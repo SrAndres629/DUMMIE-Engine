@@ -1,0 +1,145 @@
+syntax = "proto3";
+
+package dummie.v2;
+
+import "proto/dummie/v2/core.proto";
+
+option go_package = "io.dummie.v2/nervous/proto;dummie_v2";
+
+// === Servicios Centrales ===
+
+// OrchestrationService: El Cerebro (Python) coordina tareas.
+service OrchestrationService {
+    rpc ExecuteTask (AgentTask) returns (TaskResult);
+    rpc StreamThought (AgentIntent) returns (stream ThoughtTrace);
+    rpc SubmitIntent (AgentIntent) returns (TaskResult);
+}
+
+// SandboxExecutionService: El Escudo (Rust) ejecuta código aislado.
+service SandboxExecutionService {
+    rpc RunCode (ExecutionRequest) returns (ExecutionResponse);
+    rpc InstallSkill (SkillData) returns (TaskResult);
+}
+
+// TimeKeeperService: El Relojero (Go) mantiene el DAG causal.
+service TimeKeeperService {
+    rpc GetVectorClock(VectorClockRequest) returns (VectorClockResponse);
+    rpc RegisterEvent(EventId) returns (TaskResult);
+    rpc TruncateKV(EventId) returns (TaskResult);
+}
+
+// ArchitecturalValidationService: El Validador (Rust/L3) asegura conformidad Hexagonal.
+service ArchitecturalValidationService {
+    rpc ValidateConformity (ValidationRequest) returns (ValidationResponse);
+    rpc CheckAtomicIsolation (NodeIdentity) returns (TaskResult);
+}
+
+// === Mensajes de Gobernanza Soberana (Fase 14/15) ===
+
+message SovereignContext {
+    string personality_ref = 1; // e.g., "DE-V2-L0-33"
+    string ledger_link = 2;      // e.g., "DE-V2-L2-34"
+    float ROI_threshold = 3;     // Umbral de decisión económica
+}
+
+// === Mensajes de Validación ===
+
+message ValidationRequest {
+    string file_path = 1;
+    string code_content = 2;
+    string target_layer = 3; // "domain", "application", "infrastructure"
+    repeated string forbidden_imports = 4;
+}
+
+message ValidationResponse {
+    bool is_conformant = 1;
+    repeated ArchitecturalViolation violations = 2;
+    string health_score = 3;
+}
+
+message ArchitecturalViolation {
+    string file_path = 1;
+    string violation_type = 2; // "LAYER_INFECTION", "MISSING_INTERFACE", "ILLEGAL_IMPORT"
+    string description = 3;
+    string suggestion = 4;
+}
+
+message NodeIdentity {
+    string node_id = 1;
+    string port_type = 2;
+    string implementation_version = 3;
+}
+
+// === Mensajes de Tarea e Intención ===
+
+message AgentTask {
+    string task_id = 1;
+    string agent_type = 2; // "writer", "tester", "architect"
+    EventId context_anchor = 3;
+    MemoryTicket payload_ticket = 4; // Datos vía MemoryTicket (Spec 10)
+    SovereignContext sovereign_ctx = 5;
+}
+
+message AgentIntent {
+    string saga_id = 1;
+    string agent_id = 2;
+    string intent_type = 3; // "write_file", "execute_code", "query_graph"
+    string target_resource = 4;
+    bytes payload = 5;
+    EventId parent_event = 6;
+    bool is_shadow = 7; // No persistir en Git hasta consenso
+    SovereignContext sovereign_ctx = 8;
+}
+
+message TaskResult {
+    string task_id = 1;
+    enum Status {
+        SUCCESS = 0;
+        FAILURE = 1;
+        QUARANTINE = 2;
+    }
+    Status status = 2;
+    MemoryTicket output_ticket = 3; // Resultado vía MemoryTicket
+    string error_summary = 4;
+    uint32 tokens_consumed = 5;
+    EventId event_id = 6;
+}
+
+message ThoughtTrace {
+    string agent_id = 1;
+    string thought_fragment = 2;
+    float confidence = 3;
+    EventId current_position = 4;
+}
+
+// === Mensajes de Ejecución Aislada ===
+
+message ExecutionRequest {
+    string language = 1; // "python", "javascript", "bash"
+    string code = 2;
+    map<string, string> env_vars = 3;
+    uint32 timeout_ms = 4;
+}
+
+message ExecutionResponse {
+    int32 exit_code = 1;
+    string stdout = 2;
+    string stderr = 3;
+    bool timed_out = 4;
+}
+
+message SkillData {
+    string skill_name = 1;
+    bytes wasm_binary = 2;
+    string metadata_json = 3;
+}
+
+// === Mensajes de Tiempo y Concurrencia ===
+
+message VectorClockRequest {
+    repeated string branch_ids = 1;
+}
+
+message VectorClockResponse {
+    map<string, uint64> clock_map = 1;
+}

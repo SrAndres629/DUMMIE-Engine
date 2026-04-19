@@ -1,0 +1,12 @@
+{
+  "rule_id": "RULE_AO_V2_L4_18",
+  "spec_ref": "DE-V2-L4-18",
+  "domain": "L4_Ontology",
+  "invariants": {
+    "ontology_engine": "Zig_LST_Scanner",
+    "graph_db": "KùzuDB",
+    "required_symbols": ["path", "hash", "type", "dependencies"],
+    "realtime_sync": true
+  },
+  "enforcement": "STRICT_BLOCK"
+}

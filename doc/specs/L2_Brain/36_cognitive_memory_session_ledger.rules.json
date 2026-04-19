@@ -1,0 +1,12 @@
+{
+  "rule_id": "RULE_AO_V2_L2_36",
+  "spec_ref": "DE-V2-L2-36",
+  "domain": "L2_Memory",
+  "invariants": {
+    "session_log_path": ".aiwg/memory/session_ledger.jsonl",
+    "required_metadata": ["agent_id", "tick", "thought_vector", "action"],
+    "persistence_mode": "APPEND_ONLY",
+    "compression_trigger": "BUFFER_FULL"
+  },
+  "enforcement": "STRICT_BLOCK"
+}

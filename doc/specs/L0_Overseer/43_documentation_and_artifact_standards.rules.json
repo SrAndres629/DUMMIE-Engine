@@ -1,0 +1,12 @@
+{
+  "rule_id": "RULE_AO_V2_L0_43",
+  "spec_ref": "DE-V2-L0-43",
+  "domain": "L0_Governance_Docs",
+  "invariants": {
+    "required_siblings": [".feature", ".rules.json"],
+    "folder_naming_pattern": "L[0-6]_[A-Za-z]+",
+    "enforce_layer_match": true,
+    "metrics_syntax": "And Performance Metric: .*"
+  },
+  "enforcement": "STRICT_BLOCK"
+}

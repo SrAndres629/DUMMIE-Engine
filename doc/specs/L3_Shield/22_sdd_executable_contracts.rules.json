@@ -1,0 +1,12 @@
+{
+  "rule_id": "RULE_AO_V2_L3_22",
+  "spec_ref": "DE-V2-L3-22",
+  "domain": "L3_Governance",
+  "invariants": {
+    "rule_directory": "/governance/rules/",
+    "enforcement_modes": ["STRICT_BLOCK", "WARN"],
+    "required_for_persistence": "AF_TOKEN",
+    "manual_edit_forbidden": true
+  },
+  "enforcement": "STRICT_BLOCK"
+}

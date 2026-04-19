@@ -1,0 +1,82 @@
+syntax = "proto3";
+
+package dummie.v2;
+
+option go_package = "io.dummie.v2/nervous/proto;dummie_v2";
+
+// === Nivel de Autoridad (Spec 10/12) ===
+enum AuthorityLevel {
+    AGENT_PROPOSAL = 0;
+    CONSENSUS_COMMIT = 1;
+    HUMAN_OVERRIDE = 2;
+    EXECUTIVE_ARBITER = 3;
+}
+
+// === Identidad Causal 4D-TES (Spec 10) ===
+message EventId {
+    string universe_id = 1;   // ID del Proyecto (Wing)
+    string branch_id = 2;     // ID de la Rama de Razonamiento
+    uint64 lamport_tick = 3;  // Reloj de Lamport
+    AuthorityLevel authority = 4;
+    uint32 entropy_count = 5; // Contador de reintentos/muertes
+    bool is_toxic = 6;         // Flag de limpieza de VRAM
+    DeathMetadata necrosis_info = 7;
+}
+
+enum DeathReason {
+    UNKNOWN = 0;
+    SEMANTIC_TIMEOUT = 1;
+    RESOURCES_OOM = 2;
+    INFINITE_LOOP = 3;
+    VRAM_LIMIT = 4;
+    SHIELD_VETO = 5;
+}
+
+message DeathMetadata {
+    DeathReason reason = 1;
+    string last_known_instruction = 2;
+    string supervisor_note = 3;
+    string stack_trace = 4;
+}
+
+// === Descriptor de Memoria Compartida (MemoryTicket - Spec 10/16) ===
+// Este mensaje es el descriptor que viaja por el Control Plane (NATS).
+// El buffer real en SHM comienza con la cabecera binaria de 64B definida en Spec 16.
+message MemoryTicket {
+    string shm_path = 1;      // Ruta al archivo mmap o ID de SHM
+    uint64 offset = 2;        // Offset al inicio del RecordBatch (tras los 64B de header)
+    uint64 length = 3;        // Longitud del RecordBatch
+    uint32 alignment = 4;     // Alineación (Default: 64)
+    
+    // RBAC Topográfico (Spec 18)
+    AuthorityLevel required_level = 5;
+    string namespace_scope = 6;
+    bool is_toxic = 7;
+    
+    uint64 ticket_uuid_high = 8; // UUID v4 (High 64 bits)
+    uint64 ticket_uuid_low = 9;  // UUID v4 (Low 64 bits)
+}
+
+// === Protocolo de Migración Phase-Gate (Spec 10) ===
+message PhaseTransitionSignal {
+    string from_phase = 1;
+    string to_phase = 2;
+    string cat_token = 3;     // Token de validación (CAT)
+    uint64 lamport_tick = 4;
+}
+
+message PhaseTransitionAck {
+    bool ready = 1;
+    string node_id = 2;
+    string status_report = 3;
+}
+
+// === Errores Políglotas (Spec 10) ===
+message PolyglotError {
+    int32 code = 1;
+    string message = 2;
+    string stack_trace = 3;
+    string origin_layer = 4; // L0..L6
+    bool is_recoverable = 5;
+    EventId associated_event = 6;
+}

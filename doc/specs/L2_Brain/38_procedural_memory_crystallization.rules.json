@@ -1,0 +1,12 @@
+{
+  "rule_id": "RULE_AO_V2_L2_38",
+  "spec_ref": "DE-V2-L2-38",
+  "domain": "L2_Kaizen",
+  "invariants": {
+    "crystallization_threshold": 0.85,
+    "necro_learning_trigger": "IDLE_PERIOD_EXCEEDED",
+    "output_formats": ["SKILL.yaml", "LINT_RULE"],
+    "personality_compliance": "STRICT"
+  },
+  "enforcement": "STRICT_BLOCK"
+}

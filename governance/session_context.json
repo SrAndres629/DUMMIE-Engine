@@ -1,0 +1,14 @@
+{
+  "timestamp": "2026-04-18T12:14:49Z",
+  "environment": {
+    "has_nix": false,
+    "has_docker": true,
+    "execution_path": "DOCKER_SOVEREIGN"
+  },
+  "physical_truth": {
+    "l0_overseer": "SKELETAL",
+    "l1_nervous": "SKELETAL",
+    "l2_brain": "EMPTY",
+    "contracts": "CORE_UNIFIED"
+  }
+}

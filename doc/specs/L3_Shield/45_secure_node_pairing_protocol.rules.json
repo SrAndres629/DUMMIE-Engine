@@ -1,0 +1,25 @@
+{
+  "rule_id": "RULE_AO_V2_L3_45",
+  "spec_ref": "DE-V2-L3-45",
+  "invariants": {
+    "forbidden_patterns": [
+      "AUTO_PAIRING_ENABLED",
+      "STATIC_DEVICE_TOKEN",
+      "ANONYMOUS_WS_CONNECTION"
+    ],
+    "required_headers": [
+      "X-AO-Handshake-Signature",
+      "X-AO-Hardware-ID"
+    ],
+    "approval_flow": "Quarantine -> PendingTicket -> PAH_Approval -> DeviceToken",
+    "token_policy": {
+      "rotation_period": "24h",
+      "revocation": "Instant via veto"
+    }
+  },
+  "enforcement": "STRICT_BLOCK",
+  "session_governance": {
+    "quarantine_timeout": "60s",
+    "token_ttl": "86400s"
+  }
+}

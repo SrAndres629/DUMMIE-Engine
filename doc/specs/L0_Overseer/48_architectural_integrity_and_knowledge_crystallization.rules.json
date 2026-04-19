@@ -1,0 +1,22 @@
+{
+  "spec": "48",
+  "name": "architectural_integrity_and_knowledge_crystallization",
+  "invariants": [
+    {
+      "id": "INV-48-01",
+      "description": "Los archivos .venv o node_modules no deben ser directorios físicos reales en la unidad principal.",
+      "condition": "is_symlink(path) || !exists(path)",
+      "scope": ["layers/**/.venv", "layers/**/node_modules"]
+    },
+    {
+      "id": "INV-48-02",
+      "description": "Cada cambio en el Makefile o Dockerfile debe tener una entrada correspondiente en el Ledger de Decisiones.",
+      "condition": "count_matches('.aiwg/memory/decisions.jsonl', current_session_id) > 0"
+    },
+    {
+      "id": "INV-48-03",
+      "description": "Las rutas de caché de compilación deben apuntar a /media/datasets.",
+      "condition": "contains(dockerfile.env.GOCACHE, '/media/datasets') && contains(dockerfile.env.UV_CACHE_DIR, '/media/datasets')"
+    }
+  ]
+}

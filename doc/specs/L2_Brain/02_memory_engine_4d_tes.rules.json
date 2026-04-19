@@ -1,0 +1,13 @@
+{
+  "rule_id": "RULE_AO_V2_L2_02",
+  "spec_ref": "DE-V2-L2-02",
+  "domain": "L2_Memory",
+  "invariants": {
+    "decay_lambda": 0.8,
+    "entropy_hard_cap_bits": 2.5,
+    "shm_format": "Apache_Arrow",
+    "causality_model": "Lamport_Ticks",
+    "fusion_logic": "Join_Semilattice"
+  },
+  "enforcement": "STRICT_BLOCK"
+}

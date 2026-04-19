@@ -1,0 +1,21 @@
+---
+skill_id: "DE-V2-SKILL-CODER"
+name: "Industrial Logic Fabricator"
+version: "1.0.0"
+namespace: "sw.coder"
+description: "Constructor de lógica pura y adaptadores bajo arquitectura hexagonal."
+capabilities:
+  - id: "HEXAGONAL_FABRICATION"
+    description: "Implementación de Dominios, Puertos y Adaptadores."
+  - id: "ZERO_COPY_OPTIMIZATION"
+    description: "Uso de Apache Arrow y SHM para interop políglota."
+  - id: "UNIT_TEST_AUTO"
+    description: "Generación automática de tests unitarios industriales."
+  - id: "LST_REFACTORING"
+    description: "Manipulación de código a nivel simbólico."
+protocols:
+  - type: "SDD_V3"
+    compliance: "STRICT"
+  - type: "POKA_YOKE_CODING"
+    compliance: "MANDATORY"
+---

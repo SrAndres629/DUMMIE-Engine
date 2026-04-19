@@ -1,0 +1,12 @@
+{
+  "rule_id": "RULE_AO_V2_L2_39",
+  "spec_ref": "DE-V2-L2-39",
+  "domain": "L2_Sync",
+  "invariants": {
+    "root_of_truth": "SPEC",
+    "sync_mode": "STRICT_CASCADING",
+    "forbidden_manual_code_drift": true,
+    "required_agents": ["Synchronizer", "Architect", "Coder"]
+  },
+  "enforcement": "STRICT_BLOCK"
+}

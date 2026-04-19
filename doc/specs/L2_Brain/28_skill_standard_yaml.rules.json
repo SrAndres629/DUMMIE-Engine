@@ -1,0 +1,20 @@
+{
+  "rule_id": "RULE_AO_V2_L2_28",
+  "spec_ref": "DE-V2-L2-28",
+  "invariants": {
+    "forbidden_patterns": [
+      "UNAUDITED_SKILL_HOTLOAD",
+      "ORPHAN_SKILL_DIRECTORY",
+      "MISSING_CONTRACT_FILE"
+    ],
+    "required_headers": [
+      "X-AO-Skill-ID",
+      "X-AO-Skill-Version"
+    ]
+  },
+  "enforcement": "STRICT_BLOCK",
+  "scaffolding_policy": {
+    "mandatory_files": ["SKILL.md", "*.feature", "*.rules.json"],
+    "enforced_linter": "sdd_validator.py"
+  }
+}

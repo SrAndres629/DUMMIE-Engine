@@ -1,0 +1,19 @@
+---
+skill_id: "DE-V2-SKILL-ARCHITECT"
+name: "Domain & System Architect"
+version: "1.0.0"
+namespace: "sw.architect"
+description: "Experto en diseño DDD, Bounded Contexts y contratos de comunicación industrial."
+capabilities:
+  - id: "DDD_DESIGN"
+    description: "Modelado de dominios y agregados."
+  - id: "PORT_DESIGN"
+    description: "Generación de contratos OpenAPI y Protobuf."
+  - id: "LST_MAPPING"
+    description: "Mapeo de símbolos de lenguaje en la ontología Loci."
+protocols:
+  - type: "SDD_V3"
+    compliance: "STRICT"
+  - type: "HEXAGONAL_ENFORCEMENT"
+    compliance: "MANDATORY"
+---

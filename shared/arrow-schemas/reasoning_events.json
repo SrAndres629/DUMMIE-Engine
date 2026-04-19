@@ -1,0 +1,11 @@
+{
+  "fields": [
+    {"name": "timestamp", "type": {"name": "timestamp", "unit": "MICROSECOND", "timezone": "UTC"}, "nullable": false},
+    {"name": "event_id", "type": {"name": "utf8"}, "nullable": false},
+    {"name": "agent_id", "type": {"name": "utf8"}, "nullable": false},
+    {"name": "intent_type", "type": {"name": "utf8"}, "nullable": false},
+    {"name": "risk_score", "type": {"name": "floatingpoint", "precision": "DOUBLE"}, "nullable": false},
+    {"name": "payload_size", "type": {"name": "int", "bitWidth": 64, "isSigned": true}, "nullable": false}
+  ],
+  "metadata": {"version": "2.0", "layer": "L2_BRAIN"}
+}

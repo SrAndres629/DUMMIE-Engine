@@ -1,0 +1,9 @@
+{
+  "rule_id": "RULE_AO_V2_L0_08",
+  "spec_ref": "DE-V2-L0-08",
+  "invariants": {
+    "forbidden_patterns": [],
+    "required_headers": []
+  },
+  "enforcement": "STRICT_BLOCK"
+}

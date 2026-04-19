@@ -1,0 +1,20 @@
+{
+  "rule_id": "RULE_AO_V2_L6-26",
+  "spec_ref": "DE-V2-L6-26",
+  "invariants": {
+    "forbidden_patterns": [
+      "RAW_DOM_ACCESS_FROM_BRIDGE",
+      "UNSECURE_POSTMESSAGE_LISTENER",
+      "ORPHAN_WEBVIEW_CONTEXT"
+    ],
+    "required_headers": [
+      "X-AO-Webview-Origin",
+      "X-AO-Bridge-Token"
+    ]
+  },
+  "enforcement": "STRICT_BLOCK",
+  "bridge_policy": {
+    "allowed_target": "vscode-webview",
+    "rpc_timeout": "2s"
+  }
+}

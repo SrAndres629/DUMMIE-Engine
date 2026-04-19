@@ -1,0 +1,84 @@
+nvestigación de Ingeniería: Anatomía y Orquestación de Agentes Industriales
+
+  Para que Claude, Gemini, Qwen y Kimi operen como una sola entidad sin importar el terminal o el
+  modelo, debemos dejar de tratarlos como "chats" y empezar a tratarlos como Nodos de Cómputo
+  Cognitivo. 
+
+  He realizado una investigación profunda sobre los estándares actuales (2024-2026) y cómo integrarlos
+  en la SFE (Software Fabrication Engine) de DUMMIE Engine.
+
+  ---
+
+  1. La Anatomía del Agente Profesional (Más allá del Prompt)
+  Un agente industrial no es un bloque de texto; es una estructura de datos compuesta por 5 elementos
+  innegociables:
+
+   1. Identity (Persona): Definida en archivos .agents/skills/NAME_agent.yaml. No es prosa, es un
+      conjunto de Restricciones de Sistema (System Instructions) que rigen el "Mood" y el "Axioma"
+      (Spec 33).
+   2. Tools (Capabilities): El agente no "adivina" cómo usar una herramienta. Las herramientas se
+      exponen mediante el Model Context Protocol (MCP). Esto permite que Gemini y Claude usen el mismo
+      read_file de forma idéntica.
+   3. Short-Term Memory (Context): La ventana de contexto del LLM. Optimizada mediante Semantic
+      Snapshots (Spec 17) para no desperdiciar tokens.
+   4. Long-Term Memory (Loci): El acceso al Palacio de Loci (KùzuDB) mediante RAG de Grafos.
+   5. Reasoning Loop (Logic): El algoritmo de pensamiento (ReAct, Reflexion o Plan-and-Execute). En
+      nuestro caso, usamos LangGraph en L2 para definir el flujo de control.
+
+  ---
+
+  2. El Secreto de la Interoperabilidad: MCP y ACP
+  Para que diferentes modelos (Claude, Gemini, etc.) se entiendan, usamos dos protocolos como
+  "traductores universales":
+
+   * MCP (Model Context Protocol): Es el "USB-C" de la IA. Permite que cualquier modelo se conecte a
+     un servidor de herramientas (nuestro L1 Nervous System). Si Claude quiere una base de datos, pide
+     mcp://database/query. Si Gemini quiere lo mismo, usa el mismo URI. L1 traduce esto a la acción
+     física real.
+   * ACP (Agent Client Protocol): Es el estándar para que los agentes hablen con el terminal o el IDE.
+     Garantiza que la salida de un agente sea procesable por el siguiente, sin importar si uno corre
+     en VS Code y el otro en una terminal de Linux.
+  3. Enjambres vs. Gremios: La Estructura de Poder
+  Un "Enjambre" (Swarm) tradicional es una red plana (Peer-to-Peer). Un "Gremio Industrial" es una
+  Jerarquía de Control:
+
+   * The Orchestrator (L0/L2): Decide qué modelo es mejor para cada tarea. (Ej: GPT-4 para
+     Arquitectura, Claude 3.5 para Código, Gemini 1.5 Pro para Contexto Masivo).
+   * The Protocol Buffer (L1): Normaliza la respuesta. Sin importar qué modelo responda, el output se
+     convierte en un mensaje Protobuf. Así, el siguiente agente recibe datos estructurados, no texto
+     libre.
+   * The Deterministic Gate (L3): Valida que el modelo no haya "alucinado" una herramienta
+     inexistente.
+
+  ---
+
+  4. Aplicación en DUMMIE Engine (Plan de Implementación)
+
+  Para aplicar esto en nuestro proyecto, el diseño senior se basa en la Ceguera de Modelo:
+
+   1. Definición de Agentes en YAML: Creamos plantillas de agentes que definen:
+       * model_agnostic_instructions: Reglas de lógica pura.
+       * provider_specific_tweaks: Ajustes mínimos para que Gemini sea tan preciso como Claude.
+   2. Capa L1 como Bridge MCP: L1 Nervous System expondrá todas las funciones del sistema (Makefile,
+      Git, Nix, sdd_validator) como un Servidor MCP. Los agentes no "corren comandos", invocan
+      "Recursos MCP".
+   3. Capa L2 como Router Cognitivo: El Maestro Arquitecto (L2) recibirá la intención del humano y,
+      basándose en la complejidad, "reclutará" al modelo más eficiente para el Sub-Agente
+      especialista.
+   4. Capa L4 como LST Mapper: Zig escaneará el código y lo entregará a los agentes como un Grafo
+      Semántico, no como texto plano. Así, el agente "entiende" la arquitectura sin leer miles de
+      líneas.
+
+  Resumen de la Investigación para el Proyecto:
+   * Lenguaje de Comunicación: Protobuf (Binario) + JSON-RPC (Señalización).
+   * Estándar de Herramientas: MCP (Model Context Protocol).
+   * Estructura de Carpeta:
+       * .agents/blueprints/: Definiciones de agentes (Sin estado).
+       * .agents/skills/: Funciones MCP que los agentes pueden usar.
+       * shared/telemetry/: El "Cerebro Colectivo" donde todos los modelos registran sus trazas
+         (OTel).
+
+  Conclusión: Estamos listos. El diseño es Agnośtico al Modelo y Resiliente al Terminal. No importa si
+  usas Kimi en una terminal o Claude en VS Code; el Protocolo de Handshake (Spec 41) garantiza que
+  todos sigan el mismo "Ritual de Ingeniería".
+

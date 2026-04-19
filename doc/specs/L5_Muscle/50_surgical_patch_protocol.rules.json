@@ -1,0 +1,20 @@
+{
+  "rule_id": "RULE_AO_V2_L5_50",
+  "spec_ref": "DE-V2-L5-50",
+  "invariants": {
+    "forbidden_patterns": [
+      "FUZZY_PATCHING",
+      "NON_ATOMIC_MULTIFILE_EDIT",
+      "BYPASS_HASH_CHECK"
+    ],
+    "required_headers": [
+      "X-AO-Target-Hash",
+      "X-AO-Patch-Type"
+    ]
+  },
+  "enforcement": "STRICT_BLOCK",
+  "patch_policy": {
+    "max_patch_size_kb": 256,
+    "require_pre_applied_snapshot": true
+  }
+}

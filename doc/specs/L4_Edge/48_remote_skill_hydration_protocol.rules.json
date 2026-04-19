@@ -1,0 +1,27 @@
+{
+  "rule_id": "RULE_AO_V2_L4_48",
+  "spec_ref": "DE-V2-L4-48",
+  "invariants": {
+    "forbidden_patterns": [
+      "UNAUDITED_REMOTE_EXECUTION",
+      "NON_WHITELISTED_HYDRATION",
+      "AUTOMATIC_PROD_INSTALL"
+    ],
+    "required_headers": [
+      "X-AO-Hydration-Source",
+      "X-AO-Sentinel-Token"
+    ],
+    "hydration_source": {
+      "supported_protocols": ["https_git"],
+      "whitelist": ["github.com", "dummie.io"]
+    },
+    "audit_pipeline": {
+      "steps": ["Sterile_Download", "SDD_Validation", "Static_Analysis", "PAH_Approval"]
+    }
+  },
+  "enforcement": "STRICT_BLOCK",
+  "download_policy": {
+    "max_size_mb": 50,
+    "sterile_expiry_s": 300
+  }
+}

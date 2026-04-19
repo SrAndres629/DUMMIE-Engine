@@ -1,0 +1,12 @@
+{
+  "rule_id": "RULE_AO_V2_L3_24",
+  "spec_ref": "DE-V2-L3-24",
+  "domain": "L3_Compliance",
+  "invariants": {
+    "license_policy": "STRICT_MIT_APACHE_ONLY",
+    "structural_similarity_threshold": 0.8,
+    "provenance_mandatory": true,
+    "forbidden_patterns": ["bypass", "exploit", "unauthorized_access"]
+  },
+  "enforcement": "STRICT_BLOCK"
+}

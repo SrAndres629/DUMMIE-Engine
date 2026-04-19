@@ -1,0 +1,12 @@
+{
+  "rule_id": "RULE_AO_V2_L5_16",
+  "spec_ref": "DE-V2-L5-16",
+  "domain": "L5_Hardware",
+  "invariants": {
+    "shm_alignment_bytes": 64,
+    "header_magic": "0x41544B4E",
+    "pinned_memory_required": true,
+    "cuda_zeroing_enabled": true
+  },
+  "enforcement": "STRICT_BLOCK"
+}

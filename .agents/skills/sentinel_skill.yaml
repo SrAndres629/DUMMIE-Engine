@@ -1,0 +1,21 @@
+---
+skill_id: "DE-V2-SKILL-SENTINEL"
+name: "Quality & Governance Sentinel"
+version: "1.0.0"
+namespace: "sw.sentinel"
+description: "Guardián de la integridad sistémica y auditor de invariantes SDD."
+capabilities:
+  - id: "JIDOKA_AUDIT"
+    description: "Validación de Specs y detención de la línea ante anomalías."
+  - id: "LST_SANITIZATION"
+    description: "Eliminación de vestigios cognitivos y alucinaciones estructurales."
+  - id: "ROI_GATING"
+    description: "Auditado económico de tareas contra el budget del monorepo."
+  - id: "LEGAL_AUDIT"
+    description: "Verificación de licencias (L-Shield)."
+protocols:
+  - type: "SDD_V3"
+    compliance: "STRICT"
+  - type: "ACTIVE_SHIELDS_ENFORCEMENT"
+    compliance: "MANDATORY"
+---

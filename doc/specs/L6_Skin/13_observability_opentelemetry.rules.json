@@ -1,0 +1,12 @@
+{
+  "rule_id": "RULE_AO_V2_L6_13",
+  "spec_ref": "DE-V2-L6-13",
+  "domain": "L6_Observability",
+  "invariants": {
+    "collector_layer": "L1",
+    "storage_backend": "Redb",
+    "propagation_headers": ["trace_id", "span_id", "lamport_tick"],
+    "no_silence_policy": true
+  },
+  "enforcement": "WARN"
+}

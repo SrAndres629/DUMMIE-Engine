@@ -1,0 +1,12 @@
+{
+  "rule_id": "RULE_AO_V2_L2_29",
+  "spec_ref": "DE-V2-L2-29",
+  "domain": "L2_Design",
+  "invariants": {
+    "workflow_states": ["DRAFT", "AUDIT", "ACTIVE", "DEPRECATED"],
+    "authority_required": "ARCHITECT_L0",
+    "dependency_check": "RECURSIVE",
+    "collision_detection": true
+  },
+  "enforcement": "STRICT_BLOCK"
+}

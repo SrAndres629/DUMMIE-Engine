@@ -1,0 +1,19 @@
+{
+  "rule_id": "RULE_AO_V2_L6_17",
+  "spec_ref": "DE-V2-L6-17",
+  "invariants": {
+    "forbidden_patterns": [
+      "RAW_DOM_INJECTION",
+      "PIXEL_LEVEL_PROCESSING_ONLY"
+    ],
+    "required_headers": [
+      "X-AO-Snapshot-Type",
+      "X-AO-Trace-ID"
+    ]
+  },
+  "enforcement": "STRICT_BLOCK",
+  "data_governance": {
+    "min_token_reduction": 0.5,
+    "max_distillation_depth": 5
+  }
+}

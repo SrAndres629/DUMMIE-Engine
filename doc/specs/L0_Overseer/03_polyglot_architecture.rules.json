@@ -1,0 +1,23 @@
+{
+  "rule_id": "RULE_AO_V2_L0_03",
+  "spec_ref": "DE-V2-L0-03",
+  "domain": "L0_Topology",
+  "invariants": {
+    "fsm_states": [
+      "IDLE",
+      "PLANNING",
+      "VALIDATION",
+      "EXECUTION",
+      "SIGNALING",
+      "ARBITRATION"
+    ],
+    "isolation_rules": {
+      "L2_Brain": {
+        "forbidden_std": ["fs", "net"],
+        "interaction_mode": "IO_REQUEST_Protobuf"
+      }
+    },
+    "shm_ownership": "L3_Shield_Owner"
+  },
+  "enforcement": "STRICT_BLOCK"
+}

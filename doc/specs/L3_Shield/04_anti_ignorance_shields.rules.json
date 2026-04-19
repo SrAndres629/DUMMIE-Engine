@@ -1,0 +1,12 @@
+{
+  "rule_id": "RULE_AO_V2_L3_04",
+  "spec_ref": "DE-V2-L3-04",
+  "domain": "L3_Security",
+  "invariants": {
+    "shield_types": ["Structural", "Economic", "Legal", "Personality", "Consistency"],
+    "max_interception_latency_ms": 10,
+    "automatic_rollback": true,
+    "vram_sanitization": "ACTIVE"
+  },
+  "enforcement": "STRICT_BLOCK"
+}

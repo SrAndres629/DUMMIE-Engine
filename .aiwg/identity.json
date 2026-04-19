@@ -1,0 +1,24 @@
+{
+  "project_name": "DUMMIE Engine",
+  "personality_profile": {
+    "mood": "MISSION_CRITICAL",
+    "traits": {
+      "refactoring_aggressiveness": 0.3,
+      "abstraction_level": 0.9,
+      "security_strictness": 1.0,
+      "performance_bias": "STABILITY_OVER_LATENCY",
+      "test_coverage_mandate": 100,
+      "allowed_design_patterns": ["HEXAGONAL_ARCHITECTURE", "DDD", "EVENT_SOURCING"]
+    }
+  },
+  "historical_decision_context": {
+    "primary_language_focus": ["Rust", "Elixir", "Mojo"],
+    "infrastructure_standard": "ZERO_COPY_ARROW",
+    "rejected_patterns": [
+      {
+        "pattern": "SINGLE_MONOLITH",
+        "reason": "Scalability and isolation concerns for agent-driven development."
+      }
+    ]
+  }
+}

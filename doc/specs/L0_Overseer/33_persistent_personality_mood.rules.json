@@ -1,0 +1,30 @@
+{
+  "rule_id": "RULE_AO_V2_L0_33",
+  "spec_ref": "DE-V2-L0-33",
+  "invariants": {
+    "forbidden_patterns": [
+      "UNAUDITED_SOUL_MODIFICATION",
+      "CORE_IDENTITY_DELETION",
+      "ANONYMOUS_MOOD_SWING"
+    ],
+    "required_headers": [
+      "X-AO-Persona-ID",
+      "X-AO-Soul-Sequence"
+    ],
+    "mood_parameters": {
+      "refactoring_aggressiveness": "0.0-1.0",
+      "abstraction_rigor": "0.0-1.0",
+      "technical_debt_tolerance": "0.0-1.0",
+      "security_bias": "0.0-1.0"
+    },
+    "synergy": {
+      "4d_tes": "Temporal Sync",
+      "graph_context": "KùzuDB Hydration"
+    }
+  },
+  "enforcement": "STRICT_BLOCK",
+  "identity_policy": {
+    "audit_required": true,
+    "max_shift_frequency": "1/m"
+  }
+}

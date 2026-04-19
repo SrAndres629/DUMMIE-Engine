@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package io.dummie.v2.memory;
+
+import "google/protobuf/timestamp.proto";
+
+// Representa una decisión técnica vinculante tomada por un agente o el PAH.
+message Decision {
+    int64 tick = 1;                     // Lamport Tick (Orden Causal)
+    string decision_id = 2;             // Identificador único (DEC-XXX)
+    string resolution = 3;              // La acción tomada
+    string rationale = 4;               // El "Por qué" (Justificación técnica)
+    string authority = 5;               // Quién tomó la decisión (ARCHITECT, PAH, etc.)
+    google.protobuf.Timestamp ts = 6;   // Timestamp físico
+}
+
+// Representa una lección aprendida tras un fallo o refactorización.
+message Lesson {
+    int64 tick = 1;
+    string lesson_id = 2;               // Identificador único (LES-XXX)
+    string issue = 3;                   // El problema detectado
+    string correction = 4;              // Cómo se solucionó
+    string prevention = 5;              // Cómo evitarlo en el futuro
+}
+
+// Representa la resolución de una indeterminación lógica.
+message Ambiguity {
+    int64 tick = 1;
+    string ambiguity_id = 2;            // Identificador único (AMB-XXX)
+    string context = 3;                 // El escenario ambiguo
+    string resolution = 4;              // La aclaración final
+    string impact = 5;                  // Qué partes del sistema se ven afectadas
+}
+
+// Contenedor para exportación masiva o persistencia en frío.
+message SessionCrystallization {
+    repeated Decision decisions = 1;
+    repeated Lesson lessons = 2;
+    repeated Ambiguity ambiguities = 3;
+}

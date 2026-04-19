@@ -1,0 +1,12 @@
+{
+  "rule_id": "RULE_AO_V2_L2_09",
+  "spec_ref": "DE-V2-L2-09",
+  "domain": "L2_Concepts",
+  "invariants": {
+    "persistence_model": "Delta_Immutable",
+    "ram_complexity_limit": "O(1)",
+    "branch_recovery_mode": "Bifurcation",
+    "snapshotting_status": "REJECTED"
+  },
+  "enforcement": "WARN"
+}

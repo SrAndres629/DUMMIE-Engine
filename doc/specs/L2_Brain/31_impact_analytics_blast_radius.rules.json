@@ -1,0 +1,12 @@
+{
+  "rule_id": "RULE_AO_V2_L2_31",
+  "spec_ref": "DE-V2-L2-31",
+  "domain": "L2_Impact",
+  "invariants": {
+    "graph_engine": "KùzuDB",
+    "required_analysis": ["RECURSIVE_DEPS", "BLAST_RADIUS", "SIDEEFFECTS"],
+    "veto_on_global_risk": true,
+    "min_confidence_score": 0.95
+  },
+  "enforcement": "STRICT_BLOCK"
+}

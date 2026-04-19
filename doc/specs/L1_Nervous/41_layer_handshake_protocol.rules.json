@@ -1,0 +1,20 @@
+{
+  "rule_id": "RULE_AO_V2_L1_41",
+  "spec_ref": "DE-V2-L1-41",
+  "invariants": {
+    "forbidden_patterns": [
+      "UNVERSIONED_ACP_MESSAGE",
+      "RAW_JSON_TRANSIT_BYPASS",
+      "MALFORMED_RPC_ENVELOPE"
+    ],
+    "required_headers": [
+      "X-AO-Protocol-Version",
+      "X-AO-Handshake-Type"
+    ]
+  },
+  "enforcement": "STRICT_BLOCK",
+  "acp_config": {
+    "supported_versions": ["1.0", "1.1-AO"],
+    "serialization": "Protobuf_Nested_JSON"
+  }
+}

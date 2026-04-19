@@ -1,0 +1,29 @@
+{
+  "rule_id": "RULE_AO_V2_L0_46",
+  "spec_ref": "DE-V2-L0-46",
+  "invariants": {
+    "forbidden_patterns": [
+      "PARALLEL_STATE_MUTATION",
+      "UNBOUNDED_QUEUE_GROWTH",
+      "ORPHANED_LOCKS"
+    ],
+    "required_headers": [
+      "X-AO-Session-ID",
+      "X-AO-Execution-Mode"
+    ],
+    "queue_architecture": {
+      "type": "FIFO_Serialization",
+      "scope": "SessionLane",
+      "lock_mechanism": "SemanticLock_GenServer"
+    },
+    "deadlock_protection": {
+      "timeout": "45s",
+      "strategy": "Rollback_And_Requeue"
+    }
+  },
+  "enforcement": "STRICT_BLOCK",
+  "transaction_limits": {
+    "max_queue_depth": 10,
+    "lock_ttl": "45s"
+  }
+}

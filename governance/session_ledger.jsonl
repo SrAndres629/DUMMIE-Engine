@@ -1,0 +1,2 @@
+{"tick": 1, "timestamp": "2026-04-18T12:14:19Z", "agent_id": "sw.architect", "action": "INITIALIZE_HYBRID_PROTOCOL", "decision": "ADR-006: Sovereign Hybrid Execution (Docker for builds, Local for Docs).", "rationale": "Host lacks Nix but has Docker. Need hermeticity for polyglot layers.", "status": "ACTIVE"}
+{"tick": 2, "timestamp": "2026-04-18T12:14:19Z", "agent_id": "sw.architect", "action": "TRUTH_ALIGNMENT", "decision": "Downgrade README milestones to Skeletal.", "rationale": "Prevent architectural hallucination of finished features.", "status": "PENDING"}

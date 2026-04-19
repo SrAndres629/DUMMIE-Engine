@@ -1,0 +1,12 @@
+{
+  "rule_id": "RULE_AO_V2_L4_25",
+  "spec_ref": "DE-V2-L4-25",
+  "domain": "L4_Registry",
+  "invariants": {
+    "storage_backend": "L loci filesystem",
+    "blueprint_format": "YAML_MSA",
+    "forbidden_manual_blueprint_edit": true,
+    "required_components": ["Domain", "App", "Infra"]
+  },
+  "enforcement": "STRICT_BLOCK"
+}

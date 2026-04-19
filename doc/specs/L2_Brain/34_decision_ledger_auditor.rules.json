@@ -1,0 +1,12 @@
+{
+  "rule_id": "RULE_AO_V2_L2_34",
+  "spec_ref": "DE-V2-L2-34",
+  "domain": "L2_Governance",
+  "invariants": {
+    "ledger_path": "/ledger/sovereign_resolutions.jsonl",
+    "required_fields": ["tick", "id", "resolution", "witness_hash"],
+    "immutable_ledger": true,
+    "audit_frequency": "REAL_TIME"
+  },
+  "enforcement": "STRICT_BLOCK"
+}

@@ -1,0 +1,12 @@
+{
+  "rule_id": "RULE_AO_V2_L5_01",
+  "spec_ref": "DE-V2-L5-01",
+  "domain": "L5_Hardware",
+  "invariants": {
+    "max_gpu_temp_c": 85,
+    "max_ram_per_agent_gb": 4,
+    "storage_backend": "NVMe_Gen4",
+    "architecture": "x86_64_AVX512"
+  },
+  "enforcement": "STRICT_BLOCK"
+}

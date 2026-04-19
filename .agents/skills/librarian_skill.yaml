@@ -1,0 +1,21 @@
+---
+skill_id: "DE-V2-SKILL-LIBRARIAN"
+name: "Semantic Memory & Ledger Manager"
+version: "1.0.0"
+namespace: "sw.librarian.memory"
+description: "Gestor de la base de conocimientos soberana del proyecto. Asegura la persistencia de decisiones históricas y la coherencia de la personalidad técnica."
+capabilities:
+  - id: "LEDGER_ARCHIVING"
+    description: "Persistencia de tickets de ambigüedad en .aiwg/ledger/resolutions.jsonl tras aprobación del PAH."
+  - id: "PERSONALITY_SYNC"
+    description: "Distribución de los hiperparámetros de .aiwg/personality/profile.json al bus NATS para alineación de agentes."
+  - id: "KUZU_HYDRATION"
+    description: "Transformación de entradas de ledger y perfiles en nodos de KùzuDB para RAG sobre grafos."
+protocols:
+  - type: "COMMIT_ON_RESOLVE"
+    compliance: "MANDATORY"
+    description: "Cada aclaración del usuario debe ser archivada antes de cerrar la tarea."
+  - type: "IDENTITY_HEARTBEAT"
+    compliance: "STRICT"
+    description: "Verificación periódica de que los agentes operan bajo el Mood actual."
+---

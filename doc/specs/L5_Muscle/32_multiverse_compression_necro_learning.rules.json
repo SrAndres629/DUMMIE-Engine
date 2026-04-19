@@ -1,0 +1,12 @@
+{
+  "rule_id": "RULE_AO_V2_L5_32",
+  "spec_ref": "DE-V2-L5-32",
+  "domain": "L5_Storage",
+  "invariants": {
+    "compression_algorithm": "Zstd",
+    "min_compression_level": 19,
+    "cold_storage_path": "/data/cold_storage/",
+    "max_decompression_buffer_mb": 500
+  },
+  "enforcement": "STRICT_BLOCK"
+}

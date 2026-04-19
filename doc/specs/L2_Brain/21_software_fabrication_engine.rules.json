@@ -1,0 +1,12 @@
+{
+  "rule_id": "RULE_AO_V2_L2_21",
+  "spec_ref": "DE-V2-L2-21",
+  "domain": "L2_Fabrication",
+  "invariants": {
+    "fabrication_modes": ["GREENFIELD", "REFACTOR", "BUGFIX"],
+    "spec_first": true,
+    "drift_prevention": "STRICT_REVERT",
+    "required_agents": ["Architect", "Coder", "Sentinel"]
+  },
+  "enforcement": "STRICT_BLOCK"
+}

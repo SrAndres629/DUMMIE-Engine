@@ -1,0 +1,12 @@
+{
+  "rule_id": "RULE_AO_V2_L2_37",
+  "spec_ref": "DE-V2-L2-37",
+  "domain": "L2_Collaboration",
+  "invariants": {
+    "discovery_topic": "ao.v2.l2.brain.presence",
+    "required_handshake": true,
+    "secure_delegation_via": "MCP_Sidecar",
+    "max_discovery_hops": 2
+  },
+  "enforcement": "STRICT_BLOCK"
+}

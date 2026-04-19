@@ -1,0 +1,85 @@
+syntax = "proto3";
+
+package dummie.v2;
+
+option go_package = "io.dummie.v2/contracts";
+
+// === Servicios ===
+
+service LociMapper {
+    rpc IndexFile(IndexRequest) returns (IndexResponse);
+    rpc VerifyAuthority(AuthorityRequest) returns (AuthorityResponse);
+    rpc GetBlastRadius(ImpactRequest) returns (ImpactResponse);
+}
+
+service MuscleService {
+    rpc ProjectPerception(PerceptionRequest) returns (PerceptionResponse);
+    rpc RegisterSIMDKernel(KernelRequest) returns (KernelResponse);
+}
+
+// === Mensajes de Telemetría y Causalidad ===
+
+enum AuthorityLevel {
+    AGENT_PROPOSAL = 0;
+    CONSENSUS_COMMIT = 1;
+    HUMAN_OVERRIDE = 2;
+    EXECUTIVE_ARBITER = 3;
+}
+
+message EventId {
+    string universe_id = 1;
+    string branch_id = 2;
+    uint64 lamport_tick = 3;
+    AuthorityLevel authority = 4;
+}
+
+message PhaseTransitionSignal {
+    string from_phase = 1;
+    string to_phase = 2;
+    string cat_token = 3;
+    uint64 lamport_tick = 4;
+}
+
+// === Mensajes de Impacto (Blast Radius) ===
+
+message ImpactRequest {
+    string source_symbol_id = 1;
+    uint32 max_depth = 2;
+}
+
+message ImpactResponse {
+    double blast_radius_score = 1;
+    repeated string affected_symbol_ids = 2;
+    string risk_category = 3; 
+}
+
+// === Mensajes de Memoria y Percepción ===
+
+message MemoryTicket {
+    string shm_path = 1;
+    uint64 offset = 2;
+    uint64 length = 3;
+    uint32 alignment = 4;
+    AuthorityLevel required_level = 5;
+    string namespace_scope = 6;
+    bool is_toxic = 7;
+}
+
+message PerceptionRequest {
+    MemoryTicket ticket = 1;
+    float normalizer_weight = 2;
+}
+
+message PerceptionResponse {
+    uint64 processed_rows = 1;
+    uint32 average_vram_load = 2;
+}
+
+// === Placeholders para completar compilación ===
+
+message IndexRequest { string path = 1; }
+message IndexResponse { bool success = 1; }
+message AuthorityRequest { string agent_id = 1; }
+message AuthorityResponse { bool authorized = 1; }
+message KernelRequest { string kernel_id = 1; }
+message KernelResponse { bool registered = 1; }

@@ -1,0 +1,27 @@
+---
+skill_id: "DE-V2-SKILL-AMBIGUITY-AUDIT"
+name: "Cognitive Dissonance & Ambiguity Auditor"
+version: "1.0.0"
+namespace: "sw.sentinel.audit"
+description: "Especialista en detectar vacíos semánticos, contradicciones lógicas y deudas técnicas ocultas en especificaciones y código."
+capabilities:
+  - id: "CROSS_LAYER_CONSISTENCY"
+    description: "Verificación de que las promesas de una capa coincidan con los contratos de las capas adyacentes."
+  - id: "SEMANTIC_VACUUM_DETECTION"
+    description: "Identificación de términos 'hand-wavy' o abstractos que carecen de una base de datos de LST."
+  - id: "IDENTITY_ISOMORPHISM"
+    description: "Asegurar que el comportamiento del sistema sea isomorfo a los trazos de personalidad definidos en ADR-004 y Spec 33."
+  - id: "HISTORICAL_LEDGER_RECALL"
+    description: "Consulta semántica del .aiwg/ledger/resolutions.jsonl para evitar duplicidad de consultas al PAH."
+  - id: "CONTRADICTION_AUDIT"
+    description: "Detección de colisiones entre nuevas propuestas y decretos históricos del Ledger."
+protocols:
+  - type: "JIDOKA_LEVEL_2"
+    compliance: "MANDATORY"
+  - type: "LEDGER_RECALL_BEFORE_ESCALATION"
+    compliance: "STRICT"
+  - type: "CONTRADICTION_ALERT_PUSH"
+    compliance: "CRITICAL"
+  - type: "AMBIGUITY_TICKET_ARCHIVE"
+    compliance: "MANDATORY"
+---

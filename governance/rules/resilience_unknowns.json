@@ -1,0 +1,62 @@
+[
+  {
+    "rule_id": "RES_COG_001",
+    "scenario": "Infinite Refactoring Loop",
+    "shield": "E-Shield",
+    "invariants": {
+      "lock_on_pass": true,
+      "max_refactor_cycles": 3
+    },
+    "action": "STRICT_BLOCK"
+  },
+  {
+    "rule_id": "RES_COG_002",
+    "scenario": "Package Typosquatting",
+    "shield": "L-Shield",
+    "invariants": {
+      "enforce_whitelist": true,
+      "audit_by_hash": true
+    },
+    "action": "REVOKE_TOKEN"
+  },
+  {
+    "rule_id": "RES_HW_001",
+    "scenario": "VRAM OOM",
+    "shield": "E-Shield",
+    "invariants": {
+      "fractal_offload": true,
+      "vram_threshold_pct": 95
+    },
+    "action": "PAGE_TO_DISK"
+  },
+  {
+    "rule_id": "RES_HW_002",
+    "scenario": "Thermal Saturation",
+    "shield": "E-Shield",
+    "invariants": {
+      "max_tdp_watts": 170,
+      "time_dilation_factor": 1.5
+    },
+    "action": "INJECT_LATENCY"
+  },
+  {
+    "rule_id": "RES_CAUS_001",
+    "scenario": "Grandfather Paradox",
+    "shield": "S-Shield",
+    "invariants": {
+      "shadow_git": true,
+      "retention_until_pc": true
+    },
+    "action": "DEFER_PHYSICAL_IO"
+  },
+  {
+    "rule_id": "RES_CAUS_002",
+    "scenario": "SHM Race Condition",
+    "shield": "S-Shield",
+    "invariants": {
+      "hazard_pointers": true,
+      "lock_free": true
+    },
+    "action": "ENFORCE_ATOMIC"
+  }
+]

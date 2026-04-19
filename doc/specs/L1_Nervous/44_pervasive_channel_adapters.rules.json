@@ -1,0 +1,25 @@
+{
+  "rule_id": "RULE_AO_V2_L1_44",
+  "spec_ref": "DE-V2-L1-44",
+  "invariants": {
+    "forbidden_patterns": [
+      "UNAUTHENTICATED_WEBHOOK",
+      "RAW_JSON_TRANSIT"
+    ],
+    "required_headers": [
+      "X-AO-Channel-ID",
+      "X-AO-Source-Token"
+    ],
+    "message_flow": "Webhook/Poll -> Adapter -> Intent (Protobuf)",
+    "supported_channels": ["whatsapp", "telegram", "slack", "discord"],
+    "constraints": {
+      "max_message_size": 4096,
+      "rate_limit": "5 msg/s"
+    }
+  },
+  "enforcement": "STRICT_BLOCK",
+  "normalization": {
+    "protocol": "Protobuf-v2",
+    "encoding": "Zero-Copy-Arrow"
+  }
+}

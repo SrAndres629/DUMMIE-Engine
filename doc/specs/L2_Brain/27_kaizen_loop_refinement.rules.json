@@ -1,0 +1,12 @@
+{
+  "rule_id": "RULE_AO_V2_L2_27",
+  "spec_ref": "DE-V2-L2-27",
+  "domain": "L2_Kaizen",
+  "invariants": {
+    "learning_threshold": 0.85,
+    "forbidden_regressions": true,
+    "output_standard": "agentskills.io",
+    "required_approval": "PAH_ORACLE"
+  },
+  "enforcement": "STRICT_BLOCK"
+}

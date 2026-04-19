@@ -1,0 +1,22 @@
+{
+  "rule_id": "VIO_HEX_001",
+  "domain": "L2_Brain",
+  "description": "Enforce strict hexagonal isolation for cognitive layers.",
+  "invariants": {
+    "no_io_direct": true,
+    "forbidden_imports": [
+      "os",
+      "subprocess",
+      "requests",
+      "socket",
+      "shutil"
+    ],
+    "max_complexity": 15,
+    "required_traits": [
+      "SovereignEntity",
+      "SFE_Audit_Ready"
+    ]
+  },
+  "enforcement": "STRICT_BLOCK",
+  "priority": 100
+}
