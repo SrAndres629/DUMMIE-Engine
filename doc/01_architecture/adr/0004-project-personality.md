@@ -77,3 +77,10 @@ Cada rasgo de personalidad definido en `.aiwg/personality/profile.json` se insta
 ## 5. Consecuencias
 - **Positivas:** Eliminación de la erosión arquitectónica; los agentes "cambian de chip" instantáneamente al cambiar de contexto.
 - **Negativas:** Requiere una fase inicial de "Ajuste de Tono" (Tuning) para cada proyecto nuevo.
+
+---
+
+## [MSA] Sibling Components Requeridos
+Todo documento maestro debe ir acompañado de sus archivos hermanos para convertirse en una *Active Architectural Fitness Function*:
+- **Executable Contract:** `0004-project-personality.feature`
+- **Machine Rules:** `0004-project-personality.rules.json`

@@ -72,3 +72,10 @@ $$Score = (ROI \cdot 0.6) - (Complexity\_Risk \cdot 0.4)$$
 ## 5. Consecuencias y Sanciones
 - **Apoptosis Preventiva:** Si un agente insiste en una propuesta vetada por el S-Shield tras 3 iteraciones, L0 dispara el protocolo de muerte cerebral.
 - **Trazabilidad Forense:** Toda decisión del Árbitro se persiste en el Event Store con el hash de la regla SDD que motivó el veto.
+
+---
+
+## [MSA] Sibling Components Requeridos
+Todo documento maestro debe ir acompañado de sus archivos hermanos para convertirse en una *Active Architectural Fitness Function*:
+- **Executable Contract:** `0003-agentic-communication-fabrication.feature`
+- **Machine Rules:** `0003-agentic-communication-fabrication.rules.json`

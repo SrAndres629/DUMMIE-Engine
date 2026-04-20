@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Semantic Fabric Validation Rules",
+  "type": "object",
+  "properties": {
+    "cross_reference_requirements": {
+      "type": "object",
+      "properties": {
+        "adr_must_link_to_spec": { "type": "boolean", "default": true },
+        "resolution_must_link_to_spec_or_adr": { "type": "boolean", "default": true }
+      }
+    },
+    "orphan_handling": {
+      "type": "string",
+      "enum": ["WARN", "STRICT_FAIL", "AUTO_RESOLVE"]
+    }
+  },
+  "required": ["cross_reference_requirements", "orphan_handling"]
+}

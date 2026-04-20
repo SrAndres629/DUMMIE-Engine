@@ -50,6 +50,13 @@ DUMMIE Engine requiere una infraestructura que elimine las "grietas cerebrales" 
 ## 3. Decisión
 Se implementa una arquitectura híbrida de 7 capas basada en la **Especialización Radical de Lenguajes** y la comunicación **Zero-Copy via Apache Arrow**.
 
+---
+
+## [MSA] Sibling Components Requeridos
+Todo documento maestro debe ir acompañado de sus archivos hermanos para convertirse en una *Active Architectural Fitness Function*:
+- **Executable Contract:** `0001-polyglot-architecture.feature`
+- **Machine Rules:** `0001-polyglot-architecture.rules.json`
+
 ### 3.1 Estratigrafía de Capas (L0-L6)
 - **L0 - Overseer (Elixir/OTP):** El **Árbitro Ejecutivo**. Gestión de vida y resolución de conflictos.
 - **L1 - Nervous (Go/NATS):** El **Relojero de Lamport**. Malla de agentes y persistencia distribuida.

@@ -1,0 +1,40 @@
+{
+  "project_certainty": 0.5,
+  "layers": {
+    "L0_Overseer": {
+      "certainty": 0.5,
+      "status": "THEORETICAL"
+    },
+    "L1_Nervous": {
+      "certainty": 0.5,
+      "status": "THEORETICAL"
+    },
+    "L2_Brain": {
+      "certainty": 0.8,
+      "status": "CRYSTALLIZING",
+      "bounded_contexts": {
+        "context": 0.9,
+        "memory": 0.9,
+        "fabrication": 0.7,
+        "governance": 0.6
+      }
+    },
+    "L3_Shield": {
+      "certainty": 0.5,
+      "status": "THEORETICAL"
+    },
+    "L4_Edge": {
+      "certainty": 0.2,
+      "status": "TERRA_INCOGNITA"
+    },
+    "L5_Muscle": {
+      "certainty": 0.2,
+      "status": "TERRA_INCOGNITA"
+    },
+    "L6_Skin": {
+      "certainty": 0.0,
+      "status": "TERRA_INCOGNITA"
+    }
+  },
+  "last_audit_tick": 1113
+}

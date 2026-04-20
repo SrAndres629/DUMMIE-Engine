@@ -53,6 +53,16 @@ El Swarm opera bajo un modelo de **Fábrica Autárquica**, dividido en cuatro de
 6. **Mandatory session logging:** Al finalizar, el agente DEBE registrar aprendizajes o decisiones en el Memory Ledger para asegurar la persistencia del conocimiento.
 7. **Sovereign Hybrid Execution (ADR-006):** En ausencia de Nix, el agente utilizará Docker para compilación (L1, L3, L4) y herramientas locales (`uv`) para cognición (L2).
 8. **Proactive Documentation (ADR-006):** El agente tiene el mandato de actualizar la Verdad Física del proyecto en Specs y READMEs en tiempo real. No se permite la desincronización entre el código real y los hitos reportados.
+9. **Iniciativa Documental (Evolutiva):** El agente `sw.arch.core` DEBE proponer autónomamente nuevos ADRs en `doc/01_architecture/adr/` al detectar ineficiencias o patrones repetitivos.
+10. **Mantenimiento Espacial (Híbrido):** Al modificar la topología del sistema, el enjambre regenerará los diagramas arquitectónicos eligiendo dinámicamente el formato óptimo (Mermaid para flujos, C4 PlantUML para estructuras) según el ADR-0010.
+11. **Bucle Metacognitivo:** El enjambre evalúa su rendimiento y ajusta autónomamente sus `traits` en `identity.json`. **Regla estricta:** Toda mutación de identidad debe ser notificada explícitamente al PAH (Humano) para mantener la transparencia evolutiva.
 
 ## 4. Directorio de Habilidades
 Las habilidades y manifiestos YAML se encuentran en `.agents/skills/`. Cada habilidad debe cumplir con el estándar `agentskills.io`.
+
+---
+
+## [MSA] Sibling Components Requeridos
+El manifiesto del enjambre está gobernado por:
+- **Executable Contract:** `AGENTS.feature`
+- **Machine Rules:** `AGENTS.rules.json`

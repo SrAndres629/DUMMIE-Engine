@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Polyglot Architecture Constraints",
+  "type": "object",
+  "properties": {
+    "layer_language_mapping": {
+      "type": "object",
+      "properties": {
+        "l0_overseer": { "type": "string", "enum": ["elixir"] },
+        "l1_nervous": { "type": "string", "enum": ["go"] },
+        "l2_brain": { "type": "string", "enum": ["python"] },
+        "l3_shield": { "type": "string", "enum": ["rust"] },
+        "l4_edge": { "type": "string", "enum": ["zig"] },
+        "l5_muscle": { "type": "string", "enum": ["mojo"] },
+        "l6_skin": { "type": "string", "enum": ["typescript", "rust"] }
+      },
+      "additionalProperties": false
+    },
+    "inter_layer_transport": {
+      "type": "array",
+      "items": { "type": "string", "enum": ["arrow", "grpc", "nats"] }
+    }
+  },
+  "required": ["layer_language_mapping", "inter_layer_transport"]
+}

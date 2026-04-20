@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Global State Integrity Constraints",
+  "type": "object",
+  "properties": {
+    "required_sections": {
+      "type": "array",
+      "items": { "type": "string", "enum": ["Architecture", "State", "Documentation"] }
+    },
+    "truth_alignment": {
+      "type": "boolean",
+      "const": true,
+      "description": "El README debe coincidir siempre con el estado del código y los ADRs activos."
+    }
+  },
+  "required": ["required_sections", "truth_alignment"]
+}

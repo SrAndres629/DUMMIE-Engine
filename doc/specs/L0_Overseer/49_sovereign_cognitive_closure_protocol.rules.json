@@ -1,0 +1,13 @@
+{
+  "spec_id": "DE-V2-L0-49",
+  "invariants": {
+    "mandatory_files": [
+      ".aiwg/evolution.jsonl",
+      ".aiwg/memory/ego_state.jsonl",
+      ".aiwg/memory/lessons.jsonl"
+    ],
+    "link_integrity_check": true,
+    "causal_link_required": "tick_id",
+    "prohibited_terms": ["bugs fixed", "minor changes", "update docs"]
+  }
+}

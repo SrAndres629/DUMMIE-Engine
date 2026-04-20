@@ -18,7 +18,12 @@ El monorepo sigue una política de **Sustrato Dividido** (Spec 48) para mantener
 │       └── zig-cache -> /media/datasets/dummie/build_artifacts/l4_edge_zig/zig-cache
 ├── proto/             # Contratos SSoT (Protobuf v2)
 │   └── dummie/v2/     # New namespace path
-└── .aiwg/memory/      # Cristalización de Memoria (ACIP)
+├── .aiwg/             # Hipocampo Agéntico (Evolución y Autoconciencia)
+│   ├── identity.json  # Super-Ego y rasgos de personalidad.
+│   ├── evolution.jsonl # Registro del gap Teoría vs Física.
+│   ├── ontological_map.json # Mapa de certidumbre de las 7 capas.
+│   └── memory/        # Cristalización de Memoria (ACIP)
+└── .git/              # Control de versiones.
 ```
 
 ### 1.2. Unidad D (Bloatware y Persistencia)

@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Agentic Communication Constraints",
+  "type": "object",
+  "properties": {
+    "allowed_agent_namespaces": {
+      "type": "array",
+      "items": { 
+        "type": "string", 
+        "enum": ["sw.strategy.*", "sw.arch.*", "sw.plant.*", "sw.qa.*"] 
+      }
+    },
+    "communication_protocol": {
+      "type": "string",
+      "const": "agent_client_protocol_acp"
+    }
+  },
+  "required": ["allowed_agent_namespaces", "communication_protocol"]
+}

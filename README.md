@@ -78,3 +78,10 @@ La fabricación de cada línea de código sigue un flujo de ingeniería estricto
 2.  **[ ] Bloque Zeta (Gobernanza):** ROI, Legal Shield y Árbitro Ejecutivo. **(PENDING)**
 3.  **[ ] Bloque Beta (L2+L3):** Core Cognitivo y Escudo de Ejecución. (Fabricación en curso).
 4.  **[ ] Bloque Gamma (L1+L4+L5):** Sistema Nervioso, Ontología LST y Músculo SIMD.
+
+---
+
+## [MSA] Sibling Components Requeridos
+Para mantener la "Verdad Física" (Physical Truth Alignment), este README está gobernado por:
+- **Executable Contract:** `README.feature`
+- **Machine Rules:** `README.rules.json`

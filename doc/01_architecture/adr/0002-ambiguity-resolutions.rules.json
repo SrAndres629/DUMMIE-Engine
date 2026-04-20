@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Ambiguity Resolution Constraints",
+  "type": "object",
+  "properties": {
+    "escalation_protocol": {
+      "type": "string",
+      "const": "jidoka_stop_and_escalate"
+    },
+    "required_ledger_logging": {
+      "type": "array",
+      "items": { "type": "string", "enum": ["ambiguities.jsonl", "resolutions.jsonl"] }
+    }
+  },
+  "required": ["escalation_protocol", "required_ledger_logging"]
+}

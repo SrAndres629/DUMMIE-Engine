@@ -82,3 +82,10 @@ El Swarm se organiza en dos grupos operativos:
 ## 5. Consecuencias
 - **Determinismo:** Eliminación de alucinaciones arquitectónicas.
 - **Colaboración:** El usuario y los agentes co-architectorizan el sistema mediante un diálogo socrático de alta precisión.
+
+---
+
+## [MSA] Sibling Components Requeridos
+Todo documento maestro debe ir acompañado de sus archivos hermanos para convertirse en una *Active Architectural Fitness Function*:
+- **Executable Contract:** `0005-cognitive-fabrication-protocols.feature`
+- **Machine Rules:** `0005-cognitive-fabrication-protocols.rules.json`

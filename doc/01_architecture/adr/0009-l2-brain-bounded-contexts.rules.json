@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "L2 Brain Bounded Context Constraints",
+  "type": "object",
+  "properties": {
+    "allowed_domain_namespaces": {
+      "type": "array",
+      "items": { "type": "string", "enum": ["context", "memory", "fabrication", "governance"] }
+    },
+    "strict_isolation": {
+      "type": "boolean",
+      "default": true,
+      "description": "Cross-imports between bounded contexts must use explicit ports."
+    }
+  },
+  "required": ["allowed_domain_namespaces"]
+}

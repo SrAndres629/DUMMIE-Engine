@@ -82,3 +82,10 @@ La negociación infinita entre agentes expertos requiere un mecanismo de arbitra
 ## 6. Consecuencias
 - **Determinismo:** Garantía de progreso ante divergencia cognitiva.
 - **Soberanía:** Blindaje contra el agotamiento de recursos (Tokens/RAM).
+
+---
+
+## [MSA] Sibling Components Requeridos
+Todo documento maestro debe ir acompañado de sus archivos hermanos para convertirse en una *Active Architectural Fitness Function*:
+- **Executable Contract:** `0002-ambiguity-resolutions.feature`
+- **Machine Rules:** `0002-ambiguity-resolutions.rules.json`

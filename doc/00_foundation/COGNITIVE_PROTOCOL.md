@@ -10,6 +10,7 @@ Antes de realizar cualquier cambio físico en el monorepo, todo agente DEBE real
     -   `decisions.jsonl`: ¿Se ha decidido algo antes sobre este componente?
     -   `lessons.jsonl`: ¿Qué falló la última vez que alguien tocó esto?
     -   `ambiguities.jsonl`: ¿Qué dudas resolvió el PAH recientemente?
+3.  **Auditar Restricciones Arquitectónicas Activas (ADRs):** El agente Tech Lead (Nodo 3) **DEBE** procesar todos los archivos `.rules.json` en `doc/01_architecture/adr/`. Las reglas de los ADRs con estado `ACCEPTED` son vinculantes. Los que tienen estado `SUPERSEDED` deben ignorarse. Ningún código o plan puede violar las "Active Architectural Fitness Functions".
 
 ## 3. Protocolo de Escritura (Crystallization)
 El agente no espera al final de la sesión; cristaliza la memoria en tiempo real tras hitos críticos:
@@ -31,3 +32,6 @@ Si el agente tuvo que usar el protocolo `Ask-User-First` para eliminar una indet
 
 ## 4. Invariante de Validación
 Cualquier entrada de memoria será validada por el **SDD Auditor (04_forge/sdd_validator.py)**. Las entradas que violen el esquema Protobuf de Layer 1 serán marcadas como `CORRUPTED` y el agente deberá corregirlas mediante auto-reflexión.
+
+## 5. Protocolo de Cierre Soberano (SCCP)
+Al final de cada sesión, es MANDATORIO ejecutar el ritual de cierre definido en la **[Spec 49](../specs/L0_Overseer/49_sovereign_cognitive_closure_protocol.md)**. Ninguna sesión se considera exitosa si no se ha actualizado el `ontological_map.json` y el `ego_state.jsonl`.

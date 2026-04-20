@@ -81,6 +81,7 @@ Este documento actúa como el índice maestro de todas las especificaciones, dec
 | DE-V2-L2-38 | [Procedural Memory](../specs/L2_Brain/38_procedural_memory_crystallization.md) | L2 | .cognitive.memory.procedural |
 | DE-V2-L2-39 | [Semantic Consistency](../specs/L2_Brain/39_semantic_consistency_agent.md) | L2 | .cognitive.sync |
 | DE-V2-L4-40 | [Self-Healing](../specs/L4_Edge/40_self_healing_remediation_loop.md) | L4 | .infrastructure.healing |
+| DE-V2-L0-49 | [Cognitive Closure (SCCP)](../specs/L0_Overseer/49_sovereign_cognitive_closure_protocol.md) | L0 | .governance.closure |
 
 ---
 
@@ -95,3 +96,4 @@ Este documento actúa como el índice maestro de todas las especificaciones, dec
 | DE-V2-ADR-003 | [Agentic SFE](../01_architecture/adr/0003-agentic-communication-fabrication.md) | L2 | ACTIVE |
 | DE-V2-ADR-004 | [Identity & Mood](../01_architecture/adr/0004-project-personality.md) | L0 | ACTIVE |
 | DE-V2-ADR-005 | [Cognitive Standards](../01_architecture/adr/0005-cognitive-fabrication-protocols.md) | L0 | ACTIVE |
+| DE-V2-ADR-010 | [L2 Memory Bridge](../01_architecture/adr/0010-l2-infrastructure-bridge.md) | L0 | ACTIVE |

@@ -20,5 +20,10 @@
         "reason": "Scalability and isolation concerns for agent-driven development."
       }
     ]
+  },
+  "metacognition": {
+    "last_audit_tick": 1113,
+    "auto_adjust_traits": true,
+    "evolution_enabled": true
   }
 }

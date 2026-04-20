@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Ontological Certainty Rules",
+  "type": "object",
+  "properties": {
+    "certainty_thresholds": {
+      "type": "object",
+      "properties": {
+        "coding_allowed_minimum": { "type": "number", "minimum": 0.0, "maximum": 1.0, "default": 0.5 },
+        "crystallized_state": { "type": "number", "const": 1.0 }
+      }
+    },
+    "heuristic_weights": {
+      "type": "object",
+      "properties": {
+        "spec_existence": { "type": "number", "default": 0.4 },
+        "adr_alignment": { "type": "number", "default": 0.3 },
+        "tdd_passing": { "type": "number", "default": 0.3 }
+      }
+    }
+  },
+  "required": ["certainty_thresholds", "heuristic_weights"]
+}

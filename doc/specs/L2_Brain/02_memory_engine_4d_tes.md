@@ -20,6 +20,11 @@ El motor 4D-TES (Topological Event Sourcing) implementa un modelo de memoria inm
 ## 1. Arquitectura de Retención
 El sistema no almacena "archivos", sino vectores en un espacio de 6 dimensiones indexados causalmente. La memoria se divide en tres estratos: Episódico (Timeline), Semántico (Grafos) y Procedural (Skills).
 
+## 2. Anexo Ontológico (KùzuDB)
+Conforme al **ADR-010**, la persistencia inicial se realizará en `.aiwg/memory/loci.db` con el siguiente esquema:
+- **Nodos**: `Event`, `Agent`, `Requirement`.
+- **Relaciones**: `CAUSED_BY`, `EXECUTED_BY`, `VALIDATES`.
+
 ---
 
 ## [MSA] Sibling Components

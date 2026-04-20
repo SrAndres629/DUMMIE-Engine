@@ -1,0 +1,14 @@
+{
+  "spec_id": "DE-V2-L1-11",
+  "invariants": {
+    "serialization": "Zero-Copy",
+    "format": "Apache Arrow 15.0+",
+    "shm_path": "/dev/shm/dummie_data_plane",
+    "access_control": {
+      "L1": "RW",
+      "L2": "RW",
+      "L3": "R",
+      "L4": "RW"
+    }
+  }
+}

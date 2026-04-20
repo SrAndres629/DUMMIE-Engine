@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Cognitive Fabrication Protocols Constraints",
+  "type": "object",
+  "properties": {
+    "state_management_output": {
+      "type": "boolean",
+      "const": true,
+      "description": "El agente DEBE imprimir [SYSTEM_STATE] antes de finalizar su turno."
+    },
+    "spec_driven_development": {
+      "type": "boolean",
+      "const": true,
+      "description": "Ningún código puede escribirse sin una Spec previa asociada."
+    }
+  },
+  "required": ["state_management_output", "spec_driven_development"]
+}
