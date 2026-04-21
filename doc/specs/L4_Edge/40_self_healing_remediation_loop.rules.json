@@ -1,13 +1,21 @@
 {
-  "rule_id": "RULE_AO_V2_L4_40",
-  "spec_ref": "DE-V2-L4-40",
+  "spec_id": "DE-V2-L4-40",
   "domain": "L4_Infrastructure",
-  "invariants": {
+  "remediation_limits": {
     "max_autonomous_fixes_daily": 10,
-    "cb_threshold_count": 3,
-    "cb_threshold_window_hours": 24,
-    "remediation_gate_required": "QA_AGENT",
-    "required_signals": ["latency", "error_rate", "cve"]
+    "gate_required_after": 5,
+    "gate_authority": "QA_AGENT"
   },
-  "enforcement": "STRICT_BLOCK"
+  "circuit_breaker": {
+    "threshold_count": 3,
+    "window_hours": 24,
+    "reset_timeout_seconds": 3600
+  },
+  "invariants": {
+    "mandatory_blueprint_sync": true,
+    "no_manual_hotfixes_in_production": true
+  },
+  "health_signals": ["latency", "error_rate", "cve_density", "memory_leak_slope"],
+  "enforcement": "STRICT_BLOCK",
+  "personality_ref": "DE-V2-L0-33"
 }

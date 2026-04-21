@@ -1,12 +1,20 @@
 {
-  "rule_id": "RULE_AO_V2_L2_27",
-  "spec_ref": "DE-V2-L2-27",
+  "spec_id": "DE-V2-L2-27",
   "domain": "L2_Kaizen",
-  "invariants": {
-    "learning_threshold": 0.85,
-    "forbidden_regressions": true,
-    "output_standard": "agentskills.io",
-    "required_approval": "PAH_ORACLE"
+  "learning_parameters": {
+    "min_certainty_threshold": 0.85,
+    "max_iterations_per_lesson": 3,
+    "forbidden_regressions": true
   },
-  "enforcement": "STRICT_BLOCK"
+  "skill_governance": {
+    "output_standard": "agentskills.io",
+    "required_approval": "PAH_ORACLE",
+    "verification_layer": "L3_Shield"
+  },
+  "invariants": {
+    "mandatory_memory_sync": true,
+    "no_ego_mutation_without_audit": true
+  },
+  "enforcement": "STRICT_BLOCK",
+  "personality_ref": "DE-V2-L0-33"
 }

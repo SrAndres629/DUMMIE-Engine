@@ -2,7 +2,7 @@
 spec_id: "DE-V2-GOV-02"
 title: "System Design Blueprint (Modelos C4)"
 status: "ACTIVE"
-version: "2.1.0"
+version: "2.2.0"
 layer: "L0"
 namespace: "io.dummie.v2.concepts"
 authority: "ARCHITECT"
@@ -15,27 +15,10 @@ tags: ["governance", "system_design", "c4_model", "industrial_sdd"]
 # System Design Blueprint (Modelos C4)
 
 ## Abstract
-Este documento modela visualmente cómo interactúan e intercambian flujos las capas estructurales, usando nomenclatura C4. Proporciona una visión holística de la topología del sistema y los contratos de comunicación inter-capa.
+Este documento modela visualmente cómo interactúan e intercambian flujos las capas estructurales de DUMMIE Engine, usando nomenclatura C4. Proporciona una visión holística de la topología del sistema, los contenedores por capa y los contratos de comunicación inter-capa (NATS, Arrow, gRPC).
 
-## 1. Cognitive Context Model (JSON)
-```json
-{
-  "diagrams": {
-    "level_1": "Contexto de Sistema (Mermaid C4Context)",
-    "level_2": "Diagrama de Contenedores (Mermaid C4Container)",
-    "level_3": "Flujo de Datos Inter-Capa (Mermaid Graph)"
-  },
-  "technologies": [
-    "NATS",
-    "Apache Arrow",
-    "gRPC",
-    "Protobuf"
-  ],
-  "layer_mapping": "L0-L6 Stratigraphy",
-  "personality_ref": "DE-V2-L0-33",
-  "ledger_link": "DE-V2-L2-34"
-}
-```
+## 1. Cognitive Context Model (Ref)
+Para la definición de niveles de diagramación, tecnologías de transporte y mapeo estratigráfico, consulte el archivo hermano [c4_model_graphs.rules.json](./c4_model_graphs.rules.json).
 
 ---
 
@@ -68,7 +51,7 @@ C4Container
         
         Container(c_go, "NATS / Traffic Manager", "Go + Redb", "Nervous System (L1): Enruta todo tráfico IPC. Event Store en Redb.")
         
-        Container(c_py, "Core de Inferencia", "Python + LangGraph + PydanticAI", "Brain (L2): Genera intenciones atómicas via Consenso.")
+        Container(c_py, "Core de Inferencia", "Python + Swarm + PydanticAI", "Brain (L2): Genera intenciones atómicas via Consenso.")
         
         Container(c_rust, "Sandbox & Execution Shield", "Rust + WASM + PyO3", "Shield (L3): Testea y ejecuta código sin contaminar host.")
         
@@ -119,3 +102,10 @@ graph LR
     NATS -->|"L0 ↔ L1 ↔ L3"| NET["Red local"]
     GRPC -->|"L1 ↔ L2"| NET
 ```
+
+---
+
+## [MSA] Sibling Components Requeridos
+Todo documento maestro debe ir acompañado de sus archivos hermanos para convertirse en una *Active Architectural Fitness Function*:
+- **Executable Contract:** [c4_model_graphs.feature](./c4_model_graphs.feature)
+- **Machine Rules:** [c4_model_graphs.rules.json](./c4_model_graphs.rules.json)

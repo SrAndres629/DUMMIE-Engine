@@ -1,12 +1,20 @@
 {
-  "rule_id": "RULE_AO_V2_L2_34",
-  "spec_ref": "DE-V2-L2-34",
+  "spec_id": "DE-V2-L2-34",
   "domain": "L2_Governance",
-  "invariants": {
-    "ledger_path": "/ledger/sovereign_resolutions.jsonl",
-    "required_fields": ["tick", "id", "resolution", "witness_hash"],
-    "immutable_ledger": true,
-    "audit_frequency": "REAL_TIME"
+  "storage": {
+    "ledger_path": "ledger/sovereign_resolutions.jsonl",
+    "format": "JSONL_APPEND_ONLY",
+    "required_fields": ["tick", "id", "resolution", "witness_hash"]
   },
-  "enforcement": "STRICT_BLOCK"
+  "invariants": {
+    "immutable_ledger": true,
+    "audit_mode": "REAL_TIME_STREAM",
+    "witness_hash_algorithm": "SHA-256"
+  },
+  "alerts": {
+    "critical_events": ["Architecture_Shift", "Constraint_Violation", "PAH_Required"],
+    "broadcast_channel": "NATS_CORE_ALERTS"
+  },
+  "enforcement": "STRICT_BLOCK",
+  "personality_ref": "DE-V2-L0-33"
 }

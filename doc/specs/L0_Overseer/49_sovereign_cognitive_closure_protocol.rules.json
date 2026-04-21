@@ -1,13 +1,22 @@
 {
   "spec_id": "DE-V2-L0-49",
-  "invariants": {
+  "hipocampo_topology": {
+    "root": ".aiwg/",
     "mandatory_files": [
-      ".aiwg/evolution.jsonl",
-      ".aiwg/memory/ego_state.jsonl",
-      ".aiwg/memory/lessons.jsonl"
-    ],
+      "identity.json",
+      "evolution.jsonl",
+      "ontological_map.json",
+      "memory/ego_state.jsonl",
+      "memory/decisions.jsonl",
+      "memory/lessons.jsonl"
+    ]
+  },
+  "invariants": {
+    "forbidden_terms": ["bugs fixed", "minor changes", "update docs", "refactor"],
     "link_integrity_check": true,
-    "causal_link_required": "tick_id",
-    "prohibited_terms": ["bugs fixed", "minor changes", "update docs"]
-  }
+    "causal_link": "tick_id",
+    "zero_ambiguity": true
+  },
+  "enforcement": "STRICT_BLOCK",
+  "personality_ref": "DE-V2-L0-33"
 }

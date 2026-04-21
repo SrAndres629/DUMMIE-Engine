@@ -1,12 +1,20 @@
 {
-  "rule_id": "RULE_AO_V2_L6_30",
-  "spec_ref": "DE-V2-L6-30",
+  "spec_id": "DE-V2-L6-30",
   "domain": "L6_Visualizer",
-  "invariants": {
+  "render_config": {
     "visual_engines": ["Force_Directed_3D", "React_Three_Fiber"],
-    "telemetry_source": "nats.agent.telemetry.>",
-    "authority_required_for_apoptosis": "PAH_HUMAN",
-    "real_time_sync": true
+    "refresh_rate_hz": 60,
+    "telemetry_source": "nats.agent.telemetry.>"
   },
-  "enforcement": "WARN"
+  "synchronization": {
+    "real_time_sync": true,
+    "max_perceptual_lag_ms": 200,
+    "temporal_standard": "LAMPORT_CLOCKS"
+  },
+  "invariants": {
+    "mandatory_pah_auth_for_destructive_actions": true,
+    "state_fidelity_enforced": true
+  },
+  "enforcement": "WARN",
+  "personality_ref": "DE-V2-L0-33"
 }

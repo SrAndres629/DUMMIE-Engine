@@ -1,12 +1,20 @@
 {
-  "rule_id": "RULE_AO_V2_L3_22",
-  "spec_ref": "DE-V2-L3-22",
+  "spec_id": "DE-V2-L3-22",
   "domain": "L3_Governance",
-  "invariants": {
-    "rule_directory": "/governance/rules/",
+  "contract_logic": {
+    "rule_directory": "governance/rules/",
     "enforcement_modes": ["STRICT_BLOCK", "WARN"],
-    "required_for_persistence": "AF_TOKEN",
-    "manual_edit_forbidden": true
+    "required_token": "AF_TOKEN"
   },
-  "enforcement": "STRICT_BLOCK"
+  "invariants": {
+    "manual_edit_forbidden": true,
+    "periodic_hash_validation": true,
+    "mandatory_contract_loading": true
+  },
+  "validation_metrics": {
+    "min_fitness_score": 0.9,
+    "max_drift_allowed": 0.0
+  },
+  "enforcement": "STRICT_BLOCK",
+  "personality_ref": "DE-V2-L0-33"
 }

@@ -1,29 +1,30 @@
 {
-  "rule_id": "RULE_AO_V2_L0_46",
-  "spec_ref": "DE-V2-L0-46",
+  "spec_id": "DE-V2-L0-46",
+  "queue_architecture": {
+    "type": "FIFO_Serialization",
+    "scope": "SessionLane",
+    "lock_mechanism": "SemanticLock_GenServer (Elixir)"
+  },
+  "deadlock_protection": {
+    "timeout_s": 45,
+    "strategy": "Rollback_And_Requeue",
+    "preemption": "PAH_Bypass"
+  },
   "invariants": {
     "forbidden_patterns": [
       "PARALLEL_STATE_MUTATION",
       "UNBOUNDED_QUEUE_GROWTH",
       "ORPHANED_LOCKS"
     ],
-    "required_headers": [
+    "mandatory_headers": [
       "X-AO-Session-ID",
       "X-AO-Execution-Mode"
-    ],
-    "queue_architecture": {
-      "type": "FIFO_Serialization",
-      "scope": "SessionLane",
-      "lock_mechanism": "SemanticLock_GenServer"
-    },
-    "deadlock_protection": {
-      "timeout": "45s",
-      "strategy": "Rollback_And_Requeue"
-    }
+    ]
   },
-  "enforcement": "STRICT_BLOCK",
   "transaction_limits": {
     "max_queue_depth": 10,
-    "lock_ttl": "45s"
-  }
+    "lock_ttl_s": 45
+  },
+  "enforcement": "STRICT_BLOCK",
+  "personality_ref": "DE-V2-L0-33"
 }

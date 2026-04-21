@@ -1,9 +1,28 @@
 {
-  "rule_id": "RULE_AO_V2_L0_06",
-  "spec_ref": "DE-V2-L0-06",
-  "invariants": {
-    "forbidden_patterns": [],
-    "required_headers": []
+  "spec_id": "DE-V2-L0-06",
+  "migration_phases": [
+    "INIT",
+    "ALPHA_STAGING",
+    "ALPHA_STABLE",
+    "BETA_STAGING",
+    "BETA_STABLE",
+    "GAMMA_DIVERGENCE",
+    "OMEGA_STATIONARY"
+  ],
+  "transition_criteria": {
+    "Alpha_Beta": { "latency_nats_ms": 2.0, "uptime_percent": 99.9 },
+    "Beta_Gamma": { "ffi_zero_copy_ns": 100.0, "sdd_coverage": 1.0 },
+    "Gamma_Omega": { "4d_tes_rewind_consistency": true }
   },
-  "enforcement": "STRICT_BLOCK"
+  "rollback_strategy": {
+    "suspension": "L0_Freeze",
+    "validation": "L3_Shield_Jidoka",
+    "sovereignty": "Absolute_Veto"
+  },
+  "invariants": [
+    "No code without Spec 22 contract",
+    "Mandatory ROI justification per Spec 14",
+    "PhaseTransitionSignal required for state advancement"
+  ],
+  "personality_ref": "DE-V2-L0-33"
 }

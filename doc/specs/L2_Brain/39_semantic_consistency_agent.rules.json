@@ -1,12 +1,20 @@
 {
-  "rule_id": "RULE_AO_V2_L2_39",
-  "spec_ref": "DE-V2-L2-39",
+  "spec_id": "DE-V2-L2-39",
   "domain": "L2_Sync",
-  "invariants": {
-    "root_of_truth": "SPEC",
-    "sync_mode": "STRICT_CASCADING",
-    "forbidden_manual_code_drift": true,
-    "required_agents": ["Synchronizer", "Architect", "Coder"]
+  "sync_mechanics": {
+    "root_of_truth": "SPEC_DRIVEN",
+    "mode": "STRICT_CASCADING",
+    "auto_correction_enabled": true
   },
-  "enforcement": "STRICT_BLOCK"
+  "invariants": {
+    "forbidden_manual_code_drift": true,
+    "mandatory_contract_alignment": true,
+    "required_agents": ["Synchronizer", "Architect", "Sentinel"]
+  },
+  "drift_handling": {
+    "detection": "LST_HASH_COMPARISON",
+    "action": "STRICT_REVERT_AND_ALERT"
+  },
+  "enforcement": "STRICT_BLOCK",
+  "personality_ref": "DE-V2-L0-33"
 }

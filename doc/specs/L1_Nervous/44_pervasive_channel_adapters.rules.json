@@ -1,25 +1,26 @@
 {
-  "rule_id": "RULE_AO_V2_L1_44",
-  "spec_ref": "DE-V2-L1-44",
+  "spec_id": "DE-V2-L1-44",
+  "gateway_config": {
+    "supported_channels": ["whatsapp", "telegram", "slack", "discord"],
+    "flow": "Webhook/Poll -> L1_Adapter -> Intent (Protobuf)",
+    "rate_limit_msg_s": 5
+  },
+  "security": {
+    "identity_pinning": true,
+    "mandatory_anonimization": true,
+    "source_validation_required": true
+  },
   "invariants": {
+    "max_message_size_bytes": 4096,
     "forbidden_patterns": [
       "UNAUTHENTICATED_WEBHOOK",
       "RAW_JSON_TRANSIT"
     ],
-    "required_headers": [
+    "mandatory_headers": [
       "X-AO-Channel-ID",
       "X-AO-Source-Token"
-    ],
-    "message_flow": "Webhook/Poll -> Adapter -> Intent (Protobuf)",
-    "supported_channels": ["whatsapp", "telegram", "slack", "discord"],
-    "constraints": {
-      "max_message_size": 4096,
-      "rate_limit": "5 msg/s"
-    }
+    ]
   },
   "enforcement": "STRICT_BLOCK",
-  "normalization": {
-    "protocol": "Protobuf-v2",
-    "encoding": "Zero-Copy-Arrow"
-  }
+  "personality_ref": "DE-V2-L0-33"
 }

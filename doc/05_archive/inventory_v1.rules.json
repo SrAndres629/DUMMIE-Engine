@@ -1,0 +1,29 @@
+{
+  "rule_id": "RULE_AO_V2_INDEX_01",
+  "spec_ref": "DE-V2-INDEX-01",
+  "domain": "Archive_Governance",
+  "migration_map": [
+    {
+      "source": "AgentOrchestrator",
+      "target": "DE-V2-L0-03",
+      "invariant": "OTP_RESILIENCE"
+    },
+    {
+      "source": "TaskQueue",
+      "target": "DE-V2-L1-10",
+      "invariant": "CAUSAL_PERSISTENCE"
+    },
+    {
+      "source": "VectorDB",
+      "target": "DE-V2-L4-18",
+      "invariant": "LOCI_TOPOLOGY"
+    }
+  ],
+  "invariants": {
+    "read_only_archive": true,
+    "mandatory_legacy_reference": true,
+    "migration_audit_required": true
+  },
+  "enforcement": "STRICT_BLOCK",
+  "personality_ref": "DE-V2-L0-33"
+}

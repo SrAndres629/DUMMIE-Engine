@@ -2,7 +2,7 @@
 spec_id: "DE-V2-L0-48"
 title: "Protocolo de Cristalización de Integridad Arquitectónica (ACIP)"
 status: "ACTIVE"
-version: "1.0.0"
+version: "2.2.0"
 layer: "L0"
 namespace: "io.dummie.v2.overseer.integrity"
 authority: "ARCHITECT"
@@ -12,32 +12,42 @@ dependencies:
 tags: ["governance", "integrity", "acip", "industrial_sdd"]
 ---
 
-# Spec 48: Protocolo de Cristalización de Integridad Arquitectónica (ACIP)
+# 48. Protocolo de Cristalización de Integridad Arquitectónica (ACIP)
 
-## 1. Declaración de Misión
-El objetivo de esta especificación es asegurar que el **DUMMIE Engine** sea un sistema de auto-documentación perpetua, donde ninguna decisión física (código/infra) quede huérfana de su justificación teórica (SDM/SDD). Se prohíbe la acumulación de "Deuda de Conocimiento".
+## Abstract
+DUMMIE Engine es un sistema de auto-documentación perpetua gobernado por el **Protocolo ACIP**. Ninguna decisión física (código o infraestructura) queda huérfana de su justificación teórica, eliminando la acumulación de deuda de conocimiento y garantizando la soberanía de los activos en el monorepo.
+
+## 1. Cognitive Context Model (Ref)
+Para los invariantes de integridad de directorios, las reglas de cristalización mandataria en el Ledger y las políticas de exclusión de bloatware en la unidad principal, consulte el archivo hermano [48_architectural_integrity_and_knowledge_crystallization.rules.json](./48_architectural_integrity_and_knowledge_crystallization.rules.json).
+
+---
 
 ## 2. Los Tres Pilares de la Integridad
 
 ### 2.1. Cristalización Mandataria (Causal Crystallization)
-Tras cada hito de implementación exitosa (Phase-Gate), el agente ejecutor DEBE:
-1.  **Registrar la Decisión**: En `.aiwg/memory/decisions.jsonl` (Por qué se hizo así).
-2.  **Registrar la Lección**: En `.aiwg/memory/lessons.jsonl` (Qué falló y cómo se evitó).
-3.  **Resolver Ambigüedades**: En `.aiwg/memory/ambiguities.jsonl` (Qué compromisos pragmáticos se tomaron).
+Tras cada hito de implementación exitosa, el agente ejecutor DEBE cristalizar el conocimiento en la memoria agéntica (`.aiwg/memory/`):
+1.  **Decisión**: Por qué se implementó de esta forma.
+2.  **Lección**: Qué fallos ocurrieron y cómo se evitaron.
+3.  **Ambigüedad**: Compromisos pragmáticos tomados durante la fabricación.
 
 ### 2.2. Política de Soberanía de Disco (Anti-Bloatware)
-La unidad de sistema operativo (Linux Main) es sagrada y solo debe contener **CÓDIGO FUENTE E INTENCIÓN**.
-- **Regla**: Todo artefacto derivado (venvs, node_modules, caches, build-artifacts) superior a 50MB DEBE residir en la **Unidad D (/media/datasets)**.
-- **Mecanismo**: Uso obligatorio de enlaces simbólicos (symlinks) gestionados por el protocolo de soberanía.
-- **Excepción**: Solo archivos `.env` y archivos de configuración crítica de menos de 10KB pueden residir en la raíz local.
+La unidad de sistema operativo es sagrada y solo debe contener **CÓDIGO FUENTE E INTENCIÓN**.
+- **Regla**: Todo artefacto derivado (> 50MB) DEBE residir en la **Unidad D (/media/datasets)**.
+- **Mecanismo**: Uso obligatorio de enlaces simbólicos (symlinks).
 
 ### 2.3. Control de Drift (Sincronización SDD)
-Si la implementación física diverge de la Spec (ej. usar Docker en lugar de Nix debido a restricciones de sistema), la Spec DEBE ser actualizada con una sección de "Compromisos de Runtime" antes de cerrar la sesión.
+Cualquier divergencia física respecto a la Spec original DEBE ser documentada como un "Compromiso de Runtime" antes del cierre de la sesión para evitar la entropía arquitectónica.
+
+---
 
 ## 3. Criterios de Aceptación (AC)
-- **AC-48.1**: Todo agente futuro debe ser capaz de reconstruir el entorno políglota leyendo solo la Spec 08 y los registros de memoria de la sesión anterior.
-- **AC-48.2**: El comando `du -sh .` en el monorepo no debe exceder los 500MB (excluyendo el historial de Git).
-- **AC-48.3**: No existe código sin contrato (Spec 10) ni contrato sin registro de decisión (Spec 34).
+- **AC-48.1**: Reproducibilidad total del entorno mediante Specs y Memory Ledger.
+- **AC-48.2**: El monorepo no debe exceder los 500MB de peso físico.
+- **AC-48.3**: Trazabilidad total: No existe código sin contrato ni contrato sin registro de decisión.
 
-## 4. Gobernanza
-Cualquier desviación de este protocolo será marcada como `CRITICAL_ARCHITECTURE_VIOLATION` por el Sentinel (L3) y bloqueará el despliegue en producción.
+---
+
+## [MSA] Sibling Components Requeridos
+Todo documento maestro debe ir acompañado de sus archivos hermanos para convertirse en una *Active Architectural Fitness Function*:
+- **Executable Contract:** [48_architectural_integrity_and_knowledge_crystallization.feature](./48_architectural_integrity_and_knowledge_crystallization.feature)
+- **Machine Rules:** [48_architectural_integrity_and_knowledge_crystallization.rules.json](./48_architectural_integrity_and_knowledge_crystallization.rules.json)

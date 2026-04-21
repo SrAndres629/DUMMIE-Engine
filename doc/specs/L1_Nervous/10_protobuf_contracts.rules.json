@@ -1,17 +1,18 @@
 {
-  "rule_id": "RULE_AO_V2_L1_10",
-  "spec_ref": "DE-V2-L1-10",
+  "spec_id": "DE-V2-L1-10",
   "domain": "L1_Contracts",
+  "protocol_version": "2.3.0",
+  "required_messages": [
+    "PhaseTransitionSignal",
+    "EventId",
+    "PolyglotError",
+    "MemoryTicket"
+  ],
   "invariants": {
-    "protocol_version": "2.3.0",
-    "required_messages": [
-      "PhaseTransitionSignal",
-      "EventId",
-      "PolyglotError",
-      "MemoryTicket"
-    ],
     "rpc_timeout_ms": 50,
-    "shm_alignment": 64
+    "shm_alignment": 64,
+    "no_unknown_fields": true
   },
-  "enforcement": "STRICT_BLOCK"
+  "enforcement": "STRICT_BLOCK",
+  "personality_ref": "DE-V2-L0-33"
 }

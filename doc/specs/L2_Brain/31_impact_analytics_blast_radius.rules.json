@@ -1,12 +1,18 @@
 {
-  "rule_id": "RULE_AO_V2_L2_31",
-  "spec_ref": "DE-V2-L2-31",
+  "spec_id": "DE-V2-L2-31",
   "domain": "L2_Impact",
-  "invariants": {
-    "graph_engine": "KùzuDB",
-    "required_analysis": ["RECURSIVE_DEPS", "BLAST_RADIUS", "SIDEEFFECTS"],
-    "veto_on_global_risk": true,
-    "min_confidence_score": 0.95
+  "analysis_engine": {
+    "graph_db": "KùzuDB",
+    "required_scans": ["RECURSIVE_DEPS", "BLAST_RADIUS", "SIDEEFFECTS"]
   },
-  "enforcement": "STRICT_BLOCK"
+  "risk_thresholds": {
+    "global_veto_confidence": 0.95,
+    "neighborhood_alert_threshold": 0.70
+  },
+  "invariants": {
+    "veto_on_global_risk": true,
+    "mandatory_impact_report": true
+  },
+  "enforcement": "STRICT_BLOCK",
+  "personality_ref": "DE-V2-L0-33"
 }

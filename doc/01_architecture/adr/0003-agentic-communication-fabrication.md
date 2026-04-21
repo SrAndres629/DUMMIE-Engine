@@ -15,30 +15,10 @@ tags: ["architectural_decision", "agentic_communication", "software_fabrication"
 # [ADR-003](0003-agentic-communication-fabrication.md): Comunicación Agéntica y Fabricación (SFE)
 
 ## Abstract
-La construcción de software mediante agentes de IA suele fracasar debido a la **Entropía Arquitectónica** y al acoplamiento semántico. El sistema se define como una **Software Fabrication Engine (SFE)** que impone el rigor de un Arquitecto de Sistemas experto sobre la generación de código.
+La construcción de software mediante agentes de IA suele fracasar debido a la **Entropía Arquitectónica** y al acoplamiento semántico. El sistema se define como una **Software Fabrication Engine (SFE)** que impone el rigor de un Arquitecto de Sistemas experto sobre la generación de código mediante un protocolo de "Arquitectura Primero".
 
-## 1. Cognitive Context Model (JSON)
-```json
-{
-  "protocol": "Architecture-First (AF)",
-  "consensus_triangle": [
-    "Domain Proposal (Pure Logic)",
-    "Port Contract (Protobuf)",
-    "Sign-off (Shield Validation)"
-  ],
-  "arbitration_algorithm": {
-    "formula": "Score = (ROI * 0.6) - (Complexity_Risk * 0.4)",
-    "veto_override": "S-Shield (Integrity)",
-    "escalation": "PAH_OVERRIDE (Human)"
-  },
-  "enforcement": [
-    "Apoptosis Preventiva",
-    "Trazabilidad Forense"
-  ],
-  "personality_ref": "DE-V2-L0-33",
-  "ledger_link": "DE-V2-L2-34"
-}
-```
+## 1. Cognitive Context Model (Ref)
+Para los parámetros técnicos del Triángulo de Consenso, el algoritmo de arbitraje ponderado y las sanciones por incumplimiento, consulte el archivo hermano [0003-agentic-communication-fabrication.rules.json](./0003-agentic-communication-fabrication.rules.json).
 
 ---
 

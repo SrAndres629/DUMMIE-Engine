@@ -1,8 +1,25 @@
+---
+spec_id: "DE-V2-ATLAS"
+title: "DUMMIE Engine: Sovereign Documentation Atlas (HSD)"
+status: "ACTIVE"
+version: "2.0.0"
+layer: "L0"
+namespace: "io.dummie.v2.atlas"
+authority: "ARCHITECT"
+tags: ["atlas", "navigation", "hierarchical_documentation"]
+---
+
 # DUMMIE Engine: Sovereign Documentation Atlas (HSD)
 
-Este es el punto de entrada de **Grado Cero** para la navegación cognitiva y operativa del monorepo. Sigue una arquitectura **Hierarchical Sovereign Documentation (HSD)** diseñada para la eficiencia de agentes de IA.
+## Abstract
+Este es el punto de entrada de **Grado Cero** para la navegación cognitiva y operativa del monorepo. Sigue una arquitectura **Hierarchical Sovereign Documentation (HSD)** diseñada para la eficiencia de agentes de IA, garantizando que el Swarm tenga un mapa topológico claro del conocimiento del sistema.
 
-## 🗺️ Mapa de Loci Documental
+## 1. Cognitive Context Model (Ref)
+Para la estructura técnica de la jerarquía documental, consulte el archivo hermano [ATLAS.rules.json](./ATLAS.rules.json).
+
+---
+
+## 2. 🗺️ Mapa de Loci Documental
 
 ### [00_Foundation](./00_foundation/) - LA INTENCIÓN
 *   **[Vision Manifesto](./00_foundation/vision_manifesto.md):** El "Por qué" inmutable y los axiomas del sistema.
@@ -31,4 +48,13 @@ Este es el punto de entrada de **Grado Cero** para la navegación cognitiva y op
 Organizado por capas soberanas L0 (Elixir) a L6 (User Interface).
 
 ---
-**Protocolo de Uso:** Todo agente nuevo debe indexar este archivo antes de realizar cambios estructurales. La verdad reside en las `/specs/`, pero el contexto reside en el `/doc/Atlas`.
+
+## 3. Protocolo de Uso
+Todo agente nuevo debe indexar este archivo antes de realizar cambios estructurales. La verdad reside en las `/specs/`, pero el contexto reside en el `/doc/Atlas`.
+
+---
+
+## [MSA] Sibling Components Requeridos
+Todo documento maestro debe ir acompañado de sus archivos hermanos para convertirse en una *Active Architectural Fitness Function*:
+- **Executable Contract:** [ATLAS.feature](./ATLAS.feature)
+- **Machine Rules:** [ATLAS.rules.json](./ATLAS.rules.json)

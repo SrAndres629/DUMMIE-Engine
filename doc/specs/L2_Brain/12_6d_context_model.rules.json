@@ -1,14 +1,21 @@
 {
-  "rule_id": "RULE_AO_V2_L2_12",
-  "spec_ref": "DE-V2-L2-12",
+  "spec_id": "DE-V2-L2-12",
   "domain": "L2_Context",
-  "invariants": {
+  "vectors": {
     "dimensions": 6,
-    "immutable_dims": [1, 2, 3, 4],
-    "volatile_dims": [5, 6],
-    "relevance_range": [0.0, 1.0],
-    "handshake_mandatory": true,
-    "lst_enforced": true
+    "mapping": {
+      "x_y_z": "Spatial (Loci)",
+      "t": "Temporal (Lamport)",
+      "w": "Semantic Weight (0.0-1.0)",
+      "a": "Authority Level (RBAC)"
+    }
   },
-  "enforcement": "STRICT_BLOCK"
+  "invariants": {
+    "immutable_dims": ["x", "y", "z", "t"],
+    "volatile_dims": ["w", "a"],
+    "lst_enforced": true,
+    "handshake_mandatory": true
+  },
+  "enforcement": "STRICT_BLOCK",
+  "personality_ref": "DE-V2-L0-33"
 }

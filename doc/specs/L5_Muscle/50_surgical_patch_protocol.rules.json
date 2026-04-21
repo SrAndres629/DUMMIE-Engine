@@ -1,20 +1,20 @@
 {
-  "rule_id": "RULE_AO_V2_L5_50",
-  "spec_ref": "DE-V2-L5-50",
+  "spec_id": "DE-V2-L5-50",
+  "domain": "L5_Patching",
+  "patch_governance": {
+    "max_size_kb": 256,
+    "require_pre_applied_snapshot": true,
+    "mandatory_hash_verification": true
+  },
   "invariants": {
-    "forbidden_patterns": [
-      "FUZZY_PATCHING",
-      "NON_ATOMIC_MULTIFILE_EDIT",
-      "BYPASS_HASH_CHECK"
-    ],
-    "required_headers": [
-      "X-AO-Target-Hash",
-      "X-AO-Patch-Type"
-    ]
+    "no_fuzzy_matching": true,
+    "atomic_multifile_edit": true,
+    "forbidden_patterns": ["BYPASS_HASH_CHECK", "NON_ATOMIC_MULTIFILE_EDIT"]
+  },
+  "error_handling": {
+    "on_hash_mismatch": "DETACH_EXCEPTION",
+    "on_partial_failure": "TOTAL_ROLLBACK"
   },
   "enforcement": "STRICT_BLOCK",
-  "patch_policy": {
-    "max_patch_size_kb": 256,
-    "require_pre_applied_snapshot": true
-  }
+  "personality_ref": "DE-V2-L0-33"
 }

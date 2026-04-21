@@ -2,7 +2,7 @@
 spec_id: "DE-V2-INDEX-00"
 title: "Project Headers Index"
 status: "ACTIVE"
-version: "2.1.0"
+version: "2.2.0"
 layer: "L0"
 namespace: "io.dummie.v2.index"
 authority: "LIBRARIAN"
@@ -13,36 +13,47 @@ tags: ["index", "metadata", "industrial_sdd"]
 # Project Headers Index
 
 ## Abstract
-Este documento actúa como el índice maestro de todas las especificaciones, decisiones arquitectónicas y manifiestos del proyecto DUMMIE Engine. Proporciona una visión rápida de la estructura cognitiva y técnica del sistema.
+Este documento actúa como el índice maestro de todas las especificaciones, decisiones arquitectónicas y manifiestos del proyecto DUMMIE Engine. Proporciona una visión rápida de la estructura cognitiva y técnica del sistema, sirviendo como SSOT para la navegación agéntica.
 
-## 1. Cognitive Context Model (JSON)
-```json
-{
-  "categories": [
-    "Governance",
-    "Brain",
-    "Shield",
-    "Nervous",
-    "Muscle",
-    "Skin",
-    "Edge"
-  ],
-  "total_specs": 40,
-  "total_adrs": 5,
-  "validation": "SDD V3 Standard",
-  "personality_ref": "DE-V2-L0-33",
-  "ledger_link": "DE-V2-L2-34"
-}
-```
+## 1. Cognitive Context Model (Ref)
+Para el conteo total de especificaciones, el estado de validación SDD y las reglas de integridad del índice, consulte el archivo hermano [headers.rules.json](./headers.rules.json).
 
 ---
 
-## 2. Core Specifications (L0-L6)
+## 2. Foundation & Atlas
+
+| ID | Title | Path |
+| :--- | :--- | :--- |
+| DE-V2-ATLAS | [ATLAS Zero](../ATLAS.md) | `doc/ATLAS.md` |
+| DE-V2-GOV-00 | [Vision Manifesto](../00_foundation/vision_manifesto.md) | `doc/00_foundation/vision_manifesto.md` |
+| DE-V2-SCCP | [Cognitive Protocol](../00_foundation/COGNITIVE_PROTOCOL.md) | `doc/00_foundation/COGNITIVE_PROTOCOL.md` |
+| DE-V2-MAP-01 | [Physical Map](./PHYSICAL_MAP.md) | `doc/02_atlas/PHYSICAL_MAP.md` |
+
+---
+
+## 3. Architectural Decision Records (ADRs)
+
+| ID | Title | Layer | Status |
+| :--- | :--- | :--- | :--- |
+| DE-V2-ADR-001 | [Polyglot L0-L6](../01_architecture/adr/0001-polyglot-architecture.md) | L0 | ACTIVE |
+| DE-V2-ADR-002 | [Ambiguity Res.](../01_architecture/adr/0002-ambiguity-resolutions.md) | L0 | ACTIVE |
+| DE-V2-ADR-003 | [Agentic SFE](../01_architecture/adr/0003-agentic-communication-fabrication.md) | L2 | ACTIVE |
+| DE-V2-ADR-004 | [Identity & Mood](../01_architecture/adr/0004-project-personality.md) | L0 | ACTIVE |
+| DE-V2-ADR-005 | [Cognitive Standards](../01_architecture/adr/0005-cognitive-fabrication-protocols.md) | L0 | ACTIVE |
+| DE-V2-ADR-006 | [Hybrid Execution](../01_architecture/adr/0006-sovereign-hybrid-documentation-protocol.md) | L0 | ACTIVE |
+| DE-V2-ADR-007 | [Modular Specs (MSA)](../01_architecture/adr/0007-modular-spec-sibling-files.md) | L0 | ACTIVE |
+| DE-V2-ADR-008 | [Hierarchical DDD](../01_architecture/adr/0008-hierarchical-domain-specific-documentation.md) | L0 | ACTIVE |
+| DE-V2-ADR-009 | [L2 Bounded Contexts](../01_architecture/adr/0009-l2-brain-bounded-contexts.md) | L0 | ACTIVE |
+| DE-V2-ADR-010 | [Hybrid Diagramming](../01_architecture/adr/0010-hybrid-diagram-strategy.md) | L0 | ACTIVE |
+| DE-V2-ADR-011 | [L2 Memory Bridge](../01_architecture/adr/0011-l2-infrastructure-bridge.md) | L0 | ACTIVE |
+
+---
+
+## 4. Core Specifications (L0-L6)
 
 | ID | Title | Layer | Namespace |
 | :--- | :--- | :--- | :--- |
 | DE-V2-L0-00 | [Topology Tracker](../specs/L0_Overseer/00_topology_tracker.md) | L0 | .tracker |
-| DE-V2-L5-01 | [Environment & Metal](../specs/L5_Muscle/01_environment_and_hardware.md) | L5 | .hardware |
 | DE-V2-L2-02 | [Memory Engine (4D-TES)](../specs/L2_Brain/02_memory_engine_4d_tes.md) | L2 | .brain.memory |
 | DE-V2-L0-03 | [Polyglot Architecture](../specs/L0_Overseer/03_polyglot_architecture.md) | L0 | .architecture |
 | DE-V2-L3-04 | [Anti-Ignorance Shields](../specs/L3_Shield/04_anti_ignorance_shields.md) | L3 | .shield |
@@ -81,19 +92,13 @@ Este documento actúa como el índice maestro de todas las especificaciones, dec
 | DE-V2-L2-38 | [Procedural Memory](../specs/L2_Brain/38_procedural_memory_crystallization.md) | L2 | .cognitive.memory.procedural |
 | DE-V2-L2-39 | [Semantic Consistency](../specs/L2_Brain/39_semantic_consistency_agent.md) | L2 | .cognitive.sync |
 | DE-V2-L4-40 | [Self-Healing](../specs/L4_Edge/40_self_healing_remediation_loop.md) | L4 | .infrastructure.healing |
+| DE-V2-L0-43 | [Documentation Standards](../specs/L0_Overseer/43_documentation_and_artifact_standards.md) | L0 | .governance.docs |
+| DE-V2-L0-48 | [Knowledge Crystallization (ACIP)](../specs/L0_Overseer/48_architectural_integrity_and_knowledge_crystallization.md) | L0 | .governance.integrity |
 | DE-V2-L0-49 | [Cognitive Closure (SCCP)](../specs/L0_Overseer/49_sovereign_cognitive_closure_protocol.md) | L0 | .governance.closure |
 
 ---
 
-## 3. ADRs & Manifestos
-
-| ID | Title | Layer | Status |
-| :--- | :--- | :--- | :--- |
-| DE-V2-GOV-01 | [Vision Manifesto](../00_foundation/vision_manifesto.md) | L0 | ACTIVE |
-| DE-V2-GOV-02 | [C4 Model Graphs](../01_architecture/diagrams/c4_model_graphs.md) | L0 | ACTIVE |
-| DE-V2-ADR-001 | [Polyglot L0-L6](../01_architecture/adr/0001-polyglot-architecture.md) | L0 | ACTIVE |
-| DE-V2-ADR-002 | [Ambiguity Res.](../01_architecture/adr/0002-ambiguity-resolutions.md) | L0 | ACTIVE |
-| DE-V2-ADR-003 | [Agentic SFE](../01_architecture/adr/0003-agentic-communication-fabrication.md) | L2 | ACTIVE |
-| DE-V2-ADR-004 | [Identity & Mood](../01_architecture/adr/0004-project-personality.md) | L0 | ACTIVE |
-| DE-V2-ADR-005 | [Cognitive Standards](../01_architecture/adr/0005-cognitive-fabrication-protocols.md) | L0 | ACTIVE |
-| DE-V2-ADR-010 | [L2 Memory Bridge](../01_architecture/adr/0010-l2-infrastructure-bridge.md) | L0 | ACTIVE |
+## [MSA] Sibling Components Requeridos
+Todo documento maestro debe ir acompañado de sus archivos hermanos para convertirse en una *Active Architectural Fitness Function*:
+- **Executable Contract:** [headers.feature](./headers.feature)
+- **Machine Rules:** [headers.rules.json](./headers.rules.json)

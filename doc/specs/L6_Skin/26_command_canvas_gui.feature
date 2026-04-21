@@ -12,5 +12,5 @@ Feature: Interfaz Command Canvas (DE-V2-L6-26)
   Scenario: Real-time context update in Sidecar
     Given a cursor move event in the IDE editor
     When the Semantic Bridge (L4) emits a context update
-    Then the Command Canvas must highlight the active AST node visually
+    Then the Command Canvas must highlight the active LST node visually
     And the Performance Metric: visual_sync_latency < 100ms

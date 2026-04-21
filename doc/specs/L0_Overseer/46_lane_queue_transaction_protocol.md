@@ -2,7 +2,7 @@
 spec_id: "DE-V2-L0-46"
 title: "Protocolo de Transacción en Lane Queue (Orchestration Integrity)"
 status: "ACTIVE"
-version: "1.0.0"
+version: "2.2.0"
 layer: "L0"
 namespace: "io.dummie.v2.orchestration.determinism"
 authority: "ARCHITECT"
@@ -17,36 +17,40 @@ tags: ["orchestration", "lane_queue", "serialization", "deadlock_prevention", "c
 # 46. Protocolo de Transacción en Lane Queue (Orchestration Integrity)
 
 ## Abstract
-Inspirado por el **Lane Queue de OpenClaw**, esta especificación garantiza el determinismo operacional en un enjambre de agentes que comparten herramientas físicas (Filesystem, Terminal, Browser). El sistema introduce colas de serialización por `Session_ID`, eliminando condiciones de carrera y corrupciones de estado cuando múltiples agentes intentan manipular el mismo entorno simultáneamente.
+DUMMIE Engine garantiza el determinismo operacional mediante el **Protocolo Lane Queue**. El sistema introduce colas de serialización por `Session_ID`, eliminando condiciones de carrera y corrupciones de estado cuando múltiples agentes intentan manipular el mismo entorno físico simultáneamente.
 
-## 1. El Determinismo de la Cola
+## 1. Cognitive Context Model (Ref)
+Para la arquitectura de la cola (FIFO), las políticas de gestión de bloqueos semánticos y los invariantes de protección ante interbloqueos (Deadlock), consulte el archivo hermano [46_lane_queue_transaction_protocol.rules.json](./46_lane_queue_transaction_protocol.rules.json).
+
+---
+
+## 2. El Determinismo de la Cola
 El Protocolo Lane Queue garantiza que el estado del sistema permanezca íntegro mediante la serialización de operaciones. Cada sesión de usuario posee su propia "Lane" (carril) donde las tareas se ejecutan de forma ordenada.
 
 - **Mecanismo**: Bloqueo Semántico gestionado por GenServers en L0 Elixir.
 - **Alcance**: Serialización estricta para tareas de escritura (Stateful); ejecución paralela permitida para lectura (Idempotent).
-- **Protección**: Timeout automático (45s) y estrategias de Rollback para evitar bloqueos globales.
-
-Para los detalles técnicos de la arquitectura de la cola y las políticas de gestión de bloqueos, consulte el archivo de reglas [46_lane_queue_transaction_protocol.rules.json](46_lane_queue_transaction_protocol.rules.json).
+- **Protección**: Timeout automático y estrategias de Rollback.
 
 ---
 
-## 2. El Algoritmo Lane Queue (L0 Overseer)
+## 3. El Algoritmo Lane Queue (L0 Overseer)
 El sistema gestiona el acceso a recursos mediante "Lanes" virtuales:
 
-1.  **Request Capture:** Cada `Intent` que requiere acceso a una herramienta (L1/L5) es interceptado por el `LaneController`.
-2.  **Resource Mapping:** El controlador identifica si la tarea es de Escritura (Stateful) o Lectura (Idempotent).
-3.  **Serialization:** Si la tarea es Stateful, se encola en la Lane de la sesión. El sistema bloquea cualquier otra tarea de escritura en esa Lane hasta que se reciba el `ACK` de finalización.
-4.  **Priority Preemption:** Las órdenes directas del PAH (Humano) tienen un ticket de `BYPASS_SERIALIZATION` para interrumpir colas bloqueadas.
+1.  **Request Capture:** Intercepción de `Intent` por el `LaneController`.
+2.  **Resource Mapping:** Identificación de naturaleza Stateful o Idempotent.
+3.  **Serialization:** Encolado en la Lane de sesión y bloqueo de tareas de escritura competitivas.
+4.  **Priority Preemption:** Bypass de serialización para órdenes directas del PAH.
 
 ---
 
-## 3. Prevención de Deadlock
+## 4. Prevención de Deadlock
 Para evitar el bloqueo total del enjambre:
-- **Semantic Timeout:** Si una tarea en la Lane excede los 45s sin emitir telemetría ([Spec 13](../L6_Skin/13_observability_opentelemetry.md)), el Overseer realiza una **Apoptosis de Task** y libera la Lane.
-- **Rollback Consensus:** El sistema intenta revertir el estado del monorepo (L4 Zig) antes de permitir la siguiente tarea en la cola.
+- **Semantic Timeout:** Apoptosis de tarea y liberación de Lane tras exceder el límite temporal.
+- **Rollback Consensus:** Reversión del estado del monorepo (L4 Zig) antes de permitir el siguiente turno en la cola.
 
 ---
 
-## [MSA] Sibling Components
-- **Executable Contract**: [46_lane_queue_transaction_protocol.feature](46_lane_queue_transaction_protocol.feature)
-- **Machine Rules**: [46_lane_queue_transaction_protocol.rules.json](46_lane_queue_transaction_protocol.rules.json)
+## [MSA] Sibling Components Requeridos
+Todo documento maestro debe ir acompañado de sus archivos hermanos para convertirse en una *Active Architectural Fitness Function*:
+- **Executable Contract:** [46_lane_queue_transaction_protocol.feature](./46_lane_queue_transaction_protocol.feature)
+- **Machine Rules:** [46_lane_queue_transaction_protocol.rules.json](./46_lane_queue_transaction_protocol.rules.json)

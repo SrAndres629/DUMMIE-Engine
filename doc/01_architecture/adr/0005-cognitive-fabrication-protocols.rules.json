@@ -1,18 +1,24 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "Cognitive Fabrication Protocols Constraints",
-  "type": "object",
-  "properties": {
-    "state_management_output": {
-      "type": "boolean",
-      "const": true,
-      "description": "El agente DEBE imprimir [SYSTEM_STATE] antes de finalizar su turno."
-    },
-    "spec_driven_development": {
-      "type": "boolean",
-      "const": true,
-      "description": "Ningún código puede escribirse sin una Spec previa asociada."
-    }
+  "spec_id": "DE-V2-ADR-005",
+  "documentation_standards": {
+    "SDD": "Spec-Driven Development (Specs are Code)",
+    "DDD": "Domain-Driven Design (Bounded Contexts)",
+    "TDD": "Test-Driven Development (Sentinel Verification)",
+    "BDD": "Behavior-Driven Development (Gherkin Flows)"
   },
-  "required": ["state_management_output", "spec_driven_development"]
+  "interaction_protocol": {
+    "ambiguity_handling": "Stop and Ask User (PAH)",
+    "indeterminacy_elimination": "Proactive questioning",
+    "system_goal": "Absolute Determinism"
+  },
+  "agent_roles": {
+    "researchers_architects": "Design, Specification, Ambiguity Discovery",
+    "fullstack_engineers": "Implementation, Validation, Execution"
+  },
+  "invariants": {
+    "no_prose": true,
+    "mandatory_architecture": true,
+    "state_management_output": true
+  },
+  "personality_ref": "DE-V2-L0-33"
 }

@@ -1,20 +1,20 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "Hybrid Execution & Documentation Constraints",
-  "type": "object",
-  "properties": {
-    "polyglot_build_environment": {
-      "type": "string",
-      "enum": ["docker", "nix"],
-      "description": "L0, L1, L3, L4, L5 must be built using Docker if Nix is unavailable."
-    },
-    "documentation_integrity": {
-      "type": "object",
-      "properties": {
-        "allow_premature_finalization": { "type": "boolean", "const": false },
-        "require_real_time_updates": { "type": "boolean", "const": true }
-      }
-    }
+  "spec_id": "DE-V2-ADR-006",
+  "execution_strategy": "Hybrid Sovereign",
+  "build_layer": "Docker (Dockerfile.builder)",
+  "design_layer": "Local Host (uv/Python/MD)",
+  "integrity_axioms": [
+    "Physical Truth Alignment",
+    "Real-time Documentation",
+    "Drift Elimination"
+  ],
+  "polyglot_build_environment": {
+    "enum": ["docker", "nix"],
+    "rule": "L0, L1, L3, L4, L5 must be built using Docker if Nix is unavailable."
   },
-  "required": ["polyglot_build_environment", "documentation_integrity"]
+  "documentation_integrity": {
+    "allow_premature_finalization": false,
+    "require_real_time_updates": true
+  },
+  "personality_ref": "DE-V2-L0-33"
 }

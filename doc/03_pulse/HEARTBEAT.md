@@ -1,19 +1,46 @@
+---
+spec_id: "DE-V2-PULSE-HB"
+title: "Agentic Heartbeat: Sovereign Goals"
+status: "ACTIVE"
+version: "2.2.0"
+layer: "L0/L3"
+namespace: "io.dummie.v2.pulse"
+authority: "OVERSEER"
+dependencies:
+  - id: "DE-V2-L0-42"
+    relationship: "EXECUTES_PROTOCOL"
+  - id: "DE-V2-L3-04"
+    relationship: "AUDITS_INTENT"
+tags: ["pulse", "heartbeat", "proactivity", "industrial_sdd"]
+---
+
 # Agentic Heartbeat: Sovereign Goals
 
-Este archivo rige las tareas proactivas que el Agentic OS realiza de forma autónoma durante cada "Pulso" (L0 Heartbeat).
+## Abstract
+El **Heartbeat Agéntico** es el metrónomo de proactividad del sistema. Este archivo rige las tareas autónomas que el Overseer (L0) y el Escudo (L3) ejecutan cíclicamente para mantener la salud ontológica, la seguridad y la eficiencia del monorepo sin intervención humana directa. Es la manifestación física de la voluntad del sistema para auto-gobernarse.
 
-## 1. Daily Recurring Tasks
-- [ ] **SDD Integrity Audit**: Ejecutar `python3 doc/sdd_validator.py` y reportar divergencias en el Ledger.
-- [ ] **Dependency DAG Refresh**: Escanear el monorepo y actualizar el mapa de dependencias LST.
-- [ ] **Token Budget Review**: Analizar el consumo del E-Shield y optimizar si el ROI es < 1.2.
-
-## 2. Background Monitors
-- [ ] **Architecture Drift**: Vigilar cambios manuales en `/proto/` que no tengan una Spec asociada.
-- [ ] **Security Scrubber**: Buscar secretos o API Keys expuestos en el espacio de trabajo.
-
-## 3. Pending Reflections
-- [ ] **Cognitive Depth**: ¿Es suficiente el Palacio de Loci actual para la fase Gamma de Greenfield?
-- [ ] **Necro-Learning Loop**: Analizar los fallos de la última sesión para ajustar la `Personality Profile`.
+## 1. Cognitive Context Model (Ref)
+Para la frecuencia de los pulsos, los umbrales de consumo de tokens y las políticas de auditoría de deriva (Drift), consulte el archivo hermano [HEARTBEAT.rules.json](./HEARTBEAT.rules.json).
 
 ---
-*Ultima actualización de pulso: 2026-04-18T12:00:00Z*
+
+## 2. Tareas Recurrentes de Ingeniería
+En cada pulso, el sistema ejecuta de forma inmutable:
+- **SDD Integrity Audit:** Validación automática de todas las Specs contra sus contratos ejecutables.
+- **Dependency DAG Refresh:** Escaneo del monorepo para actualizar el mapa de dependencias LST ([Spec 18](../specs/L4_Edge/18_loci_ontology_mapping.md)).
+- **Token Budget Review:** Análisis del ROI cognitivo y optimización de la ventana de contexto.
+
+---
+
+## 3. Monitoreo de Invariantes (Background)
+El sistema mantiene una vigilancia constante sobre:
+1.  **Architecture Drift:** Detección de cambios manuales que violen los contratos de gobernanza.
+2.  **Security Scrubber:** Búsqueda proactiva de secretos expuestos mediante el protocolo de inyección soberana ([Spec 47](../specs/L3_Shield/47_sovereign_secret_injection_protocol.md)).
+3.  **Necro-Learning Loop:** Destilación de experiencias pasadas para ajustar el perfil de personalidad agéntica.
+
+---
+
+## [MSA] Sibling Components Requeridos
+Todo documento de pulso debe ir acompañado de sus archivos hermanos para convertirse en una *Active Architectural Fitness Function*:
+- **Executable Contract:** [HEARTBEAT.feature](./HEARTBEAT.feature)
+- **Machine Rules:** [HEARTBEAT.rules.json](./HEARTBEAT.rules.json)

@@ -1,23 +1,24 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "Ontological Certainty Rules",
-  "type": "object",
-  "properties": {
-    "certainty_thresholds": {
-      "type": "object",
-      "properties": {
-        "coding_allowed_minimum": { "type": "number", "minimum": 0.0, "maximum": 1.0, "default": 0.5 },
-        "crystallized_state": { "type": "number", "const": 1.0 }
-      }
-    },
-    "heuristic_weights": {
-      "type": "object",
-      "properties": {
-        "spec_existence": { "type": "number", "default": 0.4 },
-        "adr_alignment": { "type": "number", "default": 0.3 },
-        "tdd_passing": { "type": "number", "default": 0.3 }
-      }
-    }
+  "spec_id": "DE-V2-L2-42",
+  "domain": "L2_Ontology",
+  "certainty_thresholds": {
+    "coding_allowed_minimum": 0.5,
+    "crystallized_state": 1.0,
+    "terra_incognita": 0.0
   },
-  "required": ["certainty_thresholds", "heuristic_weights"]
+  "heuristic_weights": {
+    "spec_existence": 0.4,
+    "adr_alignment": 0.3,
+    "tdd_passing": 0.3
+  },
+  "persistence": {
+    "path": ".aiwg/ontological_map.json",
+    "format": "JSON_DYNAMIC_UPDATE"
+  },
+  "invariants": {
+    "no_coding_below_threshold": true,
+    "mandatory_certainty_audit": true
+  },
+  "enforcement": "STRICT_BLOCK",
+  "personality_ref": "DE-V2-L0-33"
 }

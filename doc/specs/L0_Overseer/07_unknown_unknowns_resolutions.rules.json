@@ -1,9 +1,29 @@
 {
-  "rule_id": "RULE_AO_V2_L0_07",
-  "spec_ref": "DE-V2-L0-07",
-  "invariants": {
-    "forbidden_patterns": [],
-    "required_headers": []
+  "spec_id": "DE-V2-L0-07",
+  "failure_categories": {
+    "Cognitive": ["Infinite Loops", "Context Drift", "Hallucination"],
+    "Hardware": ["VRAM OOM", "Thermal Max", "Secret Leaks"],
+    "Causal": ["Grandfather Paradox", "Time Jitter", "Race Conditions"]
   },
-  "enforcement": "STRICT_BLOCK"
+  "resolution_mechanisms": {
+    "shields": ["E-Shield", "L-Shield", "S-Shield"],
+    "actions": [
+      "Time Dilation",
+      "VRAM Zeroing",
+      "Shadow Execution",
+      "Apoptosis Informada"
+    ]
+  },
+  "roles": {
+    "Writer": "Python",
+    "Tester": "Rust",
+    "Debugger": "Zig/C++",
+    "Orchestrator": "Elixir"
+  },
+  "invariants": {
+    "no_unauthorized_standard_libs": true,
+    "mandatory_necropsy": true,
+    "casuality_check": "Lamport Clocks"
+  },
+  "personality_ref": "DE-V2-L0-33"
 }

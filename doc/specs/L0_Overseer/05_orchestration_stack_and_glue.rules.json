@@ -1,9 +1,15 @@
 {
-  "rule_id": "RULE_AO_V2_L0_05",
-  "spec_ref": "DE-V2-L0-05",
-  "invariants": {
-    "forbidden_patterns": [],
-    "required_headers": []
+  "spec_id": "DE-V2-L0-05",
+  "orchestration_model": "Mesh of Experts",
+  "arbitration": {
+    "arbiter": "L0_Overseer",
+    "protocol": "Weighted Consensus",
+    "impasse_resolution": "Escalate to Human (PAH)"
   },
-  "enforcement": "STRICT_BLOCK"
+  "invariants": [
+    "No agent can execute without a previous Architectural Sign-off",
+    "Consensus must involve at least 3 agent namespaces",
+    "Audit trail is mandatory for every decision"
+  ],
+  "personality_ref": "DE-V2-L0-33"
 }

@@ -19,30 +19,8 @@ tags: ["architectural_decision", "cognitive_identity", "industrial_sdd"]
 ## Abstract
 En la fabricación de software artesanal, el sistema hereda el estilo y los sesgos del operador individual. Esta decisión establece que la identidad técnica debe residir en el proyecto mismo, definida por una "Personalidad" basada en grafos que rige los hiperparámetros de razonamiento de los agentes.
 
-## 1. Cognitive Context Model (JSON)
-```json
-{
-  "trait_matrix": {
-    "refactoring_aggressiveness": "0.0 - 1.0",
-    "abstraction_level": "0.0 - 1.0",
-    "security_strictness": "0.0 - 1.0",
-    "biases": [
-      "performance",
-      "test_coverage"
-    ]
-  },
-  "mechanisms": [
-    "Graph-based Personality",
-    "GraphRAG Decision Memory"
-  ],
-  "capsules": [
-    "Exploratory",
-    "Mission Critical"
-  ],
-  "personality_ref": "DE-V2-L0-33",
-  "ledger_link": "DE-V2-L2-34"
-}
-```
+## 1. Cognitive Context Model (Ref)
+Para la matriz de rasgos (agresividad, abstracción, seguridad), las cápsulas de proyecto y los invariantes de tono de voz, consulte el archivo hermano [0004-project-personality.rules.json](./0004-project-personality.rules.json).
 
 ---
 
@@ -55,7 +33,7 @@ En la fabricación artesanal, el software hereda las inconsistencias de la inter
 Se establece que la identidad de un proyecto es una **Propiedad Estructural** del Palacio de Loci (Grafo L4). La personalidad deja de ser un prompt estático para convertirse en un conjunto de nodos y relaciones que condicionan la navegación semántica.
 
 ### 3.1 Nodos de Gobernanza (KùzuDB)
-Cada rasgo de personalidad definido en `.aiwg/personality/profile.json` se instancia como un nodo:
+Cada rasgo de personalidad definido en `.aiwg/identity.json` se instancia como un nodo:
 - `PersonalityTrait`: Nodos que emiten campos de fuerza de "Mood" sobre los directorios de código.
 - `SovereignDecision`: Nodos que actúan como hitos inamovibles en la cronología del proyecto.
 
@@ -65,12 +43,9 @@ Cada rasgo de personalidad definido en `.aiwg/personality/profile.json` se insta
 3. **L2 (Inference):** Los agentes perciben el mundo a través del filtro topográfico, haciendo que los anti-patrones sean "difíciles de ver" o "explícitamente prohibidos" en el espacio semántico.
 
 ---
-
----
-
 ## 4. Implementación de "Cápsulas de Proyecto"
-- **Proyecto Exploratorio:** Mood ágil, `refactoring_aggressiveness` bajo, `security_strictness` equilibrado.
-- **Proyecto Misión Crítica:** Mood conservador, `security_strictness` máximo, arquitectura hexagonal obligatoria.
+- **Proyecto Exploratorio:** Mood ágil, `refactoring_aggressiveness` alto (evolución rápida), `security_strictness` equilibrado.
+- **Proyecto Misión Crítica:** Mood conservador, `refactoring_aggressiveness` bajo (estabilidad extrema), `security_strictness` máximo, arquitectura hexagonal obligatoria.
 
 ---
 

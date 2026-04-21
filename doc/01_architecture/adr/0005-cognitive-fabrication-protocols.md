@@ -19,28 +19,8 @@ tags: ["architectural_decision", "cognitive_standards", "industrial_sdd"]
 ## Abstract
 La transición de una herramienta de desarrollo a una **Software Fabrication Engine (SFE)** industrial requiere la imposición de estándares de ingeniería de software (SDD, DDD, TDD, BDD) no solo sobre el código, sino sobre la documentación misma. Ninguna actualización puede carecer de arquitectura previa, y toda ambigüedad debe resolverse proactivamente consultando al usuario para eliminar cualquier indeterminación.
 
-## 1. Cognitive Context Model (JSON)
-```json
-{
-  "documentation_standards": {
-    "SDD": "Spec-Driven Development (Specs are Code)",
-    "DDD": "Domain-Driven Design (Bounded Contexts)",
-    "TDD": "Test-Driven Development (Sentinel Verification)",
-    "BDD": "Behavior-Driven Development (Gherkin Flows)"
-  },
-  "interaction_protocol": {
-    "ambiguity_handling": "Stop and Ask User (PAH)",
-    "indeterminacy_elimination": "Proactive questioning",
-    "system_goal": "Absolute Determinism"
-  },
-  "agent_roles": {
-    "researchers_architects": "Design, Specification, Ambiguity Discovery",
-    "fullstack_engineers": "Implementation, Validation, Execution"
-  },
-  "personality_ref": "DE-V2-L0-33",
-  "ledger_link": "DE-V2-L2-34"
-}
-```
+## 1. Cognitive Context Model (Ref)
+Para los estándares de documentación (SDD, DDD, TDD, BDD), los protocolos de interacción con el PAH y la segregación de roles agénticos, consulte el archivo hermano [0005-cognitive-fabrication-protocols.rules.json](./0005-cognitive-fabrication-protocols.rules.json).
 
 ---
 
@@ -53,7 +33,7 @@ Para operar como una base cognitiva soberana, toda documentación debe ser estru
 - **TDD/BDD:** Cada especificación debe incluir criterios de aceptación verificables (Jidoka) y ejemplos de comportamiento claro.
 
 ### 2.2 Prohibición de Caos Estructural
-Se prohíbe terminantemente la creación o actualización de documentación que no responda a una arquitectura o arquitectura clave predefinida. No existe "prosa libre" en DUMMIE Engine; solo contratos.
+Se prohíbe terminantemente la creación o actualización de documentación que no responda a una arquitectura predefinida. No existe "prosa libre" en DUMMIE Engine; solo contratos.
 
 ---
 

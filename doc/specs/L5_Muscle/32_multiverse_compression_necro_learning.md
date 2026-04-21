@@ -2,26 +2,43 @@
 spec_id: "DE-V2-L5-32"
 title: "Motor de Ultra-Compresión del Multiverso"
 status: "ACTIVE"
-version: "1.0.0"
+version: "2.2.0"
 layer: "L5"
 namespace: "io.dummie.v2.muscle"
 authority: "SYSTEM"
 dependencies:
-  - id: "DE-V2-L1-10"
-    relationship: "IMPLEMENTS"
+  - id: "DE-V2-L5-20"
+    relationship: "REQUIRES"
 tags: ["cognitive_core", "hardware_acceleration", "industrial_sdd"]
 ---
 
-# Motor de Ultra-Compresión del Multiverso
+# 32. Motor de Ultra-Compresión del Multiverso
 
 ## Abstract
-Esta especificación define los mecanismos de aceleración de cómputo (SIMD) y estabilidad de hardware del Agentic OS. Layer 5 (Mojo/Mojo SIMD) actúa como el "Músculo" del sistema, procesando vectores de percepción y comprimiendo el multiverso en el plano de datos.
+El **Motor de Ultra-Compresión** es el componente de Layer 5 encargado de la persistencia eficiente de la memoria a largo plazo. Utilizando algoritmos de compresión de alta densidad (Zstd Nivel 19+), este motor comprime los snapshots del 4D-TES y el Multiverso semántico, garantizando que el sistema pueda almacenar décadas de experiencia técnica con un impacto mínimo en el almacenamiento físico NVMe.
 
-## 1. Alcance del Cómputo SIMD
-El sistema delega las tareas de alta densidad matemática a núcleos especializados (AVX-512/CUDA) mediante el MAX Engine, garantizando que el plano cognitivo (L2) permanezca libre de latencia computacional.
+## 1. Cognitive Context Model (Ref)
+Para el algoritmo de compresión (Zstd), el nivel mínimo de compresión y los límites del buffer de descompresión en RAM, consulte el archivo hermano [32_multiverse_compression_necro_learning.rules.json](./32_multiverse_compression_necro_learning.rules.json).
 
 ---
 
-## [MSA] Sibling Components
-- **Executable Contract**: 32_multiverse_compression_necro_learning.feature
-- **Machine Rules**: 32_multiverse_compression_necro_learning.rules.json
+## 2. Compresión del Multiverso
+El sistema optimiza la huella de datos del conocimiento agéntico:
+- **Latent Snapshots:** Compresión de los estados del grafo LST para almacenamiento en frío.
+- **Differential Storage:** Solo se almacenan las diferencias (Deltas) entre versiones del multiverso, utilizando técnicas de deduplicación a nivel de bloque.
+- **Cold Storage Management:** Migración automática de experiencias poco frecuentes a zonas de alta compresión en Layer 5.
+
+---
+
+## 3. Invariantes de Almacenamiento
+El motor de compresión opera bajo reglas estrictas:
+1.  **Integrity Check:** Cada bloque comprimido debe pasar una validación de suma de comprobación (Checksum) antes de ser considerado "Cristalizado".
+2.  **Resource Throttling:** La compresión masiva (Necro-learning) solo ocurre durante periodos de baja actividad del sistema nervioso para no interferir con la latencia de fabricación.
+3.  **Atomic Persistence:** Las operaciones de escritura en el almacén de ultra-compresión son atómicas; si falla el suministro eléctrico o el bus IPC, el sistema revierte al último snapshot válido.
+
+---
+
+## [MSA] Sibling Components Requeridos
+Todo documento maestro debe ir acompañado de sus archivos hermanos para convertirse en una *Active Architectural Fitness Function*:
+- **Executable Contract:** [32_multiverse_compression_necro_learning.feature](./32_multiverse_compression_necro_learning.feature)
+- **Machine Rules:** [32_multiverse_compression_necro_learning.rules.json](./32_multiverse_compression_necro_learning.rules.json)

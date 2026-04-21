@@ -33,7 +33,7 @@ DUMMIE Engine requiere una infraestructura que elimine las "grietas cerebrales" 
   "mechanisms": [
     "Zero-Copy via Apache Arrow",
     "Financial Circuit Breaker",
-    "Self-Healing ([Spec 21](../../specs/L2_Brain/21_software_fabrication_engine.md))"
+    "Self-Healing (Spec 21)"
   ],
   "personality_ref": "DE-V2-L0-33",
   "ledger_link": "DE-V2-L2-34"
@@ -50,17 +50,10 @@ DUMMIE Engine requiere una infraestructura que elimine las "grietas cerebrales" 
 ## 3. Decisión
 Se implementa una arquitectura híbrida de 7 capas basada en la **Especialización Radical de Lenguajes** y la comunicación **Zero-Copy via Apache Arrow**.
 
----
-
-## [MSA] Sibling Components Requeridos
-Todo documento maestro debe ir acompañado de sus archivos hermanos para convertirse en una *Active Architectural Fitness Function*:
-- **Executable Contract:** `0001-polyglot-architecture.feature`
-- **Machine Rules:** `0001-polyglot-architecture.rules.json`
-
 ### 3.1 Estratigrafía de Capas (L0-L6)
 - **L0 - Overseer (Elixir/OTP):** El **Árbitro Ejecutivo**. Gestión de vida y resolución de conflictos.
 - **L1 - Nervous (Go/NATS):** El **Relojero de Lamport**. Malla de agentes y persistencia distribuida.
-- **L2 - Brain (Python/LG):** Cognición estricta validada por **PydanticAI**.
+- **L2 - Brain (Python/Swarm):** Cognición estricta validada por **PydanticAI**.
 - **L3 - Shield (Rust/WASM):** **Enforcement de los 3 Escudos**. Garantiza la validación de invariantes físicas.
 - **L4 - Edge (Zig/Kùzu):** Análisis LST y **Copyright Gavel**. Ingesta ontológica para el Palacio de Loci.
 - **L5 - Muscle (Mojo):** **Consolidación de Memoria Jerárquica** y compactación RCU asíncrona.
@@ -74,6 +67,15 @@ Conforme a la directriz del PAH, se establece una frontera física de intervenci
 - **Capa de Ejecución (Agentes):** Los agentes son los únicos autorizados para modificar archivos de infraestructura y lógica imperativa (**Makefile, flake.nix, .go, .rs, .zig, .mojo**).
 - **Veto Absoluto:** Ningún humano intervendrá en el código fuente para corregir fallos; toda corrección se realizará mediante el refinamiento de las Specs (SDD).
 
-## 4. Consecuencias
+---
+
+## 5. Consecuencias
 - **Positivas:** Reducción del 95% en deuda técnica, soberanía de hardware local y trazabilidad legal total (PoI).
 - **Negativas:** Incremento en la complejidad inicial de despliegue (mitigado por Nix Flakes en [Spec 08](../../specs/L0_Overseer/08_devex_and_deployment_strategy.md)).
+
+---
+
+## [MSA] Sibling Components Requeridos
+Todo documento maestro debe ir acompañado de sus archivos hermanos para convertirse en una *Active Architectural Fitness Function*:
+- **Executable Contract:** [0001-polyglot-architecture.feature](./0001-polyglot-architecture.feature)
+- **Machine Rules:** [0001-polyglot-architecture.rules.json](./0001-polyglot-architecture.rules.json)

@@ -1,12 +1,20 @@
 {
-  "rule_id": "RULE_AO_V2_L5_35",
-  "spec_ref": "DE-V2-L5-35",
+  "spec_id": "DE-V2-L5-35",
   "domain": "L5_Learning",
-  "invariants": {
-    "necro_source": "ColdStorage",
-    "required_analysis": ["Diff", "Context_Correlation", "Instruction_Mapping"],
-    "danger_node_probability_threshold": 0.4,
-    "jidoka_on_high_risk": true
+  "necro_policy": {
+    "data_source": "ColdStorage",
+    "analysis_types": ["Diff", "Context_Correlation", "Instruction_Mapping"],
+    "min_pattern_confidence": 0.95
   },
-  "enforcement": "STRICT_BLOCK"
+  "risk_governance": {
+    "danger_node_threshold": 0.4,
+    "jidoka_on_high_risk": true,
+    "mandatory_pah_audit_on_fail": true
+  },
+  "execution": {
+    "background_only": true,
+    "max_cpu_usage_percent": 30
+  },
+  "enforcement": "STRICT_BLOCK",
+  "personality_ref": "DE-V2-L0-33"
 }

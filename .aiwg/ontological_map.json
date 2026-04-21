@@ -10,11 +10,11 @@
       "status": "THEORETICAL"
     },
     "L2_Brain": {
-      "certainty": 0.8,
-      "status": "CRYSTALLIZING",
+      "certainty": 0.9,
+      "status": "CRYSTALLIZING (PHYSICAL_DOMAIN_ESTABLISHED)",
       "bounded_contexts": {
         "context": 0.9,
-        "memory": 0.9,
+        "memory": 1.0,
         "fabrication": 0.7,
         "governance": 0.6
       }
@@ -36,5 +36,5 @@
       "status": "TERRA_INCOGNITA"
     }
   },
-  "last_audit_tick": 1113
+  "last_audit_tick": 1114
 }

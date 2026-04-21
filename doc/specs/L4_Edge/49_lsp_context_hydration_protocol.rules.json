@@ -1,21 +1,19 @@
 {
-  "rule_id": "RULE_AO_V2_L4_49",
-  "spec_ref": "DE-V2-L4-49",
-  "invariants": {
-    "forbidden_patterns": [
-      "UNSYNCED_LSP_STATE",
-      "RAW_LST_DUMP_TO_BRAIN",
-      "BLIND_LSP_RELIANCE"
-    ],
-    "required_headers": [
-      "X-AO-LSP-Server-Version",
-      "X-AO-LST-Depth"
-    ]
-  },
-  "enforcement": "STRICT_BLOCK",
+  "spec_id": "DE-V2-L4-49",
+  "domain": "L4_LSP",
   "hydration_policy": {
     "max_context_depth": 3,
     "include_diagnostics": true,
-    "compression": "Skeletal_Extraction"
-  }
+    "compression_method": "SKELETAL_EXTRACTION"
+  },
+  "invariants": {
+    "forbidden_patterns": ["UNSYNCED_LSP_STATE", "RAW_LST_DUMP_TO_BRAIN", "BLIND_LSP_RELIANCE"],
+    "visual_semantic_sync_mandatory": true
+  },
+  "protocol_requirements": {
+    "acp_version_min": "1.0.0",
+    "lsp_server_required": true
+  },
+  "enforcement": "STRICT_BLOCK",
+  "personality_ref": "DE-V2-L0-33"
 }

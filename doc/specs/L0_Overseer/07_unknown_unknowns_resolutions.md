@@ -2,7 +2,7 @@
 spec_id: "DE-V2-L0-07"
 title: "Resoluciones de Unknown Unknowns"
 status: "ACTIVE"
-version: "2.1.0"
+version: "2.2.0"
 layer: "L0"
 namespace: "io.dummie.v2.resilience"
 authority: "ARCHITECT"
@@ -17,57 +17,13 @@ tags: ["cognitive_core", "resilience_patterns", "industrial_sdd"]
 ## Abstract
 Este documento cataloga los mecanismos de resolución para fallos estocásticos de "Ignorancia Desconocida" (Unknown Unknowns). El sistema asume que el fallo es inevitable y, por tanto, implementa estrategias de contención física, rebobinado temporal y necro-aprendizaje para garantizar la integridad de la organización agéntica.
 
-## 1. Cognitive Context Model (JSON)
-```json
-{
-  "failure_categories": {
-    "Cognitive": [
-      "Infinite Loops",
-      "Context Drift",
-      "Hallucination"
-    ],
-    "Hardware": [
-      "VRAM OOM",
-      "Thermal Max",
-      "Secret Leaks"
-    ],
-    "Causal": [
-      "Grandfather Paradox",
-      "Time Jitter",
-      "Race Conditions"
-    ]
-  },
-  "resolution_mechanisms": {
-    "shields": [
-      "E-Shield",
-      "L-Shield",
-      "S-Shield"
-    ],
-    "actions": [
-      "Time Dilation",
-      "VRAM Zeroing",
-      "Shadow Execution",
-      "Apoptosis Informada"
-    ]
-  },
-  "roles": [
-    "Writer (Python)",
-    "Tester (Rust)",
-    "Debugger (Zig/C++)",
-    "Orchestrator (Elixir)"
-  ],
-  "personality_ref": "DE-V2-L0-33",
-  "ledger_link": "DE-V2-L2-34"
-}
-```
+## 1. Cognitive Context Model (Ref)
+Para las categorías de fallo (Cognitivo, Hardware, Causal), los mecanismos de resolución por Shield y los roles operativos del Swarm ante crisis, consulte el archivo hermano [07_unknown_unknowns_resolutions.rules.json](./07_unknown_unknowns_resolutions.rules.json).
 
 ---
 
 ## 2. Vínculo Técnico: Validación Física SDD
-Para garantizar que estas resoluciones no sean descriptivas sino coercitivas, cada regla se mapea a una entrada ejecutable en:
-`[PROJECT_ROOT]/governance/rules/resilience_unknowns.json`
-
-El **Shield (L3)** carga este archivo mediante `mmap` y utiliza los `rule_id` correspondientes para inyectar estados de contención (ej. *Time Dilation*) o disparar acciones de limpieza (ej. *VRAM Zeroing*) de forma autónoma ante señales de telemetría de Go (L1).
+Para garantizar que estas resoluciones sean coercitivas, el **Shield (L3)** utiliza los invariantes definidos en el contrato de reglas para inyectar estados de contención (ej. *Time Dilation*) o disparar acciones de limpieza (ej. *VRAM Zeroing*) ante señales de telemetría de Go (L1).
 
 ---
 
@@ -103,17 +59,13 @@ El **Shield (L3)** carga este archivo mediante `mmap` y utiliza los `rule_id` co
 El sistema opera mediante el **Protocolo de Necrosis Informada**:
 1. **Detección:** Elixir (L0) detecta anomalía (Latidos Semánticos = 0).
 2. **Eutanasia:** El proceso infractor es purgado de la VRAM.
-3. **Autopsia:** Se registra `death_reason` y el árbol LST en el Event Store (Redb).
-4. **Hibernación ([Spec 32](../L5_Muscle/32_multiverse_compression_necro_learning.md)):** Las ramas inactivas o "muertas" se someten a **Ultra-Compresión Zstd** para despejar el SSD.
-5. **Despertar:** Se instancia un nuevo agente con el `Necrosis_Context` inyectado. Si se requiere consultar ramas hibernadas, se activa la descompresión perezosa supervisada (Necro-Learning).
+3. **Autopsia:** Registro de `death_reason` en el Event Store (Redb).
+4. **Hibernación ([Spec 32](../L5_Muscle/32_multiverse_compression_necro_learning.md)):** Ramas muertas sometidas a **Ultra-Compresión Zstd**.
+5. **Despertar:** Instanciación de nuevo agente con `Necrosis_Context`.
 
 ---
 
-## 7. Anexo Arquitectónico: Inteligencia Táctica (Edge CPU/GPU)
-La inclusión transversal del estrato **C++ (Llama.cpp / MLX)** erradica el coste de capital financiero en operaciones atómicas. Las tareas triviales se resuelven localmente usando la GPU local en escasos milisegundos.
-
-### Topología de Roles Cooperativos
-1. **El Escritor (Python + LangGraph):** Piensa y construye los nodos de la aplicación.
-2. **El Tester (Rust):** Audita código bajo sanboxing estricto (WASM).
-3. **El Debugger (Zig / C++):** Revisa punteros, domina volcados de logs y mapea el LST.
-4. **El Orquestador (Elixir + Nx / Broadway):** Coordinador inmutable que garantiza la resiliencia sistémica.
+## [MSA] Sibling Components Requeridos
+Todo documento maestro debe ir acompañado de sus archivos hermanos para convertirse en una *Active Architectural Fitness Function*:
+- **Executable Contract:** [07_unknown_unknowns_resolutions.feature](./07_unknown_unknowns_resolutions.feature)
+- **Machine Rules:** [07_unknown_unknowns_resolutions.rules.json](./07_unknown_unknowns_resolutions.rules.json)

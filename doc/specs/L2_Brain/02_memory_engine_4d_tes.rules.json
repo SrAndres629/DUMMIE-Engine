@@ -1,13 +1,21 @@
 {
-  "rule_id": "RULE_AO_V2_L2_02",
-  "spec_ref": "DE-V2-L2-02",
+  "spec_id": "DE-V2-L2-02",
   "domain": "L2_Memory",
-  "invariants": {
-    "decay_lambda": 0.8,
-    "entropy_hard_cap_bits": 2.5,
-    "shm_format": "Apache_Arrow",
+  "mechanics": {
     "causality_model": "Lamport_Ticks",
-    "fusion_logic": "Join_Semilattice"
+    "fusion_logic": "Join_Semilattice",
+    "shm_format": "Apache_Arrow"
   },
-  "enforcement": "STRICT_BLOCK"
+  "metrics": {
+    "decay_lambda": 0.8,
+    "entropy_hard_cap_bits": 2.5
+  },
+  "persistence": {
+    "engine": "KùzuDB",
+    "path": ".aiwg/memory/loci.db",
+    "nodes": ["Event", "Agent", "Requirement"],
+    "relations": ["CAUSED_BY", "EXECUTED_BY", "VALIDATES"]
+  },
+  "enforcement": "STRICT_BLOCK",
+  "personality_ref": "DE-V2-L0-33"
 }

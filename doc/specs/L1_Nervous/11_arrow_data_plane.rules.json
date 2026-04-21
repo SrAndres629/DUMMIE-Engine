@@ -1,14 +1,23 @@
 {
   "spec_id": "DE-V2-L1-11",
-  "invariants": {
+  "data_plane": {
     "serialization": "Zero-Copy",
     "format": "Apache Arrow 15.0+",
     "shm_path": "/dev/shm/dummie_data_plane",
-    "access_control": {
-      "L1": "RW",
-      "L2": "RW",
-      "L3": "R",
-      "L4": "RW"
-    }
-  }
+    "shm_size_mb": 512
+  },
+  "access_control": {
+    "L0_Overseer": "R",
+    "L1_Nervous": "RW",
+    "L2_Brain": "RW",
+    "L3_Shield": "R",
+    "L4_Edge": "RW"
+  },
+  "invariants": {
+    "mandatory_fields": ["event_id", "lamport_tick", "layer_source"],
+    "no_copy_enforcement": true,
+    "alignment": 64
+  },
+  "enforcement": "STRICT_BLOCK",
+  "personality_ref": "DE-V2-L0-33"
 }

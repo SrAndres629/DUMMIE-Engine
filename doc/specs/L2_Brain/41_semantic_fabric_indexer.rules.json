@@ -1,19 +1,23 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "Semantic Fabric Validation Rules",
-  "type": "object",
-  "properties": {
-    "cross_reference_requirements": {
-      "type": "object",
-      "properties": {
-        "adr_must_link_to_spec": { "type": "boolean", "default": true },
-        "resolution_must_link_to_spec_or_adr": { "type": "boolean", "default": true }
-      }
-    },
-    "orphan_handling": {
-      "type": "string",
-      "enum": ["WARN", "STRICT_FAIL", "AUTO_RESOLVE"]
+  "spec_id": "DE-V2-L2-41",
+  "domain": "L2_Semantic",
+  "indexing_logic": {
+    "root_of_truth": "Lloci_Palace_Sync",
+    "cross_reference_validation": {
+      "adr_to_spec": true,
+      "spec_to_rules": true
     }
   },
-  "required": ["cross_reference_requirements", "orphan_handling"]
+  "governance_states": {
+    "ACCEPTED": "Active_In_Payload",
+    "SUPERSEDED": "Ignored_In_Payload",
+    "DRAFT": "Audit_Only"
+  },
+  "orphan_handling": "STRICT_FAIL",
+  "invariants": {
+    "mandatory_ubiquitous_language_check": true,
+    "no_circular_references": true
+  },
+  "enforcement": "STRICT_BLOCK",
+  "personality_ref": "DE-V2-L0-33"
 }

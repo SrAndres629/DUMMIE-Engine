@@ -1,12 +1,20 @@
 {
-  "rule_id": "RULE_AO_V2_L4_25",
-  "spec_ref": "DE-V2-L4-25",
+  "spec_id": "DE-V2-L4-25",
   "domain": "L4_Registry",
-  "invariants": {
-    "storage_backend": "L loci filesystem",
-    "blueprint_format": "YAML_MSA",
-    "forbidden_manual_blueprint_edit": true,
-    "required_components": ["Domain", "App", "Infra"]
+  "blueprint_governance": {
+    "storage": "L_Loci_Filesystem",
+    "format": "YAML_MSA_V3",
+    "required_layers": ["Domain", "App", "Infra"]
   },
-  "enforcement": "STRICT_BLOCK"
+  "invariants": {
+    "forbidden_manual_blueprint_edit": true,
+    "immutable_registry": true,
+    "mandatory_versioning": true
+  },
+  "scaffolding_policy": {
+    "auto_hydration_enabled": true,
+    "linter_check_required": true
+  },
+  "enforcement": "STRICT_BLOCK",
+  "personality_ref": "DE-V2-L0-33"
 }

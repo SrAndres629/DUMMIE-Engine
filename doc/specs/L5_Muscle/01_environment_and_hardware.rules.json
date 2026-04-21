@@ -1,12 +1,20 @@
 {
-  "rule_id": "RULE_AO_V2_L5_01",
-  "spec_ref": "DE-V2-L5-01",
+  "spec_id": "DE-V2-L5-01",
   "domain": "L5_Hardware",
-  "invariants": {
+  "thermal_policy": {
     "max_gpu_temp_c": 85,
-    "max_ram_per_agent_gb": 4,
-    "storage_backend": "NVMe_Gen4",
-    "architecture": "x86_64_AVX512"
+    "max_cpu_temp_c": 90,
+    "thermal_throttling_enabled": true
   },
-  "enforcement": "STRICT_BLOCK"
+  "resource_quotas": {
+    "max_ram_per_agent_gb": 4,
+    "max_vram_per_agent_gb": 8,
+    "storage_backend": "NVMe_Gen4"
+  },
+  "compute_architecture": {
+    "target": "x86_64_AVX512",
+    "accelerator": "CUDA_MAX_ENGINE"
+  },
+  "enforcement": "STRICT_BLOCK",
+  "personality_ref": "DE-V2-L0-33"
 }

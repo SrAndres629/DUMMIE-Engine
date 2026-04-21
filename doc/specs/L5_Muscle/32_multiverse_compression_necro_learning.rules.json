@@ -1,12 +1,21 @@
 {
-  "rule_id": "RULE_AO_V2_L5_32",
-  "spec_ref": "DE-V2-L5-32",
+  "spec_id": "DE-V2-L5-32",
   "domain": "L5_Storage",
-  "invariants": {
-    "compression_algorithm": "Zstd",
-    "min_compression_level": 19,
-    "cold_storage_path": "/data/cold_storage/",
+  "compression_config": {
+    "algorithm": "Zstd",
+    "min_level": 19,
     "max_decompression_buffer_mb": 500
   },
-  "enforcement": "STRICT_BLOCK"
+  "persistence_policy": {
+    "cold_storage_path": "data/cold_storage/",
+    "mandatory_checksum": "SHA256",
+    "differential_mode_enabled": true
+  },
+  "invariants": {
+    "atomic_writes_only": true,
+    "necro_learning_throttling": true,
+    "no_data_loss_on_compression": true
+  },
+  "enforcement": "STRICT_BLOCK",
+  "personality_ref": "DE-V2-L0-33"
 }

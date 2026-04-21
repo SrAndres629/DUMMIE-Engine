@@ -1,9 +1,23 @@
 {
-  "rule_id": "RULE_AO_V2_L0_11",
-  "spec_ref": "DE-V2-L0-11",
-  "invariants": {
-    "forbidden_patterns": [],
-    "required_headers": []
+  "spec_id": "DE-V2-L0-11",
+  "topology": {
+    "doc/": "SSoT (Specs, ADRs)",
+    "doc/01_architecture/adr/": "Architectural Decision Records",
+    "governance/": "Executable Contracts",
+    "proto/": "Schema Definitions",
+    "layers/": "7-Layer Stack (L0-L6)",
+    "pkg/": "Shared Libraries",
+    "flake.nix": "Environment Hermeticity"
   },
-  "enforcement": "STRICT_BLOCK"
+  "invariants": {
+    "hermeticity": "Nix-Enforced",
+    "security_masks": ".aiwg/secrets",
+    "governance_path": "doc/01_architecture/adr/"
+  },
+  "rbac_topology": {
+    "sw.arch.*": ["doc/", "governance/", "proto/"],
+    "sw.plant.coder": ["layers/"],
+    "sw.strategy.*": [".aiwg/"]
+  },
+  "personality_ref": "DE-V2-L0-33"
 }

@@ -1,12 +1,20 @@
 {
-  "rule_id": "RULE_AO_V2_L4_18",
-  "spec_ref": "DE-V2-L4-18",
+  "spec_id": "DE-V2-L4-18",
   "domain": "L4_Ontology",
-  "invariants": {
-    "ontology_engine": "Zig_LST_Scanner",
+  "indexing": {
+    "engine": "Zig_LST_Scanner",
     "graph_db": "KùzuDB",
-    "required_symbols": ["path", "hash", "type", "dependencies"],
-    "realtime_sync": true
+    "required_symbols": ["path", "hash", "type", "dependencies", "rbac_scope"]
   },
-  "enforcement": "STRICT_BLOCK"
+  "rbac_topography": {
+    "mode": "STRICT_CONTEXT_ISOLATION",
+    "access_levels": ["READ", "WRITE", "AUDIT"]
+  },
+  "invariants": {
+    "realtime_sync": true,
+    "mandatory_hash_integrity": true,
+    "no_circular_loci": true
+  },
+  "enforcement": "STRICT_BLOCK",
+  "personality_ref": "DE-V2-L0-33"
 }

@@ -1,12 +1,21 @@
 {
-  "rule_id": "RULE_AO_V2_L2_29",
-  "spec_ref": "DE-V2-L2-29",
+  "spec_id": "DE-V2-L2-29",
   "domain": "L2_Design",
-  "invariants": {
-    "workflow_states": ["DRAFT", "AUDIT", "ACTIVE", "DEPRECATED"],
+  "workflow": {
+    "states": ["DRAFT", "AUDIT", "ACTIVE", "DEPRECATED"],
     "authority_required": "ARCHITECT_L0",
-    "dependency_check": "RECURSIVE",
-    "collision_detection": true
+    "dependency_check": "RECURSIVE_DEEP"
   },
-  "enforcement": "STRICT_BLOCK"
+  "invariants": {
+    "collision_detection": true,
+    "no_circular_dependencies": true,
+    "mandatory_audit_before_active": true
+  },
+  "audit_criteria": {
+    "contract_compliance": "feature_match",
+    "security_compliance": "shield_audit",
+    "ontological_fit": "loci_palace_sync"
+  },
+  "enforcement": "STRICT_BLOCK",
+  "personality_ref": "DE-V2-L0-33"
 }

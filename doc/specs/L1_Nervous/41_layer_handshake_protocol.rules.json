@@ -1,20 +1,25 @@
 {
-  "rule_id": "RULE_AO_V2_L1_41",
-  "spec_ref": "DE-V2-L1-41",
+  "spec_id": "DE-V2-L1-41",
+  "wire_topology": {
+    "control_plane": "NATS JetStream",
+    "data_plane": "Apache Arrow SHM",
+    "acp_bridge": "JSON-RPC Over NATS"
+  },
+  "acp_config": {
+    "supported_versions": ["1.0", "1.1-AO"],
+    "serialization": "Protobuf_Nested_JSON"
+  },
   "invariants": {
     "forbidden_patterns": [
       "UNVERSIONED_ACP_MESSAGE",
       "RAW_JSON_TRANSIT_BYPASS",
       "MALFORMED_RPC_ENVELOPE"
     ],
-    "required_headers": [
+    "mandatory_headers": [
       "X-AO-Protocol-Version",
       "X-AO-Handshake-Type"
     ]
   },
   "enforcement": "STRICT_BLOCK",
-  "acp_config": {
-    "supported_versions": ["1.0", "1.1-AO"],
-    "serialization": "Protobuf_Nested_JSON"
-  }
+  "personality_ref": "DE-V2-L0-33"
 }

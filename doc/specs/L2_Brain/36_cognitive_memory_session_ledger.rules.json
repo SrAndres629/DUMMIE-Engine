@@ -1,12 +1,20 @@
 {
-  "rule_id": "RULE_AO_V2_L2_36",
-  "spec_ref": "DE-V2-L2-36",
+  "spec_id": "DE-V2-L2-36",
   "domain": "L2_Memory",
-  "invariants": {
-    "session_log_path": ".aiwg/memory/session_ledger.jsonl",
-    "required_metadata": ["agent_id", "tick", "thought_vector", "action"],
-    "persistence_mode": "APPEND_ONLY",
-    "compression_trigger": "BUFFER_FULL"
+  "session_ledger": {
+    "path": ".aiwg/memory/session_ledger.jsonl",
+    "format": "JSONL_APPEND_ONLY",
+    "required_metadata": ["agent_id", "tick", "thought_vector", "action"]
   },
-  "enforcement": "STRICT_BLOCK"
+  "lifecycle": {
+    "persistence": "Transient (Per Session)",
+    "crystallization_ref": "DE-V2-L0-49",
+    "compression_trigger": "BUFFER_FULL_OR_EOS"
+  },
+  "invariants": {
+    "no_raw_pii_in_thought_vectors": true,
+    "mandatory_tick_sync": true
+  },
+  "enforcement": "STRICT_BLOCK",
+  "personality_ref": "DE-V2-L0-33"
 }

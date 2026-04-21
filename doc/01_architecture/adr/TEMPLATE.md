@@ -1,9 +1,11 @@
 ---
-status: "PROPOSED" # Enum: PROPOSED, ACCEPTED, SUPERSEDED
-date: "YYYY-MM-DD"
-deciders: ["sw.arch.core", "Humano PAH"]
-supersedes: "" # ID del ADR que este revoca, si aplica
-tags: ["arquitectura", "dominio"]
+spec_id: "DE-V2-L0-ADR-XXX"
+title: "[Título Breve e Imperativo]"
+status: "PROPOSED"
+version: "1.0.0"
+layer: "L0"
+namespace: "io.dummie.v2.adr"
+authority: "ARCHITECT"
 ---
 
 # ADR-XXXX: [Título Breve e Imperativo]

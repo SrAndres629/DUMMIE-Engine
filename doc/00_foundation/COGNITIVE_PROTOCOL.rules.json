@@ -1,0 +1,19 @@
+{
+  "spec_id": "DE-V2-L0-PROTOCOL",
+  "memory_types": [
+    "decisions",
+    "lessons",
+    "ambiguities"
+  ],
+  "format": "JSONL",
+  "validation_engine": "doc/04_forge/sdd_validator.py",
+  "invariants": [
+    "No session can close without SCCP (Spec 49) execution",
+    "All memory entries must include a timestamp and a rule_hash",
+    "Lessons must include 'root_cause' and 'remediation' fields"
+  ],
+  "enforcement": {
+    "on_fail": "Mark as CORRUPTED and trigger self-healing",
+    "on_duplicate": "Merge and increase weight"
+  }
+}

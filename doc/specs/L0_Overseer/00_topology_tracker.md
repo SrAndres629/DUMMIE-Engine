@@ -2,7 +2,7 @@
 spec_id: "DE-V2-L0-00"
 title: "Rastreador de Topología y Soberanía"
 status: "ACTIVE"
-version: "2.1.0"
+version: "2.2.0"
 layer: "L0"
 namespace: "io.dummie.v2.topology"
 authority: "ARCHITECT"
@@ -17,67 +17,8 @@ tags: ["cognitive_core", "topology_map", "industrial_sdd"]
 ## Abstract
 El **Rastreador de Topología** es el SSoT (Single Source of Truth) del estado de implementación y soberanía del Agentic OS. Enlaza los contratos arquitectónicos (Specs) con la realidad física del monorepo, permitiendo una trazabilidad total del ROI y la seguridad sistémica.
 
-## 1. Cognitive Context Model (JSON)
-```json
-{
-  "entities": [
-    {
-      "id": "L0",
-      "name": "Overseer",
-      "tech": "Elixir/OTP",
-      "status": "Alpha"
-    },
-    {
-      "id": "L1",
-      "name": "Nervous",
-      "tech": "Go/NATS",
-      "status": "Alpha"
-    },
-    {
-      "id": "L2",
-      "name": "Brain",
-      "tech": "Python/LangGraph",
-      "status": "Beta"
-    },
-    {
-      "id": "L3",
-      "name": "Shield",
-      "tech": "Rust/WASM",
-      "status": "Beta"
-    },
-    {
-      "id": "L4",
-      "name": "Edge",
-      "tech": "Zig/Kùzu",
-      "status": "Gamma"
-    },
-    {
-      "id": "L5",
-      "name": "Muscle",
-      "tech": "Mojo/CUDA",
-      "status": "Gamma"
-    },
-    {
-      "id": "L6",
-      "name": "Skin",
-      "tech": "TS/Tauri",
-      "status": "Alpha"
-    }
-  ],
-  "invariants": [
-    "Consensus Architecture-First",
-    "Zero-Copy SHM (Arrow)",
-    "Deep LST Scanning"
-  ],
-  "components": [
-    "Doc Tree",
-    "Dependency DAG",
-    "Z-Index"
-  ],
-  "personality_ref": "DE-V2-L0-33",
-  "ledger_link": "DE-V2-L2-34"
-}
-```
+## 1. Cognitive Context Model (Ref)
+Para el estado detallado de las entidades (L0-L6), los invariantes de progreso y el backlog estratégico de ejecución, consulte el archivo hermano [00_topology_tracker.rules.json](./00_topology_tracker.rules.json).
 
 ---
 
@@ -122,41 +63,7 @@ Tras el ciclo de refactorización "El Martillo del Arquitecto", la base de espec
 
 ---
 
-## 6. Strategic Execution Backlog (Multiverse Priority)
-
-Este backlog dinámico rige la prioridad física de implementación. Los agentes deben consultar este bloque JSON para determinar su próximo objetivo táctico.
-
-```json
-{
-  "active_sprint": "Greenfield Phase 0: The Wire & Integrity",
-  "priority_stack": [
-    {
-      "id": "AO-PRIO-001",
-      "target": "doc/specs/41_layer_handshake_protocol.md",
-      "status": "IMPLEMENTED",
-      "objective": "Formalize binary and NATS contracts."
-    },
-    {
-      "id": "AO-PRIO-002",
-      "target": "doc/sdd_validator.py",
-      "status": "IMPLEMENTED",
-      "objective": "Evolve to Semantic Auditor with cross-spec enforcement."
-    },
-    {
-      "id": "AO-PRIO-003",
-      "target": "proto/dummie/v2/",
-      "status": "IN_PROGRESS",
-      "objective": "Normalize all Protobuf services for L3/L4/L5."
-    },
-    {
-      "id": "AO-PRIO-004",
-      "target": "L0 Elixir/OTP",
-      "status": "BACKLOG",
-      "objective": "Initialize Overseer supervision tree for L1/L2."
-    }
-  ],
-  "global_blockers": [],
-  "current_focus": "Eliminating architectural cracks and ensuring semantic zero-copy consistency."
-}
-```
-
+## [MSA] Sibling Components Requeridos
+Todo documento maestro debe ir acompañado de sus archivos hermanos para convertirse en una *Active Architectural Fitness Function*:
+- **Executable Contract:** [00_topology_tracker.feature](./00_topology_tracker.feature)
+- **Machine Rules:** [00_topology_tracker.rules.json](./00_topology_tracker.rules.json)

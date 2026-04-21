@@ -1,12 +1,19 @@
 {
-  "rule_id": "RULE_AO_V2_L2_09",
-  "spec_ref": "DE-V2-L2-09",
-  "domain": "L2_Concepts",
+  "spec_id": "DE-V2-L2-09",
+  "paradigms": {
+    "snapshotting": "Rejected (I/O & RAM Infection)",
+    "lambda_projection": "Adopted (4D-TES Efficiency)"
+  },
+  "memory_topology": {
+    "3D_Loci": "Spatial (WHERE) - KùzuDB",
+    "4D_TES": "Temporal (WHEN) - Redb"
+  },
   "invariants": {
     "persistence_model": "Delta_Immutable",
-    "ram_complexity_limit": "O(1)",
-    "branch_recovery_mode": "Bifurcation",
-    "snapshotting_status": "REJECTED"
+    "ram_complexity": "O(1) - Active Window",
+    "consistency": "Lamport-Strict",
+    "recovery_strategy": "Bifurcation_And_Pruning"
   },
-  "enforcement": "WARN"
+  "enforcement": "WARN",
+  "personality_ref": "DE-V2-L0-33"
 }

@@ -1,9 +1,24 @@
 {
-  "rule_id": "RULE_AO_V2_L0_42",
-  "spec_ref": "DE-V2-L0-42",
-  "invariants": {
-    "forbidden_patterns": [],
-    "required_headers": []
+  "spec_id": "DE-V2-L0-42",
+  "trigger_mechanism": {
+    "type": "GenServer Timer (Elixir)",
+    "default_interval_s": 1800,
+    "jitter_pct": 0.1
   },
-  "enforcement": "STRICT_BLOCK"
+  "signal": {
+    "subject": "ao.v2.l0.signal.pulse",
+    "payload_type": "PulseEvent",
+    "priority": "LOW"
+  },
+  "sources": [
+    "doc/HEARTBEAT.md",
+    "governance/rules/cron_schedules.json"
+  ],
+  "invariants": {
+    "max_autonomous_tasks_per_pulse": 3,
+    "max_depth": 0,
+    "budget_cap_percent": 15.0,
+    "thermal_override": true
+  },
+  "personality_ref": "DE-V2-L0-33"
 }

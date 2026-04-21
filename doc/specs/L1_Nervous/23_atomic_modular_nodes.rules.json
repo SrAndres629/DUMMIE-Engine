@@ -1,9 +1,32 @@
 {
-  "rule_id": "RULE_AO_V2_L1_23",
-  "spec_ref": "DE-V2-L1-23",
-  "invariants": {
-    "forbidden_patterns": [],
-    "required_headers": []
+  "spec_id": "DE-V2-L1-23",
+  "node_architecture": {
+    "strata": ["Port (Definition)", "Core (Domain)", "Adapter (Plug)", "Shield (Security)"],
+    "pattern": "Ports & Adapters (Hexagonal)"
   },
-  "enforcement": "STRICT_BLOCK"
+  "manifest_schema": {
+    "node_uid": "UUID-V4",
+    "layer": "enum(L0..L6)",
+    "interface": {
+      "protobuf_svc": "string",
+      "shm_req_size_mb": "int",
+      "alignment": 64
+    },
+    "governance": {
+      "authority_level": "enum(ARCHITECT, AGENT_PROPOSAL, PAH)",
+      "sdd_rules": ["array"]
+    }
+  },
+  "lifecycle": {
+    "swap_protocol": "Atomic Swap via L0_Overseer",
+    "discovery": "NATS_Discovery",
+    "registry_ref": "DE-V2-L4-18"
+  },
+  "invariants": {
+    "no_direct_io_in_core": true,
+    "mandatory_shield_injection": true,
+    "atomic_rollback_on_failure": true
+  },
+  "enforcement": "STRICT_BLOCK",
+  "personality_ref": "DE-V2-L0-33"
 }

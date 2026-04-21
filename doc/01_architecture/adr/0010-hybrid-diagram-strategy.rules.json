@@ -1,17 +1,12 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "Hybrid Diagram Strategy Constraints",
-  "type": "object",
-  "properties": {
-    "allowed_diagram_formats": {
-      "type": "array",
-      "items": { "type": "string", "enum": ["mermaid", "plantuml", "c4"] }
-    },
-    "dynamic_rendering_required": {
-      "type": "boolean",
-      "default": true,
-      "description": "Se debe preferir Mermaid para diagramas embebidos que cambian frecuentemente."
-    }
+  "spec_id": "DE-V2-ADR-010",
+  "allowed_diagram_formats": ["mermaid", "plantuml", "c4", "lst_json", "lst_yaml"],
+  "usage_guidelines": {
+    "flows": "mermaid",
+    "high_level_architecture": "plantuml_c4",
+    "cognitive_internal": "lst_json"
   },
-  "required": ["allowed_diagram_formats"]
+  "forbidden_formats": ["dot", "graphviz", "visjs"],
+  "dynamic_rendering_required": true,
+  "personality_ref": "DE-V2-L0-33"
 }

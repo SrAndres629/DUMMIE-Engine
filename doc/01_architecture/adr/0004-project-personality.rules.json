@@ -1,19 +1,20 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "Project Personality Constraints",
-  "type": "object",
-  "properties": {
-    "identity_file_path": {
-      "type": "string",
-      "const": ".aiwg/identity.json"
-    },
-    "forbidden_phrases": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      },
-      "default": ["Como modelo de lenguaje", "As an AI"]
-    }
+  "spec_id": "DE-V2-ADR-004",
+  "trait_matrix": {
+    "refactoring_aggressiveness": { "range": [0.0, 1.0], "default": 0.5 },
+    "abstraction_level": { "range": [0.0, 1.0], "default": 1.0 },
+    "security_strictness": { "range": [0.0, 1.0], "default": 1.0 },
+    "biases": ["performance", "test_coverage"]
   },
-  "required": ["identity_file_path"]
+  "mechanisms": [
+    "Graph-based Personality",
+    "GraphRAG Decision Memory"
+  ],
+  "capsules": {
+    "Exploratory": { "aggressiveness": 1.0, "strictness": 0.5 },
+    "Mission Critical": { "aggressiveness": 0.3, "strictness": 1.0 }
+  },
+  "identity_file_path": ".aiwg/identity.json",
+  "forbidden_phrases": ["Como modelo de lenguaje", "As an AI", "Lo siento, pero"],
+  "personality_ref": "DE-V2-L0-33"
 }

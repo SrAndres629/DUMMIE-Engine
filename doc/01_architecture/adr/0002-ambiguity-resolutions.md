@@ -5,7 +5,7 @@ status: "ACTIVE"
 version: "2.1.0"
 layer: "L0"
 namespace: "io.dummie.v2.adr"
-authority: "EXECUTIVE_ARBITER"
+authority: "ARCHITECT"
 dependencies:
   - id: "DE-V2-L0-14"
     relationship: "IMPLEMENTS"
@@ -17,34 +17,10 @@ tags: ["architectural_decision", "ambiguity_resolution", "industrial_sdd"]
 # [ADR-002](0002-ambiguity-resolutions.md): Resolución de Ambigüedades y Gobernanza
 
 ## Abstract
-La negociación infinita entre agentes expertos requiere un mecanismo de arbitraje vinculante. Esta decisión establece al Árbitro de Elixir (L0) como la autoridad suprema para la resolución de conflictos, limitada por el budget cognitivo y el ROI proyectado.
+La negociación infinita entre agentes expertos requiere un mecanismo de arbitraje vinculante. Esta decisión establece al Árbitro de Elixir (L0) como la autoridad suprema para la resolución de conflictos, limitada por el budget cognitivo y el ROI proyectado, e impone el protocolo "Ask-User-First" para eliminar indeterminaciones.
 
-## 1. Cognitive Context Model (JSON)
-```json
-{
-  "arbitration": {
-    "arbiter": "L0 Elixir",
-    "iteration_limit": 3,
-    "escalation": "PAH (Human Pointer)",
-    "protocol": "Ask-User-First ([ADR-005](0005-cognitive-fabrication-protocols.md))"
-  },
-  "safety_macros": {
-    "S_Shield": "Structural/Causal",
-    "E_Shield": "Economic/ROI",
-    "L_Shield": "Legal/Copyright"
-  },
-  "bus_segmentation": {
-    "control_plane": "NATS (Signal/Veto)",
-    "data_plane": "Apache Arrow (Zero-Copy)"
-  },
-  "persistence": {
-    "event_store": "Redb",
-    "ontology": "KùzuDB"
-  },
-  "personality_ref": "DE-V2-L0-33",
-  "ledger_link": "DE-V2-L2-34"
-}
-```
+## 1. Cognitive Context Model (Ref)
+Para los parámetros técnicos de arbitraje, escudos y persistencia causal, consulte el archivo hermano [0002-ambiguity-resolutions.rules.json](./0002-ambiguity-resolutions.rules.json).
 
 ---
 

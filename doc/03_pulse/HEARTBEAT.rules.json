@@ -1,0 +1,20 @@
+{
+  "spec_id": "DE-V2-PULSE-HB",
+  "domain": "Pulse_Governance",
+  "heartbeat_config": {
+    "pulse_frequency_seconds": 300,
+    "max_tasks_per_pulse": 5,
+    "concurrency_limit": 2
+  },
+  "token_governance": {
+    "min_roi_ratio": 1.2,
+    "automatic_optimization_enabled": true
+  },
+  "invariants": {
+    "mandatory_sdd_validation": true,
+    "no_manual_drift_allowed": true,
+    "proactive_secret_scrubbing": true
+  },
+  "enforcement": "STRICT_BLOCK",
+  "personality_ref": "DE-V2-L0-33"
+}

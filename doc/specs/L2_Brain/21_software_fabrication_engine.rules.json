@@ -1,6 +1,5 @@
 {
-  "rule_id": "RULE_AO_V2_L2_21",
-  "spec_ref": "DE-V2-L2-21",
+  "spec_id": "DE-V2-L2-21",
   "domain": "L2_Fabrication",
   "invariants": {
     "fabrication_modes": ["GREENFIELD", "REFACTOR", "BUGFIX"],
@@ -8,5 +7,10 @@
     "drift_prevention": "STRICT_REVERT",
     "required_agents": ["Architect", "Coder", "Sentinel"]
   },
-  "enforcement": "STRICT_BLOCK"
+  "kaizen_loop": {
+    "steps": ["Spec-Analysis", "Implementation", "Audit"],
+    "min_certainty_threshold": 0.85
+  },
+  "enforcement": "STRICT_BLOCK",
+  "personality_ref": "DE-V2-L0-33"
 }

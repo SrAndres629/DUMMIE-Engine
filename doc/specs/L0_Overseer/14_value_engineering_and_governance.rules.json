@@ -1,9 +1,24 @@
 {
-  "rule_id": "RULE_AO_V2_L0_14",
-  "spec_ref": "DE-V2-L0-14",
-  "invariants": {
-    "forbidden_patterns": [],
-    "required_headers": []
+  "spec_id": "DE-V2-L0-14",
+  "metrics": {
+    "roi_formula": "(BusinessValue - OperationalCost) / OperationalCost",
+    "min_roi_threshold": 1.2,
+    "cost_factors": ["Inference (Tokens)", "Compute (Watts)", "Hardware Amortization"]
   },
-  "enforcement": "STRICT_BLOCK"
+  "economic_shields": {
+    "breaker": "E-Shield (Financial Circuit Breaker)",
+    "monitor": "L0_Overseer",
+    "enforcement": "L1_Socket_Cut"
+  },
+  "service_tiers": {
+    "Tier 0": "Architecture (High ROI)",
+    "Tier 1": "Standard (Balanced)",
+    "Tier 2": "Fast-Track (Local 0-Cost)"
+  },
+  "invariants": [
+    "No saga execution without ROI validation",
+    "Daily budget hard-cap enforcement via NATS",
+    "Maximum 3 iterations for aesthetic refactors (Economic Apoptosis)"
+  ],
+  "personality_ref": "DE-V2-L0-33"
 }

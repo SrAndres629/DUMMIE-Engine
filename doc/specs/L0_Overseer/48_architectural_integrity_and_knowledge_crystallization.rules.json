@@ -1,22 +1,20 @@
 {
-  "spec": "48",
-  "name": "architectural_integrity_and_knowledge_crystallization",
-  "invariants": [
-    {
-      "id": "INV-48-01",
-      "description": "Los archivos .venv o node_modules no deben ser directorios físicos reales en la unidad principal.",
-      "condition": "is_symlink(path) || !exists(path)",
-      "scope": ["layers/**/.venv", "layers/**/node_modules"]
-    },
-    {
-      "id": "INV-48-02",
-      "description": "Cada cambio en el Makefile o Dockerfile debe tener una entrada correspondiente en el Ledger de Decisiones.",
-      "condition": "count_matches('.aiwg/memory/decisions.jsonl', current_session_id) > 0"
-    },
-    {
-      "id": "INV-48-03",
-      "description": "Las rutas de caché de compilación deben apuntar a /media/datasets.",
-      "condition": "contains(dockerfile.env.GOCACHE, '/media/datasets') && contains(dockerfile.env.UV_CACHE_DIR, '/media/datasets')"
-    }
-  ]
+  "spec_id": "DE-V2-L0-48",
+  "crystallization_targets": [
+    ".aiwg/memory/decisions.jsonl",
+    ".aiwg/memory/lessons.jsonl",
+    ".aiwg/memory/ambiguities.jsonl"
+  ],
+  "invariants": {
+    "source_root_limit_mb": 500,
+    "bloatware_threshold_mb": 50,
+    "mandatory_symlinks": [".venv", "node_modules", "target", "zig-out", "zig-cache"],
+    "forbidden_storage": ["/media/datasets/**/.git"]
+  },
+  "compliance_checks": {
+    "no_contract_no_code": true,
+    "drift_documentation_required": true
+  },
+  "enforcement": "CRITICAL_ARCHITECTURE_VIOLATION",
+  "personality_ref": "DE-V2-L0-33"
 }

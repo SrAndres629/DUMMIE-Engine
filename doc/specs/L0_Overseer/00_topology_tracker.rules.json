@@ -1,9 +1,28 @@
 {
-  "rule_id": "RULE_AO_V2_L0_00",
-  "spec_ref": "DE-V2-L0-00",
+  "spec_id": "DE-V2-L0-00",
+  "entities": [
+    { "id": "L0", "name": "Overseer", "tech": "Elixir/OTP", "status": "Alpha" },
+    { "id": "L1", "name": "Nervous", "tech": "Go/NATS", "status": "Alpha" },
+    { "id": "L2", "name": "Brain", "tech": "Python/Swarm", "status": "Beta" },
+    { "id": "L3", "name": "Shield", "tech": "Rust/WASM", "status": "Beta" },
+    { "id": "L4", "name": "Edge", "tech": "Zig/Kùzu", "status": "Gamma" },
+    { "id": "L5", "name": "Muscle", "tech": "Mojo/CUDA", "status": "Gamma" },
+    { "id": "L6", "name": "Skin", "tech": "TS/Tauri", "status": "Alpha" }
+  ],
   "invariants": {
-    "forbidden_patterns": [],
-    "required_headers": []
+    "no_uncontracted_code": true,
+    "mandatory_protobuf": true,
+    "zero_copy_shm": "Apache Arrow",
+    "lst_scanning": "Zig (L4)"
   },
-  "enforcement": "STRICT_BLOCK"
+  "backlog": {
+    "active_sprint": "Greenfield Phase 0: The Wire & Integrity",
+    "priority_stack": [
+      { "id": "AO-PRIO-001", "target": "doc/specs/L0_Overseer/41_layer_handshake_protocol.md", "status": "IMPLEMENTED" },
+      { "id": "AO-PRIO-002", "target": "doc/04_forge/sdd_validator.py", "status": "IMPLEMENTED" },
+      { "id": "AO-PRIO-003", "target": "proto/dummie/v2/", "status": "IN_PROGRESS" },
+      { "id": "AO-PRIO-004", "target": "layers/l0_overseer/", "status": "BACKLOG" }
+    ]
+  },
+  "personality_ref": "DE-V2-L0-33"
 }

@@ -1,0 +1,21 @@
+{
+  "spec_id": "DE-V2-L0-VISION",
+  "vision": "Autonomous Software Fabrication Engine (SFE)",
+  "axioms": {
+    "collaboration": "Virtual Office (Expert Consensus)",
+    "hierarchy": "Executive Arbiter (L0 Elixir)",
+    "arbitration": "ROI-Based Decisioning"
+  },
+  "pilars": [
+    "Schema-First Primacy",
+    "Atomic Modularity",
+    "Causal Consistency (4D-TES)",
+    "Sovereign Cognitive Memory (Spec 36)"
+  ],
+  "invariants": [
+    "No manual code intervention allowed in production-grade components",
+    "All decisions must be recorded in the Decision Ledger (Spec 34)",
+    "Quality must be built-in via Jidoka (Active Shields)"
+  ],
+  "personality_ref": "DE-V2-L0-33"
+}
