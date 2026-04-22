@@ -1,9 +1,9 @@
 import os
 import nats
-from brain.application.ports import BrainInputPort
+from brain.application.interfaces import IBrainOrchestrator
 
 class NatsController:
-    def __init__(self, input_port: BrainInputPort):
+    def __init__(self, input_port: IBrainOrchestrator):
         self.input_port = input_port
         self.nc = None
         self.is_running = True

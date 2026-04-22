@@ -22,12 +22,13 @@ Para los estados del workflow, los requisitos de autoridad (Architect L0) y los 
 
 ---
 
-## 2. El Ciclo de Vida del Diseño
-Toda nueva especificación o componente sigue este flujo:
-1.  **DRAFT:** Fase de ideación y prototipado ontológico.
-2.  **AUDIT:** Validación técnica por el Sentinel (L3) y el Auditor (L2).
-3.  **ACTIVE:** Integración en la Verdad Lógica del sistema tras aprobación.
-4.  **DEPRECATED:** Marcado para eliminación o refactorización masiva.
+## 2. El Ciclo de Vida del Diseño (Causal Projection)
+En un sistema 4D-TES puro, **no existen los estados mutables**. Un componente no "cambia" de DRAFT a ACTIVE. El estado es una **Proyección Matemática (View)** calculada leyendo la cadena de eventos:
+
+1.  **DRAFT:** Estado por defecto cuando un nodo es creado (`IntentType = MUTATION`).
+2.  **AUDIT:** Estado derivado cuando un Auditor o el Sentinel L3 anexa un nodo de revisión al DAG apuntando al `causal_hash` del DRAFT.
+3.  **ACTIVE:** Estado derivado exclusivamente cuando un `DecisionRecord` (emitido por `ARCHITECT_L0` o superior) apunta al `causal_hash` del nodo con una resolución de aprobación.
+4.  **DEPRECATED:** Proyección cuando un nuevo `DecisionRecord` revoca el estado anterior.
 
 ---
 

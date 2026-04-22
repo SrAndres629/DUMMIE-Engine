@@ -2,9 +2,9 @@
   "spec_id": "DE-V2-L2-38",
   "domain": "L2_Kaizen",
   "crystallization": {
-    "threshold": 0.85,
     "necro_learning_trigger": "IDLE_PERIOD_EXCEEDED",
-    "output_formats": ["SKILL.yaml", "LINT_RULE"]
+    "output_formats": ["SKILL.yaml", "LINT_RULE"],
+    "apoptosis_lamport_threshold": 1000
   },
   "compliance": {
     "personality_ref": "DE-V2-L0-33",
@@ -12,7 +12,8 @@
   },
   "invariants": {
     "no_redundant_skills": true,
-    "mandatory_contract_generation": true
+    "mandatory_contract_generation": true,
+    "strict_skill_provenance": true
   },
   "enforcement": "STRICT_BLOCK"
 }

@@ -36,6 +36,28 @@ El Auditor L2 vigila el ledger y emite alertas a través de NATS ante eventos cr
 - **Constraint Violation:** Decisiones que contradicen los invariantes del Shield L3.
 - **Human Oversight Required:** Decisiones con alto radio de explosión que requieren el oráculo del PAH.
 
+## 4. Formal Contract Boundary (Audit Trace)
+Para que las decisiones no sean simples promesas en texto, el Ledger implementa el siguiente contrato físico Protobuf (v3) que actúa como *Single Source of Truth* (SSoT):
+
+```protobuf
+// ==========================================
+// DECISION LEDGER RECORD
+// ==========================================
+message DecisionRecord {
+    string decision_id = 1;
+    string rationale = 2;
+    string impact_blast_radius = 3;
+    
+    // Origen de la decisión
+    SixDimensionalContext context = 4; 
+    // El nodo 4D-TES sobre el que recae el fallo
+    string target_causal_hash = 5;     
+    
+    // Firma criptográfica del auditor (Sentinel/PAH)
+    string witness_hash = 6;           
+}
+```
+
 ---
 
 ## [MSA] Sibling Components Requeridos

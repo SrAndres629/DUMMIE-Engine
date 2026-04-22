@@ -30,11 +30,31 @@ El proceso de cristalización sigue una lógica de **Destilación de Gradiente**
 
 ---
 
-## 3. Necro-learning (Aprendizaje en Reposo)
+## 3. Necro-learning y Apoptosis (Garbage Collection)
 Cuando el sistema detecta periodos de inactividad de I/O, la Cristalización activa el modo de **Necro-learning**:
-- Auditoría profunda de sesiones antiguas.
-- Consolidación de micro-aprendizajes en macro-reglas de diseño.
-- Optimización de los vectores de pensamiento en la memoria semántica.
+- **Apoptosis (Muerte Celular):** El sistema barre el DAG en KùzuDB. Los nodos hoja que lleven más de `N` Lamport Ticks sin recibir referencias de tipo `IntentType = OBSERVATION` sufrirán borrado en frío (S3/Disk), reduciendo la entropía.
+- **Consolidación:** Los nodos con alta densidad de referencias se cristalizan en macro-reglas de diseño.
+
+---
+
+## 4. Formal Contract Boundary (Skill Provenance)
+Toda habilidad destilada debe probar matemáticamente su origen empírico para evitar la Amnesia Causal:
+
+```protobuf
+// ==========================================
+// CRYSTALLIZED SKILL (PROCEDURAL MEMORY)
+// ==========================================
+message CrystallizedSkill {
+    string skill_id = 1;
+    string yaml_payload = 2; // El contrato YAML ejecutable
+    
+    // Proveniencia: Lista de nodos 4D-TES que originaron este aprendizaje
+    repeated string source_causal_hashes = 3; 
+    
+    // Firma criptográfica que previene tampering de la habilidad
+    string skill_hash = 4;
+}
+```
 
 ---
 

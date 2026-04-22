@@ -30,10 +30,14 @@ El mapa se actualiza dinámicamente ante cada evento del sistema:
 
 ---
 
-## 3. Escala de Certeza (Heurística)
-- **1.0 (Cristalino):** Specs completas, ADRs alineados, Tests TDD en verde.
-- **0.5 (Teórico):** Specs completas pero sin validación física en código.
-- **0.0 (Ignorancia):** Código existente sin contrato ni documentación asociada.
+## 3. Derivada de Certeza (Mathematical Projection)
+Dado que el 6D-Context ya no posee un Peso Semántico estático (`w`), la Certeza Ontológica se calcula como una proyección sobre el DAG 4D-TES en un punto $\{x, y, z\}$:
+
+$$Certeza = \frac{\sum Tests \ en \ Verde}{\sum Nodos \ de \ Mutacion \ sin \ Auditar}$$
+
+- **1.0 (Cristalino):** Todas las mutaciones en $\{x,y,z\}$ están auditadas y validadas.
+- **$\ge$ 0.5 (Autorizado):** Nivel mínimo de certeza para que el Agente pueda emitir un nodo de Mutación en L1 (Código). Si es menor, el Sentinel bloquea la escritura.
+- **0.0 (Terra Incognita):** Código existente pero sin historial causal de Specs o Tests. Se requiere una auditoría prioritaria.
 
 ---
 

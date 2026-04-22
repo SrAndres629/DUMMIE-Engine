@@ -6,13 +6,13 @@
     "mapping": {
       "x_y_z": "Spatial (Loci)",
       "t": "Temporal (Lamport)",
-      "w": "Semantic Weight (0.0-1.0)",
+      "i": "Intent (Causalidad Intencional)",
       "a": "Authority Level (RBAC)"
     }
   },
   "invariants": {
-    "immutable_dims": ["x", "y", "z", "t"],
-    "volatile_dims": ["w", "a"],
+    "immutable_dims": ["x", "y", "z", "t", "i"],
+    "volatile_dims": ["a"],
     "lst_enforced": true,
     "handshake_mandatory": true
   },

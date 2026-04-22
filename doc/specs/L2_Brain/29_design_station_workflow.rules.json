@@ -2,11 +2,13 @@
   "spec_id": "DE-V2-L2-29",
   "domain": "L2_Design",
   "workflow": {
-    "states": ["DRAFT", "AUDIT", "ACTIVE", "DEPRECATED"],
+    "state_resolution": "CAUSAL_PROJECTION_FROM_DAG",
     "authority_required": "ARCHITECT_L0",
     "dependency_check": "RECURSIVE_DEEP"
   },
   "invariants": {
+    "no_in_place_state_mutation": true,
+    "state_is_derived_view": true,
     "collision_detection": true,
     "no_circular_dependencies": true,
     "mandatory_audit_before_active": true

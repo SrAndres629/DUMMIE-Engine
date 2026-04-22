@@ -23,11 +23,54 @@ Para la definición de los 6 vectores (espaciales, temporales, relevancia, autor
 ---
 
 ## 2. Los 6 Vectores de Soberanía
-Toda entidad o evento en el sistema se indexa mediante un vector $V = \{x, y, z, t, w, a\}$:
+Toda entidad o evento en el sistema se indexa mediante un vector $V = \{x, y, z, t, i, a\}$:
 - **$\{x, y, z\}$**: Dimensiones espaciales (Loci).
 - **$\{t\}$**: Dimensión temporal (Lamport).
-- **$\{w\}$**: Relevancia semántica (Weight).
+- **$\{i\}$**: Causalidad Intencional (Intent). Razón inmutable de la existencia.
 - **$\{a\}$**: Nivel de autoridad (Authority).
+
+---
+
+## 3. Formal Contract Boundary
+Para asegurar la viabilidad del determinismo, este es el contrato estructurado en Protobuf (v3) que actúa como *Single Source of Truth* (SSoT):
+
+```protobuf
+// ==========================================
+// 6D-CONTEXT: THE DETERMINISTIC VECTOR
+// ==========================================
+message SixDimensionalContext {
+    // [3D Espacial] Coordenadas en el Grafo Ontológico
+    string locus_x = 1;       // ID del Bounded Context
+    string locus_y = 2;       // ID del Aggregate Root
+    string locus_z = 3;       // ID de la Entidad Atómica
+
+    // [1D Temporal] La Flecha del Tiempo
+    uint64 lamport_t = 4;     // Contador monotónico local
+
+    // [1D Soberanía]
+    AuthorityLevel authority_a = 5;
+
+    // [1D Causalidad Intencional]
+    IntentType intent_i = 6;  // Razón inmutable
+}
+
+enum AuthorityLevel {
+    AUTHORITY_UNSPECIFIED = 0;
+    AGENT = 1;
+    ENGINEER = 2;
+    ARCHITECT = 3;
+    OVERSEER = 4;
+    HUMAN = 5;
+}
+
+enum IntentType {
+    INTENT_UNSPECIFIED = 0;
+    OBSERVATION = 1;
+    MUTATION = 2;
+    RESOLUTION = 3;
+    CRYSTALLIZATION = 4;
+}
+```
 
 ---
 

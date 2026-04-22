@@ -4,14 +4,19 @@ package io.dummie.v2.memory;
 
 import "google/protobuf/timestamp.proto";
 
-// Representa una decisión técnica vinculante tomada por un agente o el PAH.
-message Decision {
-    int64 tick = 1;                     // Lamport Tick (Orden Causal)
-    string decision_id = 2;             // Identificador único (DEC-XXX)
-    string resolution = 3;              // La acción tomada
-    string rationale = 4;               // El "Por qué" (Justificación técnica)
-    string authority = 5;               // Quién tomó la decisión (ARCHITECT, PAH, etc.)
-    google.protobuf.Timestamp ts = 6;   // Timestamp físico
+// ==========================================
+// DECISION LEDGER RECORD
+// ==========================================
+// Prueba criptográfica inmutable de resoluciones de diseño.
+message DecisionRecord {
+    string decision_id = 1;
+    string rationale = 2;
+    string impact_blast_radius = 3;
+    
+    SixDimensionalContext context = 4; // Origen de la decisión
+    string target_causal_hash = 5;     // El nodo 4D-TES sobre el que recae el fallo
+    
+    string witness_hash = 6;           // Firma criptográfica del auditor (Sentinel/PAH)
 }
 
 // Representa una lección aprendida tras un fallo o refactorización.
@@ -34,7 +39,107 @@ message Ambiguity {
 
 // Contenedor para exportación masiva o persistencia en frío.
 message SessionCrystallization {
-    repeated Decision decisions = 1;
+    repeated DecisionRecord decisions = 1;
     repeated Lesson lessons = 2;
     repeated Ambiguity ambiguities = 3;
+}
+
+// ==========================================
+// 6D-CONTEXT: THE DETERMINISTIC VECTOR
+// ==========================================
+// Un vector de coordenadas absolutas que no admite ambigüedad.
+// Si falta una coordenada, el validador emite un SegFault Lógico.
+message SixDimensionalContext {
+    // [3D Espacial] Coordenadas en el Grafo Ontológico
+    string locus_x = 1;       // ID del Bounded Context (ej. "domain.fabrication")
+    string locus_y = 2;       // ID del Aggregate Root (ej. "MemoryNode")
+    string locus_z = 3;       // ID de la Entidad Atómica (ej. "models.py")
+
+    // [1D Temporal] La Flecha del Tiempo
+    uint64 lamport_t = 4;     // Contador monotónico local de causalidad
+
+    // [1D Soberanía]
+    AuthorityLevel authority_a = 5; // Peso determinista en la resolución de conflictos
+
+    // [1D Causalidad Intencional]
+    IntentType intent_i = 6;  // Razón inmutable de la existencia del nodo
+}
+
+enum AuthorityLevel {
+    AUTHORITY_UNSPECIFIED = 0;
+    AGENT = 1;      // Operación de rutina
+    ENGINEER = 2;   // Refactor de capas bajas (L1-L4)
+    ARCHITECT = 3;  // Mutación topológica
+    OVERSEER = 4;   // L0 - Sistema base
+    HUMAN = 5;      // PAH (Override absoluto)
+}
+
+enum IntentType {
+    INTENT_UNSPECIFIED = 0;
+    OBSERVATION = 1;      // Lectura de estado (No altera el CausalHash general)
+    MUTATION = 2;         // Escritura/Refactor
+    RESOLUTION = 3;       // Cierre de ambigüedad (Jidoka)
+    CRYSTALLIZATION = 4;  // Creación de Skill/Regla
+}
+
+// ==========================================
+// 4D-TES: IMMUTABLE MEMORY NODE
+// ==========================================
+// Entrada atómica en el Event Sourcing. Mutar implica derivar una nueva rama.
+message MemoryNode4DTES {
+    string causal_hash = 1;       // SHA-256(parent_hash + payload_hash + 6d_context)
+    string parent_hash = 2;       // Puntero criptográfico al nodo anterior (Merkle-like)
+    
+    SixDimensionalContext context = 3; // Coordenadas absolutas de génesis
+    
+    bytes payload = 4;            // Excitación inmutable (Zstd compressed JSON o AST)
+    string payload_hash = 5;      // Verificación de integridad del payload aislado
+}
+
+// === Ledger de Sesión (Spec 36) ===
+// Captura el "Stream of Consciousness" efímero.
+message EgoState {
+    string agent_id = 1;
+    uint64 tick = 2;
+    string thought_vector = 3;          // Representación latente o descripción en texto
+    string action = 4;                  // Intención física o llamada a herramienta
+    SixDimensionalContext context = 5;  // Contexto en el momento de la inferencia
+}
+
+// === Ontological Certainty Map (Spec 42) ===
+// Cuantifica el determinismo de una capa.
+message LayerCertainty {
+    string layer_name = 1;              // ej. "L2_Brain", "L4_Edge"
+    float certainty_score = 2;          // [0.0 - 1.0]
+    bool is_terra_incognita = 3;        // Código sin representación en doc
+    uint32 tests_passing = 4;
+}
+
+message OntologicalMap {
+    repeated LayerCertainty layers = 1;
+    google.protobuf.Timestamp updated_at = 2;
+}
+
+// === A2A Discovery Protocol (Spec 37) ===
+// Latidos (Heartbeats) emitidos a NATS para presencia.
+message AgentPresenceHeartbeat {
+    string agent_id = 1;
+    repeated string expertise_tags = 2; // Skills registradas (Spec 28)
+    float current_load = 3;             // Saturación cognitiva [0.0 - 1.0]
+    string authority_level = 4;         // Delegación de capa base
+}
+
+// ==========================================
+// CRYSTALLIZED SKILL (PROCEDURAL MEMORY)
+// ==========================================
+// Habilidad destilada con proveniencia causal inquebrantable (Spec 38)
+message CrystallizedSkill {
+    string skill_id = 1;
+    string yaml_payload = 2; // El contrato YAML ejecutable
+    
+    // Proveniencia: Lista de nodos 4D-TES que originaron este aprendizaje
+    repeated string source_causal_hashes = 3; 
+    
+    // Firma criptográfica que previene tampering de la habilidad
+    string skill_hash = 4;
 }

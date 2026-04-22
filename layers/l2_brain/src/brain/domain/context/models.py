@@ -1,36 +1,41 @@
 from enum import Enum
 from pydantic import BaseModel, Field
-from typing import Tuple
+from typing import Tuple, List
 
 class AuthorityLevel(str, Enum):
-    HUMAN = "HUMAN"
-    OVERSEER = "OVERSEER"
-    ARCHITECT = "ARCHITECT"
-    ENGINEER = "ENGINEER"
+    AUTHORITY_UNSPECIFIED = "AUTHORITY_UNSPECIFIED"
     AGENT = "AGENT"
+    ENGINEER = "ENGINEER"
+    ARCHITECT = "ARCHITECT"
+    OVERSEER = "OVERSEER"
+    HUMAN = "HUMAN"
 
-class Vector6D(BaseModel):
+class IntentType(str, Enum):
+    INTENT_UNSPECIFIED = "INTENT_UNSPECIFIED"
+    OBSERVATION = "OBSERVATION"
+    MUTATION = "MUTATION"
+    RESOLUTION = "RESOLUTION"
+    CRYSTALLIZATION = "CRYSTALLIZATION"
+
+class SixDimensionalContext(BaseModel):
     """
     6D-Context Model (Spec 12)
-    V = {x, y, z, t, w, a}
+    V = {x, y, z, t, a, i}
+    Alineado con proto/dummie/v2/memory.proto
     """
-    # Spatial Dimensions
-    x: float = Field(..., description="Eje X: Dimensión espacial 1")
-    y: float = Field(..., description="Eje Y: Dimensión espacial 2")
-    z: float = Field(..., description="Eje Z: Dimensión espacial 3")
-    
-    # Temporal Dimension
-    t: int = Field(..., description="Eje t: Reloj de Lamport (Tiempo lógico)")
-    
-    # Semantic Relevance
-    w: float = Field(..., ge=0.0, le=1.0, description="Eje w: Relevancia semántica [0.0, 1.0]")
-    
-    # Authority Level
-    a: AuthorityLevel = Field(..., description="Eje a: Nivel de autoridad")
+    locus_x: str = Field(..., description="ID del Bounded Context")
+    locus_y: str = Field(..., description="ID del Aggregate Root")
+    locus_z: str = Field(..., description="ID de la Entidad Atómica")
+    lamport_t: int = Field(..., ge=0, description="Contador monotónico local de causalidad")
+    authority_a: AuthorityLevel = Field(AuthorityLevel.AGENT, description="Peso determinista")
+    intent_i: IntentType = Field(..., description="Razón inmutable de existencia")
 
-    def immutable_core(self) -> Tuple[float, float, float, int]:
-        """Returns the immutable dimensions (x, y, z, t)"""
-        return (self.x, self.y, self.z, self.t)
+    def immutable_core(self) -> Tuple[str, str, str, int, str]:
+        """Returns the immutable dimensions (x, y, z, t, i)"""
+        return (self.locus_x, self.locus_y, self.locus_z, self.lamport_t, self.intent_i.value)
 
-    def is_highly_relevant(self) -> bool:
-        return self.w > 0.8
+    def compute_context_hash(self) -> str:
+        """Helper para el cálculo de CausalHash"""
+        import hashlib
+        core_str = f"{self.locus_x}|{self.locus_y}|{self.locus_z}|{self.lamport_t}|{self.intent_i.value}|{self.authority_a.value}"
+        return hashlib.sha256(core_str.encode('utf-8')).hexdigest()

@@ -37,6 +37,31 @@ La persistencia física reside en `.aiwg/memory/loci.db`:
 
 ---
 
+## 4. Formal Contract Boundary (CausalHash Enforced)
+Para garantizar el determinismo y la soberanía criptográfica, la actualización in-place de la memoria está prohibida. Toda mutación debe generar un nuevo nodo en el DAG:
+
+```protobuf
+// ==========================================
+// 4D-TES: IMMUTABLE MEMORY NODE
+// ==========================================
+message MemoryNode4DTES {
+    // SHA-256(parent_hash + payload_hash + 6d_context)
+    string causal_hash = 1;       
+    // Puntero criptográfico al nodo anterior (Merkle-like)
+    string parent_hash = 2;       
+    
+    // Coordenadas absolutas de génesis
+    SixDimensionalContext context = 3; 
+    
+    // Excitación inmutable (Zstd compressed JSON o AST)
+    bytes payload = 4;            
+    // Verificación de integridad del payload aislado
+    string payload_hash = 5;      
+}
+```
+
+---
+
 ## [MSA] Sibling Components Requeridos
 Todo documento maestro debe ir acompañado de sus archivos hermanos para convertirse en una *Active Architectural Fitness Function*:
 - **Executable Contract:** [02_memory_engine_4d_tes.feature](./02_memory_engine_4d_tes.feature)

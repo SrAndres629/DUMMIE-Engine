@@ -4,7 +4,7 @@
   "storage": {
     "ledger_path": "ledger/sovereign_resolutions.jsonl",
     "format": "JSONL_APPEND_ONLY",
-    "required_fields": ["tick", "id", "resolution", "witness_hash"]
+    "required_fields": ["tick", "decision_id", "rationale", "impact", "context", "target_causal_hash", "witness_hash"]
   },
   "invariants": {
     "immutable_ledger": true,

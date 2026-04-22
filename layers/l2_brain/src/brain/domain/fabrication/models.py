@@ -34,10 +34,12 @@ class DesignStation(BaseModel):
     active_blueprint: str
     assigned_skills: List[SkillDefinition]
 
-class AgentDiscovery(BaseModel):
+class AgentPresenceHeartbeat(BaseModel):
     """
     Protocolo de Descubrimiento A2A (Spec 37)
     """
     agent_id: str
-    capabilities: List[str]
+    expertise_tags: List[str]
+    current_load: float = Field(..., ge=0.0, le=1.0)
+    authority_level: str
     status: str = "AVAILABLE"
