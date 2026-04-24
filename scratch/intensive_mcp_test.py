@@ -11,7 +11,7 @@ async def run_intensive_test():
     """
     server_params = StdioServerParameters(
         command="python",
-        args=["/home/jorand/Escritorio/DUMMIE Engine/layers/l1_nervous/adapters/mcp/server.py"],
+        args=["/home/jorand/Escritorio/DUMMIE Engine/layers/l1_nervous/mcp_server.py"],
         env={"PYTHONPATH": "/home/jorand/Escritorio/DUMMIE Engine/layers/l2_brain/src"}
     )
 

@@ -3,14 +3,14 @@
 Este servidor actúa como el adaptador universal (USB-C) del **DUMMIE Engine**, permitiendo que agentes externos (Gemini, Claude, GPT) interactúen con la memoria soberana y el núcleo cognitivo (L2 Brain).
 
 ## 1. Conexión
-El servidor se lanza mediante el wrapper `mcp_wrapper.sh`. En entornos como **Claude Desktop**, configure el servidor con el siguiente comando:
+El servidor oficial se lanza directamente desde `layers/l1_nervous/mcp_server.py`. En entornos como **Claude Desktop**, configure el servidor con el siguiente comando:
 
 ```json
 {
   "mcpServers": {
     "dummie-brain": {
-      "command": "/bin/bash",
-      "args": ["/home/jorand/Escritorio/DUMMIE Engine/layers/l1_nervous/adapters/mcp/mcp_wrapper.sh"]
+      "command": "/home/jorand/Escritorio/DUMMIE Engine/layers/l2_brain/.venv/bin/python",
+      "args": ["/home/jorand/Escritorio/DUMMIE Engine/layers/l1_nervous/mcp_server.py"]
     }
   }
 }

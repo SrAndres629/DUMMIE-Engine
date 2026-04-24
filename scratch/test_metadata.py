@@ -3,7 +3,6 @@ import sys
 
 # Set up PYTHONPATH
 sys.path.append("/home/jorand/Escritorio/DUMMIE Engine/layers/l2_brain/src")
-sys.path.append("/home/jorand/Escritorio/DUMMIE Engine/layers/l1_nervous/adapters/mcp")
 
 from brain.infrastructure.adapters.kuzu_repository import KuzuRepository
 from brain.infrastructure.adapters.ledger_adapter import DecisionLedgerAdapter

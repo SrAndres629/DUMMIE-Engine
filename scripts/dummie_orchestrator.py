@@ -55,7 +55,7 @@ class DummieOrchestrator:
                     "args": [
                         str(self.root_dir / "scripts" / "mcp_wrapper.sh"),
                         str(self.root_dir / "layers" / "l1_nervous" / ".venv" / "bin" / "python"),
-                        str(self.root_dir / "layers" / "l1_nervous" / "adapters" / "mcp" / "server.py")
+                        str(self.root_dir / "layers" / "l1_nervous" / "mcp_server.py")
                     ],
                     "env": {
                         "DUMMIE_SESSION_ID": session_id,

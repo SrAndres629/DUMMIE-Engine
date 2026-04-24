@@ -11,9 +11,9 @@
   "venv": ".venv",
   "executionEnvironments": [
     {
-      "root": "layers/l1_nervous/adapters/mcp",
+      "root": "layers/l1_nervous",
       "extraPaths": [
-        "../../l2_brain/src"
+        "layers/l2_brain/src"
       ]
     }
   ]

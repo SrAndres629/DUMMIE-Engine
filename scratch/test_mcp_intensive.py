@@ -7,7 +7,7 @@ from mcp.client.stdio import stdio_client
 async def test_mcp():
     server_params = StdioServerParameters(
         command="/home/jorand/Escritorio/DUMMIE Engine/layers/l2_brain/.venv/bin/python",
-        args=["/home/jorand/Escritorio/DUMMIE Engine/layers/l1_nervous/adapters/mcp/server.py"],
+        args=["/home/jorand/Escritorio/DUMMIE Engine/layers/l1_nervous/mcp_server.py"],
         env={**os.environ, 
              "DUMMIE_ROOT_DIR": "/home/jorand/Escritorio/DUMMIE Engine",
              "DUMMIE_AIWG_DIR": "/home/jorand/Escritorio/DUMMIE Engine/.aiwg",
