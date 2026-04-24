@@ -5,28 +5,35 @@ status: "DRAFT"
 layer: "L4"
 last_verified_on: "2026-04-24"
 ---
-
 # Palacio de Loci y RBAC Topográfico
 
 ## Purpose
-Definir el contrato tecnico minimo de esta capacidad para el sistema actual.
+Definir el contrato operativo de esta capacidad y su relación con el estado físico vigente.
 
 ## Current State
-Implementacion en transicion; requiere consolidacion de contrato.
+Capacidad en transición; requiere consolidación progresiva de contratos y pruebas.
 
 ## Physical Evidence
+- `doc/specs/18_loci_ontology_mapping.md`
+- `doc/specs/18_loci_ontology_mapping.feature`
+- `doc/specs/18_loci_ontology_mapping.rules.json`
 - `layers/l4_edge`
-- `layers/l1_nervous/mcp_proxy.py`
+- `doc/CORE_SPEC.md`
+- `doc/PHYSICAL_MAP.md`
 
-## Gaps
-- Falta trazabilidad fina entre contrato y pruebas de conformidad.
-- Existen diferencias historicas entre narrativa anterior y estado fisico actual.
+## Contract Invariants
+- `status` debe estar dentro del conjunto permitido por `doc/CORE_SPEC.md`.
+- Los artefactos hermanos (`.feature`, `.rules.json`) deben existir junto a la spec.
+- Toda referencia en `Physical Evidence` debe resolver a una ruta real del repositorio.
 
-## Next Actions
-1. Mantener este contrato alineado con el codigo real de su capa.
-2. Agregar o ajustar pruebas de conformidad para validar este contrato.
-3. Actualizar `doc/CORE_SPEC.md` y `doc/PHYSICAL_MAP.md` cuando cambie el alcance.
+## Verification
+```bash
+python3 scripts/validate_specs_docs.py --check doc/specs/18_loci_ontology_mapping.md
+```
 
-## Sibling Artifacts
-- `./18_loci_ontology_mapping.feature`
-- `./18_loci_ontology_mapping.rules.json`
+## Traceability
+| Invariant | Evidence | Verification |
+| --- | --- | --- |
+| Estado permitido | `doc/CORE_SPEC.md` + frontmatter de esta spec | `python3 scripts/validate_specs_docs.py --check doc/specs/18_loci_ontology_mapping.md` |
+| Artefactos hermanos presentes | `doc/specs/18_loci_ontology_mapping.feature` y `doc/specs/18_loci_ontology_mapping.rules.json` | `python3 scripts/validate_specs_docs.py --check doc/specs/18_loci_ontology_mapping.md` |
+| Evidencia física existente | sección `Physical Evidence` | `python3 scripts/validate_specs_docs.py --check doc/specs/18_loci_ontology_mapping.md` |

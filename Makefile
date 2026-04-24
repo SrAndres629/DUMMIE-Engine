@@ -1,7 +1,7 @@
 # Makefile - DUMMIE Engine Sovereign Orquestration
 # Based on Spec 08 - One-Click Deployment
 
-.PHONY: all proto-gen build-l0 build-l1 build-l2 build-l3 build-l4 clean factory-reset
+.PHONY: all proto-gen build-l0 build-l1 build-l2 build-l3 build-l4 clean factory-reset docs-check
 
 LOCAL_BIN = $(HOME)/.local/bin
 export PATH := $(LOCAL_BIN):$(HOME)/go/bin:$(PATH)
@@ -79,9 +79,16 @@ build-l4:
 ready:
 	@echo "=== Verificando Integridad de la Fábrica (SDD) ==="
 	@python3 doc/04_forge/sdd_validator.py
+	@echo "=== Verificando Contratos de Documentación y Specs ==="
+	@python3 scripts/validate_specs_docs.py
 	@echo "=== Verificando Registro de Engranajes ==="
 	@cat shared/gear_registry.json | jq .version
 	@echo "[✓] DUMMIE Engine listo para operaciones."
+
+docs-check:
+	@echo "=== Validando documentación y specs ==="
+	@python3 scripts/validate_specs_docs.py
+	@echo "[✓] Documentación validada."
 
 factory-reset: clean all
 

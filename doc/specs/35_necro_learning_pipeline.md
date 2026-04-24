@@ -5,28 +5,35 @@ status: "DRAFT"
 layer: "L5"
 last_verified_on: "2026-04-24"
 ---
-
 # Pipeline de Necro-Learning
 
 ## Purpose
-Definir el contrato tecnico minimo de esta capacidad para el sistema actual.
+Definir el contrato operativo de esta capacidad y su relación con el estado físico vigente.
 
 ## Current State
-Implementacion en transicion; requiere consolidacion de contrato.
+Capacidad en transición; requiere consolidación progresiva de contratos y pruebas.
 
 ## Physical Evidence
+- `doc/specs/35_necro_learning_pipeline.md`
+- `doc/specs/35_necro_learning_pipeline.feature`
+- `doc/specs/35_necro_learning_pipeline.rules.json`
 - `layers/l5_muscle`
-- `layers/l1_nervous/tools.py`
+- `doc/CORE_SPEC.md`
+- `doc/PHYSICAL_MAP.md`
 
-## Gaps
-- Falta trazabilidad fina entre contrato y pruebas de conformidad.
-- Existen diferencias historicas entre narrativa anterior y estado fisico actual.
+## Contract Invariants
+- `status` debe estar dentro del conjunto permitido por `doc/CORE_SPEC.md`.
+- Los artefactos hermanos (`.feature`, `.rules.json`) deben existir junto a la spec.
+- Toda referencia en `Physical Evidence` debe resolver a una ruta real del repositorio.
 
-## Next Actions
-1. Mantener este contrato alineado con el codigo real de su capa.
-2. Agregar o ajustar pruebas de conformidad para validar este contrato.
-3. Actualizar `doc/CORE_SPEC.md` y `doc/PHYSICAL_MAP.md` cuando cambie el alcance.
+## Verification
+```bash
+python3 scripts/validate_specs_docs.py --check doc/specs/35_necro_learning_pipeline.md
+```
 
-## Sibling Artifacts
-- `./35_necro_learning_pipeline.feature`
-- `./35_necro_learning_pipeline.rules.json`
+## Traceability
+| Invariant | Evidence | Verification |
+| --- | --- | --- |
+| Estado permitido | `doc/CORE_SPEC.md` + frontmatter de esta spec | `python3 scripts/validate_specs_docs.py --check doc/specs/35_necro_learning_pipeline.md` |
+| Artefactos hermanos presentes | `doc/specs/35_necro_learning_pipeline.feature` y `doc/specs/35_necro_learning_pipeline.rules.json` | `python3 scripts/validate_specs_docs.py --check doc/specs/35_necro_learning_pipeline.md` |
+| Evidencia física existente | sección `Physical Evidence` | `python3 scripts/validate_specs_docs.py --check doc/specs/35_necro_learning_pipeline.md` |

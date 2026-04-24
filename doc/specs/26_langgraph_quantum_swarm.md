@@ -9,25 +9,34 @@ last_verified_on: "2026-04-24"
 # Orquestador de Enjambre Cuántico (Go StateGraph)
 
 ## Purpose
-Sustituir la orquestación lineal y frágil por un sistema de ejecución paralelo basado en Grafos de Estado (StateGraph), permitiendo la multiplicidad de agentes y la resolución por consenso o velocidad.
+Sustituir la orquestación lineal por ejecución paralela basada en StateGraph para habilitar fan-out/fan-in y selección de línea de ejecución más eficiente.
 
-## Architecture
-- **State (Floating Session State):** Objeto en Go que viaja por el grafo, clonándose en ramificaciones paralelas.
-- **Nodes (Agentes):** Funciones asíncronas en Go que ejecutan tareas específicas.
-- **Quantum Merge:** Lógica de fusión que selecciona la mejor línea de tiempo (time-to-success) y consolida el estado.
+## Current State
+Diseño de roadmap con prototipo local en L0; aún no está integrado como ruta operativa principal del pipeline de ejecución.
 
-## Implementation Details (Go)
-- **Path:** `layers/l0_overseer/internal/orchestrator/graph.go`
-- **Concurrency:** Goroutines + `sync.WaitGroup` para el Fan-out.
-- **Sovereignty:** Cada rama puede operar en un `Shadow Worktree` independiente.
+## Physical Evidence
+- `doc/specs/26_langgraph_quantum_swarm.md`
+- `doc/specs/26_langgraph_quantum_swarm.feature`
+- `doc/specs/26_langgraph_quantum_swarm.rules.json`
+- `layers/l0_overseer/internal/orchestrator/graph.go`
+- `layers/l0_overseer/cmd/swarm/main.go`
+- `doc/CORE_SPEC.md`
+- `doc/PHYSICAL_MAP.md`
 
-## Success Evidence (Audit 2026-04-24)
-Ejecución exitosa del comando `swarm` demostrando:
-1. Planificación centralizada.
-2. Ejecución paralela de estrategias (Aggressive vs Conservative).
-3. Fusión atómica del estado final basada en la primera respuesta válida.
+## Contract Invariants
+- El `status` de la spec debe permanecer en estados permitidos por `doc/CORE_SPEC.md`.
+- El prototipo StateGraph debe mantener semántica de ejecución paralela (`runParallel`) y merge determinista.
+- La evidencia física debe permanecer en rutas Go de L0 y en artefactos hermanos de la spec.
 
-## Next Steps
-1. Integración con el `SkillIngester`.
-2. Implementación de `Juez Node` para evaluación semántica de resultados paralelos.
-3. Conexión con el Brain (L2) vía gRPC.
+## Verification
+```bash
+python3 scripts/validate_specs_docs.py --check doc/specs/26_langgraph_quantum_swarm.md
+go test ./layers/l0_overseer/internal/orchestrator/... ./layers/l0_overseer/cmd/swarm/...
+```
+
+## Traceability
+| Invariant | Evidence | Verification |
+| --- | --- | --- |
+| Estado permitido | frontmatter + `doc/CORE_SPEC.md` | `python3 scripts/validate_specs_docs.py --check doc/specs/26_langgraph_quantum_swarm.md` |
+| Paralelismo y merge | `layers/l0_overseer/internal/orchestrator/graph.go` | `go test ./layers/l0_overseer/internal/orchestrator/...` |
+| Integración de prototipo | `layers/l0_overseer/cmd/swarm/main.go` | `go test ./layers/l0_overseer/cmd/swarm/...` |

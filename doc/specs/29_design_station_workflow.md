@@ -5,29 +5,35 @@ status: "DRAFT"
 layer: "L2"
 last_verified_on: "2026-04-24"
 ---
-
 # Arquitectura de la Estación de Diseño (Workflow)
 
 ## Purpose
-Definir el contrato tecnico minimo de esta capacidad para el sistema actual.
+Definir el contrato operativo de esta capacidad y su relación con el estado físico vigente.
 
 ## Current State
-Implementacion en transicion; requiere consolidacion de contrato.
+Capacidad en transición; requiere consolidación progresiva de contratos y pruebas.
 
 ## Physical Evidence
+- `doc/specs/29_design_station_workflow.md`
+- `doc/specs/29_design_station_workflow.feature`
+- `doc/specs/29_design_station_workflow.rules.json`
 - `layers/l2_brain`
-- `.aiwg`
-- `governance/session_context.json`
+- `doc/CORE_SPEC.md`
+- `doc/PHYSICAL_MAP.md`
 
-## Gaps
-- Falta trazabilidad fina entre contrato y pruebas de conformidad.
-- Existen diferencias historicas entre narrativa anterior y estado fisico actual.
+## Contract Invariants
+- `status` debe estar dentro del conjunto permitido por `doc/CORE_SPEC.md`.
+- Los artefactos hermanos (`.feature`, `.rules.json`) deben existir junto a la spec.
+- Toda referencia en `Physical Evidence` debe resolver a una ruta real del repositorio.
 
-## Next Actions
-1. Mantener este contrato alineado con el codigo real de su capa.
-2. Agregar o ajustar pruebas de conformidad para validar este contrato.
-3. Actualizar `doc/CORE_SPEC.md` y `doc/PHYSICAL_MAP.md` cuando cambie el alcance.
+## Verification
+```bash
+python3 scripts/validate_specs_docs.py --check doc/specs/29_design_station_workflow.md
+```
 
-## Sibling Artifacts
-- `./29_design_station_workflow.feature`
-- `./29_design_station_workflow.rules.json`
+## Traceability
+| Invariant | Evidence | Verification |
+| --- | --- | --- |
+| Estado permitido | `doc/CORE_SPEC.md` + frontmatter de esta spec | `python3 scripts/validate_specs_docs.py --check doc/specs/29_design_station_workflow.md` |
+| Artefactos hermanos presentes | `doc/specs/29_design_station_workflow.feature` y `doc/specs/29_design_station_workflow.rules.json` | `python3 scripts/validate_specs_docs.py --check doc/specs/29_design_station_workflow.md` |
+| Evidencia física existente | sección `Physical Evidence` | `python3 scripts/validate_specs_docs.py --check doc/specs/29_design_station_workflow.md` |

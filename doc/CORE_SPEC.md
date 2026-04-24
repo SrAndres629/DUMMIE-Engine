@@ -43,3 +43,8 @@
 
 ## Criterio de mantenimiento
 Si cambia una spec (estado, nombre o ubicación), este índice se actualiza en el mismo lote.
+Antes de cerrar el lote documental, ejecutar:
+
+```bash
+python3 scripts/validate_specs_docs.py
+```
