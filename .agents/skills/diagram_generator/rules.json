@@ -1,0 +1,18 @@
+{
+  "invariants": {
+    "max_nodes": 50,
+    "forbidden_tags": ["<script>", "<iframe>", "javascript:"],
+    "enforce_hexagonal_colors": true,
+    "allowed_formats": ["mermaid", "svg", "png"]
+  },
+  "styling": {
+    "theme": "dark",
+    "primary_color": "#00d1ff",
+    "secondary_color": "#ff00d1",
+    "font_family": "Inter, Roboto"
+  },
+  "error_thresholds": {
+    "syntax_errors_max": 2,
+    "recovery_strategy": "AUTO_REPAIR"
+  }
+}

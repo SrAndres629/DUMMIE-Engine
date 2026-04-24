@@ -2,17 +2,17 @@
   "layers": {
     "sw.plant.orchestrator": {
       "layer_name": "sw.plant.orchestrator",
-      "certainty_score": 0.37857142857142856,
+      "certainty_score": 0.6363636363636364,
       "is_terra_incognita": false,
-      "tests_passing": 3,
-      "unverified_mutations": 5
+      "tests_passing": 7,
+      "unverified_mutations": 4
     },
     "sw.strategy.discovery": {
       "layer_name": "sw.strategy.discovery",
-      "certainty_score": 0.5214285714285714,
+      "certainty_score": 0.39444444444444443,
       "is_terra_incognita": false,
       "tests_passing": 4,
-      "unverified_mutations": 4
+      "unverified_mutations": 6
     },
     "sw.qa.auditor": {
       "layer_name": "sw.qa.auditor",
@@ -22,5 +22,5 @@
       "unverified_mutations": 7
     }
   },
-  "updated_at": "2026-04-24T05:25:03.188092"
+  "updated_at": "2026-04-24T05:41:49.862113"
 }

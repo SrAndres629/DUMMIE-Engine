@@ -1,3 +1,11 @@
+import sys
+import builtins
+_original_print = builtins.print
+def _stderr_print(*args, **kwargs):
+    kwargs.setdefault("file", sys.stderr)
+    _original_print(*args, **kwargs)
+builtins.print = _stderr_print
+
 import os
 import json
 import hashlib
@@ -162,8 +170,9 @@ async def log_lesson(issue: str, correction: str) -> str:
     )
     orchestrator.lessons_use_case.execute_error(
         context=context,
-        error=Exception(f"Issue: {issue} | Correction: {correction}"),
-        tick=orchestrator.lamport_clock
+        error=Exception(issue),
+        tick=orchestrator.lamport_clock,
+        correction=correction
     )
     return f"[L1-MCP] Lección registrada exitosamente en .aiwg"
 

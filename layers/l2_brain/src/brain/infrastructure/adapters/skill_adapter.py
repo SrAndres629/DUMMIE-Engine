@@ -39,7 +39,7 @@ class KuzuSkillRepository(ISkillRepositoryPort):
                 f"KùzuDB está en modo read-only (posible lock de otro proceso) para {self.db_path}"
             )
         self.conn.execute(
-            "INSERT INTO Skill(skill_id, yaml_payload, skill_hash) VALUES ($id, $payload, $hash)",
+            "CREATE (s:Skill {skill_id: $id, yaml_payload: $payload, skill_hash: $hash})",
             {"id": skill.skill_id, "payload": skill.yaml_payload, "hash": skill.skill_hash},
         )
 

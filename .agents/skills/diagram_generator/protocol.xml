@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SkillProtocol id="sw.arch.diagram_generator" version="1.0.0">
+    <DataStructures>
+        <Structure name="C4Component">
+            <Field name="id" type="string" required="true" pattern="[a-zA-Z0-9_]+" />
+            <Field name="label" type="string" required="true" />
+            <Field name="type" type="enum">
+                <Option>PERSON</Option>
+                <Option>SYSTEM</Option>
+                <Option>CONTAINER</Option>
+                <Option>COMPONENT</Option>
+                <Option>DATABASE</Option>
+            </Field>
+            <Field name="description" type="string" required="false" />
+        </Structure>
+        <Structure name="Relationship">
+            <Field name="from" type="string" required="true" />
+            <Field name="to" type="string" required="true" />
+            <Field name="label" type="string" required="false" />
+            <Field name="technology" type="string" required="false" />
+        </Structure>
+    </DataStructures>
+</SkillProtocol>

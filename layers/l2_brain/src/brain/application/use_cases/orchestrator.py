@@ -1,4 +1,5 @@
 import json
+import hashlib
 from datetime import datetime
 from typing import Optional, List, Union
 from brain.application.interfaces import IBrainOrchestrator
@@ -30,7 +31,9 @@ class CognitiveOrchestrator(IBrainOrchestrator):
         self.session_ledger = session_ledger
         self.skill_repo = skill_repo
         self.mode = mode
-        self.lamport_clock = 0
+        # Recuperar el tick máximo del Event Store (Spec 02 - Causal Ordering)
+        # Esto previene la destrucción del ordenamiento causal tras reinicios.
+        self.lamport_clock = self._recover_lamport_clock()
         
         self.crystallize_use_case = CrystallizeProceduralMemoryUseCase(
             event_store=event_store,
@@ -40,6 +43,20 @@ class CognitiveOrchestrator(IBrainOrchestrator):
         self.lessons_use_case = CrystallizeLessonsUseCase(
             ledger_audit=ledger_audit
         )
+
+    def _recover_lamport_clock(self) -> int:
+        """Recupera el tick máximo del 4D-TES para garantizar monotonía causal (Spec 02)."""
+        try:
+            result = self.event_store.conn.execute(
+                "MATCH (m:MemoryNode4D) RETURN max(m.lamport_t)"
+            )
+            if result.has_next():
+                max_tick = result.get_next()[0]
+                if max_tick is not None:
+                    return int(max_tick)
+        except Exception as e:
+            print(f"[L2-Brain Orchestrator] Warning: Could not recover Lamport clock: {e}")
+        return 0
 
     async def handle_task(self, payload: Union[str, AgentIntent]) -> str:
         """
@@ -144,7 +161,6 @@ class CognitiveOrchestrator(IBrainOrchestrator):
         )
 
     def _compute_hash(self, intent: AgentIntent, parent_hash: str) -> str:
-        content = f"{intent.intent_type}{intent.target}{parent_hash}{self.lamport_clock}"
+        """Computa el hash causal incluyendo rationale para unicidad (Spec 02)."""
+        content = f"{intent.intent_type}{intent.target}{parent_hash}{self.lamport_clock}{intent.rationale}"
         return hashlib.sha256(content.encode()).hexdigest()
-
-import hashlib

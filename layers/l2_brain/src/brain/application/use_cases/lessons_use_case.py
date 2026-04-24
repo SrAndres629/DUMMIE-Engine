@@ -1,3 +1,5 @@
+import uuid
+import hashlib
 from brain.domain.context.models import SixDimensionalContext
 from brain.domain.governance.models import LessonRecord, AmbiguityRecord
 from brain.domain.memory.ports import ILedgerAuditPort
@@ -10,14 +12,21 @@ class CrystallizeLessonsUseCase:
     def __init__(self, ledger_audit: ILedgerAuditPort):
         self.ledger_audit = ledger_audit
 
-    def execute_error(self, context: SixDimensionalContext, error: Exception, tick: int):
+    def execute_error(
+        self,
+        context: SixDimensionalContext,
+        error: Exception,
+        tick: int,
+        correction: str = None,
+        prevention: str = None
+    ):
         """Captura un fallo de ejecución como una lección aprendida."""
         lesson = LessonRecord(
-            lesson_id=f"LES-ERR-{tick}",
+            lesson_id=f"LES-{uuid.uuid4().hex[:8]}",
             tick=tick,
             issue=str(error),
-            correction="Identified via autonomous crystallization",
-            prevention="Enhance SDD validation at L2 boundary",
+            correction=correction or "Pending manual analysis",
+            prevention=prevention or "Enhance SDD validation at L2 boundary",
             context=context
         )
         self.ledger_audit.record_lesson(lesson)
@@ -32,10 +41,22 @@ class CrystallizeLessonsUseCase:
 
     def execute_ambiguity(self, context: SixDimensionalContext, ambiguity: str, plan: str):
         """Registra una ambigüedad descubierta durante la fabricación."""
+        # Hash único basado en contenido real + timestamp para evitar colisiones de ID
+        content_hash = hashlib.sha256(
+            f"{ambiguity}|{plan}|{uuid.uuid4().hex}".encode()
+        ).hexdigest()[:8]
+        
+        # Estimación de impacto basada en señales del contenido
+        impact = "HIGH" if any(kw in ambiguity.lower() for kw in [
+            "critical", "security", "data loss", "crash", "corruption",
+            "crítico", "seguridad", "pérdida", "corrupción"
+        ]) else "MEDIUM"
+        
         record = AmbiguityRecord(
-            ambiguity_id=f"AMB-{context.compute_context_hash()[:8]}",
+            ambiguity_id=f"AMB-{content_hash}",
             context=ambiguity,
             resolution_plan=plan,
-            impact_level="MEDIUM"
+            impact_level=impact
         )
         self.ledger_audit.record_ambiguity(record)
+
