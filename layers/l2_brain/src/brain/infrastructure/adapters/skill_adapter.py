@@ -19,13 +19,22 @@ class KuzuSkillRepository(ISkillRepositoryPort):
                 self.db = kuzu.Database(db_path)
             except RuntimeError as e:
                 if "Could not set lock on file" in str(e):
-                    self.db = kuzu.Database(db_path, read_only=True)
-                    self.read_only = True
+                    try:
+                        self.db = kuzu.Database(db_path, read_only=True)
+                        self.read_only = True
+                    except Exception:
+                        self.db = None
+                        self.read_only = True
                 else:
                     raise
-        self.conn = kuzu.Connection(self.db)
-        if not self.read_only:
-            self._init_schema()
+        
+        if self.db is not None:
+            self.conn = kuzu.Connection(self.db)
+            if not self.read_only:
+                self._init_schema()
+        else:
+            self.conn = None
+            self.read_only = True
 
     def _init_schema(self):
         try:

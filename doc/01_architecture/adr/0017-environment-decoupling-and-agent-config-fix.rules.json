@@ -1,0 +1,15 @@
+{
+  "adr_id": "0017",
+  "invariants": [
+    {
+      "rule": "L1_ISOLATED_VENV",
+      "description": "L1 Nervous must maintain its own virtual environment to avoid circular dependency with L2 Brain.",
+      "path": "layers/l1_nervous/.venv"
+    },
+    {
+      "rule": "VALID_MCP_TOOL_NAMES",
+      "description": "Agent configuration must use fully qualified MCP tool names.",
+      "pattern": "mcp_[a-z]+_[a-z]+"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+name: spec_compliance_skill
+description: "Audita la coherencia entre el código implementado y las especificaciones formales (OpenAPI, Proto, Zod). Asegura que no existan desviaciones del contrato."
+version: "2.0.0"
+capabilities:
+  - contract_validation: "Valida esquemas JSON/YAML contra el código."
+  - breaking_change_detection: "Identifica cambios que rompen la compatibilidad hacia atrás en las APIs."
+  - drift_analysis: "Detecta discrepancias entre la documentación y la realidad física del sistema."
+usage_guidelines:
+  - "Invocable por el 'formal-validator' antes de cualquier commit."
+  - "Requiere la ruta de la spec y el directorio de implementación."

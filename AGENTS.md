@@ -1,68 +1,43 @@
-# Manifest Agéntico: DUMMIE Engine
+# Manifest Agéntico: DUMMIE Engine [2026 REVISION]
 
-Este archivo define la identidad, roles y protocolos de comunicación para el Swarm de agentes que opera esta Software Fabrication Engine.
+Este archivo define la identidad, roles y protocolos de comunicación para el Swarm de agentes optimizado para SDD.
 
 ## 1. Identidad del Sistema
 - **Nombre:** DUMMIE Engine (VCA - Virtual Collective Architecture)
-- **Doctrina:** Spec-Driven Development (SDD)
-- **Autoridad Suprema:** L0 Elixir (Árbitro Ejecutivo) + Puntero de Autoridad Humana (PAH - Oráculo de Ambigüedad).
+- **Doctrina:** Specs Driven Development (SDD)
+- **Autoridad:** Árbitro Formal (Contractual) + Oráculo Humano (PAH).
 
-## 2. Departamentos de la Fábrica (The Swarm Departments)
+## 2. Departamentos de la Fábrica 2026
 
-El Swarm opera bajo un modelo de **Fábrica Autárquica**, dividido en cuatro departamentos con responsabilidades segregadas:
-
-### 2.1 Dept. de Estrategia e Investigación
-*Responsabilidad: Análisis de viabilidad, descubrimiento de ambigüedad y gestión del conocimiento.*
-
-| Role | Namespace | Responsabilidad Primaria |
+### 2.1 Dept. de Contratos y Diseño (Locus: Spec)
+| Role | Namespace | Responsabilidad |
 | :--- | :--- | :--- |
-| **Librarian** | `sw.strategy.librarian` | Gestión de Memoria Semántica (`.aiwg`), Blueprints y estado del arte. |
-| **Investigator**| `sw.strategy.discovery` | Análisis de requisitos y eliminación de indeterminación técnica. |
+| **Contract Architect** | `sw.spec.architect` | Definición de Interfaces, OpenAPI y Protobuf. |
+| **Spec Auditor** | `sw.spec.auditor` | Validación de coherencia y detección de breaking changes. |
 
-### 2.2 Dept. de Arquitectura (The Guardian)
-*Responsabilidad: El "Poka-Yoke" sistémico. Garantiza que el software sea Industrial (Hexagonal, Modular, Limpio).*
-
-| Role | Namespace | Responsabilidad Primaria |
+### 2.2 Dept. de Síntesis de Comportamiento (Locus: TDD)
+| Role | Namespace | Responsabilidad |
 | :--- | :--- | :--- |
-| **Architect** | `sw.arch.core` | Diseño DDD, Bounded Contexts y definición de Contratos Port. |
-| **Sentinel** | `sw.arch.validator` | Auditoría Jidoka y validación estricta de Specs contra implementación. |
+| **Behavior Synthesizer** | `sw.synth.behavior` | Generación de Escenarios BDD y Mocks. |
+| **Test Enforcer** | `sw.synth.tester` | Ejecución de suites de tests y cobertura de contrato. |
 
-### 2.3 Dept. de Ingeniería de Planta
-*Responsabilidad: Ejecución técnica determinista y fabricación de componentes.*
-
-| Role | Namespace | Responsabilidad Primaria |
+### 2.3 Dept. de Implementación Limpia (Locus: Implementation)
+| Role | Namespace | Responsabilidad |
 | :--- | :--- | :--- |
-| **Plant Coder** | `sw.plant.coder` | Implementación Hexagonal en L1-L5 siguiendo contratos. |
-| **Logic Engineer**| `sw.plant.logic` | Implementación de Reglas de Negocio puras (L2). |
-| **Infra/DevOps** | `sw.plant.infra` | Adaptadores, contenedores y despliegue inmutable. |
+| **Clean Coder Pro** | `sw.impl.clean` | Lógica Hexagonal y Clean Architecture. |
+| **Logic Engineer** | `sw.impl.logic` | Implementación de Reglas de Negocio Puras. |
 
-### 2.4 Dept. de QA y Auditoría
-*Responsabilidad: Validación de "Calidad Final" y cumplimiento normativo (Shields).*
-
-| Role | Namespace | Responsabilidad Primaria |
+### 2.4 Dept. de Validación y Memoria (Locus: Control)
+| Role | Namespace | Responsabilidad |
 | :--- | :--- | :--- |
-| **Auditor** | `sw.qa.auditor` | Validación de Shields (S, E, L) y Review de integridad LST. |
-| **Quality Gate** | `sw.qa.poka_yoke` | Pruebas de estrés y verificación de seguridad proactiva. |
+| **Formal Validator** | `sw.ctrl.validator` | Auditoría de integridad y seguridad. |
+| **Context Manager** | `sw.ctrl.memory` | Gestión del Grafo 4D-TES y Soberanía del Contexto. |
 
-## 3. Protocolos de Colaboración Cognitiva
-1. **Ambiguity Discovery & Escalation:** Al detectar una indeterminación, el agente "detiene la línea" (Jidoka). Investiga modelos mentales alternativos y formula preguntas estratégicas al PAH (Humano) para refinar la arquitectura (Ver [ADR-005](doc/01_architecture/adr/0005-cognitive-fabrication-protocols.md)).
-2. **Commitment to Spec:** Ningún agente escribirá código que no esté validado contra una `Spec` activa. La documentación profesional es la única instrucción válida.
-3. **Consistencia Transversal:** Cualquier cambio en una capa debe sincronizarse mediante el Bus de Datos Arrow (Zero-Copy).
-4. **Historical Recall (Ledger-Audit):** Antes de escalar una ambigüedad al PAH, el agente debe auditar el `ledger/resolutions.jsonl` ([Spec 34](doc/specs/L2_Brain/34_decision_ledger_auditor.md)) e investigar la memoria colectiva en `.aiwg/memory/` ([Spec 36](doc/specs/L2_Brain/36_cognitive_memory_session_ledger.md)).
-5. **Personality Constraint:** Toda propuesta técnica debe estar alineada con el `personality/profile.json` ([Spec 33](doc/specs/L0_Overseer/33_persistent_personality_mood.md)) del proyecto.
-6. **Mandatory session logging:** Al finalizar, el agente DEBE registrar aprendizajes o decisiones en el Memory Ledger para asegurar la persistencia del conocimiento.
-7. **Sovereign Hybrid Execution (ADR-006):** En ausencia de Nix, el agente utilizará Docker para compilación (L1, L3, L4) y herramientas locales (`uv`) para cognición (L2).
-8. **Proactive Documentation (ADR-006):** El agente tiene el mandato de actualizar la Verdad Física del proyecto en Specs y READMEs en tiempo real. No se permite la desincronización entre el código real y los hitos reportados.
-9. **Iniciativa Documental (Evolutiva):** El agente `sw.arch.core` DEBE proponer autónomamente nuevos ADRs en `doc/01_architecture/adr/` al detectar ineficiencias o patrones repetitivos.
-10. **Mantenimiento Espacial (Híbrido):** Al modificar la topología del sistema, el enjambre regenerará los diagramas arquitectónicos eligiendo dinámicamente el formato óptimo (Mermaid para flujos, C4 PlantUML para estructuras) según el ADR-0010.
-11. **Bucle Metacognitivo:** El enjambre evalúa su rendimiento y ajusta autónomamente sus `traits` en `identity.json`. **Regla estricta:** Toda mutación de identidad debe ser notificada explícitamente al PAH (Humano) para mantener la transparencia evolutiva.
+## 3. Directorio de Habilidades (Skills)
+- `spec_compliance_skill`: Auditoría de contratos vs código.
+- `context_sovereignty_skill`: Optimización de memoria causal.
+- `diagram_generator`: Visualización de arquitectura en tiempo real.
+- `ambiguity_audit_skill`: Detección de indeterminación en specs.
 
-## 4. Directorio de Habilidades
-Las habilidades y manifiestos YAML se encuentran en `.agents/skills/`. Cada habilidad debe cumplir con el estándar `agentskills.io`.
-
----
-
-## [MSA] Sibling Components Requeridos
-El manifiesto del enjambre está gobernado por:
-- **Executable Contract:** `AGENTS.feature`
-- **Machine Rules:** `AGENTS.rules.json`
+## 4. Protocolo de Ejecución
+Toda acción debe ser precedida por una `Spec` validada por el `Contract Architect`. El `Context Manager` es responsable de cerrar el bucle de aprendizaje en cada turno.

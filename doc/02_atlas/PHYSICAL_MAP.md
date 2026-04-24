@@ -31,6 +31,7 @@ El monorepo sigue una política de **Sustrato Dividido** (Spec 48) para mantener
 ├── layers/
 │   ├── l0_overseer/   # Elixir (Arbiter) - Supervisión OTP
 │   ├── l1_nervous/    # Go (Nervous) - Reloj de Lamport y NATS Bridge
+│   │   └── .venv/     # Isolated environment for L1 (Decoupling exception)
 │   ├── l2_brain/      # Python (Brain) - Razonamiento PydanticAI
 │   ├── l3_shield/     # Rust (Shield) - Validación PyO3
 │   └── l4_edge/       # Zig (Edge) - Escáner LST
@@ -45,7 +46,7 @@ El monorepo sigue una política de **Sustrato Dividido** (Spec 48) para mantener
 
 ### 2.2. Unidad D (Bloatware y Persistencia)
 Ubicación: `/media/datasets/dummie/`
-- `venvs/`: Entornos virtuales de Python.
+- `venvs/`: Entornos virtuales globales de Python (Shared).
 - `build_artifacts/`: Binarios de Rust y Zig.
 - `uv_cache/`, `go_cache/`, `mix_cache/`: Repositorios de dependencias externas.
 - `telemetry/`: Bus de datos **Apache Arrow** (Zero-Copy).

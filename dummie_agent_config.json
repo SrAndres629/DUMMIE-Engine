@@ -1,17 +1,22 @@
 {
   "mcpServers": {
-    "dummie-nervous-adapter": {
-      "command": "/home/jorand/Escritorio/DUMMIE Engine/layers/l2_brain/.venv/bin/python",
+    "dummie-brain-adapter": {
+      "command": "/home/jorand/Escritorio/DUMMIE Engine/layers/l1_nervous/.venv/bin/python",
       "args": [
         "/home/jorand/Escritorio/DUMMIE Engine/layers/l1_nervous/adapters/mcp/server.py"
       ],
       "env": {
         "DUMMIE_ROOT_DIR": "/home/jorand/Escritorio/DUMMIE Engine",
         "DUMMIE_AIWG_DIR": "/home/jorand/Escritorio/DUMMIE Engine/.aiwg",
-        "DUMMIE_KUZU_DB_PATH": "/home/jorand/Escritorio/DUMMIE Engine/.aiwg/memory/loci_agent.db",
-        "PYTHONPATH": "/home/jorand/Escritorio/DUMMIE Engine/layers/l2_brain/src:/home/jorand/Escritorio/DUMMIE Engine/layers/l1_nervous",
-        "PATH": "/home/jorand/.local/bin:/usr/local/bin:/usr/bin:/bin"
+        "DUMMIE_KUZU_DB_PATH": "/home/jorand/Escritorio/DUMMIE Engine/.aiwg/memory/loci.db",
+        "PYTHONPATH": "/home/jorand/Escritorio/DUMMIE Engine/layers/l2_brain/src:/home/jorand/Escritorio/DUMMIE Engine/layers/l1_nervous"
       }
+    },
+    "local-ssh-context": {
+      "command": "/bin/bash",
+      "args": [
+        "/home/jorand/Escritorio/DUMMIE Engine/layers/l1_nervous/adapters/mcp/ssh_sandbox_wrapper.sh"
+      ]
     },
     "memory": {
       "command": "node",

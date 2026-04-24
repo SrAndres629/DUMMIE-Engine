@@ -1,0 +1,10 @@
+name: context_sovereignty_skill
+description: "Gestiona la persistencia cognitiva y la soberanía del contexto en el grafo 4D-TES. Optimiza la recuperación de recuerdos relevantes."
+version: "1.0.0"
+capabilities:
+  - 4d_tes_optimization: "Indexa eventos en las 4 dimensiones (Espacio, Tiempo, Entropía, Topología)."
+  - causal_linkage: "Asegura que cada nuevo recuerdo esté correctamente anclado a su predecesor causal."
+  - entropy_reduction: "Limpia ruidos y redundancias en la memoria de la sesión."
+usage_guidelines:
+  - "Invocable por el 'context-memory-manager' al finalizar cada ciclo MAD."
+  - "Fundamental para mantener la coherencia en sesiones de larga duración."

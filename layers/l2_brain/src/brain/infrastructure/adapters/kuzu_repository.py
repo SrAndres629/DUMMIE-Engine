@@ -20,6 +20,10 @@ class KuzuRepository(IEventStorePort, IStructuralAnalysisPort):
         
         if db is not None:
             self.db = db
+        elif db_path is None:
+            # Modo explícitamente desconectado
+            self.db = None
+            self.read_only = True
         else:
             db_dir = os.path.dirname(self.db_path)
             if db_dir:
@@ -32,14 +36,22 @@ class KuzuRepository(IEventStorePort, IStructuralAnalysisPort):
                 # arrancamos en modo read-only para que el servidor no "muera" en bootstrap.
                 # Las operaciones de escritura deben fallar explícitamente.
                 if "Could not set lock on file" in str(e):
-                    self.db = kuzu.Database(self.db_path, read_only=True)
-                    self.read_only = True
+                    try:
+                        self.db = kuzu.Database(self.db_path, read_only=True)
+                        self.read_only = True
+                    except Exception:
+                        self.db = None
+                        self.read_only = True
                 else:
                     raise
         
-        self.conn = kuzu.Connection(self.db)
-        if not self.read_only:
-            self._initialize_schema()
+        if self.db is not None:
+            self.conn = kuzu.Connection(self.db)
+            if not self.read_only:
+                self._initialize_schema()
+        else:
+            self.conn = None
+            self.read_only = True
 
     def _initialize_schema(self):
         """Inicializa las tablas y relaciones si no existen (Spec 02)."""

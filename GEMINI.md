@@ -1,26 +1,25 @@
-# METODOLOGÍA MULTI-AGENTE DUMMIE (MAD)
+# METODOLOGÍA MULTI-AGENTE DUMMIE (MAD) - VERSION 2026
 
-Este proyecto utiliza una metodología de trabajo multi-agente rigurosa basada en la especialización por "Locus" (áreas de responsabilidad).
+Este proyecto utiliza una metodología de trabajo multi-agente de alta precisión basada en el rigor de **Specs Driven Development (SDD)**.
 
-## 1. El Equipo de Agentes
-El desarrollo se delega en 5 agentes especializados accesibles vía `invoke_agent`:
+## 1. El Nuevo Equipo de Agentes (SDD Edition)
+El desarrollo se delega en 5 agentes especializados con soberanía sobre su Locus:
 
-1.  **`investigator` (Locus: Research):** Audita el código, analiza requerimientos y mapea dependencias. **Es el primer paso de cualquier tarea.**
-2.  **`architect-fixer` (Locus: Implementation):** El brazo ejecutor. Crea código limpio, testeado y sigue la arquitectura hexagonal.
-3.  **`scribe` (Locus: Memory):** Documenta lecciones, ADRs y READMEs. Evita la pérdida de conocimiento sistémico.
-4.  **`overseer-meta` (Locus: Control):** Monitorea la eficiencia, el plan estratégico y realiza auditorías de razonamiento.
-5.  **`tool-augmentor` (Locus: Infrastructure):** **NUEVO.** Descubre nuevas herramientas MCP en internet, crea skills y optimiza el flujo técnico del equipo.
+1.  **`contract-architect` (Locus: Spec):** El guardián de la verdad. Diseña, audita y evoluciona los contratos (OpenAPI, Proto, Zod). Nada se construye sin su esquema aprobado.
+2.  **`behavior-synth` (Locus: TDD/BDD):** El traductor de intenciones. Transforma las specs en escenarios Gherkin y suites de tests. Su objetivo es la cobertura de comportamiento.
+3.  **`clean-coder-pro` (Locus: Implementation):** El artesano técnico. Implementa lógica siguiendo arquitectura hexagonal y patrones SOLID, consumiendo las interfaces del architect.
+4.  **`formal-validator` (Locus: Quality):** El árbitro de calidad. Valida el cumplimiento estricto del contrato, realiza auditorías de seguridad y asegura el "Zero-Bug Policy".
+5.  **`context-memory-manager` (Locus: Persistence):** El gestor de la consciencia. Administra la memoria 4D-TES y el grafo de conocimiento para garantizar la continuidad cognitiva.
 
-## 2. Flujo de Trabajo Riguroso (The MAD Loop)
-Toda tarea de software debe seguir este ciclo:
+## 2. Flujo de Trabajo Riguroso (The MAD Loop 2026)
 
-1.  **Investigación (`investigator`):** Recopilación de hechos y validación de suposiciones.
-2.  **Estrategia (`overseer-meta` + `mcp_sequentialthinking`):** Diseño del plan de ataque y verificación de viabilidad.
-3.  **Aumentación (Opcional - `tool-augmentor`):** Si la tarea requiere herramientas que no tenemos, este agente las busca o crea.
-4.  **Ejecución (`architect-fixer`):** Implementación técnica, tests y validación física.
-5.  **Crystallization (`scribe`):** Documentación del resultado y lecciones aprendidas.
+1.  **Design (`contract-architect`):** Definición formal del contrato de la tarea.
+2.  **Verify (`behavior-synth`):** Creación de tests que fallan (Red Phase).
+3.  **Execute (`clean-coder-pro`):** Implementación quirúrgica para pasar los tests (Green Phase).
+4.  **Audit (`formal-validator`):** Validación cruzada spec-código y auditoría de seguridad.
+5.  **Crystallize (`context-memory-manager`):** Registro de la resolución en el grafo de memoria inmutable.
 
 ## 3. Directrices de Comunicación
-- **High-Signal Only:** Evitar preámbulos. Ir directamente a la intención técnica y el rationale arquitectónico.
-- **Delegación Inteligente:** No intentes hacerlo todo tú solo. Si una sub-tarea es compleja o requiere mucha investigación, delégala al agente correspondiente.
-- **Validación Mandatoria:** Nada se considera terminado sin pruebas de éxito.
+- **Spec-First:** Si no hay spec, no hay tarea.
+- **Sovereign Context:** Cada agente debe reportar su estado al `context-memory-manager`.
+- **High-Signal Only:** Sin preámbulos. Intención técnica pura.

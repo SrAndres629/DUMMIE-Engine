@@ -1,17 +1,10 @@
-import sys
-import builtins
-_original_print = builtins.print
-def _stderr_print(*args, **kwargs):
-    kwargs.setdefault("file", sys.stderr)
-    _original_print(*args, **kwargs)
-builtins.print = _stderr_print
-
 import os
 import json
 import hashlib
 import atexit
 import signal
 import sys
+import logging
 import kuzu
 from mcp.server.fastmcp import FastMCP
 from brain.domain.context.models import SixDimensionalContext, AuthorityLevel, IntentType as ContextIntent
@@ -28,6 +21,14 @@ from brain.infrastructure.adapters.skill_adapter import KuzuSkillRepository
 mcp = FastMCP("DUMMIE-Brain-Adapter", 
               dependencies=["kuzu", "pydantic", "zstd", "mcp"])
 
+# Configurar logging para redirigir a stderr (estándar MCP)
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    stream=sys.stderr
+)
+logger = logging.getLogger("dummie-mcp")
+
 # 2. Infrastructure Setup (Bootstrap)
 # NOTA: En una arquitectura más madura, este setup se inyectaría desde un punto de entrada global.
 # Siguiendo la "Logic Zero Policy", este archivo solo actúa como el canal físico.
@@ -36,21 +37,36 @@ AIWG_DIR = os.environ.get("DUMMIE_AIWG_DIR", os.path.join(ROOT_DIR, ".aiwg"))
 KUZU_DB_PATH = os.environ.get("DUMMIE_KUZU_DB_PATH", os.path.join(AIWG_DIR, "memory/loci.db"))
 
 def bootstrap_orchestrator():
-    # Inicializar la base de datos una sola vez para compartirla entre repositorios (Spec 02/38)
-    # Esto evita bloqueos internos de E/S en KùzuDB.
+    """
+    Inicializa el orquestador cognitivo con una política de resiliencia ante bloqueos (Spec L1-15).
+    """
     db = None
     read_only = False
+    
     try:
+        # Intento 1: Modo Master (Escritura)
         db = kuzu.Database(KUZU_DB_PATH)
+        logger.info(f"Master instance initialized at {KUZU_DB_PATH}")
     except RuntimeError as e:
-        if "Could not set lock on file" in str(e):
-            db = kuzu.Database(KUZU_DB_PATH, read_only=True)
-            read_only = True
+        error_msg = str(e)
+        if "Could not set lock on file" in error_msg or "Permission denied" in error_msg:
+            try:
+                # Intento 2: Fallback a modo lectura (Spec L1-15, Sec 6.1)
+                logger.warning(f"Lock active on {KUZU_DB_PATH}. Attempting READER mode.")
+                db = kuzu.Database(KUZU_DB_PATH, read_only=True)
+                read_only = True
+            except Exception as e2:
+                # Intento 3: Modo Desconectado (Resiliencia Extrema)
+                logger.critical(f"Database totally locked/inaccessible. Operating in OFFLINE mode. Error: {str(e2)}")
+                db = None
+                read_only = True
         else:
+            logger.error(f"Unexpected DB error during bootstrap: {error_msg}")
             raise
 
-    event_store = KuzuRepository(db_path=KUZU_DB_PATH, db=db)
-    if read_only:
+    event_store = KuzuRepository(db_path=KUZU_DB_PATH if db else None, db=db)
+    # Forzar el flag si db es None o read_only
+    if read_only or db is None:
         event_store.read_only = True
         
     ledger_audit = DecisionLedgerAdapter(
@@ -62,8 +78,8 @@ def bootstrap_orchestrator():
     session_ledger = SessionLedgerAdapter(ledger_path=os.path.join(AIWG_DIR, "memory/ego_state.jsonl"))
     shield = NativeShieldAdapter()
     
-    skill_repo = KuzuSkillRepository(db_path=KUZU_DB_PATH, db=db)
-    if read_only:
+    skill_repo = KuzuSkillRepository(db_path=KUZU_DB_PATH if db else None, db=db)
+    if read_only or db is None:
         skill_repo.read_only = True
 
     return CognitiveOrchestrator(
@@ -109,8 +125,11 @@ async def calibrate_neural_links() -> str:
     """
     results = []
     # 1. Verificar Kùzu (Memory)
-    node_count = orchestrator.event_store.conn.execute("MATCH (n) RETURN count(n)").get_next()[0]
-    results.append(f"[✓] Loci Graph Alive: {node_count} nodes detected.")
+    if getattr(orchestrator.event_store, "db", None) is None:
+        results.append("[!] Loci Graph: OFFLINE (Database locked).")
+    else:
+        node_count = orchestrator.event_store.conn.execute("MATCH (n) RETURN count(n)").get_next()[0]
+        results.append(f"[✓] Loci Graph Alive: {node_count} nodes detected.")
     
     # 2. Verificar Ledger (Identity)
     if os.path.exists(orchestrator.ledger_audit.ledger_path):
@@ -121,6 +140,7 @@ async def calibrate_neural_links() -> str:
     # 3. Clock Sync
     results.append(f"[✓] Lamport Clock: {orchestrator.lamport_clock}")
     
+    logger.info("Neural link calibration completed.")
     return "\n".join(results)
 
 @mcp.tool()
@@ -130,7 +150,8 @@ async def metacognitive_status() -> str:
     """
     decisions = get_recent_decisions()
     identity = get_brain_identity()
-    return f"--- Metacognitive Report ---\nIdentity: {identity}\nRecent Decisions: {decisions}\n---"
+    status = "Degraded" if getattr(orchestrator.event_store, "read_only", False) else "Optimal"
+    return f"--- Metacognitive Report ---\nStatus: {status}\nIdentity: {identity}\nRecent Decisions: {decisions}\n---"
 
 @mcp.tool()
 async def crystallize(payload: str, context: dict) -> str:
@@ -138,6 +159,9 @@ async def crystallize(payload: str, context: dict) -> str:
     Punto de entrada único para la persistencia de conocimiento validado en el 4D-TES.
     Mapea a la capacidad física de orquestación de tareas (Spec 02).
     """
+    if getattr(orchestrator.event_store, "read_only", False):
+        return "[L1-MCP] ERR_MEMORY_LOCKED: El sistema de memoria está en modo lectura por bloqueo de otra instancia (MASTER)."
+
     # Extraer metadatos del contexto si existen
     authority = context.get("authority", AuthorityLevel.HUMAN)
     locus = context.get("locus", "sw.strategy.discovery")
@@ -152,6 +176,7 @@ async def crystallize(payload: str, context: dict) -> str:
         locus_x=locus
     )
     result = await orchestrator.handle_task(intent)
+    logger.info(f"Crystallization success: {result}")
     return f"[L1-MCP] Cristalización completada: {result}"
 
 @mcp.tool()
@@ -160,6 +185,9 @@ async def log_lesson(issue: str, correction: str) -> str:
     Registra una lección aprendida tras un fallo o descubrimiento.
     Implementa la política de captura de conocimiento de la Spec 48.
     """
+    if getattr(orchestrator.event_store, "read_only", False):
+        return "[L1-MCP] ERR_MEMORY_LOCKED: No se puede registrar la lección. Memoria bloqueada."
+
     context = SixDimensionalContext(
         locus_x="sw.strategy.discovery",
         locus_y="L1_TRANSPORT",
@@ -182,6 +210,9 @@ async def resolve_ambiguity(ambiguity: str, plan: str) -> str:
     Registra una ambigüedad descubierta y el plan para resolverla.
     Activa el protocolo de cierre cognitivo (Spec 49).
     """
+    if getattr(orchestrator.event_store, "read_only", False):
+        return "[L1-MCP] ERR_MEMORY_LOCKED: No se puede registrar la ambigüedad. Memoria bloqueada."
+
     context = SixDimensionalContext(
         locus_x="sw.strategy.discovery",
         locus_y="AMBIGUITY_RESOLVER",
@@ -217,6 +248,44 @@ async def brain_ping() -> str:
     """Diagnóstico básico del estado del motor."""
     return f"[L1-MCP] Engine Alive. Layer: L1-Adapter. Clock: {orchestrator.lamport_clock}"
 
+@mcp.tool()
+async def ssh_grep(pattern: str, path: str = ".", include: str = "*") -> str:
+    """
+    Ejecuta una búsqueda optimizada (grep) a través del bridge SSH (Spec 41).
+    Ideal para 'low-entropy reading' de grandes volúmenes de código sin saturar el contexto.
+    """
+    import asyncio
+    import subprocess
+    
+    # Propagación de contexto (Spec 41/12)
+    env = os.environ.copy()
+    env["DUMMIE_CONTEXT_T"] = str(orchestrator.lamport_clock)
+    
+    # Comando grep vía SSH (Simulado mediante ejecución local protegida por el bridge)
+    # En una implementación física completa, esto usaría la conexión SSH establecida.
+    cmd = ["grep", "-rnI", "--include", include, pattern, os.path.join(ROOT_DIR, path)]
+    
+    try:
+        process = await asyncio.create_subprocess_exec(
+            *cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            env=env
+        )
+        stdout, stderr = await process.communicate()
+        
+        if process.returncode != 0 and not stdout:
+            return f"No se encontraron coincidencias para '{pattern}' en {path}."
+            
+        # Aplicar el Causal Pruning si el output es demasiado grande
+        lines = stdout.decode().splitlines()
+        if len(lines) > 50:
+            return "\n".join(lines[:50]) + f"\n... (Truncated: {len(lines) - 50} more lines. Use more specific pattern or subpath)"
+            
+        return stdout.decode()
+    except Exception as e:
+        return f"Error ejecutando SSH-Grep: {str(e)}"
+
 # --- RESOURCES ---
 
 @mcp.resource("brain://identity")
@@ -231,14 +300,20 @@ def get_brain_identity() -> str:
 @mcp.resource("memory://decisions")
 def get_recent_decisions() -> str:
     """Lee las últimas resoluciones del Ledger de Decisiones (Spec 34)."""
-    path = os.path.join(AIWG_DIR, "ledger/sovereign_resolutions.jsonl")
+    path = orchestrator.ledger_audit.ledger_path
     if not os.path.exists(path): return "No decisions found."
     with open(path, "r") as f:
         return "".join(f.readlines()[-10:])
 
 @mcp.resource("memory://timeline")
 def get_memory_timeline() -> str:
-    """Stream de eventos inmutables del 4D-TES (Spec 02)."""
+    """
+    Stream de eventos inmutables del 4D-TES (Spec 02).
+    Aplica Causal Pruning (Spec 40B): limita el historial a los últimos 50 nodos.
+    """
+    if orchestrator.event_store.conn is None:
+        return "Memory Timeline: OFFLINE (No database connection)."
+    
     results = orchestrator.event_store.conn.execute(
         "MATCH (m:MemoryNode4D) RETURN m.lamport_t, m.causal_hash, m.intent_i ORDER BY m.lamport_t DESC LIMIT 50"
     )
@@ -251,16 +326,24 @@ def get_memory_timeline() -> str:
 @mcp.resource("memory://loci")
 def get_memory_loci() -> str:
     """Acceso al grafo de relaciones ontológicas (Palacio de Loci)."""
+    if orchestrator.event_store.conn is None:
+        return json.dumps({"status": "Offline", "reason": "Database locked"}, indent=2)
+
     # Resumen estadístico del grafo
-    node_results = orchestrator.event_store.conn.execute("MATCH (n) RETURN labels(n), count(*)")
     nodes_summary = []
-    while node_results.has_next():
-        nodes_summary.append(node_results.get_next())
-        
-    rel_results = orchestrator.event_store.conn.execute("MATCH ()-[r]->() RETURN label(r), count(*)")
     rels_summary = []
-    while rel_results.has_next():
-        rels_summary.append(rel_results.get_next())
+    
+    try:
+        node_results = orchestrator.event_store.conn.execute("MATCH (n) RETURN labels(n), count(*)")
+        while node_results.has_next():
+            nodes_summary.append(node_results.get_next())
+            
+        rel_results = orchestrator.event_store.conn.execute("MATCH ()-[r]->() RETURN label(r), count(*)")
+        while rel_results.has_next():
+            rels_summary.append(rel_results.get_next())
+    except Exception as e:
+        logger.error(f"Error inspecting loci topology: {e}")
+        return json.dumps({"status": "Error", "reason": str(e)}, indent=2)
         
     return json.dumps({
         "status": "Healthy",
@@ -274,6 +357,9 @@ def get_memory_loci() -> str:
 @mcp.resource("memory://latest_node")
 def get_latest_memory_node() -> str:
     """Retorna el último nodo 4D-TES persistido, incluyendo coordenadas 6D (Spec 02)."""
+    if orchestrator.event_store.conn is None:
+        return json.dumps({"status": "Offline", "db_path": KUZU_DB_PATH}, indent=2)
+
     result = orchestrator.event_store.conn.execute(
         "MATCH (m:MemoryNode4D) "
         "RETURN "
@@ -322,6 +408,23 @@ def get_active_specs_list() -> str:
             if file.endswith(".md"):
                 specs_list.append(file)
     return "\n".join(specs_list)
+
+@mcp.resource("brain://health")
+def get_brain_health() -> str:
+    """
+    Reporta el estado de salud del adaptador y la persistencia (Spec 15).
+    Identifica si la instancia está en modo MASTER o READER.
+    """
+    is_read_only = getattr(orchestrator.event_store, "read_only", False)
+    db_status = "READER (Degraded)" if is_read_only else "MASTER (Optimal)"
+    
+    return json.dumps({
+        "status": "Healthy",
+        "mode": db_status,
+        "kuzu_db": "Connected" if orchestrator.event_store.db else "Disconnected",
+        "ledger": "Available" if os.path.exists(orchestrator.ledger_audit.ledger_path) else "Missing",
+        "clock": orchestrator.lamport_clock
+    }, indent=2)
 
 if __name__ == "__main__":
     mcp.run()
