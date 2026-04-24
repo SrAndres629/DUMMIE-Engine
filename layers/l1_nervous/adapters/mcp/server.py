@@ -55,7 +55,7 @@ async def calibrate_neural_links() -> str:
     results = []
     try:
         # 1. Verificar Kùzu (Memory)
-        node_count = orchestrator.event_store.db.execute("MATCH (n) RETURN count(n)").get_next()[0]
+        node_count = orchestrator.event_store.conn.execute("MATCH (n) RETURN count(n)").get_next()[0]
         results.append(f"[✓] Loci Graph Alive: {node_count} nodes detected.")
         
         # 2. Verificar Ledger (Identity)
@@ -84,22 +84,27 @@ async def metacognitive_status() -> str:
         return f"Error en reporte metacognitivo: {str(e)}"
 
 @mcp.tool()
-async def crystallize_decision(decision: str, rationale: str) -> str:
+async def crystallize(payload: str, context: dict) -> str:
     """
-    Cristaliza una decisión técnica en el 4D-TES (L2).
-    Mapea a la capacidad física de orquestación de tareas.
+    Punto de entrada único para la persistencia de conocimiento validado en el 4D-TES.
+    Mapea a la capacidad física de orquestación de tareas (Spec 02).
     """
     try:
+        # Extraer metadatos del contexto si existen
+        authority = context.get("authority", AuthorityLevel.HUMAN)
+        locus = context.get("locus", "sw.strategy.discovery")
+        
         intent = AgentIntent(
             intent_type=FabricationIntent.RESOLUTION,
             target="L2_BRAIN",
-            rationale=f"Decision: {decision}. Rationale: {rationale}",
-            risk_score=0.2,
-            authority_a=AuthorityLevel.HUMAN,
-            intent_i=ContextIntent.RESOLUTION
+            rationale=f"Crystallization Request: {payload}",
+            risk_score=0.1,
+            authority_a=authority,
+            intent_i=ContextIntent.RESOLUTION,
+            locus_x=locus
         )
         result = await orchestrator.handle_task(intent)
-        return f"[L1-MCP] Decisión cristalizada con éxito: {result}"
+        return f"[L1-MCP] Cristalización completada: {result}"
     except Exception as e:
         return f"[L1-MCP] Error en cristalización: {str(e)}"
 
@@ -189,6 +194,39 @@ def get_recent_decisions() -> str:
     if not os.path.exists(path): return "No decisions found."
     with open(path, "r") as f:
         return "".join(f.readlines()[-10:])
+
+@mcp.resource("memory://timeline")
+def get_memory_timeline() -> str:
+    """Stream de eventos inmutables del 4D-TES (Spec 02)."""
+    try:
+        results = orchestrator.event_store.conn.execute(
+            "MATCH (m:MemoryNode4D) RETURN m.lamport_t, m.causal_hash, m.intent_i ORDER BY m.lamport_t DESC LIMIT 50"
+        )
+        events = []
+        while results.has_next():
+            row = results.get_next()
+            events.append(f"T={row[0]} | Hash={row[1]} | Intent={row[2]}")
+        return "\n".join(events) if events else "Timeline empty."
+    except Exception as e:
+        return f"Error reading timeline: {str(e)}"
+
+@mcp.resource("memory://loci")
+def get_memory_loci() -> str:
+    """Acceso al grafo de relaciones ontológicas (Palacio de Loci)."""
+    try:
+        # Resumen estadístico del grafo
+        nodes = orchestrator.event_store.conn.execute("MATCH (n) RETURN labels(n), count(*)").get_next()
+        rels = orchestrator.event_store.conn.execute("MATCH ()-[r]->() RETURN type(r), count(*)").get_next()
+        return json.dumps({
+            "status": "Healthy",
+            "topology": "Merkle-DAG",
+            "summary": {
+                "nodes": nodes,
+                "relationships": rels
+            }
+        }, indent=2)
+    except Exception as e:
+        return f"Error reading loci graph: {str(e)}"
 
 @mcp.resource("specs://active")
 def get_active_specs_list() -> str:

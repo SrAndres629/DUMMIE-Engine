@@ -13,6 +13,14 @@
         "PYTHONPATH": "/home/jorand/Escritorio/DUMMIE Engine/layers/l2_brain/src:/home/jorand/Escritorio/DUMMIE Engine/layers/l1_nervous/adapters/mcp",
         "PATH": "/home/jorand/.local/bin:/usr/local/bin:/usr/bin:/bin"
       }
+    },
+    "memory": {
+      "command": "node",
+      "args": ["@modelcontextprotocol/server-memory"]
+    },
+    "git": {
+      "command": "node",
+      "args": ["@modelcontextprotocol/server-git", "--repository", "/home/jorand/Escritorio/DUMMIE Engine"]
     }
   }
 }

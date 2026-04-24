@@ -1,0 +1,36 @@
+{
+  "engine": {
+    "name": "DUMMIE Engine System Pro",
+    "version": "2.0.0-alpha",
+    "status": "OPERATIONAL",
+    "layers": {
+      "L0": "Elixir/OTP (Substrate)",
+      "L1": "Go (Nervous System)",
+      "L2": "Python/LangGraph (Brain)",
+      "L3": "Rust (Shield)",
+      "L4": "Zig (Edge)",
+      "L5": "Mojo (Muscle)",
+      "L6": "TS/Tauri (Skin)"
+    }
+  },
+  "governance": {
+    "adr_compliance": true,
+    "sdd_validation": "STRICT",
+    "circuit_breaker": {
+      "ram_threshold_mb": 2048,
+      "cpu_threshold_percent": 85
+    }
+  },
+  "active_gears": [
+    "mem0",
+    "e2b",
+    "cube-sandbox",
+    "aider",
+    "code-bundler-pro",
+    "tree-sitter"
+  ],
+  "mcp_endpoints": {
+    "primary": "dummie-nervous-adapter",
+    "secondary": ["filesystem", "memory", "git", "sequentialthinking"]
+  }
+}

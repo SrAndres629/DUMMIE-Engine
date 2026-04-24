@@ -1,0 +1,59 @@
+{
+  "version": "1.0.0",
+  "gears": [
+    {
+      "id": "mem0",
+      "name": "Mem0",
+      "layer": "L2",
+      "type": "Cognitive Memory",
+      "resource_profile": "Medium",
+      "connectivity": "MCP",
+      "description": "Long-term episodic and semantic memory crystallization."
+    },
+    {
+      "id": "e2b",
+      "name": "E2B",
+      "layer": "L3",
+      "type": "Secure Sandbox",
+      "resource_profile": "Heavy",
+      "connectivity": "API/Cloud",
+      "description": "Cloud-based microVMs for long-running secure execution."
+    },
+    {
+      "id": "cube-sandbox",
+      "name": "Cube Sandbox",
+      "layer": "L3",
+      "type": "Local Sandbox",
+      "resource_profile": "Medium",
+      "connectivity": "CLI/Local",
+      "description": "Fast RustVMM-based local sandboxing for S-Shield validation."
+    },
+    {
+      "id": "aider",
+      "name": "Aider",
+      "layer": "L5",
+      "type": "Code Surgeon",
+      "resource_profile": "Light",
+      "connectivity": "CLI",
+      "description": "Git-aware pair programming and code editing."
+    },
+    {
+      "id": "code-bundler-pro",
+      "name": "Code Bundler Pro",
+      "layer": "L4",
+      "type": "Context Logistics",
+      "resource_profile": "Light",
+      "connectivity": "CLI",
+      "description": "Efficient file bundling for LLM context optimization."
+    },
+    {
+      "id": "tree-sitter",
+      "name": "Tree-sitter",
+      "layer": "L4",
+      "type": "LST Parser",
+      "resource_profile": "Light",
+      "connectivity": "Binary/FFI",
+      "description": "Incremental parsing for multi-language LST analysis."
+    }
+  ]
+}

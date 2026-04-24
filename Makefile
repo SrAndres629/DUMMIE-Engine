@@ -67,6 +67,14 @@ build-l4:
 	cd layers/l4_edge && zig build -Doptimize=ReleaseSafe
 	@echo "[✓] L4 compilado."
 
+# 7. Readiness Check (SDD Compliance)
+ready:
+	@echo "=== Verificando Integridad de la Fábrica (SDD) ==="
+	@python3 doc/04_forge/sdd_validator.py
+	@echo "=== Verificando Registro de Engranajes ==="
+	@cat shared/gear_registry.json | jq .version
+	@echo "[✓] DUMMIE Engine listo para operaciones."
+
 factory-reset: clean all
 
 clean:

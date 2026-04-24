@@ -173,18 +173,21 @@ class KuzuRepository(IEventStorePort, IStructuralAnalysisPort):
         result = self.conn.execute(query, {"ch": causal_hash})
         
         impacted_loci = []
+        total_nodes = 0
         while result.has_next():
             row = result.get_next()
+            count = row[2]
+            total_nodes += count
             impacted_loci.append({
                 "locus_x": row[0],
                 "locus_y": row[1],
-                "nodes_count": row[2]
+                "nodes_count": count
             })
             
         return {
             "root_hash": causal_hash,
-            "impact_level": "HIGH" if len(impacted_loci) > 5 else "LOW",
+            "impact_level": "HIGH" if total_nodes > 5 else "LOW",
             "impacted_loci": impacted_loci,
-            "total_impacted_nodes": len(impacted_loci)
+            "total_impacted_nodes": total_nodes
         }
 

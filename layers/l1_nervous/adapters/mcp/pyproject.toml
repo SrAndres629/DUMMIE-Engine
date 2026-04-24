@@ -16,5 +16,5 @@ dev-dependencies = [
 ]
 
 # Configuración de búsqueda de fuentes para permitir import brain.*
-[[tool.uv.sources]]
+[tool.uv.sources]
 brain = { path = "../../../l2_brain/src" }
