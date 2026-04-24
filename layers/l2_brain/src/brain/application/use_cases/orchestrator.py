@@ -60,6 +60,13 @@ class CognitiveOrchestrator(IBrainOrchestrator):
             print(f"[L2-Brain Orchestrator] Warning: Could not recover Lamport clock: {e}")
         return 0
 
+    def sync_clock(self, external_tick: int) -> None:
+        """Sincroniza el Reloj de Lamport local con el pulso sistémico (Spec 03)."""
+        if external_tick > self.lamport_clock:
+            old_tick = self.lamport_clock
+            self.lamport_clock = external_tick
+            print(f"[L2-Brain Orchestrator] Clock Synced: {old_tick} -> {self.lamport_clock}")
+
     async def handle_task(self, payload: Union[str, AgentIntent]) -> str:
         """
         Punto de entrada principal (Spec 21).

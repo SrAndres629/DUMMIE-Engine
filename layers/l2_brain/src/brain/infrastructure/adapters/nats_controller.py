@@ -5,6 +5,14 @@ from datetime import datetime
 from nats.errors import ConnectionClosedError, TimeoutError, NoServersError
 from brain.application.interfaces import IBrainOrchestrator
 
+# Protobuf imports for L1/L2 Causal Sync (Spec 03)
+# Note: Ensure the proto path is in PYTHONPATH
+try:
+    from proto.dummie.v2.memory_pb2 import MemoryNode4DTES
+except ImportError:
+    # Fallback if proto generation is not in standard path
+    MemoryNode4DTES = None
+
 class NatsController:
     def __init__(self, input_port: IBrainOrchestrator):
         self.input_port = input_port
@@ -42,7 +50,24 @@ class NatsController:
     async def listen_for_tasks(self):
         if not self.nc:
             return
-            
+
+        # 1. Escuchar el Pulso de Vida (L1 Heartbeats) para sincronía causal (Spec 03)
+        async def heartbeat_handler(msg):
+            if MemoryNode4DTES is None:
+                return
+            try:
+                node = MemoryNode4DTES()
+                node.ParseFromString(msg.data)
+                # Sincronizar Reloj de Lamport con L1
+                self.input_port.sync_clock(node.context.lamport_t)
+            except Exception as e:
+                # Silencioso para no inundar el log en heartbeats de alta frecuencia
+                pass
+
+        await self.nc.subscribe("core.v2.life.heartbeat.full", cb=heartbeat_handler)
+        print("[NatsController] Escuchando Pulso Causal (core.v2.life.heartbeat.full)")
+
+        # 2. Escuchar tareas de orquestación
         async def message_handler(msg):
             data = msg.data.decode()
             response = await self.input_port.handle_task(data)

@@ -9,3 +9,8 @@ class IBrainOrchestrator(ABC):
     async def handle_task(self, payload: str) -> str:
         """Procesa una tarea y retorna el estado de validación."""
         pass
+
+    @abstractmethod
+    def sync_clock(self, external_tick: int) -> None:
+        """Sincroniza el Reloj de Lamport con un pulso externo (Spec 02/03)."""
+        pass

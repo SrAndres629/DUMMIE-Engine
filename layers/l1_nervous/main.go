@@ -118,10 +118,23 @@ func (ns *NervousSystem) StartHeartbeat(ctx context.Context) {
 				Context:    contextObj,
 			}
 
-			// Telemetría con EventId (Spec 13)
+			// Generar Legacy EventId (Spec 10) para L0 Overseer
+			legacyEvent := &pb.EventId{
+				UniverseId:  ns.universeID,
+				BranchId:    "main",
+				LamportTick: tick,
+				Authority:   pb.AuthorityLevel_AGENT,
+			}
+
+			// Telemetría (Spec 13)
 			if ns.nc != nil {
-				data, _ := proto.Marshal(node)
-				ns.nc.Publish("core.v2.life.heartbeat", data)
+				// 1. Full Node para L2/L5
+				dataFull, _ := proto.Marshal(node)
+				ns.nc.Publish("core.v2.life.heartbeat.full", dataFull)
+				
+				// 2. Legacy EventId para L0 (Overseer Health Monitoring)
+				dataLegacy, _ := proto.Marshal(legacyEvent)
+				ns.nc.Publish("core.v2.life.heartbeat", dataLegacy)
 				
 				// Simulación de Registro Apache Arrow (Zero-Copy) en Unidad D
 				log.Printf("[%s] Pulse: CausalHash=%s (parent: %s) | LamportTick=%d", LayerName, causalHash[:8], ns.lastHash[:8], tick)
