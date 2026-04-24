@@ -54,7 +54,7 @@ message MemoryNode4DTES {
     // Coordenadas absolutas de génesis
     SixDimensionalContext context = 3; 
     
-    // Excitación inmutable (Zstd compressed JSON o LST)
+    // Excitación inmutable (Zstd compressed JSON o LST, codificado en Base64 en KùzuDB)
     bytes payload = 4;            
     // Verificación de integridad del payload aislado
     string payload_hash = 5;      

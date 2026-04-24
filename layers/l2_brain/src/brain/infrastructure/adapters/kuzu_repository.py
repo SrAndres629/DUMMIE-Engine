@@ -14,15 +14,32 @@ class KuzuRepository(IEventStorePort, IStructuralAnalysisPort):
     Implementación del repositorio 4D-TES utilizando KùzuDB (Spec 02).
     Soporta persistencia Merkle-DAG y análisis estructural de grafos.
     """
-    def __init__(self, db_path: str = ".aiwg/memory/loci.db"):
+    def __init__(self, db_path: str = ".aiwg/memory/loci.db", db: kuzu.Database = None):
         self.db_path = db_path
-        db_dir = os.path.dirname(self.db_path)
-        if db_dir:
-            os.makedirs(db_dir, exist_ok=True)
-            
-        self.db = kuzu.Database(self.db_path)
+        self.read_only = False
+        
+        if db is not None:
+            self.db = db
+        else:
+            db_dir = os.path.dirname(self.db_path)
+            if db_dir:
+                os.makedirs(db_dir, exist_ok=True)
+                
+            try:
+                self.db = kuzu.Database(self.db_path)
+            except RuntimeError as e:
+                # Si el DB está bloqueado por otro proceso (p. ej. otro MCP/cliente),
+                # arrancamos en modo read-only para que el servidor no "muera" en bootstrap.
+                # Las operaciones de escritura deben fallar explícitamente.
+                if "Could not set lock on file" in str(e):
+                    self.db = kuzu.Database(self.db_path, read_only=True)
+                    self.read_only = True
+                else:
+                    raise
+        
         self.conn = kuzu.Connection(self.db)
-        self._initialize_schema()
+        if not self.read_only:
+            self._initialize_schema()
 
     def _initialize_schema(self):
         """Inicializa las tablas y relaciones si no existen (Spec 02)."""
@@ -60,31 +77,36 @@ class KuzuRepository(IEventStorePort, IStructuralAnalysisPort):
 
     def append(self, node: MemoryNode4DTES) -> bool:
         """Persiste un nodo 4D-TES en el grafo."""
-        try:
-            # Asegurar que el payload son bytes para compresión (Spec 02)
-            raw_payload = node.payload
-            if isinstance(raw_payload, str):
-                raw_payload = raw_payload.encode('utf-8')
-                
-            compressed_payload = zstd.compress(raw_payload)
-            # Codificar en Base64 para persistencia como STRING (evita problemas de Binder con BLOB)
-            b64_payload = base64.b64encode(compressed_payload).decode('utf-8')
-            
-            query = """
-            CREATE (m:MemoryNode4D {
-                causal_hash: $ch, 
-                parent_hash: $ph, 
-                payload: $py, 
-                payload_hash: $pyh,
-                locus_x: $lx,
-                locus_y: $ly,
-                locus_z: $lz,
-                lamport_t: $lt,
-                authority_a: $aa,
-                intent_i: $ii
-            })
-            """
-            self.conn.execute(query, {
+        if self.read_only:
+            raise RuntimeError(
+                f"KùzuDB está en modo read-only (posible lock de otro proceso) para {self.db_path}"
+            )
+        # Asegurar que el payload son bytes para compresión (Spec 02)
+        raw_payload = node.payload
+        if isinstance(raw_payload, str):
+            raw_payload = raw_payload.encode("utf-8")
+
+        compressed_payload = zstd.compress(raw_payload)
+        # Codificar en Base64 para persistencia como STRING (evita problemas de Binder con BLOB)
+        b64_payload = base64.b64encode(compressed_payload).decode("utf-8")
+
+        query = """
+        CREATE (m:MemoryNode4D {
+            causal_hash: $ch,
+            parent_hash: $ph,
+            payload: $py,
+            payload_hash: $pyh,
+            locus_x: $lx,
+            locus_y: $ly,
+            locus_z: $lz,
+            lamport_t: $lt,
+            authority_a: $aa,
+            intent_i: $ii
+        })
+        """
+        self.conn.execute(
+            query,
+            {
                 "ch": node.causal_hash,
                 "ph": node.parent_hash,
                 "py": b64_payload,
@@ -94,19 +116,18 @@ class KuzuRepository(IEventStorePort, IStructuralAnalysisPort):
                 "lz": node.context.locus_z,
                 "lt": node.context.lamport_t,
                 "aa": node.context.authority_a,
-                "ii": node.context.intent_i
-            })
-            
-            # Crear arcos de causalidad (Spec 02)
-            if node.parent_hash != "GENESIS":
-                self.conn.execute(
-                    "MATCH (p:MemoryNode4D {causal_hash: $ph}), (c:MemoryNode4D {causal_hash: $ch}) CREATE (c)-[:CAUSED_BY]->(p)",
-                    {"ph": node.parent_hash, "ch": node.causal_hash}
-                )
-            return True
-        except Exception as e:
-            print(f"[KuzuRepository] Error al persistir nodo: {e}")
-            return False
+                "ii": node.context.intent_i,
+            },
+        )
+
+        # Crear arcos de causalidad (Spec 02)
+        if node.parent_hash != "GENESIS":
+            self.conn.execute(
+                "MATCH (p:MemoryNode4D {causal_hash: $ph}), (c:MemoryNode4D {causal_hash: $ch}) "
+                "CREATE (c)-[:CAUSED_BY]->(p)",
+                {"ph": node.parent_hash, "ch": node.causal_hash},
+            )
+        return True
 
     def get_by_hash(self, causal_hash: str) -> Optional[MemoryNode4DTES]:
         """Recupera un nodo por su hash causal."""
@@ -190,4 +211,3 @@ class KuzuRepository(IEventStorePort, IStructuralAnalysisPort):
             "impacted_loci": impacted_loci,
             "total_impacted_nodes": total_nodes
         }
-

@@ -6,7 +6,14 @@
       "is_terra_incognita": false,
       "tests_passing": 2,
       "unverified_mutations": 0
+    },
+    "sw.strategy.discovery": {
+      "layer_name": "sw.strategy.discovery",
+      "certainty_score": 0.5214285714285714,
+      "is_terra_incognita": false,
+      "tests_passing": 4,
+      "unverified_mutations": 4
     }
   },
-  "updated_at": "2026-04-22T06:28:15.976999"
+  "updated_at": "2026-04-24T05:11:13.334780"
 }

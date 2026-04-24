@@ -10,7 +10,8 @@ class IntentType(str, Enum):
     DELETE_FILE = "delete_file"
     EXECUTE_COMMAND = "execute_command"
     CREATE_AGENT = "create_agent"
-    MUTATION = "mutation" # Added for Spec 21/42
+    MUTATION = "mutation"
+    RESOLUTION = "resolution" # Fixed for Spec 21/42 crystallization
 
 class AgentIntent(BaseModel):
     """
