@@ -1,5 +1,8 @@
 import os
 import nats
+import json
+from datetime import datetime
+from nats.errors import ConnectionClosedError, TimeoutError, NoServersError
 from brain.application.interfaces import IBrainOrchestrator
 
 class NatsController:
@@ -15,6 +18,26 @@ class NatsController:
             print(f"[NatsController] Conectado a NATS en {nats_url}")
         except Exception as e:
             print(f"[NatsController] Error al conectar a NATS: {e}")
+
+    async def publish_event(self, subject: str, payload: bytes):
+        """Publica un evento en NATS."""
+        if self.nc and self.nc.is_connected:
+            await self.nc.publish(subject, payload)
+        else:
+            print(f"[NATSController] Error: No conectado. Omitiendo {subject}")
+
+    async def emit_heartbeat(self, agent_id: str, expertise: list):
+        """Emite latidos de presencia (Spec 37)."""
+        subject = "ao.v2.l2.brain.presence"
+        heartbeat = {
+            "agent_id": agent_id,
+            "expertise_tags": expertise,
+            "current_load": 0.1, # Mock
+            "authority_level": "AGENT",
+            "timestamp": datetime.utcnow().isoformat()
+        }
+        await self.publish_event(subject, json.dumps(heartbeat).encode())
+        print(f"[NATSController] Heartbeat emitido: {subject}")
 
     async def listen_for_tasks(self):
         if not self.nc:

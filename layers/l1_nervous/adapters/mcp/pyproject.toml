@@ -1,0 +1,20 @@
+[project]
+name = "dummie-l1-mcp"
+version = "0.1.0"
+description = "MCP Adapter for DUMMIE Nervous System (L1)"
+requires-python = ">=3.11"
+dependencies = [
+    "mcp[cli]>=1.0.0",
+    "kuzu>=0.11.3",
+    "pydantic>=2.0.0",
+    "zstd>=1.5.7.3",
+]
+
+[tool.uv]
+dev-dependencies = [
+    "pytest>=9.0.3",
+]
+
+# Configuración de búsqueda de fuentes para permitir import brain.*
+[[tool.uv.sources]]
+brain = { path = "../../../l2_brain/src" }

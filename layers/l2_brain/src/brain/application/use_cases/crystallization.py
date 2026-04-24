@@ -37,9 +37,15 @@ class CrystallizeProceduralMemoryUseCase:
         if certainty_score < 0.85: # Umbral definido en Spec 38
             raise ValueError(f"Certeza insuficiente ({certainty_score:.2f}) para cristalización en {context.locus_x}")
 
-        # [Destilación] Generación de la Skill
+        # [Destilación] Generación de la Skill (Spec 28)
         skill_id = f"SKILL-{context.compute_context_hash()[:8]}"
-        yaml_payload = f"spec_id: {skill_id}\nstatus: ACTIVE\nintent: CRYSTALLIZATION\norigin_locus: {context.locus_x}"
+        yaml_payload = f"""# X-AO-Skill-ID: {skill_id}
+# X-AO-Skill-Version: 1.0.0
+spec_id: {skill_id}
+status: ACTIVE
+intent: CRYSTALLIZATION
+origin_locus: {context.locus_x}
+"""
         
         # Proveniencia Causal (Audit Trace)
         source_hashes = [node.causal_hash for node in source_nodes]
@@ -61,6 +67,7 @@ class CrystallizeProceduralMemoryUseCase:
         # [Gobernanza] Registro inmutable del aprendizaje
         decision = DecisionRecord(
             decision_id=f"DEC-{skill_id}",
+            tick=context.lamport_t,
             rationale=f"Cristalización procedimental del locus {context.locus_x} (Certainty: {certainty_score:.2f})",
             impact_blast_radius="domain.procedural",
             context=context,

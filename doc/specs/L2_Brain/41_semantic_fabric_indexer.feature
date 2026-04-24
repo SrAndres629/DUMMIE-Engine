@@ -22,3 +22,5 @@ Feature: Semantic Fabric Integrity Check
     When el Indexador revisa las dependencias hacia las Specs
     And no encuentra ninguna Spec que justifique "RES-099"
     Then lanza una alerta "Orphaned Memory Detected" al Metacognitive Audit Loop
+
+  Performance Metric: index_time < 200ms

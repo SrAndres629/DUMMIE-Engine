@@ -12,7 +12,7 @@ tags: ["foundation", "cognitive_protocol", "memory_management"]
 # Protocolo de Ingesta y Cristalización Cognitiva
 
 ## Abstract
-Este protocolo rige cómo los agentes (L2 Brain) deben consumir y generar conocimiento dentro del DUMMIE Engine. Su misión es garantizar la soberanía de la información, evitar la duplicidad de errores y asegurar que todo aprendizaje sea cristalizado de forma determinista en el Ledger del sistema.
+Este protocolo rige cómo los agentes (L2 Brain) deben consumir y generar conocimiento dentro del DUMMIE Engine. Su misión es garantizar la soberanía de la información, evitar la duplicidad de errores y asegurar que todo aprendizaje sea cristalizado de forma determinista en el Ledger del sistema. **La comunicación se estandariza mediante MCP (Model Context Protocol), actuando como la interfaz universal (USB-C) entre el motor y los agentes.**
 
 ## 1. Cognitive Context Model (Ref)
 Para los invariantes técnicos del flujo de memoria, consulte el archivo hermano [COGNITIVE_PROTOCOL.rules.json](./COGNITIVE_PROTOCOL.rules.json).
@@ -27,6 +27,7 @@ Antes de realizar cualquier cambio físico en el monorepo, todo agente DEBE real
     -   `lessons.jsonl`: ¿Qué falló la última vez que alguien tocó esto?
     -   `ambiguities.jsonl`: ¿Qué dudas resolvió el PAH recientemente?
 3.  **Auditar Restricciones Arquitectónicas Activas (ADRs):** El agente Tech Lead (Nodo 3) **DEBE** procesar todos los archivos `.rules.json` en `doc/01_architecture/adr/`. Las reglas de los ADRs con estado `ACCEPTED` son vinculantes.
+4.  **Conexión vía MCP:** El agente debe inicializar su sesión conectándose al **DUMMIE Memory MCP Server**, que expone las herramientas de lectura/escritura para `.aiwg` y la base de datos de Loci.
 
 ---
 

@@ -1,5 +1,5 @@
 from pydantic import BaseModel, Field
-from typing import List, Optional
+from typing import List, Optional, Dict
 from datetime import datetime
 from brain.domain.context.models import SixDimensionalContext
 
@@ -32,19 +32,42 @@ class LayerCertainty(BaseModel):
 
 class OntologicalMap(BaseModel):
     """Spec 42: Mapa Ontológico del Sistema"""
-    layers: List[LayerCertainty] = Field(default_factory=list)
-    updated_at: datetime = Field(default_factory=datetime.utcnow)
+    layers: Dict[str, LayerCertainty] = Field(default_factory=dict)
+    updated_at: datetime = Field(default_factory=datetime.now)
 
 class DecisionRecord(BaseModel):
     """
     Decision Ledger Auditor (Spec 34)
     """
     decision_id: str
+    tick: int = Field(..., description="Lamport tick of the decision")
     rationale: str
     impact_blast_radius: str
     context: SixDimensionalContext
     target_causal_hash: str
     witness_hash: str = Field(..., description="Firma criptográfica del auditor (Sentinel/PAH)")
+    timestamp: datetime = Field(default_factory=datetime.utcnow)
+
+class LessonRecord(BaseModel):
+    """
+    Knowledge Crystallization Lesson (Spec 48)
+    """
+    lesson_id: str
+    tick: int
+    issue: str
+    correction: str
+    prevention: str
+    context: SixDimensionalContext
+    timestamp: datetime = Field(default_factory=datetime.utcnow)
+
+class AmbiguityRecord(BaseModel):
+    """
+    Ambiguity Discovery (Spec 48)
+    """
+    ambiguity_id: str
+    context: str
+    resolution_plan: str
+    impact_level: str
     timestamp: datetime = Field(default_factory=datetime.utcnow)
 
 class SemanticConsistencyCheck(BaseModel):

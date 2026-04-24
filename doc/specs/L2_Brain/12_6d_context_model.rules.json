@@ -14,7 +14,8 @@
     "immutable_dims": ["x", "y", "z", "t", "i"],
     "volatile_dims": ["a"],
     "lst_enforced": true,
-    "handshake_mandatory": true
+    "handshake_mandatory": true,
+    "mcp_transport": "context://current"
   },
   "enforcement": "STRICT_BLOCK",
   "personality_ref": "DE-V2-L0-33"

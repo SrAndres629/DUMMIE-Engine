@@ -4,7 +4,8 @@
   "mechanics": {
     "causality_model": "Lamport_Ticks",
     "fusion_logic": "Join_Semilattice",
-    "shm_format": "Apache_Arrow"
+    "shm_format": "Apache_Arrow",
+    "mcp_interface": "memory://timeline, memory://loci"
   },
   "metrics": {
     "decay_lambda": 0.8,

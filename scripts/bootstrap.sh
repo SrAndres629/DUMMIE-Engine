@@ -26,21 +26,44 @@ else
 fi
 
 # 3. Detect Local Runtimes
-echo "--- Local Toolchain Audit ---"
-command -v go >/dev/null 2>&1 && echo "[L1] Go: $(go version)" || echo "[L1] Go: MISSING"
-command -v elixir >/dev/null 2>&1 && echo "[L0] Elixir: $(elixir --version | grep Elixir)" || echo "[L0] Elixir: MISSING"
-command -v uv >/dev/null 2>&1 && echo "[L2] uv (Python): $(uv --version)" || echo "[L2] uv: MISSING"
+echo "--- Local Toolchain Audit (User-Space Priority) ---"
 
-# 4. Determine Execution Path (ADR-006)
+# Asegurar que ~/.local/bin esté en el PATH para el script
+export PATH="$HOME/.local/bin:$HOME/go/bin:$PATH"
+
+check_tool() {
+    local name=$1
+    local cmd=$2
+    if command -v "$cmd" >/dev/null 2>&1; then
+        echo "[$name] $cmd: $( "$cmd" version 2>&1 | head -n 1 || "$cmd" --version 2>&1 | head -n 1 )"
+    else
+        echo "[$name] $cmd: MISSING in PATH"
+    fi
+}
+
+check_tool "L1" "go"
+check_tool "L0" "elixir"
+check_tool "L2" "uv"
+check_tool "L3" "cargo"
+check_tool "L4" "zig"
+
+# 4. Determine Execution Path (ADR-006 & ADR-0014)
 if [ "$HAS_NIX" = true ]; then
     EXEC_PATH="NIX_NATIVE"
     echo ">> Recommendation: Use 'nix develop' for all builds."
 elif [ "$HAS_DOCKER" = true ]; then
-    EXEC_PATH="DOCKER_SOVEREIGN"
-    echo ">> Recommendation: Use 'Dockerfile.builder' for L0, L1, L3, L4 builds."
+    # Verificar si docker requiere sudo
+    if docker ps >/dev/null 2>&1; then
+        echo "[✓] Docker available WITHOUT sudo."
+        EXEC_PATH="DOCKER_SOVEREIGN"
+    else
+        echo "[!] Docker detected but requires SUDO or group membership."
+        echo "    Action: run 'sudo usermod -aG docker \$USER' and restart session."
+        EXEC_PATH="DOCKER_RESTRICTED"
+    fi
 else
-    EXEC_PATH="HOST_CONTAMINATED"
-    echo ">> WARNING: Host lacks hermeticity. Manual tool installation required (NOT RECOMMENDED)."
+    EXEC_PATH="HOST_USER_SPACE"
+    echo ">> Strategy: Falling back to User-Space tools (Zero-Sudo)."
 fi
 
 # 5. Export state to Session Context
@@ -50,7 +73,8 @@ cat <<EOF > governance/session_context.json
   "environment": {
     "has_nix": $HAS_NIX,
     "has_docker": $HAS_DOCKER,
-    "execution_path": "$EXEC_PATH"
+    "execution_path": "$EXEC_PATH",
+    "user_space_ready": $(command -v uv >/dev/null 2>&1 && echo true || echo false)
   },
   "physical_truth": {
     "l0_overseer": "SKELETAL",

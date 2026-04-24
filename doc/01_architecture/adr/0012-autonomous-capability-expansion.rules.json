@@ -1,0 +1,25 @@
+{
+  "rule_id": "DE-RULE-0012",
+  "title": "Restricciones para la Expansión de Capacidades",
+  "constraints": [
+    {
+      "id": "SEC-01",
+      "description": "Solo se permiten instalaciones locales (uvx, cargo, binaries) en unidades de datos autorizadas (ej. Unidad D).",
+      "severity": "CRITICAL"
+    },
+    {
+      "id": "EFF-01",
+      "description": "Toda nueva herramienta debe justificar un ahorro de tokens o una mejora medible en la precisión del código.",
+      "severity": "HIGH"
+    },
+    {
+      "id": "GOV-01",
+      "description": "Cualquier modificación en mcp_config.json debe ser registrada en el Decision Ledger.",
+      "severity": "MANDATORY"
+    }
+  ],
+  "automation": {
+    "validation_script": "sw.arch.validator.check_capability_drift",
+    "on_failure": "JIDOKA_STOP_LINE"
+  }
+}

@@ -10,3 +10,5 @@ Feature: Sovereign Cognitive Closure Protocol (SCCP)
     And I must record technical lessons in the Tactical Genome (lessons.jsonl)
     And I must verify the integrity of all documentation links
     And the session state must be persisted in the Ego State ledger
+
+  Performance Metric: closure_time < 500ms

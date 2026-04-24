@@ -85,3 +85,14 @@ La fabricación de cada línea de código sigue un flujo de ingeniería estricto
 Para mantener la "Verdad Física" (Physical Truth Alignment), este README está gobernado por:
 - **Executable Contract:** `README.feature`
 - **Machine Rules:** `README.rules.json`
+
+## ⚡ Conectividad Universal (MCP)
+DUMMIE Engine actúa como un **Agente de Sistema Residente**. Para conectar cualquier interfaz de IA (Antigravity, Claude Desktop, etc.) con el cerebro del motor, importe la configuración:
+
+```bash
+# Plugin para el Agente de Sistema
+cat dummie_agent_config.json
+```
+
+---
+**DUMMIE Engine:** Fabricando el futuro de la autonomía agéntica, un tick a la vez.

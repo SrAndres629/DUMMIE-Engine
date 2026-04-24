@@ -12,10 +12,10 @@ dependencies:
 tags: ["cognitive_core", "io_isolation", "industrial_sdd"]
 ---
 
-# 15. Aislamiento Fiduciario de I/O (Modelo FEI)
+# 15. Aislamiento Fiduciario de I/O y Servidor MCP (Modelo FEI)
 
 ## Abstract
-Para proteger la integridad del bus de datos y evitar el bloqueo del Cerebro (L2) ante latencias de red, el sistema implementa el **Modelo de Aislamiento Fiduciario (FEI)**. Toda interacción con el mundo exterior (MCP Tools) es gestionada por un Sidecar en Go (L1), que desacopla la ejecución física de la inferencia cognitiva.
+Para proteger la integridad del bus de datos y estandarizar la conectividad agéntica, el sistema implementa el **Modelo de Aislamiento Fiduciario (FEI)**. Toda interacción se gestiona mediante un **Servidor MCP Universal**. Este Sidecar actúa como el "Puerto USB-C" del sistema, operando bajo la **Política de Lógica Cero**: no contiene reglas de dominio, delegando toda decisión cognitiva al Cerebro (L2).
 
 ## 1. Cognitive Context Model (Ref)
 Para el modelo de aislamiento (Bubblewrap), la lógica de promesas topológicas (Np) y los mecanismos de resiliencia ante backpressure de I/O, consulte el archivo hermano [15_mcp_sidecar_isolation.rules.json](./15_mcp_sidecar_isolation.rules.json).
@@ -43,7 +43,8 @@ Las acciones con efectos secundarios (Git, Webhook, DB) operan bajo Shadowing:
 
 ---
 
-## 5. Discovery Epistemológico
+## 5. El Servidor MCP como HUB de Integración
+- **Exposición de Memoria:** L1 actúa como el puente MCP hacia el 4D-TES (L2), permitiendo que agentes externos lean y escriban en la memoria soberana sin acceso directo al sistema de archivos.
 - **Hot-Reload de Herramientas:** La adición de plugins MCP en L1 dispara un broadcast de NATS.
 - **Update Cognitivo:** L2 actualiza su registro de herramientas en caliente.
 

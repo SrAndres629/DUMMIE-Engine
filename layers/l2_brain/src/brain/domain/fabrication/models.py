@@ -2,12 +2,15 @@ from pydantic import BaseModel, Field
 from typing import List, Dict
 from enum import Enum
 
+from brain.domain.context.models import AuthorityLevel, IntentType as ContextIntent
+
 class IntentType(str, Enum):
     READ_FILE = "read_file"
     WRITE_FILE = "write_file"
     DELETE_FILE = "delete_file"
     EXECUTE_COMMAND = "execute_command"
     CREATE_AGENT = "create_agent"
+    MUTATION = "mutation" # Added for Spec 21/42
 
 class AgentIntent(BaseModel):
     """
@@ -17,6 +20,9 @@ class AgentIntent(BaseModel):
     target: str
     rationale: str
     risk_score: float = Field(..., ge=0.0, le=1.0)
+    locus_x: str = "sw.plant.orchestrator" # Default for Spec 21
+    intent_i: ContextIntent = ContextIntent.OBSERVATION # Default for Spec 21
+    authority_a: AuthorityLevel = AuthorityLevel.AGENT # Default for Spec 21
     
 class SkillDefinition(BaseModel):
     """

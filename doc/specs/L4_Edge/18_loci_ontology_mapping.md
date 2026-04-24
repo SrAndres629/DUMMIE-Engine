@@ -23,7 +23,7 @@ Para el motor de escaneo (Zig LST), los símbolos requeridos (Path, Hash, Type) 
 ---
 
 ## 2. Escaneo LST (Latent Semantic Tree)
-El Palacio de Loci trasciende el AST tradicional mediante el uso de LST:
+El Palacio de Loci trasciende el LST tradicional mediante el uso de un grafo semántico:
 - **Latent Mapping:** Indexación no solo de la sintaxis, sino de las relaciones semánticas transversales entre Specs, Código y ADRs.
 - **Topographical RBAC:** Los agentes no ven archivos; ven "Loci" (lugares) con permisos de lectura/escritura definidos por su rol en el Swarm.
 

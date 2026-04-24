@@ -25,17 +25,17 @@ Para los axiomas técnicos y pilares de arquitectura, consulte el archivo herman
 ## 2. La Estructura Departamental (Industrial Mapping)
 La factoría opera bajo el principio de **Separación de Responsabilidades Industriales**, mapeando sus 7 capas políglotas en cuatro departamentos soberanos:
 
-### 2.1 Dept. de Estrategia e Investigación (L2 Brain)
-Responsable de la intención y el diseño cognitivo. Utiliza el **Context Model de 6 Dimensiones** para eliminar la ambigüedad antes de que llegue a la planta de fabricación.
+### 2.1 Dept. de Estrategia e Investigación (L2 Brain / Librarian / Investigator)
+Responsable de la intención, el diseño cognitivo y la gestión de la Memoria Semántica. Utiliza el **Context Model de 6 Dimensiones** para eliminar la ambigüedad antes de que llegue a la planta de fabricación.
 
-### 2.2 Dept. de Arquitectura - The Guardian (L3 Shield / L4 Edge)
-El guardián del **Poka-Yoke**. Garantiza que ninguna línea de código viole los contratos estructurales. Si se detecta un riesgo, se activa el **Andon Cord**.
+### 2.2 Dept. de Arquitectura - The Guardian (L3 Shield / L4 Edge / Architect / Sentinel)
+El guardián del **Poka-Yoke**. Garantiza que ninguna línea de código viole los contratos estructurales. Si se detecta un riesgo, se activa el **Andon Cord**. Supervisa la integridad de los ADRs y el Grafo de Conocimiento.
 
-### 2.3 Dept. de Ingeniería de Planta (L0 Overseer / L1 Nervous / L5 Muscle)
-La maquinaria pesada. Encargada de la persistencia causal, el multiverso OTP y el procesamiento SIMD. Es una ejecución determinista e inmutable.
+### 2.3 Dept. de Ingeniería de Planta (L0 Overseer / L1 Nervous / L5 Muscle / Plant Coder)
+La maquinaria pesada. Encargada de la persistencia causal, el multiverso OTP, el procesamiento SIMD y la implementación física de componentes. Es una ejecución determinista e inmutable gestionada por agentes especialistas.
 
-### 2.4 Dept. de QA y Auditoría (Active Shields)
-Validación continua mediante **Jidoka**. El sistema se auto-inspecciona en tiempo real, colapsando la onda de probabilidad solo cuando se alcanza el consenso de integridad total.
+### 2.4 Dept. de QA y Auditoría (Active Shields / Auditor / Quality Gate)
+Validación continua mediante **Jidoka**. El sistema se auto-inspecciona en tiempo real, colapsando la onda de probabilidad solo cuando se alcanza el consenso de integridad total y el cumplimiento de los Shields (S, E, L).
 
 ---
 
@@ -56,6 +56,9 @@ El software nace modular por diseño. Cada componente es un [**Nodo Atómico (Sp
 
 ### III. Consistencia Causal (4D-TES)
 La verdad no es un estado estático, sino una línea de universo inmutable. La memoria multiplexada ([Spec 02](../specs/L2_Brain/02_memory_engine_4d_tes.md)) garantiza la trazabilidad.
+
+### IV. Interoperabilidad Universal (MCP / USB-C)
+El sistema se estandariza mediante el **Model Context Protocol (MCP)**. La memoria, las herramientas y el contexto son accesibles como si de un puerto USB-C se tratara, permitiendo la integración "Plug & Play" de cualquier agente de IA o sistema externo con el ecosistema DUMMIE.
 
 ---
 

@@ -41,8 +41,8 @@ Se prohíbe terminantemente la creación o actualización de documentación que 
 El sistema busca el **Determinismo Absoluto**. Ante cualquier indeterminación lógica:
 1. **Detección:** El agente identifica el `Ambiguity_Ticket`.
 2. **Amplificación Intelectual:** En lugar de asumir una solución, el agente debe investigar cuál es la mejor forma de hacerlo y plantear preguntas al usuario (PAH).
-3. **Refinamiento Mental:** Las preguntas deben estar diseñadas para ayudar al usuario a pensar mejor y eliminar ambigüedades en la idea del sistema.
-4. **Validación:** No se procede al desarrollo hasta que la indeterminación sea eliminada por la respuesta del usuario.
+3. **Refinamiento Mental:** Las preguntas deben estar diseñadas para ayudar al usuario a pensar mejor y eliminar ambigüedades en la idea del sistema. **Este proceso se facilita mediante herramientas MCP de interacción proactiva.**
+4. **Validación:** No se procede al desarrollo hasta que la indeterminación sea eliminada por la respuesta del usuario. **La resolución se registra mediante la herramienta 'resolve_ambiguity' del servidor MCP.**
 
 ---
 

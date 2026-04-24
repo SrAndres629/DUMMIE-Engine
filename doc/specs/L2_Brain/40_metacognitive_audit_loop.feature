@@ -16,3 +16,5 @@ Feature: Metacognitive Identity Evolution
     When el Audit Loop analiza la eficiencia de la sesión
     Then el trait "abstraction_level" en "identity.json" debe incrementarse en 0.05
     And el sistema documenta su aumento de confianza en la capa
+
+  Performance Metric: audit_cycle < 100ms

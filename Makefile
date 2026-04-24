@@ -1,14 +1,17 @@
 # Makefile - DUMMIE Engine Sovereign Orquestration
 # Based on Spec 08 - One-Click Deployment
 
-.PHONY: all proto-gen build-l1 build-l0 clean
+.PHONY: all proto-gen build-l0 build-l1 build-l2 build-l3 build-l4 clean factory-reset
+
+LOCAL_BIN = $(HOME)/.local/bin
+export PATH := $(LOCAL_BIN):$(HOME)/go/bin:$(PATH)
 
 PROTO_DIR = proto/dummie/v2
 GO_PROTO_OUT = layers/l1_nervous/proto
 EX_PROTO_OUT = layers/l0_overseer/lib/proto
 PY_PROTO_OUT = layers/l2_brain/proto
 
-all: proto-gen build-l1 build-l0
+all: proto-gen build-l4 build-l3 build-l1 build-l0 build-l2
 
 # 1. Generación de Stubs (Spec 10)
 proto-gen:
@@ -29,28 +32,47 @@ proto-gen:
 		--python_out=$(PY_PROTO_OUT) \
 		--grpc_python_out=$(PY_PROTO_OUT) \
 		$(PROTO_DIR)/*.proto
-	@echo "[✓] Stubs generados en $(GO_PROTO_OUT), $(EX_PROTO_OUT) y $(PY_PROTO_OUT)"
+	@echo "[✓] Stubs generados."
 
-# 4. Capa L3 - Shield (Rust)
+# 2. Capa L0 - Overseer (Elixir)
+build-l0:
+	@echo "=== Compilando Layer 0: Overseer (Elixir) ==="
+	cd layers/l0_overseer && \
+		mix local.hex --force && \
+		mix local.rebar --force && \
+		mix deps.get && \
+		mix compile
+	@echo "[✓] L0 compilado."
+
+# 3. Capa L1 - Nervous (Go)
+build-l1:
+	@echo "=== Compilando Layer 1: Nervous (Go) ==="
+	cd layers/l1_nervous && go build -o ../../bin/l1_nervous .
+	@echo "[✓] L1 compilado."
+
+# 4. Capa L2 - Brain (Python)
+build-l2:
+	@echo "=== Configurando Layer 2: Brain (Python/UV) ==="
+	cd layers/l2_brain && uv sync
+	@echo "[✓] L2 configurado."
+
+# 5. Capa L3 - Shield (Rust)
 build-l3:
 	@echo "=== Compilando Layer 3: Shield (Rust/PyO3) ==="
 	cd layers/l3_shield && cargo build --release
-	@echo "[✓] L3 compilado"
+	@echo "[✓] L3 compilado."
 
-# 5. Capa L4 - Edge (Zig)
+# 6. Capa L4 - Edge (Zig)
 build-l4:
 	@echo "=== Compilando Layer 4: Edge (Zig/LST Scanner) ==="
 	cd layers/l4_edge && zig build -Doptimize=ReleaseSafe
-	@echo "[✓] L4 compilado"
+	@echo "[✓] L4 compilado."
 
-# 6. Capa L2 - Brain (Python Setup)
-setup-l2:
-	@echo "=== Configurando Layer 2: Brain (Python/UV) ==="
-	cd layers/l2_brain && uv sync
-	@echo "[✓] L2 configurado"
+factory-reset: clean all
 
 clean:
-	rm -rf bin/ proto/dummie/v2/*.pb.go $(GO_PROTO_OUT)/*.pb.go $(EX_PROTO_OUT)/*.pb.ex $(PY_PROTO_OUT)/*.py
+	rm -rf bin/* proto/dummie/v2/*.pb.go $(GO_PROTO_OUT)/*.pb.go $(EX_PROTO_OUT)/*.pb.ex $(PY_PROTO_OUT)/*.py
 	cd layers/l1_nervous && go clean
 	cd layers/l3_shield && cargo clean
 	cd layers/l4_edge && rm -rf zig-out/ zig-cache/
+	cd layers/l0_overseer && mix clean

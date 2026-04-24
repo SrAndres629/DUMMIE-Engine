@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package io.dummie.v2.memory;
 
+option go_package = "io.dummie.v2/nervous/proto;dummie_v2";
+
 import "google/protobuf/timestamp.proto";
 
 // ==========================================
@@ -17,6 +19,7 @@ message DecisionRecord {
     string target_causal_hash = 5;     // El nodo 4D-TES sobre el que recae el fallo
     
     string witness_hash = 6;           // Firma criptográfica del auditor (Sentinel/PAH)
+    uint64 tick = 7;                   // Reloj de Lamport de la resolución
 }
 
 // Representa una lección aprendida tras un fallo o refactorización.
@@ -111,8 +114,9 @@ message EgoState {
 message LayerCertainty {
     string layer_name = 1;              // ej. "L2_Brain", "L4_Edge"
     float certainty_score = 2;          // [0.0 - 1.0]
-    bool is_terra_incognita = 3;        // Código sin representación en doc
+    bool is_terra_incognita = 3;        // Código sin representation en doc
     uint32 tests_passing = 4;
+    uint32 unverified_mutations = 5;    // Cambios sin test asociado
 }
 
 message OntologicalMap {

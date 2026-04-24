@@ -1,106 +1,150 @@
 import json
 from datetime import datetime
+from typing import Optional, List, Union
 from brain.application.interfaces import IBrainOrchestrator
 from brain.application.use_cases.crystallization import CrystallizeProceduralMemoryUseCase
+from brain.application.use_cases.lessons_use_case import CrystallizeLessonsUseCase
 from brain.domain.fabrication.models import AgentIntent, IntentType as FabricationIntent
 from brain.domain.context.models import SixDimensionalContext, AuthorityLevel, IntentType as ContextIntent
-from brain.domain.memory.models import MemoryNode4DTES
+from brain.domain.memory.ports import IEventStorePort, ILedgerAuditPort, IShieldOutputPort, ISkillRepositoryPort, ISessionLedgerPort
+from brain.domain.memory.models import MemoryNode4DTES, EgoState
 from brain.domain.governance.models import DecisionRecord
-from brain.domain.memory.ports import IEventStorePort, ILedgerAuditPort, IShieldOutputPort, ISkillRepositoryPort
 
 class CognitiveOrchestrator(IBrainOrchestrator):
+    """
+    Orquestador Cognitivo (L2 Brain).
+    Implementa el flujo determinista de la Spec 21 y Spec 42.
+    """
     def __init__(
         self, 
         shield_port: IShieldOutputPort, 
         event_store: IEventStorePort,
         ledger_audit: ILedgerAuditPort,
-        skill_repo: ISkillRepositoryPort
+        session_ledger: ISessionLedgerPort,
+        skill_repo: ISkillRepositoryPort,
+        mode: str = "GREENFIELD"
     ):
-        self.shield_port = shield_port
+        self.shield = shield_port
         self.event_store = event_store
         self.ledger_audit = ledger_audit
+        self.session_ledger = session_ledger
         self.skill_repo = skill_repo
-        self.crystallizer = CrystallizeProceduralMemoryUseCase(
+        self.mode = mode
+        self.lamport_clock = 0
+        
+        self.crystallize_use_case = CrystallizeProceduralMemoryUseCase(
             event_store=event_store,
             skill_repo=skill_repo,
             ledger_audit=ledger_audit
         )
-
-    async def handle_task(self, payload: str) -> str:
-        print(f"[L2-Brain Orchestrator] Procesando tarea: {payload}")
-
-        # 1. Recuperar el estado actual de la memoria (Merkle-DAG head)
-        last_hash = self.event_store.get_last_leaf_hash()
-        last_node = self.event_store.get_by_hash(last_hash) if last_hash != "GENESIS" else None
-        
-        # Sincronización de Tiempo Lógico (Lamport Ticks)
-        current_tick = (last_node.context.lamport_t + 1) if last_node else 1
-
-        # 2. Extracción de intención de fabricación
-        intent = AgentIntent(
-            intent_type=FabricationIntent.DELETE_FILE if "VETO" in payload else FabricationIntent.READ_FILE,
-            target="/",
-            rationale=f"Acción gatillada por payload: {payload[:50]}...",
-            risk_score=0.9 if "VETO" in payload else 0.1
+        self.lessons_use_case = CrystallizeLessonsUseCase(
+            ledger_audit=ledger_audit
         )
 
-        # 3. Construcción del Vector 6D (Spec 12)
-        context = SixDimensionalContext(
-            locus_x="sw.plant.orchestrator",
-            locus_y="task.execution",
-            locus_z="entity.atomic",
-            lamport_t=current_tick,
-            authority_a=AuthorityLevel.AGENT,
-            intent_i=ContextIntent.MUTATION if "VETO" in payload else ContextIntent.OBSERVATION
-        )
-
-        # 4. Auditar intención con el Escudo (L3)
-        audit_result = self.shield_port.audit_intent(intent.model_dump_json())
-        is_authorized = audit_result.get("authorized", False)
-
-        # 5. Generar Nodo de Memoria 4D-TES (Encadenamiento Causal)
-        payload_data = {
-            "intent": intent.model_dump(),
-            "audit": audit_result
-        }
-        memory_node = MemoryNode4DTES.generate(
-            parent_hash=last_hash,
-            context=context,
-            payload=json.dumps(payload_data).encode('utf-8')
-        )
-
-        # 6. Persistencia Causal (DIP)
-        self.event_store.append(memory_node)
-        print(f"[L2-Brain Orchestrator] Nodo 4D-TES encadenado: {memory_node.causal_hash} (parent: {last_hash})")
-
-        # 7. Registro de Decisión (Spec 34)
-        decision = DecisionRecord(
-            decision_id=f"dec_{memory_node.causal_hash[:8]}",
-            rationale=intent.rationale,
-            impact_blast_radius="local.component",
-            context=context,
-            target_causal_hash=memory_node.causal_hash,
-            witness_hash=audit_result.get("witness_hash", "PENDING_L3_SIGNATURE"),
-            timestamp=datetime.utcnow()
-        )
-        self.ledger_audit.record_decision(decision)
-
-        # 8. Protocolo de Cristalización (Spec 38)
-        # Se activa si la certeza del locus es suficiente (Gatillado por evento)
+    async def handle_task(self, payload: Union[str, AgentIntent]) -> str:
+        """
+        Punto de entrada principal (Spec 21).
+        Coordina el flujo de memoria, gobernanza y ejecución.
+        """
         try:
-            certainty = self.ledger_audit.get_certainty_for_locus(context.locus_x)
-            if certainty.certainty_score > 0.9 and current_tick % 5 == 0: # Ejemplo: Cada 5 eventos si hay certeza
-                print(f"[L2-Brain Orchestrator] Iniciando Cristalización Cognitiva (Certeza: {certainty.certainty_score})")
-                chain = self.event_store.get_causal_chain(memory_node.causal_hash, depth=5)
-                self.crystallizer.execute(context, chain)
+            if isinstance(payload, AgentIntent):
+                intent = payload
+                print(f"[L2-Brain Orchestrator] Procesando intención directa: {intent.intent_type}")
+            else:
+                print(f"[L2-Brain Orchestrator] Procesando tarea en modo {self.mode}: {payload}")
+                # 1. Parsing de Intención (Spec 21)
+                intent = self._parse_intent(payload)
+            
+            # 2. Auditoría Metacognitiva de Certeza (Spec 42)
+            # Bloquear mutaciones si la certeza del locus es baja (< 0.5)
+            stats = self.ledger_audit.get_certainty_for_locus(intent.locus_x)
+            if stats.certainty_score < 0.5 and intent.intent_i == ContextIntent.MUTATION:
+                raise Exception(f"[Spec 42] Ontological lock: Certeza insuficiente ({stats.certainty_score}) para mutación en {intent.locus_x}")
+
+            # 3. Análisis de Impacto (Spec 31)
+            impact = self.event_store.compute_blast_radius(intent.target)
+            
+            # 4. Shielding (L3 - Spec 04)
+            shield_result = self.shield.audit_intent(intent.model_dump_json())
+            if not shield_result.get("authorized", False):
+                return "INTENT_REJECTED_BY_SHIELD"
+
+            # 5. Causal Chaining (4D-TES - Spec 02)
+            parent_hash = self.event_store.get_last_leaf_hash(intent.locus_x)
+            self.lamport_clock += 1
+            
+            node = MemoryNode4DTES(
+                causal_hash=self._compute_hash(intent, parent_hash),
+                parent_hash=parent_hash,
+                payload=intent.rationale,
+                payload_hash=hashlib.sha256(intent.rationale.encode()).hexdigest(),
+                context=SixDimensionalContext(
+                    locus_x=intent.locus_x,
+                    locus_y=intent.target,
+                    locus_z="L2_BRAIN",
+                    lamport_t=self.lamport_clock,
+                    authority_a=intent.authority_a,
+                    intent_i=intent.intent_i
+                )
+            )
+            self.event_store.append(node)
+            print(f"[L2-Brain Orchestrator] Nodo 4D-TES encadenado: {node.causal_hash} (parent: {parent_hash})")
+
+            # 6. Registro en el Ledger de Decisiones (Spec 34)
+            self.ledger_audit.record_decision(DecisionRecord(
+                decision_id=f"DEC-{self.lamport_clock}",
+                tick=self.lamport_clock,
+                context=node.context,
+                rationale=intent.rationale,
+                impact_blast_radius=impact["impact_level"],
+                target_causal_hash=node.causal_hash,
+                witness_hash=hashlib.sha256(node.causal_hash.encode()).hexdigest(), # Mock Sentinel
+                metadata={"impact_details": impact}
+            ))
+
+            # 7. Registro en Session Ledger (Spec 36)
+            self.session_ledger.record_ego_state(EgoState(
+                agent_id="sw.plant.orchestrator",
+                tick=self.lamport_clock,
+                thought_vector=f"Handled task: {intent.rationale}",
+                action="TASK_HANDLED",
+                context=node.context
+            ))
+
+            return "INTENT_QUEUED_L2_VALIDATED"
         except Exception as e:
-            print(f"[L2-Brain Orchestrator] Cristalización omitida: {e}")
+            # AUTO-CRISTALIZACIÓN DE LECCIONES (Spec 48)
+            print(f"[L2-Brain Orchestrator] CRITICAL ERROR: {e}")
+            
+            # Intentar capturar el contexto para la lección
+            context_fallback = SixDimensionalContext(
+                locus_x="sw.plant.orchestrator",
+                locus_y="L2_BRAIN",
+                locus_z="L2_BRAIN",
+                lamport_t=self.lamport_clock,
+                authority_a=AuthorityLevel.OVERSEER,
+                intent_i=ContextIntent.OBSERVATION
+            )
+            
+            self.lessons_use_case.execute_error(
+                context=context_fallback,
+                error=e,
+                tick=self.lamport_clock
+            )
+            raise e
 
-        if not is_authorized:
-            print(f"[L2-Brain Orchestrator] !!! VETO DEL ESCUDO (L3) !!! Motivo: {audit_result.get('shield_note')}")
-            return "VETO_L3_SECURITY_VIOLATION"
+    def _parse_intent(self, task: str) -> AgentIntent:
+        """Heurística simple para mapear texto a intención estructurada."""
+        # En producción, esto usaría un LLM o un Parser DSL
+        return AgentIntent(
+            intent_type=FabricationIntent.READ_FILE,
+            target="/",
+            rationale=task,
+            risk_score=0.1
+        )
 
-        return "INTENT_QUEUED_L2_VALIDATED"
+    def _compute_hash(self, intent: AgentIntent, parent_hash: str) -> str:
+        content = f"{intent.intent_type}{intent.target}{parent_hash}{self.lamport_clock}"
+        return hashlib.sha256(content.encode()).hexdigest()
 
-
-
+import hashlib

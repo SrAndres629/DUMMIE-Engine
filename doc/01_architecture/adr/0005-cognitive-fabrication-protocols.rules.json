@@ -9,6 +9,7 @@
   "interaction_protocol": {
     "ambiguity_handling": "Stop and Ask User (PAH)",
     "indeterminacy_elimination": "Proactive questioning",
+    "mcp_interaction": "Standardized tool calls",
     "system_goal": "Absolute Determinism"
   },
   "agent_roles": {

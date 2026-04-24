@@ -30,14 +30,15 @@ La memoria se divide en tres estratos inyectables:
 
 ---
 
-## 3. Anexo Ontológico (KùzuDB)
-La persistencia física reside en `.aiwg/memory/loci.db`:
-- **Nodos**: `Event`, `Agent`, `Requirement`.
-- **Relaciones**: `CAUSED_BY`, `EXECUTED_BY`, `VALIDATES`.
+## 4. MCP Access Layer (USB-C Interface)
+Para asegurar la interoperabilidad, el motor 4D-TES expone sus capacidades mediante un servidor MCP:
+- **Resource: `memory://timeline`**: Stream de eventos inmutables.
+- **Resource: `memory://loci`**: Acceso al grafo de relaciones ontológicas.
+- **Tool: `crystallize(payload, context)`**: Punto de entrada único para la persistencia de conocimiento validado.
 
 ---
 
-## 4. Formal Contract Boundary (CausalHash Enforced)
+## 5. Formal Contract Boundary (CausalHash Enforced)
 Para garantizar el determinismo y la soberanía criptográfica, la actualización in-place de la memoria está prohibida. Toda mutación debe generar un nuevo nodo en el DAG:
 
 ```protobuf
@@ -53,7 +54,7 @@ message MemoryNode4DTES {
     // Coordenadas absolutas de génesis
     SixDimensionalContext context = 3; 
     
-    // Excitación inmutable (Zstd compressed JSON o AST)
+    // Excitación inmutable (Zstd compressed JSON o LST)
     bytes payload = 4;            
     // Verificación de integridad del payload aislado
     string payload_hash = 5;      

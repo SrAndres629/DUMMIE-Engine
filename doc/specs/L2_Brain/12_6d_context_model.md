@@ -31,7 +31,12 @@ Toda entidad o evento en el sistema se indexa mediante un vector $V = \{x, y, z,
 
 ---
 
-## 3. Formal Contract Boundary
+## 3. MCP Vector Transport
+El vector 6D es inyectado en cada interacción agéntica a través del servidor MCP. Los agentes pueden consultar el contexto actual mediante el recurso `context://current` y deben adjuntar el vector validado en cada llamada a herramientas de mutación para garantizar la coherencia topológica.
+
+---
+
+## 4. Formal Contract Boundary
 Para asegurar la viabilidad del determinismo, este es el contrato estructurado en Protobuf (v3) que actúa como *Single Source of Truth* (SSoT):
 
 ```protobuf

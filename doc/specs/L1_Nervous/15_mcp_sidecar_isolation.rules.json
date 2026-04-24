@@ -4,7 +4,8 @@
   "sidecar": {
     "tech": "Go (L1)",
     "sandbox": "Bubblewrap",
-    "promise_logic": "Topological Promise (Np)"
+    "promise_logic": "Topological Promise (Np)",
+    "mcp_hub": "Standardized System Interface"
   },
   "mechanisms": {
     "shadowing": "Shadow Queue (L1) -> Atomic Collapse",

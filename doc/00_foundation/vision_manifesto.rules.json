@@ -10,7 +10,8 @@
     "Schema-First Primacy",
     "Atomic Modularity",
     "Causal Consistency (4D-TES)",
-    "Sovereign Cognitive Memory (Spec 36)"
+    "Sovereign Cognitive Memory (Spec 36)",
+    "Universal Interoperability (MCP/USB-C)"
   ],
   "invariants": [
     "No manual code intervention allowed in production-grade components",

@@ -1,0 +1,20 @@
+{
+  "include": [
+    "layers"
+  ],
+  "exclude": [
+    "**/node_modules",
+    "**/__pycache__",
+    ".venv"
+  ],
+  "venvPath": ".",
+  "venv": ".venv",
+  "executionEnvironments": [
+    {
+      "root": "layers/l1_nervous/adapters/mcp",
+      "extraPaths": [
+        "../../l2_brain/src"
+      ]
+    }
+  ]
+}

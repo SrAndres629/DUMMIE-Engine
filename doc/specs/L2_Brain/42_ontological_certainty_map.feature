@@ -15,3 +15,5 @@ Feature: Ontological Certainty Calculation
     And todos los ADRs de "L2_Brain" están indexados en el Semantic Fabric
     When el Audit Loop invoca el cálculo de certeza
     Then el valor de "L2_Brain" se establece en 1.0 (Cristalino)
+
+  Performance Metric: mapping_latency < 50ms
