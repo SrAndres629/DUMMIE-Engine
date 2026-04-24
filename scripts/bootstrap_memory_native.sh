@@ -15,8 +15,8 @@ URL="https://github.com/kuzudb/kuzu/releases/download/$VERSION/libkuzu-linux-x86
 TEMP_FILE="kuzu_native.tar.gz"
 curl -L "$URL" -o "$TEMP_FILE"
 
-# Extraer solo lo necesario
-tar -xzf "$TEMP_FILE" -C "$TARGET_DIR" --strip-components=1
+# Extraer solo lo necesario (esta versión no tiene subcarpeta)
+tar -xzf "$TEMP_FILE" -C "$TARGET_DIR"
 rm "$TEMP_FILE"
 
 echo "[✓] Librerías nativas instaladas en: $TARGET_DIR"

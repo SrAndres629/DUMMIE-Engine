@@ -26,8 +26,8 @@ El servidor oficial se lanza directamente desde `layers/l1_nervous/mcp_server.py
 | `read_spec` | Recupera el contrato formal de cualquier Spec. | SDD |
 | `ssh_grep` | Búsqueda ultra-rápida vía SSH bridge (Baja Entropía). | Spec 41 |
 | `crystallize` | Persistencia mandataria de conocimiento en el 4D-TES. | Spec 02 |
-| `log_lesson` | Captura fallos y genera lecciones aprendidas. | Spec 48 |
-| `resolve_ambiguity` | Documenta compromisos técnicos y planes de cierre. | Spec 49 |
+| `log_lesson` | Captura fallos y genera lecciones aprendidas. | Spec 35 |
+| `resolve_ambiguity` | Documenta compromisos técnicos y planes de cierre. | Spec 07 |
 
 ## 3. Recursos (Resources)
 

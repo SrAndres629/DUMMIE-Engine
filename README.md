@@ -7,7 +7,8 @@ DUMMIE Engine es un sistema experimental de orquestación agéntica multi-capa c
 - Gateway MCP operativo en Python: `layers/l1_nervous/mcp_server.py`.
 - Núcleo cognitivo actual en Python plano (bridge): `layers/l2_brain/*.py`.
 - Validadores de L3/L4/L5 presentes, mayormente en estado base o stub.
-- Existen brechas entre documentación histórica y contratos físicos actuales (imports legacy en tests, referencias antiguas en specs).
+- Suite de pruebas de `L2` alineada al layout físico actual (`13 passed` en `layers/l2_brain/tests`).
+- Principal deuda vigente: estandarización operativa de `doc/specs/*.md` (trazabilidad y contenido no genérico).
 
 ## Arquitectura física resumida
 - `L0`: base Elixir/OTP (`layers/l0_overseer`).
@@ -27,9 +28,11 @@ git status --short
 PYTHONPATH="layers/l2_brain:layers/l1_nervous:layers/l3_shield:layers/l4_edge:layers/l5_muscle" \
   layers/l2_brain/.venv/bin/python -c "import models, orchestrator, bootstrap, tools, resources"
 
-# Tests actuales (pueden fallar por imports legacy)
-PYTHONPATH="layers/l2_brain:layers/l1_nervous:layers/l3_shield:layers/l4_edge:layers/l5_muscle" \
-  layers/l2_brain/.venv/bin/python -m pytest layers/l2_brain/tests layers/l1_nervous/tests -q
+# Tests L2 (alineados al estado actual)
+cd layers/l2_brain && uv run pytest -q tests
+
+# Validación de documentación/specs
+python3 scripts/validate_specs_docs.py
 ```
 
 ## Navegación documental

@@ -23,6 +23,9 @@ func main() {
 	log.Printf("[L0-MEMORY] Socket: %s", socketPath)
 
 	if err := memory.StartFlightServer(dbPath, socketPath); err != nil {
-		log.Fatalf("[L0-MEMORY] Fallo crítico: %v", err)
+		log.Printf("[L0-MEMORY] ERROR CRÍTICO: No se pudo iniciar el servidor.")
+		log.Printf("[L0-MEMORY] Causa probable: La base de datos está bloqueada por otro proceso.")
+		log.Printf("[L0-MEMORY] Solución: Ejecuta 'scripts/vanguard_lock_resolver.sh' para liberar bloqueos.")
+		log.Fatalf("[L0-MEMORY] Detalles: %v", err)
 	}
 }

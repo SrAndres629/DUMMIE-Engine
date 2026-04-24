@@ -43,6 +43,11 @@ build-l0:
 		mix compile
 	@echo "[✓] L0 compilado."
 	@echo "=== Compilando Memory Plane (Go) ==="
+	mkdir -p /tmp/dummie_kuzu && \
+	ln -sf "$(shell pwd)/shared/lib/kuzu/"* /tmp/dummie_kuzu/ && \
+	export CGO_ENABLED=1 && \
+	export CGO_CFLAGS="-I/tmp/dummie_kuzu" && \
+	export CGO_LDFLAGS="-L/tmp/dummie_kuzu -lkuzu -Wl,-rpath,/tmp/dummie_kuzu" && \
 	cd layers/l0_overseer && go build -o ../../bin/memory_server ./cmd/memory/main.go
 	@echo "[✓] Memory Plane compilado."
 

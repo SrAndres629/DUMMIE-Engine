@@ -1,7 +1,7 @@
 ---
 spec_id: "DE-V3-L0-26"
 title: "Orquestador de Enjambre Cuántico (Go StateGraph)"
-status: "IMPLEMENTED_PROTOTYPE"
+status: "PROPOSED"
 layer: "L0_OVERSEER"
 last_verified_on: "2026-04-24"
 ---

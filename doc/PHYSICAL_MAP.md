@@ -17,7 +17,8 @@ Mapa de verdad física del sistema para evitar deriva entre diseño teórico y e
 ### L2 (`layers/l2_brain`)
 - Dominio/orquestación en estructura plana (`models.py`, `orchestrator.py`, `daemon.py`).
 - Adaptadores de ledger/Kuzu en estado bridge (`adapters.py`).
-- Tests existentes con imports legacy no alineados al layout actual.
+- Daemon con planner jerárquico obligatorio y outcome explícito de saga (`SUCCESS`/`FAILED`).
+- Tests alineados al layout físico actual (`layers/l2_brain/tests`).
 
 ### L3 (`layers/l3_shield`)
 - Auditores Python (`topological_auditor.py`, `budget_auditor.py`, `compliance_auditor.py`).
@@ -36,9 +37,9 @@ Mapa de verdad física del sistema para evitar deriva entre diseño teórico y e
 
 ## Brechas físico-teóricas prioritarias
 1. Contratos de modelos (`AuthorityLevel`, `IntentType`, `AgentIntent`) no alineados entre L1 y L2.
-2. Tests de L1/L2 dependen de namespace `brain.*` ya no presente.
-3. Parte de specs describe tecnología/meta no implementada actualmente.
-4. Existen artefactos historicos fuera del contrato documental vigente que deben mantenerse fuera del contexto operativo.
+2. Contratos de resultado/telemetría del daemon no están formalizados para consumidores inter-capa.
+3. Parte de specs sigue en plantilla genérica y sin verificación trazable.
+4. Existen artefactos históricos fuera del contrato documental vigente que deben mantenerse fuera del contexto operativo.
 
 ## Semáforo de estado
 - `ACTIVE`: respaldado por evidencia física en el repo.
