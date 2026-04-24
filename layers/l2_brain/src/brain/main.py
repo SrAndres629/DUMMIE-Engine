@@ -11,10 +11,12 @@ async def main():
     shield_adapter = NativeShieldAdapter()
     from brain.infrastructure.adapters.kuzu_repository import KuzuRepository, KuzuSkillRepository
     from brain.infrastructure.adapters.ledger_adapter import DecisionLedgerAdapter
+    from brain.infrastructure.adapters.session_ledger_adapter import SessionLedgerAdapter
     
     kuzu_repo = KuzuRepository()
-    skill_repo = KuzuSkillRepository(kuzu_repo)
+    skill_repo = KuzuSkillRepository(db=kuzu_repo.db)
     ledger_adapter = DecisionLedgerAdapter()
+    session_ledger = SessionLedgerAdapter()
     
     # 2. Instanciar Casos de Uso (Application)
     # Nota: El orquestador ahora inyecta el caso de uso de cristalización internamente
@@ -22,6 +24,7 @@ async def main():
         shield_port=shield_adapter,
         event_store=kuzu_repo,
         ledger_audit=ledger_adapter,
+        session_ledger=session_ledger,
         skill_repo=skill_repo
     )
     
