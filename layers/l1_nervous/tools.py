@@ -4,9 +4,11 @@ import logging
 import hashlib
 import asyncio
 import subprocess
+from datetime import datetime
 from mcp.server.fastmcp import FastMCP
 from models import SixDimensionalContext, AuthorityLevel, IntentType as ContextIntent
 from models import AgentIntent, IntentType as FabricationIntent
+from utils import AtomicLedgerWriter
 
 logger = logging.getLogger("dummie-mcp.tools")
 
@@ -202,14 +204,12 @@ def register_tools(mcp: FastMCP, orchestrator, proxy_manager, root_dir: str):
         """[SWARM] Publica el plan actual del agente para coordinarse con otros."""
         ledger_path = os.path.join(AIWG_DIR, "memory/swarm_ledger.jsonl")
         entry = {
-            "timestamp": os.popen("date --iso-8601=seconds").read().strip(),
             "agent_id": agent_id,
             "intent": intent,
             "target": target_file,
             "clock": orchestrator.lamport_clock
         }
-        with open(ledger_path, "a") as f:
-            f.write(json.dumps(entry) + "\n")
+        AtomicLedgerWriter.append_entry(ledger_path, entry)
         return f"[SWARM] Intención publicada por {agent_id}. El enjambre ha sido notificado."
 
     @mcp.tool()
@@ -234,13 +234,12 @@ def register_tools(mcp: FastMCP, orchestrator, proxy_manager, root_dir: str):
         """[SWARM] Delega una tarea bloqueada (por sandbox u otros) a un agente con mayores privilegios."""
         ledger_path = os.path.join(AIWG_DIR, "memory/swarm_ledger.jsonl")
         entry = {
-            "timestamp": os.popen("date --iso-8601=seconds").read().strip(),
             "agent_id": requester_id,
             "intent": "TASK_DELEGATION_REQUESTED",
             "target": target,
             "instructions": instructions,
-            "status": "PENDING"
+            "status": "PENDING",
+            "clock": orchestrator.lamport_clock
         }
-        with open(ledger_path, "a") as f:
-            f.write(json.dumps(entry) + "\n")
+        AtomicLedgerWriter.append_entry(ledger_path, entry)
         return f"[SWARM] Tarea delegada exitosamente. Esperando que un agente libre (como Antigravity) tome el control."

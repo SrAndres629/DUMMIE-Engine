@@ -6,13 +6,15 @@ Mapa de verdad física del sistema para evitar deriva entre diseño teórico y e
 ## Estado físico actual (verificado)
 
 ### L0 (`layers/l0_overseer`)
-- Runtime/base Elixir con `mix.exs` y módulo de aplicación.
-- Evidencia: `layers/l0_overseer/mix.exs`, `layers/l0_overseer/lib/overseer/application.ex`.
+- **Control Plane**: Monitor de salud y orquestación de ciclo de vida.
+- Binario Go (`cmd/monitor/main.go`) que escucha telemetría de fallos vía NATS.
+- Runtime base Elixir mantenido para orquestación reactiva.
 
 ### L1 (`layers/l1_nervous`)
-- Gateway MCP FastMCP (`mcp_server.py`) y bootstrap hacia L2.
-- Bridge/proxy de servidores MCP secundarios (`mcp_proxy.py`).
-- Binarios y contratos Go presentes (`main.go`, `sidecar.go`, `proto/*.pb.go`).
+- **Data Plane (Memory Plane)**: Servidor Arrow Flight tipado (`cmd/memory/main.go`).
+- **Nervous Infrastructure**: Gateway MCP FastMCP (`mcp_server.py`) con bootstrap estricto (no fallback).
+- **Zero-Copy IPC**: Bridge tipado en `memory_ipc.py` con excepciones estructuradas.
+- **Atomicidad**: `utils.py` con `AtomicLedgerWriter` (flock).
 
 ### L2 (`layers/l2_brain`)
 - Dominio/orquestación en estructura plana (`models.py`, `orchestrator.py`, `daemon.py`).
