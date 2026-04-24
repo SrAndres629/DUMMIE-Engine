@@ -69,8 +69,13 @@ func (ns *NervousSystem) Connect() error {
 	return nil
 }
 
-func (ns *NervousSystem) computeCausalHash(tick uint64, payload string) string {
-	content := fmt.Sprintf("%s|%d|%s", ns.lastHash, tick, payload)
+func (ns *NervousSystem) computeCausalHash(parentHash string, payloadHash string, ctx *pb.SixDimensionalContext) string {
+	// Canonical concatenation per Spec 02
+	// SHA-256(parent_hash + payload_hash + 6d_context)
+	contextStr := fmt.Sprintf("%s|%s|%s|%d|%d|%d",
+		ctx.LocusX, ctx.LocusY, ctx.LocusZ, ctx.LamportT, int32(ctx.AuthorityA), int32(ctx.IntentI))
+	
+	content := parentHash + payloadHash + contextStr
 	hash := sha256.Sum256([]byte(content))
 	return hex.EncodeToString(hash[:])
 }
@@ -87,25 +92,30 @@ func (ns *NervousSystem) StartHeartbeat(ctx context.Context) {
 		case <-ticker.C:
 			tick := ns.clock.Tick()
 			payload := "PULSE_HEARTBEAT"
-			causalHash := ns.computeCausalHash(tick, payload)
+			payloadHash := hex.EncodeToString(func() []byte {
+				h := sha256.Sum256([]byte(payload))
+				return h[:]
+			}())
+			
+			// Contexto Determinista (Spec 12)
+			contextObj := &pb.SixDimensionalContext{
+				LocusX:      LayerName,
+				LocusY:      "core.life",
+				LocusZ:      "heartbeat",
+				LamportT:    tick,
+				AuthorityA:  pb.AuthorityLevel_AGENT,
+				IntentI:     pb.IntentType_OBSERVATION,
+			}
+
+			causalHash := ns.computeCausalHash(ns.lastHash, payloadHash, contextObj)
 			
 			// Generar MemoryNode4DTES (Spec 02/10)
 			node := &pb.MemoryNode4DTES{
 				CausalHash: causalHash,
 				ParentHash: ns.lastHash,
 				Payload:    []byte(payload),
-				PayloadHash: hex.EncodeToString(func() []byte {
-					h := sha256.Sum256([]byte(payload))
-					return h[:]
-				}()),
-				Context: &pb.SixDimensionalContext{
-					LocusX:      LayerName,
-					LocusY:      "core.life",
-					LocusZ:      "heartbeat",
-					LamportT:    tick,
-					AuthorityA:  pb.AuthorityLevel_AGENT,
-					IntentI:     pb.IntentType_OBSERVATION,
-				},
+				PayloadHash: payloadHash,
+				Context:    contextObj,
 			}
 
 			// Telemetría con EventId (Spec 13)
