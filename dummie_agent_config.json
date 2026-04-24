@@ -19,12 +19,12 @@
       ]
     },
     "memory": {
-      "command": "node",
-      "args": ["@modelcontextprotocol/server-memory"]
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-memory"]
     },
     "git": {
-      "command": "node",
-      "args": ["@modelcontextprotocol/server-git", "--repository", "/home/jorand/Escritorio/DUMMIE Engine"]
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-git", "--repository", "/home/jorand/Escritorio/DUMMIE Engine"]
     }
   }
 }

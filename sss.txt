@@ -23,7 +23,7 @@ nvestigación de Ingeniería: Anatomía y Orquestación de Agentes Industriales
       Snapshots (Spec 17) para no desperdiciar tokens.
    4. Long-Term Memory (Loci): El acceso al Palacio de Loci (KùzuDB) mediante RAG de Grafos.
    5. Reasoning Loop (Logic): El algoritmo de pensamiento (ReAct, Reflexion o Plan-and-Execute). En
-      nuestro caso, usamos LangGraph en L2 para definir el flujo de control.
+      nuestro caso, usamos el Custom Orchestration Daemon (Antigravity) en L2 para definir el flujo de control MAS.
 
   ---
 

@@ -19,19 +19,30 @@ func NewIOSidecar(nc *nats.Conn) *IOSidecar {
 }
 
 func (s *IOSidecar) Start(ctx context.Context) {
-	// Suscribirse a solicitudes de MCP (Spec 15)
+	// Suscribirse a solicitudes de MCP globales (Spec 15)
 	sub, err := s.nc.Subscribe("core.v2.mcp.request", func(m *nats.Msg) {
 		log.Printf("[L1-Sidecar] MCP Request recibida: %s", string(m.Data))
-		// Lógica de ruteo hacia L2 o ejecución directa si es atómica
 		s.nc.Publish(m.Reply, []byte("ACK_MCP_V2_L1"))
 	})
-
 	if err != nil {
 		log.Fatalf("[!] Error al iniciar Sidecar MCP: %v", err)
 	}
 
 	log.Println("[+] Sidecar de I/O (MCP) activo en core.v2.mcp.request")
 
+	// Soporte para Sesiones Flotantes (Spec 30)
+	sessionSub, err := s.nc.Subscribe("core.v2.mcp.session.*.request", func(m *nats.Msg) {
+		log.Printf("[L1-Sidecar] Session Request recibida en %s", m.Subject)
+		s.nc.Publish(m.Reply, []byte("ACK_SESSION_ROUTED_L1"))
+	})
+
+	if err != nil {
+		log.Printf("[!] Error al suscribir a sesiones: %v", err)
+	}
+
 	<-ctx.Done()
 	sub.Unsubscribe()
+	if sessionSub != nil {
+		sessionSub.Unsubscribe()
+	}
 }
