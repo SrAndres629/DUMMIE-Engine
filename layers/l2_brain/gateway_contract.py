@@ -1,5 +1,5 @@
 from datetime import datetime
-from pydantic import BaseModel, Field, validator
+from pydantic import BaseModel, Field, field_validator
 from typing import List, Dict, Optional, Any
 import xml.etree.ElementTree as ET
 from enum import Enum
@@ -16,7 +16,7 @@ class TaskExecution(BaseModel):
     agent_locus: AgentLocus
     intent: str
     arguments: Dict[str, str]
-    depends_on: List[str] = []
+    depends_on: List[str] = Field(default_factory=list)
 
 class GatewayRequest(BaseModel):
     """
@@ -27,8 +27,9 @@ class GatewayRequest(BaseModel):
     dag_xml: str  # El DAG se define en XML para anclaje AST y enrutamiento complejo
     priority: int = 1
 
-    @validator("dag_xml")
-    def validate_dag_structure(cls, v):
+    @field_validator("dag_xml")
+    @classmethod
+    def validate_dag_structure(cls, v: str):
         """
         [Metacognición: Rama C] Valida la integridad del DAG en el XML.
         Evita ciclos y asegura que los agentes definidos sean válidos.
@@ -78,5 +79,5 @@ class SagaTransaction(BaseModel):
     """
     transaction_id: str
     context_token: str # Token único para aislamiento de contexto (L2-Sync)
-    steps: List[SagaStep] = []
+    steps: List[SagaStep] = Field(default_factory=list)
     start_time: str = Field(default_factory=lambda: datetime.now().isoformat())

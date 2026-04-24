@@ -42,6 +42,9 @@ build-l0:
 		mix deps.get && \
 		mix compile
 	@echo "[✓] L0 compilado."
+	@echo "=== Compilando Memory Plane (Go) ==="
+	cd layers/l0_overseer && go build -o ../../bin/memory_server ./cmd/memory/main.go
+	@echo "[✓] Memory Plane compilado."
 
 # 3. Capa L1 - Nervous (Go)
 build-l1:

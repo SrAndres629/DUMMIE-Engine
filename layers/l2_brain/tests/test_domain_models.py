@@ -1,30 +1,38 @@
 import pytest
-from brain.domain.context.models import SixDimensionalContext, AuthorityLevel, IntentType
+import sys
+from pathlib import Path
 
-def test_six_dimensional_context_creation():
-    v = SixDimensionalContext(
-        locus_x="domain",
-        locus_y="fabrication",
-        locus_z="models",
-        lamport_t=100,
-        authority_a=AuthorityLevel.AGENT,
-        intent_i=IntentType.MUTATION
-    )
-    assert v.locus_x == "domain"
-    assert v.immutable_core() == ("domain", "fabrication", "models", 100, "MUTATION")
-    
-    hash_val = v.compute_context_hash()
-    assert isinstance(hash_val, str)
-    assert len(hash_val) == 64
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 
-def test_six_dimensional_context_validation():
-    with pytest.raises(ValueError):
-        # intent_i is required
-        SixDimensionalContext(
-            locus_x="domain",
-            locus_y="fabrication",
-            locus_z="models",
-            lamport_t=100,
-            authority_a=AuthorityLevel.AGENT
-        )
+from models import SixDimensionalContext, AgentIntent, AuthorityLevel, IntentType
 
+
+def test_six_dimensional_context_defaults():
+    ctx = SixDimensionalContext()
+    assert ctx.x == 0.0
+    assert ctx.a == AuthorityLevel.READ
+    assert ctx.i == IntentType.CONTEXT
+    assert ctx.metadata == {}
+
+
+def test_six_dimensional_context_metadata_is_isolated():
+    ctx_a = SixDimensionalContext()
+    ctx_b = SixDimensionalContext()
+
+    ctx_a.metadata["trace_id"] = "T-001"
+
+    assert ctx_b.metadata == {}
+    assert ctx_a.metadata["trace_id"] == "T-001"
+
+
+def test_agent_intent_defaults():
+    intent = AgentIntent(agent_id="A-01", goal="Refactor daemon planner")
+    assert intent.intent_type == IntentType.FABRICATION
+    assert intent.constraints == []
+
+
+def test_authority_and_intent_enums_are_stable():
+    assert AuthorityLevel.ADMIN.value == "ADMIN"
+    assert IntentType.REPAIR.value == "REPAIR"

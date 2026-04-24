@@ -23,26 +23,37 @@ except ImportError:
 logger = logging.getLogger("dummie-mcp.infra")
 
 def bootstrap_orchestrator(kuzu_db_path: str, aiwg_dir: str):
+    from memory_ipc import ArrowMemoryBridge
+    
+    SOCKET_PATH = "/tmp/dummie_memory.sock"
     db = None
     read_only = False
-    
-    try:
-        db = kuzu.Database(kuzu_db_path)
-        logger.info(f"Master instance initialized at {kuzu_db_path}")
-    except RuntimeError as e:
-        error_msg = str(e)
-        if "Could not set lock on file" in error_msg or "Permission denied" in error_msg:
-            try:
-                logger.warning(f"Lock active on {kuzu_db_path}. Attempting READER mode.")
-                db = kuzu.Database(kuzu_db_path, read_only=True)
-                read_only = True
-            except Exception as e2:
-                logger.critical(f"Database totally locked. OFFLINE mode. {str(e2)}")
-                db = None
-                read_only = True
-        else:
-            logger.error(f"Unexpected DB error: {error_msg}")
-            raise
+
+    # [SPEC-30] Intento de conexión al Memory Plane (Zero-Copy IPC)
+    bridge = ArrowMemoryBridge(SOCKET_PATH)
+    if bridge.heartbeat():
+        logger.info(f"Memory Plane active and verified at {SOCKET_PATH}. Activating IPC mode.")
+        db = bridge
+    else:
+        logger.warning(f"Memory Plane not responding at {SOCKET_PATH}. Falling back to native mode.")
+        # Fallback a acceso nativo (con riesgo de Lock)
+        try:
+            db = kuzu.Database(kuzu_db_path)
+            logger.info(f"Native master instance initialized at {kuzu_db_path}")
+        except RuntimeError as e:
+            error_msg = str(e)
+            if "Could not set lock on file" in error_msg or "Permission denied" in error_msg:
+                try:
+                    logger.warning(f"Lock active on {kuzu_db_path}. Attempting READER mode.")
+                    db = kuzu.Database(kuzu_db_path, read_only=True)
+                    read_only = True
+                except Exception as e2:
+                    logger.critical(f"Database totally locked. OFFLINE mode. {str(e2)}")
+                    db = None
+                    read_only = True
+            else:
+                logger.error(f"Unexpected DB error: {error_msg}")
+                raise
 
     event_store = KuzuRepository(db_path=kuzu_db_path if db else None, db=db)
     if read_only or db is None:

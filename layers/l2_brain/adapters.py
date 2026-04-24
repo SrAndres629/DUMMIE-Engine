@@ -12,12 +12,21 @@ class KuzuRepository:
         self.read_only = False
         self.conn = None
         if db:
-            import kuzu
-            self.conn = kuzu.Connection(db)
+            if hasattr(db, "ipc"):
+                # [SPEC-30] Memory Plane (Arrow IPC)
+                # Obtenemos el proxy de conexión directamente
+                self.conn = db.ipc
+                logger.info("KuzuRepository initialized in IPC mode (Zero-Copy)")
+            else:
+                # Modo Nativo
+                import kuzu
+                self.conn = kuzu.Connection(db)
 
     def query(self, cypher: str):
         if not self.conn: return []
-        return self.conn.execute(cypher)
+        if hasattr(self.conn, "execute"):
+            return self.conn.execute(cypher)
+        return []
 
 class DecisionLedgerAdapter:
     def __init__(self, ledger_path: str, lessons_path: str, ambiguities_path: str, ontological_map_path: str):
