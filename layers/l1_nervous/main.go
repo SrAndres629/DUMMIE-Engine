@@ -2,6 +2,8 @@ package main
 
 import (
 	"context"
+	"crypto/sha256"
+	"encoding/hex"
 	"fmt"
 	"log"
 	"os"
@@ -44,15 +46,17 @@ func (lc *LamportClock) Sync(other uint64) {
 
 // NervousSystem (L1) - El Relojero de Lamport
 type NervousSystem struct {
-	nc        *nats.Conn
-	clock     *LamportClock
+	nc         *nats.Conn
+	clock      *LamportClock
 	universeID string
+	lastHash   string
 }
 
 func NewNervousSystem(universeID string) *NervousSystem {
 	return &NervousSystem{
 		clock:      &LamportClock{counter: 0},
 		universeID: universeID,
+		lastHash:   "0000000000000000000000000000000000000000000000000000000000000000", // Genesis Hash
 	}
 }
 
@@ -63,6 +67,12 @@ func (ns *NervousSystem) Connect() error {
 	}
 	ns.nc = nc
 	return nil
+}
+
+func (ns *NervousSystem) computeCausalHash(tick uint64, payload string) string {
+	content := fmt.Sprintf("%s|%d|%s", ns.lastHash, tick, payload)
+	hash := sha256.Sum256([]byte(content))
+	return hex.EncodeToString(hash[:])
 }
 
 // Loop de Latido Sistémico (Heartbeat - Spec 05/13)
@@ -76,24 +86,38 @@ func (ns *NervousSystem) StartHeartbeat(ctx context.Context) {
 			return
 		case <-ticker.C:
 			tick := ns.clock.Tick()
+			payload := "PULSE_HEARTBEAT"
+			causalHash := ns.computeCausalHash(tick, payload)
 			
-			// Generar EventID Causal (Spec 10/12)
-			event := &pb.EventId{
-				UniverseId:     ns.universeID,
-				BranchId:       "main",
-				LamportTick:    tick,
-				Authority:      pb.AuthorityLevel_AGENT,
+			// Generar MemoryNode4DTES (Spec 02/10)
+			node := &pb.MemoryNode4DTES{
+				CausalHash: causalHash,
+				ParentHash: ns.lastHash,
+				Payload:    []byte(payload),
+				PayloadHash: hex.EncodeToString(func() []byte {
+					h := sha256.Sum256([]byte(payload))
+					return h[:]
+				}()),
+				Context: &pb.SixDimensionalContext{
+					LocusX:      LayerName,
+					LocusY:      "core.life",
+					LocusZ:      "heartbeat",
+					LamportT:    tick,
+					AuthorityA:  pb.AuthorityLevel_AGENT,
+					IntentI:     pb.IntentType_OBSERVATION,
+				},
 			}
 
 			// Telemetría con EventId (Spec 13)
 			if ns.nc != nil {
-				data, _ := proto.Marshal(event)
+				data, _ := proto.Marshal(node)
 				ns.nc.Publish("core.v2.life.heartbeat", data)
 				
 				// Simulación de Registro Apache Arrow (Zero-Copy) en Unidad D
-				// En producción, esto usaría cgo o garrow para escribir RecordBatches
-				log.Printf("[%s] Pulse: LamportTick=%d | ArrowBatch persistido en /media/datasets/dummie/telemetry", LayerName, tick)
+				log.Printf("[%s] Pulse: CausalHash=%s (parent: %s) | LamportTick=%d", LayerName, causalHash[:8], ns.lastHash[:8], tick)
 			}
+			
+			ns.lastHash = causalHash
 		}
 	}
 }
