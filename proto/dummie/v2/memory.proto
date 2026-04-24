@@ -62,20 +62,13 @@ message SixDimensionalContext {
     uint64 lamport_t = 4;     // Contador monotónico local de causalidad
 
     // [1D Soberanía]
-    AuthorityLevel authority_a = 5; // Peso determinista en la resolución de conflictos
+    .dummie.v2.AuthorityLevel authority_a = 5; // Peso determinista en la resolución de conflictos
 
     // [1D Causalidad Intencional]
     IntentType intent_i = 6;  // Razón inmutable de la existencia del nodo
 }
 
-enum AuthorityLevel {
-    AUTHORITY_UNSPECIFIED = 0;
-    AGENT = 1;      // Operación de rutina
-    ENGINEER = 2;   // Refactor de capas bajas (L1-L4)
-    ARCHITECT = 3;  // Mutación topológica
-    OVERSEER = 4;   // L0 - Sistema base
-    HUMAN = 5;      // PAH (Override absoluto)
-}
+import "proto/dummie/v2/core.proto";
 
 enum IntentType {
     INTENT_UNSPECIFIED = 0;

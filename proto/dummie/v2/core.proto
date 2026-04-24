@@ -4,12 +4,14 @@ package dummie.v2;
 
 option go_package = "io.dummie.v2/nervous/proto;dummie_v2";
 
-// === Nivel de Autoridad (Spec 10/12) ===
+// === Nivel de Autoridad (Spec 10/12/18) ===
 enum AuthorityLevel {
-    AGENT_PROPOSAL = 0;
-    CONSENSUS_COMMIT = 1;
-    HUMAN_OVERRIDE = 2;
-    EXECUTIVE_ARBITER = 3;
+    AUTHORITY_UNSPECIFIED = 0;
+    AGENT = 1;      // Operación de rutina
+    ENGINEER = 2;   // Refactor de capas bajas (L1-L4)
+    ARCHITECT = 3;  // Mutación topológica
+    OVERSEER = 4;   // L0 - Sistema base
+    HUMAN = 5;      // PAH (Override absoluto)
 }
 
 // === Identidad Causal 4D-TES (Spec 10) ===

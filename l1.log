@@ -1,0 +1,8 @@
+=== L1_NERVOUS: El Relojero de Lamport Iniciado ===
+2026/04/24 03:30:18 [+] Conexión a NATS establecida.
+2026/04/24 03:30:18 [+] Sidecar de I/O (MCP) activo en core.v2.mcp.request
+2026/04/24 03:30:21 [L1_NERVOUS] Pulse: LamportTick=1 | ArrowBatch persistido en /media/datasets/dummie/telemetry
+2026/04/24 03:30:24 [L1_NERVOUS] Pulse: LamportTick=2 | ArrowBatch persistido en /media/datasets/dummie/telemetry
+2026/04/24 03:30:27 [L1_NERVOUS] Pulse: LamportTick=3 | ArrowBatch persistido en /media/datasets/dummie/telemetry
+
+=== L1_NERVOUS: Apoptosis Causal Controlada ===

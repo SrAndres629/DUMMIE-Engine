@@ -82,7 +82,7 @@ func (ns *NervousSystem) StartHeartbeat(ctx context.Context) {
 				UniverseId:     ns.universeID,
 				BranchId:       "main",
 				LamportTick:    tick,
-				Authority:      pb.AuthorityLevel_CONSENSUS_COMMIT,
+				Authority:      pb.AuthorityLevel_AGENT,
 			}
 
 			// Telemetría con EventId (Spec 13)

@@ -34,7 +34,7 @@ defmodule Overseer.HealthMonitor do
   apoptosis adaptativa y dilación temporal según Spec 05.
   """
   use GenServer
-  alias DUMMIE Engine.V2.EventId
+  alias Dummie.V2.EventId
 
   @base_timeout 15_000 # 15 segundos para Alpha (Spec 05)
   @topic_heartbeat "core.v2.life.heartbeat"

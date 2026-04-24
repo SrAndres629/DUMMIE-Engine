@@ -19,19 +19,18 @@ proto-gen:
 	@mkdir -p $(GO_PROTO_OUT) $(EX_PROTO_OUT) $(PY_PROTO_OUT)
 	# Go (L1)
 	protoc --proto_path=. \
-		--go_out=. --go_opt=module=io.dummie.v2/nervous \
-		--go-grpc_out=. --go-grpc_opt=module=io.dummie.v2/nervous \
+		--go_out=layers/l1_nervous --go_opt=module=io.dummie.v2/nervous \
+		--go-grpc_out=layers/l1_nervous --go-grpc_opt=module=io.dummie.v2/nervous \
 		$(PROTO_DIR)/*.proto
-	mv proto/dummie/v2/*.pb.go $(GO_PROTO_OUT)/ 2>/dev/null || true
 	# Elixir (L0)
 	protoc --proto_path=. \
 		--elixir_out=$(EX_PROTO_OUT) \
 		$(PROTO_DIR)/*.proto
 	# Python (L2)
-	python3 -m grpc_tools.protoc --proto_path=. \
-		--python_out=$(PY_PROTO_OUT) \
-		--grpc_python_out=$(PY_PROTO_OUT) \
-		$(PROTO_DIR)/*.proto
+	cd layers/l2_brain && uv run python -m grpc_tools.protoc --proto_path=../.. \
+		--python_out=proto \
+		--grpc_python_out=proto \
+		../../$(PROTO_DIR)/*.proto
 	@echo "[✓] Stubs generados."
 
 # 2. Capa L0 - Overseer (Elixir)
@@ -71,7 +70,10 @@ build-l4:
 factory-reset: clean all
 
 clean:
-	rm -rf bin/* proto/dummie/v2/*.pb.go $(GO_PROTO_OUT)/*.pb.go $(EX_PROTO_OUT)/*.pb.ex $(PY_PROTO_OUT)/*.py
+	rm -rf bin/*
+	rm -rf layers/l1_nervous/proto/*.pb.go
+	rm -rf layers/l0_overseer/lib/proto/*
+	rm -rf layers/l2_brain/proto/*.py
 	cd layers/l1_nervous && go clean
 	cd layers/l3_shield && cargo clean
 	cd layers/l4_edge && rm -rf zig-out/ zig-cache/

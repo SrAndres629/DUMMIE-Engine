@@ -1,0 +1,14 @@
+/home/jorand/Escritorio/DUMMIE Engine/layers/l3_shield/target/release/deps/pyo3_build_config-8f48c82fd10a2081.d: /home/jorand/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pyo3-build-config-0.28.3/src/lib.rs /home/jorand/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pyo3-build-config-0.28.3/src/errors.rs /home/jorand/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pyo3-build-config-0.28.3/src/impl_.rs /home/jorand/Escritorio/DUMMIE\ Engine/layers/l3_shield/target/release/build/pyo3-build-config-990bd52ee82ae264/out/pyo3-build-config-file.txt /home/jorand/Escritorio/DUMMIE\ Engine/layers/l3_shield/target/release/build/pyo3-build-config-990bd52ee82ae264/out/pyo3-build-config.txt
+
+/home/jorand/Escritorio/DUMMIE Engine/layers/l3_shield/target/release/deps/libpyo3_build_config-8f48c82fd10a2081.rlib: /home/jorand/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pyo3-build-config-0.28.3/src/lib.rs /home/jorand/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pyo3-build-config-0.28.3/src/errors.rs /home/jorand/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pyo3-build-config-0.28.3/src/impl_.rs /home/jorand/Escritorio/DUMMIE\ Engine/layers/l3_shield/target/release/build/pyo3-build-config-990bd52ee82ae264/out/pyo3-build-config-file.txt /home/jorand/Escritorio/DUMMIE\ Engine/layers/l3_shield/target/release/build/pyo3-build-config-990bd52ee82ae264/out/pyo3-build-config.txt
+
+/home/jorand/Escritorio/DUMMIE Engine/layers/l3_shield/target/release/deps/libpyo3_build_config-8f48c82fd10a2081.rmeta: /home/jorand/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pyo3-build-config-0.28.3/src/lib.rs /home/jorand/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pyo3-build-config-0.28.3/src/errors.rs /home/jorand/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pyo3-build-config-0.28.3/src/impl_.rs /home/jorand/Escritorio/DUMMIE\ Engine/layers/l3_shield/target/release/build/pyo3-build-config-990bd52ee82ae264/out/pyo3-build-config-file.txt /home/jorand/Escritorio/DUMMIE\ Engine/layers/l3_shield/target/release/build/pyo3-build-config-990bd52ee82ae264/out/pyo3-build-config.txt
+
+/home/jorand/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pyo3-build-config-0.28.3/src/lib.rs:
+/home/jorand/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pyo3-build-config-0.28.3/src/errors.rs:
+/home/jorand/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pyo3-build-config-0.28.3/src/impl_.rs:
+/home/jorand/Escritorio/DUMMIE\ Engine/layers/l3_shield/target/release/build/pyo3-build-config-990bd52ee82ae264/out/pyo3-build-config-file.txt:
+/home/jorand/Escritorio/DUMMIE\ Engine/layers/l3_shield/target/release/build/pyo3-build-config-990bd52ee82ae264/out/pyo3-build-config.txt:
+
+# env-dep:CARGO_PKG_VERSION=0.28.3
+# env-dep:OUT_DIR=/home/jorand/Escritorio/DUMMIE Engine/layers/l3_shield/target/release/build/pyo3-build-config-990bd52ee82ae264/out

@@ -6,7 +6,7 @@ import warnings
 from proto.dummie.v2 import core_pb2 as proto_dot_dummie_dot_v2_dot_core__pb2
 from proto.dummie.v2 import orchestration_pb2 as proto_dot_dummie_dot_v2_dot_orchestration__pb2
 
-GRPC_GENERATED_VERSION = '1.80.0'
+GRPC_GENERATED_VERSION = '1.71.2'
 GRPC_VERSION = grpc.__version__
 _version_not_supported = False
 
@@ -19,7 +19,7 @@ except ImportError:
 if _version_not_supported:
     raise RuntimeError(
         f'The grpc package installed is at version {GRPC_VERSION},'
-        + ' but the generated code in proto/dummie/v2/orchestration_pb2_grpc.py depends on'
+        + f' but the generated code in proto/dummie/v2/orchestration_pb2_grpc.py depends on'
         + f' grpcio>={GRPC_GENERATED_VERSION}.'
         + f' Please upgrade your grpc module to grpcio>={GRPC_GENERATED_VERSION}'
         + f' or downgrade your generated code using grpcio-tools<={GRPC_VERSION}.'
