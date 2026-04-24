@@ -1,16 +1,15 @@
 {
   "mcpServers": {
     "dummie-nervous-adapter": {
-      "command": "uv",
+      "command": "/home/jorand/Escritorio/DUMMIE Engine/layers/l2_brain/.venv/bin/python",
       "args": [
-        "--directory",
-        "/home/jorand/Escritorio/DUMMIE Engine/layers/l1_nervous/adapters/mcp",
-        "run",
-        "python",
-        "server.py"
+        "/home/jorand/Escritorio/DUMMIE Engine/layers/l1_nervous/adapters/mcp/server.py"
       ],
       "env": {
-        "PYTHONPATH": "/home/jorand/Escritorio/DUMMIE Engine/layers/l2_brain/src:/home/jorand/Escritorio/DUMMIE Engine/layers/l1_nervous/adapters/mcp",
+        "DUMMIE_ROOT_DIR": "/home/jorand/Escritorio/DUMMIE Engine",
+        "DUMMIE_AIWG_DIR": "/home/jorand/Escritorio/DUMMIE Engine/.aiwg",
+        "DUMMIE_KUZU_DB_PATH": "/home/jorand/Escritorio/DUMMIE Engine/.aiwg/memory/loci_agent.db",
+        "PYTHONPATH": "/home/jorand/Escritorio/DUMMIE Engine/layers/l2_brain/src:/home/jorand/Escritorio/DUMMIE Engine/layers/l1_nervous",
         "PATH": "/home/jorand/.local/bin:/usr/local/bin:/usr/bin:/bin"
       }
     },
