@@ -112,3 +112,17 @@ class IStructuralAnalysisPort(Protocol):
         """Retorna una lista de hashes o IDs afectados por un cambio en el nodo target."""
         ...
 
+
+class IEmbeddingPort(Protocol):
+    """
+    Output Port para la generación de vectores semánticos (Embeddings).
+    Permite la búsqueda semántica local para reducir el consumo de tokens en la nube.
+    """
+    def generate_embedding(self, text: str) -> List[float]:
+        """Genera un vector numérico (embedding) a partir de una cadena de texto."""
+        ...
+
+    async def generate_embedding_async(self, text: str) -> List[float]:
+        """Versión asíncrona de la generación de embeddings."""
+        ...
+

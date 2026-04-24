@@ -13,6 +13,7 @@ class MemoryNode4DTES(BaseModel):
     context: SixDimensionalContext
     payload: bytes = Field(..., description="Excitación inmutable (Zstd compressed JSON o AST)")
     payload_hash: str = Field(..., description="Hash del payload aislado")
+    embedding: Optional[List[float]] = Field(None, description="Vector semántico local (Ollama/Gemma)")
 
     @classmethod
     def generate(cls, parent_hash: str, context: SixDimensionalContext, payload: bytes) -> "MemoryNode4DTES":

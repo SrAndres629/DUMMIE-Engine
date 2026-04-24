@@ -23,6 +23,7 @@ class CognitiveOrchestrator(IBrainOrchestrator):
         ledger_audit: ILedgerAuditPort,
         session_ledger: ISessionLedgerPort,
         skill_repo: ISkillRepositoryPort,
+        embedding_port: Optional["IEmbeddingPort"] = None,
         mode: str = "GREENFIELD"
     ):
         self.shield = shield_port
@@ -30,6 +31,7 @@ class CognitiveOrchestrator(IBrainOrchestrator):
         self.ledger_audit = ledger_audit
         self.session_ledger = session_ledger
         self.skill_repo = skill_repo
+        self.embedding_port = embedding_port
         self.mode = mode
         # Recuperar el tick máximo del Event Store (Spec 02 - Causal Ordering)
         # Esto previene la destrucción del ordenamiento causal tras reinicios.
@@ -104,6 +106,11 @@ class CognitiveOrchestrator(IBrainOrchestrator):
                     intent_i=intent.intent_i
                 )
             )
+            
+            # 5b. Generar Embedding Semántico (Local-RAG)
+            if self.embedding_port:
+                node.embedding = await self.embedding_port.generate_embedding_async(intent.rationale)
+
             self.event_store.append(node)
             print(f"[L2-Brain Orchestrator] Nodo 4D-TES encadenado: {node.causal_hash} (parent: {parent_hash})")
 

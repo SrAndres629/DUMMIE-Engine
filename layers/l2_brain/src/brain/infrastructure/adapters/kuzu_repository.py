@@ -57,6 +57,7 @@ class KuzuRepository(IEventStorePort, IStructuralAnalysisPort):
                     intent_i STRING,
                     payload STRING,
                     payload_hash STRING,
+                    embedding FLOAT[],
                     PRIMARY KEY (causal_hash)
                 )
             """)
@@ -101,7 +102,8 @@ class KuzuRepository(IEventStorePort, IStructuralAnalysisPort):
             locus_z: $lz,
             lamport_t: $lt,
             authority_a: $aa,
-            intent_i: $ii
+            intent_i: $ii,
+            embedding: $emb
         })
         """
         self.conn.execute(
@@ -117,6 +119,7 @@ class KuzuRepository(IEventStorePort, IStructuralAnalysisPort):
                 "lt": node.context.lamport_t,
                 "aa": node.context.authority_a,
                 "ii": node.context.intent_i,
+                "emb": node.embedding
             },
         )
 
@@ -154,7 +157,8 @@ class KuzuRepository(IEventStorePort, IStructuralAnalysisPort):
                     lamport_t=row[5],
                     authority_a=row[6],
                     intent_i=row[7]
-                )
+                ),
+                embedding=row[10]
             )
         return None
 
@@ -180,6 +184,27 @@ class KuzuRepository(IEventStorePort, IStructuralAnalysisPort):
             chain.append(node)
             current_hash = node.parent_hash
         return chain
+
+    def semantic_search(self, query_vector: List[float], top_k: int = 5) -> List[MemoryNode4DTES]:
+        """
+        Búsqueda semántica usando distancia coseno sobre KùzuDB (Spec Local-RAG).
+        """
+        # Kùzu 0.11+ admite cosine_similarity
+        query = """
+        MATCH (m:MemoryNode4D)
+        WHERE m.embedding IS NOT NULL
+        RETURN m.causal_hash, cosine_similarity(m.embedding, $vec) as similarity
+        ORDER BY similarity DESC
+        LIMIT $k
+        """
+        result = self.conn.execute(query, {"vec": query_vector, "k": top_k})
+        nodes = []
+        while result.has_next():
+            row = result.get_next()
+            node = self.get_by_hash(row[0])
+            if node:
+                nodes.append(node)
+        return nodes
 
     def compute_blast_radius(self, causal_hash: str) -> dict:
         """
