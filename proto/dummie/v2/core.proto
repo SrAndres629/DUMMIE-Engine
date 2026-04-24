@@ -82,3 +82,15 @@ message PolyglotError {
     bool is_recoverable = 5;
     EventId associated_event = 6;
 }
+
+// === Telemetría Distribuida (Spec 13) ===
+message TelemetrySpan {
+    string trace_id = 1;      // ID único de la operación (UUID)
+    string span_id = 2;       // ID del paso actual
+    string parent_span_id = 3;
+    string name = 4;          // Nombre de la operación (e.g., "KuzuQuery")
+    int64 start_time_ns = 5;
+    int64 end_time_ns = 6;
+    map<string, string> tags = 7; // Metadatos (layer, status, etc)
+    PolyglotError error = 8;
+}

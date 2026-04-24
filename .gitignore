@@ -1,0 +1,41 @@
+# --- DUMMIE Engine .gitignore ---
+
+# Logs & Temporales
+*.log
+*.old
+tmp/
+.aiwg/
+.gemini/
+
+# Binarios y Artefactos de Build
+bin/
+_build/
+deps/
+*.beam
+*.ez
+target/
+zig-out/
+zig-cache/
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.uv/
+
+# Node.js
+node_modules/
+dist/
+
+# Protobuf (Solo ignoramos los generados si queremos mantener la 'Physical Truth' en el repo)
+# Por política SDD, preferimos mantener los stubs si son necesarios para el despliegue,
+# pero en este caso los ignoraremos para forzar el build local.
+# layers/l0_overseer/lib/proto/
+# layers/l1_nervous/proto/
+# layers/l2_brain/proto/
+
+# OS
+.DS_Store
+.idea/
+.vscode/

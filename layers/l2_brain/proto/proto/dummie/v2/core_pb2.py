@@ -24,7 +24,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1aproto/dummie/v2/core.proto\x12\tdummie.v2\"\xcf\x01\n\x07\x45ventId\x12\x13\n\x0buniverse_id\x18\x01 \x01(\t\x12\x11\n\tbranch_id\x18\x02 \x01(\t\x12\x14\n\x0clamport_tick\x18\x03 \x01(\x04\x12,\n\tauthority\x18\x04 \x01(\x0e\x32\x19.dummie.v2.AuthorityLevel\x12\x15\n\rentropy_count\x18\x05 \x01(\r\x12\x10\n\x08is_toxic\x18\x06 \x01(\x08\x12/\n\rnecrosis_info\x18\x07 \x01(\x0b\x32\x18.dummie.v2.DeathMetadata\"\x85\x01\n\rDeathMetadata\x12&\n\x06reason\x18\x01 \x01(\x0e\x32\x16.dummie.v2.DeathReason\x12\x1e\n\x16last_known_instruction\x18\x02 \x01(\t\x12\x17\n\x0fsupervisor_note\x18\x03 \x01(\t\x12\x13\n\x0bstack_trace\x18\x04 \x01(\t\"\xe4\x01\n\x0cMemoryTicket\x12\x10\n\x08shm_path\x18\x01 \x01(\t\x12\x0e\n\x06offset\x18\x02 \x01(\x04\x12\x0e\n\x06length\x18\x03 \x01(\x04\x12\x11\n\talignment\x18\x04 \x01(\r\x12\x31\n\x0erequired_level\x18\x05 \x01(\x0e\x32\x19.dummie.v2.AuthorityLevel\x12\x17\n\x0fnamespace_scope\x18\x06 \x01(\t\x12\x10\n\x08is_toxic\x18\x07 \x01(\x08\x12\x18\n\x10ticket_uuid_high\x18\x08 \x01(\x04\x12\x17\n\x0fticket_uuid_low\x18\t \x01(\x04\"f\n\x15PhaseTransitionSignal\x12\x12\n\nfrom_phase\x18\x01 \x01(\t\x12\x10\n\x08to_phase\x18\x02 \x01(\t\x12\x11\n\tcat_token\x18\x03 \x01(\t\x12\x14\n\x0clamport_tick\x18\x04 \x01(\x04\"K\n\x12PhaseTransitionAck\x12\r\n\x05ready\x18\x01 \x01(\x08\x12\x0f\n\x07node_id\x18\x02 \x01(\t\x12\x15\n\rstatus_report\x18\x03 \x01(\t\"\x9f\x01\n\rPolyglotError\x12\x0c\n\x04\x63ode\x18\x01 \x01(\x05\x12\x0f\n\x07message\x18\x02 \x01(\t\x12\x13\n\x0bstack_trace\x18\x03 \x01(\t\x12\x14\n\x0corigin_layer\x18\x04 \x01(\t\x12\x16\n\x0eis_recoverable\x18\x05 \x01(\x08\x12,\n\x10\x61ssociated_event\x18\x06 \x01(\x0b\x32\x12.dummie.v2.EventId*l\n\x0e\x41uthorityLevel\x12\x19\n\x15\x41UTHORITY_UNSPECIFIED\x10\x00\x12\t\n\x05\x41GENT\x10\x01\x12\x0c\n\x08\x45NGINEER\x10\x02\x12\r\n\tARCHITECT\x10\x03\x12\x0c\n\x08OVERSEER\x10\x04\x12\t\n\x05HUMAN\x10\x05*w\n\x0b\x44\x65\x61thReason\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x14\n\x10SEMANTIC_TIMEOUT\x10\x01\x12\x11\n\rRESOURCES_OOM\x10\x02\x12\x11\n\rINFINITE_LOOP\x10\x03\x12\x0e\n\nVRAM_LIMIT\x10\x04\x12\x0f\n\x0bSHIELD_VETO\x10\x05\x42&Z$io.dummie.v2/nervous/proto;dummie_v2b\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1aproto/dummie/v2/core.proto\x12\tdummie.v2\"\xcf\x01\n\x07\x45ventId\x12\x13\n\x0buniverse_id\x18\x01 \x01(\t\x12\x11\n\tbranch_id\x18\x02 \x01(\t\x12\x14\n\x0clamport_tick\x18\x03 \x01(\x04\x12,\n\tauthority\x18\x04 \x01(\x0e\x32\x19.dummie.v2.AuthorityLevel\x12\x15\n\rentropy_count\x18\x05 \x01(\r\x12\x10\n\x08is_toxic\x18\x06 \x01(\x08\x12/\n\rnecrosis_info\x18\x07 \x01(\x0b\x32\x18.dummie.v2.DeathMetadata\"\x85\x01\n\rDeathMetadata\x12&\n\x06reason\x18\x01 \x01(\x0e\x32\x16.dummie.v2.DeathReason\x12\x1e\n\x16last_known_instruction\x18\x02 \x01(\t\x12\x17\n\x0fsupervisor_note\x18\x03 \x01(\t\x12\x13\n\x0bstack_trace\x18\x04 \x01(\t\"\xe4\x01\n\x0cMemoryTicket\x12\x10\n\x08shm_path\x18\x01 \x01(\t\x12\x0e\n\x06offset\x18\x02 \x01(\x04\x12\x0e\n\x06length\x18\x03 \x01(\x04\x12\x11\n\talignment\x18\x04 \x01(\r\x12\x31\n\x0erequired_level\x18\x05 \x01(\x0e\x32\x19.dummie.v2.AuthorityLevel\x12\x17\n\x0fnamespace_scope\x18\x06 \x01(\t\x12\x10\n\x08is_toxic\x18\x07 \x01(\x08\x12\x18\n\x10ticket_uuid_high\x18\x08 \x01(\x04\x12\x17\n\x0fticket_uuid_low\x18\t \x01(\x04\"f\n\x15PhaseTransitionSignal\x12\x12\n\nfrom_phase\x18\x01 \x01(\t\x12\x10\n\x08to_phase\x18\x02 \x01(\t\x12\x11\n\tcat_token\x18\x03 \x01(\t\x12\x14\n\x0clamport_tick\x18\x04 \x01(\x04\"K\n\x12PhaseTransitionAck\x12\r\n\x05ready\x18\x01 \x01(\x08\x12\x0f\n\x07node_id\x18\x02 \x01(\t\x12\x15\n\rstatus_report\x18\x03 \x01(\t\"\x9f\x01\n\rPolyglotError\x12\x0c\n\x04\x63ode\x18\x01 \x01(\x05\x12\x0f\n\x07message\x18\x02 \x01(\t\x12\x13\n\x0bstack_trace\x18\x03 \x01(\t\x12\x14\n\x0corigin_layer\x18\x04 \x01(\t\x12\x16\n\x0eis_recoverable\x18\x05 \x01(\x08\x12,\n\x10\x61ssociated_event\x18\x06 \x01(\x0b\x32\x12.dummie.v2.EventId\"\x8c\x02\n\rTelemetrySpan\x12\x10\n\x08trace_id\x18\x01 \x01(\t\x12\x0f\n\x07span_id\x18\x02 \x01(\t\x12\x16\n\x0eparent_span_id\x18\x03 \x01(\t\x12\x0c\n\x04name\x18\x04 \x01(\t\x12\x15\n\rstart_time_ns\x18\x05 \x01(\x03\x12\x13\n\x0b\x65nd_time_ns\x18\x06 \x01(\x03\x12\x30\n\x04tags\x18\x07 \x03(\x0b\x32\".dummie.v2.TelemetrySpan.TagsEntry\x12\'\n\x05\x65rror\x18\x08 \x01(\x0b\x32\x18.dummie.v2.PolyglotError\x1a+\n\tTagsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01*l\n\x0e\x41uthorityLevel\x12\x19\n\x15\x41UTHORITY_UNSPECIFIED\x10\x00\x12\t\n\x05\x41GENT\x10\x01\x12\x0c\n\x08\x45NGINEER\x10\x02\x12\r\n\tARCHITECT\x10\x03\x12\x0c\n\x08OVERSEER\x10\x04\x12\t\n\x05HUMAN\x10\x05*w\n\x0b\x44\x65\x61thReason\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x14\n\x10SEMANTIC_TIMEOUT\x10\x01\x12\x11\n\rRESOURCES_OOM\x10\x02\x12\x11\n\rINFINITE_LOOP\x10\x03\x12\x0e\n\nVRAM_LIMIT\x10\x04\x12\x0f\n\x0bSHIELD_VETO\x10\x05\x42&Z$io.dummie.v2/nervous/proto;dummie_v2b\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -32,10 +32,12 @@ _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'proto.dummie.v2.core_pb2', 
 if not _descriptor._USE_C_DESCRIPTORS:
   _globals['DESCRIPTOR']._loaded_options = None
   _globals['DESCRIPTOR']._serialized_options = b'Z$io.dummie.v2/nervous/proto;dummie_v2'
-  _globals['_AUTHORITYLEVEL']._serialized_start=961
-  _globals['_AUTHORITYLEVEL']._serialized_end=1069
-  _globals['_DEATHREASON']._serialized_start=1071
-  _globals['_DEATHREASON']._serialized_end=1190
+  _globals['_TELEMETRYSPAN_TAGSENTRY']._loaded_options = None
+  _globals['_TELEMETRYSPAN_TAGSENTRY']._serialized_options = b'8\001'
+  _globals['_AUTHORITYLEVEL']._serialized_start=1232
+  _globals['_AUTHORITYLEVEL']._serialized_end=1340
+  _globals['_DEATHREASON']._serialized_start=1342
+  _globals['_DEATHREASON']._serialized_end=1461
   _globals['_EVENTID']._serialized_start=42
   _globals['_EVENTID']._serialized_end=249
   _globals['_DEATHMETADATA']._serialized_start=252
@@ -48,4 +50,8 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_PHASETRANSITIONACK']._serialized_end=797
   _globals['_POLYGLOTERROR']._serialized_start=800
   _globals['_POLYGLOTERROR']._serialized_end=959
+  _globals['_TELEMETRYSPAN']._serialized_start=962
+  _globals['_TELEMETRYSPAN']._serialized_end=1230
+  _globals['_TELEMETRYSPAN_TAGSENTRY']._serialized_start=1187
+  _globals['_TELEMETRYSPAN_TAGSENTRY']._serialized_end=1230
 # @@protoc_insertion_point(module_scope)

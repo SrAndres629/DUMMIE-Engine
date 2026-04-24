@@ -99,8 +99,14 @@ defmodule Overseer.HealthMonitor do
       # Publicar VETO en NATS (Spec 03)
       Gnat.pub(:gnat, @topic_veto, "KILL_L1_INACTIVE_TIMEOUT")
       
-      # Nota: En una implementación física, L0 podría ejecutar `kill` sobre el PID de L1
-      # si L1 fue spawn-eado por L0. Por ahora, confiamos en el Control Plane.
+      # Autorepuesto (Spec 05 / Jidoka): Relanzar L1
+      if state.load_factor < 5.0 do
+        IO.puts("[L0] >> Intentando relanzar Sistema Nervioso (L1)...")
+        # Nota: Usamos una ruta absoluta o relativa al root del proyecto
+        # En una arquitectura industrial, esto lo gestionaría un supervisor de sistema (systemd/docker)
+        # pero para soberanía local, L0 toma el mando.
+        System.cmd("bash", ["-c", "cd ../.. && ./bin/l1_nervous > l1.log 2>&1 &"])
+      end
     end
 
     Process.send_after(self(), :check_apoptosis, 5_000)
