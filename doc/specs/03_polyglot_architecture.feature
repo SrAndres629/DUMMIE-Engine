@@ -1,24 +1,16 @@
-Feature: Arquitectura Políglota de 7 Capas (DE-V2-L0-03)
-  Criterios de Aceptación Ejecutables para el Swarm de Agentes.
+Feature: Arquitectura Políglota de 7 Capas contract
+  As an engineering team
+  I want this spec to stay aligned with physical implementation
+  So that agents and humans operate with low-entropy context
 
-  Scenario: Transition from PLANNING to VALIDATION
-    Given an agent in "PLANNING" state (L2 - Python)
-    And a formal code proposal is generated
-    When the agent requests transition to "VALIDATION"
-    Then the "Executive Arbiter" (L0 - Elixir) must verify the isolation rule
-    And the proposal must be passed to "L3 - Shield" (Rust)
-    And Performance Metric: transition_latency < 25ms
+  Scenario: frontmatter is complete
+    Given the spec file `03_polyglot_architecture.md`
+    Then it defines `spec_id`, `title`, `status`, `layer`, and `last_verified_on`
 
-  Scenario: Enforce Memory Ownership (FEI Model)
-    Given an "L3 - Shield" process as the MemoryOwner
-    When an "L2 - Brain" process attempts direct write to the pointer
-    Then the Shield must block the operation
-    And the system must emit a "VIO_HEX_001" fault signal
-    And Performance Metric: violation_detection_latency < 1ms
+  Scenario: evidence points to existing system areas
+    Given the physical evidence section
+    Then it references active repository paths for layer `L0`
 
-  Scenario: Adaptive Heartbeat Time Dilation
-    Given a system with a "load_factor" of 0.5
-    When L1 Nervous System emits a heartbeat
-    Then L0 Overseer must calculate a "DynamicTimeout" of 67.5s (45s * 1.5)
-    And the agent must not be purged before the Dilated Timeout.
-    And Performance Metric: calculation_overhead < 500us
+  Scenario: lifecycle is explicit
+    Given this spec status is `DRAFT`
+    Then implementation and roadmap expectations are unambiguous

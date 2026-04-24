@@ -1,39 +1,33 @@
 ---
 spec_id: "DE-V2-L1-30"
-title: "Protocolo de Orquestación de Sesiones Flotantes (Floating Context)"
+title: "Floating Sessions Protocol"
 status: "DRAFT"
-version: "1.0.0"
 layer: "L1"
-namespace: "io.dummie.v2.nervous.orchestration"
-authority: "ARCHITECT"
-dependencies:
-  - id: "DE-V2-L1-15"
-    relationship: "EXTENDS"
-tags: ["orchestration", "floating_sessions", "multi_tenancy", "context_isolation"]
+last_verified_on: "2026-04-24"
 ---
 
-# 30. Protocolo de Orquestación de Sesiones Flotantes
+# Floating Sessions Protocol
 
-## 1. Abstract
-Para industrializar el desarrollo agéntico y reducir el sesgo probabilístico, DUMMIE Engine implementa el **Modelo de Sesiones Flotantes**. Cada tarea de desarrollo se ejecuta en un "Nodo Contextual" efímero. Estos nodos son independientes entre sí, compartiendo únicamente la persistencia causal del Cerebro (L2).
+## Purpose
+Definir el contrato tecnico minimo de esta capacidad para el sistema actual.
 
-## 2. Ciclo de Vida de la Sesión (Apoptosis Controlada)
+## Current State
+Implementacion en transicion; requiere consolidacion de contrato.
 
-1.  **Spawn:** El Orquestador crea una instancia de MCP Sidecar con un `SessionID` único.
-2.  **Context Injection:** Se carga un sub-conjunto del grafo 4D-TES relevante para la tarea en la memoria de trabajo del nodo.
-3.  **Isolated Execution:** El agente opera sobre un `Workspace Shadow` (L0) aislado para evitar colisiones de archivos.
-4.  **Crystallization:** Al completar la tarea, los hallazgos se validan y se consolidan en el grafo principal.
-5.  **Apoptosis:** La sesión se destruye, liberando recursos y eliminando el sesgo acumulado en la memoria de corto plazo (KV-Cache).
+## Physical Evidence
+- `layers/l1_nervous`
+- `proto`
+- `dummie_agent_config.json`
 
-## 3. Direccionamiento via NATS
-El ruteo de mensajes se realiza mediante sujetos jerárquicos:
-- `core.v2.mcp.session.{SessionID}.request`: Peticiones entrantes.
-- `core.v2.mcp.session.{SessionID}.response`: Respuestas del nodo.
-- `core.v2.mcp.broadcast.status`: Latidos de salud de todas las sesiones activas.
+## Gaps
+- Falta trazabilidad fina entre contrato y pruebas de conformidad.
+- Existen diferencias historicas entre narrativa anterior y estado fisico actual.
 
-## 4. Invariantes de Seguridad
-- **Namespace Locking:** Una sesión no puede modificar archivos fuera de su namespace asignado sin una `Cross-Locus Permission` validada por el Shield (L3).
-- **Causal Sovereignty:** Solo una sesión puede ser `MASTER` de escritura para un `locus_x` específico en un tiempo $t$.
+## Next Actions
+1. Mantener este contrato alineado con el codigo real de su capa.
+2. Agregar o ajustar pruebas de conformidad para validar este contrato.
+3. Actualizar `doc/CORE_SPEC.md` y `doc/PHYSICAL_MAP.md` cuando cambie el alcance.
 
-## 5. Integración con Antigravity
-El IDE actuará como el orquestador principal de UI, visualizando cada sesión flotante como un hilo de trabajo independiente en el panel de herramientas.
+## Sibling Artifacts
+- `./30_floating_sessions.feature`
+- `./30_floating_sessions.rules.json`

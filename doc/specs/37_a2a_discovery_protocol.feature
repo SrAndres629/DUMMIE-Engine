@@ -1,16 +1,16 @@
-Feature: A2A Discovery Protocol (DE-V2-L2-37)
-  Criterios de Aceptación Ejecutables para el Descubrimiento entre Agentes.
+Feature: Protocolo de Descubrimiento Agent-to-Agent (A2A) contract
+  As an engineering team
+  I want this spec to stay aligned with physical implementation
+  So that agents and humans operate with low-entropy context
 
-  Scenario: Agent Capability Advertisement
-    Given an agent "A" with "Skill: Protobuf_Optimization"
-    When agent_A broadcasts its presence on "ao.v2.l2.brain.presence"
-    Then the Orchestrator must register its "Functional_Signature"
-    And other agents must be able to discover agent_A via a "Capability_Lookup"
-    And Performance Metric: discovery_broadcast_latency < 100ms
+  Scenario: frontmatter is complete
+    Given the spec file `37_a2a_discovery_protocol.md`
+    Then it defines `spec_id`, `title`, `status`, `layer`, and `last_verified_on`
 
-  Scenario: Secure A2A Delegation
-    Given agent "A" delegating a task to agent "B"
-    When agent_B accepts the delegation
-    Then an MCP Sidecar must be provisioned for the task execution
-    And all interactions must be traced via the "trace_id"
-    And Performance Metric: delegation_handshake < 500ms
+  Scenario: evidence points to existing system areas
+    Given the physical evidence section
+    Then it references active repository paths for layer `L2`
+
+  Scenario: lifecycle is explicit
+    Given this spec status is `DRAFT`
+    Then implementation and roadmap expectations are unambiguous

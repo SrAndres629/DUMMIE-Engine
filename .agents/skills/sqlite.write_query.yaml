@@ -1,0 +1,12 @@
+skill_id: sw.sqlite.write_query
+name: Write Query
+description: Execute an INSERT, UPDATE, or DELETE query on the SQLite database. Utilidad
+  del servidor sqlite.. Utilidad del servidor sqlite.. Utilidad del servidor sqlite.
+version: 1.1.0
+capabilities:
+- write_query
+invariants:
+- 'compliance: standard'
+metadata:
+  server: sqlite
+  status: active

@@ -1,20 +1,38 @@
 {
   "spec_id": "DE-V2-L2-40",
-  "domain": "L2_Metacognition",
-  "audit_triggers": [
-    "LAYER_SYNC_COMPLETE",
-    "JIDOKA_THRESHOLD_REACHED",
-    "SESSION_CLOSURE"
+  "title": "Metacognitive Audit Loop (Observador del Observador)",
+  "status": "DRAFT",
+  "layer": "L2",
+  "last_verified_on": "2026-04-24",
+  "required_frontmatter": [
+    "spec_id",
+    "title",
+    "status",
+    "layer",
+    "last_verified_on"
   ],
-  "mutation_governance": {
-    "trait_delta_limit_per_cycle": 0.2,
-    "min_refactoring_aggressiveness": 0.1,
-    "mandatory_pah_notification": true
-  },
-  "invariants": {
-    "no_silent_identity_mutation": true,
-    "mandatory_ledger_sync": true
-  },
-  "enforcement": "STRICT_BLOCK",
-  "personality_ref": "DE-V2-L0-33"
+  "required_sections": [
+    "Purpose",
+    "Current State",
+    "Physical Evidence",
+    "Gaps",
+    "Next Actions",
+    "Sibling Artifacts"
+  ],
+  "evidence_paths": [
+    "layers/l2_brain",
+    ".aiwg",
+    "governance/session_context.json"
+  ],
+  "policy": {
+    "allow_legacy_narrative": false,
+    "require_existing_links": true,
+    "status_values": [
+      "ACTIVE",
+      "DRAFT",
+      "PROPOSED",
+      "DEPRECATED",
+      "REFERENCE"
+    ]
+  }
 }

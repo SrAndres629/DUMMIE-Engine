@@ -1,0 +1,12 @@
+skill_id: sw.local-ssh-context.ssh_reconnect
+name: Ssh Reconnect
+description: Reconnect to SSH server (force reconnection). Utilidad del servidor local-ssh-context..
+  Utilidad del servidor local-ssh-context.. Utilidad del servidor local-ssh-context.
+version: 1.1.0
+capabilities:
+- ssh_reconnect
+invariants:
+- 'compliance: standard'
+metadata:
+  server: local-ssh-context
+  status: active

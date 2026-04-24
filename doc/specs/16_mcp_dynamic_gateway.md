@@ -1,39 +1,33 @@
-# Spec L1-16: MCP Dynamic Gateway (Semantic Tool Orchestration) - v2.0
+---
+spec_id: "DE-V2-L1-16B"
+title: "MCP Dynamic Gateway"
+status: "ACTIVE"
+layer: "L1"
+last_verified_on: "2026-04-24"
+---
 
-## 1. Contexto y Propósito (Metacognición 2026)
-El escalado de capacidades en DUMMIE Engine ha superado el modelo de "carga estática". Esta especificación define el **Gateway Cognitivo**, que no solo actúa como proxy, sino como un **Filtro de Atención** para el LLM, resolviendo la entropía informacional y los conflictos de concurrencia en entornos multi-agente.
+# MCP Dynamic Gateway
 
-## 2. Contrato de Interfaz (Gateway Tools)
+## Purpose
+Definir el contrato tecnico minimo de esta capacidad para el sistema actual.
 
-### 2.1 `list_remote_servers`
-- **Propósito:** Descubrimiento de infraestructuras.
-- **Metacognición:** Permite al agente mapear el "mapa de habilidades" del sistema sin saturar su RAM cognitiva.
+## Current State
+Implementacion parcial/operativa presente en el repositorio.
 
-### 2.2 `list_remote_tools(server_name)`
-- **Propósito:** Introspección bajo demanda.
+## Physical Evidence
+- `layers/l1_nervous`
+- `proto`
+- `dummie_agent_config.json`
 
-### 2.3 `exec_remote_tool(server_name, tool_name, arguments)`
-- **Propósito:** Ejecución de canal único.
-- **Tracing:** Cada ejecución genera automáticamente un `CausalID` (Spec 02) que vincula la acción al `Locus` del agente.
+## Gaps
+- Falta trazabilidad fina entre contrato y pruebas de conformidad.
+- Existen diferencias historicas entre narrativa anterior y estado fisico actual.
 
-### 2.4 `search_capabilities(query)`
-- **Propósito:** Descubrimiento semántico.
-- **Mecánica:** Integración con KùzuDB para buscar herramientas basadas en resultados de tareas previas similares.
+## Next Actions
+1. Mantener este contrato alineado con el codigo real de su capa.
+2. Agregar o ajustar pruebas de conformidad para validar este contrato.
+3. Actualizar `doc/CORE_SPEC.md` y `doc/PHYSICAL_MAP.md` cuando cambie el alcance.
 
-## 3. Resolución de Problemas Reales (Simulation-Driven)
-
-| Problema Identificado | Causalidad | Solución Metacognitiva (2026) |
-| :--- | :--- | :--- |
-| **Latencia de Round-Trip** | Múltiples saltos entre procesos. | **Intent-Based Pre-fetching:** El Gateway arranca servidores MCP en paralelo cuando detecta un `AgentIntent` complejo antes de que se solicite la tool. |
-| **Deriva de Estado** | Un agente modifica archivos y otro no se entera. | **Stateful Proxying:** El Gateway mantiene un "Diff-Cache" de los cambios realizados por herramientas remotas para inyectar avisos de consistencia. |
-| **Discovery Exhaustion** | El agente se pierde entre 500+ herramientas posibles. | **Hierarchical Menus:** Las herramientas se agrupan por `Locus` (sw.impl, sw.spec, etc.). Solo se muestran las del Locus activo. |
-| **Alucinación de Schema** | El LLM confunde argumentos entre herramientas similares. | **Schema Homogenization:** El Gateway valida los argumentos contra el `Zod/JSON Schema` original antes de enviarlos al sub-proceso. |
-
-## 4. Orquestación Multi-Agente (Swarm Mode)
-- **Shared Lock Registry:** El Gateway consulta el `L1_Nervous_Ledger` antes de ejecutar una tool que afecte el sistema de archivos o la memoria, evitando colisiones entre agentes paralelos.
-- **Context Injection API:** El Gateway puede inyectar "pistas" en el prompt del LLM sobre herramientas recomendadas basadas en el éxito de otros agentes del enjambre.
-
-## 5. Causalidad y Performance
-- **Token Budgeting:** Límite estricto de 2000 tokens para definiciones de herramientas por turno.
-- **Latency Budget:** Máximo 50ms de overhead en el routing de paquetes JSON-RPC.
-- **Persistence:** Todas las llamadas fallidas se registran como `lessons.jsonl` (Spec 48) para el auto-ajuste del Gateway.
+## Sibling Artifacts
+- `./16_mcp_dynamic_gateway.feature`
+- `./16_mcp_dynamic_gateway.rules.json`

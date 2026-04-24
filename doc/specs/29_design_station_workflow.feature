@@ -1,16 +1,16 @@
-Feature: Design Station Workflow (DE-V2-L2-29)
-  Criterios de Aceptación Ejecutables para la Estación de Diseño.
+Feature: Arquitectura de la Estación de Diseño (Workflow) contract
+  As an engineering team
+  I want this spec to stay aligned with physical implementation
+  So that agents and humans operate with low-entropy context
 
-  Scenario: Cognitive Handshake for New Feature
-    Given a new feature request "X"
-    When the Architect Agent initiates the "Design Handshake"
-    Then the system must provide the relevant LST sub-graph
-    And it must inject the Personality Constraints (Spec 33)
-    And Performance Metric: design_context_injection < 2s
+  Scenario: frontmatter is complete
+    Given the spec file `29_design_station_workflow.md`
+    Then it defines `spec_id`, `title`, `status`, `layer`, and `last_verified_on`
 
-  Scenario: Draft Validation before Physics
-    Given a new Spec draft in L0
-    When the Sentinel executes the "Semantic Audit"
-    Then it must pass the SDD Validator 3.0
-    And it must not contradict existing ADRs
-    And Performance Metric: draft_validation_time < 5s
+  Scenario: evidence points to existing system areas
+    Given the physical evidence section
+    Then it references active repository paths for layer `L2`
+
+  Scenario: lifecycle is explicit
+    Given this spec status is `DRAFT`
+    Then implementation and roadmap expectations are unambiguous

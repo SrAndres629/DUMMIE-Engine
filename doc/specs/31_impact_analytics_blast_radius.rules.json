@@ -1,18 +1,38 @@
 {
   "spec_id": "DE-V2-L2-31",
-  "domain": "L2_Impact",
-  "analysis_engine": {
-    "graph_db": "KùzuDB",
-    "required_scans": ["RECURSIVE_DEPS", "BLAST_RADIUS", "SIDEEFFECTS"]
-  },
-  "risk_thresholds": {
-    "global_veto_confidence": 0.95,
-    "neighborhood_alert_threshold": 0.70
-  },
-  "invariants": {
-    "veto_on_global_risk": true,
-    "mandatory_impact_report": true
-  },
-  "enforcement": "STRICT_BLOCK",
-  "personality_ref": "DE-V2-L0-33"
+  "title": "An\u00e1lisis de Impacto y Radio de Explosi\u00f3n",
+  "status": "DRAFT",
+  "layer": "L2",
+  "last_verified_on": "2026-04-24",
+  "required_frontmatter": [
+    "spec_id",
+    "title",
+    "status",
+    "layer",
+    "last_verified_on"
+  ],
+  "required_sections": [
+    "Purpose",
+    "Current State",
+    "Physical Evidence",
+    "Gaps",
+    "Next Actions",
+    "Sibling Artifacts"
+  ],
+  "evidence_paths": [
+    "layers/l2_brain",
+    ".aiwg",
+    "governance/session_context.json"
+  ],
+  "policy": {
+    "allow_legacy_narrative": false,
+    "require_existing_links": true,
+    "status_values": [
+      "ACTIVE",
+      "DRAFT",
+      "PROPOSED",
+      "DEPRECATED",
+      "REFERENCE"
+    ]
+  }
 }

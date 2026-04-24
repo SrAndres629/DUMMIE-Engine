@@ -1,24 +1,17 @@
-# 👁️ L4_Edge: Los Sentidos de Antigravity
+# L4 Edge
 
-## 1. Abstract
-La capa L4 es el sistema sensorial del DUMMIE Engine. Su función es descubrir capacidades, analizar la estructura del código y observar cambios en el entorno operativo para informar al Cerebro (L2).
+## Purpose
+Descubrimiento y observabilidad de capacidades/entorno para alimentar la orquestación.
 
-## 2. Divisiones Sensoriales
+## Current State
+- Descubrimiento MCP en `tool_discovery.py`.
+- Observador de archivos en estado inicial (`file_watcher.py`).
 
-### 2.1. Discovery (Descubrimiento)
-- **Locus:** `edge/discovery/`
-- **Función:** Detecta herramientas instaladas, servidores MCP activos y perfiles de agentes disponibles.
-- **Impacto:** Alimenta el catálogo del `SkillBinder`.
+## Key Gaps
+1. Parser de capacidades depende de formato textual frágil.
+2. Watcher no implementa monitoreo continuo real.
 
-### 2.2. Scanner (Análisis Estático)
-- **Locus:** `edge/scanner/`
-- **Función:** Realiza análisis profundo de la topología del lenguaje (**LST**).
-- **Mecanismo:** Implementación en Zig para máxima performance en el escaneo de símbolos.
-
-### 2.3. Observers (Monitoreo)
-- **Locus:** `edge/observers/`
-- **Función:** Vigilancia continua del sistema de archivos.
-- **Mecanismo:** Notificaciones reactivas (Inotify/Watchdog) para detectar mutaciones externas.
-
-## 3. Protocolo de Observación
-L4 opera bajo el principio de **"Sentir antes de Actuar"**. El cerebro consulta periódicamente a L4 para sincronizar su mapa mental con la realidad física del host.
+## Next Actions
+1. Estandarizar formato de inventario de capacidades.
+2. Implementar watcher con backend real y pruebas.
+3. Integrar eventos de edge al flujo de orquestación L2.

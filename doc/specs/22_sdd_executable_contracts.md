@@ -2,42 +2,31 @@
 spec_id: "DE-V2-L3-22"
 title: "Contratos Ejecutables de Gobernanza (SDD)"
 status: "ACTIVE"
-version: "2.2.0"
 layer: "L3"
-namespace: "io.dummie.v2.shield"
-authority: "ARCHITECT"
-dependencies:
-  - id: "DE-V2-L1-10"
-    relationship: "REQUIRES"
-tags: ["cognitive_core", "security_layer", "industrial_sdd"]
+last_verified_on: "2026-04-24"
 ---
 
-# 22. Contratos Ejecutables de Gobernanza (SDD)
+# Contratos Ejecutables de Gobernanza (SDD)
 
-## Abstract
-Los **Contratos Ejecutables** son la materialización física de las especificaciones SDD en Layer 3. Estos contratos actúan como "Architectural Fitness Functions" que validan cada transacción cognitiva contra los invariantes definidos en los archivos `.rules.json`, garantizando que el sistema nunca derive hacia estados de desorden o deuda técnica.
+## Purpose
+Definir el contrato tecnico minimo de esta capacidad para el sistema actual.
 
-## 1. Cognitive Context Model (Ref)
-Para el directorio de reglas de gobernanza, los modos de cumplimiento (Strict Block, Warn) y los requisitos de persistencia mediante AF_TOKEN, consulte el archivo hermano [22_sdd_executable_contracts.rules.json](./22_sdd_executable_contracts.rules.json).
+## Current State
+Implementacion parcial/operativa presente en el repositorio.
 
----
+## Physical Evidence
+- `layers/l3_shield`
+- `layers/l2_brain/daemon.py`
 
-## 2. Inyección de Restricciones
-El Escudo L3 inyecta las restricciones en el tiempo de ejecución:
-1.  **Contract Loading:** Carga de los archivos `.rules.json` asociados a la tarea activa.
-2.  **Inference Interception:** Análisis del `Thought Vector` y la `Action` propuesta por el Swarm.
-3.  **Fitness Check:** Evaluación de si la acción viola algún invariante estructural o de gobernanza.
+## Gaps
+- Falta trazabilidad fina entre contrato y pruebas de conformidad.
+- Existen diferencias historicas entre narrativa anterior y estado fisico actual.
 
----
+## Next Actions
+1. Mantener este contrato alineado con el codigo real de su capa.
+2. Agregar o ajustar pruebas de conformidad para validar este contrato.
+3. Actualizar `doc/CORE_SPEC.md` y `doc/PHYSICAL_MAP.md` cuando cambie el alcance.
 
-## 3. Prevención de Drift de Código
-Los contratos ejecutables prohíben la edición manual de archivos críticos:
-- **Hash Integrity:** Validación periódica de los hashes de los archivos de gobernanza.
-- **Strict Enforcement:** Cualquier intento de modificar las reglas sin seguir el flujo SDD bloquea el acceso de escritura al monorepo hasta que el Auditor L2 resuelva el conflicto.
-
----
-
-## [MSA] Sibling Components Requeridos
-Todo documento maestro debe ir acompañado de sus archivos hermanos para convertirse en una *Active Architectural Fitness Function*:
-- **Executable Contract:** [22_sdd_executable_contracts.feature](./22_sdd_executable_contracts.feature)
-- **Machine Rules:** [22_sdd_executable_contracts.rules.json](./22_sdd_executable_contracts.rules.json)
+## Sibling Artifacts
+- `./22_sdd_executable_contracts.feature`
+- `./22_sdd_executable_contracts.rules.json`

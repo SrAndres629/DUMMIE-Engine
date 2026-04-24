@@ -1,16 +1,16 @@
-Feature: Decision Ledger Auditor (DE-V2-L2-34)
-  Criterios de Aceptación Ejecutables para el Registro de Decisiones.
+Feature: Ledger de Decisiones e Interfaz de Alerta contract
+  As an engineering team
+  I want this spec to stay aligned with physical implementation
+  So that agents and humans operate with low-entropy context
 
-  Scenario: Log Sovereign Decision (PAH)
-    Given a decision made by the Human Authority (PAH)
-    When the Ledger Auditor receives the "Resolution_Signal"
-    Then it must persist the decision to "/ledger/sovereign_resolutions.jsonl"
-    And it must generate a "Knowledge Witness" hash linking to the Spec ID
-    And Performance Metric: logging_latency < 100ms
+  Scenario: frontmatter is complete
+    Given the spec file `34_decision_ledger_auditor.md`
+    Then it defines `spec_id`, `title`, `status`, `layer`, and `last_verified_on`
 
-  Scenario: Audit Agent Consistency against Ledger
-    Given an agent proposing a change
-    When the Auditor scans the "Decision Ledger" for contradictory past resolutions
-    Then it must block the proposal if a "Sovereign_Veto" is found
-    And it must emit a "Consistency_Violation" signal
-    And Performance Metric: audit_scan_time < 200ms
+  Scenario: evidence points to existing system areas
+    Given the physical evidence section
+    Then it references active repository paths for layer `L2`
+
+  Scenario: lifecycle is explicit
+    Given this spec status is `DRAFT`
+    Then implementation and roadmap expectations are unambiguous

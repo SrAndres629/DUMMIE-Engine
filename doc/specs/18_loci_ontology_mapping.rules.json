@@ -1,20 +1,37 @@
 {
   "spec_id": "DE-V2-L4-18",
-  "domain": "L4_Ontology",
-  "indexing": {
-    "engine": "Zig_LST_Scanner",
-    "graph_db": "KùzuDB",
-    "required_symbols": ["path", "hash", "type", "dependencies", "rbac_scope"]
-  },
-  "rbac_topography": {
-    "mode": "STRICT_CONTEXT_ISOLATION",
-    "access_levels": ["READ", "WRITE", "AUDIT"]
-  },
-  "invariants": {
-    "realtime_sync": true,
-    "mandatory_hash_integrity": true,
-    "no_circular_loci": true
-  },
-  "enforcement": "STRICT_BLOCK",
-  "personality_ref": "DE-V2-L0-33"
+  "title": "Palacio de Loci y RBAC Topogr\u00e1fico",
+  "status": "DRAFT",
+  "layer": "L4",
+  "last_verified_on": "2026-04-24",
+  "required_frontmatter": [
+    "spec_id",
+    "title",
+    "status",
+    "layer",
+    "last_verified_on"
+  ],
+  "required_sections": [
+    "Purpose",
+    "Current State",
+    "Physical Evidence",
+    "Gaps",
+    "Next Actions",
+    "Sibling Artifacts"
+  ],
+  "evidence_paths": [
+    "layers/l4_edge",
+    "layers/l1_nervous/mcp_proxy.py"
+  ],
+  "policy": {
+    "allow_legacy_narrative": false,
+    "require_existing_links": true,
+    "status_values": [
+      "ACTIVE",
+      "DRAFT",
+      "PROPOSED",
+      "DEPRECATED",
+      "REFERENCE"
+    ]
+  }
 }

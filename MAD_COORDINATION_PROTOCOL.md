@@ -1,26 +1,21 @@
-# PROTOCOLO DE COORDINACIÓN MULTI-AGENTE (MAD v2.5)
+# Multi-Agent Coordination Protocol
 
-Este documento establece las reglas de convivencia para los agentes que operan simultáneamente en el proyecto (Antigravity, Codex, Gemini CLI, etc.).
+## Purpose
+Coordinate concurrent agent work with minimal conflicts and deterministic integration.
 
-## 1. El Ledger de Enjambre (SSoT)
-El archivo `.aiwg/memory/swarm_ledger.jsonl` es la fuente única de verdad sobre la actividad actual.
-- **REGLA DE ORO**: Antes de iniciar una tarea, un agente DEBE consultar `observe_swarm`.
-- **REGLA DE ACCIÓN**: Antes de escribir/modificar archivos, un agente DEBE llamar a `broadcast_intent`.
+## Core Rules
+1. Work isolation by scope and owned files.
+2. Publish intent before high-impact edits.
+3. Prefer objective validation (tests/checks) over preference.
+4. Integrate only changes with evidence.
 
-## 2. Gestión de Conflictos (Atomic Locking)
-- Si dos agentes intentan modificar el mismo `target`, el agente con el **Lamport Clock** más bajo debe ceder o esperar a que el otro termine.
-- Si un agente detecta que otro está trabajando en el mismo componente, debe abrir un canal de "Sugerencia" (Lesson Log) en lugar de sobrescribir.
+## Conflict Resolution
+1. Deterministic validation results.
+2. Lower complexity and clearer invariants.
+3. Better traceability and rollback safety.
 
-## 3. Niveles de Permiso
-- **Nivel L0 (Solo Lectura)**: Observación del estado.
-- **Nivel L1 (Colaboración)**: Edición de archivos con broadcast previo.
-- **Nivel L2 (Orquestación)**: Modificación de infraestructura y coordinación de sub-agentes.
-
-## 4. Mitigación de Sandbox (bwrap)
-Si un agente CLI encuentra un error `Errno 1` (Operation not permitted):
-1. Reportar el bloqueo mediante `log_lesson`.
-2. Solicitar al usuario humano (Authority A) la elevación de privilegios o relajación del sandbox.
-3. Degradar a modo "Offline" para tareas que no requieran red.
-
----
-**[PROVISIÓN DE SOBERANÍA]**: Todo agente que siga este protocolo tiene permiso para proponer cambios y criticar los planes de otros agentes en el ledger de decisiones.
+## Required Handoff Data
+- target files,
+- assumptions,
+- validation evidence,
+- open risks.

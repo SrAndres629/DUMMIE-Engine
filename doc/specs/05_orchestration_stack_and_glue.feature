@@ -1,23 +1,16 @@
-  Scenario: Enforce Semantic Timeout
-    Given an agent in "ACTIVE" state
-    And the agent has not emitted tokens for "46s"
-    When L0 Overseer monitors the agent heartbeat
-    Then L0 must emit a "SIGKILL" signal
-    And the agent process must be terminated via Apoptosis
-    And Performance Metric: termination_latency < 500ms
+Feature: Stack de Orquestación y Arbitraje contract
+  As an engineering team
+  I want this spec to stay aligned with physical implementation
+  So that agents and humans operate with low-entropy context
 
-  Scenario: RAM Threshold Hibernation
-    Given an L2 agent process
-    When RAM usage exceeds "80%" of the allocated buffer
-    Then L0 Overseer must send an "Hiberation_Signal"
-    And the agent state must be persisted to "Redb" event store
-    And the process must be paused until resources are deallocated
-    And Performance Metric: freeze_time < 2s
+  Scenario: frontmatter is complete
+    Given the spec file `05_orchestration_stack_and_glue.md`
+    Then it defines `spec_id`, `title`, `status`, `layer`, and `last_verified_on`
 
-  Scenario: Executive Arbitration on Divergence
-    Given two agents with conflicting "LST Proposals"
-    And they have reached "3" iterations of failed consensus
-    When the L0 Executive Arbiter receives the impase signal
-    Then L0 must inject a "FINAL_DECISION" payload via NATS
-    And the Decision Ledger must record the resolution for future bias.
-    And Performance Metric: arbiter_selection_latency < 100ms
+  Scenario: evidence points to existing system areas
+    Given the physical evidence section
+    Then it references active repository paths for layer `L0`
+
+  Scenario: lifecycle is explicit
+    Given this spec status is `DRAFT`
+    Then implementation and roadmap expectations are unambiguous

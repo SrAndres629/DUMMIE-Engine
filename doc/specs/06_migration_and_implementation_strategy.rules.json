@@ -1,28 +1,38 @@
 {
   "spec_id": "DE-V2-L0-06",
-  "migration_phases": [
-    "INIT",
-    "ALPHA_STAGING",
-    "ALPHA_STABLE",
-    "BETA_STAGING",
-    "BETA_STABLE",
-    "GAMMA_DIVERGENCE",
-    "OMEGA_STATIONARY"
+  "title": "Estrategia de Migraci\u00f3n y Construcci\u00f3n (Greenfield)",
+  "status": "DRAFT",
+  "layer": "L0",
+  "last_verified_on": "2026-04-24",
+  "required_frontmatter": [
+    "spec_id",
+    "title",
+    "status",
+    "layer",
+    "last_verified_on"
   ],
-  "transition_criteria": {
-    "Alpha_Beta": { "latency_nats_ms": 2.0, "uptime_percent": 99.9 },
-    "Beta_Gamma": { "ffi_zero_copy_ns": 100.0, "sdd_coverage": 1.0 },
-    "Gamma_Omega": { "4d_tes_rewind_consistency": true }
-  },
-  "rollback_strategy": {
-    "suspension": "L0_Freeze",
-    "validation": "L3_Shield_Jidoka",
-    "sovereignty": "Absolute_Veto"
-  },
-  "invariants": [
-    "No code without Spec 22 contract",
-    "Mandatory ROI justification per Spec 14",
-    "PhaseTransitionSignal required for state advancement"
+  "required_sections": [
+    "Purpose",
+    "Current State",
+    "Physical Evidence",
+    "Gaps",
+    "Next Actions",
+    "Sibling Artifacts"
   ],
-  "personality_ref": "DE-V2-L0-33"
+  "evidence_paths": [
+    "layers/l0_overseer",
+    "doc/CORE_SPEC.md",
+    "doc/PHYSICAL_MAP.md"
+  ],
+  "policy": {
+    "allow_legacy_narrative": false,
+    "require_existing_links": true,
+    "status_values": [
+      "ACTIVE",
+      "DRAFT",
+      "PROPOSED",
+      "DEPRECATED",
+      "REFERENCE"
+    ]
+  }
 }

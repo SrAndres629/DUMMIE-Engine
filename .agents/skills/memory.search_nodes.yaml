@@ -1,0 +1,14 @@
+skill_id: sw.memory.search_nodes
+name: Search Nodes
+description: 'search_nodes: Gestion de grafo de memoria para entidades, relaciones
+  y observaciones trazables.. Acceso al grafo de conocimiento 4D-TES.. Acceso al grafo
+  de conocimiento 4D-TES.. Acceso al grafo de conocimiento 4D-TES.'
+version: 1.1.0
+capabilities:
+- search_nodes
+invariants:
+- 'verified_only: true'
+- 'long_term_persistence: true'
+metadata:
+  server: memory
+  status: active

@@ -1,0 +1,13 @@
+skill_id: sw.everything.get-resource-reference
+name: Get-Resource-Reference
+description: Returns a resource reference that can be used by MCP clients. Utilidad
+  del servidor everything.. Utilidad del servidor everything.. Utilidad del servidor
+  everything.
+version: 1.1.0
+capabilities:
+- get-resource-reference
+invariants:
+- 'compliance: standard'
+metadata:
+  server: everything
+  status: active

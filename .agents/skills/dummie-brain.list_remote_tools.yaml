@@ -1,0 +1,15 @@
+skill_id: sw.brain.list_remote_tools
+name: List Remote Tools
+description: Lista herramientas de un servidor proxyado.. Capacidad soberana del núcleo
+  dummie-brain.. Capacidad soberana del núcleo dummie-brain.. Capacidad soberana del
+  núcleo dummie-brain.
+version: 1.1.0
+capabilities:
+- list_remote_tools
+invariants:
+- 'sovereignty: high'
+- 'context_anchoring: mandatory'
+- 'layer: L1'
+metadata:
+  server: dummie-brain
+  status: active

@@ -1,16 +1,14 @@
-Feature: Agentic Department Segregation [2026]
-  Como el Orquestador del Sistema SDD
-  Quiero que cada agente respete estrictamente su Locus de responsabilidad
-  Para asegurar un flujo de fabricación de software inmutable y verificado
+Feature: Agent Collaboration Discipline
+  As a multi-agent team
+  I want explicit ownership and validation evidence
+  So that concurrent work remains consistent and auditable
 
-  Scenario: Escalada ante Inconsistencia de Contrato
-    Given un agente de "Implementation" detecta que una interfaz es insuficiente para el caso de uso
-    When intenta modificar el archivo de contrato en "proto/" o "openapi/"
-    Then el sistema debe bloquear la escritura directa
-    And forzar al agente a solicitar al "Contract Architect" la evolución formal del esquema
+  Scenario: agent handoff includes evidence
+    Given an agent finishes a task slice
+    When it hands off to another agent
+    Then changed files, assumptions, and validation evidence are included
 
-  Scenario: Validación de Comportamiento Mandatoria
-    Given el "Clean Coder Pro" ha terminado una funcionalidad
-    When el "Formal Validator" audita el código
-    Then debe existir un rastro de tests (Suites BDD) generado previamente por el "Behavior Synthesizer"
-    And los tests deben ser consistentes con la Spec aprobada
+  Scenario: conflicting edits are resolved deterministically
+    Given two agents propose different changes
+    When integration happens
+    Then deterministic checks and lower complexity decide acceptance

@@ -1,16 +1,16 @@
-Feature: Pipeline de Necro-Learning (DE-V2-L5-35)
-  Criterios de Aceptación Ejecutables para el Aprendizaje de Fallos.
+Feature: Pipeline de Necro-Learning contract
+  As an engineering team
+  I want this spec to stay aligned with physical implementation
+  So that agents and humans operate with low-entropy context
 
-  Scenario: Extract Danger Nodes from Dead Branches
-    Given a set of dead branches in "Cold Storage"
-    When the Necro-Auditor executes a "Causal Necropsy"
-    Then it must identify the "Danger Patterns" (conflicting symbols/traits)
-    And it must inject these patterns as "Danger Nodes" in Layer 4 (KùzuDB)
-    And Performance Metric: pattern_extraction_latency < 60s
+  Scenario: frontmatter is complete
+    Given the spec file `35_necro_learning_pipeline.md`
+    Then it defines `spec_id`, `title`, `status`, `layer`, and `last_verified_on`
 
-  Scenario: Preventative Veto via Necro-Awareness
-    Given a new agent intent that colides with a "Danger Node" (prob > 40%)
-    When the Sentinel performs the pre-flight check
-    Then the system must request a "Sovereign_Validation" from the PAH
-    And the execution must be paused until approval
-    And Performance Metric: risk_detection_time < 500ms
+  Scenario: evidence points to existing system areas
+    Given the physical evidence section
+    Then it references active repository paths for layer `L5`
+
+  Scenario: lifecycle is explicit
+    Given this spec status is `DRAFT`
+    Then implementation and roadmap expectations are unambiguous

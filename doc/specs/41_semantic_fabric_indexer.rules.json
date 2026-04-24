@@ -1,23 +1,38 @@
 {
   "spec_id": "DE-V2-L2-41",
-  "domain": "L2_Semantic",
-  "indexing_logic": {
-    "root_of_truth": "Lloci_Palace_Sync",
-    "cross_reference_validation": {
-      "adr_to_spec": true,
-      "spec_to_rules": true
-    }
-  },
-  "governance_states": {
-    "ACCEPTED": "Active_In_Payload",
-    "SUPERSEDED": "Ignored_In_Payload",
-    "DRAFT": "Audit_Only"
-  },
-  "orphan_handling": "STRICT_FAIL",
-  "invariants": {
-    "mandatory_ubiquitous_language_check": true,
-    "no_circular_references": true
-  },
-  "enforcement": "STRICT_BLOCK",
-  "personality_ref": "DE-V2-L0-33"
+  "title": "Semantic Fabric Indexer",
+  "status": "DRAFT",
+  "layer": "L2",
+  "last_verified_on": "2026-04-24",
+  "required_frontmatter": [
+    "spec_id",
+    "title",
+    "status",
+    "layer",
+    "last_verified_on"
+  ],
+  "required_sections": [
+    "Purpose",
+    "Current State",
+    "Physical Evidence",
+    "Gaps",
+    "Next Actions",
+    "Sibling Artifacts"
+  ],
+  "evidence_paths": [
+    "layers/l2_brain",
+    ".aiwg",
+    "governance/session_context.json"
+  ],
+  "policy": {
+    "allow_legacy_narrative": false,
+    "require_existing_links": true,
+    "status_values": [
+      "ACTIVE",
+      "DRAFT",
+      "PROPOSED",
+      "DEPRECATED",
+      "REFERENCE"
+    ]
+  }
 }

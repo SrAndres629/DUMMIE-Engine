@@ -1,16 +1,16 @@
-Feature: Optical Nerve Telemetry (DE-V2-L6-17)
-  Criterios de Aceptación Ejecutables para el Procesamiento Visual y Destilación Semántica.
+Feature: Nervio Óptico (Visualización 4D) contract
+  As an engineering team
+  I want this spec to stay aligned with physical implementation
+  So that agents and humans operate with low-entropy context
 
-  Scenario: Generate a Semantic Snapshot from a web page
-    Given a raw DOM content of "500KB" from a product page
-    When the Optical Nerve processes the input via Semantic Distillation
-    Then the resulting snapshot must be < "100KB"
-    And it must contain primary product metadata (Title, Price, Specs)
-    And the Performance Metric: distillation_latency < 150ms
-    And the Performance Metric: token_reduction_ratio > 0.8
+  Scenario: frontmatter is complete
+    Given the spec file `17_optical_nerve_telemetry.md`
+    Then it defines `spec_id`, `title`, `status`, `layer`, and `last_verified_on`
 
-  Scenario: Render causal telemetry in 4D Canvas
-    Given a set of OpenTelemetry traces from the Elixir L0 cluster
-    When the Command Canvas receives the pulse signal
-    Then it must project the nodes in a time-ordered 4D space
-    And the Performance Metric: rendering_frame_rate > 60fps
+  Scenario: evidence points to existing system areas
+    Given the physical evidence section
+    Then it references active repository paths for layer `L6`
+
+  Scenario: lifecycle is explicit
+    Given this spec status is `DRAFT`
+    Then implementation and roadmap expectations are unambiguous

@@ -1,24 +1,38 @@
 {
   "spec_id": "DE-V2-L0-14",
-  "metrics": {
-    "roi_formula": "(BusinessValue - OperationalCost) / OperationalCost",
-    "min_roi_threshold": 1.2,
-    "cost_factors": ["Inference (Tokens)", "Compute (Watts)", "Hardware Amortization"]
-  },
-  "economic_shields": {
-    "breaker": "E-Shield (Financial Circuit Breaker)",
-    "monitor": "L0_Overseer",
-    "enforcement": "L1_Socket_Cut"
-  },
-  "service_tiers": {
-    "Tier 0": "Architecture (High ROI)",
-    "Tier 1": "Standard (Balanced)",
-    "Tier 2": "Fast-Track (Local 0-Cost)"
-  },
-  "invariants": [
-    "No saga execution without ROI validation",
-    "Daily budget hard-cap enforcement via NATS",
-    "Maximum 3 iterations for aesthetic refactors (Economic Apoptosis)"
+  "title": "Ingenier\u00eda de Valor y Gobernanza Econ\u00f3mica",
+  "status": "DRAFT",
+  "layer": "L0",
+  "last_verified_on": "2026-04-24",
+  "required_frontmatter": [
+    "spec_id",
+    "title",
+    "status",
+    "layer",
+    "last_verified_on"
   ],
-  "personality_ref": "DE-V2-L0-33"
+  "required_sections": [
+    "Purpose",
+    "Current State",
+    "Physical Evidence",
+    "Gaps",
+    "Next Actions",
+    "Sibling Artifacts"
+  ],
+  "evidence_paths": [
+    "layers/l0_overseer",
+    "doc/CORE_SPEC.md",
+    "doc/PHYSICAL_MAP.md"
+  ],
+  "policy": {
+    "allow_legacy_narrative": false,
+    "require_existing_links": true,
+    "status_values": [
+      "ACTIVE",
+      "DRAFT",
+      "PROPOSED",
+      "DEPRECATED",
+      "REFERENCE"
+    ]
+  }
 }

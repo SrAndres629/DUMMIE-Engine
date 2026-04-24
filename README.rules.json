@@ -1,17 +1,21 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "Global State Integrity Constraints",
+  "title": "README Integrity Rules",
   "type": "object",
   "properties": {
     "required_sections": {
       "type": "array",
-      "items": { "type": "string", "enum": ["Architecture", "State", "Documentation"] }
+      "items": { "type": "string" },
+      "contains": { "const": "Estado actual" }
     },
-    "truth_alignment": {
+    "require_verifiable_paths": {
       "type": "boolean",
-      "const": true,
-      "description": "El README debe coincidir siempre con el estado del código y los ADRs activos."
+      "const": true
+    },
+    "allow_legacy_narrative": {
+      "type": "boolean",
+      "const": false
     }
   },
-  "required": ["required_sections", "truth_alignment"]
+  "required": ["required_sections", "require_verifiable_paths", "allow_legacy_narrative"]
 }

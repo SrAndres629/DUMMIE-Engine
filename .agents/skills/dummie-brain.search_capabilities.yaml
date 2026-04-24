@@ -1,0 +1,15 @@
+skill_id: sw.brain.search_capabilities
+name: Search Capabilities
+description: Descubrimiento semántico de herramientas.. Capacidad soberana del núcleo
+  dummie-brain.. Capacidad soberana del núcleo dummie-brain.. Capacidad soberana del
+  núcleo dummie-brain.
+version: 1.1.0
+capabilities:
+- search_capabilities
+invariants:
+- 'sovereignty: high'
+- 'context_anchoring: mandatory'
+- 'layer: L1'
+metadata:
+  server: dummie-brain
+  status: active

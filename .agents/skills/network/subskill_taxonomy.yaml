@@ -1,0 +1,23 @@
+version: 1.0.0
+description: Taxonomía para mapear objetivos a clusters de subskills reutilizables.
+clusters:
+  - id: discovery
+    goal_keywords: ["explorar", "analizar", "investigar", "inspeccionar", "buscar"]
+    preferred_capabilities: ["search", "read_file", "list_files", "metadata"]
+  - id: planning
+    goal_keywords: ["plan", "estrategia", "descomponer", "orquestar"]
+    preferred_capabilities: ["goal_decomposition", "ambiguity_resolution", "verification"]
+  - id: implementation
+    goal_keywords: ["implementar", "codificar", "editar", "refactor"]
+    preferred_capabilities: ["edit_file", "write_file", "scoped_editing"]
+  - id: verification
+    goal_keywords: ["validar", "verificar", "test", "revisión"]
+    preferred_capabilities: ["verification", "diff", "status", "read_query"]
+llm_constraints:
+  default_max_context_windows: 1
+  default_max_active_objectives: 1
+  default_max_concurrent_tools: 3
+  anti_patterns:
+    - over_planning_without_execution
+    - tool_churn
+    - unbounded_file_scans

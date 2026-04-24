@@ -1,16 +1,16 @@
-Feature: Refinamiento Kaizen Loop (DE-V2-L2-27)
-  Criterios de Aceptación Ejecutables para la Mejora Continua.
+Feature: Bucle Kaizen (Mejora Continua) contract
+  As an engineering team
+  I want this spec to stay aligned with physical implementation
+  So that agents and humans operate with low-entropy context
 
-  Scenario: Autonomous Error Learning
-    Given a failed execution in the "Muscle (L5)" layer
-    And the error has been resolved by a Sentinel
-    When the Kaizen Loop initiates a "Knowledge Extraction"
-    Then it must identify the underlying pattern of error
-    And it must generate a new "Skill" in YAML format
-    And Performance Metric: learning_extraction_time < 10s
+  Scenario: frontmatter is complete
+    Given the spec file `27_kaizen_loop_refinement.md`
+    Then it defines `spec_id`, `title`, `status`, `layer`, and `last_verified_on`
 
-  Scenario: Prevent Regression via Shield Injection
-    Given a newly crystallized Skill rule
-    When an agent attempts to repeat the same error
-    Then the L3 Shield must block the action in real-time
-    And Performance Metric: veto_propagation < 100ms
+  Scenario: evidence points to existing system areas
+    Given the physical evidence section
+    Then it references active repository paths for layer `L2`
+
+  Scenario: lifecycle is explicit
+    Given this spec status is `DRAFT`
+    Then implementation and roadmap expectations are unambiguous

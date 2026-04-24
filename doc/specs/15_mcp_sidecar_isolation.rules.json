@@ -1,22 +1,38 @@
 {
   "spec_id": "DE-V2-L1-15",
-  "isolation_model": "FEI (Functional Isolation)",
-  "sidecar": {
-    "tech": "Go (L1)",
-    "sandbox": "Bubblewrap",
-    "promise_logic": "Topological Promise (Np)",
-    "mcp_hub": "Standardized System Interface"
-  },
-  "mechanisms": {
-    "shadowing": "Shadow Queue (L1) -> Atomic Collapse",
-    "resilience": ["Lease Extension", "Time Dilation Signal"],
-    "discovery": "Hot-Reload via NATS Broadcast"
-  },
-  "invariants": {
-    "max_file_descriptors_percent": 80,
-    "mandatory_bubblewrap": true,
-    "io_timeout_s": 30
-  },
-  "enforcement": "STRICT_BLOCK",
-  "personality_ref": "DE-V2-L0-33"
+  "title": "Aislamiento de I/O y Adaptador MCP (Modelo FEI)",
+  "status": "ACTIVE",
+  "layer": "L1",
+  "last_verified_on": "2026-04-24",
+  "required_frontmatter": [
+    "spec_id",
+    "title",
+    "status",
+    "layer",
+    "last_verified_on"
+  ],
+  "required_sections": [
+    "Purpose",
+    "Current State",
+    "Physical Evidence",
+    "Gaps",
+    "Next Actions",
+    "Sibling Artifacts"
+  ],
+  "evidence_paths": [
+    "layers/l1_nervous",
+    "proto",
+    "dummie_agent_config.json"
+  ],
+  "policy": {
+    "allow_legacy_narrative": false,
+    "require_existing_links": true,
+    "status_values": [
+      "ACTIVE",
+      "DRAFT",
+      "PROPOSED",
+      "DEPRECATED",
+      "REFERENCE"
+    ]
+  }
 }

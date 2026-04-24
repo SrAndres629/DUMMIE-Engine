@@ -1,0 +1,14 @@
+skill_id: sw.brain.log_lesson
+name: Log Lesson
+description: Registra una lección aprendida.. Capacidad soberana del núcleo dummie-brain..
+  Capacidad soberana del núcleo dummie-brain.. Capacidad soberana del núcleo dummie-brain.
+version: 1.1.0
+capabilities:
+- log_lesson
+invariants:
+- 'sovereignty: high'
+- 'context_anchoring: mandatory'
+- 'layer: L1'
+metadata:
+  server: dummie-brain
+  status: active

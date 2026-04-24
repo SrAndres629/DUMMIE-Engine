@@ -1,37 +1,33 @@
 ---
 spec_id: "DE-V2-L0-05"
 title: "Stack de Orquestación y Arbitraje"
-status: "ACTIVE"
-version: "2.2.0"
+status: "DRAFT"
 layer: "L0"
-namespace: "io.dummie.v2.orchestration"
-authority: "ARCHITECT"
-dependencies:
-  - id: "DE-V2-L0-03"
-    relationship: "IMPLEMENTS"
-  - id: "DE-V2-L3-22"
-    relationship: "REQUIRES"
-  - id: "DE-V2-[ADR-004](../../01_architecture/adr/0004-project-personality.md)"
-    relationship: "INFLUENCES"
-tags: ["cognitive_core", "swarm_orchestration", "industrial_sdd"]
+last_verified_on: "2026-04-24"
 ---
 
-# 05. Stack de Orquestación y Arbitraje (Agentic OS)
+# Stack de Orquestación y Arbitraje
 
-## Abstract
-El stack de orquestación del Agentic OS evoluciona el paradigma de "Agente Único" hacia una **Malla de Expertos** coordinada bajo leyes de consenso rígidas y arbitraje ejecutivo. El sistema garantiza la resolución de impases cognitivos y la viabilidad del negocio mediante la jerarquía de Elixir y la validación de PydanticAI.
+## Purpose
+Definir el contrato tecnico minimo de esta capacidad para el sistema actual.
 
-## 1. Cognitive Context Model (Ref)
-Para los mecanismos de consenso, los protocolos de resolución de impases y los invariantes de arbitraje ejecutivo entre capas, consulte el archivo hermano [05_orchestration_stack_and_glue.rules.json](./05_orchestration_stack_and_glue.rules.json).
+## Current State
+Implementacion en transicion; requiere consolidacion de contrato.
 
----
+## Physical Evidence
+- `layers/l0_overseer`
+- `doc/CORE_SPEC.md`
+- `doc/PHYSICAL_MAP.md`
 
-## 2. Gobernanza de la Malla
-La orquestación no es una simple cola de tareas, sino una negociación entre agentes con roles segregados (Estrategia, Arquitectura, Ingeniería, QA). El arbitraje final reside en el Nodo Overseer (L0).
+## Gaps
+- Falta trazabilidad fina entre contrato y pruebas de conformidad.
+- Existen diferencias historicas entre narrativa anterior y estado fisico actual.
 
----
+## Next Actions
+1. Mantener este contrato alineado con el codigo real de su capa.
+2. Agregar o ajustar pruebas de conformidad para validar este contrato.
+3. Actualizar `doc/CORE_SPEC.md` y `doc/PHYSICAL_MAP.md` cuando cambie el alcance.
 
-## [MSA] Sibling Components Requeridos
-Todo documento maestro debe ir acompañado de sus archivos hermanos para convertirse en una *Active Architectural Fitness Function*:
-- **Executable Contract:** [05_orchestration_stack_and_glue.feature](./05_orchestration_stack_and_glue.feature)
-- **Machine Rules:** [05_orchestration_stack_and_glue.rules.json](./05_orchestration_stack_and_glue.rules.json)
+## Sibling Artifacts
+- `./05_orchestration_stack_and_glue.feature`
+- `./05_orchestration_stack_and_glue.rules.json`

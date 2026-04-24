@@ -1,0 +1,13 @@
+skill_id: sw.everything.get-resource-links
+name: Get-Resource-Links
+description: Returns up to ten resource links that reference different types of resources.
+  Utilidad del servidor everything.. Utilidad del servidor everything.. Utilidad del
+  servidor everything.
+version: 1.1.0
+capabilities:
+- get-resource-links
+invariants:
+- 'compliance: standard'
+metadata:
+  server: everything
+  status: active

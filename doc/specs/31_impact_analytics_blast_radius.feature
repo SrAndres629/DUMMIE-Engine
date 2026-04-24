@@ -1,16 +1,16 @@
-Feature: Impact Analytics - Blast Radius (DE-V2-L2-31)
-  Criterios de Aceptación Ejecutables para el Análisis de Impacto.
+Feature: Análisis de Impacto y Radio de Explosión contract
+  As an engineering team
+  I want this spec to stay aligned with physical implementation
+  So that agents and humans operate with low-entropy context
 
-  Scenario: Calculate Blast Radius for Spec Mutation
-    Given a proposed change in "Spec 10 (Contracts)"
-    When the Impact Engine performs a Cypher-lookup in L4 (KùzuDB)
-    Then it must return a list of all dependent microservices (L1, L3)
-    And it must identify the associated Unit Tests to re-run
-    And Performance Metric: impact_calculation_latency < 1s
+  Scenario: frontmatter is complete
+    Given the spec file `31_impact_analytics_blast_radius.md`
+    Then it defines `spec_id`, `title`, `status`, `layer`, and `last_verified_on`
 
-  Scenario: Veto High-Risk Unvalidated Changes
-    Given a change with "BlastRadius: GLOBAL"
-    When the change is submitted without a corresponding "Safety_Audit_L3"
-    Then the SFE must block the synchronization
-    And it must request a manual review from the PAH
-    And Performance Metric: risk_veto_latency < 100ms
+  Scenario: evidence points to existing system areas
+    Given the physical evidence section
+    Then it references active repository paths for layer `L2`
+
+  Scenario: lifecycle is explicit
+    Given this spec status is `DRAFT`
+    Then implementation and roadmap expectations are unambiguous

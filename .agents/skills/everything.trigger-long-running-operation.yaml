@@ -1,0 +1,13 @@
+skill_id: sw.everything.trigger-long-running-operation
+name: Trigger-Long-Running-Operation
+description: Demonstrates a long running operation with progress updates.. Utilidad
+  del servidor everything.. Utilidad del servidor everything.. Utilidad del servidor
+  everything.
+version: 1.1.0
+capabilities:
+- trigger-long-running-operation
+invariants:
+- 'compliance: standard'
+metadata:
+  server: everything
+  status: active

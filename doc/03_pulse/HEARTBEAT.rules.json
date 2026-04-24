@@ -1,20 +1,16 @@
 {
   "spec_id": "DE-V2-PULSE-HB",
-  "domain": "Pulse_Governance",
-  "heartbeat_config": {
-    "pulse_frequency_seconds": 300,
-    "max_tasks_per_pulse": 5,
-    "concurrency_limit": 2
+  "title": "Operational Heartbeat Rules",
+  "status": "DRAFT",
+  "layer": "L0",
+  "last_verified_on": "2026-04-24",
+  "heartbeat": {
+    "enabled": true,
+    "frequency_seconds": 300,
+    "max_tasks_per_pulse": 5
   },
-  "token_governance": {
-    "min_roi_ratio": 1.2,
-    "automatic_optimization_enabled": true
-  },
-  "invariants": {
-    "mandatory_sdd_validation": true,
-    "no_manual_drift_allowed": true,
-    "proactive_secret_scrubbing": true
-  },
-  "enforcement": "STRICT_BLOCK",
-  "personality_ref": "DE-V2-L0-33"
+  "policy": {
+    "must_record_outcome": true,
+    "allow_destructive_actions": false
+  }
 }

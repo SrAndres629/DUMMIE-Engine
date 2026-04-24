@@ -1,24 +1,38 @@
 {
   "spec_id": "DE-V2-L0-42",
-  "trigger_mechanism": {
-    "type": "GenServer Timer (Elixir)",
-    "default_interval_s": 1800,
-    "jitter_pct": 0.1
-  },
-  "signal": {
-    "subject": "ao.v2.l0.signal.pulse",
-    "payload_type": "PulseEvent",
-    "priority": "LOW"
-  },
-  "sources": [
-    "doc/HEARTBEAT.md",
-    "governance/rules/cron_schedules.json"
+  "title": "Protocolo de Heartbeat Proactivo (The Pulse)",
+  "status": "DRAFT",
+  "layer": "L0",
+  "last_verified_on": "2026-04-24",
+  "required_frontmatter": [
+    "spec_id",
+    "title",
+    "status",
+    "layer",
+    "last_verified_on"
   ],
-  "invariants": {
-    "max_autonomous_tasks_per_pulse": 3,
-    "max_depth": 0,
-    "budget_cap_percent": 15.0,
-    "thermal_override": true
-  },
-  "personality_ref": "DE-V2-L0-33"
+  "required_sections": [
+    "Purpose",
+    "Current State",
+    "Physical Evidence",
+    "Gaps",
+    "Next Actions",
+    "Sibling Artifacts"
+  ],
+  "evidence_paths": [
+    "layers/l0_overseer",
+    "doc/CORE_SPEC.md",
+    "doc/PHYSICAL_MAP.md"
+  ],
+  "policy": {
+    "allow_legacy_narrative": false,
+    "require_existing_links": true,
+    "status_values": [
+      "ACTIVE",
+      "DRAFT",
+      "PROPOSED",
+      "DEPRECATED",
+      "REFERENCE"
+    ]
+  }
 }

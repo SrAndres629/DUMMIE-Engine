@@ -1,25 +1,16 @@
-Feature: Secure Node Pairing Protocol (DE-V2-L3-45)
-  Criterios de Aceptación Ejecutables para el Onboarding Soberano de Hardware.
+Feature: Protocolo de Emparejamiento Seguro (Sovereign Node Pairing) contract
+  As an engineering team
+  I want this spec to stay aligned with physical implementation
+  So that agents and humans operate with low-entropy context
 
-  Scenario: Approve a new laptop node
-    Given a connection request from "MacBook-Pro-LST"
-    And the node is in "QUARANTINE" state
-    When the PAH clicks "APPROVE" in the Command Canvas
-    Then L3 must issue a valid "X-AO-Device-Token"
-    And the node must transition to "AUTHORIZED" state
-    And the Performance Metric: handshake_latency < 200ms
-    And the Performance Metric: crypto_verification < 50ms
+  Scenario: frontmatter is complete
+    Given the spec file `45_secure_node_pairing_protocol.md`
+    Then it defines `spec_id`, `title`, `status`, `layer`, and `last_verified_on`
 
-  Scenario: Block unauthorized remote node
-    Given an unrecognized connection attempt from IP "192.168.1.50"
-    When the L3 Shield evaluates the security policy
-    And no manual approval is received within "60s"
-    Then the connection must be terminated with code "1008" (Policy Violation)
-    And the IP must be added to the temporary blocklist
-    And the Performance Metric: rejection_time < 5ms
+  Scenario: evidence points to existing system areas
+    Given the physical evidence section
+    Then it references active repository paths for layer `L3`
 
-  Scenario: Re-authenticate with rotated token
-    Given an authorized node with an expired token (24h+)
-    When it attempts to send a heartbeats signal
-    Then it must perform a background token rotation handshake
-    And the Performance Metric: rotation_latency < 100ms
+  Scenario: lifecycle is explicit
+    Given this spec status is `DRAFT`
+    Then implementation and roadmap expectations are unambiguous

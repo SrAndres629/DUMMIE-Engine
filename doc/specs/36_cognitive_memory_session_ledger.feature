@@ -1,16 +1,16 @@
-Feature: Cognitive Memory Session Ledger (DE-V2-L2-36)
-  Criterios de Aceptación Ejecutables para la Memoria de Sesión.
+Feature: Memoria Cognitiva y Ledger de Sesión contract
+  As an engineering team
+  I want this spec to stay aligned with physical implementation
+  So that agents and humans operate with low-entropy context
 
-  Scenario: Persistent Thought-Chain Logging
-    Given an agent performing a complex reasoning task
-    When the agent generates an "Inference_Step"
-    Then the step must be logged to ".aiwg/memory/session_ledger.jsonl"
-    And the log must include the associated "lamport_tick"
-    And Performance Metric: session_logging_latency < 50ms
+  Scenario: frontmatter is complete
+    Given the spec file `36_cognitive_memory_session_ledger.md`
+    Then it defines `spec_id`, `title`, `status`, `layer`, and `last_verified_on`
 
-  Scenario: Snapshot State for Recovery
-    Given a session with 100+ inference steps
-    When the system triggers a "Memory_Snapshot"
-    Then it must compress the session ledger into a binary "Necro_Blob"
-    And the current architecture state must be point-in-time recoverable
-    And Performance Metric: snapshot_time < 2s
+  Scenario: evidence points to existing system areas
+    Given the physical evidence section
+    Then it references active repository paths for layer `L2`
+
+  Scenario: lifecycle is explicit
+    Given this spec status is `DRAFT`
+    Then implementation and roadmap expectations are unambiguous

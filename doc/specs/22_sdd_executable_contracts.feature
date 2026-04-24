@@ -1,16 +1,16 @@
-Feature: Contratos Ejecutables de Gobernanza - SDD (DE-V2-L3-22)
-  Criterios de Aceptación Ejecutables para el Sistema SDD.
+Feature: Contratos Ejecutables de Gobernanza (SDD) contract
+  As an engineering team
+  I want this spec to stay aligned with physical implementation
+  So that agents and humans operate with low-entropy context
 
-  Scenario: Load and Enforce JSON Invariant
-    Given a new rule file in "/governance/rules/VIO_HEX_001.json"
-    When the L3 Shield (Rust) performs a "Bootstrap Load"
-    Then the rule must be mmapped into protected memory
-    And any L2 agent attempting to violate it must be blocked
-    And Performance Metric: rule_load_latency < 10ms
+  Scenario: frontmatter is complete
+    Given the spec file `22_sdd_executable_contracts.md`
+    Then it defines `spec_id`, `title`, `status`, `layer`, and `last_verified_on`
 
-  Scenario: Global Re-scan on Governance Patch
-    Given a modified rule in the governance directory
-    When the PAH (Human) confirms the "Sovereign Decree"
-    Then the Shield must trigger a "Re-Scan Global" of the monorepo
-    And any file that deviates must be marked as "CORRUPTED"
-    And Performance Metric: scan_througput > 100_files/sec
+  Scenario: evidence points to existing system areas
+    Given the physical evidence section
+    Then it references active repository paths for layer `L3`
+
+  Scenario: lifecycle is explicit
+    Given this spec status is `ACTIVE`
+    Then implementation and roadmap expectations are unambiguous

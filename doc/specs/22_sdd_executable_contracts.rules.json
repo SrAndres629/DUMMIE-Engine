@@ -1,20 +1,37 @@
 {
   "spec_id": "DE-V2-L3-22",
-  "domain": "L3_Governance",
-  "contract_logic": {
-    "rule_directory": "governance/rules/",
-    "enforcement_modes": ["STRICT_BLOCK", "WARN"],
-    "required_token": "AF_TOKEN"
-  },
-  "invariants": {
-    "manual_edit_forbidden": true,
-    "periodic_hash_validation": true,
-    "mandatory_contract_loading": true
-  },
-  "validation_metrics": {
-    "min_fitness_score": 0.9,
-    "max_drift_allowed": 0.0
-  },
-  "enforcement": "STRICT_BLOCK",
-  "personality_ref": "DE-V2-L0-33"
+  "title": "Contratos Ejecutables de Gobernanza (SDD)",
+  "status": "ACTIVE",
+  "layer": "L3",
+  "last_verified_on": "2026-04-24",
+  "required_frontmatter": [
+    "spec_id",
+    "title",
+    "status",
+    "layer",
+    "last_verified_on"
+  ],
+  "required_sections": [
+    "Purpose",
+    "Current State",
+    "Physical Evidence",
+    "Gaps",
+    "Next Actions",
+    "Sibling Artifacts"
+  ],
+  "evidence_paths": [
+    "layers/l3_shield",
+    "layers/l2_brain/daemon.py"
+  ],
+  "policy": {
+    "allow_legacy_narrative": false,
+    "require_existing_links": true,
+    "status_values": [
+      "ACTIVE",
+      "DRAFT",
+      "PROPOSED",
+      "DEPRECATED",
+      "REFERENCE"
+    ]
+  }
 }

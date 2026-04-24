@@ -1,16 +1,16 @@
-Feature: Software Fabrication Engine (DE-V2-L2-21)
-  Criterios de Aceptación Ejecutables para el Motor de Fabricación.
+Feature: Software Fabrication Engine (SFE) contract
+  As an engineering team
+  I want this spec to stay aligned with physical implementation
+  So that agents and humans operate with low-entropy context
 
-  Scenario: Automated Spec-to-Code Pipeline
-    Given a validated Specification (MD/Feature/JSON)
-    When the SFE initiates the "Fabrication Cycle"
-    Then it must generate code stubs in the target language (Go/Rust/Zig)
-    And the generated code must pass the L3 Shield invariants
-    And Performance Metric: generation_latency < 5s
+  Scenario: frontmatter is complete
+    Given the spec file `21_software_fabrication_engine.md`
+    Then it defines `spec_id`, `title`, `status`, `layer`, and `last_verified_on`
 
-  Scenario: Prevent Architectural Drift
-    Given a code modification that deviates from the Spec
-    When the Consistency Agent (Spec 39) runs the audit
-    Then the SFE must reject the PR and revert changes
-    And it must emit a "Drift_Alert" to the Architect
-    And Performance Metric: drift_detection_time < 1s
+  Scenario: evidence points to existing system areas
+    Given the physical evidence section
+    Then it references active repository paths for layer `L2`
+
+  Scenario: lifecycle is explicit
+    Given this spec status is `ACTIVE`
+    Then implementation and roadmap expectations are unambiguous

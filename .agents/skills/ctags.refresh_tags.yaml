@@ -1,0 +1,13 @@
+skill_id: sw.ctags.refresh_tags
+name: Refresh Tags
+description: Regenerate the ctags index. Run this after significant code changes,
+  new files, or branch switches.. Utilidad del servidor ctags.. Utilidad del servidor
+  ctags.. Utilidad del servidor ctags.
+version: 1.1.0
+capabilities:
+- refresh_tags
+invariants:
+- 'compliance: standard'
+metadata:
+  server: ctags
+  status: active

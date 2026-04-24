@@ -1,0 +1,41 @@
+skill_id: sw.master.reflective_orchestrator
+name: Reflective Skill Orchestrator
+version: 1.0.0
+skill_type: master
+description: >-
+  Skill maestra para reducir ambigüedad, planificar por fases y ejecutar herramientas
+  con verificación explícita, minimizando sobrecarga cognitiva del LLM.
+tags:
+  - planning
+  - reflection
+  - orchestration
+  - llm_limits
+objectives:
+  - transformar metas abiertas en planes ejecutables por pasos
+  - minimizar saltos de contexto y uso de herramientas irrelevantes
+  - forzar una fase de verificación antes de concluir
+capabilities:
+  - goal_decomposition
+  - ambiguity_resolution
+  - staged_execution
+  - verification
+llm_limits:
+  max_candidate_skills: 10
+  max_execution_steps: 7
+  max_parallel_subskills: 2
+  max_planning_depth: 3
+invariants:
+  - "one_goal_per_plan: true"
+  - "verification_before_completion: true"
+  - "avoid_tool_churn: true"
+subskills:
+  - skill_id: dummie-brain.resolve_ambiguity
+  - skill_id: dummie-brain.search_capabilities
+  - skill_id: dummie-brain.list_all_capabilities
+  - skill_id: filesystem.read_text_file
+  - skill_id: filesystem.search_files
+  - skill_id: ripgrep.search
+  - skill_id: git.git_status
+  - skill_id: git.git_diff
+  - capability: read_file
+  - capability: search

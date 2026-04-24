@@ -1,18 +1,16 @@
-Feature: Bucle de Autosanación e Infraestructura (DE-V2-L4-40)
-  Criterios de Aceptación Ejecutables para el Sistema de Remediación.
+Feature: Bucle de Autosanación e Infraestructura Agéntica contract
+  As an engineering team
+  I want this spec to stay aligned with physical implementation
+  So that agents and humans operate with low-entropy context
 
-  Scenario: Autonomous Latency Remediation
-    Given a microservice with latency > 500ms (detected via L6 OTel)
-    When the Self-Healing Agent analyzes the RCA
-    And it determines a "Resource_Scaling" is required
-    Then it must increase the Pod replicas in the Kubernetes manifest
-    And it must update the "Infra_Drift" ledger
-    And Performance Metric: remediation_loop_time < 30s
+  Scenario: frontmatter is complete
+    Given the spec file `40_self_healing_remediation_loop.md`
+    Then it defines `spec_id`, `title`, `status`, `layer`, and `last_verified_on`
 
-  Scenario: Circuit Breaker on Recursive Failures
-    Given a service with 3 remediations in the last 24h
-    When a 4th failure is detected
-    Then the Self-Healing system must deactivate for this node
-    And it must trigger a "CRITICAL_FAILURE" alert in the Command Canvas (L6)
-    And it must request manual inspection from the PAH
-    And Performance Metric: CB_activation < 1s
+  Scenario: evidence points to existing system areas
+    Given the physical evidence section
+    Then it references active repository paths for layer `L4`
+
+  Scenario: lifecycle is explicit
+    Given this spec status is `DRAFT`
+    Then implementation and roadmap expectations are unambiguous

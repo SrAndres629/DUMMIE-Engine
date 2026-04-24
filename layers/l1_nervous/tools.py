@@ -228,3 +228,19 @@ def register_tools(mcp: FastMCP, orchestrator, proxy_manager, root_dir: str):
                 data = json.loads(line)
                 output.append(f"[{data['timestamp']}] Agent {data['agent_id']} -> {data['intent']} (Target: {data['target']})")
             return "\n".join(output)
+
+    @mcp.tool()
+    async def delegate_task(requester_id: str, instructions: str, target: str) -> str:
+        """[SWARM] Delega una tarea bloqueada (por sandbox u otros) a un agente con mayores privilegios."""
+        ledger_path = os.path.join(AIWG_DIR, "memory/swarm_ledger.jsonl")
+        entry = {
+            "timestamp": os.popen("date --iso-8601=seconds").read().strip(),
+            "agent_id": requester_id,
+            "intent": "TASK_DELEGATION_REQUESTED",
+            "target": target,
+            "instructions": instructions,
+            "status": "PENDING"
+        }
+        with open(ledger_path, "a") as f:
+            f.write(json.dumps(entry) + "\n")
+        return f"[SWARM] Tarea delegada exitosamente. Esperando que un agente libre (como Antigravity) tome el control."

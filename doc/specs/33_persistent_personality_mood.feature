@@ -1,17 +1,16 @@
-Feature: Personalidad y Persistencia del Alma (DE-V2-L0-33)
-  Criterios de Aceptación Ejecutables para la Identidad Evolutiva y el Soul Shifting.
+Feature: Perfil de Personalidad y Mood Estratégico contract
+  As an engineering team
+  I want this spec to stay aligned with physical implementation
+  So that agents and humans operate with low-entropy context
 
-  Scenario: Shift soul to Security Auditor persona
-    Given an active session with "Creative Writer" soul
-    When the system requirements shift to "Perform Security Audit"
-    And the agent triggers a "Soul Shift" to "Security-Auditor" template
-    Then the 6D Context Model must update its biases to "High_Security_Skepticism"
-    And the agent's tone must become "Rigorous and Analytical"
-    And the Performance Metric: persona_switch_latency < 100ms
-    And the Performance Metric: bias_update_accuracy == 1.0
+  Scenario: frontmatter is complete
+    Given the spec file `33_persistent_personality_mood.md`
+    Then it defines `spec_id`, `title`, `status`, `layer`, and `last_verified_on`
 
-  Scenario: Evolution of the SOUL.md after learning
-    Given a learning hito in the Necro-Learning pipeline
-    When the agent reflect on its previous performance
-    Then it must append a "Hito de Aprendizaje" to the SOUL.md
-    And the "Mood" hyperparameter must be updated based on efficiency.
+  Scenario: evidence points to existing system areas
+    Given the physical evidence section
+    Then it references active repository paths for layer `L0`
+
+  Scenario: lifecycle is explicit
+    Given this spec status is `DRAFT`
+    Then implementation and roadmap expectations are unambiguous

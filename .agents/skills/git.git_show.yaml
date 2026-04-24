@@ -1,0 +1,13 @@
+skill_id: sw.git.git_show
+name: Git Show
+description: Shows the contents of a commit. Control de versiones atómico.. Control
+  de versiones atómico.. Control de versiones atómico.
+version: 1.1.0
+capabilities:
+- git_show
+invariants:
+- 'atomic_commits: true'
+- 'conventional_naming: mandatory'
+metadata:
+  server: git
+  status: active

@@ -1,16 +1,16 @@
-Feature: DevEx y Estrategia de Despliegue (DE-V2-L0-08)
-  Criterios de Aceptación Ejecutables para la Hermeticidad del Entorno.
+Feature: DevEx y Estrategia de Despliegue Hermético contract
+  As an engineering team
+  I want this spec to stay aligned with physical implementation
+  So that agents and humans operate with low-entropy context
 
-  Scenario: Detect Execution Path via Bootstrap
-    Given a host environment with Docker but without Nix
-    When the "bootstrap.sh" script is executed
-    Then the "EXEC_PATH" must be set to "DOCKER_SOVEREIGN"
-    And the "session_context.json" must be initialized with the detected state
-    And Performance Metric: detection_latency < 2s
+  Scenario: frontmatter is complete
+    Given the spec file `08_devex_and_deployment_strategy.md`
+    Then it defines `spec_id`, `title`, `status`, `layer`, and `last_verified_on`
 
-  Scenario: Hermetic Build in Docker
-    Given a "DOCKER_SOVEREIGN" execution path
-    When the agent triggers a polyglot build (L0, L1, L3, L4)
-    Then the build must occur inside the "Dockerfile.builder" container
-    And the host environment must remain uncontaminated by polyglot dependencies
-    And Performance Metric: build_overhead_docker < 15%
+  Scenario: evidence points to existing system areas
+    Given the physical evidence section
+    Then it references active repository paths for layer `L0`
+
+  Scenario: lifecycle is explicit
+    Given this spec status is `DRAFT`
+    Then implementation and roadmap expectations are unambiguous

@@ -1,17 +1,16 @@
-Feature: Registry de Blueprints (DE-V2-L4-25)
-  Criterios de Aceptación Ejecutables para el Registro de Blueprints.
+Feature: Registro de Blueprints Industriales contract
+  As an engineering team
+  I want this spec to stay aligned with physical implementation
+  So that agents and humans operate with low-entropy context
 
-  Scenario: Template-Based Service Generation
-    Given a request for a "Go Microservice"
-    And a valid Blueprint in the Layer 4 Registry
-    When the SFE executes the "Expansion"
-    Then it must generate the Hexagonal structure (Domain, App, Infra)
-    And it must inject the standard Handshake logic (Spec 41)
-    And Performance Metric: blueprint_expansion_time < 2s
+  Scenario: frontmatter is complete
+    Given the spec file `25_blueprint_registry.md`
+    Then it defines `spec_id`, `title`, `status`, `layer`, and `last_verified_on`
 
-  Scenario: Global Kaizen Update
-    Given a refinement in the "L1_Nervous" Blueprint
-    When the Arbiter (L0) approves the update
-    Then all newly created services must inherit the refined logic
-    And extant services must be flagged for "Outdated_Blueprint" audit
-    And Performance Metric: registry_sync_latency < 500ms
+  Scenario: evidence points to existing system areas
+    Given the physical evidence section
+    Then it references active repository paths for layer `L4`
+
+  Scenario: lifecycle is explicit
+    Given this spec status is `DRAFT`
+    Then implementation and roadmap expectations are unambiguous

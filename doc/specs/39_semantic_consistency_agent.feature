@@ -1,16 +1,16 @@
-Feature: Agente de Consistencia Semántica (DE-V2-L2-39)
-  Criterios de Aceptación Ejecutables para la Sincronía del Ecosistema.
+Feature: Agente de Consistencia Semántica (Orchestration Synchronizer) contract
+  As an engineering team
+  I want this spec to stay aligned with physical implementation
+  So that agents and humans operate with low-entropy context
 
-  Scenario: Propagate Spec Change to Code
-    Given a validated change in "doc/specs/L1_Nervous/10_contracts.md"
-    When the Synchronizer initiates a "Cascading_Update"
-    Then it must identify affected microservices via Impact Analytics (Spec 31)
-    And it must orquestrate the update of Protobuf stubs in the Coder swarm
-    And Performance Metric: propagation_latency < 10s
+  Scenario: frontmatter is complete
+    Given the spec file `39_semantic_consistency_agent.md`
+    Then it defines `spec_id`, `title`, `status`, `layer`, and `last_verified_on`
 
-  Scenario: Veto Inconsistent Code Refactor
-    Given a manual code change that violates the "Spec-as-Source" invariant
-    When the Consistency Agent detects the "Semantic_Drift"
-    Then it must revert the code to match the Spec
-    And it must require an "Official_Spec_Update" before re-applying the change
-    And Performance Metric: drift_reversion_time < 2s
+  Scenario: evidence points to existing system areas
+    Given the physical evidence section
+    Then it references active repository paths for layer `L2`
+
+  Scenario: lifecycle is explicit
+    Given this spec status is `DRAFT`
+    Then implementation and roadmap expectations are unambiguous

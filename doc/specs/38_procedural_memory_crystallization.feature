@@ -1,16 +1,16 @@
-Feature: Cristalización de Memoria Procedimental (DE-V2-L2-38)
-  Criterios de Aceptación Ejecutables para el Aprendizaje de Heurísticas.
+Feature: Cristalización de Memoria Procedimental (Kaizen Loop) contract
+  As an engineering team
+  I want this spec to stay aligned with physical implementation
+  So that agents and humans operate with low-entropy context
 
-  Scenario: Extract Logic from Resolved Ambiguity
-    Given an "Ambiguity_Ticket" resolved by the PAH
-    When the Kaizen Agent analyzes the resolution
-    Then it must identify the "Architectural Pattern" used
-    And it must generate a new Skill rule in ".agents/skills/"
-    And Performance Metric: crystallization_time < 30s
+  Scenario: frontmatter is complete
+    Given the spec file `38_procedural_memory_crystallization.md`
+    Then it defines `spec_id`, `title`, `status`, `layer`, and `last_verified_on`
 
-  Scenario: Compact Obsolete Skills (Necro-Learning)
-    Given a set of Skills not accessed for 100+ tasks
-    When the Memory Engine triggers a "Compresión Multiverso"
-    Then the skills must be moved to the L5 "Memoria de Necros"
-    And the current prompt context must be reduced
-    And Performance Metric: context_reduction > 1000_tokens
+  Scenario: evidence points to existing system areas
+    Given the physical evidence section
+    Then it references active repository paths for layer `L2`
+
+  Scenario: lifecycle is explicit
+    Given this spec status is `DRAFT`
+    Then implementation and roadmap expectations are unambiguous

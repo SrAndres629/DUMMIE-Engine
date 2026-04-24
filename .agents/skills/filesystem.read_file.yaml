@@ -1,0 +1,15 @@
+skill_id: sw.fs.read_file
+name: Read File
+description: 'Read the complete contents of a file as text. DEPRECATED: Use read_text_file
+  instead.. Gestión industrial de archivos.. Gestión industrial de archivos.. Gestión
+  industrial de archivos.'
+version: 1.1.0
+capabilities:
+- read_file
+invariants:
+- 'path_validation: strict'
+- 'size_limit: 1MB'
+- 'zero_trust: true'
+metadata:
+  server: filesystem
+  status: active

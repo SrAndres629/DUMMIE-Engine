@@ -1,0 +1,16 @@
+skill_id: sw.fs.write_file
+name: Write File
+description: Create a new file or completely overwrite an existing file with new content.
+  Use with caution as it will overwrite existing files without warning. Handles text
+  content with proper encoding. Only works within allowed directories.. Gestión industrial
+  de archivos.. Gestión industrial de archivos.. Gestión industrial de archivos.
+version: 1.1.0
+capabilities:
+- write_file
+invariants:
+- 'path_validation: strict'
+- 'size_limit: 1MB'
+- 'zero_trust: true'
+metadata:
+  server: filesystem
+  status: active

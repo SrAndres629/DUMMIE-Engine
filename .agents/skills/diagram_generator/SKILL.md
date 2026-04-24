@@ -1,3 +1,22 @@
+---
+skill_id: "sw.arch.diagram_generator"
+name: "Orquestador de Diagramas C4/Mermaid"
+version: "1.0.0"
+description: "Generador autónomo de visualizaciones arquitectónicas basadas en el Palacio de Loci."
+author: "DUMMIE Engine-SFE"
+capabilities:
+  - "AUTO_LAYOUT"
+  - "C4_COMPLIANCE"
+  - "LOCI_INTEGRATION"
+requirements:
+  layers: ["L2", "L4"]
+  tools: ["mermaid-cli", "plantuml", "kuzu-query"]
+invariants:
+  - "diagram_syntax_valid: true"
+  - "forbidden_labels: blocked"
+  - "traceability: causal"
+---
+
 # Skill: Diagram Generator (sw.arch.diagram_generator)
 
 ## Propósito

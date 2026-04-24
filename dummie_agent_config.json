@@ -1,31 +1,133 @@
 {
   "mcpServers": {
-    "dummie-brain-adapter": {
-      "command": "./layers/l2_brain/.venv/bin/python",
+    "memory": {
+      "command": "node",
       "args": [
-        "./layers/l1_nervous/mcp_server.py"
+        "/home/jorand/temp_servers/src/memory/dist/index.js"
       ],
       "env": {
-        "DUMMIE_ROOT_DIR": ".",
-        "DUMMIE_AIWG_DIR": "./.aiwg",
-        "DUMMIE_KUZU_DB_PATH": "./.aiwg/memory/loci.db",
-        "PYTHONPATH": "./layers/l2_brain:./layers/l1_nervous",
-        "DUMMIE_MCP_CONFIG_PATH": "./dummie_agent_config.json"
+        "MEMORY_FILE_PATH": "/home/jorand/.gemini/antigravity/knowledge/memory.jsonl"
+      }
+    },
+    "filesystem": {
+      "command": "node",
+      "args": [
+        "/home/jorand/temp_servers/src/filesystem/dist/index.js",
+        "/home/jorand/Escritorio/DUMMIE Engine",
+        "/tmp"
+      ]
+    },
+    "sequentialthinking": {
+      "command": "node",
+      "args": [
+        "/home/jorand/temp_servers/src/sequentialthinking/dist/index.js"
+      ]
+    },
+    "time": {
+      "command": "uvx",
+      "args": [
+        "mcp-server-time"
+      ],
+      "disabled": false
+    },
+    "fetch": {
+      "command": "uvx",
+      "args": [
+        "mcp-server-fetch"
+      ],
+      "disabled": false
+    },
+    "sqlite": {
+      "command": "uvx",
+      "args": [
+        "mcp-server-sqlite",
+        "--db-path",
+        "/home/jorand/.gemini/antigravity/knowledge/dummie_sqlite.db"
+      ],
+      "disabled": false
+    },
+    "git": {
+      "command": "uvx",
+      "args": [
+        "mcp-server-git",
+        "--repository",
+        "/home/jorand/Escritorio/DUMMIE Engine"
+      ],
+      "disabled": false
+    },
+    "ripgrep": {
+      "command": "node",
+      "args": [
+        "/media/datasets/sw_tools/mcp_servers/node_modules/mcp-ripgrep/dist/index.js"
+      ],
+      "env": {
+        "PATH": "/media/datasets/sw_tools/bin:/usr/local/bin:/usr/bin:/bin"
+      }
+    },
+    "ctags": {
+      "command": "node",
+      "args": [
+        "/media/datasets/sw_tools/mcp_servers/node_modules/mcp-ctags/index.js"
+      ],
+      "env": {
+        "PATH": "/media/datasets/sw_tools/bin:/usr/local/bin:/usr/bin:/bin"
+      }
+    },
+    "genkit-mcp-server": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "genkit-cli@latest",
+        "mcp",
+        "--explicitProjectRoot",
+        "--no-update-notification",
+        "--non-interactive"
+      ]
+    },
+    "everything": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-everything"
+      ]
+    },
+    "arize-tracing-assistant": {
+      "command": "uvx",
+      "args": [
+        "arize-tracing-assistant"
+      ]
+    },
+    "puppeteer": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-puppeteer"
+      ],
+      "disabled": false
+    },
+    "dummie-brain": {
+      "command": "/home/jorand/Escritorio/DUMMIE Engine/layers/l2_brain/.venv/bin/python",
+      "args": [
+        "/home/jorand/Escritorio/DUMMIE Engine/layers/l1_nervous/mcp_server.py"
+      ],
+      "env": {
+        "DUMMIE_ROOT_DIR": "/home/jorand/Escritorio/DUMMIE Engine",
+        "DUMMIE_AIWG_DIR": "/home/jorand/Escritorio/DUMMIE Engine/.aiwg",
+        "DUMMIE_KUZU_DB_PATH": "/home/jorand/Escritorio/DUMMIE Engine/.aiwg/memory/loci.db",
+        "PYTHONPATH": "/home/jorand/Escritorio/DUMMIE Engine/layers/l2_brain:/home/jorand/Escritorio/DUMMIE Engine/layers/l1_nervous",
+        "DUMMIE_MCP_CONFIG_PATH": "/home/jorand/Escritorio/DUMMIE Engine/dummie_agent_config.json"
       }
     },
     "local-ssh-context": {
-      "command": "/bin/bash",
+      "command": "uvx",
       "args": [
-        "./layers/l1_nervous/ssh_sandbox_wrapper.sh"
+        "mcp-server-ssh",
+        "127.0.0.1",
+        "--user",
+        "jorand",
+        "--identity",
+        "/home/jorand/.ssh/dummie_agent_key"
       ]
-    },
-    "memory": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-memory"]
-    },
-    "git": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-git", "--repository", "/home/jorand/Escritorio/DUMMIE Engine"]
     }
   }
 }

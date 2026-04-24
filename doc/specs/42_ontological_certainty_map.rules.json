@@ -1,21 +1,38 @@
 {
   "spec_id": "DE-V2-L2-42",
-  "domain": "L2_Ontology",
-  "certainty_derivation": {
-    "formula": "Tests_Passing / Unverified_Mutations",
-    "coding_allowed_minimum": 0.5,
-    "crystallized_state": 1.0,
-    "terra_incognita": 0.0
-  },
-  "persistence": {
-    "path": ".aiwg/ontological_map.json",
-    "format": "JSON_DYNAMIC_UPDATE"
-  },
-  "invariants": {
-    "no_coding_below_threshold": true,
-    "mandatory_certainty_audit": true,
-    "certainty_is_derived_view": true
-  },
-  "enforcement": "STRICT_BLOCK",
-  "personality_ref": "DE-V2-L0-33"
+  "title": "Ontological Certainty Map",
+  "status": "DRAFT",
+  "layer": "L2",
+  "last_verified_on": "2026-04-24",
+  "required_frontmatter": [
+    "spec_id",
+    "title",
+    "status",
+    "layer",
+    "last_verified_on"
+  ],
+  "required_sections": [
+    "Purpose",
+    "Current State",
+    "Physical Evidence",
+    "Gaps",
+    "Next Actions",
+    "Sibling Artifacts"
+  ],
+  "evidence_paths": [
+    "layers/l2_brain",
+    ".aiwg",
+    "governance/session_context.json"
+  ],
+  "policy": {
+    "allow_legacy_narrative": false,
+    "require_existing_links": true,
+    "status_values": [
+      "ACTIVE",
+      "DRAFT",
+      "PROPOSED",
+      "DEPRECATED",
+      "REFERENCE"
+    ]
+  }
 }

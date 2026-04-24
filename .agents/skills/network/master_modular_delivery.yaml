@@ -1,0 +1,40 @@
+skill_id: sw.master.modular_delivery
+name: Modular Delivery Orchestrator
+version: 1.0.0
+skill_type: master
+description: >-
+  Skill maestra para ejecutar trabajo modular de ingeniería con foco en cambio mínimo,
+  validación incremental y cierre seguro.
+tags:
+  - coding
+  - modular
+  - delivery
+  - safety
+objectives:
+  - descomponer implementaciones en unidades pequeñas y verificables
+  - priorizar lectura, edición y validación con mínimo contexto activo
+  - garantizar cierre con diff y evidencias de verificación
+capabilities:
+  - scoped_editing
+  - incremental_validation
+  - safe_delivery
+llm_limits:
+  max_candidate_skills: 12
+  max_execution_steps: 8
+  max_parallel_subskills: 3
+  max_planning_depth: 3
+invariants:
+  - "small_diff_preference: true"
+  - "no_destructive_commands_without_request: true"
+  - "evidence_before_success_claims: true"
+subskills:
+  - skill_id: filesystem.read_text_file
+  - skill_id: filesystem.search_files
+  - skill_id: filesystem.edit_file
+  - skill_id: ripgrep.search
+  - skill_id: git.git_status
+  - skill_id: git.git_diff
+  - skill_id: git.git_diff_staged
+  - capability: write_file
+  - capability: read_file
+  - capability: search

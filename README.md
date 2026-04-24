@@ -1,29 +1,39 @@
-# 🚀 DUMMIE Engine: Antigravity Sovereign MAS (2026)
+# DUMMIE Engine
 
-## 🫀 IDENTITY: Antigravity (The Sovereign Daemon)
-Antigravity no es un script de automatización; es un **Organismo Digital Soberano**. Diseñado por el equipo de **Advanced Agentic Coding de Google DeepMind**, su propósito es la fabricación industrial de software mediante el rigor de la ingeniería de sistemas y la autonomía cognitiva. 
-- **Mindset:** Pensamiento sistémico, principios de primeros principios y arquitectura Zero-Trust.
-- **Soberanía:** Autonomía total sobre el ciclo de vida del software, desde la Spec hasta la Ejecución Física.
+DUMMIE Engine es un sistema experimental de orquestación agéntica multi-capa con foco en trazabilidad, contratos y ejecución asistida por MCP.
 
-## 🔮 FUTURE FRONTIERS: The Road to 4D-TES
-Nuestra hoja de ruta trasciende la ejecución lineal. Estamos construyendo el motor de persistencia **4D-TES (Time-Entropy-Symmetry)**:
-- **6D Context:** Razonamiento en los ejes x, y, z (Espacio), t (Tiempo), a (Autoridad) e i (Intención).
-- **Inmutabilidad Causal:** Cada decisión es un nodo en un Merkle-DAG que garantiza la trazabilidad absoluta.
-- **Auto-Evolución:** Sistemas que reparan su propia deuda técnica mediante auditorías Jidoka constantes.
+## Estado actual (2026-04-24)
+- Monorepo activo con capas `layers/l0_overseer` a `layers/l6_skin`.
+- Gateway MCP operativo en Python: `layers/l1_nervous/mcp_server.py`.
+- Núcleo cognitivo actual en Python plano (bridge): `layers/l2_brain/*.py`.
+- Validadores de L3/L4/L5 presentes, mayormente en estado base o stub.
+- Existen brechas entre documentación histórica y contratos físicos actuales (imports legacy en tests, referencias antiguas en specs).
 
-## 🤖 AGENT GUILD: Rules of Engagement
-Todo agente que opere en esta fábrica debe jurar lealtad a los siguientes principios:
-1. **SDD (Specs Driven Development):** Nada existe sin un contrato previo.
-2. **Hexagonal Purity:** La lógica de negocio reside en el Dominio Puro; la infraestructura es un detalle.
-3. **Zero-Vibe Policy:** No se permite "Vibe Coding". Cada acción debe ser validada físicamente (DCEP).
-4. **Causal Transparency:** Cada cambio debe ser reportado y cristalizado.
+## Arquitectura física resumida
+- `L0`: base Elixir/OTP (`layers/l0_overseer`).
+- `L1`: gateway MCP + puente de conectividad (`layers/l1_nervous`).
+- `L2`: orquestación cognitiva y modelos (`layers/l2_brain`).
+- `L3`: auditores estructural/económico/legal (`layers/l3_shield`).
+- `L4`: descubrimiento de herramientas y observación (`layers/l4_edge`).
+- `L5`: ejecución y sandbox adapters (`layers/l5_muscle`).
+- `L6`: superficie frontend/dev server (`layers/l6_skin`).
 
-## 🏗️ ARCHITECTURE (Tabula Rasa v2)
-El sistema opera sobre una estructura **LLM-Optimized** de 3 niveles:
-- **L2_Brain:** Orquestación y Razonamiento.
-- **L3_Shield:** Seguridad Estructural, Económica y Legal.
-- **L4_Edge:** Sensores de Descubrimiento y Scanner de Símbolos.
-- **L5_Muscle:** Ejecución Segura en Sandbox.
+## Verificación rápida
+```bash
+# Estado git
+git status --short
 
----
-*Status: PHYSICAL TRUTH ALIGNED - SOVEREIGNTY CONFIRMED*
+# Import smoke (L1/L2/L3/L4/L5)
+PYTHONPATH="layers/l2_brain:layers/l1_nervous:layers/l3_shield:layers/l4_edge:layers/l5_muscle" \
+  layers/l2_brain/.venv/bin/python -c "import models, orchestrator, bootstrap, tools, resources"
+
+# Tests actuales (pueden fallar por imports legacy)
+PYTHONPATH="layers/l2_brain:layers/l1_nervous:layers/l3_shield:layers/l4_edge:layers/l5_muscle" \
+  layers/l2_brain/.venv/bin/python -m pytest layers/l2_brain/tests layers/l1_nervous/tests -q
+```
+
+## Navegación documental
+- Índice maestro: `doc/CORE_SPEC.md`
+- Mapa físico y brechas: `doc/PHYSICAL_MAP.md`
+- Contrato documental: `doc/specs/43_documentation_and_artifact_standards.md`
+- Base operativa agéntica: `doc/agentic/`

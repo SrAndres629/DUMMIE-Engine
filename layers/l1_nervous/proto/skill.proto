@@ -1,0 +1,18 @@
+syntax = "proto3";
+package dummie.v3.core;
+
+option go_package = "github.com/dummie-engine/proto/skill";
+
+message Skill {
+  string id = 1;                     
+  string technical_name = 2;         
+  string backend_server = 3;         
+  string description = 4;            
+  string json_schema = 5;            
+  repeated string invariants = 6;    
+  map<string, string> metadata = 7;  
+}
+
+message SkillRegistry {
+  repeated Skill skills = 1;
+}

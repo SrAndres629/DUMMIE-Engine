@@ -1,16 +1,16 @@
-Feature: Visualizador Topológico 4D (DE-V2-L6-30)
-  Criterios de Aceptación Ejecutables para el Visualizador Cinematográfico.
+Feature: Visualizador Topológico 4D (Microservicio) contract
+  As an engineering team
+  I want this spec to stay aligned with physical implementation
+  So that agents and humans operate with low-entropy context
 
-  Scenario: Point-and-Click ADR Lookup
-    Given a node in the L6 Canvas
-    When the user clicks on the node
-    Then the "LST Inspector" must display the associated ADR and Architecture Decision
-    And it must show the "Provenance of Inference (PoI)" from Spec 24
-    And Performance Metric: lookup_latency < 200ms
+  Scenario: frontmatter is complete
+    Given the spec file `30_visualizer_microservice.md`
+    Then it defines `spec_id`, `title`, `status`, `layer`, and `last_verified_on`
 
-  Scenario: Apocalypse (Apoptosis) Activation
-    Given a running reasoning saga visible in the Canvas
-    When the user activates the "Apoptosis" button
-    Then the L0 Arbitrator must terminate the saga immediately
-    And the associated SHM buffer must be sanitized
-    And Performance Metric: apoptosis_termination_time < 1s
+  Scenario: evidence points to existing system areas
+    Given the physical evidence section
+    Then it references active repository paths for layer `L6`
+
+  Scenario: lifecycle is explicit
+    Given this spec status is `DRAFT`
+    Then implementation and roadmap expectations are unambiguous

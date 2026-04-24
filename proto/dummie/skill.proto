@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package dummie.skill;
+
+option go_package = "io.dummie.v2/nervous/pkg/proto/skill";
+
+message Skill {
+  string id = 1;
+  string technical_name = 2;
+  string backend_server = 3;
+  string description = 4;
+  string json_schema = 5;
+  repeated string invariants = 6;
+}
+
+message SkillIngestionRequest {
+  string server_name = 1;
+}
+
+message SkillIngestionResponse {
+  repeated Skill skills = 1;
+}

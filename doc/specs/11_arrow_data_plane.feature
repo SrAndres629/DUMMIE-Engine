@@ -1,12 +1,16 @@
-Feature: Arrow Data Plane Zero-Copy
-  As a System Architect
-  I want to use Apache Arrow for inter-layer communication
-  To eliminate serialization overhead and maintain state consistency
+Feature: Protocolo de Plano de Datos (Apache Arrow Zero-Copy) contract
+  As an engineering team
+  I want this spec to stay aligned with physical implementation
+  So that agents and humans operate with low-entropy context
 
-  Scenario: High-Fidelity State Transfer
-    Given a cognitive event produced in Layer 2
-    When the event is encapsulated in an Arrow RecordBatch
-    Then it must be accessible by Layer 1 without physical memory copies
-    And the Lamport Tick must be validated by the TimeKeeper
+  Scenario: frontmatter is complete
+    Given the spec file `11_arrow_data_plane.md`
+    Then it defines `spec_id`, `title`, `status`, `layer`, and `last_verified_on`
 
-  Performance Metric: copy_overhead <= 0.0%
+  Scenario: evidence points to existing system areas
+    Given the physical evidence section
+    Then it references active repository paths for layer `L1`
+
+  Scenario: lifecycle is explicit
+    Given this spec status is `DRAFT`
+    Then implementation and roadmap expectations are unambiguous

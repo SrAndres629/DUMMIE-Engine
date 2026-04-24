@@ -1,0 +1,15 @@
+skill_id: sw.brain.observe_swarm
+name: Observe Swarm
+description: '[SWARM] Observa qué están haciendo otros agentes en este momento.. Capacidad
+  soberana del núcleo dummie-brain.. Capacidad soberana del núcleo dummie-brain..
+  Capacidad soberana del núcleo dummie-brain.'
+version: 1.1.0
+capabilities:
+- observe_swarm
+invariants:
+- 'sovereignty: high'
+- 'context_anchoring: mandatory'
+- 'layer: L1'
+metadata:
+  server: dummie-brain
+  status: active

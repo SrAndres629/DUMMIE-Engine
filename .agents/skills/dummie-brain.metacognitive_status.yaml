@@ -1,0 +1,15 @@
+skill_id: sw.brain.metacognitive_status
+name: Metacognitive Status
+description: Retorna el estado de 'Ego State' y los aprendizajes recientes.. Capacidad
+  soberana del núcleo dummie-brain.. Capacidad soberana del núcleo dummie-brain..
+  Capacidad soberana del núcleo dummie-brain.
+version: 1.1.0
+capabilities:
+- metacognitive_status
+invariants:
+- 'sovereignty: high'
+- 'context_anchoring: mandatory'
+- 'layer: L1'
+metadata:
+  server: dummie-brain
+  status: active

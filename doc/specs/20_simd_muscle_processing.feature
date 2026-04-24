@@ -1,17 +1,16 @@
-Feature: Músculo SIMD y Cómputo Paralelo - Mojo (DE-V2-L5-20)
-  Criterios de Aceptación Ejecutables para el Acelerador Mojo.
+Feature: Computo Paralelo y Procesamiento SIMD contract
+  As an engineering team
+  I want this spec to stay aligned with physical implementation
+  So that agents and humans operate with low-entropy context
 
-  Scenario: Semantic Gating Evaluation (SIMD)
-    Given a perception buffer in Apache Arrow
-    And the current semantic weights [w_t, w_s, w_i]
-    When the Mojo kernel executes the "semantic_gating_kernel"
-    Then it must normalize the perception vector Phi(Pt)
-    And it must use AVX-512 or CUDA acceleration for batch processing
-    And Performance Metric: gating_latency < 1ms
+  Scenario: frontmatter is complete
+    Given the spec file `20_simd_muscle_processing.md`
+    Then it defines `spec_id`, `title`, `status`, `layer`, and `last_verified_on`
 
-  Scenario: Entropy Compression Breach (Zstd)
-    Given a memory node with entropy > 2.5 bits
-    When the Mojo daemon detects the breach
-    Then it must trigger a Zstandard (Zstd) compression of the RecordBatch
-    And it must signal the completion to L3 Shield
-    And Performance Metric: compression_throughput > 500MB/s
+  Scenario: evidence points to existing system areas
+    Given the physical evidence section
+    Then it references active repository paths for layer `L5`
+
+  Scenario: lifecycle is explicit
+    Given this spec status is `DRAFT`
+    Then implementation and roadmap expectations are unambiguous

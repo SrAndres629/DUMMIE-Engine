@@ -1,15 +1,16 @@
-Feature: Entorno Físico y Restricciones del Metal (DE-V2-L5-01)
-  Criterios de Aceptación Ejecutables para la Estabilidad de Hardware.
+Feature: Entorno Físico y Restricciones del Metal contract
+  As an engineering team
+  I want this spec to stay aligned with physical implementation
+  So that agents and humans operate with low-entropy context
 
-  Scenario: Thermal Throttling Enforcement
-    Given a GPU temperature > 85C
-    When the E-Shield (L3) detects the thermal stress
-    Then it must suspend the Mojo compute hilos
-    And it must emit a "Hardware_Overheat_Protection" signal
-    And Performance Metric: detection_latency < 100ms
+  Scenario: frontmatter is complete
+    Given the spec file `01_environment_and_hardware.md`
+    Then it defines `spec_id`, `title`, `status`, `layer`, and `last_verified_on`
 
-  Scenario: Resource Quota Monitoring
-    Given an agent exceeding the RAM quota of 4GB
-    When the system performs the pre-flight audit
-    Then the task must be rejected until RAM is freed or compressed
-    And Performance Metric: quota_check_latency < 10ms
+  Scenario: evidence points to existing system areas
+    Given the physical evidence section
+    Then it references active repository paths for layer `L5`
+
+  Scenario: lifecycle is explicit
+    Given this spec status is `DRAFT`
+    Then implementation and roadmap expectations are unambiguous

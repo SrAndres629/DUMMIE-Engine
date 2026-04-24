@@ -1,23 +1,38 @@
 {
   "spec_id": "DE-V2-L1-11",
-  "data_plane": {
-    "serialization": "Zero-Copy",
-    "format": "Apache Arrow 15.0+",
-    "shm_path": "/dev/shm/dummie_data_plane",
-    "shm_size_mb": 512
-  },
-  "access_control": {
-    "L0_Overseer": "R",
-    "L1_Nervous": "RW",
-    "L2_Brain": "RW",
-    "L3_Shield": "R",
-    "L4_Edge": "RW"
-  },
-  "invariants": {
-    "mandatory_fields": ["event_id", "lamport_tick", "layer_source"],
-    "no_copy_enforcement": true,
-    "alignment": 64
-  },
-  "enforcement": "STRICT_BLOCK",
-  "personality_ref": "DE-V2-L0-33"
+  "title": "Protocolo de Plano de Datos (Apache Arrow Zero-Copy)",
+  "status": "DRAFT",
+  "layer": "L1",
+  "last_verified_on": "2026-04-24",
+  "required_frontmatter": [
+    "spec_id",
+    "title",
+    "status",
+    "layer",
+    "last_verified_on"
+  ],
+  "required_sections": [
+    "Purpose",
+    "Current State",
+    "Physical Evidence",
+    "Gaps",
+    "Next Actions",
+    "Sibling Artifacts"
+  ],
+  "evidence_paths": [
+    "layers/l1_nervous",
+    "proto",
+    "dummie_agent_config.json"
+  ],
+  "policy": {
+    "allow_legacy_narrative": false,
+    "require_existing_links": true,
+    "status_values": [
+      "ACTIVE",
+      "DRAFT",
+      "PROPOSED",
+      "DEPRECATED",
+      "REFERENCE"
+    ]
+  }
 }

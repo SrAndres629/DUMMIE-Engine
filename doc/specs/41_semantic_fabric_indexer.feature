@@ -1,26 +1,16 @@
-Feature: Semantic Fabric Integrity Check
-  Como el Nodo Arquitecto (L2)
-  Quiero que mis especificaciones y decisiones (ADR) estén bidireccionalmente vinculadas
-  Para evitar desincronización cognitiva y alucinaciones por contexto aislado
+Feature: Semantic Fabric Indexer contract
+  As an engineering team
+  I want this spec to stay aligned with physical implementation
+  So that agents and humans operate with low-entropy context
 
-  Scenario: Validación de enlace ADR hacia Spec
-    Given un nuevo ADR propuesto en "doc/01_architecture/adr/"
-    And el ADR contiene una referencia a la spec "DE-V2-L2-41"
-    When el Semantic Fabric Indexer escanea el repositorio
-    Then la spec "DE-V2-L2-41" debe existir
-    And el indexador debe actualizar el "ontological_map.json" confirmando el cruce semántico
+  Scenario: frontmatter is complete
+    Given the spec file `41_semantic_fabric_indexer.md`
+    Then it defines `spec_id`, `title`, `status`, `layer`, and `last_verified_on`
 
-  Scenario: Desactivación de Fitness Functions en ADRs revocados
-    Given un ADR "0002-old-decision.md" con "status: SUPERSEDED" en su frontmatter
-    And el ADR tiene un archivo hermano "0002-old-decision.rules.json"
-    When el Semantic Fabric Indexer consolida las reglas de arquitectura
-    Then el archivo "0002-old-decision.rules.json" debe ser purgado del "Active Constraint Payload"
-    And las restricciones de ese ADR ya no deben afectar al Agente 3 (Tech Lead)
+  Scenario: evidence points to existing system areas
+    Given the physical evidence section
+    Then it references active repository paths for layer `L2`
 
-  Scenario: Detección de orfandad en el Memory Ledger
-    Given una resolución "RES-099" en ".aiwg/memory/resolutions.jsonl"
-    When el Indexador revisa las dependencias hacia las Specs
-    And no encuentra ninguna Spec que justifique "RES-099"
-    Then lanza una alerta "Orphaned Memory Detected" al Metacognitive Audit Loop
-
-  Performance Metric: index_time < 200ms
+  Scenario: lifecycle is explicit
+    Given this spec status is `DRAFT`
+    Then implementation and roadmap expectations are unambiguous

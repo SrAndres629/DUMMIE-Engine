@@ -1,24 +1,18 @@
-# 💪 L5_Muscle: La Fuerza de Antigravity
+# L5 Muscle
 
-## 1. Abstract
-La capa L5 es el sistema efector del DUMMIE Engine. Su función es traducir las órdenes cognitivas de L2 en acciones físicas seguras, aisladas y optimizadas.
+## Purpose
+Capa de ejecución física y contención operativa para acciones del sistema.
 
-## 2. Divisiones Musculares
+## Current State
+- Driver MCP: `mcp_driver.py`
+- Sandbox manager: `manager.py`
+- Compactor de memoria: `compactor.py`
 
-### 2.1. Drivers (Transporte)
-- **Locus:** `muscle/drivers/`
-- **Función:** Adaptadores para diferentes protocolos (MCP, SSH, Docker Exec).
-- **Mecanismo:** MCP Driver (Transporte Zero-Trust).
+## Key Gaps
+1. Controles de sandbox aún básicos.
+2. Ruta de ejecución carece de contrato fuerte de errores/reintentos.
 
-### 2.2. Sandbox (Contención)
-- **Locus:** `muscle/sandbox/`
-- **Función:** Garantiza que las tareas mutativas no contaminen el host.
-- **Mecanismo:** Sandbox Manager (Gestión de celdas de aislamiento efímeras).
-
-### 2.3. Optimization (Performance)
-- **Locus:** `muscle/optimization/`
-- **Función:** Procesamiento de alto rendimiento para tareas de datos intensivos.
-- **Mecanismo:** Módulos Mojo con optimización SIMD.
-
-## 3. Protocolo de Acción
-L5 opera bajo el principio de **"Aislar antes de Actuar"**. El cerebro (L2) solicita una ejecución y L5 se encarga de preparar el entorno, enviar el comando y limpiar los residuos, devolviendo solo el resultado verificado.
+## Next Actions
+1. Definir política de aislamiento verificable.
+2. Endurecer manejo de errores en transporte MCP.
+3. Añadir pruebas de resiliencia y cleanup.

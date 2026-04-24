@@ -1,20 +1,16 @@
-Feature: Metacognitive Identity Evolution
-  Como el Nodo de Auditoría Reflexiva (L2)
-  Quiero evaluar el historial de resoluciones y ambigüedades
-  Para ajustar los traits de identidad y optimizar la autonomía del enjambre
+Feature: Metacognitive Audit Loop (Observador del Observador) contract
+  As an engineering team
+  I want this spec to stay aligned with physical implementation
+  So that agents and humans operate with low-entropy context
 
-  Scenario: Ajuste de agresividad tras errores de TDD
-    Given que el ciclo de sincronización para "L2_Brain" ha concluido
-    And el archivo "ambiguities.jsonl" registra más de 3 errores tipo "TDD Failure"
-    When el Audit Loop analiza la eficiencia de la sesión
-    Then el trait "refactoring_aggressiveness" en "identity.json" debe reducirse en 0.1
-    And se debe añadir un registro en "evolution.jsonl" explicando el ajuste por inestabilidad de código
-    And el sistema comunica explícitamente al Humano (PAH) la lección aprendida y la mutación de identidad
+  Scenario: frontmatter is complete
+    Given the spec file `40_metacognitive_audit_loop.md`
+    Then it defines `spec_id`, `title`, `status`, `layer`, and `last_verified_on`
 
-  Scenario: Incremento de abstracción por éxito repetido
-    Given que el enjambre ha resuelto "L3_Shield" sin disparar alarmas Jidoka
-    When el Audit Loop analiza la eficiencia de la sesión
-    Then el trait "abstraction_level" en "identity.json" debe incrementarse en 0.05
-    And el sistema documenta su aumento de confianza en la capa
+  Scenario: evidence points to existing system areas
+    Given the physical evidence section
+    Then it references active repository paths for layer `L2`
 
-  Performance Metric: audit_cycle < 100ms
+  Scenario: lifecycle is explicit
+    Given this spec status is `DRAFT`
+    Then implementation and roadmap expectations are unambiguous

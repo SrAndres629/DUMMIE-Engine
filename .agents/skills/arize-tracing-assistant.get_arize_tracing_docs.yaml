@@ -1,0 +1,22 @@
+skill_id: sw.arize-tracing-assistant.get_arize_tracing_docs
+name: Get Arize Tracing Docs
+description: "\nGet docs and examples to instrument an app and send traces/spans to\
+  \ Arize.\nIf the framework is not in the list use manual instrumentation with open\
+  \ telemetry.\n\nParameters\n----------\nframework : str\n    LLM provider or framework.\
+  \ One of:\n    [\"agno\", \"amazon-bedrock\", \"anthropic\", \"autogen\", \"beeai\"\
+  , \"crewai\", \"dspy\", \"google-gen-ai\", \"groq\", \"guardrails-ai\", \"haystack\"\
+  ,\n    \"hugging-face-smolagents\", \"instructor\", \"langchain\", \"langflow\"\
+  , \"langgraph\", \"litellm\", \"llamaindex\", \"mistralai\", \"openai\", \"openai-agents\"\
+  , \"prompt-flow\",\n    \"pydantic-ai\", \"strands-agents\", \"together\", \"vercel\"\
+  , \"vertexai\"]\nlanguage : str\n    Programming language: \"python\" or \"typescript\"\
+  \n\nReturns\n-------\nstr\n    Example code snippets for auto/manual instrumentation\
+  \ for Arize.\n. Utilidad del servidor arize-tracing-assistant.. Utilidad del servidor\
+  \ arize-tracing-assistant.. Utilidad del servidor arize-tracing-assistant."
+version: 1.1.0
+capabilities:
+- get_arize_tracing_docs
+invariants:
+- 'compliance: standard'
+metadata:
+  server: arize-tracing-assistant
+  status: active

@@ -1,15 +1,38 @@
 {
   "spec_id": "DE-V2-L0-05",
-  "orchestration_model": "Mesh of Experts",
-  "arbitration": {
-    "arbiter": "L0_Overseer",
-    "protocol": "Weighted Consensus",
-    "impasse_resolution": "Escalate to Human (PAH)"
-  },
-  "invariants": [
-    "No agent can execute without a previous Architectural Sign-off",
-    "Consensus must involve at least 3 agent namespaces",
-    "Audit trail is mandatory for every decision"
+  "title": "Stack de Orquestaci\u00f3n y Arbitraje",
+  "status": "DRAFT",
+  "layer": "L0",
+  "last_verified_on": "2026-04-24",
+  "required_frontmatter": [
+    "spec_id",
+    "title",
+    "status",
+    "layer",
+    "last_verified_on"
   ],
-  "personality_ref": "DE-V2-L0-33"
+  "required_sections": [
+    "Purpose",
+    "Current State",
+    "Physical Evidence",
+    "Gaps",
+    "Next Actions",
+    "Sibling Artifacts"
+  ],
+  "evidence_paths": [
+    "layers/l0_overseer",
+    "doc/CORE_SPEC.md",
+    "doc/PHYSICAL_MAP.md"
+  ],
+  "policy": {
+    "allow_legacy_narrative": false,
+    "require_existing_links": true,
+    "status_values": [
+      "ACTIVE",
+      "DRAFT",
+      "PROPOSED",
+      "DEPRECATED",
+      "REFERENCE"
+    ]
+  }
 }

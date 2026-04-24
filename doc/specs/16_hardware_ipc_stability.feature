@@ -1,16 +1,16 @@
-Feature: Estabilidad IPC y Memoria Compartida (DE-V2-L5-16)
-  Criterios de Aceptación Ejecutables para el Bus SHM.
+Feature: Estabilidad Física y Sincronización IPC contract
+  As an engineering team
+  I want this spec to stay aligned with physical implementation
+  So that agents and humans operate with low-entropy context
 
-  Scenario: Validate Binary Header Integrity
-    Given an SHM buffer allocated by Layer 3 (Rust)
-    When a process reads the 64B header
-    Then it must find the magic "ATKN" at offset 0
-    And the "TicketID" UUID must match the active transaction
-    And Performance Metric: header_integrity_check < 100us
+  Scenario: frontmatter is complete
+    Given the spec file `16_hardware_ipc_stability.md`
+    Then it defines `spec_id`, `title`, `status`, `layer`, and `last_verified_on`
 
-  Scenario: Zero-Copy Arrow Transmission
-    Given a large telemetry set in L6
-    When the system persists it to L5 SHM
-    Then it must be transmitted via Apache Arrow without user-space copies
-    And the "Data_Offset" must be 64-byte aligned
-    And Performance Metric: transmission_bandwidth > 10GB/s
+  Scenario: evidence points to existing system areas
+    Given the physical evidence section
+    Then it references active repository paths for layer `L5`
+
+  Scenario: lifecycle is explicit
+    Given this spec status is `DRAFT`
+    Then implementation and roadmap expectations are unambiguous
