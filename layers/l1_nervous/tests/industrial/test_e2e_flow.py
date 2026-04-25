@@ -11,8 +11,8 @@ from memory_ipc import ArrowMemoryBridge, MemoryPlaneError
 def test_industrial_e2e():
     print("=== DUMMIE INDUSTRIAL VERIFICATION - SMOKE E2E ===")
     
-    SOCKET_PATH = os.path.abspath("/tmp/dummie_industrial.sock")
-    DB_PATH = os.path.abspath("./.industrial_test_kuzu")
+    SOCKET_PATH = "/tmp/dummie_industrial.sock"
+    DB_PATH = "/tmp/dummie_ind_kuzu"
     
     # Limpieza total antes de empezar
     if os.path.exists(SOCKET_PATH): os.remove(SOCKET_PATH)
@@ -39,9 +39,15 @@ def test_industrial_e2e():
     env["MEMORY_SOCKET_PATH"] = SOCKET_PATH
     env["KUZU_DB_PATH"] = DB_PATH
     
-    # Arrancamos el servidor
+    # Arrancamos el servidor (Binario si existe, si no go run)
+    binary_path = "./bin/memory_server"
+    if os.path.exists(os.path.join("layers/l1_nervous", binary_path)):
+        cmd = [binary_path]
+    else:
+        cmd = ["go", "run", "cmd/memory/main.go"]
+        
     proc = subprocess.Popen(
-        ["go", "run", "cmd/memory/main.go"],
+        cmd,
         cwd="layers/l1_nervous",
         env=env, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
         text=True

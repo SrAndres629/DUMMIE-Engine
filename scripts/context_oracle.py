@@ -3,10 +3,12 @@ import os
 import sys
 import json
 import argparse
+import re
 from pathlib import Path
 
 # Raíz del proyecto DUMMIE Engine
 ROOT_DIR = Path(__file__).parent.parent.absolute()
+sys.path.append(str(ROOT_DIR))
 AIWG_DIR = ROOT_DIR / ".aiwg"
 DOC_DIR = ROOT_DIR / "doc"
 
@@ -82,14 +84,31 @@ def main():
     args = parser.parse_args()
     
     if args.tree:
-        print("=== ÁRBOL DE DIRECTORIOS EN TIEMPO REAL ===")
-        print(get_tree())
+        print("=== ÁRBOL DE DIRECTORIOS (QUANTIZED) ===")
+        # Intentar obtener keywords del entorno o de un archivo temporal de 'Goal'
+        goal = os.environ.get("DUMMIE_CURRENT_GOAL", "")
+        keywords = [w for w in re.findall(r'\w+', goal) if len(w) > 3]
+        
+        from layers.l1_nervous.context_quantizer import ContextQuantizer
+        quantizer = ContextQuantizer(ROOT_DIR)
+        raw_tree = get_tree()
+        print(quantizer.prune_tree(raw_tree, keywords))
+        
     elif args.arch:
         print("=== REGLAS DE ARQUITECTURA (MAD 2026) ===")
         print(get_architecture())
+        
     elif args.specs:
-        print("=== ESPECIFICACIONES ACTIVAS ===")
-        print(get_active_specs())
+        print("=== ESPECIFICACIONES ACTIVAS (QUANTIZED) ===")
+        specs_dir = DOC_DIR / "specs"
+        if specs_dir.exists():
+            from layers.l1_nervous.context_quantizer import ContextQuantizer
+            quantizer = ContextQuantizer(ROOT_DIR)
+            for file in specs_dir.rglob("*.md"):
+                print(f"\n--- {file.name} ---")
+                print(quantizer.quantize_spec(file.read_text()))
+        else:
+            print("No hay specs activas.")
     elif args.memory:
         print("=== ESTADO DE MEMORIA 4D-TES ===")
         print(get_memory_state())

@@ -34,27 +34,24 @@ type DummieMemoryServer struct {
 }
 
 func NewDummieMemoryServer(dbPath string, nc *nats.Conn) (*DummieMemoryServer, error) {
-	// Asegurar que el directorio de la DB existe y es accesible
-	if err := os.MkdirAll(dbPath, 0755); err != nil {
-		publishInfraError(nc, "FS_PERMISSION_DENIED", err.Error())
-		return nil, fmt.Errorf("failed to create db directory: %w", err)
-	}
-
+	log.Printf("[L1-MEMORY] Step 1: Opening KuzuDB (Native creation)...")
 	config := kuzu.DefaultSystemConfig()
-	// Incrementamos buffer pool para industrialización (opcional)
-	// config.BufferPoolSize = 1024 * 1024 * 128 // 128MB
-
+	
+	// Intento de apertura con aislamiento
 	db, err := kuzu.OpenDatabase(dbPath, config)
 	if err != nil {
-		publishInfraError(nc, "DATABASE_OPEN_FAILED", err.Error())
-		return nil, fmt.Errorf("failed to open kuzu at %s: %w", dbPath, err)
-	}
-	conn, err := kuzu.OpenConnection(db)
-	if err != nil {
-		db.Close() // Limpiar si la conexión falla
-		publishInfraError(nc, "CONNECTION_OPEN_FAILED", err.Error())
+		log.Printf("[L1-MEMORY] CRITICAL: Kuzu OpenDatabase failed: %v", err)
 		return nil, err
 	}
+	
+	log.Printf("[L1-MEMORY] Step 3: Establishing internal connection...")
+	conn, err := kuzu.OpenConnection(db)
+	if err != nil {
+		db.Close()
+		return nil, err
+	}
+	
+	log.Printf("[L1-MEMORY] SUCCESS: KuzuDB initialized and isolated.")
 	return &DummieMemoryServer{db: db, conn: conn, nc: nc}, nil
 }
 
@@ -297,23 +294,15 @@ func toFloat64(v any) (float64, bool) {
 	}
 }
 
-func StartFlightServer(dbPath, socketPath string, natsURL string) error {
+func StartFlightServerWithInstance(server *DummieMemoryServer, socketPath string, natsURL string) error {
 	if _, err := os.Stat(socketPath); err == nil {
 		os.Remove(socketPath)
 	}
-	
-	nc, _ := nats.Connect(natsURL)
-	if nc != nil {
-		defer nc.Close()
-	}
 
-	/* if err := ResolveStaleLocks(dbPath); err != nil {
-		log.Printf("[L1-MEMORY] Fencing Error: %v", err)
-	} */
-
-	server, err := NewDummieMemoryServer(dbPath, nc)
-	if err != nil {
-		return err
+	// Reconectar NATS si fue pasado como nil durante la pre-inicialización
+	if server.nc == nil {
+		nc, _ := nats.Connect(natsURL)
+		server.nc = nc
 	}
 
 	lis, err := net.Listen("unix", socketPath)
@@ -327,4 +316,19 @@ func StartFlightServer(dbPath, socketPath string, natsURL string) error {
 	fmt.Printf("[L1-MEMORY] Memory Plane Data Plane (TYPED) activo en unix://%s\n", socketPath)
 	fs.InitListener(lis)
 	return fs.Serve()
+}
+
+func StartFlightServer(dbPath, socketPath string, natsURL string) error {
+	if err := ResolveStaleLocks(dbPath); err != nil {
+		log.Printf("[L1-MEMORY] Fencing Error: %v", err)
+	}
+
+	nc, _ := nats.Connect(natsURL)
+	server, err := NewDummieMemoryServer(dbPath, nc)
+	if err != nil {
+		if nc != nil { nc.Close() }
+		return err
+	}
+
+	return StartFlightServerWithInstance(server, socketPath, natsURL)
 }

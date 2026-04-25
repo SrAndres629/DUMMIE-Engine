@@ -1,7 +1,6 @@
 import os
 import sys
 import logging
-import kuzu
 import atexit
 import signal
 from pathlib import Path

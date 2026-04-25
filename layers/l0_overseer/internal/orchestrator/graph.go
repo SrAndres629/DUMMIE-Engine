@@ -53,6 +53,14 @@ func (g *StateGraph) Run(ctx context.Context, initialState *State, startNode str
 	state := initialState
 
 	for {
+		// [STABLE PREFIX] Hardened Prefix: Identity + Golden Rules (GEMINI.md)
+		state.Mu.Lock()
+		if len(state.History) == 0 {
+			prefix := fmt.Sprintf("SYSTEM: Role=%s | Goal=%s\n[IDENTITY]: Sovereign Agentic AI\n[RULES]: Spec-First, Domain-Driven, Hexagonal Architecture.", state.ID, state.Goal)
+			state.History = append(state.History, prefix)
+		}
+		state.Mu.Unlock()
+
 		nodeFunc, ok := g.Nodes[curr]
 		if !ok {
 			return state, fmt.Errorf("node %s not found", curr)
@@ -64,6 +72,11 @@ func (g *StateGraph) Run(ctx context.Context, initialState *State, startNode str
 			return state, err
 		}
 		state = newState
+
+		// [COMPRESSION CHECK] Si el historial es muy largo, se sugiere llamar al utility_compressor
+		if len(state.History) > 50 {
+			fmt.Printf("[GRAFO] Alerta: Historial extenso (%d mensajes). Sugerido trigger de Compresion Semantica.\n", len(state.History))
+		}
 
 		// Determinar siguiente nodo (lógica simple por ahora)
 		nextNodes, ok := g.Edges[curr]
@@ -92,8 +105,19 @@ func (g *StateGraph) runParallel(ctx context.Context, state *State, nodes []stri
 		wg.Add(1)
 		go func(nodeName string) {
 			defer wg.Done()
-			// Clonar estado para cada rama (Quantum State Cloning)
+			// [BRANCH ISOLATION 2.0] Clonar estado y aplicar TurboQuant (Truncado agresivo)
 			clonedState := g.cloneState(state)
+			
+			clonedState.Mu.Lock()
+			if len(clonedState.History) > 10 {
+				// Mantener solo el prefijo (índice 0) y los últimos 3 mensajes para la rama
+				prefix := clonedState.History[0]
+				recent := clonedState.History[len(clonedState.History)-3:]
+				clonedState.History = append([]string{prefix, "[BRANCH_SUMMARY]: Historial previo podado por TurboQuant."}, recent...)
+			}
+			clonedState.Branch = nodeName
+			clonedState.Mu.Unlock()
+
 			res, err := g.Run(ctx, clonedState, nodeName)
 			if err != nil {
 				errors <- err
