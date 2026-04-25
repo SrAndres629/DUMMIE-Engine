@@ -6,6 +6,7 @@
 tmp/
 .aiwg/
 .gemini/
+.worktrees/
 
 # Binarios y Artefactos de Build
 bin/
