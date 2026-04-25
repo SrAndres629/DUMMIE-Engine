@@ -19,7 +19,7 @@ func main() {
 	fmt.Printf("[L0] %d habilidades cargadas en el SkillManager.\n", len(sm.Registry.Skills))
 
 	// 2. Inicializar Grafo
-	graph := orchestrator.NewStateGraph(sm)
+	graph := orchestrator.NewStateGraph(sm, nil)
 
 	// 3. Definir Nodo: Planner (Filtrado de Skills)
 	graph.AddNode("Planner", func(ctx context.Context, state *orchestrator.State) (*orchestrator.State, error) {

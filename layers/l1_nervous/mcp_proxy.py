@@ -130,10 +130,53 @@ class MCPProxyManager:
         if "env" in cfg:
             env.update(cfg["env"])
 
-        logger.info(f"Starting MCP Server: {server_name} ({cmd})")
+        # [SOVEREIGN SECURITY TOGGLE]
+        # Activa o desactiva el sandbox bwrap según la presencia del usuario
+        state_file = Path(os.environ.get("DUMMIE_AIWG_DIR", os.getcwd() + "/.aiwg")) / "security_state"
+        sandbox_mode = os.environ.get("DUMMIE_SANDBOX_MODE", "OFF").upper()
+        
+        if state_file.exists():
+            with open(state_file, "r") as f:
+                sandbox_mode = f.read().strip().upper()
+        
+        final_cmd = cmd
+        final_args = args
+
+        if sandbox_mode == "ON":
+            logger.info(f"🛡️ Security Mode: HIGH (Sovereign Sandbox Active)")
+            # Requisito: bwrap instalado. 
+            # Configuramos un sandbox que permite red (share-net) pero aislada (loopback)
+            # y monta el root_dir para que el servidor pueda trabajar.
+            root_dir = os.environ.get("DUMMIE_ROOT_DIR", os.getcwd())
+            
+            bwrap_args = [
+                "bwrap",
+                "--unshare-all",
+                "--share-net",
+                "--loopback",
+                "--dev", "/dev",
+                "--proc", "/proc",
+                "--tmpfs", "/tmp",
+                "--ro-bind", "/usr", "/usr",
+                "--ro-bind", "/lib", "/lib",
+                "--ro-bind", "/lib64", "/lib64",
+                "--ro-bind", "/bin", "/bin",
+                "--ro-bind", "/sbin", "/sbin",
+                "--ro-bind", "/etc/resolv.conf", "/etc/resolv.conf",
+                "--bind", root_dir, root_dir,
+                "--bind", os.path.expanduser("~"), os.path.expanduser("~"), # Necesario para npx/uv cache
+                "--",
+                cmd
+            ]
+            final_cmd = "bwrap"
+            final_args = bwrap_args[1:] + args
+        else:
+            logger.info(f"🔓 Security Mode: LOW (Proximity Mode - Direct Execution)")
+
+        logger.info(f"Starting MCP Server: {server_name} ({final_cmd})")
         try:
             process = await asyncio.create_subprocess_exec(
-                cmd, *args,
+                final_cmd, *final_args,
                 stdin=asyncio.subprocess.PIPE,
                 stdout=asyncio.subprocess.PIPE,
                 stderr=asyncio.subprocess.PIPE,
@@ -142,7 +185,7 @@ class MCPProxyManager:
         except OSError as e:
             if e.errno == 1: # Operation not permitted
                 logger.error(f"Sandbox Restriction: {server_name} failed with Errno 1.")
-                raise RuntimeError(f"Sandbox Block: bwrap/RTM_NEWADDR. Sugerencia: Revisa 'unprivileged_userns_clone' o desactiva el sandbox del runner.")
+                raise RuntimeError(f"Sandbox Block: bwrap/RTM_NEWADDR. Sugerencia: Revisa 'unprivileged_userns_clone' o desactiva el sandbox.")
             raise
         
         # Manejo de logs en segundo plano (stderr)

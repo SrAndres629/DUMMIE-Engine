@@ -1,8 +1,8 @@
 {
-  "report_version": "2.1.0-VERIFIED",
-  "timestamp_utc": "2026-04-25T03:10:00Z",
-  "overall_status": "partial",
-  "confidence": 0.93,
+  "report_version": "2.2.0-ONLINE-VERIFIED",
+  "timestamp_utc": "2026-04-25T09:04:00Z",
+  "overall_status": "pass",
+  "confidence": 0.98,
   "facts": [
     {
       "id": "BUILD_L0_OK",
@@ -73,32 +73,41 @@
           "exit_code": 0
         }
       ]
-    }
-  ],
-  "failed_or_partial_claims": [
-    {
-      "claim": "Persistencia real online validada en esta sesión",
-      "why": "No hay Memory Plane activo en /tmp/dummie_memory.sock; verify_compression online falla.",
-      "risk_level": "high",
-      "fix": "Levantar servidor de memoria y ejecutar verify_compression sin --allow-offline, verificando causal_hash_v2 en DB."
-    }
-  ],
-  "recommendations": [
-    {
-      "priority": "P0",
-      "title": "Automatizar test online de persistencia",
-      "impact": "Evita reportes inflados y garantiza evidencia real de escritura/lectura",
-      "effort": "M",
-      "proposed_change": "Agregar script que levante Memory Plane temporal y ejecute verify_compression en modo online",
-      "acceptance_test": "verify_compression.py (sin --allow-offline) exit 0"
     },
     {
+      "id": "ONLINE_MEMORY_PLANE_VERIFIED",
+      "statement": "La auditoria industrial levanto Memory Plane en socket aislado, ejecuto verify_compression.py en modo online y verifico persistencia con causal_hash_v2/msg_count.",
+      "evidence": [
+        {
+          "type": "command",
+          "value": "bash scripts/full_industrial_audit.sh",
+          "exit_code": 0
+        },
+        {
+          "type": "file",
+          "path": "scripts/full_industrial_audit.sh",
+          "line": 10
+        }
+      ]
+    }
+  ],
+  "failed_or_partial_claims": [],
+  "recommendations": [
+    {
       "priority": "P1",
-      "title": "Estandarizar intérprete de tests L1",
-      "impact": "Elimina fallos por dependencias ausentes con python del sistema",
+      "title": "Mover auditoria industrial a CI local",
+      "impact": "Evita que la persistencia online vuelva a quedar sin evidencia fresca",
+      "effort": "M",
+      "proposed_change": "Ejecutar scripts/full_industrial_audit.sh como smoke test antes de cerrar hardening de memoria",
+      "acceptance_test": "bash scripts/full_industrial_audit.sh exit 0"
+    },
+    {
+      "priority": "P2",
+      "title": "Reducir ruido de logs esperados",
+      "impact": "Hace mas clara la diferencia entre error esperado de CREATE TABLE existente y fallo real",
       "effort": "S",
-      "proposed_change": "Documentar y aplicar siempre layers/l1_nervous/.venv/bin/python3 en scripts de verificación",
-      "acceptance_test": "scripts/test_semantic_precision.py y scripts/verify_compression.py ejecutables con venv"
+      "proposed_change": "Agregar manejo explicito de tabla existente en memory_ipc o verify_compression.py",
+      "acceptance_test": "La auditoria online pasa sin logs de backend para el caso tabla existente"
     }
   ],
   "agent_own_ideas": [
@@ -109,8 +118,8 @@
     }
   ],
   "next_actions_72h": [
-    "Implementar harness de Memory Plane temporal para CI local.",
-    "Agregar test de manipulación de prefijo con payload que incluya hash correcto pero contenido corrupto.",
-    "Añadir verificación de causal_hash_v2 en pipeline de smoke tests."
+    "Agregar full_industrial_audit.sh a un objetivo Makefile.",
+    "Evaluar UPSERT/MERGE para cristalizaciones repetidas con el mismo causal hash.",
+    "Separar fixtures de auditoria para que cada corrida tenga payload unico o limpieza transaccional."
   ]
 }

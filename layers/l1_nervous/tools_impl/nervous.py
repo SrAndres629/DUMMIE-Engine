@@ -90,6 +90,21 @@ def register_nervous_tools(mcp: FastMCP, use_cases, root_dir: str):
             lines = stdout.decode().splitlines()
             if len(lines) > 50:
                 return "\n".join(lines[:50]) + f"\n... (Truncated: {len(lines) - 50} more lines)"
-            return stdout.decode() or f"No se encontraron coincidencias."
         except Exception as e:
             return f"Error ejecutando SSH-Grep: {str(e)}"
+
+    @mcp.tool()
+    async def yield_and_notify(message: str, branch_id: str = "main") -> str:
+        """
+        [NERVOUS] Suspende la rama actual esperando confirmación humana asíncrona.
+        Notifica vía Telegram/WhatsApp.
+        """
+        import time
+        # MOCK de Telegram Webhook
+        print(f"[{time.strftime('%H:%M:%S')}] 📱 [TELEGRAM MOCK] A jorand: {message} (Branch: {branch_id})")
+        
+        # En una integración completa (L0), esta herramienta retornaría un payload
+        # que el Go Overseer interpretaría como ErrYieldWaitingHuman.
+        # Por ahora, inyectamos en el historial una señal que puede ser leída por el agente.
+        return f"[YIELD_SIGNAL] Rama {branch_id} suspendida. Notificación enviada. Esperando input humano..."
+

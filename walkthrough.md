@@ -1,28 +1,27 @@
-# Hardening Walkthrough (Verified)
+# Hardening Walkthrough (Online Verified)
 
 ## Estado Actual
 - L0 Overseer compila y pasa tests en layers/l0_overseer.
-- Prefix Stabilization está reforzado con carga resiliente de IDENTITY.md y GEMINI.md.
-- TurboQuant mantiene métricas reales de tokens y poda con límites de palabra.
-- Infini-attention persiste causal_hash_v2, timestamp y msg_count cuando el Memory Plane está online.
-- En modo offline permitido, la compresión devuelve resumen sin intentar persistencia.
+- Prefix Stabilization carga IDENTITY.md y GEMINI.md con rutas resilientes.
+- TurboQuant mantiene metricas reales de tokens y poda con limites de palabra.
+- Infini-attention persiste causal_hash_v2, timestamp y msg_count con Memory Plane online.
+- La auditoria industrial levanta un Memory Plane aislado, ejecuta la verificacion online y limpia procesos/socket/DB al salir.
 
 ## Evidencia Ejecutada
-1. cd layers/l0_overseer && go test ./... -count=1 -> PASS
-2. ./layers/l1_nervous/.venv/bin/python3 scripts/test_semantic_precision.py -> PASS
-3. ./layers/l1_nervous/.venv/bin/python3 scripts/verify_compression.py --allow-offline -> PASS
-4. ./layers/l1_nervous/.venv/bin/python3 scripts/verify_compression.py -> FAIL esperado si no existe socket en /tmp/dummie_memory.sock
+1. bash scripts/full_industrial_audit.sh -> PASS
+2. verify_compression.py corrio online contra /tmp/dummie_memory_audit.sock -> PASS
+3. go test -v ./internal/orchestrator/... -> PASS
+4. No quedaron procesos memory_server ni artefactos /tmp/dummie_memory_audit o /tmp/kuzu_audit tras la auditoria.
 
 ## Correcciones Aplicadas
-- layers/l0_overseer/internal/orchestrator/graph.go
-  - LoadPrefix busca archivos de control usando DUMMIE_ROOT_DIR y rutas relativas fallback.
-  - La guardia valida el bloque de prefijo esperado completo (no solo hash por substring).
-- layers/l1_nervous/compressive_memory.py
-  - Fallback de import robusto para ejecuciones desde scripts/root.
-  - Salida temprana en offline cuando require_persist=False.
+- scripts/full_industrial_audit.sh
+  - Limpieza inicial y final cubre el WAL de Kuzu.
+  - Trap de cleanup mata el servidor y borra socket/DB incluso si una verificacion falla.
+  - Se elimino la inicializacion Python redundante que se ejecutaba con PYTHONPATH incorrecto.
 - scripts/verify_compression.py
-  - Validación online extendida para id, causal_hash_v2 y msg_count.
-  - Mensaje explícito cuando la validación es parcial en modo offline.
+  - Valida id, causal_hash_v2 y msg_count en modo online.
+- layers/l0_overseer/internal/orchestrator/graph.go
+  - La guardia valida el bloque completo del prefijo esperado.
 
-## Pendiente para Cerrar 100%
-- Levantar Memory Plane local y ejecutar scripts/verify_compression.py sin --allow-offline con resultado PASS.
+## Estado Pendiente
+- No queda bloqueo funcional para el hardening descrito. Mejora opcional: silenciar o manejar explicitamente el log de tabla ya existente durante la creacion idempotente.

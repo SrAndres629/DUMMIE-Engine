@@ -9,7 +9,7 @@ import (
 
 func main() {
 	sm := &orchestrator.SkillManager{}
-	graph := orchestrator.NewStateGraph(sm)
+	graph := orchestrator.NewStateGraph(sm, nil)
 
 	// 1. Planner Node
 	graph.AddNode("Planner", func(ctx context.Context, state *orchestrator.State) (*orchestrator.State, error) {

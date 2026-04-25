@@ -7,19 +7,30 @@ BIN_DIR="$ROOT_DIR/bin"
 L1_VENV="$ROOT_DIR/layers/l1_nervous/.venv/bin/python3"
 SOCKET_PATH="/tmp/dummie_memory_audit.sock"
 DB_PATH="/tmp/kuzu_audit_db"
+SERVER_PID=""
 
+cleanup() {
+    if [ -n "$SERVER_PID" ] && kill -0 "$SERVER_PID" >/dev/null 2>&1; then
+        kill "$SERVER_PID" || true
+        wait "$SERVER_PID" 2>/dev/null || true
+    fi
+    rm -rf "$DB_PATH" "$DB_PATH.wal"
+    rm -f "$SOCKET_PATH"
+}
+
+trap cleanup EXIT
 echo "=== INICIANDO AUDITORÍA INDUSTRIAL DE EXTREMO A EXTREMO ==="
 
 # 1. Limpieza de entorno
 echo "[1/5] Limpiando sockets y DBs previas..."
-rm -rf "$DB_PATH"
+rm -rf "$DB_PATH" "$DB_PATH.wal"
 rm -f "$SOCKET_PATH"
 mkdir -p "$BIN_DIR"
 
 # 2. Build de componentes
-echo "[2/5] Compilando Memory Plane y Overseer..."
+echo "[2/5] Compilando Memory Plane y Overseer (All Commands)..."
 cd "$ROOT_DIR/layers/l1_nervous" && go build -o "$BIN_DIR/memory_server" ./cmd/memory/main.go
-cd "$ROOT_DIR/layers/l0_overseer" && go build -o "$BIN_DIR/overseer" ./cmd/overseer
+cd "$ROOT_DIR/layers/l0_overseer" && go build -o "$BIN_DIR/" ./cmd/...
 
 # 3. Levantar Memory Plane en segundo plano
 echo "[3/5] Levantando Memory Plane (Online Mode)..."
@@ -43,9 +54,6 @@ if [ ! -S "$SOCKET_PATH" ]; then
     exit 1
 fi
 
-# Inicializar Tabla (Si es necesario, aunque verify_compression lo intenta)
-MEMORY_SOCKET_PATH="$SOCKET_PATH" "$L1_VENV" -c "from layers.l1_nervous.memory_ipc import ArrowMemoryBridge; import os; bridge = ArrowMemoryBridge(os.getenv('MEMORY_SOCKET_PATH')); bridge.ipc.execute('CREATE NODE TABLE MemoryState(id STRING, causal_hash_v2 STRING, summary STRING, type STRING, timestamp INT64, msg_count INT64, PRIMARY KEY(id))')" || true
-sleep 2
 
 # 4. Ejecutar Suite de Verificación (MODO ONLINE)
 echo "[4/5] Ejecutando Verificación de Compresión (ONLINE)..."
@@ -56,6 +64,5 @@ cd "$ROOT_DIR/layers/l0_overseer" && go test -v ./internal/orchestrator/...
 
 # 5. Cleanup
 echo "=== AUDITORÍA COMPLETADA CON ÉXITO ==="
-kill "$SERVER_PID"
-rm -rf "$DB_PATH"
-rm -f "$SOCKET_PATH"
+cleanup
+trap - EXIT

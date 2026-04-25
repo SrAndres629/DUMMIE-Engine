@@ -19,11 +19,16 @@ type State struct {
 	Context map[string]interface{}
 	History []string
 	Skills  []*skill.Skill
-	Result  string
-	Branch  string
-	Errors  []error
-	Mu      sync.RWMutex
+	Result   string
+	Branch   string
+	Status   string
+	Friction float64
+	Errors   []error
+	Mu       sync.RWMutex
 }
+
+var ErrYieldWaitingHuman = fmt.Errorf("yield: waiting for human input")
+
 
 // NodeFunc es la unidad de ejecución en el grafo
 type NodeFunc func(ctx context.Context, state *State) (*State, error)
@@ -33,15 +38,17 @@ type StateGraph struct {
 	Nodes       map[string]NodeFunc
 	Edges       map[string][]string
 	SkillMgr    *SkillManager
+	Store       *StateStore
 	PrefixBlock string
 	PrefixHash  string
 }
 
-func NewStateGraph(sm *SkillManager) *StateGraph {
+func NewStateGraph(sm *SkillManager, store *StateStore) *StateGraph {
 	g := &StateGraph{
 		Nodes:    make(map[string]NodeFunc),
 		Edges:    make(map[string][]string),
 		SkillMgr: sm,
+		Store:    store,
 	}
 	g.LoadPrefix()
 	return g
@@ -109,6 +116,10 @@ func (g *StateGraph) Run(ctx context.Context, initialState *State, startNode str
 			}
 		}
 		state.Mu.Unlock()
+		
+		if g.Store != nil {
+			g.Store.SaveState(state)
+		}
 
 		nodeFunc, ok := g.Nodes[curr]
 		if !ok {
@@ -118,9 +129,30 @@ func (g *StateGraph) Run(ctx context.Context, initialState *State, startNode str
 		fmt.Printf("[GRAFO] Ejecutando Nodo: %s\n", curr)
 		newState, err := nodeFunc(ctx, state)
 		if err != nil {
+			if err == ErrYieldWaitingHuman {
+				fmt.Printf("[GRAFO] Rama '%s' suspendida (Yield) esperando entrada humana.\n", state.Branch)
+				state.Mu.Lock()
+				state.Status = "BLOCKED_WAITING_HUMAN"
+				state.Mu.Unlock()
+				
+				if g.Store != nil {
+					g.Store.SaveState(state)
+				}
+				
+				// Rompemos el ciclo sin devolver error fatal para que el orquestador global siga
+				return state, nil
+			}
 			return state, err
 		}
 		state = newState
+
+		state.Mu.Lock()
+		state.Status = "RUNNING"
+		state.Mu.Unlock()
+		
+		if g.Store != nil {
+			g.Store.SaveState(state)
+		}
 
 		// [COMPRESSION CHECK] Si el historial es muy largo, se sugiere llamar al utility_compressor
 		if len(state.History) > 50 {
@@ -134,9 +166,9 @@ func (g *StateGraph) Run(ctx context.Context, initialState *State, startNode str
 			break
 		}
 
-		// Si hay múltiples nodos, lanzamos el "Fan-out" (Paralelismo Cuántico)
+	// Si hay múltiples nodos, lanzamos el "Fan-out" probabilístico
 		if len(nextNodes) > 1 {
-			return g.runParallel(ctx, state, nextNodes)
+			return g.runProbabilistic(ctx, state, nextNodes)
 		}
 
 		curr = nextNodes[0]
@@ -145,57 +177,94 @@ func (g *StateGraph) Run(ctx context.Context, initialState *State, startNode str
 	return state, nil
 }
 
-func (g *StateGraph) runParallel(ctx context.Context, state *State, nodes []string) (*State, error) {
-	var wg sync.WaitGroup
-	results := make(chan *State, len(nodes))
-	errors := make(chan error, len(nodes))
+type NodeEvaluation struct {
+	Name     string
+	Friction float64
+}
 
-	for _, n := range nodes {
-		wg.Add(1)
-		go func(nodeName string) {
-			defer wg.Done()
-			// [BRANCH ISOLATION 2.0] Clonar estado y aplicar TurboQuant (Truncado agresivo)
-			clonedState := g.cloneState(state)
-
-			clonedState.Mu.Lock()
-			if len(clonedState.History) > 10 {
-				// Mantener solo el prefijo (índice 0) y los últimos 3 mensajes para la rama
-				prefix := clonedState.History[0]
-				recent := clonedState.History[len(clonedState.History)-3:]
-				clonedState.History = append([]string{prefix, "[BRANCH_SUMMARY]: Historial previo podado por TurboQuant."}, recent...)
-			}
-			clonedState.Branch = nodeName
-			clonedState.Mu.Unlock()
-
-			res, err := g.Run(ctx, clonedState, nodeName)
-			if err != nil {
-				errors <- err
-				return
-			}
-			results <- res
-		}(n)
+func (g *StateGraph) runProbabilistic(ctx context.Context, state *State, nodes []string) (*State, error) {
+	fmt.Printf("[GRAFO] Resolviendo bifurcación probabilística (%d rutas posibles)...\n", len(nodes))
+	
+	evals := make([]NodeEvaluation, len(nodes))
+	for i, n := range nodes {
+		friction := AnalyzePotentialNode(state, n)
+		evals[i] = NodeEvaluation{Name: n, Friction: friction}
 	}
 
-	wg.Wait()
-	close(results)
-	close(errors)
+	// Ordenar burbuja simple (de menor a mayor fricción)
+	for i := 0; i < len(evals)-1; i++ {
+		for j := 0; j < len(evals)-i-1; j++ {
+			if evals[j].Friction > evals[j+1].Friction {
+				evals[j], evals[j+1] = evals[j+1], evals[j]
+			}
+		}
+	}
 
-	// Lógica de Fusión (Merge) - Tomamos el primero exitoso y actualizamos el estado original
-	select {
-	case res := <-results:
+	var lastErr error
+	var lastYieldedState *State
+
+	// Ejecutar secuencialmente priorizando menor fricción
+	for _, eval := range evals {
+		fmt.Printf("[GRAFO] Intentando ruta '%s' (Fricción estimada: %.2f)\n", eval.Name, eval.Friction)
+		
+		// [BRANCH ISOLATION 2.0] Clonar estado y aplicar TurboQuant
+		clonedState := g.cloneState(state)
+
+		clonedState.Mu.Lock()
+		if len(clonedState.History) > 10 {
+			prefix := clonedState.History[0]
+			recent := clonedState.History[len(clonedState.History)-3:]
+			clonedState.History = append([]string{prefix, "[BRANCH_SUMMARY]: Historial previo podado por TurboQuant."}, recent...)
+		}
+		clonedState.Branch = eval.Name
+		clonedState.Mu.Unlock()
+
+		res, err := g.Run(ctx, clonedState, eval.Name)
+		if err != nil {
+			fmt.Printf("[GRAFO] Ruta '%s' falló con error: %v. Buscando alternativa...\n", eval.Name, err)
+			lastErr = err
+			continue // Probar siguiente ruta
+		}
+
+		res.Mu.RLock()
+		status := res.Status
+		res.Mu.RUnlock()
+
+		if status == "BLOCKED_WAITING_HUMAN" {
+			fmt.Printf("[GRAFO] Ruta '%s' bloqueada (Yield). Buscando alternativa...\n", eval.Name)
+			lastYieldedState = res
+			continue // Probar siguiente ruta
+		}
+
+		// Éxito total sin bloqueos
+		fmt.Printf("[GRAFO] Ruta '%s' completada con éxito. Descartando otras opciones.\n", eval.Name)
 		state.Mu.Lock()
 		state.Result = res.Result
 		state.History = res.History
 		state.Context = res.Context
 		state.Errors = res.Errors
+		state.Status = res.Status
+		state.Friction = eval.Friction
 		state.Mu.Unlock()
 		return state, nil
-	case err := <-errors:
-		return state, err
-	default:
-		return state, fmt.Errorf("parallel execution failed with no results")
 	}
+
+	// Si todas fallaron o hicieron yield
+	if lastYieldedState != nil {
+		fmt.Println("[GRAFO] Todas las rutas fallaron o están bloqueadas. Retornando estado Yield.")
+		state.Mu.Lock()
+		state.Result = lastYieldedState.Result
+		state.History = lastYieldedState.History
+		state.Context = lastYieldedState.Context
+		state.Errors = lastYieldedState.Errors
+		state.Status = "BLOCKED_WAITING_HUMAN"
+		state.Mu.Unlock()
+		return state, nil
+	}
+
+	return state, fmt.Errorf("probabilistic execution failed all routes: %v", lastErr)
 }
+
 
 func (g *StateGraph) cloneState(s *State) *State {
 	s.Mu.RLock()
