@@ -1,10 +1,10 @@
 import logging
 from mcp.server.fastmcp import FastMCP
-from .application.use_cases import BrainToolUseCases
-from .tools_impl.core import register_core_tools
-from .tools_impl.gateway import register_gateway_tools
-from .tools_impl.swarm import register_swarm_tools
-from .tools_impl.nervous import register_nervous_tools
+from application.use_cases import BrainToolUseCases
+from tools_impl.core import register_core_tools
+from tools_impl.gateway import register_gateway_tools
+from tools_impl.swarm import register_swarm_tools
+from tools_impl.nervous import register_nervous_tools
 
 logger = logging.getLogger("dummie-mcp.tools")
 

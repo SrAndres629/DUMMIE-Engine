@@ -1,34 +1,16 @@
-from enum import Enum
-from typing import Optional, Dict, Any
-from dataclasses import dataclass, field
+import logging
+import os
+import sys
 
-class AuthorityLevel(Enum):
-    HUMAN = "HUMAN"
-    OVERSEER = "OVERSEER"
-    AGENT = "AGENT"
+# [HEXAGONAL BRIDGE] Redirección al Dominio Soberano (L2)
+# L1 actúa como puerto/adaptador, pero el modelo de información es soberano en L2.
 
-class IntentType(Enum):
-    RESOLUTION = "RESOLUTION"
-    OBSERVATION = "OBSERVATION"
-    QUERY = "QUERY"
-    FABRICATION = "FABRICATION"
+try:
+    from models import SixDimensionalContext, AuthorityLevel, IntentType, AgentIntent
+except ImportError:
+    # Fallback si no está en el path (aunque debería estar según mcp_config.json)
+    sys.path.append(os.path.join(os.environ.get("DUMMIE_ROOT_DIR", ""), "layers/l2_brain"))
+    from models import SixDimensionalContext, AuthorityLevel, IntentType, AgentIntent
 
-@dataclass
-class SixDimensionalContext:
-    locus_x: str
-    locus_y: str
-    locus_z: str
-    lamport_t: int
-    authority_a: AuthorityLevel
-    intent_i: IntentType
-    metadata: Dict[str, Any] = field(default_factory=dict)
-
-@dataclass
-class AgentIntent:
-    intent_type: IntentType
-    target: str
-    rationale: str
-    risk_score: float
-    authority_a: AuthorityLevel
-    intent_i: IntentType
-    locus_x: str
+# Re-exportamos para que el resto de L1 use 'domain.models'
+__all__ = ["SixDimensionalContext", "AuthorityLevel", "IntentType", "AgentIntent"]

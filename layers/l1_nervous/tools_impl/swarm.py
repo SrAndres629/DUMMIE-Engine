@@ -1,7 +1,7 @@
 import os
 import json
 from mcp.server.fastmcp import FastMCP
-from ..utils import AtomicLedgerWriter
+from utils import AtomicLedgerWriter
 
 def register_swarm_tools(mcp: FastMCP, use_cases, root_dir: str):
     AIWG_DIR = os.path.join(root_dir, ".aiwg")

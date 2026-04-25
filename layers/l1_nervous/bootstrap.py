@@ -34,11 +34,10 @@ def bootstrap_orchestrator(kuzu_db_path: str, aiwg_dir: str):
         logger.info(f"Memory Plane active and verified at {SOCKET_PATH}. Activating IPC mode.")
         db = bridge
     else:
-        logger.critical(f"Memory Plane OFFLINE at {SOCKET_PATH}. Industrial safety protocol: EXIT.")
-        print(f"\n[!] ERROR CRÍTICO: El Memory Plane (L0) no está activo.")
-        print(f"    Soberanía comprometida. El sistema no puede arrancar en modo nativo.")
-        print(f"    Solución: Inicia el servidor de memoria Go antes que el cerebro.\n")
-        sys.exit(1)
+        logger.error(f"Memory Plane OFFLINE at {SOCKET_PATH}. Entering DEGRADED mode.")
+        print(f"\n[!] ADVERTENCIA: El Memory Plane (L0) no está activo.")
+        print(f"    El sistema arrancará en modo DEGRADADO (sin persistencia).\n")
+        db = None
 
     event_store = KuzuRepository(db_path=kuzu_db_path if db else None, db=db)
     if read_only or db is None:

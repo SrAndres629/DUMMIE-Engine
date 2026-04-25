@@ -6,10 +6,13 @@ from mcp.server.fastmcp import FastMCP
 def register_nervous_tools(mcp: FastMCP, use_cases, root_dir: str):
     AIWG_DIR = os.path.join(root_dir, ".aiwg")
 
+    from domain.models import SixDimensionalContext, AuthorityLevel, IntentType
+    from dataclasses import asdict
+
     @mcp.tool()
-    async def crystallize(payload: str, context: dict) -> str:
+    async def crystallize(payload: str, context: SixDimensionalContext) -> str:
         """Persistencia de conocimiento validado en el 4D-TES."""
-        return await use_cases.execute_crystallization(payload, context)
+        return await use_cases.execute_crystallization(payload, asdict(context))
 
     @mcp.tool()
     async def log_lesson(issue: str, correction: str) -> str:
@@ -24,10 +27,9 @@ def register_nervous_tools(mcp: FastMCP, use_cases, root_dir: str):
         if getattr(orchestrator.event_store, "read_only", False):
             return "[L1-MCP] ERR_MEMORY_LOCKED: Memoria bloqueada."
 
-        from ..domain.models import SixDimensionalContext, AuthorityLevel, IntentType
         context = SixDimensionalContext(
             locus_x="sw.strategy.discovery", locus_y="AMBIGUITY_RESOLVER", locus_z="L2_BRAIN",
-            lamport_t=orchestrator.lamport_clock, authority_a=AuthorityLevel.HUMAN,
+            lamport_t=float(orchestrator.lamport_clock), authority_a=AuthorityLevel.HUMAN,
             intent_i=IntentType.RESOLUTION
         )
         orchestrator.lessons_use_case.execute_ambiguity(context=context, ambiguity=ambiguity, plan=plan)
@@ -49,8 +51,8 @@ def register_nervous_tools(mcp: FastMCP, use_cases, root_dir: str):
     @mcp.tool()
     async def compress_context(history: List[str], focus: str = "") -> str:
         """[NERVOUS] Ejecuta la cristalización del historial para optimizar el KV cache (Infini-attention)."""
-        from ..compressive_memory import CompressiveMemory
-        from ..memory_ipc import ArrowMemoryBridge
+        from compressive_memory import CompressiveMemory
+        from memory_ipc import ArrowMemoryBridge
         
         bridge = ArrowMemoryBridge()
         comp_mem = CompressiveMemory(bridge)
@@ -67,7 +69,7 @@ def register_nervous_tools(mcp: FastMCP, use_cases, root_dir: str):
     @mcp.tool()
     async def quantize_context(goal: str, tree: str = "", specs: str = "", arch: str = "") -> str:
         """[NERVOUS] Aplica TurboQuant para reducir contexto según objetivo."""
-        from ..context_quantizer import quantize_context_for_goal
+        from context_quantizer import quantize_context_for_goal
 
         payload = {"tree": tree, "specs": specs, "arch": arch}
         result = quantize_context_for_goal(goal=goal, full_context=payload, root_dir=root_dir)
