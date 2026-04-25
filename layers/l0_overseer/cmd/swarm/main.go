@@ -3,12 +3,13 @@ package main
 import (
 	"context"
 	"fmt"
-	"time"
 	"io.dummie.v2/overseer/internal/orchestrator"
+	"time"
 )
 
 func main() {
-	graph := orchestrator.NewStateGraph()
+	sm := &orchestrator.SkillManager{}
+	graph := orchestrator.NewStateGraph(sm)
 
 	// 1. Planner Node
 	graph.AddNode("Planner", func(ctx context.Context, state *orchestrator.State) (*orchestrator.State, error) {

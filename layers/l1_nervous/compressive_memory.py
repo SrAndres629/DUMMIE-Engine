@@ -4,8 +4,12 @@ from typing import List
 try:
     from .memory_ipc import ArrowMemoryBridge, MemoryPlaneError
 except ImportError:
-    # Compatibilidad cuando este módulo se importa como top-level desde mcp_server.py
-    from memory_ipc import ArrowMemoryBridge, MemoryPlaneError
+    try:
+        # Compatibilidad cuando este módulo se importa como top-level desde mcp_server.py
+        from memory_ipc import ArrowMemoryBridge, MemoryPlaneError
+    except ImportError:
+        # Fallback explícito para ejecuciones desde raíz de repo/scripts.
+        from layers.l1_nervous.memory_ipc import ArrowMemoryBridge, MemoryPlaneError
 
 logger = logging.getLogger("dummie-mcp.compressive-memory")
 
@@ -26,59 +30,85 @@ class CompressiveMemory:
     def crystallize_history(self, history: List[str], require_persist: bool = False) -> str:
         """
         Toma una lista de mensajes y los comprime en un resumen persistente.
-        Se categoriza la información para mantener coherencia ontológica.
+        Implementa extracción semántica estructurada (Production Hardening).
         """
         if not history:
             return "No hay historial para cristalizar."
 
+        import re
         combined_text = "\n".join(history)
         logger.info(f"Crystallizing history: {len(combined_text)} chars")
         
-        # Simulación de extracción ontológica (En el futuro esto lo hace Gemini 1.5 Flash)
-        # Extraemos intenciones y decisiones clave
-        decisions = [line for line in history if "RESOLVED" in line or "DECISION" in line]
-        errors = [line for line in history if "ERROR" in line or "FAIL" in line]
+        # Extracción semántica estructurada (Ontology Alignment)
+        patterns = {
+            "DECISIONES": [r"DECISION: (.*)", r"RESOLVED: (.*)", r"SELECTED: (.*)", r"APPROVED: (.*)"],
+            "ERRORES": [r"ERROR: (.*)", r"FAIL: (.*)", r"CRITICAL: (.*)", r"EXCEPTION: (.*)"],
+            "ESTADO_FABRICACION": [r"MOVED TO: (.*)", r"COMPONENT: (.*)", r"SPEC: (.*)"]
+        }
+        
+        extracted = {k: [] for k in patterns}
+        for msg in history:
+            for category, regex_list in patterns.items():
+                for regex in regex_list:
+                    match = re.search(regex, msg, re.IGNORECASE)
+                    if match:
+                        extracted[category].append(match.group(1).strip())
         
         summary_blocks = [
-            "--- CRISTALIZACIÓN DE MEMORIA (4D-TES) ---",
+            "--- CRISTALIZACIÓN DE MEMORIA INDUSTRIAL (V3.1) ---",
             f"T-CONTEXT: {len(history)} mensajes comprimidos.",
-            "DECISIONES CLAVE:",
-            "\n".join(f"  - {d[:150]}" for d in decisions[:3]) if decisions else "  - Ninguna detectada.",
-            "ERRORES/APRENDIZAJES:",
-            "\n".join(f"  - {e[:150]}" for e in errors[:3]) if errors else "  - Sin fallos críticos.",
-            f"RESUMEN SEMÁNTICO: {combined_text[:300]}..."
+            "ARTEFACTOS DE DECISIÓN Y ESTADO:"
         ]
+        
+        for cat, items in extracted.items():
+            if items:
+                summary_blocks.append(f"  [{cat}]:")
+                # Deduplicar y limitar
+                unique_items = list(dict.fromkeys(items))
+                for item in unique_items[:5]:
+                    summary_blocks.append(f"    - {item[:150]}")
+        
+        summary_blocks.append(f"RESUMEN SEMÁNTICO: {combined_text[:350]}...")
         summary = "\n".join(summary_blocks)
         
-        # Persistir en KùzuDB vía IPC
+        # Persistencia Determinista
         self.last_persist_ok = False
         self.last_error = ""
         self.last_causal_hash = ""
 
         try:
-            # Asegurarse de que el bridge esté conectado
             if not self.bridge.heartbeat():
                 msg = "Memory Plane not available for crystallization."
                 logger.warning(msg)
                 if require_persist:
                     self.last_error = msg
                     raise MemoryPlaneError("ERR_CONNECTION_REFUSED", msg)
+                # En modo offline permitido no intentamos escribir: evitamos ruido y errores colaterales.
+                return summary
             
-            # Crear nodo de memoria con hash causal (simplificado)
             import hashlib
-            causal_hash = hashlib.sha256(combined_text.encode()).hexdigest()[:16]
+            import time
+            causal_hash = hashlib.sha256(combined_text.encode()).hexdigest()[:24]
             self.last_causal_hash = causal_hash
             
-            # Escapar comillas para Cypher
+            now_ms = int(time.time() * 1000)
             safe_summary = summary.replace("'", "''")
-            cypher = f"CREATE (m:MemoryState {{id: '{causal_hash}', summary: '{safe_summary}', type: 'crystallized', timestamp: timestamp()}})"
+            cypher = (
+                f"CREATE (m:MemoryState {{"
+                f"id: '{causal_hash}', "
+                f"causal_hash_v2: 'sha256:{causal_hash}', "
+                f"summary: '{safe_summary}', "
+                f"type: 'crystallized', "
+                f"timestamp: {now_ms}, "
+                f"msg_count: {len(history)}}})"
+            )
             
             self.bridge.ipc.execute(cypher)
-            logger.info(f"Crystallization successful: {causal_hash}")
+            logger.info(f"Crystallization persisted: {causal_hash}")
             self.last_persist_ok = True
         except Exception as e:
             self.last_error = str(e)
-            logger.error(f"Error persisting crystallization: {e}")
+            logger.error(f"Persistence failure: {e}")
             if require_persist:
                 raise
             

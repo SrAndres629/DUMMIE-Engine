@@ -1,0 +1,116 @@
+{
+  "report_version": "2.1.0-VERIFIED",
+  "timestamp_utc": "2026-04-25T03:10:00Z",
+  "overall_status": "partial",
+  "confidence": 0.93,
+  "facts": [
+    {
+      "id": "BUILD_L0_OK",
+      "statement": "La regresión de build en cmd/swarm quedó resuelta y la suite Go compila.",
+      "evidence": [
+        {
+          "type": "command",
+          "value": "cd layers/l0_overseer && go test ./... -count=1",
+          "exit_code": 0
+        }
+      ]
+    },
+    {
+      "id": "PREFIX_GUARD_HARDENED",
+      "statement": "El guard de prefijo valida bloque esperado completo y carga archivos de control con rutas resilientes.",
+      "evidence": [
+        {
+          "type": "file",
+          "path": "layers/l0_overseer/internal/orchestrator/graph.go",
+          "line": 46
+        },
+        {
+          "type": "file",
+          "path": "layers/l0_overseer/internal/orchestrator/graph.go",
+          "line": 100
+        }
+      ]
+    },
+    {
+      "id": "TURBOQUANT_METRICS",
+      "statement": "TurboQuant mantiene métricas de tokens y poda con word-boundaries.",
+      "evidence": [
+        {
+          "type": "file",
+          "path": "layers/l1_nervous/context_quantizer.py",
+          "line": 24
+        },
+        {
+          "type": "file",
+          "path": "layers/l1_nervous/context_quantizer.py",
+          "line": 31
+        }
+      ]
+    },
+    {
+      "id": "OFFLINE_COMPRESSION_BEHAVIOR",
+      "statement": "En modo offline permitido, CompressiveMemory ya no intenta persistir y evita errores ruidosos.",
+      "evidence": [
+        {
+          "type": "file",
+          "path": "layers/l1_nervous/compressive_memory.py",
+          "line": 86
+        },
+        {
+          "type": "command",
+          "value": "./layers/l1_nervous/.venv/bin/python3 scripts/verify_compression.py --allow-offline",
+          "exit_code": 0
+        }
+      ]
+    },
+    {
+      "id": "SEMANTIC_AUDIT_OK",
+      "statement": "La auditoría semántica de extracción y límites de poda pasa en venv de L1.",
+      "evidence": [
+        {
+          "type": "command",
+          "value": "./layers/l1_nervous/.venv/bin/python3 scripts/test_semantic_precision.py",
+          "exit_code": 0
+        }
+      ]
+    }
+  ],
+  "failed_or_partial_claims": [
+    {
+      "claim": "Persistencia real online validada en esta sesión",
+      "why": "No hay Memory Plane activo en /tmp/dummie_memory.sock; verify_compression online falla.",
+      "risk_level": "high",
+      "fix": "Levantar servidor de memoria y ejecutar verify_compression sin --allow-offline, verificando causal_hash_v2 en DB."
+    }
+  ],
+  "recommendations": [
+    {
+      "priority": "P0",
+      "title": "Automatizar test online de persistencia",
+      "impact": "Evita reportes inflados y garantiza evidencia real de escritura/lectura",
+      "effort": "M",
+      "proposed_change": "Agregar script que levante Memory Plane temporal y ejecute verify_compression en modo online",
+      "acceptance_test": "verify_compression.py (sin --allow-offline) exit 0"
+    },
+    {
+      "priority": "P1",
+      "title": "Estandarizar intérprete de tests L1",
+      "impact": "Elimina fallos por dependencias ausentes con python del sistema",
+      "effort": "S",
+      "proposed_change": "Documentar y aplicar siempre layers/l1_nervous/.venv/bin/python3 en scripts de verificación",
+      "acceptance_test": "scripts/test_semantic_precision.py y scripts/verify_compression.py ejecutables con venv"
+    }
+  ],
+  "agent_own_ideas": [
+    {
+      "idea": "Agregar un modo --strict-evidence en scripts de auditoría",
+      "why_it_helps": "Bloquea PASS si una parte crítica quedó solo en validación offline",
+      "quick_experiment": "forzar fallo cuando allow-offline=true y claim solicita persistencia real"
+    }
+  ],
+  "next_actions_72h": [
+    "Implementar harness de Memory Plane temporal para CI local.",
+    "Agregar test de manipulación de prefijo con payload que incluya hash correcto pero contenido corrupto.",
+    "Añadir verificación de causal_hash_v2 en pipeline de smoke tests."
+  ]
+}

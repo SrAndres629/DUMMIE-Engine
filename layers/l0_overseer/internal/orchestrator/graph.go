@@ -2,7 +2,11 @@ package orchestrator
 
 import (
 	"context"
+	"crypto/sha256"
 	"fmt"
+	"os"
+	"path/filepath"
+	"strings"
 	"sync"
 
 	"io.dummie.v2/nervous/pkg/proto/skill"
@@ -10,15 +14,15 @@ import (
 
 // State representa el Floating Session State del enjambre
 type State struct {
-	ID        string
-	Goal      string
-	Context   map[string]interface{}
-	History   []string
-	Skills    []*skill.Skill
-	Result    string
-	Branch    string
-	Errors    []error
-	Mu        sync.RWMutex
+	ID      string
+	Goal    string
+	Context map[string]interface{}
+	History []string
+	Skills  []*skill.Skill
+	Result  string
+	Branch  string
+	Errors  []error
+	Mu      sync.RWMutex
 }
 
 // NodeFunc es la unidad de ejecución en el grafo
@@ -26,17 +30,55 @@ type NodeFunc func(ctx context.Context, state *State) (*State, error)
 
 // StateGraph gestiona el flujo asíncrono de agentes
 type StateGraph struct {
-	Nodes        map[string]NodeFunc
-	Edges        map[string][]string
-	SkillMgr     *SkillManager
+	Nodes       map[string]NodeFunc
+	Edges       map[string][]string
+	SkillMgr    *SkillManager
+	PrefixBlock string
+	PrefixHash  string
 }
 
 func NewStateGraph(sm *SkillManager) *StateGraph {
-	return &StateGraph{
+	g := &StateGraph{
 		Nodes:    make(map[string]NodeFunc),
 		Edges:    make(map[string][]string),
 		SkillMgr: sm,
 	}
+	g.LoadPrefix()
+	return g
+}
+
+func (g *StateGraph) LoadPrefix() {
+	identity, _ := readRepoControlFile("IDENTITY.md")
+	rules, _ := readRepoControlFile("GEMINI.md")
+
+	g.PrefixBlock = fmt.Sprintf("=== SOVEREIGN IDENTITY ===\n%s\n\n=== ARCHITECTURAL RULES ===\n%s\n",
+		string(identity), string(rules))
+
+	h := sha256.New()
+	h.Write([]byte(g.PrefixBlock))
+	g.PrefixHash = fmt.Sprintf("%x", h.Sum(nil))
+}
+
+func readRepoControlFile(name string) ([]byte, error) {
+	candidates := make([]string, 0, 8)
+	if root := os.Getenv("DUMMIE_ROOT_DIR"); root != "" {
+		candidates = append(candidates, filepath.Join(root, name))
+	}
+	candidates = append(candidates,
+		name,
+		filepath.Join("..", name),
+		filepath.Join("..", "..", name),
+		filepath.Join("..", "..", "..", name),
+		filepath.Join("..", "..", "..", "..", name),
+	)
+
+	for _, path := range candidates {
+		data, err := os.ReadFile(path)
+		if err == nil {
+			return data, nil
+		}
+	}
+	return []byte{}, fmt.Errorf("control file not found: %s", name)
 }
 
 func (g *StateGraph) AddNode(name string, f NodeFunc) {
@@ -47,17 +89,24 @@ func (g *StateGraph) AddEdge(from, to string) {
 	g.Edges[from] = append(g.Edges[from], to)
 }
 
-// Run ejecuta el grafo desde un nodo inicial
+// Run ejecuta el grafo desde un node inicial
 func (g *StateGraph) Run(ctx context.Context, initialState *State, startNode string) (*State, error) {
 	curr := startNode
 	state := initialState
 
 	for {
-		// [STABLE PREFIX] Hardened Prefix: Identity + Golden Rules (GEMINI.md)
+		// [STABLE PREFIX] Hardened Prefix: Identity + Golden Rules (File-based)
 		state.Mu.Lock()
+		fullPrefix := fmt.Sprintf("SYSTEM: Role=%s | Goal=%s\n%s\n[INTEGRITY_ID]: %s", state.ID, state.Goal, g.PrefixBlock, g.PrefixHash)
+
 		if len(state.History) == 0 {
-			prefix := fmt.Sprintf("SYSTEM: Role=%s | Goal=%s\n[IDENTITY]: Sovereign Agentic AI\n[RULES]: Spec-First, Domain-Driven, Hexagonal Architecture.", state.ID, state.Goal)
-			state.History = append(state.History, prefix)
+			state.History = append(state.History, fullPrefix)
+		} else {
+			// [HARDENING] Validar integridad del bloque completo esperado (no solo substring/hash).
+			if !strings.HasPrefix(state.History[0], fullPrefix) {
+				fmt.Printf("[ALERTA] Corrupción o manipulación de prefijo detectada. Restaurando integridad (Hash: %s)...\n", g.PrefixHash[:8])
+				state.History[0] = fullPrefix + "\n[SHIELD_STATUS]: RESTORED_FROM_AUDIT"
+			}
 		}
 		state.Mu.Unlock()
 
@@ -107,7 +156,7 @@ func (g *StateGraph) runParallel(ctx context.Context, state *State, nodes []stri
 			defer wg.Done()
 			// [BRANCH ISOLATION 2.0] Clonar estado y aplicar TurboQuant (Truncado agresivo)
 			clonedState := g.cloneState(state)
-			
+
 			clonedState.Mu.Lock()
 			if len(clonedState.History) > 10 {
 				// Mantener solo el prefijo (índice 0) y los últimos 3 mensajes para la rama
@@ -151,7 +200,7 @@ func (g *StateGraph) runParallel(ctx context.Context, state *State, nodes []stri
 func (g *StateGraph) cloneState(s *State) *State {
 	s.Mu.RLock()
 	defer s.Mu.RUnlock()
-	
+
 	newCtx := make(map[string]interface{})
 	for k, v := range s.Context {
 		newCtx[k] = v
