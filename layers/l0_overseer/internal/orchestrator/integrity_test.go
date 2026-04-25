@@ -4,8 +4,46 @@ import (
 	"context"
 	"fmt"
 	"strings"
+	"sync"
 	"testing"
 )
+
+func TestBranchIsolationConcurrency(t *testing.T) {
+	sm := &SkillManager{}
+	g := NewStateGraph(sm)
+	g.AddNode("Work", func(ctx context.Context, s *State) (*State, error) {
+		s.History = append(s.History, fmt.Sprintf("Worker-%s: Done", s.Branch))
+		return s, nil
+	})
+
+	const numBranches = 20
+	var wg sync.WaitGroup
+	wg.Add(numBranches)
+
+	for i := 0; i < numBranches; i++ {
+		go func(id int) {
+			defer wg.Done()
+			branchState := &State{
+				ID:     fmt.Sprintf("Agent-%d", id),
+				Goal:   "Stress Test",
+				Branch: fmt.Sprintf("B%d", id),
+			}
+			final, err := g.Run(context.Background(), branchState, "Work")
+			if err != nil {
+				t.Errorf("Error en rama %d: %v", id, err)
+			}
+			
+			// Verificar que el historial de esta rama NO contiene mensajes de otras ramas
+			for _, h := range final.History {
+				if strings.Contains(h, "Worker-B") && !strings.Contains(h, fmt.Sprintf("Worker-B%d", id)) {
+					t.Errorf("LEAK DE CONTEXTO: La rama %d tiene historial de otra rama: %s", id, h)
+				}
+			}
+		}(i)
+	}
+	wg.Wait()
+	fmt.Printf("[✓] Branch Isolation Concurrency Test Passed (%d branches).\n", numBranches)
+}
 
 func TestPrefixIntegrityHardening(t *testing.T) {
 	sm := &SkillManager{}

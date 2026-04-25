@@ -42,12 +42,14 @@ Más detalles irrelevantes que deberían ser podados por el cuantizador para aho
 
 def test_infini_attention(allow_offline: bool = False):
     print("--- Testing Infini-attention Hardened (Regex Extraction) ---")
-    bridge = ArrowMemoryBridge("/tmp/dummie_memory.sock")
+    import os
+    socket_path = os.getenv("MEMORY_SOCKET_PATH", "/tmp/dummie_memory.sock")
+    bridge = ArrowMemoryBridge(socket_path)
     online = bridge.heartbeat()
     if not online and not allow_offline:
-        raise RuntimeError("Memory Plane no disponible en /tmp/dummie_memory.sock")
+        raise RuntimeError(f"Memory Plane no disponible en {socket_path}")
     if not online and allow_offline:
-        print("[WARN] Memory Plane offline: se valida solo extracción semántica, no persistencia.")
+        print(f"[WARN] Memory Plane offline ({socket_path}): se valida solo extracción semántica, no persistencia.")
 
     comp_mem = CompressiveMemory(bridge)
     
@@ -61,7 +63,15 @@ def test_infini_attention(allow_offline: bool = False):
         "AGENT: RESOLVED: Switched to port 8081."
     ]
     
-    summary = comp_mem.crystallize_history(history, require_persist=not allow_offline)
+    if not allow_offline:
+        # Asegurar esquema (Self-healing)
+        try:
+            bridge.ipc.execute("CREATE NODE TABLE MemoryState(id STRING, causal_hash_v2 STRING, summary STRING, type STRING, timestamp INT64, msg_count INT64, PRIMARY KEY(id))")
+        except Exception:
+            pass # Ya existe o error manejado por la persistencia posterior
+        summary = comp_mem.crystallize_history(history, require_persist=True)
+    else:
+        summary = comp_mem.crystallize_history(history, require_persist=False)
     print("Crystallized Summary:")
     print(summary)
     
