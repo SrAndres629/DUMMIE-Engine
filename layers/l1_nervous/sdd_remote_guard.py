@@ -106,7 +106,14 @@ def _normalize_repo_relative_path(root: Path, value: str) -> str:
 
 def _is_active_spec(text: str) -> bool:
     lowered = text.lower()
-    return 'status: "active"' in lowered or "status: active" in lowered or "status: approved" in lowered
+    return (
+        'status: "active"' in lowered
+        or "status: active" in lowered
+        or 'status: "stable"' in lowered
+        or "status: stable" in lowered
+        or 'status: "approved"' in lowered
+        or "status: approved" in lowered
+    )
 
 
 def _extract_physical_evidence_paths(text: str) -> list[str]:

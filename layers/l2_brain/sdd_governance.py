@@ -19,6 +19,7 @@ class SpecNode:
     owner: str = ""
     scopes: list[str] = field(default_factory=list)
     constraints: list[str] = field(default_factory=list)
+    physical_evidence: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -94,15 +95,21 @@ def compile_spec_document(path: str, text: str) -> SpecNode:
     title = next((line[2:].strip() for line in lines if line.startswith("# ")), Path(path).stem)
     metadata: dict[str, list[str]] = {}
     constraints: list[str] = []
+    physical_evidence: list[str] = []
     in_constraints = False
+    in_physical_evidence = False
 
     for line in lines:
         stripped = line.strip()
         if stripped.startswith("## "):
             in_constraints = stripped.lower() == "## constraints"
+            in_physical_evidence = stripped.lower() == "## physical evidence"
             continue
         if in_constraints and stripped.startswith("- "):
             constraints.append(stripped[2:].strip())
+            continue
+        if in_physical_evidence and stripped.startswith("- "):
+            physical_evidence.append(_extract_markdown_path(stripped[2:].strip()))
             continue
         if ":" in stripped and not stripped.startswith("#"):
             key, value = stripped.split(":", 1)
@@ -110,7 +117,7 @@ def compile_spec_document(path: str, text: str) -> SpecNode:
 
     spec_id = _clean_metadata_value(metadata.get("spec_id", [Path(path).stem])[0])
     status_value = _clean_metadata_value(metadata.get("status", ["DRAFT"])[0] or "DRAFT").upper()
-    if status_value == "ACTIVE":
+    if status_value in {"ACTIVE", "STABLE"}:
         status_value = "APPROVED"
     status = SpecStatus.__members__.get(status_value, SpecStatus.DRAFT)
     return SpecNode(
@@ -119,13 +126,23 @@ def compile_spec_document(path: str, text: str) -> SpecNode:
         title=title,
         status=status,
         owner=_clean_metadata_value(metadata.get("owner", [""])[0]),
-        scopes=metadata.get("scope", []),
+        scopes=[_clean_metadata_value(scope) for scope in metadata.get("scope", [])],
         constraints=constraints,
+        physical_evidence=[item for item in physical_evidence if item],
     )
 
 
 def _clean_metadata_value(value: str) -> str:
     return value.strip().strip('"').strip("'")
+
+
+def _extract_markdown_path(value: str) -> str:
+    stripped = value.strip()
+    if "`" in stripped:
+        parts = stripped.split("`")
+        if len(parts) >= 3:
+            return parts[1].strip()
+    return stripped.strip("- ").strip()
 
 
 def verify_evidence_packet(packet: EvidencePacket) -> ValidationResult:
@@ -169,10 +186,10 @@ def admit_change(
 
 
 def _files_match_parent_scopes(files: list[str], specs: list[SpecNode]) -> bool:
-    scopes = [scope for spec in specs for scope in spec.scopes]
-    if not scopes:
+    coverage_patterns = [pattern for spec in specs for pattern in [*spec.scopes, *spec.physical_evidence]]
+    if not coverage_patterns:
         return True
-    return all(any(fnmatch(path, scope) for scope in scopes) for path in files)
+    return all(any(_matches_coverage(path, pattern) for pattern in coverage_patterns) for path in files)
 
 
 def detect_spec_contradictions(specs: list[SpecNode]) -> list[SpecContradiction]:
@@ -219,12 +236,27 @@ def evaluate_decision_decay(
 
 
 def calculate_spec_coverage(specs: list[SpecNode], files: list[str]) -> SpecCoverageReport:
-    approved_scopes = [
-        scope for spec in specs if spec.status == SpecStatus.APPROVED for scope in spec.scopes
+    approved_patterns = [
+        pattern
+        for spec in specs
+        if spec.status == SpecStatus.APPROVED
+        for pattern in [*spec.scopes, *spec.physical_evidence]
     ]
-    covered = [path for path in files if any(fnmatch(path, scope) for scope in approved_scopes)]
+    covered = [path for path in files if any(_matches_coverage(path, pattern) for pattern in approved_patterns)]
     orphans = [path for path in files if path not in covered]
     return SpecCoverageReport(covered, orphans)
+
+
+def _matches_coverage(path: str, pattern: str) -> bool:
+    clean_pattern = pattern.rstrip("/")
+    if not clean_pattern:
+        return False
+    return (
+        fnmatch(path, clean_pattern)
+        or fnmatch(path, clean_pattern.rstrip("/") + "/**")
+        or path == clean_pattern
+        or path.startswith(clean_pattern + "/")
+    )
 
 
 def classify_failure(description: str) -> FailureRecord:

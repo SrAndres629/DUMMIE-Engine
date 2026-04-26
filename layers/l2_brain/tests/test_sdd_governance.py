@@ -57,6 +57,36 @@ layer: "L3"
     assert spec.status == SpecStatus.APPROVED
 
 
+def test_compile_spec_document_accepts_stable_frontmatter_as_approved():
+    text = """---
+spec_id: "DE-V2-L2-02"
+status: "STABLE"
+---
+# Memory Engine
+"""
+
+    spec = compile_spec_document("doc/specs/02_memory_engine_4d_tes.md", text)
+
+    assert spec.status == SpecStatus.APPROVED
+
+
+def test_compile_spec_document_extracts_physical_evidence_as_coverage():
+    text = """---
+spec_id: "DE-V2-L2-02"
+status: "STABLE"
+---
+# Memory Engine
+
+## Physical Evidence
+- `layers/l2_brain`
+- `doc/specs/02_memory_engine_4d_tes.md`
+"""
+
+    spec = compile_spec_document("doc/specs/02_memory_engine_4d_tes.md", text)
+
+    assert spec.physical_evidence == ["layers/l2_brain", "doc/specs/02_memory_engine_4d_tes.md"]
+
+
 def test_admission_blocks_orphan_change_without_approved_parent_spec():
     request = ChangeRequest(
         change_id="chg-1",
@@ -147,6 +177,21 @@ def test_spec_coverage_reports_orphan_files():
             compile_spec_document(
                 "doc/specs/l2.md",
                 "# L2\n\nStatus: APPROVED\nScope: layers/l2_brain/**",
+            )
+        ],
+        files=["layers/l2_brain/models.py", "layers/l1_nervous/mcp_proxy.py"],
+    )
+
+    assert coverage.covered_files == ["layers/l2_brain/models.py"]
+    assert coverage.orphan_files == ["layers/l1_nervous/mcp_proxy.py"]
+
+
+def test_spec_coverage_uses_physical_evidence_when_scope_is_absent():
+    coverage = calculate_spec_coverage(
+        specs=[
+            compile_spec_document(
+                "doc/specs/l2.md",
+                "# L2\n\nStatus: STABLE\n\n## Physical Evidence\n- `layers/l2_brain`",
             )
         ],
         files=["layers/l2_brain/models.py", "layers/l1_nervous/mcp_proxy.py"],

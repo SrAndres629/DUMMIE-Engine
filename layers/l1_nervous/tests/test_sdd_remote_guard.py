@@ -57,6 +57,30 @@ status: "ACTIVE"
     assert decision.reason == "auto_sdd_admission"
 
 
+def test_mutating_remote_tool_auto_admits_stable_spec(tmp_path):
+    spec_dir = tmp_path / "doc" / "specs"
+    spec_dir.mkdir(parents=True)
+    (spec_dir / "02_memory_engine_4d_tes.md").write_text(
+        """---
+status: "STABLE"
+---
+# Memory Engine
+
+## Physical Evidence
+- `layers/l2_brain`
+"""
+    )
+
+    decision = evaluate_remote_tool_admission(
+        server_name="filesystem",
+        tool_name="write_file",
+        arguments={"path": "layers/l2_brain/models.py", "content": "x"},
+        repo_root=str(tmp_path),
+    )
+
+    assert decision.status == "ALLOW"
+
+
 def test_auto_admission_rejects_path_traversal_outside_covered_spec(tmp_path):
     spec_dir = tmp_path / "doc" / "specs"
     spec_dir.mkdir(parents=True)
