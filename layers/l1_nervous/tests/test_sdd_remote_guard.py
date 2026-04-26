@@ -31,6 +31,32 @@ def test_mutating_remote_tool_is_blocked_without_sdd_admission():
     assert "sdd_admission" in decision.reason
 
 
+def test_mutating_remote_tool_auto_admits_when_repo_spec_covers_path(tmp_path):
+    spec_dir = tmp_path / "doc" / "specs"
+    spec_dir.mkdir(parents=True)
+    (spec_dir / "22_sdd_executable_contracts.md").write_text(
+        """---
+spec_id: "DE-V2-L3-22"
+status: "ACTIVE"
+---
+# SDD
+
+## Physical Evidence
+- `layers/l2_brain`
+"""
+    )
+
+    decision = evaluate_remote_tool_admission(
+        server_name="filesystem",
+        tool_name="write_file",
+        arguments={"path": "layers/l2_brain/models.py", "content": "x"},
+        repo_root=str(tmp_path),
+    )
+
+    assert decision.status == "ALLOW"
+    assert decision.reason == "auto_sdd_admission"
+
+
 def test_mutating_remote_tool_is_allowed_with_sdd_admission_allow():
     decision = evaluate_remote_tool_admission(
         server_name="filesystem",

@@ -1,4 +1,5 @@
 import asyncio
+import os
 import sys
 from pathlib import Path
 
@@ -44,3 +45,31 @@ async def test_exec_remote_tool_blocks_mutation_before_proxy_call():
 
     assert result == "SDD_BLOCKED: missing_sdd_admission"
     assert use_cases.proxy_manager.calls == []
+
+
+@pytest.mark.asyncio
+async def test_exec_remote_tool_auto_admits_when_active_spec_covers_path(tmp_path, monkeypatch):
+    spec_dir = tmp_path / "doc" / "specs"
+    spec_dir.mkdir(parents=True)
+    (spec_dir / "22_sdd_executable_contracts.md").write_text(
+        """---
+status: "ACTIVE"
+---
+# SDD
+
+## Physical Evidence
+- `README.md`
+"""
+    )
+    monkeypatch.setenv("DUMMIE_ROOT", str(tmp_path))
+    mcp = FastMCP("test")
+    use_cases = FakeUseCases()
+    register_gateway_tools(mcp, use_cases)
+    tool = mcp._tool_manager._tools["exec_remote_tool"].fn
+
+    result = await tool("filesystem", "write_file", {"path": "README.md", "content": "x"})
+
+    assert result == "called"
+    assert use_cases.proxy_manager.calls == [
+        ("filesystem", "write_file", {"path": "README.md", "content": "x"})
+    ]
