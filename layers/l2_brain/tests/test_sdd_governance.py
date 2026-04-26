@@ -42,6 +42,21 @@ Scope: layers/l2_brain/**
     assert "L2 must not import L1." in spec.constraints
 
 
+def test_compile_spec_document_accepts_active_frontmatter_as_approved():
+    text = """---
+spec_id: "DE-V2-L3-22"
+status: "ACTIVE"
+layer: "L3"
+---
+# SDD Contracts
+"""
+
+    spec = compile_spec_document("doc/specs/22_sdd_executable_contracts.md", text)
+
+    assert spec.spec_id == "DE-V2-L3-22"
+    assert spec.status == SpecStatus.APPROVED
+
+
 def test_admission_blocks_orphan_change_without_approved_parent_spec():
     request = ChangeRequest(
         change_id="chg-1",

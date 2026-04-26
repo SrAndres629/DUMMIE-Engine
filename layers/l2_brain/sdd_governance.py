@@ -108,17 +108,24 @@ def compile_spec_document(path: str, text: str) -> SpecNode:
             key, value = stripped.split(":", 1)
             metadata.setdefault(key.strip().lower(), []).append(value.strip())
 
-    status_value = (metadata.get("status", ["DRAFT"])[0] or "DRAFT").upper()
+    spec_id = _clean_metadata_value(metadata.get("spec_id", [Path(path).stem])[0])
+    status_value = _clean_metadata_value(metadata.get("status", ["DRAFT"])[0] or "DRAFT").upper()
+    if status_value == "ACTIVE":
+        status_value = "APPROVED"
     status = SpecStatus.__members__.get(status_value, SpecStatus.DRAFT)
     return SpecNode(
-        spec_id=Path(path).stem,
+        spec_id=spec_id,
         path=path,
         title=title,
         status=status,
-        owner=metadata.get("owner", [""])[0],
+        owner=_clean_metadata_value(metadata.get("owner", [""])[0]),
         scopes=metadata.get("scope", []),
         constraints=constraints,
     )
+
+
+def _clean_metadata_value(value: str) -> str:
+    return value.strip().strip('"').strip("'")
 
 
 def verify_evidence_packet(packet: EvidencePacket) -> ValidationResult:

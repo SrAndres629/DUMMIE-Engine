@@ -69,14 +69,19 @@ def _auto_admit_from_repo_specs(
     if not specs_dir.exists():
         return RemoteAdmissionDecision("BLOCK", "missing_specs_dir")
 
-    normalized_target = target_path.strip().lstrip("/")
+    normalized_target = _normalize_repo_relative_path(root, target_path)
+    if not normalized_target:
+        return RemoteAdmissionDecision("BLOCK", "target_path_outside_repo")
     for spec_path in specs_dir.glob("*.md"):
         text = spec_path.read_text(errors="ignore")
         if not _is_active_spec(text):
             continue
         evidence_paths = _extract_physical_evidence_paths(text)
         for evidence in evidence_paths:
-            if normalized_target == evidence or normalized_target.startswith(evidence.rstrip("/") + "/"):
+            normalized_evidence = _normalize_repo_relative_path(root, evidence)
+            if not normalized_evidence:
+                continue
+            if normalized_target == normalized_evidence or normalized_target.startswith(normalized_evidence.rstrip("/") + "/"):
                 return RemoteAdmissionDecision("ALLOW", "auto_sdd_admission")
     return RemoteAdmissionDecision("BLOCK", "no_covering_active_spec")
 
@@ -87,6 +92,16 @@ def _extract_target_path(arguments: dict[str, Any]) -> str:
         if isinstance(value, str) and value:
             return value
     return ""
+
+
+def _normalize_repo_relative_path(root: Path, value: str) -> str:
+    try:
+        candidate = (root / value.strip().lstrip("/")).resolve()
+        resolved_root = root.resolve()
+        candidate.relative_to(resolved_root)
+        return candidate.relative_to(resolved_root).as_posix()
+    except ValueError:
+        return ""
 
 
 def _is_active_spec(text: str) -> bool:

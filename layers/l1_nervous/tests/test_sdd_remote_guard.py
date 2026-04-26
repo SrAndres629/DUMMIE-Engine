@@ -57,6 +57,54 @@ status: "ACTIVE"
     assert decision.reason == "auto_sdd_admission"
 
 
+def test_auto_admission_rejects_path_traversal_outside_covered_spec(tmp_path):
+    spec_dir = tmp_path / "doc" / "specs"
+    spec_dir.mkdir(parents=True)
+    (spec_dir / "22_sdd_executable_contracts.md").write_text(
+        """---
+status: "ACTIVE"
+---
+# SDD
+
+## Physical Evidence
+- `layers/l2_brain`
+"""
+    )
+
+    decision = evaluate_remote_tool_admission(
+        server_name="filesystem",
+        tool_name="write_file",
+        arguments={"path": "layers/l2_brain/../../layers/l1_nervous/mcp_proxy.py", "content": "x"},
+        repo_root=str(tmp_path),
+    )
+
+    assert decision.status == "BLOCK"
+
+
+def test_auto_admission_rejects_absolute_path_outside_repo(tmp_path):
+    spec_dir = tmp_path / "doc" / "specs"
+    spec_dir.mkdir(parents=True)
+    (spec_dir / "22_sdd_executable_contracts.md").write_text(
+        """---
+status: "ACTIVE"
+---
+# SDD
+
+## Physical Evidence
+- `layers/l2_brain`
+"""
+    )
+
+    decision = evaluate_remote_tool_admission(
+        server_name="filesystem",
+        tool_name="write_file",
+        arguments={"path": "/etc/passwd", "content": "x"},
+        repo_root=str(tmp_path),
+    )
+
+    assert decision.status == "BLOCK"
+
+
 def test_mutating_remote_tool_is_allowed_with_sdd_admission_allow():
     decision = evaluate_remote_tool_admission(
         server_name="filesystem",
