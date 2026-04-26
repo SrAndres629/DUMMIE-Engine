@@ -18,6 +18,13 @@ class IntentType(Enum):
     RESOLUTION = "RESOLUTION"
     OBSERVATION = "OBSERVATION"
 
+
+class MemoryTemperature(Enum):
+    HOT = "HOT"
+    WARM = "WARM"
+    COLD = "COLD"
+    QUARANTINED = "QUARANTINED"
+
 @dataclass
 class SixDimensionalContext:
     # Legacy/bridge names used by L1 tools.
@@ -59,3 +66,52 @@ class AgentIntent:
             self.goal = self.rationale
         if not self.rationale and self.goal:
             self.rationale = self.goal
+
+
+@dataclass
+class SourceArtifact:
+    provider: str
+    source_uri: str
+    content_type: str
+    content: str
+    payload_hash: str
+    observed_at: str
+    metadata: Dict[str, Any] = field(default_factory=dict)
+
+
+@dataclass
+class MemoryTemperatureSignal:
+    source_uri: str
+    provider: str
+    signal_type: str
+    weight: float
+    observed_at: str
+
+
+@dataclass
+class IntentDraft:
+    draft_id: str
+    goal: str
+    risk_level: str
+    proposed_steps: List[str]
+    requires_human_review: bool
+    target_file: str
+
+
+@dataclass
+class ConsensusDecision:
+    consensus_id: str
+    topic: str
+    participants: List[str]
+    decision: str
+    dissent: List[str] = field(default_factory=list)
+    evidence_refs: List[str] = field(default_factory=list)
+
+
+@dataclass
+class RehydrationManifest:
+    manifest_id: str
+    source_provider: str
+    scan_roots: List[str]
+    artifact_kinds: List[str]
+    mode: str

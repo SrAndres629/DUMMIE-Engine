@@ -4,8 +4,20 @@ import logging
 import os
 from typing import Any, Dict, List, Optional
 from pathlib import Path
+from enum import Enum
 
 logger = logging.getLogger("mcp-proxy")
+
+
+class MCPConnectionState(str, Enum):
+    INIT = "INIT"
+    WAIT_SERVER = "WAIT_SERVER"
+    HANDSHAKE_OK = "HANDSHAKE_OK"
+    DISCOVERY = "DISCOVERY"
+    READY = "READY"
+    DEGRADED = "DEGRADED"
+    FAILED = "FAILED"
+
 
 class MCPProxyManager:
     """
@@ -16,6 +28,8 @@ class MCPProxyManager:
         self.config_path = Path(config_path)
         self.servers: Dict[str, Dict[str, Any]] = {}
         self.active_processes: Dict[str, asyncio.subprocess.Process] = {}
+        self.server_states: Dict[str, MCPConnectionState] = {}
+        self.tool_cache: Dict[str, List[Dict[str, Any]]] = {}
         self._load_config()
 
     def _load_config(self):
@@ -43,11 +57,8 @@ class MCPProxyManager:
 
     async def get_tools_for_server(self, server_name: str) -> List[Dict[str, Any]]:
         """Interroga a un servidor para obtener su lista de herramientas."""
-        # En una implementación real, esto ejecutaría 'list_tools' vía JSON-RPC.
-        # Por ahora, simulamos o devolvemos un esquema básico si ya lo conocemos.
-        # Para 2026, lo ideal es tener un caché de capacidades.
-        response = await self.call_tool(server_name, "list_tools", {})
-        return response.get("tools", [])
+        await self._ensure_ready(server_name)
+        return self.tool_cache.get(server_name, [])
 
     async def call_tool(self, server_name: str, tool_name: str, arguments: Dict[str, Any]) -> Any:
         """Ejecuta una herramienta en un servidor secundario."""
@@ -58,43 +69,20 @@ class MCPProxyManager:
         if server_cfg.get("disabled", False):
             raise ValueError(f"Server '{server_name}' is disabled.")
 
-        # Obtener o iniciar proceso
-        process = await self._ensure_process(server_name)
+        process = await self._ensure_ready(server_name)
         
         # Construir JSON-RPC Request
-        request_id = os.urandom(4).hex()
-        # Nota: 'list_tools' es una operación especial en MCP, 
-        # pero aquí usamos el mismo canal para simplicidad.
-        method = "tools/call" if tool_name != "list_tools" else "tools/list"
-        
-        payload = {
-            "jsonrpc": "2.0",
-            "id": request_id,
-            "method": method,
-            "params": {
-                "name": tool_name,
-                "arguments": arguments
-            } if tool_name != "list_tools" else {}
-        }
-
         try:
-            input_data = json.dumps(payload) + "\n"
-            process.stdin.write(input_data.encode())
-            await process.stdin.drain()
-
-            # Leer respuesta (asumiendo una línea por respuesta para Stdio simple)
-            # Nota: Esto es frágil si el servidor envía logs a stdout. 
-            # Los servidores MCP bien implementados envían logs a stderr.
-            response_data = await process.stdout.readline()
-            if not response_data:
-                raise RuntimeError(f"Server '{server_name}' closed connection.")
-            
-            result = json.loads(response_data.decode())
-            
+            result = await self._send_jsonrpc_request(
+                process,
+                "tools/call",
+                {"name": tool_name, "arguments": arguments},
+            )
             # [Metacognición 2026] Entropy Filtering / Schema Homogenization
             # Evita saturar al LLM con metadatos técnicos innecesarios del sub-servidor
             return self._homogenize_response(result)
         except Exception as e:
+            self.server_states[server_name] = MCPConnectionState.FAILED
             error_msg = str(e)
             logger.error(f"Error communicating with {server_name}: {error_msg}")
             
@@ -116,6 +104,84 @@ class MCPProxyManager:
                 del self.active_processes[server_name]
             raise
 
+    async def _ensure_ready(self, server_name: str) -> asyncio.subprocess.Process:
+        """Completa el handshake MCP antes de exponer tools/call."""
+        if self.server_states.get(server_name) == MCPConnectionState.READY:
+            proc = self.active_processes.get(server_name)
+            if proc and proc.returncode is None:
+                return proc
+
+        process = await self._ensure_process(server_name)
+        self.server_states[server_name] = MCPConnectionState.INIT
+
+        try:
+            self.server_states[server_name] = MCPConnectionState.WAIT_SERVER
+            await self._send_jsonrpc_request(
+                process,
+                "initialize",
+                {
+                    "protocolVersion": "2024-11-05",
+                    "capabilities": {},
+                    "clientInfo": {"name": "dummie-mcp-proxy", "version": "0.1.0"},
+                },
+                request_id=f"init-{server_name}-{os.urandom(4).hex()}",
+            )
+
+            self.server_states[server_name] = MCPConnectionState.HANDSHAKE_OK
+            await self._send_jsonrpc_notification(process, "notifications/initialized", {})
+
+            self.server_states[server_name] = MCPConnectionState.DISCOVERY
+            tools_response = await self._send_jsonrpc_request(process, "tools/list", {})
+            self.tool_cache[server_name] = tools_response.get("result", {}).get("tools", [])
+
+            self.server_states[server_name] = MCPConnectionState.READY
+            return process
+        except Exception:
+            self.server_states[server_name] = MCPConnectionState.FAILED
+            raise
+
+    async def _send_jsonrpc_request(
+        self,
+        process: asyncio.subprocess.Process,
+        method: str,
+        params: Dict[str, Any],
+        request_id: Optional[str] = None,
+    ) -> Dict[str, Any]:
+        payload = {
+            "jsonrpc": "2.0",
+            "id": request_id or os.urandom(4).hex(),
+            "method": method,
+            "params": params,
+        }
+        input_data = json.dumps(payload) + "\n"
+        process.stdin.write(input_data.encode())
+        await process.stdin.drain()
+        return await self._read_jsonrpc_response(process)
+
+    async def _send_jsonrpc_notification(
+        self,
+        process: asyncio.subprocess.Process,
+        method: str,
+        params: Dict[str, Any],
+    ) -> None:
+        payload = {"jsonrpc": "2.0", "method": method}
+        if params:
+            payload["params"] = params
+        input_data = json.dumps(payload) + "\n"
+        process.stdin.write(input_data.encode())
+        await process.stdin.drain()
+
+    async def _read_jsonrpc_response(self, process: asyncio.subprocess.Process) -> Dict[str, Any]:
+        # Leer respuesta (asumiendo una línea por respuesta para Stdio simple)
+        # Nota: Esto es frágil si el servidor envía logs a stdout.
+        response_data = await process.stdout.readline()
+        if not response_data:
+            raise RuntimeError("Server closed connection.")
+        result = json.loads(response_data.decode())
+        if "error" in result:
+            raise RuntimeError(json.dumps(result["error"]))
+        return result
+
     async def _ensure_process(self, server_name: str) -> asyncio.subprocess.Process:
         """Asegura que el proceso del servidor esté corriendo."""
         if server_name in self.active_processes:
@@ -131,8 +197,8 @@ class MCPProxyManager:
             env.update(cfg["env"])
 
         # [SOVEREIGN SECURITY TOGGLE]
-        # Activa o desactiva el sandbox bwrap según la presencia del usuario
-        state_file = Path(os.environ.get("DUMMIE_AIWG_DIR", os.getcwd() + "/.aiwg")) / "security_state"
+        aiwg_dir = Path(os.environ.get("DUMMIE_AIWG", os.environ.get("DUMMIE_AIWG_DIR", os.getcwd() + "/.aiwg")))
+        state_file = aiwg_dir / "security_state"
         sandbox_mode = os.environ.get("DUMMIE_SANDBOX_MODE", "OFF").upper()
         
         if state_file.exists():
@@ -147,7 +213,7 @@ class MCPProxyManager:
             # Requisito: bwrap instalado. 
             # Configuramos un sandbox que permite red (share-net) pero aislada (loopback)
             # y monta el root_dir para que el servidor pueda trabajar.
-            root_dir = os.environ.get("DUMMIE_ROOT_DIR", os.getcwd())
+            root_dir = os.environ.get("DUMMIE_ROOT", os.environ.get("DUMMIE_ROOT_DIR", os.getcwd()))
             
             bwrap_args = [
                 "bwrap",
@@ -192,6 +258,7 @@ class MCPProxyManager:
         asyncio.create_task(self._log_stderr(server_name, process.stderr))
         
         self.active_processes[server_name] = process
+        self.server_states.setdefault(server_name, MCPConnectionState.INIT)
         return process
 
     async def _log_stderr(self, name: str, stderr: asyncio.StreamReader):
@@ -236,7 +303,8 @@ class MCPProxyManager:
 
     def _lookup_lesson(self, error_msg: str) -> Optional[str]:
         """Busca en el historial de lecciones una solución para un error dado."""
-        lessons_path = Path(os.environ.get("DUMMIE_AIWG_DIR", "/home/jorand/Escritorio/DUMMIE Engine/.aiwg")) / "memory" / "lessons.jsonl"
+        aiwg_dir = Path(os.environ.get("DUMMIE_AIWG", os.environ.get("DUMMIE_AIWG_DIR", os.getcwd() + "/.aiwg")))
+        lessons_path = aiwg_dir / "memory" / "lessons.jsonl"
         if not lessons_path.exists():
             return None
             
