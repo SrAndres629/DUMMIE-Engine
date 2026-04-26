@@ -6,6 +6,7 @@ from tools_impl.gateway import register_gateway_tools
 from tools_impl.swarm import register_swarm_tools
 from tools_impl.nervous import register_nervous_tools
 from tools_impl.knowledge import register_knowledge_tools
+from tools_impl.sdd import register_sdd_tools
 
 logger = logging.getLogger("dummie-mcp.tools")
 
@@ -23,5 +24,6 @@ def register_tools(mcp: FastMCP, orchestrator, proxy_manager, root_dir: str):
     register_swarm_tools(mcp, use_cases, root_dir)
     register_nervous_tools(mcp, use_cases, root_dir)
     register_knowledge_tools(mcp, use_cases)
+    register_sdd_tools(mcp, use_cases)
     
     logger.info("Registro de herramientas completado exitosamente.")
