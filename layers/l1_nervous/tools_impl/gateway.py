@@ -2,6 +2,7 @@ import json
 import hashlib
 import logging
 from mcp.server.fastmcp import FastMCP
+from sdd_remote_guard import evaluate_remote_tool_admission
 
 logger = logging.getLogger("dummie.l1.tools.gateway")
 
@@ -32,6 +33,9 @@ def register_gateway_tools(mcp: FastMCP, use_cases):
         try:
             causal_id = hashlib.sha256(f"{server_name}.{tool_name}.{orchestrator.lamport_clock}".encode()).hexdigest()[:12]
             logger.info(f"Gateway [CausalID:{causal_id}]: Executing {server_name}.{tool_name}")
+            admission = evaluate_remote_tool_admission(server_name, tool_name, arguments)
+            if admission.status != "ALLOW":
+                return f"SDD_BLOCKED: {admission.reason}"
             response = await proxy_manager.call_tool(server_name, tool_name, arguments)
             
             if "error" in response:
