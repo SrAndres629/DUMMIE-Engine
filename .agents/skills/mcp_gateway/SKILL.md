@@ -1,43 +1,39 @@
 ---
-name: MCP Gateway Dynamic Discovery
-description: Protocolo de descubrimiento y ejecución de herramientas delegadas a través del Gateway dummie-brain.
-version: 1.0.0
+name: Meta-Gateway Dynamic Discovery
+description: Protocolo de descubrimiento y ejecución unificado para TODAS las capacidades del sistema (locales y remotas) vía dummie-brain.
+version: 2.0.0
 ---
 
-# MCP Gateway Pattern
+# Meta-Gateway Pattern
 
-Para evitar la sobrecarga de la ventana de contexto y mantener la interfaz limpia, el DUMMIE Engine utiliza un **Gateway Pattern** para acceder a herramientas. Como agente LLM, no tendrás todas las herramientas cargadas directamente en tu `mcp.json`. En su lugar, usarás `dummie-brain` como tu único hub.
+Para evitar la sobrecarga de la ventana de contexto, el DUMMIE Engine utiliza un **Meta-Gateway Pattern**. Como agente LLM, inicias en estado "Tabula Rasa" (Pizarra en blanco).
+No verás docenas de herramientas expuestas. Todo tu cuerpo físico y tus herramientas externas están ocultas detrás de **solo 3 herramientas maestras**.
 
 ## Flujo de Trabajo Cognitivo (Workflow)
 
-Cuando necesites utilizar capacidades que no tienes de forma nativa (por ejemplo, buscar en Github, usar Git, consultar una Base de Datos SQLite, leer Puppeteer, etc.), **debes usar el Gateway** siguiendo este proceso:
+Cada vez que necesites realizar *cualquier* acción física o lógica (ej. buscar en Git, usar SQLite, o cristalizar conocimiento local), debes seguir este ciclo tridimensional:
 
-### 1. Descubrir Servidores
-Si no estás seguro de qué servidor utilizar, usa la herramienta para ver los servidores proxyados.
-**Herramienta:** `mcp_dummie-brain_list_remote_servers`
+### 1. Descubrir Capacidades (Discover)
+Si no sabes qué herramientas tienes o qué nombres tienen, usa esta herramienta.
+**Herramienta:** `mcp_dummie-brain_dummie_discover_capabilities`
+- Puedes pasar un argumento `query` (ej. "git" o "memory") para filtrar.
+- Te devolverá una lista de *targets* en formato `local.nombre_herramienta` o `servidor.nombre_herramienta`.
 
-### 2. Descubrir Herramientas
-Una vez que sepas el nombre del servidor (ej. `git`), consulta qué herramientas tiene disponibles y qué parámetros necesitan.
-**Herramienta:** `mcp_dummie-brain_list_remote_tools(server_name="git")`
-Esto te devolverá la lista de herramientas, como `git_status`, `git_commit`, etc.
+### 2. Analizar Capacidad (Analyze)
+Una vez que conoces el `target` exacto (ej. `local.crystallize` o `git.git_status`), descubre qué argumentos exige su contrato.
+**Herramienta:** `mcp_dummie-brain_dummie_analyze_capability`
+- `target`: Pasa el identificador exacto (ej. "sqlite.read_query").
+- Te devolverá el JSON Schema completo y la descripción de la herramienta. **NO adivines argumentos**. Si es la primera vez que usas el target en esta sesión, analízalo.
 
-### 3. Ejecutar la Herramienta
-Usa la herramienta genérica de ejecución para invocar la herramienta remota, pasando los argumentos como un objeto JSON (diccionario).
-**Herramienta:** `mcp_dummie-brain_exec_remote_tool`
-- `server_name`: "git"
-- `tool_name`: "git_status"
-- `arguments`: {} (Cualquier argumento requerido, si aplica)
+### 3. Ejecutar Capacidad (Execute)
+Ejecuta la herramienta pasando los parámetros mapeados de acuerdo a su Schema.
+**Herramienta:** `mcp_dummie-brain_dummie_execute_capability`
+- `target`: El identificador (ej. "local.broadcast_intent").
+- `arguments`: Un objeto JSON (diccionario) con los parámetros exactos.
 
 ---
 
 ## ⚠️ Reglas Estrictas de Ejecución
-1. **Evita la asunción de argumentos:** Si no estás 100% seguro de los parámetros de una herramienta remota, ejecuta `list_remote_tools` primero.
-2. **Usa el Gateway sobre comandos directos:** Si existe un MCP server para la tarea (ej. Git, Fetch, SQLite), prioriza usar `exec_remote_tool` sobre comandos de terminal a menos que el servidor MCP falle.
-3. **Manejo de Errores:** Si `exec_remote_tool` devuelve un `SDD_BLOCKED`, significa que la política Zero-Trust (SDD Guardrails) ha bloqueado tu acción. Debes revisar tu plan arquitectónico antes de insistir.
-
-## Ejemplos de Servidores Frecuentes
-- `git`: Control de versiones.
-- `sqlite`: Bases de datos relacionales locales.
-- `filesystem`: Lectura/escritura (aunque posees herramientas nativas).
-- `fetch`: Lectura de páginas web y URLs.
-- `ripgrep`: Búsquedas de alto rendimiento.
+1. **El Target es Sagrado:** Nunca uses espacios o nombres erróneos. Usa siempre el prefijo (`local.` o `server.`).
+2. **Cero Suposiciones:** Si un `dummie_execute` falla por "missing arguments" o "validation error", significa que no corriste `dummie_analyze` primero. El SDD (Schema Driven Development) es inquebrantable.
+3. **Manejo de SDD Guardrails:** Si `dummie_execute_capability` devuelve un error de `SDD_BLOCKED`, tu acción fue bloqueada por la capa L3 Shield de seguridad Zero-Trust. No insistas sin antes aprobar una especificación (Spec).
