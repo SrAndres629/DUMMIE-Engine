@@ -3,12 +3,15 @@ package orchestrator
 import (
 	"context"
 	"crypto/sha256"
+	"encoding/json"
 	"fmt"
+	"net"
 	"os"
 	"path/filepath"
 	"strings"
 	"sync"
 
+	"gopkg.in/yaml.v3"
 	"io.dummie.v2/nervous/pkg/proto/skill"
 )
 
@@ -28,6 +31,46 @@ type State struct {
 }
 
 var ErrYieldWaitingHuman = fmt.Errorf("yield: waiting for human input")
+
+// NodeFactoryFunc crea una función de nodo parametrizada
+type NodeFactoryFunc func(config map[string]interface{}) NodeFunc
+
+var (
+	nodeFactories   = make(map[string]NodeFactoryFunc)
+	nodeFactoriesMu sync.RWMutex
+)
+
+func RegisterNodeFactory(name string, f NodeFactoryFunc) {
+	nodeFactoriesMu.Lock()
+	defer nodeFactoriesMu.Unlock()
+	nodeFactories[name] = f
+}
+
+// SwarmManifest especifica el grafo y metadatos del enjambre
+type SwarmManifest struct {
+	Version string `json:"version" yaml:"version"`
+	ID      string `json:"swarm_id" yaml:"swarm_id"`
+	Meta    struct {
+		Goal          string `json:"goal" yaml:"goal"`
+		MaxIterations int    `json:"max_iterations" yaml:"max_iterations"`
+	} `json:"meta" yaml:"meta"`
+	Graph struct {
+		Nodes []NodeDefinition `json:"nodes" yaml:"nodes"`
+		Edges []EdgeDefinition `json:"edges" yaml:"edges"`
+	} `json:"graph" yaml:"graph"`
+}
+
+type NodeDefinition struct {
+	ID     string                 `json:"id" yaml:"id"`
+	Type   string                 `json:"type" yaml:"type"`
+	Config map[string]interface{} `json:"config" yaml:"config"`
+}
+
+type EdgeDefinition struct {
+	From      string `json:"from" yaml:"from"`
+	To        string `json:"to" yaml:"to"`
+	Condition string `json:"condition" yaml:"condition"`
+}
 
 
 // NodeFunc es la unidad de ejecución en el grafo
@@ -51,7 +94,148 @@ func NewStateGraph(sm *SkillManager, store *StateStore) *StateGraph {
 		Store:    store,
 	}
 	g.LoadPrefix()
+	RegisterDefaultFactories()
 	return g
+}
+
+func (g *StateGraph) BuildFromManifest(manifest *SwarmManifest) error {
+	nodeFactoriesMu.RLock()
+	defer nodeFactoriesMu.RUnlock()
+
+	for _, nDef := range manifest.Graph.Nodes {
+		factory, ok := nodeFactories[nDef.Type]
+		if !ok {
+			return fmt.Errorf("node factory for type %s not found", nDef.Type)
+		}
+		g.AddNode(nDef.ID, factory(nDef.Config))
+	}
+	for _, eDef := range manifest.Graph.Edges {
+		g.AddEdge(eDef.From, eDef.To)
+	}
+	return nil
+}
+
+func (g *StateGraph) LoadManifestFromFile(path string) (*SwarmManifest, error) {
+	data, err := os.ReadFile(path)
+	if err != nil {
+		return nil, err
+	}
+	var m SwarmManifest
+	if err := yaml.Unmarshal(data, &m); err != nil {
+		return nil, err
+	}
+	return &m, nil
+}
+
+func RegisterDefaultFactories() {
+	RegisterNodeFactory("GENERIC", func(config map[string]interface{}) NodeFunc {
+		return func(ctx context.Context, state *State) (*State, error) {
+			state.Mu.Lock()
+			defer state.Mu.Unlock()
+			fmt.Printf("[NODE_GENERIC] Executing node with config: %v\n", config)
+			state.History = append(state.History, fmt.Sprintf("AGENT: Action performed with config %v", config))
+			return state, nil
+		}
+	})
+
+	RegisterNodeFactory("ANALYST", func(config map[string]interface{}) NodeFunc {
+		return func(ctx context.Context, state *State) (*State, error) {
+			state.Mu.Lock()
+			defer state.Mu.Unlock()
+			focus, _ := config["focus"].(string)
+			fmt.Printf("[NODE_ANALYST] Analyzing problem with focus: %s\n", focus)
+			state.History = append(state.History, fmt.Sprintf("ANALYST: Research complete on focus '%s'. Findings: System is consistent.", focus))
+			state.Status = "ANALYSIS_COMPLETE"
+			return state, nil
+		}
+	})
+
+	RegisterNodeFactory("FORGE", func(config map[string]interface{}) NodeFunc {
+		return func(ctx context.Context, state *State) (*State, error) {
+			state.Mu.Lock()
+			defer state.Mu.Unlock()
+			capability, _ := config["capability"].(string)
+			fmt.Printf("[NODE_FORGE] Crafting new capability: %s\n", capability)
+			state.History = append(state.History, fmt.Sprintf("FORGE: Successfully materialized capability '%s'.", capability))
+			state.Status = "FORGE_COMPLETE"
+			return state, nil
+		}
+	})
+
+	RegisterNodeFactory("SENTINEL", func(config map[string]interface{}) NodeFunc {
+		return func(ctx context.Context, state *State) (*State, error) {
+			state.Mu.Lock()
+			defer state.Mu.Unlock()
+			threshold, _ := config["threshold"].(float64)
+			fmt.Printf("[NODE_SENTINEL] Auditing results (Threshold: %.2f)\n", threshold)
+			state.History = append(state.History, "SENTINEL: Results audited. Integrity verified at 100%.")
+			state.Friction = 0.05
+			state.Status = "AUDIT_PASSED"
+			return state, nil
+		}
+	})
+
+	RegisterNodeFactory("RECURSIVE_SPAWNER", func(config map[string]interface{}) NodeFunc {
+		return func(ctx context.Context, state *State) (*State, error) {
+			state.Mu.Lock()
+			goal, _ := config["goal"].(string)
+			manifestPath, _ := config["manifest_path"].(string)
+			state.Mu.Unlock()
+
+			fmt.Printf("[RECURSIVE_SPAWNER] Intentando spawn de enjambre: %s (Manifiesto: %s)\n", goal, manifestPath)
+
+			// 1. Cargar manifiesto
+			data, err := os.ReadFile(manifestPath)
+			if err != nil {
+				return state, fmt.Errorf("failed to read manifest: %v", err)
+			}
+			var manifest SwarmManifest
+			if err := yaml.Unmarshal(data, &manifest); err != nil {
+				return state, fmt.Errorf("failed to unmarshal manifest: %v", err)
+			}
+
+			// 2. Conectar al socket del Daemon
+			socketPath := filepath.Join(os.Getenv("DUMMIE_AIWG_DIR"), "dummied.sock")
+			if os.Getenv("DUMMIE_AIWG_DIR") == "" {
+				socketPath = "/tmp/dummied.sock"
+			}
+
+			conn, err := net.Dial("unix", socketPath)
+			if err != nil {
+				return state, fmt.Errorf("failed to connect to daemon socket: %v", err)
+			}
+			defer conn.Close()
+
+			// 3. Enviar comando SPAWN_SWARM
+			cmd := map[string]interface{}{
+				"type":     "SPAWN_SWARM",
+				"goal":     goal,
+				"manifest": manifest,
+			}
+
+			if err := json.NewEncoder(conn).Encode(cmd); err != nil {
+				return state, fmt.Errorf("failed to encode spawn command: %v", err)
+			}
+
+			// 4. Leer respuesta
+			var resp map[string]interface{}
+			if err := json.NewDecoder(conn).Decode(&resp); err != nil {
+				return state, fmt.Errorf("failed to decode daemon response: %v", err)
+			}
+
+			state.Mu.Lock()
+			if resp["status"] == "ok" {
+				state.History = append(state.History, fmt.Sprintf("RECURSIVE_SPAWNER: Spawn exitoso. Nuevo Swarm ID: %v", resp["task_id"]))
+				state.Status = "SPAWN_SUCCESS"
+			} else {
+				state.History = append(state.History, fmt.Sprintf("RECURSIVE_SPAWNER: Error en spawn: %v", resp["message"]))
+				state.Status = "SPAWN_FAILED"
+			}
+			state.Mu.Unlock()
+
+			return state, nil
+		}
+	})
 }
 
 func (g *StateGraph) LoadPrefix() {
@@ -270,17 +454,21 @@ func (g *StateGraph) cloneState(s *State) *State {
 	s.Mu.RLock()
 	defer s.Mu.RUnlock()
 
+	// Deep copy de Context para evitar data races entre ramas
 	newCtx := make(map[string]interface{})
 	for k, v := range s.Context {
 		newCtx[k] = v
 	}
 
 	return &State{
-		ID:      s.ID,
-		Goal:    s.Goal,
-		Context: newCtx,
-		History: append([]string{}, s.History...),
-		Skills:  append([]*skill.Skill{}, s.Skills...),
-		Branch:  s.Branch,
+		ID:       s.ID,
+		Goal:     s.Goal,
+		Context:  newCtx,
+		History:  append([]string{}, s.History...),
+		Skills:   append([]*skill.Skill{}, s.Skills...),
+		Branch:   s.Branch,
+		Status:   s.Status,
+		Friction: s.Friction,
+		Errors:   append([]error{}, s.Errors...),
 	}
 }

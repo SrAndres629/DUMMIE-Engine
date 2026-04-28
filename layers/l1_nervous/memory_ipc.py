@@ -1,3 +1,4 @@
+import os
 import logging
 from typing import Any, List, Optional
 import pyarrow as pa
@@ -69,7 +70,11 @@ class KuzuConnectionProxy:
             raise MemoryPlaneError("ERR_IPC_DISCONNECT", str(e))
 
 class ArrowMemoryBridge:
-    def __init__(self, socket_path: str = "/tmp/dummie_memory.sock"):
+    def __init__(self, socket_path: Optional[str] = None):
+        if not socket_path:
+            aiwg = os.environ.get("DUMMIE_AIWG", os.environ.get("DUMMIE_AIWG_DIR", os.getcwd() + "/.aiwg"))
+            socket_path = os.environ.get('MEMORY_SOCKET_PATH', os.path.join(aiwg, "sockets/flight.sock"))
+        
         self.socket_path = socket_path
         self.location = f"grpc+unix://{socket_path}"
         self.client: Optional[flight.FlightClient] = None

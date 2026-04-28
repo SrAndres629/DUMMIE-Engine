@@ -1,0 +1,28 @@
+version: "2.0"
+swarm_id: "DOC_SPECIALIST_V1"
+meta:
+  goal: "Review files and generate missing READMEs or comments."
+  max_iterations: 10
+
+graph:
+  nodes:
+    - id: "scanner"
+      type: "ANALYST"
+      config:
+        focus: "missing_docs"
+    
+    - id: "writer"
+      type: "FORGE"
+      config:
+        capability: "markdown_generation"
+        
+    - id: "reviewer"
+      type: "SENTINEL"
+      config:
+        threshold: 0.8
+
+  edges:
+    - from: "scanner"
+      to: "writer"
+    - from: "writer"
+      to: "reviewer"

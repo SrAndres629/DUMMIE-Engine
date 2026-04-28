@@ -62,7 +62,26 @@ The `dummie-brain` is the primary interface between the LLM (L2) and the DUMMIE 
 - **Description**: Discovery of all tools available in the swarm (local + remote).
 - **Output**: JSON-structured inventory.
 
+### Category: Gateway (Dynamic Proxy)
+
+#### `list_remote_servers`
+- **Description**: Lists all proxied MCP servers available via the gateway.
+- **Output**: String listing server names.
+
+#### `list_remote_tools`
+- **Description**: Lists tools exposed by a specific proxied server.
+- **Input**:
+  - `server_name` (string): Target server.
+
+#### `exec_remote_tool`
+- **Description**: Executes a tool on a proxied server under SDD Guardrails.
+- **Input**:
+  - `server_name` (string): Target server.
+  - `tool_name` (string): Target tool.
+  - `arguments` (dict): JSON-compatible arguments map.
+
 ## 4. Architectural Constraints
 1. **Purity**: Tools MUST NOT write to `stdout` except via the MCP protocol.
 2. **Determinism**: All persistent actions MUST include a `lamport_t` timestamp.
 3. **Fencing**: Tools MUST respect `read_only` locks on the memory plane.
+4. **Gateway Pattern**: AI Agents MUST configure `dummie-brain` as their ONLY explicitly known MCP server. All other servers (Git, Fetch, SQLite) MUST be accessed dynamically via the Gateway Category tools to minimize LLM Context Window exhaustion.

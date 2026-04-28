@@ -51,3 +51,47 @@ def register_swarm_tools(mcp: FastMCP, use_cases, root_dir: str):
         }
         AtomicLedgerWriter.append_entry(ledger_path, entry)
         return f"[SWARM] Tarea delegada exitosamente. Esperando que un agente libre tome el control."
+    @mcp.tool()
+    async def spawn_agent(goal: str, manifest_path: str = "", id: str = "") -> str:
+        """[SWARM] Crea e inyecta un nuevo agente/enjambre en el motor L0."""
+        import socket
+        import yaml
+        
+        socket_path = "/tmp/dummied.sock"
+        if not manifest_path:
+            # Manifiesto por defecto si no se provee uno
+            manifest = {
+                "version": "2.0",
+                "swarm_id": f"spawned_{id}" if id else "dynamic_spawn",
+                "meta": {"goal": goal, "max_iterations": 5},
+                "graph": {
+                    "nodes": [{"id": "init", "type": "GENERIC", "config": {"goal": goal}}],
+                    "edges": []
+                }
+            }
+        else:
+            if not os.path.isabs(manifest_path):
+                manifest_path = os.path.join(root_dir, manifest_path)
+            
+            if not os.path.exists(manifest_path):
+                return f"Error: Manifiesto no encontrado en {manifest_path}"
+                
+            with open(manifest_path, 'r') as f:
+                manifest = yaml.safe_load(f)
+
+        cmd = {
+            "type": "SPAWN_SWARM",
+            "goal": goal,
+            "id": id,
+            "manifest": manifest
+        }
+
+        try:
+            client = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+            client.connect(socket_path)
+            client.sendall(json.dumps(cmd).encode())
+            response = client.recv(4096).decode()
+            client.close()
+            return f"[SWARM] Agente inyectado exitosamente: {response}"
+        except Exception as e:
+            return f"Error al conectar con el daemon L0 (¿está encendido?): {str(e)}"

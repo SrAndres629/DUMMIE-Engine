@@ -1,0 +1,29 @@
+version: "2.0"
+swarm_id: "AUTOPOIESIS_DEMO_01"
+meta:
+  goal: "Analyze current state and forge new capabilities if friction is detected."
+  max_iterations: 5
+
+graph:
+  nodes:
+    - id: "researcher"
+      type: "ANALYST"
+      config:
+        focus: "system_evolution"
+        depth: 3
+    
+    - id: "builder"
+      type: "FORGE"
+      config:
+        capability: "dynamic_mcp_reloading"
+        
+    - id: "auditor"
+      type: "SENTINEL"
+      config:
+        threshold: 0.95
+
+  edges:
+    - from: "researcher"
+      to: "builder"
+    - from: "builder"
+      to: "auditor"

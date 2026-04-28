@@ -1,0 +1,12 @@
+skill_id: sw.everything.get-tiny-image
+name: Get-Tiny-Image
+description: Returns a tiny MCP logo image.. Utilidad del servidor everything.. Utilidad
+  del servidor everything.. Utilidad del servidor everything.
+version: 1.1.0
+capabilities:
+- get-tiny-image
+invariants:
+- 'compliance: standard'
+metadata:
+  server: everything
+  status: active

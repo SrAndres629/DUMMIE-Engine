@@ -3,10 +3,14 @@ set -e
 
 # Configuración de Rutas
 ROOT_DIR="/home/jorand/Escritorio/DUMMIE Engine"
+export DUMMIE_ROOT="$ROOT_DIR"
+export DUMMIE_AIWG="/tmp/dummie_audit_aiwg"
 BIN_DIR="$ROOT_DIR/bin"
 L1_VENV="$ROOT_DIR/layers/l1_nervous/.venv/bin/python3"
-SOCKET_PATH="/tmp/dummie_memory_audit.sock"
-DB_PATH="/tmp/kuzu_audit_db"
+
+# Rutas derivadas
+SOCKET_PATH="$DUMMIE_AIWG/sockets/flight.sock"
+DB_PATH="$DUMMIE_AIWG/memory/kuzu.db"
 SERVER_PID=""
 
 cleanup() {
@@ -14,18 +18,18 @@ cleanup() {
         kill "$SERVER_PID" || true
         wait "$SERVER_PID" 2>/dev/null || true
     fi
-    rm -rf "$DB_PATH" "$DB_PATH.wal"
-    rm -f "$SOCKET_PATH"
+    rm -rf "$DUMMIE_AIWG"
 }
 
 trap cleanup EXIT
 echo "=== INICIANDO AUDITORÍA INDUSTRIAL DE EXTREMO A EXTREMO ==="
 
 # 1. Limpieza de entorno
-echo "[1/5] Limpiando sockets y DBs previas..."
-rm -rf "$DB_PATH" "$DB_PATH.wal"
-rm -f "$SOCKET_PATH"
+echo "[1/5] Limpiando entorno de auditoría..."
+rm -rf "$DUMMIE_AIWG"
 mkdir -p "$BIN_DIR"
+mkdir -p "$DUMMIE_AIWG/memory"
+mkdir -p "$DUMMIE_AIWG/sockets"
 
 # 2. Build de componentes
 echo "[2/5] Compilando Memory Plane y Overseer (All Commands)..."
@@ -34,8 +38,6 @@ cd "$ROOT_DIR/layers/l0_overseer" && go build -o "$BIN_DIR/" ./cmd/...
 
 # 3. Levantar Memory Plane en segundo plano
 echo "[3/5] Levantando Memory Plane (Online Mode)..."
-export KUZU_DB_PATH="$DB_PATH"
-export MEMORY_SOCKET_PATH="$SOCKET_PATH"
 "$BIN_DIR/memory_server" > /dev/null 2>&1 &
 SERVER_PID=$!
 

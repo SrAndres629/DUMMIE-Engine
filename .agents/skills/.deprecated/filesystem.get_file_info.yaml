@@ -1,0 +1,17 @@
+skill_id: sw.fs.get_file_info
+name: Get File Info
+description: Retrieve detailed metadata about a file or directory. Returns comprehensive
+  information including size, creation time, last modified time, permissions, and
+  type. This tool is perfect for understanding file characteristics without reading
+  the actual content. Only works within allowed directories.. Gestión industrial de
+  archivos.. Gestión industrial de archivos.. Gestión industrial de archivos.
+version: 1.1.0
+capabilities:
+- get_file_info
+invariants:
+- 'path_validation: strict'
+- 'size_limit: 1MB'
+- 'zero_trust: true'
+metadata:
+  server: filesystem
+  status: active

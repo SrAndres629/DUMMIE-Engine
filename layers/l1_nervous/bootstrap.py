@@ -13,7 +13,7 @@ try:
     from adapters import KuzuRepository, DecisionLedgerAdapter, SessionLedgerAdapter, NativeShieldAdapter, KuzuSkillRepository
 except ImportError:
     # Intento de redundancia si no está en PYTHONPATH directo
-    sys.path.append(os.path.join(os.environ.get("DUMMIE_ROOT_DIR", ""), "layers/l2_brain"))
+    sys.path.append(os.path.join(os.environ.get("DUMMIE_ROOT", os.environ.get("DUMMIE_ROOT_DIR", "")), "layers/l2_brain"))
     from models import SixDimensionalContext, AuthorityLevel, IntentType as ContextIntent
     from models import AgentIntent, IntentType as FabricationIntent
     from orchestrator import CognitiveOrchestrator
@@ -24,19 +24,18 @@ logger = logging.getLogger("dummie-mcp.infra")
 def bootstrap_orchestrator(kuzu_db_path: str, aiwg_dir: str):
     from memory_ipc import ArrowMemoryBridge
     
-    SOCKET_PATH = "/tmp/dummie_memory.sock"
     db = None
     read_only = False
 
     # [SPEC-30] Intento de conexión al Memory Plane (Zero-Copy IPC)
-    bridge = ArrowMemoryBridge(SOCKET_PATH)
+    bridge = ArrowMemoryBridge() # Ahora usa defaults normalizados
     if bridge.heartbeat():
-        logger.info(f"Memory Plane active and verified at {SOCKET_PATH}. Activating IPC mode.")
+        logger.info(f"Memory Plane active and verified at {bridge.socket_path}. Activating IPC mode.")
         db = bridge
     else:
-        logger.error(f"Memory Plane OFFLINE at {SOCKET_PATH}. Entering DEGRADED mode.")
-        print(f"\n[!] ADVERTENCIA: El Memory Plane (L0) no está activo.")
-        print(f"    El sistema arrancará en modo DEGRADADO (sin persistencia).\n")
+        logger.error(f"Memory Plane OFFLINE at {bridge.socket_path}. Entering DEGRADED mode.")
+        logger.warning("[!] ADVERTENCIA: El Memory Plane (L0) no está activo.")
+        logger.warning("    El sistema arrancará en modo DEGRADADO (sin persistencia).")
         db = None
 
     event_store = KuzuRepository(db_path=kuzu_db_path if db else None, db=db)

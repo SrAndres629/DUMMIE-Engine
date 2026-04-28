@@ -1,0 +1,18 @@
+skill_id: sw.fs.list_directory
+name: List Directory
+description: Get a detailed listing of all files and directories in a specified path.
+  Results clearly distinguish between files and directories with [FILE] and [DIR]
+  prefixes. This tool is essential for understanding directory structure and finding
+  specific files within a directory. Only works within allowed directories.. Gestión
+  industrial de archivos.. Gestión industrial de archivos.. Gestión industrial de
+  archivos.
+version: 1.1.0
+capabilities:
+- list_directory
+invariants:
+- 'path_validation: strict'
+- 'size_limit: 1MB'
+- 'zero_trust: true'
+metadata:
+  server: filesystem
+  status: active

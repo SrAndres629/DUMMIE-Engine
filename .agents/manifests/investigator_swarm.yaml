@@ -1,0 +1,30 @@
+version: "2.0"
+swarm_id: "INVESTIGATOR_CORE"
+meta:
+  goal: "Audit the repository for technical debt and spawn specialized agents to fix it."
+  max_iterations: 10
+
+graph:
+  nodes:
+    - id: "auditor"
+      type: "ANALYST"
+      config:
+        focus: "technical_debt"
+        depth: 5
+    
+    - id: "blacksmith"
+      type: "FORGE"
+      config:
+        capability: "auto_documentation_specialist"
+        
+    - id: "deployer"
+      type: "RECURSIVE_SPAWNER"
+      config:
+        goal: "Deploy specialized documentation agent"
+        manifest_path: ".agents/manifests/doc_specialist.yaml"
+
+  edges:
+    - from: "auditor"
+      to: "blacksmith"
+    - from: "blacksmith"
+      to: "deployer"

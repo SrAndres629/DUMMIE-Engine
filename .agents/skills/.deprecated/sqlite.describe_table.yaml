@@ -1,0 +1,12 @@
+skill_id: sw.sqlite.describe_table
+name: Describe Table
+description: Get the schema information for a specific table. Utilidad del servidor
+  sqlite.. Utilidad del servidor sqlite.. Utilidad del servidor sqlite.
+version: 1.1.0
+capabilities:
+- describe_table
+invariants:
+- 'compliance: standard'
+metadata:
+  server: sqlite
+  status: active

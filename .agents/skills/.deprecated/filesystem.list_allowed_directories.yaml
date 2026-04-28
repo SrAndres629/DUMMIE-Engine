@@ -1,0 +1,17 @@
+skill_id: sw.fs.list_allowed_directories
+name: List Allowed Directories
+description: Returns the list of directories that this server is allowed to access.
+  Subdirectories within these allowed directories are also accessible. Use this to
+  understand which directories and their nested paths are available before trying
+  to access files.. Gestión industrial de archivos.. Gestión industrial de archivos..
+  Gestión industrial de archivos.
+version: 1.1.0
+capabilities:
+- list_allowed_directories
+invariants:
+- 'path_validation: strict'
+- 'size_limit: 1MB'
+- 'zero_trust: true'
+metadata:
+  server: filesystem
+  status: active

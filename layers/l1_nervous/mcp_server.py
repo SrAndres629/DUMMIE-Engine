@@ -6,18 +6,28 @@ import sys
 _actual_stdout = sys.stdout
 sys.stdout = sys.stderr
 
+# [TABULA RASA v2] SSoT de Rutas (Prioridad Máxima)
+_CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+_DEFAULT_ROOT = os.path.abspath(os.path.join(_CURRENT_DIR, "..", ".."))
+ROOT_DIR = os.environ.get("DUMMIE_ROOT", os.environ.get("DUMMIE_ROOT_DIR", _DEFAULT_ROOT))
+
+# Asegurar que todas las capas estén en PYTHONPATH
+for layer in ["l1_nervous", "l2_brain", "l3_shield"]:
+    layer_path = os.path.join(ROOT_DIR, "layers", layer)
+    if os.path.exists(layer_path) and layer_path not in sys.path:
+        sys.path.insert(0, layer_path)
+
 from mcp.server.fastmcp import FastMCP
 
-# [TABULA RASA v2] Importaciones Planas
+# Importaciones locales (ahora seguras)
 from bootstrap import bootstrap_orchestrator, setup_shutdown_handlers
 from tools import register_tools
 from resources import register_resources
 from mcp_proxy import MCPProxyManager
 
-# Configuración (SSoT)
-ROOT_DIR = os.environ.get("DUMMIE_ROOT_DIR", "/home/jorand/Escritorio/DUMMIE Engine")
-AIWG_DIR = os.environ.get("DUMMIE_AIWG_DIR", os.path.join(ROOT_DIR, ".aiwg"))
-KUZU_DB_PATH = os.environ.get("DUMMIE_KUZU_DB_PATH", os.path.join(AIWG_DIR, "memory/loci.db"))
+# Configuración (Resto)
+AIWG_DIR = os.environ.get("DUMMIE_AIWG", os.environ.get("DUMMIE_AIWG_DIR", os.path.join(ROOT_DIR, ".aiwg")))
+KUZU_DB_PATH = os.environ.get("DUMMIE_KUZU_DB_PATH", os.path.join(AIWG_DIR, "memory/kuzu.db"))
 
 _EXPLICIT_MCP_CONFIG_PATH = os.environ.get("DUMMIE_MCP_CONFIG_PATH")
 _DEFAULT_REGISTRY_PATH = os.path.expanduser("~/.gemini/antigravity/mcp_config.registry.json")

@@ -1,0 +1,12 @@
+skill_id: sw.everything.get-sum
+name: Get-Sum
+description: Returns the sum of two numbers. Utilidad del servidor everything.. Utilidad
+  del servidor everything.. Utilidad del servidor everything.
+version: 1.1.0
+capabilities:
+- get-sum
+invariants:
+- 'compliance: standard'
+metadata:
+  server: everything
+  status: active

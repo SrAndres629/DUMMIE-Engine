@@ -48,15 +48,17 @@ var DefaultEvaluator Evaluator = &HeuristicEvaluator{}
 // AnalyzePotentialNode simula brevemente la viabilidad de un nodo
 // En un MCTS real, esto expandiría el árbol. Aquí hace un look-ahead simple.
 func AnalyzePotentialNode(state *State, nodeName string) float64 {
-	// Clonamos superficialmente para no mutar durante la heurística
+	state.Mu.RLock()
+	// Clonamos para no mutar durante la heurística y evitar data races en el historial
 	simState := &State{
 		ID:      state.ID,
 		Goal:    state.Goal,
 		Branch:  nodeName,
 		Status:  state.Status,
-		History: state.History, // Read-only look
+		History: append([]string{}, state.History...), // Deep copy
 		Errors:  state.Errors,
 	}
+	state.Mu.RUnlock()
 
 	// Evaluar la fricción inicial
 	baseFriction := DefaultEvaluator.EvaluateFriction(simState)

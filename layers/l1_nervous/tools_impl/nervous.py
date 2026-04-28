@@ -4,7 +4,7 @@ from typing import List
 from mcp.server.fastmcp import FastMCP
 
 def register_nervous_tools(mcp: FastMCP, use_cases, root_dir: str):
-    AIWG_DIR = os.path.join(root_dir, ".aiwg")
+    AIWG_DIR = os.environ.get("DUMMIE_AIWG", os.path.join(root_dir, ".aiwg"))
 
     from domain.models import SixDimensionalContext, AuthorityLevel, IntentType
     from dataclasses import asdict
@@ -101,7 +101,7 @@ def register_nervous_tools(mcp: FastMCP, use_cases, root_dir: str):
         """
         import time
         # MOCK de Telegram Webhook
-        print(f"[{time.strftime('%H:%M:%S')}] 📱 [TELEGRAM MOCK] A jorand: {message} (Branch: {branch_id})")
+        logger.info(f"[{time.strftime('%H:%M:%S')}] 📱 [TELEGRAM MOCK] A jorand: {message} (Branch: {branch_id})")
         
         # En una integración completa (L0), esta herramienta retornaría un payload
         # que el Go Overseer interpretaría como ErrYieldWaitingHuman.

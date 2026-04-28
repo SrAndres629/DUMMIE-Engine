@@ -1,0 +1,12 @@
+skill_id: sw.sqlite.append_insight
+name: Append Insight
+description: Add a business insight to the memo. Utilidad del servidor sqlite.. Utilidad
+  del servidor sqlite.. Utilidad del servidor sqlite.
+version: 1.1.0
+capabilities:
+- append_insight
+invariants:
+- 'compliance: standard'
+metadata:
+  server: sqlite
+  status: active

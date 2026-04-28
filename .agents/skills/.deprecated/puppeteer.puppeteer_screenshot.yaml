@@ -1,0 +1,13 @@
+skill_id: sw.puppeteer.puppeteer_screenshot
+name: Puppeteer Screenshot
+description: Take a screenshot of the current page or a specific element. Utilidad
+  del servidor puppeteer.. Utilidad del servidor puppeteer.. Utilidad del servidor
+  puppeteer.
+version: 1.1.0
+capabilities:
+- puppeteer_screenshot
+invariants:
+- 'compliance: standard'
+metadata:
+  server: puppeteer
+  status: active

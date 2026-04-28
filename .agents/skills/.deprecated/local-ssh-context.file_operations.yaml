@@ -1,0 +1,13 @@
+skill_id: sw.local-ssh-context.file_operations
+name: File Operations
+description: File operations (read, write, list directory). Utilidad del servidor
+  local-ssh-context.. Utilidad del servidor local-ssh-context.. Utilidad del servidor
+  local-ssh-context.
+version: 1.1.0
+capabilities:
+- file_operations
+invariants:
+- 'compliance: standard'
+metadata:
+  server: local-ssh-context
+  status: active

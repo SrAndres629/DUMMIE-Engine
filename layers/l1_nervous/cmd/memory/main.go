@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"os"
+	"path/filepath"
 
 	"github.com/nats-io/nats.go"
 	"io.dummie.v2/nervous/internal/memory"
@@ -11,11 +12,22 @@ import (
 func main() {
 	dbPath := os.Getenv("KUZU_DB_PATH")
 	if dbPath == "" {
-		dbPath = "../../.aiwg/memory/kuzu"
+		aiwg := os.Getenv("DUMMIE_AIWG_DIR")
+		if aiwg == "" {
+			aiwg = os.Getenv("DUMMIE_AIWG")
+		}
+		if aiwg == "" {
+			aiwg = "../../.aiwg"
+		}
+		dbPath = filepath.Join(aiwg, "memory", "kuzu.db")
 	}
 	socketPath := os.Getenv("MEMORY_SOCKET_PATH")
 	if socketPath == "" {
-		socketPath = "/tmp/dummie_memory.sock"
+		aiwg := os.Getenv("DUMMIE_AIWG")
+		if aiwg == "" {
+			aiwg = "../../.aiwg"
+		}
+		socketPath = filepath.Join(aiwg, "sockets", "flight.sock")
 	}
 	natsURL := os.Getenv("NATS_URL")
 	if natsURL == "" {

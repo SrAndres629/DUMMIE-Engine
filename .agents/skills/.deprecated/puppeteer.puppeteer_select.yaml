@@ -1,0 +1,12 @@
+skill_id: sw.puppeteer.puppeteer_select
+name: Puppeteer Select
+description: Select an element on the page with Select tag. Utilidad del servidor
+  puppeteer.. Utilidad del servidor puppeteer.. Utilidad del servidor puppeteer.
+version: 1.1.0
+capabilities:
+- puppeteer_select
+invariants:
+- 'compliance: standard'
+metadata:
+  server: puppeteer
+  status: active
