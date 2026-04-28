@@ -43,3 +43,7 @@ dist/
 Obsidian.AppImage
 squashfs-root/
 venv/
+scratch/venv/
+*.so
+*.dll
+*.dylib
