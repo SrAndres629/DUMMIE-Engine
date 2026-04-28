@@ -70,6 +70,15 @@ class KuzuRepository:
         Persiste un MemoryNode4D en la base de datos de forma 100% segura.
         Usa consultas parametrizadas nativas si están disponibles, o serialización estricta en su defecto.
         """
+        # Idempotencia: Prevenir duplicados en reintentos
+        try:
+            existing = self.get_by_hash(node.causal_hash)
+            if existing:
+                logger.debug(f"MemoryNode4D {node.causal_hash} already persisted (idempotency ACK).")
+                return node.causal_hash
+        except Exception:
+            pass
+
         try:
             from cypher_codec import node_to_create_cypher
         except ImportError:
@@ -143,7 +152,10 @@ class KuzuRepository:
                 
             return self.conn.execute(cypher)
         except Exception as e:
-            logger.error(f"Kuzu Query Error: {e} | Cypher: {cypher} | Params: {parameters}")
+            import hashlib
+            cypher_hash = hashlib.sha256(cypher.encode()).hexdigest()[:12]
+            param_keys = list(parameters.keys()) if parameters else []
+            logger.error(f"Kuzu Query Error: {e} | CypherHash: {cypher_hash} | ParamKeys: {param_keys}")
             raise RuntimeError(f"Kuzu Execution Failure: {e}")
 
     def get_last_leaf_hash(self) -> str:
