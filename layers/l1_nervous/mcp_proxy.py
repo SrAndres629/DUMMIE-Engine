@@ -2,6 +2,7 @@ import asyncio
 import json
 import logging
 import os
+import time
 from typing import Any, Dict, List, Optional
 from pathlib import Path
 from enum import Enum
@@ -30,7 +31,11 @@ class MCPProxyManager:
         self.active_processes: Dict[str, asyncio.subprocess.Process] = {}
         self.server_states: Dict[str, MCPConnectionState] = {}
         self.tool_cache: Dict[str, List[Dict[str, Any]]] = {}
+        self.locks: Dict[str, asyncio.Lock] = {}
+        self.last_accessed: Dict[str, float] = {}
+        self._gc_task: Optional[asyncio.Task] = None
         self._load_config()
+
 
     def _load_config(self):
         """Carga la configuración de servidores desde el archivo JSON."""
@@ -45,6 +50,34 @@ class MCPProxyManager:
                 logger.info(f"Loaded {len(self.servers)} servers from config.")
         except Exception as e:
             logger.error(f"Error loading MCP config: {e}")
+
+    async def _garbage_collector_loop(self):
+        """Monitorea inactividad y apaga servidores para liberar recursos (Idle Timeout)."""
+        idle_timeout = 300 # 5 minutos
+        while True:
+            try:
+                await asyncio.sleep(60) # Revisar cada minuto
+                now = time.time()
+                for server_name in list(self.active_processes.keys()):
+                    last_used = self.last_accessed.get(server_name, 0)
+                    if now - last_used > idle_timeout:
+                        logger.info(f"🗑️ Garbage Collector: Apagando {server_name} por inactividad (>5m).")
+                        if server_name not in self.locks:
+                            self.locks[server_name] = asyncio.Lock()
+                        
+                        async with self.locks[server_name]:
+                            proc = self.active_processes.get(server_name)
+                            if proc:
+                                try:
+                                    proc.terminate()
+                                except:
+                                    pass
+                                del self.active_processes[server_name]
+                            self.server_states[server_name] = MCPConnectionState.INIT
+            except asyncio.CancelledError:
+                break
+            except Exception as e:
+                logger.error(f"Error in GC loop: {e}")
 
     async def prefetch_server(self, server_name: str):
         """
@@ -68,44 +101,59 @@ class MCPProxyManager:
         server_cfg = self.servers[server_name]
         if server_cfg.get("disabled", False):
             raise ValueError(f"Server '{server_name}' is disabled.")
+        if server_name not in self.locks:
+            self.locks[server_name] = asyncio.Lock()
 
-        process = await self._ensure_ready(server_name)
-        
-        # Construir JSON-RPC Request
-        try:
-            result = await self._send_jsonrpc_request(
-                process,
-                "tools/call",
-                {"name": tool_name, "arguments": arguments},
-            )
-            # [Metacognición 2026] Entropy Filtering / Schema Homogenization
-            # Evita saturar al LLM con metadatos técnicos innecesarios del sub-servidor
-            return self._homogenize_response(result)
-        except Exception as e:
-            self.server_states[server_name] = MCPConnectionState.FAILED
-            error_msg = str(e)
-            logger.error(f"Error communicating with {server_name}: {error_msg}")
+        self.last_accessed[server_name] = time.time()
+
+        async with self.locks[server_name]:
+            process = await self._ensure_ready(server_name)
             
-            # [Metacognición 2026] Gateway Diagnóstico
-            # Buscamos si existe una lección previa para este error específico
-            suggestion = self._lookup_lesson(error_msg)
-            if suggestion:
-                logger.info(f"Gateway Diagnostic: Found relevant lesson for '{error_msg}'")
-                return {
-                    "error": {
-                        "code": -32000,
-                        "message": f"Fallo en {server_name}: {error_msg}",
-                        "data": {"suggestion": suggestion}
+            # Construir JSON-RPC Request
+            try:
+                result = await self._send_jsonrpc_request(
+                    process,
+                    "tools/call",
+                    {"name": tool_name, "arguments": arguments},
+                )
+                # [Metacognición 2026] Entropy Filtering / Schema Homogenization
+                # Evita saturar al LLM con metadatos técnicos innecesarios del sub-servidor
+                return self._homogenize_response(result)
+            except Exception as e:
+                self.server_states[server_name] = MCPConnectionState.FAILED
+                error_msg = str(e)
+                logger.error(f"Error communicating with {server_name}: {error_msg}")
+                
+                # [Metacognición 2026] Gateway Diagnóstico
+                # Buscamos si existe una lección previa para este error específico
+                suggestion = self._lookup_lesson(error_msg)
+                if suggestion:
+                    logger.info(f"Gateway Diagnostic: Found relevant lesson for '{error_msg}'")
+                    return {
+                        "error": {
+                            "code": -32000,
+                            "message": f"Fallo en {server_name}: {error_msg}",
+                            "data": {"suggestion": suggestion}
+                        }
                     }
-                }
-
-            # Si falla, limpiar proceso para reintento
-            if server_name in self.active_processes:
-                del self.active_processes[server_name]
-            raise
+    
+                # Si falla, limpiar proceso para reintento
+                if server_name in self.active_processes:
+                    del self.active_processes[server_name]
+                raise
 
     async def _ensure_ready(self, server_name: str) -> asyncio.subprocess.Process:
         """Completa el handshake MCP antes de exponer tools/call."""
+        # [FIX] Asegurar que el GC corra en el loop actual
+        if self._gc_task is None:
+            try:
+                loop = asyncio.get_running_loop()
+                self._gc_task = loop.create_task(self._garbage_collector_loop())
+                logger.info("MCP Proxy Garbage Collector started.")
+            except RuntimeError:
+                # Si no hay loop corriendo (raro aquí), lo intentará en la siguiente llamada
+                pass
+
         if self.server_states.get(server_name) == MCPConnectionState.READY:
             proc = self.active_processes.get(server_name)
             if proc and proc.returncode is None:
@@ -270,7 +318,10 @@ class MCPProxyManager:
             logger.info(f"[{name}] {line.decode().strip()}")
 
     async def shutdown(self):
-        """Cierra todos los procesos activos."""
+        """Cierra todos los procesos activos y cancela tareas en background."""
+        if hasattr(self, '_gc_task'):
+            self._gc_task.cancel()
+            
         for name, proc in self.active_processes.items():
             logger.info(f"Shutting down {name}...")
             try:

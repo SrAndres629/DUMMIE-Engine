@@ -14,7 +14,7 @@ from bootstrap import bootstrap_orchestrator
 
 print("=== VERIFICACIÓN DE ESTADO INDUSTRIAL ===")
 aiwg_dir = os.path.join(ROOT_DIR, ".aiwg")
-kuzu_path = os.path.join(aiwg_dir, "memory/kuzu_data")
+kuzu_path = os.path.join(aiwg_dir, "memory/loci.db")
 
 orchestrator = bootstrap_orchestrator(kuzu_path, aiwg_dir)
 

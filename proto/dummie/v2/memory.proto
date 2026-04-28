@@ -72,10 +72,12 @@ import "proto/dummie/v2/core.proto";
 
 enum IntentType {
     INTENT_UNSPECIFIED = 0;
-    OBSERVATION = 1;      // Lectura de estado (No altera el CausalHash general)
-    MUTATION = 2;         // Escritura/Refactor
-    RESOLUTION = 3;       // Cierre de ambigüedad (Jidoka)
-    CRYSTALLIZATION = 4;  // Creación de Skill/Regla
+    OBSERVATION = 1;      // Lectura de estado
+    FABRICATION = 2;      // Creación/Escritura de nuevo conocimiento
+    MUTATION = 3;         // Refactor/Cambio de conocimiento existente
+    RESOLUTION = 4;       // Cierre de ambigüedad (Jidoka)
+    AUDIT = 5;            // Verificación/Validación (Sentinel)
+    CRYSTALLIZATION = 6;  // Destilación de Skill/Regla
 }
 
 // ==========================================

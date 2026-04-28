@@ -10,7 +10,7 @@ L1_VENV="$ROOT_DIR/layers/l1_nervous/.venv/bin/python3"
 
 # Rutas derivadas
 SOCKET_PATH="$DUMMIE_AIWG/sockets/flight.sock"
-DB_PATH="$DUMMIE_AIWG/memory/kuzu.db"
+DB_PATH="$DUMMIE_AIWG/memory/loci.db"
 SERVER_PID=""
 
 cleanup() {
@@ -38,7 +38,7 @@ cd "$ROOT_DIR/layers/l0_overseer" && go build -o "$BIN_DIR/" ./cmd/...
 
 # 3. Levantar Memory Plane en segundo plano
 echo "[3/5] Levantando Memory Plane (Online Mode)..."
-"$BIN_DIR/memory_server" > /dev/null 2>&1 &
+DUMMIE_KUZU_DB_PATH="$DB_PATH" MEMORY_SOCKET_PATH="$SOCKET_PATH" "$BIN_DIR/memory_server" > /dev/null 2>&1 &
 SERVER_PID=$!
 
 # Esperar a que el socket esté listo
@@ -58,10 +58,14 @@ fi
 
 
 # 4. Ejecutar Suite de Verificación (MODO ONLINE)
-echo "[4/5] Ejecutando Verificación de Compresión (ONLINE)..."
+echo "[4/6] Ejecutando Verificación de Compresión (ONLINE)..."
 MEMORY_SOCKET_PATH="$SOCKET_PATH" "$L1_VENV" "$ROOT_DIR/scripts/verify_compression.py"
 
-echo "[5/5] Ejecutando Verificación de Integridad de Prefijo (Go)..."
+echo "[5/6] Ejecutando Auditoría de Contratos y Merkle-DAG (Python)..."
+# Usamos el venv de L2 para los tests de modelos
+cd "$ROOT_DIR/layers/l2_brain" && uv run pytest tests/test_contract_drift.py tests/test_causal_integrity.py
+
+echo "[6/6] Ejecutando Verificación de Integridad de Prefijo (Go)..."
 cd "$ROOT_DIR/layers/l0_overseer" && go test -v ./internal/orchestrator/...
 
 # 5. Cleanup

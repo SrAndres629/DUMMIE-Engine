@@ -209,6 +209,70 @@ Think of it like a human reviewing their journal and updating their mental model
 
 The goal: Be helpful without being annoying. Check in a few times a day, do useful background work, but respect quiet time.
 
+## Engineering Mandate: Evolvability First
+
+All agents working in this repository must optimize for evolvability, maintainability, and regression resistance.
+
+A fix is not complete if it only makes the current symptom disappear. It must reduce the probability that the same class of problem returns later.
+
+### Required Behavior
+
+- **Prefer stable contracts over local patches.**
+- **Centralize schemas, paths, configuration, protocol formats, and runtime assumptions.**
+- **Do not duplicate route/path/schema logic across layers.**
+- **Do not hardcode absolute paths** unless explicitly required by a documented runtime boundary.
+- **Do not silently swallow failures** that affect persistence, memory, orchestration, security, or user-visible behavior.
+- **Do not mutate, delete, or recreate persistent data stores** without explicit backup, migration, and verification.
+- **Preserve backward compatibility** unless a migration plan and tests prove the break is intentional.
+- **Every bug fix must add or update a regression test** that would fail if the bug returns.
+- **Every architectural change must include verification commands and evidence.**
+- **Keep diffs scoped.** Do not mix unrelated tools, services, configs, generated files, or experiments with the requested fix.
+- **Generated artifacts** such as `__pycache__`, binarios, logs, temporary DBs, and local scratch files must not be included unless intentionally versioned and documented.
+
+### Before Claiming Completion
+
+An agent must verify:
+
+1. The original failure is reproduced or clearly explained.
+2. The root cause is identified.
+3. The fix addresses the root cause, not only the symptom.
+4. Relevant tests pass.
+5. The change does not introduce new hardcoded paths, duplicate contracts, silent fallbacks, or destructive behavior.
+6. The final diff contains only related changes.
+
+### Agent Handoff Rule
+
+When handing work to another agent, include:
+
+- Current verified state.
+- Exact commands run.
+- Failing/passing results.
+- Files changed.
+- Remaining risks.
+- Invariants that must not be broken.
+
+## 4D-TES Stability Contract
+
+The 4D-TES memory engine must be treated as a persistent, schema-governed system.
+
+- `MemoryNode4D` schema changes must happen in one canonical contract module (`layers/l2_brain/models.py`).
+- L1, L2, scripts, tests, and docs must consume the same schema contract.
+- Kùzu paths must be resolved through one documented policy (defaulting to `.aiwg/memory/loci.db`).
+- No component may reintroduce legacy paths such as `kuzu_data` without migration rationale.
+- Memory writes must fail explicitly if persistence is required and unavailable.
+- Tests must use temporary databases or copies, never mutate sovereign memory directly.
+- Industrial audit scripts must verify the same schema used in production.
+
+## Completion Checklist
+
+Before final response, run or justify:
+
+- `git status --short`
+- Relevant unit/integration tests
+- Relevant spec/docs validation
+- `rg -n "kuzu_data|MemoryState|m\\.\\*|rm -f.*kuzu|os\\.remove\\(" layers scripts doc -S` when touching 4D-TES
+- Inspect final diff for unrelated changes
+
 ## Make It Yours
 
 This is a starting point. Add your own conventions, style, and rules as you figure out what works.

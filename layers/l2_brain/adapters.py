@@ -3,6 +3,10 @@ import json
 import logging
 import fcntl
 from typing import Dict, Any, List, Optional
+try:
+    from layers.l2_brain.ports import CodeAnalysisPort, ObservabilityPort
+except ModuleNotFoundError:
+    from ports import CodeAnalysisPort, ObservabilityPort
 
 logger = logging.getLogger("brain.adapters")
 
@@ -22,26 +26,52 @@ class KuzuRepository:
                 self.conn = kuzu.Connection(db)
         elif db_path:
             import kuzu
-            # Asegurar que el path sea un directorio
-            if os.path.exists(db_path) and os.path.isfile(db_path):
-                logger.warning(f"Removing file {db_path} to create Kuzu directory")
-                os.remove(db_path)
+            # [HARDENING] Verificación de integridad de ruta
+            # Kùzu espera que el path sea el nombre de la base de datos (archivo o prefijo),
+            # NO un directorio ya existente (en algunas versiones).
+            if os.path.isdir(db_path):
+                # Si es un directorio, verificamos si contiene archivos de Kùzu.
+                # Si está vacío o no parece una DB, lanzamos error para evitar confusión.
+                if not os.listdir(db_path):
+                    logger.error(f"CRITICAL: Kuzu path '{db_path}' is an empty directory. Kuzu requires the path to be the database target, not a pre-existing directory.")
+                    raise ValueError(f"Invalid Kuzu database path: '{db_path}' is a directory. Provide a file-like path.")
+            
+            # Asegurar que el directorio PADRE exista
+            parent_dir = os.path.dirname(os.path.abspath(db_path))
+            if not os.path.exists(parent_dir):
+                os.makedirs(parent_dir, exist_ok=True)
+                logger.info(f"Created parent directory for Kuzu: {parent_dir}")
+            
             self.db = kuzu.Database(db_path)
             self.conn = kuzu.Connection(self.db)
             self._ensure_schema()
 
     def _ensure_schema(self):
-        """Crea las tablas necesarias si no existen."""
+        """Crea las tablas necesarias si no existen con el esquema SOVEREIGN-4D."""
         if not self.conn: return
         try:
-            self.conn.execute("CREATE NODE TABLE MemoryNode4D(causal_hash STRING, parent_hash STRING, lamport_t INT64, locus_x STRING, locus_y STRING, locus_z STRING, authority_a STRING, intent_i STRING, summary STRING, timestamp INT64, PRIMARY KEY (causal_hash))")
-            logger.info("Created table MemoryNode4D")
-        except Exception:
-            pass # Ya existe
+            from models import MemoryNode4D
+            # Esquema alineado con .aiwg/memory/loci.db real
+            self.conn.execute(MemoryNode4D.schema_creation_query())
+            logger.info("Created table MemoryNode4D with SOVEREIGN-4D schema")
+        except Exception as e:
+            # Solo permitimos pasar si el error es "Table ... already exists"
+            msg = str(e).lower()
+            if "already exists" in msg:
+                logger.debug("Schema already exists (verified)")
+            else:
+                logger.critical(f"FATAL: Could not ensure Kuzu schema: {e}")
+                raise RuntimeError(f"Kuzu Integrity Error: {e}")
 
     def query(self, cypher: str):
-        if not self.conn: return []
-        return self.conn.execute(cypher)
+        if not self.conn:
+            logger.error("Attempted query on uninitialized KuzuRepository")
+            raise ConnectionError("Kuzu connection not established")
+        try:
+            return self.conn.execute(cypher)
+        except Exception as e:
+            logger.error(f"Kuzu Query Error: {e} | Cypher: {cypher}")
+            raise RuntimeError(f"Kuzu Execution Failure: {e}")
 
     def get_last_leaf_hash(self) -> str:
         res = self.query("MATCH (m:MemoryNode4D) RETURN m.causal_hash ORDER BY m.lamport_t DESC LIMIT 1")
@@ -50,25 +80,34 @@ class KuzuRepository:
         return "GENESIS"
 
     def get_by_hash(self, causal_hash: str) -> Any:
-        res = self.query(f"MATCH (m:MemoryNode4D) WHERE m.causal_hash = '{causal_hash}' RETURN m.*")
+        try:
+            from models import MemoryNode4D
+        except ImportError:
+            from layers.l2_brain.models import MemoryNode4D
+
+        # Usamos nombres explícitos para desacoplar del orden físico de las columnas
+        columns = [
+            "causal_hash", "parent_hash", "locus_x", "locus_y", "locus_z",
+            "lamport_t", "authority_a", "intent_i", "payload", "payload_hash", "embedding"
+        ]
+        return_clause = ", ".join([f"m.{c}" for c in columns])
+        
+        res = self.query(f"MATCH (m:MemoryNode4D) WHERE m.causal_hash = '{causal_hash}' RETURN {return_clause}")
         if res.has_next():
             row = res.get_next()
-            # Retornar un objeto mock que se parezca a lo que esperan los tests
-            class Node: pass
-            n = Node()
-            n.causal_hash = row[0]
-            n.parent_hash = row[1]
-            class Context: pass
-            n.context = Context()
-            n.context.lamport_t = row[2]
-            n.locus_x = row[3]
-            n.locus_y = row[4]
-            n.locus_z = row[5]
-            n.authority_a = row[6]
-            n.intent_i = row[7]
-            n.summary = row[8]
-            n.timestamp = row[9]
-            return n
+            return MemoryNode4D(
+                causal_hash=row[0],
+                parent_hash=row[1],
+                locus_x=row[2],
+                locus_y=row[3],
+                locus_z=row[4],
+                lamport_t=row[5],
+                authority_a=row[6],
+                intent_i=row[7],
+                payload=row[8],
+                payload_hash=row[9],
+                embedding=row[10]
+            )
         return None
 
     def get_causal_chain(self, leaf_hash: str) -> List[Any]:
@@ -80,6 +119,45 @@ class KuzuRepository:
             chain.append(node)
             current = node.parent_hash
         return chain
+
+    def find_similar_nodes(self, query_text: str, limit: int = 5) -> List[Dict[str, Any]]:
+        """
+        Busca nodos semánticamente similares utilizando similitud de coseno sobre embeddings.
+        (Fase 4: Memoria Asociativa)
+        """
+        try:
+            from embedding_provider import EmbeddingProvider
+        except ImportError:
+            from layers.l2_brain.embedding_provider import EmbeddingProvider
+            
+        query_vec = EmbeddingProvider.generate_vector(query_text)
+        
+        # En KùzuDB v0.x, la similitud vectorial se hace comparando el vector query 
+        # con la columna embedding. Nota: Kùzu aún no tiene un operador nativo de Coseno 
+        # tan optimizado como pgvector, así que hacemos una aproximación por producto punto
+        # si los vectores están normalizados (fastembed lo hace).
+        
+        # Query Cypher para búsqueda por producto punto (aproximación de similitud)
+        # Nota: La sintaxis exacta depende de la versión de Kùzu.
+        # Asumimos vectores normalizados: score = dot_product(v1, v2)
+        cypher = (
+            f"MATCH (m:MemoryNode4D) "
+            f"RETURN m.causal_hash, m.payload, m.intent_i, "
+            f"CAST(dot_product(m.embedding, {json.dumps(query_vec)}) AS FLOAT) as score "
+            f"ORDER BY score DESC LIMIT {limit}"
+        )
+        
+        results = self.query(cypher)
+        matches = []
+        while results.has_next():
+            row = results.get_next()
+            matches.append({
+                "hash": row[0],
+                "payload": row[1],
+                "intent": row[2],
+                "score": row[3]
+            })
+        return matches
 
 class DecisionLedgerAdapter:
     def __init__(self, ledger_path: str, lessons_path: str, ambiguities_path: str, ontological_map_path: str):
@@ -123,3 +201,28 @@ class NativeShieldAdapter:
 
 class KuzuSkillRepository(KuzuRepository):
     pass
+
+class SocraticodeAdapter(CodeAnalysisPort):
+    def __init__(self, proxy_manager: Any):
+        self.proxy = proxy_manager
+
+    async def analyze_symbols(self, path: str) -> List[Dict[str, Any]]:
+        try:
+            result = await self.proxy.call_tool("socraticode", "analyze_directory", {"path": path})
+            return result.get("symbols", [])
+        except Exception as e:
+            logger.error(f"Error en SocraticodeAdapter: {e}")
+            return []
+
+class PhoenixAdapter(ObservabilityPort):
+    def __init__(self, proxy_manager: Any):
+        self.proxy = proxy_manager
+
+    async def record_trace(self, session_id: str, action: str, status: str) -> None:
+        try:
+            await self.proxy.call_tool("phoenix", "upsert-prompt", {
+                "name": f"session_{session_id}",
+                "template": f"Action: {action} | Status: {status}"
+            })
+        except Exception as e:
+            logger.error(f"Error en PhoenixAdapter: {e}")

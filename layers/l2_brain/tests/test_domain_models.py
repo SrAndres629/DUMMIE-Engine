@@ -23,8 +23,8 @@ from models import (
 def test_six_dimensional_context_defaults():
     ctx = SixDimensionalContext()
     assert ctx.x == 0.0
-    assert ctx.a == AuthorityLevel.READ
-    assert ctx.i == IntentType.CONTEXT
+    assert ctx.a == AuthorityLevel.AGENT
+    assert ctx.i == IntentType.OBSERVATION
     assert ctx.metadata == {}
 
 
@@ -40,13 +40,13 @@ def test_six_dimensional_context_metadata_is_isolated():
 
 def test_agent_intent_defaults():
     intent = AgentIntent(agent_id="A-01", goal="Refactor daemon planner")
-    assert intent.intent_type == IntentType.FABRICATION
+    assert intent.intent_type == IntentType.MUTATION
     assert intent.constraints == []
 
 
 def test_authority_and_intent_enums_are_stable():
-    assert AuthorityLevel.ADMIN.value == "ADMIN"
-    assert IntentType.REPAIR.value == "REPAIR"
+    assert AuthorityLevel.OVERSEER.value == "OVERSEER"
+    assert IntentType.RESOLUTION.value == "RESOLUTION"
 
 
 def test_universal_knowledge_bus_models_are_provider_agnostic():

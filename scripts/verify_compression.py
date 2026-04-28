@@ -66,7 +66,8 @@ def test_infini_attention(allow_offline: bool = False):
     if not allow_offline:
         # Asegurar esquema (Self-healing)
         try:
-            bridge.ipc.execute("CREATE NODE TABLE MemoryState(id STRING, causal_hash_v2 STRING, summary STRING, type STRING, timestamp INT64, msg_count INT64, PRIMARY KEY(id))")
+            from layers.l2_brain.models import MemoryNode4D
+            bridge.ipc.execute(MemoryNode4D.schema_creation_query())
         except Exception:
             pass # Ya existe o error manejado por la persistencia posterior
         summary = comp_mem.crystallize_history(history, require_persist=True)
@@ -83,14 +84,15 @@ def test_infini_attention(allow_offline: bool = False):
     if not allow_offline:
         assert comp_mem.last_persist_ok, f"Persistencia fallida: {comp_mem.last_error}"
         assert comp_mem.last_causal_hash, "No se generó causal hash"
+        # Verificar con el nuevo esquema SOVEREIGN-4D
         check = bridge.ipc.execute(
-            f"MATCH (m:MemoryState {{id: '{comp_mem.last_causal_hash}'}}) RETURN m.id, m.causal_hash_v2, m.msg_count"
+            f"MATCH (m:MemoryNode4D {{causal_hash: '{comp_mem.last_causal_hash}'}}) RETURN m.causal_hash, m.payload_hash, m.intent_i"
         )
         assert check.has_next(), "No hubo respuesta del backend para verificar persistencia"
         row = check.get_next()
-        assert row[0] == comp_mem.last_causal_hash, "El id persistido no coincide con el causal hash"
-        assert row[1] == f"sha256:{comp_mem.last_causal_hash}", "causal_hash_v2 inválido"
-        assert int(row[2]) == len(history), "msg_count persistido inválido"
+        assert row[0] == comp_mem.last_causal_hash, "El causal_hash persistido no coincide"
+        assert row[1].startswith("sha256:"), "payload_hash inválido"
+        assert row[2] == "CRYSTALLIZATION", "intent_i incorrecto para cristalización"
 
     print("[✓] Infini-attention Hardened test passed.\n")
 

@@ -7,7 +7,9 @@
       ],
       "env": {
         "MEMORY_FILE_PATH": "/home/jorand/.gemini/antigravity/knowledge/memory.jsonl"
-      }
+      },
+      "disabled": true,
+      "disabled_reason": "Quarantined until it is bridged into canonical 4D-TES memory; avoid parallel memory truth."
     },
     "filesystem": {
       "command": "node",
@@ -15,27 +17,41 @@
         "/home/jorand/temp_servers/src/filesystem/dist/index.js",
         "/home/jorand/Escritorio/DUMMIE Engine",
         "/tmp"
-      ]
+      ],
+      "disabled": false,
+      "profile": "core",
+      "capability_class": "workspace_io",
+      "rationale": "Shared bounded filesystem access for CLI/IDE clients that do not have Codex-level file tools."
     },
     "sequentialthinking": {
       "command": "node",
       "args": [
         "/home/jorand/temp_servers/src/sequentialthinking/dist/index.js"
-      ]
+      ],
+      "disabled": false,
+      "profile": "core",
+      "capability_class": "reasoning_support",
+      "rationale": "Optional structured decomposition surface for clients with weaker native planning."
     },
     "time": {
       "command": "uvx",
       "args": [
         "mcp-server-time"
       ],
-      "disabled": false
+      "disabled": false,
+      "profile": "utility",
+      "capability_class": "temporal_context",
+      "rationale": "Low-risk shared time capability for clients without native time tooling."
     },
     "fetch": {
       "command": "uvx",
       "args": [
         "mcp-server-fetch"
       ],
-      "disabled": false
+      "disabled": false,
+      "profile": "utility",
+      "capability_class": "network_retrieval",
+      "rationale": "Shared explicit fetch capability for agents/IDEs without web tooling; invoked only through gateway."
     },
     "obsidian": {
       "command": "uvx",
@@ -56,7 +72,10 @@
         "--db-path",
         "/home/jorand/.gemini/antigravity/knowledge/dummie_sqlite.db"
       ],
-      "disabled": false
+      "disabled": false,
+      "profile": "knowledge",
+      "capability_class": "structured_local_store",
+      "rationale": "Shared local structured store for non-4D artifacts and cross-client knowledge bus experiments."
     },
     "git": {
       "command": "uvx",
@@ -65,7 +84,10 @@
         "--repository",
         "/home/jorand/Escritorio/DUMMIE Engine"
       ],
-      "disabled": false
+      "disabled": false,
+      "profile": "core",
+      "capability_class": "vcs",
+      "rationale": "Shared repository state access for clients without reliable shell/git integration."
     },
     "ripgrep": {
       "command": "node",
@@ -74,7 +96,11 @@
       ],
       "env": {
         "PATH": "/media/datasets/sw_tools/bin:/usr/local/bin:/usr/bin:/bin"
-      }
+      },
+      "disabled": false,
+      "profile": "core",
+      "capability_class": "code_search",
+      "rationale": "High-value semantic gateway primitive: fast source search available to every CLI/IDE client."
     },
     "ctags": {
       "command": "node",
@@ -83,7 +109,11 @@
       ],
       "env": {
         "PATH": "/media/datasets/sw_tools/bin:/usr/local/bin:/usr/bin:/bin"
-      }
+      },
+      "disabled": false,
+      "profile": "core",
+      "capability_class": "code_index",
+      "rationale": "Complements ripgrep with symbol navigation for IDE-like clients and cross-language code analysis."
     },
     "genkit-mcp-server": {
       "command": "npx",
@@ -94,20 +124,26 @@
         "--explicitProjectRoot",
         "--no-update-notification",
         "--non-interactive"
-      ]
+      ],
+      "disabled": true,
+      "disabled_reason": "Project-specific external tool; enable only inside a Genkit-owned workflow with tests."
     },
     "everything": {
       "command": "npx",
       "args": [
         "-y",
         "@modelcontextprotocol/server-everything"
-      ]
+      ],
+      "disabled": true,
+      "disabled_reason": "Broad demo server; exposes noisy tools and weakens tool selection."
     },
     "arize-tracing-assistant": {
       "command": "uvx",
       "args": [
         "arize-tracing-assistant"
-      ]
+      ],
+      "disabled": true,
+      "disabled_reason": "External observability assistant; no verified runtime dependency in the current gateway flow."
     },
     "puppeteer": {
       "command": "npx",
@@ -115,7 +151,8 @@
         "-y",
         "@modelcontextprotocol/server-puppeteer"
       ],
-      "disabled": false
+      "disabled": true,
+      "disabled_reason": "Browser automation is useful only for explicit UI tasks; keep off the default cognitive path."
     },
     "local-ssh-context": {
       "command": "/home/jorand/Escritorio/DUMMIE Engine/.aiwg/venv_ssh/bin/python",
@@ -127,7 +164,31 @@
         "jorand",
         "--identity",
         "/home/jorand/.ssh/dummie_agent_key"
-      ]
+      ],
+      "disabled": true,
+      "disabled_reason": "Sensitive SSH surface; enable only for an explicit remote-context task."
+    },
+    "socraticode": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "socraticode"
+      ],
+      "env": {
+        "SOCRATICODE_BRANCH_AWARE": "true",
+        "SOCRATICODE_LOG_LEVEL": "info"
+      },
+      "disabled": true,
+      "disabled_reason": "External coding assistant duplicates agent reasoning and previously created orphan runtime processes."
+    },
+    "phoenix": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@arizeai/phoenix-mcp"
+      ],
+      "disabled": true,
+      "disabled_reason": "External tracing surface; keep disabled until telemetry integration has tests and ownership."
     }
   }
 }

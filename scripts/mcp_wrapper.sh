@@ -21,10 +21,15 @@ echo "--- SESSION ATTEMPT: $(date) ---" >> "$LOG_FILE"
 echo "[$(date)] Original Args: $@" >> "$LOG_FILE"
 echo "[$(date)] Corrected Args: ${NEW_ARGS[@]}" >> "$LOG_FILE"
 
-# Aseguramiento de limpieza de cache (Se remueve pkill para evitar cortes de STDIO)
-echo ">> [mcp_wrapper] Limpiando caché npx..."
-rm -rf ~/.npm/_npx/* 2>/dev/null || true
-rm -rf /media/datasets/CacheLinks/npm/_npx/* 2>/dev/null || true
+# La limpieza de caché npx es opt-in. Borrarla en cada arranque hace que el gateway
+# dependa de red y estado global incluso cuando solo necesita abrir un pipe STDIO local.
+if [[ "${DUMMIE_MCP_CLEAR_NPX_CACHE:-0}" == "1" ]]; then
+    echo ">> [mcp_wrapper] Limpiando caché npx..." >> "$LOG_FILE"
+    rm -rf ~/.npm/_npx/* 2>/dev/null || true
+    rm -rf /media/datasets/CacheLinks/npm/_npx/* 2>/dev/null || true
+else
+    echo "[$(date)] Skipping npx cache cleanup. Set DUMMIE_MCP_CLEAR_NPX_CACHE=1 to enable." >> "$LOG_FILE"
+fi
 
 # Ejecutar con los argumentos corregidos
 exec "${NEW_ARGS[@]}" 2>> "$LOG_FILE"

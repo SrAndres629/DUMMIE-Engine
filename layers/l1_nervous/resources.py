@@ -5,7 +5,7 @@ from mcp.server.fastmcp import FastMCP
 
 logger = logging.getLogger("dummie-mcp.resources")
 
-def register_resources(mcp: FastMCP, orchestrator, proxy_manager, root_dir: str):
+def register_resources(mcp: FastMCP, get_orchestrator, get_proxy, root_dir: str):
     """Registra todos los recursos en la instancia de FastMCP."""
     
     AIWG_DIR = os.path.join(root_dir, ".aiwg")
@@ -22,12 +22,14 @@ def register_resources(mcp: FastMCP, orchestrator, proxy_manager, root_dir: str)
     @mcp.resource("brain://dashboard")
     def get_brain_dashboard() -> str:
         """Dashboard de capacidades activas (Anclaje Semántico)."""
+        proxy_manager = get_proxy()
         registry = list(proxy_manager.servers.keys())
         return f"--- DASHBOARD ---\nSwarm: {', '.join(registry)}\nUsa 'exec_remote_tool'.\n---"
 
     @mcp.resource("memory://decisions")
     def get_recent_decisions() -> str:
         """Lee las últimas resoluciones del Ledger."""
+        orchestrator = get_orchestrator()
         path = orchestrator.ledger_audit.ledger_path
         if not os.path.exists(path): return "No decisions found."
         with open(path, "r") as f:
@@ -36,6 +38,7 @@ def register_resources(mcp: FastMCP, orchestrator, proxy_manager, root_dir: str)
     @mcp.resource("memory://timeline")
     def get_memory_timeline() -> str:
         """Stream de eventos inmutables del 4D-TES."""
+        orchestrator = get_orchestrator()
         if orchestrator.event_store.conn is None: return "Offline."
         results = orchestrator.event_store.conn.execute(
             "MATCH (m:MemoryNode4D) RETURN m.lamport_t, m.causal_hash, m.intent_i ORDER BY m.lamport_t DESC LIMIT 50"
@@ -49,6 +52,7 @@ def register_resources(mcp: FastMCP, orchestrator, proxy_manager, root_dir: str)
     @mcp.resource("memory://loci")
     def get_memory_loci() -> str:
         """Acceso al grafo de relaciones ontológicas."""
+        orchestrator = get_orchestrator()
         if orchestrator.event_store.conn is None: return "{}"
         nodes_summary = []
         rels_summary = []
@@ -63,6 +67,7 @@ def register_resources(mcp: FastMCP, orchestrator, proxy_manager, root_dir: str)
     @mcp.resource("brain://health")
     def get_brain_health() -> str:
         """Reporta el estado de salud y modo (MASTER/READER)."""
+        orchestrator = get_orchestrator()
         is_read_only = getattr(orchestrator.event_store, "read_only", False)
         return json.dumps({
             "mode": "READER" if is_read_only else "MASTER",

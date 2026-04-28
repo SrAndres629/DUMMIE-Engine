@@ -27,7 +27,7 @@ from mcp_proxy import MCPProxyManager
 
 # Configuración (Resto)
 AIWG_DIR = os.environ.get("DUMMIE_AIWG", os.environ.get("DUMMIE_AIWG_DIR", os.path.join(ROOT_DIR, ".aiwg")))
-KUZU_DB_PATH = os.environ.get("DUMMIE_KUZU_DB_PATH", os.path.join(AIWG_DIR, "memory/kuzu.db"))
+KUZU_DB_PATH = os.environ.get("DUMMIE_KUZU_DB_PATH", os.path.join(AIWG_DIR, "memory/loci.db"))
 
 _EXPLICIT_MCP_CONFIG_PATH = os.environ.get("DUMMIE_MCP_CONFIG_PATH")
 _DEFAULT_REGISTRY_PATH = os.path.expanduser("~/.gemini/antigravity/mcp_config.registry.json")
@@ -47,20 +47,34 @@ logger = logging.getLogger("dummie-mcp.main")
 
 mcp = FastMCP("DUMMIE-Brain-Gateway")
 
-# Bootstrap
-orchestrator = bootstrap_orchestrator(KUZU_DB_PATH, AIWG_DIR)
-proxy_manager = MCPProxyManager(MCP_CONFIG_PATH)
+# Bootstrap perezoso para estabilidad multi-CLI
+_orchestrator = None
+_proxy_manager = None
 
-setup_shutdown_handlers(orchestrator, proxy_manager)
+def get_orchestrator():
+    global _orchestrator
+    if _orchestrator is None:
+        _orchestrator = bootstrap_orchestrator(KUZU_DB_PATH, AIWG_DIR)
+    return _orchestrator
 
-# Registro
-register_tools(mcp, orchestrator, proxy_manager, ROOT_DIR)
-register_resources(mcp, orchestrator, proxy_manager, ROOT_DIR)
+def get_proxy():
+    global _proxy_manager
+    if _proxy_manager is None:
+        _proxy_manager = MCPProxyManager(MCP_CONFIG_PATH)
+    return _proxy_manager
+
+# Registro dinámico
+register_tools(mcp, get_orchestrator, get_proxy, ROOT_DIR)
+register_resources(mcp, get_orchestrator, get_proxy, ROOT_DIR)
 
 if __name__ == "__main__":
     logger.info("DUMMIE Brain Gateway (FLAT-L1) Online.")
     # Restaurar stdout para el servidor MCP
     sys.stdout = _actual_stdout
+    
+    # Setup handlers con objetos ya inicializados si es necesario
+    setup_shutdown_handlers(get_orchestrator(), get_proxy())
+    
     try:
         mcp.run()
     except KeyboardInterrupt:
@@ -68,7 +82,8 @@ if __name__ == "__main__":
     finally:
         # Garantizar limpieza de procesos huérfanos al cerrarse el pipe STDIO
         import asyncio
-        try:
-            asyncio.run(proxy_manager.shutdown())
-        except Exception:
-            pass
+        if _proxy_manager:
+            try:
+                asyncio.run(_proxy_manager.shutdown())
+            except Exception:
+                pass

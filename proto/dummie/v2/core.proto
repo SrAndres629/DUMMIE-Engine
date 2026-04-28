@@ -4,7 +4,7 @@ package dummie.v2;
 
 option go_package = "io.dummie.v2/nervous/proto;dummie_v2";
 
-// === Nivel de Autoridad (Spec 10/12/18) ===
+// === Nivel de Autoridad (Spec 12/18) ===
 enum AuthorityLevel {
     AUTHORITY_UNSPECIFIED = 0;
     AGENT = 1;      // Operación de rutina

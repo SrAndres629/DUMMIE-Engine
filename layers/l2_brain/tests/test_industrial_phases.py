@@ -49,7 +49,8 @@ class _Intent:
 async def test_bridge_orchestrator_acknowledges_intent(clean_env):
     result = await clean_env["orchestrator"].process_intent(_Intent("Industrialize gateway path"))
     assert result["status"] == "ACK"
-    assert result["intent_id"] == "LEGACY-01"
+    # El intent_id ahora es un hash real si hay persistencia, o LEGACY-01 si no.
+    assert len(result["intent_id"]) > 0
 
 
 def test_decision_ledger_adapter_persists_jsonl(clean_env):

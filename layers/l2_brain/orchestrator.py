@@ -64,19 +64,16 @@ class CognitiveOrchestrator:
         goal = getattr(intent, "goal", "") or getattr(intent, "rationale", str(intent))
         logger.info(f"Processing intent: {goal}")
         
-        # Persistencia 4D-TES (Spec 02)
-        if self.event_store and self.event_store.conn:
-            import hashlib
-            import time
+        # Persistencia 4D-TES (Spec 02) - Esquema SOVEREIGN-4D
+        if self.event_store and getattr(self.event_store, "conn", None):
             from enum import Enum
+            try:
+                from models import MemoryNode4D
+            except ImportError:
+                # Fallback path if run from different context
+                from layers.l2_brain.models import MemoryNode4D
             
             parent_hash = self.event_store.get_last_leaf_hash()
-            
-            # Generar hash causal (Merkle-DAG simplificado)
-            content = f"{parent_hash}|{self.lamport_clock}|{goal}"
-            causal_hash = hashlib.sha256(content.encode()).hexdigest()[:24]
-            
-            now_ms = int(time.time() * 1000)
             
             # Extraer dimensiones (Spec 12 / 6D Model)
             locus_x = getattr(intent, "locus_x", "sw.strategy.discovery")
@@ -85,20 +82,15 @@ class CognitiveOrchestrator:
             intent_i = getattr(intent, "intent_i", "RESOLUTION")
             if isinstance(intent_i, Enum): intent_i = intent_i.value
             
-            safe_summary = goal.replace("'", "''")
-            
-            cypher = (
-                f"CREATE (m:MemoryNode4D {{"
-                f"causal_hash: '{causal_hash}', "
-                f"parent_hash: '{parent_hash}', "
-                f"lamport_t: {self.lamport_clock}, "
-                f"locus_x: '{locus_x}', "
-                f"locus_y: 'L1_TRANSPORT', "
-                f"locus_z: 'L2_BRAIN', "
-                f"authority_a: '{authority_a}', "
-                f"intent_i: '{intent_i}', "
-                f"summary: '{safe_summary}', "
-                f"timestamp: {now_ms}}})"
+            causal_hash, cypher = MemoryNode4D.build_create_cypher(
+                parent_hash=parent_hash,
+                locus_x=locus_x,
+                locus_y='L1_TRANSPORT',
+                locus_z='L2_BRAIN',
+                lamport_t=self.lamport_clock,
+                authority_a=authority_a,
+                intent_i=intent_i,
+                payload=goal
             )
             
             try:
@@ -106,8 +98,10 @@ class CognitiveOrchestrator:
                 logger.info(f"4D-TES Persistence OK: {causal_hash}")
                 return {"status": "ACK", "intent_id": causal_hash}
             except Exception as e:
-                logger.error(f"4D-TES Persistence Failed: {e}")
-                # Fallback para no romper el flujo principal
+                logger.error(f"4D-TES Persistence CRITICAL FAILURE: {e}")
+                # En modo degradado podríamos continuar, pero aquí estamos forzando contrato.
+                if not getattr(self.event_store, "read_only", False):
+                    raise RuntimeError(f"Failed to persist intent to 4D-TES: {e}")
         
         return {"status": "ACK", "intent_id": "LEGACY-01"}
 

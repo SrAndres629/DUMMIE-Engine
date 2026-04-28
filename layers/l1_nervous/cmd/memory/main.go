@@ -10,7 +10,10 @@ import (
 )
 
 func main() {
-	dbPath := os.Getenv("KUZU_DB_PATH")
+	dbPath := os.Getenv("DUMMIE_KUZU_DB_PATH")
+	if dbPath == "" {
+		dbPath = os.Getenv("KUZU_DB_PATH")
+	}
 	if dbPath == "" {
 		aiwg := os.Getenv("DUMMIE_AIWG_DIR")
 		if aiwg == "" {
@@ -19,11 +22,14 @@ func main() {
 		if aiwg == "" {
 			aiwg = "../../.aiwg"
 		}
-		dbPath = filepath.Join(aiwg, "memory", "kuzu.db")
+		dbPath = filepath.Join(aiwg, "memory", "loci.db")
 	}
 	socketPath := os.Getenv("MEMORY_SOCKET_PATH")
 	if socketPath == "" {
-		aiwg := os.Getenv("DUMMIE_AIWG")
+		aiwg := os.Getenv("DUMMIE_AIWG_DIR")
+		if aiwg == "" {
+			aiwg = os.Getenv("DUMMIE_AIWG")
+		}
 		if aiwg == "" {
 			aiwg = "../../.aiwg"
 		}
@@ -42,7 +48,7 @@ func main() {
 	if err := memory.ResolveStaleLocks(dbPath); err != nil {
 		log.Printf("[L1-MEMORY] Fencing Error: %v", err)
 	}
-	
+
 	// Usamos nil para NATS temporalmente hasta que el servidor esté listo
 	// para evitar que la conexión NATS interfiera con la inicialización de Kuzu mmap
 	server, err := memory.NewDummieMemoryServer(dbPath, nil)

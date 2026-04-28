@@ -86,31 +86,44 @@ class CompressiveMemory:
                 # En modo offline permitido no intentamos escribir: evitamos ruido y errores colaterales.
                 return summary
             
-            import hashlib
             import time
-            causal_hash = hashlib.sha256(combined_text.encode()).hexdigest()[:24]
+            try:
+                from models import MemoryNode4D
+            except ImportError:
+                from layers.l2_brain.models import MemoryNode4D
+            
+            # [HARDENING] Saneamiento de Cadena Causal
+            # No usamos strings arbitrarios como 'COMPRESSED_CONTEXT'.
+            # Buscamos el último hash para mantener el Merkle-DAG íntegro.
+            try:
+                # Intentamos obtener el último hash de la DB si es posible a través del bridge/repo
+                try:
+                    from layers.l2_brain.adapters import KuzuRepository
+                except ImportError:
+                    from adapters import KuzuRepository
+                
+                repo = KuzuRepository(db=self.bridge)
+                parent_hash = repo.get_last_leaf_hash()
+                logger.info(f"Causal link identified: parent={parent_hash}")
+            except Exception as e:
+                logger.warning(f"Causal link fallback to GENESIS: {e}")
+                parent_hash = "GENESIS"
+
+            causal_hash, cypher = MemoryNode4D.build_create_cypher(
+                parent_hash=parent_hash,
+                locus_x='layers.l1_nervous.compression',
+                locus_y='L1_TRANSPORT',
+                locus_z='L2_BRAIN',
+                lamport_t=int(time.time()),
+                authority_a='OVERSEER',
+                intent_i='CRYSTALLIZATION',
+                payload=summary,
+                content_to_hash=combined_text
+            )
             self.last_causal_hash = causal_hash
             
-            now_ms = int(time.time() * 1000)
-            safe_summary = summary.replace("'", "''")
-            
-            # Unificación con el esquema MemoryNode4D de L2_BRAIN
-            cypher = (
-                f"CREATE (m:MemoryNode4D {{"
-                f"causal_hash: '{causal_hash}', "
-                f"parent_hash: 'COMPRESSED_CONTEXT', "
-                f"lamport_t: {now_ms}, " # Fallback si no hay acceso al reloj global
-                f"locus_x: 'layers.l1_nervous.compression', "
-                f"locus_y: 'L1_TRANSPORT', "
-                f"locus_z: 'L2_BRAIN', "
-                f"authority_a: 'OVERSEER', "
-                f"intent_i: 'CONTEXT', "
-                f"summary: '{safe_summary}', "
-                f"timestamp: {now_ms}}})"
-            )
-            
             self.bridge.ipc.execute(cypher)
-            logger.info(f"Crystallization persisted (MemoryNode4D): {causal_hash}")
+            logger.info(f"Crystallization persisted (SOVEREIGN-4D): {causal_hash}")
             self.last_persist_ok = True
         except Exception as e:
             self.last_error = str(e)

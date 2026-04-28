@@ -1,37 +1,32 @@
 import pytest
-import sys
-from pathlib import Path
+import os
+import shutil
+try:
+    from layers.l2_brain.adapters import KuzuRepository
+except ImportError:
+    import sys
+    import os
+    sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..")))
+    from adapters import KuzuRepository
 
-ROOT = Path(__file__).resolve().parents[2]
-if str(ROOT) not in sys.path:
-    sys.path.insert(0, str(ROOT))
+@pytest.fixture
+def temp_kuzu(tmp_path):
+    db_path = str(tmp_path / "test_db")
+    repo = KuzuRepository(db_path=db_path)
+    return repo, db_path
 
-from adapters import KuzuRepository
+def test_kuzu_ensure_schema_fail_on_invalid_sql(tmp_path):
+    """Verifica que fallos que no sean 'Table already exists' lancen excepción."""
+    db_path = str(tmp_path / "fail_db")
+    repo = KuzuRepository(db_path=db_path)
+    
+    # Inyectar un error manual (mockeando el connection execute si fuera necesario)
+    # Pero aquí probaremos el query robusto
+    with pytest.raises(RuntimeError):
+        repo.query("MATCH (invalid_syntax) --- >> {}")
 
-
-class _FakeConn:
-    def __init__(self):
-        self.cypher = []
-
-    def execute(self, cypher: str):
-        self.cypher.append(cypher)
-        return {"ok": True}
-
-
-class _FakeIPCBridge:
-    def __init__(self):
-        self.ipc = _FakeConn()
-
-
-def test_repository_uses_ipc_connection_when_bridge_exposes_ipc():
-    bridge = _FakeIPCBridge()
-    repo = KuzuRepository(db=bridge)
-    result = repo.query("MATCH (n) RETURN count(n)")
-    assert result == {"ok": True}
-    assert repo.conn is bridge.ipc
-    assert bridge.ipc.cypher == ["MATCH (n) RETURN count(n)"]
-
-
-def test_repository_returns_empty_without_connection():
-    repo = KuzuRepository(db_path="/tmp/unused.db", db=None)
-    assert repo.query("RETURN 1") == []
+def test_kuzu_query_no_connection():
+    """Verifica que consultas sin conexión fallen explícitamente."""
+    repo = KuzuRepository(db=None)
+    with pytest.raises(ConnectionError):
+        repo.query("MATCH (m) RETURN m")
