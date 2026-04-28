@@ -61,4 +61,14 @@ if __name__ == "__main__":
     logger.info("DUMMIE Brain Gateway (FLAT-L1) Online.")
     # Restaurar stdout para el servidor MCP
     sys.stdout = _actual_stdout
-    mcp.run()
+    try:
+        mcp.run()
+    except KeyboardInterrupt:
+        pass
+    finally:
+        # Garantizar limpieza de procesos huérfanos al cerrarse el pipe STDIO
+        import asyncio
+        try:
+            asyncio.run(proxy_manager.shutdown())
+        except Exception:
+            pass

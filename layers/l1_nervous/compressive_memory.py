@@ -93,18 +93,24 @@ class CompressiveMemory:
             
             now_ms = int(time.time() * 1000)
             safe_summary = summary.replace("'", "''")
+            
+            # Unificación con el esquema MemoryNode4D de L2_BRAIN
             cypher = (
-                f"CREATE (m:MemoryState {{"
-                f"id: '{causal_hash}', "
-                f"causal_hash_v2: 'sha256:{causal_hash}', "
+                f"CREATE (m:MemoryNode4D {{"
+                f"causal_hash: '{causal_hash}', "
+                f"parent_hash: 'COMPRESSED_CONTEXT', "
+                f"lamport_t: {now_ms}, " # Fallback si no hay acceso al reloj global
+                f"locus_x: 'layers.l1_nervous.compression', "
+                f"locus_y: 'L1_TRANSPORT', "
+                f"locus_z: 'L2_BRAIN', "
+                f"authority_a: 'OVERSEER', "
+                f"intent_i: 'CONTEXT', "
                 f"summary: '{safe_summary}', "
-                f"type: 'crystallized', "
-                f"timestamp: {now_ms}, "
-                f"msg_count: {len(history)}}})"
+                f"timestamp: {now_ms}}})"
             )
             
             self.bridge.ipc.execute(cypher)
-            logger.info(f"Crystallization persisted: {causal_hash}")
+            logger.info(f"Crystallization persisted (MemoryNode4D): {causal_hash}")
             self.last_persist_ok = True
         except Exception as e:
             self.last_error = str(e)

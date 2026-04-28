@@ -1,9 +1,9 @@
 {
   "spec_id": "DE-V2-L2-02",
   "title": "Motor de Memoria Inmutable (4D-TES)",
-  "status": "DRAFT",
+  "status": "ACTIVE",
   "layer": "L2",
-  "last_verified_on": "2026-04-24",
+  "last_verified_on": "2026-04-28",
   "required_frontmatter": [
     "spec_id",
     "title",
@@ -15,14 +15,15 @@
     "Purpose",
     "Current State",
     "Physical Evidence",
-    "Gaps",
-    "Next Actions",
-    "Sibling Artifacts"
+    "Contract Invariants",
+    "Verification",
+    "Traceability"
   ],
   "evidence_paths": [
-    "layers/l2_brain",
-    ".aiwg",
-    "governance/session_context.json"
+    "layers/l2_brain/orchestrator.py",
+    "layers/l2_brain/adapters.py",
+    "layers/l1_nervous/compressive_memory.py",
+    ".aiwg/memory/loci.db"
   ],
   "policy": {
     "allow_legacy_narrative": false,
@@ -31,8 +32,7 @@
       "ACTIVE",
       "DRAFT",
       "PROPOSED",
-      "DEPRECATED",
-      "REFERENCE"
+      "DEPRECATED"
     ]
   }
 }

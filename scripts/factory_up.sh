@@ -3,14 +3,19 @@
 
 ROOT_DIR="/home/jorand/Escritorio/DUMMIE Engine"
 AIWG_DIR="$ROOT_DIR/.aiwg"
-SOCKET_PATH="/tmp/dummie_flight.sock"
+SOCKET_PATH="$AIWG_DIR/sockets/flight.sock"
 KUZU_PATH="$AIWG_DIR/memory/kuzu_data"
 
 echo "=== [FACTORY] Iniciando DUMMIE Engine (Nivel 5) ==="
 
 # 1. Higiene
 mkdir -p "$AIWG_DIR/sockets"
-mkdir -p "$AIWG_DIR/memory/kuzu_data"
+if [ -f "$KUZU_PATH" ]; then
+    echo ">> Removing legacy kuzu file: $KUZU_PATH"
+    rm -f "$KUZU_PATH"
+fi
+mkdir -p "$KUZU_PATH"
+rm -f "$SOCKET_PATH"
 
 # 2. Iniciar L1 Nervous (Relojero)
 echo ">> Launching L1 Nervous (Lamport)..."

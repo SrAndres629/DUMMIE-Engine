@@ -12,5 +12,5 @@ Feature: Motor de Memoria Inmutable (4D-TES) contract
     Then it references active repository paths for layer `L2`
 
   Scenario: lifecycle is explicit
-    Given this spec status is `DRAFT`
+    Given this spec status is `ACTIVE`
     Then implementation and roadmap expectations are unambiguous

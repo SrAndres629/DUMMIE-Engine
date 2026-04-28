@@ -76,7 +76,9 @@ class ArrowMemoryBridge:
             socket_path = os.environ.get('MEMORY_SOCKET_PATH', os.path.join(aiwg, "sockets/flight.sock"))
         
         self.socket_path = socket_path
-        self.location = f"grpc+unix://{socket_path}"
+        # Reemplazar espacios por %20 para evitar el error de parseo en Arrow/gRPC
+        safe_socket_path = socket_path.replace(" ", "%20")
+        self.location = f"grpc+unix://{safe_socket_path}"
         self.client: Optional[flight.FlightClient] = None
 
     def heartbeat(self) -> bool:

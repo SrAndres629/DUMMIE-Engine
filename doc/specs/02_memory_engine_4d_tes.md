@@ -1,14 +1,17 @@
 ---
 spec_id: "DE-V2-L2-02"
 title: "Motor de Memoria Inmutable (4D-TES)"
-status: "STABLE"
+status: "ACTIVE"
 layer: "L2"
-last_verified_on: "2026-04-26"
+last_verified_on: "2026-04-28"
 ---
 # Motor de Memoria Inmutable (4D-TES)
 
 ## Purpose
 Definir el contrato operativo del motor de memoria espacio-temporal de DUMMIE Engine. El 4D-TES (Temporal-Evolutionary Storage) garantiza que el conocimiento del sistema sea inmutable, rastreable y eficiente mediante técnicas de compresión semántica y persistencia en grafos.
+
+## Current State
+El motor está en fase de despliegue activo. Se ha unificado el esquema `MemoryNode4D` entre las capas L1 y L2. El `CognitiveOrchestrator` implementa la persistencia de hitos causales en KùzuDB mediante un Merkle-DAG simplificado. La cristalización de memoria en L1 (`CompressiveMemory`) está alineada con el repositorio de L2.
 
 ## Arquitectura Técnica
 
@@ -56,15 +59,15 @@ graph TB
 - **KùzuDB (Palacio de Loci):** Base de datos de grafos embebida que almacena la topología del conocimiento.
 
 ## Contract Invariants
-- **Inmutabilidad:** Una vez que un nodo (`MemoryNode4DTES`) es persistido, su `causal_hash` no puede cambiar.
+- **Inmutabilidad:** Una vez que un nodo (`MemoryNode4D`) es persistido, su `causal_hash` no puede cambiar.
 - **Causalidad:** Todo nodo (excepto GENESIS) debe tener un `parent_hash` válido.
 - **Consistencia:** El estado del Loci Graph debe ser verificable mediante el `Decision Ledger`.
 
 ## Physical Evidence
 - `layers/l1_nervous/compressive_memory.py`: Lógica de cristalización.
-- `layers/l1_nervous/context_quantizer.py`: Implementación de TurboQuant.
-- `layers/l1_nervous/main.go`: Orquestador de hashes causales.
-- `layers/l2_brain/models.py`: Definición del SixDimensionalContext.
+- `layers/l1_nervous/resources.py`: Exposición de recursos de memoria.
+- `layers/l2_brain/orchestrator.py`: Implementación de persistencia causal.
+- `layers/l2_brain/adapters.py`: Repositorio Kùzu con soporte causal.
 - `.aiwg/memory/loci.db`: Base de datos física de Kùzu.
 
 ## Verification
@@ -75,6 +78,6 @@ python3 scripts/validate_specs_docs.py --check doc/specs/02_memory_engine_4d_tes
 ## Traceability
 | Invariant | Evidence | Verification |
 | --- | --- | --- |
-| Inmutabilidad Causal | `layers/l1_nervous/main.go` | SHA-256 Validation in tests |
+| Inmutabilidad Causal | `layers/l2_brain/orchestrator.py` | SHA-256 Validation in tests |
 | Poda Semántica | `layers/l1_nervous/context_quantizer.py` | TurboQuant Benchmarks |
 | Persistencia Loci | `.aiwg/memory/loci.db` | Kùzu Cypher Queries |

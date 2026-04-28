@@ -48,10 +48,10 @@ def register_tools(mcp: FastMCP, orchestrator, proxy_manager, root_dir: str):
         output.append("\n=== CAPACIDADES REMOTAS (Proxy Servers) ===")
         try:
             for s_name in proxy_manager.servers.keys():
-                if query and query.lower() not in s_name.lower():
+                if query and query != "*" and query.lower() not in s_name.lower():
                     # Si hay query, hacemos pre-fetch solo si el servidor coincide con la busqueda.
                     # Sino, listamos todos los servidores y sus tools.
-                    pass
+                    continue
                 
                 try:
                     r_tools = await proxy_manager.get_tools_for_server(s_name)

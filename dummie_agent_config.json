@@ -9,7 +9,7 @@
         "DUMMIE_ROOT_DIR": "/home/jorand/Escritorio/DUMMIE Engine",
         "DUMMIE_AIWG_DIR": "/home/jorand/Escritorio/DUMMIE Engine/.aiwg",
         "DUMMIE_KUZU_DB_PATH": "/home/jorand/Escritorio/DUMMIE Engine/.aiwg/memory/kuzu_data",
-        "MEMORY_SOCKET_PATH": "/tmp/dummie_flight.sock",
+        "MEMORY_SOCKET_PATH": "/home/jorand/Escritorio/DUMMIE Engine/.aiwg/sockets/flight.sock",
         "PYTHONPATH": "/home/jorand/Escritorio/DUMMIE Engine/layers/l2_brain:/home/jorand/Escritorio/DUMMIE Engine/layers/l1_nervous:/home/jorand/Escritorio/DUMMIE Engine/layers/l3_shield",
         "DUMMIE_MCP_CONFIG_PATH": "/home/jorand/Escritorio/DUMMIE Engine/dummie_gateway_config.json"
       }
