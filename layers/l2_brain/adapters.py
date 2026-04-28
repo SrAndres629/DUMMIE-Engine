@@ -133,9 +133,12 @@ class KuzuRepository:
                 except ImportError:
                     from layers.l2_brain.cypher_codec import cypher_literal
                 
+                import re
                 bound_cypher = cypher
                 for key, val in parameters.items():
-                    bound_cypher = bound_cypher.replace(f"${key}", cypher_literal(val))
+                    # Word boundaries evitan colisiones entre $id e $id_long
+                    pattern = r'\$' + re.escape(key) + r'\b'
+                    bound_cypher = re.sub(pattern, lambda m, v=val: cypher_literal(v), bound_cypher)
                 return self.conn.execute(bound_cypher)
                 
             return self.conn.execute(cypher)
