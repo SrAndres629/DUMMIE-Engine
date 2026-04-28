@@ -117,7 +117,6 @@ class MemoryNode4D(BaseModel):
             "PRIMARY KEY (causal_hash))"
         )
 
-    @staticmethod
     @classmethod
     def from_intent_context(
         cls,
@@ -186,41 +185,14 @@ class MemoryNode4D(BaseModel):
 
     def to_cypher(self) -> str:
         """
-        Serializa el nodo de memoria en una consulta Cypher 100% segura.
-        Usa serialización estricta centralizada basada en el dump de Pydantic.
+        [LEGACY BRIDGE] Serializa el nodo de memoria a Cypher delegando en cypher_codec.
         """
-        from enum import Enum
-        import json
-        
-        def cypher_literal(value):
-            if value is None:
-                return "NULL"
-            if isinstance(value, bool):
-                return "true" if value else "false"
-            if isinstance(value, (int, float)):
-                return str(value)
-            if isinstance(value, list):
-                return "[" + ", ".join(cypher_literal(v) for v in value) + "]"
-            if isinstance(value, Enum):
-                value = value.value
-            if isinstance(value, str):
-                escaped = (
-                    str(value)
-                    .replace("\\", "\\\\")
-                    .replace("'", "\\'")
-                    .replace("\n", "\\n")
-                    .replace("\r", "\\r")
-                )
-                return f"'{escaped}'"
-            raise TypeError(f"Unsupported Cypher literal type: {type(value)!r}")
-
-        if hasattr(self, "model_dump"):
-            data = self.model_dump(mode="json")
-        else:
-            data = {k: v for k, v in self.__dict__.items() if not k.startswith("_")}
-
-        props = ", ".join(f"{key}: {cypher_literal(value)}" for key, value in data.items())
-        return f"CREATE (m:MemoryNode4D {{{props}}})"
+        try:
+            from cypher_codec import node_to_create_cypher
+        except ImportError:
+            from layers.l2_brain.cypher_codec import node_to_create_cypher
+            
+        return node_to_create_cypher(self)
 
 @dataclass
 class SourceArtifact:

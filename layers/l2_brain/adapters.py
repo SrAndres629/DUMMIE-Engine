@@ -70,40 +70,21 @@ class KuzuRepository:
         Persiste un MemoryNode4D en la base de datos de forma 100% segura.
         Usa consultas parametrizadas nativas si están disponibles, o serialización estricta en su defecto.
         """
-        from enum import Enum
-        
-        def cypher_literal(value):
-            if value is None:
-                return "NULL"
-            if isinstance(value, bool):
-                return "true" if value else "false"
-            if isinstance(value, (int, float)):
-                return str(value)
-            if isinstance(value, list):
-                return "[" + ", ".join(cypher_literal(v) for v in value) + "]"
-            if isinstance(value, Enum):
-                value = value.value
-            if isinstance(value, str):
-                escaped = (
-                    str(value)
-                    .replace("\\", "\\\\")
-                    .replace("'", "\\'")
-                    .replace("\n", "\\n")
-                    .replace("\r", "\\r")
-                )
-                return f"'{escaped}'"
-            raise TypeError(f"Unsupported Cypher literal type: {type(value)!r}")
-
-        # Si es un objeto Pydantic
-        if hasattr(node, "model_dump"):
-            data = node.model_dump(mode="json")
-        elif hasattr(node, "__dict__"):
-            data = {k: v for k, v in node.__dict__.items() if not k.startswith("_")}
-        else:
-            raise ValueError("Invalid node structure for persistence")
+        try:
+            from cypher_codec import node_to_create_cypher
+        except ImportError:
+            from layers.l2_brain.cypher_codec import node_to_create_cypher
 
         # Intentamos consulta parametrizada primero
         try:
+            if not self._execute_supports_parameters():
+                raise NotImplementedError("IPC connection does not support parameters natively")
+                
+            if hasattr(node, "model_dump"):
+                data = node.model_dump(mode="json")
+            else:
+                data = {k: v for k, v in node.__dict__.items() if not k.startswith("_")}
+
             cypher = (
                 "CREATE (m:MemoryNode4D {"
                 "causal_hash: $causal_hash, "
@@ -121,30 +102,43 @@ class KuzuRepository:
             self.query(cypher, data)
             return node.causal_hash
         except Exception as e:
-            logger.warning(f"Parameterized query failed ({e}). Falling back to strict serialization.")
-            
-            # Serialización estricta basada en el dump validado
-            props = ", ".join(f"{key}: {cypher_literal(value)}" for key, value in data.items())
-            cypher_fallback = f"CREATE (m:MemoryNode4D {{{props}}})"
+            logger.debug(f"Parameterized query not used ({e}). Executing strict serialization.")
+            cypher_fallback = node_to_create_cypher(node)
             self.query(cypher_fallback)
             return node.causal_hash
+
+    def _execute_supports_parameters(self) -> bool:
+        import inspect
+        try:
+            # Si es proxy no soporta parámetros
+            if self.conn.__class__.__name__.endswith("Proxy"):
+                return False
+            sig = inspect.signature(self.conn.execute)
+            return len(sig.parameters) >= 2
+        except Exception:
+            return False
 
     def query(self, cypher: str, parameters: Optional[Dict[str, Any]] = None):
         if not self.conn:
             logger.error("Attempted query on uninitialized KuzuRepository")
             raise ConnectionError("Kuzu connection not established")
         try:
-            if hasattr(self.conn, "execute"):
-                # Manejador estándar de Kùzu
-                if parameters:
-                    return self.conn.execute(cypher, parameters)
-                return self.conn.execute(cypher)
-            else:
-                # Puente IPC (Zero-Copy)
-                # Si el puente soporta parámetros, se los pasamos.
-                if parameters:
-                    return self.conn.execute(cypher, parameters)
-                return self.conn.execute(cypher)
+            if parameters and self._execute_supports_parameters():
+                return self.conn.execute(cypher, parameters)
+            
+            if parameters:
+                # Fallback seguro si no soporta parámetros (ej. IPC bridge)
+                try:
+                    from cypher_codec import cypher_literal
+                except ImportError:
+                    from layers.l2_brain.cypher_codec import cypher_literal
+                
+                bound_cypher = cypher
+                for key, val in parameters.items():
+                    bound_cypher = bound_cypher.replace(f"${key}", cypher_literal(val))
+                return self.conn.execute(bound_cypher)
+                
+            return self.conn.execute(cypher)
         except Exception as e:
             logger.error(f"Kuzu Query Error: {e} | Cypher: {cypher} | Params: {parameters}")
             raise RuntimeError(f"Kuzu Execution Failure: {e}")
