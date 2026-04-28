@@ -76,8 +76,11 @@ class KuzuRepository:
             if existing:
                 logger.debug(f"MemoryNode4D {node.causal_hash} already persisted (idempotency ACK).")
                 return node.causal_hash
-        except Exception:
-            pass
+        except ValueError:
+            logger.error(f"Security block: Invalid causal hash format for idempotency: {node.causal_hash}")
+            raise
+        except Exception as e:
+            logger.debug(f"Node lookup for idempotency returned no results (expected if new): {e}")
 
         try:
             from cypher_codec import node_to_create_cypher

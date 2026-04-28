@@ -80,8 +80,8 @@ class MemoryNode4D(BaseModel):
     locus_y: str
     locus_z: str
     lamport_t: int
-    authority_a: AuthorityLevel
-    intent_i: IntentType
+    authority_a: str
+    intent_i: str
     payload: str
     payload_hash: str
     embedding: Optional[List[float]] = Field(default_factory=lambda: [0.0])
@@ -116,80 +116,6 @@ class MemoryNode4D(BaseModel):
             "embedding FLOAT[], "
             "PRIMARY KEY (causal_hash))"
         )
-
-def compute_causal_hash(
-    parent_hash: str,
-    payload_hash: str,
-    locus_x: str,
-    locus_y: str,
-    locus_z: str,
-    lamport_t: int,
-    authority_a: str,
-    intent_i: str,
-) -> str:
-    """
-    Función pura que calcula el causal_hash criptográfico utilizando un volcado JSON canónico.
-    """
-    import json
-    import hashlib
-    
-    node_material = {
-        "parent_hash": str(parent_hash),
-        "payload_hash": str(payload_hash),
-        "locus_x": str(locus_x),
-        "locus_y": str(locus_y),
-        "locus_z": str(locus_z),
-        "lamport_t": int(lamport_t),
-        "authority_a": str(authority_a),
-        "intent_i": str(intent_i),
-    }
-
-    canonical = json.dumps(
-        node_material,
-        sort_keys=True,
-        separators=(",", ":"),
-        ensure_ascii=False,
-    )
-    return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
-
-class CausalIntegrityVerifier:
-    @staticmethod
-    def verify_node(node: Any) -> bool:
-        """
-        Verifica si el causal_hash de un nodo coincide con sus propiedades.
-        """
-        try:
-            from enum import Enum
-            auth_val = node.authority_a.value if isinstance(node.authority_a, Enum) else str(node.authority_a)
-            intent_val = node.intent_i.value if isinstance(node.intent_i, Enum) else str(node.intent_i)
-            
-            recomputed = compute_causal_hash(
-                parent_hash=node.parent_hash,
-                payload_hash=node.payload_hash,
-                locus_x=node.locus_x,
-                locus_y=node.locus_y,
-                locus_z=node.locus_z,
-                lamport_t=node.lamport_t,
-                authority_a=auth_val,
-                intent_i=intent_val
-            )
-            return recomputed == node.causal_hash
-        except Exception:
-            return False
-
-class MemoryNode4D(BaseModel):
-    # Propiedades estructurales...
-    causal_hash: str
-    parent_hash: str
-    locus_x: str
-    locus_y: str
-    locus_z: str
-    lamport_t: int
-    authority_a: str
-    intent_i: str
-    payload: str
-    payload_hash: str
-    embedding: list[float]
 
     @classmethod
     def from_intent_context(
@@ -251,6 +177,73 @@ class MemoryNode4D(BaseModel):
             from layers.l2_brain.cypher_codec import node_to_create_cypher
             
         return node_to_create_cypher(self)
+
+def compute_causal_hash(
+    parent_hash: str,
+    payload_hash: str,
+    locus_x: str,
+    locus_y: str,
+    locus_z: str,
+    lamport_t: int,
+    authority_a: str,
+    intent_i: str,
+) -> str:
+    """
+    Función pura que calcula el causal_hash criptográfico utilizando un volcado JSON canónico.
+    """
+    import json
+    import hashlib
+    
+    node_material = {
+        "parent_hash": str(parent_hash),
+        "payload_hash": str(payload_hash),
+        "locus_x": str(locus_x),
+        "locus_y": str(locus_y),
+        "locus_z": str(locus_z),
+        "lamport_t": int(lamport_t),
+        "authority_a": str(authority_a),
+        "intent_i": str(intent_i),
+    }
+
+    canonical = json.dumps(
+        node_material,
+        sort_keys=True,
+        separators=(",", ":"),
+        ensure_ascii=False,
+    )
+    return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
+
+class CausalIntegrityVerifier:
+    @staticmethod
+    def verify_node(node: Any) -> bool:
+        """
+        Verifica tanto el payload_hash como el causal_hash para evitar falsificaciones parciales.
+        """
+        import hashlib
+        try:
+            from enum import Enum
+            auth_val = node.authority_a.value if isinstance(node.authority_a, Enum) else str(node.authority_a)
+            intent_val = node.intent_i.value if isinstance(node.intent_i, Enum) else str(node.intent_i)
+            
+            # 1. Verificar integridad del payload
+            expected_payload_hash = f"sha256:{hashlib.sha256(node.payload.encode('utf-8')).hexdigest()}"
+            if expected_payload_hash != node.payload_hash:
+                return False
+
+            # 2. Verificar integridad causal
+            recomputed = compute_causal_hash(
+                parent_hash=node.parent_hash,
+                payload_hash=node.payload_hash,
+                locus_x=node.locus_x,
+                locus_y=node.locus_y,
+                locus_z=node.locus_z,
+                lamport_t=node.lamport_t,
+                authority_a=auth_val,
+                intent_i=intent_val
+            )
+            return recomputed == node.causal_hash
+        except Exception:
+            return False
 
 @dataclass
 class SourceArtifact:
