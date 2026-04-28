@@ -40,3 +40,6 @@ dist/
 .DS_Store
 .idea/
 .vscode/
+Obsidian.AppImage
+squashfs-root/
+venv/

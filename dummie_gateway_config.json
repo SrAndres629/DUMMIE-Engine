@@ -9,7 +9,7 @@
         "MEMORY_FILE_PATH": "/home/jorand/.gemini/antigravity/knowledge/memory.jsonl"
       },
       "disabled": true,
-      "disabled_reason": "Quarantined until it is bridged into canonical 4D-TES memory; avoid parallel memory truth."
+      "disabled_reason": "legacy no conecta con el motor 4d "
     },
     "filesystem": {
       "command": "node",
@@ -59,11 +59,11 @@
         "mcp-obsidian"
       ],
       "env": {
-        "OBSIDIAN_API_KEY": "<set outside git>",
+        "OBSIDIAN_API_KEY": "414232f5a13a06c45df9e561cba82deffdbc0c3a75bcc526714dd14f9de987af",
         "OBSIDIAN_HOST": "127.0.0.1",
         "OBSIDIAN_PORT": "27124"
       },
-      "disabled": true
+      "disabled": false
     },
     "sqlite": {
       "command": "uvx",
@@ -125,7 +125,7 @@
         "--no-update-notification",
         "--non-interactive"
       ],
-      "disabled": true,
+      "disabled": false,
       "disabled_reason": "Project-specific external tool; enable only inside a Genkit-owned workflow with tests."
     },
     "everything": {
@@ -142,8 +142,8 @@
       "args": [
         "arize-tracing-assistant"
       ],
-      "disabled": true,
-      "disabled_reason": "External observability assistant; no verified runtime dependency in the current gateway flow."
+      "disabled": false,
+      "active_reason": "Forman parte de los mcp que descargamos oficiales de antigravity"
     },
     "puppeteer": {
       "command": "npx",
@@ -151,7 +151,7 @@
         "-y",
         "@modelcontextprotocol/server-puppeteer"
       ],
-      "disabled": true,
+      "disabled": false,
       "disabled_reason": "Browser automation is useful only for explicit UI tasks; keep off the default cognitive path."
     },
     "local-ssh-context": {
@@ -171,7 +171,6 @@
     "socraticode": {
       "command": "npx",
       "args": [
-        "-y",
         "socraticode"
       ],
       "env": {

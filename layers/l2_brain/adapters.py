@@ -44,6 +44,8 @@ class KuzuRepository:
             
             self.db = kuzu.Database(db_path)
             self.conn = kuzu.Connection(self.db)
+            logger.warning("[!] ALERTA DE SOBERANÍA: KuzuRepository ha inicializado en Modo NATIVO (Lock físico).")
+            logger.warning("    Esto impide que otros agentes se conecten concurrentemente. Se recomienda usar IPC Singleton.")
             self._ensure_schema()
 
     def _ensure_schema(self):
@@ -122,8 +124,8 @@ class KuzuRepository:
 
     def find_similar_nodes(self, query_text: str, limit: int = 5) -> List[Dict[str, Any]]:
         """
-        Busca nodos semánticamente similares utilizando similitud de coseno sobre embeddings.
-        (Fase 4: Memoria Asociativa)
+        Busca nodos semánticamente similares con fallback antifrágil.
+        Si el motor Kùzu no soporta dot_product nativo, recuperamos candidatos y rankeamos en Python.
         """
         try:
             from embedding_provider import EmbeddingProvider
@@ -132,32 +134,41 @@ class KuzuRepository:
             
         query_vec = EmbeddingProvider.generate_vector(query_text)
         
-        # En KùzuDB v0.x, la similitud vectorial se hace comparando el vector query 
-        # con la columna embedding. Nota: Kùzu aún no tiene un operador nativo de Coseno 
-        # tan optimizado como pgvector, así que hacemos una aproximación por producto punto
-        # si los vectores están normalizados (fastembed lo hace).
-        
-        # Query Cypher para búsqueda por producto punto (aproximación de similitud)
-        # Nota: La sintaxis exacta depende de la versión de Kùzu.
-        # Asumimos vectores normalizados: score = dot_product(v1, v2)
-        cypher = (
-            f"MATCH (m:MemoryNode4D) "
-            f"RETURN m.causal_hash, m.payload, m.intent_i, "
-            f"CAST(dot_product(m.embedding, {json.dumps(query_vec)}) AS FLOAT) as score "
-            f"ORDER BY score DESC LIMIT {limit}"
-        )
-        
-        results = self.query(cypher)
-        matches = []
-        while results.has_next():
-            row = results.get_next()
-            matches.append({
-                "hash": row[0],
-                "payload": row[1],
-                "intent": row[2],
-                "score": row[3]
-            })
-        return matches
+        # [ANTI-FRAGILITY] Intentamos dot_product nativo primero
+        try:
+            cypher = (
+                f"MATCH (m:MemoryNode4D) "
+                f"RETURN m.causal_hash, m.payload, m.intent_i, "
+                f"CAST(dot_product(m.embedding, {json.dumps(query_vec)}) AS FLOAT) as score "
+                f"ORDER BY score DESC LIMIT {limit}"
+            )
+            results = self.query(cypher)
+            matches = []
+            while results.has_next():
+                row = results.get_next()
+                matches.append({"hash": row[0], "payload": row[1], "intent": row[2], "score": row[3]})
+            return matches
+        except Exception as e:
+            logger.warning(f"Native dot_product failed ({e}). Falling back to client-side ranking.")
+            # FALLBACK: Recuperar los últimos 100 nodos y rankear en memoria (Escalable para DUMMIE)
+            cypher = "MATCH (m:MemoryNode4D) RETURN m.causal_hash, m.payload, m.intent_i, m.embedding ORDER BY m.lamport_t DESC LIMIT 100"
+            results = self.query(cypher)
+            matches = []
+            while results.has_next():
+                row = results.get_next()
+                # [ROBUSTNESS] Asegurar que el embedding sea una lista de floats
+                emb = row[3]
+                if isinstance(emb, str):
+                    try:
+                        emb = json.loads(emb)
+                    except:
+                        emb = None
+                
+                score = EmbeddingProvider.similarity(query_vec, emb) if emb else 0.0
+                matches.append({"hash": row[0], "payload": row[1], "intent": row[2], "score": score})
+            
+            matches.sort(key=lambda x: x["score"], reverse=True)
+            return matches[:limit]
 
 class DecisionLedgerAdapter:
     def __init__(self, ledger_path: str, lessons_path: str, ambiguities_path: str, ontological_map_path: str):

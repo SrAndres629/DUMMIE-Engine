@@ -33,10 +33,26 @@ def bootstrap_orchestrator(kuzu_db_path: str, aiwg_dir: str):
         logger.info(f"Memory Plane active and verified at {bridge.socket_path}. Activating IPC mode.")
         db = bridge
     else:
-        logger.error(f"Memory Plane OFFLINE at {bridge.socket_path}. Entering DEGRADED mode.")
-        logger.warning("[!] ADVERTENCIA: El Memory Plane (L0) no está activo.")
-        logger.warning("    El sistema arrancará en modo DEGRADADO (sin persistencia).")
-        db = None
+        logger.warning(f"Memory Plane OFFLINE at {bridge.socket_path}. Iniciando Auto-Recuperación (Self-Healing)...")
+        import subprocess
+        daemon_script = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../scripts/start_memory_daemon.sh"))
+        
+        if os.path.exists(daemon_script):
+            try:
+                # Ejecutar el demonio (liberará locks y levantará server)
+                subprocess.run([daemon_script], check=True, capture_output=True, text=True)
+                # Reintentar conexión
+                if bridge.heartbeat():
+                    logger.info("Auto-Recuperación exitosa. Sovereign Memory Daemon activo.")
+                    db = bridge
+                else:
+                    raise Exception("El servidor no respondió al handshake tras la auto-recuperación.")
+            except Exception as e:
+                logger.error(f"Fallo en Auto-Recuperación: {e}. Entering DEGRADED mode.")
+                db = None
+        else:
+            logger.error(f"Script de demonización no encontrado en {daemon_script}. Entering DEGRADED mode.")
+            db = None
 
     event_store = KuzuRepository(db_path=kuzu_db_path if db else None, db=db)
     if read_only or db is None:

@@ -69,21 +69,20 @@ register_resources(mcp, get_orchestrator, get_proxy, ROOT_DIR)
 
 if __name__ == "__main__":
     logger.info("DUMMIE Brain Gateway (FLAT-L1) Online.")
-    # Restaurar stdout para el servidor MCP
+    # [ANTIGRAVITY HARDENING] Garantizar que NADA escriba en stdout excepto el servidor MCP
     sys.stdout = _actual_stdout
     
-    # Setup handlers con objetos ya inicializados si es necesario
-    setup_shutdown_handlers(get_orchestrator(), get_proxy())
-    
     try:
-        mcp.run()
-    except KeyboardInterrupt:
-        pass
+        # Forzar el transporte STDIO de forma explícita y segura
+        mcp.run(transport='stdio')
+    except Exception as e:
+        logger.critical(f"Gateway Crash: {e}", file=sys.stderr)
     finally:
         # Garantizar limpieza de procesos huérfanos al cerrarse el pipe STDIO
         import asyncio
         if _proxy_manager:
             try:
-                asyncio.run(_proxy_manager.shutdown())
+                # Usar un timeout para no bloquear el cierre
+                asyncio.run(asyncio.wait_for(_proxy_manager.shutdown(), timeout=2.0))
             except Exception:
                 pass

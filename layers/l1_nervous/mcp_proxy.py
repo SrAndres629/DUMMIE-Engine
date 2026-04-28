@@ -220,15 +220,51 @@ class MCPProxyManager:
         await process.stdin.drain()
 
     async def _read_jsonrpc_response(self, process: asyncio.subprocess.Process) -> Dict[str, Any]:
-        # Leer respuesta (asumiendo una línea por respuesta para Stdio simple)
-        # Nota: Esto es frágil si el servidor envía logs a stdout.
-        response_data = await process.stdout.readline()
-        if not response_data:
+        # Leer respuesta. Puede venir como JSON crudo por línea o con Content-Length framing (Stdio estándar)
+        line = await process.stdout.readline()
+        if not line:
             raise RuntimeError("Server closed connection.")
-        result = json.loads(response_data.decode())
+        
+        line_str = line.decode().strip()
+        
+        # Caso 1: Content-Length framing estándar de MCP
+        if line_str.startswith("Content-Length:"):
+            try:
+                length = int(line_str.split(":")[1].strip())
+            except ValueError:
+                raise RuntimeError(f"Invalid Content-Length header: {line_str}")
+            
+            # Leer el separador vacío \r\n
+            await process.stdout.readline()
+            
+            # Leer exactamente 'length' bytes
+            body = await process.stdout.readexactly(length)
+            result = json.loads(body.decode())
+        
+        # Caso 2: Línea JSON cruda (Stdio simple)
+        elif line_str.startswith("{"):
+            result = json.loads(line_str)
+            
+        # Caso 3: Podría ser un log ruidoso en stdout. Intentar seguir leyendo.
+        else:
+            while not (line_str.startswith("{") or line_str.startswith("Content-Length:")):
+                line = await process.stdout.readline()
+                if not line:
+                    raise RuntimeError("Server closed connection while skipping logs.")
+                line_str = line.decode().strip()
+            
+            if line_str.startswith("Content-Length:"):
+                length = int(line_str.split(":")[1].strip())
+                await process.stdout.readline()
+                body = await process.stdout.readexactly(length)
+                result = json.loads(body.decode())
+            else:
+                result = json.loads(line_str)
+
         if "error" in result:
             raise RuntimeError(json.dumps(result["error"]))
         return result
+
 
     async def _ensure_process(self, server_name: str) -> asyncio.subprocess.Process:
         """Asegura que el proceso del servidor esté corriendo."""
