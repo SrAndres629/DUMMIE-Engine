@@ -118,32 +118,49 @@ class MemoryNode4D(BaseModel):
         )
 
     @staticmethod
-    def build_create_cypher(
+    @classmethod
+    def from_intent_context(
+        cls,
         parent_hash: str,
         locus_x: str,
         locus_y: str,
         locus_z: str,
         lamport_t: int,
-        authority_a: str,
-        intent_i: str,
+        authority_a: Any,
+        intent_i: Any,
         payload: str,
-        content_to_hash: str = None
-    ) -> tuple[str, str]:
+    ) -> "MemoryNode4D":
         """
-        Genera la query Cypher de creación y el causal_hash utilizando Hashing Causal Robusto (Spec 02).
-        Fórmula: SHA256(parent_hash + payload_hash + 6D-Context)
+        Materializa un nodo de memoria 4D completamente validado mediante Pydantic
+        y calcula el causal_hash criptográfico utilizando un volcado JSON canónico.
         """
-        payload_hash = f"sha256:{hashlib.sha256(payload.encode()).hexdigest()}"
-        
-        if content_to_hash is None:
-            # Merkle-DAG Hashing Completo
-            content_to_hash = (
-                f"{parent_hash}{payload_hash}{locus_x}{locus_y}{locus_z}"
-                f"{lamport_t}{authority_a}{intent_i}"
-            )
-        
-        causal_hash = hashlib.sha256(content_to_hash.encode()).hexdigest()
-        safe_payload = payload.replace("'", "''")
+        payload_hash = f"sha256:{hashlib.sha256(payload.encode('utf-8')).hexdigest()}"
+
+        # Normalizar Enums
+        from enum import Enum
+        auth_val = authority_a.value if isinstance(authority_a, Enum) else str(authority_a)
+        intent_val = intent_i.value if isinstance(intent_i, Enum) else str(intent_i)
+
+        # Estructura canónica para el Causal Hash (Previene colisiones de concatenación)
+        node_material = {
+            "parent_hash": str(parent_hash),
+            "payload_hash": payload_hash,
+            "locus_x": str(locus_x),
+            "locus_y": str(locus_y),
+            "locus_z": str(locus_z),
+            "lamport_t": int(lamport_t),
+            "authority_a": auth_val,
+            "intent_i": intent_val,
+        }
+
+        canonical = json.dumps(
+            node_material,
+            sort_keys=True,
+            separators=(",", ":"),
+            ensure_ascii=False,
+        )
+
+        causal_hash = hashlib.sha256(canonical.encode("utf-8")).hexdigest()
 
         # [NEW] Generación de Embeddings Reales (Fase 2)
         try:
@@ -153,36 +170,57 @@ class MemoryNode4D(BaseModel):
         
         embedding_vec = EmbeddingProvider.generate_vector(payload)
 
-        # Strict Pydantic Validation
-        node = MemoryNode4D(
+        return cls(
             causal_hash=causal_hash,
             parent_hash=parent_hash,
             locus_x=locus_x,
             locus_y=locus_y,
             locus_z=locus_z,
             lamport_t=lamport_t,
-            authority_a=authority_a,
-            intent_i=intent_i,
+            authority_a=auth_val,
+            intent_i=intent_val,
             payload=payload,
             payload_hash=payload_hash,
             embedding=embedding_vec
         )
 
-        cypher = (
-            f"CREATE (m:MemoryNode4D {{"
-            f"causal_hash: '{causal_hash}', "
-            f"parent_hash: '{parent_hash}', "
-            f"locus_x: '{locus_x}', "
-            f"locus_y: '{locus_y}', "
-            f"locus_z: '{locus_z}', "
-            f"lamport_t: {lamport_t}, "
-            f"authority_a: '{authority_a}', "
-            f"intent_i: '{intent_i}', "
-            f"payload: '{safe_payload}', "
-            f"payload_hash: '{payload_hash}', "
-            f"embedding: {json.dumps(embedding_vec)}}})"
-        )
-        return causal_hash, cypher
+    def to_cypher(self) -> str:
+        """
+        Serializa el nodo de memoria en una consulta Cypher 100% segura.
+        Usa serialización estricta centralizada basada en el dump de Pydantic.
+        """
+        from enum import Enum
+        import json
+        
+        def cypher_literal(value):
+            if value is None:
+                return "NULL"
+            if isinstance(value, bool):
+                return "true" if value else "false"
+            if isinstance(value, (int, float)):
+                return str(value)
+            if isinstance(value, list):
+                return "[" + ", ".join(cypher_literal(v) for v in value) + "]"
+            if isinstance(value, Enum):
+                value = value.value
+            if isinstance(value, str):
+                escaped = (
+                    str(value)
+                    .replace("\\", "\\\\")
+                    .replace("'", "\\'")
+                    .replace("\n", "\\n")
+                    .replace("\r", "\\r")
+                )
+                return f"'{escaped}'"
+            raise TypeError(f"Unsupported Cypher literal type: {type(value)!r}")
+
+        if hasattr(self, "model_dump"):
+            data = self.model_dump(mode="json")
+        else:
+            data = {k: v for k, v in self.__dict__.items() if not k.startswith("_")}
+
+        props = ", ".join(f"{key}: {cypher_literal(value)}" for key, value in data.items())
+        return f"CREATE (m:MemoryNode4D {{{props}}})"
 
 @dataclass
 class SourceArtifact:

@@ -82,7 +82,7 @@ class CognitiveOrchestrator:
             intent_i = getattr(intent, "intent_i", "RESOLUTION")
             if isinstance(intent_i, Enum): intent_i = intent_i.value
             
-            causal_hash, cypher = MemoryNode4D.build_create_cypher(
+            node = MemoryNode4D.from_intent_context(
                 parent_hash=parent_hash,
                 locus_x=locus_x,
                 locus_y='L1_TRANSPORT',
@@ -94,7 +94,8 @@ class CognitiveOrchestrator:
             )
             
             try:
-                self.event_store.query(cypher)
+                self.event_store.create_memory_node(node)
+                causal_hash = node.causal_hash
                 logger.info(f"4D-TES Persistence OK: {causal_hash}")
                 return {"status": "ACK", "intent_id": causal_hash}
             except Exception as e:

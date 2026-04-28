@@ -109,7 +109,7 @@ class CompressiveMemory:
                 logger.warning(f"Causal link fallback to GENESIS: {e}")
                 parent_hash = "GENESIS"
 
-            causal_hash, cypher = MemoryNode4D.build_create_cypher(
+            node = MemoryNode4D.from_intent_context(
                 parent_hash=parent_hash,
                 locus_x='layers.l1_nervous.compression',
                 locus_y='L1_TRANSPORT',
@@ -117,10 +117,10 @@ class CompressiveMemory:
                 lamport_t=int(time.time()),
                 authority_a='OVERSEER',
                 intent_i='CRYSTALLIZATION',
-                payload=summary,
-                content_to_hash=combined_text
+                payload=summary
             )
-            self.last_causal_hash = causal_hash
+            self.last_causal_hash = node.causal_hash
+            cypher = node.to_cypher()
             
             self.bridge.ipc.execute(cypher)
             logger.info(f"Crystallization persisted (SOVEREIGN-4D): {causal_hash}")

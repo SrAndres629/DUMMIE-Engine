@@ -65,14 +65,88 @@ class KuzuRepository:
                 logger.critical(f"FATAL: Could not ensure Kuzu schema: {e}")
                 raise RuntimeError(f"Kuzu Integrity Error: {e}")
 
-    def query(self, cypher: str):
+    def create_memory_node(self, node: Any) -> str:
+        """
+        Persiste un MemoryNode4D en la base de datos de forma 100% segura.
+        Usa consultas parametrizadas nativas si están disponibles, o serialización estricta en su defecto.
+        """
+        from enum import Enum
+        
+        def cypher_literal(value):
+            if value is None:
+                return "NULL"
+            if isinstance(value, bool):
+                return "true" if value else "false"
+            if isinstance(value, (int, float)):
+                return str(value)
+            if isinstance(value, list):
+                return "[" + ", ".join(cypher_literal(v) for v in value) + "]"
+            if isinstance(value, Enum):
+                value = value.value
+            if isinstance(value, str):
+                escaped = (
+                    str(value)
+                    .replace("\\", "\\\\")
+                    .replace("'", "\\'")
+                    .replace("\n", "\\n")
+                    .replace("\r", "\\r")
+                )
+                return f"'{escaped}'"
+            raise TypeError(f"Unsupported Cypher literal type: {type(value)!r}")
+
+        # Si es un objeto Pydantic
+        if hasattr(node, "model_dump"):
+            data = node.model_dump(mode="json")
+        elif hasattr(node, "__dict__"):
+            data = {k: v for k, v in node.__dict__.items() if not k.startswith("_")}
+        else:
+            raise ValueError("Invalid node structure for persistence")
+
+        # Intentamos consulta parametrizada primero
+        try:
+            cypher = (
+                "CREATE (m:MemoryNode4D {"
+                "causal_hash: $causal_hash, "
+                "parent_hash: $parent_hash, "
+                "locus_x: $locus_x, "
+                "locus_y: $locus_y, "
+                "locus_z: $locus_z, "
+                "lamport_t: $lamport_t, "
+                "authority_a: $authority_a, "
+                "intent_i: $intent_i, "
+                "payload: $payload, "
+                "payload_hash: $payload_hash, "
+                "embedding: $embedding})"
+            )
+            self.query(cypher, data)
+            return node.causal_hash
+        except Exception as e:
+            logger.warning(f"Parameterized query failed ({e}). Falling back to strict serialization.")
+            
+            # Serialización estricta basada en el dump validado
+            props = ", ".join(f"{key}: {cypher_literal(value)}" for key, value in data.items())
+            cypher_fallback = f"CREATE (m:MemoryNode4D {{{props}}})"
+            self.query(cypher_fallback)
+            return node.causal_hash
+
+    def query(self, cypher: str, parameters: Optional[Dict[str, Any]] = None):
         if not self.conn:
             logger.error("Attempted query on uninitialized KuzuRepository")
             raise ConnectionError("Kuzu connection not established")
         try:
-            return self.conn.execute(cypher)
+            if hasattr(self.conn, "execute"):
+                # Manejador estándar de Kùzu
+                if parameters:
+                    return self.conn.execute(cypher, parameters)
+                return self.conn.execute(cypher)
+            else:
+                # Puente IPC (Zero-Copy)
+                # Si el puente soporta parámetros, se los pasamos.
+                if parameters:
+                    return self.conn.execute(cypher, parameters)
+                return self.conn.execute(cypher)
         except Exception as e:
-            logger.error(f"Kuzu Query Error: {e} | Cypher: {cypher}")
+            logger.error(f"Kuzu Query Error: {e} | Cypher: {cypher} | Params: {parameters}")
             raise RuntimeError(f"Kuzu Execution Failure: {e}")
 
     def get_last_leaf_hash(self) -> str:
@@ -82,6 +156,11 @@ class KuzuRepository:
         return "GENESIS"
 
     def get_by_hash(self, causal_hash: str) -> Any:
+        import re
+        if causal_hash != "GENESIS" and not re.match(r"^[a-f0-9]{64}$", str(causal_hash)):
+            logger.error(f"Security block: Invalid causal hash format: {causal_hash}")
+            raise ValueError(f"Invalid causal hash format: {causal_hash}")
+
         try:
             from models import MemoryNode4D
         except ImportError:
@@ -94,7 +173,10 @@ class KuzuRepository:
         ]
         return_clause = ", ".join([f"m.{c}" for c in columns])
         
-        res = self.query(f"MATCH (m:MemoryNode4D) WHERE m.causal_hash = '{causal_hash}' RETURN {return_clause}")
+        res = self.query(
+            f"MATCH (m:MemoryNode4D) WHERE m.causal_hash = $causal_hash RETURN {return_clause}",
+            {"causal_hash": causal_hash}
+        )
         if res.has_next():
             row = res.get_next()
             return MemoryNode4D(
@@ -137,12 +219,12 @@ class KuzuRepository:
         # [ANTI-FRAGILITY] Intentamos dot_product nativo primero
         try:
             cypher = (
-                f"MATCH (m:MemoryNode4D) "
-                f"RETURN m.causal_hash, m.payload, m.intent_i, "
-                f"CAST(dot_product(m.embedding, {json.dumps(query_vec)}) AS FLOAT) as score "
-                f"ORDER BY score DESC LIMIT {limit}"
+                "MATCH (m:MemoryNode4D) "
+                "RETURN m.causal_hash, m.payload, m.intent_i, "
+                "CAST(dot_product(m.embedding, $query_vec) AS FLOAT) as score "
+                "ORDER BY score DESC LIMIT $limit"
             )
-            results = self.query(cypher)
+            results = self.query(cypher, {"query_vec": query_vec, "limit": limit})
             matches = []
             while results.has_next():
                 row = results.get_next()
