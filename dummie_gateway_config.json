@@ -166,7 +166,7 @@
         "/home/jorand/.ssh/dummie_agent_key"
       ],
       "disabled": true,
-      "disabled_reason": "Sensitive SSH surface; enable only for an explicit remote-context task."
+      "disabled_reason": "Sensitive SSH surface; enable only for an explicit remote-context task with human approval."
     },
     "socraticode": {
       "command": "npx",
@@ -178,8 +178,7 @@
         "SOCRATICODE_BRANCH_AWARE": "true",
         "SOCRATICODE_LOG_LEVEL": "info"
       },
-      "disabled": true,
-      "disabled_reason": "External coding assistant duplicates agent reasoning and previously created orphan runtime processes."
+      "disabled": false
     },
     "phoenix": {
       "command": "npx",
@@ -187,8 +186,7 @@
         "-y",
         "@arizeai/phoenix-mcp"
       ],
-      "disabled": true,
-      "disabled_reason": "External tracing surface; keep disabled until telemetry integration has tests and ownership."
+      "disabled": false
     }
   }
 }

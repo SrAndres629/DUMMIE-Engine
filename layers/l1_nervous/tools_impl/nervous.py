@@ -1,7 +1,12 @@
 import os
 import json
+import logging
+import subprocess
 from typing import List
+from pathlib import Path
 from mcp.server.fastmcp import FastMCP
+
+logger = logging.getLogger("dummie-mcp.tools.nervous")
 
 def register_nervous_tools(mcp: FastMCP, use_cases, root_dir: str):
     AIWG_DIR = os.environ.get("DUMMIE_AIWG", os.path.join(root_dir, ".aiwg"))
@@ -75,23 +80,39 @@ def register_nervous_tools(mcp: FastMCP, use_cases, root_dir: str):
         result = quantize_context_for_goal(goal=goal, full_context=payload, root_dir=root_dir)
         return json.dumps(result, ensure_ascii=False, indent=2)
 
+
     @mcp.tool()
     async def ssh_grep(pattern: str, path: str = ".", include: str = "*") -> str:
-        """Búsqueda optimizada vía bridge SSH."""
-        import asyncio
-        import subprocess
+        """Búsqueda rápida y acotada del workspace. Conserva el contrato histórico ssh_grep sin requerir SSH."""
+        root = Path(root_dir).resolve()
+        target = (root / path).resolve()
+        if root not in [target, *target.parents]:
+            return "[L1-MCP] ERR_PATH_OUTSIDE_WORKSPACE"
+
         orchestrator = use_cases.orchestrator
         env = os.environ.copy()
-        env["DUMMIE_CONTEXT_T"] = str(orchestrator.lamport_clock)
-        cmd = ["grep", "-rnI", "--include", include, pattern, os.path.join(root_dir, path)]
+        env["DUMMIE_CONTEXT_T"] = str(getattr(orchestrator, "lamport_clock", 0))
+        cmd = ["rg", "-n", "--hidden", "--glob", include, pattern, str(target)]
         try:
-            process = await asyncio.create_subprocess_exec(*cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, env=env)
-            stdout, _ = await process.communicate()
-            lines = stdout.decode().splitlines()
+            import asyncio
+            process = await asyncio.create_subprocess_exec(
+                *cmd,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                env=env,
+            )
+            stdout, stderr = await process.communicate()
+            if process.returncode not in (0, 1):
+                return f"[L1-MCP] ERR_SEARCH_FAILED: {stderr.decode(errors='replace')[:1000]}"
+            lines = stdout.decode(errors="replace").splitlines()
             if len(lines) > 50:
                 return "\n".join(lines[:50]) + f"\n... (Truncated: {len(lines) - 50} more lines)"
+            return "\n".join(lines) if lines else ""
+        except FileNotFoundError:
+            return "[L1-MCP] ERR_DEPENDENCY_MISSING: rg no está instalado."
         except Exception as e:
-            return f"Error ejecutando SSH-Grep: {str(e)}"
+            return f"[L1-MCP] ERR_SEARCH_FAILED: {str(e)}"
+
 
     @mcp.tool()
     async def yield_and_notify(message: str, branch_id: str = "main") -> str:
@@ -100,11 +121,22 @@ def register_nervous_tools(mcp: FastMCP, use_cases, root_dir: str):
         Notifica vía Telegram/WhatsApp.
         """
         import time
-        # MOCK de Telegram Webhook
-        logger.info(f"[{time.strftime('%H:%M:%S')}] 📱 [TELEGRAM MOCK] A jorand: {message} (Branch: {branch_id})")
+        orchestrator = use_cases.orchestrator
+        event = {
+            "branch_id": branch_id,
+            "message": message,
+            "status": "WAITING_HUMAN",
+            "created_at": time.strftime("%Y-%m-%dT%H:%M:%S%z"),
+            "lamport_t": getattr(orchestrator, "lamport_clock", 0),
+        }
+        yields_path = os.path.join(AIWG_DIR, "memory", "pending_yields.jsonl")
+        os.makedirs(os.path.dirname(yields_path), exist_ok=True)
+        with open(yields_path, "a", encoding="utf-8") as f:
+            f.write(json.dumps(event, ensure_ascii=False) + "\n")
+
+        logger.info(f"[{time.strftime('%H:%M:%S')}] [HITL MOCK] A jorand: {message} (Branch: {branch_id})")
         
         # En una integración completa (L0), esta herramienta retornaría un payload
         # que el Go Overseer interpretaría como ErrYieldWaitingHuman.
         # Por ahora, inyectamos en el historial una señal que puede ser leída por el agente.
-        return f"[YIELD_SIGNAL] Rama {branch_id} suspendida. Notificación enviada. Esperando input humano..."
-
+        return f"[YIELD_SIGNAL] Rama {branch_id} suspendida y persistida en {yields_path}. Esperando input humano..."
