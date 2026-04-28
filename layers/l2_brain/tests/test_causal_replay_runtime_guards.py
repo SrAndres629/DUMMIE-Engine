@@ -15,14 +15,14 @@ def test_causal_replay_reconstructs_frame_at_lamport_tick():
             event_id="ev-1",
             lamport_t=1,
             causal_hash="h1",
-            parent_hash="GENESIS",
+            parent_hashes=["GENESIS"],
             context={"spec": "A"},
         ),
         CausalEvent(
             event_id="ev-2",
             lamport_t=2,
             causal_hash="h2",
-            parent_hash="h1",
+            parent_hashes=["h1"],
             context={"decision": "B"},
         ),
     ]

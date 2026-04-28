@@ -86,7 +86,7 @@ enum IntentType {
 // Entrada atómica en el Event Sourcing. Mutar implica derivar una nueva rama.
 message MemoryNode4DTES {
     string causal_hash = 1;       // SHA-256(parent_hash + payload_hash + 6d_context)
-    string parent_hash = 2;       // Puntero criptográfico al nodo anterior (Merkle-like)
+    repeated string parent_hashes = 2; // Puntero criptográfico al nodo anterior (Join-semilattice)
     
     SixDimensionalContext context = 3; // Coordenadas absolutas de génesis
     

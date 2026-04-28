@@ -79,6 +79,25 @@ class DummieDaemon:
 
         logger.info(f"Saga Start: {transaction_id} | Goal: {request.goal}")
         
+        # [COGNITIVE LOOP] Haz de Hipótesis y Colapso Entrópico
+        try:
+            from domain.dtos import HypothesisBundle, Hypothesis
+            from domain.hypothesis_service import HypothesisService
+        except ImportError:
+            from layers.l2_brain.domain.dtos import HypothesisBundle, Hypothesis
+            from layers.l2_brain.domain.hypothesis_service import HypothesisService
+
+        bundle = HypothesisBundle(
+            bundle_id=transaction_id,
+            hypotheses=[
+                Hypothesis(hypothesis_id="optimal_path", content="Ejecución óptima directa", weight=0.7),
+                Hypothesis(hypothesis_id="fallback_path", content="Reintento o compensación parcial", weight=0.2),
+                Hypothesis(hypothesis_id="abort_path", content="Fallo irrecuperable", weight=0.1)
+            ]
+        )
+        entropy = HypothesisService.calculate_entropy(bundle)
+        logger.info(f"Cognitive loop HypothesisBundle initial entropy: {entropy}")
+
         try:
             # Auditoría Jidoka Triple
             for shield, name in [(self.s_shield, "S"), (self.e_shield, "E"), (self.l_shield, "L")]:
@@ -111,6 +130,22 @@ class DummieDaemon:
 
         if not route.get("master_skill") or not route.get("subskill_id"):
             raise RuntimeError(f"Task {task_id} skipped hierarchical planning gate")
+
+        # [COGNITIVE LOOP] Inferencia Contrafactual do(a) Pearl
+        try:
+            from domain.counterfactual_service import CounterfactualService
+        except ImportError:
+            from layers.l2_brain.domain.counterfactual_service import CounterfactualService
+            
+        tool_name = task_node.get("tool")
+        utility_score = CounterfactualService.evaluate_intervention(
+            action_a=tool_name,
+            context_x=saga.transaction_id,
+            utility_function=lambda a, x: 1.0 if a else 0.0,
+            cost_lambda=0.1,
+            cost_function=lambda a: 0.5 if "destructive" in str(a).lower() else 0.1
+        )
+        logger.info(f"Counterfactual do({tool_name}) evaluation score: {utility_score}")
 
         response = await self.muscle.execute(
             server_name=task_node.get("server", "filesystem"),

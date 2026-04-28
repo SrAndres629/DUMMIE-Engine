@@ -100,7 +100,7 @@ class KuzuRepository:
             cypher = (
                 "CREATE (m:MemoryNode4D {"
                 "causal_hash: $causal_hash, "
-                "parent_hash: $parent_hash, "
+                "parent_hashes: $parent_hashes, "
                 "locus_x: $locus_x, "
                 "locus_y: $locus_y, "
                 "locus_z: $locus_z, "
@@ -180,7 +180,7 @@ class KuzuRepository:
 
         # Usamos nombres explícitos para desacoplar del orden físico de las columnas
         columns = [
-            "causal_hash", "parent_hash", "locus_x", "locus_y", "locus_z",
+            "causal_hash", "parent_hashes", "locus_x", "locus_y", "locus_z",
             "lamport_t", "authority_a", "intent_i", "payload", "payload_hash", "embedding"
         ]
         return_clause = ", ".join([f"m.{c}" for c in columns])
@@ -193,7 +193,7 @@ class KuzuRepository:
             row = res.get_next()
             return MemoryNode4D(
                 causal_hash=row[0],
-                parent_hash=row[1],
+                parent_hashes=row[1] if isinstance(row[1], list) else [],
                 locus_x=row[2],
                 locus_y=row[3],
                 locus_z=row[4],
@@ -207,62 +207,88 @@ class KuzuRepository:
         return None
 
     def get_causal_chain(self, leaf_hash: str) -> List[Any]:
+        visited = set()
         chain = []
-        current = leaf_hash
-        while current and current != "GENESIS":
+        queue = [leaf_hash]
+        while queue:
+            current = queue.pop(0)
+            if current == "GENESIS" or current in visited:
+                continue
             node = self.get_by_hash(current)
-            if not node: break
-            chain.append(node)
-            current = node.parent_hash
+            if node:
+                visited.add(current)
+                chain.append(node)
+                for phash in getattr(node, "parent_hashes", []):
+                    if phash != "GENESIS" and phash not in visited:
+                        queue.append(phash)
+        # Ordenar cronológicamente por Lamport T
+        chain.sort(key=lambda n: n.lamport_t)
         return chain
 
     def find_similar_nodes(self, query_text: str, limit: int = 5) -> List[Dict[str, Any]]:
         """
-        Busca nodos semánticamente similares con fallback antifrágil.
-        Si el motor Kùzu no soporta dot_product nativo, recuperamos candidatos y rankeamos en Python.
+        Busca nodos semánticamente similares integrando el Score Epistémico y Ranking Causal.
         """
         try:
             from embedding_provider import EmbeddingProvider
+            from domain.retrieval_service import RetrievalService
         except ImportError:
             from layers.l2_brain.embedding_provider import EmbeddingProvider
+            from layers.l2_brain.domain.retrieval_service import RetrievalService
             
+        try:
+            from models import MemoryNode4D
+        except ImportError:
+            from layers.l2_brain.models import MemoryNode4D
+
         query_vec = EmbeddingProvider.generate_vector(query_text)
         
-        # [ANTI-FRAGILITY] Intentamos dot_product nativo primero
-        try:
-            cypher = (
-                "MATCH (m:MemoryNode4D) "
-                "RETURN m.causal_hash, m.payload, m.intent_i, "
-                "CAST(dot_product(m.embedding, $query_vec) AS FLOAT) as score "
-                "ORDER BY score DESC LIMIT $limit"
+        columns = [
+            "causal_hash", "parent_hashes", "locus_x", "locus_y", "locus_z",
+            "lamport_t", "authority_a", "intent_i", "payload", "payload_hash", "embedding"
+        ]
+        return_clause = ", ".join([f"m.{c}" for c in columns])
+        
+        # Traer un pool de 100 candidatos recientes
+        res = self.query(f"MATCH (m:MemoryNode4D) RETURN {return_clause} ORDER BY m.lamport_t DESC LIMIT 100")
+        
+        nodes = []
+        similarities = []
+        
+        while res.has_next():
+            row = res.get_next()
+            node = MemoryNode4D(
+                causal_hash=row[0],
+                parent_hashes=row[1] if isinstance(row[1], list) else [],
+                locus_x=row[2],
+                locus_y=row[3],
+                locus_z=row[4],
+                lamport_t=row[5],
+                authority_a=row[6],
+                intent_i=row[7],
+                payload=row[8],
+                payload_hash=row[9],
+                embedding=row[10]
             )
-            results = self.query(cypher, {"query_vec": query_vec, "limit": limit})
-            matches = []
-            while results.has_next():
-                row = results.get_next()
-                matches.append({"hash": row[0], "payload": row[1], "intent": row[2], "score": row[3]})
-            return matches
-        except Exception as e:
-            logger.warning(f"Native dot_product failed ({e}). Falling back to client-side ranking.")
-            # FALLBACK: Recuperar los últimos 100 nodos y rankear en memoria (Escalable para DUMMIE)
-            cypher = "MATCH (m:MemoryNode4D) RETURN m.causal_hash, m.payload, m.intent_i, m.embedding ORDER BY m.lamport_t DESC LIMIT 100"
-            results = self.query(cypher)
-            matches = []
-            while results.has_next():
-                row = results.get_next()
-                # [ROBUSTNESS] Asegurar que el embedding sea una lista de floats
-                emb = row[3]
-                if isinstance(emb, str):
-                    try:
-                        emb = json.loads(emb)
-                    except:
-                        emb = None
-                
-                score = EmbeddingProvider.similarity(query_vec, emb) if emb else 0.0
-                matches.append({"hash": row[0], "payload": row[1], "intent": row[2], "score": score})
+            nodes.append(node)
+            sim = EmbeddingProvider.similarity(query_vec, node.embedding) if node.embedding else 0.0
+            similarities.append(sim)
             
-            matches.sort(key=lambda x: x["score"], reverse=True)
-            return matches[:limit]
+        # Rankeo Epistémico
+        ranked = RetrievalService.rank_nodes(nodes, similarities)
+        
+        matches = []
+        for node in ranked[:limit]:
+            idx = nodes.index(node)
+            score = similarities[idx]
+            matches.append({
+                "hash": node.causal_hash, 
+                "payload": node.payload, 
+                "intent": node.intent_i, 
+                "score": score
+            })
+            
+        return matches
 
 class DecisionLedgerAdapter:
     def __init__(self, ledger_path: str, lessons_path: str, ambiguities_path: str, ontological_map_path: str):

@@ -24,7 +24,7 @@ def test_six_dimensional_context_defaults():
     ctx = SixDimensionalContext()
     assert ctx.x == 0.0
     assert ctx.a == AuthorityLevel.AGENT
-    assert ctx.i == IntentType.OBSERVATION
+    assert ctx.i == IntentType.FABRICATION
     assert ctx.metadata == {}
 
 

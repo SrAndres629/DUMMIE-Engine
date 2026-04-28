@@ -4,7 +4,7 @@ from layers.l2_brain.models import MemoryNode4D
 
 def test_from_intent_context_is_callable():
     node = MemoryNode4D.from_intent_context(
-        parent_hash="GENESIS",
+        parent_hashes=["GENESIS"],
         locus_x="sw.strategy.discovery",
         locus_y="L1_TRANSPORT",
         locus_z="L2_BRAIN",
@@ -14,11 +14,11 @@ def test_from_intent_context_is_callable():
         payload="hello",
     )
     assert len(node.causal_hash) == 64
-    assert node.parent_hash == "GENESIS"
+    assert node.parent_hashes == ["GENESIS"]
 
 def test_canonical_hash_is_deterministic():
     node_a = MemoryNode4D.from_intent_context(
-        parent_hash="GENESIS",
+        parent_hashes=["GENESIS"],
         locus_x="sw.strategy.discovery",
         locus_y="L1_TRANSPORT",
         locus_z="L2_BRAIN",
@@ -28,7 +28,7 @@ def test_canonical_hash_is_deterministic():
         payload="hello",
     )
     node_b = MemoryNode4D.from_intent_context(
-        parent_hash="GENESIS",
+        parent_hashes=["GENESIS"],
         locus_x="sw.strategy.discovery",
         locus_y="L1_TRANSPORT",
         locus_z="L2_BRAIN",
@@ -41,7 +41,7 @@ def test_canonical_hash_is_deterministic():
 
 def test_payload_with_quotes_does_not_break_cypher():
     node = MemoryNode4D.from_intent_context(
-        parent_hash="GENESIS",
+        parent_hashes=["GENESIS"],
         locus_x="sw.strategy.discovery",
         locus_y="L1_TRANSPORT",
         locus_z="L2_BRAIN",
@@ -58,7 +58,10 @@ def test_invalid_hash_is_rejected():
     from layers.l2_brain.adapters import KuzuRepository
     # Mock connection
     class MockConn:
-        def execute(self, query): return None
+        def execute(self, query, params=None):
+            class MockRes:
+                def has_next(self): return False
+            return MockRes()
     
     repo = KuzuRepository(db=None)
     repo.conn = MockConn()

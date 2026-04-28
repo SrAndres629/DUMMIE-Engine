@@ -26,7 +26,7 @@ from google.protobuf import timestamp_pb2 as google_dot_protobuf_dot_timestamp__
 from proto.dummie.v2 import core_pb2 as proto_dot_dummie_dot_v2_dot_core__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1cproto/dummie/v2/memory.proto\x12\x13io.dummie.v2.memory\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1aproto/dummie/v2/core.proto\"\xd2\x01\n\x0e\x44\x65\x63isionRecord\x12\x13\n\x0b\x64\x65\x63ision_id\x18\x01 \x01(\t\x12\x11\n\trationale\x18\x02 \x01(\t\x12\x1b\n\x13impact_blast_radius\x18\x03 \x01(\t\x12;\n\x07\x63ontext\x18\x04 \x01(\x0b\x32*.io.dummie.v2.memory.SixDimensionalContext\x12\x1a\n\x12target_causal_hash\x18\x05 \x01(\t\x12\x14\n\x0cwitness_hash\x18\x06 \x01(\t\x12\x0c\n\x04tick\x18\x07 \x01(\x04\"`\n\x06Lesson\x12\x0c\n\x04tick\x18\x01 \x01(\x03\x12\x11\n\tlesson_id\x18\x02 \x01(\t\x12\r\n\x05issue\x18\x03 \x01(\t\x12\x12\n\ncorrection\x18\x04 \x01(\t\x12\x12\n\nprevention\x18\x05 \x01(\t\"d\n\tAmbiguity\x12\x0c\n\x04tick\x18\x01 \x01(\x03\x12\x14\n\x0c\x61mbiguity_id\x18\x02 \x01(\t\x12\x0f\n\x07\x63ontext\x18\x03 \x01(\t\x12\x12\n\nresolution\x18\x04 \x01(\t\x12\x0e\n\x06impact\x18\x05 \x01(\t\"\xb3\x01\n\x16SessionCrystallization\x12\x36\n\tdecisions\x18\x01 \x03(\x0b\x32#.io.dummie.v2.memory.DecisionRecord\x12,\n\x07lessons\x18\x02 \x03(\x0b\x32\x1b.io.dummie.v2.memory.Lesson\x12\x33\n\x0b\x61mbiguities\x18\x03 \x03(\x0b\x32\x1e.io.dummie.v2.memory.Ambiguity\"\xc0\x01\n\x15SixDimensionalContext\x12\x0f\n\x07locus_x\x18\x01 \x01(\t\x12\x0f\n\x07locus_y\x18\x02 \x01(\t\x12\x0f\n\x07locus_z\x18\x03 \x01(\t\x12\x11\n\tlamport_t\x18\x04 \x01(\x04\x12.\n\x0b\x61uthority_a\x18\x05 \x01(\x0e\x32\x19.dummie.v2.AuthorityLevel\x12\x31\n\x08intent_i\x18\x06 \x01(\x0e\x32\x1f.io.dummie.v2.memory.IntentType\"\x9f\x01\n\x0fMemoryNode4DTES\x12\x13\n\x0b\x63\x61usal_hash\x18\x01 \x01(\t\x12\x13\n\x0bparent_hash\x18\x02 \x01(\t\x12;\n\x07\x63ontext\x18\x03 \x01(\x0b\x32*.io.dummie.v2.memory.SixDimensionalContext\x12\x0f\n\x07payload\x18\x04 \x01(\x0c\x12\x14\n\x0cpayload_hash\x18\x05 \x01(\t\"\x8f\x01\n\x08\x45goState\x12\x10\n\x08\x61gent_id\x18\x01 \x01(\t\x12\x0c\n\x04tick\x18\x02 \x01(\x04\x12\x16\n\x0ethought_vector\x18\x03 \x01(\t\x12\x0e\n\x06\x61\x63tion\x18\x04 \x01(\t\x12;\n\x07\x63ontext\x18\x05 \x01(\x0b\x32*.io.dummie.v2.memory.SixDimensionalContext\"\x8e\x01\n\x0eLayerCertainty\x12\x12\n\nlayer_name\x18\x01 \x01(\t\x12\x17\n\x0f\x63\x65rtainty_score\x18\x02 \x01(\x02\x12\x1a\n\x12is_terra_incognita\x18\x03 \x01(\x08\x12\x15\n\rtests_passing\x18\x04 \x01(\r\x12\x1c\n\x14unverified_mutations\x18\x05 \x01(\r\"u\n\x0eOntologicalMap\x12\x33\n\x06layers\x18\x01 \x03(\x0b\x32#.io.dummie.v2.memory.LayerCertainty\x12.\n\nupdated_at\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"q\n\x16\x41gentPresenceHeartbeat\x12\x10\n\x08\x61gent_id\x18\x01 \x01(\t\x12\x16\n\x0e\x65xpertise_tags\x18\x02 \x03(\t\x12\x14\n\x0c\x63urrent_load\x18\x03 \x01(\x02\x12\x17\n\x0f\x61uthority_level\x18\x04 \x01(\t\"m\n\x11\x43rystallizedSkill\x12\x10\n\x08skill_id\x18\x01 \x01(\t\x12\x14\n\x0cyaml_payload\x18\x02 \x01(\t\x12\x1c\n\x14source_causal_hashes\x18\x03 \x03(\t\x12\x12\n\nskill_hash\x18\x04 \x01(\t*h\n\nIntentType\x12\x16\n\x12INTENT_UNSPECIFIED\x10\x00\x12\x0f\n\x0bOBSERVATION\x10\x01\x12\x0c\n\x08MUTATION\x10\x02\x12\x0e\n\nRESOLUTION\x10\x03\x12\x13\n\x0f\x43RYSTALLIZATION\x10\x04\x42&Z$io.dummie.v2/nervous/proto;dummie_v2b\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1cproto/dummie/v2/memory.proto\x12\x13io.dummie.v2.memory\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1aproto/dummie/v2/core.proto\"\xd2\x01\n\x0e\x44\x65\x63isionRecord\x12\x13\n\x0b\x64\x65\x63ision_id\x18\x01 \x01(\t\x12\x11\n\trationale\x18\x02 \x01(\t\x12\x1b\n\x13impact_blast_radius\x18\x03 \x01(\t\x12;\n\x07\x63ontext\x18\x04 \x01(\x0b\x32*.io.dummie.v2.memory.SixDimensionalContext\x12\x1a\n\x12target_causal_hash\x18\x05 \x01(\t\x12\x14\n\x0cwitness_hash\x18\x06 \x01(\t\x12\x0c\n\x04tick\x18\x07 \x01(\x04\"`\n\x06Lesson\x12\x0c\n\x04tick\x18\x01 \x01(\x03\x12\x11\n\tlesson_id\x18\x02 \x01(\t\x12\r\n\x05issue\x18\x03 \x01(\t\x12\x12\n\ncorrection\x18\x04 \x01(\t\x12\x12\n\nprevention\x18\x05 \x01(\t\"d\n\tAmbiguity\x12\x0c\n\x04tick\x18\x01 \x01(\x03\x12\x14\n\x0c\x61mbiguity_id\x18\x02 \x01(\t\x12\x0f\n\x07\x63ontext\x18\x03 \x01(\t\x12\x12\n\nresolution\x18\x04 \x01(\t\x12\x0e\n\x06impact\x18\x05 \x01(\t\"\xb3\x01\n\x16SessionCrystallization\x12\x36\n\tdecisions\x18\x01 \x03(\x0b\x32#.io.dummie.v2.memory.DecisionRecord\x12,\n\x07lessons\x18\x02 \x03(\x0b\x32\x1b.io.dummie.v2.memory.Lesson\x12\x33\n\x0b\x61mbiguities\x18\x03 \x03(\x0b\x32\x1e.io.dummie.v2.memory.Ambiguity\"\xc0\x01\n\x15SixDimensionalContext\x12\x0f\n\x07locus_x\x18\x01 \x01(\t\x12\x0f\n\x07locus_y\x18\x02 \x01(\t\x12\x0f\n\x07locus_z\x18\x03 \x01(\t\x12\x11\n\tlamport_t\x18\x04 \x01(\x04\x12.\n\x0b\x61uthority_a\x18\x05 \x01(\x0e\x32\x19.dummie.v2.AuthorityLevel\x12\x31\n\x08intent_i\x18\x06 \x01(\x0e\x32\x1f.io.dummie.v2.memory.IntentType\"\xa1\x01\n\x0fMemoryNode4DTES\x12\x13\n\x0b\x63\x61usal_hash\x18\x01 \x01(\t\x12\x15\n\rparent_hashes\x18\x02 \x03(\t\x12;\n\x07\x63ontext\x18\x03 \x01(\x0b\x32*.io.dummie.v2.memory.SixDimensionalContext\x12\x0f\n\x07payload\x18\x04 \x01(\x0c\x12\x14\n\x0cpayload_hash\x18\x05 \x01(\t\"\x8f\x01\n\x08\x45goState\x12\x10\n\x08\x61gent_id\x18\x01 \x01(\t\x12\x0c\n\x04tick\x18\x02 \x01(\x04\x12\x16\n\x0ethought_vector\x18\x03 \x01(\t\x12\x0e\n\x06\x61\x63tion\x18\x04 \x01(\t\x12;\n\x07\x63ontext\x18\x05 \x01(\x0b\x32*.io.dummie.v2.memory.SixDimensionalContext\"\x8e\x01\n\x0eLayerCertainty\x12\x12\n\nlayer_name\x18\x01 \x01(\t\x12\x17\n\x0f\x63\x65rtainty_score\x18\x02 \x01(\x02\x12\x1a\n\x12is_terra_incognita\x18\x03 \x01(\x08\x12\x15\n\rtests_passing\x18\x04 \x01(\r\x12\x1c\n\x14unverified_mutations\x18\x05 \x01(\r\"u\n\x0eOntologicalMap\x12\x33\n\x06layers\x18\x01 \x03(\x0b\x32#.io.dummie.v2.memory.LayerCertainty\x12.\n\nupdated_at\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"q\n\x16\x41gentPresenceHeartbeat\x12\x10\n\x08\x61gent_id\x18\x01 \x01(\t\x12\x16\n\x0e\x65xpertise_tags\x18\x02 \x03(\t\x12\x14\n\x0c\x63urrent_load\x18\x03 \x01(\x02\x12\x17\n\x0f\x61uthority_level\x18\x04 \x01(\t\"m\n\x11\x43rystallizedSkill\x12\x10\n\x08skill_id\x18\x01 \x01(\t\x12\x14\n\x0cyaml_payload\x18\x02 \x01(\t\x12\x1c\n\x14source_causal_hashes\x18\x03 \x03(\t\x12\x12\n\nskill_hash\x18\x04 \x01(\t*\x84\x01\n\nIntentType\x12\x16\n\x12INTENT_UNSPECIFIED\x10\x00\x12\x0f\n\x0bOBSERVATION\x10\x01\x12\x0f\n\x0b\x46\x41\x42RICATION\x10\x02\x12\x0c\n\x08MUTATION\x10\x03\x12\x0e\n\nRESOLUTION\x10\x04\x12\t\n\x05\x41UDIT\x10\x05\x12\x13\n\x0f\x43RYSTALLIZATION\x10\x06\x42&Z$io.dummie.v2/nervous/proto;dummie_v2b\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -34,8 +34,8 @@ _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'proto.dummie.v2.memory_pb2'
 if not _descriptor._USE_C_DESCRIPTORS:
   _globals['DESCRIPTOR']._loaded_options = None
   _globals['DESCRIPTOR']._serialized_options = b'Z$io.dummie.v2/nervous/proto;dummie_v2'
-  _globals['_INTENTTYPE']._serialized_start=1702
-  _globals['_INTENTTYPE']._serialized_end=1806
+  _globals['_INTENTTYPE']._serialized_start=1705
+  _globals['_INTENTTYPE']._serialized_end=1837
   _globals['_DECISIONRECORD']._serialized_start=115
   _globals['_DECISIONRECORD']._serialized_end=325
   _globals['_LESSON']._serialized_start=327
@@ -47,15 +47,15 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_SIXDIMENSIONALCONTEXT']._serialized_start=710
   _globals['_SIXDIMENSIONALCONTEXT']._serialized_end=902
   _globals['_MEMORYNODE4DTES']._serialized_start=905
-  _globals['_MEMORYNODE4DTES']._serialized_end=1064
-  _globals['_EGOSTATE']._serialized_start=1067
-  _globals['_EGOSTATE']._serialized_end=1210
-  _globals['_LAYERCERTAINTY']._serialized_start=1213
-  _globals['_LAYERCERTAINTY']._serialized_end=1355
-  _globals['_ONTOLOGICALMAP']._serialized_start=1357
-  _globals['_ONTOLOGICALMAP']._serialized_end=1474
-  _globals['_AGENTPRESENCEHEARTBEAT']._serialized_start=1476
-  _globals['_AGENTPRESENCEHEARTBEAT']._serialized_end=1589
-  _globals['_CRYSTALLIZEDSKILL']._serialized_start=1591
-  _globals['_CRYSTALLIZEDSKILL']._serialized_end=1700
+  _globals['_MEMORYNODE4DTES']._serialized_end=1066
+  _globals['_EGOSTATE']._serialized_start=1069
+  _globals['_EGOSTATE']._serialized_end=1212
+  _globals['_LAYERCERTAINTY']._serialized_start=1215
+  _globals['_LAYERCERTAINTY']._serialized_end=1357
+  _globals['_ONTOLOGICALMAP']._serialized_start=1359
+  _globals['_ONTOLOGICALMAP']._serialized_end=1476
+  _globals['_AGENTPRESENCEHEARTBEAT']._serialized_start=1478
+  _globals['_AGENTPRESENCEHEARTBEAT']._serialized_end=1591
+  _globals['_CRYSTALLIZEDSKILL']._serialized_start=1593
+  _globals['_CRYSTALLIZEDSKILL']._serialized_end=1702
 # @@protoc_insertion_point(module_scope)

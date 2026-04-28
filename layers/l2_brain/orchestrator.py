@@ -83,7 +83,7 @@ class CognitiveOrchestrator:
             if isinstance(intent_i, Enum): intent_i = intent_i.value
             
             node = MemoryNode4D.from_intent_context(
-                parent_hash=parent_hash,
+                parent_hashes=[parent_hash],
                 locus_x=locus_x,
                 locus_y='L1_TRANSPORT',
                 locus_z='L2_BRAIN',

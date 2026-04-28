@@ -7,7 +7,7 @@ class CausalEvent:
     event_id: str
     lamport_t: int
     causal_hash: str
-    parent_hash: str
+    parent_hashes: list[str]
     context: dict[str, Any]
 
 

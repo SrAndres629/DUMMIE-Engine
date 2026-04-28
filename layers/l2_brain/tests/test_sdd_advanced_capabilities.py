@@ -47,8 +47,8 @@ def test_semantic_graph_rag_answers_decision_rationale():
 def test_witness_validates_contiguous_causal_chain():
     result = validate_witness_chain(
         [
-            WitnessNode(causal_hash="h1", parent_hash="GENESIS", lamport_t=1),
-            WitnessNode(causal_hash="h2", parent_hash="h1", lamport_t=2),
+            WitnessNode(causal_hash="h1", parent_hashes=["GENESIS"], lamport_t=1),
+            WitnessNode(causal_hash="h2", parent_hashes=["h1"], lamport_t=2),
         ]
     )
 
@@ -58,13 +58,13 @@ def test_witness_validates_contiguous_causal_chain():
 def test_witness_rejects_broken_parent_link():
     result = validate_witness_chain(
         [
-            WitnessNode(causal_hash="h1", parent_hash="GENESIS", lamport_t=1),
-            WitnessNode(causal_hash="h2", parent_hash="wrong", lamport_t=2),
+            WitnessNode(causal_hash="h1", parent_hashes=["GENESIS"], lamport_t=1),
+            WitnessNode(causal_hash="h2", parent_hashes=["wrong"], lamport_t=2),
         ]
     )
 
     assert result.status == "INVALID"
-    assert "parent_hash" in result.reason
+    assert "parent_hashes" in result.reason
 
 
 def test_self_optimization_proposes_spec_refactor_for_repeated_failures():

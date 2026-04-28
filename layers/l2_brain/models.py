@@ -75,7 +75,7 @@ import json
 
 class MemoryNode4D(BaseModel):
     causal_hash: str
-    parent_hash: str
+    parent_hashes: List[str] = Field(default_factory=lambda: ["GENESIS"])
     locus_x: str
     locus_y: str
     locus_z: str
@@ -104,7 +104,7 @@ class MemoryNode4D(BaseModel):
         return (
             "CREATE NODE TABLE MemoryNode4D("
             "causal_hash STRING, "
-            "parent_hash STRING, "
+            "parent_hashes STRING[], "
             "locus_x STRING, "
             "locus_y STRING, "
             "locus_z STRING, "
@@ -120,15 +120,24 @@ class MemoryNode4D(BaseModel):
     @classmethod
     def from_intent_context(
         cls,
-        parent_hash: str,
-        locus_x: str,
-        locus_y: str,
-        locus_z: str,
-        lamport_t: int,
-        authority_a: Any,
-        intent_i: Any,
-        payload: str,
+        parent_hashes: Optional[List[str]] = None,
+        locus_x: str = "",
+        locus_y: str = "",
+        locus_z: str = "",
+        lamport_t: int = 0,
+        authority_a: Any = None,
+        intent_i: Any = None,
+        payload: str = "",
+        **kwargs
     ) -> "MemoryNode4D":
+        if parent_hashes is None:
+            p_hash = kwargs.get("parent_hash")
+            if p_hash:
+                parent_hashes = [p_hash] if isinstance(p_hash, str) else p_hash
+            else:
+                parent_hashes = ["GENESIS"]
+
+        import hashlib
         payload_hash = f"sha256:{hashlib.sha256(payload.encode('utf-8')).hexdigest()}"
 
         from enum import Enum
@@ -136,7 +145,7 @@ class MemoryNode4D(BaseModel):
         intent_val = intent_i.value if isinstance(intent_i, Enum) else str(intent_i)
 
         causal_hash = compute_causal_hash(
-            parent_hash=parent_hash,
+            parent_hashes=parent_hashes,
             payload_hash=payload_hash,
             locus_x=locus_x,
             locus_y=locus_y,
@@ -155,7 +164,7 @@ class MemoryNode4D(BaseModel):
 
         return cls(
             causal_hash=causal_hash,
-            parent_hash=parent_hash,
+            parent_hashes=sorted(parent_hashes) if parent_hashes else ["GENESIS"],
             locus_x=locus_x,
             locus_y=locus_y,
             locus_z=locus_z,
@@ -179,7 +188,7 @@ class MemoryNode4D(BaseModel):
         return node_to_create_cypher(self)
 
 def compute_causal_hash(
-    parent_hash: str,
+    parent_hashes: List[str],
     payload_hash: str,
     locus_x: str,
     locus_y: str,
@@ -194,8 +203,11 @@ def compute_causal_hash(
     import json
     import hashlib
     
+    # Ordenar hashes para determinismo
+    sorted_parents = sorted(parent_hashes) if parent_hashes else ["GENESIS"]
+    
     node_material = {
-        "parent_hash": str(parent_hash),
+        "parent_hashes": sorted_parents,
         "payload_hash": str(payload_hash),
         "locus_x": str(locus_x),
         "locus_y": str(locus_y),
@@ -232,7 +244,7 @@ class CausalIntegrityVerifier:
 
             # 2. Verificar integridad causal
             recomputed = compute_causal_hash(
-                parent_hash=node.parent_hash,
+                parent_hashes=node.parent_hashes,
                 payload_hash=node.payload_hash,
                 locus_x=node.locus_x,
                 locus_y=node.locus_y,
