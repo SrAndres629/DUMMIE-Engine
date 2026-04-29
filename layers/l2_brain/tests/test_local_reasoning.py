@@ -6,7 +6,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from local_reasoning import DeterministicReasoningProvider, LocalReasoningService
+from local_reasoning import DeterministicReasoningProvider, LocalReasoningService, OllamaGemmaProvider
 
 
 def test_deterministic_rerank_prefers_relevant_low_risk_candidates():
@@ -122,3 +122,11 @@ def test_provider_result_tolerates_model_json_wrapped_in_text():
     parsed = provider.parse_json_response('Result:\n```json\n{"ranked": [{"id": "a"}]}\n```')
 
     assert parsed == {"ranked": [{"id": "a"}]}
+
+
+def test_ollama_provider_default_timeout_allows_local_model_cold_start(monkeypatch):
+    monkeypatch.delenv("DUMMIE_LOCAL_REASONING_TIMEOUT", raising=False)
+
+    provider = OllamaGemmaProvider()
+
+    assert provider.timeout >= 30

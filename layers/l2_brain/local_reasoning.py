@@ -85,7 +85,7 @@ class OllamaGemmaProvider:
     def __init__(self, base_url: str | None = None, model: str | None = None, timeout: float | None = None):
         self.base_url = (base_url or os.getenv("DUMMIE_OLLAMA_BASE_URL") or "http://127.0.0.1:11434").rstrip("/")
         self.model = model or os.getenv("DUMMIE_GEMMA_MODEL") or "gemma4:latest"
-        self.timeout = float(timeout or os.getenv("DUMMIE_LOCAL_REASONING_TIMEOUT", "0.75"))
+        self.timeout = float(timeout or os.getenv("DUMMIE_LOCAL_REASONING_TIMEOUT", "45"))
 
     def complete_json(self, task: str, payload: dict[str, Any]) -> ReasoningResult:
         started = time.perf_counter()
@@ -123,7 +123,7 @@ class OpenAICompatibleProvider:
         self.base_url = (base_url or os.getenv("DUMMIE_OPENAI_COMPAT_BASE_URL") or "").rstrip("/")
         self.api_key = api_key or os.getenv("DUMMIE_OPENAI_COMPAT_API_KEY") or ""
         self.model = model or os.getenv("DUMMIE_GEMMA_MODEL") or "gemma4"
-        self.timeout = float(timeout or os.getenv("DUMMIE_LOCAL_REASONING_TIMEOUT", "0.75"))
+        self.timeout = float(timeout or os.getenv("DUMMIE_LOCAL_REASONING_TIMEOUT", "45"))
 
     def complete_json(self, task: str, payload: dict[str, Any]) -> ReasoningResult:
         started = time.perf_counter()
