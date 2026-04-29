@@ -17,11 +17,11 @@ import (
 
 // State representa el Floating Session State del enjambre
 type State struct {
-	ID      string
-	Goal    string
-	Context map[string]interface{}
-	History []string
-	Skills  []*skill.Skill
+	ID       string
+	Goal     string
+	Context  map[string]interface{}
+	History  []string
+	Skills   []*skill.Skill
 	Result   string
 	Branch   string
 	Status   string
@@ -71,7 +71,6 @@ type EdgeDefinition struct {
 	To        string `json:"to" yaml:"to"`
 	Condition string `json:"condition" yaml:"condition"`
 }
-
 
 // NodeFunc es la unidad de ejecución en el grafo
 type NodeFunc func(ctx context.Context, state *State) (*State, error)
@@ -194,11 +193,8 @@ func RegisterDefaultFactories() {
 				return state, fmt.Errorf("failed to unmarshal manifest: %v", err)
 			}
 
-			// 2. Conectar al socket del Daemon
-			socketPath := filepath.Join(os.Getenv("DUMMIE_AIWG_DIR"), "dummied.sock")
-			if os.Getenv("DUMMIE_AIWG_DIR") == "" {
-				socketPath = "/tmp/dummied.sock"
-			}
+			// 2. Conectar al socket del Daemon usando el mismo contrato que el listener.
+			socketPath := resolveDummiedSocketPath()
 
 			conn, err := net.Dial("unix", socketPath)
 			if err != nil {
@@ -300,7 +296,7 @@ func (g *StateGraph) Run(ctx context.Context, initialState *State, startNode str
 			}
 		}
 		state.Mu.Unlock()
-		
+
 		if g.Store != nil {
 			g.Store.SaveState(state)
 		}
@@ -318,11 +314,11 @@ func (g *StateGraph) Run(ctx context.Context, initialState *State, startNode str
 				state.Mu.Lock()
 				state.Status = "BLOCKED_WAITING_HUMAN"
 				state.Mu.Unlock()
-				
+
 				if g.Store != nil {
 					g.Store.SaveState(state)
 				}
-				
+
 				// Rompemos el ciclo sin devolver error fatal para que el orquestador global siga
 				return state, nil
 			}
@@ -333,7 +329,7 @@ func (g *StateGraph) Run(ctx context.Context, initialState *State, startNode str
 		state.Mu.Lock()
 		state.Status = "RUNNING"
 		state.Mu.Unlock()
-		
+
 		if g.Store != nil {
 			g.Store.SaveState(state)
 		}
@@ -350,7 +346,7 @@ func (g *StateGraph) Run(ctx context.Context, initialState *State, startNode str
 			break
 		}
 
-	// Si hay múltiples nodos, lanzamos el "Fan-out" probabilístico
+		// Si hay múltiples nodos, lanzamos el "Fan-out" probabilístico
 		if len(nextNodes) > 1 {
 			return g.runProbabilistic(ctx, state, nextNodes)
 		}
@@ -368,7 +364,7 @@ type NodeEvaluation struct {
 
 func (g *StateGraph) runProbabilistic(ctx context.Context, state *State, nodes []string) (*State, error) {
 	fmt.Printf("[GRAFO] Resolviendo bifurcación probabilística (%d rutas posibles)...\n", len(nodes))
-	
+
 	evals := make([]NodeEvaluation, len(nodes))
 	for i, n := range nodes {
 		friction := AnalyzePotentialNode(state, n)
@@ -390,7 +386,7 @@ func (g *StateGraph) runProbabilistic(ctx context.Context, state *State, nodes [
 	// Ejecutar secuencialmente priorizando menor fricción
 	for _, eval := range evals {
 		fmt.Printf("[GRAFO] Intentando ruta '%s' (Fricción estimada: %.2f)\n", eval.Name, eval.Friction)
-		
+
 		// [BRANCH ISOLATION 2.0] Clonar estado y aplicar TurboQuant
 		clonedState := g.cloneState(state)
 
@@ -448,7 +444,6 @@ func (g *StateGraph) runProbabilistic(ctx context.Context, state *State, nodes [
 
 	return state, fmt.Errorf("probabilistic execution failed all routes: %v", lastErr)
 }
-
 
 func (g *StateGraph) cloneState(s *State) *State {
 	s.Mu.RLock()

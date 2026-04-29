@@ -2,34 +2,44 @@ import os
 import json
 import logging
 from mcp.server.fastmcp import FastMCP
+from runtime_paths import resolve_aiwg_dir
 
 logger = logging.getLogger("dummie-mcp.resources")
 
+
+def _load_agent_identity(identity_md_path: str) -> dict[str, str]:
+    identity_data = {}
+    if not os.path.exists(identity_md_path):
+        return identity_data
+
+    try:
+        with open(identity_md_path, "r") as f:
+            content = f.read()
+    except Exception as e:
+        logger.error(f"Error reading IDENTITY.md: {e}")
+        return identity_data
+
+    for line in content.splitlines():
+        for key in ["Name", "Creature", "Vibe", "Emoji", "Avatar"]:
+            if f"**{key}:**" in line or f"**{key}**:" in line:
+                value = line.split(":", 1)[1].strip().replace("*", "").strip()
+                if "_(" not in value and value:
+                    identity_data[key.lower()] = value
+
+    return identity_data
+
+
 def register_resources(mcp: FastMCP, get_orchestrator, get_proxy, root_dir: str):
     """Registra todos los recursos en la instancia de FastMCP."""
-    
-    AIWG_DIR = os.path.join(root_dir, ".aiwg")
+
+    AIWG_DIR = str(resolve_aiwg_dir(root_dir))
 
     @mcp.resource("brain://identity")
     def get_brain_identity() -> str:
         """Retorna la identidad y arquetipo del sistema."""
-        import re
         identity_md_path = os.path.join(root_dir, "IDENTITY.md")
-        identity_data = {}
-        
-        if os.path.exists(identity_md_path):
-            try:
-                with open(identity_md_path, "r") as f:
-                    content = f.read()
-                for key in ["Name", "Creature", "Vibe", "Emoji", "Avatar"]:
-                    match = re.search(rf"- \*\*.*?{key}.*?\*\*:(.*)", content, re.IGNORECASE)
-                    if match:
-                        val = match.group(1).strip()
-                        if "_(" not in val and val:
-                            identity_data[key.lower()] = val
-            except Exception as e:
-                logger.error(f"Error parsing IDENTITY.md: {e}")
-                
+        identity_data = _load_agent_identity(identity_md_path)
+
         path = os.path.join(AIWG_DIR, "identity.json")
         if os.path.exists(path):
             try:
@@ -42,12 +52,33 @@ def register_resources(mcp: FastMCP, get_orchestrator, get_proxy, root_dir: str)
                     json_data["personality_profile"]["vibe"] = identity_data.get("vibe", "Technical")
                     json_data["personality_profile"]["emoji"] = identity_data.get("emoji", "🌌")
                     json_data["personality_profile"]["avatar"] = identity_data.get("avatar", "")
+                    json_data["agent_identity"] = identity_data
+                    json_data["identity_sources"] = {
+                        "agent_identity": "IDENTITY.md",
+                        "system_profile": ".aiwg/identity.json",
+                    }
                 return json.dumps(json_data, indent=2)
             except Exception as e:
                 logger.error(f"Error reading identity.json: {e}")
                 
         if identity_data:
-            return json.dumps(identity_data, indent=2)
+            return json.dumps(
+                {
+                    **identity_data,
+                    "personality_profile": {
+                        "agent_name": identity_data.get("name", "Antigravity"),
+                        "creature": identity_data.get("creature", "Ghost"),
+                        "vibe": identity_data.get("vibe", "Technical"),
+                        "emoji": identity_data.get("emoji", "🌌"),
+                        "avatar": identity_data.get("avatar", ""),
+                    },
+                    "agent_identity": identity_data,
+                    "identity_sources": {
+                        "agent_identity": "IDENTITY.md",
+                    },
+                },
+                indent=2,
+            )
         return "Identidad desconocida."
 
     @mcp.resource("brain://dashboard")

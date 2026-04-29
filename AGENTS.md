@@ -273,6 +273,12 @@ Before final response, run or justify:
 - `rg -n "kuzu_data|MemoryState|m\\.\\*|rm -f.*kuzu|os\\.remove\\(" layers scripts doc -S` when touching 4D-TES
 - Inspect final diff for unrelated changes
 
+## 🧠 Cognitive Blindspots & Layer Verification
+
+Para evitar la complacencia de operar solo en la capa más cómoda (L2/Python) y dejar cabos sueltos en las capas inferiores (L0/L1 Go-Elixir):
+1. **Auditoría Vertical:** Antes de dar por terminado un cambio, verifica los contratos de datos en L0 y L1 físicamente.
+2. **Inyección de Identidad:** Mantén la coherencia entre la declaración explícita de `IDENTITY.md` y el consumo físico de las APIs internas.
+
 ## Make It Yours
 
 This is a starting point. Add your own conventions, style, and rules as you figure out what works.

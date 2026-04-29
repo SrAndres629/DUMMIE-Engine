@@ -39,7 +39,7 @@ func NewDaemon(g *StateGraph, s *StateStore) *Daemon {
 // Start inicia el loop reactivo del daemon
 func (d *Daemon) Start(ctx context.Context) error {
 	fmt.Println("[DAEMON] Iniciando motor de orquestación continua...")
-	
+
 	// Setup cleanup on exit
 	sigChan := make(chan os.Signal, 1)
 	signal.Notify(sigChan, os.Interrupt, syscall.SIGTERM)
@@ -66,7 +66,7 @@ func (d *Daemon) Start(ctx context.Context) error {
 	}
 
 	go d.schedulerLoop(ctx)
-	
+
 	return d.startControlInterface(ctx)
 }
 
@@ -105,14 +105,7 @@ func (d *Daemon) schedulerLoop(ctx context.Context) {
 }
 
 func (d *Daemon) startControlInterface(ctx context.Context) error {
-	d.socketPath = filepath.Join(os.Getenv("DUMMIE_AIWG_DIR"), "sockets", "dummied.sock")
-	if os.Getenv("DUMMIE_AIWG_DIR") == "" {
-		if pwd, err := os.Getwd(); err == nil {
-			d.socketPath = filepath.Join(pwd, ".aiwg", "sockets", "dummied.sock")
-		} else {
-			d.socketPath = "/tmp/dummied.sock"
-		}
-	}
+	d.socketPath = resolveDummiedSocketPath()
 
 	// Asegurar existencia del directorio padre
 	os.MkdirAll(filepath.Dir(d.socketPath), 0755)

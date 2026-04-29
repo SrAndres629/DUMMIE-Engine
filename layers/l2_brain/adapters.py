@@ -194,7 +194,7 @@ class KuzuRepository:
         )
         if res.has_next():
             row = res.get_next()
-            return MemoryNode4D(
+            node = MemoryNode4D(
                 causal_hash=row[0],
                 parent_hashes=row[1] if isinstance(row[1], list) else [],
                 locus_x=row[2],
@@ -207,6 +207,15 @@ class KuzuRepository:
                 payload_hash=row[9],
                 embedding=row[10]
             )
+            try:
+                from models import CausalIntegrityVerifier
+            except ImportError:
+                from layers.l2_brain.models import CausalIntegrityVerifier
+                
+            if not CausalIntegrityVerifier.verify_node(node):
+                logger.critical(f"Causal Integrity Failure for node {causal_hash}")
+                raise ValueError(f"Causal Integrity Failure: Node {causal_hash} has been tampered with.")
+            return node
         return None
 
     def get_causal_chain(self, leaf_hash: str) -> List[Any]:

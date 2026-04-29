@@ -1,20 +1,21 @@
 #!/bin/bash
 # DUMMIE ENGINE - Fencing Stress Test
 DB_DIR="/home/jorand/Escritorio/DUMMIE Engine/.aiwg/memory/kuzu"
+DB_PATH="$DB_DIR/state.db"
 LOCK_FILE="$DB_DIR/lock.file"
 
 echo "[TEST] Iniciando Stress Test de Fencing..."
 
-# 1. Asegurar que la DB existe
+# 1. Asegurar que el directorio existe
 mkdir -p "$DB_DIR"
 
-# 2. Simular un bloqueo huérfano (crear lock.file manualmente)
+# 2. Simular un bloqueo huérfano
 echo "SIMULATED_ORPHAN_PID" > "$LOCK_FILE"
 echo "[TEST] Lock huérfano inyectado en $LOCK_FILE"
 
-# 3. Intentar arrancar el servidor Go en segundo plano
+# 3. Intentar arrancar el servidor Go
 echo "[TEST] Arrancando Servidor Memory Plane..."
-cd layers/l1_nervous && KUZU_DB_PATH="$DB_DIR" go run cmd/memory/main.go &
+cd layers/l1_nervous && KUZU_DB_PATH="$DB_PATH" ./bin/memory_server &
 GO_PID=$!
 cd ../..
 

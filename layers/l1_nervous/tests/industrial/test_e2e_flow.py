@@ -12,12 +12,14 @@ def test_industrial_e2e():
     print("=== DUMMIE INDUSTRIAL VERIFICATION - SMOKE E2E ===")
     
     SOCKET_PATH = "/tmp/dummie_industrial.sock"
-    DB_PATH = "/tmp/dummie_ind_kuzu"
+    DB_PATH = "/tmp/dummie_ind_kuzu/state.db"
     
     # Limpieza total antes de empezar
     if os.path.exists(SOCKET_PATH): os.remove(SOCKET_PATH)
-    # No creamos el directorio, dejamos que Go lo haga para evitar conflictos de dueño/permisos
-    if os.path.exists(DB_PATH): shutil.rmtree(DB_PATH, ignore_errors=True)
+    parent_dir = os.path.dirname(DB_PATH)
+    if os.path.exists(parent_dir):
+        shutil.rmtree(parent_dir, ignore_errors=True)
+    os.makedirs(parent_dir, exist_ok=True)
     
     bridge = ArrowMemoryBridge(SOCKET_PATH)
     

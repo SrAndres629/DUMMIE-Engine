@@ -23,6 +23,7 @@ SERVER = ROOT / "layers" / "l1_nervous" / "mcp_server.py"
 GATEWAY_CONFIG = ROOT / "dummie_gateway_config.json"
 CANONICAL_DB = ROOT / ".aiwg" / "memory" / "loci.db"
 SOCKET = ROOT / ".aiwg" / "sockets" / "flight.sock"
+DUMMIED_SOCKET = ROOT / ".aiwg" / "sockets" / "dummied.sock"
 
 
 def gateway_env() -> dict[str, str]:
@@ -32,6 +33,7 @@ def gateway_env() -> dict[str, str]:
             "DUMMIE_ROOT_DIR": str(ROOT),
             "DUMMIE_AIWG_DIR": str(ROOT / ".aiwg"),
             "DUMMIE_KUZU_DB_PATH": str(CANONICAL_DB),
+            "DUMMIE_DUMMIED_SOCKET_PATH": str(DUMMIED_SOCKET),
             "DUMMIE_MCP_CONFIG_PATH": str(GATEWAY_CONFIG),
             "MEMORY_SOCKET_PATH": str(SOCKET),
             "PYTHONPATH": ":".join(
@@ -126,6 +128,19 @@ def inspect_processes() -> bool:
     return not legacy
 
 
+def inspect_runtime_sockets() -> bool:
+    sockets = {
+        "dummied_socket": DUMMIED_SOCKET,
+        "legacy_aiwg_dummied_socket": ROOT / ".aiwg" / "dummied.sock",
+        "legacy_tmp_dummied_socket": Path("/tmp/dummied.sock"),
+        "flight_socket": SOCKET,
+    }
+    for label, path in sockets.items():
+        state = "present" if path.exists() else "missing"
+        print(f"socket:{label}={state} path={path}")
+    return True
+
+
 async def check_mcp_handshake(call_discovery: bool) -> bool:
     from mcp.client.session import ClientSession
     from mcp.client.stdio import StdioServerParameters, stdio_client
@@ -151,6 +166,10 @@ async def check_mcp_handshake(call_discovery: bool) -> bool:
             health = await session.read_resource("brain://health")
             health_text = "\n".join(getattr(item, "text", "") for item in health.contents)
             print(f"brain_health={health_text.strip()}")
+
+            identity = await session.read_resource("brain://identity")
+            identity_text = "\n".join(getattr(item, "text", "") for item in identity.contents)
+            print(f"brain_identity={identity_text.strip()}")
 
             if call_discovery:
                 result = await session.call_tool("dummie_discover_capabilities", {"query": ""})
@@ -186,6 +205,7 @@ async def main() -> int:
         ok = check_codex_config() and ok
     ok = audit_gateway_config() and ok
     ok = inspect_processes() and ok
+    ok = inspect_runtime_sockets() and ok
 
     try:
         ok = await check_mcp_handshake(args.call_discovery) and ok

@@ -1,5 +1,4 @@
 import logging
-import time
 
 logger = logging.getLogger("edge-observer")
 
@@ -10,9 +9,11 @@ class FileWatcher:
     """
     def __init__(self, watch_path: str):
         self.path = watch_path
+        self.enabled = False
 
     async def watch_forever(self):
-        logger.info(f"L4 EDGE: Observing file changes in {self.path}")
-        import asyncio
-        while True:
-            await asyncio.sleep(3600)
+        logger.warning(
+            "L4 EDGE file watcher disabled until a real backend is implemented for %s",
+            self.path,
+        )
+        return "DISABLED_PENDING_IMPLEMENTATION"

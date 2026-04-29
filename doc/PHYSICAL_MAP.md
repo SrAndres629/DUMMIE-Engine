@@ -9,6 +9,7 @@ Mapa de verdad física del sistema para evitar deriva entre diseño teórico y e
 - **Control Plane**: Monitor de salud y orquestación de ciclo de vida.
 - Binario Go (`cmd/monitor/main.go`) que escucha telemetría de fallos vía NATS.
 - Runtime base Elixir mantenido para orquestación reactiva.
+- Socket de control canónico en `.aiwg/sockets/dummied.sock` con compatibilidad legacy limitada durante migración.
 
 ### L1 (`layers/l1_nervous`)
 - **Data Plane (Memory Plane)**: Servidor Arrow Flight tipado (`cmd/memory/main.go`).
@@ -28,7 +29,7 @@ Mapa de verdad física del sistema para evitar deriva entre diseño teórico y e
 
 ### L4 (`layers/l4_edge`)
 - Descubrimiento de capacidades MCP (`tool_discovery.py`).
-- Observador de archivos en estado placeholder (`file_watcher.py`).
+- Observador de archivos explícitamente deshabilitado hasta tener backend real (`file_watcher.py`).
 
 ### L5 (`layers/l5_muscle`)
 - Driver MCP y manager de sandbox en Python.

@@ -53,3 +53,53 @@ def test_causal_hash_no_truncation():
         ["GENESIS"], "x", "y", "z", 1, AuthorityLevel.AGENT, IntentType.FABRICATION, "content"
     )
     assert len(node.causal_hash) == 64, "Causal hash must be a full SHA-256 hex string (64 chars)"
+
+def test_tamper_detection(tmp_path):
+    """Verifica que si un nodo es alterado en la DB, get_by_hash levante ValueError."""
+    from layers.l2_brain.adapters import KuzuRepository
+    from layers.l2_brain.models import MemoryNode4D, AuthorityLevel, IntentType
+    
+    db_file = str(tmp_path / "test_db")
+    repo = KuzuRepository(db_path=db_file)
+    
+    # 1. Crear nodo válido
+    node = MemoryNode4D.from_intent_context(
+        parent_hashes=["GENESIS"],
+        locus_x="x", locus_y="y", locus_z="z",
+        lamport_t=1,
+        authority_a=AuthorityLevel.AGENT,
+        intent_i=IntentType.FABRICATION,
+        payload="valid_content"
+    )
+    
+    repo.create_memory_node(node)
+    
+    # 2. Verificar que se puede leer
+    read_node = repo.get_by_hash(node.causal_hash)
+    assert read_node is not None
+    
+    # 3. Simulamos corrupción modificando el comportamiento de query
+    class TamperedRepo(KuzuRepository):
+        def query(self, cypher, parameters=None):
+            class MockRes:
+                def has_next(self): return True
+                def get_next(self):
+                    return [
+                        node.causal_hash,
+                        node.parent_hashes,
+                        node.locus_x, node.locus_y, node.locus_z,
+                        node.lamport_t,
+                        node.authority_a,
+                        node.intent_i,
+                        "TAMPERED_CONTENT", # Alterado!
+                        node.payload_hash,
+                        node.embedding
+                    ]
+            return MockRes()
+            
+    tampered_repo = TamperedRepo(db=repo.db)
+    tampered_repo.conn = repo.conn
+    
+    import pytest
+    with pytest.raises(ValueError, match="Causal Integrity Failure"):
+        tampered_repo.get_by_hash(node.causal_hash)

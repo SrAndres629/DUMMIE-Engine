@@ -2,6 +2,7 @@ import os
 import json
 from mcp.server.fastmcp import FastMCP
 from utils import AtomicLedgerWriter
+from runtime_paths import iter_dummied_socket_candidates
 
 def register_swarm_tools(mcp: FastMCP, use_cases, root_dir: str):
     AIWG_DIR = os.path.join(root_dir, ".aiwg")
@@ -56,10 +57,6 @@ def register_swarm_tools(mcp: FastMCP, use_cases, root_dir: str):
         """[SWARM] Crea e inyecta un nuevo agente/enjambre en el motor L0."""
         import socket
         import yaml
-        
-        socket_path = os.path.join(AIWG_DIR, "sockets/dummied.sock")
-        if not os.path.exists(socket_path):
-            socket_path = "/tmp/dummied.sock"
         if not manifest_path:
             # Manifiesto por defecto si no se provee uno
             manifest = {
@@ -88,12 +85,16 @@ def register_swarm_tools(mcp: FastMCP, use_cases, root_dir: str):
             "manifest": manifest
         }
 
-        try:
-            client = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
-            client.connect(socket_path)
-            client.sendall(json.dumps(cmd).encode())
-            response = client.recv(4096).decode()
-            client.close()
-            return f"[SWARM] Agente inyectado exitosamente: {response}"
-        except Exception as e:
-            return f"Error al conectar con el daemon L0 (¿está encendido?): {str(e)}"
+        errors = []
+        for socket_path in iter_dummied_socket_candidates(root_dir):
+            try:
+                client = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+                client.connect(str(socket_path))
+                client.sendall(json.dumps(cmd).encode())
+                response = client.recv(4096).decode()
+                client.close()
+                return f"[SWARM] Agente inyectado exitosamente: {response}"
+            except Exception as e:
+                errors.append(f"{socket_path}: {e}")
+
+        return "Error al conectar con el daemon L0 (¿está encendido?): " + " | ".join(errors)

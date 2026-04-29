@@ -18,7 +18,9 @@ defmodule Overseer.Application do
         start: {Gnat, :start_link, [gnat_opts, [name: :gnat]]}
       },
       # 2. Monitor de Salud Causal (L1-L6) - Árbitro Ejecutivo
-      {Overseer.HealthMonitor, []}
+      {Overseer.HealthMonitor, []},
+      # 3. Daemon Go (Port)
+      {Overseer.PortManager, []}
     ]
 
     # Estrategia One For One: Si el Gnat falla, se reinicia solo.
@@ -110,6 +112,104 @@ defmodule Overseer.HealthMonitor do
     end
 
     Process.send_after(self(), :check_apoptosis, 5_000)
+    {:noreply, state}
+  end
+end
+
+defmodule Overseer.PortManager do
+  @moduledoc """
+  Gestiona el ciclo de vida y la comunicación IPC (via Erlang Ports)
+  con el daemon de Go (dummied).
+  """
+  use GenServer
+
+  def start_link(opts) do
+    GenServer.start_link(__MODULE__, opts, name: __MODULE__)
+  end
+
+  def send_command(name \\ __MODULE__, command, args \\ %{}) do
+    GenServer.call(name, {:send_command, command, args})
+  end
+
+  @impl true
+  def init(_opts) do
+    IO.puts("[L0] PortManager: Activando supervisión del Daemon Go...")
+    Process.flag(:trap_exit, true)
+    
+    # Preferir el binario canónico del repo y degradar al artefacto local solo por compatibilidad.
+    repo_root = System.get_env("DUMMIE_ROOT_DIR") || Path.expand("../../../..", __DIR__)
+
+    bin_path =
+      [
+        Path.join(repo_root, "bin/dummied"),
+        Path.expand("../../dummied", __DIR__)
+      ]
+      |> Enum.find(&File.exists?/1)
+    
+    if bin_path do
+      IO.puts("[L0] PortManager: Iniciando binario en #{bin_path}")
+      port =
+        Port.open(
+          {:spawn_executable, bin_path},
+          [
+            :binary,
+            :use_stdio,
+            {:line, 4096},
+            {:env, [{'DUMMIE_PORT_INTERFACE', 'stdio'}]}
+          ]
+        )
+      {:ok, %{port: port, requests: %{}, buffer: ""}}
+    else
+      IO.puts("[L0] PortManager: ADVERTENCIA - Binario no encontrado. Se requiere compilación.")
+      {:ok, %{port: nil, requests: %{}, buffer: ""}}
+    end
+  end
+
+  @impl true
+  def handle_call({:send_command, _command, _args}, _from, %{port: nil} = state) do
+    {:reply, {:error, :port_not_active}, state}
+  end
+
+  def handle_call({:send_command, command, args}, from, state) do
+    id = "req_#{System.unique_integer([:positive])}"
+    msg = %{"id" => id, "command" => command, "args" => args}
+    payload = Jason.encode!(msg) <> "\n"
+    
+    Port.command(state.port, payload)
+    
+    new_requests = Map.put(state.requests, id, from)
+    {:noreply, %{state | requests: new_requests}}
+  end
+
+  @impl true
+  def handle_info({port, {:data, {:eol, line}}}, %{port: port} = state) do
+    full_line = state.buffer <> line
+    state = %{state | buffer: ""}
+    
+    case Jason.decode(full_line) do
+      {:ok, %{"id" => id, "status" => status, "payload" => payload}} ->
+        case Map.pop(state.requests, id) do
+          {nil, _} ->
+            {:noreply, state}
+          {from, new_requests} ->
+            GenServer.reply(from, {String.to_atom(status), payload})
+            {:noreply, %{state | requests: new_requests}}
+        end
+      _ ->
+        {:noreply, state}
+    end
+  end
+
+  def handle_info({port, {:data, {:noeol, partial}}}, %{port: port} = state) do
+    {:noreply, %{state | buffer: state.buffer <> partial}}
+  end
+
+  def handle_info({:EXIT, port, reason}, %{port: port} = state) do
+    IO.puts("[L0] PortManager: El proceso Go ha caído: #{inspect(reason)}")
+    {:stop, :port_terminated, state}
+  end
+  
+  def handle_info(_msg, state) do
     {:noreply, state}
   end
 end

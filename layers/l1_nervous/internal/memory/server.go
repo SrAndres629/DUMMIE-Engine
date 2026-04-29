@@ -37,6 +37,14 @@ func NewDummieMemoryServer(dbPath string, nc *nats.Conn) (*DummieMemoryServer, e
 	log.Printf("[L1-MEMORY] Step 1: Opening KuzuDB (Native creation)...")
 	config := kuzu.DefaultSystemConfig()
 	
+	if info, err := os.Stat(dbPath); err == nil && info.IsDir() {
+		files, _ := os.ReadDir(dbPath)
+		if len(files) == 0 {
+			log.Printf("[L1-MEMORY] dbPath es un directorio vacío. Eliminándolo para evitar error de Kuzu...")
+			os.Remove(dbPath)
+		}
+	}
+	
 	// Intento de apertura con aislamiento
 	db, err := kuzu.OpenDatabase(dbPath, config)
 	if err != nil {

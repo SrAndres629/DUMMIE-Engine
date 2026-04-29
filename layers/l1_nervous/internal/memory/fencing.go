@@ -12,13 +12,16 @@ func ResolveStaleLocks(dbPath string) error {
 	if os.IsNotExist(err) {
 		return nil
 	}
-	if !info.IsDir() {
-		log.Printf("[FENCING] Warning: dbPath %s is not a directory.", dbPath)
+	var lockDir string
+	if info.IsDir() {
+		lockDir = dbPath
+	} else {
+		lockDir = filepath.Dir(dbPath)
 	}
 
 	lockFiles := []string{
-		filepath.Join(dbPath, "lock.file"),
-		filepath.Join(dbPath, "kuzu.lock"),
+		filepath.Join(lockDir, "lock.file"),
+		filepath.Join(lockDir, "kuzu.lock"),
 	}
 
 	for _, lockFile := range lockFiles {
