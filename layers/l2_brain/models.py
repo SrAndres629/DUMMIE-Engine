@@ -124,6 +124,13 @@ class MemoryNode4D(BaseModel):
             "PRIMARY KEY (causal_hash))"
         )
 
+    @staticmethod
+    def schema_creation_queries() -> List[str]:
+        return [
+            MemoryNode4D.schema_creation_query(),
+            "CREATE REL TABLE CAUSAL_LINK(FROM MemoryNode4D TO MemoryNode4D)"
+        ]
+
     @classmethod
     def from_intent_context(
         cls,

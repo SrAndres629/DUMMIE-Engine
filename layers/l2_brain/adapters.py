@@ -56,17 +56,30 @@ class KuzuRepository:
                 from models import MemoryNode4D
             except ImportError:
                 from layers.l2_brain.models import MemoryNode4D
-            # Esquema alineado con .aiwg/memory/loci.db real
-            self.conn.execute(MemoryNode4D.schema_creation_query())
-            logger.info("Created table MemoryNode4D with SOVEREIGN-4D schema")
-        except Exception as e:
-            # Solo permitimos pasar si el error es "Table ... already exists"
-            msg = str(e).lower()
-            if "already exists" in msg:
-                logger.debug("Schema already exists (verified)")
+            
+            # Ejecutar todas las consultas de esquema
+            queries = []
+            if hasattr(MemoryNode4D, "schema_creation_queries"):
+                queries = MemoryNode4D.schema_creation_queries()
             else:
-                logger.critical(f"FATAL: Could not ensure Kuzu schema: {e}")
-                raise RuntimeError(f"Kuzu Integrity Error: {e}")
+                queries = [MemoryNode4D.schema_creation_query()]
+                
+            for q in queries:
+                try:
+                    self.conn.execute(q)
+                    logger.info(f"Executed schema query: {q[:30]}...")
+                except Exception as e:
+                    msg = str(e).lower()
+                    if "already exists" in msg:
+                        logger.debug(f"Schema element already exists: {q[:30]}")
+                    else:
+                        logger.critical(f"FATAL: Could not ensure Kuzu schema element: {e}")
+                        raise RuntimeError(f"Kuzu Integrity Error: {e}")
+        except RuntimeError:
+            raise
+        except Exception as e:
+            logger.critical(f"FATAL: Unexpected error ensuring Kuzu schema: {e}")
+            raise RuntimeError(f"Kuzu Integrity Error: {e}")
 
     def create_memory_node(self, node: Any) -> str:
         """
@@ -115,12 +128,33 @@ class KuzuRepository:
                 "embedding: $embedding})"
             )
             self.query(cypher, data)
-            return node.causal_hash
         except Exception as e:
             logger.debug(f"Parameterized query not used ({e}). Executing strict serialization.")
             cypher_fallback = node_to_create_cypher(node)
             self.query(cypher_fallback)
-            return node.causal_hash
+
+        # [4D-TES Edge Creation]
+        parents = getattr(node, "parent_hashes", [])
+        if isinstance(parents, str):
+            parents = [parents]
+        elif not isinstance(parents, list):
+            parents = []
+            
+        for p_hash in parents:
+            if p_hash == "GENESIS":
+                continue
+            try:
+                cypher_rel = (
+                    "MATCH (p:MemoryNode4D), (c:MemoryNode4D) "
+                    "WHERE p.causal_hash = $p_hash AND c.causal_hash = $c_hash "
+                    "CREATE (p)-[:CAUSAL_LINK]->(c)"
+                )
+                self.query(cypher_rel, {"p_hash": p_hash, "c_hash": node.causal_hash})
+                logger.info(f"Created CAUSAL_LINK from {p_hash} to {node.causal_hash}")
+            except Exception as e:
+                logger.warning(f"Could not create CAUSAL_LINK from {p_hash} to {node.causal_hash}: {e}")
+
+        return node.causal_hash
 
     def _execute_supports_parameters(self) -> bool:
         import inspect
