@@ -22,8 +22,6 @@ def cypher_literal(value: Any) -> str:
             str(value)
             .replace("\\", "\\\\")
             .replace("'", "\\'")
-            .replace("\n", "\\n")
-            .replace("\r", "\\r")
         )
         return f"'{escaped}'"
     

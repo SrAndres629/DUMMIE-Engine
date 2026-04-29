@@ -54,6 +54,27 @@ def test_payload_with_quotes_does_not_break_cypher():
     # Verifica que la comilla se escapó a \'Hara o ''Hara según cypher_literal
     assert "O\\'Hara" in cypher or "O''Hara" in cypher
 
+def test_multiline_payload_round_trips_without_causal_integrity_failure(tmp_path):
+    from layers.l2_brain.adapters import KuzuRepository
+
+    repo = KuzuRepository(db_path=str(tmp_path / "loci"))
+    node = MemoryNode4D.from_intent_context(
+        parent_hashes=["GENESIS"],
+        locus_x="sw.strategy.discovery",
+        locus_y="L1_TRANSPORT",
+        locus_z="L2_BRAIN",
+        lamport_t=1,
+        authority_a="HUMAN",
+        intent_i="RESOLUTION",
+        payload="line one\nline two",
+    )
+
+    repo.query(node.to_cypher())
+    restored = repo.get_by_hash(node.causal_hash)
+
+    assert restored.payload == node.payload
+    assert restored.payload_hash == node.payload_hash
+
 def test_invalid_hash_is_rejected():
     from layers.l2_brain.adapters import KuzuRepository
     # Mock connection

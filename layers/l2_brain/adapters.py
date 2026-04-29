@@ -154,7 +154,35 @@ class KuzuRepository:
             except Exception as e:
                 logger.warning(f"Could not create CAUSAL_LINK from {p_hash} to {node.causal_hash}: {e}")
 
+        # [Paso B] Enriquecimiento vectorial asíncrono
+        self._enqueue_vector_enrichment(node.causal_hash, node.payload)
+
         return node.causal_hash
+
+    def _enqueue_vector_enrichment(self, causal_hash: str, payload: str):
+        """
+        [Paso B] Cola asíncrona de enriquecimiento vectorial.
+        Dispara un hilo de fondo para actualizar los embeddings sin bloquear el flujo causal.
+        """
+        import threading
+        
+        def _enrich():
+            try:
+                try:
+                    from embedding_provider import EmbeddingProvider
+                except ImportError:
+                    from layers.l2_brain.embedding_provider import EmbeddingProvider
+                    
+                vec = EmbeddingProvider.generate_vector(payload)
+                if vec and vec != [0.0]:
+                    cypher_update = "MATCH (m:MemoryNode4D) WHERE m.causal_hash = $c_hash SET m.embedding = $embedding"
+                    self.query(cypher_update, {"c_hash": causal_hash, "embedding": vec})
+                    logger.info(f"Vector enrichment successful for node {causal_hash}")
+            except Exception as e:
+                logger.warning(f"Vector enrichment failed for node {causal_hash}: {e}")
+                
+        threading.Thread(target=_enrich, daemon=True).start()
+
 
     def _execute_supports_parameters(self) -> bool:
         import inspect

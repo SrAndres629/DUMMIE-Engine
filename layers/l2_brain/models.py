@@ -194,11 +194,14 @@ class MemoryNode4D(BaseModel):
         )
 
         try:
-            from embedding_provider import EmbeddingProvider
-        except ImportError:
-            from layers.l2_brain.embedding_provider import EmbeddingProvider
-        
-        embedding_vec = EmbeddingProvider.generate_vector(payload)
+            try:
+                from embedding_provider import EmbeddingProvider
+            except ImportError:
+                from layers.l2_brain.embedding_provider import EmbeddingProvider
+            embedding_vec = EmbeddingProvider.generate_vector(payload)
+        except Exception:
+            # Fallback seguro (Paso A): el nodo causal se crea sin fallar por problemas en Ollama/Local
+            embedding_vec = [0.0]
 
         return cls(
             causal_hash=causal_hash,
