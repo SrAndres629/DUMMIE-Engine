@@ -1,23 +1,35 @@
-<repository>
-  <layer name="l0_overseer" language="Go, Elixir">
-    <role>Supervisión y ciclo de vida</role>
-  </layer>
-  <layer name="l1_nervous" language="Python, Go">
-    <role>Transporte Zero-Copy IPC</role>
-  </layer>
-  <layer name="l2_brain" language="Python">
-    <role>Modelado cognitivo y grafos</role>
-  </layer>
-  <layer name="l3_shield" language="Rust, Python">
-    <role>Validación topológica y seguridad</role>
-  </layer>
-  <layer name="l4_edge" language="Zig, Python">
-    <role>Descubrimiento y escaneo</role>
-  </layer>
-  <layer name="l5_muscle" language="Mojo, Python">
-    <role>Operaciones rápidas y compactación</role>
-  </layer>
-  <layer name="l6_skin" language="HTML, JS">
-    <role>Interfaz visual</role>
-  </layer>
-</repository>
+<repositoryMap>
+  <layers>
+    <layer name="L0_overseer">
+      <path>layers/l0_overseer</path>
+      <role>Low-level supervision</role>
+    </layer>
+    <layer name="L1_nervous">
+      <path>layers/l1_nervous</path>
+      <role>Transport, IPC, MCP tools</role>
+      <violations>
+        <violation>sys.path manipulation to import L2</violation>
+      </violations>
+    </layer>
+    <layer name="L2_brain">
+      <path>layers/l2_brain</path>
+      <role>Pure logic, models, adapters</role>
+      <core_files>
+        <file>models.py</file>
+        <file>adapters.py</file>
+      </core_files>
+    </layer>
+    <layer name="L3_shield">
+      <path>layers/l3_shield</path>
+      <role>Security and topological audit</role>
+      <violations>
+        <violation>Symbolic validation fallback in TopologicalAuditor</violation>
+      </violations>
+    </layer>
+  </layers>
+  <contracts>
+    <contract>AuthorityLevel</contract>
+    <contract>IntentType</contract>
+    <contract>MemoryNode4D</contract>
+  </contracts>
+</repositoryMap>

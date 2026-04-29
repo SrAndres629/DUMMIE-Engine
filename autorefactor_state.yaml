@@ -1,0 +1,29 @@
+# autorefactor_state.yaml
+
+project: "DUMMIE Engine"
+mode: "incremental_strangler_fig"
+current_iteration: 1
+max_iterations: 12
+
+health:
+  tests_passing: false
+  topology_valid: false
+  contracts_aligned: false
+  shield_real: false
+  bridge_native_6d: false
+  sys_path_hacks_removed: false
+
+critical_findings:
+  - "sys.path hacks in L1 importing L2"
+  - "Symbolic validation in L3 Shield"
+  - "Drift in read_spec contract"
+active_specs: []
+completed_patches: []
+failed_patches: []
+lessons: []
+
+next_actions:
+  - id: "NEXT-001"
+    priority: "critical"
+    owner: "ContractAuditor"
+    action: "Audit local.read_spec contract drift"

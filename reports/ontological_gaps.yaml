@@ -1,25 +1,9 @@
-gaps:
-  - id: "ONT-001"
-    claim: "El sistema declara autopoiesis y soberanía"
-    implementation_status: "partial"
-    evidence_files:
-      - "IDENTITY.md"
-      - "SOUL.md"
-    risk_level: "medium"
-    required_action: "implement_feedback_loop"
-    
-  - id: "ONT-002"
-    claim: "Aislamiento estricto de capas L1/L2"
-    implementation_status: "contradicted"
-    evidence_files:
-      - "layers/l1_nervous/bootstrap.py"
-    risk_level: "high"
-    required_action: "remove_sys_path_hacks"
-    
-  - id: "ONT-003"
-    claim: "Validación estructural robusta (L3)"
-    implementation_status: "missing"
-    evidence_files:
-      - "layers/l3_shield/topological_auditor.py"
-    risk_level: "critical"
-    required_action: "refactor_graph_traversal"
+gap:
+  id: "ONT-001"
+  claim: "El sistema declara autopoiesis"
+  implementation_status: "missing"
+  evidence_files:
+    - "IDENTITY.md"
+    - "SOUL.md"
+  risk_level: "high"
+  required_action: "refactor"

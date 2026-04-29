@@ -1,0 +1,12 @@
+{
+  "nodes": [
+    {"id": "L0", "label": "L0 Overseer"},
+    {"id": "L1", "label": "L1 Nervous"},
+    {"id": "L2", "label": "L2 Brain"},
+    {"id": "L3", "label": "L3 Shield"}
+  ],
+  "edges": [
+    {"source": "L1", "target": "L2", "type": "illegal_import"},
+    {"source": "L2", "target": "L3", "type": "contract"}
+  ]
+}

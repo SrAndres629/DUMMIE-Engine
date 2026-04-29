@@ -1,29 +1,24 @@
 layers:
-  l0_overseer:
-    language: [Go, Elixir]
-    role: "Supervisión y ciclo de vida"
-    critical_files: ["cmd/overseer/main.go"]
-  l1_nervous:
-    language: [Python, Go]
-    role: "Transporte Zero-Copy IPC"
-    critical_files: ["memory_ipc.py", "mcp_proxy.py"]
-  l2_brain:
-    language: [Python]
-    role: "Modelado cognitivo y grafos"
-    critical_files: ["models.py", "adapters.py"]
-  l3_shield:
-    language: [Rust, Python]
-    role: "Validación topológica y seguridad"
-    critical_files: ["topological_auditor.py"]
-  l4_edge:
-    language: [Zig, Python]
-    role: "Descubrimiento y escaneo"
-    critical_files: ["lst_scanner.zig"]
-  l5_muscle:
-    language: [Mojo, Python]
-    role: "Operaciones rápidas y compactación"
-    critical_files: ["math_ops.mojo"]
-  l6_skin:
-    language: [HTML, JS]
-    role: "Interfaz visual"
-    critical_files: ["index.html"]
+  L0_overseer:
+    path: "layers/l0_overseer"
+    role: "Low-level supervision"
+  L1_nervous:
+    path: "layers/l1_nervous"
+    role: "Transport, IPC, MCP tools"
+    violations:
+      - "sys.path manipulation to import L2"
+  L2_brain:
+    path: "layers/l2_brain"
+    role: "Pure logic, models, adapters"
+    core_files:
+      - "models.py"
+      - "adapters.py"
+  L3_shield:
+    path: "layers/l3_shield"
+    role: "Security and topological audit"
+    violations:
+      - "Symbolic validation fallback in TopologicalAuditor"
+contracts:
+  - "AuthorityLevel"
+  - "IntentType"
+  - "MemoryNode4D"

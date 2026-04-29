@@ -1,34 +1,43 @@
-# Mapa del Repositorio: DUMMIE Engine
+# Repository Map - DUMMIE Engine
 
-## Capas Arquitectónicas (L0 a L6)
+## Overview
+Este documento mapea la estructura física y lógica del repositorio DUMMIE Engine.
 
-### [L0 Overseer](file:///home/jorand/Escritorio/DUMMIE%20Engine/layers/l0_overseer) (Go / Elixir)
-- **Rol:** Supervisión de procesos, tolerancia a fallos y ciclo de vida.
-- **Componentes Clave:** Daemon principal, scripts de control.
+## Layer Topology
 
-### [L1 Nervous](file:///home/jorand/Escritorio/DUMMIE%20Engine/layers/l1_nervous) (Go / Python)
-- **Rol:** Transporte de datos e IPC (Zero-Copy vía Apache Arrow).
-- **Componentes Clave:** `memory_ipc.py`, `mcp_proxy.py`.
+### L0 Overseer
+- **Ruta**: `layers/l0_overseer`
+- **Rol**: Supervisión de bajo nivel.
 
-### [L2 Brain](file:///home/jorand/Escritorio/DUMMIE%20Engine/layers/l2_brain) (Python)
-- **Rol:** Modelado cognitivo y almacenamiento en grafo.
-- **Componentes Clave:** `models.py`, `adapters.py`, `embedding_provider.py`.
+### L1 Nervous
+- **Ruta**: `layers/l1_nervous`
+- **Rol**: Transporte, IPC y herramientas MCP.
+- **Componentes Críticos**:
+  - `tools_impl/`: Implementación de herramientas locales.
+  - `sdd_remote_guard.py`: Guardián de herramientas remotas.
+- **Contradicciones**:
+  - Manipulación de `sys.path` para importar `L2_brain`.
 
-### [L3 Shield](file:///home/jorand/Escritorio/DUMMIE%20Engine/layers/l3_shield) (Rust / Python)
-- **Rol:** Validación de seguridad topológica y cumplimiento.
-- **Componentes Clave:** `topological_auditor.py`, `Cargo.toml` (Rust Core).
+### L2 Brain
+- **Ruta**: `layers/l2_brain`
+- **Rol**: Lógica de negocio pura, modelos y adaptadores.
+- **Componentes Críticos**:
+  - `models.py`: Modelos de dominio (`AuthorityLevel`, `MemoryNode4D`).
+  - `adapters.py`: `KuzuRepository`.
+  - `sdd_governance.py`: Reglas de admisión.
 
-### [L4 Edge](file:///home/jorand/Escritorio/DUMMIE%20Engine/layers/l4_edge) (Zig / Python)
-- **Rol:** Escaneo de bajo nivel y descubrimiento de herramientas.
-- **Componentes Clave:** `lst_scanner.zig`, `tool_discovery.py`.
+### L3 Shield
+- **Ruta**: `layers/l3_shield`
+- **Rol**: Seguridad y auditoría topológica.
+- **Contradicciones**:
+  - `TopologicalAuditor` usa validación simbólica ("cycle" in string) como fallback.
 
-### [L5 Muscle](file:///home/jorand/Escritorio/DUMMIE%20Engine/layers/l5_muscle) (Mojo / Python)
-- **Rol:** Operaciones matemáticas rápidas y compactación de memoria.
-- **Componentes Clave:** `math_ops.mojo`, `compactor.py`.
+## Contracts
+- `AuthorityLevel` (defined in `layers/l2_brain/models.py`).
+- `IntentType`.
+- `MemoryNode4D`.
 
-### [L6 Skin](file:///home/jorand/Escritorio/DUMMIE%20Engine/layers/l6_skin) (Web)
-- **Rol:** Interfaz gráfica y observabilidad básica.
-- **Componentes Clave:** `index.html`.
-
-## Dependencias Críticas e Imports Cruzados
-- **Advertencia:** Fugas de abstracción detectadas en `L1_nervous` mediante manipulaciones de `sys.path` para importar desde `L2_brain`.
+## Identified Contradictions
+1. **Identity**: Declaraciones de autopoiesis vs ejecución real.
+2. **Topology**: Fugas en fronteras de capas (`sys.path`).
+3. **Contracts**: Drift en `read_spec`.

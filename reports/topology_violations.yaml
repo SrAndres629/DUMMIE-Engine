@@ -1,0 +1,9 @@
+rule:
+  id: "TOPO-001"
+  name: "L1 must not import L2 directly"
+  forbidden:
+    from_layer: "L1_nervous"
+    to_layer: "L2_brain"
+    mechanism:
+      - "sys_path_mutation"
+  status: "VIOLATED"

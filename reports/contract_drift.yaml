@@ -1,0 +1,9 @@
+contract_drift:
+  id: "CONTRACT-001"
+  interface: "local.read_spec"
+  documented_input:
+    field: "spec_id"
+  implemented_input:
+    field: "spec_path"
+  severity: "critical"
+  decision: "canonicalize to spec_id"

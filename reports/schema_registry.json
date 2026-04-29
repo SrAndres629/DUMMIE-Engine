@@ -1,0 +1,15 @@
+{
+  "schemas": {
+    "AuthorityLevel": {
+      "type": "string",
+      "enum": ["AUTHORITY_UNSPECIFIED", "AGENT", "ENGINEER", "ARCHITECT", "OVERSEER", "HUMAN"]
+    },
+    "MemoryNode4D": {
+      "type": "object",
+      "properties": {
+        "causal_hash": {"type": "string"},
+        "parent_hashes": {"type": "array", "items": {"type": "string"}}
+      }
+    }
+  }
+}
