@@ -1,36 +1,39 @@
 ---
 spec_id: "DE-V2-L0-46"
 title: "Demonio Soberano (dummied)"
-status: "PROPOSAL"
+status: "PROPOSED"
 layer: "L0"
-last_verified_on: "2026-04-25"
+last_verified_on: "2026-04-28"
 ---
-# Especificación: Demonio Soberano (dummied)
+# Demonio Soberano (dummied)
 
-## 1. Propósito
-Definir el comportamiento de un servicio persistente que orqueste el enjambre de agentes de forma autónoma, asíncrona y resiliente a reinicios del sistema.
+## Purpose
+Definir el comportamiento contractual del daemon soberano que orquesta ramas, persistencia y recuperación sin depender de una sesión interactiva continua.
 
-## 2. Invariantes Operativos
-- **Sovereignty**: El daemon es el único dueño del ciclo de vida de los agentes locales.
-- **Persistence**: Todo cambio en el `State` de una rama debe persistirse atómicamente antes de cada paso del grafo.
-- **Async-First**: La comunicación con el humano (vía L1/Telegram) no bloquea el progreso de ramas paralelas.
-- **Resilience**: Tras un fallo de energía o crash del proceso, el daemon debe recuperar el estado exacto de la última instrucción válida.
+## Current State
+Existe implementación física en L0 para `dummied`, almacenamiento de estado y orquestación, pero esta spec todavía describe un objetivo parcialmente estabilizado. Debe tratarse como `PROPOSED` hasta que el contrato completo de control y recuperación quede cubierto por verificación trazable.
 
-## 3. Estados del Proceso
-- `IDLE`: Sin tareas activas.
-- `ACTIVE`: Al menos una rama ejecutando un agente.
-- `DEGRADED`: Fallo en la comunicación con el Memory Plane (L1) o el StateStore.
-- `SHUTDOWN`: Cierre controlado salvando todos los estados pendientes.
-
-## 4. Interfaz de Control (Contrato Sugerido)
-El daemon expondrá un canal de control con los siguientes comandos:
-- `SPAWN(goal)`: Crea una nueva raíz de orquestación.
-- `STATUS()`: Retorna el mapa de fricción actual del enjambre.
-- `WAKE(branch_id, context_patch)`: Reanuda una rama suspendida inyectando nueva información.
-- `TERMINATE(branch_id)`: Poda una rama del grafo.
-
-## 5. Evidencia Física
+## Physical Evidence
 - `layers/l0_overseer/cmd/dummied/main.go`
 - `layers/l0_overseer/internal/orchestrator/store.go`
 - `layers/l0_overseer/internal/orchestrator/daemon.go`
-- `.aiwg/memory/state.db` (SQLite)
+- `.aiwg/memory/state.db`
+
+## Contract Invariants
+- **Sovereignty:** El daemon es dueño del ciclo de vida de los agentes locales.
+- **Persistence:** Todo cambio de estado persistente debe sobrevivir a reinicios del proceso.
+- **Async-First:** La espera de input humano no debe bloquear ramas no relacionadas.
+- **Resilience:** El daemon debe reconstruir el último estado válido después de un crash.
+
+## Verification
+```bash
+python3 scripts/validate_specs_docs.py --check doc/specs/46_sovereign_daemon_dummied.md
+cd layers/l0_overseer && go test -v ./internal/orchestrator/...
+```
+
+## Traceability
+| Invariant | Evidence | Verification |
+| --- | --- | --- |
+| Persistencia de estado | `layers/l0_overseer/internal/orchestrator/store.go` | `go test -v ./internal/orchestrator/...` |
+| Aislamiento de ramas | `layers/l0_overseer/internal/orchestrator/daemon.go` | `go test -v ./internal/orchestrator/...` |
+| Bootstrap del daemon | `layers/l0_overseer/cmd/dummied/main.go` | Inspección y pruebas de build |

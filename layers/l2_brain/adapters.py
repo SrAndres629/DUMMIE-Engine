@@ -52,7 +52,10 @@ class KuzuRepository:
         """Crea las tablas necesarias si no existen con el esquema SOVEREIGN-4D."""
         if not self.conn: return
         try:
-            from models import MemoryNode4D
+            try:
+                from models import MemoryNode4D
+            except ImportError:
+                from layers.l2_brain.models import MemoryNode4D
             # Esquema alineado con .aiwg/memory/loci.db real
             self.conn.execute(MemoryNode4D.schema_creation_query())
             logger.info("Created table MemoryNode4D with SOVEREIGN-4D schema")
@@ -221,11 +224,17 @@ class KuzuRepository:
                 for phash in getattr(node, "parent_hashes", []):
                     if phash != "GENESIS" and phash not in visited:
                         queue.append(phash)
-        # Ordenar cronológicamente por Lamport T
-        chain.sort(key=lambda n: n.lamport_t)
+        # Compatibilidad legacy: devolver leaf-first para facilitar replay causal.
+        chain.sort(key=lambda n: n.lamport_t, reverse=True)
         return chain
 
-    def find_similar_nodes(self, query_text: str, limit: int = 5) -> List[Dict[str, Any]]:
+    def find_similar_nodes(
+        self,
+        query_text: str,
+        limit: int = 5,
+        include_proof_subgraph: bool = False,
+        tau_threshold: float = 0.8,
+    ) -> List[Dict[str, Any]]:
         """
         Busca nodos semánticamente similares integrando el Score Epistémico y Ranking Causal.
         """
@@ -281,12 +290,22 @@ class KuzuRepository:
         for node in ranked[:limit]:
             idx = nodes.index(node)
             score = similarities[idx]
-            matches.append({
+            match = {
                 "hash": node.causal_hash, 
                 "payload": node.payload, 
                 "intent": node.intent_i, 
                 "score": score
-            })
+            }
+            if include_proof_subgraph:
+                proof_nodes = RetrievalService.extract_minimal_proof_subgraph(
+                    node,
+                    self.get_by_hash,
+                    query_sim=score,
+                    tau_threshold=tau_threshold,
+                )
+                match["proof_subgraph"] = [proof_node.causal_hash for proof_node in proof_nodes]
+                match["proof_size"] = len(proof_nodes)
+            matches.append(match)
             
         return matches
 

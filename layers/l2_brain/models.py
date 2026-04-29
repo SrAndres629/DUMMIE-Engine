@@ -99,6 +99,13 @@ class MemoryNode4D(BaseModel):
                 self.intent_i = node.intent_i
         return _LegacyContext(self)
 
+    @property
+    def parent_hash(self) -> str:
+        """Compatibilidad con callers legacy de padre singular."""
+        if self.parent_hashes:
+            return self.parent_hashes[0]
+        return "GENESIS"
+
     @staticmethod
     def schema_creation_query() -> str:
         return (
@@ -186,6 +193,31 @@ class MemoryNode4D(BaseModel):
             from layers.l2_brain.cypher_codec import node_to_create_cypher
             
         return node_to_create_cypher(self)
+
+    @classmethod
+    def build_create_cypher(
+        cls,
+        parent_hash: str = "GENESIS",
+        locus_x: str = "",
+        locus_y: str = "",
+        locus_z: str = "",
+        lamport_t: int = 0,
+        authority_a: Any = None,
+        intent_i: Any = None,
+        payload: str = "",
+    ) -> tuple[str, str]:
+        """Compatibilidad legacy: construye el nodo y devuelve `(causal_hash, cypher)`."""
+        node = cls.from_intent_context(
+            parent_hash=parent_hash,
+            locus_x=locus_x,
+            locus_y=locus_y,
+            locus_z=locus_z,
+            lamport_t=lamport_t,
+            authority_a=authority_a,
+            intent_i=intent_i,
+            payload=payload,
+        )
+        return node.causal_hash, node.to_cypher()
 
 def compute_causal_hash(
     parent_hashes: List[str],

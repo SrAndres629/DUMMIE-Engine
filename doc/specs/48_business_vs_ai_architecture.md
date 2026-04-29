@@ -21,6 +21,11 @@ Estandarización de contratos de salida para la generación de código.
 - Todo generador de Use Case debe emitir código alineado con Arquitectura Hexagonal pura.
 - Las entidades del dominio de negocio no deben importar librerías de IA.
 
+## Verification
+```bash
+python3 scripts/validate_specs_docs.py --check doc/specs/48_business_vs_ai_architecture.md
+```
+
 ## Traceability
 | Invariant | Evidence | Verification |
 | --- | --- | --- |

@@ -1,7 +1,7 @@
 ---
 spec_id: "DE-V2-L4-18"
 title: "Palacio de Loci y RBAC Topográfico"
-status: "STABLE"
+status: "ACTIVE"
 layer: "L4"
 last_verified_on: "2026-04-26"
 ---
@@ -9,6 +9,9 @@ last_verified_on: "2026-04-26"
 
 ## Purpose
 Definir la estructura ontológica y el sistema de control de acceso basado en topología (RBAC Topográfico) de DUMMIE Engine. El Palacio de Loci es el grafo de conocimiento que organiza todas las entidades, relaciones y eventos del sistema de forma espacial y navegable.
+
+## Current State
+La ontología operativa actual usa Kùzu como backing store del 4D-TES y expone rutas de consulta y recuperación causal desde L2. El RBAC topográfico todavía convive con capas de policy en L3, pero el modelo espacial y las rutas de evidencia ya existen físicamente.
 
 ## Estructura Ontológica (Palacio de Loci)
 
@@ -60,6 +63,12 @@ El acceso a la información no se define solo por "roles", sino por la **posici�
 - `.aiwg/memory/loci.db`: Base de datos de grafos activa (KùzuDB).
 - `layers/l1_nervous/tools_impl/core.py`: Herramientas de calibración del Loci Graph.
 - `layers/l2_brain/implementation_plan.md`: Plan de migración a la ontología Loci.
+
+## Verification
+```bash
+python3 scripts/validate_specs_docs.py --check doc/specs/18_loci_ontology_mapping.md
+cd layers/l2_brain && PYTHONPATH=../.. uv run pytest -q tests/test_causal_integrity_suite.py
+```
 
 ## Traceability
 | Invariant | Evidence | Verification |

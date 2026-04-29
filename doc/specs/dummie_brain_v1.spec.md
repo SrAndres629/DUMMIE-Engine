@@ -1,87 +1,37 @@
+---
+spec_id: "DE-V2-L1-BRAIN"
+title: "DUMMIE Brain MCP Specification v1.0"
+status: "DRAFT"
+layer: "L1"
+last_verified_on: "2026-04-28"
+---
 # DUMMIE Brain MCP Specification v1.0
 
-## Status: ACTIVE
-**Contract Owner**: Antigravity
-**Architecture**: Flat-L1 Gateway
+## Purpose
+Definir el contrato documental del gateway `dummie-brain` como interfaz entre L2 y la infraestructura de herramientas/memoria de L1.
 
-## 1. Overview
-The `dummie-brain` is the primary interface between the LLM (L2) and the DUMMIE Engine Infrastructure (L1). It acts as a gateway for both local capabilities (Loci Graph, 4D-TES) and remote capabilities (Swarm MCP Servers).
+## Current State
+El documento conserva la intención histórica del gateway, pero su superficie actual convive con otras capas y contratos más recientes. Se mantiene como `DRAFT` hasta que se consolide una correspondencia completa con los tools y contratos activos.
 
-## 2. Information Model (Schemas)
+## Physical Evidence
+- `layers/l1_nervous/mcp_server.py`
+- `layers/l1_nervous/tools.py`
+- `doc/guides/mcp_server_usage.md`
 
-### AuthorityLevel (Enum)
-- `HUMAN`: Direct user intervention.
-- `OVERSEER`: L0 Orchestrator authority.
-- `AGENT`: Autonomous agent authority.
+## Contract Invariants
+- **Purity:** Las herramientas no deben emitir salida fuera del protocolo esperado.
+- **Determinism:** Las operaciones persistentes deben conservar metadatos causales.
+- **Fencing:** El gateway debe respetar estados de solo lectura/bloqueo del memory plane.
+- **Gateway Pattern:** Los agentes deben descubrir capacidades remotas a través del gateway en lugar de hardcodearlas.
 
-### SixDimensionalContext (Object)
-- `locus_x` (string): Logic/Strategic dimension.
-- `locus_y` (string): Transport/Tactical dimension.
-- `locus_z` (string): Physical/Execution dimension.
-- `lamport_t` (int): Causal timestamp.
-- `authority_a` (AuthorityLevel): Identity of the actor.
-- `intent_i` (IntentType): Semantic goal.
+## Verification
+```bash
+python3 scripts/validate_specs_docs.py --check doc/specs/dummie_brain_v1.spec.md
+```
 
-## 3. Toolset Definitions
-
-### Category: Core (Diagnostic & Lifecycle)
-
-#### `calibrate_neural_links`
-- **Description**: Verifies health of Loci Graph and Decision Ledger.
-- **Output**: Markdown report of connectivity status.
-
-#### `brain_ping`
-- **Description**: Lightweight heartbeat.
-- **Output**: Status message with current Lamport clock.
-
-### Category: Cognitive (Memory & Learning)
-
-#### `crystallize`
-- **Description**: Persists validated knowledge into 4D-TES.
-- **Input**:
-  - `payload` (string): Knowledge to persist.
-  - `context` (SixDimensionalContext): Structural metadata.
-- **Behavior**: Requires `RW` access to Loci Graph. Returns transaction hash.
-
-#### `log_lesson`
-- **Description**: Records learning from errors or sub-optimal paths.
-- **Input**:
-  - `issue` (string): Description of the problem.
-  - `correction` (string): Path to avoid/resolve it.
-
-### Category: Swarm (Coordination)
-
-#### `broadcast_intent`
-- **Description**: Publishes agent plan to the swarm ledger.
-- **Input**:
-  - `agent_id` (string): Identity of the broadcaster.
-  - `intent` (string): Description of planned action.
-  - `target_file` (string, optional): Affected resource.
-
-#### `list_all_capabilities`
-- **Description**: Discovery of all tools available in the swarm (local + remote).
-- **Output**: JSON-structured inventory.
-
-### Category: Gateway (Dynamic Proxy)
-
-#### `list_remote_servers`
-- **Description**: Lists all proxied MCP servers available via the gateway.
-- **Output**: String listing server names.
-
-#### `list_remote_tools`
-- **Description**: Lists tools exposed by a specific proxied server.
-- **Input**:
-  - `server_name` (string): Target server.
-
-#### `exec_remote_tool`
-- **Description**: Executes a tool on a proxied server under SDD Guardrails.
-- **Input**:
-  - `server_name` (string): Target server.
-  - `tool_name` (string): Target tool.
-  - `arguments` (dict): JSON-compatible arguments map.
-
-## 4. Architectural Constraints
-1. **Purity**: Tools MUST NOT write to `stdout` except via the MCP protocol.
-2. **Determinism**: All persistent actions MUST include a `lamport_t` timestamp.
-3. **Fencing**: Tools MUST respect `read_only` locks on the memory plane.
-4. **Gateway Pattern**: AI Agents MUST configure `dummie-brain` as their ONLY explicitly known MCP server. All other servers (Git, Fetch, SQLite) MUST be accessed dynamically via the Gateway Category tools to minimize LLM Context Window exhaustion.
+## Traceability
+| Invariant | Evidence | Verification |
+| --- | --- | --- |
+| Entrada MCP | `layers/l1_nervous/mcp_server.py` | Inspección de bootstrap |
+| Surface de tools | `layers/l1_nervous/tools.py` | Tests/inspección de registro |
+| Contrato operativo | `doc/guides/mcp_server_usage.md` | Revisión documental |

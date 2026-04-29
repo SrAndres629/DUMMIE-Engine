@@ -123,7 +123,7 @@ class CompressiveMemory:
             cypher = node.to_cypher()
             
             self.bridge.ipc.execute(cypher)
-            logger.info(f"Crystallization persisted (SOVEREIGN-4D): {causal_hash}")
+            logger.info(f"Crystallization persisted (SOVEREIGN-4D): {self.last_causal_hash}")
             self.last_persist_ok = True
         except Exception as e:
             self.last_error = str(e)

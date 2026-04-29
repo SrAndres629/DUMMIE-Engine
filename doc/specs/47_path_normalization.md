@@ -1,21 +1,38 @@
-# Spec 47: Path Normalization & Industrial Environment
+---
+spec_id: "DE-V2-L0-47"
+title: "Path Normalization & Industrial Environment"
+status: "ACTIVE"
+layer: "L0"
+last_verified_on: "2026-04-28"
+---
+# Path Normalization & Industrial Environment
 
-Para resolver la inconsistencia de rutas detectada ("miles de errores"), se establece el siguiente estándar obligatorio para todos los componentes (L0, L1, L2).
+## Purpose
+Definir el contrato mínimo de resolución de rutas y variables de entorno para evitar hardcodes y deriva entre auditorías, L0, L1 y L2.
 
-## Variables de Entorno Primarias
-- `DUMMIE_ROOT`: Directorio raíz del proyecto (default: `/home/jorand/Escritorio/DUMMIE Engine`).
-- `DUMMIE_AIWG`: Directorio de trabajo y memoria (default: `$DUMMIE_ROOT/.aiwg`).
+## Current State
+El repositorio ya usa `DUMMIE_ROOT` y `DUMMIE_AIWG` en scripts y componentes críticos, pero aún conviven rutas históricas y contratos documentales parciales. La validación industrial depende de esta normalización para ser reproducible.
 
-## Mapa de Rutas Estándar
-| Recurso | Ruta Estándar | Propósito |
-| :--- | :--- | :--- |
-| **KùzuDB (Ontología)** | `$DUMMIE_AIWG/memory/kuzu.db` | Memoria a largo plazo (L1). |
-| **SQLite (Estado)** | `$DUMMIE_AIWG/memory/state.db` | Persistencia de sesiones flotantes (L0). |
-| **Lecciones Learned** | `$DUMMIE_AIWG/memory/lessons.jsonl` | Aprendizaje por refuerzo. |
-| **Security State** | `$DUMMIE_AIWG/security_state` | Toggle de bwrap (HIGH/LOW). |
-| **Unix Sockets** | `$DUMMIE_AIWG/sockets/` | Comunicación IPC (Flight, Control). |
+## Physical Evidence
+- `scripts/full_industrial_audit.sh`
+- `scripts/dummie_mcp_doctor.py`
+- `layers/l2_brain/adapters.py`
+- `layers/l1_nervous/compressive_memory.py`
 
-## Reglas de Implementación
-1. **No Hardcoding**: Está terminantemente prohibido usar rutas absolutas literales en el código. Se debe usar `os.Getenv` o `os.environ.get` con fallbacks relativos al root detectado.
-2. **Resolución de Root**: Todos los módulos deben intentar detectar el root buscando el archivo `.aiwg` hacia arriba si la variable no está seteada.
-3. **Migración**: Se deben actualizar `mcp_proxy.py`, `graph.go`, `store.go` y los scripts de auditoría para usar este esquema.
+## Contract Invariants
+- **No Hardcoding:** Los componentes no deben introducir rutas absolutas fuera de límites de runtime documentados.
+- **Root Resolution:** La resolución del root debe apoyarse en variables o detección estable, no en supuestos implícitos del cwd.
+- **Operational Consistency:** Las mismas rutas deben servir para auditoría, tests y runtime.
+
+## Verification
+```bash
+python3 scripts/validate_specs_docs.py --check doc/specs/47_path_normalization.md
+rg -n "kuzu_data|MemoryState|m\\.\\*|rm -f.*kuzu|os\\.remove\\(" layers scripts doc -S
+```
+
+## Traceability
+| Invariant | Evidence | Verification |
+| --- | --- | --- |
+| Variables estándar | `scripts/full_industrial_audit.sh` | Inspección + ejecución del script |
+| Root resolution | `layers/l2_brain/adapters.py` | Tests de integración y rutas |
+| Evitar hardcodes frágiles | `scripts/dummie_mcp_doctor.py` | `rg` contractual |

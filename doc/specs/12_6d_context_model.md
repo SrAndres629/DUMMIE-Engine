@@ -1,7 +1,7 @@
 ---
 spec_id: "DE-V2-L2-12"
 title: "Modelo Formal de Memoria 6D-Context"
-status: "STABLE"
+status: "ACTIVE"
 layer: "L2"
 last_verified_on: "2026-04-26"
 ---
@@ -9,6 +9,9 @@ last_verified_on: "2026-04-26"
 
 ## Purpose
 Establecer el sistema de coordenadas de 6 dimensiones utilizado por DUMMIE Engine para indexar, navegar y recuperar información del 4D-TES. Este modelo asegura que cada interacción sea situada en un contexto espacial, temporal, de autoridad e intención.
+
+## Current State
+El contrato 6D está implementado en `MemoryNode4D`, en los tipos de contexto de L2 y en el contrato protobuf compartido. La forma exacta de los nombres sigue teniendo puentes legacy, pero el sistema ya usa `locus_x`, `locus_y`, `locus_z`, `lamport_t`, `authority_a` e `intent_i` como base causal.
 
 ## Definición de Dimensiones
 
@@ -51,9 +54,15 @@ graph LR
 - **Determinismo:** El valor de `Lamport T` debe ser monótonamente creciente dentro de una misma rama causal.
 
 ## Physical Evidence
-- `layers/l2_brain/models.py`: Implementación de la dataclass `SixDimensionalContext`.
+- `layers/l2_brain/models.py`: Implementación de SixDimensionalContext y del nodo canónico MemoryNode4D.
 - `layers/l1_nervous/main.go`: Generación de contextos para eventos del sistema nervioso.
-- `pkg/proto/dummie/v2/core.proto`: Definición del contrato binario del contexto.
+- `proto/dummie/v2/core.proto`: Definición del contrato binario del contexto.
+
+## Verification
+```bash
+python3 scripts/validate_specs_docs.py --check doc/specs/12_6d_context_model.md
+cd layers/l2_brain && PYTHONPATH=../.. uv run pytest -q tests/test_domain_models.py tests/test_causal_integrity.py
+```
 
 ## Traceability
 | Invariant | Evidence | Verification |

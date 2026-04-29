@@ -1,5 +1,9 @@
 from typing import List, Any, Callable
-from layers.l2_brain.domain.dtos import HypothesisBundle, Hypothesis
+
+try:
+    from layers.l2_brain.domain.dtos import HypothesisBundle, Hypothesis
+except ModuleNotFoundError:
+    from domain.dtos import HypothesisBundle, Hypothesis
 
 class CounterfactualService:
     """
