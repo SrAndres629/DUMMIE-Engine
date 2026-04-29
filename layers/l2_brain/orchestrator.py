@@ -57,6 +57,23 @@ class CognitiveOrchestrator:
         # Bridge compatibility: L1 MCP tools read this clock directly.
         self.lamport_clock = 0
         self.lessons_use_case = _LessonsUseCaseBridge(ledger_audit)
+        
+        # [AUTO-EVOLUTION CABLES]
+        try:
+            from .ast_indexer import ASTBlastRadiusIndexer
+            from .auto_evolution import CognitiveAutoEvolver
+            import os
+            
+            _current_dir = os.path.dirname(os.path.abspath(__file__))
+            self.workspace_root = os.path.dirname(os.path.dirname(_current_dir))
+            self.auto_evolver = CognitiveAutoEvolver(self.workspace_root)
+            self.ast_indexer = ASTBlastRadiusIndexer(self.workspace_root)
+            logger.info("Auto-Evolution Cables Connected OK.")
+        except ImportError:
+            self.auto_evolver = None
+            self.ast_indexer = None
+            logger.warning("Auto-Evolution Cables failed to connect (ImportError).")
+            
         logger.info("CognitiveOrchestrator Materialized (Tabula Rasa Bridge)")
 
     async def process_intent(self, intent: Any):
