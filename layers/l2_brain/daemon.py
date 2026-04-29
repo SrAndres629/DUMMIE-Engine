@@ -16,11 +16,17 @@ try:
     from compliance_auditor import ComplianceAuditor
     from mcp_driver import MCPDriver as MuscleDriver
 except ImportError as e:
-    logging.getLogger("dummie-daemon").error(f"Tabula Rasa Import Error: {e}")
-    TopologicalAuditor = None
-    BudgetAuditor = None
-    ComplianceAuditor = None
-    MuscleDriver = None
+    try:
+        from layers.l3_shield.topological_auditor import TopologicalAuditor
+        from layers.l3_shield.budget_auditor import BudgetAuditor
+        from layers.l3_shield.compliance_auditor import ComplianceAuditor
+        from layers.l5_muscle.mcp_driver import MCPDriver as MuscleDriver
+    except ImportError as nested_error:
+        logging.getLogger("dummie-daemon").error(f"Tabula Rasa Import Error: {e}; fallback import error: {nested_error}")
+        TopologicalAuditor = None
+        BudgetAuditor = None
+        ComplianceAuditor = None
+        MuscleDriver = None
 
 logger = logging.getLogger("dummie-daemon")
 

@@ -30,6 +30,15 @@ class _NoopEventBus:
         raise NotImplementedError
 
 
+class _GatewayStub:
+    def __init__(self):
+        self.calls = []
+
+    async def call_tool(self, server_name: str, tool_name: str, arguments: dict):
+        self.calls.append((server_name, tool_name, arguments))
+        return {"ok": True, "arguments": arguments}
+
+
 def _make_daemon():
     daemon = DummieDaemon(
         ledger_path="/tmp/ledger.jsonl",
@@ -116,3 +125,46 @@ async def test_counterfactual_threshold_blocks_low_utility_action():
     assert outcome["gate_status"] == "BLOCK"
     assert "counterfactual_score_below_threshold" in outcome["gate_reasons"]
     assert daemon.muscle.calls == []
+
+
+@pytest.mark.asyncio
+async def test_daemon_default_wiring_uses_real_shields_and_driver():
+    gateway = _GatewayStub()
+    daemon = DummieDaemon(
+        ledger_path="/tmp/ledger.jsonl",
+        mcp_gateway=gateway,
+        event_bus=_NoopEventBus(),
+        skill_binder=None,
+    )
+
+    assert daemon.s_shield.__class__.__name__ == "TopologicalAuditor"
+    assert daemon.e_shield.__class__.__name__ == "BudgetAuditor"
+    assert daemon.l_shield.__class__.__name__ == "ComplianceAuditor"
+    assert hasattr(daemon.muscle, "execute")
+
+    request = GatewayRequest(
+        session_id="S-G4",
+        goal="Default wiring request",
+        dag_xml=(
+            "<dag>"
+            "<task id='t1' server='filesystem' tool='read'>"
+            "<arguments>{\"path\": \"README.md\"}</arguments>"
+            "</task>"
+            "</dag>"
+        ),
+    )
+
+    outcome = await daemon.process_request(request)
+
+    assert outcome["status"] == "SUCCESS"
+    assert gateway.calls == [
+        (
+            "dummie-brain",
+            "exec_remote_tool",
+            {
+                "server_name": "filesystem",
+                "tool_name": "read",
+                "arguments": {"path": "README.md"},
+            },
+        )
+    ]

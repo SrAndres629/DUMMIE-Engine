@@ -11,6 +11,10 @@ class MCPDriver:
     def __init__(self, mcp_gateway: Any):
         self.mcp_gateway = mcp_gateway
 
+    async def execute(self, server_name: str, tool_name: str, arguments: Dict[str, Any]) -> Dict[str, Any]:
+        """Compatibilidad con el contrato BaseExecutor esperado por el daemon."""
+        return await self.send_command(server_name, tool_name, arguments)
+
     async def send_command(self, server: str, tool: str, args: Dict[str, Any]) -> Dict[str, Any]:
         logger.info(f"L5 DRIVER: Sending MCP command -> {server}/{tool}")
         try:
