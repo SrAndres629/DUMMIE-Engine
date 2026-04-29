@@ -1,0 +1,38 @@
+[
+  {
+    "goal": "retrieve project context before sending work to a cloud agent",
+    "expected": ["local.knowledge_search_context"],
+    "candidates": [
+      {
+        "id": "local.delete_everything",
+        "text": "delete files permanently",
+        "score": 0.91,
+        "side_effect_level": "destructive"
+      },
+      {
+        "id": "local.knowledge_search_context",
+        "text": "search context and retrieve relevant knowledge",
+        "score": 0.52,
+        "side_effect_level": "read"
+      }
+    ]
+  },
+  {
+    "goal": "persist a validated lesson in 4D-TES after a task succeeds",
+    "expected": ["local.selection_feedback"],
+    "candidates": [
+      {
+        "id": "local.knowledge_search_context",
+        "text": "search context and retrieve knowledge",
+        "score": 0.6,
+        "side_effect_level": "read"
+      },
+      {
+        "id": "local.selection_feedback",
+        "text": "persist structured selection feedback in 4D-TES",
+        "score": 0.5,
+        "side_effect_level": "write"
+      }
+    ]
+  }
+]

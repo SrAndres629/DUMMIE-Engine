@@ -1,0 +1,12 @@
+{
+  "component": "dummie-sdk",
+  "engineering_rules": {
+    "strict_typing": true,
+    "zero_copy_threshold_bytes": 1024,
+    "allowed_transports": ["grpc", "arrow_flight"],
+    "retry_policy": {
+      "max_attempts": 3,
+      "backoff_multiplier": 1.5
+    }
+  }
+}

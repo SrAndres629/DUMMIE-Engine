@@ -1,6 +1,7 @@
 import asyncio
 import json
 import logging
+import os
 from typing import Dict, Any, List, Optional
 from datetime import datetime
 from abc import ABC, abstractmethod
@@ -61,6 +62,7 @@ class DummieDaemon:
         self.last_hypothesis_decision: str = "collapsed"
         self.last_counterfactual_scores: List[float] = []
         self._current_counterfactual_threshold: float = 0.0
+        self.last_cognitive_preflight: Dict[str, Any] = {"status": "SKIPPED"}
         
         # Capas Somáticas (Conexión Directa)
         self.s_shield: BaseAuditor = TopologicalAuditor() if TopologicalAuditor else _AllowAllAuditor()
@@ -92,6 +94,7 @@ class DummieDaemon:
         self.last_gate_reasons = ["all_guards_passed"]
         self.last_counterfactual_scores = []
         self._current_counterfactual_threshold = 0.0
+        self.last_cognitive_preflight = {"status": "SKIPPED"}
 
         logger.info(f"Saga Start: {transaction_id} | Goal: {request.goal}")
         
@@ -133,6 +136,9 @@ class DummieDaemon:
                 )
             dominant = HypothesisService.collapse_to_dominant(bundle)
             self.last_hypothesis_decision = dominant.hypothesis_id if dominant else "collapsed"
+
+            if self._cognitive_preflight_enabled(root):
+                self.last_cognitive_preflight = await self._run_cognitive_preflight(request)
 
             plan = self._build_hierarchical_plan(request, root)
             self.last_plan = plan
@@ -284,8 +290,91 @@ class DummieDaemon:
             "error": error,
             "gate_status": gate_status,
             "gate_reasons": gate_reasons or ["all_guards_passed"],
+            "cognitive_preflight": self.last_cognitive_preflight,
             "steps": [{"task_id": step.task_id, "status": step.status} for step in saga.steps],
         }
+
+    def _cognitive_preflight_enabled(self, dag_root: Any) -> bool:
+        explicit = dag_root.get("cognitive_preflight")
+        if explicit is not None:
+            return self._parse_bool(explicit, False)
+        return self._parse_bool(os.getenv("DUMMIE_COGNITIVE_PREFLIGHT"), False)
+
+    async def _run_cognitive_preflight(self, request: GatewayRequest) -> Dict[str, Any]:
+        try:
+            recall = await self._execute_local_reasoning(
+                "local.semantic_recall",
+                {
+                    "goal": request.goal,
+                    "query": request.goal,
+                    "top_k": 10,
+                    "sources": ["mcp", "knowledge", "4d_tes"],
+                },
+            )
+            candidates = recall.get("candidates", []) if isinstance(recall, dict) else []
+            rerank = await self._execute_local_reasoning(
+                "local.reasoned_rerank",
+                {
+                    "goal": request.goal,
+                    "candidates": candidates,
+                    "max_selected": 5,
+                    "mode": "shadow",
+                },
+            )
+            ranked = rerank.get("ranked", []) if isinstance(rerank, dict) else []
+            packet = await self._execute_local_reasoning(
+                "local.context_shaper",
+                {
+                    "goal": request.goal,
+                    "ranked": ranked,
+                    "token_budget": 4000,
+                    "cloud_agent": "generic",
+                },
+            )
+            selected_tools = packet.get("selected_tools", []) if isinstance(packet, dict) else []
+            return {
+                "status": "READY",
+                "selected_tools": selected_tools,
+                "recall_candidates": len(candidates),
+                "provider_status": rerank.get("provider_status", "unknown") if isinstance(rerank, dict) else "unknown",
+                "context_packet": packet if isinstance(packet, dict) else {},
+            }
+        except Exception as exc:
+            logger.warning(f"Cognitive preflight degraded: {exc}")
+            return {"status": "DEGRADED", "reason": str(exc)}
+
+    async def _execute_local_reasoning(self, target: str, arguments: Dict[str, Any]) -> Dict[str, Any]:
+        if not self.mcp_gateway or not hasattr(self.mcp_gateway, "call_tool"):
+            raise RuntimeError("mcp_gateway_unavailable")
+        response = await self.mcp_gateway.call_tool(
+            "dummie-brain",
+            "dummie_execute_capability",
+            {
+                "target": target,
+                "arguments": arguments,
+            },
+        )
+        payload = self._parse_gateway_payload(response)
+        if isinstance(payload, dict) and payload.get("error"):
+            raise RuntimeError(str(payload["error"]))
+        return payload
+
+    def _parse_gateway_payload(self, value: Any) -> Dict[str, Any]:
+        if isinstance(value, dict):
+            if "result" in value:
+                return self._parse_gateway_payload(value["result"])
+            if "content" in value and isinstance(value["content"], list):
+                texts = [item.get("text", "") for item in value["content"] if item.get("type") == "text"]
+                return self._parse_gateway_payload("\n".join(texts))
+            return value
+        if isinstance(value, str):
+            stripped = value.strip()
+            try:
+                parsed = json.loads(stripped)
+                return parsed if isinstance(parsed, dict) else {"value": parsed}
+            except json.JSONDecodeError:
+                return {"raw": stripped}
+        return {"value": value}
 
     def _evaluate_runtime_guards(self, dag_root: Any):
         try:

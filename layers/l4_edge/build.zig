@@ -6,7 +6,7 @@ pub fn build(b: *std.Build) void {
 
     const exe = b.addExecutable(.{
         .name = "lst_scanner",
-        .root_source_file = .{ .path = "src/lst_scanner.zig" },
+        .root_source_file = .{ .path = "lst_scanner.zig" },
         .target = target,
         .optimize = optimize,
     });

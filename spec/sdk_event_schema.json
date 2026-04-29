@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DummieSDKEvent",
+  "type": "object",
+  "properties": {
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "event_type": {
+      "type": "string",
+      "enum": ["AGENT_START", "TOOL_EXEC", "PLAN_UPDATE", "COMPLETED", "FAILED"]
+    },
+    "payload": {
+      "type": "object"
+    }
+  },
+  "required": ["timestamp", "event_type", "payload"]
+}

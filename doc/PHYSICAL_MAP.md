@@ -16,11 +16,13 @@ Mapa de verdad física del sistema para evitar deriva entre diseño teórico y e
 - **Nervous Infrastructure**: Gateway MCP FastMCP (`mcp_server.py`) con bootstrap estricto (no fallback).
 - **Zero-Copy IPC**: Bridge tipado en `memory_ipc.py` con excepciones estructuradas.
 - **Atomicidad**: `utils.py` con `AtomicLedgerWriter` (flock).
+- **Local Reasoning Gateway**: Tools MCP en modo sombra para recall, rerank, context shaping y feedback medible.
 
 ### L2 (`layers/l2_brain`)
 - Dominio/orquestación en estructura plana (`models.py`, `orchestrator.py`, `daemon.py`).
 - Adaptadores de ledger/Kuzu en estado bridge (`adapters.py`).
 - Daemon con planner jerárquico obligatorio y outcome explícito de saga (`SUCCESS`/`FAILED`).
+- Contratos de razonamiento local para proveedores Gemma/Ollama, OpenAI-compatible y fallback determinista.
 - Tests alineados al layout físico actual (`layers/l2_brain/tests`).
 
 ### L3 (`layers/l3_shield`)

@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package dummie.v1;
+
+service DummieOrchestrator {
+  rpc ExecuteIntent (IntentRequest) returns (IntentResponse);
+  rpc StreamEvents (SessionRequest) returns (stream AgentEvent);
+}
+
+message IntentRequest {
+  string session_id = 1;
+  string goal = 2;
+}
+
+message IntentResponse {
+  string transaction_id = 1;
+  string status = 2;
+}
+
+message SessionRequest {
+  string session_id = 1;
+}
+
+message AgentEvent {
+  string timestamp = 1;
+  string event_type = 2;
+  string payload = 3;
+}

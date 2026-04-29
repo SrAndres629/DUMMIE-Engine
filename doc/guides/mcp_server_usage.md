@@ -28,6 +28,11 @@ El servidor oficial se lanza directamente desde `layers/l1_nervous/mcp_server.py
 | `crystallize` | Persistencia mandataria de conocimiento en el 4D-TES. | Spec 02 |
 | `log_lesson` | Captura fallos y genera lecciones aprendidas. | Spec 35 |
 | `resolve_ambiguity` | Documenta compromisos técnicos y planes de cierre. | Spec 07 |
+| `semantic_recall` | Recupera candidatos desde MCP, conocimiento y 4D-TES para una tarea. | Spec 44 |
+| `tool_card_resolver` | Normaliza schemas, riesgos y textos indexables de herramientas MCP. | Spec 44 |
+| `reasoned_rerank` | Reordena candidatos con razonamiento local en modo sombra. | Spec 44 |
+| `context_shaper` | Produce paquetes compactos para agentes de nube. | Spec 44 |
+| `selection_feedback` | Persiste feedback estructurado de seleccion en 4D-TES. | Spec 44 |
 
 ## 3. Recursos (Resources)
 

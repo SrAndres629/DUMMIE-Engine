@@ -26,6 +26,7 @@
 - `doc/specs/23_atomic_modular_nodes.md`
 - `doc/specs/41_layer_handshake_protocol.md`
 - `doc/specs/43_documentation_and_artifact_standards.md`
+- `doc/specs/44_local_reasoning_gateway.md`
 
 ## Especificaciones roadmap (PROPOSED)
 - `doc/specs/26_langgraph_quantum_swarm.md`
