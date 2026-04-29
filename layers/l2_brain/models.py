@@ -41,6 +41,33 @@ class SixDimensionalContext:
     intent_i: IntentType = IntentType.FABRICATION
     metadata: Dict[str, Any] = field(default_factory=dict)
 
+    @property
+    def x(self) -> float:
+        """Legacy numeric locus alias retained for pre-4D callers."""
+        return 0.0
+
+    @property
+    def y(self) -> float:
+        """Legacy numeric locus alias retained for pre-4D callers."""
+        return 0.0
+
+    @property
+    def z(self) -> float:
+        """Legacy numeric locus alias retained for pre-4D callers."""
+        return 0.0
+
+    @property
+    def t(self) -> float:
+        return self.lamport_t
+
+    @property
+    def a(self) -> AuthorityLevel:
+        return self.authority_a
+
+    @property
+    def i(self) -> IntentType:
+        return self.intent_i
+
 @dataclass
 class AgentIntent:
     """
@@ -54,11 +81,17 @@ class AgentIntent:
     constraints: List[str] = field(default_factory=list)
     risk_score: float = 0.0
     metadata: Dict[str, Any] = field(default_factory=dict)
+    agent_id: str = ""
 
     @property
     def rationale(self) -> str:
         """Alias de compatibilidad para capas externas."""
         return self.goal
+
+    @property
+    def intent_type(self) -> IntentType:
+        """Alias de compatibilidad para callers previos al contrato `intent_i`."""
+        return self.intent_i
 
 
 import hashlib

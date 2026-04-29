@@ -1,7 +1,7 @@
 gap:
   id: "ONT-001"
   claim: "El sistema declara autopoiesis"
-  implementation_status: "missing"
+  implementation_status: "resolved"
   evidence_files:
     - "IDENTITY.md"
     - "SOUL.md"

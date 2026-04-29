@@ -30,3 +30,27 @@ def propose_self_optimization(
                 rationale=f"{count} repeated failures at {locus} ({category})",
             )
     return None
+
+
+@dataclass(frozen=True)
+class AutopoiesisSignal:
+    ego_status: str
+    cognitive_clock: int
+    needs_refactor: bool
+    action_intent: str
+
+
+def trigger_autopoiesis(ego_status: str, clock: int, failure_count: int) -> AutopoiesisSignal:
+    """
+    Analiza el pulso cognitivo del sistema y determina si requiere autoreparación.
+    Esta función materializa la Autopoiesis declarada formalmente en IDENTITY.md y SOUL.md.
+    """
+    needs_refactor = failure_count >= 1 or ego_status == "Degraded"
+    intent = "RESTORE_OPTIMAL_STATE" if needs_refactor else "MAINTAIN_EQUILIBRIUM"
+    return AutopoiesisSignal(
+        ego_status=ego_status,
+        cognitive_clock=clock,
+        needs_refactor=needs_refactor,
+        action_intent=intent
+    )
+

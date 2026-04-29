@@ -97,7 +97,11 @@ class OllamaGemmaProvider:
                     {"role": "system", "content": _system_prompt(task)},
                     {"role": "user", "content": json.dumps(payload, ensure_ascii=False)},
                 ],
-                "options": {"temperature": 0},
+                "options": {
+                    "temperature": 0,
+                    "num_ctx": 8192,
+                    "num_thread": int(os.getenv("DUMMIE_OLLAMA_THREADS", "4"))
+                },
             }
         ).encode("utf-8")
         req = urlrequest.Request(
