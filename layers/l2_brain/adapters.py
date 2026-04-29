@@ -387,13 +387,37 @@ class SessionLedgerAdapter:
     def __init__(self, ledger_path: str):
         self.ledger_path = ledger_path
 
-class NativeShieldAdapter:
-    """Mock/Stub de compatibilidad para el bootstrap antiguo."""
+class UnsafeBypassShieldAdapter:
+    """
+    [DEPRECATED: UNSAFE] Bypass de compatibilidad para bootstrap antiguo.
+    
+    Este adaptador NO realiza ninguna validación de seguridad real.
+    Solo se permite su uso si la variable de entorno DUMMIE_ALLOW_UNSAFE_BYPASS
+    está explícitamente configurada como "true".
+    
+    Para auditoría real, usar TopologicalAuditor de L3.
+    """
     async def audit(self, dag, goal):
+        import os
+        logger.warning(
+            "UnsafeBypassShieldAdapter is being used. "
+            "This bypasses ALL security checks."
+        )
+        if os.environ.get("DUMMIE_ALLOW_UNSAFE_BYPASS", "").lower() != "true":
+            raise RuntimeError(
+                "BYPASS_SHIELD_BLOCKED: UnsafeBypassShieldAdapter cannot be used "
+                "without setting DUMMIE_ALLOW_UNSAFE_BYPASS=true"
+            )
         return True, "BYPASS"
 
+# [DEPRECATED ALIAS] Mantener compatibilidad con bootstrap.py
+# que importa NativeShieldAdapter por nombre.
+NativeShieldAdapter = UnsafeBypassShieldAdapter
+
 class KuzuSkillRepository(KuzuRepository):
+    """Repositorio de skills basado en KuzuDB."""
     pass
+
 
 class SocraticodeAdapter(CodeAnalysisPort):
     def __init__(self, proxy_manager: Any):

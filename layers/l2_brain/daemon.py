@@ -65,9 +65,9 @@ class DummieDaemon:
         self.last_cognitive_preflight: Dict[str, Any] = {"status": "SKIPPED"}
         
         # Capas Somáticas (Conexión Directa)
-        self.s_shield: BaseAuditor = TopologicalAuditor() if TopologicalAuditor else _AllowAllAuditor()
-        self.e_shield: BaseAuditor = BudgetAuditor() if BudgetAuditor else _AllowAllAuditor()
-        self.l_shield: BaseAuditor = ComplianceAuditor() if ComplianceAuditor else _AllowAllAuditor()
+        self.s_shield: BaseAuditor = TopologicalAuditor() if TopologicalAuditor else _FallbackUnsafeAuditor()
+        self.e_shield: BaseAuditor = BudgetAuditor() if BudgetAuditor else _FallbackUnsafeAuditor()
+        self.l_shield: BaseAuditor = ComplianceAuditor() if ComplianceAuditor else _FallbackUnsafeAuditor()
         self.muscle: BaseExecutor = MuscleDriver(mcp_gateway) if MuscleDriver else _NoopExecutor()
 
     async def run_forever(self):
@@ -454,9 +454,14 @@ class DummieDaemon:
             return default
 
 
-class _AllowAllAuditor(BaseAuditor):
+class _FallbackUnsafeAuditor(BaseAuditor):
+    """Fallback auditor when L3 Shield imports fail. Allows all but logs warning."""
     async def audit(self, dag_xml: str, goal: str = ""):
-        return True, "BYPASS"
+        logger.warning(
+            "_FallbackUnsafeAuditor: L3 Shield import failed. "
+            "All requests are being allowed WITHOUT security validation."
+        )
+        return True, "FALLBACK_UNSAFE: L3 Shield import failed"
 
 
 class _NoopExecutor(BaseExecutor):

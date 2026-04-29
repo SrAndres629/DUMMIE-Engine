@@ -15,34 +15,50 @@ class TopologicalAuditor(BaseAuditor):
     async def audit(self, dag_xml: str, goal: str = "") -> Tuple[bool, str]:
         """
         Analiza el DAG en busca de anomalías estructurales reales.
+        Solo acepta XML válido. No hace inferencias textuales.
         """
         logger.info(f"S-SHIELD: Auditing DAG topology for goal: {goal}")
-        
-        # [L3 HARDENING] Validación de Ciclos Real mediante parsing
+
+        if not dag_xml or not dag_xml.strip():
+            return False, "AUDIT_ERROR: Empty DAG input."
+
+        # [L3 HARDENING] Rechazar input no-XML de forma explícita
+        stripped = dag_xml.strip()
+        if not stripped.startswith("<"):
+            logger.warning(
+                "S-SHIELD: Received non-XML input. "
+                "Text-based fallback has been removed for safety."
+            )
+            return False, "AUDIT_ERROR: Invalid DAG format. Expected XML."
+
         try:
             import xml.etree.ElementTree as ET
             from collections import defaultdict
 
-            # Si es un string simple que no parece XML, fallback al auditor anterior (pero logeando advertencia)
-            if not dag_xml.strip().startswith("<"):
-                if "cycle" in dag_xml.lower():
-                    return False, "DETECTION_ANOMALY: Circular dependency detected in raw text."
-                return True, "TOPOLOGY_VALIDATED_LEGACY"
-
             root = ET.fromstring(dag_xml)
-            adj = defaultdict(list)
+            adj: Dict[str, list] = defaultdict(list)
+            all_nodes: set = set()
+
             # Asumimos formato simple: <edge source="A" target="B"/>
             for edge in root.findall(".//edge"):
                 u = edge.get("source")
                 v = edge.get("target")
                 if u and v:
                     adj[u].append(v)
+                    all_nodes.add(u)
+                    all_nodes.add(v)
 
-            # Algoritmo de detección de ciclos (DFS)
-            visited = set()
-            rec_stack = set()
+            edge_count = sum(len(targets) for targets in adj.values())
+            logger.info(
+                f"S-SHIELD: Parsed DAG with {len(all_nodes)} nodes, "
+                f"{edge_count} edges."
+            )
 
-            def has_cycle(v):
+            # Algoritmo de detección de ciclos (DFS con recursion stack)
+            visited: set = set()
+            rec_stack: set = set()
+
+            def has_cycle(v: str) -> bool:
                 visited.add(v)
                 rec_stack.add(v)
                 for neighbour in adj[v]:
@@ -61,6 +77,9 @@ class TopologicalAuditor(BaseAuditor):
 
             return True, "TOPOLOGY_VALIDATED_DAG"
 
+        except ET.ParseError as e:
+            logger.error(f"S-SHIELD: XML parse error: {e}")
+            return False, f"AUDIT_ERROR: Invalid XML: {str(e)}"
         except Exception as e:
             logger.error(f"Auditor Failure: {e}")
             return False, f"AUDIT_SYSTEM_ERROR: {str(e)}"

@@ -2,20 +2,22 @@ import os
 import logging
 import sys
 
-# [ANTIGRAVITY] Purity Guard: Evitar contaminación de stdout durante el bootstrap
-_actual_stdout = sys.stdout
-sys.stdout = sys.stderr
-
 # [TABULA RASA v2] SSoT de Rutas (Prioridad Máxima)
 _CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 _DEFAULT_ROOT = os.path.abspath(os.path.join(_CURRENT_DIR, "..", ".."))
 ROOT_DIR = os.environ.get("DUMMIE_ROOT", os.environ.get("DUMMIE_ROOT_DIR", _DEFAULT_ROOT))
 
-# Asegurar que todas las capas estén en PYTHONPATH
-for layer in ["l1_nervous", "l2_brain", "l3_shield"]:
-    layer_path = os.path.join(ROOT_DIR, "layers", layer)
-    if os.path.exists(layer_path) and layer_path not in sys.path:
-        sys.path.insert(0, layer_path)
+# [TECHNICAL DEBT] sys.path manipulation
+# WHY: L1 imports modules from L2 and L3 via flat namespace (e.g. `from models import ...`).
+# The correct fix is proper Python packaging with pyproject.toml or namespace packages.
+# This hack adds each layer directory to sys.path so flat imports resolve.
+# SCOPE: Exactly 3 paths added (l1_nervous, l2_brain, l3_shield).
+# RISK: Import collisions between layers with same-named modules.
+# TRACKED: autorefactor_state.yaml -> sys_path_hacks_removed = false
+for _layer in ["l1_nervous", "l2_brain", "l3_shield"]:
+    _layer_path = os.path.join(ROOT_DIR, "layers", _layer)
+    if os.path.exists(_layer_path) and _layer_path not in sys.path:
+        sys.path.insert(0, _layer_path)
 
 from mcp.server.fastmcp import FastMCP
 
@@ -68,8 +70,16 @@ register_tools(mcp, get_orchestrator, get_proxy, ROOT_DIR)
 register_resources(mcp, get_orchestrator, get_proxy, ROOT_DIR)
 
 if __name__ == "__main__":
+    # [TECHNICAL DEBT] STDIO Purity Guard
+    # WHY: FastMCP STDIO transport requires exclusive control of stdout.
+    # Any print() or logging to stdout during bootstrap corrupts the MCP protocol.
+    # The correct fix requires FastMCP to support a file descriptor override,
+    # or running the server in a subprocess with controlled file descriptors.
+    # SCOPE: stdout is redirected to stderr ONLY within this __main__ block.
+    _actual_stdout = sys.stdout
+    sys.stdout = sys.stderr
+
     logger.info("DUMMIE Brain Gateway (FLAT-L1) Online.")
-    # [ANTIGRAVITY HARDENING] Garantizar que NADA escriba en stdout excepto el servidor MCP
     sys.stdout = _actual_stdout
     
     try:
@@ -86,3 +96,4 @@ if __name__ == "__main__":
                 asyncio.run(asyncio.wait_for(_proxy_manager.shutdown(), timeout=2.0))
             except Exception:
                 pass
+
