@@ -37,12 +37,12 @@ def register_core_tools(mcp: FastMCP, use_cases, root_dir: str):
         return await use_cases.ping_gateway()
 
     @mcp.tool()
-    async def read_spec(spec_id: str) -> str:
+    async def read_spec(spec_path: str) -> str:
         """Lee una especificación técnica (Spec)."""
         specs_dir = os.path.join(root_dir, "doc/specs")
         for r, _, files in os.walk(specs_dir):
             for file in files:
-                if spec_id in file and file.endswith(".md"):
+                if spec_path in file and file.endswith(".md"):
                     with open(os.path.join(r, file), "r") as f:
                         return f.read()
-        return f"Spec {spec_id} no encontrada."
+        return f"Spec {spec_path} no encontrada."
