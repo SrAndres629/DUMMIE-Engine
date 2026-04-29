@@ -105,11 +105,17 @@ func (d *Daemon) schedulerLoop(ctx context.Context) {
 }
 
 func (d *Daemon) startControlInterface(ctx context.Context) error {
-	d.socketPath = filepath.Join(os.Getenv("DUMMIE_AIWG_DIR"), "dummied.sock")
+	d.socketPath = filepath.Join(os.Getenv("DUMMIE_AIWG_DIR"), "sockets", "dummied.sock")
 	if os.Getenv("DUMMIE_AIWG_DIR") == "" {
-		d.socketPath = "/tmp/dummied.sock"
+		if pwd, err := os.Getwd(); err == nil {
+			d.socketPath = filepath.Join(pwd, ".aiwg", "sockets", "dummied.sock")
+		} else {
+			d.socketPath = "/tmp/dummied.sock"
+		}
 	}
 
+	// Asegurar existencia del directorio padre
+	os.MkdirAll(filepath.Dir(d.socketPath), 0755)
 	os.Remove(d.socketPath)
 	l, err := net.Listen("unix", d.socketPath)
 	if err != nil {

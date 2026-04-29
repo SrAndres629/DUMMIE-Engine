@@ -13,10 +13,41 @@ def register_resources(mcp: FastMCP, get_orchestrator, get_proxy, root_dir: str)
     @mcp.resource("brain://identity")
     def get_brain_identity() -> str:
         """Retorna la identidad y arquetipo del sistema."""
+        import re
+        identity_md_path = os.path.join(root_dir, "IDENTITY.md")
+        identity_data = {}
+        
+        if os.path.exists(identity_md_path):
+            try:
+                with open(identity_md_path, "r") as f:
+                    content = f.read()
+                for key in ["Name", "Creature", "Vibe", "Emoji", "Avatar"]:
+                    match = re.search(rf"- \*\*.*?{key}.*?\*\*:(.*)", content, re.IGNORECASE)
+                    if match:
+                        val = match.group(1).strip()
+                        if "_(" not in val and val:
+                            identity_data[key.lower()] = val
+            except Exception as e:
+                logger.error(f"Error parsing IDENTITY.md: {e}")
+                
         path = os.path.join(AIWG_DIR, "identity.json")
         if os.path.exists(path):
-            with open(path, "r") as f:
-                return f.read()
+            try:
+                with open(path, "r") as f:
+                    json_data = json.load(f)
+                if identity_data:
+                    json_data.setdefault("personality_profile", {})
+                    json_data["personality_profile"]["agent_name"] = identity_data.get("name", "Antigravity")
+                    json_data["personality_profile"]["creature"] = identity_data.get("creature", "Ghost")
+                    json_data["personality_profile"]["vibe"] = identity_data.get("vibe", "Technical")
+                    json_data["personality_profile"]["emoji"] = identity_data.get("emoji", "🌌")
+                    json_data["personality_profile"]["avatar"] = identity_data.get("avatar", "")
+                return json.dumps(json_data, indent=2)
+            except Exception as e:
+                logger.error(f"Error reading identity.json: {e}")
+                
+        if identity_data:
+            return json.dumps(identity_data, indent=2)
         return "Identidad desconocida."
 
     @mcp.resource("brain://dashboard")

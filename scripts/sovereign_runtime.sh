@@ -15,9 +15,13 @@ echo ">> Launching L1 Nervous..."
 L1_PID=$!
 
 # 3. Launch Overseer (L0) - The Arbiter
-echo ">> Launching L0 Overseer (Self-Healing Active)..."
-cd layers/l0_overseer && mix run --no-halt > ../../l0.log 2>&1 &
-L0_PID=$!
+echo ">> Launching L0 Overseer (Self-Healing Elixir)..."
+cd layers/l0_overseer && mix run --no-halt > ../../l0_elixir.log 2>&1 &
+L0_ELIXIR_PID=$!
+
+echo ">> Launching L0 Overseer (Daemon Go)..."
+cd layers/l0_overseer && go run cmd/dummied/main.go > ../../l0_go.log 2>&1 &
+L0_GO_PID=$!
 cd ../..
 
 echo ">> Factory is ONLINE. Monitoring PIDs: L1=$L1_PID, L0=$L0_PID"

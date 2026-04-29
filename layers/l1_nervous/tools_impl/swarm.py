@@ -57,7 +57,9 @@ def register_swarm_tools(mcp: FastMCP, use_cases, root_dir: str):
         import socket
         import yaml
         
-        socket_path = "/tmp/dummied.sock"
+        socket_path = os.path.join(AIWG_DIR, "sockets/dummied.sock")
+        if not os.path.exists(socket_path):
+            socket_path = "/tmp/dummied.sock"
         if not manifest_path:
             # Manifiesto por defecto si no se provee uno
             manifest = {

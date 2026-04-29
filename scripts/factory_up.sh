@@ -23,9 +23,13 @@ cd "$ROOT_DIR/layers/l1_nervous" && go run main.go sidecar.go > "$ROOT_DIR/l1.lo
 echo ">> Launching Memory Plane (Flight/Kuzu)..."
 (cd "$ROOT_DIR/layers/l1_nervous" && DUMMIE_KUZU_DB_PATH="$KUZU_PATH" KUZU_DB_PATH="$KUZU_PATH" MEMORY_SOCKET_PATH="$SOCKET_PATH" go run cmd/memory/main.go) > "$ROOT_DIR/memory.log" 2>&1 &
 
-# 4. Iniciar L0 Overseer (Daemon)
-echo ">> Launching L0 Overseer (Daemon)..."
-cd "$ROOT_DIR/layers/l0_overseer" && go run cmd/dummied/main.go > "$ROOT_DIR/l0.log" 2>&1 &
+# 4. Iniciar L0 Overseer (Daemon Go)
+echo ">> Launching L0 Overseer (Daemon Go)..."
+cd "$ROOT_DIR/layers/l0_overseer" && go run cmd/dummied/main.go > "$ROOT_DIR/l0_go.log" 2>&1 &
+
+# 5. Iniciar L0 Overseer (Supervisor Elixir)
+echo ">> Launching L0 Overseer (Supervisor Elixir)..."
+cd "$ROOT_DIR/layers/l0_overseer" && mix run --no-halt > "$ROOT_DIR/l0_elixir.log" 2>&1 &
 
 # 5. Iniciar L0 Monitor
 echo ">> Launching L0 Monitor..."

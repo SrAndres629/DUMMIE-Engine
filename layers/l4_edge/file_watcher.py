@@ -13,7 +13,6 @@ class FileWatcher:
 
     async def watch_forever(self):
         logger.info(f"L4 EDGE: Observing file changes in {self.path}")
-        # Placeholder: Integrar con inotify/watchdog
+        import asyncio
         while True:
-            # await asyncio.sleep(60)
-            break
+            await asyncio.sleep(3600)
