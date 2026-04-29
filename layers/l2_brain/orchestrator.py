@@ -68,10 +68,16 @@ class CognitiveOrchestrator:
         if self.event_store and getattr(self.event_store, "conn", None):
             from enum import Enum
             try:
-                from models import MemoryNode4D
+                from .models import MemoryNode4D
             except ImportError:
-                # Fallback path if run from different context
-                from layers.l2_brain.models import MemoryNode4D
+                try:
+                    from models import MemoryNode4D
+                except ImportError:
+                    try:
+                        from l2_brain.models import MemoryNode4D
+                    except ImportError:
+                        # Fallback path if run from different context
+                        from layers.l2_brain.models import MemoryNode4D
             
             parent_hash = self.event_store.get_last_leaf_hash()
             
