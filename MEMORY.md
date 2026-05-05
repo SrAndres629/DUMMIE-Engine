@@ -1,0 +1,25 @@
+# 2026-04-26
+
+## ADR 2026-04-26-OBS-001: Obsidian 4D Bridge
+
+Decision approved by the user acting as Principal Systems Engineer / Sovereign Architect:
+
+- Integrate `MarkusPfundstein/mcp-obsidian` as an external non-sovereign MCP provider, not vendored domain code.
+- Preserve L2 sovereignty: L2 must speak through provider-agnostic knowledge ports and must not know that Obsidian exists.
+- Treat Obsidian as input context and human-readable wisdom journal; 4D-TES remains the operational source of truth.
+- Require deterministic MCP handshake before any `tools/call`.
+- Expose read-only Obsidian capabilities first; route all writes through DUMMIE-owned wrappers and L3 policy.
+- Generic patch, overwrite, and delete require intervention and human yield.
+
+Spec created at `docs/superpowers/specs/2026-04-26-obsidian-4d-bridge-design.md`
+
+## Expansion: Universal Knowledge Bus
+
+The user approved expanding the Obsidian bridge into a broader Universal Knowledge Bus strategy. Additional pillars:
+
+- Semantic entropy management: use human relevance signals from Obsidian to classify 4D-TES memories as HOT/WARM/COLD/QUARANTINED without deleting sovereign history.
+- Pre-flight validation sandbox: publish draft intentions to Obsidian for human correction before high-risk code execution.
+- Swarm consensus mirroring: export readable consensus artifacts from multi-agent workflows while keeping 4D-TES as authority.
+- Deep memory rehydration: use curated Obsidian notes as a black-box recorder to rebuild a conservative cognitive baseline after TES storage loss.
+
+Implementation plan created at `docs/superpowers/plans/2026-04-26-universal-knowledge-bus.md`

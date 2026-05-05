@@ -1,0 +1,37 @@
+{
+  "spec_id": "DE-V2-CROSS-51",
+  "title": "Model Contracts Alignment",
+  "status": "ACTIVE",
+  "layer": "CROSS",
+  "last_verified_on": "2026-04-29",
+  "required_frontmatter": [
+    "spec_id",
+    "title",
+    "status",
+    "layer",
+    "last_verified_on"
+  ],
+  "required_sections": [
+    "Purpose",
+    "Current State",
+    "Physical Evidence",
+    "Contract Invariants",
+    "Verification",
+    "Traceability"
+  ],
+  "evidence_paths": [
+    "layers/l2_brain/models.py",
+    "doc/CORE_SPEC.md",
+    "doc/PHYSICAL_MAP.md"
+  ],
+  "policy": {
+    "allow_legacy_narrative": false,
+    "require_existing_links": true,
+    "status_values": [
+      "ACTIVE",
+      "DRAFT",
+      "PROPOSED",
+      "DEPRECATED"
+    ]
+  }
+}

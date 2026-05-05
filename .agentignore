@@ -1,0 +1,14 @@
+.aiwg/index/
+.aiwg/events/
+.aiwg/sessions/
+.aiwg/cache/
+.aiwg/runtime/
+.aiwg/memory/
+.aiwg/ledger/
+.aiwg/venv_ssh/
+.aiwg/obsidian_vault/**/.obsidian/plugins/*/data.json
+.worktrees/
+.venv/
+node_modules/
+__pycache__/
+.pytest_cache/

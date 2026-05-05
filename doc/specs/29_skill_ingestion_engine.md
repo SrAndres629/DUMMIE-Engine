@@ -1,9 +1,9 @@
 ---
 spec_id: "DE-V2-CROSS-29_SKILL_INGESTION_ENGINE"
 title: "Skill Ingestion Engine"
-status: "PROPOSED"
+status: "ACTIVE"
 layer: "CROSS"
-last_verified_on: "2026-04-24"
+last_verified_on: "2026-04-29"
 ---
 # Skill Ingestion Engine
 
@@ -11,13 +11,15 @@ last_verified_on: "2026-04-24"
 Definir el contrato operativo de esta capacidad y su relación con el estado físico vigente.
 
 ## Current State
-Diseño de roadmap; implementación parcial o no integrada al flujo principal.
+Implementado como pipeline de ingesta automatizado que mapea herramientas MCP a Blueprints cognitivos y genera el archivo maestro de capacidades.
 
 ## Physical Evidence
 - `doc/specs/29_skill_ingestion_engine.md`
 - `doc/specs/29_skill_ingestion_engine.feature`
 - `doc/specs/29_skill_ingestion_engine.rules.json`
-- `README.md`
+- `layers/l1_nervous/proto/skill.proto`
+- `layers/l1_nervous/tools.py`
+- `layers/l0_overseer/internal/orchestrator/skills.go`
 - `doc/CORE_SPEC.md`
 - `doc/PHYSICAL_MAP.md`
 

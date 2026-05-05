@@ -1,0 +1,186 @@
+{
+  "case_count": 10,
+  "cases": [
+    {
+      "expected_status": "CONTRADICTED",
+      "id": "contract_drift",
+      "metric_scores": {
+        "causal_ordering": 0.0,
+        "contradiction_detection": 1.0,
+        "corrective_action_quality": 0.9,
+        "evidence_precision": 1.0,
+        "evidence_recall": 0.0,
+        "hallucination_penalty": 0.0,
+        "pattern_detection_quality": 0.0,
+        "persona_alignment": 0.0,
+        "six_d_context_correctness": 0.0
+      },
+      "predicted_status": "CONTRADICTED",
+      "score": 0.66,
+      "status_score": 1.0
+    },
+    {
+      "expected_status": "CONTRADICTED",
+      "id": "stale_spec_vs_current_code",
+      "metric_scores": {
+        "causal_ordering": 0.0,
+        "contradiction_detection": 0.0,
+        "corrective_action_quality": 0.8,
+        "evidence_precision": 0.9,
+        "evidence_recall": 0.8,
+        "hallucination_penalty": 0.0,
+        "pattern_detection_quality": 0.0,
+        "persona_alignment": 0.0,
+        "six_d_context_correctness": 0.0
+      },
+      "predicted_status": "CONTRADICTED",
+      "score": 0.6333,
+      "status_score": 1.0
+    },
+    {
+      "expected_status": "SUPPORTED",
+      "id": "topology_cycle_vs_word_cycle",
+      "metric_scores": {
+        "causal_ordering": 1.0,
+        "contradiction_detection": 0.0,
+        "corrective_action_quality": 0.0,
+        "evidence_precision": 0.0,
+        "evidence_recall": 0.0,
+        "hallucination_penalty": 0.0,
+        "pattern_detection_quality": 0.0,
+        "persona_alignment": 0.0,
+        "six_d_context_correctness": 0.0
+      },
+      "predicted_status": "SUPPORTED",
+      "score": 0.5333,
+      "status_score": 1.0
+    },
+    {
+      "expected_status": "SUPPORTED",
+      "id": "goal_rationale_alias",
+      "metric_scores": {
+        "causal_ordering": 0.0,
+        "contradiction_detection": 0.0,
+        "corrective_action_quality": 0.8,
+        "evidence_precision": 0.0,
+        "evidence_recall": 0.9,
+        "hallucination_penalty": 0.0,
+        "pattern_detection_quality": 0.0,
+        "persona_alignment": 0.0,
+        "six_d_context_correctness": 0.0
+      },
+      "predicted_status": "SUPPORTED",
+      "score": 0.58,
+      "status_score": 1.0
+    },
+    {
+      "expected_status": "SUPPORTED",
+      "id": "business_mvp_selection",
+      "metric_scores": {
+        "causal_ordering": 0.0,
+        "contradiction_detection": 0.0,
+        "corrective_action_quality": 1.0,
+        "evidence_precision": 0.0,
+        "evidence_recall": 0.0,
+        "hallucination_penalty": 0.0,
+        "pattern_detection_quality": 0.0,
+        "persona_alignment": 0.9,
+        "six_d_context_correctness": 0.0
+      },
+      "predicted_status": "SUPPORTED",
+      "score": 0.5933,
+      "status_score": 1.0
+    },
+    {
+      "expected_status": "SUPPORTED",
+      "id": "file_deletion_event",
+      "metric_scores": {
+        "causal_ordering": 0.8,
+        "contradiction_detection": 0.0,
+        "corrective_action_quality": 0.0,
+        "evidence_precision": 0.0,
+        "evidence_recall": 0.0,
+        "hallucination_penalty": 0.0,
+        "pattern_detection_quality": 0.0,
+        "persona_alignment": 0.0,
+        "six_d_context_correctness": 0.8
+      },
+      "predicted_status": "SUPPORTED",
+      "score": 0.5733,
+      "status_score": 1.0
+    },
+    {
+      "expected_status": "INSUFFICIENT_EVIDENCE",
+      "id": "unsupported_claim",
+      "metric_scores": {
+        "causal_ordering": 0.0,
+        "contradiction_detection": 0.0,
+        "corrective_action_quality": 0.0,
+        "evidence_precision": 1.0,
+        "evidence_recall": 0.0,
+        "hallucination_penalty": 0.0,
+        "pattern_detection_quality": 0.0,
+        "persona_alignment": 0.0,
+        "six_d_context_correctness": 0.0
+      },
+      "predicted_status": "INSUFFICIENT_EVIDENCE",
+      "score": 0.5333,
+      "status_score": 1.0
+    },
+    {
+      "expected_status": "CONTRADICTED",
+      "id": "generated_artifact_risk",
+      "metric_scores": {
+        "causal_ordering": 0.0,
+        "contradiction_detection": 1.0,
+        "corrective_action_quality": 0.0,
+        "evidence_precision": 0.9,
+        "evidence_recall": 0.0,
+        "hallucination_penalty": 0.0,
+        "pattern_detection_quality": 0.0,
+        "persona_alignment": 0.0,
+        "six_d_context_correctness": 0.0
+      },
+      "predicted_status": "CONTRADICTED",
+      "score": 0.5933,
+      "status_score": 1.0
+    },
+    {
+      "expected_status": "SUPPORTED",
+      "id": "persona_alignment",
+      "metric_scores": {
+        "causal_ordering": 0.0,
+        "contradiction_detection": 0.0,
+        "corrective_action_quality": 0.0,
+        "evidence_precision": 0.0,
+        "evidence_recall": 0.0,
+        "hallucination_penalty": 0.0,
+        "pattern_detection_quality": 0.0,
+        "persona_alignment": 1.0,
+        "six_d_context_correctness": 0.0
+      },
+      "predicted_status": "SUPPORTED",
+      "score": 0.5333,
+      "status_score": 1.0
+    },
+    {
+      "expected_status": "SUPPORTED",
+      "id": "pattern_detection",
+      "metric_scores": {
+        "causal_ordering": 0.0,
+        "contradiction_detection": 0.0,
+        "corrective_action_quality": 0.0,
+        "evidence_precision": 0.0,
+        "evidence_recall": 0.8,
+        "hallucination_penalty": 0.0,
+        "pattern_detection_quality": 1.0,
+        "persona_alignment": 0.0,
+        "six_d_context_correctness": 0.0
+      },
+      "predicted_status": "SUPPORTED",
+      "score": 0.5867,
+      "status_score": 1.0
+    }
+  ],
+  "overall_score": 0.582
+}

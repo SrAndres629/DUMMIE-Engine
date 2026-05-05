@@ -1,0 +1,23 @@
+# Worktree Rules for Autonomous Execution
+rules:
+  - enforce_strict_isolation: true
+  - allow_destructive_operations: false
+  - log_all_events: true
+  - require_evidence_for_commits: true
+git_policy:
+  versioned_aiwg_paths:
+    - .aiwg/README.md
+    - .aiwg/control/**
+    - .aiwg/templates/**
+  local_only_aiwg_paths:
+    - .aiwg/index/
+    - .aiwg/events/
+    - .aiwg/sessions/
+    - .aiwg/cache/
+    - .aiwg/runtime/
+    - .aiwg/memory/
+    - .aiwg/ledger/
+    - .aiwg/security_state
+    - .aiwg/venv_ssh/
+    - .aiwg/*.jsonl
+    - .aiwg/*.db

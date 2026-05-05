@@ -41,6 +41,21 @@ class SixDimensionalContext:
     intent_i: IntentType = IntentType.FABRICATION
     metadata: Dict[str, Any] = field(default_factory=dict)
 
+    @property
+    def x(self) -> float:
+        """Legacy numeric alias retained for older tests/callers."""
+        return 0.0 if self.locus_x else 0.0
+
+    @property
+    def a(self) -> AuthorityLevel:
+        """Legacy alias for authority."""
+        return self.authority_a
+
+    @property
+    def i(self) -> IntentType:
+        """Legacy alias for intent."""
+        return self.intent_i
+
 @dataclass
 class AgentIntent:
     """
@@ -48,6 +63,7 @@ class AgentIntent:
     Representa una unidad de voluntad del sistema.
     """
     goal: str
+    agent_id: str = ""
     authority_a: AuthorityLevel = AuthorityLevel.AGENT
     intent_i: IntentType = IntentType.MUTATION
     locus_x: str = "sw.strategy.discovery"
@@ -59,6 +75,11 @@ class AgentIntent:
     def rationale(self) -> str:
         """Alias de compatibilidad para capas externas."""
         return self.goal
+
+    @property
+    def intent_type(self) -> IntentType:
+        """Legacy alias for intent_i."""
+        return self.intent_i
 
 
 import hashlib

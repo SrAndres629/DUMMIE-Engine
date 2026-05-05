@@ -60,7 +60,7 @@ El acceso a la información no se define solo por "roles", sino por la **posici�
 - **Soberanía de Datos:** Cada Locus X (Dominio) es el dueño de sus datos; otros dominios deben usar el Loci Graph para consultas de sólo lectura.
 
 ## Physical Evidence
-- `.aiwg/memory/loci.db`: Base de datos de grafos activa (KùzuDB).
+- `.aiwg/memory/kuzu/state.db`: Base local runtime de Kùzu cuando existe en el entorno de desarrollo.
 - `layers/l1_nervous/tools_impl/core.py`: Herramientas de calibración del Loci Graph.
 - `layers/l2_brain/implementation_plan.md`: Plan de migración a la ontología Loci.
 
@@ -73,6 +73,6 @@ cd layers/l2_brain && PYTHONPATH=../.. uv run pytest -q tests/test_causal_integr
 ## Traceability
 | Invariant | Evidence | Verification |
 | --- | --- | --- |
-| Grafo de Relaciones | `loci.db` | Cypher Query: `MATCH (n)-[r]->(m) RETURN count(*)` |
+| Grafo de Relaciones | `layers/l2_brain/adapters.py` | Repository tests and Kùzu query smoke checks |
 | RBAC Topográfico | `layers/l3_shield` | Policy enforcement tests |
 | Mapeo Ontológico | `doc/specs/18_loci_ontology_mapping.feature` | Gherkin acceptance tests |

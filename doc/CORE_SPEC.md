@@ -24,15 +24,18 @@
 - `doc/specs/21_software_fabrication_engine.md`
 - `doc/specs/22_sdd_executable_contracts.md`
 - `doc/specs/23_atomic_modular_nodes.md`
+- `doc/specs/26_langgraph_quantum_swarm.md`
+- `doc/specs/29_skill_ingestion_engine.md`
 - `doc/specs/41_layer_handshake_protocol.md`
 - `doc/specs/43_documentation_and_artifact_standards.md`
 - `doc/specs/44_local_reasoning_gateway.md`
+- `doc/specs/49_typed_sdk_generation.md`
+- `doc/specs/50_daemon_telemetry_contracts.md`
+- `doc/specs/51_model_contracts_alignment.md`
 
 ## Especificaciones roadmap (PROPOSED)
-- `doc/specs/26_langgraph_quantum_swarm.md`
 - `doc/specs/27_floating_session_state.md`
 - `doc/specs/28_shadow_worktrees.md`
-- `doc/specs/29_skill_ingestion_engine.md`
 - `doc/specs/40_token_optimization_protocol.md`
 - `doc/specs/41_wordline_sovereignty.md`
 - `doc/specs/42_metacognitive_identity.md`

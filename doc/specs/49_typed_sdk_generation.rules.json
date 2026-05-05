@@ -1,0 +1,39 @@
+{
+  "spec_id": "DE-V2-L1-49",
+  "title": "Typed SDK Generation",
+  "status": "ACTIVE",
+  "layer": "L1",
+  "last_verified_on": "2026-04-29",
+  "required_frontmatter": [
+    "spec_id",
+    "title",
+    "status",
+    "layer",
+    "last_verified_on"
+  ],
+  "required_sections": [
+    "Purpose",
+    "Current State",
+    "Physical Evidence",
+    "Contract Invariants",
+    "Verification",
+    "Traceability"
+  ],
+  "evidence_paths": [
+    "layers/l1_nervous/sdk_generator.py",
+    "layers/l1_nervous/generated/",
+    "scratch/generate_sdks.py",
+    "doc/CORE_SPEC.md",
+    "doc/PHYSICAL_MAP.md"
+  ],
+  "policy": {
+    "allow_legacy_narrative": false,
+    "require_existing_links": true,
+    "status_values": [
+      "ACTIVE",
+      "DRAFT",
+      "PROPOSED",
+      "DEPRECATED"
+    ]
+  }
+}

@@ -1,0 +1,97 @@
+cases:
+  - id: contract_drift
+    prompt: "Spec says telemetry outcome is optional but daemon code requires it."
+    expected_status: CONTRADICTED
+    evidence:
+      - type: active_spec
+        supports: true
+      - type: source_code
+        contradicts: true
+    metrics:
+      evidence_precision: 1.0
+      contradiction_detection: 1.0
+      corrective_action_quality: 0.9
+  - id: stale_spec_vs_current_code
+    prompt: "Documentation references a deleted loci.db file."
+    expected_status: CONTRADICTED
+    evidence:
+      - type: core_spec
+        supports: true
+      - type: filesystem
+        contradicts: true
+    metrics:
+      evidence_precision: 0.9
+      evidence_recall: 0.8
+      corrective_action_quality: 0.8
+  - id: topology_cycle_vs_word_cycle
+    prompt: "Detect graph cycle, not textual use of the word cycle."
+    expected_status: SUPPORTED
+    evidence:
+      - type: test
+        supports: true
+    metrics:
+      causal_ordering: 1.0
+      hallucination_penalty: 0.0
+  - id: goal_rationale_alias
+    prompt: "Treat goal/rationale aliases as related planning evidence."
+    expected_status: SUPPORTED
+    evidence:
+      - type: typed_schema
+        supports: true
+    metrics:
+      evidence_recall: 0.9
+      corrective_action_quality: 0.8
+  - id: business_mvp_selection
+    prompt: "Select low-risk MVP with tests over broad refactor."
+    expected_status: SUPPORTED
+    evidence:
+      - type: test
+        supports: true
+    metrics:
+      persona_alignment: 0.9
+      corrective_action_quality: 1.0
+  - id: file_deletion_event
+    prompt: "A deleted file should produce FILE_DELETED with old hash."
+    expected_status: SUPPORTED
+    evidence:
+      - type: source_code
+        supports: true
+    metrics:
+      six_d_context_correctness: 0.8
+      causal_ordering: 0.8
+  - id: unsupported_claim
+    prompt: "Claim with no evidence must not be trusted."
+    expected_status: INSUFFICIENT_EVIDENCE
+    evidence: []
+    metrics:
+      evidence_precision: 1.0
+      hallucination_penalty: 0.0
+  - id: generated_artifact_risk
+    prompt: "Generated artifact should not override source code."
+    expected_status: CONTRADICTED
+    evidence:
+      - type: generated_report
+        supports: true
+      - type: source_code
+        contradicts: true
+    metrics:
+      contradiction_detection: 1.0
+      evidence_precision: 0.9
+  - id: persona_alignment
+    prompt: "Approve rigorous safe patch, constrain narrative bloat."
+    expected_status: SUPPORTED
+    evidence:
+      - type: test
+        supports: true
+    metrics:
+      persona_alignment: 1.0
+      hallucination_penalty: 0.0
+  - id: pattern_detection
+    prompt: "Repeated file events should produce hotspot pattern."
+    expected_status: SUPPORTED
+    evidence:
+      - type: test
+        supports: true
+    metrics:
+      pattern_detection_quality: 1.0
+      evidence_recall: 0.8
