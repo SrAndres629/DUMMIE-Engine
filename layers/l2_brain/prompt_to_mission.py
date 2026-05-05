@@ -102,8 +102,16 @@ class PromptToMissionCompiler:
             f"Action needed: {recommended_action}."
         )
         
-        # We delegate to compile() to ensure all destructive checks and phase additions happen
-        mission = self.compile({"prompt": prompt, "authority_a": "SYSTEM"})
+        # Delegate to compile() to ensure destructive checks
+        mission = self.compile({"prompt": prompt, "authority_a": "SYSTEM_HEALER"})
+        
+        # Force strict gating for self-healing (No direct apply)
+        mission["self_healing_safety_gates"] = {
+            "apply_patch_enabled": False,
+            "persona_guardian_required": True,
+            "requires_human_approval": True,
+            "coldplanner_metrics": pattern.get("coldplanner_metrics", {})
+        }
         
         # Enrich the generated mission with pattern context
         mission["source_pattern_id"] = pattern.get("pattern_id")

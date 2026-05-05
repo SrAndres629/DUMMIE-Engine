@@ -1,9 +1,48 @@
 import datetime
 import json
 import re
+import os
+import tempfile
+from contextlib import contextmanager
 from pathlib import Path
 from typing import Any
 
+try:
+    import fcntl
+except ImportError:  # Windows fallback
+    fcntl = None
+
+
+@contextmanager
+def file_lock(lock_path: Path):
+    lock_path.parent.mkdir(parents=True, exist_ok=True)
+    with lock_path.open("a+", encoding="utf-8") as lock_file:
+        if fcntl:
+            fcntl.flock(lock_file.fileno(), fcntl.LOCK_EX)
+        try:
+            yield
+        finally:
+            if fcntl:
+                fcntl.flock(lock_file.fileno(), fcntl.LOCK_UN)
+
+
+def atomic_write_text(path: Path, content: str) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    fd, tmp_name = tempfile.mkstemp(
+        prefix=f".{path.name}.",
+        suffix=".tmp",
+        dir=str(path.parent),
+        text=True,
+    )
+    try:
+        with os.fdopen(fd, "w", encoding="utf-8") as handle:
+            handle.write(content)
+            handle.flush()
+            os.fsync(handle.fileno())
+        os.replace(tmp_name, path)
+    finally:
+        if os.path.exists(tmp_name):
+            os.unlink(tmp_name)
 
 class SessionStore:
     SESSION_ID_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_.-]{0,127}$")
@@ -74,25 +113,55 @@ class SessionStore:
         if not session_path.exists():
             raise FileNotFoundError(f"Session not found: {session_id}")
 
-        state = self._read_json(session_path / "state.json")
-        lamport_t = int(state.get("lamport_t", 0)) + 1
-        event = {
-            "event_type": event_type,
-            "timestamp": self._now(),
-            "summary": summary,
-            "evidence_refs": evidence_refs or [],
-            "six_d_context": six_d_context or {},
-            "lamport_t": lamport_t,
-            "data": data or {},
-        }
-        with (session_path / "events.jsonl").open("a", encoding="utf-8") as handle:
-            handle.write(json.dumps(event, sort_keys=True) + "\n")
+        lock_path = session_path / ".session.lock"
 
-        state["events_count"] = int(state.get("events_count", 0)) + 1
-        state["lamport_t"] = lamport_t
-        state["updated_at"] = event["timestamp"]
-        self._write_json(session_path / "state.json", state)
+        with file_lock(lock_path):
+            state_path = session_path / "state.json"
+            state = self._read_json(state_path)
+            lamport_t = int(state.get("lamport_t", 0)) + 1
+
+            context = dict(six_d_context or {})
+            context.setdefault("lamport_t", lamport_t)
+
+            event = {
+                "event_type": event_type,
+                "timestamp": self._now(),
+                "summary": summary,
+                "evidence_refs": evidence_refs or [],
+                "six_d_context": context,
+                "lamport_t": lamport_t,
+                "data": data or {},
+            }
+
+            with (session_path / "events.jsonl").open("a", encoding="utf-8") as handle:
+                handle.write(json.dumps(event, sort_keys=True) + "\n")
+                handle.flush()
+                os.fsync(handle.fileno())
+
+            state["events_count"] = int(state.get("events_count", 0)) + 1
+            state["lamport_t"] = lamport_t
+            state["updated_at"] = event["timestamp"]
+            self._write_json(state_path, state)
+
         return event
+
+    def iter_events(self, session_id: str):
+        session_path = self._session_path(session_id)
+        events_path = session_path / "events.jsonl"
+        if not events_path.exists():
+            return
+        with events_path.open("r", encoding="utf-8") as handle:
+            for line_no, line in enumerate(handle, start=1):
+                if not line.strip():
+                    continue
+                try:
+                    yield json.loads(line)
+                except json.JSONDecodeError as exc:
+                    yield {
+                        "event_type": "CORRUPT_EVENT_LINE",
+                        "line_no": line_no,
+                        "error": str(exc),
+                    }
 
     def save_artifact(self, session_id: str, artifact_name: str, content: str) -> Path:
         session_path = self._session_path(session_id)
@@ -148,7 +217,10 @@ class SessionStore:
 
     @staticmethod
     def _write_json(path: Path, data: dict[str, Any]) -> None:
-        path.write_text(json.dumps(data, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+        atomic_write_text(
+            path,
+            json.dumps(data, indent=2, sort_keys=True) + "\n",
+        )
 
     @staticmethod
     def _read_events(session_path: Path) -> list[dict[str, Any]]:

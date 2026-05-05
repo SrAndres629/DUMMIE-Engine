@@ -8,24 +8,34 @@ import time
 from typing import Any, Protocol
 from urllib import request as urlrequest
 from urllib.error import URLError
+from pathlib import Path
 
-def load_dotenv_simple():
-    env_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../.env"))
-    if not os.path.exists(env_path):
-        env_path = os.path.abspath(os.path.join(os.getcwd(), ".env"))
-        
-    if os.path.exists(env_path):
-        with open(env_path, "r") as f:
-            for line in f:
-                line = line.strip()
-                if not line or line.startswith("#"):
+def load_dotenv_simple() -> None:
+    if os.getenv("DUMMIE_LOAD_DOTENV", "0").strip().lower() not in {"1", "true", "yes"}:
+        return
+
+    candidates = [
+        Path(__file__).resolve().parents[2] / ".env",
+        Path.cwd() / ".env",
+    ]
+
+    for env_path in candidates:
+        if not env_path.exists():
+            continue
+        if env_path.name != ".env":
+            continue
+
+        with env_path.open("r", encoding="utf-8") as handle:
+            for raw in handle:
+                line = raw.strip()
+                if not line or line.startswith("#") or "=" not in line:
                     continue
-                if "=" in line:
-                    key, val = line.split("=", 1)
-                    key = key.strip()
-                    val = val.strip().strip('"').strip("'")
-                    if key not in os.environ:
-                        os.environ[key] = val
+                key, val = line.split("=", 1)
+                key = key.strip()
+                if not key.startswith("DUMMIE_"):
+                    continue
+                os.environ.setdefault(key, val.strip().strip('"').strip("'"))
+        return
 
 load_dotenv_simple()
 

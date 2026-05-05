@@ -63,7 +63,7 @@ def test_compile_from_pattern_generates_system_mission():
     
     mission = compiler.compile_from_pattern(pattern)
     
-    assert mission["authority_a"] == "SYSTEM"
+    assert mission["authority_a"] == "SYSTEM_HEALER"
     assert mission["source_pattern_id"] == "drift_daemon.py"
     assert "Contract drift" in mission["goal"]
     assert "daemon.py contradicted" in mission["goal"]

@@ -29,6 +29,11 @@ from auditor_port import BaseAuditor, BaseExecutor
 
 # Importaciones de Adaptadores (Cruce de Capas vía PYTHONPATH)
 try:
+    from safe_fallbacks import FailClosedAuditor, FailClosedExecutor
+except ImportError:
+    from layers.l2_brain.safe_fallbacks import FailClosedAuditor, FailClosedExecutor
+
+try:
     from topological_auditor import TopologicalAuditor
     from budget_auditor import BudgetAuditor
     from compliance_auditor import ComplianceAuditor
@@ -81,11 +86,33 @@ class DummieDaemon:
         self._current_counterfactual_threshold: float = 0.0
         self.last_cognitive_preflight: Dict[str, Any] = {"status": "SKIPPED"}
         
+        self._background_tasks: set[asyncio.Task] = set()
+        self.request_timeout_s = float(os.getenv("DUMMIE_REQUEST_TIMEOUT_S", "60"))
+
         # Capas Somáticas (Conexión Directa)
-        self.s_shield: BaseAuditor = TopologicalAuditor() if TopologicalAuditor else _FallbackUnsafeAuditor()
-        self.e_shield: BaseAuditor = BudgetAuditor() if BudgetAuditor else _FallbackUnsafeAuditor()
-        self.l_shield: BaseAuditor = ComplianceAuditor() if ComplianceAuditor else _FallbackUnsafeAuditor()
-        self.muscle: BaseExecutor = MuscleDriver(mcp_gateway) if MuscleDriver else _NoopExecutor()
+        shield_error = "shield_import_failed"
+        executor_error = "muscle_import_failed"
+        self.s_shield: BaseAuditor = TopologicalAuditor() if TopologicalAuditor else FailClosedAuditor(shield_error)
+        self.e_shield: BaseAuditor = BudgetAuditor() if BudgetAuditor else FailClosedAuditor(shield_error)
+        self.l_shield: BaseAuditor = ComplianceAuditor() if ComplianceAuditor else FailClosedAuditor(shield_error)
+        self.muscle: BaseExecutor = MuscleDriver(mcp_gateway) if MuscleDriver else FailClosedExecutor(executor_error)
+
+    def _spawn_task(self, coro, transaction_hint: str = "") -> None:
+        task = asyncio.create_task(coro)
+        self._background_tasks.add(task)
+
+        def _done_callback(done: asyncio.Task) -> None:
+            self._background_tasks.discard(done)
+            try:
+                done.result()
+            except Exception as exc:
+                logger.exception(
+                    "Background task failed transaction_hint=%s error=%s",
+                    transaction_hint,
+                    exc,
+                )
+
+        task.add_done_callback(_done_callback)
 
     async def run_forever(self):
         logger.info("Antigravity Daemon: ONLINE (TABULA RASA MODE)")
@@ -93,7 +120,13 @@ class DummieDaemon:
             try:
                 request = await self.event_bus.wait_for_request()
                 if request:
-                    asyncio.create_task(self._process_request_safe(request))
+                    self._spawn_task(
+                        asyncio.wait_for(
+                            self._process_request_safe(request),
+                            timeout=self.request_timeout_s,
+                        ),
+                        transaction_hint=getattr(request, "session_id", ""),
+                    )
             except Exception as e:
                 logger.error(f"Cycle Failure: {e}")
                 await asyncio.sleep(5)
@@ -103,8 +136,13 @@ class DummieDaemon:
             await self.process_request(request)
 
     async def process_request(self, request: GatewayRequest):
-        transaction_id = f"TXN-{datetime.now().strftime('%Y%m%d%H%M%S')}"
-        context_token = f"TOKEN-{hash(transaction_id)}"
+        import uuid
+        import hashlib
+        from datetime import UTC
+        ts = datetime.now(UTC).strftime("%Y%m%dT%H%M%S%fZ")
+        transaction_id = f"TXN-{ts}-{uuid.uuid4().hex[:8]}"
+        payload = f"{request.session_id}:{transaction_id}".encode("utf-8")
+        context_token = "TOKEN-" + hashlib.sha256(payload).hexdigest()[:24]
         saga = SagaTransaction(transaction_id=transaction_id, context_token=context_token)
         self.active_transactions[transaction_id] = saga
         self.last_gate_status = "ALLOW"
@@ -471,19 +509,7 @@ class DummieDaemon:
             return default
 
 
-class _FallbackUnsafeAuditor(BaseAuditor):
-    """Fallback auditor when L3 Shield imports fail. Allows all but logs warning."""
-    async def audit(self, dag_xml: str, goal: str = ""):
-        logger.warning(
-            "_FallbackUnsafeAuditor: L3 Shield import failed. "
-            "All requests are being allowed WITHOUT security validation."
-        )
-        return True, "FALLBACK_UNSAFE: L3 Shield import failed"
-
-
-class _NoopExecutor(BaseExecutor):
-    async def execute(self, server_name: str, tool_name: str, arguments: Dict[str, Any]) -> Dict[str, Any]:
-        return {"ok": True}
+# Classes _FallbackUnsafeAuditor and _NoopExecutor moved to safe_fallbacks.py
 
 
 class GovernanceGateError(RuntimeError):

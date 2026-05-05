@@ -41,7 +41,7 @@ def test_session_store_persists_state_events_artifacts_and_compaction(tmp_path):
     assert store.list_sessions()[0]["session_id"] == "sess-1"
 
     event_lines = (tmp_path / ".aiwg" / "sessions" / "sess-1" / "events.jsonl").read_text().splitlines()
-    assert json.loads(event_lines[0])["six_d_context"] == {"axis": "runtime"}
+    assert json.loads(event_lines[0])["six_d_context"]["axis"] == "runtime"
 
 
 @pytest.mark.parametrize(
