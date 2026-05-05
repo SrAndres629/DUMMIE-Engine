@@ -26,7 +26,7 @@ echo ">> Creating sudoers exception for agent-specific commands..."
 
 cat <<EOF | sudo tee $SUDOERS_FILE > /dev/null
 # DUMMIE Engine Agent Sovereignty
-$USER_NAME ALL=(ALL) NOPASSWD: /usr/bin/docker, /usr/local/bin/uv, /home/jorand/.local/bin/uv
+$USER_NAME ALL=(ALL) NOPASSWD: /usr/bin/docker, $(which uv 2>/dev/null || echo "/usr/local/bin/uv")
 EOF
 sudo chmod 440 $SUDOERS_FILE
 

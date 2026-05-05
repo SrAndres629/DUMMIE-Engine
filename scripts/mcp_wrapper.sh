@@ -1,7 +1,7 @@
 #!/bin/bash
 # DUMMIE Engine - MCP Error Wrapper (Hardened & Autocorrecting)
 LOG_FILE="/tmp/dummie_mcp_errors.log"
-export DUMMIE_ROOT_DIR="${DUMMIE_ROOT_DIR:-/home/jorand/Escritorio/DUMMIE Engine}"
+export DUMMIE_ROOT_DIR="${DUMMIE_ROOT:-$(cd "$(dirname "$0")/.." && pwd)}"
 export DUMMIE_AIWG_DIR="${DUMMIE_AIWG_DIR:-$DUMMIE_ROOT_DIR/.aiwg}"
 export MEMORY_SOCKET_PATH="${MEMORY_SOCKET_PATH:-$DUMMIE_AIWG_DIR/sockets/flight.sock}"
 

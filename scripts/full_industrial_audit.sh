@@ -2,7 +2,7 @@
 set -e
 
 # Configuración de Rutas
-ROOT_DIR="/home/jorand/Escritorio/DUMMIE Engine"
+ROOT_DIR="${DUMMIE_ROOT:-$(cd "$(dirname "$0")/.." && pwd)}"
 export DUMMIE_ROOT="$ROOT_DIR"
 export DUMMIE_AIWG="/tmp/dummie_audit_aiwg"
 BIN_DIR="$ROOT_DIR/bin"
