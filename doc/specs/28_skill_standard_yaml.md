@@ -17,7 +17,7 @@ Capacidad en transición; requiere consolidación progresiva de contratos y prue
 - `doc/specs/28_skill_standard_yaml.md`
 - `doc/specs/28_skill_standard_yaml.feature`
 - `doc/specs/28_skill_standard_yaml.rules.json`
-- `layers/l2_brain`
+- `layers/l2_brain/daemon.py`
 - `doc/CORE_SPEC.md`
 - `doc/PHYSICAL_MAP.md`
 

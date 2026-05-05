@@ -101,6 +101,11 @@ def validate_spec_file(path: Path) -> list[str]:
             errors.append(f"{path}: Physical Evidence path does not exist `{rel}`")
             continue
 
+        if target.is_dir() and target.name not in ("docs", "specs", ".agents", "doc", "infra"):
+            # Enforce pointing to files instead of directories to prevent behavioral linkage bypass
+            errors.append(f"{path}: Physical Evidence `{rel}` must be a file, not a directory.")
+            continue
+
         # Enforce behavioral linkage for source code files
         if target.suffix in (".py", ".go") and "tests/" not in rel and "tests" not in target.parts:
             try:

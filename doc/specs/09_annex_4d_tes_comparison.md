@@ -17,7 +17,7 @@ Capacidad en transición; requiere consolidación progresiva de contratos y prue
 - `doc/specs/09_annex_4d_tes_comparison.md`
 - `doc/specs/09_annex_4d_tes_comparison.feature`
 - `doc/specs/09_annex_4d_tes_comparison.rules.json`
-- `layers/l2_brain`
+- `layers/l2_brain/daemon.py`
 - `doc/CORE_SPEC.md`
 - `doc/PHYSICAL_MAP.md`
 

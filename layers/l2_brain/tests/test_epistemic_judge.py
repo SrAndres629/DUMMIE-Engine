@@ -77,3 +77,45 @@ def test_low_authority_support_remains_assumption_until_verified():
     assert result["status"] == "ASSUMPTION"
     assert result["decision"] == "verify_source"
     assert result["required_next_check"] == "source_code_or_test"
+
+
+def test_contradicted_branch_returns_correct_status_and_confidence():
+    """Regression: dead code bug L53 previously assigned SUPPORTED then overwrote with CONTRADICTED."""
+    judge = EpistemicJudge()
+
+    result = judge.evaluate_claim(
+        "Spec claims watcher is active",
+        [
+            {"id": "spec-1", "type": "active_spec", "supports": True},
+            {"id": "code-1", "type": "source_code", "contradicts": True},
+        ],
+    )
+
+    assert result["status"] == "CONTRADICTED"
+    assert result["confidence"] == 0.85
+    assert result["decision"] == "reject"
+    assert result["required_next_check"] is None
+    assert len(result["contradicting_evidence"]) == 1
+    assert result["contradicting_evidence"][0]["id"] == "code-1"
+
+
+def test_compare_sources_ranks_test_above_comment():
+    judge = EpistemicJudge()
+
+    assert judge.compare_sources({"type": "test"}, {"type": "comment"}) == 1
+    assert judge.compare_sources({"type": "comment"}, {"type": "test"}) == -1
+
+
+def test_compare_sources_returns_zero_for_equal_types():
+    judge = EpistemicJudge()
+
+    assert judge.compare_sources({"type": "test"}, {"type": "test"}) == 0
+
+
+def test_compare_sources_handles_unknown_types():
+    judge = EpistemicJudge()
+
+    # Unknown types get default weight 0.1, so they're equal to each other
+    assert judge.compare_sources({"type": "unknown_x"}, {"type": "unknown_y"}) == 0
+    # But lower than any known type
+    assert judge.compare_sources({"type": "comment"}, {"type": "unknown"}) == 1

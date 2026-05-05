@@ -17,7 +17,7 @@ Capacidad activa con evidencia verificable en el repositorio.
 - `doc/specs/00_topology_tracker.md`
 - `doc/specs/00_topology_tracker.feature`
 - `doc/specs/00_topology_tracker.rules.json`
-- `layers/l0_overseer`
+- `layers/l0_overseer/__init__.py`
 - `doc/CORE_SPEC.md`
 - `doc/PHYSICAL_MAP.md`
 

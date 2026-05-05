@@ -17,7 +17,7 @@ Capacidad en transición; requiere consolidación progresiva de contratos y prue
 - `doc/specs/25_blueprint_registry.md`
 - `doc/specs/25_blueprint_registry.feature`
 - `doc/specs/25_blueprint_registry.rules.json`
-- `layers/l4_edge`
+- `layers/l4_edge/__init__.py`
 - `doc/CORE_SPEC.md`
 - `doc/PHYSICAL_MAP.md`
 

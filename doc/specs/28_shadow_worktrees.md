@@ -17,7 +17,7 @@ Diseño de roadmap; implementación parcial o no integrada al flujo principal.
 - `doc/specs/28_shadow_worktrees.md`
 - `doc/specs/28_shadow_worktrees.feature`
 - `doc/specs/28_shadow_worktrees.rules.json`
-- `layers/l0_overseer`
+- `layers/l0_overseer/__init__.py`
 - `doc/CORE_SPEC.md`
 - `doc/PHYSICAL_MAP.md`
 

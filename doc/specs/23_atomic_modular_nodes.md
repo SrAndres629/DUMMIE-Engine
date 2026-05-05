@@ -17,7 +17,7 @@ Capacidad activa con evidencia verificable en el repositorio.
 - `doc/specs/23_atomic_modular_nodes.md`
 - `doc/specs/23_atomic_modular_nodes.feature`
 - `doc/specs/23_atomic_modular_nodes.rules.json`
-- `layers/l1_nervous`
+- `layers/l1_nervous/__init__.py`
 - `doc/CORE_SPEC.md`
 - `doc/PHYSICAL_MAP.md`
 

@@ -1,3 +1,20 @@
+__spec_id__ = "DE-V2-L2-42B"
+__spec_id__ = "DE-V2-L2-34"
+__spec_id__ = "DE-V2-L2-27B"
+__spec_id__ = "DE-V2-L2-27"
+__spec_id__ = "DE-V2-L2-40B"
+__spec_id__ = "DE-V2-L2-28"
+__spec_id__ = "DE-V2-L2-37"
+__spec_id__ = "DE-V2-L2-40"
+__spec_id__ = "DE-V2-L2-31"
+__spec_id__ = "DE-V2-L2-09"
+__spec_id__ = "DE-V2-L2-41B"
+__spec_id__ = "DE-V2-L2-39"
+__spec_id__ = "DE-V2-L2-42"
+__spec_id__ = "DE-V2-L2-21"
+__spec_id__ = "DE-V2-L2-29"
+__spec_id__ = "DE-V2-L2-36"
+__spec_id__ = "DE-V2-L2-38"
 import asyncio
 import json
 import logging

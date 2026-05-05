@@ -17,7 +17,7 @@ Capacidad en transición; requiere consolidación progresiva de contratos y prue
 - `doc/specs/42_proactive_heartbeat_protocol.md`
 - `doc/specs/42_proactive_heartbeat_protocol.feature`
 - `doc/specs/42_proactive_heartbeat_protocol.rules.json`
-- `layers/l0_overseer`
+- `layers/l0_overseer/__init__.py`
 - `doc/CORE_SPEC.md`
 - `doc/PHYSICAL_MAP.md`
 

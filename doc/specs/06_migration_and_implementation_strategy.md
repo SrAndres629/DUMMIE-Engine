@@ -17,7 +17,7 @@ Capacidad en transición; requiere consolidación progresiva de contratos y prue
 - `doc/specs/06_migration_and_implementation_strategy.md`
 - `doc/specs/06_migration_and_implementation_strategy.feature`
 - `doc/specs/06_migration_and_implementation_strategy.rules.json`
-- `layers/l0_overseer`
+- `layers/l0_overseer/__init__.py`
 - `doc/CORE_SPEC.md`
 - `doc/PHYSICAL_MAP.md`
 

@@ -1,0 +1,4 @@
+ROW[1] type: <class 'list'>, value: ['23e95cbb4c701093974235e0a4de7704932d4cd8eb791b35abc33fb31b6b0930']
+Payload match: False
+Causal match: True
+Payload diff: sha256:{hashlib.sha256(row[8].encode("utf-8")).hexdigest()} vs sha256:b4d80740e703ed048a20241aec10ebd399ec5300a4984507c852e19d7f7f7b12

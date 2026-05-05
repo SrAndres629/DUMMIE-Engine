@@ -50,7 +50,6 @@ class EpistemicJudge:
         top_contradiction = contradicting_evidence[0]["_weight"] if contradicting_evidence else 0.0
 
         if top_contradiction >= top_support and contradicting_evidence:
-            status = "SUPPORTED"
             status = "CONTRADICTED"
             confidence = top_contradiction
             decision = "reject"
@@ -78,6 +77,20 @@ class EpistemicJudge:
             "required_next_check": required_next_check,
             "decision": decision,
         }
+
+    def compare_sources(self, left: Dict[str, Any], right: Dict[str, Any]) -> int:
+        """Compare two evidence sources by authority weight.
+
+        Returns:
+            1 if left outranks right, -1 if right outranks left, 0 if equal.
+        """
+        left_weight = self.EVIDENCE_WEIGHTS.get(left.get("type", ""), 0.1)
+        right_weight = self.EVIDENCE_WEIGHTS.get(right.get("type", ""), 0.1)
+        if left_weight > right_weight:
+            return 1
+        if right_weight > left_weight:
+            return -1
+        return 0
 
     @staticmethod
     def _strip_weight(item: Dict[str, Any]) -> Dict[str, Any]:

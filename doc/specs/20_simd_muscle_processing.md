@@ -17,7 +17,7 @@ Capacidad en transición; requiere consolidación progresiva de contratos y prue
 - `doc/specs/20_simd_muscle_processing.md`
 - `doc/specs/20_simd_muscle_processing.feature`
 - `doc/specs/20_simd_muscle_processing.rules.json`
-- `layers/l5_muscle`
+- `layers/l5_muscle/__init__.py`
 - `doc/CORE_SPEC.md`
 - `doc/PHYSICAL_MAP.md`
 

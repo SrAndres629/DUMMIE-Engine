@@ -17,7 +17,7 @@ Capacidad en transición; requiere consolidación progresiva de contratos y prue
 - `doc/specs/14_value_engineering_and_governance.md`
 - `doc/specs/14_value_engineering_and_governance.feature`
 - `doc/specs/14_value_engineering_and_governance.rules.json`
-- `layers/l0_overseer`
+- `layers/l0_overseer/__init__.py`
 - `doc/CORE_SPEC.md`
 - `doc/PHYSICAL_MAP.md`
 

@@ -17,7 +17,7 @@ Capacidad en transición; requiere consolidación progresiva de contratos y prue
 - `doc/specs/24_legal_compliance_shield.md`
 - `doc/specs/24_legal_compliance_shield.feature`
 - `doc/specs/24_legal_compliance_shield.rules.json`
-- `layers/l3_shield`
+- `layers/l3_shield/__init__.py`
 - `doc/CORE_SPEC.md`
 - `doc/PHYSICAL_MAP.md`
 

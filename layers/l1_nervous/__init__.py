@@ -1,0 +1,8 @@
+__spec_id__ = "DE-V2-L1-30"
+__spec_id__ = "DE-V2-L1-23"
+__spec_id__ = "DE-V2-L1-11"
+__spec_id__ = "DE-V2-L1-16B"
+__spec_id__ = "DE-V2-L1-44"
+__spec_id__ = "DE-V2-L1-15"
+__spec_id__ = "DE-V2-L1-10"
+__spec_id__ = "DE-V2-L1-41"

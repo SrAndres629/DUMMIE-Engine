@@ -17,7 +17,7 @@ Capacidad en transición; requiere consolidación progresiva de contratos y prue
 - `doc/specs/26_command_canvas_gui.md`
 - `doc/specs/26_command_canvas_gui.feature`
 - `doc/specs/26_command_canvas_gui.rules.json`
-- `layers/l6_skin`
+- `layers/l6_skin/__init__.py`
 - `doc/CORE_SPEC.md`
 - `doc/PHYSICAL_MAP.md`
 

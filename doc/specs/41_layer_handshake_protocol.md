@@ -17,7 +17,7 @@ Capacidad activa con evidencia verificable en el repositorio.
 - `doc/specs/41_layer_handshake_protocol.md`
 - `doc/specs/41_layer_handshake_protocol.feature`
 - `doc/specs/41_layer_handshake_protocol.rules.json`
-- `layers/l1_nervous`
+- `layers/l1_nervous/__init__.py`
 - `doc/CORE_SPEC.md`
 - `doc/PHYSICAL_MAP.md`
 

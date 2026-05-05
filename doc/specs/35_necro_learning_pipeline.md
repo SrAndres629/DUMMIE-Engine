@@ -17,7 +17,7 @@ Capacidad en transición; requiere consolidación progresiva de contratos y prue
 - `doc/specs/35_necro_learning_pipeline.md`
 - `doc/specs/35_necro_learning_pipeline.feature`
 - `doc/specs/35_necro_learning_pipeline.rules.json`
-- `layers/l5_muscle`
+- `layers/l5_muscle/compactor.py`
 - `doc/CORE_SPEC.md`
 - `doc/PHYSICAL_MAP.md`
 

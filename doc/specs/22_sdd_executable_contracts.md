@@ -17,7 +17,7 @@ Capacidad activa con evidencia verificable en el repositorio.
 - `doc/specs/22_sdd_executable_contracts.md`
 - `doc/specs/22_sdd_executable_contracts.feature`
 - `doc/specs/22_sdd_executable_contracts.rules.json`
-- `layers/l3_shield`
+- `layers/l3_shield/__init__.py`
 - `doc/CORE_SPEC.md`
 - `doc/PHYSICAL_MAP.md`
 

@@ -15,7 +15,7 @@ Implementado y operativo. El componente `layers/l1_nervous/sdk_generator.py` lee
 
 ## Physical Evidence
 - `layers/l1_nervous/sdk_generator.py`
-- `layers/l1_nervous/generated/`
+- `layers/l1_nervous/generated/everything_sdk.py`
 - `scratch/generate_sdks.py`
 - `doc/CORE_SPEC.md`
 - `doc/PHYSICAL_MAP.md`

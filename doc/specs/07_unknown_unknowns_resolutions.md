@@ -17,7 +17,7 @@ Capacidad en transición; requiere consolidación progresiva de contratos y prue
 - `doc/specs/07_unknown_unknowns_resolutions.md`
 - `doc/specs/07_unknown_unknowns_resolutions.feature`
 - `doc/specs/07_unknown_unknowns_resolutions.rules.json`
-- `layers/l0_overseer`
+- `layers/l0_overseer/__init__.py`
 - `doc/CORE_SPEC.md`
 - `doc/PHYSICAL_MAP.md`
 
