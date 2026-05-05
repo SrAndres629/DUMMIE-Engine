@@ -3,6 +3,8 @@ from __future__ import annotations
 import json
 from typing import Any
 
+__spec_id__ = "DE-V2-L1-44"
+
 
 class LocalReasoningToolService:
     def __init__(

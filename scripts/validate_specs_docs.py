@@ -90,6 +90,7 @@ def validate_spec_file(path: Path) -> list[str]:
     if not sibling_rules.exists():
         errors.append(f"{path}: missing sibling artifact `{sibling_rules}`")
 
+    spec_id = meta.get("spec_id", "")
     for rel in parse_physical_evidence(body):
         if " " in rel:
             continue
@@ -98,6 +99,19 @@ def validate_spec_file(path: Path) -> list[str]:
         target = ROOT / rel
         if not target.exists():
             errors.append(f"{path}: Physical Evidence path does not exist `{rel}`")
+            continue
+
+        # Enforce behavioral linkage for source code files
+        if target.suffix in (".py", ".go") and "tests/" not in rel and "tests" not in target.parts:
+            try:
+                content = target.read_text(encoding="utf-8")
+                has_spec_ref = spec_id in content if spec_id else False
+                has_test_file = any(target.parent.rglob("test_*.py")) or any(target.parent.rglob("*_test.go"))
+                
+                if not has_spec_ref and not has_test_file:
+                    errors.append(f"{path}: Physical Evidence `{rel}` lacks behavioral linkage (no `{spec_id}` reference and no local tests found).")
+            except Exception:
+                pass
 
     return errors
 

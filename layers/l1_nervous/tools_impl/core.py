@@ -1,6 +1,8 @@
 import os
 from mcp.server.fastmcp import FastMCP
 
+__spec_id__ = "DE-V2-L4-18"
+
 def register_core_tools(mcp: FastMCP, use_cases, root_dir: str):
     AIWG_DIR = os.path.join(root_dir, ".aiwg")
 
