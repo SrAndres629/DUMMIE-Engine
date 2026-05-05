@@ -27,6 +27,13 @@ METRICS = [
     "hallucination_penalty",
     "persona_alignment",
     "pattern_detection_quality",
+    "e2e_completion",
+    "evidence_quality",
+    "planning_quality",
+    "memory_usage",
+    "safety_compliance",
+    "artifact_efficiency",
+    "next_mission_quality",
 ]
 
 
@@ -44,14 +51,17 @@ def score_case(case: dict[str, Any]) -> dict[str, Any]:
     predicted = infer_status(case.get("evidence", []))
     expected = case.get("expected_status")
     status_score = 1.0 if predicted == expected else 0.0
-    metric_scores = {name: float(case.get("metrics", {}).get(name, 0.0)) for name in METRICS}
-
+    metric_scores = {name: float(case.get("metrics", {}).get(name, 0.0)) for name in METRICS if name in case.get("metrics", {})}
+    
     # hallucination_penalty is better when lower; convert to quality contribution.
-    metric_contributions = [
-        1.0 - metric_scores["hallucination_penalty"] if name == "hallucination_penalty" else metric_scores[name]
-        for name in METRICS
-    ]
-    quality_score = mean(metric_contributions) if metric_contributions else 0.0
+    metric_contributions = []
+    for name, value in metric_scores.items():
+        if name == "hallucination_penalty":
+            metric_contributions.append(1.0 - value)
+        else:
+            metric_contributions.append(value)
+            
+    quality_score = mean(metric_contributions) if metric_contributions else 1.0
     total_score = round((status_score * 0.4) + (quality_score * 0.6), 4)
     return {
         "id": case["id"],

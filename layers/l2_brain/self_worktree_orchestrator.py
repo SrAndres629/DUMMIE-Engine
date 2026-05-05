@@ -93,6 +93,10 @@ class SelfWorktreeOrchestrator:
             self.root_dir / ".aiwg" / "control" / "REASONING_PROTOCOL.md",
             self.root_dir / ".aiwg" / "control" / "WORKTREE_RULES.yaml",
         ]
+        persona_path = self.root_dir / ".aiwg" / "self_model" / "DUMMIE_PERSONA.yaml"
+        if persona_path.exists():
+            context_files.append(persona_path)
+
         found = [str(path.relative_to(self.root_dir)) for path in context_files if path.exists()]
         body = "# Global Recall\n\n" + "\n".join(f"- {path}" for path in found)
         if not found:
@@ -111,6 +115,24 @@ class SelfWorktreeOrchestrator:
         candidate_paths = candidate_paths or []
         allowed_paths = [self._validate_patch_path(path) for path in candidate_paths]
 
+        # 1. Mine patterns from repository events
+        events_path = self.root_dir / ".aiwg" / "events" / "file_events.jsonl"
+        repo_events = []
+        if events_path.exists():
+            for line in events_path.read_text(encoding="utf-8").splitlines():
+                if line.strip():
+                    import json
+                    repo_events.append(json.loads(line))
+        patterns = self.pattern_miner.mine_patterns(repo_events)
+
+        # 2. Calculate risk penalty if candidates hit a hotspot or drift
+        risk_penalty = 0.0
+        for pattern in patterns:
+            for path in allowed_paths:
+                if path in pattern.get("hypothesis", ""):
+                    risk_penalty += 0.5
+
+        # 3. Create candidates and rank them
         candidates = [
             {
                 "id": "plan_patch",
@@ -123,14 +145,17 @@ class SelfWorktreeOrchestrator:
                     "testability": 0.8,
                     "implementation_cost_inverse": 0.6,
                     "reversibility": 0.9,
+                    "risk": risk_penalty,
                 },
             }
         ]
         selected = self.planner.select_next_action(candidates)
-        patterns = self.pattern_miner.mine_patterns(self.store.load_session(session_id)["events"])
+
+        # 4. Evaluate persona alignment
         alignment = self.persona_guardian.evaluate_alignment(
             {"metrics": {"scientific_rigor": 0.8, "risk_of_bloat": 0.2}}
         )
+
         plan = {
             "plan_id": f"plan_{self.store.load_session(session_id)['state'].get('lamport_t', 0) + 1}",
             "goal": goal,

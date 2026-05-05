@@ -49,3 +49,22 @@ def test_compile_accepts_string_plus_authority():
 def test_compile_blocks_destructive_prompts(prompt):
     with pytest.raises(ValueError):
         PromptToMissionCompiler().compile(prompt)
+
+
+def test_compile_from_pattern_generates_system_mission():
+    compiler = PromptToMissionCompiler()
+    pattern = {
+        "pattern_id": "drift_daemon.py",
+        "name": "Contract drift",
+        "hypothesis": "daemon.py contradicted by source_code.",
+        "proposed_rule": "Reconcile spec.",
+        "recommended_action": "RECONCILE_CONTRACT",
+    }
+    
+    mission = compiler.compile_from_pattern(pattern)
+    
+    assert mission["authority_a"] == "SYSTEM"
+    assert mission["source_pattern_id"] == "drift_daemon.py"
+    assert "Contract drift" in mission["goal"]
+    assert "daemon.py contradicted" in mission["goal"]
+    assert "RECONCILE_CONTRACT" in mission["goal"]

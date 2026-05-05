@@ -88,6 +88,30 @@ class PromptToMissionCompiler:
             },
         }
 
+    def compile_from_pattern(self, pattern: dict[str, Any], context: dict[str, Any] | None = None) -> dict[str, Any]:
+        """Generate a mission directly from a detected pattern (OpenClaw loop)."""
+        pattern_name = pattern.get("name", "Unknown Pattern")
+        hypothesis = pattern.get("hypothesis", "")
+        proposed_rule = pattern.get("proposed_rule", "")
+        recommended_action = pattern.get("recommended_action", "INVESTIGATE")
+        
+        prompt = (
+            f"Address {pattern_name}. "
+            f"Evidence shows: {hypothesis}. "
+            f"Rule to enforce: {proposed_rule}. "
+            f"Action needed: {recommended_action}."
+        )
+        
+        # We delegate to compile() to ensure all destructive checks and phase additions happen
+        mission = self.compile({"prompt": prompt, "authority_a": "SYSTEM"})
+        
+        # Enrich the generated mission with pattern context
+        mission["source_pattern_id"] = pattern.get("pattern_id")
+        if context:
+            mission["context_refs"] = context.get("evidence_refs", [])
+            
+        return mission
+
     def _normalize_input(self, mission_input: str | dict[str, Any], authority: str) -> tuple[str, str]:
         if isinstance(mission_input, dict):
             prompt = str(mission_input.get("prompt", "")).strip()

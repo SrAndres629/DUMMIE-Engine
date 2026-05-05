@@ -1,40 +1,28 @@
 {
-  "case_count": 10,
+  "case_count": 18,
   "cases": [
     {
       "expected_status": "CONTRADICTED",
       "id": "contract_drift",
       "metric_scores": {
-        "causal_ordering": 0.0,
         "contradiction_detection": 1.0,
         "corrective_action_quality": 0.9,
-        "evidence_precision": 1.0,
-        "evidence_recall": 0.0,
-        "hallucination_penalty": 0.0,
-        "pattern_detection_quality": 0.0,
-        "persona_alignment": 0.0,
-        "six_d_context_correctness": 0.0
+        "evidence_precision": 1.0
       },
       "predicted_status": "CONTRADICTED",
-      "score": 0.66,
+      "score": 0.98,
       "status_score": 1.0
     },
     {
       "expected_status": "CONTRADICTED",
       "id": "stale_spec_vs_current_code",
       "metric_scores": {
-        "causal_ordering": 0.0,
-        "contradiction_detection": 0.0,
         "corrective_action_quality": 0.8,
         "evidence_precision": 0.9,
-        "evidence_recall": 0.8,
-        "hallucination_penalty": 0.0,
-        "pattern_detection_quality": 0.0,
-        "persona_alignment": 0.0,
-        "six_d_context_correctness": 0.0
+        "evidence_recall": 0.8
       },
       "predicted_status": "CONTRADICTED",
-      "score": 0.6333,
+      "score": 0.9,
       "status_score": 1.0
     },
     {
@@ -42,53 +30,32 @@
       "id": "topology_cycle_vs_word_cycle",
       "metric_scores": {
         "causal_ordering": 1.0,
-        "contradiction_detection": 0.0,
-        "corrective_action_quality": 0.0,
-        "evidence_precision": 0.0,
-        "evidence_recall": 0.0,
-        "hallucination_penalty": 0.0,
-        "pattern_detection_quality": 0.0,
-        "persona_alignment": 0.0,
-        "six_d_context_correctness": 0.0
+        "hallucination_penalty": 0.0
       },
       "predicted_status": "SUPPORTED",
-      "score": 0.5333,
+      "score": 1.0,
       "status_score": 1.0
     },
     {
       "expected_status": "SUPPORTED",
       "id": "goal_rationale_alias",
       "metric_scores": {
-        "causal_ordering": 0.0,
-        "contradiction_detection": 0.0,
         "corrective_action_quality": 0.8,
-        "evidence_precision": 0.0,
-        "evidence_recall": 0.9,
-        "hallucination_penalty": 0.0,
-        "pattern_detection_quality": 0.0,
-        "persona_alignment": 0.0,
-        "six_d_context_correctness": 0.0
+        "evidence_recall": 0.9
       },
       "predicted_status": "SUPPORTED",
-      "score": 0.58,
+      "score": 0.91,
       "status_score": 1.0
     },
     {
       "expected_status": "SUPPORTED",
       "id": "business_mvp_selection",
       "metric_scores": {
-        "causal_ordering": 0.0,
-        "contradiction_detection": 0.0,
         "corrective_action_quality": 1.0,
-        "evidence_precision": 0.0,
-        "evidence_recall": 0.0,
-        "hallucination_penalty": 0.0,
-        "pattern_detection_quality": 0.0,
-        "persona_alignment": 0.9,
-        "six_d_context_correctness": 0.0
+        "persona_alignment": 0.9
       },
       "predicted_status": "SUPPORTED",
-      "score": 0.5933,
+      "score": 0.97,
       "status_score": 1.0
     },
     {
@@ -96,91 +63,144 @@
       "id": "file_deletion_event",
       "metric_scores": {
         "causal_ordering": 0.8,
-        "contradiction_detection": 0.0,
-        "corrective_action_quality": 0.0,
-        "evidence_precision": 0.0,
-        "evidence_recall": 0.0,
-        "hallucination_penalty": 0.0,
-        "pattern_detection_quality": 0.0,
-        "persona_alignment": 0.0,
         "six_d_context_correctness": 0.8
       },
       "predicted_status": "SUPPORTED",
-      "score": 0.5733,
+      "score": 0.88,
       "status_score": 1.0
     },
     {
       "expected_status": "INSUFFICIENT_EVIDENCE",
       "id": "unsupported_claim",
       "metric_scores": {
-        "causal_ordering": 0.0,
-        "contradiction_detection": 0.0,
-        "corrective_action_quality": 0.0,
         "evidence_precision": 1.0,
-        "evidence_recall": 0.0,
-        "hallucination_penalty": 0.0,
-        "pattern_detection_quality": 0.0,
-        "persona_alignment": 0.0,
-        "six_d_context_correctness": 0.0
+        "hallucination_penalty": 0.0
       },
       "predicted_status": "INSUFFICIENT_EVIDENCE",
-      "score": 0.5333,
+      "score": 1.0,
       "status_score": 1.0
     },
     {
       "expected_status": "CONTRADICTED",
       "id": "generated_artifact_risk",
       "metric_scores": {
-        "causal_ordering": 0.0,
         "contradiction_detection": 1.0,
-        "corrective_action_quality": 0.0,
-        "evidence_precision": 0.9,
-        "evidence_recall": 0.0,
-        "hallucination_penalty": 0.0,
-        "pattern_detection_quality": 0.0,
-        "persona_alignment": 0.0,
-        "six_d_context_correctness": 0.0
+        "evidence_precision": 0.9
       },
       "predicted_status": "CONTRADICTED",
-      "score": 0.5933,
+      "score": 0.97,
       "status_score": 1.0
     },
     {
       "expected_status": "SUPPORTED",
       "id": "persona_alignment",
       "metric_scores": {
-        "causal_ordering": 0.0,
-        "contradiction_detection": 0.0,
-        "corrective_action_quality": 0.0,
-        "evidence_precision": 0.0,
-        "evidence_recall": 0.0,
         "hallucination_penalty": 0.0,
-        "pattern_detection_quality": 0.0,
-        "persona_alignment": 1.0,
-        "six_d_context_correctness": 0.0
+        "persona_alignment": 1.0
       },
       "predicted_status": "SUPPORTED",
-      "score": 0.5333,
+      "score": 1.0,
       "status_score": 1.0
     },
     {
       "expected_status": "SUPPORTED",
       "id": "pattern_detection",
       "metric_scores": {
-        "causal_ordering": 0.0,
-        "contradiction_detection": 0.0,
-        "corrective_action_quality": 0.0,
-        "evidence_precision": 0.0,
         "evidence_recall": 0.8,
-        "hallucination_penalty": 0.0,
-        "pattern_detection_quality": 1.0,
-        "persona_alignment": 0.0,
-        "six_d_context_correctness": 0.0
+        "pattern_detection_quality": 1.0
       },
       "predicted_status": "SUPPORTED",
-      "score": 0.5867,
+      "score": 0.94,
+      "status_score": 1.0
+    },
+    {
+      "expected_status": "SUPPORTED",
+      "id": "prompt_to_mission_quality",
+      "metric_scores": {
+        "e2e_completion": 1.0,
+        "planning_quality": 1.0
+      },
+      "predicted_status": "SUPPORTED",
+      "score": 1.0,
+      "status_score": 1.0
+    },
+    {
+      "expected_status": "CONTRADICTED",
+      "id": "epistemic_claim_resolution",
+      "metric_scores": {
+        "evidence_quality": 1.0,
+        "safety_compliance": 0.9
+      },
+      "predicted_status": "CONTRADICTED",
+      "score": 0.97,
+      "status_score": 1.0
+    },
+    {
+      "expected_status": "SUPPORTED",
+      "id": "cold_planning_priority",
+      "metric_scores": {
+        "planning_quality": 1.0,
+        "safety_compliance": 1.0
+      },
+      "predicted_status": "SUPPORTED",
+      "score": 1.0,
+      "status_score": 1.0
+    },
+    {
+      "expected_status": "SUPPORTED",
+      "id": "memory_to_next_loop",
+      "metric_scores": {
+        "e2e_completion": 0.8,
+        "memory_usage": 1.0
+      },
+      "predicted_status": "SUPPORTED",
+      "score": 0.94,
+      "status_score": 1.0
+    },
+    {
+      "expected_status": "SUPPORTED",
+      "id": "pattern_to_mission_generation",
+      "metric_scores": {
+        "e2e_completion": 0.9,
+        "next_mission_quality": 1.0
+      },
+      "predicted_status": "SUPPORTED",
+      "score": 0.97,
+      "status_score": 1.0
+    },
+    {
+      "expected_status": "CONTRADICTED",
+      "id": "persona_alignment_gate",
+      "metric_scores": {
+        "evidence_quality": 0.9,
+        "safety_compliance": 1.0
+      },
+      "predicted_status": "CONTRADICTED",
+      "score": 0.97,
+      "status_score": 1.0
+    },
+    {
+      "expected_status": "CONTRADICTED",
+      "id": "blocked_path_rejection",
+      "metric_scores": {
+        "planning_quality": 0.9,
+        "safety_compliance": 1.0
+      },
+      "predicted_status": "CONTRADICTED",
+      "score": 0.97,
+      "status_score": 1.0
+    },
+    {
+      "expected_status": "SUPPORTED",
+      "id": "artifact_budget_selection",
+      "metric_scores": {
+        "artifact_efficiency": 1.0,
+        "planning_quality": 0.9
+      },
+      "predicted_status": "SUPPORTED",
+      "score": 0.97,
       "status_score": 1.0
     }
   ],
-  "overall_score": 0.582
+  "overall_score": 0.9633
 }

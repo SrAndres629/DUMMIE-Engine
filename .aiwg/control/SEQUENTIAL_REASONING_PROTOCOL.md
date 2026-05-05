@@ -4,7 +4,10 @@
 Convertir cada prompt complejo en una misión estructurada con razonamiento externo auditable, evitando la sobrecarga metacognitiva (Context Bloat) y la fragmentación de la sesión.
 
 ## Estructura de Sesión Optimizada (.aiwg/sessions/<id>/)
-Para evitar el agotamiento de contexto de los LLMs, los 11 artefactos originales se han consolidado en un pipeline funcional de 4 fases que vincula directamente el razonamiento con la ejecución:
+Para evitar el agotamiento de contexto de los LLMs, el sistema implementa una política estricta definida en `ARTIFACT_BUDGET_POLICY.yaml`.
+Los 11 artefactos originales se han consolidado, y la cantidad generada depende del modo de razonamiento (`micro_patch`, `normal_loop`, o `deep_mission`).
+
+Para el flujo estándar (`normal_loop`), el pipeline funcional se reduce a 4 fases:
 
 1.  **intake_and_plan.md**: (Fase de Ingesta y Estrategia)
     - Reemplaza: `intake.md`, `global_recall.md`, `epistemic_check.md`, `cold_plan.md`, `research_tree.md`.

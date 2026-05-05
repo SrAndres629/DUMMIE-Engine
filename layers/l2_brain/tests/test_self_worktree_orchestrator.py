@@ -53,3 +53,40 @@ def test_self_orchestrator_rejects_blocked_patch_paths(tmp_path, blocked):
 
     with pytest.raises(ValueError):
         orchestrator.plan_safe_patch("self-1", "Unsafe", candidate_paths=[blocked])
+
+
+def test_self_orchestrator_uses_memory_derived_risk_scores(tmp_path):
+    orchestrator = SelfWorktreeOrchestrator(tmp_path)
+    orchestrator.start_self_session("mem-1")
+
+    # Create dummy events to trigger a hotspot pattern on 'target.py'
+    events_dir = tmp_path / ".aiwg" / "events"
+    events_dir.mkdir(parents=True, exist_ok=True)
+    events_path = events_dir / "file_events.jsonl"
+    
+    import json
+    with events_path.open("w", encoding="utf-8") as f:
+        for i in range(3):
+            f.write(json.dumps({"path": "target.py", "kind": "test_failure"}) + "\n")
+
+    # The orchestrator should detect the hotspot and penalize 'target.py'
+    plan = orchestrator.plan_safe_patch("mem-1", "Fix target", candidate_paths=["target.py"])
+    
+    # Verify the selected action has increased risk
+    assert plan["selected_action"]["risk_level"] in {"medium", "high"}
+    
+    # Also verify that a non-hotspot path stays low risk
+    plan_safe = orchestrator.plan_safe_patch("mem-1", "Fix safe", candidate_paths=["safe.py"])
+    assert plan_safe["selected_action"]["risk_level"] == "low"
+
+
+def test_self_orchestrator_loads_persona_yaml(tmp_path):
+    orchestrator = SelfWorktreeOrchestrator(tmp_path)
+    orchestrator.start_self_session("persona-1")
+
+    persona_dir = tmp_path / ".aiwg" / "self_model"
+    persona_dir.mkdir(parents=True, exist_ok=True)
+    (persona_dir / "DUMMIE_PERSONA.yaml").write_text("scientific_rigor: 0.9", encoding="utf-8")
+
+    context = orchestrator.load_global_context("persona-1")
+    assert any("DUMMIE_PERSONA.yaml" in ref for ref in context["context_refs"])
