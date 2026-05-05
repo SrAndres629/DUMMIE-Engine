@@ -43,21 +43,9 @@ async def test_pattern_to_patch_transaction_e2e_successful_dry_run():
     mission = compiler.compile_from_pattern(pattern)
     assert mission["self_healing_safety_gates"]["apply_patch_enabled"] is False
 
-    # 3. Planner proposes patch (simulated)
+    # 3. Planner proposes patch
     planner = SelfHealingPlanner(MockGateway())
-    proposal_dict = await planner.generate_patch_proposal(mission)
-    
-    # Enrich the proposal with test-specific data to pass the schema
-    proposal = PatchProposal(
-        proposal_id=proposal_dict["mission_id"] or "prop-1",
-        source_pattern_id=mission["source_pattern_id"],
-        mission_id=mission["mission_id"],
-        affected_paths=["src/decayed.py"],
-        diff_unified="+ def new_test(): pass",
-        tests_to_run=["pytest tests/test_decayed.py"],
-        rollback_plan="git checkout src/decayed.py",
-        safety_gates=mission["self_healing_safety_gates"]
-    )
+    proposal = await planner.generate_patch_proposal(mission)
     
     # Simulate PersonaGuardian and ColdPlanner approving
     proposal.safety_gates["persona_guardian_approved"] = True
@@ -67,23 +55,16 @@ async def test_pattern_to_patch_transaction_e2e_successful_dry_run():
     store = MockSessionStore()
     manager = PatchTransactionManager(store)
     
-    txn = manager.create_transaction("sess-1", proposal)
-    
     # 5. Assertions
-    assert txn.status == "BLOCKED" # Wait, apply_patch_enabled is False!
-    assert "apply_patch_enabled" in txn.evidence_refs[0]
-    
-    # Let's test the successful case by overriding the gate locally for the test
-    proposal.safety_gates["apply_patch_enabled"] = True
-    txn_success = manager.create_transaction("sess-1", proposal)
-    
-    assert txn_success.status == "AWAITING_APPROVAL"
-    assert len(store.events) == 2
-    assert store.events[1]["type"] == "TRANSACTION_CREATED"
+    # FIXED: apply_patch_enabled=False should result in AWAITING_APPROVAL now
+    txn = manager.create_transaction("sess-1", proposal)
+    assert txn.status == "AWAITING_APPROVAL"
+    assert len(store.events) == 1
     
     # Validate JSON serialization
-    serialized = txn_success.to_dict()
-    assert serialized["transaction_id"] == txn_success.transaction_id
+    serialized = txn.to_dict()
+    assert serialized["transaction_id"] == txn.transaction_id
+    assert "apply_patch_enabled" in serialized["safety_gates"]
 
 
 @pytest.mark.asyncio
@@ -100,18 +81,10 @@ async def test_pattern_to_patch_transaction_e2e_blocked_path():
     mission = compiler.compile_from_pattern(pattern)
 
     planner = SelfHealingPlanner(MockGateway())
-    proposal_dict = await planner.generate_patch_proposal(mission)
+    proposal = await planner.generate_patch_proposal(mission)
     
-    proposal = PatchProposal(
-        proposal_id="prop-env",
-        source_pattern_id=mission["source_pattern_id"],
-        mission_id=mission["mission_id"],
-        affected_paths=[".env"],
-        diff_unified="+ SECRET=123",
-        tests_to_run=["pytest"],
-        rollback_plan="git checkout .env",
-        safety_gates=mission["self_healing_safety_gates"]
-    )
+    # Force a blocked path
+    proposal.affected_paths = [".env"]
     
     # Even if we bypass gates, the path blocker must trigger
     proposal.safety_gates["apply_patch_enabled"] = True
@@ -124,5 +97,4 @@ async def test_pattern_to_patch_transaction_e2e_blocked_path():
     txn = manager.create_transaction("sess-1", proposal)
     
     assert txn.status == "BLOCKED"
-    assert "Path blocked" in txn.evidence_refs[0]
-    assert ".env" in txn.evidence_refs[0]
+    assert any(".env" in err for err in txn.validation_errors)

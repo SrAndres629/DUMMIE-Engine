@@ -39,6 +39,7 @@ class PatchTransaction:
         "ROLLED_BACK",
         "BLOCKED",
     ] = "CREATED"
+    validation_errors: List[str] = field(default_factory=list)
 
     @classmethod
     def from_proposal(
@@ -48,11 +49,7 @@ class PatchTransaction:
         proposal: PatchProposal,
         evidence_refs: List[str] = None
     ) -> "PatchTransaction":
-        if not proposal.tests_to_run:
-            raise ValueError("PatchTransaction requires at least one test to run")
-        if not proposal.rollback_plan.strip():
-            raise ValueError("PatchTransaction requires a rollback plan")
-
+        # Validation is now delegated to the Manager to allow BLOCKED state with errors
         return cls(
             transaction_id=transaction_id,
             source_pattern_id=proposal.source_pattern_id,
@@ -82,4 +79,5 @@ class PatchTransaction:
             "evidence_refs": self.evidence_refs,
             "safety_gates": self.safety_gates,
             "status": self.status,
+            "validation_errors": self.validation_errors,
         }

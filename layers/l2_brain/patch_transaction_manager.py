@@ -16,31 +16,37 @@ class PatchTransactionManager:
         self.session_store = session_store
 
     def create_transaction(self, session_id: str, proposal: PatchProposal) -> PatchTransaction:
-        # Validate blocked paths
+        validation_errors = []
+
+        # 1. Structural Validations (These lead to BLOCKED)
         for path in proposal.affected_paths:
             if any(path.endswith(b) or b in path.split("/") for b in BLOCKED_PATHS):
-                txn = self._build_blocked_transaction(proposal, f"Path blocked by security policy: {path}")
-                self._record_transaction(session_id, txn)
-                return txn
+                validation_errors.append(f"Path blocked by security policy: {path}")
 
-        # Validate gates
-        gates = proposal.safety_gates or {}
-        if not gates.get("apply_patch_enabled"):
-            txn = self._build_blocked_transaction(proposal, "Direct apply is disabled (apply_patch_enabled=False)")
-            self._record_transaction(session_id, txn)
-            return txn
+        if not proposal.tests_to_run:
+            validation_errors.append("Proposal lacks tests_to_run")
             
+        if not proposal.rollback_plan or not proposal.rollback_plan.strip():
+            validation_errors.append("Proposal lacks a valid rollback_plan")
+
+        # 2. Semantic Gates (Some might block, others just force AWAITING_APPROVAL)
+        gates = proposal.safety_gates or {}
+        
+        # Missing approvals block the transaction
         if gates.get("persona_guardian_required") and not gates.get("persona_guardian_approved"):
-            txn = self._build_blocked_transaction(proposal, "PersonaGuardian approval required but missing")
-            self._record_transaction(session_id, txn)
-            return txn
+            validation_errors.append("PersonaGuardian approval required but missing")
 
         if not gates.get("coldplanner_selected_action"):
-            txn = self._build_blocked_transaction(proposal, "ColdPlanner did not explicitly select this action")
+            validation_errors.append("ColdPlanner did not explicitly select this action")
+
+        # If we have structural/approval errors, it's BLOCKED
+        if validation_errors:
+            txn = self._build_blocked_transaction(proposal, validation_errors)
             self._record_transaction(session_id, txn)
             return txn
 
-        # Success - create awaiting approval transaction
+        # 3. Success (AWAITING_APPROVAL)
+        # Note: apply_patch_enabled=False no longer blocks creation.
         txn_id = f"txn-{uuid.uuid4().hex[:8]}"
         branch_name = f"heal-{proposal.proposal_id[:8]}"
         
@@ -54,33 +60,17 @@ class PatchTransactionManager:
         self._record_transaction(session_id, txn)
         return txn
 
-    def _build_blocked_transaction(self, proposal: PatchProposal, reason: str) -> PatchTransaction:
+    def _build_blocked_transaction(self, proposal: PatchProposal, errors: List[str]) -> PatchTransaction:
         txn_id = f"txn-{uuid.uuid4().hex[:8]}"
         branch_name = f"heal-blocked-{proposal.proposal_id[:8]}"
-        try:
-            txn = PatchTransaction.from_proposal(
-                transaction_id=txn_id,
-                branch_name=branch_name,
-                proposal=proposal
-            )
-            txn.status = "BLOCKED"
-            txn.evidence_refs = [f"block_reason:{reason}"]
-        except ValueError:
-            # If proposal is fundamentally broken (e.g. no tests), still return blocked struct
-            txn = PatchTransaction(
-                transaction_id=txn_id,
-                source_pattern_id=proposal.source_pattern_id,
-                mission_id=proposal.mission_id,
-                proposal_id=proposal.proposal_id,
-                branch_name=branch_name,
-                affected_paths=proposal.affected_paths,
-                diff_unified=proposal.diff_unified,
-                tests_to_run=proposal.tests_to_run or ["dummy"],
-                rollback_plan=proposal.rollback_plan or "dummy",
-                evidence_refs=[f"block_reason:{reason}"],
-                safety_gates=proposal.safety_gates,
-                status="BLOCKED"
-            )
+        
+        txn = PatchTransaction.from_proposal(
+            transaction_id=txn_id,
+            branch_name=branch_name,
+            proposal=proposal
+        )
+        txn.status = "BLOCKED"
+        txn.validation_errors = errors
         return txn
 
     def _record_transaction(self, session_id: str, txn: PatchTransaction) -> None:

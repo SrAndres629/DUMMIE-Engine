@@ -2,7 +2,10 @@ import pytest
 from patch_transaction import PatchProposal, PatchTransaction
 
 
-def test_creates_transaction_from_proposal():
+def test_creates_transaction_from_proposal_without_strict_enforcement():
+    """
+    Validation is now handled by the Manager to allow BLOCKED status artifacts.
+    """
     proposal = PatchProposal(
         proposal_id="prop-1",
         source_pattern_id="pat-1",
@@ -27,36 +30,6 @@ def test_creates_transaction_from_proposal():
     assert "main.py" in txn.affected_paths
 
 
-def test_rejects_empty_rollback_plan():
-    proposal = PatchProposal(
-        proposal_id="prop-1",
-        source_pattern_id="pat-1",
-        mission_id="miss-1",
-        affected_paths=["main.py"],
-        diff_unified="+ code",
-        tests_to_run=["pytest"],
-        rollback_plan="   ",
-    )
-
-    with pytest.raises(ValueError, match="rollback plan"):
-        PatchTransaction.from_proposal("txn-1", "branch", proposal)
-
-
-def test_rejects_transaction_without_tests():
-    proposal = PatchProposal(
-        proposal_id="prop-1",
-        source_pattern_id="pat-1",
-        mission_id="miss-1",
-        affected_paths=["main.py"],
-        diff_unified="+ code",
-        tests_to_run=[],
-        rollback_plan="git reset",
-    )
-
-    with pytest.raises(ValueError, match="test to run"):
-        PatchTransaction.from_proposal("txn-1", "branch", proposal)
-
-
 def test_serializes_to_json_dict():
     proposal = PatchProposal(
         proposal_id="prop-1",
@@ -73,3 +46,4 @@ def test_serializes_to_json_dict():
     assert d["transaction_id"] == "txn-1"
     assert d["status"] == "CREATED"
     assert d["source_pattern_id"] == "pat-1"
+    assert "validation_errors" in d

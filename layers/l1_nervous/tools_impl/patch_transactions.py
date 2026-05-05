@@ -1,5 +1,19 @@
 import json
+import os
 from typing import Dict, Any, List
+from pathlib import Path
+
+def _get_store_or_error() -> Any:
+    """Helper to ensure DUMMIE_ROOT is present."""
+    root_dir = os.getenv("DUMMIE_ROOT")
+    if not root_dir:
+        return None
+        
+    try:
+        from layers.l2_brain.session_store import SessionStore
+        return SessionStore(root_dir)
+    except ImportError:
+        return None
 
 def create_patch_transaction(
     session_id: str,
@@ -16,20 +30,16 @@ def create_patch_transaction(
     MCP Tool: dummie_patch_transaction_create
     Creates a patch transaction in dry-run mode. Returns the transaction status.
     """
+    store = _get_store_or_error()
+    if not store:
+        return {"error": "DUMMIE_ROOT_REQUIRED", "message": "DUMMIE_ROOT env var must be set for session operations."}
+
     try:
         from layers.l2_brain.patch_transaction import PatchProposal
         from layers.l2_brain.patch_transaction_manager import PatchTransactionManager
-        from layers.l2_brain.session_store import SessionStore
     except ImportError:
-        return {"error": "L2 Brain modules not found. Cannot create transaction."}
+        return {"error": "L2_BRAIN_NOT_FOUND"}
 
-    # In a real environment, we would inject the correct SessionStore instance here.
-    # For now, we mock the dependency or load it from the known path.
-    import os
-    from pathlib import Path
-    
-    root_dir = os.getenv("DUMMIE_ROOT") or str(Path.cwd())
-    store = SessionStore(root_dir)
     manager = PatchTransactionManager(store)
     
     proposal = PatchProposal(
@@ -49,6 +59,7 @@ def create_patch_transaction(
         "status": "success",
         "transaction_id": txn.transaction_id,
         "transaction_status": txn.status,
+        "validation_errors": txn.validation_errors,
         "evidence": txn.evidence_refs
     }
 
@@ -58,17 +69,10 @@ def get_patch_transaction_status(session_id: str, transaction_id: str) -> Dict[s
     MCP Tool: dummie_patch_transaction_status
     Retrieves the status of an existing patch transaction from the session artifacts.
     """
-    try:
-        from layers.l2_brain.session_store import SessionStore
-    except ImportError:
-        return {"error": "L2 Brain modules not found."}
+    store = _get_store_or_error()
+    if not store:
+        return {"error": "DUMMIE_ROOT_REQUIRED"}
 
-    import os
-    from pathlib import Path
-    
-    root_dir = os.getenv("DUMMIE_ROOT") or str(Path.cwd())
-    store = SessionStore(root_dir)
-    
     try:
         session = store.load_session(session_id)
         artifact_name = f"transaction_{transaction_id}.json"
@@ -89,10 +93,8 @@ def get_patch_transaction_status(session_id: str, transaction_id: str) -> Dict[s
 def validate_patch_transaction(session_id: str, transaction_id: str) -> Dict[str, Any]:
     """
     MCP Tool: dummie_patch_transaction_validate
-    Simulates validation of an awaiting transaction. Does not apply it.
+    Simulates validation of an awaiting transaction.
     """
-    # This would normally trigger the L2 Brain's validation runner.
-    # For this phase, it just confirms it can read the transaction and returns a validation simulation.
     status_response = get_patch_transaction_status(session_id, transaction_id)
     if "error" in status_response:
         return status_response
@@ -105,5 +107,6 @@ def validate_patch_transaction(session_id: str, transaction_id: str) -> Dict[str
     return {
         "status": "success",
         "validation_state": "SIMULATED_PASS",
-        "message": "Validation simulation complete. Transaction is safe but cannot be applied in Phase 5."
+        "authoritative": False,
+        "message": "Validation simulation complete. NOTE: This is a non-authoritative dry-run."
     }

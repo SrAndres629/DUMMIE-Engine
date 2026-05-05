@@ -88,6 +88,7 @@ class DummieDaemon:
         
         self._background_tasks: set[asyncio.Task] = set()
         self.request_timeout_s = float(os.getenv("DUMMIE_REQUEST_TIMEOUT_S", "60"))
+        self.diagnostic_mode = os.getenv("DUMMIE_DIAGNOSTIC_MODE") == "1"
 
         # Capas Somáticas (Conexión Directa)
         shield_error = "shield_import_failed"
@@ -96,6 +97,14 @@ class DummieDaemon:
         self.e_shield: BaseAuditor = BudgetAuditor() if BudgetAuditor else FailClosedAuditor(shield_error)
         self.l_shield: BaseAuditor = ComplianceAuditor() if ComplianceAuditor else FailClosedAuditor(shield_error)
         self.muscle: BaseExecutor = MuscleDriver(mcp_gateway) if MuscleDriver else FailClosedExecutor(executor_error)
+
+        if self.diagnostic_mode:
+            try:
+                from daemon_diagnostic import DiagnosticReporter
+                self.diagnostic_reporter = DiagnosticReporter(self)
+            except ImportError:
+                from layers.l2_brain.daemon_diagnostic import DiagnosticReporter
+                self.diagnostic_reporter = DiagnosticReporter(self)
 
     def _spawn_task(self, coro, transaction_hint: str = "") -> None:
         task = asyncio.create_task(coro)
@@ -115,6 +124,13 @@ class DummieDaemon:
         task.add_done_callback(_done_callback)
 
     async def run_forever(self):
+        if self.diagnostic_mode:
+            logger.info("Antigravity Daemon: STARTING IN DIAGNOSTIC MODE")
+            await self.diagnostic_reporter.run_diagnostic()
+            logger.info("Diagnostic complete. Staying in passive wait mode.")
+            while True:
+                await asyncio.sleep(3600)
+                
         logger.info("Antigravity Daemon: ONLINE (TABULA RASA MODE)")
         while True:
             try:

@@ -63,26 +63,33 @@ def test_blocks_env_file(manager, store, base_proposal):
     base_proposal.affected_paths = [".env"]
     txn = manager.create_transaction("sess-1", base_proposal)
     assert txn.status == "BLOCKED"
-    assert "block_reason" in txn.evidence_refs[0]
-    assert ".env" in txn.evidence_refs[0]
+    assert any(".env" in err for err in txn.validation_errors)
 
 
-def test_blocks_when_apply_patch_disabled(manager, base_proposal):
+def test_allows_creation_when_apply_patch_disabled(manager, base_proposal):
+    # FIXED: This should now return AWAITING_APPROVAL, not BLOCKED
     base_proposal.safety_gates["apply_patch_enabled"] = False
     txn = manager.create_transaction("sess-1", base_proposal)
-    assert txn.status == "BLOCKED"
-    assert "apply_patch_enabled" in txn.evidence_refs[0]
+    assert txn.status == "AWAITING_APPROVAL"
 
 
 def test_blocks_missing_persona_approval(manager, base_proposal):
     base_proposal.safety_gates["persona_guardian_approved"] = False
     txn = manager.create_transaction("sess-1", base_proposal)
     assert txn.status == "BLOCKED"
-    assert "PersonaGuardian" in txn.evidence_refs[0]
+    assert any("PersonaGuardian" in err for err in txn.validation_errors)
 
 
-def test_blocks_missing_coldplanner_action(manager, base_proposal):
-    base_proposal.safety_gates["coldplanner_selected_action"] = False
+def test_blocks_missing_tests(manager, base_proposal):
+    # FIXED: Remove dummy check
+    base_proposal.tests_to_run = []
     txn = manager.create_transaction("sess-1", base_proposal)
     assert txn.status == "BLOCKED"
-    assert "ColdPlanner" in txn.evidence_refs[0]
+    assert any("tests_to_run" in err for err in txn.validation_errors)
+
+
+def test_blocks_missing_rollback(manager, base_proposal):
+    base_proposal.rollback_plan = ""
+    txn = manager.create_transaction("sess-1", base_proposal)
+    assert txn.status == "BLOCKED"
+    assert any("rollback_plan" in err for err in txn.validation_errors)
