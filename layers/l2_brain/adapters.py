@@ -184,10 +184,11 @@ class KuzuRepository:
                 
                 import re
                 bound_cypher = cypher
-                for key, val in parameters.items():
-                    # Word boundaries evitan colisiones entre $id e $id_long
-                    pattern = r'\$' + re.escape(key) + r'\b'
-                    bound_cypher = re.sub(pattern, lambda m, v=val: cypher_literal(v), bound_cypher)
+                # Sort keys by length descending to match longest parameters first ($id_long before $id)
+                keys_sorted = sorted(parameters.keys(), key=len, reverse=True)
+                # Combine all parameter names into a single pattern to prevent re-evaluating interpolated values
+                pattern = r'\$(' + '|'.join(map(re.escape, keys_sorted)) + r')\b'
+                bound_cypher = re.sub(pattern, lambda m: cypher_literal(parameters[m.group(1)]), bound_cypher)
                 return self.conn.execute(bound_cypher)
                 
             return self.conn.execute(cypher)
