@@ -2,8 +2,9 @@ import json
 import logging
 import fcntl
 import os
+import asyncio
 from pathlib import Path
-from typing import Dict, Any
+from typing import Dict, Any, List, Tuple
 
 logger = logging.getLogger("post-mortem-agent")
 
@@ -23,6 +24,19 @@ class PostMortemAnalyst:
             "allowed_patch_keys": ["timeout", "retry_policy", "concurrency"]
         }
 
+    def _read_and_parse_ledger(self, path: str, pos: int) -> Tuple[List[Dict[str, Any]], int]:
+        failed_entries = []
+        with open(path, "r") as f:
+            f.seek(pos)
+            for line in f:
+                try:
+                    entry = json.loads(line)
+                    if entry.get("status") == "FAILED":
+                        failed_entries.append(entry)
+                except json.JSONDecodeError:
+                    continue
+            return failed_entries, f.tell()
+
     async def analyze_failures(self):
         """
         Analiza las entradas de fallo en el Ledger desde el último punto conocido.
@@ -31,20 +45,17 @@ class PostMortemAnalyst:
         if not os.path.exists(self.ledger_path):
             return
 
-        last_pos = self._get_last_position()
+        last_pos = await asyncio.to_thread(self._get_last_position)
         
-        with open(self.ledger_path, "r") as f:
-            f.seek(last_pos)
-            for line in f:
-                try:
-                    entry = json.loads(line)
-                    if entry.get("status") == "FAILED":
-                        await self._diagnose_and_propose(entry)
-                except json.JSONDecodeError:
-                    continue
+        failed_entries, new_pos = await asyncio.to_thread(
+            self._read_and_parse_ledger, self.ledger_path, last_pos
+        )
+
+        for entry in failed_entries:
+            await self._diagnose_and_propose(entry)
             
-            # Guardar nueva posición para el próximo ciclo
-            self._save_position(f.tell())
+        # Guardar nueva posición para el próximo ciclo
+        await asyncio.to_thread(self._save_position, new_pos)
 
     async def _diagnose_and_propose(self, entry: Dict[str, Any]):
         """
