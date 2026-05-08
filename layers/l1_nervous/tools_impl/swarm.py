@@ -28,15 +28,19 @@ def register_swarm_tools(mcp: FastMCP, use_cases, root_dir: str):
         if not os.path.exists(ledger_path):
             return "El enjambre está en silencio."
         
-        with open(ledger_path, "r") as f:
-            lines = f.readlines()[-10:]
-            if not lines: return "Sin actividad reciente."
-            
-            output = ["--- ESTADO ACTUAL DEL ENJAMBRE ---"]
-            for line in reversed(lines):
-                data = json.loads(line)
-                output.append(f"[{data.get('timestamp', 'N/A')}] Agent {data['agent_id']} -> {data['intent']} (Target: {data['target']})")
-            return "\n".join(output)
+        import asyncio
+        def _read_lines():
+            with open(ledger_path, "r") as f:
+                return f.readlines()[-10:]
+
+        lines = await asyncio.to_thread(_read_lines)
+        if not lines: return "Sin actividad reciente."
+
+        output = ["--- ESTADO ACTUAL DEL ENJAMBRE ---"]
+        for line in reversed(lines):
+            data = json.loads(line)
+            output.append(f"[{data.get('timestamp', 'N/A')}] Agent {data['agent_id']} -> {data['intent']} (Target: {data['target']})")
+        return "\n".join(output)
 
     @mcp.tool()
     async def delegate_task(requester_id: str, instructions: str, target: str) -> str:

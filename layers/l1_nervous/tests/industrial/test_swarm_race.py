@@ -6,7 +6,7 @@ import time
 sys.path.append('layers/l1_nervous')
 from utils import AtomicLedgerWriter
 
-LEDGER_PATH = "/home/jorand/Escritorio/DUMMIE Engine/.aiwg/memory/swarm_race_test.jsonl"
+LEDGER_PATH = "/app/.aiwg/memory/swarm_race_test.jsonl"
 
 def worker(worker_id):
     for i in range(100):
