@@ -92,7 +92,7 @@ def register_nervous_tools(mcp: FastMCP, use_cases, root_dir: str):
         orchestrator = use_cases.orchestrator
         env = os.environ.copy()
         env["DUMMIE_CONTEXT_T"] = str(getattr(orchestrator, "lamport_clock", 0))
-        cmd = ["rg", "-n", "--hidden", "--glob", include, pattern, str(target)]
+        cmd = ["rg", "-n", "--hidden", "--glob", include, "--", pattern, str(target)]
         try:
             import asyncio
             process = await asyncio.create_subprocess_exec(
