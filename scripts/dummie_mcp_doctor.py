@@ -12,10 +12,8 @@ import asyncio
 import json
 import os
 import subprocess
-import sys
 from pathlib import Path
 from typing import Any
-
 
 ROOT = Path(__file__).resolve().parents[1]
 PYTHON = ROOT / "layers" / "l2_brain" / ".venv" / "bin" / "python"
@@ -59,7 +57,9 @@ def run_command(args: list[str]) -> tuple[int, str, str]:
 
 
 def check_codex_config() -> bool:
-    code, stdout, stderr = run_command(["codex", "mcp", "get", "dummie-brain", "--json"])
+    code, stdout, stderr = run_command(
+        ["codex", "mcp", "get", "dummie-brain", "--json"]
+    )
     if code != 0:
         print(f"codex_config=FAIL code={code} stderr={stderr.strip()}")
         return False
@@ -78,7 +78,9 @@ def check_codex_config() -> bool:
         and transport.get("args") == [str(SERVER)]
         and transport.get("env", {}).get("DUMMIE_KUZU_DB_PATH") == str(CANONICAL_DB)
     )
-    print(f"codex_config={'OK' if ok else 'FAIL'} name={data.get('name')} enabled={data.get('enabled')}")
+    print(
+        f"codex_config={'OK' if ok else 'FAIL'} name={data.get('name')} enabled={data.get('enabled')}"
+    )
     return ok
 
 
@@ -89,14 +91,20 @@ def audit_gateway_config() -> bool:
 
     data = json.loads(GATEWAY_CONFIG.read_text())
     servers: dict[str, dict[str, Any]] = data.get("mcpServers", {})
-    active = sorted(name for name, cfg in servers.items() if not cfg.get("disabled", False))
-    disabled = sorted(name for name, cfg in servers.items() if cfg.get("disabled", False))
+    active = sorted(
+        name for name, cfg in servers.items() if not cfg.get("disabled", False)
+    )
+    disabled = sorted(
+        name for name, cfg in servers.items() if cfg.get("disabled", False)
+    )
     external = sorted(
         name
         for name, cfg in servers.items()
         if cfg.get("command") in {"npx", "uvx"} and not cfg.get("disabled", False)
     )
-    print(f"gateway_config=OK servers={len(servers)} active={len(active)} disabled={len(disabled)}")
+    print(
+        f"gateway_config=OK servers={len(servers)} active={len(active)} disabled={len(disabled)}"
+    )
     if external:
         print(f"gateway_external_active={','.join(external)}")
     return True
@@ -158,21 +166,31 @@ async def check_mcp_handshake(call_discovery: bool) -> bool:
             tools = await session.list_tools()
             resources = await session.list_resources()
             tool_names = sorted(tool.name for tool in tools.tools)
-            resource_uris = sorted(str(resource.uri) for resource in resources.resources)
-            print(f"mcp_handshake=OK tools={len(tool_names)} resources={len(resource_uris)}")
+            resource_uris = sorted(
+                str(resource.uri) for resource in resources.resources
+            )
+            print(
+                f"mcp_handshake=OK tools={len(tool_names)} resources={len(resource_uris)}"
+            )
             print(f"mcp_tools={','.join(tool_names)}")
             print(f"mcp_resources={','.join(resource_uris)}")
 
             health = await session.read_resource("brain://health")
-            health_text = "\n".join(getattr(item, "text", "") for item in health.contents)
+            health_text = "\n".join(
+                getattr(item, "text", "") for item in health.contents
+            )
             print(f"brain_health={health_text.strip()}")
 
             identity = await session.read_resource("brain://identity")
-            identity_text = "\n".join(getattr(item, "text", "") for item in identity.contents)
+            identity_text = "\n".join(
+                getattr(item, "text", "") for item in identity.contents
+            )
             print(f"brain_identity={identity_text.strip()}")
 
             if call_discovery:
-                result = await session.call_tool("dummie_discover_capabilities", {"query": ""})
+                result = await session.call_tool(
+                    "dummie_discover_capabilities", {"query": ""}
+                )
                 text = "\n".join(getattr(item, "text", "") for item in result.content)
                 print("discover_default=OK")
                 print(text[:2000])
