@@ -2,6 +2,8 @@ import os
 import json
 import logging
 import subprocess
+import asyncio
+from collections import deque
 from typing import List
 from pathlib import Path
 from mcp.server.fastmcp import FastMCP
@@ -46,10 +48,14 @@ def register_nervous_tools(mcp: FastMCP, use_cases, root_dir: str):
         lessons = []
         l_path = os.path.join(AIWG_DIR, "memory/lessons.jsonl")
         if os.path.exists(l_path):
-            with open(l_path, "r") as f:
-                for line in f.readlines()[-5:]:
-                    l = json.loads(line)
-                    lessons.append(f"- Fallo: {l.get('issue')}\n  Corrección: {l.get('correction')}")
+            def _read_last_lessons(path: str) -> List[str]:
+                with open(path, "r") as f:
+                    return list(deque(f, maxlen=5))
+
+            lines = await asyncio.to_thread(_read_last_lessons, l_path)
+            for line in lines:
+                l = json.loads(line)
+                lessons.append(f"- Fallo: {l.get('issue')}\n  Corrección: {l.get('correction')}")
         
         return f"--- SYNC COGNITIVA ---\nContexto: {task_context}\nLecciones:\n" + "\n".join(lessons) + "\n---"
 
