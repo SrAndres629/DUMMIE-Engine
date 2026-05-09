@@ -1,0 +1,244 @@
+{
+  "_meta": {
+    "registry_type": "mcp",
+    "version": "1.0.0",
+    "generated_at": "2026-05-09T03:27:00Z",
+    "generated_by": "antigravity_audit",
+    "purpose": "Canonical map of all MCP-related files: servers, proxies, drivers, tool skills, configs, specs, and quarantine. No files were moved or deleted.",
+    "schema_version": "1.0.0"
+  },
+  "items": [
+    {
+      "path": "layers/l1_nervous/mcp_server.py",
+      "kind": "mcp_server",
+      "status": "canonical",
+      "canonical_target": "layers/l1_nervous/mcp_server.py",
+      "owner_layer": "l1_nervous",
+      "risk": "high",
+      "reason": "Primary MCP server implementation (3.9KB). Serves dummie-brain tools. Core infrastructure component.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "layers/l1_nervous/mcp_proxy.py",
+      "kind": "mcp_proxy",
+      "status": "canonical",
+      "canonical_target": "layers/l1_nervous/mcp_proxy.py",
+      "owner_layer": "l1_nervous",
+      "risk": "high",
+      "reason": "MCP proxy/gateway (17.4KB). Routes between local and remote MCP servers. Most complex MCP component.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "layers/l1_nervous/internal/skill/mcp_client.go",
+      "kind": "mcp_client_go",
+      "status": "canonical",
+      "canonical_target": "layers/l1_nervous/internal/skill/mcp_client.go",
+      "owner_layer": "l1_nervous",
+      "risk": "medium",
+      "reason": "Go-based MCP client for skill invocation. Part of L1 Go runtime.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "layers/l5_muscle/mcp_driver.py",
+      "kind": "mcp_driver",
+      "status": "canonical",
+      "canonical_target": "layers/l5_muscle/mcp_driver.py",
+      "owner_layer": "l5_muscle",
+      "risk": "medium",
+      "reason": "MCP driver for muscle layer execution (2KB). Lightweight tool dispatch.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "layers/l1_nervous/generated/genkit_mcp_server_sdk.py",
+      "kind": "generated_sdk",
+      "status": "generated",
+      "canonical_target": "layers/l1_nervous/generated/genkit_mcp_server_sdk.py",
+      "owner_layer": "l1_nervous",
+      "risk": "low",
+      "reason": "Auto-generated MCP SDK. Should not be hand-edited.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": ".agents/skills/mcp_gateway/SKILL.md",
+      "kind": "mcp_skill_definition",
+      "status": "canonical",
+      "canonical_target": ".agents/skills/mcp_gateway/SKILL.md",
+      "owner_layer": ".agents",
+      "risk": "low",
+      "reason": "MCP Gateway skill instructions for agent consumption.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": ".gemini/skills/mcp_optimizer/SKILL.md",
+      "kind": "mcp_skill_definition",
+      "status": "duplicate",
+      "canonical_target": ".agents/skills/mcp_gateway/SKILL.md",
+      "owner_layer": ".gemini",
+      "risk": "medium",
+      "reason": "MCP optimizer skill in .gemini/ directory. Functionally overlaps with mcp_gateway. Agent-specific fork.",
+      "recommended_action": "alias"
+    },
+    {
+      "path": ".agents/skills/dummie-brain.exec_remote_tool.yaml",
+      "kind": "mcp_tool_manifest",
+      "status": "canonical",
+      "canonical_target": ".agents/skills/dummie-brain.exec_remote_tool.yaml",
+      "owner_layer": ".agents",
+      "risk": "medium",
+      "reason": "Defines remote tool execution capability. Security-sensitive.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "scripts/dummie_mcp_doctor.py",
+      "kind": "mcp_diagnostic",
+      "status": "canonical",
+      "canonical_target": "scripts/dummie_mcp_doctor.py",
+      "owner_layer": "scripts",
+      "risk": "low",
+      "reason": "MCP diagnostic/doctor script (10.4KB). Validates MCP connectivity.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "scripts/mcp_wrapper.sh",
+      "kind": "mcp_launcher",
+      "status": "canonical",
+      "canonical_target": "scripts/mcp_wrapper.sh",
+      "owner_layer": "scripts",
+      "risk": "low",
+      "reason": "Shell wrapper for starting MCP server.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "dummie_gateway_config.json",
+      "kind": "mcp_config",
+      "status": "canonical",
+      "canonical_target": "dummie_gateway_config.json",
+      "owner_layer": "root",
+      "risk": "medium",
+      "reason": "Gateway configuration (5.7KB). Defines remote MCP server connections. Should eventually move to .aiwg/config/.",
+      "recommended_action": "alias"
+    },
+    {
+      "path": "dummie_agent_config.json",
+      "kind": "agent_config",
+      "status": "canonical",
+      "canonical_target": "dummie_agent_config.json",
+      "owner_layer": "root",
+      "risk": "medium",
+      "reason": "Agent configuration (764B). Related to MCP tool configuration.",
+      "recommended_action": "alias"
+    },
+    {
+      "path": ".aiwg/runtime/quarantine/",
+      "kind": "quarantine_directory",
+      "status": "canonical",
+      "canonical_target": ".aiwg/runtime/quarantine/",
+      "owner_layer": ".aiwg",
+      "risk": "low",
+      "reason": "Quarantine directory for untrusted MCP tools/skills. Exists but pipeline not fully automated.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "doc/specs/15_mcp_sidecar_isolation.md",
+      "kind": "mcp_spec",
+      "status": "canonical",
+      "canonical_target": "doc/specs/15_mcp_sidecar_isolation.md",
+      "owner_layer": "doc",
+      "risk": "low",
+      "reason": "Spec for MCP sidecar isolation with matching .feature and .rules.json.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "doc/specs/16_mcp_dynamic_gateway.md",
+      "kind": "mcp_spec",
+      "status": "canonical",
+      "canonical_target": "doc/specs/16_mcp_dynamic_gateway.md",
+      "owner_layer": "doc",
+      "risk": "low",
+      "reason": "Spec for MCP dynamic gateway with matching .feature and .rules.json.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "doc/guides/mcp_server_usage.md",
+      "kind": "mcp_guide",
+      "status": "canonical",
+      "canonical_target": "doc/guides/mcp_server_usage.md",
+      "owner_layer": "doc",
+      "risk": "low",
+      "reason": "MCP server usage guide for operators.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "layers/l1_nervous/tests/test_mcp_proxy_handshake.py",
+      "kind": "mcp_test",
+      "status": "canonical",
+      "canonical_target": "layers/l1_nervous/tests/test_mcp_proxy_handshake.py",
+      "owner_layer": "l1_nervous",
+      "risk": "low",
+      "reason": "Test for MCP proxy handshake.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "layers/l1_nervous/tests/test_mcp_server_purity.py",
+      "kind": "mcp_test",
+      "status": "canonical",
+      "canonical_target": "layers/l1_nervous/tests/test_mcp_server_purity.py",
+      "owner_layer": "l1_nervous",
+      "risk": "low",
+      "reason": "Purity test for MCP server.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "mcp.log",
+      "kind": "log_file",
+      "status": "runtime_local",
+      "canonical_target": null,
+      "owner_layer": "root",
+      "risk": "low",
+      "reason": "Runtime log. Should be in .aiwg/logs/ or .gitignored.",
+      "recommended_action": "move_later"
+    },
+    {
+      "path": "mcp_server.log",
+      "kind": "log_file",
+      "status": "runtime_local",
+      "canonical_target": null,
+      "owner_layer": "root",
+      "risk": "low",
+      "reason": "Runtime log. Should be in .aiwg/logs/ or .gitignored.",
+      "recommended_action": "move_later"
+    },
+    {
+      "path": "scratch_test_mcp.py",
+      "kind": "scratch_file",
+      "status": "deprecated",
+      "canonical_target": null,
+      "owner_layer": "root",
+      "risk": "low",
+      "reason": "Scratch test file at root (1.3KB). Historical artifact.",
+      "recommended_action": "delete_later"
+    }
+  ],
+  "summary": {
+    "total_items": 21,
+    "status_counts": {
+      "canonical": 14,
+      "duplicate": 1,
+      "generated": 1,
+      "runtime_local": 2,
+      "deprecated": 1
+    },
+    "architecture_notes": [
+      "MCP server lives in L1 (mcp_server.py). This is architecturally correct — L1 is the nervous system gateway.",
+      "MCP proxy/gateway (mcp_proxy.py at 17.4KB) is the most complex MCP component. Risk of becoming a God Object.",
+      "MCP driver in L5 (mcp_driver.py at 2KB) is appropriately thin. Good separation.",
+      "Go MCP client in L1 (mcp_client.go) enables polyglot tool invocation. Used by L0 overseer pipeline.",
+      "Quarantine directory exists but automated quarantine pipeline (static audit → sandbox → approval) is NOT implemented yet."
+    ],
+    "critical_issues": [
+      "No automated static audit pipeline for incoming MCP tools",
+      "dummie_gateway_config.json at root should be in .aiwg/config/ or .agents/config/",
+      "Log files (mcp.log, mcp_server.log) at root — should be gitignored and directed to .aiwg/logs/"
+    ]
+  }
+}

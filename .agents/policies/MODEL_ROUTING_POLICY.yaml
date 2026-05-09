@@ -1,0 +1,98 @@
+# MODEL_ROUTING_POLICY — Declarative model tier routing rules
+# Referenced by: .agents/prompts/router_classifier.md
+# Consumed by: layers/l2_brain/model_router.py
+# Status: ACTIVE
+
+version: "1.0.0"
+updated_at: "2026-05-09"
+
+tiers:
+  local_fast:
+    description: "Lightweight local model for trivial tasks"
+    max_context_tokens: 4096
+    typical_models: ["gemma-3-4b", "phi-4-mini", "qwen2.5-3b"]
+    use_for:
+      - formatting
+      - linting
+      - typo_fixes
+      - comment_additions
+      - status_queries
+      - json_parsing
+      - log_analysis
+    complexity: trivial
+    cost: 0
+
+  local_deep:
+    description: "Capable local model for routine/moderate tasks"
+    max_context_tokens: 32768
+    typical_models: ["gemma-3-27b", "qwen2.5-32b", "deepseek-r1-14b"]
+    use_for:
+      - standard_coding
+      - config_changes
+      - single_layer_modifications
+      - test_writing
+      - documentation
+      - simple_bug_fixes
+      - intent_classification
+      - context_compression
+      - graph_queries
+      - manifest_generation
+      - basic_security_audit
+    complexity: routine
+    cost: 0
+
+  cloud_std:
+    description: "Cloud model for complex multi-file tasks"
+    max_context_tokens: 128000
+    typical_models: ["gemini-2.5-flash", "claude-sonnet"]
+    use_for:
+      - multi_file_refactoring
+      - integration_work
+      - pipeline_changes
+      - daemon_modifications
+      - transaction_logic
+    complexity: complex
+    cost: paid
+
+  cloud_prem:
+    description: "Premium cloud model for critical architecture decisions"
+    max_context_tokens: 1048576
+    typical_models: ["gemini-2.5-pro", "claude-opus", "o3"]
+    use_for:
+      - architecture_changes
+      - schema_migrations
+      - security_review
+      - cross_layer_refactoring
+      - protocol_modifications
+      - breaking_changes
+      - consensus_logic
+    complexity: critical
+    cost: paid
+
+escalation_rules:
+  - condition: "affected_layers >= 3"
+    action: "escalate to cloud_std minimum"
+  - condition: "affects_security or affects_memory"
+    action: "escalate to cloud_prem for review"
+  - condition: "diff_size > 500 lines"
+    action: "escalate to cloud_std minimum"
+  - condition: "modifies proto/ or models.py"
+    action: "escalate to cloud_prem for review"
+
+budget:
+  daily_cloud_token_limit: 500000
+  cloud_prem_daily_limit: 100000
+  alert_threshold_percent: 80
+  action_on_exhaustion: "fallback to local_deep"
+
+prohibited_cloud_uses:
+  - json_formatting
+  - log_parsing
+  - file_listing
+  - simple_grep
+  - manifest_generation
+  - schema_validation
+  - basic_test_generation
+
+fallback_cascade:
+  - "cloud_prem → cloud_std → local_deep → local_fast → deterministic_regex"

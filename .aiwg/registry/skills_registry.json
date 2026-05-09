@@ -1,0 +1,397 @@
+{
+  "_meta": {
+    "registry_type": "skills",
+    "version": "1.0.0",
+    "generated_at": "2026-05-09T03:25:00Z",
+    "generated_by": "antigravity_audit",
+    "purpose": "Canonical map of all skills across all directories. No files were moved or deleted.",
+    "schema_version": "1.0.0"
+  },
+  "directories_scanned": [
+    ".agents/skills/",
+    ".gemini/skills/",
+    "skills/",
+    "shared/skills/"
+  ],
+  "items": [
+    {
+      "path": ".agents/skills/architect_skill.yaml",
+      "kind": "role_skill",
+      "status": "canonical",
+      "canonical_target": ".agents/skills/architect_skill.yaml",
+      "owner_layer": ".agents",
+      "risk": "low",
+      "reason": "Architect role definition. Active.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": ".agents/skills/coder_skill.yaml",
+      "kind": "role_skill",
+      "status": "canonical",
+      "canonical_target": ".agents/skills/coder_skill.yaml",
+      "owner_layer": ".agents",
+      "risk": "low",
+      "reason": "Coder role definition. Active.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": ".agents/skills/sentinel_skill.yaml",
+      "kind": "role_skill",
+      "status": "canonical",
+      "canonical_target": ".agents/skills/sentinel_skill.yaml",
+      "owner_layer": ".agents",
+      "risk": "low",
+      "reason": "Security sentinel role. Active.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": ".agents/skills/librarian_skill.yaml",
+      "kind": "role_skill",
+      "status": "canonical",
+      "canonical_target": ".agents/skills/librarian_skill.yaml",
+      "owner_layer": ".agents",
+      "risk": "low",
+      "reason": "Knowledge librarian role. Active.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": ".agents/skills/ambiguity_audit_skill.yaml",
+      "kind": "role_skill",
+      "status": "canonical",
+      "canonical_target": ".agents/skills/ambiguity_audit_skill.yaml",
+      "owner_layer": ".agents",
+      "risk": "low",
+      "reason": "Ambiguity audit role. Active.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": ".agents/skills/context_sovereignty_skill.yaml",
+      "kind": "role_skill",
+      "status": "canonical",
+      "canonical_target": ".agents/skills/context_sovereignty_skill.yaml",
+      "owner_layer": ".agents",
+      "risk": "low",
+      "reason": "Context sovereignty role. Active.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": ".agents/skills/spec_compliance_skill.yaml",
+      "kind": "role_skill",
+      "status": "canonical",
+      "canonical_target": ".agents/skills/spec_compliance_skill.yaml",
+      "owner_layer": ".agents",
+      "risk": "low",
+      "reason": "Spec compliance checker role. Active.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": ".agents/skills/SKILL_TEMPLATE.md",
+      "kind": "skill_template",
+      "status": "canonical",
+      "canonical_target": ".agents/skills/SKILL_TEMPLATE.md",
+      "owner_layer": ".agents",
+      "risk": "low",
+      "reason": "Template for new skill creation.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": ".agents/skills/diagram_generator/SKILL.md",
+      "kind": "complex_skill",
+      "status": "canonical",
+      "canonical_target": ".agents/skills/diagram_generator/",
+      "owner_layer": ".agents",
+      "risk": "low",
+      "reason": "Diagram generator skill with ledger, protocol, rules, feature, and YAML.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": ".agents/skills/mcp_gateway/SKILL.md",
+      "kind": "complex_skill",
+      "status": "canonical",
+      "canonical_target": ".agents/skills/mcp_gateway/",
+      "owner_layer": ".agents",
+      "risk": "low",
+      "reason": "MCP Gateway skill. Core infrastructure skill.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": ".agents/skills/socraticode_workflow/SKILL.md",
+      "kind": "complex_skill",
+      "status": "canonical",
+      "canonical_target": ".agents/skills/socraticode_workflow/",
+      "owner_layer": ".agents",
+      "risk": "low",
+      "reason": "Socraticode cognitive workflow. Active.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": ".agents/skills/network/",
+      "kind": "skill_network",
+      "status": "canonical",
+      "canonical_target": ".agents/skills/network/",
+      "owner_layer": ".agents",
+      "risk": "low",
+      "reason": "Network skills with master orchestrator and taxonomy.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": ".agents/skills/dummie-brain.brain_ping.yaml",
+      "kind": "mcp_tool_skill",
+      "status": "canonical",
+      "canonical_target": ".agents/skills/dummie-brain.brain_ping.yaml",
+      "owner_layer": ".agents",
+      "risk": "low",
+      "reason": "Brain ping MCP tool skill.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": ".agents/skills/dummie-brain.broadcast_intent.yaml",
+      "kind": "mcp_tool_skill",
+      "status": "canonical",
+      "canonical_target": ".agents/skills/dummie-brain.broadcast_intent.yaml",
+      "owner_layer": ".agents",
+      "risk": "low",
+      "reason": "Broadcast intent MCP tool skill.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": ".agents/skills/dummie-brain.calibrate_neural_links.yaml",
+      "kind": "mcp_tool_skill",
+      "status": "canonical",
+      "canonical_target": ".agents/skills/dummie-brain.calibrate_neural_links.yaml",
+      "owner_layer": ".agents",
+      "risk": "low",
+      "reason": "Neural links calibration MCP tool skill.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": ".agents/skills/dummie-brain.crystallize.yaml",
+      "kind": "mcp_tool_skill",
+      "status": "canonical",
+      "canonical_target": ".agents/skills/dummie-brain.crystallize.yaml",
+      "owner_layer": ".agents",
+      "risk": "low",
+      "reason": "Memory crystallization MCP tool skill.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": ".agents/skills/dummie-brain.delegate_task.yaml",
+      "kind": "mcp_tool_skill",
+      "status": "canonical",
+      "canonical_target": ".agents/skills/dummie-brain.delegate_task.yaml",
+      "owner_layer": ".agents",
+      "risk": "low",
+      "reason": "Task delegation MCP tool skill.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": ".agents/skills/dummie-brain.exec_remote_tool.yaml",
+      "kind": "mcp_tool_skill",
+      "status": "canonical",
+      "canonical_target": ".agents/skills/dummie-brain.exec_remote_tool.yaml",
+      "owner_layer": ".agents",
+      "risk": "low",
+      "reason": "Remote tool execution MCP tool skill.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": ".agents/skills/dummie-brain.list_all_capabilities.yaml",
+      "kind": "mcp_tool_skill",
+      "status": "canonical",
+      "canonical_target": ".agents/skills/dummie-brain.list_all_capabilities.yaml",
+      "owner_layer": ".agents",
+      "risk": "low",
+      "reason": "List capabilities MCP tool skill.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": ".agents/skills/dummie-brain.list_remote_servers.yaml",
+      "kind": "mcp_tool_skill",
+      "status": "canonical",
+      "canonical_target": ".agents/skills/dummie-brain.list_remote_servers.yaml",
+      "owner_layer": ".agents",
+      "risk": "low",
+      "reason": "List remote servers MCP tool skill.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": ".agents/skills/dummie-brain.list_remote_tools.yaml",
+      "kind": "mcp_tool_skill",
+      "status": "canonical",
+      "canonical_target": ".agents/skills/dummie-brain.list_remote_tools.yaml",
+      "owner_layer": ".agents",
+      "risk": "low",
+      "reason": "List remote tools MCP tool skill.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": ".agents/skills/dummie-brain.log_lesson.yaml",
+      "kind": "mcp_tool_skill",
+      "status": "canonical",
+      "canonical_target": ".agents/skills/dummie-brain.log_lesson.yaml",
+      "owner_layer": ".agents",
+      "risk": "low",
+      "reason": "Log lesson MCP tool skill.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": ".agents/skills/dummie-brain.metacognitive_status.yaml",
+      "kind": "mcp_tool_skill",
+      "status": "canonical",
+      "canonical_target": ".agents/skills/dummie-brain.metacognitive_status.yaml",
+      "owner_layer": ".agents",
+      "risk": "low",
+      "reason": "Metacognitive status MCP tool skill.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": ".agents/skills/dummie-brain.observe_swarm.yaml",
+      "kind": "mcp_tool_skill",
+      "status": "canonical",
+      "canonical_target": ".agents/skills/dummie-brain.observe_swarm.yaml",
+      "owner_layer": ".agents",
+      "risk": "low",
+      "reason": "Swarm observation MCP tool skill.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": ".agents/skills/dummie-brain.read_spec.yaml",
+      "kind": "mcp_tool_skill",
+      "status": "canonical",
+      "canonical_target": ".agents/skills/dummie-brain.read_spec.yaml",
+      "owner_layer": ".agents",
+      "risk": "low",
+      "reason": "Spec reader MCP tool skill.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": ".agents/skills/dummie-brain.resolve_ambiguity.yaml",
+      "kind": "mcp_tool_skill",
+      "status": "canonical",
+      "canonical_target": ".agents/skills/dummie-brain.resolve_ambiguity.yaml",
+      "owner_layer": ".agents",
+      "risk": "low",
+      "reason": "Ambiguity resolution MCP tool skill.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": ".agents/skills/dummie-brain.search_capabilities.yaml",
+      "kind": "mcp_tool_skill",
+      "status": "canonical",
+      "canonical_target": ".agents/skills/dummie-brain.search_capabilities.yaml",
+      "owner_layer": ".agents",
+      "risk": "low",
+      "reason": "Capability search MCP tool skill.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": ".agents/skills/dummie-brain.ssh_grep.yaml",
+      "kind": "mcp_tool_skill",
+      "status": "canonical",
+      "canonical_target": ".agents/skills/dummie-brain.ssh_grep.yaml",
+      "owner_layer": ".agents",
+      "risk": "low",
+      "reason": "SSH grep MCP tool skill.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": ".agents/skills/dummie-brain.sync_cognitive_state.yaml",
+      "kind": "mcp_tool_skill",
+      "status": "canonical",
+      "canonical_target": ".agents/skills/dummie-brain.sync_cognitive_state.yaml",
+      "owner_layer": ".agents",
+      "risk": "low",
+      "reason": "Cognitive state sync MCP tool skill.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": ".agents/skills/.deprecated/",
+      "kind": "deprecated_skills",
+      "status": "deprecated",
+      "canonical_target": null,
+      "owner_layer": ".agents",
+      "risk": "low",
+      "reason": "92+ deprecated tool YAMLs (filesystem, git, memory, puppeteer, ripgrep, sqlite, time, etc). Already properly marked as deprecated.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": ".agents/skills/test_agent.yaml",
+      "kind": "test_artifact",
+      "status": "generated",
+      "canonical_target": null,
+      "owner_layer": ".agents",
+      "risk": "low",
+      "reason": "Test agent YAML (45 bytes). Likely test fixture.",
+      "recommended_action": "manual_review"
+    },
+    {
+      "path": ".agents/skills/test_agent.patch.json",
+      "kind": "test_artifact",
+      "status": "generated",
+      "canonical_target": null,
+      "owner_layer": ".agents",
+      "risk": "low",
+      "reason": "Test agent patch JSON (28 bytes). Likely test fixture.",
+      "recommended_action": "manual_review"
+    },
+    {
+      "path": ".gemini/skills/mcp_optimizer/SKILL.md",
+      "kind": "complex_skill",
+      "status": "duplicate",
+      "canonical_target": ".agents/skills/mcp_gateway/SKILL.md",
+      "owner_layer": ".gemini",
+      "risk": "high",
+      "reason": "MCP optimizer skill living in .gemini/ instead of canonical .agents/. May be consumed by Gemini CLI independently. Functionally overlaps with mcp_gateway skill.",
+      "recommended_action": "alias"
+    },
+    {
+      "path": "skills/chatgpt/",
+      "kind": "external_skill_pack",
+      "status": "duplicate",
+      "canonical_target": null,
+      "owner_layer": "root",
+      "risk": "high",
+      "reason": "ChatGPT-specific skills (SKILL.md, memory-template, prompt-packets, setup, troubleshooting, etc.) living at root skills/ level. Has .clawhub/origin.json indicating external origin. Not referenced by .agents/ registry.",
+      "recommended_action": "alias"
+    },
+    {
+      "path": "skills/diagnostic/",
+      "kind": "diagnostic_skill",
+      "status": "duplicate",
+      "canonical_target": ".agents/skills/",
+      "owner_layer": "root",
+      "risk": "medium",
+      "reason": "Diagnostic skill at root level. Should be under .agents/skills/ if actively used.",
+      "recommended_action": "alias"
+    },
+    {
+      "path": "shared/skills/",
+      "kind": "shared_skill_directory",
+      "status": "unknown",
+      "canonical_target": ".agents/skills/",
+      "owner_layer": "shared",
+      "risk": "medium",
+      "reason": "Empty directory. Possibly intended for cross-repo shared skills. No content found.",
+      "recommended_action": "manual_review"
+    }
+  ],
+  "summary": {
+    "total_items": 36,
+    "directories_with_skills": 4,
+    "canonical_location": ".agents/skills/",
+    "status_counts": {
+      "canonical": 27,
+      "duplicate": 3,
+      "deprecated": 1,
+      "generated": 2,
+      "unknown": 1,
+      "legacy_source": 0,
+      "runtime_local": 0
+    },
+    "critical_duplications": [
+      "skills/chatgpt/ and skills/diagnostic/ exist outside canonical .agents/skills/",
+      ".gemini/skills/mcp_optimizer/ duplicates functionality of .agents/skills/mcp_gateway/",
+      "shared/skills/ is empty but creates path ambiguity"
+    ]
+  }
+}
