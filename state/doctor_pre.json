@@ -1,0 +1,25 @@
+{
+  "ok": true,
+  "results": {
+    "system_resources": {
+      "ok": true,
+      "ram": {
+        "total": 15667,
+        "used": 7232,
+        "free": 7711
+      },
+      "swap": {
+        "total": 19942,
+        "used": 1271,
+        "free": 18671
+      }
+    },
+    "gateway_config_ok": true,
+    "processes": {
+      "relevant": [],
+      "legacy": []
+    },
+    "runtime_sockets_ok": true,
+    "mcp_handshake_ok": true
+  }
+}
