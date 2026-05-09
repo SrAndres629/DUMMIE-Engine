@@ -12,6 +12,7 @@ class CognitiveAutoEvolver:
     """
     def __init__(self, workspace_root: str):
         self.workspace_root = workspace_root
+        self.socraticode = None # Injected by orchestrator
 
     def collect_performance_metrics(self) -> Dict[str, Any]:
         """
@@ -69,4 +70,110 @@ class CognitiveAutoEvolver:
 - Automated Test Coverage: Pending
 - Blast Radius: Calculated via AST Blast Radius Indexer.
 """
-        return pr_template
+    async def analyze_failure(self, error_context: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        [WAVE 6] Analiza un fallo sistémico para encontrar la causa raíz.
+        """
+        msg = error_context.get("message", "").lower()
+        stack = error_context.get("stack_trace", "")
+        
+        affected_files = []
+        import re
+        # Extraer archivos del stack trace
+        file_matches = re.findall(r"File ['\"](.+?)['\"]", stack)
+        for f in file_matches:
+            if f not in affected_files:
+                affected_files.append(f)
+        
+        root_cause = "Unknown structural anomaly"
+        if "no module named" in msg:
+            root_cause = f"Missing dependency or incorrect PYTHONPATH: {msg}"
+        elif "connection refused" in msg or "not established" in msg:
+            root_cause = "Infrastructure connectivity failure (Service Down)"
+        elif "locked" in msg:
+            root_cause = "Resource contention (File Lock/Race Condition)"
+            
+        # [WAVE 8] Análisis de Impacto vía Socraticode
+        blast_radius = []
+        if self.socraticode:
+            try:
+                for f in affected_files:
+                    impact = await self.socraticode.codebase_impact(target=f)
+                    if isinstance(impact, list):
+                        blast_radius.extend([item.get('filePath') for item in impact if item.get('filePath')])
+            except Exception as e:
+                logger.warning(f"Socraticode impact analysis failed: {e}")
+
+        logger.info(f"Auto-Evolution: Analysis complete. Root Cause: {root_cause}")
+        return {
+            "root_cause": root_cause,
+            "affected_files": affected_files,
+            "blast_radius": list(set(blast_radius)),
+            "severity": "CRITICAL" if "import" in msg or "connection" in msg else "ROUTINE"
+        }
+
+    async def propose_fix(self, analysis: Dict[str, Any], daemon: Any) -> str:
+        """
+        Usa el DummieDaemon para razonar una solución.
+        """
+        prompt = (
+            f"Como DUMMIE Engine, analiza este fallo y propone una corrección en formato de parche:\n"
+            f"Causa Raíz: {analysis['root_cause']}\n"
+            f"Archivos Afectados: {analysis['affected_files']}\n"
+            f"Por favor, devuelve solo el razonamiento técnico y el pseudocódigo del parche."
+        )
+        return await daemon.reason_with_tiers(prompt, concept="self_healing")
+
+    async def self_program(self, mission: str, daemon: Any) -> Dict[str, Any]:
+        """
+        [WAVE 7] DUMMIE escribe su propio código para cumplir una misión.
+        """
+        logger.info(f"Self-Programming: Starting mission '{mission}'")
+        
+        prompt = (
+            f"Como DUMMIE Engine (Entidad Soberana), tu misión es programar un nuevo módulo funcional para cumplir esto: {mission}\n"
+            "Reglas:\n"
+            "1. El código debe ser Python puro, altamente tipado y modular.\n"
+            "2. Incluye docstrings detallados.\n"
+            "3. Devuelve el código dentro de un bloque ```python\n"
+            "4. No incluyas explicaciones innecesarias fuera del bloque de código."
+        )
+        
+        generated_code_raw = await daemon.reason_with_tiers(prompt, concept="self_programming")
+        
+        # Extraer el bloque de código
+        import re
+        code_match = re.search(r"```python\n(.*?)```", generated_code_raw, re.DOTALL)
+        if not code_match:
+            return {"success": False, "error": "No valid python block found in reasoning output"}
+            
+        code = code_match.group(1)
+        
+        # Nombre sugerido
+        suggested_name = mission.lower().replace(" ", "_")[:20] + ".py"
+        target_path = os.path.join(self.workspace_root, "layers/l4_ext", suggested_name)
+        os.makedirs(os.path.dirname(target_path), exist_ok=True)
+        
+        # Escribir y validar sintaxis
+        try:
+            with open(target_path, "w") as f:
+                f.write(code)
+            
+            # Syntax check
+            compile(code, target_path, 'exec')
+            # [WAVE 8] Indexar nuevo código en Socraticode
+            if self.socraticode:
+                await self.socraticode.codebase_update(projectPath=self.workspace_root)
+                
+            return {
+                "success": True,
+                "file_path": target_path,
+                "code_preview": code[:200] + "..."
+            }
+        except Exception as e:
+            logger.error(f"Self-Programming: Validation failed for {target_path}: {e}")
+            if os.path.exists(target_path):
+                os.remove(target_path)
+            return {"success": False, "error": str(e)}
+
+

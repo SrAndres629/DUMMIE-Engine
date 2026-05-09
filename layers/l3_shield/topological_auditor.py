@@ -39,14 +39,15 @@ class TopologicalAuditor(BaseAuditor):
             adj: Dict[str, list] = defaultdict(list)
             all_nodes: set = set()
 
-            # Asumimos formato simple: <edge source="A" target="B"/>
-            for edge in root.findall(".//edge"):
-                u = edge.get("source")
-                v = edge.get("target")
-                if u and v:
-                    adj[u].append(v)
-                    all_nodes.add(u)
-                    all_nodes.add(v)
+            for task in root.findall(".//task"):
+                u = task.get("id")
+                if not u: continue
+                all_nodes.add(u)
+                for dep in task.findall(".//depends_on"):
+                    v = (dep.text or "").strip()
+                    if v:
+                        adj[u].append(v)
+                        all_nodes.add(v)
 
             edge_count = sum(len(targets) for targets in adj.values())
             logger.info(

@@ -12,11 +12,27 @@ def register_core_tools(mcp: FastMCP, use_cases, root_dir: str):
         results = []
         orchestrator = use_cases.orchestrator
         
-        if getattr(orchestrator.event_store, "db", None) is None:
-            results.append("[!] Loci Graph: OFFLINE (Database locked).")
+        if getattr(orchestrator.event_store, "read_only", False) or getattr(orchestrator.event_store, "conn", None) is None:
+            results.append("[!] Loci Graph: OFFLINE (Database locked or stub mode).")
         else:
-            node_count = orchestrator.event_store.conn.execute("MATCH (n) RETURN count(n)").get_next()[0]
-            results.append(f"[✓] Loci Graph Alive: {node_count} nodes detected.")
+            try:
+                # Kuzu python API returns a QueryResult, using get_next() or iterating
+                res = orchestrator.event_store.conn.execute("MATCH (n) RETURN count(n)")
+                node_count = 0
+                if hasattr(res, "get_next"):
+                    node_count = res.get_next()[0]
+                elif hasattr(res, "get_next_row"):
+                    node_count = res.get_next_row()[0]
+                elif hasattr(res, "has_next"):
+                    while res.has_next():
+                        node_count = res.get_next()[0]
+                else:
+                    # Kuzu 0.6+ query result iteration
+                    for row in res:
+                        node_count = row[0]
+                results.append(f"[✓] Loci Graph Alive: {node_count} nodes detected (Native Mode).")
+            except Exception as e:
+                results.append(f"[!] Loci Graph: ERROR ({e})")
         
         if os.path.exists(os.path.join(AIWG_DIR, "ledger/sovereign_resolutions.jsonl")):
             results.append(f"[✓] Decision Ledger: Online.")

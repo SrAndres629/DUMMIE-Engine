@@ -15,7 +15,7 @@ import re
 import time
 from dataclasses import dataclass, field
 from enum import Enum
-from typing import Any, Protocol
+from typing import Any, Protocol, Optional
 
 logger = logging.getLogger("model-router")
 
@@ -247,8 +247,12 @@ class ModelRouter:
     Performs difficulty classification, tier selection, and fallback resolution.
     """
 
-    def __init__(self, registry: ModelRegistry | None = None):
-        self.registry = registry or build_model_registry()
+    def __init__(self, registry: Optional[Any] = None, ledger: Any = None):
+        if registry is None:
+            from model_discovery import ModelRegistry
+            registry = ModelRegistry()
+        self.registry = registry
+        self.ledger = ledger
         self._total_cloud_tokens = 0
         self._daily_budget = int(os.getenv("DUMMIE_DAILY_TOKEN_BUDGET", "500000"))
 

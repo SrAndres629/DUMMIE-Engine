@@ -16,6 +16,7 @@ class KuzuRepository:
         self.read_only = False
         self.conn = None
         if db:
+            logger.info(f"KuzuRepository: Initializing with existing DB object: {db}")
             if hasattr(db, "ipc"):
                 # [SPEC-30] Memory Plane (Arrow IPC)
                 self.conn = db.ipc
@@ -24,28 +25,40 @@ class KuzuRepository:
                 # Modo Nativo
                 import kuzu
                 self.conn = kuzu.Connection(db)
+                logger.info(f"KuzuRepository: Native connection created: {self.conn}")
         elif db_path:
             import kuzu
-            # [HARDENING] Verificación de integridad de ruta
-            # Kùzu espera que el path sea el nombre de la base de datos (archivo o prefijo),
-            # NO un directorio ya existente (en algunas versiones).
-            if os.path.isdir(db_path):
-                # Si es un directorio, verificamos si contiene archivos de Kùzu.
-                # Si está vacío o no parece una DB, lanzamos error para evitar confusión.
-                if not os.listdir(db_path):
-                    logger.error(f"CRITICAL: Kuzu path '{db_path}' is an empty directory. Kuzu requires the path to be the database target, not a pre-existing directory.")
-                    raise ValueError(f"Invalid Kuzu database path: '{db_path}' is a directory. Provide a file-like path.")
+            import glob
             
-            # Asegurar que el directorio PADRE exista
+            # [HARDENING] Verificación de integridad de ruta
+            if os.path.isdir(db_path):
+                if not os.listdir(db_path):
+                    pass # It's an empty dir, Kuzu will populate it
+            elif os.path.isfile(db_path):
+                # The user created loci.db as a file by mistake (e.g. touch or open)
+                logger.warning(f"Kuzu target {db_path} is a file. Kuzu expects a directory. Removing file to let Kuzu create a directory.")
+                os.remove(db_path)
+            
             parent_dir = os.path.dirname(os.path.abspath(db_path))
             if not os.path.exists(parent_dir):
                 os.makedirs(parent_dir, exist_ok=True)
                 logger.info(f"Created parent directory for Kuzu: {parent_dir}")
             
-            self.db = kuzu.Database(db_path)
+            try:
+                self.db = kuzu.Database(db_path)
+            except Exception as e:
+                logger.warning(f"Database init failed ({e}). Attempting lock recovery for {db_path}...")
+                if os.path.isdir(db_path):
+                    for lock_file in glob.glob(os.path.join(db_path, "*.lock")):
+                        try:
+                            os.remove(lock_file)
+                            logger.info(f"Removed orphan lock file: {lock_file}")
+                        except OSError:
+                            pass
+                self.db = kuzu.Database(db_path)
+
             self.conn = kuzu.Connection(self.db)
             logger.warning("[!] ALERTA DE SOBERANÍA: KuzuRepository ha inicializado en Modo NATIVO (Lock físico).")
-            logger.warning("    Esto impide que otros agentes se conecten concurrentemente. Se recomienda usar IPC Singleton.")
             self._ensure_schema()
 
     def _ensure_schema(self):

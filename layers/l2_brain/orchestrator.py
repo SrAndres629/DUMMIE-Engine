@@ -1,4 +1,5 @@
 import logging
+import os
 from datetime import datetime
 from enum import Enum
 from typing import Any
@@ -59,28 +60,140 @@ class CognitiveOrchestrator:
         self.lessons_use_case = _LessonsUseCaseBridge(ledger_audit)
         
         # [AUTO-EVOLUTION CABLES]
+        _current_dir = os.path.dirname(os.path.abspath(__file__))
+        self.workspace_root = os.path.dirname(os.path.dirname(_current_dir))
+        aiwg_dir = os.path.join(self.workspace_root, ".aiwg")
+
+
+            
+        # [WAVE 2] Conectar el DummieDaemon y el AsyncEventBus
         try:
-            from .ast_indexer import ASTBlastRadiusIndexer
-            from .auto_evolution import CognitiveAutoEvolver
-            import os
+            from event_bus import AsyncEventBus
+            from daemon import DummieDaemon
+            from token_ledger import TokenLedger
+            from model_router import ModelRouter
+            from model_executor import ModelExecutor
+            from model_discovery import ModelDiscoveryService
+            from semantic_cache import SemanticCache
+            from neuron_ledger import NeuronLedger
+            from action_graph import ActionGraph
+            from supervisor_protocol import SupervisorProtocol
+            from entity_voice import EntityVoice
+            from auto_evolution import CognitiveAutoEvolver
             
-            _current_dir = os.path.dirname(os.path.abspath(__file__))
-            self.workspace_root = os.path.dirname(os.path.dirname(_current_dir))
-            self.auto_evolver = CognitiveAutoEvolver(self.workspace_root)
-            self.ast_indexer = ASTBlastRadiusIndexer(self.workspace_root)
-            logger.info("Auto-Evolution Cables Connected OK.")
-        except ImportError:
-            self.auto_evolver = None
-            self.ast_indexer = None
-            logger.warning("Auto-Evolution Cables failed to connect (ImportError).")
+            # [WAVE 3] Contabilidad y Modelos
+            ledger_path = os.path.join(aiwg_dir, "ledger/token_usage.jsonl")
+            self.token_ledger = TokenLedger(ledger_path)
+            self.model_executor = ModelExecutor(self.token_ledger)
             
+            # Descubrimiento dinámico (asíncrono en background)
+            self.model_router = ModelRouter(ledger=self.token_ledger)
+            self.discovery_service = ModelDiscoveryService()
+            
+            # [WAVE 4] Sistema Social y Cache
+            self.semantic_cache = SemanticCache(self.skill_repo) # skill_repo is the KuzuRepo here
+            self.neuron_ledger = NeuronLedger()
+            self.action_graph = ActionGraph(self.skill_repo)
+            self.supervisor_protocol = SupervisorProtocol(self.model_executor, self.model_router)
+            self.entity_voice = EntityVoice()
+            self.auto_evolver = CognitiveAutoEvolver(workspace_root=os.getcwd())
+            
+            # [WAVE 8] Integrated SDKs (Obsidian & Socraticode)
+            self.obsidian = None
+            self.socraticode = None
+            
+            self.event_bus = AsyncEventBus()
+            self.daemon = DummieDaemon(
+                ledger_path=getattr(self.ledger_audit, "ledger_path", "sovereign_resolutions.jsonl"),
+                mcp_gateway=None, # Will be injected later if needed
+                event_bus=self.event_bus,
+                skill_binder=None,
+                event_store=self.event_store,
+                model_router=self.model_router,
+                model_executor=self.model_executor,
+                semantic_cache=self.semantic_cache,
+                neuron_ledger=self.neuron_ledger,
+                action_graph=self.action_graph,
+                supervisor_protocol=self.supervisor_protocol,
+                entity_voice=self.entity_voice,
+                auto_evolver=self.auto_evolver
+            )
+            self.daemon.obsidian = None # Will be set by set_mcp_gateway
+            self.daemon.socraticode = None # Will be set by set_mcp_gateway
+            self._daemon_task = None
+            logger.info("DummieDaemon (Wave 4) conectado e inicializado en CognitiveOrchestrator.")
+            
+            # Trigger discovery
+            async def _lazy_discovery():
+                registry = await self.discovery_service.discover_all()
+                self.model_router.registry = registry
+            
+            import asyncio
+            try:
+                loop = asyncio.get_running_loop()
+                loop.create_task(_lazy_discovery())
+            except RuntimeError:
+                pass # No loop yet
+
+        def set_mcp_gateway(self, mcp_gateway: Any):
+            """Inyecta el Meta-Gateway (L1 Proxy) y activa los SDKs integrados."""
+            self.daemon.mcp_gateway = mcp_gateway
+            
+            # Inicialización de SDKs Generados
+            try:
+                from layers.l1_nervous.generated.obsidian_sdk import ObsidianClient
+                from layers.l1_nervous.generated.socraticode_sdk import SocraticodeClient
+                
+                self.obsidian = ObsidianClient(mcp_gateway)
+                self.socraticode = SocraticodeClient(mcp_gateway)
+                
+                self.daemon.obsidian = self.obsidian
+                self.daemon.socraticode = self.socraticode
+                
+                # Inyectar en EntityVoice para Archival
+                if self.entity_voice:
+                    self.entity_voice.obsidian = self.obsidian
+                
+                # Inyectar en Auto-Evolver para análisis de Blast Radius
+                if self.auto_evolver:
+                    self.auto_evolver.socraticode = self.socraticode
+                
+                logger.info("Integrated SDKs (Obsidian & Socraticode) Materialized.")
+            except ImportError as e:
+                logger.warning(f"Failed to load integrated SDKs: {e}")
+                
+        except Exception as e:
+            logger.error(f"Fallo al inicializar DummieDaemon Wave 3: {e}")
+            self.daemon = None
+
         logger.info("CognitiveOrchestrator Materialized (Tabula Rasa Bridge)")
 
+    def _ensure_daemon_running(self):
+        import asyncio
+        if self.daemon and self._daemon_task is None:
+            try:
+                loop = asyncio.get_running_loop()
+                self._daemon_task = loop.create_task(self.daemon.run_forever())
+            except RuntimeError:
+                pass # No running loop yet
+
     async def process_intent(self, intent: Any):
+        self._ensure_daemon_running()
         self.lamport_clock += 1
         goal = getattr(intent, "goal", "") or getattr(intent, "rationale", str(intent))
         logger.info(f"Processing intent: {goal}")
         
+        # Si el daemon está vivo, despachar la intención allí
+        if self.daemon:
+            from gateway_contract import GatewayRequest
+            try:
+                # Construir el GatewayRequest
+                dag_xml = f"<dag><task id='t1'></task></dag>" # Stub DAG
+                req = GatewayRequest(session_id=f"intent_{self.lamport_clock}", goal=goal, dag_xml=dag_xml)
+                await self.daemon.submit_intent(req)
+            except Exception as e:
+                logger.error(f"Error submitting intent to Daemon: {e}")
+
         # Persistencia 4D-TES (Spec 02) - Esquema SOVEREIGN-4D
         if self.event_store and getattr(self.event_store, "conn", None):
             from enum import Enum

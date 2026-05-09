@@ -11,13 +11,12 @@ KUZU_PATH="${DUMMIE_KUZU_DB_PATH:-$AIWG_DIR/memory/loci.db}"
 
 echo "=== [FACTORY] Iniciando DUMMIE Engine (Nivel 5) ==="
 
-# 1. Higiene (No destructiva)
+# 1. Higiene Transaccional (Full Reset)
+echo ">> Ensuring clean state..."
+bash "$ROOT_DIR/scripts/shutdown_factory.sh"
+
 mkdir -p "$AIWG_DIR/sockets"
 mkdir -p "$(dirname "$KUZU_PATH")"
-
-rm -f "$SOCKET_PATH"
-rm -f "$DUMMIED_SOCKET_PATH"
-rm -f "$LEGACY_DUMMIED_SOCKET_PATH"
 
 # 2. Iniciar L1 Nervous (Relojero)
 echo ">> Launching L1 Nervous (Lamport)..."

@@ -39,6 +39,7 @@ if _EXPLICIT_MCP_CONFIG_PATH:
 else:
     _candidates = [
         _DEFAULT_REGISTRY_PATH,
+        os.path.join(ROOT_DIR, "dummie_gateway_config.json"),
         os.path.join(ROOT_DIR, "dummie_agent_config.json"),
         os.path.join(AIWG_DIR, "mcp_config.registry.json"),
     ]

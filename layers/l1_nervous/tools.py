@@ -27,7 +27,9 @@ def register_tools(mcp: FastMCP, get_orchestrator, get_proxy, root_dir: str):
         proxy_manager = get_proxy()
         use_cases = BrainToolUseCases(orchestrator, proxy_manager)
         
-        # Evitar doble registro si se llama varias veces
+        # [WAVE 8] Vincular Meta-Gateway al Orquestador
+        if hasattr(orchestrator, "set_mcp_gateway"):
+            orchestrator.set_mcp_gateway(proxy_manager)
         if not internal_mcp._tool_manager.list_tools():
             register_core_tools(internal_mcp, use_cases, root_dir)
             register_swarm_tools(internal_mcp, use_cases, root_dir)
