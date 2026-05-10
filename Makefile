@@ -1,4 +1,4 @@
-.PHONY: verify-industrial verify-specs sdk
+.PHONY: verify-industrial verify-specs verify-truth sdk
 
 verify-industrial: verify-specs
 	@echo "=== STARTING INDUSTRIAL AUDIT SUITE ==="
@@ -14,6 +14,9 @@ verify-industrial: verify-specs
 verify-specs:
 	@echo "Validating Specs and Docs..."
 	@python3 scripts/validate_specs_docs.py
+
+verify-truth:
+	@layers/l2_brain/.venv/bin/python scripts/dummie_truth.py
 
 sdk:
 	@echo "Regenerating Typed SDKs..."

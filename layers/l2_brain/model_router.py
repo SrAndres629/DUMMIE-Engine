@@ -249,8 +249,7 @@ class ModelRouter:
 
     def __init__(self, registry: Optional[Any] = None, ledger: Any = None):
         if registry is None:
-            from model_discovery import ModelRegistry
-            registry = ModelRegistry()
+            registry = build_model_registry()
         self.registry = registry
         self.ledger = ledger
         self._total_cloud_tokens = 0

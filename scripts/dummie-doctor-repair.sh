@@ -42,12 +42,30 @@ find "$ROOT_DIR/.aiwg/sockets/" -name "*.sock" -type s -atime +1 -delete 2>/dev/
 echo "Attempting to flush filesystem caches..."
 sudo sync && echo 1 | sudo tee /proc/sys/vm/drop_caches > /dev/null || echo "Could not flush caches (skip)."
 
+echo "=== [2.5/5] DEPENDENCY SYNC ==="
+if [ -f "$ROOT_DIR/uv.lock" ]; then
+    echo "Found uv.lock. Synchronizing dependencies..."
+    cd "$ROOT_DIR" && uv sync || echo "UV sync failed, skipping."
+elif [ -f "$ROOT_DIR/layers/l2_brain/uv.lock" ]; then
+    echo "Found uv.lock in l2_brain. Synchronizing..."
+    cd "$ROOT_DIR/layers/l2_brain" && uv sync || echo "UV sync failed, skipping."
+fi
+
 echo "=== [3/5] SUBSTRATE CYCLE ==="
 echo "Stopping lab..."
-/usr/local/bin/dummie-lab-off
+# Usar el script directamente si existe en PATH o local
+if command -v dummie-lab-off >/dev/null 2>&1; then
+    dummie-lab-off
+else
+    bash "$ROOT_DIR/scripts/shutdown_factory.sh"
+fi
 
 echo "Starting lab..."
-/usr/local/bin/dummie-lab-on
+if command -v dummie-lab-on >/dev/null 2>&1; then
+    dummie-lab-on
+else
+    bash "$ROOT_DIR/scripts/factory_up.sh"
+fi
 
 echo "=== [4/5] VERIFICATION PHASE ==="
 sleep 5 # Wait for services to settle

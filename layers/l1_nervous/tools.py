@@ -1,6 +1,6 @@
 import json
 import logging
-from typing import Any, Dict
+from typing import Any, Dict, List, Optional
 from mcp.server.fastmcp import FastMCP
 from application.use_cases import BrainToolUseCases
 from tools_impl.core import register_core_tools
@@ -232,4 +232,33 @@ def register_tools(mcp: FastMCP, get_orchestrator, get_proxy, root_dir: str):
             except Exception as e:
                 return f"Fallo crítico en Proxy ({target}): {str(e)}"
 
-    logger.info("Registro de Meta-Gateway (3 Herramientas Universales) completado.")
+    @mcp.tool()
+    async def dummie_install_mcp(server_name: str, command: str, args: List[str], env: Optional[Dict[str, str]] = None) -> str:
+        """
+        [WAVE 9] Instala un nuevo servidor MCP dinámicamente en el Gateway.
+        """
+        orchestrator, _ = setup_internal()
+        if not hasattr(orchestrator, "auto_evolver"):
+            return "Error: AutoEvolver no disponible en este contexto."
+        
+        success = await orchestrator.auto_evolver.autonomous_mcp_ingestion(server_name, command, args, env)
+        if success:
+            return f"Servidor MCP '{server_name}' instalado. Reinicia el Gateway para activar."
+        return f"Fallo al instalar el servidor MCP '{server_name}'."
+
+    @mcp.tool()
+    async def dummie_self_program(mission: str) -> str:
+        """
+        [WAVE 9] DUMMIE escribe su propio código para resolver una misión técnica compleja.
+        Detecta automáticamente dónde guardar el código basándose en su arquitectura de capas.
+        """
+        orchestrator, _ = setup_internal()
+        if not hasattr(orchestrator, "auto_evolver") or not orchestrator.daemon:
+            return "Error: AutoEvolver o Daemon no disponibles."
+        
+        result = await orchestrator.auto_evolver.self_program(mission, orchestrator.daemon)
+        if result.get("success"):
+            return f"MISIÓN CUMPLIDA: Código generado e instalado en {result['file_path']}.\nPreview:\n{result['code_preview']}"
+        return f"MISIÓN FALLIDA: {result.get('error')}"
+
+    logger.info("Registro de Meta-Gateway (5 Herramientas Universales) completado.")

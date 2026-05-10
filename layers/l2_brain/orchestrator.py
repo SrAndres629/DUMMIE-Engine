@@ -134,37 +134,38 @@ class CognitiveOrchestrator:
                 loop.create_task(_lazy_discovery())
             except RuntimeError:
                 pass # No loop yet
-
-        def set_mcp_gateway(self, mcp_gateway: Any):
-            """Inyecta el Meta-Gateway (L1 Proxy) y activa los SDKs integrados."""
-            self.daemon.mcp_gateway = mcp_gateway
-            
-            # Inicialización de SDKs Generados
-            try:
-                from layers.l1_nervous.generated.obsidian_sdk import ObsidianClient
-                from layers.l1_nervous.generated.socraticode_sdk import SocraticodeClient
-                
-                self.obsidian = ObsidianClient(mcp_gateway)
-                self.socraticode = SocraticodeClient(mcp_gateway)
-                
-                self.daemon.obsidian = self.obsidian
-                self.daemon.socraticode = self.socraticode
-                
-                # Inyectar en EntityVoice para Archival
-                if self.entity_voice:
-                    self.entity_voice.obsidian = self.obsidian
-                
-                # Inyectar en Auto-Evolver para análisis de Blast Radius
-                if self.auto_evolver:
-                    self.auto_evolver.socraticode = self.socraticode
-                
-                logger.info("Integrated SDKs (Obsidian & Socraticode) Materialized.")
-            except ImportError as e:
-                logger.warning(f"Failed to load integrated SDKs: {e}")
-                
         except Exception as e:
             logger.error(f"Fallo al inicializar DummieDaemon Wave 3: {e}")
             self.daemon = None
+
+        logger.info("CognitiveOrchestrator Materialized (Tabula Rasa Bridge)")
+
+    def set_mcp_gateway(self, mcp_gateway: Any):
+        """Inyecta el Meta-Gateway (L1 Proxy) y activa los SDKs integrados."""
+        self.daemon.mcp_gateway = mcp_gateway
+        
+        # Inicialización de SDKs Generados
+        try:
+            from generated.obsidian_sdk import ObsidianClient
+            from generated.socraticode_sdk import SocraticodeClient
+            
+            self.obsidian = ObsidianClient(mcp_gateway)
+            self.socraticode = SocraticodeClient(mcp_gateway)
+            
+            self.daemon.obsidian = self.obsidian
+            self.daemon.socraticode = self.socraticode
+            
+            # Inyectar en EntityVoice para Archival
+            if self.entity_voice:
+                self.entity_voice.obsidian = self.obsidian
+            
+            # Inyectar en Auto-Evolver para análisis de Blast Radius
+            if self.auto_evolver:
+                self.auto_evolver.socraticode = self.socraticode
+            
+            logger.info("Integrated SDKs (Obsidian & Socraticode) Materialized.")
+        except ImportError as e:
+            logger.warning(f"Failed to load integrated SDKs: {e}")
 
         logger.info("CognitiveOrchestrator Materialized (Tabula Rasa Bridge)")
 
@@ -196,24 +197,18 @@ class CognitiveOrchestrator:
 
         # Persistencia 4D-TES (Spec 02) - Esquema SOVEREIGN-4D
         if self.event_store and getattr(self.event_store, "conn", None):
-            from enum import Enum
             try:
-                from .models import MemoryNode4D
+                from models import MemoryNode4D
             except ImportError:
-                try:
-                    from models import MemoryNode4D
-                except ImportError:
-                    try:
-                        from l2_brain.models import MemoryNode4D
-                    except ImportError:
-                        # Fallback path if run from different context
-                        from layers.l2_brain.models import MemoryNode4D
+                # Fallback for complex environments
+                from layers.l2_brain.models import MemoryNode4D
             
             parent_hash = self.event_store.get_last_leaf_hash()
             
             # Extraer dimensiones (Spec 12 / 6D Model)
             locus_x = getattr(intent, "locus_x", "sw.strategy.discovery")
             authority_a = getattr(intent, "authority_a", "HUMAN")
+            from enum import Enum
             if isinstance(authority_a, Enum): authority_a = authority_a.value
             intent_i = getattr(intent, "intent_i", "RESOLUTION")
             if isinstance(intent_i, Enum): intent_i = intent_i.value

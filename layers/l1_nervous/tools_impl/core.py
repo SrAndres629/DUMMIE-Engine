@@ -55,6 +55,34 @@ def register_core_tools(mcp: FastMCP, use_cases, root_dir: str):
         return await use_cases.ping_gateway()
 
     @mcp.tool()
+    async def operational_truth_report(format: str = "text", include_slow: bool = False) -> str:
+        """[TRUTH] Reporta el estado operacional real de DUMMIE Engine."""
+        import json as _json
+        import sys as _sys
+
+        l2_path = os.path.join(root_dir, "layers", "l2_brain")
+        if l2_path not in _sys.path:
+            _sys.path.insert(0, l2_path)
+
+        from operational_truth_collectors import collect_truth
+
+        report = collect_truth(root_dir, include_slow=include_slow)
+        if format == "json":
+            return _json.dumps(report.to_dict(), indent=2)
+
+        lines = [
+            "=== DUMMIE OPERATIONAL TRUTH ===",
+            f"Repo: {report.repo_root}",
+            f"Summary: {report.summary()}",
+        ]
+        for check in report.checks:
+            evidence = "; ".join(check.evidence) if check.evidence else check.error
+            lines.append(f"- [{check.status.value}] {check.layer} {check.name}: {evidence}")
+            if check.next_repair:
+                lines.append(f"  next: {check.next_repair}")
+        return "\n".join(lines)
+
+    @mcp.tool()
     async def read_spec(spec_id: str) -> str:
         """
         Lee una especificación técnica (Spec) por su ID.
@@ -132,4 +160,3 @@ def register_core_tools(mcp: FastMCP, use_cases, root_dir: str):
             "spec_id": spec_id,
             "searched_dir": specs_dir,
         })
-

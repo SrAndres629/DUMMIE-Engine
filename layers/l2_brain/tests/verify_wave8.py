@@ -8,22 +8,17 @@ for layer in ["l1_nervous", "l2_brain", "l3_shield"]:
     sys.path.append(os.path.join(ROOT_DIR, "layers", layer))
 
 from mcp_proxy import MCPProxyManager
-from orchestrator import CognitiveOrchestrator
+from bootstrap import bootstrap_orchestrator
 
 async def test_integration():
     print("🚀 Testing Obsidian/Socraticode Integration...")
     
-    # 1. Config Path Check
-    config_path = os.path.join(ROOT_DIR, "dummie_gateway_config.json")
-    print(f"Checking config: {config_path}")
-    if os.path.exists(config_path):
-        print("✅ Config found.")
-    else:
-        print("❌ Config NOT found.")
-        return
+    AIWG_DIR = os.path.join(ROOT_DIR, ".aiwg")
+    KUZU_DB_PATH = os.path.join(AIWG_DIR, "memory/loci.db")
+    GATEWAY_CONFIG = os.path.join(ROOT_DIR, "dummie_gateway_config.json")
 
-    # 2. Proxy Manager Initialization
-    proxy = MCPProxyManager(config_path)
+    # 1. Proxy Manager
+    proxy = MCPProxyManager(GATEWAY_CONFIG)
     print(f"Proxy Servers: {list(proxy.servers.keys())}")
     
     if "socraticode" in proxy.servers and "obsidian" in proxy.servers:
@@ -31,8 +26,8 @@ async def test_integration():
     else:
         print("❌ Servers missing from Proxy.")
 
-    # 3. Orchestrator Integration
-    orch = CognitiveOrchestrator(os.path.join(ROOT_DIR, ".aiwg/memory/loci.db"), os.path.join(ROOT_DIR, ".aiwg"))
+    # 2. Orchestrator
+    orch = bootstrap_orchestrator(KUZU_DB_PATH, AIWG_DIR)
     orch.set_mcp_gateway(proxy)
     
     if orch.obsidian and orch.socraticode:
@@ -45,6 +40,8 @@ async def test_integration():
     
     if orch.entity_voice.obsidian:
         print("✅ Obsidian injected in EntityVoice.")
+        
+    print("🚀 Verification Complete.")
 
 if __name__ == "__main__":
     asyncio.run(test_integration())

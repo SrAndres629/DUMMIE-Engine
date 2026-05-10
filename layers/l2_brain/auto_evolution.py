@@ -13,6 +13,8 @@ class CognitiveAutoEvolver:
     def __init__(self, workspace_root: str):
         self.workspace_root = workspace_root
         self.socraticode = None # Injected by orchestrator
+        from expansion_policy import ExpansionPolicy
+        self.policy = ExpansionPolicy(workspace_root)
 
     def collect_performance_metrics(self) -> Dict[str, Any]:
         """
@@ -149,10 +151,10 @@ class CognitiveAutoEvolver:
             
         code = code_match.group(1)
         
-        # Nombre sugerido
-        suggested_name = mission.lower().replace(" ", "_")[:20] + ".py"
-        target_path = os.path.join(self.workspace_root, "layers/l4_ext", suggested_name)
-        os.makedirs(os.path.dirname(target_path), exist_ok=True)
+        # [WAVE 9] Resolución Inteligente de Rutas vía Policy
+        suggested_name = mission.lower().replace(" ", "_")[:25] + ".py"
+        component_type = self.policy.categorize_mission(mission)
+        target_path = self.policy.resolve_path(component_type, suggested_name)
         
         # Escribir y validar sintaxis
         try:
@@ -165,15 +167,37 @@ class CognitiveAutoEvolver:
             if self.socraticode:
                 await self.socraticode.codebase_update(projectPath=self.workspace_root)
                 
-            return {
-                "success": True,
-                "file_path": target_path,
-                "code_preview": code[:200] + "..."
-            }
+            return {"success": True, "file_path": target_path, "code_preview": code[:200] + "..."}
         except Exception as e:
             logger.error(f"Self-Programming: Validation failed for {target_path}: {e}")
             if os.path.exists(target_path):
                 os.remove(target_path)
             return {"success": False, "error": str(e)}
+
+    async def autonomous_mcp_ingestion(self, server_name: str, command: str, args: list, env: dict = None):
+        """
+        [WAVE 9] DUMMIE ingiere una nueva herramienta MCP dinámicamente.
+        """
+        config_path = os.path.join(self.workspace_root, "dummie_gateway_config.json")
+        try:
+            import json
+            with open(config_path, "r") as f:
+                config = json.load(f)
+            
+            config["mcpServers"][server_name] = {
+                "command": command,
+                "args": args,
+                "env": env or {},
+                "disabled": False
+            }
+            
+            with open(config_path, "w") as f:
+                json.dump(config, f, indent=2)
+            
+            logger.info(f"Autonomous Ingestion: MCP Server '{server_name}' added to gateway.")
+            return True
+        except Exception as e:
+            logger.error(f"Failed to ingest MCP server {server_name}: {e}")
+            return False
 
 
