@@ -80,6 +80,8 @@ class CognitiveOrchestrator:
             from supervisor_protocol import SupervisorProtocol
             from entity_voice import EntityVoice
             from auto_evolution import CognitiveAutoEvolver
+            from evolution_feedback_loop import EvolutionFeedbackLoop, OptimizationAdvisor
+            from local_reasoning import LocalReasoningService
             
             # [WAVE 3] Contabilidad y Modelos
             ledger_path = os.path.join(aiwg_dir, "ledger/token_usage.jsonl")
@@ -97,6 +99,12 @@ class CognitiveOrchestrator:
             self.supervisor_protocol = SupervisorProtocol(self.model_executor, self.model_router)
             self.entity_voice = EntityVoice()
             self.auto_evolver = CognitiveAutoEvolver(workspace_root=os.getcwd())
+            
+            # [WAVE 10] Feedback Loop & Optimization Advisor
+            self.local_reasoning = LocalReasoningService()
+            self.feedback_loop = EvolutionFeedbackLoop(self.skill_repo, self.local_reasoning)
+            self.optimization_advisor = OptimizationAdvisor(self.feedback_loop)
+            self.auto_evolver.feedback_loop = self.feedback_loop
             
             # [WAVE 8] Integrated SDKs (Obsidian & Socraticode)
             self.obsidian = None
@@ -183,6 +191,10 @@ class CognitiveOrchestrator:
         self.lamport_clock += 1
         goal = getattr(intent, "goal", "") or getattr(intent, "rationale", str(intent))
         logger.info(f"Processing intent: {goal}")
+        
+        # [WAVE 10] Consultar al Asesor de Optimización
+        optimization_params = self.optimization_advisor.recommend_parameters(goal)
+        logger.info(f"Optimization Advisor recommendation: {optimization_params}")
         
         # Si el daemon está vivo, despachar la intención allí
         if self.daemon:

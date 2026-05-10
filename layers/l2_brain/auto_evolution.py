@@ -15,17 +15,23 @@ class CognitiveAutoEvolver:
         self.socraticode = None # Injected by orchestrator
         from expansion_policy import ExpansionPolicy
         self.policy = ExpansionPolicy(workspace_root)
+        self.feedback_loop = None # Injected by orchestrator
 
     def collect_performance_metrics(self) -> Dict[str, Any]:
         """
-        Simula la recopilación de métricas de observabilidad del Gateway L1.
+        Recopila métricas reales si el feedback loop está disponible, de lo contrario simula.
         """
         logger.info("Collecting real-time performance metrics...")
-        # En un flujo real, leería trazas distribuidas o perfiles cProfile
+        if self.feedback_loop and self.feedback_loop.snapshots:
+            last_snapshot = self.feedback_loop.snapshots[-1]
+            import dataclasses
+            return dataclasses.asdict(last_snapshot)
+            
         return {
             "status": "OPTIMAL",
             "bottlenecks": [],
-            "active_routines": 12
+            "active_routines": 12,
+            "simulated": True
         }
 
     def execute_git_push_action(self, branch_name: str, commit_message: str) -> bool:
