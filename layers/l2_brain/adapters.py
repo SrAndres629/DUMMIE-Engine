@@ -1,14 +1,20 @@
-import os
-import json
 import logging
-import fcntl
-from typing import Dict, Any, List, Optional
+
 try:
-    from layers.l2_brain.ports import CodeAnalysisPort, ObservabilityPort
-except ModuleNotFoundError:
-    from ports import CodeAnalysisPort, ObservabilityPort
+    from infrastructure.adapters.kuzu import KuzuRepository, KuzuSkillRepository
+    from infrastructure.adapters.ledger import DecisionLedgerAdapter, SessionLedgerAdapter
+    from infrastructure.adapters.external import NativeShieldAdapter, SocraticodeAdapter, PhoenixAdapter
+except ImportError:
+    import sys
+    import os
+    sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+    from infrastructure.adapters.kuzu import KuzuRepository, KuzuSkillRepository
+    from infrastructure.adapters.ledger import DecisionLedgerAdapter, SessionLedgerAdapter
+    from infrastructure.adapters.external import NativeShieldAdapter, SocraticodeAdapter, PhoenixAdapter
 
 logger = logging.getLogger("brain.adapters")
+<<<<<<< HEAD
+=======
 
 class KuzuRepository:
     def __init__(self, db_path: Optional[str] = None, db: Any = None):
@@ -456,3 +462,4 @@ class PhoenixAdapter(ObservabilityPort):
             })
         except Exception as e:
             logger.error(f"Error en PhoenixAdapter: {e}")
+>>>>>>> main
