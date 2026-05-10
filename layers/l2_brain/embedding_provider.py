@@ -36,8 +36,8 @@ class EmbeddingProvider:
             embeddings = list(model.embed([text]))
             return embeddings[0].tolist()
         except Exception as e:
-            logger.warning(f"Embedding generation failed: {e}. Falling back to zeros.")
-            return [0.0] * 384
+            logger.error(f"Embedding generation failed: {e}")
+            raise RuntimeError(f"Embedding generation failed: {e}")
 
     @classmethod
     def similarity(cls, v1: List[float], v2: List[float]) -> float:

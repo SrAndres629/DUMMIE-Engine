@@ -17,7 +17,7 @@ Capacidad en transición; requiere consolidación progresiva de contratos y prue
 - `doc/specs/42_ontological_certainty_map.md`
 - `doc/specs/42_ontological_certainty_map.feature`
 - `doc/specs/42_ontological_certainty_map.rules.json`
-- `layers/l2_brain`
+- `layers/l2_brain/daemon.py`
 - `doc/CORE_SPEC.md`
 - `doc/PHYSICAL_MAP.md`
 

@@ -1,0 +1,258 @@
+{
+  "_meta": {
+    "registry_type": "docs",
+    "version": "1.0.0",
+    "generated_at": "2026-05-09T03:25:00Z",
+    "generated_by": "antigravity_audit",
+    "purpose": "Canonical map of all documentation assets. No files were moved or deleted.",
+    "schema_version": "1.0.0"
+  },
+  "items": [
+    {
+      "path": "README.md",
+      "kind": "project_readme",
+      "status": "canonical",
+      "canonical_target": "README.md",
+      "owner_layer": "root",
+      "risk": "low",
+      "reason": "Primary project README. Should remain at root.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "AGENTS.md",
+      "kind": "agent_system_prompt",
+      "status": "canonical",
+      "canonical_target": ".agents/core_context/agent_system_prompt.md",
+      "owner_layer": "root",
+      "risk": "high",
+      "reason": "Defines agent workspace rules, memory protocol, heartbeat, engineering mandate, and 4D-TES stability contract. Currently loaded as system context by all agents. Moving requires updating all agent bootstrap paths.",
+      "recommended_action": "alias"
+    },
+    {
+      "path": "GEMINI.md",
+      "kind": "agent_collaboration_model",
+      "status": "legacy_source",
+      "canonical_target": ".agents/core_context/agent_system_prompt.md",
+      "owner_layer": "root",
+      "risk": "medium",
+      "reason": "Defines 5 collaboration roles. Content overlaps with AGENTS.md. Should be merged into a unified system prompt.",
+      "recommended_action": "deprecate"
+    },
+    {
+      "path": "IDENTITY.md",
+      "kind": "agent_identity",
+      "status": "legacy_source",
+      "canonical_target": ".agents/core_context/identity.md",
+      "owner_layer": "root",
+      "risk": "medium",
+      "reason": "Minimal identity declaration (name, creature, vibe). Content should merge into unified agent context.",
+      "recommended_action": "move_later"
+    },
+    {
+      "path": "SOUL.md",
+      "kind": "agent_personality",
+      "status": "legacy_source",
+      "canonical_target": ".agents/core_context/identity.md",
+      "owner_layer": "root",
+      "risk": "medium",
+      "reason": "Personality/soul definition. Overlaps with IDENTITY.md and .aiwg/identity.json. Three sources of truth for one concept.",
+      "recommended_action": "deprecate"
+    },
+    {
+      "path": "USER.md",
+      "kind": "user_profile",
+      "status": "canonical",
+      "canonical_target": ".agents/core_context/user_contract.md",
+      "owner_layer": "root",
+      "risk": "low",
+      "reason": "User profile for agent personalization. Should be versionable but separate from identity.",
+      "recommended_action": "move_later"
+    },
+    {
+      "path": "MAD_COORDINATION_PROTOCOL.md",
+      "kind": "coordination_protocol",
+      "status": "legacy_source",
+      "canonical_target": ".agents/core_context/coordination_protocol.md",
+      "owner_layer": "root",
+      "risk": "medium",
+      "reason": "Multi-agent coordination rules. Content overlaps with AGENTS.md (agent handoff rules section). Should merge.",
+      "recommended_action": "deprecate"
+    },
+    {
+      "path": "MEMORY.md",
+      "kind": "agent_memory_log",
+      "status": "runtime_local",
+      "canonical_target": "MEMORY.md",
+      "owner_layer": "root",
+      "risk": "low",
+      "reason": "Long-term curated memory. Local-only by design (AGENTS.md rules). Keep at root for agent access.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "HEARTBEAT.md",
+      "kind": "agent_heartbeat_config",
+      "status": "runtime_local",
+      "canonical_target": "HEARTBEAT.md",
+      "owner_layer": "root",
+      "risk": "low",
+      "reason": "Heartbeat checklist. Local-only runtime state.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "TOOLS.md",
+      "kind": "agent_tools_config",
+      "status": "canonical",
+      "canonical_target": ".agents/core_context/tools.md",
+      "owner_layer": "root",
+      "risk": "low",
+      "reason": "Local tool config (camera names, SSH details, voice prefs). Should be versionable.",
+      "recommended_action": "move_later"
+    },
+    {
+      "path": "INVENTARIO_TOTAL_SKILLS.md",
+      "kind": "skill_inventory",
+      "status": "legacy_source",
+      "canonical_target": ".aiwg/registry/skills_registry.json",
+      "owner_layer": "root",
+      "risk": "medium",
+      "reason": "Human-readable skill inventory. Replaced by machine-readable skills_registry.json.",
+      "recommended_action": "deprecate"
+    },
+    {
+      "path": "RESUMEN_INDUSTRIALIZACION.md",
+      "kind": "project_summary",
+      "status": "legacy_source",
+      "canonical_target": "docs/architecture/industrialization_summary.md",
+      "owner_layer": "root",
+      "risk": "low",
+      "reason": "Summary of industrialization efforts. Should live in docs/architecture/.",
+      "recommended_action": "move_later"
+    },
+    {
+      "path": "validar-si-deep-research-report-es-verdad.md",
+      "kind": "research_artifact",
+      "status": "deprecated",
+      "canonical_target": null,
+      "owner_layer": "root",
+      "risk": "low",
+      "reason": "One-off research validation document (64KB). Not a permanent asset.",
+      "recommended_action": "delete_later"
+    },
+    {
+      "path": "walkthrough.md",
+      "kind": "session_walkthrough",
+      "status": "runtime_local",
+      "canonical_target": null,
+      "owner_layer": "root",
+      "risk": "low",
+      "reason": "Agent session walkthrough. Ephemeral.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "doc/specs/",
+      "kind": "spec_directory",
+      "status": "canonical",
+      "canonical_target": "docs/specs/",
+      "owner_layer": "doc",
+      "risk": "high",
+      "reason": "Contains 52+ spec files (triples: .md, .feature, .rules.json). This is the primary specification corpus. Duplicated number prefixes (11, 16, 26, 27, 28, 29, 30, 40, 41, 42, 44). Moving requires updating all spec references in code, tests, and prompts.",
+      "recommended_action": "alias"
+    },
+    {
+      "path": "doc/adr/",
+      "kind": "adr_directory",
+      "status": "canonical",
+      "canonical_target": "docs/adr/",
+      "owner_layer": "doc",
+      "risk": "medium",
+      "reason": "Architecture Decision Records. Should consolidate into docs/.",
+      "recommended_action": "alias"
+    },
+    {
+      "path": "doc/guides/",
+      "kind": "guides_directory",
+      "status": "canonical",
+      "canonical_target": "docs/guides/",
+      "owner_layer": "doc",
+      "risk": "medium",
+      "reason": "User/developer guides including MCP server usage. Should live under docs/.",
+      "recommended_action": "alias"
+    },
+    {
+      "path": "doc/manifesto/",
+      "kind": "manifesto_directory",
+      "status": "canonical",
+      "canonical_target": "docs/manifestos/",
+      "owner_layer": "doc",
+      "risk": "low",
+      "reason": "Project manifestos.",
+      "recommended_action": "alias"
+    },
+    {
+      "path": "doc/.deprecated/",
+      "kind": "deprecated_directory",
+      "status": "deprecated",
+      "canonical_target": null,
+      "owner_layer": "doc",
+      "risk": "low",
+      "reason": "Contains deprecated scratchpad scripts (17+ Python files). All appear to be historical one-off tests.",
+      "recommended_action": "manual_review"
+    },
+    {
+      "path": "doc/agentic/",
+      "kind": "agentic_docs",
+      "status": "canonical",
+      "canonical_target": "docs/architecture/agentic/",
+      "owner_layer": "doc",
+      "risk": "low",
+      "reason": "Agent architecture documentation.",
+      "recommended_action": "alias"
+    },
+    {
+      "path": "docs/ops/",
+      "kind": "ops_docs",
+      "status": "canonical",
+      "canonical_target": "docs/ops/",
+      "owner_layer": "docs",
+      "risk": "low",
+      "reason": "Operations documentation (Obsidian knowledge bus).",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "docs/superpowers/plans/",
+      "kind": "plan_directory",
+      "status": "canonical",
+      "canonical_target": "docs/superpowers/plans/",
+      "owner_layer": "docs",
+      "risk": "low",
+      "reason": "Dated improvement plans (6 files). Active planning artifacts.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "docs/superpowers/specs/",
+      "kind": "design_spec_directory",
+      "status": "canonical",
+      "canonical_target": "docs/superpowers/specs/",
+      "owner_layer": "docs",
+      "risk": "low",
+      "reason": "Design specs for superpowers (4 files). Active.",
+      "recommended_action": "keep"
+    }
+  ],
+  "summary": {
+    "total_items": 23,
+    "status_counts": {
+      "canonical": 10,
+      "legacy_source": 5,
+      "deprecated": 2,
+      "runtime_local": 3,
+      "unknown": 0
+    },
+    "critical_duplications": [
+      "AGENTS.md vs GEMINI.md vs MAD_COORDINATION_PROTOCOL.md — three overlapping agent behavior sources",
+      "IDENTITY.md vs SOUL.md vs .aiwg/identity.json — three identity/personality sources",
+      "doc/ vs docs/ — two top-level documentation directories",
+      "doc/specs has duplicate number prefixes: 11, 16, 26, 27, 28, 29, 30, 40, 41, 42, 44"
+    ]
+  }
+}

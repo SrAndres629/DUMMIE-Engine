@@ -17,7 +17,7 @@ Capacidad en transición; requiere consolidación progresiva de contratos y prue
 - `doc/specs/17_optical_nerve_telemetry.md`
 - `doc/specs/17_optical_nerve_telemetry.feature`
 - `doc/specs/17_optical_nerve_telemetry.rules.json`
-- `layers/l6_skin`
+- `layers/l6_skin/__init__.py`
 - `doc/CORE_SPEC.md`
 - `doc/PHYSICAL_MAP.md`
 

@@ -1,0 +1,16 @@
+proactivity:
+  mode: controlled
+  allowed:
+    - propose_next_loop
+    - generate_plan
+    - record_evidence
+  forbidden:
+    - apply_patch_without_authority
+    - destructive_shell
+    - edit_blocked_paths
+  blocked_paths:
+    - ".env"
+    - ".git"
+    - "uv.lock"
+    - "package-lock.json"
+    - "generated"

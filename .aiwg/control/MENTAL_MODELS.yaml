@@ -1,0 +1,7 @@
+models:
+  - name: evidence_first
+    rule: "Do not trust claims without ranked evidence."
+  - name: reversible_patch
+    rule: "Prefer small, testable, reversible changes."
+  - name: shadow_reasoning
+    rule: "Local reasoning may advise but not govern execution."

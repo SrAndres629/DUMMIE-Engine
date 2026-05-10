@@ -17,7 +17,7 @@ Capacidad activa con evidencia verificable en el repositorio.
 - `doc/specs/10_protobuf_contracts.md`
 - `doc/specs/10_protobuf_contracts.feature`
 - `doc/specs/10_protobuf_contracts.rules.json`
-- `layers/l1_nervous`
+- `layers/l1_nervous/__init__.py`
 - `doc/CORE_SPEC.md`
 - `doc/PHYSICAL_MAP.md`
 

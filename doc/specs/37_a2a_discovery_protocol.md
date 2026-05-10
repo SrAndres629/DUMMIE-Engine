@@ -17,7 +17,7 @@ Capacidad en transición; requiere consolidación progresiva de contratos y prue
 - `doc/specs/37_a2a_discovery_protocol.md`
 - `doc/specs/37_a2a_discovery_protocol.feature`
 - `doc/specs/37_a2a_discovery_protocol.rules.json`
-- `layers/l2_brain`
+- `layers/l2_brain/daemon.py`
 - `doc/CORE_SPEC.md`
 - `doc/PHYSICAL_MAP.md`
 

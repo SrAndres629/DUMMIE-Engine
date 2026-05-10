@@ -3,7 +3,7 @@
 # DUMMIE Engine - 2026 Process Lifecycle Management
 
 # Usamos rutas absolutas para evitar ambigüedades
-ROOT_DIR="/home/jorand/Escritorio/DUMMIE Engine"
+ROOT_DIR="${DUMMIE_ROOT:-$(cd "$(dirname "$0")/.." && pwd)}"
 MEMORY_DIR="$ROOT_DIR/.aiwg/memory"
 
 echo "=== [VANGUARD] Auditoría de bloqueos en $MEMORY_DIR ==="

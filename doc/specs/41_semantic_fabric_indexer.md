@@ -17,7 +17,7 @@ Capacidad en transición; requiere consolidación progresiva de contratos y prue
 - `doc/specs/41_semantic_fabric_indexer.md`
 - `doc/specs/41_semantic_fabric_indexer.feature`
 - `doc/specs/41_semantic_fabric_indexer.rules.json`
-- `layers/l2_brain`
+- `layers/l2_brain/daemon.py`
 - `doc/CORE_SPEC.md`
 - `doc/PHYSICAL_MAP.md`
 

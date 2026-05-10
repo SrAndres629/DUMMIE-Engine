@@ -30,33 +30,52 @@ class GatewayRequest(BaseModel):
     @field_validator("dag_xml")
     @classmethod
     def validate_dag_structure(cls, v: str):
-        """
-        [Metacognición: Rama C] Valida la integridad del DAG en el XML.
-        Evita ciclos y asegura que los agentes definidos sean válidos.
-        """
         try:
             root = ET.fromstring(v)
             if root.tag != "dag":
                 raise ValueError("XML root must be <dag>")
-            
-            tasks = []
-            ids = set()
+
+            ids: set[str] = set()
+            graph: dict[str, list[str]] = {}
+
             for task in root.findall("task"):
-                t_id = task.get("id")
-                if not t_id: raise ValueError("Task missing ID")
-                ids.add(t_id)
-                tasks.append(task)
-            
-            # Verificación de dependencias
-            for task in tasks:
+                task_id = task.get("id")
+                if not task_id:
+                    raise ValueError("Task missing ID")
+                if task_id in ids:
+                    raise ValueError(f"Duplicate task id: {task_id}")
+                ids.add(task_id)
+                graph[task_id] = []
+
+            for task in root.findall("task"):
+                task_id = task.get("id")
                 for dep in task.findall("depends_on"):
-                    if dep.text not in ids:
-                        raise ValueError(f"Task {task.get('id')} depends on unknown task {dep.text}")
-            
+                    dep_id = (dep.text or "").strip()
+                    if dep_id not in ids:
+                        raise ValueError(f"Task {task_id} depends on unknown task {dep_id}")
+                    graph[task_id].append(dep_id)
+
+            visiting: set[str] = set()
+            visited: set[str] = set()
+
+            def visit(node: str) -> None:
+                if node in visiting:
+                    raise ValueError(f"DAG cycle detected at task {node}")
+                if node in visited:
+                    return
+                visiting.add(node)
+                for dep in graph[node]:
+                    visit(dep)
+                visiting.remove(node)
+                visited.add(node)
+
+            for task_id in sorted(ids):
+                visit(task_id)
+
             return v
+
         except ET.ParseError as e:
-            # [Metacognición: Rama B] Mitigación de malformed XML
-            raise ValueError(f"Invalid XML format: {str(e)}")
+            raise ValueError(f"Invalid XML format: {str(e)}") from e
 
 class CompensatoryAction(BaseModel):
     """

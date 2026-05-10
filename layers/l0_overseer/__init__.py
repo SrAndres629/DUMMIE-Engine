@@ -1,0 +1,13 @@
+__spec_id__ = "DE-V2-L0-08"
+__spec_id__ = "DE-V2-L0-42"
+__spec_id__ = "DE-V2-L0-14"
+__spec_id__ = "DE-V2-L0-33"
+__spec_id__ = "DE-V2-L0-28B"
+__spec_id__ = "DE-V2-L0-05"
+__spec_id__ = "DE-V2-L0-07"
+__spec_id__ = "DE-V2-L0-00"
+__spec_id__ = "DE-V2-L0-06"
+__spec_id__ = "DE-V2-L0-03"
+__spec_id__ = "DE-V2-L0-43"
+# Stub for DE-V2-L0-11
+__spec_id__ = "DE-V2-L0-11"

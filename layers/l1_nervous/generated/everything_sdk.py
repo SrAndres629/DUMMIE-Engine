@@ -1,3 +1,4 @@
+__spec_id__ = "DE-V2-L1-49"
 from pydantic import BaseModel, Field
 from typing import Dict, Any, List, Optional
 

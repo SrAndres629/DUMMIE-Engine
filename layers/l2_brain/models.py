@@ -29,45 +29,57 @@ class MemoryTemperature(Enum):
 
 @dataclass
 class SixDimensionalContext:
-    # Legacy/bridge names used by L1 tools.
+    """
+    [L2_BRAIN] Modelo de Contexto 6D (Sovereign).
+    Define la posición y autoridad de una intención en el espacio cognitivo.
+    """
     locus_x: str = "sw.strategy.discovery"
     locus_y: str = "L1_TRANSPORT"
     locus_z: str = "L2_BRAIN"
     lamport_t: float = 0.0
     authority_a: AuthorityLevel = AuthorityLevel.AGENT
     intent_i: IntentType = IntentType.FABRICATION
-
-    # Compact names kept for compatibility with existing code paths.
-    x: float = 0.0
-    y: float = 0.0
-    z: float = 0.0
-    t: float = 0.0
-    a: AuthorityLevel = AuthorityLevel.AGENT
-    i: IntentType = IntentType.FABRICATION
     metadata: Dict[str, Any] = field(default_factory=dict)
+
+    @property
+    def x(self) -> float:
+        """Legacy numeric alias retained for older tests/callers."""
+        return 0.0 if self.locus_x else 0.0
+
+    @property
+    def a(self) -> AuthorityLevel:
+        """Legacy alias for authority."""
+        return self.authority_a
+
+    @property
+    def i(self) -> IntentType:
+        """Legacy alias for intent."""
+        return self.intent_i
 
 @dataclass
 class AgentIntent:
-    # Legacy/bridge fields expected by L1 tools.
-    target: str = ""
-    rationale: str = ""
-    risk_score: float = 0.0
+    """
+    [L2_BRAIN] Intención Agéntica Soberana.
+    Representa una unidad de voluntad del sistema.
+    """
+    goal: str
+    agent_id: str = ""
     authority_a: AuthorityLevel = AuthorityLevel.AGENT
     intent_i: IntentType = IntentType.MUTATION
     locus_x: str = "sw.strategy.discovery"
-
-    # Compact fields kept for compatibility with existing code paths.
-    agent_id: str = "bridge-agent"
-    goal: str = ""
-    intent_type: IntentType = IntentType.MUTATION
     constraints: List[str] = field(default_factory=list)
+    risk_score: float = 0.0
+    metadata: Dict[str, Any] = field(default_factory=dict)
 
-    def __post_init__(self):
-        # Keep legacy and compact fields in sync for bridge consumers.
-        if not self.goal and self.rationale:
-            self.goal = self.rationale
-        if not self.rationale and self.goal:
-            self.rationale = self.goal
+    @property
+    def rationale(self) -> str:
+        """Alias de compatibilidad para capas externas."""
+        return self.goal
+
+    @property
+    def intent_type(self) -> IntentType:
+        """Legacy alias for intent_i."""
+        return self.intent_i
 
 
 import hashlib
@@ -123,6 +135,13 @@ class MemoryNode4D(BaseModel):
             "embedding FLOAT[], "
             "PRIMARY KEY (causal_hash))"
         )
+
+    @staticmethod
+    def schema_creation_queries() -> List[str]:
+        return [
+            MemoryNode4D.schema_creation_query(),
+            "CREATE REL TABLE CAUSAL_LINK(FROM MemoryNode4D TO MemoryNode4D)"
+        ]
 
     @classmethod
     def from_intent_context(

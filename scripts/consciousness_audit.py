@@ -3,8 +3,12 @@ import json
 import os
 
 # Configuración de Rutas
-LEDGER_PATH = "/home/jorand/Escritorio/DUMMIE Engine/.aiwg/ledger/sovereign_resolutions.jsonl"
-OUTPUT_PATH = "/home/jorand/Escritorio/DUMMIE Engine/.aiwg/memory/efficiency_report.json"
+import os
+from pathlib import Path
+
+ROOT_DIR = Path(os.getenv("DUMMIE_ROOT", Path(__file__).parent.parent))
+LEDGER_PATH = ROOT_DIR / ".aiwg" / "ledger" / "sovereign_resolutions.jsonl"
+OUTPUT_PATH = ROOT_DIR / ".aiwg" / "memory" / "efficiency_report.json"
 
 def analyze_consciousness():
     if not os.path.exists(LEDGER_PATH):

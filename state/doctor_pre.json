@@ -1,0 +1,30 @@
+{
+  "ok": false,
+  "results": {
+    "system_resources": {
+      "ok": true,
+      "ram": {
+        "total": 15667,
+        "used": 15166,
+        "free": 473
+      },
+      "swap": {
+        "total": 19942,
+        "used": 12256,
+        "free": 7686
+      }
+    },
+    "gateway_config_ok": true,
+    "processes": {
+      "relevant": [
+        "43480   43322 Sl   python          /home/jorand/Escritorio/DUMMIE Engine/layers/l2_brain/.venv/bin/python /home/jorand/Escritorio/DUMMIE Engine/layers/l1_nervous/mcp_server.py",
+        "44323   44085 Sl   python          /home/jorand/Escritorio/DUMMIE Engine/layers/l2_brain/.venv/bin/python /home/jorand/Escritorio/DUMMIE Engine/layers/l1_nervous/mcp_server.py",
+        "242551  242263 Sl   python          /home/jorand/Escritorio/DUMMIE Engine/layers/l2_brain/.venv/bin/python /home/jorand/Escritorio/DUMMIE Engine/layers/l1_nervous/mcp_server.py"
+      ],
+      "legacy": []
+    },
+    "runtime_sockets_ok": true,
+    "mcp_handshake_ok": false,
+    "mcp_handshake_error": "unhandled errors in a TaskGroup (1 sub-exception)"
+  }
+}

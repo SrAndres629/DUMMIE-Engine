@@ -17,7 +17,7 @@ Capacidad en transición; requiere consolidación progresiva de contratos y prue
 - `doc/specs/27_kaizen_loop_refinement.md`
 - `doc/specs/27_kaizen_loop_refinement.feature`
 - `doc/specs/27_kaizen_loop_refinement.rules.json`
-- `layers/l2_brain`
+- `layers/l2_brain/daemon.py`
 - `doc/CORE_SPEC.md`
 - `doc/PHYSICAL_MAP.md`
 

@@ -95,12 +95,9 @@ def test_industrial_e2e():
         proc.wait()
         if os.path.exists(SOCKET_PATH): os.remove(SOCKET_PATH)
         
-    return success
+    assert success, "Industrial E2E Smoke Test Failed"
 
 if __name__ == "__main__":
-    if test_industrial_e2e():
-        print("\nVERDICT: PASS")
-        sys.exit(0)
-    else:
-        print("\nVERDICT: FAIL")
-        sys.exit(1)
+    test_industrial_e2e()
+    print("\nVERDICT: PASS")
+    sys.exit(0)

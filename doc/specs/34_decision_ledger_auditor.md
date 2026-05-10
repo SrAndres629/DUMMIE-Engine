@@ -17,7 +17,7 @@ Capacidad en transición; requiere consolidación progresiva de contratos y prue
 - `doc/specs/34_decision_ledger_auditor.md`
 - `doc/specs/34_decision_ledger_auditor.feature`
 - `doc/specs/34_decision_ledger_auditor.rules.json`
-- `layers/l2_brain`
+- `layers/l2_brain/daemon.py`
 - `doc/CORE_SPEC.md`
 - `doc/PHYSICAL_MAP.md`
 

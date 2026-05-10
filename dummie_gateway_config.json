@@ -59,7 +59,7 @@
         "mcp-obsidian"
       ],
       "env": {
-        "OBSIDIAN_API_KEY": "414232f5a13a06c45df9e561cba82deffdbc0c3a75bcc526714dd14f9de987af",
+        "OBSIDIAN_API_KEY": "${OBSIDIAN_API_KEY}",
         "OBSIDIAN_HOST": "127.0.0.1",
         "OBSIDIAN_PORT": "27124"
       },

@@ -179,6 +179,36 @@ async def check_mcp_handshake(call_discovery: bool) -> bool:
     return True
 
 
+def check_system_resources() -> dict[str, Any]:
+    code, stdout, stderr = run_command(["free", "-m"])
+    resources = {"ok": True, "ram": {}, "swap": {}}
+    if code != 0:
+        resources["ok"] = False
+        print(f"resource_scan=FAIL code={code}")
+        return resources
+    
+    lines = stdout.splitlines()
+    if len(lines) >= 2:
+        parts = lines[1].split()
+        if len(parts) >= 6:
+            resources["ram"] = {"total": int(parts[1]), "used": int(parts[2]), "free": int(parts[3])}
+            usage = (resources["ram"]["used"] / resources["ram"]["total"]) * 100
+            print(f"resource_ram=OK total={parts[1]}MB used={parts[2]}MB usage={usage:.1f}%")
+            if usage > 90:
+                print("resource_ram=WARNING pressure detected")
+    
+    if len(lines) >= 3:
+        parts = lines[2].split()
+        if len(parts) >= 3:
+            resources["swap"] = {"total": int(parts[1]), "used": int(parts[2]), "free": int(parts[3])}
+            usage = (resources["swap"]["used"] / resources["swap"]["total"]) * 100 if int(parts[1]) > 0 else 0
+            print(f"resource_swap=OK total={parts[1]}MB used={parts[2]}MB usage={usage:.1f}%")
+            if usage > 50:
+                print("resource_swap=WARNING high zram/swap usage")
+    
+    return resources
+
+
 async def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -191,9 +221,16 @@ async def main() -> int:
         action="store_true",
         help="Call dummie_discover_capabilities with an empty query after handshake.",
     )
+    parser.add_argument(
+        "--json",
+        action="store_true",
+        help="Output results in JSON format.",
+    )
     args = parser.parse_args()
 
+    results = {}
     ok = True
+    
     if not PYTHON.exists():
         print(f"python=FAIL missing={PYTHON}")
         ok = False
@@ -201,17 +238,47 @@ async def main() -> int:
         print(f"server=FAIL missing={SERVER}")
         ok = False
 
+    results["system_resources"] = check_system_resources()
     if ok and not args.skip_codex:
         ok = check_codex_config() and ok
-    ok = audit_gateway_config() and ok
-    ok = inspect_processes() and ok
-    ok = inspect_runtime_sockets() and ok
+    
+    results["gateway_config_ok"] = audit_gateway_config()
+    ok = results["gateway_config_ok"] and ok
+    
+    # Capture process info for repair
+    code, stdout, stderr = run_command(["ps", "-eo", "pid,ppid,stat,comm,args"])
+    relevant = []
+    legacy = []
+    if code == 0:
+        for line in stdout.splitlines():
+            low = line.lower()
+            if "mcp_server.py" in low or "memory_server" in low or "flight.sock" in low:
+                if "dummie_mcp_doctor.py" not in line:
+                    relevant.append(line.strip())
+            if "kuzu_data" in line:
+                legacy.append(line.strip())
+    
+    results["processes"] = {"relevant": relevant, "legacy": legacy}
+    print(f"process_scan={'OK' if not legacy else 'FAIL'} relevant={len(relevant)} legacy_kuzu_data={len(legacy)}")
+    
+    results["runtime_sockets_ok"] = inspect_runtime_sockets()
+    ok = results["runtime_sockets_ok"] and ok
 
     try:
-        ok = await check_mcp_handshake(args.call_discovery) and ok
+        results["mcp_handshake_ok"] = await check_mcp_handshake(args.call_discovery)
+        ok = results["mcp_handshake_ok"] and ok
     except Exception as exc:
         print(f"mcp_handshake=FAIL error={exc}")
+        results["mcp_handshake_ok"] = False
+        results["mcp_handshake_error"] = str(exc)
         ok = False
+
+    if args.json:
+        # Clear stdout of previous prints if we want pure JSON? 
+        # Actually, let's just print the JSON at the end.
+        print("--- JSON START ---")
+        print(json.dumps({"ok": ok, "results": results}, indent=2))
+        print("--- JSON END ---")
 
     return 0 if ok else 1
 

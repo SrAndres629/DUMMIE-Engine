@@ -1,0 +1,112 @@
+# MCP_SECURITY_POLICY — Security policy for MCP tool lifecycle
+# Referenced by: .agents/prompts/lifecycle_auditor.md, security_validator.md
+# Consumed by: layers/l1_nervous/mcp_proxy.py, layers/l3_shield/
+# Status: ACTIVE
+
+version: "1.0.0"
+updated_at: "2026-05-09"
+
+quarantine:
+  path: ".aiwg/runtime/quarantine/"
+  mandatory_for:
+    - origin_remote
+    - origin_unknown
+  optional_for:
+    - origin_local  # local tools can skip if from trusted source
+
+blocked_imports:
+  critical:  # auto-reject if undeclared
+    - "os.system"
+    - "os.popen"
+    - "subprocess.call"
+    - "subprocess.run"
+    - "subprocess.Popen"
+    - "shutil.rmtree"
+    - "eval"
+    - "exec"
+    - "compile"
+    - "__import__"
+  high:  # require sandbox_first if undeclared
+    - "requests"
+    - "urllib"
+    - "httpx"
+    - "aiohttp"
+    - "socket"
+    - "smtplib"
+    - "open.*w"
+    - "pathlib.Path.write_text"
+    - "pathlib.Path.write_bytes"
+
+required_manifest_fields:
+  - name
+  - version
+  - description
+  - permissions
+  - transport       # stdio | sse | http
+  - sandbox_profile # lightweight | standard | strict
+
+sandbox_profiles:
+  lightweight:
+    description: "Read-only filesystem, no network, no subprocess"
+    allow_fs_read: true
+    allow_fs_write: false
+    allow_network: false
+    allow_subprocess: false
+    timeout_seconds: 30
+  standard:
+    description: "Scoped filesystem write, no network, no subprocess"
+    allow_fs_read: true
+    allow_fs_write: "scoped"  # only within declared paths
+    allow_network: false
+    allow_subprocess: false
+    timeout_seconds: 120
+  strict:
+    description: "Full sandbox with network and subprocess monitoring"
+    allow_fs_read: true
+    allow_fs_write: "scoped"
+    allow_network: "monitored"
+    allow_subprocess: "monitored"
+    timeout_seconds: 300
+
+auto_reject_conditions:
+  - "undeclared critical import"
+  - "missing manifest"
+  - "missing sandbox profile and origin is remote"
+  - "risk_score >= 0.95"
+
+human_review_threshold: 0.7  # risk_score at which human must approve
+
+lifecycle_flow:
+  # The full quarantine pipeline
+  steps:
+    - id: download
+      action: "Place in quarantine directory"
+      output: ".aiwg/runtime/quarantine/{entity_type}/{name}/"
+    - id: manifest_audit
+      action: "Validate manifest completeness"
+      prompt: ".agents/prompts/lifecycle_auditor.md"
+    - id: static_analysis
+      action: "Scan for blocked imports and suspicious patterns"
+      prompt: ".agents/prompts/security_validator.md"
+    - id: sandbox_execution
+      action: "Run in isolated environment with selected profile"
+      condition: "recommendation == sandbox_first"
+    - id: human_approval
+      action: "Request human review"
+      condition: "risk_score >= human_review_threshold"
+    - id: registry_addition
+      action: "Add to canonical registry"
+      registries:
+        agent: ".agents/registry/agents.registry.yaml"
+        skill: ".aiwg/registry/skills_registry.json"
+        mcp: ".aiwg/registry/mcp_registry.json"
+
+credential_handling:
+  rule: "Never store credentials in manifests or source code"
+  method: "Environment variable references only"
+  pattern: "${ENV_VAR_NAME}"
+  forbidden_patterns:
+    - "api_key: sk-"
+    - "token: ghp_"
+    - "password:"
+    - "secret:"

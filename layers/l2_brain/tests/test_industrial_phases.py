@@ -63,7 +63,12 @@ def test_decision_ledger_adapter_persists_jsonl(clean_env):
 
 
 @pytest.mark.asyncio
-async def test_native_shield_adapter_allows_by_default(clean_env):
+async def test_native_shield_adapter_requires_explicit_bypass(clean_env, monkeypatch):
+    monkeypatch.delenv("DUMMIE_ALLOW_UNSAFE_BYPASS", raising=False)
+    with pytest.raises(RuntimeError, match="BYPASS_SHIELD_BLOCKED"):
+        await NativeShieldAdapter().audit("<dag></dag>", "test")
+
+    monkeypatch.setenv("DUMMIE_ALLOW_UNSAFE_BYPASS", "true")
     ok, msg = await NativeShieldAdapter().audit("<dag></dag>", "test")
     assert ok is True
     assert msg == "BYPASS"

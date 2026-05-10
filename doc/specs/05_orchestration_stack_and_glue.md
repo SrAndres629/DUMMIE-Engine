@@ -17,7 +17,7 @@ Capacidad en transición; requiere consolidación progresiva de contratos y prue
 - `doc/specs/05_orchestration_stack_and_glue.md`
 - `doc/specs/05_orchestration_stack_and_glue.feature`
 - `doc/specs/05_orchestration_stack_and_glue.rules.json`
-- `layers/l0_overseer`
+- `layers/l0_overseer/__init__.py`
 - `doc/CORE_SPEC.md`
 - `doc/PHYSICAL_MAP.md`
 

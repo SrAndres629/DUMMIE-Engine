@@ -11,7 +11,7 @@ Decision approved by the user acting as Principal Systems Engineer / Sovereign A
 - Expose read-only Obsidian capabilities first; route all writes through DUMMIE-owned wrappers and L3 policy.
 - Generic patch, overwrite, and delete require intervention and human yield.
 
-Spec created at `docs/superpowers/specs/2026-04-26-obsidian-4d-bridge-design.md`.
+Spec created at `docs/superpowers/specs/2026-04-26-obsidian-4d-bridge-design.md`
 
 ## Expansion: Universal Knowledge Bus
 
@@ -22,4 +22,4 @@ The user approved expanding the Obsidian bridge into a broader Universal Knowled
 - Swarm consensus mirroring: export readable consensus artifacts from multi-agent workflows while keeping 4D-TES as authority.
 - Deep memory rehydration: use curated Obsidian notes as a black-box recorder to rebuild a conservative cognitive baseline after TES storage loss.
 
-Implementation plan created at `docs/superpowers/plans/2026-04-26-universal-knowledge-bus.md`.
+Implementation plan created at `docs/superpowers/plans/2026-04-26-universal-knowledge-bus.md`

@@ -17,7 +17,7 @@ Capacidad en transición; requiere consolidación progresiva de contratos y prue
 - `doc/specs/31_impact_analytics_blast_radius.md`
 - `doc/specs/31_impact_analytics_blast_radius.feature`
 - `doc/specs/31_impact_analytics_blast_radius.rules.json`
-- `layers/l2_brain`
+- `layers/l2_brain/daemon.py`
 - `doc/CORE_SPEC.md`
 - `doc/PHYSICAL_MAP.md`
 

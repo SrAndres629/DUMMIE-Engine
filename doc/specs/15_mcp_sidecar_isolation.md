@@ -17,7 +17,7 @@ Capacidad activa con evidencia verificable en el repositorio.
 - `doc/specs/15_mcp_sidecar_isolation.md`
 - `doc/specs/15_mcp_sidecar_isolation.feature`
 - `doc/specs/15_mcp_sidecar_isolation.rules.json`
-- `layers/l1_nervous`
+- `layers/l1_nervous/__init__.py`
 - `doc/CORE_SPEC.md`
 - `doc/PHYSICAL_MAP.md`
 

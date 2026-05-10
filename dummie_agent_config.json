@@ -1,10 +1,8 @@
 {
   "mcpServers": {
     "dummie-brain": {
-      "command": "./layers/l2_brain/.venv/bin/python",
-      "args": [
-        "./layers/l1_nervous/mcp_server.py"
-      ],
+      "command": "/usr/local/bin/dummie-mcp",
+      "args": [],
       "env": {
         "DUMMIE_ROOT_DIR": "/home/jorand/Escritorio/DUMMIE Engine",
         "DUMMIE_AIWG_DIR": "/home/jorand/Escritorio/DUMMIE Engine/.aiwg",

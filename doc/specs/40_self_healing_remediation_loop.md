@@ -17,7 +17,7 @@ Capacidad en transición; requiere consolidación progresiva de contratos y prue
 - `doc/specs/40_self_healing_remediation_loop.md`
 - `doc/specs/40_self_healing_remediation_loop.feature`
 - `doc/specs/40_self_healing_remediation_loop.rules.json`
-- `layers/l4_edge`
+- `layers/l4_edge/__init__.py`
 - `doc/CORE_SPEC.md`
 - `doc/PHYSICAL_MAP.md`
 

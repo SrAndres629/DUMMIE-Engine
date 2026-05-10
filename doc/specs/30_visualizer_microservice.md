@@ -17,7 +17,7 @@ Capacidad en transición; requiere consolidación progresiva de contratos y prue
 - `doc/specs/30_visualizer_microservice.md`
 - `doc/specs/30_visualizer_microservice.feature`
 - `doc/specs/30_visualizer_microservice.rules.json`
-- `layers/l6_skin`
+- `layers/l6_skin/__init__.py`
 - `doc/CORE_SPEC.md`
 - `doc/PHYSICAL_MAP.md`
 

@@ -1,9 +1,9 @@
 ---
 spec_id: "DE-V3-L0-26"
 title: "Orquestador de Enjambre Cuántico (Go StateGraph)"
-status: "PROPOSED"
+status: "ACTIVE"
 layer: "L0_OVERSEER"
-last_verified_on: "2026-04-24"
+last_verified_on: "2026-04-29"
 ---
 
 # Orquestador de Enjambre Cuántico (Go StateGraph)
@@ -12,7 +12,7 @@ last_verified_on: "2026-04-24"
 Sustituir la orquestación lineal por ejecución paralela basada en StateGraph para habilitar fan-out/fan-in y selección de línea de ejecución más eficiente.
 
 ## Current State
-Diseño de roadmap con prototipo local en L0; aún no está integrado como ruta operativa principal del pipeline de ejecución.
+Implementado como motor de ejecución principal en L0 mediante Go StateGraph, permitiendo fan-out/fan-in y selección de línea de ejecución eficiente.
 
 ## Physical Evidence
 - `doc/specs/26_langgraph_quantum_swarm.md`

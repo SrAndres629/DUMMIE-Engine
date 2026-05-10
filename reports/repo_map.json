@@ -1,0 +1,32 @@
+{
+  "layers": {
+    "l0_overseer": {
+      "language": ["Go", "Elixir"],
+      "role": "Supervisión y ciclo de vida"
+    },
+    "l1_nervous": {
+      "language": ["Python", "Go"],
+      "role": "Transporte Zero-Copy IPC"
+    },
+    "l2_brain": {
+      "language": ["Python"],
+      "role": "Modelado cognitivo y grafos"
+    },
+    "l3_shield": {
+      "language": ["Rust", "Python"],
+      "role": "Validación topológica y seguridad"
+    },
+    "l4_edge": {
+      "language": ["Zig", "Python"],
+      "role": "Descubrimiento y escaneo"
+    },
+    "l5_muscle": {
+      "language": ["Mojo", "Python"],
+      "role": "Operaciones rápidas y compactación"
+    },
+    "l6_skin": {
+      "language": ["HTML", "JS"],
+      "role": "Interfaz visual"
+    }
+  }
+}

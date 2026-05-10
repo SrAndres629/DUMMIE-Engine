@@ -17,7 +17,7 @@ Capacidad en transición; requiere consolidación progresiva de contratos y prue
 - `doc/specs/44_pervasive_channel_adapters.md`
 - `doc/specs/44_pervasive_channel_adapters.feature`
 - `doc/specs/44_pervasive_channel_adapters.rules.json`
-- `layers/l1_nervous`
+- `layers/l1_nervous/__init__.py`
 - `doc/CORE_SPEC.md`
 - `doc/PHYSICAL_MAP.md`
 

@@ -17,7 +17,7 @@ Capacidad activa con evidencia verificable en el repositorio.
 - `doc/specs/16_mcp_dynamic_gateway.md`
 - `doc/specs/16_mcp_dynamic_gateway.feature`
 - `doc/specs/16_mcp_dynamic_gateway.rules.json`
-- `layers/l1_nervous`
+- `layers/l1_nervous/__init__.py`
 - `doc/CORE_SPEC.md`
 - `doc/PHYSICAL_MAP.md`
 

@@ -1,0 +1,214 @@
+{
+  "spec_id": "DE-V2-CROSS-52",
+  "title": "Agentic systemd Runtime and Resource Governance",
+  "status": "ACTIVE",
+  "layer": "CROSS",
+  "last_verified_on": "2026-05-07",
+  "required_frontmatter": [
+    "spec_id",
+    "title",
+    "status",
+    "layer",
+    "last_verified_on"
+  ],
+  "required_sections": [
+    "Purpose",
+    "Current State",
+    "Physical Evidence",
+    "Contract Invariants",
+    "Operational Modes",
+    "Monitoring",
+    "Verification",
+    "Traceability"
+  ],
+  "purpose": "Define how DUMMIE Engine uses Linux systemd, cgroups, zram, swap, journald, GPU services, and explicit lab lifecycle commands to run agent workloads only when needed and release hardware resources when the user is doing non-agent work.",
+  "current_state": {
+    "hardware_profile": {
+      "machine": "ROG Zephyrus M16 GU603HM",
+      "ram_class": "16GiB",
+      "gpu": "NVIDIA GeForce RTX 3060 Laptop GPU",
+      "vram_class": "6GiB"
+    },
+    "kernel_memory_policy": {
+      "zram": {
+        "device": "/dev/zram0",
+        "algorithm": "zstd",
+        "size": "75% MemTotal, currently about 11.5GiB",
+        "priority": 100,
+        "owner": "zram-config.service override"
+      },
+      "fallback_swap": {
+        "path": "/var/lib/swapfile-agentic",
+        "size": "8GiB",
+        "priority": 1,
+        "purpose": "last-resort survival buffer after zram"
+      },
+      "sysctl": {
+        "path": "/etc/sysctl.d/zz-agentic-memory.conf",
+        "swappiness": 120,
+        "page_cluster": 0,
+        "vfs_cache_pressure": 50,
+        "watermark_scale_factor": 125
+      }
+    },
+    "systemd_runtime": {
+      "agent_slice": "/etc/systemd/system/agentic.slice",
+      "agent_template": "/etc/systemd/system/agentic-agent@.service",
+      "ollama_override": "/etc/systemd/system/ollama.service.d/99-agentic.conf",
+      "journald_policy": "/etc/systemd/journald.conf.d/99-agentic.conf"
+    },
+    "operator_commands": {
+      "status": "/usr/local/bin/dummie-lab-status",
+      "lab_on": "/usr/local/bin/dummie-lab-on",
+      "lab_off": "/usr/local/bin/dummie-lab-off",
+      "mcp_launcher": "/usr/local/bin/dummie-mcp"
+    }
+  },
+  "physical_evidence": [
+    "/etc/systemd/system/agentic.slice",
+    "/etc/systemd/system/agentic-agent@.service",
+    "/etc/systemd/system/ollama.service.d/99-agentic.conf",
+    "/etc/systemd/system/zram-config.service.d/99-agentic.conf",
+    "/usr/local/sbin/init-agentic-zram-swapping",
+    "/etc/sysctl.d/zz-agentic-memory.conf",
+    "/etc/fstab",
+    "/etc/systemd/journald.conf.d/99-agentic.conf",
+    "/usr/local/bin/dummie-lab-status",
+    "/usr/local/bin/dummie-lab-on",
+    "/usr/local/bin/dummie-lab-off",
+    "/usr/local/bin/dummie-mcp",
+    "dummie_agent_config.json"
+  ],
+  "contract_invariants": [
+    {
+      "name": "DUMMIE lab off means no DUMMIE workload",
+      "rule": "After dummie-lab-off, ollama.service must be inactive and no process may be running the exact DUMMIE MCP server path layers/l1_nervous/mcp_server.py."
+    },
+    {
+      "name": "Hardware substrate remains available",
+      "rule": "dummie-lab-off must not stop asusd.service, supergfxd.service, nvidia-persistenced.service, nvidia-powerd.service, zram-config.service, journald, networking, or the desktop."
+    },
+    {
+      "name": "MCP remains client-owned",
+      "rule": "DUMMIE MCP uses STDIO and must be launched by the MCP client through /usr/local/bin/dummie-mcp; it must not be converted into a persistent daemon unless the transport changes."
+    },
+    {
+      "name": "Ollama is demand-loaded",
+      "rule": "Ollama may be started by dummie-lab-on or by a future resource governor before local reasoning. It must be stoppable by dummie-lab-off when the user is doing non-agent work."
+    },
+    {
+      "name": "Agent workloads live in cgroups",
+      "rule": "Long-lived non-STDIO agents must use agentic.slice or agentic-agent@.service so CPU, memory, IO, task count, logs, and failure policy are observable and bounded."
+    },
+    {
+      "name": "Zram first, disk swap last",
+      "rule": "zram must have higher priority than /var/lib/swapfile-agentic so pressure goes to compressed RAM before NVMe swap."
+    },
+    {
+      "name": "Monitoring precedes optimization",
+      "rule": "Any autonomous resource optimizer must expose process, cgroup, RAM, swap, GPU, token, and idle-time signals before killing, unloading, or restarting workloads."
+    }
+  ],
+  "operational_modes": {
+    "normal_desktop": {
+      "entry_command": "dummie-lab-off",
+      "expected_state": [
+        "ollama.service inactive",
+        "no DUMMIE MCP process",
+        "no agentic-agent@*.service unless explicitly started for another task",
+        "ASUS, NVIDIA persistence, zram, and journald remain active"
+      ],
+      "use_case": "Chrome, research, writing, desktop work, non-agent coding."
+    },
+    "agent_lab": {
+      "entry_command": "dummie-lab-on",
+      "expected_state": [
+        "ollama.service active but models load only on demand",
+        "DUMMIE MCP clients use /usr/local/bin/dummie-mcp",
+        "long-lived agent workers run under agentic.slice"
+      ],
+      "use_case": "DUMMIE Engine orchestration, MCP gateway use, local reasoning, multi-agent experiments."
+    },
+    "observability": {
+      "entry_command": "dummie-lab-status",
+      "expected_state": [
+        "prints service state",
+        "prints DUMMIE/Ollama process RSS",
+        "prints RAM, swap, zram, and GPU summary"
+      ],
+      "use_case": "Before and after experiments, debugging resource pressure, checking that lab-off released resources."
+    }
+  },
+  "monitoring": {
+    "current_manual_surfaces": [
+      "dummie-lab-status",
+      "systemctl status agentic.slice ollama",
+      "journalctl -u ollama",
+      "journalctl -u agentic-agent@NAME",
+      "swapon --show",
+      "zramctl",
+      "nvidia-smi"
+    ],
+    "required_future_resource_governor_signals": [
+      "per-process RSS and command path",
+      "per-cgroup memory.current, memory.high, memory.max, cpu.pressure, memory.pressure, io.pressure",
+      "GPU memory used, GPU utilization, power draw",
+      "Ollama model loaded state and idle duration",
+      "DUMMIE active sessions and event queue depth",
+      "local reasoning token estimates and actual token counts when provider metadata is available",
+      "last user-visible activity timestamp",
+      "resource release actions with reason and timestamp"
+    ],
+    "required_future_actions": [
+      "start ollama before local reasoning when inactive",
+      "release or stop ollama after idle timeout when no DUMMIE sessions are active",
+      "refuse to unload during an active generation or transaction",
+      "lower concurrency under memory pressure",
+      "emit JSON status for dashboards and tests"
+    ]
+  },
+  "verification": {
+    "syntax": [
+      "python3 -m json.tool doc/specs/52_agentic_systemd_runtime_and_resource_governance.rules.json >/dev/null",
+      "bash -n /usr/local/bin/dummie-lab-status /usr/local/bin/dummie-lab-on /usr/local/bin/dummie-lab-off /usr/local/bin/dummie-mcp"
+    ],
+    "runtime": [
+      "dummie-lab-status",
+      "swapon --show",
+      "zramctl",
+      "systemctl is-active asusd supergfxd zram-config systemd-journald"
+    ],
+    "lab_off_acceptance": [
+      "Run dummie-lab-off outside active MCP sessions.",
+      "Verify systemctl is-active ollama returns inactive.",
+      "Verify pgrep -f 'DUMMIE Engine/layers/l1_nervous/mcp_server.py' returns no processes.",
+      "Verify Chrome and normal desktop work are not competing with Ollama or DUMMIE MCP."
+    ]
+  },
+  "traceability": {
+    "related_specs": [
+      "doc/specs/44_local_reasoning_gateway.rules.json",
+      "doc/specs/46_sovereign_daemon_dummied.rules.json",
+      "doc/specs/50_daemon_telemetry_contracts.rules.json",
+      "doc/specs/51_model_contracts_alignment.rules.json"
+    ],
+    "related_runtime_files": [
+      "layers/l1_nervous/mcp_server.py",
+      "layers/l2_brain/local_reasoning.py",
+      "layers/l2_brain/self_optimization.py",
+      "layers/l2_brain/daemon.py",
+      "dummie_agent_config.json"
+    ],
+    "next_spec_candidate": "ResourceGovernor: event-driven Ollama lifecycle, token accounting, and cgroup-aware process optimization."
+  },
+  "policy": {
+    "allow_legacy_narrative": false,
+    "require_existing_links": true,
+    "status_values": [
+      "ACTIVE",
+      "DRAFT",
+      "PROPOSED",
+      "DEPRECATED"
+    ]
+  }
+}

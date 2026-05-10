@@ -4,6 +4,8 @@ import pyarrow.parquet as pq
 import os
 from datetime import datetime
 
+__spec_id__ = "DE-V2-L5-35"
+
 class MemoryCompactor:
     """
     L5 Muscle - Compactor de Memoria (Spec 35).

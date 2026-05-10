@@ -17,7 +17,7 @@ Capacidad activa con evidencia verificable en el repositorio.
 - `doc/specs/43_documentation_and_artifact_standards.md`
 - `doc/specs/43_documentation_and_artifact_standards.feature`
 - `doc/specs/43_documentation_and_artifact_standards.rules.json`
-- `layers/l0_overseer`
+- `layers/l0_overseer/__init__.py`
 - `doc/CORE_SPEC.md`
 - `doc/PHYSICAL_MAP.md`
 

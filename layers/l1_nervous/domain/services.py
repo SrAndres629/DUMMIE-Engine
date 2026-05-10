@@ -14,9 +14,8 @@ class NervousDomainService:
             raise PermissionError("ERR_MEMORY_LOCKED: Modo lectura activo.")
 
         intent = AgentIntent(
-            intent_type=IntentType.RESOLUTION,
-            target="L2_BRAIN",
-            rationale=f"Crystallization Request: {payload}",
+            goal=f"Crystallization Request: {payload}",
+            agent_id="crystallize_tool",
             risk_score=0.1,
             authority_a=context_data.get("authority", AuthorityLevel.HUMAN),
             intent_i=IntentType.RESOLUTION,

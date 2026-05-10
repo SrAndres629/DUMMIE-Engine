@@ -1,0 +1,61 @@
+# WORKSPACE_RULES — Machine-readable workspace policy
+# Referenced by: .agents/prompts/workspace_rules.md
+# Consumed by: model_router.py, daemon.py, self_worktree_orchestrator.py
+# Status: ACTIVE
+
+version: "1.0.0"
+updated_at: "2026-05-09"
+
+blocked_paths:
+  always:
+    - ".env"
+    - ".env.*"
+    - ".git/"
+    - "*.lock"
+    - "*_pb2.py"
+    - "*.pb.go"
+    - "shield.so"
+    - ".aiwg/memory/loci.db"  # sovereign memory — gateway only
+  without_approval:
+    - "layers/l0_overseer/"   # Go/Elixir runtime
+    - "layers/l3_shield/src/" # Rust security core
+    - "proto/"                # protobuf contracts
+
+diff_policy:
+  max_lines_without_approval: 300
+  require_scoped_diffs: true
+  preserve_unrelated_comments: true
+  safe_delete: "trash"  # prefer trash over rm
+
+evidence_requirements:
+  before_claiming_complete:
+    - "git status --short"
+    - "relevant test/validation output"
+    - "documentation updates if architecture changed"
+  before_claiming_exists:
+    - "ls -la <path>"
+    - "head -20 <path>"
+  before_claiming_works:
+    - "python3 -m pytest <test>"
+    - "python3 <script> --help"
+
+handoff_required_fields:
+  - current_git_status
+  - commands_run_with_outputs
+  - files_changed_with_rationale
+  - remaining_risks
+  - invariants_that_must_not_break
+
+approval_required_for:
+  - install_system_dependencies
+  - send_external_communications
+  - modify_credentials_or_auth
+  - run_destructive_commands
+  - add_network_dependencies
+  - modify_sovereign_memory
+
+documentation_contracts:
+  truth_index: "doc/CORE_SPEC.md"
+  physical_map: "doc/PHYSICAL_MAP.md"
+  execution_protocol: "doc/agentic/EXECUTION_PROTOCOL.md"
+  rule: "Both CORE_SPEC and PHYSICAL_MAP must be updated in the same batch as the change they document."

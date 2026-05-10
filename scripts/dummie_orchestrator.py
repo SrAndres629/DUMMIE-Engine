@@ -90,6 +90,7 @@ class DummieOrchestrator:
         self.active_sessions[session_id]["status"] = "TERMINATED"
 
 if __name__ == "__main__":
-    orchestrator = DummieOrchestrator("/home/jorand/Escritorio/DUMMIE Engine")
+    root_dir = os.getenv("DUMMIE_ROOT", str(Path(__file__).parent.parent))
+    orchestrator = DummieOrchestrator(root_dir)
     sid = orchestrator.spawn_session("Refactorización de Capa de Transporte L1")
     print(f"Sesión activa: {sid}")

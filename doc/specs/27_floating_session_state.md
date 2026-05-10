@@ -17,7 +17,7 @@ Diseño de roadmap; implementación parcial o no integrada al flujo principal.
 - `doc/specs/27_floating_session_state.md`
 - `doc/specs/27_floating_session_state.feature`
 - `doc/specs/27_floating_session_state.rules.json`
-- `layers/l2_brain`
+- `layers/l2_brain/daemon.py`
 - `doc/CORE_SPEC.md`
 - `doc/PHYSICAL_MAP.md`
 

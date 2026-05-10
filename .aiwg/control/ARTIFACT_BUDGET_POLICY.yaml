@@ -1,0 +1,44 @@
+# ARTIFACT BUDGET POLICY
+# 
+# Purpose: Prevent reasoning artifact bloat while preserving deep reasoning for complex missions.
+# The system must select the lowest-ceremony mode that safely satisfies the mission intent.
+
+reasoning_modes:
+  micro_patch:
+    trigger_condition: "Changes touching 1–2 files with no architectural impact."
+    max_tokens_budget: 1500
+    required_artifacts:
+      - patch_plan.md
+      - validation_report.md
+      - next_loop.md
+    forbidden_artifacts:
+      - swarm_debate.md
+      - research_tree.md
+
+  normal_loop:
+    trigger_condition: "Module-level changes, adding tests, or resolving contract drift."
+    max_tokens_budget: 4000
+    required_artifacts:
+      - intake_and_plan.md
+      - execution_trace.md
+      - validation_report.md
+      - session_closure.md
+
+  deep_mission:
+    trigger_condition: "Architecture changes, memory structure updates, self-evolution, or swarm coordination."
+    max_tokens_budget: 12000
+    required_artifacts:
+      - intake_and_plan.md
+      - global_recall.md
+      - epistemic_check.md
+      - execution_trace.md
+      - research_tree.md
+      - swarm_debate.md
+      - validation_report.md
+      - decision_log.md
+      - session_closure.md
+
+rules:
+  - rule: "Never require swarm_debate.md for trivial or functional_mvp patches."
+  - rule: "Do not generate artifacts that no downstream module or human will consume."
+  - rule: "If validation_report.md shows failure, the mode may escalate to deep_mission on the next loop."

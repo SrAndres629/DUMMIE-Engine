@@ -17,7 +17,7 @@ Capacidad en transición; requiere consolidación progresiva de contratos y prue
 - `doc/specs/33_persistent_personality_mood.md`
 - `doc/specs/33_persistent_personality_mood.feature`
 - `doc/specs/33_persistent_personality_mood.rules.json`
-- `layers/l0_overseer`
+- `layers/l0_overseer/__init__.py`
 - `doc/CORE_SPEC.md`
 - `doc/PHYSICAL_MAP.md`
 

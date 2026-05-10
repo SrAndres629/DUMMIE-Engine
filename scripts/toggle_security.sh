@@ -20,7 +20,8 @@ else
 fi
 
 # Guardar estado en un archivo para que el mcp_server lo lea
-echo "$DUMMIE_SANDBOX_MODE" > "/home/jorand/Escritorio/DUMMIE Engine/.aiwg/security_state"
+ROOT_DIR="${DUMMIE_ROOT:-$(cd "$(dirname "$0")/.." && pwd)}"
+echo "$DUMMIE_SANDBOX_MODE" > "$ROOT_DIR/.aiwg/security_state"
 
 echo "[✓] Estado de seguridad actualizado a: $DUMMIE_SANDBOX_MODE"
 echo "[!] Nota: Los servidores MCP ya activos deben reiniciarse para aplicar el cambio."
