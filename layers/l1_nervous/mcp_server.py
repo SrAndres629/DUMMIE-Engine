@@ -9,11 +9,16 @@ ROOT_DIR = os.environ.get("DUMMIE_ROOT", os.environ.get("DUMMIE_ROOT_DIR", _DEFA
 
 # [TECHNICAL DEBT] sys.path manipulation
 # WHY: L1 imports modules from L2 and L3 via flat namespace (e.g. `from models import ...`).
+# Also, many L2 modules use absolute imports (e.g. `from layers.l2_brain...`).
 # The correct fix is proper Python packaging with pyproject.toml or namespace packages.
-# This hack adds each layer directory to sys.path so flat imports resolve.
-# SCOPE: Exactly 3 paths added (l1_nervous, l2_brain, l3_shield).
+# This hack adds the project root and each layer directory to sys.path.
 # RISK: Import collisions between layers with same-named modules.
 # TRACKED: autorefactor_state.yaml -> sys_path_hacks_removed = false
+
+# Ensure ROOT_DIR is in path for absolute 'layers.*' imports
+if ROOT_DIR not in sys.path:
+    sys.path.insert(0, ROOT_DIR)
+
 for _layer in ["l1_nervous", "l2_brain", "l3_shield"]:
     _layer_path = os.path.join(ROOT_DIR, "layers", _layer)
     if os.path.exists(_layer_path) and _layer_path not in sys.path:
@@ -22,10 +27,10 @@ for _layer in ["l1_nervous", "l2_brain", "l3_shield"]:
 from mcp.server.fastmcp import FastMCP
 
 # Importaciones locales (ahora seguras)
-from bootstrap import bootstrap_orchestrator, setup_shutdown_handlers
-from tools import register_tools
-from resources import register_resources
-from mcp_proxy import MCPProxyManager
+from layers.l1_nervous.bootstrap import bootstrap_orchestrator, setup_shutdown_handlers
+from layers.l1_nervous.tools import register_tools
+from layers.l1_nervous.resources import register_resources
+from layers.l1_nervous.mcp_proxy import MCPProxyManager
 
 # Configuración (Resto)
 AIWG_DIR = os.environ.get("DUMMIE_AIWG", os.environ.get("DUMMIE_AIWG_DIR", os.path.join(ROOT_DIR, ".aiwg")))

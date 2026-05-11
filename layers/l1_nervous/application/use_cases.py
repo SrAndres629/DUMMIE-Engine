@@ -1,4 +1,4 @@
-from domain.services import NervousDomainService
+from layers.l1_nervous.domain.services import NervousDomainService
 
 class BrainToolUseCases:
     def __init__(self, orchestrator, proxy_manager):

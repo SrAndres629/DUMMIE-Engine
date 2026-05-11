@@ -13,7 +13,7 @@ logger = logging.getLogger("dummie-mcp.tools.nervous")
 def register_nervous_tools(mcp: FastMCP, use_cases, root_dir: str):
     AIWG_DIR = os.environ.get("DUMMIE_AIWG", os.path.join(root_dir, ".aiwg"))
 
-    from domain.models import SixDimensionalContext, AuthorityLevel, IntentType
+    from layers.l1_nervous.domain.models import SixDimensionalContext, AuthorityLevel, IntentType
     from dataclasses import asdict
 
     @mcp.tool()

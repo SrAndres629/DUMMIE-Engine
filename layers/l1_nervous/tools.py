@@ -2,15 +2,15 @@ import json
 import logging
 from typing import Any, Dict, List, Optional
 from mcp.server.fastmcp import FastMCP
-from application.use_cases import BrainToolUseCases
-from tools_impl.core import register_core_tools
-from tools_impl.swarm import register_swarm_tools
-from tools_impl.nervous import register_nervous_tools
-from tools_impl.knowledge import register_knowledge_tools
-from tools_impl.sdd import register_sdd_tools
-from tools_impl.local_reasoning import register_local_reasoning_tools
-from tools_impl.self_worktree import register_self_worktree_tools
-from tools_impl.metacognition import register_metacognitive_tools
+from layers.l1_nervous.application.use_cases import BrainToolUseCases
+from layers.l1_nervous.tools_impl.core import register_core_tools
+from layers.l1_nervous.tools_impl.swarm import register_swarm_tools
+from layers.l1_nervous.tools_impl.nervous import register_nervous_tools
+from layers.l1_nervous.tools_impl.knowledge import register_knowledge_tools
+from layers.l1_nervous.tools_impl.sdd import register_sdd_tools
+from layers.l1_nervous.tools_impl.local_reasoning import register_local_reasoning_tools
+from layers.l1_nervous.tools_impl.self_worktree import register_self_worktree_tools
+from layers.l1_nervous.tools_impl.metacognition import register_metacognitive_tools
 
 logger = logging.getLogger("dummie-mcp.tools")
 
