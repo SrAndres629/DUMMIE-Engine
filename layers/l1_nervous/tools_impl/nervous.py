@@ -43,13 +43,20 @@ def register_nervous_tools(mcp: FastMCP, use_cases, root_dir: str):
     @mcp.tool()
     async def sync_cognitive_state(task_context: str) -> str:
         """Sincroniza consciencia con el estado físico (Pre-flight)."""
+        import asyncio
         lessons = []
         l_path = os.path.join(AIWG_DIR, "memory/lessons.jsonl")
-        if os.path.exists(l_path):
-            with open(l_path, "r") as f:
-                for line in f.readlines()[-5:]:
-                    l = json.loads(line)
-                    lessons.append(f"- Fallo: {l.get('issue')}\n  Corrección: {l.get('correction')}")
+
+        def _read_lessons():
+            local_lessons = []
+            if os.path.exists(l_path):
+                with open(l_path, "r") as f:
+                    for line in f.readlines()[-5:]:
+                        l = json.loads(line)
+                        local_lessons.append(f"- Fallo: {l.get('issue')}\n  Corrección: {l.get('correction')}")
+            return local_lessons
+
+        lessons = await asyncio.to_thread(_read_lessons)
         
         return f"--- SYNC COGNITIVA ---\nContexto: {task_context}\nLecciones:\n" + "\n".join(lessons) + "\n---"
 
@@ -121,6 +128,7 @@ def register_nervous_tools(mcp: FastMCP, use_cases, root_dir: str):
         Notifica vía Telegram/WhatsApp.
         """
         import time
+        import asyncio
         orchestrator = use_cases.orchestrator
         event = {
             "branch_id": branch_id,
@@ -130,9 +138,13 @@ def register_nervous_tools(mcp: FastMCP, use_cases, root_dir: str):
             "lamport_t": getattr(orchestrator, "lamport_clock", 0),
         }
         yields_path = os.path.join(AIWG_DIR, "memory", "pending_yields.jsonl")
-        os.makedirs(os.path.dirname(yields_path), exist_ok=True)
-        with open(yields_path, "a", encoding="utf-8") as f:
-            f.write(json.dumps(event, ensure_ascii=False) + "\n")
+
+        def _write_yield():
+            os.makedirs(os.path.dirname(yields_path), exist_ok=True)
+            with open(yields_path, "a", encoding="utf-8") as f:
+                f.write(json.dumps(event, ensure_ascii=False) + "\n")
+
+        await asyncio.to_thread(_write_yield)
 
         logger.info(f"[{time.strftime('%H:%M:%S')}] [HITL MOCK] A jorand: {message} (Branch: {branch_id})")
         
