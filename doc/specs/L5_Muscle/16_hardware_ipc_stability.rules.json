@@ -1,0 +1,20 @@
+{
+  "spec_id": "DE-V2-L5-16",
+  "domain": "L5_Hardware",
+  "ipc_protocol": {
+    "shm_alignment_bytes": 64,
+    "header_magic": "0x41544B4E",
+    "required_mechanisms": ["PINNED_MEMORY", "CUDA_ZEROING"]
+  },
+  "synchronization": {
+    "mode": "ZERO_COPY_ATOMIC",
+    "bus_recoil_ms": 5
+  },
+  "invariants": {
+    "mandatory_frame_integrity": true,
+    "no_unaligned_access": true,
+    "isolation_per_agent": true
+  },
+  "enforcement": "STRICT_BLOCK",
+  "personality_ref": "DE-V2-L0-33"
+}

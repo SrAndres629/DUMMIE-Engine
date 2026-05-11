@@ -3,6 +3,11 @@ from typing import List, Dict, Any
 
 logger = logging.getLogger("brain.adapters.external")
 
+try:
+    from ports import CodeAnalysisPort, ObservabilityPort
+except ImportError:
+    from layers.l2_brain.ports import CodeAnalysisPort, ObservabilityPort
+
 class UnsafeBypassShieldAdapter:
     """
     [DEPRECATED: UNSAFE] Bypass de compatibilidad para bootstrap antiguo.
@@ -27,7 +32,7 @@ class UnsafeBypassShieldAdapter:
 # [DEPRECATED ALIAS]
 NativeShieldAdapter = UnsafeBypassShieldAdapter
 
-class SocraticodeAdapter:
+class SocraticodeAdapter(CodeAnalysisPort):
     def __init__(self, proxy_manager: Any):
         self.proxy = proxy_manager
 
@@ -39,7 +44,7 @@ class SocraticodeAdapter:
             logger.error(f"Error en SocraticodeAdapter: {e}")
             return []
 
-class PhoenixAdapter:
+class PhoenixAdapter(ObservabilityPort):
     def __init__(self, proxy_manager: Any):
         self.proxy = proxy_manager
 

@@ -1,0 +1,20 @@
+{
+  "spec_id": "DE-V2-L2-40",
+  "domain": "L2_Metacognition",
+  "audit_triggers": [
+    "LAYER_SYNC_COMPLETE",
+    "JIDOKA_THRESHOLD_REACHED",
+    "SESSION_CLOSURE"
+  ],
+  "mutation_governance": {
+    "trait_delta_limit_per_cycle": 0.2,
+    "min_refactoring_aggressiveness": 0.1,
+    "mandatory_pah_notification": true
+  },
+  "invariants": {
+    "no_silent_identity_mutation": true,
+    "mandatory_ledger_sync": true
+  },
+  "enforcement": "STRICT_BLOCK",
+  "personality_ref": "DE-V2-L0-33"
+}

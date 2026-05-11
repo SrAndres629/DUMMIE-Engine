@@ -1,0 +1,15 @@
+{
+  "rule_id": "DE-ADR-0016",
+  "rules": [
+    {
+      "id": "GEAR_ISOLATION",
+      "statement": "Todo 'engranaje' externo debe operar preferiblemente como un proceso aislado vía MCP.",
+      "severity": "CRITICAL"
+    },
+    {
+      "id": "HARDWARE_CONSTRAINTS",
+      "statement": "No se permite la ejecución de más de 2 engranajes de perfil 'Heavy' simultáneamente.",
+      "severity": "WARNING"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "spec_id": "DE-V2-L1-44",
+  "gateway_config": {
+    "supported_channels": ["whatsapp", "telegram", "slack", "discord"],
+    "flow": "Webhook/Poll -> L1_Adapter -> Intent (Protobuf)",
+    "rate_limit_msg_s": 5
+  },
+  "security": {
+    "identity_pinning": true,
+    "mandatory_anonimization": true,
+    "source_validation_required": true
+  },
+  "invariants": {
+    "max_message_size_bytes": 4096,
+    "forbidden_patterns": [
+      "UNAUTHENTICATED_WEBHOOK",
+      "RAW_JSON_TRANSIT"
+    ],
+    "mandatory_headers": [
+      "X-AO-Channel-ID",
+      "X-AO-Source-Token"
+    ]
+  },
+  "enforcement": "STRICT_BLOCK",
+  "personality_ref": "DE-V2-L0-33"
+}

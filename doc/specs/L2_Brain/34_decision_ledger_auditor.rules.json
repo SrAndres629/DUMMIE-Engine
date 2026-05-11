@@ -1,0 +1,20 @@
+{
+  "spec_id": "DE-V2-L2-34",
+  "domain": "L2_Governance",
+  "storage": {
+    "ledger_path": "ledger/sovereign_resolutions.jsonl",
+    "format": "JSONL_APPEND_ONLY",
+    "required_fields": ["tick", "decision_id", "rationale", "impact", "context", "target_causal_hash", "witness_hash"]
+  },
+  "invariants": {
+    "immutable_ledger": true,
+    "audit_mode": "REAL_TIME_STREAM",
+    "witness_hash_algorithm": "SHA-256"
+  },
+  "alerts": {
+    "critical_events": ["Architecture_Shift", "Constraint_Violation", "PAH_Required"],
+    "broadcast_channel": "NATS_CORE_ALERTS"
+  },
+  "enforcement": "STRICT_BLOCK",
+  "personality_ref": "DE-V2-L0-33"
+}

@@ -1,0 +1,21 @@
+{
+  "spec_id": "DE-V2-L3-45",
+  "domain": "L3_Trust",
+  "pairing_protocol": {
+    "flow": ["QUARANTINE", "CHALLENGE", "PAH_APPROVAL", "ACTIVE"],
+    "required_headers": ["X-AO-Handshake-Signature", "X-AO-Hardware-ID"],
+    "quarantine_timeout_seconds": 60
+  },
+  "token_policy": {
+    "ttl_seconds": 86400,
+    "rotation_period": "24h",
+    "instant_revocation_on_drift": true
+  },
+  "invariants": {
+    "forbidden_auto_pairing": true,
+    "mandatory_hardware_pinning": true,
+    "zero_trust_enforcement": true
+  },
+  "enforcement": "STRICT_BLOCK",
+  "personality_ref": "DE-V2-L0-33"
+}

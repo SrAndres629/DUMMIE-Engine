@@ -1,0 +1,28 @@
+{
+  "spec_id": "DE-V2-L0-08",
+  "environment": {
+    "tool": "Nix Flakes",
+    "isolation": "Hermetic (No Global Pkgs)",
+    "entrypoint": "nix develop",
+    "builder_container": "Dockerfile.builder"
+  },
+  "deployment": {
+    "orchestration": "Master Makefile",
+    "components": [
+      "Atomic Build",
+      "Zero-Install Workflow",
+      "Fast Startup"
+    ]
+  },
+  "observability": {
+    "standard": "OpenTelemetry (Spec 13)",
+    "correlation": "Trace-ID via NATS/Arrow"
+  },
+  "invariants": [
+    "No manual steps allowed in deployment",
+    "Large artifacts (>50MB) must use symlinks to Unidad D",
+    "Source root must stay < 500MB",
+    "chown mandatory after Docker build"
+  ],
+  "personality_ref": "DE-V2-L0-33"
+}

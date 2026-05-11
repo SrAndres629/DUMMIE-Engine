@@ -1,0 +1,25 @@
+{
+  "spec_id": "DE-V2-MAP-01",
+  "physical_layout": {
+    "root": "/home/jorand/Escritorio/DUMMIE Engine",
+    "bloat_storage": "/media/datasets/dummie",
+    "layers": {
+      "L0": "layers/l0_overseer",
+      "L1": "layers/l1_nervous",
+      "L2": "layers/l2_brain",
+      "L3": "layers/l3_shield",
+      "L4": "layers/l4_edge"
+    }
+  },
+  "connectivity": {
+    "control_plane": "NATS",
+    "data_plane": "Apache Arrow",
+    "shared_memory_path": "/media/datasets/dummie/telemetry"
+  },
+  "invariants": [
+    "No large binaries (>100MB) allowed in source root",
+    "All venvs and build caches must reside in bloat_storage",
+    "Proto contracts are the SSOT for inter-layer communication"
+  ],
+  "personality_ref": "DE-V2-L0-33"
+}

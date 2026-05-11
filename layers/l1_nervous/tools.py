@@ -53,6 +53,10 @@ def register_tools(mcp: FastMCP, get_orchestrator, get_proxy, root_dir: str):
         """
         _, proxy_manager = setup_internal()
         
+        # [DYNAMIC RELOAD] Asegurar que el proxy vea cambios recientes en dummie_gateway_config.json
+        if hasattr(proxy_manager, "_load_config"):
+            proxy_manager._load_config()
+        
         try:
             from layers.l2_brain.embedding_provider import EmbeddingProvider
         except ImportError:
@@ -148,6 +152,12 @@ def register_tools(mcp: FastMCP, get_orchestrator, get_proxy, root_dir: str):
             output.append("No se encontraron capacidades que coincidan con la búsqueda.")
             
         return "\n".join(output)
+
+    @mcp.tool()
+    async def dummie_report_config_path() -> str:
+        """Reporta la ruta del archivo de configuración MCP que el gateway está usando."""
+        _, proxy_manager = setup_internal()
+        return f"CONFIG_PATH: {proxy_manager.config_path}"
 
     @mcp.tool()
     async def dummie_analyze_capability(target: str) -> str:

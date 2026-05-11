@@ -21,8 +21,7 @@ class KuzuRepository:
                 import kuzu
                 self.conn = kuzu.Connection(db)
                 logger.info(f"KuzuRepository: Native connection created: {self.conn}")
-        elif db_path:
-            import kuzu
+            import glob
             
             # [HARDENING] Verificación de integridad de ruta
             if os.path.isdir(db_path):
@@ -64,7 +63,7 @@ class KuzuRepository:
             except ImportError:
                 from layers.l2_brain.models import MemoryNode4D
             
-            # Ejecutar todas las consultas de esquema
+            # [IDEMPOTENCY] Execute all schema queries
             queries = []
             if hasattr(MemoryNode4D, "schema_creation_queries"):
                 queries = MemoryNode4D.schema_creation_queries()
@@ -76,16 +75,14 @@ class KuzuRepository:
                     self.conn.execute(q)
                     logger.info(f"Executed schema query: {q[:30]}...")
                 except Exception as e:
-                    msg = str(e).lower()
-                    if "already exists" in msg:
+                    if "already exists" in str(e).lower():
                         logger.debug(f"Schema element already exists: {q[:30]}")
                     else:
                         logger.critical(f"FATAL: Could not ensure Kuzu schema element: {e}")
                         raise RuntimeError(f"Kuzu Integrity Error: {e}")
-        except RuntimeError:
-            raise
         except Exception as e:
-            logger.critical(f"FATAL: Unexpected error ensuring Kuzu schema: {e}")
+            if not isinstance(e, RuntimeError):
+                logger.critical(f"FATAL: Unexpected error ensuring Kuzu schema: {e}")
             raise RuntimeError(f"Kuzu Integrity Error: {e}")
 
     def create_memory_node(self, node: Any) -> str:

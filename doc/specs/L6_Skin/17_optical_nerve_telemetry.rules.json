@@ -1,0 +1,20 @@
+{
+  "spec_id": "DE-V2-L6-17",
+  "domain": "L6_Perception",
+  "distillation_policy": {
+    "min_token_reduction_percent": 80,
+    "max_distillation_depth": 5,
+    "allowed_source_types": ["DOM", "TERMINAL_BUFFER", "SCREENSHOT_OCR"]
+  },
+  "invariants": {
+    "no_raw_dom_injection": true,
+    "mandatory_trace_id_link": true,
+    "forbidden_patterns": ["RAW_DOM_INJECTION", "PIXEL_LEVEL_PROCESSING_ONLY"]
+  },
+  "visualizer_sync": {
+    "mode": "REALTIME_4D",
+    "temporal_standard": "LAMPORT_CLOCKS"
+  },
+  "enforcement": "STRICT_BLOCK",
+  "personality_ref": "DE-V2-L0-33"
+}

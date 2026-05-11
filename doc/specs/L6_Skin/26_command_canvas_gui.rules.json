@@ -1,0 +1,19 @@
+{
+  "spec_id": "DE-V2-L6-26",
+  "domain": "L6_GUI",
+  "bridge_policy": {
+    "allowed_target": "vscode-webview",
+    "rpc_timeout_ms": 2000,
+    "mandatory_bridge_token": true
+  },
+  "security_invariants": {
+    "forbidden_patterns": ["RAW_DOM_ACCESS_FROM_BRIDGE", "UNSECURE_POSTMESSAGE_LISTENER", "ORPHAN_WEBVIEW_CONTEXT"],
+    "content_security_policy": "STRICT_WEBVIEW"
+  },
+  "ui_performance": {
+    "max_node_render_count": 1000,
+    "refresh_rate_hz": 60
+  },
+  "enforcement": "STRICT_BLOCK",
+  "personality_ref": "DE-V2-L0-33"
+}

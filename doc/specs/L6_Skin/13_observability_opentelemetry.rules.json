@@ -1,0 +1,20 @@
+{
+  "spec_id": "DE-V2-L6-13",
+  "domain": "L6_Observability",
+  "telemetry_config": {
+    "collector_layer": "L1_Nervous",
+    "storage_backend": "Redb",
+    "standard": "OpenTelemetry_v1.0"
+  },
+  "propagation": {
+    "headers": ["trace_id", "span_id", "lamport_tick"],
+    "required_for_all_layers": true
+  },
+  "invariants": {
+    "no_silence_policy": true,
+    "mandatory_causal_tracing": true,
+    "realtime_sync_ms": 100
+  },
+  "enforcement": "WARN",
+  "personality_ref": "DE-V2-L0-33"
+}

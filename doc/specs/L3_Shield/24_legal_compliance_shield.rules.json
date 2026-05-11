@@ -1,0 +1,16 @@
+{
+  "spec_id": "DE-V2-L3-24",
+  "domain": "L3_Compliance",
+  "policies": {
+    "license_whitelist": ["MIT", "Apache-2.0"],
+    "similarity_threshold": 0.8,
+    "pii_sanitization_level": "STRICT"
+  },
+  "invariants": {
+    "provenance_mandatory": true,
+    "forbidden_patterns": ["bypass", "exploit", "unauthorized_access", "privilege_escalation"],
+    "ethical_alignment_check": true
+  },
+  "enforcement": "STRICT_BLOCK",
+  "personality_ref": "DE-V2-L0-33"
+}

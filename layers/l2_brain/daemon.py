@@ -59,6 +59,11 @@ try:
 except ImportError:
     from layers.l2_brain.event_bus import AsyncEventBus
 
+try:
+    from repo_guard import RepoGuard
+except ImportError:
+    from layers.l1_nervous.repo_guard import RepoGuard
+
 class DummieDaemon:
     """
     [L2_BRAIN] Orquestador Supremo Antigravity.

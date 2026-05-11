@@ -25,6 +25,7 @@ class MemoryTemperature(Enum):
     HOT = "HOT"
     WARM = "WARM"
     COLD = "COLD"
+    RESERVED = "RESERVED"
     QUARANTINED = "QUARANTINED"
 
 @dataclass

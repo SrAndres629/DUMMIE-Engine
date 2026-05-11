@@ -186,6 +186,42 @@
         "@arizeai/phoenix-mcp"
       ],
       "disabled": false
+    },
+    "github": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-github"
+      ],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_PERSONAL_ACCESS_TOKEN}"
+      },
+      "disabled": false
+    },
+    "vercel": {
+      "command": "node",
+      "args": [
+        "/media/datasets/proyectos/Biblioteca MCP/Vercel/my-vercel-mcp/dist/index.js"
+      ],
+      "env": {
+        "VERCEL_TOKEN": "${VERCEL_TOKEN}"
+      },
+      "disabled": false
+    },
+    "comfyui": {
+      "command": "node",
+      "args": [
+        "/media/datasets/proyectos/Biblioteca MCP/Mcp_Comfyui/build/index.js"
+      ],
+      "disabled": false
+    },
+    "feat-sniper": {
+      "command": "/media/datasets/proyectos/Biblioteca MCP/feat_sniper_mcp/.venv/bin/python",
+      "args": [
+        "/media/datasets/proyectos/Biblioteca MCP/feat_sniper_mcp/mcp_server.py"
+      ],
+      "disabled": true,
+      "rationale": "High-frequency knowledge ingestion. Requires local MT5/DB setup."
     }
   }
 }
