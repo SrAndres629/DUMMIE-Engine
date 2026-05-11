@@ -1,0 +1,10 @@
+{
+  "spec_id": "SPEC-71",
+  "rules": [
+    {
+      "id": "R1",
+      "description": "Enforce discovery tools before direct file reads",
+      "severity": "high"
+    }
+  ]
+}

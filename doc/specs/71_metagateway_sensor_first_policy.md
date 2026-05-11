@@ -1,4 +1,15 @@
+---
+spec_id: "SPEC-71"
+title: "Meta-Gateway Sensor-First Policy"
+status: "ACTIVE"
+layer: "l2_brain"
+governance: "sensor_first"
+last_verified_on: "2026-05-11"
+---
 # SPEC-71: Meta-Gateway Sensor-First Policy
+
+## Purpose
+Optimize token consumption and improve agent precision by mandating sensory discovery before direct file reading.
 
 ## Contexto
 Para optimizar el consumo de tokens y mejorar la precisión del agente, el descubrimiento de conceptos debe realizarse a través de herramientas sensoriales (Socraticode / Semantic Search / Meta-Gateway) antes de recurrir a la lectura directa de archivos.
@@ -16,8 +27,19 @@ Para optimizar el consumo de tokens y mejorar la precisión del agente, el descu
 | Debug / Stacktrace | Ninguna | **ALLOW** |
 | Diff Review | Ninguna | **ALLOW** |
 
-## Implementación
-La política se implementa en `layers/l2_brain/metagateway_policy.py` y es consultada por el `DummieDaemon` durante el pre-flight o por los hooks de deliberación.
+## Current State
+Implemented in `layers/l2_brain/metagateway_policy.py` and enforced via `layers/l2_brain/sensor_first_guard.py`.
 
-## Monitoreo
-Las violaciones de política se registran en los metadatos de la Saga (`gateway_first_policy: WARN_MODE_ACTIVE`).
+## Physical Evidence
+- `layers/l2_brain/metagateway_policy.py`
+- `layers/l2_brain/sensor_first_guard.py`
+- `layers/l2_brain/metagateway_runtime_meter.py`
+
+## Contract Invariants
+- `concept_discovery` requests without `semantic_search_attempted` or `gateway_attempted` must return `WARN` or `BLOCK`.
+
+## Verification
+Verified via `layers/l2_brain/tests/test_metagateway_hardening.py`.
+
+## Traceability
+Traced via `gateway_first_policy` metadata in Saga transactions.

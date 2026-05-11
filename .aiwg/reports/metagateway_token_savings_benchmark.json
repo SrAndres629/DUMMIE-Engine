@@ -1,35 +1,43 @@
-[
-  {
-    "scenario": "inspect_model_router",
-    "direct_files_read": 5,
-    "gateway_capabilities_discovered": 1,
-    "gateway_capabilities_analyzed": 1,
-    "estimated_direct_tokens": 25000,
-    "estimated_gateway_tokens": 1300,
-    "estimated_tokens_saved": 23700,
-    "token_reduction_ratio": 0.948,
-    "success": true
-  },
-  {
-    "scenario": "inspect_daemon_metacognition",
-    "direct_files_read": 8,
-    "gateway_capabilities_discovered": 1,
-    "gateway_capabilities_analyzed": 2,
-    "estimated_direct_tokens": 40000,
-    "estimated_gateway_tokens": 2100,
-    "estimated_tokens_saved": 37900,
-    "token_reduction_ratio": 0.9475,
-    "success": true
-  },
-  {
-    "scenario": "choose_tool_for_repo_analysis",
-    "direct_files_read": 3,
-    "gateway_capabilities_discovered": 1,
-    "gateway_capabilities_analyzed": 1,
-    "estimated_direct_tokens": 15000,
-    "estimated_gateway_tokens": 1300,
-    "estimated_tokens_saved": 13700,
-    "token_reduction_ratio": 0.9133,
-    "success": true
+{
+  "measurement_type": "estimated",
+  "confidence": "low",
+  "scenarios": [
+    {
+      "scenario": "inspect_model_router",
+      "direct_files_read": 5,
+      "gateway_capabilities_discovered": 1,
+      "gateway_capabilities_analyzed": 1,
+      "estimated_direct_tokens": 25000,
+      "estimated_gateway_tokens": 1300,
+      "estimated_tokens_saved": 23700,
+      "token_reduction_ratio": 0.948,
+      "success": true
+    },
+    {
+      "scenario": "inspect_daemon_metacognition",
+      "direct_files_read": 8,
+      "gateway_capabilities_discovered": 1,
+      "gateway_capabilities_analyzed": 2,
+      "estimated_direct_tokens": 40000,
+      "estimated_gateway_tokens": 2100,
+      "estimated_tokens_saved": 37900,
+      "token_reduction_ratio": 0.9475,
+      "success": true
+    },
+    {
+      "scenario": "choose_tool_for_repo_analysis",
+      "direct_files_read": 3,
+      "gateway_capabilities_discovered": 1,
+      "gateway_capabilities_analyzed": 1,
+      "estimated_direct_tokens": 15000,
+      "estimated_gateway_tokens": 1300,
+      "estimated_tokens_saved": 13700,
+      "token_reduction_ratio": 0.9133,
+      "success": true
+    }
+  ],
+  "summary": {
+    "total_scenarios": 3,
+    "avg_token_reduction_ratio": 0.9363
   }
-]
+}
