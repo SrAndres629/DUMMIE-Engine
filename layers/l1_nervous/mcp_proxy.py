@@ -1,3 +1,4 @@
+import aiofiles
 import asyncio
 import json
 import logging
@@ -286,8 +287,9 @@ class MCPProxyManager:
         sandbox_mode = os.environ.get("DUMMIE_SANDBOX_MODE", "OFF").upper()
         
         if state_file.exists():
-            with open(state_file, "r") as f:
-                sandbox_mode = f.read().strip().upper()
+            async with aiofiles.open(state_file, "r") as f:
+                content = await f.read()
+                sandbox_mode = content.strip().upper()
         
         final_cmd = cmd
         final_args = args
