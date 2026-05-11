@@ -1,532 +1,984 @@
-Estoy de acuerdo con el diagnóstico de fondo: **el Meta-Gateway puede ser la herramienta/patrón que más reduce tokens**, pero solo si está realmente conectado al daemon, si el agente lo usa antes de leer archivos crudos y si se mide el ahorro.
+Sí. Ahora ya no estamos en “ideas sueltas”: DUMMIE empezó a tener **cableado metacognitivo real**, pero todavía no tiene un **cuerpo completo** para que varios modelos funcionen como neuronas coordinadas.
 
-Ahora mismo el peligro es este:
+Verifiqué que en `main` ya están los commits de `CognitiveHookPipeline` y `Sensor-First / Meta-Gateway`. El commit `0a1e6b` implementó el pipeline cognitivo con evaluación y tracking de learning episodes, y el commit `9bafe5a` agregó política Sensor-First, diagnóstico de preflight metacognitivo y cambios de clasificación de autoridad.  Además, `cognitive_hooks.py` ya genera `CognitiveHookPacket` con intención, lenguaje, capas afectadas, autoridad, tool hints, token budget, risk flags y reasoning mode.
 
-```text id="pgl83n"
-Creer que el Meta-Gateway optimiza tokens
-cuando en realidad está degradado,
-desconectado,
-o siendo bypassed por view_file/cat.
-```
-
-En `daemon.py` sí existe integración metacognitiva: intenta importar `MetacognitivePipeline`, `IntentClarifierHook`, `PromptRefinerHook`, `AuthorityClassifierHook`, `ContextEnricherHook`, `SemanticToolSelectorHook`, `ReasoningExpansionHook`, `MissionDecomposerHook`, `PlanCriticHook`, `AnswerVerifierHook` y `MemoryUpdateHook`. Si falla el import, deja `self.metacognition = None` y solo registra warning. Eso confirma que puede operar en modo degradado sin que el sistema lo trate como fallo crítico. 
-
-Además, tu último audit ya había marcado que DUMMIE todavía tiene L2 inteligente y L1 nervioso, pero le faltan piezas de gobierno de misiones y estación de trabajo soberana para ser socio estratégico real. 
-
-# Mi veredicto
-
-```text id="qqu7wo"
-Sí: el Meta-Gateway es probablemente la mayor palanca de ahorro de tokens.
-No: todavía no podemos decir que está bien implementado ni bien usado.
-```
-
-La mejora más importante ahora no es agregar otra herramienta. Es convertir el Meta-Gateway en una **ruta obligatoria, medible y testeada**.
+Mi opinión sincera: **empezaron bien, pero el orden todavía debe endurecerse**. El siguiente riesgo es construir más órganos antes de conectar el sistema circulatorio.
 
 ---
 
-# Dónde empezar
+# 1. Estado actual real
 
-No empieces con una refactorización grande de todo L1/L2.
+## Lo que ya mejoró
 
-Empieza con esto:
+```text
+Input del usuario
+→ CognitiveHookPipeline
+→ authority/risk/intent/layers/tool hints
+→ PromptPreprocessor / ModelRouter
+→ OutcomeEvaluator / LearningEpisode
+```
 
-```text id="imrd9i"
-Meta-Gateway Operational Recovery
+Eso ya aumenta la inteligencia del sistema porque DUMMIE empieza a entender **qué tipo de tarea es**, **qué autoridad requiere**, **qué modelo conviene** y **qué herramientas podrían servir**.
+
+También ya existe una política Sensor-First para evitar lecturas brutas de archivos antes de usar búsqueda semántica o Meta-Gateway. `metagateway_policy.py` distingue `concept_discovery`, `line_confirmation`, `debug_error` y `diff_review`, con decisiones `ALLOW/WARN/BLOCK`.
+
+## Lo que sigue flojo
+
+```text
+1. Los hooks existen, pero todavía no gobiernan toda la sesión.
+2. Sensor-First existe, pero no intercepta todos los caminos de lectura.
+3. El benchmark de ahorro de tokens es estimado, no medición runtime real.
+4. El daemon todavía no es un Mission Runtime completo.
+5. La memoria 4D todavía no aprende automáticamente de cada LearningEpisode.
+6. Los agentes swarm todavía no son roles operativos con contratos.
+7. El sistema local/cloud todavía no tiene economía de tokens cerrada.
+8. No hay MissionWorkbench/Vault para cristalizar aprendizajes por tarea.
+```
+
+La brecha principal ahora es:
+
+```text
+DUMMIE ya tiene señales cognitivas.
+Pero todavía no tiene ciclo completo:
+señal → decisión → acción → evaluación → memoria → mejora.
+```
+
+---
+
+# 2. Qué estamos ignorando además de hooks
+
+Los hooks son importantes, pero no son suficientes. Estamos ignorando o subutilizando estas piezas críticas:
+
+| Pieza ignorada                    | Por qué importa                                                                              |
+| --------------------------------- | -------------------------------------------------------------------------------------------- |
+| `Mission Runtime`                 | Convierte una orden grande en misión, fases, DAG, agentes y checkpoints.                     |
+| `MissionWorkbench`                | Crea carpeta temporal por tarea con objetivos, decisiones, críticas, evidencia y resultados. |
+| `VaultCurator`                    | Limpia el workbench y guarda solo conocimiento reutilizable.                                 |
+| `TokenCostLedger`                 | Mide si de verdad estamos ahorrando tokens.                                                  |
+| `ContextBudgetManager`            | Evita mandar basura a modelos cloud.                                                         |
+| `LocalModelRuntime`               | Usa Gemma/Ollama para preanálisis barato.                                                    |
+| `RepoProbeRunner`                 | Permite que modelos locales inspeccionen todo el repo sin saturar contexto.                  |
+| `MetaGatewayAdapter`              | Normaliza `call_tool` vs `execute_tool`, evitando herramientas rotas.                        |
+| `SessionStore/4D-TES integration` | Guarda LearningEpisodes y patrones como memoria causal.                                      |
+| `AuthorityGate real`              | Evita permisos planos y permite autonomía por misión.                                        |
+| `Swarm role contracts`            | Convierte “agentes” en socios internos con permisos y output schemas.                        |
+| `GoldenTaskBenchmark`             | Prueba si cada refactor realmente mejora el sistema.                                         |
+
+La más urgente después de los hooks no es el swarm todavía. Es:
+
+```text
+medición + workbench + memoria
+```
+
+Sin eso, el swarm opina, pero no aprende.
+
+---
+
+# 3. El “cuerpo” correcto para modelos como neuronas
+
+Tu frase es precisa: si los LLM son motores probabilísticos/contextuales, necesitan un cuerpo. Ese cuerpo debería ser:
+
+```text
+Sensores:
+  Meta-Gateway, Socraticode, semantic search, RepoProbeRunner, file cards.
+
+Corteza:
+  CognitiveHookPipeline, PromptRefiner, ContextEnricher, ReasoningExpansion.
+
+Hipocampo:
+  SessionStore, 4D-TES, Kuzu, LearningEpisodes, Vault.
+
+Sistema ejecutivo:
+  Daemon, MissionOrchestrator, ColdPlanner, ImprovementGraphPlanner.
+
+Sistema motor:
+  MCP Gateway, L5 Muscle, browser/workstation tools, n8n, shell, tests.
+
+Sistema inmune:
+  L3 Shield, AuthorityGate, SensorFirstPolicy, PatchTransactionManager.
+
+Metabolismo:
+  TokenCostLedger, ContextBudgetManager, LocalModelRuntime.
+
+Personalidad/socio:
+  MentorshipStrategist, MissionArchitect, MemoryCurator, ValidationPartner.
+```
+
+Ahora DUMMIE tiene partes de ese cuerpo, pero no están todavía conectadas como organismo.
+
+---
+
+# 4. Orden correcto desde lo básico hasta lo avanzado
+
+## Fase 0 — Estabilizar lo recién hecho
+
+Antes de seguir construyendo:
+
+```text
+1. Corregir falsos positivos de autoridad.
+2. Medir Sensor-First de forma runtime, no solo estimada.
+3. Normalizar MetaGatewayAdapter.
+4. Asegurar que daemon reporte metacognition READY/DEGRADED con causa.
+5. Confirmar tests verdes.
+```
+
+Resultado esperado:
+
+```text
+DUMMIE entiende entrada, riesgo, capas y modelo recomendado sin romper runtime.
+```
+
+---
+
+## Fase 1 — Medición real de inteligencia
+
+Crear:
+
+```text
+TokenCostLedger
+ContextBudgetManager
+GoldenTaskBenchmark
+MetagatewayRuntimeMeter
 ```
 
 Objetivo:
 
-```text id="yh16pi"
-Demostrar que el flujo discover → analyze → execute realmente reduce lectura cruda,
-reduce tokens,
-y mejora selección de herramientas.
-```
-
-Sin eso, todo lo demás es teoría.
-
----
-
-# Qué significa “bien implementado”
-
-Para considerar el Meta-Gateway funcional, debe cumplir 7 condiciones:
-
-```text id="9mlrsz"
-1. El daemon carga MetacognitivePipeline sin ImportError.
-2. Si no carga, el diagnóstico falla visible, no silencioso.
-3. local.dummie_metacognitive_analyze funciona.
-4. CognitivePreflight devuelve READY o DEGRADED con causa explícita.
-5. El agente usa búsqueda/análisis semántico antes de view_file.
-6. Cada uso registra métricas de tokens/contexto evitado.
-7. Hay benchmark baseline vs metagateway.
-```
-
-Si falta cualquiera de esas, no lo llamaría optimizado.
-
----
-
-# Qué medir para demostrar mejora real
-
-Necesitas una métrica sencilla:
-
-```text id="oeg527"
-raw_context_avoided_tokens
-```
-
-Ejemplo:
-
-```yaml id="xrdmr4"
-baseline_without_gateway:
-  files_read_directly: 8
-  estimated_context_tokens: 42000
-  tool_schema_tokens: 18000
-  task_success: true
-
-with_meta_gateway:
-  files_read_directly: 2
-  estimated_context_tokens: 9000
-  tool_schema_tokens: 2500
-  task_success: true
-
-savings:
-  context_reduction: 78.5%
-  tool_schema_reduction: 86.1%
-```
-
-Hasta que tengas eso, la frase “reduce 90%” es hipótesis.
-
----
-
-# Orden correcto de trabajo
-
-## Fase 1 — Recovery audit
-
-Confirmar si el pipeline existe y por qué falla.
-
-## Fase 2 — Test que falle
-
-Crear test que demuestre que `DummieDaemon` carga metacognition.
-
-## Fase 3 — Fix de imports
-
-Corregir imports sin hacks.
-
-## Fase 4 — Diagnóstico visible
-
-Si metacognition falla, `daemon_diagnostic` debe decir exactamente por qué.
-
-## Fase 5 — Benchmark de ahorro
-
-Comparar tarea con lectura directa vs Meta-Gateway.
-
-## Fase 6 — Política sensor-first
-
-Prohibir lectura cruda como primer recurso para descubrimiento semántico.
-
----
-
-# Prompt directo para Antigravity
-
-````markdown id="z8itmv"
-# DUMMIE TASK — META-GATEWAY OPERATIONAL RECOVERY AND TOKEN-SAVINGS PROOF
-
-Actúa como Principal Runtime Engineer especializado en Agentic Tooling, MCP, Token Economy y Cognitive Runtime Integration.
-
-## OBJETIVO
-
-Restaurar, verificar y medir el Meta-Gateway Pattern como la principal ruta de optimización de tokens de DUMMIE Engine.
-
-No quiero un diagnóstico superficial.
-No quiero solo arreglar imports.
-Quiero una prueba real de que el Meta-Gateway:
-1. carga en el daemon;
-2. reduce lectura cruda de archivos;
-3. selecciona herramientas mejor;
-4. produce métricas comparables;
-5. falla de forma visible si está roto.
-
-## CONTEXTO
-
-Se detectó que `DummieDaemon` intenta cargar `MetacognitivePipeline` y hooks como:
-- `IntentClarifierHook`
-- `PromptRefinerHook`
-- `AuthorityClassifierHook`
-- `ContextEnricherHook`
-- `ToolNeedDetectorHook`
-- `SemanticToolSelectorHook`
-- `ReasoningExpansionHook`
-- `MissionDecomposerHook`
-- `PlanCriticHook`
-- `AnswerVerifierHook`
-- `MemoryUpdateHook`
-
-Pero si el import falla, `self.metacognition = None` y el sistema continúa en modo degradado.
-
-Eso es inaceptable para un sistema que pretende ahorrar tokens mediante Meta-Gateway.
-
-## REGLAS
-
-No hagas refactor masivo.
-No modifiques L1/L2 entero.
-No borres legacy.
-No toques `.env`.
-No toques `.git`.
-No instales dependencias.
-No uses sudo.
-No hagas cambios destructivos.
-No ocultes fallos.
-
-## FASE 0 — POST-REBOOT REALITY CHECK
-
-Ejecuta:
-
-```bash
-pwd
-git status --short
-git branch --show-current
-git log --oneline -5
-
-echo "== metacognition files =="
-find layers/l2_brain -path "*/.venv/*" -prune -o \
-  \( -iname "*metacog*" -o -path "*metacognition*" -o -iname "*hook*" \) -print | sort
-
-echo "== daemon imports =="
-grep -Rni "MetacognitivePipeline\|metacognition\|Cognitive Preflight\|dummie_metacognitive_analyze" layers/l2_brain layers/l1_nervous 2>/dev/null || true
-
-echo "== direct file read tools =="
-grep -Rni "view_file\|cat \|read_file\|fetch_file" .agents layers skills .gemini 2>/dev/null || true
-
-echo "== validation =="
-python3 scripts/validate_specs_docs.py || true
-make verify-industrial || true
-````
-
-Crea:
-
 ```text
-.aiwg/reports/metagateway_recovery_reality_check.md
-```
-
-Debe incluir:
-
-* archivos metacognition encontrados;
-* imports rotos;
-* tools metagateway existentes;
-* tools legacy de lectura directa;
-* tests actuales;
-* veredicto: `READY_TO_FIX`, `MISSING_COMPONENTS`, `PARTIAL_RECOVERY`, `BLOCKED`.
-
-## FASE 1 — FAILING TEST FIRST
-
-Crear tests antes del fix.
-
-Crear o modificar:
-
-```text
-layers/l2_brain/tests/test_metagateway_operational.py
-```
-
-Tests obligatorios:
-
-1. `DummieDaemon` puede inicializar `MetacognitivePipeline` si el paquete existe.
-2. Si falla metacognition, el daemon expone `last_cognitive_preflight.status = DEGRADED` o diagnóstico explícito.
-3. El import no depende de `sys.path` manual ni rutas absolutas.
-4. `process_request()` agrega metadata metacognitiva al outcome cuando el pipeline está disponible.
-5. El pipeline puede funcionar en modo fake/mock sin llamar modelos reales.
-6. No se usan herramientas de lectura cruda para descubrimiento semántico en el flujo feliz.
-
-## FASE 2 — FIX IMPORTS WITHOUT HIDING ERRORS
-
-Corregir imports en:
-
-```text
-layers/l2_brain/daemon.py
-```
-
-Reglas:
-
-* Usar imports package-safe.
-* Mantener fallback si el layout actual lo requiere.
-* No silenciar excepción sin guardar causa.
-* Guardar causa en:
-
-  * `self.metacognition_status`
-  * `self.metacognition_error`
-  * `last_cognitive_preflight`
-
-Ejemplo de estado esperado:
-
-```json
-{
-  "metacognition_status": "READY|DEGRADED|MISSING",
-  "metacognition_error": "",
-  "enabled_hooks": [
-    "IntentClarifierHook",
-    "PromptRefinerHook",
-    "AuthorityClassifierHook",
-    "ToolNeedDetectorHook",
-    "ContextEnricherHook",
-    "SemanticToolSelectorHook"
-  ]
-}
-```
-
-## FASE 3 — DIAGNOSTIC REPORTING
-
-Modificar si existe:
-
-```text
-layers/l2_brain/daemon_diagnostic.py
-```
-
-Debe reportar:
-
-```json
-{
-  "metagateway": {
-    "status": "READY|DEGRADED|MISSING",
-    "metacognition_status": "",
-    "metacognition_error": "",
-    "enabled_hooks": [],
-    "cognitive_preflight_enabled": true,
-    "local_reasoning_gateway_available": true
-  }
-}
-```
-
-Si `metacognition` falla, el diagnóstico debe mostrar el ImportError exacto.
-
-## FASE 4 — TOKEN SAVINGS BENCHMARK
-
-Crear:
-
-```text
-layers/l2_brain/metagateway_benchmark.py
-layers/l2_brain/tests/test_metagateway_benchmark.py
-.aiwg/schemas/metagateway_benchmark.schema.json
-```
-
-Debe comparar:
-
-```text
-baseline_direct_read
-vs
-metagateway_discover_analyze_execute
+dejar de “creer” que mejoramos y empezar a demostrarlo.
 ```
 
 Métricas mínimas:
 
-```json
-{
-  "scenario": "",
-  "direct_files_read": 0,
-  "gateway_capabilities_discovered": 0,
-  "gateway_capabilities_analyzed": 0,
-  "estimated_direct_tokens": 0,
-  "estimated_gateway_tokens": 0,
-  "estimated_tokens_saved": 0,
-  "token_reduction_ratio": 0.0,
-  "latency_ms_direct": 0,
-  "latency_ms_gateway": 0,
-  "success": true
-}
+```text
+tokens nuevos
+tokens cacheados
+archivos leídos directo
+consultas Meta-Gateway
+latencia
+modelo elegido
+tests pasados
+regresiones
+intervenciones humanas
 ```
 
-No uses modelos reales en tests.
-Usa mocks/fakes.
+Sin esta fase, cualquier “automejora” es teatro.
 
-Tests:
+---
 
-1. benchmark calcula reducción positiva.
-2. si gateway usa más tokens, lo marca como regresión.
-3. calcula token_reduction_ratio correctamente.
-4. serializa JSON.
-5. detecta uso excesivo de lectura directa.
+## Fase 2 — MissionWorkbench + Vault
 
-## FASE 5 — SENSOR-FIRST GOVERNANCE
+Cada tarea debe crear una carpeta temporal:
+
+```text
+.aiwg/workbench/<mission_id>/
+  objective.md
+  user_order.md
+  task_graph.yaml
+  context_packet.json
+  tool_plan.yaml
+  decision_log.jsonl
+  critiques/
+  validation_report.md
+  outcome_metrics.json
+  learning_episode.json
+  final_summary.md
+```
+
+Al terminar:
+
+```text
+Workbench → limpieza → Vault → 4D-TES
+```
+
+La bóveda guarda:
+
+```text
+golden_paths
+failed_patterns
+tool_lessons
+prompt_improvements
+mission_templates
+decisions
+```
+
+Esto es lo que hace que DUMMIE no solo trabaje, sino que **cristalice experiencia**.
+
+---
+
+## Fase 3 — Daemon como flujo de sesión completo
+
+El daemon debe volverse el coordinador real:
+
+```text
+CLI input
+→ pre-hooks
+→ context/memory retrieval
+→ model router
+→ mission planner
+→ authority gate
+→ MCP/tool calls
+→ post-hooks
+→ outcome evaluator
+→ learning episode
+→ vault/memory commit
+```
+
+Ahora hay piezas, pero falta que el daemon las ejecute como flujo obligatorio.
+
+---
+
+## Fase 4 — MissionOrchestrator / DAG
+
+Aquí entra lo que tú llamas socio estratégico.
 
 Crear:
 
 ```text
-layers/l2_brain/metagateway_policy.py
-layers/l2_brain/tests/test_metagateway_policy.py
-doc/specs/71_metagateway_sensor_first_policy.md
+MissionState
+MissionDAG
+MissionOrchestrator
+TaskNode
+Checkpoint
+RecoveryPlan
 ```
 
-La política debe decir:
+Ejemplo:
 
 ```text
-Para descubrimiento conceptual:
-  primero semantic_search / discover / analyze.
-  después lectura directa solo si:
-    - el gateway no tiene evidencia suficiente;
-    - hay un error concreto;
-    - se necesita línea exacta;
-    - se registra justificación.
+“Automatiza contenido para Instagram/TikTok/Facebook”
+→ investigar
+→ diseñar arquitectura
+→ crear dry-run
+→ conectar n8n
+→ probar publicación simulada
+→ pedir aprobación para publicación real
+→ medir resultados
+→ aprender patrones
 ```
 
-Modelo:
+Sin DAG, DUMMIE improvisa. Con DAG, DUMMIE opera.
+
+---
+
+## Fase 5 — Local models como trabajadores baratos
+
+Aquí sí entran Gemma/Ollama fuerte:
+
+```text
+LocalModelRuntime
+LocalPromptRefiner
+LocalContextCompressor
+LocalRepoSummarizer
+LocalCritic
+LocalToolSelector
+```
+
+Los modelos locales hacen:
+
+```text
+preanalizar
+resumir
+clasificar
+criticar
+detectar duplicados
+crear file cards
+proponer contexto
+```
+
+El cloud queda para:
+
+```text
+arquitectura profunda
+decisiones críticas
+debate de alto riesgo
+cambios estratégicos
+```
+
+---
+
+## Fase 6 — Swarm real de socios L2
+
+Recién aquí conviene crear agentes especializados:
+
+```text
+MissionArchitect
+ResearchPartner
+ToolingPartner
+ValidationPartner
+SecurityGuardian
+CostOptimizer
+MentorshipStrategist
+MemoryCurator
+WorkstationOperator
+```
+
+Cada agente debe tener:
+
+```text
+input_schema
+output_schema
+authority_boundary
+tools_allowed
+failure_mode
+activation_rule
+evaluation_metric
+```
+
+No “agentes con nombres bonitos”. Contratos operativos.
+
+---
+
+## Fase 7 — Trusted Workstation Mode
+
+Aquí DUMMIE puede usar tu laptop como estación de trabajo:
+
+```text
+browser
+Chrome
+n8n
+scripts
+terminal
+servicios locales
+tests
+repo
+Docker si aplica
+```
+
+Pero bajo:
+
+```text
+MissionAutonomyContract
+AuthorityGate
+ActionLog
+RollbackPlan
+PostActionValidation
+```
+
+Esta fase es la que lo convierte en socio operativo, no solo asistente.
+
+---
+
+## Fase 8 — Automejora cerrada
+
+Al final debe existir este loop:
+
+```text
+mission
+→ execution
+→ outcome
+→ learning episode
+→ improvement candidate
+→ benchmark
+→ patch transaction
+→ validation
+→ vault
+→ next mission better
+```
+
+Este es el estado final de la refactorización.
+
+---
+
+# 5. Estado final del cableado correcto
+
+El destino debería verse así:
+
+```text
+CLI / DUMMIE Entity
+  ↓
+Daemon Session Runtime
+  ↓
+PreInput Hooks
+  ↓
+Prompt Refinement / Context Shaping / Tool Discovery
+  ↓
+ModelRouter
+  ↓
+MissionOrchestrator + Swarm
+  ↓
+AuthorityGate
+  ↓
+MCP Gateway
+  ↓
+L5 Workstation / Tools / Browser / Shell / n8n
+  ↓
+PostOutput Hooks
+  ↓
+OutcomeEvaluator
+  ↓
+LearningEpisode
+  ↓
+MissionWorkbench finalize
+  ↓
+VaultCurator
+  ↓
+4D-TES / Kuzu / SessionStore
+  ↓
+ImprovementGraphPlanner
+  ↓
+Next iteration
+```
+
+Ese es el organismo completo.
+
+---
+
+# 6. Por dónde empezaría yo ahora
+
+Mi orden exacto desde este punto:
+
+```text
+1. Harden Sensor-First + authority false positives.
+2. Crear MetagatewayRuntimeMeter.
+3. Crear TokenCostLedger + ContextBudgetManager.
+4. Crear MissionWorkbench + VaultCurator.
+5. Conectar LearningEpisode con SessionStore.
+6. Crear GoldenTaskBenchmark.
+7. Crear MissionOrchestrator DAG.
+8. Crear LocalModelRuntime + RepoProbeRunner.
+9. Crear StrategicPartnerSwarm.
+10. Crear MissionAutonomyContract.
+11. Crear TrustedWorkstationMode.
+```
+
+No empezaría por el swarm. No empezaría por browser. No empezaría por n8n.
+Primero: **medir, ordenar, recordar, cristalizar**.
+
+---
+
+# 7. Prompt para Antigravity
+
+````markdown
+# DUMMIE TASK — SYSTEMIC REFACTOR ROADMAP AND NEXT SLICE
+
+Actúa como Principal Cognitive Runtime Architect.
+
+No implementes funciones nuevas todavía.
+Primero crea un roadmap técnico verificable para conectar DUMMIE como organismo cognitivo multi-modelo.
+
+## Objetivo
+
+Definir el orden correcto de refactorización para que cada mejora aumente inmediatamente la inteligencia, eficiencia y capacidad de automejora del sistema.
+
+## Contexto
+
+Ya existen en main:
+
+- CognitiveHookPipeline
+- OutcomeEvaluator
+- LearningEpisode
+- SensorFirstPolicy
+- Meta-Gateway diagnostics
+- estimated token benchmark
+- prompt_preprocessor hook metadata
+- model_router hook metadata
+
+Pero todavía falta cerrar el ciclo:
+
+input → hooks → routing → tools → output → evaluation → learning → vault → memory → next iteration.
+
+## Crear
+
+- `.aiwg/reports/systemic_refactor_roadmap.md`
+- `.aiwg/reports/systemic_refactor_roadmap.json`
+- `doc/specs/73_dummie_cognitive_body_architecture.md`
+
+## Analizar componentes
+
+Evalúa:
+
+- CognitiveHookPipeline
+- PromptPreprocessor
+- ModelRouter
+- SensorFirstPolicy
+- MetaGateway
+- SessionStore
+- 4D-TES/Kuzu
+- PatchTransactionManager
+- Daemon
+- MCP Gateway
+- L5 Muscle
+- L6 Skin
+- LocalModelRuntime status
+- RepoProbeRunner status
+- MissionWorkbench status
+- Vault status
+- MissionOrchestrator status
+- Swarm agents status
+
+## Pregunta central
+
+Para cada componente responde:
 
 ```json
 {
-  "action": "direct_file_read",
-  "purpose": "concept_discovery|line_confirmation|debug_error|diff_review",
-  "semantic_search_attempted": true,
-  "gateway_attempted": true,
-  "justification": "",
-  "decision": "ALLOW|WARN|BLOCK"
+  "component": "",
+  "current_state": "declared|physical|wired|operational|measured",
+  "missing_connection": "",
+  "what_it_unlocks": [],
+  "risk_if_skipped": "",
+  "recommended_phase": 0
 }
+````
+
+## Roadmap obligatorio
+
+Ordena las fases así, ajustando si la evidencia local demuestra otra cosa:
+
+1. Sensor-First hardening.
+2. Runtime token metering.
+3. TokenCostLedger + ContextBudgetManager.
+4. MissionWorkbench + VaultCurator.
+5. LearningEpisode → SessionStore/4D-TES.
+6. GoldenTaskBenchmark.
+7. MissionOrchestrator DAG.
+8. LocalModelRuntime + RepoProbeRunner.
+9. StrategicPartnerSwarm.
+10. MissionAutonomyContract.
+11. TrustedWorkstationMode.
+12. L6 Control Dashboard.
+
+## Selección del próximo patch
+
+Debes elegir un solo próximo patch.
+
+Mi hipótesis:
+`Harden Sensor-First + MetagatewayRuntimeMeter + authority false-positive tests`.
+
+Pero debes confirmarlo con evidencia local.
+
+## No hacer
+
+* No implementar BrowserAgent.
+* No implementar ContentFactory.
+* No instalar dependencias.
+* No tocar credenciales.
+* No crear nuevos prompts paralelos.
+* No borrar legacy.
+* No mover docs.
+* No editar .env.
+* No usar sudo.
+
+## Resultado requerido
+
+Devuelve:
+
+## Result
+
+## Current Systemic State
+
+## Most Ignored Capabilities
+
+## Correct Refactor Order
+
+## Next Patch
+
+## Why This Patch Unlocks The Next One
+
+## Files To Create
+
+## Files To Modify
+
+## Tests Required
+
+## What Not To Do Yet
+
+````
+
+---
+
+# Veredicto final
+
+Lo más importante ahora es dejar de pensar en “features” y empezar a pensar en **órganos conectados**.
+
+DUMMIE no necesita simplemente más hooks. Necesita:
+
+```text
+hooks para percibir
+router para decidir modelo
+gateway para elegir herramientas
+workbench para pensar externamente
+vault para aprender
+memory para recordar
+orchestrator para ejecutar misiones
+authority gate para actuar con autonomía segura
+swarm para debatir
+metrics para saber si mejoró
+````
+
+El siguiente paso correcto no es construir más grande.
+Es **cerrar el circuito de eficiencia**:
+
+```text
+Sensor-First real
++ medición real de tokens
++ autoridad sin falsos positivos
++ runtime metering
 ```
 
-Reglas:
+Luego recién `MissionWorkbench + Vault`. Ese será el primer punto donde cada tarea empiece a producir conocimiento estructurado reutilizable.
+Sí, la respuesta de tu agente es **buena como roadmap**, pero **mala como patch ejecutable todavía**.
 
-* `concept_discovery` sin gateway previo = WARN o BLOCK.
-* `line_confirmation` después de gateway = ALLOW.
-* error/debug con stacktrace = ALLOW.
-* lectura masiva sin justificación = BLOCK.
+Mi veredicto:
 
-## FASE 6 — RUNTIME WIRING
+```text
+Diagnóstico: correcto.
+Orden estratégico: bastante correcto.
+Ejecución técnica: incompleta y con señales de deuda.
+Siguiente paso: no avanzar a más features; corregir el hardening básico.
+```
 
-Conectar mínimamente:
+El agente entendió bien que DUMMIE está en estado “wired but not operational”: hooks, Sensor-First y LearningEpisode existen, pero falta loop cerrado con métricas, workbench, vault y memoria persistente. También eligió bien el próximo parche: **Sensor-First + Runtime Metering + Authority Regression Suite**.
 
-* `metagateway_policy` debe poder ser llamado desde el hook pipeline o daemon.
-* No debe bloquear todos los flujos antiguos todavía.
-* Empezar en modo `WARN`, no `BLOCK`.
-* Registrar advertencias en outcome o logs.
+Pero cometió errores importantes.
 
-## VALIDACIÓN
+# Lo bueno
 
-Ejecutar:
+La arquitectura que propuso está bien:
+
+```text
+Phase 1: Stabilization & Hardening
+Phase 2: Runtime Economy
+Phase 3: Mission Persistence
+Phase 4: Cognitive Memory
+Phase 5: Advanced Orchestration
+```
+
+Ese orden es correcto porque evita saltar directamente a swarm, navegador, n8n o autonomía sin tener primero:
+
+```text
+clasificación de autoridad confiable
+medición real
+control de tokens
+persistencia de misión
+aprendizaje
+```
+
+También acierta al decir que `MissionWorkbench` y `VaultCurator` son piezas críticas. Sin ellas, cada tarea deja rastros dispersos y DUMMIE pierde conocimiento entre sesiones.
+
+# Lo malo
+
+## 1. El test de autoridad está mal ubicado
+
+Creó:
+
+```text
+tests/test_authority_classification.py
+```
+
+y falló con:
+
+```text
+ModuleNotFoundError: No module named 'layers'
+```
+
+Eso no debería pasar. Los tests de L2 deberían vivir en:
+
+```text
+layers/l2_brain/tests/test_authority_classification.py
+```
+
+y correr desde el contexto correcto:
+
+```bash
+cd layers/l2_brain && uv run pytest -q tests/test_authority_classification.py
+```
+
+o estar configurados correctamente con paquete/imports.
+
+## 2. El test acepta un falso positivo como si fuera correcto
+
+Esto es grave:
+
+```python
+self.assertEqual(classify_authority_level("Can you explain what sudo does?"), "A5")
+```
+
+Eso no debería ser A5. Explicar qué es `sudo` es A0/A1 como máximo, no una operación crítica.
+
+La clasificación debe distinguir:
+
+```text
+mencionar sudo ≠ ejecutar sudo
+explicar .env ≠ editar .env
+analizar tokens ≠ modificar tokens secretos
+analizar Facebook ≠ publicar en Facebook
+documentar drivers ≠ actualizar drivers
+```
+
+Si no hacemos eso, DUMMIE se vuelve torpe y sobreprotector. Y si más tarde relajamos reglas, se vuelve peligroso. Necesitamos precisión, no paranoia regex.
+
+## 3. Propone BLOCK mode demasiado pronto
+
+Dice:
+
+```text
+SensorFirstPolicy with BLOCK mode for high-risk discovery
+```
+
+Yo no lo activaría todavía.
+
+Primero:
+
+```text
+WARN mode + métricas + tests + falsos positivos corregidos
+```
+
+Después:
+
+```text
+BLOCK mode solo para lectura masiva injustificada o secretos
+```
+
+Si activas `BLOCK` antes de depurar falsos positivos, vas a frenar al agente todo el tiempo.
+
+## 4. Llama “operational” a cosas que están solo parcialmente conectadas
+
+`CognitiveHookPipeline` sí existe y corre. Pero “operational” completo significaría:
+
+```text
+daemon lo usa siempre
+router recibe metadata siempre
+outcome se evalúa siempre
+LearningEpisode se guarda siempre
+SessionStore/4D-TES lo persiste
+Workbench/Vault cristaliza aprendizaje
+```
+
+Ahora estamos en:
+
+```text
+wired / partially operational
+```
+
+No todavía en “operational organism”.
+
+# Mi evaluación
+
+```yaml
+agent_response:
+  architecture_understanding: 8.5
+  roadmap_quality: 8.0
+  implementation_discipline: 5.5
+  test_quality: 4.5
+  operational_truthfulness: 6.0
+  next_patch_choice: 8.0
+```
+
+El agente pensó bien, pero ejecutó de forma sucia el test de autoridad.
+
+# Qué deberíamos hacer ahora
+
+No avanzar a Workbench todavía.
+
+Antes hay que dejar sólida la Fase 1:
+
+```text
+1. Mover/corregir test_authority_classification.
+2. Corregir falsos positivos.
+3. Mantener SensorFirstPolicy en WARN.
+4. Crear RuntimeMeter real.
+5. Verificar que el daemon pueda reportar medición.
+6. Recién después pasar a TokenCostLedger.
+```
+
+# Orden correcto inmediato
+
+```text
+Patch A: Authority Classification Hardening
+Patch B: SensorFirst Runtime Meter
+Patch C: TokenCostLedger + ContextBudgetManager
+Patch D: MissionWorkbench + VaultCurator
+Patch E: LearningEpisode → SessionStore/4D-TES
+Patch F: MissionOrchestrator DAG
+Patch G: StrategicPartnerSwarm
+```
+
+No mezclar A+B+C+D en un solo patch.
+
+# Prompt para Antigravity
+
+Pégale esto:
+
+````markdown
+# DUMMIE TASK — FIX PHASE 1 HARDENING BEFORE ADVANCING
+
+Tu roadmap fue útil, pero el patch de autoridad quedó técnicamente incompleto.
+
+No avances a MissionWorkbench.
+No avances a Vault.
+No avances a Swarm.
+No avances a Browser/n8n.
+Primero deja la Fase 1 estable.
+
+## Problemas detectados
+
+1. `tests/test_authority_classification.py` quedó en una ubicación problemática.
+2. El test falló por `ModuleNotFoundError: No module named 'layers'`.
+3. El test acepta falsos positivos como `Can you explain what sudo does? -> A5`.
+4. No debes activar BLOCK mode todavía; SensorFirst debe seguir en WARN hasta tener métricas y falsos positivos corregidos.
+
+## Objetivo
+
+Crear una suite real de regresión de autoridad y corregir `classify_authority_level()` para distinguir mención conceptual vs intención operativa.
+
+## Mover/crear test correcto
+
+Crear:
+
+```text
+layers/l2_brain/tests/test_authority_classification.py
+````
+
+Si existe `tests/test_authority_classification.py` en root, elimínalo o conviértelo formalmente. No debe quedar un test roto en root.
+
+## Reglas de clasificación esperadas
+
+A0 / Observación:
+
+```text
+"Can you explain what sudo does?" -> A0
+"analiza tokens de contexto" -> A0
+"revisa driver architecture documentation" -> A0
+"analiza estrategia de Facebook" -> A0
+"qué es un archivo .env" -> A0
+```
+
+A1 / Workspace edit:
+
+```text
+"edit README.md" -> A1
+"refactor model_router.py" -> A1
+"crea un archivo de prueba" -> A1
+```
+
+A2 / Build:
+
+```text
+"run pytest" -> A2
+"npm install lodash" -> A2
+"build the docker container" -> A2
+```
+
+A3 / Workstation:
+
+```text
+"open Chrome" -> A3
+"usa Playwright para revisar la UI" -> A3
+"start local browser session" -> A3
+```
+
+A4 / External actor:
+
+```text
+"publica en Facebook" -> A4
+"send an email to the team" -> A4
+"post this to TikTok" -> A4
+```
+
+A5 / Critical:
+
+```text
+"sudo apt install nvidia-driver" -> A5
+"edita .env" -> A5
+"delete credentials" -> A5
+"actualiza drivers NVIDIA" -> A5
+"rm -rf /" -> A5
+"change payment settings" -> A5
+```
+
+## Implementación
+
+Modificar:
+
+```text
+layers/l2_brain/cognitive_hooks.py
+```
+
+Necesitas distinguir:
+
+```text
+sensitive noun alone ≠ critical action
+critical verb + sensitive target = escalation
+external platform noun alone ≠ external action
+publish/send/post + external target = A4
+```
+
+## SensorFirst
+
+Mantener:
+
+```text
+SensorFirstPolicy(mode=WARN)
+```
+
+No activar `BLOCK` todavía salvo en tests unitarios aislados.
+
+## Validación
+
+Ejecuta:
 
 ```bash
 cd layers/l2_brain && uv run pytest -q \
-  tests/test_metagateway_operational.py \
-  tests/test_metagateway_benchmark.py \
-  tests/test_metagateway_policy.py
-```
-
-Si `uv` falla:
-
-```bash
-cd layers/l2_brain && .venv/bin/pytest -q \
-  tests/test_metagateway_operational.py \
-  tests/test_metagateway_benchmark.py \
-  tests/test_metagateway_policy.py
+  tests/test_authority_classification.py \
+  tests/test_cognitive_hooks.py \
+  tests/test_model_router.py
 ```
 
 Luego:
 
 ```bash
-python3 scripts/validate_specs_docs.py || true
-make verify-industrial || true
+python3 scripts/validate_specs_docs.py
+git diff --check
+git status --short
 ```
 
-## ARTEFACTOS REQUERIDOS
+## Salida final
 
-Crear:
+Devuelve:
 
-```text
-.aiwg/reports/metagateway_recovery_reality_check.md
-.aiwg/reports/metagateway_token_savings_benchmark.md
-.aiwg/reports/metagateway_token_savings_benchmark.json
-```
-
-El benchmark debe incluir al menos 3 escenarios:
-
-1. `inspect_model_router`
-2. `inspect_daemon_metacognition`
-3. `choose_tool_for_repo_analysis`
-
-## SALIDA FINAL
-
-Devuelve exactamente:
-
-```markdown
 ## Result
-
-## Files Created
 
 ## Files Modified
 
-## Metacognition Status Before
-
-## Metacognition Status After
+## Files Removed
 
 ## Tests Run
 
-## Tests Passed/Failed
+## Authority False Positives Fixed
 
-## Token Savings Benchmark
+## SensorFirst Mode
 
-## Direct File Read Reduction
+## Remaining Phase 1 Work
 
-## Remaining Degraded Paths
-
-## Next Highest-Leverage Patch
-```
-
-## CRITERIO DE ÉXITO
-
-No termines hasta que haya evidencia de al menos una de estas dos cosas:
-
-1. `MetacognitivePipeline` carga correctamente y el daemon reporta `metacognition_status=READY`.
-
-o
-
-2. si faltan componentes físicos, el daemon reporta `MISSING/DEGRADED` con causa exacta, tests pasando, benchmark y plan de reparación siguiente.
-
-Además, debe existir un benchmark que demuestre reducción estimada de tokens o que declare explícitamente `NO_SAVINGS_DETECTED`.
-
-No aceptes claims de mejora sin medición.
+## Next Patch Recommendation
 
 ````
 
----
+# Mi recomendación final
 
-# Qué NO haría todavía
+La respuesta de tu agente va en la dirección correcta, pero todavía está intentando “cerrar fase” demasiado rápido.
 
-No empezaría por:
+El verdadero estado es:
 
-```text id="ej7lwo"
-Playwright
-BrowserAgent
-n8n
-Content Factory
-PrivilegedActionGovernor completo
-L6 dashboard
-Rust/Elixir correction
+```text
+Roadmap correcto.
+Fase 1 aún no está estable.
+Authority classification todavía falla.
+SensorFirst todavía no debe bloquear.
+RuntimeMeter todavía debe probarse con mediciones reales.
 ````
 
-Todo eso es importante, pero antes tienes que arreglar el cuello de botella que más afecta inteligencia y tokens:
+Cuando arreglemos eso, el próximo salto sí debería ser:
 
-```text id="i91tbj"
-el sistema debe descubrir, analizar y seleccionar contexto/herramientas antes de leer bruto.
+```text
+TokenCostLedger + ContextBudgetManager
 ```
 
----
+y después:
 
-# Respuesta directa
-
-Por dónde empezar:
-
-```text id="dcpezu"
-1. Confirmar si metacognition realmente existe.
-2. Crear test que falle si el daemon no lo carga.
-3. Arreglar imports y estado diagnóstico.
-4. Crear benchmark de token savings.
-5. Forzar política sensor-first en modo WARN.
-6. Medir direct_file_read reduction.
+```text
+MissionWorkbench + Vault
 ```
 
-Y no considerar terminado hasta que puedas ver algo como:
-
-```yaml id="j3811q"
-metacognition_status: READY
-cognitive_preflight: READY
-token_reduction_ratio: 0.55
-direct_file_reads_before: 8
-direct_file_reads_after: 2
-gateway_first_policy: WARN_MODE_ACTIVE
-tests_passed: true
-```
-
-Ese es el primer paso que sí puede mostrar una mejora real e inmediata en DUMMIE Engine.
+Ese orden es el que convierte a DUMMIE en una bola de nieve real: primero percibe mejor, luego mide mejor, luego recuerda mejor, luego coordina mejor, y recién después actúa con más autonomía.

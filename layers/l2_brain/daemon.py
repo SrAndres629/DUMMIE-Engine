@@ -96,11 +96,11 @@ class DummieDaemon:
         self.last_counterfactual_scores: List[float] = []
         self._current_counterfactual_threshold: float = 0.0
         self.last_cognitive_preflight: Dict[str, Any] = {"status": "SKIPPED"}
-        
+
         # Metacognitive Pipeline Integration
         self.metacognition_status = "MISSING"
         self.metacognition_error = ""
-        
+
         try:
             from layers.l2_brain.metacognition.pipeline import MetacognitivePipeline
             from layers.l2_brain.metacognition.input_hooks import (
@@ -114,10 +114,10 @@ class DummieDaemon:
             from layers.l2_brain.metacognition.reasoning_hooks import ReasoningExpansionHook
             from layers.l2_brain.metacognition.deliberation_hooks import MissionDecomposerHook, PlanCriticHook
             from layers.l2_brain.metacognition.output_hooks import AnswerVerifierHook, MemoryUpdateHook
-            
+
             self.metacognition = MetacognitivePipeline(
                 input_hooks=[
-                    IntentClarifierHook(), 
+                    IntentClarifierHook(),
                     PromptRefinerHook(),
                     AuthorityClassifierHook(),
                     ToolNeedDetectorHook(),
@@ -148,7 +148,7 @@ class DummieDaemon:
         except ImportError:
             AuthorityGate = None
         self.authority_gate = AuthorityGate() if AuthorityGate else None
-        
+
         self._background_tasks: set[asyncio.Task] = set()
         self.request_timeout_s = float(os.getenv("DUMMIE_REQUEST_TIMEOUT_S", "60"))
         self.diagnostic_mode = os.getenv("DUMMIE_DIAGNOSTIC_MODE") == "1"
@@ -160,8 +160,15 @@ class DummieDaemon:
         self.e_shield: BaseAuditor = BudgetAuditor() if BudgetAuditor else FailClosedAuditor(shield_error)
         self.l_shield: BaseAuditor = ComplianceAuditor() if ComplianceAuditor else FailClosedAuditor(shield_error)
         self.muscle: BaseExecutor = MuscleDriver(mcp_gateway) if MuscleDriver else FailClosedExecutor(executor_error)
-        
+
         self.gateway_policy = SensorFirstPolicy(mode=PolicyDecision.WARN)
+
+        try:
+            from layers.l2_brain.metagateway_runtime_meter import MetaGatewayRuntimeMeter
+            self.runtime_meter = MetaGatewayRuntimeMeter()
+        except ImportError:
+            self.runtime_meter = None
+            logger.warning("MetaGatewayRuntimeMeter not available")
 
         if self.diagnostic_mode:
             try:
@@ -195,7 +202,7 @@ class DummieDaemon:
             except Exception as e:
                 logger.error(f"Invalid intent payload: {e}")
                 return
-        
+
         self._spawn_task(
             asyncio.wait_for(
                 self._process_request_safe(payload),
@@ -215,11 +222,11 @@ class DummieDaemon:
             logger.info("Diagnostic complete. Staying in passive wait mode.")
             while True:
                 await asyncio.sleep(3600)
-                
+
         logger.info("Antigravity Daemon: ONLINE (TABULA RASA MODE)")
         self.event_bus.subscribe("INTENT", self._handle_intent)
         await self.event_bus.start()
-        
+
         # Keep the daemon alive
         while True:
             await asyncio.sleep(3600)
@@ -265,21 +272,21 @@ class DummieDaemon:
         # 1. Routing & Tiers
         decision = self.model_router.route(prompt)
         tiers_to_try = [decision.tier, ModelTier.CLOUD_STD, ModelTier.LOCAL_FAST]
-        
+
         # Identity injection
         if self.entity_voice and not system_prompt:
             system_prompt = self.entity_voice.get_system_prompt(concept)
-            
+
         last_error = "No models available"
         for tier in tiers_to_try:
             configs = self.model_router.registry.models.get(tier, [])
             for config in configs:
                 try:
                     logger.info(f"Reasoning: Trying {config.model_id} ({tier.value})...")
-                    
+
                     # 2. Execution
                     response = await self.model_executor.execute_config(config, prompt, system_prompt, concept)
-                    
+
                     # 3. Stats & Reputation (Wave 4)
                     if self.neuron_ledger:
                         if response.success:
@@ -295,11 +302,11 @@ class DummieDaemon:
                                     from action_graph import ActionGraph
                                 except ImportError:
                                     from layers.l2_brain.action_graph import ActionGraph
-                                
+
                                 graph = ActionGraph()
                             except ImportError:
                                 graph = None
-                                
+
                             import uuid
                             from action_graph import ActionNode
                             await self.action_graph.record_action(ActionNode(
@@ -310,7 +317,7 @@ class DummieDaemon:
                                 target="llm_inference",
                                 description=f"Razonamiento tier {tier.value} para: {prompt[:50]}..."
                             ))
-                        
+
                         # 5. Supervision (Wave 4)
                         if self.supervisor_protocol and tier != ModelTier.LOCAL_FAST:
                             review = await self.supervisor_protocol.review_task(prompt, response.text, config.model_id)
@@ -324,18 +331,18 @@ class DummieDaemon:
                         final_text = response.text
                         if self.entity_voice:
                             final_text = self.entity_voice.format_output(final_text, config.model_id)
-                            
+
                         if self.semantic_cache:
                             await self.semantic_cache.set(prompt, final_text, system_prompt)
 
                         return final_text
                     else:
                         last_error = response.error
-                            
+
                 except Exception as e:
                     logger.error(f"Error in tier {tier}: {e}")
                     last_error = str(e)
-        
+
         # [WAVE 6] Self-Healing Trigger
         if self.auto_evolver:
             logger.warning("Critical Reasoning Failure: Triggering Auto-Evolution Analysis...")
@@ -346,19 +353,19 @@ class DummieDaemon:
             # Log for the user to see DUMMIE's internal thought
             logger.info(f"DUMMIE Self-Healing Analysis: {analysis['root_cause']}")
 
-                    
+
         return f"ERROR_EXECUTION: {last_error}"
 
     async def _execute_local_reasoning(self, target: str, arguments: Dict[str, Any]) -> Dict[str, Any]:
         """
         [BRIDGE] Ejecuta razonamiento local.
-        Si es una capacidad nativa (mcp), la llama. 
+        Si es una capacidad nativa (mcp), la llama.
         Si no, intenta usar el ModelRouter para razonar sobre el problema.
         """
         try:
             if not self.mcp_gateway or not hasattr(self.mcp_gateway, "call_tool"):
                 raise RuntimeError("mcp_gateway_unavailable")
-            
+
             response = await self.mcp_gateway.call_tool(
                 "dummie-brain",
                 "dummie_execute_capability",
@@ -398,7 +405,7 @@ class DummieDaemon:
                 from runtime_guards import GuardInput, evaluate_runtime_guards, InputGuard
             except ImportError:
                 from layers.l2_brain.runtime_guards import GuardInput, evaluate_runtime_guards, InputGuard
-            
+
             guard = InputGuard()
         except ImportError:
             guard = None

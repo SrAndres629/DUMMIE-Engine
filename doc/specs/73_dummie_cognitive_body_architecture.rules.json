@@ -1,0 +1,15 @@
+{
+  "spec_id": "SPEC-73",
+  "rules": [
+    {
+      "id": "R1",
+      "description": "Deterministic classification of all inputs via CognitiveHookPipeline",
+      "severity": "high"
+    },
+    {
+      "id": "R2",
+      "description": "Empirical metering of token reduction for all sagas",
+      "severity": "medium"
+    }
+  ]
+}

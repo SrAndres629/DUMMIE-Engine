@@ -36,6 +36,10 @@ class OutcomeEvaluator:
             "steps": [{"task_id": step.task_id, "status": step.status} for step in saga.steps],
         }
 
+        # Efficiency Stats from Runtime Meter
+        if hasattr(self.daemon, "runtime_meter") and self.daemon.runtime_meter:
+            outcome["efficiency"] = self.daemon.runtime_meter.get_stats()
+
         # Integración de Metadatos de Metacognición si están disponibles
         if hasattr(self.daemon, "metacognition") and self.daemon.metacognition:
             # Notamos que el frame se pasa externamente o se recupera del daemon

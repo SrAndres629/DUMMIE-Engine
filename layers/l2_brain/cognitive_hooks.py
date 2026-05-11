@@ -223,41 +223,53 @@ def detect_affected_layers(message: str) -> list[str]:
 
 
 _A5_SENSITIVE_TARGETS = r"(\.env\b|credential(s)?\b|secret(s)?\b|token(s)?\b|payment(s)?\b|billing\b|root\b|kernel\b|/etc\b)"
-_A5_CRITICAL_COMMANDS = r"(\bsudo\b|rm\s+-rf\b|delete\s+everything\b)"
+_A5_CRITICAL_COMMANDS = r"(\bsudo\s+\w+|\brm\s+-rf\b|delete\s+everything\b)"
 _A5_DRIVERS = r"\bdriver(s)?\b"
 
 _A4_SOCIAL_TARGETS = r"(\bpost\b|\btweet\b|\bsocial\b|\btwitter\b|\blinkedin\b|\bfacebook\b|\binstagram\b|\btiktok\b|\bwhatsapp\b|\btelegram\b)"
-_A4_EXTERNAL_ACTIONS = r"(\bpublish\b|\bpublica\b|\bsend\s+email\b|\bcorreo\b|\bproduction\s+api\b)"
+_A4_EXTERNAL_ACTIONS = r"(\bpublish\b|\bpublica\b|\bsend\s+(an\s+)?email\b|\bcorreo\b|\bproduction\s+api\b|\benvía\b)"
 
-_ACTION_VERBS = r"(edit|modify|refactor|implement|patch|write|update|actualiza|delete|borra|elimina|post|publish|publica|send|envía|install|instala)"
+_ACTION_VERBS = r"\b(edit|edita|modify|modifica|refactor|implement|patch|write|update|actualiza|delete|borra|elimina|post|publish|publica|send|envía|install|instala|run|ejecuta|create|crea|add|añade|use|usa|open|abre)\b"
+_EXPLANATION_VERBS = r"\b(explain|what\s+is|how\s+to|show|describe|analiza|audit|inspect|review|report|explica|qué\s+es|cómo|muestra|describe|analiza|audita|inspecciona|revisa|reporta)\b"
 
 def classify_authority_level(message: str, current_authority_level: str = "A0") -> str:
     raw = sanitize_message(message).lower()
-    
+
+    # Check for explanation/query intent first - these should stay A0 even with sensitive tokens
+    is_explanation = re.search(_EXPLANATION_VERBS, raw)
+    is_action = re.search(_ACTION_VERBS, raw)
+
     # A5: Critical commands or Action + Sensitive Target
-    if re.search(_A5_CRITICAL_COMMANDS, raw):
+    if re.search(_A5_CRITICAL_COMMANDS, raw) and not is_explanation:
         return "A5"
-    if re.search(_ACTION_VERBS, raw) and (re.search(_A5_SENSITIVE_TARGETS, raw) or re.search(_A5_DRIVERS, raw)):
+    if is_action and (re.search(_A5_SENSITIVE_TARGETS, raw) or re.search(_A5_DRIVERS, raw)):
         return "A5"
-        
+
     # A4: External Publication or Action + Social Target
     if re.search(_A4_EXTERNAL_ACTIONS, raw):
         return "A4"
-    if re.search(_ACTION_VERBS, raw) and re.search(_A4_SOCIAL_TARGETS, raw):
+    if is_action and re.search(_A4_SOCIAL_TARGETS, raw):
         return "A4"
 
-    # A3: Workstation/UI
-    if re.search(r"(\bchrome\b|\bplaywright\b|\bbrowser\b|\bgui\b|\bdesktop\b|\bworkstation\b|\blocal\s+service\b|\bxdg-open\b)", raw):
+    # A3: Workstation/UI (Action or specific tool mention)
+    if is_action and re.search(r"(\bchrome\b|\bplaywright\b|\bbrowser\b|\bgui\b|\bdesktop\b|\bworkstation\b|\blocal\s+service\b|\bxdg-open\b)", raw):
         return "A3"
-        
-    # A2: Build/Install (not already covered by A5 update/install logic)
+    # Direct tool calls without action verbs might still be A3 if they are workstation-specific
+    if re.search(r"(\bchrome\b|\bplaywright\b|\bbrowser\b|\bgui\b)", raw) and not is_explanation:
+        return "A3"
+
+    # A2: Build/Install
     if re.search(r"(\binstall\b|\binstala\b|\bdependency\b|\bdependenc(ia|y)\b|\buv\s+add\b|\bpip\s+install\b|\bnpm\s+install\b|\bbuild\b|\bcompile\b|\brun\s+tests?\b|\bpytest\b)", raw):
-        return "A2"
-        
+        if not is_explanation:
+            return "A2"
+
     # A1: Basic Workspace Edits
-    if re.search(r"(\bedit\b|\bedita\b|\bmodify\b|\bmodifica\b|\bcreate\b|\bcrea\b|\bwrite\b|\bimplement\b|\brefactor\b|\bpatch\b|\brepo\b|\bfile\b|\btests?\b)", raw):
+    if is_action and re.search(r"(\bedit\b|\bedita\b|\bmodify\b|\bmodifica\b|\bcreate\b|\bcrea\b|\bwrite\b|\bimplement\b|\brefactor\b|\bpatch\b|\brepo\b|\bfile\b|\btests?\b)", raw):
         return "A1"
-        
+    # Specific common edit commands
+    if re.search(r"\b(edit|create|refactor)\b", raw) and not is_explanation:
+        return "A1"
+
     return current_authority_level if current_authority_level in AUTHORITY_LEVELS else "A0"
 
 
