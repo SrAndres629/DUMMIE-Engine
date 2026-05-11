@@ -8,9 +8,24 @@ from metacognition.contracts import AuthorityLevel
 
 @pytest.mark.asyncio
 async def test_metacognitive_pipeline_full_flow():
+    from unittest.mock import AsyncMock, MagicMock
+    mock_daemon = MagicMock()
+    mock_daemon.reason_with_tiers = AsyncMock(return_value='{"steps": []}')
+    
+    from metacognition.semantic_hooks import SemanticToolSelectorHook
+    from metacognition.reasoning_hooks import ReasoningExpansionHook
+
     pipeline = MetacognitivePipeline(
-        input_hooks=[IntentClarifierHook(), AuthorityClassifierHook()],
-        deliberation_hooks=[MissionDecomposerHook(), PlanCriticHook()],
+        input_hooks=[
+            IntentClarifierHook(), 
+            AuthorityClassifierHook(),
+            SemanticToolSelectorHook(None)
+        ],
+        deliberation_hooks=[
+            ReasoningExpansionHook(mock_daemon),
+            MissionDecomposerHook(mock_daemon), 
+            PlanCriticHook()
+        ],
         output_hooks=[AnswerVerifierHook(), MemoryUpdateHook()]
     )
     
@@ -18,6 +33,12 @@ async def test_metacognitive_pipeline_full_flow():
     frame = await pipeline.preprocess("test_session_1", "Quiero automatizar mi contenido de TikTok")
     assert frame.refined_intent == "OBJECTIVE_AUTOMATION"
     assert frame.authority_level == AuthorityLevel.A4_EXTERNAL_ACTOR
+    
+    # Mock LLM response for decomposer
+    mock_daemon.reason_with_tiers.side_effect = [
+        "Razonamiento profundo sobre TikTok...", # Expansion
+        '[{"step": 1, "agent": "ResearchAgent", "action": "Investigate TikTok APIs"}]' # Decomposition
+    ]
     
     frame = await pipeline.deliberate(frame)
     assert len(frame.mission_plan) > 0

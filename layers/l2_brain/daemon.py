@@ -114,12 +114,22 @@ class DummieDaemon:
         try:
             from metacognition.pipeline import MetacognitivePipeline
             from metacognition.input_hooks import IntentClarifierHook, AuthorityClassifierHook
+            from metacognition.semantic_hooks import SemanticToolSelectorHook
+            from metacognition.reasoning_hooks import ReasoningExpansionHook
             from metacognition.deliberation_hooks import MissionDecomposerHook, PlanCriticHook
             from metacognition.output_hooks import AnswerVerifierHook, MemoryUpdateHook
             
             self.metacognition = MetacognitivePipeline(
-                input_hooks=[IntentClarifierHook(), AuthorityClassifierHook()],
-                deliberation_hooks=[MissionDecomposerHook(), PlanCriticHook()],
+                input_hooks=[
+                    IntentClarifierHook(), 
+                    AuthorityClassifierHook(),
+                    SemanticToolSelectorHook(self.mcp_gateway)
+                ],
+                deliberation_hooks=[
+                    ReasoningExpansionHook(self),
+                    MissionDecomposerHook(self),
+                    PlanCriticHook()
+                ],
                 output_hooks=[AnswerVerifierHook(), MemoryUpdateHook()]
             )
         except ImportError:
