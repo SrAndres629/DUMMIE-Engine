@@ -51,14 +51,16 @@ def test_runtime_meter_token_reduction():
     meter = MetaGatewayRuntimeMeter()
     
     # Simulate some activity
-    meter.record_gateway_usage("discovery")
-    meter.record_gateway_usage("analysis")
+    meter.record_gateway_usage(2000, "discovery")
+    meter.record_gateway_usage(3200, "analysis")
     meter.record_direct_read(1000, "line_confirmation")
     meter.record_direct_read(2000, "debug_error")
     
     stats = meter.get_stats()
     assert stats["direct_read_attempts"] == 2
     assert stats["gateway_attempts"] == 2
-    assert stats["estimated_direct_tokens"] == 10000 # 2 * 5000
-    assert stats["estimated_gateway_tokens"] == 1300 # 500 + 800
-    assert stats["token_reduction_ratio"] == 0.87 # (10000 - 1300) / 10000
+    # Actual tokens: context = 3000 // 4 = 750, gateway = 5200 // 4 = 1300
+    assert stats["actual_direct_tokens"] == 750
+    assert stats["actual_gateway_tokens"] == 1300
+    # Since actual_direct_tokens > 0 (750) and actual_gateway_tokens (1300), saved = 0. ratio = 0.0
+    assert stats["token_reduction_ratio"] == 0.0

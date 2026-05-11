@@ -112,7 +112,7 @@ func (ns *NervousSystem) StartHeartbeat(ctx context.Context) {
 			// Generar MemoryNode4DTES (Spec 02/10)
 			node := &pb.MemoryNode4DTES{
 				CausalHash: causalHash,
-				ParentHash: ns.lastHash,
+				ParentHashes: []string{ns.lastHash},
 				Payload:    []byte(payload),
 				PayloadHash: payloadHash,
 				Context:    contextObj,

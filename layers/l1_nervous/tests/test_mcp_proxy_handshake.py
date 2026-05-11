@@ -57,10 +57,10 @@ async def test_proxy_reaches_ready_before_tool_call(tmp_path):
         ]
     )
 
-    async def fake_ensure_process(server_name):
+    async def fake_spawn_process(server_name, cfg):
         return process
 
-    manager._ensure_process = fake_ensure_process
+    manager.transport.spawn_process = fake_spawn_process
 
     response = await manager.call_tool("obsidian", "obsidian_get_file_contents", {"filepath": "A.md"})
 
@@ -82,12 +82,13 @@ async def test_get_tools_uses_discovery_cache_after_ready(tmp_path):
         ]
     )
 
-    async def fake_ensure_process(server_name):
+    async def fake_spawn_process(server_name, cfg):
         return process
 
-    manager._ensure_process = fake_ensure_process
+    manager.transport.spawn_process = fake_spawn_process
+    await manager._ensure_ready("obsidian")
 
-    tools = await manager.get_tools_for_server("obsidian")
+    tools = manager.registry.get_tools("obsidian")
 
     assert tools == [{"name": "obsidian_simple_search"}]
     assert [message["method"] for message in process.stdin.messages] == [

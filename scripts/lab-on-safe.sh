@@ -2,8 +2,9 @@
 # DUMMIE Engine - Safe Lab Startup
 set -euo pipefail
 
-ROOT_DIR="/home/jorand/Escritorio/DUMMIE Engine"
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 START_SCRIPT="$ROOT_DIR/scripts/factory_up.sh"
+SHUTDOWN_SCRIPT="$ROOT_DIR/scripts/shutdown_factory.sh"
 
 echo "=== [SAFE-ON] Launching DUMMIE Application Stack ==="
 

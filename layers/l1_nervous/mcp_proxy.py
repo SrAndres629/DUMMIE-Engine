@@ -34,6 +34,39 @@ class MCPProxyManager:
         cfg = self.registry.get_server_config(server_name)
         if not cfg: raise ValueError(f"Server {server_name} not found.")
         
+        # [Somatic Sensor-First Injection] Runtime Guard for File Reading
+        if server_name == "filesystem" and tool_name in {"read_text_file", "read_file"}:
+            try:
+                from layers.l2_brain.sensor_first_guard import SensorFirstGuard
+                from layers.l2_brain.metagateway_policy import PolicyDecision
+                
+                # In a real environment, we'd pull purpose and context from context_token/telemetry.
+                # For somatic enforcement at this level, we enforce a strict baseline if it's a blind read.
+                # We assume we don't have gateway info here unless passed via arguments (which we don't standardly do yet),
+                # but we can log the evaluation. For now, we evaluate in WARN mode to track without breaking everything,
+                # unless explicitly configured otherwise.
+                guard = SensorFirstGuard(mode=PolicyDecision.WARN)
+                
+                # Check if this read feels like a concept discovery (e.g. no specific line target)
+                purpose = "concept_discovery" if "head" not in arguments and "tail" not in arguments else "line_confirmation"
+                
+                eval_result = guard.evaluate_direct_read(
+                    purpose=purpose,
+                    semantic_search_attempted=arguments.get("_semantic_search_attempted", False),
+                    gateway_attempted=arguments.get("_gateway_attempted", False)
+                )
+                
+                if eval_result["decision"] == "BLOCK":
+                    logger.error(f"[Sensor-First] BLOCKED read request for {arguments.get('path', 'unknown')}: {eval_result['reason']}")
+                    return {"jsonrpc": "2.0", "result": {"content": [{"type": "text", "text": f"Error: Sensor-First policy blocked this request: {eval_result['reason']}"}]}}
+                elif eval_result["decision"] == "WARN":
+                    logger.warning(f"[Sensor-First] WARNING for read request {arguments.get('path', 'unknown')}: {eval_result['reason']}")
+                    
+            except ImportError as e:
+                logger.debug(f"[Sensor-First] Guard not available at proxy level: {e}")
+            except Exception as e:
+                logger.error(f"[Sensor-First] Guard evaluation failed: {e}")
+
         self.last_accessed[server_name] = time.time()
         if server_name not in self.locks: self.locks[server_name] = asyncio.Lock()
         
