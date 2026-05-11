@@ -1,0 +1,15 @@
+{
+  "spec_id": "SPEC-74",
+  "rules": [
+    {
+      "id": "R1",
+      "description": "All token usage events MUST be schema-compliant.",
+      "severity": "high"
+    },
+    {
+      "id": "R2",
+      "description": "Budget enforcement MUST trigger compression at 80% utilization.",
+      "severity": "medium"
+    }
+  ]
+}

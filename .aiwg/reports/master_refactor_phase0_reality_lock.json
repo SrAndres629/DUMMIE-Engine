@@ -1,0 +1,19 @@
+{
+  "git_status": [],
+  "tests_run": [
+    "tests/test_authority_classification.py",
+    "tests/test_cognitive_hooks.py",
+    "tests/test_metagateway_hardening.py",
+    "tests/test_model_router.py",
+    "tests/test_outcome_evaluator.py"
+  ],
+  "tests_passed": 54,
+  "tests_failed": 0,
+  "spec_validation": "PASS",
+  "sensor_first_mode": "WARN",
+  "runtime_meter_available": true,
+  "known_blockers": [
+    "MISSING_TEST: tests/test_metagateway_policy.py"
+  ],
+  "safe_to_continue": true
+}

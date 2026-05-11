@@ -165,11 +165,16 @@ class DummieDaemon:
 
         try:
             from layers.l2_brain.metagateway_runtime_meter import MetaGatewayRuntimeMeter
+            from layers.l2_brain.token_cost_ledger import TokenCostLedger
+            from layers.l2_brain.context_budget_manager import ContextBudgetManager
             self.runtime_meter = MetaGatewayRuntimeMeter()
+            self.token_ledger = TokenCostLedger()
+            self.budget_manager = ContextBudgetManager()
         except ImportError:
             self.runtime_meter = None
-            logger.warning("MetaGatewayRuntimeMeter not available")
-
+            self.token_ledger = None
+            self.budget_manager = None
+            logger.warning("Metabolic components (Meter/Ledger/Budget) not fully available")
         if self.diagnostic_mode:
             try:
                 from layers.l2_brain.daemon_diagnostic import DiagnosticReporter
