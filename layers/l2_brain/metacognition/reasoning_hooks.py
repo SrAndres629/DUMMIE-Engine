@@ -21,12 +21,13 @@ class ReasoningExpansionHook:
         Intención detectada: {frame.refined_intent}
         Objetivo estratégico: {frame.strategic_objective}
         
-        Desarrolla una Cadena de Razonamiento (Chain of Thought) para cumplir este objetivo.
-        Considera:
+        Produce un resumen deliberativo verificable para cumplir este objetivo.
+        No expongas cadena de pensamiento privada. Incluye:
         1. Dependencias técnicas.
         2. Riesgos de seguridad.
         3. Herramientas necesarias.
         4. Pasos de verificación.
+        5. Hipótesis consideradas y criterios de decisión.
         
         Devuelve un resumen de deliberación claro y profesional.
         """
@@ -34,7 +35,10 @@ class ReasoningExpansionHook:
         # Usamos el sistema de tiers del daemon para delegar a un modelo local (LOCAL_DEEP) si es posible
         reasoning = await self.daemon.reason_with_tiers(
             prompt=prompt,
-            system_prompt="Eres la consciencia estratégica de DUMMIE Engine. Piensa paso a paso.",
+            system_prompt=(
+                "Eres el módulo estratégico de DUMMIE Engine. "
+                "Devuelve solo un resumen operacional verificable, sin razonamiento privado."
+            ),
             concept="metacognitive_expansion",
             saga_id=frame.session_id
         )

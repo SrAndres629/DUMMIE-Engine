@@ -128,6 +128,29 @@ async def test_counterfactual_threshold_blocks_low_utility_action():
 
 
 @pytest.mark.asyncio
+async def test_authority_gate_blocks_external_action_before_tool_execution():
+    daemon = _make_daemon()
+    request = GatewayRequest(
+        session_id="S-G5",
+        goal="Publica contenido en TikTok",
+        dag_xml=(
+            "<dag>"
+            "<task id='t1' server='filesystem' tool='write'>"
+            "<arguments>{\"path\": \"README.md\", \"content\": \"ok\"}</arguments>"
+            "</task>"
+            "</dag>"
+        ),
+    )
+
+    outcome = await daemon.process_request(request)
+
+    assert outcome["status"] == "FAILED"
+    assert outcome["gate_status"] == "REVIEW"
+    assert any("authority_gate" in reason for reason in outcome["gate_reasons"])
+    assert daemon.muscle.calls == []
+
+
+@pytest.mark.asyncio
 async def test_daemon_default_wiring_uses_real_shields_and_driver():
     gateway = _GatewayStub()
     daemon = DummieDaemon(

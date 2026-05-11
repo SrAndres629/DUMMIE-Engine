@@ -36,11 +36,15 @@ patterns=(
     "cloudcode_cli duet"
     "pyrefly lsp"
     "language_server.*DUMMIE_20Engine"
+    "Ollama"
+    "fastembed"
+    "uvicorn"
+    "gunicorn"
 )
 
 for pattern in "${patterns[@]}"; do
     # Intentar SIGTERM primero, luego SIGKILL si persiste
-    pids=$(pgrep -f "$pattern" || true)
+    pids=$(pgrep -f "$pattern" | grep -v "$$" || true)
     if [ -n "$pids" ]; then
         echo "  [-] Killing $pattern (PIDs: $pids)..."
         kill -15 $pids 2>/dev/null || true

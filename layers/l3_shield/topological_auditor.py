@@ -1,6 +1,9 @@
 import logging
 from typing import Dict, Any, Tuple
-from auditor_port import BaseAuditor
+try:
+    from auditor_port import BaseAuditor
+except ImportError:  # pragma: no cover - package import fallback
+    from layers.l2_brain.auditor_port import BaseAuditor
 
 logger = logging.getLogger("shield-structural")
 

@@ -4,9 +4,6 @@ from .contracts import MetacognitiveFrame
 
 logger = logging.getLogger("dummie.metacognition.pipeline")
 
-class Hook(property):
-    pass # Placeholder for hook decorator if needed
-
 class MetacognitivePipeline:
     def __init__(self, input_hooks=None, deliberation_hooks=None, output_hooks=None):
         self.input_hooks = input_hooks or []
@@ -20,6 +17,7 @@ class MetacognitivePipeline:
                 frame = await hook.run(frame)
             except Exception as e:
                 logger.error(f"Input Hook {hook.__class__.__name__} failed: {e}")
+                self._record_hook_failure(frame, "input", hook, e)
         return frame
 
     async def deliberate(self, frame: MetacognitiveFrame) -> MetacognitiveFrame:
@@ -28,6 +26,7 @@ class MetacognitivePipeline:
                 frame = await hook.run(frame)
             except Exception as e:
                 logger.error(f"Deliberation Hook {hook.__class__.__name__} failed: {e}")
+                self._record_hook_failure(frame, "deliberation", hook, e)
         return frame
 
     async def postprocess(self, frame: MetacognitiveFrame, outcome: Any) -> MetacognitiveFrame:
@@ -38,4 +37,17 @@ class MetacognitivePipeline:
                 frame = await hook.run(frame)
             except Exception as e:
                 logger.error(f"Output Hook {hook.__class__.__name__} failed: {e}")
+                self._record_hook_failure(frame, "output", hook, e)
         return frame
+
+    @staticmethod
+    def _record_hook_failure(frame: MetacognitiveFrame, phase: str, hook: Any, error: Exception) -> None:
+        failures = frame.telemetry.setdefault("hook_failures", [])
+        failures.append(
+            {
+                "phase": phase,
+                "hook": hook.__class__.__name__,
+                "error": str(error),
+            }
+        )
+        frame.risk_level = "degraded"

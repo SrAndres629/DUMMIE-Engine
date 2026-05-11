@@ -51,21 +51,25 @@ elif [ -f "$ROOT_DIR/layers/l2_brain/uv.lock" ]; then
     cd "$ROOT_DIR/layers/l2_brain" && uv sync || echo "UV sync failed, skipping."
 fi
 
-echo "=== [3/5] SUBSTRATE CYCLE ==="
-echo "Stopping lab..."
-# Usar el script directamente si existe en PATH o local
-if command -v dummie-lab-off >/dev/null 2>&1; then
-    dummie-lab-off
-else
-    bash "$ROOT_DIR/scripts/shutdown_factory.sh"
+echo "=== [3/5] AUTONOMOUS SELF-HEALING ==="
+# Execute the self-healing routine from the nervous layer if available
+if [ -f "$ROOT_DIR/layers/l1_nervous/self_healing.py" ]; then
+    echo "Running Nervous Self-Healing..."
+    "$VENV_PYTHON" "$ROOT_DIR/layers/l1_nervous/self_healing.py" --fix || echo "Self-healing failed."
 fi
 
-echo "Starting lab..."
-if command -v dummie-lab-on >/dev/null 2>&1; then
-    dummie-lab-on
-else
-    bash "$ROOT_DIR/scripts/factory_up.sh"
+# Fix potential SPEC validation failures by generating stubs
+if [ -f "$ROOT_DIR/scratch/generate_sdks.py" ]; then
+    echo "Regenerating SDK stubs for Spec compliance..."
+    "$VENV_PYTHON" "$ROOT_DIR/scratch/generate_sdks.py"
 fi
+
+echo "=== [4/5] SUBSTRATE CYCLE ==="
+echo "Stopping lab..."
+dummie-lab-off
+
+echo "Starting lab..."
+dummie-lab-on
 
 echo "=== [4/5] VERIFICATION PHASE ==="
 sleep 5 # Wait for services to settle

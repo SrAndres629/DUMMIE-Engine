@@ -6,13 +6,17 @@ from .contracts import MetacognitiveFrame
 logger = logging.getLogger("dummie.metacognition.deliberation_hooks")
 
 class MissionDecomposerHook:
-    def __init__(self, daemon: Any):
+    def __init__(self, daemon: Any = None):
         self.daemon = daemon
 
     async def run(self, frame: MetacognitiveFrame) -> MetacognitiveFrame:
         if frame.refined_intent == "OBJECTIVE_INQUIRY":
              frame.mission_plan = [{"step": 1, "agent": "ObserverAgent", "action": "Gather system intel"}]
              return frame
+
+        if not self.daemon or not hasattr(self.daemon, "reason_with_tiers"):
+            frame.mission_plan = self._fallback_plan(frame)
+            return frame
 
         prompt = f"""
         Genera un plan de misión estructurado en JSON para el siguiente objetivo:
@@ -40,9 +44,17 @@ class MissionDecomposerHook:
             frame.mission_plan = json.loads(json_str)
         except Exception as e:
             logger.error(f"Failed to parse mission plan JSON: {e}")
-            frame.mission_plan = [{"step": 1, "agent": "FallbackAgent", "action": "Manual intervention required"}]
+            frame.mission_plan = self._fallback_plan(frame)
             
         return frame
+
+    @staticmethod
+    def _fallback_plan(frame: MetacognitiveFrame) -> List[Dict[str, Any]]:
+        return [
+            {"step": 1, "agent": "ResearchAgent", "action": "Clarify operational objective and constraints"},
+            {"step": 2, "agent": "BuilderAgent", "action": "Prepare reversible implementation path"},
+            {"step": 3, "agent": "QAAgent", "action": "Verify risks, tests, and rollback evidence"},
+        ]
 
 class PlanCriticHook:
     async def run(self, frame: MetacognitiveFrame) -> MetacognitiveFrame:

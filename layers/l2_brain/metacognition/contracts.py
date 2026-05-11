@@ -1,14 +1,10 @@
 from dataclasses import dataclass, field
 from typing import Dict, Any, List, Optional
-from enum import Enum
 
-class AuthorityLevel(str, Enum):
-    A0_OBSERVER = "A0_OBSERVER"
-    A1_WORKSPACE_OP = "A1_WORKSPACE_OP"
-    A2_BUILDER = "A2_BUILDER"
-    A3_STATION_OP = "A3_STATION_OP"
-    A4_EXTERNAL_ACTOR = "A4_EXTERNAL_ACTOR"
-    A5_CRITICAL_OP = "A5_CRITICAL_OP"
+try:
+    from models import AuthorityLevel
+except ImportError:  # pragma: no cover - package import fallback
+    from layers.l2_brain.models import AuthorityLevel
 
 @dataclass
 class MetacognitiveFrame:

@@ -63,3 +63,25 @@ async def test_authority_classification_workspace():
     
     frame = await pipeline.preprocess("test_session_3", "Crea un archivo de notas")
     assert frame.authority_level == AuthorityLevel.A1_WORKSPACE_OP
+
+
+@pytest.mark.asyncio
+async def test_pipeline_records_hook_failures_in_frame_telemetry():
+    class BrokenHook:
+        async def run(self, frame):
+            raise RuntimeError("boom")
+
+    pipeline = MetacognitivePipeline(input_hooks=[BrokenHook(), IntentClarifierHook()])
+
+    frame = await pipeline.preprocess("test_session_4", "Analiza el sistema")
+
+    assert frame.refined_intent == "OBJECTIVE_INQUIRY"
+    assert frame.risk_level == "degraded"
+    assert frame.telemetry["hook_failures"][0]["hook"] == "BrokenHook"
+    assert "boom" in frame.telemetry["hook_failures"][0]["error"]
+
+
+def test_metacognitive_authority_level_uses_l2_model_contract():
+    from models import AuthorityLevel as ModelAuthorityLevel
+
+    assert AuthorityLevel is ModelAuthorityLevel

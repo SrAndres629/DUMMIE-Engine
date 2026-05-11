@@ -113,7 +113,13 @@ class DummieDaemon:
         # Metacognitive Pipeline Integration
         try:
             from metacognition.pipeline import MetacognitivePipeline
-            from metacognition.input_hooks import IntentClarifierHook, AuthorityClassifierHook
+            from metacognition.input_hooks import (
+                AuthorityClassifierHook,
+                ContextEnricherHook,
+                IntentClarifierHook,
+                PromptRefinerHook,
+                ToolNeedDetectorHook,
+            )
             from metacognition.semantic_hooks import SemanticToolSelectorHook
             from metacognition.reasoning_hooks import ReasoningExpansionHook
             from metacognition.deliberation_hooks import MissionDecomposerHook, PlanCriticHook
@@ -122,7 +128,10 @@ class DummieDaemon:
             self.metacognition = MetacognitivePipeline(
                 input_hooks=[
                     IntentClarifierHook(), 
+                    PromptRefinerHook(),
                     AuthorityClassifierHook(),
+                    ToolNeedDetectorHook(),
+                    ContextEnricherHook(),
                     SemanticToolSelectorHook(self.mcp_gateway)
                 ],
                 deliberation_hooks=[
@@ -135,6 +144,15 @@ class DummieDaemon:
         except ImportError:
             self.metacognition = None
             logger.warning("Metacognitive Pipeline disabled: Import Error")
+
+        try:
+            from authority_gate import AuthorityGate
+        except ImportError:
+            try:
+                from layers.l3_shield.authority_gate import AuthorityGate
+            except ImportError:
+                AuthorityGate = None
+        self.authority_gate = AuthorityGate() if AuthorityGate else None
         
         self._background_tasks: set[asyncio.Task] = set()
         self.request_timeout_s = float(os.getenv("DUMMIE_REQUEST_TIMEOUT_S", "60"))
@@ -228,6 +246,7 @@ class DummieDaemon:
         self.last_counterfactual_scores = []
         self._current_counterfactual_threshold = 0.0
         self.last_cognitive_preflight = {"status": "SKIPPED"}
+        frame = None
 
         logger.info(f"Saga Start: {transaction_id} | Goal: {request.goal}")
         
@@ -270,14 +289,25 @@ class DummieDaemon:
             dominant = HypothesisService.collapse_to_dominant(bundle)
             self.last_hypothesis_decision = dominant.hypothesis_id if dominant else "collapsed"
 
-            if self._cognitive_preflight_enabled(root):
-                self.last_cognitive_preflight = await self._run_cognitive_preflight(request)
-
             # Metacognitive Pre-processing
             if self.metacognition:
                 frame = await self.metacognition.preprocess(request.session_id, request.goal)
+                if self.authority_gate:
+                    authorized, authority_msg = await self.authority_gate.validate_intent(frame)
+                    if not authorized:
+                        gate_status = "REVIEW"
+                        if "VETO" in authority_msg:
+                            gate_status = "BLOCK"
+                        raise GovernanceGateError(
+                            "authority_gate_blocked",
+                            gate_status,
+                            [f"authority_gate:{authority_msg}"],
+                        )
                 frame = await self.metacognition.deliberate(frame)
                 logger.info(f"Metacognitive Deliberation: {frame.deliberation_summary}")
+
+            if self._cognitive_preflight_enabled(root):
+                self.last_cognitive_preflight = await self._run_cognitive_preflight(request)
 
             plan = self._build_hierarchical_plan(request, root)
             self.last_plan = plan
@@ -291,12 +321,14 @@ class DummieDaemon:
             outcome = self._build_outcome("SUCCESS", transaction_id, saga)
             
             # Metacognitive Post-processing
-            if self.metacognition:
+            if self.metacognition and frame is not None:
                 final_frame = await self.metacognition.postprocess(frame, outcome)
                 outcome["metacognition"] = {
-                    "authority": final_frame.authority_level,
+                    "authority": final_frame.authority_level.value,
                     "mission_steps": len(final_frame.mission_plan),
-                    "verification": final_frame.verification_findings
+                    "verification": final_frame.verification_findings,
+                    "required_tools": final_frame.required_tools,
+                    "risk_level": final_frame.risk_level,
                 }
 
             logger.info(f"Saga Success: {transaction_id}")
@@ -450,6 +482,84 @@ class DummieDaemon:
         if explicit is not None:
             return self._parse_bool(explicit, False)
         return self._parse_bool(os.getenv("DUMMIE_COGNITIVE_PREFLIGHT"), False)
+
+    async def _run_cognitive_preflight(self, request: GatewayRequest) -> Dict[str, Any]:
+        try:
+            recall = await self._call_local_reasoning_capability(
+                "local.semantic_recall",
+                {
+                    "goal": request.goal,
+                    "query": request.goal,
+                    "top_k": 10,
+                    "sources": ["mcp", "knowledge", "4d_tes"],
+                },
+            )
+            candidates = recall.get("candidates")
+            if not isinstance(candidates, list):
+                raise RuntimeError(f"semantic_recall_invalid_payload:{recall}")
+
+            rerank = await self._call_local_reasoning_capability(
+                "local.reasoned_rerank",
+                {
+                    "goal": request.goal,
+                    "candidates": candidates,
+                    "max_selected": 5,
+                    "mode": "shadow",
+                },
+            )
+            ranked = rerank.get("ranked")
+            if not isinstance(ranked, list):
+                raise RuntimeError(f"reasoned_rerank_invalid_payload:{rerank}")
+
+            shaped = await self._call_local_reasoning_capability(
+                "local.context_shaper",
+                {
+                    "goal": request.goal,
+                    "ranked": ranked,
+                    "token_budget": 4000,
+                    "cloud_agent": "daemon",
+                },
+            )
+            selected_tools = shaped.get("selected_tools")
+            if not isinstance(selected_tools, list):
+                selected_tools = [str(item.get("id")) for item in ranked[:5] if item.get("id")]
+
+            return {
+                "status": "READY",
+                "provider_status": {
+                    "recall": recall.get("provider_status", "unknown"),
+                    "rerank": rerank.get("provider_status", "unknown"),
+                    "context": shaped.get("provider_status", "unknown"),
+                },
+                "candidates_count": len(candidates),
+                "ranked_count": len(ranked),
+                "selected_tools": selected_tools,
+                "context_packet": shaped,
+            }
+        except Exception as exc:
+            logger.warning("Cognitive preflight degraded: %s", exc)
+            return {
+                "status": "DEGRADED",
+                "error": str(exc),
+                "selected_tools": [],
+            }
+
+    async def _call_local_reasoning_capability(self, target: str, arguments: Dict[str, Any]) -> Dict[str, Any]:
+        if not self.mcp_gateway or not hasattr(self.mcp_gateway, "call_tool"):
+            raise RuntimeError("mcp_gateway_unavailable")
+
+        response = await self.mcp_gateway.call_tool(
+            "dummie-brain",
+            "dummie_execute_capability",
+            {
+                "target": target,
+                "arguments": arguments,
+            },
+        )
+        parsed = self._parse_gateway_payload(response)
+        if not isinstance(parsed, dict):
+            raise RuntimeError(f"{target}_returned_non_object")
+        return parsed
 
     async def reason_with_tiers(self, prompt: str, system_prompt: str = "", concept: str = "general", saga_id: str = "unknown") -> str:
         """
