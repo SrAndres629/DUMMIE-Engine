@@ -1,7 +1,6 @@
 import socket
 import json
 import yaml
-import sys
 
 def test_spawn():
     socket_path = "/tmp/dummied.sock"
