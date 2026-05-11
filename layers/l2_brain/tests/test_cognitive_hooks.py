@@ -39,8 +39,22 @@ def test_sudo_drivers_env_request_classifies_as_a5():
         "Run sudo install for system packages",
         "Modify .env with production credentials",
         "Install GPU drivers",
+        "Delete tokens from the database",
     ):
         assert classify_authority_level(prompt) == "A5"
+
+
+def test_authority_false_positives_not_escalated():
+    # Test that simple mentions without action verbs don't escalate
+    assert classify_authority_level("analiza tokens de contexto") != "A5"
+    assert classify_authority_level("analiza estrategia de Facebook") != "A4"
+    assert classify_authority_level("revisa driver architecture documentation") != "A5"
+    
+    # Test that actions DO escalate
+    assert classify_authority_level("publica en Facebook") == "A4"
+    assert classify_authority_level("edita .env") == "A5"
+    assert classify_authority_level("actualiza drivers NVIDIA") == "A5"
+    assert classify_authority_level("delete my session tokens") == "A5"
 
 
 def test_hook_pipeline_produces_packet_and_json():

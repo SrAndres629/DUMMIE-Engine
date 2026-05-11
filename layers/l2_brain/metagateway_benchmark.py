@@ -41,8 +41,20 @@ class MetaGatewayBenchmark:
         return result
 
     def export_report(self, path: str):
+        avg_ratio = sum(r["token_reduction_ratio"] for r in self.results) / len(self.results) if self.results else 0.0
+        
+        report = {
+            "measurement_type": "estimated",
+            "confidence": "low",
+            "scenarios": self.results,
+            "summary": {
+                "total_scenarios": len(self.results),
+                "avg_token_reduction_ratio": round(avg_ratio, 4)
+            }
+        }
+        
         with open(path, "w") as f:
-            json.dump(self.results, f, indent=2)
+            json.dump(report, f, indent=2)
 
 if __name__ == "__main__":
     benchmark = MetaGatewayBenchmark()
