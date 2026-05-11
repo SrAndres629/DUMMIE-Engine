@@ -1,0 +1,33 @@
+# WORKTREE_POLICY — Protocol for agentic repository interaction
+# Status: MANDATORY
+# Enforcement: RepoGuard (L1), Sentinel (L3)
+
+version: "1.0.0"
+updated_at: "2026-05-11"
+
+concurrency_model:
+  primary_strategy: "SHARED_ROOT"
+  description: "All agents must operate within the primary DUMMIE_ROOT. Isolated worktrees are deprecated for autonomous evolution."
+  locking_mechanism: "LOCUS_RESERVATION" # Agents must reserve files in 4D-TES before editing.
+
+commit_standards:
+  atomic_commits: true
+  sign_off: true
+  mandatory_checks:
+    - secret_scanning: "ghp_|github_pat_|sk-"
+    - syntax_validation: "python -m py_compile"
+    - conflict_marker_detection: "<<<<<<<|=======|>>>>>>>"
+    - linting: "find_unused_imports (L1-Sentinel)"
+
+synchronization_protocol:
+  pre_action: "pull --rebase origin main"
+  post_action: "push origin main"
+  conflict_resolution: "FAIL_IMMEDIATELY" # Agents must not attempt auto-merges of logical conflicts without human review.
+
+branching_strategy:
+  allowed: ["main"] # Direct-to-main via RepoGuard atomic flow.
+  prohibited: ["temp/*", "agent/*"] # Avoid fragmented branch sprawl.
+
+data_sovereignty:
+  git_remote: "SrAndres629/DUMMIE-Engine"
+  credential_source: "ENV_VAR (GITHUB_PERSONAL_ACCESS_TOKEN)"
