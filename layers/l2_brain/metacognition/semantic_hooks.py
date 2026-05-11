@@ -18,13 +18,33 @@ class SemanticToolSelectorHook:
         logger.info(f"Semantically searching tools for: {frame.raw_user_input}")
         
         try:
-            from embedding_provider import EmbeddingProvider
+            try:
+                from embedding_provider import EmbeddingProvider
+            except ImportError:
+                from layers.l2_brain.embedding_provider import EmbeddingProvider
             query_vec = EmbeddingProvider.generate_vector(frame.raw_user_input)
             
-            # Buscamos en el meta-gateway
-            frame.telemetry["semantic_tool_search"] = "INITIALIZED"
+            # Buscamos en el meta-gateway vía descubrimiento semántico
+            # El Gateway de DUMMIE expone dummie_discover_capabilities
+            try:
+                discovery_result = await self.mcp_gateway.execute_tool(
+                    server_name="dummie-brain",
+                    tool_name="dummie_discover_capabilities",
+                    arguments={"query": frame.raw_user_input}
+                )
+                
+                if discovery_result and "capabilities" in discovery_result:
+                    tools = discovery_result["capabilities"]
+                    frame.required_tools.extend([t["id"] for t in tools if t.get("id")])
+                    frame.telemetry["semantic_tool_search"] = f"FOUND_{len(tools)}"
+                    logger.info(f"Metacognitive discovery found {len(tools)} potential tools")
+                else:
+                    frame.telemetry["semantic_tool_search"] = "NO_RESULTS"
+            except Exception as ge:
+                logger.warning(f"Metacognitive discovery tool call failed: {ge}")
+                frame.telemetry["semantic_tool_search"] = "GATEWAY_ERROR"
             
         except Exception as e:
-            logger.error(f"Semantic tool selection failed: {e}")
+            logger.error(f"Semantic tool selection logic failed: {e}")
             
         return frame

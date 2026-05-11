@@ -4,7 +4,10 @@ import time
 import os
 from typing import Dict, Any, Optional
 from dataclasses import dataclass
-from model_router import ModelConfig, ModelTier, RoutingDecision
+try:
+    from model_router import ModelConfig, ModelTier, RoutingDecision
+except ImportError:
+    from layers.l2_brain.model_router import ModelConfig, ModelTier, RoutingDecision
 
 logger = logging.getLogger("brain.executor")
 

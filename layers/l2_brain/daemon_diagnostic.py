@@ -20,6 +20,7 @@ class DiagnosticReporter:
             "mode": "DIAGNOSTIC",
             "environment": self._check_env(),
             "layers": await self._check_layers(),
+            "metagateway": await self._check_metagateway(),
             "mcp_connectivity": await self._check_mcp(),
             "storage": self._check_storage()
         }
@@ -82,4 +83,22 @@ class DiagnosticReporter:
             "ledger_path": str(ledger),
             "exists": ledger.exists(),
             "writable": os.access(ledger.parent, os.W_OK) if ledger.parent.exists() else False
+        }
+
+    async def _check_metagateway(self) -> Dict[str, Any]:
+        """Check Meta-Gateway status and Metacognitive Pipeline."""
+        status = getattr(self.daemon, "metacognition_status", "MISSING")
+        error = getattr(self.daemon, "metacognition_error", "")
+        
+        hooks = []
+        if self.daemon.metacognition and hasattr(self.daemon.metacognition, "input_hooks"):
+            hooks = [type(h).__name__ for h in self.daemon.metacognition.input_hooks]
+
+        return {
+            "status": status,
+            "metacognition_status": status,
+            "metacognition_error": error,
+            "enabled_hooks": hooks,
+            "cognitive_preflight_enabled": self.daemon.diagnostic_mode or os.getenv("DUMMIE_COGNITIVE_PREFLIGHT") == "1",
+            "local_reasoning_gateway_available": hasattr(self.daemon, "mcp_gateway") and self.daemon.mcp_gateway is not None
         }

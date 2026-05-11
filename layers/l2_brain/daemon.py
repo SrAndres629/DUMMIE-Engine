@@ -20,13 +20,18 @@ import json
 import logging
 import os
 from typing import Dict, Any, List, Optional
-from model_router import ModelTier
 from datetime import datetime
 from abc import ABC, abstractmethod
 
 # Importaciones Isomórficas (Flat Structure)
-from gateway_contract import GatewayRequest, SagaTransaction, SagaStep
-from auditor_port import BaseAuditor, BaseExecutor
+try:
+    from gateway_contract import GatewayRequest, SagaTransaction, SagaStep
+    from auditor_port import BaseAuditor, BaseExecutor
+    from model_router import ModelTier
+except ImportError:
+    from layers.l2_brain.gateway_contract import GatewayRequest, SagaTransaction, SagaStep
+    from layers.l2_brain.auditor_port import BaseAuditor, BaseExecutor
+    from layers.l2_brain.model_router import ModelTier
 
 # Importaciones de Adaptadores (Cruce de Capas vía PYTHONPATH)
 try:
@@ -57,12 +62,20 @@ logger = logging.getLogger("dummie-daemon")
 try:
     from event_bus import AsyncEventBus
 except ImportError:
-    from layers.l2_brain.event_bus import AsyncEventBus
+    try:
+        from layers.l2_brain.event_bus import AsyncEventBus
+    except ImportError:
+        AsyncEventBus = None
 
 try:
     from repo_guard import RepoGuard
 except ImportError:
     from layers.l1_nervous.repo_guard import RepoGuard
+
+try:
+    from metagateway_policy import SensorFirstPolicy, PolicyDecision
+except ImportError:
+    from layers.l2_brain.metagateway_policy import SensorFirstPolicy, PolicyDecision
 
 class DummieDaemon:
     """
@@ -111,19 +124,37 @@ class DummieDaemon:
         self.last_cognitive_preflight: Dict[str, Any] = {"status": "SKIPPED"}
         
         # Metacognitive Pipeline Integration
+        self.metacognition_status = "MISSING"
+        self.metacognition_error = ""
+        
         try:
-            from metacognition.pipeline import MetacognitivePipeline
-            from metacognition.input_hooks import (
-                AuthorityClassifierHook,
-                ContextEnricherHook,
-                IntentClarifierHook,
-                PromptRefinerHook,
-                ToolNeedDetectorHook,
-            )
-            from metacognition.semantic_hooks import SemanticToolSelectorHook
-            from metacognition.reasoning_hooks import ReasoningExpansionHook
-            from metacognition.deliberation_hooks import MissionDecomposerHook, PlanCriticHook
-            from metacognition.output_hooks import AnswerVerifierHook, MemoryUpdateHook
+            try:
+                from metacognition.pipeline import MetacognitivePipeline
+                from metacognition.input_hooks import (
+                    AuthorityClassifierHook,
+                    ContextEnricherHook,
+                    IntentClarifierHook,
+                    PromptRefinerHook,
+                    ToolNeedDetectorHook,
+                )
+                from metacognition.semantic_hooks import SemanticToolSelectorHook
+                from metacognition.reasoning_hooks import ReasoningExpansionHook
+                from metacognition.deliberation_hooks import MissionDecomposerHook, PlanCriticHook
+                from metacognition.output_hooks import AnswerVerifierHook, MemoryUpdateHook
+            except ImportError:
+                # Fallback to absolute paths if relative/path-based import fails
+                from layers.l2_brain.metacognition.pipeline import MetacognitivePipeline
+                from layers.l2_brain.metacognition.input_hooks import (
+                    AuthorityClassifierHook,
+                    ContextEnricherHook,
+                    IntentClarifierHook,
+                    PromptRefinerHook,
+                    ToolNeedDetectorHook,
+                )
+                from layers.l2_brain.metacognition.semantic_hooks import SemanticToolSelectorHook
+                from layers.l2_brain.metacognition.reasoning_hooks import ReasoningExpansionHook
+                from layers.l2_brain.metacognition.deliberation_hooks import MissionDecomposerHook, PlanCriticHook
+                from layers.l2_brain.metacognition.output_hooks import AnswerVerifierHook, MemoryUpdateHook
             
             self.metacognition = MetacognitivePipeline(
                 input_hooks=[
@@ -141,9 +172,17 @@ class DummieDaemon:
                 ],
                 output_hooks=[AnswerVerifierHook(), MemoryUpdateHook()]
             )
-        except ImportError:
+            self.metacognition_status = "READY"
+        except ImportError as e:
             self.metacognition = None
-            logger.warning("Metacognitive Pipeline disabled: Import Error")
+            self.metacognition_status = "DEGRADED"
+            self.metacognition_error = str(e)
+            logger.warning(f"Metacognitive Pipeline degraded: {e}")
+        except Exception as e:
+            self.metacognition = None
+            self.metacognition_status = "ERROR"
+            self.metacognition_error = str(e)
+            logger.error(f"Metacognitive Pipeline critical failure: {e}")
 
         try:
             from authority_gate import AuthorityGate
@@ -165,6 +204,8 @@ class DummieDaemon:
         self.e_shield: BaseAuditor = BudgetAuditor() if BudgetAuditor else FailClosedAuditor(shield_error)
         self.l_shield: BaseAuditor = ComplianceAuditor() if ComplianceAuditor else FailClosedAuditor(shield_error)
         self.muscle: BaseExecutor = MuscleDriver(mcp_gateway) if MuscleDriver else FailClosedExecutor(executor_error)
+        
+        self.gateway_policy = SensorFirstPolicy(mode=PolicyDecision.WARN)
 
         if self.diagnostic_mode:
             try:
@@ -471,8 +512,10 @@ class DummieDaemon:
             "status": status,
             "transaction_id": transaction_id,
             "error": error,
+            "metacognition_status": self.metacognition_status,
             "gate_status": gate_status,
             "gate_reasons": gate_reasons or ["all_guards_passed"],
+            "gateway_first_policy": f"{self.gateway_policy.mode.value}_MODE_ACTIVE",
             "cognitive_preflight": self.last_cognitive_preflight,
             "steps": [{"task_id": step.task_id, "status": step.status} for step in saga.steps],
         }

@@ -34,13 +34,13 @@ class PromptRefinerHook:
 class AuthorityClassifierHook:
     async def run(self, frame: MetacognitiveFrame) -> MetacognitiveFrame:
         raw = frame.raw_user_input.lower()
-        if "borra" in raw or "delete" in raw or "root" in raw:
+        if any(k in raw for k in ["borra", "delete", "remove", "root", "format", "destroy", "sudo"]):
             frame.authority_level = AuthorityLevel.A5_CRITICAL_OP
-        elif any(k in raw for k in ["publica", "post", "send", "tiktok", "facebook", "instagram", "social"]):
+        elif any(k in raw for k in ["publica", "post", "send", "tweet", "publish", "deploy", "social"]):
             frame.authority_level = AuthorityLevel.A4_EXTERNAL_ACTOR
-        elif any(k in raw for k in ["instala", "install", "chrome", "driver", "setup"]):
+        elif any(k in raw for k in ["instala", "install", "setup", "configure", "apt", "npm", "pip"]):
             frame.authority_level = AuthorityLevel.A3_STATION_OP
-        elif any(k in raw for k in ["crea", "edit", "write", "modify", "refactor"]):
+        elif any(k in raw for k in ["crea", "edit", "write", "modify", "refactor", "fix", "patch", "update"]):
             frame.authority_level = AuthorityLevel.A1_WORKSPACE_OP
         else:
             frame.authority_level = AuthorityLevel.A0_OBSERVER
