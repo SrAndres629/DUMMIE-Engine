@@ -36,6 +36,7 @@ class PreprocessingResult:
     latency_ms: float = 0.0
     provider: str = "deterministic"
     error: str = ""
+    hook_metadata: dict[str, Any] = field(default_factory=dict)
 
 
 # ─────────────────────────────────────────────
@@ -270,17 +271,64 @@ class PromptPreprocessor:
     falls back to deterministic if local model is unavailable.
     """
 
-    def __init__(self, use_llm: bool | None = None):
+    def __init__(self, use_llm: bool | None = None, pre_input_hook: Any = None):
         if use_llm is None:
             self.use_llm = os.getenv("DUMMIE_PREPROCESS_LLM", "1").strip().lower() in {"1", "true", "yes"}
         else:
             self.use_llm = use_llm
+        self.pre_input_hook = pre_input_hook
 
     def process(self, prompt: str) -> PreprocessingResult:
         """Process a raw user prompt into an enriched prompt."""
         if self.use_llm:
-            return preprocess_with_llm(prompt)
-        return preprocess_deterministic(prompt)
+            result = preprocess_with_llm(prompt)
+        else:
+            result = preprocess_deterministic(prompt)
+        result.hook_metadata = _run_optional_pre_input_hook(self.pre_input_hook, prompt, result)
+        return result
+
+
+def _run_optional_pre_input_hook(
+    pre_input_hook: Any,
+    prompt: str,
+    result: PreprocessingResult,
+) -> dict[str, Any]:
+    if pre_input_hook is None:
+        return {}
+
+    try:
+        try:
+            from cognitive_hooks import CognitiveHookInput, CognitiveHookPacket
+        except ImportError:  # pragma: no cover - package import fallback
+            from layers.l2_brain.cognitive_hooks import CognitiveHookInput, CognitiveHookPacket
+
+        hook_input = CognitiveHookInput(
+            message=prompt,
+            available_context_refs=list(result.context_refs),
+            metadata={
+                "preprocessor_provider": result.provider,
+                "extracted_intent": result.extracted_intent,
+                "detected_language": result.detected_language,
+            },
+        )
+        if hasattr(pre_input_hook, "run"):
+            hook_output = pre_input_hook.run(hook_input)
+        else:
+            hook_output = pre_input_hook(hook_input)
+
+        if isinstance(hook_output, CognitiveHookPacket):
+            metadata = hook_output.to_router_metadata()
+        elif isinstance(hook_output, dict):
+            metadata = dict(hook_output)
+        elif hook_output is None:
+            metadata = {}
+        else:
+            metadata = {"hook_output_type": type(hook_output).__name__}
+        metadata["hook_status"] = "applied"
+        return metadata
+    except Exception as exc:
+        logger.warning("Pre-input hook unavailable (%s), preserving preprocessing fallback", exc)
+        return {"hook_status": "failed", "hook_error": str(exc)}
 
 
 def _parse_json_safe(text: str) -> dict[str, Any]:

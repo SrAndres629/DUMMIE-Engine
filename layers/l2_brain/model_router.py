@@ -62,6 +62,7 @@ class RoutingDecision:
     preprocessing_applied: bool = False
     enriched_prompt: str = ""
     latency_ms: float = 0.0
+    hook_metadata: dict[str, Any] = field(default_factory=dict)
 
 
 # ─────────────────────────────────────────────
@@ -261,14 +262,17 @@ class ModelRouter:
         affected_layers: list[str] | None = None,
         affected_files: int = 0,
         force_tier: ModelTier | None = None,
+        hook_metadata: dict[str, Any] | None = None,
     ) -> RoutingDecision:
         """
         Determine the optimal model tier and return a RoutingDecision.
         """
         started = time.perf_counter()
+        hook_metadata = _normalize_hook_metadata(hook_metadata)
+        affected_layers = _merge_layers(affected_layers, hook_metadata.get("affected_layers"))
 
         complexity = classify_task_complexity(prompt, affected_layers, affected_files)
-        target_tier = force_tier or _COMPLEXITY_TO_TIER[complexity]
+        target_tier = force_tier or _tier_from_hook_metadata(hook_metadata) or _COMPLEXITY_TO_TIER[complexity]
 
         # Resolve model
         model = self.registry.get_best(target_tier)
@@ -290,6 +294,7 @@ class ModelRouter:
                 model_id="none",
                 reason="no_models_available",
                 latency_ms=(time.perf_counter() - started) * 1000,
+                hook_metadata=hook_metadata,
             )
 
         # Budget gate for cloud models
@@ -309,6 +314,11 @@ class ModelRouter:
             f"complexity={complexity.value} → tier={target_tier.value} "
             f"model={model.model_id} est_tokens={estimated}"
         )
+        if hook_metadata:
+            reason = (
+                f"{reason} hook_authority={hook_metadata.get('authority_level', 'unknown')} "
+                f"hook_reasoning={hook_metadata.get('reasoning_mode', 'unknown')}"
+            )
 
         return RoutingDecision(
             tier=target_tier,
@@ -317,6 +327,7 @@ class ModelRouter:
             reason=reason,
             estimated_tokens=estimated,
             latency_ms=(time.perf_counter() - started) * 1000,
+            hook_metadata=hook_metadata,
         )
 
     def record_usage(self, tokens: int, tier: ModelTier) -> None:
@@ -332,3 +343,27 @@ class ModelRouter:
 def _estimate_prompt_tokens(text: str) -> int:
     """Rough token estimation: ~4 chars per token."""
     return max(1, len(text) // 4)
+
+
+def _normalize_hook_metadata(hook_metadata: dict[str, Any] | None) -> dict[str, Any]:
+    if not isinstance(hook_metadata, dict):
+        return {}
+    return dict(hook_metadata)
+
+
+def _merge_layers(existing: list[str] | None, hook_layers: Any) -> list[str]:
+    layers = list(existing or [])
+    if isinstance(hook_layers, list):
+        layers.extend(str(layer) for layer in hook_layers if str(layer))
+    return list(dict.fromkeys(layers))
+
+
+def _tier_from_hook_metadata(hook_metadata: dict[str, Any]) -> ModelTier | None:
+    reasoning_mode = str(hook_metadata.get("reasoning_mode", "")).strip().lower()
+    return {
+        "deterministic": ModelTier.LOCAL_FAST,
+        "local_fast": ModelTier.LOCAL_FAST,
+        "local_deep": ModelTier.LOCAL_DEEP,
+        "cloud_std": ModelTier.CLOUD_STD,
+        "cloud_prem": ModelTier.CLOUD_PREM,
+    }.get(reasoning_mode)
