@@ -1,7 +1,7 @@
 import logging
 import json
 from typing import Any
-from .contracts import MetacognitiveFrame
+from layers.l2_brain.metacognition.contracts import MetacognitiveFrame
 
 logger = logging.getLogger("dummie.metacognition.reasoning_hooks")
 

@@ -24,58 +24,32 @@ from datetime import datetime
 from abc import ABC, abstractmethod
 
 # Importaciones Isomórficas (Flat Structure)
-try:
-    from gateway_contract import GatewayRequest, SagaTransaction, SagaStep
-    from auditor_port import BaseAuditor, BaseExecutor
-    from model_router import ModelTier
-except ImportError:
-    from layers.l2_brain.gateway_contract import GatewayRequest, SagaTransaction, SagaStep
-    from layers.l2_brain.auditor_port import BaseAuditor, BaseExecutor
-    from layers.l2_brain.model_router import ModelTier
+from layers.l2_brain.gateway_contract import GatewayRequest, SagaTransaction, SagaStep
+from layers.l2_brain.auditor_port import BaseAuditor, BaseExecutor
+from layers.l2_brain.model_router import ModelTier
 
 # Importaciones de Adaptadores (Cruce de Capas vía PYTHONPATH)
-try:
-    from safe_fallbacks import FailClosedAuditor, FailClosedExecutor
-except ImportError:
-    from layers.l2_brain.safe_fallbacks import FailClosedAuditor, FailClosedExecutor
+from layers.l2_brain.safe_fallbacks import FailClosedAuditor, FailClosedExecutor
 
 try:
-    from topological_auditor import TopologicalAuditor
-    from budget_auditor import BudgetAuditor
-    from compliance_auditor import ComplianceAuditor
-    from mcp_driver import MCPDriver as MuscleDriver
+    from layers.l3_shield.topological_auditor import TopologicalAuditor
+    from layers.l3_shield.budget_auditor import BudgetAuditor
+    from layers.l3_shield.compliance_auditor import ComplianceAuditor
+    from layers.l5_muscle.mcp_driver import MCPDriver as MuscleDriver
 except ImportError as e:
-    try:
-        from layers.l3_shield.topological_auditor import TopologicalAuditor
-        from layers.l3_shield.budget_auditor import BudgetAuditor
-        from layers.l3_shield.compliance_auditor import ComplianceAuditor
-        from layers.l5_muscle.mcp_driver import MCPDriver as MuscleDriver
-    except ImportError as nested_error:
-        logging.getLogger("dummie-daemon").error(f"Tabula Rasa Import Error: {e}; fallback import error: {nested_error}")
-        TopologicalAuditor = None
-        BudgetAuditor = None
-        ComplianceAuditor = None
-        MuscleDriver = None
+    logging.getLogger("dummie-daemon").warning(f"Audit/Muscle layers degraded: {e}")
+    TopologicalAuditor = None
+    BudgetAuditor = None
+    ComplianceAuditor = None
+    MuscleDriver = None
 
 logger = logging.getLogger("dummie-daemon")
 
-try:
-    from event_bus import AsyncEventBus
-except ImportError:
-    try:
-        from layers.l2_brain.event_bus import AsyncEventBus
-    except ImportError:
-        AsyncEventBus = None
+from layers.l2_brain.event_bus import AsyncEventBus
 
-try:
-    from repo_guard import RepoGuard
-except ImportError:
-    from layers.l1_nervous.repo_guard import RepoGuard
+from layers.l1_nervous.repo_guard import RepoGuard
 
-try:
-    from metagateway_policy import SensorFirstPolicy, PolicyDecision
-except ImportError:
-    from layers.l2_brain.metagateway_policy import SensorFirstPolicy, PolicyDecision
+from layers.l2_brain.metagateway_policy import SensorFirstPolicy, PolicyDecision
 
 class DummieDaemon:
     """
@@ -128,33 +102,18 @@ class DummieDaemon:
         self.metacognition_error = ""
         
         try:
-            try:
-                from metacognition.pipeline import MetacognitivePipeline
-                from metacognition.input_hooks import (
-                    AuthorityClassifierHook,
-                    ContextEnricherHook,
-                    IntentClarifierHook,
-                    PromptRefinerHook,
-                    ToolNeedDetectorHook,
-                )
-                from metacognition.semantic_hooks import SemanticToolSelectorHook
-                from metacognition.reasoning_hooks import ReasoningExpansionHook
-                from metacognition.deliberation_hooks import MissionDecomposerHook, PlanCriticHook
-                from metacognition.output_hooks import AnswerVerifierHook, MemoryUpdateHook
-            except ImportError:
-                # Fallback to absolute paths if relative/path-based import fails
-                from layers.l2_brain.metacognition.pipeline import MetacognitivePipeline
-                from layers.l2_brain.metacognition.input_hooks import (
-                    AuthorityClassifierHook,
-                    ContextEnricherHook,
-                    IntentClarifierHook,
-                    PromptRefinerHook,
-                    ToolNeedDetectorHook,
-                )
-                from layers.l2_brain.metacognition.semantic_hooks import SemanticToolSelectorHook
-                from layers.l2_brain.metacognition.reasoning_hooks import ReasoningExpansionHook
-                from layers.l2_brain.metacognition.deliberation_hooks import MissionDecomposerHook, PlanCriticHook
-                from layers.l2_brain.metacognition.output_hooks import AnswerVerifierHook, MemoryUpdateHook
+            from layers.l2_brain.metacognition.pipeline import MetacognitivePipeline
+            from layers.l2_brain.metacognition.input_hooks import (
+                AuthorityClassifierHook,
+                ContextEnricherHook,
+                IntentClarifierHook,
+                PromptRefinerHook,
+                ToolNeedDetectorHook,
+            )
+            from layers.l2_brain.metacognition.semantic_hooks import SemanticToolSelectorHook
+            from layers.l2_brain.metacognition.reasoning_hooks import ReasoningExpansionHook
+            from layers.l2_brain.metacognition.deliberation_hooks import MissionDecomposerHook, PlanCriticHook
+            from layers.l2_brain.metacognition.output_hooks import AnswerVerifierHook, MemoryUpdateHook
             
             self.metacognition = MetacognitivePipeline(
                 input_hooks=[
@@ -185,12 +144,9 @@ class DummieDaemon:
             logger.error(f"Metacognitive Pipeline critical failure: {e}")
 
         try:
-            from authority_gate import AuthorityGate
+            from layers.l3_shield.authority_gate import AuthorityGate
         except ImportError:
-            try:
-                from layers.l3_shield.authority_gate import AuthorityGate
-            except ImportError:
-                AuthorityGate = None
+            AuthorityGate = None
         self.authority_gate = AuthorityGate() if AuthorityGate else None
         
         self._background_tasks: set[asyncio.Task] = set()
@@ -209,11 +165,11 @@ class DummieDaemon:
 
         if self.diagnostic_mode:
             try:
-                from daemon_diagnostic import DiagnosticReporter
-                self.diagnostic_reporter = DiagnosticReporter(self)
-            except ImportError:
                 from layers.l2_brain.daemon_diagnostic import DiagnosticReporter
                 self.diagnostic_reporter = DiagnosticReporter(self)
+            except ImportError:
+                self.diagnostic_reporter = None
+                logger.warning("Diagnostic module not available")
 
     def _spawn_task(self, coro, transaction_hint: str = "") -> None:
         task = asyncio.create_task(coro)
@@ -270,339 +226,28 @@ class DummieDaemon:
 
     async def _process_request_safe(self, request: GatewayRequest):
         async with self.concurrency_limit:
-            await self.process_request(request)
+            await self.orchestrator.execute_request(request)
 
     async def process_request(self, request: GatewayRequest):
-        import uuid
-        import hashlib
-        from datetime import UTC
-        ts = datetime.now(UTC).strftime("%Y%m%dT%H%M%S%fZ")
-        transaction_id = f"TXN-{ts}-{uuid.uuid4().hex[:8]}"
-        payload = f"{request.session_id}:{transaction_id}".encode("utf-8")
-        context_token = "TOKEN-" + hashlib.sha256(payload).hexdigest()[:24]
-        saga = SagaTransaction(transaction_id=transaction_id, context_token=context_token)
-        self.active_transactions[transaction_id] = saga
-        self.last_gate_status = "ALLOW"
-        self.last_gate_reasons = ["all_guards_passed"]
-        self.last_counterfactual_scores = []
-        self._current_counterfactual_threshold = 0.0
-        self.last_cognitive_preflight = {"status": "SKIPPED"}
-        frame = None
+        return await self.orchestrator.execute_request(request)
 
-        logger.info(f"Saga Start: {transaction_id} | Goal: {request.goal}")
-        
-        # [COGNITIVE LOOP] Haz de Hipótesis y Colapso Entrópico
-        try:
-            from domain.dtos import HypothesisBundle, Hypothesis
-            from domain.hypothesis_service import HypothesisService
-        except ImportError:
-            from layers.l2_brain.domain.dtos import HypothesisBundle, Hypothesis
-            from layers.l2_brain.domain.hypothesis_service import HypothesisService
-
-        try:
-            # Auditoría Jidoka Triple
-            for shield, name in [(self.s_shield, "S"), (self.e_shield, "E"), (self.l_shield, "L")]:
-                ok, msg = await shield.audit(request.dag_xml, request.goal)
-                if not ok:
-                    raise RuntimeError(f"VETO [{name}]: {msg}")
-
-            import xml.etree.ElementTree as ET
-            root = ET.fromstring(request.dag_xml)
-            self._current_counterfactual_threshold = self._parse_float(root.get("min_counterfactual_score"), 0.0)
-
-            guard_decision = self._evaluate_runtime_guards(root)
-            self.last_gate_status = guard_decision.status
-            self.last_gate_reasons = list(guard_decision.reasons)
-            if guard_decision.status != "ALLOW":
-                raise GovernanceGateError("runtime_guard_blocked", guard_decision.status, guard_decision.reasons)
-
-            bundle, entropy_threshold = self._build_hypothesis_bundle(root, transaction_id, HypothesisBundle, Hypothesis)
-            entropy = HypothesisService.calculate_entropy(bundle)
-            self.last_hypothesis_entropy = entropy
-            logger.info(f"Cognitive loop HypothesisBundle initial entropy: {entropy}")
-            if not HypothesisService.should_collapse(bundle, entropy_threshold):
-                self.last_hypothesis_decision = "review_required"
-                raise GovernanceGateError(
-                    "high_entropy_requires_review",
-                    "REVIEW",
-                    ["high_entropy_requires_review"],
-                )
-            dominant = HypothesisService.collapse_to_dominant(bundle)
-            self.last_hypothesis_decision = dominant.hypothesis_id if dominant else "collapsed"
-
-            # Metacognitive Pre-processing
-            if self.metacognition:
-                frame = await self.metacognition.preprocess(request.session_id, request.goal)
-                if self.authority_gate:
-                    authorized, authority_msg = await self.authority_gate.validate_intent(frame)
-                    if not authorized:
-                        gate_status = "REVIEW"
-                        if "VETO" in authority_msg:
-                            gate_status = "BLOCK"
-                        raise GovernanceGateError(
-                            "authority_gate_blocked",
-                            gate_status,
-                            [f"authority_gate:{authority_msg}"],
-                        )
-                frame = await self.metacognition.deliberate(frame)
-                logger.info(f"Metacognitive Deliberation: {frame.deliberation_summary}")
-
-            if self._cognitive_preflight_enabled(root):
-                self.last_cognitive_preflight = await self._run_cognitive_preflight(request)
-
-            plan = self._build_hierarchical_plan(request, root)
-            self.last_plan = plan
-            self.last_task_routes = []
-
-            for idx, task in enumerate(root.findall("task"), start=1):
-                route = self._route_task_with_plan(task, plan, idx)
-                self.last_task_routes.append(route)
-                await self._dispatch_task(task, saga, route)
-                
-            outcome = self._build_outcome("SUCCESS", transaction_id, saga)
-            
-            # Metacognitive Post-processing
-            if self.metacognition and frame is not None:
-                final_frame = await self.metacognition.postprocess(frame, outcome)
-                outcome["metacognition"] = {
-                    "authority": final_frame.authority_level.value,
-                    "mission_steps": len(final_frame.mission_plan),
-                    "verification": final_frame.verification_findings,
-                    "required_tools": final_frame.required_tools,
-                    "risk_level": final_frame.risk_level,
-                }
-
-            logger.info(f"Saga Success: {transaction_id}")
-            return outcome
-        except GovernanceGateError as e:
-            logger.warning(f"Saga Gate Halt: {e}")
-            self.last_gate_status = e.gate_status
-            self.last_gate_reasons = list(e.reasons)
-            return self._build_outcome(
-                "FAILED",
-                transaction_id,
-                saga,
-                str(e),
-                gate_status=e.gate_status,
-                gate_reasons=e.reasons,
-            )
-        except Exception as e:
-            logger.error(f"Saga Failure: {e}")
-            await self._compensate(saga)
-            outcome = self._build_outcome(
-                "FAILED",
-                transaction_id,
-                saga,
-                str(e),
-                gate_status=self.last_gate_status,
-                gate_reasons=self.last_gate_reasons,
-            )
-            return outcome
-
-    async def _dispatch_task(self, task_node: Any, saga: SagaTransaction, route: Dict[str, str]):
-        task_id = task_node.get("id")
-        step = SagaStep(task_id=task_id)
-        saga.steps.append(step)
-
-        if not route.get("master_skill") or not route.get("subskill_id"):
-            raise RuntimeError(f"Task {task_id} skipped hierarchical planning gate")
-
-        # [COGNITIVE LOOP] Inferencia Contrafactual do(a) Pearl
-        try:
-            from domain.counterfactual_service import CounterfactualService
-        except ImportError:
-            from layers.l2_brain.domain.counterfactual_service import CounterfactualService
-            
-        tool_name = task_node.get("tool")
-        utility_score = CounterfactualService.evaluate_intervention(
-            action_a=tool_name,
-            context_x=saga.transaction_id,
-            utility_function=lambda a, x: self._task_utility(task_node),
-            cost_lambda=0.1,
-            cost_function=lambda a: self._task_cost(task_node),
-        )
-        self.last_counterfactual_scores.append(utility_score)
-        logger.info(f"Counterfactual do({tool_name}) evaluation score: {utility_score}")
-        if utility_score < self._current_counterfactual_threshold:
-            raise GovernanceGateError(
-                "counterfactual_score_below_threshold",
-                "BLOCK",
-                ["counterfactual_score_below_threshold"],
-            )
-
-        response = await self.muscle.execute(
-            server_name=task_node.get("server", "filesystem"),
-            tool_name=task_node.get("tool"),
-            arguments=json.loads(task_node.find("arguments").text or "{}")
-        )
-        
-        if "error" in response:
-            step.status = "FAILED"
-            raise RuntimeError(f"Physical Error in {task_id}")
-        
-        step.status = "DONE"
-
-    def _build_hierarchical_plan(self, request: GatewayRequest, dag_root: Any) -> Dict[str, Any]:
-        preferred_master = (dag_root.get("master_skill") or "").strip()
-        if self.skill_binder:
-            plan = self.skill_binder.propose_reflective_plan(request.goal, preferred_master)
-        else:
-            plan = {
-                "goal": request.goal,
-                "plan_type": "hierarchical_fallback",
-                "master_skill": preferred_master or "sw.master.default",
-                "steps": [
-                    {"order": 1, "skill_id": "sw.subskill.dispatch", "name": "dispatch"}
-                ],
-            }
-
-        steps = plan.get("steps", []) if isinstance(plan, dict) else []
-        master_skill = plan.get("master_skill", "") if isinstance(plan, dict) else ""
-        if not master_skill or not isinstance(steps, list) or not steps:
-            raise RuntimeError("Hierarchical planner returned an invalid plan")
-        return plan
-
-    def _route_task_with_plan(
-        self,
-        task_node: Any,
-        plan: Dict[str, Any],
-        task_index: int,
-    ) -> Dict[str, str]:
-        steps = plan.get("steps", [])
-        selected_skill = str(task_node.get("subskill") or task_node.get("skill_id") or "").strip()
-
-        if not selected_skill:
-            tool_name = str(task_node.get("tool") or "").strip().lower()
-            for step in steps:
-                skill_id = str(step.get("skill_id", "")).strip()
-                skill_name = str(step.get("name", "")).strip().lower()
-                if tool_name and (tool_name in skill_id.lower() or tool_name == skill_name):
-                    selected_skill = skill_id
-                    break
-
-        if not selected_skill:
-            selected_idx = min(max(task_index - 1, 0), len(steps) - 1)
-            selected = steps[selected_idx]
-            selected_skill = str(selected.get("skill_id", "")).strip()
-
-        route = {
-            "task_id": task_node.get("id", ""),
-            "master_skill": str(plan.get("master_skill", "")).strip(),
-            "subskill_id": selected_skill,
-        }
-        if not route["subskill_id"]:
-            raise RuntimeError(f"Task {route['task_id']} has no subskill route")
-        return route
+    def _build_outcome(self, *args, **kwargs):
+        return self.evaluator.build_outcome(*args, **kwargs)
 
     async def _compensate(self, saga: SagaTransaction):
         logger.warning(f"Saga Compensation Initiated: {saga.transaction_id}")
         for step in reversed(saga.steps):
             step.status = "COMPENSATED"
 
-    def _build_outcome(
-        self,
-        status: str,
-        transaction_id: str,
-        saga: SagaTransaction,
-        error: str = "",
-        gate_status: str = "ALLOW",
-        gate_reasons: Optional[List[str]] = None,
-    ) -> Dict[str, Any]:
-        return {
-            "status": status,
-            "transaction_id": transaction_id,
-            "error": error,
-            "metacognition_status": self.metacognition_status,
-            "gate_status": gate_status,
-            "gate_reasons": gate_reasons or ["all_guards_passed"],
-            "gateway_first_policy": f"{self.gateway_policy.mode.value}_MODE_ACTIVE",
-            "cognitive_preflight": self.last_cognitive_preflight,
-            "steps": [{"task_id": step.task_id, "status": step.status} for step in saga.steps],
-        }
 
     def _cognitive_preflight_enabled(self, dag_root: Any) -> bool:
-        explicit = dag_root.get("cognitive_preflight")
-        if explicit is not None:
-            return self._parse_bool(explicit, False)
-        return self._parse_bool(os.getenv("DUMMIE_COGNITIVE_PREFLIGHT"), False)
+        return self.orchestrator.is_preflight_enabled(dag_root)
 
     async def _run_cognitive_preflight(self, request: GatewayRequest) -> Dict[str, Any]:
-        try:
-            recall = await self._call_local_reasoning_capability(
-                "local.semantic_recall",
-                {
-                    "goal": request.goal,
-                    "query": request.goal,
-                    "top_k": 10,
-                    "sources": ["mcp", "knowledge", "4d_tes"],
-                },
-            )
-            candidates = recall.get("candidates")
-            if not isinstance(candidates, list):
-                raise RuntimeError(f"semantic_recall_invalid_payload:{recall}")
-
-            rerank = await self._call_local_reasoning_capability(
-                "local.reasoned_rerank",
-                {
-                    "goal": request.goal,
-                    "candidates": candidates,
-                    "max_selected": 5,
-                    "mode": "shadow",
-                },
-            )
-            ranked = rerank.get("ranked")
-            if not isinstance(ranked, list):
-                raise RuntimeError(f"reasoned_rerank_invalid_payload:{rerank}")
-
-            shaped = await self._call_local_reasoning_capability(
-                "local.context_shaper",
-                {
-                    "goal": request.goal,
-                    "ranked": ranked,
-                    "token_budget": 4000,
-                    "cloud_agent": "daemon",
-                },
-            )
-            selected_tools = shaped.get("selected_tools")
-            if not isinstance(selected_tools, list):
-                selected_tools = [str(item.get("id")) for item in ranked[:5] if item.get("id")]
-
-            return {
-                "status": "READY",
-                "provider_status": {
-                    "recall": recall.get("provider_status", "unknown"),
-                    "rerank": rerank.get("provider_status", "unknown"),
-                    "context": shaped.get("provider_status", "unknown"),
-                },
-                "candidates_count": len(candidates),
-                "ranked_count": len(ranked),
-                "selected_tools": selected_tools,
-                "context_packet": shaped,
-            }
-        except Exception as exc:
-            logger.warning("Cognitive preflight degraded: %s", exc)
-            return {
-                "status": "DEGRADED",
-                "error": str(exc),
-                "selected_tools": [],
-            }
+        return await self.orchestrator.run_preflight(request)
 
     async def _call_local_reasoning_capability(self, target: str, arguments: Dict[str, Any]) -> Dict[str, Any]:
-        if not self.mcp_gateway or not hasattr(self.mcp_gateway, "call_tool"):
-            raise RuntimeError("mcp_gateway_unavailable")
-
-        response = await self.mcp_gateway.call_tool(
-            "dummie-brain",
-            "dummie_execute_capability",
-            {
-                "target": target,
-                "arguments": arguments,
-            },
-        )
-        parsed = self._parse_gateway_payload(response)
-        if not isinstance(parsed, dict):
-            raise RuntimeError(f"{target}_returned_non_object")
-        return parsed
+        return await self.orchestrator.call_local_reasoning(target, arguments)
 
     async def reason_with_tiers(self, prompt: str, system_prompt: str = "", concept: str = "general", saga_id: str = "unknown") -> str:
         """
@@ -645,8 +290,18 @@ class DummieDaemon:
                     if response.success:
                         # 4. Action Graph (Wave 4)
                         if self.action_graph:
-                            from action_graph import ActionNode
+                            try:
+                                try:
+                                    from action_graph import ActionGraph
+                                except ImportError:
+                                    from layers.l2_brain.action_graph import ActionGraph
+                                
+                                graph = ActionGraph()
+                            except ImportError:
+                                graph = None
+                                
                             import uuid
+                            from action_graph import ActionNode
                             await self.action_graph.record_action(ActionNode(
                                 action_id=uuid.uuid4().hex[:8],
                                 saga_id=saga_id,
@@ -739,9 +394,14 @@ class DummieDaemon:
 
     def _evaluate_runtime_guards(self, dag_root: Any):
         try:
-            from runtime_guards import GuardInput, evaluate_runtime_guards
+            try:
+                from runtime_guards import GuardInput, evaluate_runtime_guards, InputGuard
+            except ImportError:
+                from layers.l2_brain.runtime_guards import GuardInput, evaluate_runtime_guards, InputGuard
+            
+            guard = InputGuard()
         except ImportError:
-            from layers.l2_brain.runtime_guards import GuardInput, evaluate_runtime_guards
+            guard = None
 
         return evaluate_runtime_guards(
             GuardInput(

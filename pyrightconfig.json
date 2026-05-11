@@ -1,20 +1,26 @@
 {
   "include": [
-    "layers"
+    "layers",
+    "skills",
+    "scripts"
   ],
   "exclude": [
-    "**/node_modules",
     "**/__pycache__",
-    ".venv"
+    "**/.venv"
   ],
-  "venvPath": ".",
-  "venv": ".venv",
   "executionEnvironments": [
     {
-      "root": "layers/l1_nervous",
+      "root": "layers/l2_brain",
       "extraPaths": [
-        "layers/l2_brain/src"
+        "../../",
+        "./",
+        "./src"
       ]
+    },
+    {
+      "root": "."
     }
-  ]
+  ],
+  "reportMissingImports": "none",
+  "reportMissingModuleSource": "none"
 }

@@ -1,6 +1,6 @@
 import logging
 from typing import List, Any
-from .contracts import MetacognitiveFrame
+from layers.l2_brain.metacognition.contracts import MetacognitiveFrame
 
 logger = logging.getLogger("dummie.metacognition.pipeline")
 

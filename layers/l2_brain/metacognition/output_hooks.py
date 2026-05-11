@@ -1,5 +1,5 @@
 import logging
-from .contracts import MetacognitiveFrame
+from layers.l2_brain.metacognition.contracts import MetacognitiveFrame
 
 logger = logging.getLogger("dummie.metacognition.output_hooks")
 

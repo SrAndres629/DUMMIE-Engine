@@ -1,5 +1,5 @@
 import logging
-from .contracts import MetacognitiveFrame, AuthorityLevel
+from layers.l2_brain.metacognition.contracts import MetacognitiveFrame, AuthorityLevel
 
 logger = logging.getLogger("dummie.metacognition.input_hooks")
 

@@ -1,6 +1,6 @@
 import logging
 from typing import Any
-from .contracts import MetacognitiveFrame
+from layers.l2_brain.metacognition.contracts import MetacognitiveFrame
 
 logger = logging.getLogger("dummie.metacognition.input_hooks")
 
@@ -18,10 +18,7 @@ class SemanticToolSelectorHook:
         logger.info(f"Semantically searching tools for: {frame.raw_user_input}")
         
         try:
-            try:
-                from embedding_provider import EmbeddingProvider
-            except ImportError:
-                from layers.l2_brain.embedding_provider import EmbeddingProvider
+            from layers.l2_brain.embedding_provider import EmbeddingProvider
             query_vec = EmbeddingProvider.generate_vector(frame.raw_user_input)
             
             # Buscamos en el meta-gateway vía descubrimiento semántico

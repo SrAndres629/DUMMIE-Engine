@@ -1,9 +1,6 @@
 from abc import ABC, abstractmethod
 from typing import Tuple, Dict, Any
-try:
-    from gateway_contract import GatewayRequest
-except ImportError:
-    from layers.l2_brain.gateway_contract import GatewayRequest
+from layers.l2_brain.gateway_contract import GatewayRequest
 
 class BaseAuditor(ABC):
     """

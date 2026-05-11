@@ -1,130 +1,58 @@
-"""
-[L2_BRAIN] Outcome Evaluator — measurable cognitive snowball feedback.
-"""
-from __future__ import annotations
+import logging
+from typing import Any, Dict, List, Optional
+from layers.l2_brain.gateway_contract import SagaTransaction
 
-from dataclasses import dataclass, field
-from typing import Any, Mapping
-
-
-@dataclass(frozen=True)
-class CapabilityAmplificationResult:
-    score: float
-    verdict: str
-    next: str
-    contributions: dict[str, float] = field(default_factory=dict)
-
+logger = logging.getLogger("dummie.brain.outcome")
 
 class OutcomeEvaluator:
-    """Calculate capability amplification from current-vs-baseline metrics."""
+    """
+    [L2_BRAIN] Evaluador de Resultados de Sagas.
+    Encapsula la lógica para construir el reporte final de una transacción cognitiva.
+    """
+    def __init__(self, daemon: Any):
+        self.daemon = daemon
 
-    WEIGHTS: dict[str, float] = {
-        "task_success_delta": 0.20,
-        "token_reduction_delta": 0.15,
-        "latency_reduction_delta": 0.15,
-        "fewer_human_interruptions": 0.15,
-        "regression_reduction": 0.15,
-        "memory_reuse_gain": 0.10,
-        "mentor_quality_gain": 0.10,
-    }
-
-    def calculate_capability_amplification(
+    def build_outcome(
         self,
-        current_metrics: Mapping[str, Any],
-        baseline_metrics: Mapping[str, Any] | None,
-    ) -> CapabilityAmplificationResult:
-        if not baseline_metrics:
-            return CapabilityAmplificationResult(
-                score=0,
-                verdict="insufficient_baseline",
-                next="collect_more_metrics",
-                contributions={},
-            )
-
-        contributions = {
-            "task_success_delta": _success_score(current_metrics) - _success_score(baseline_metrics),
-            "token_reduction_delta": _lower_is_better_delta(
-                _effective_tokens(current_metrics), _effective_tokens(baseline_metrics)
-            ),
-            "latency_reduction_delta": _lower_is_better_delta(
-                _number(current_metrics, "latency_ms"), _number(baseline_metrics, "latency_ms")
-            ),
-            "fewer_human_interruptions": _lower_is_better_delta(
-                _number(current_metrics, "human_interventions"), _number(baseline_metrics, "human_interventions")
-            ),
-            "regression_reduction": _lower_is_better_delta(
-                _number(current_metrics, "regressions"), _number(baseline_metrics, "regressions")
-            ),
-            "memory_reuse_gain": _higher_is_better_delta(
-                _number(current_metrics, "memory_reuse_gain"), _number(baseline_metrics, "memory_reuse_gain")
-            ),
-            "mentor_quality_gain": _higher_is_better_delta(
-                _number(current_metrics, "mentor_quality_gain"), _number(baseline_metrics, "mentor_quality_gain")
-            ),
+        status: str,
+        transaction_id: str,
+        saga: SagaTransaction,
+        error: str = "",
+        gate_status: str = "ALLOW",
+        gate_reasons: Optional[List[str]] = None,
+    ) -> Dict[str, Any]:
+        """
+        Construye el DTO final de resultado de la saga.
+        """
+        outcome = {
+            "status": status,
+            "transaction_id": transaction_id,
+            "error": error,
+            "metacognition_status": self.daemon.metacognition_status,
+            "gate_status": gate_status,
+            "gate_reasons": gate_reasons or ["all_guards_passed"],
+            "gateway_first_policy": f"{self.daemon.gateway_policy.mode.value}_MODE_ACTIVE",
+            "cognitive_preflight": self.daemon.last_cognitive_preflight,
+            "steps": [{"task_id": step.task_id, "status": step.status} for step in saga.steps],
         }
 
-        weighted = sum(self.WEIGHTS[name] * contributions[name] for name in self.WEIGHTS)
-        score = _clamp(weighted)
-        if score > 0:
-            verdict = "improved"
-            next_action = "continue_collecting_metrics"
-        elif score < 0:
-            verdict = "regressed"
-            next_action = "inspect_regression_causes"
-        else:
-            verdict = "neutral"
-            next_action = "collect_more_metrics"
+        # Integración de Metadatos de Metacognición si están disponibles
+        if hasattr(self.daemon, "metacognition") and self.daemon.metacognition:
+            # Notamos que el frame se pasa externamente o se recupera del daemon
+            pass 
 
-        return CapabilityAmplificationResult(
-            score=score,
-            verdict=verdict,
-            next=next_action,
-            contributions={name: _clamp(value) for name, value in contributions.items()},
-        )
+        return outcome
 
-
-def _success_score(metrics: Mapping[str, Any]) -> float:
-    if "task_success_delta" in metrics:
-        return _clamp(_number(metrics, "task_success_delta"))
-    outcome = str(metrics.get("outcome", "")).lower()
-    if outcome == "success":
-        return 1.0
-    if outcome == "partial":
-        return 0.5
-    if metrics.get("tests_passed") is True:
-        return 1.0
-    if metrics.get("tests_passed") is False:
-        return 0.0
-    return _number(metrics, "task_success_rate")
-
-
-def _effective_tokens(metrics: Mapping[str, Any]) -> float:
-    input_tokens = _number(metrics, "input_tokens")
-    cached_tokens = _number(metrics, "cached_tokens")
-    output_tokens = _number(metrics, "output_tokens")
-    return max(0.0, input_tokens - cached_tokens) + output_tokens
-
-
-def _lower_is_better_delta(current: float, baseline: float) -> float:
-    if baseline <= 0:
-        return 0.0 if current <= 0 else -1.0
-    return _clamp((baseline - current) / baseline)
-
-
-def _higher_is_better_delta(current: float, baseline: float) -> float:
-    scale = max(abs(baseline), 1.0)
-    return _clamp((current - baseline) / scale)
-
-
-def _number(metrics: Mapping[str, Any], key: str) -> float:
-    value = metrics.get(key, 0)
-    if isinstance(value, bool):
-        return 1.0 if value else 0.0
-    try:
-        return float(value)
-    except (TypeError, ValueError):
-        return 0.0
-
-
-def _clamp(value: float) -> float:
-    return max(-1.0, min(1.0, float(value)))
+    def enrich_with_metacognition(self, outcome: Dict[str, Any], frame: Any) -> Dict[str, Any]:
+        """
+        Enriquece el resultado con hallazgos del pipeline metacognitivo.
+        """
+        if frame:
+            outcome["metacognition"] = {
+                "authority": frame.authority_level.value if hasattr(frame.authority_level, "value") else str(frame.authority_level),
+                "mission_steps": len(getattr(frame, "mission_plan", [])),
+                "verification": getattr(frame, "verification_findings", []),
+                "required_tools": getattr(frame, "required_tools", []),
+                "risk_level": getattr(frame, "risk_level", "unknown"),
+            }
+        return outcome
