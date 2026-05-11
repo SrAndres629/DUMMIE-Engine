@@ -1,0 +1,15 @@
+{
+  "spec_id": "SPEC-76",
+  "rules": [
+    {
+      "id": "R1",
+      "description": "Vault entries must be stripped of all private reasoning and secrets.",
+      "severity": "critical"
+    },
+    {
+      "id": "R2",
+      "description": "Only missions with non-failed status can promote Golden Paths.",
+      "severity": "medium"
+    }
+  ]
+}

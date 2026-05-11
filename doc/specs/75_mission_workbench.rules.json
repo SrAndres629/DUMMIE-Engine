@@ -1,0 +1,20 @@
+{
+  "spec_id": "SPEC-75",
+  "rules": [
+    {
+      "id": "R1",
+      "description": "Every mission must have a dedicated physical folder.",
+      "severity": "high"
+    },
+    {
+      "id": "R2",
+      "description": "Block path traversal and writing outside the workbench root.",
+      "severity": "critical"
+    },
+    {
+      "id": "R3",
+      "description": "Zero storage of secrets or private CoT artifacts.",
+      "severity": "critical"
+    }
+  ]
+}
