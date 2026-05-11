@@ -110,6 +110,22 @@ class DummieDaemon:
         self._current_counterfactual_threshold: float = 0.0
         self.last_cognitive_preflight: Dict[str, Any] = {"status": "SKIPPED"}
         
+        # Metacognitive Pipeline Integration
+        try:
+            from metacognition.pipeline import MetacognitivePipeline
+            from metacognition.input_hooks import IntentClarifierHook, AuthorityClassifierHook
+            from metacognition.deliberation_hooks import MissionDecomposerHook, PlanCriticHook
+            from metacognition.output_hooks import AnswerVerifierHook, MemoryUpdateHook
+            
+            self.metacognition = MetacognitivePipeline(
+                input_hooks=[IntentClarifierHook(), AuthorityClassifierHook()],
+                deliberation_hooks=[MissionDecomposerHook(), PlanCriticHook()],
+                output_hooks=[AnswerVerifierHook(), MemoryUpdateHook()]
+            )
+        except ImportError:
+            self.metacognition = None
+            logger.warning("Metacognitive Pipeline disabled: Import Error")
+        
         self._background_tasks: set[asyncio.Task] = set()
         self.request_timeout_s = float(os.getenv("DUMMIE_REQUEST_TIMEOUT_S", "60"))
         self.diagnostic_mode = os.getenv("DUMMIE_DIAGNOSTIC_MODE") == "1"
@@ -247,6 +263,12 @@ class DummieDaemon:
             if self._cognitive_preflight_enabled(root):
                 self.last_cognitive_preflight = await self._run_cognitive_preflight(request)
 
+            # Metacognitive Pre-processing
+            if self.metacognition:
+                frame = await self.metacognition.preprocess(request.session_id, request.goal)
+                frame = await self.metacognition.deliberate(frame)
+                logger.info(f"Metacognitive Deliberation: {frame.deliberation_summary}")
+
             plan = self._build_hierarchical_plan(request, root)
             self.last_plan = plan
             self.last_task_routes = []
@@ -256,8 +278,19 @@ class DummieDaemon:
                 self.last_task_routes.append(route)
                 await self._dispatch_task(task, saga, route)
                 
+            outcome = self._build_outcome("SUCCESS", transaction_id, saga)
+            
+            # Metacognitive Post-processing
+            if self.metacognition:
+                final_frame = await self.metacognition.postprocess(frame, outcome)
+                outcome["metacognition"] = {
+                    "authority": final_frame.authority_level,
+                    "mission_steps": len(final_frame.mission_plan),
+                    "verification": final_frame.verification_findings
+                }
+
             logger.info(f"Saga Success: {transaction_id}")
-            return self._build_outcome("SUCCESS", transaction_id, saga)
+            return outcome
         except GovernanceGateError as e:
             logger.warning(f"Saga Gate Halt: {e}")
             self.last_gate_status = e.gate_status
@@ -273,7 +306,7 @@ class DummieDaemon:
         except Exception as e:
             logger.error(f"Saga Failure: {e}")
             await self._compensate(saga)
-            return self._build_outcome(
+            outcome = self._build_outcome(
                 "FAILED",
                 transaction_id,
                 saga,
@@ -281,6 +314,7 @@ class DummieDaemon:
                 gate_status=self.last_gate_status,
                 gate_reasons=self.last_gate_reasons,
             )
+            return outcome
 
     async def _dispatch_task(self, task_node: Any, saga: SagaTransaction, route: Dict[str, str]):
         task_id = task_node.get("id")

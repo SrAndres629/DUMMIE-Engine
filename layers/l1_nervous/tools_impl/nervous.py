@@ -48,19 +48,6 @@ def register_nervous_tools(mcp: FastMCP, use_cases, root_dir: str):
         import asyncio
         lessons = []
         l_path = os.path.join(AIWG_DIR, "memory/lessons.jsonl")
-<<<<<<< HEAD
-
-        def _read_lessons():
-            local_lessons = []
-            if os.path.exists(l_path):
-                with open(l_path, "r") as f:
-                    for line in f.readlines()[-5:]:
-                        l = json.loads(line)
-                        local_lessons.append(f"- Fallo: {l.get('issue')}\n  Corrección: {l.get('correction')}")
-            return local_lessons
-
-        lessons = await asyncio.to_thread(_read_lessons)
-=======
         if os.path.exists(l_path):
             def _read_last_lessons(path: str) -> List[str]:
                 with open(path, "r") as f:
@@ -70,7 +57,6 @@ def register_nervous_tools(mcp: FastMCP, use_cases, root_dir: str):
             for line in lines:
                 l = json.loads(line)
                 lessons.append(f"- Fallo: {l.get('issue')}\n  Corrección: {l.get('correction')}")
->>>>>>> remotes/origin/perf/l1-nervous-sync-cognitive-state-asyncio-4543439909663506863
         
         return f"--- SYNC COGNITIVA ---\nContexto: {task_context}\nLecciones:\n" + "\n".join(lessons) + "\n---"
 

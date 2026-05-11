@@ -19,6 +19,7 @@ dependencies = [
     "zstd>=1.5.7.3",
     "fastembed>=0.5.1",
     "numpy>=1.26.4",
+    "aiofiles>=23.2.1",
 ]
 
 [project.scripts]

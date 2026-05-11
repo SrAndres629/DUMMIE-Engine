@@ -10,6 +10,7 @@ from tools_impl.knowledge import register_knowledge_tools
 from tools_impl.sdd import register_sdd_tools
 from tools_impl.local_reasoning import register_local_reasoning_tools
 from tools_impl.self_worktree import register_self_worktree_tools
+from tools_impl.metacognition import register_metacognitive_tools
 
 logger = logging.getLogger("dummie-mcp.tools")
 
@@ -38,6 +39,7 @@ def register_tools(mcp: FastMCP, get_orchestrator, get_proxy, root_dir: str):
             register_sdd_tools(internal_mcp, use_cases)
             register_local_reasoning_tools(internal_mcp, use_cases, internal_mcp)
             register_self_worktree_tools(internal_mcp, root_dir)
+            register_metacognitive_tools(internal_mcp, orchestrator)
         return orchestrator, proxy_manager
     
     # NOTA: Desactivamos register_gateway_tools porque el Meta-Gateway absorbe su funcionalidad.
