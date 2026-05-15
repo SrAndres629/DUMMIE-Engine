@@ -187,6 +187,17 @@ class DummieDaemon:
             self.outcome_contract_error = str(e)
             logger.warning(f"Daemon outcome contract degraded: {e}")
 
+        try:
+            from layers.l2_brain.long_running_mission import LongRunningMissionRuntime
+            self.mission_runtime = LongRunningMissionRuntime()
+            self.mission_runtime_available = True
+            self.mission_runtime_error = ""
+        except Exception as e:
+            self.mission_runtime = None
+            self.mission_runtime_available = False
+            self.mission_runtime_error = str(e)
+            logger.warning(f"Long-running mission runtime degraded: {e}")
+
         if self.diagnostic_mode:
             try:
                 from layers.l2_brain.daemon_diagnostic import DiagnosticReporter

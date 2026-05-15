@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dummie.local/schemas/long_running_mission.schema.json",
+  "title": "LongRunningMissionState",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "mission_id",
+    "user_goal",
+    "status",
+    "phases",
+    "current_phase",
+    "completed_phases",
+    "blocked_phases",
+    "next_action"
+  ],
+  "properties": {
+    "mission_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]*$"
+    },
+    "user_goal": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "unknown",
+        "created",
+        "running",
+        "paused",
+        "completed",
+        "failed"
+      ]
+    },
+    "phases": {
+      "type": "object"
+    },
+    "current_phase": {
+      "type": "string"
+    },
+    "completed_phases": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "blocked_phases": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "next_action": {
+      "type": "object"
+    }
+  }
+}

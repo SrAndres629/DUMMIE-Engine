@@ -1,0 +1,56 @@
+{
+  "spec_id": "DE-V2-L2-81",
+  "title": "Phase Ledger",
+  "status": "ACTIVE",
+  "layer": "L2",
+  "last_verified_on": "2026-05-15",
+  "required_frontmatter": [
+    "spec_id",
+    "title",
+    "status",
+    "layer",
+    "last_verified_on"
+  ],
+  "required_sections": [
+    "Purpose",
+    "Current State",
+    "Physical Evidence",
+    "Contract Invariants",
+    "Verification",
+    "Traceability"
+  ],
+  "evidence_paths": [
+    "layers/l2_brain/phase_ledger.py",
+    "layers/l2_brain/tests/test_phase_ledger.py",
+    ".aiwg/schemas/phase_ledger.schema.json",
+    ".aiwg/missions/demo_refactor_snowball/phase_ledger.jsonl",
+    ".aiwg/missions/demo_refactor_snowball/current_state.json",
+    ".aiwg/missions/demo_refactor_snowball/recovery_packet.md",
+    ".aiwg/missions/demo_refactor_snowball/next_action.json"
+  ],
+  "event_types": [
+    "MISSION_CREATED",
+    "PHASE_REGISTERED",
+    "PHASE_STARTED",
+    "PHASE_COMPLETED",
+    "PHASE_BLOCKED",
+    "PHASE_PAUSED",
+    "PHASE_RESUMED",
+    "CHECKPOINT_CREATED",
+    "RECOVERY_PACKET_CREATED",
+    "NEXT_ACTION_SELECTED",
+    "MISSION_COMPLETED",
+    "MISSION_FAILED"
+  ],
+  "policy": {
+    "append_only": true,
+    "root": ".aiwg/missions",
+    "forbid_private_chain_of_thought_serialization": true,
+    "status_values": [
+      "ACTIVE",
+      "DRAFT",
+      "PROPOSED",
+      "DEPRECATED"
+    ]
+  }
+}

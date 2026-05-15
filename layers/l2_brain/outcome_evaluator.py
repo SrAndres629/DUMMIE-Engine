@@ -116,6 +116,12 @@ class OutcomeEvaluator:
             # Notamos que el frame se pasa externamente o se recupera del daemon
             pass 
 
+        mission_state = _mission_state_from(self.daemon, outcome.get("mission_id", ""))
+        if mission_state:
+            outcome["current_mission_state"] = mission_state
+            if not next_action and mission_state.get("next_action"):
+                outcome["next_action"] = mission_state["next_action"]
+
         return outcome
 
     def build_daemon_outcome(
@@ -267,3 +273,20 @@ def _next_action_from(value: Optional[Dict[str, Any]], status: str, gate_reasons
     if status == "SUCCESS":
         return NextAction(recommended="continue", reason="outcome_success")
     return NextAction(recommended="inspect", reason="outcome_not_success", blocked_by=list(gate_reasons))
+
+
+def _mission_state_from(daemon: Any, mission_id: str) -> dict:
+    if not daemon or not mission_id:
+        return {}
+    mission_runtime = _safe_getattr(daemon, "mission_runtime", None)
+    if not mission_runtime or not hasattr(mission_runtime, "current_state"):
+        return {}
+    try:
+        state = mission_runtime.current_state(mission_id)
+    except Exception as exc:
+        return {
+            "mission_id": mission_id,
+            "status": "unavailable",
+            "error": str(exc),
+        }
+    return state if isinstance(state, dict) else {}

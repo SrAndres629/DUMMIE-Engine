@@ -1,0 +1,44 @@
+{
+  "spec_id": "DE-V2-L2-82",
+  "title": "Long-Running Mission Runtime",
+  "status": "ACTIVE",
+  "layer": "L2",
+  "last_verified_on": "2026-05-15",
+  "required_frontmatter": [
+    "spec_id",
+    "title",
+    "status",
+    "layer",
+    "last_verified_on"
+  ],
+  "required_sections": [
+    "Purpose",
+    "Current State",
+    "Physical Evidence",
+    "Contract Invariants",
+    "Verification",
+    "Traceability"
+  ],
+  "evidence_paths": [
+    "layers/l2_brain/long_running_mission.py",
+    "layers/l2_brain/phase_ledger.py",
+    "layers/l2_brain/daemon.py",
+    "layers/l2_brain/tests/test_long_running_mission.py",
+    ".aiwg/schemas/long_running_mission.schema.json",
+    ".aiwg/missions/demo_refactor_snowball/phase_ledger.jsonl",
+    ".aiwg/missions/demo_refactor_snowball/current_state.json",
+    ".aiwg/missions/demo_refactor_snowball/recovery_packet.md",
+    ".aiwg/missions/demo_refactor_snowball/next_action.json"
+  ],
+  "policy": {
+    "use_phase_ledger": true,
+    "no_parallel_state_store": true,
+    "forbid_private_chain_of_thought_serialization": true,
+    "status_values": [
+      "ACTIVE",
+      "DRAFT",
+      "PROPOSED",
+      "DEPRECATED"
+    ]
+  }
+}

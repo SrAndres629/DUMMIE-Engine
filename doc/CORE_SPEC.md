@@ -32,6 +32,8 @@
 - `doc/specs/49_typed_sdk_generation.md`
 - `doc/specs/50_daemon_telemetry_contracts.md`
 - `doc/specs/51_model_contracts_alignment.md`
+- `doc/specs/81_phase_ledger.md`
+- `doc/specs/82_long_running_mission_runtime.md`
 
 ## Especificaciones roadmap (PROPOSED)
 - `doc/specs/27_floating_session_state.md`
