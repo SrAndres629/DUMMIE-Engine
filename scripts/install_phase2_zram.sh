@@ -20,7 +20,7 @@ ALGO=zstd
 PERCENT=75
 PRIORITY=100
 EOF
-    sudo systemctl restart zramswap || true
+    sudo systemctl restart zramswap || sudo systemctl restart systemd-zram-setup@zram0.service || true
 fi
 
 # 3. Crear Fallback Swap

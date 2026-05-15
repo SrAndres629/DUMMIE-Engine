@@ -3,7 +3,7 @@
   "title": "Agentic systemd Runtime and Resource Governance",
   "status": "ACTIVE",
   "layer": "CROSS",
-  "last_verified_on": "2026-05-07",
+  "last_verified_on": "2026-05-15",
   "required_frontmatter": [
     "spec_id",
     "title",

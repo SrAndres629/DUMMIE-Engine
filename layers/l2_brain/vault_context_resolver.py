@@ -23,9 +23,10 @@ class VaultContextResolver:
     """
     [L2_BRAIN] Resolves vault references into actual content and builds snippets.
     """
-    def __init__(self, vault_curator: Any = None, vault_path: str | Path = ".aiwg/vault"):
+    def __init__(self, vault_curator: Any = None, vault_path: str | Path = ".aiwg/vault", compressor: Any = None):
         self.vault_curator = vault_curator
         self.vault_path = Path(vault_path)
+        self.compressor = compressor
 
     def resolve_refs(self, vault_refs: list[str]) -> list[dict]:
         """
@@ -48,9 +49,9 @@ class VaultContextResolver:
                 logger.debug(f"Vault entry {vid} not found on disk at {entry_path}")
         return resolved
 
-    def build_snippets(self, resolved_entries: list[dict], max_chars: int = 4000) -> list[dict]:
+    def build_snippets(self, resolved_entries: list[dict], max_tokens: int = 4000) -> list[dict]:
         """
-        Builds standardized snippets for prompt injection.
+        Builds standardized snippets for prompt injection using token budget compression.
         """
         snippets = []
         for entry in resolved_entries:
@@ -72,9 +73,12 @@ class VaultContextResolver:
             if risks:
                 snippet_text += f"Risk Notes: {', '.join(risks)}\n"
 
-            # Truncate snippet if too large
-            if len(snippet_text) > max_chars:
-                snippet_text = snippet_text[:max_chars] + "... [TRUNCATED]"
+            # Compress using semantic token budget
+            if self.compressor:
+                from layers.l2_brain.domain.embedding_contract import CompressionRequest
+                req = CompressionRequest(raw_text=snippet_text, max_tokens=max_tokens)
+                resp = self.compressor.compress(req)
+                snippet_text = resp.compressed_text
 
             snippets.append({
                 "vault_id": vid,

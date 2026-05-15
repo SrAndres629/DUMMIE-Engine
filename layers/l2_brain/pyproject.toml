@@ -20,6 +20,7 @@ dependencies = [
     "fastembed>=0.5.1",
     "numpy>=1.26.4",
     "aiofiles>=23.2.1",
+    "tiktoken>=0.13.0",
 ]
 
 [project.scripts]

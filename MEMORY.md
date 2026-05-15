@@ -23,3 +23,12 @@ The user approved expanding the Obsidian bridge into a broader Universal Knowled
 - Deep memory rehydration: use curated Obsidian notes as a black-box recorder to rebuild a conservative cognitive baseline after TES storage loss.
 
 Implementation plan created at `docs/superpowers/plans/2026-04-26-universal-knowledge-bus.md`
+
+# 2026-05-15
+
+## ADR 2026-05-15-GOV-002: Systemd Agentic Runtime (Spec 52) & Semantic Shift (Phase 11)
+
+- **Systemd Sovereign Runtime:** The MCP-Gateway and daemon lifecycle are now strictly decoupled from human terminals. `dummie-mcp` is an on-demand STDIO wrapper. Dummie workload runs under `agentic.slice` (Max 14G Memory) to protect the host OS.
+- **Kernel Governance:** Implemented aggressive ZRAM (`zstd`, 75%) and heavy swapping (`swappiness=120`) to prevent LLM OOM crashes.
+- **Hexagonal Integrity (Phase 11.1):** Enforced strict separation between Domain (Interfaces `IEmbeddingAdapter`, `IContextCompressor`) and Infrastructure (`fastembed`, `tiktoken`). Injected `IContextCompressor` into `VaultContextResolver` via constructor (Dependency Inversion).
+- **Technical Debt Alert:** `VaultContextResolver` is still relying on flat JSON files (`.aiwg/vault/`). This needs to be migrated to 4D-TES / KùzuDB in upcoming phases.
