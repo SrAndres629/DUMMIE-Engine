@@ -2,17 +2,14 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "ContextBudget",
   "type": "object",
+  "required": ["total_budget", "tiers"],
   "properties": {
-    "session_id": { "type": "string" },
-    "mission_id": { "type": "string" },
-    "max_tokens": { "type": "integer", "minimum": 0 },
-    "consumed_tokens": { "type": "integer", "minimum": 0 },
-    "remaining_tokens": { "type": "integer" },
-    "priority": { "type": "integer", "minimum": 1, "maximum": 10 },
-    "enforcement_policy": {
-      "type": "string",
-      "enum": ["soft", "hard", "strict"]
-    }
-  },
-  "required": ["session_id", "max_tokens"]
+    "total_budget": { "type": "integer", "minimum": 0 },
+    "tiers": {
+      "type": "object",
+      "additionalProperties": { "type": "integer", "minimum": 0 }
+    },
+    "critical_preserved": { "type": "boolean" },
+    "compression_threshold": { "type": "float", "minimum": 0, "maximum": 1 }
+  }
 }

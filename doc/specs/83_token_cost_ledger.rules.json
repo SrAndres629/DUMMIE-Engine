@@ -1,0 +1,24 @@
+{
+  "rules": [
+    {
+      "id": "TCL-001",
+      "name": "AppendOnly",
+      "description": "Ledger must be append-only JSONL."
+    },
+    {
+      "id": "TCL-002",
+      "name": "ConcurrencySafe",
+      "description": "Use file locking for writes."
+    },
+    {
+      "id": "TCL-003",
+      "name": "Idempotent",
+      "description": "Ignore events with existing event_id."
+    },
+    {
+      "id": "TCL-004",
+      "name": "NoPrivateReasoning",
+      "description": "Reject events containing chain_of_thought or private reasoning."
+    }
+  ]
+}

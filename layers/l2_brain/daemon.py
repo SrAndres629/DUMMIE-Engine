@@ -170,6 +170,10 @@ class DummieDaemon:
             self.runtime_meter = MetaGatewayRuntimeMeter()
             self.token_ledger = TokenCostLedger()
             self.budget_manager = ContextBudgetManager()
+            
+            # [WAVE 6] Link ledger to router if both available
+            if self.model_router and hasattr(self.model_router, "ledger") and not self.model_router.ledger:
+                self.model_router.ledger = self.token_ledger
         except ImportError:
             self.runtime_meter = None
             self.token_ledger = None

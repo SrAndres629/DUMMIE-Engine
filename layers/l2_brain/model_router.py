@@ -263,6 +263,9 @@ class ModelRouter:
         affected_files: int = 0,
         force_tier: ModelTier | None = None,
         hook_metadata: dict[str, Any] | None = None,
+        session_id: str = "",
+        mission_id: str = "",
+        phase_id: str = "",
     ) -> RoutingDecision:
         """
         Determine the optimal model tier and return a RoutingDecision.
@@ -310,6 +313,22 @@ class ModelRouter:
                     model = fallback
                     target_tier = ModelTier.LOCAL_DEEP
 
+        # [WAVE 6] Record estimated usage if ledger available
+        if self.ledger:
+            try:
+                self.ledger.record_usage({
+                    "session_id": session_id,
+                    "mission_id": mission_id,
+                    "phase_id": phase_id,
+                    "model_tier": target_tier.value,
+                    "provider": model.provider,
+                    "source": "router",
+                    "input_tokens": estimated,
+                    "estimated": True,
+                })
+            except Exception as e:
+                logger.warning(f"Failed to record usage in TokenCostLedger: {e}")
+
         reason = (
             f"complexity={complexity.value} → tier={target_tier.value} "
             f"model={model.model_id} est_tokens={estimated}"
@@ -329,6 +348,36 @@ class ModelRouter:
             latency_ms=(time.perf_counter() - started) * 1000,
             hook_metadata=hook_metadata,
         )
+
+    def emit_usage_event(
+        self,
+        input_tokens: int,
+        output_tokens: int,
+        tier: ModelTier,
+        provider: str = "",
+        session_id: str = "",
+        mission_id: str = "",
+        phase_id: str = "",
+        cached_tokens: int = 0,
+        reasoning_tokens: int = 0,
+    ) -> dict | None:
+        """Explicitly emit a usage event to the ledger."""
+        if not self.ledger:
+            return None
+        
+        return self.ledger.record_usage({
+            "session_id": session_id,
+            "mission_id": mission_id,
+            "phase_id": phase_id,
+            "model_tier": tier.value if isinstance(tier, ModelTier) else str(tier),
+            "provider": provider,
+            "source": "provider_response",
+            "input_tokens": input_tokens,
+            "output_tokens": output_tokens,
+            "cached_tokens": cached_tokens,
+            "reasoning_tokens": reasoning_tokens,
+            "estimated": False,
+        })
 
     def record_usage(self, tokens: int, tier: ModelTier) -> None:
         """Track token usage for budget enforcement."""

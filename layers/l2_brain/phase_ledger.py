@@ -163,6 +163,7 @@ class PhaseLedger:
             "known_failures": [],
             "next_action": {},
             "recovery_packet_ref": "",
+            "token_ledger_ref": f".aiwg/missions/{mission_id}/token_cost_ledger.jsonl" if mission_id else "",
         }
         for event in self.iter_events(mission_id):
             self._apply_event(state, event)

@@ -57,6 +57,8 @@ class EfficiencyMetrics:
     estimated_gateway_tokens: int = 0
     token_reduction_ratio: float = 0.0
     measurement_type: str = "estimated"
+    budget_pressure: str = "low"  # low, medium, high, extreme
+    token_economy_summary: dict[str, Any] = field(default_factory=dict)
 
     def __post_init__(self) -> None:
         if self.measurement_type not in MEASUREMENT_TYPES:

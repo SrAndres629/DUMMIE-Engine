@@ -1,34 +1,64 @@
-import unittest
+import pytest
 from layers.l2_brain.context_budget_manager import ContextBudgetManager
 
-class TestContextBudgetManager(unittest.TestCase):
-    def setUp(self):
-        self.manager = ContextBudgetManager(default_max_tokens=10000)
+def test_context_budget_manager_allocate_budget():
+    cbm = ContextBudgetManager()
+    budget = cbm.allocate_budget("local_fast")
+    assert budget["total_budget"] == 4096
+    assert budget["compression_threshold"] == 3276.8
 
-    def test_allocate_and_usage(self):
-        budget = self.manager.allocate_budget("sess1", "miss1", max_tokens=5000)
-        self.assertEqual(budget["max_tokens"], 5000)
-        
-        self.manager.update_usage("miss1", 1000)
-        self.assertEqual(self.manager.budgets["miss1"]["consumed_tokens"], 1000)
+def test_context_budget_manager_should_compress():
+    cbm = ContextBudgetManager()
+    budget = cbm.allocate_budget("local_fast")
+    
+    packet_ok = {"items": [{"estimated_tokens": 1000}]}
+    assert not cbm.should_compress(packet_ok, budget)
+    
+    packet_heavy = {"items": [{"estimated_tokens": 3500}]}
+    assert cbm.should_compress(packet_heavy, budget)
 
-    def test_should_compress(self):
-        self.manager.allocate_budget("sess2", "miss2", max_tokens=1000)
-        # 700 + 150 = 850 (85%) > 80%
-        self.manager.update_usage("miss2", 700)
-        self.assertTrue(self.manager.should_compress("miss2", 150))
-        
-        # 500 + 100 = 600 (60%) < 80%
-        self.manager.allocate_budget("sess3", "miss3", max_tokens=1000)
-        self.manager.update_usage("miss3", 500)
-        self.assertFalse(self.manager.should_compress("miss3", 100))
+def test_context_budget_manager_enforce_budget_preserves_critical():
+    cbm = ContextBudgetManager()
+    budget = {"total_budget": 100}
+    
+    context = {
+        "items": [
+            {"id": "crit", "priority": "critical", "estimated_tokens": 80},
+            {"id": "low", "priority": "low", "estimated_tokens": 50},
+        ]
+    }
+    
+    res = cbm.enforce_budget(context, budget)
+    assert len(res["items"]) == 1
+    assert res["items"][0]["id"] == "crit"
+    assert "low" in res["dropped_refs"]
 
-    def test_summarize_pressure(self):
-        self.manager.allocate_budget("sess4", "miss4", max_tokens=1000)
-        self.manager.update_usage("miss4", 950)
-        pressure = self.manager.summarize_budget_pressure("sess4")
-        self.assertEqual(pressure["status"], "critical")
-        self.assertEqual(pressure["avg_pressure"], 0.95)
+def test_context_budget_manager_enforce_budget_drops_by_priority():
+    cbm = ContextBudgetManager()
+    budget = {"total_budget": 150}
+    
+    context = {
+        "items": [
+            {"id": "i1", "priority": "high", "estimated_tokens": 70},
+            {"id": "i2", "priority": "medium", "estimated_tokens": 70},
+            {"id": "i3", "priority": "low", "estimated_tokens": 70},
+        ]
+    }
+    
+    # Budget is 150. i1+i2 = 140. i3 must be dropped.
+    res = cbm.enforce_budget(context, budget)
+    assert len(res["items"]) == 2
+    ids = [item["id"] for item in res["items"]]
+    assert "i1" in ids
+    assert "i2" in ids
+    assert "i3" not in ids
+    assert "i3" in res["dropped_refs"]
 
-if __name__ == "__main__":
-    unittest.main()
+def test_context_budget_manager_summarize_pressure():
+    cbm = ContextBudgetManager()
+    budget = {"total_budget": 1000}
+    
+    packet = {"items": [{"estimated_tokens": 950}]}
+    summary = cbm.summarize_budget_pressure(packet, budget)
+    assert summary["pressure"] == "high"
+    assert summary["ratio"] == 0.95

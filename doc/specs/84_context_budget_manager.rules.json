@@ -1,0 +1,19 @@
+{
+  "rules": [
+    {
+      "id": "CBM-001",
+      "name": "PreserveCritical",
+      "description": "Never discard items marked as 'critical' priority."
+    },
+    {
+      "id": "CBM-002",
+      "name": "TieredBudget",
+      "description": "Budgets must vary based on model_tier."
+    },
+    {
+      "id": "CBM-003",
+      "name": "SequentialDiscard",
+      "description": "Discard low priority, then medium, then high (if absolutely necessary)."
+    }
+  ]
+}

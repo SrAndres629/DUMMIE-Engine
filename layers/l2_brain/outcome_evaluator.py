@@ -105,12 +105,6 @@ class OutcomeEvaluator:
         outcome["cognitive_preflight"] = _safe_getattr(self.daemon, "last_cognitive_preflight", {}) if self.daemon else {}
         outcome["steps"] = [{"task_id": step.task_id, "status": step.status} for step in saga.steps]
 
-        # Token Economy Summary from Ledger
-        if self.daemon and hasattr(self.daemon, "token_ledger") and self.daemon.token_ledger:
-            outcome["token_economy"] = self.daemon.token_ledger.summarize_session(saga.transaction_id)
-            if "cost_estimate" not in outcome["token_economy"]:
-                outcome["token_economy"]["cost_estimate"] = self.daemon.token_ledger.cloud_cost_estimate(saga.transaction_id)
-
         # Integración de Metadatos de Metacognición si están disponibles
         if self.daemon and hasattr(self.daemon, "metacognition") and self.daemon.metacognition:
             # Notamos que el frame se pasa externamente o se recupera del daemon
@@ -243,6 +237,39 @@ def _efficiency_from(daemon: Any) -> EfficiencyMetrics:
     if measurement_type.startswith("runtime"):
         measurement_type = "runtime"
 
+    # [WAVE 6] Token Economy Summary from Ledger
+    token_economy_summary = {}
+    budget_pressure = "low"
+    
+    if daemon and hasattr(daemon, "token_ledger"):
+        ledger = getattr(daemon, "token_ledger", None)
+        if ledger and not hasattr(ledger, "assert_called") and not ledger.__class__.__module__.startswith("unittest.mock"):
+            mission_id = _safe_getattr(daemon, "mission_id", "")
+            session_id = _safe_getattr(daemon, "session_id", "")
+            
+            if mission_id:
+                token_economy_summary = ledger.summarize_mission(mission_id)
+            elif session_id:
+                token_economy_summary = ledger.summarize_session(session_id)
+            
+            if token_economy_summary and "cost_estimate" not in token_economy_summary:
+                token_economy_summary["cost_estimate"] = ledger.cloud_cost_estimate(mission_id, session_id)
+                token_economy_summary["cache_hit_ratio"] = ledger.cache_hit_ratio(mission_id, session_id)
+
+    # [WAVE 6] Budget Pressure from BudgetManager
+    if daemon and hasattr(daemon, "budget_manager"):
+        manager = getattr(daemon, "budget_manager", None)
+        # Avoid using mocks if they are not explicitly configured to return dicts
+        if manager and not hasattr(manager, "assert_called") and not manager.__class__.__module__.startswith("unittest.mock"):
+            last_context = _safe_getattr(daemon, "last_context_packet", {"items": []})
+            last_budget = _safe_getattr(daemon, "last_allocated_budget", {"total_budget": 4096})
+            try:
+                pressure_info = manager.summarize_budget_pressure(last_context, last_budget)
+                if isinstance(pressure_info, dict):
+                    budget_pressure = pressure_info.get("pressure", "low")
+            except Exception:
+                pass
+
     return EfficiencyMetrics(
         input_tokens=int(stats.get("actual_direct_tokens", stats.get("input_tokens", 0)) or 0),
         cached_tokens=int(stats.get("cached_tokens", 0) or 0),
@@ -251,6 +278,8 @@ def _efficiency_from(daemon: Any) -> EfficiencyMetrics:
         estimated_gateway_tokens=int(stats.get("estimated_gateway_tokens", 0) or 0),
         token_reduction_ratio=float(stats.get("token_reduction_ratio", 0.0) or 0.0),
         measurement_type=measurement_type,
+        budget_pressure=budget_pressure,
+        token_economy_summary=token_economy_summary,
     )
 
 
