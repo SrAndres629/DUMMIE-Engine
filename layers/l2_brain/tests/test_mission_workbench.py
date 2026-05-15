@@ -1,56 +1,72 @@
-import unittest
-import os
-import shutil
+import json
+import pytest
+from pathlib import Path
 from layers.l2_brain.mission_workbench import MissionWorkbenchManager
 
-class TestMissionWorkbench(unittest.TestCase):
-    def setUp(self):
-        self.test_dir = ".aiwg/test_workbench"
-        self.manager = MissionWorkbenchManager(base_path=self.test_dir)
+def test_mission_workbench_creation(tmp_path):
+    manager = MissionWorkbenchManager(root=tmp_path)
+    meta = manager.create_workbench("m1", "Goal 1")
 
-    def tearDown(self):
-        if os.path.exists(self.test_dir):
-            shutil.rmtree(self.test_dir)
+    assert meta["mission_id"] == "m1"
+    assert meta["status"] == "active"
 
-    def test_create_workbench(self):
-        mission_id = "test_mission"
-        manifest = self.manager.create_workbench(mission_id, "session1", "test goal")
-        
-        self.assertEqual(manifest["mission_id"], mission_id)
-        self.assertTrue(os.path.exists(os.path.join(self.test_dir, mission_id, "manifest.json")))
-        self.assertTrue(os.path.exists(os.path.join(self.test_dir, mission_id, "objective.md")))
+    workbench_dir = tmp_path / "m1"
+    assert (workbench_dir / "objective.md").exists()
+    assert (workbench_dir / "token_budget.json").exists()
+    assert (workbench_dir / "decision_log.jsonl").exists()
 
-    def test_write_artifact_security(self):
-        mission_id = "test_sec"
-        self.manager.create_workbench(mission_id, "s1", "g")
-        
-        with self.assertRaises(ValueError):
-            self.manager.write_artifact(mission_id, ".env", "SECRET=123", "env")
-            
-        with self.assertRaises(ValueError):
-            self.manager.write_artifact(mission_id, "../../config.py", "malicious", "python")
+def test_mission_workbench_write_and_read_artifact(tmp_path):
+    manager = MissionWorkbenchManager(root=tmp_path)
+    manager.create_workbench("m1", "Goal 1")
 
-    def test_append_decision_log(self):
-        mission_id = "test_log"
-        self.manager.create_workbench(mission_id, "s1", "g")
-        
-        self.manager.append_decision(mission_id, {"action": "test", "internal_monologue": "private"})
-        
-        log_path = os.path.join(self.test_dir, mission_id, "decision_log.jsonl")
-        with open(log_path, "r") as f:
-            log_entry = f.readline()
-            data = json.loads(log_entry)
-            self.assertEqual(data["action"], "test")
-            self.assertNotIn("internal_monologue", data)
+    manager.write_artifact("m1", "test.txt", "content here", "note")
+    read = manager.read_artifact("m1", "test.txt")
 
-    def test_finalize(self):
-        mission_id = "test_fin"
-        self.manager.create_workbench(mission_id, "s1", "g")
-        result = self.manager.finalize_workbench(mission_id, {"status": "SUCCESS"})
-        
-        self.assertEqual(result["status"], "finalized")
-        self.assertTrue(os.path.exists(os.path.join(self.test_dir, mission_id, "final_summary.md")))
+    assert read["content"] == "content here"
+    assert read["name"] == "test.txt"
 
-import json
-if __name__ == "__main__":
-    unittest.main()
+def test_mission_workbench_append_decision(tmp_path):
+    manager = MissionWorkbenchManager(root=tmp_path)
+    manager.create_workbench("m1", "Goal 1")
+
+    decision = {
+        "claim": "Requirement A",
+        "evidence": ["test_fail_1"],
+        "objection": "Too complex",
+        "decision": "Simplify",
+        "next_action": "Refactor"
+    }
+    manager.append_decision("m1", decision)
+
+    log_path = tmp_path / "m1" / "decision_log.jsonl"
+    lines = log_path.read_text().splitlines()
+    assert len(lines) == 1
+    data = json.loads(lines[0])
+    assert data["decision"] == "Simplify"
+
+def test_mission_workbench_finalize(tmp_path):
+    manager = MissionWorkbenchManager(root=tmp_path)
+    manager.create_workbench("m1", "Goal 1")
+
+    res = manager.finalize_workbench("m1", {"status": "SUCCESS", "metrics": {"tokens": 100}})
+    assert res["status"] == "finalized"
+    assert res["outcome_summary"] == "SUCCESS"
+
+    metrics_path = tmp_path / "m1" / "outcome_metrics.json"
+    metrics = json.loads(metrics_path.read_text())
+    assert metrics["tokens"] == 100
+
+def test_mission_workbench_rejects_private(tmp_path):
+    manager = MissionWorkbenchManager(root=tmp_path)
+    manager.create_workbench("m1", "Goal 1")
+
+    with pytest.raises(ValueError, match="private reasoning"):
+        manager.write_artifact("m1", "p.txt", "chain_of_thought is secret", "note")
+
+    with pytest.raises(ValueError, match="forbidden .env assignment"):
+        manager.append_decision("m1", {"claim": "Set .env=VAL"})
+
+def test_mission_workbench_path_traversal(tmp_path):
+    manager = MissionWorkbenchManager(root=tmp_path)
+    with pytest.raises(ValueError, match="path traversal"):
+        manager.create_workbench("../bad", "goal")

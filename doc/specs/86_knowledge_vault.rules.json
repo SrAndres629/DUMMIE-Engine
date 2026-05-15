@@ -1,0 +1,19 @@
+{
+  "rules": [
+    {
+      "id": "VLT-001",
+      "name": "ReferenceOnly",
+      "description": "Prefer evidence references over embedding large artifact contents in the vault."
+    },
+    {
+      "id": "VLT-002",
+      "name": "AtomicIndex",
+      "description": "The vault index must be updated atomically using tmp-file-and-replace pattern."
+    },
+    {
+      "id": "VLT-003",
+      "name": "SafeCuration",
+      "description": "Never delete workbench files if curation or storage fails."
+    }
+  ]
+}

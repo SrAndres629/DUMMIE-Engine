@@ -1,0 +1,19 @@
+{
+  "rules": [
+    {
+      "id": "MWB-001",
+      "name": "IsolatedWorkspace",
+      "description": "Each mission must have its own subdirectory under workbench/."
+    },
+    {
+      "id": "MWB-002",
+      "name": "NoSecrets",
+      "description": "Reject artifacts containing values that look like secrets or .env assignments."
+    },
+    {
+      "id": "MWB-003",
+      "name": "AtomicWrites",
+      "description": "All workbench artifacts must be written atomically to avoid corruption."
+    }
+  ]
+}

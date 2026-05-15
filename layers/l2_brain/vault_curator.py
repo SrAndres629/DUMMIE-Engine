@@ -1,101 +1,179 @@
-import os
-import json
-import uuid
-import logging
-from datetime import datetime
-from typing import Dict, List, Any, Optional
+from __future__ import annotations
 
-logger = logging.getLogger("dummie.brain.vault")
+import json
+import logging
+import os
+import re
+import uuid
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Any, Iterable
+
+logger = logging.getLogger(__name__)
+
+_FORBIDDEN_PATTERNS = [
+    (re.compile(r"\.env\s*[=:]", re.I), "forbidden .env assignment"),
+    (re.compile(r"secret\s*(is|[:=])", re.I), "forbidden secret value"),
+    (re.compile(r"credential\s*(is|[:=])", re.I), "forbidden credential value"),
+    (re.compile(r"token\s*[=:]", re.I), "forbidden token assignment"),
+    (re.compile(r"password\s*[=:]", re.I), "forbidden password assignment"),
+    (re.compile(r"chain_of_thought", re.I), "private reasoning"),
+    (re.compile(r"private reasoning", re.I), "private reasoning"),
+    (re.compile(r"private_reasoning", re.I), "private reasoning"),
+]
+
 
 class VaultCurator:
-    """
-    [L2_BRAIN] Crystallizes temporary mission artifacts into permanent knowledge.
-    Ensures that "Golden Paths" and lessons are preserved and searchable.
-    """
-    def __init__(self, vault_path: str = ".aiwg/vault"):
-        self.vault_path = os.path.abspath(vault_path)
-        os.makedirs(self.vault_path, exist_ok=True)
+    def __init__(self, root: str | Path = ".aiwg/vault"):
+        self.root = Path(root)
 
-    def extract_vault_entries(self, mission_id: str, workbench_path: str) -> List[Dict[str, Any]]:
-        """
-        Scans a workbench for candidates to promote to the vault.
-        """
-        candidates = []
-        
-        # 1. Load manifest and outcome
-        manifest_path = os.path.join(workbench_path, "manifest.json")
-        outcome_path = os.path.join(workbench_path, "outcome_metrics.json")
-        
-        if not os.path.exists(manifest_path) or not os.path.exists(outcome_path):
+    def extract_vault_entries(self, mission_id: str, workbench_path: str | Path) -> list[dict]:
+        path = Path(workbench_path)
+        if not path.exists():
             return []
-            
-        with open(outcome_path, "r") as f:
-            outcome = json.load(f)
-            
-        # 2. Only promote 'Golden Paths' for successful missions
-        if outcome.get("status") == "SUCCESS":
-            summary_path = os.path.join(workbench_path, "final_summary.md")
-            if os.path.exists(summary_path):
-                with open(summary_path, "r") as f:
-                    content = f.read()
-                
-                candidates.append({
-                    "vault_id": f"gp-{uuid.uuid4().hex[:8]}",
-                    "mission_id": mission_id,
-                    "entry_type": "golden_path",
-                    "summary": f"Successful execution of: {outcome.get('goal', 'unknown mission')}",
-                    "content": {"markdown": content},
-                    "evidence_refs": [os.path.join(workbench_path, "outcome_metrics.json")],
-                    "created_at": datetime.now().isoformat()
+
+        entries = []
+
+        # 1. Look for golden paths in final_summary.md (heuristic)
+        summary_path = path / "final_summary.md"
+        if summary_path.exists():
+             content = summary_path.read_text(encoding="utf-8")
+             if "golden path" in content.lower() or "success pattern" in content.lower():
+                 entries.append({
+                     "entry_type": "golden_path",
+                     "summary": f"Successful execution pattern for mission {mission_id}",
+                     "evidence_refs": [str(summary_path)],
+                 })
+
+        # 2. Look for failed patterns in validation_report.md
+        report_path = path / "validation_report.md"
+        if report_path.exists():
+            content = report_path.read_text(encoding="utf-8")
+            if "fail" in content.lower() or "error" in content.lower() or "regression" in content.lower():
+                entries.append({
+                    "entry_type": "failed_pattern",
+                    "summary": f"Known pitfalls and regressions in {mission_id}",
+                    "evidence_refs": [str(report_path)],
                 })
-        
-        # 3. Always look for failed patterns to avoid repetition
-        if outcome.get("status") == "FAILED":
-            candidates.append({
-                "vault_id": f"fp-{uuid.uuid4().hex[:8]}",
+
+        # 3. Look for decisions in decision_log.jsonl
+        log_path = path / "decision_log.jsonl"
+        if log_path.exists():
+            with log_path.open("r", encoding="utf-8") as h:
+                lines = [line.strip() for line in h if line.strip()]
+                if lines:
+                    entries.append({
+                        "entry_type": "decision",
+                        "summary": f"Key architectural decisions from {mission_id}",
+                        "evidence_refs": [str(log_path)],
+                    })
+
+        # Add common metadata
+        for entry in entries:
+            entry.update({
+                "vault_id": f"vlt-{uuid.uuid4().hex[:8]}",
                 "mission_id": mission_id,
-                "entry_type": "failed_pattern",
-                "summary": f"Failure analysis for: {outcome.get('error', 'unknown error')}",
-                "content": {"error": outcome.get("error"), "stack": outcome.get("stack")},
-                "created_at": datetime.now().isoformat()
+                "created_at": _now(),
+                "reuse_conditions": [],
+                "risk_notes": [],
             })
-            
-        return candidates
 
-    def store_vault_entry(self, entry: Dict[str, Any]) -> str:
-        """
-        Persists a vault entry to disk.
-        """
-        # Security: Strip potential secrets (heuristic)
-        entry_str = json.dumps(entry)
-        for sensitive in ["api_key", "password", "token", "secret"]:
-            if sensitive in entry_str.lower():
-                raise ValueError(f"Security Violation: Vault entry contains sensitive term: {sensitive}")
-        
-        filename = f"{entry['vault_id']}.json"
-        target_path = os.path.join(self.vault_path, filename)
-        
-        with open(target_path, "w") as f:
-            json.dump(entry, f, indent=2)
-            
-        return target_path
+        return entries
 
-    def finalize_and_clean(self, mission_id: str, workbench_path: str) -> Dict[str, Any]:
-        """
-        Executes the promotion pipeline and returns summary stats.
-        """
-        candidates = self.extract_vault_entries(mission_id, workbench_path)
-        stored_paths = []
-        
-        for cand in candidates:
+    def store_vault_entry(self, entry: dict) -> dict:
+        self._reject_private(entry)
+
+        self.root.mkdir(parents=True, exist_ok=True)
+        vault_id = entry.get("vault_id") or f"vlt-{uuid.uuid4().hex[:8]}"
+        entry["vault_id"] = vault_id
+        entry["created_at"] = entry.get("created_at") or _now()
+
+        entry_path = self.root / f"{vault_id}.json"
+        self._write_json(entry_path, entry)
+
+        self.build_vault_index()
+        return entry
+
+    def list_entries(self, entry_type: str = "") -> list[dict]:
+        if not self.root.exists():
+            return []
+
+        entries = []
+        for item in self.root.glob("vlt-*.json"):
             try:
-                path = self.store_vault_entry(cand)
-                stored_paths.append(path)
+                data = json.loads(item.read_text(encoding="utf-8"))
+                if not entry_type or data.get("entry_type") == entry_type:
+                    entries.append(data)
             except Exception as e:
-                logger.error(f"Failed to store vault entry {cand.get('vault_id')}: {e}")
-                
+                logger.warning(f"Failed to read vault entry {item}: {e}")
+        return entries
+
+    def build_vault_index(self) -> dict:
+        entries = self.list_entries()
+        index = {
+            "updated_at": _now(),
+            "total_entries": len(entries),
+            "by_type": {},
+            "by_mission": {},
+        }
+
+        for e in entries:
+            etype = e.get("entry_type", "unknown")
+            index["by_type"].setdefault(etype, []).append(e["vault_id"])
+
+            mid = e.get("mission_id", "unknown")
+            index["by_mission"].setdefault(mid, []).append(e["vault_id"])
+
+        self._write_json(self.root / "vault_index.json", index)
+        return index
+
+    def finalize_and_clean(self, mission_id: str, workbench_path: str | Path) -> dict:
+        # Step 1: Extract
+        entries = self.extract_vault_entries(mission_id, workbench_path)
+
+        # Step 2: Store
+        stored = []
+        for entry in entries:
+            try:
+                stored.append(self.store_vault_entry(entry))
+            except Exception as e:
+                logger.error(f"Failed to store vault entry: {e}")
+
+        # Step 3: Cleanup policy (we retain for now)
         return {
             "mission_id": mission_id,
-            "entries_promoted": len(stored_paths),
-            "stored_paths": stored_paths
+            "vault_entries_created": len(stored),
+            "stored_ids": [s["vault_id"] for s in stored],
+            "cleanup_status": "retained",
         }
+
+    def _reject_private(self, value: Any) -> None:
+        if isinstance(value, dict):
+            for key, item in value.items():
+                self._reject_private(str(key))
+                self._reject_private(item)
+        elif isinstance(value, (list, tuple, set)):
+            for item in value:
+                self._reject_private(item)
+        elif isinstance(value, str):
+            for pattern, reason in _FORBIDDEN_PATTERNS:
+                if pattern.search(value):
+                    raise ValueError(f"vault payload contains {reason}")
+
+    def _write_json(self, path: Path, payload: dict) -> None:
+        self._reject_private(payload)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        tmp = path.with_name(f".{path.name}.tmp")
+        content = json.dumps(payload, ensure_ascii=True, indent=2, sort_keys=True) + "\n"
+        tmp.write_text(content, encoding="utf-8")
+        with tmp.open("a", encoding="utf-8") as h:
+            h.flush()
+            try:
+                os.fsync(h.fileno())
+            except OSError:
+                pass
+        tmp.replace(path)
+
+
+def _now() -> str:
+    return datetime.now(timezone.utc).isoformat()

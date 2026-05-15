@@ -1,0 +1,12 @@
+{
+  "created_at": "2026-05-15T05:24:24.046726+00:00",
+  "entry_type": "decision",
+  "evidence_refs": [
+    ".aiwg/workbench/demo_refactor_snowball/decision_log.jsonl"
+  ],
+  "mission_id": "demo_refactor_snowball",
+  "reuse_conditions": [],
+  "risk_notes": [],
+  "summary": "Key architectural decisions from demo_refactor_snowball",
+  "vault_id": "vlt-f4a988db"
+}

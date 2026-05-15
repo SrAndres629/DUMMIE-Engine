@@ -1,0 +1,1 @@
+{"claim": "Long-running missions need persistence", "decision": "APPROVED", "event_id": "dec-db72fcf15ad5430394353f09a49a4658", "evidence": [".aiwg/missions/demo_refactor_snowball/phase_ledger.jsonl"], "next_action": "Implement TokenCostLedger", "objection": "", "required_test": "", "timestamp": "2026-05-15T05:24:24.043148+00:00"}

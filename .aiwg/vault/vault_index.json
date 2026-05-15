@@ -1,0 +1,18 @@
+{
+  "by_mission": {
+    "demo_refactor_snowball": [
+      "vlt-37e60cbc",
+      "vlt-f4a988db"
+    ]
+  },
+  "by_type": {
+    "decision": [
+      "vlt-f4a988db"
+    ],
+    "golden_path": [
+      "vlt-37e60cbc"
+    ]
+  },
+  "total_entries": 2,
+  "updated_at": "2026-05-15T05:24:24.050617+00:00"
+}

@@ -2,28 +2,20 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "VaultEntry",
   "type": "object",
+  "required": ["vault_id", "entry_type", "summary", "created_at"],
   "properties": {
     "vault_id": { "type": "string" },
     "mission_id": { "type": "string" },
-    "entry_type": { 
+    "phase_id": { "type": "string" },
+    "entry_type": {
       "type": "string",
-      "enum": ["golden_path", "failed_pattern", "decision", "prompt_improvement", "tool_lesson", "mission_template"]
+      "enum": ["golden_path", "failed_pattern", "decision", "prompt_improvement", "tool_lesson", "mission_template", "risk_lesson", "architecture_lesson"]
     },
     "summary": { "type": "string" },
-    "evidence_refs": { 
-      "type": "array",
-      "items": { "type": "string" }
-    },
-    "reuse_conditions": {
-      "type": "array",
-      "items": { "type": "string" }
-    },
-    "risk_notes": {
-      "type": "array",
-      "items": { "type": "string" }
-    },
-    "created_at": { "type": "string", "format": "date-time" },
-    "content": { "type": "object" }
-  },
-  "required": ["vault_id", "mission_id", "entry_type", "summary", "created_at"]
+    "evidence_refs": { "type": "array", "items": { "type": "string" } },
+    "reuse_conditions": { "type": "array", "items": { "type": "string" } },
+    "risk_notes": { "type": "array", "items": { "type": "string" } },
+    "token_cost_summary": { "type": "object" },
+    "created_at": { "type": "string", "format": "date-time" }
+  }
 }
