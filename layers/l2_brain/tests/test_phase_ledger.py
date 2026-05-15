@@ -105,8 +105,8 @@ def test_phase_ledger_blocks_path_traversal_and_private_reasoning(tmp_path):
     with pytest.raises(ValueError, match="private"):
         ledger.create_checkpoint("mission_3", "phase_1", {"notes": "chain_of_thought://private"})
 
-    with pytest.raises(ValueError, match="secret"):
-        ledger.append_event("mission_3", {"event_type": "PHASE_BLOCKED", "phase_id": "phase_1", "reason": "read .env"})
+    with pytest.raises(ValueError, match="forbidden .env assignment"):
+        ledger.append_event("mission_3", {"event_type": "PHASE_BLOCKED", "phase_id": "phase_1", "reason": "write to .env=SECRET"})
 
 
 def test_phase_ledger_rejects_noncanonical_authority_level(tmp_path):

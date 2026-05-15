@@ -1,15 +1,23 @@
 from __future__ import annotations
 
 import json
+import logging
 import os
 import re
 import uuid
+from contextlib import contextmanager
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Iterable
+from typing import Any, Generator, Iterable
+
+try:
+    import fcntl
+except ImportError:
+    fcntl = None  # type: ignore
 
 from layers.l2_brain.models import AuthorityLevel
 
+logger = logging.getLogger(__name__)
 
 EVENT_TYPES = {
     "MISSION_CREATED",
@@ -26,14 +34,18 @@ EVENT_TYPES = {
     "MISSION_FAILED",
 }
 _SAFE_ID = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_-]*$")
-_FORBIDDEN_TEXT = (
-    "chain_of_thought",
-    "private reasoning",
-    "private_reasoning",
-    ".env",
-    "secret",
-    "credential",
-)
+
+_FORBIDDEN_PATTERNS = [
+    (re.compile(r"\.env\s*[=:]", re.I), "forbidden .env assignment"),
+    (re.compile(r"secret\s*(is|[:=])", re.I), "forbidden secret value"),
+    (re.compile(r"credential\s*(is|[:=])", re.I), "forbidden credential value"),
+    (re.compile(r"token\s*[=:]", re.I), "forbidden token assignment"),
+    (re.compile(r"password\s*[=:]", re.I), "forbidden password assignment"),
+    (re.compile(r"chain_of_thought", re.I), "private reasoning"),
+    (re.compile(r"private reasoning", re.I), "private reasoning"),
+    (re.compile(r"private_reasoning", re.I), "private reasoning"),
+]
+
 AUTHORITY_LEVEL_VALUES = {item.value for item in AuthorityLevel}
 
 
@@ -87,19 +99,37 @@ class PhaseLedger:
         for dep in event.get("depends_on", []) or []:
             self._validate_id("phase dependency", str(dep))
 
-        normalized = {
-            "event_id": event.get("event_id") or f"evt-{uuid.uuid4().hex}",
-            "event_type": event_type,
-            "mission_id": mission_id,
-            "timestamp": event.get("timestamp") or _now(),
-        }
-        normalized.update({key: value for key, value in event.items() if key not in normalized})
+        event_id = event.get("event_id")
 
-        mission_dir = self._mission_dir(mission_id)
-        mission_dir.mkdir(parents=True, exist_ok=True)
         ledger_path = self._ledger_path(mission_id)
-        with ledger_path.open("a", encoding="utf-8") as handle:
+        self._mission_dir(mission_id).mkdir(parents=True, exist_ok=True)
+
+        with self._lock_ledger(mission_id) as handle:
+            # Idempotency check: read existing events while locked
+            if event_id:
+                handle.seek(0)
+                for line in handle:
+                    if line.strip():
+                        existing = json.loads(line)
+                        if existing.get("event_id") == event_id:
+                            return existing
+
+            normalized = {
+                "event_id": event_id or f"evt-{uuid.uuid4().hex}",
+                "event_type": event_type,
+                "mission_id": mission_id,
+                "timestamp": event.get("timestamp") or _now(),
+            }
+            normalized.update({key: value for key, value in event.items() if key not in normalized})
+
+            handle.seek(0, os.SEEK_END)
             handle.write(json.dumps(normalized, ensure_ascii=True, sort_keys=True) + "\n")
+            handle.flush()
+            try:
+                os.fsync(handle.fileno())
+            except OSError:
+                pass  # fsync might not be supported on all filesystems/OS
+
         return normalized
 
     def iter_events(self, mission_id: str) -> Iterable[dict]:
@@ -109,7 +139,7 @@ class PhaseLedger:
             return iter(())
 
         def _reader():
-            with ledger_path.open("r", encoding="utf-8") as handle:
+            with self._lock_ledger(mission_id, mode="r") as handle:
                 for line in handle:
                     if line.strip():
                         yield json.loads(line)
@@ -270,6 +300,8 @@ class PhaseLedger:
             if phase_id not in state["blocked_phases"]:
                 state["blocked_phases"].append(phase_id)
             state["known_failures"].append(event.get("reason", "phase_blocked"))
+            if state["current_phase"] == phase_id:
+                state["current_phase"] = ""
         elif event_type == "PHASE_PAUSED":
             state["status"] = "paused"
         elif event_type == "PHASE_RESUMED":
@@ -310,7 +342,7 @@ class PhaseLedger:
                 state.get("user_goal", ""),
                 "",
                 "## Current Phase",
-                state.get("current_phase", ""),
+                state.get("current_phase", "") or "NONE",
                 "",
                 "## Completed Phases",
                 _markdown_list(state.get("completed_phases", [])),
@@ -354,11 +386,41 @@ class PhaseLedger:
     def _current_state_path(self, mission_id: str) -> Path:
         return self._mission_dir(mission_id) / "current_state.json"
 
+    @contextmanager
+    def _lock_ledger(self, mission_id: str, mode: str = "a+") -> Generator[Any, None, None]:
+        path = self._ledger_path(mission_id)
+        if mode == "r" and not path.exists():
+            # Create if not exists to avoid open error for locking,
+            # though iter_events handles non-existence before calling this.
+            path.touch()
+
+        with path.open(mode, encoding="utf-8") as handle:
+            if fcntl:
+                try:
+                    # LOCK_EX for a+, LOCK_SH for r?
+                    # For simplicity and to ensure idempotency check is consistent with write,
+                    # we use LOCK_EX for both if we want to be safe, or LOCK_SH for read.
+                    lock_type = fcntl.LOCK_EX if "w" in mode or "a" in mode or "+" in mode else fcntl.LOCK_SH
+                    fcntl.flock(handle, lock_type)
+                    yield handle
+                finally:
+                    fcntl.flock(handle, fcntl.LOCK_UN)
+            else:
+                logger.warning("fcntl not available, proceeding without file locking")
+                yield handle
+
     def _write_json(self, path: Path, payload: dict) -> None:
         self._reject_private(payload)
         path.parent.mkdir(parents=True, exist_ok=True)
         tmp = path.with_name(f".{path.name}.tmp")
-        tmp.write_text(json.dumps(payload, ensure_ascii=True, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+        content = json.dumps(payload, ensure_ascii=True, indent=2, sort_keys=True) + "\n"
+        tmp.write_text(content, encoding="utf-8")
+        with tmp.open("a", encoding="utf-8") as h:
+            h.flush()
+            try:
+                os.fsync(h.fileno())
+            except OSError:
+                pass
         tmp.replace(path)
 
     def _write_text(self, path: Path, payload: str) -> None:
@@ -366,6 +428,12 @@ class PhaseLedger:
         path.parent.mkdir(parents=True, exist_ok=True)
         tmp = path.with_name(f".{path.name}.tmp")
         tmp.write_text(payload, encoding="utf-8")
+        with tmp.open("a", encoding="utf-8") as h:
+            h.flush()
+            try:
+                os.fsync(h.fileno())
+            except OSError:
+                pass
         tmp.replace(path)
 
     def _validate_id(self, field_name: str, value: str) -> None:
@@ -383,12 +451,9 @@ class PhaseLedger:
             for item in value:
                 self._reject_private(item)
         elif isinstance(value, str):
-            lowered = value.lower()
-            for forbidden in _FORBIDDEN_TEXT:
-                if forbidden in lowered:
-                    if forbidden in {"secret", "credential", ".env"}:
-                        raise ValueError("mission ledger payload contains a forbidden secret reference")
-                    raise ValueError("mission ledger payload contains private reasoning")
+            for pattern, reason in _FORBIDDEN_PATTERNS:
+                if pattern.search(value):
+                    raise ValueError(f"mission ledger payload contains {reason}")
 
 
 def _now() -> str:
