@@ -86,7 +86,9 @@ class GraphSyncPlan:
             "learning_episode": "LearningEpisode",
             "vault_entry": "VaultEntry",
             "workbench": "Workbench",
-            "phase_event": "PhaseEvent"
+            "phase_event": "PhaseEvent",
+            "token_ledger": "TokenLedger",
+            "daemon_outcome": "DaemonOutcome"
         }
         node_type = node_type_map.get(rtype, "GenericNode")
         

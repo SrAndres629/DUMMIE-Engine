@@ -11,6 +11,13 @@ priority: "MANDATORY"
 ## Purpose
 Provide a layer for semantic retrieval and knowledge indexing. Initial implementation uses deterministic hashing to simulate embeddings without LLM dependencies.
 
+## Current State
+Implemented in `layers/l2_brain/vault_embedding_index.py`. Uses deterministic hash-based vectors.
+
+## Physical Evidence
+- `layers/l2_brain/vault_embedding_index.py`
+- `.aiwg/schemas/vault_embedding_index.schema.json`
+
 ## Contract Invariants
 - **Deterministic**: Embeddings are stable for the same input.
 - **Idempotent**: Indexing the same content results in no change.

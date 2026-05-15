@@ -37,12 +37,22 @@ class GraphSyncLedger:
             "data": data or {}
         }
         
-        # We don't do full idempotency check for every event here to keep it fast, 
-        # but we use lock to prevent corruption.
         with open(self.lock_path, "a") as lock_file:
             if fcntl:
                 fcntl.flock(lock_file.fileno(), fcntl.LOCK_EX)
             try:
+                # Idempotency check for PLAN_CREATED
+                if event_type == "GRAPH_SYNC_PLAN_CREATED" and self.ledger_path.exists():
+                    with open(self.ledger_path, "r", encoding="utf-8") as h:
+                        for line in h:
+                            if not line.strip(): continue
+                            try:
+                                existing = json.loads(line)
+                                if existing.get("sync_id") == sync_id and existing.get("event_type") == event_type:
+                                    return existing
+                            except json.JSONDecodeError:
+                                continue
+
                 with open(self.ledger_path, "a", encoding="utf-8") as h:
                     h.write(json.dumps(event, sort_keys=True) + "\n")
                     h.flush()
@@ -62,7 +72,7 @@ class GraphSyncLedger:
 
     def _save_latest_plan(self, plan: dict):
         plan_path = self.root / "latest_plan.json"
-        tmp_path = plan_path.with_suffix(".tmp")
+        tmp_path = plan_path.with_name(f".{plan_path.name}.tmp")
         with open(tmp_path, "w", encoding="utf-8") as h:
             json.dump(plan, h, indent=2, sort_keys=True)
             h.flush()
@@ -72,15 +82,29 @@ class GraphSyncLedger:
                 pass
         os.replace(tmp_path, plan_path)
 
+    def get_latest_plan(self) -> dict | None:
+        plan_path = self.root / "latest_plan.json"
+        if not plan_path.exists():
+            return None
+        try:
+            with open(plan_path, "r", encoding="utf-8") as h:
+                return json.load(h)
+        except Exception:
+            return None
+
     def list_events(self, sync_id: str = "") -> list[dict]:
         if not self.ledger_path.exists():
             return []
         
         events = []
         with open(self.ledger_path, "r", encoding="utf-8") as h:
-            for line in h:
-                if line.strip():
+            for line_no, line in enumerate(h, 1):
+                if not line.strip():
+                    continue
+                try:
                     evt = json.loads(line)
                     if not sync_id or evt.get("sync_id") == sync_id:
                         events.append(evt)
+                except json.JSONDecodeError as e:
+                    logger.warning(f"Corrupt ledger line at {self.ledger_path}:{line_no}: {e}")
         return events

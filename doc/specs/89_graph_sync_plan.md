@@ -11,6 +11,14 @@ priority: "MANDATORY"
 ## Purpose
 Define the structural blueprint for graph synchronization. Ensures all transitions are planned, idempotent, and validated before any database writes occur.
 
+## Current State
+Implemented in `layers/l2_brain/graph_sync_plan.py`. Supports node and edge generation from `MemoryRef`.
+
+## Physical Evidence
+- `layers/l2_brain/graph_sync_plan.py`
+- `.aiwg/schemas/graph_sync_plan.schema.json`
+- `layers/l2_brain/tests/test_graph_sync_plan.py`
+
 ## Contract Invariants
 - **Idempotency**: Node and edge IDs are deterministic based on `content_hash`.
 - **Validation**: Plans are blocked if secrets or private reasoning are detected.

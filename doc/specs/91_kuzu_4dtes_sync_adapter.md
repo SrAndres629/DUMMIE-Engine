@@ -11,6 +11,13 @@ priority: "MANDATORY"
 ## Purpose
 The final adapter for Kuzu/4D-TES synchronization. Provides dry-run validation and safe apply logic.
 
+## Current State
+Implemented in `layers/l2_brain/kuzu_graph_sync_adapter.py`. Safe simulated apply logic.
+
+## Physical Evidence
+- `layers/l2_brain/kuzu_graph_sync_adapter.py`
+- `layers/l2_brain/tests/test_kuzu_graph_sync_adapter.py`
+
 ## Contract Invariants
 - **Safety**: Writes are disabled by default.
 - **Robustness**: Handles missing database as a degraded state.

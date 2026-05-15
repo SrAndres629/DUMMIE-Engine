@@ -54,6 +54,8 @@ class KuzuGraphSyncAdapter:
             "mode": "dry_run",
             "nodes_planned": len(plan.get("nodes", [])),
             "edges_planned": len(plan.get("edges", [])),
+            "writes_performed": False,
+            "simulation": True,
             "db_status": validation["status"]
         }
 
@@ -62,21 +64,25 @@ class KuzuGraphSyncAdapter:
         Applies the plan to the database if allow_write is True.
         """
         if not allow_write:
-            return self.dry_run(plan)
+            res = self.dry_run(plan)
+            res["mode"] = "dry_run_refused_write"
+            return res
             
         validation = self.validate_plan(plan)
         if not validation["valid"]:
             return {"status": "FAILED", "errors": validation["errors"]}
             
         if not self.kuzu:
-             return {"status": "DEGRADED", "error": "Kuzu not installed. Cannot apply writes."}
+             return {"status": "DEGRADED", "error": "Kuzu not installed. Cannot apply writes.", "writes_performed": False}
              
         # Actual write logic would go here in future phases.
-        # For now, we still just simulate success to avoid breaking things.
         return {
-            "status": "SUCCESS",
+            "status": "SIMULATED",
             "mode": "apply",
-            "nodes_written": len(plan.get("nodes", [])),
-            "edges_written": len(plan.get("edges", [])),
-            "note": "Actual Kuzu writes simulated in Phase 9"
+            "nodes_planned": len(plan.get("nodes", [])),
+            "edges_planned": len(plan.get("edges", [])),
+            "writes_performed": False,
+            "simulation": True,
+            "db_status": validation["status"],
+            "note": "Actual Kuzu writes simulated in Phase 9.1"
         }
