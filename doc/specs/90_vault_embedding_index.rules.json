@@ -1,0 +1,14 @@
+{
+  "rules": [
+    {
+      "id": "VEI-001",
+      "name": "DeterministicFakeEmbedding",
+      "description": "Initial embeddings must be deterministic and derived from content hashes to avoid external dependencies."
+    },
+    {
+      "id": "VEI-002",
+      "name": "IdempotentIndexing",
+      "description": "Re-indexing the same vault_id with the same content_hash must not create a new entry."
+    }
+  ]
+}

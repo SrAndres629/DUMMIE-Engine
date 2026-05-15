@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "GraphSyncLedgerEvent",
+  "type": "object",
+  "required": ["event_type", "sync_id", "timestamp"],
+  "properties": {
+    "event_type": {
+      "type": "string",
+      "enum": [
+        "GRAPH_SYNC_PLAN_CREATED",
+        "GRAPH_SYNC_DRY_RUN_VALIDATED",
+        "GRAPH_SYNC_APPLY_SKIPPED",
+        "GRAPH_NODE_READY",
+        "GRAPH_EDGE_READY",
+        "GRAPH_SYNC_BLOCKED"
+      ]
+    },
+    "sync_id": { "type": "string" },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "data": { "type": "object" }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "rules": [
+    {
+      "id": "KSA-001",
+      "name": "DryRunMandatory",
+      "description": "Actual writes to Kuzu must be disabled by default (allow_write=False)."
+    },
+    {
+      "id": "KSA-002",
+      "name": "PlanValidation",
+      "description": "Adapter must validate the structure and safety of the GraphSyncPlan before any action."
+    },
+    {
+      "id": "KSA-003",
+      "name": "DegradedOnMissingDB",
+      "description": "If Kuzu is unavailable, the adapter must return a DEGRADED status instead of failing."
+    }
+  ]
+}

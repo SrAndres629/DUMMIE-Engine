@@ -29,3 +29,8 @@ Implemented in `layers/l2_brain/memory_refs.py`. Defines deterministic, path-saf
 ```bash
 layers/l2_brain/.venv/bin/python -m pytest -q layers/l2_brain/tests/test_memory_refs.py
 ```
+
+## Traceability
+- **Missions**: `demo_refactor_snowball`
+- **Layers**: `L2_BRAIN`
+- **Files**: `layers/l2_brain/memory_refs.py`, `layers/l2_brain/learning_episode.py`

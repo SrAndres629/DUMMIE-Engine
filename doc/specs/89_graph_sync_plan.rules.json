@@ -1,0 +1,19 @@
+{
+  "rules": [
+    {
+      "id": "GSP-001",
+      "name": "DeterministicIDs",
+      "description": "Node and edge IDs must be derived deterministically from content hashes to ensure idempotency."
+    },
+    {
+      "id": "GSP-002",
+      "name": "DryRunDefault",
+      "description": "All plans must default to dry_run mode unless explicitly requested otherwise."
+    },
+    {
+      "id": "GSP-003",
+      "name": "SafetyCheck",
+      "description": "Plans must be blocked if private reasoning or secrets are detected in properties."
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "VaultEmbeddingEntry",
+  "type": "object",
+  "required": ["vault_id", "content_hash", "embedding_model", "vector", "created_at"],
+  "properties": {
+    "vault_id": { "type": "string" },
+    "content_hash": { "type": "string" },
+    "embedding_model": { "type": "string" },
+    "vector": { "type": "array", "items": { "type": "number" } },
+    "summary": { "type": "string" },
+    "created_at": { "type": "string", "format": "date-time" }
+  }
+}
