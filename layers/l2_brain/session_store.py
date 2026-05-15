@@ -146,24 +146,45 @@ class SessionStore:
 
         return event
 
-    def append_learning_episode(self, session_id: str, episode_data: dict[str, Any]) -> Path:
+    def append_learning_episode(self, session_id: str, episode_data: dict[str, Any]) -> str:
         """
-        Saves a LearningEpisode as an atomic artifact and appends a summary event.
+        Appends a LearningEpisode to learning_episodes.jsonl with locking and idempotency.
         """
         session_path = self._session_path(session_id)
         if not session_path.exists():
             raise FileNotFoundError(f"Session not found: {session_id}")
 
-        episode_id = episode_data.get("episode_id", f"ep-{uuid.uuid4().hex[:8]}")
-        artifact_name = f"learning_episode_{episode_id}.json"
-        
+        episode_id = episode_data.get("episode_id")
+        if not episode_id:
+             episode_id = f"ep-{uuid.uuid4().hex[:8]}"
+             episode_data["episode_id"] = episode_id
+
         # Security: already handled by LearningEpisode class but reinforced here
-        content = json.dumps(episode_data, indent=2, sort_keys=True)
+        content = json.dumps(episode_data, sort_keys=True)
         if "chain-of-thought" in content.lower() or "private reasoning" in content.lower():
              raise ValueError("private reasoning artifacts are not accepted in SessionStore artifacts")
 
-        path = self.save_artifact(session_id, artifact_name, content)
+        episodes_path = session_path / "learning_episodes.jsonl"
+        lock_path = session_path / ".episodes.lock"
         
+        with file_lock(lock_path):
+             # Idempotency check
+             if episodes_path.exists():
+                 with episodes_path.open("r", encoding="utf-8") as h:
+                     for line in h:
+                         if line.strip():
+                             existing = json.loads(line)
+                             if existing.get("episode_id") == episode_id:
+                                 return str(episodes_path.relative_to(self.root_dir))
+
+             with episodes_path.open("a", encoding="utf-8") as handle:
+                 handle.write(content + "\n")
+                 handle.flush()
+                 try:
+                     os.fsync(handle.fileno())
+                 except OSError:
+                     pass
+
         # Also append to event log for causal trace
         self.append_event(
             session_id=session_id,
@@ -175,10 +196,29 @@ class SessionStore:
                 "outcome": episode_data.get("outcome"),
                 "cas": episode_data.get("capability_amplification_score", 0.0)
             },
-            evidence_refs=[str(path.relative_to(self.root_dir))]
+            evidence_refs=[str(episodes_path.relative_to(self.root_dir))]
         )
         
-        return path
+        return str(episodes_path.relative_to(self.root_dir))
+
+    def iter_learning_episodes(self, session_id: str = ""):
+        if not session_id:
+            return
+        session_path = self._session_path(session_id)
+        episodes_path = session_path / "learning_episodes.jsonl"
+        if not episodes_path.exists():
+            return
+        with episodes_path.open("r", encoding="utf-8") as handle:
+            for line in handle:
+                if line.strip():
+                    yield json.loads(line)
+
+    def latest_learning_episode(self, session_id: str = "") -> dict | None:
+        episodes = list(self.iter_learning_episodes(session_id))
+        if episodes:
+            return episodes[-1]
+        return None
+
 
     def iter_events(self, session_id: str):
         session_path = self._session_path(session_id)

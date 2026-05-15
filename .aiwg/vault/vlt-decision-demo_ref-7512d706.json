@@ -1,0 +1,13 @@
+{
+  "content_hash": "7512d706faf44616aadd5467873c0e7fb4b8c99a990b82f3800f4a6c37063259",
+  "created_at": "2026-05-15T06:00:21.402799+00:00",
+  "entry_type": "decision",
+  "evidence_refs": [
+    "/media/datasets/DUMMIE Engine/.aiwg/workbench/demo_refactor_snowball/decision_log.jsonl"
+  ],
+  "mission_id": "demo_refactor_snowball",
+  "reuse_conditions": [],
+  "risk_notes": [],
+  "summary": "Key architectural decisions from demo_refactor_snowball",
+  "vault_id": "vlt-decision-demo_ref-7512d706"
+}

@@ -1,0 +1,13 @@
+{
+  "content_hash": "e455bca9b6b57500e38fb310d37b55205ffa28ff2346e7e47c02168c543be7c7",
+  "created_at": "2026-05-15T06:00:21.402681+00:00",
+  "entry_type": "golden_path",
+  "evidence_refs": [
+    "/media/datasets/DUMMIE Engine/.aiwg/workbench/demo_refactor_snowball/final_summary.md"
+  ],
+  "mission_id": "demo_refactor_snowball",
+  "reuse_conditions": [],
+  "risk_notes": [],
+  "summary": "Successful execution pattern for mission demo_refactor_snowball",
+  "vault_id": "vlt-golden_path-demo_ref-e455bca9"
+}

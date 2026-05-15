@@ -1,0 +1,14 @@
+{
+  "rules": [
+    {
+      "id": "MEMREF-001",
+      "name": "DeterministicHash",
+      "description": "All memory refs must be identified by a SHA-256 hash of their path and context fields."
+    },
+    {
+      "id": "MEMREF-002",
+      "name": "PathSafety",
+      "description": "Paths in MemoryRefs must be relative to the workspace root, rejecting absolute paths and traversal."
+    }
+  ]
+}

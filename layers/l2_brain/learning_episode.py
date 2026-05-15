@@ -4,12 +4,29 @@
 from __future__ import annotations
 
 import json
+import re
 from dataclasses import asdict, dataclass, field
+from datetime import datetime, timezone
 from typing import Any
 
 
 OUTCOMES = {"success", "partial", "failed", "blocked", "unknown"}
 
+_FORBIDDEN_PATTERNS = [
+    (re.compile(r"\.env\s*[=:]", re.I), "forbidden .env assignment"),
+    (re.compile(r"secret\s*(is|[:=])", re.I), "forbidden secret value"),
+    (re.compile(r"credential\s*(is|[:=])", re.I), "forbidden credential value"),
+    (re.compile(r"token\s*[=:]", re.I), "forbidden token assignment"),
+    (re.compile(r"password\s*[=:]", re.I), "forbidden password assignment"),
+    (re.compile(r"chain_of_thought", re.I), "private reasoning"),
+    (re.compile(r"chain-of-thought", re.I), "private reasoning"),
+    (re.compile(r"private reasoning", re.I), "private reasoning"),
+    (re.compile(r"private_reasoning", re.I), "private reasoning"),
+    (re.compile(r"internal monologue", re.I), "private reasoning"),
+]
+
+def _now() -> str:
+    return datetime.now(timezone.utc).isoformat()
 
 @dataclass
 class LearningEpisodeMetrics:
@@ -29,15 +46,23 @@ class LearningEpisode:
     episode_id: str
     mission_id: str
     session_id: str
-    input_summary: str
-    action_taken: str
+    input_summary: str = "" # Defaulted for backward compatibility
+    action_taken: str = ""  # Defaulted for backward compatibility
     outcome: str = "unknown"
+    phase_id: str = ""
+    outcome_id: str = ""
+    workbench_ref: str = ""
+    vault_refs: list[str] = field(default_factory=list)
+    token_cost_summary: dict[str, Any] = field(default_factory=dict)
+    context_budget_summary: dict[str, Any] = field(default_factory=dict)
     metrics: LearningEpisodeMetrics = field(default_factory=LearningEpisodeMetrics)
     what_worked: list[str] = field(default_factory=list)
     what_failed: list[str] = field(default_factory=list)
     recommended_next_improvement: str = ""
     capability_amplification_score: float = 0.0
     evidence_refs: list[str] = field(default_factory=list)
+    memory_tags: list[str] = field(default_factory=list)
+    created_at: str = field(default_factory=_now)
 
     def __post_init__(self) -> None:
         if self.outcome not in OUTCOMES:
@@ -45,7 +70,22 @@ class LearningEpisode:
         if isinstance(self.metrics, dict):
             self.metrics = LearningEpisodeMetrics(**self.metrics)
         self.capability_amplification_score = max(-1.0, min(1.0, float(self.capability_amplification_score)))
-        _reject_private_reasoning(self.evidence_refs)
+        
+        # Comprehensive safety check
+        self._reject_private(self.to_dict())
+
+    def _reject_private(self, value: Any) -> None:
+        if isinstance(value, dict):
+            for key, item in value.items():
+                self._reject_private(str(key))
+                self._reject_private(item)
+        elif isinstance(value, (list, tuple, set)):
+            for item in value:
+                self._reject_private(item)
+        elif isinstance(value, str):
+            for pattern, reason in _FORBIDDEN_PATTERNS:
+                if pattern.search(value):
+                    raise ValueError(f"LearningEpisode payload contains {reason}")
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
@@ -59,11 +99,3 @@ class LearningEpisode:
         if "metrics" in data and isinstance(data["metrics"], dict):
             data["metrics"] = LearningEpisodeMetrics(**data["metrics"])
         return cls(**data)
-
-
-def _reject_private_reasoning(values: list[str]) -> None:
-    private_terms = ("chain-of-thought", "chain_of_thought", "private reasoning", "internal monologue")
-    for value in values:
-        normalized = str(value).lower()
-        if any(term in normalized for term in private_terms):
-            raise ValueError("private reasoning artifacts are not accepted in LearningEpisode evidence_refs")

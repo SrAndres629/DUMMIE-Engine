@@ -1,18 +1,26 @@
 {
+  "by_hash": {
+    "7512d706faf44616aadd5467873c0e7fb4b8c99a990b82f3800f4a6c37063259": "vlt-decision-demo_ref-7512d706",
+    "e455bca9b6b57500e38fb310d37b55205ffa28ff2346e7e47c02168c543be7c7": "vlt-golden_path-demo_ref-e455bca9"
+  },
   "by_mission": {
     "demo_refactor_snowball": [
       "vlt-37e60cbc",
-      "vlt-f4a988db"
+      "vlt-decision-demo_ref-7512d706",
+      "vlt-f4a988db",
+      "vlt-golden_path-demo_ref-e455bca9"
     ]
   },
   "by_type": {
     "decision": [
+      "vlt-decision-demo_ref-7512d706",
       "vlt-f4a988db"
     ],
     "golden_path": [
-      "vlt-37e60cbc"
+      "vlt-37e60cbc",
+      "vlt-golden_path-demo_ref-e455bca9"
     ]
   },
-  "total_entries": 2,
-  "updated_at": "2026-05-15T05:24:24.050617+00:00"
+  "total_entries": 4,
+  "updated_at": "2026-05-15T06:00:21.406463+00:00"
 }

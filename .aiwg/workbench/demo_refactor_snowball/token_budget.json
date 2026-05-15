@@ -1,8 +1,6 @@
 {
-  "budget_pressure": "low",
-  "budget_source": "ContextBudgetManager",
+  "budget_pressure": "unknown",
+  "budget_source": "unavailable",
   "mission_id": "demo_refactor_snowball",
-  "phase_id": "",
-  "token_ledger_ref": ".aiwg/missions/demo_refactor_snowball/token_cost_ledger.jsonl",
-  "total_budget": 4096
+  "phase_id": ""
 }
