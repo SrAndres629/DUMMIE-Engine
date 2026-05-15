@@ -24,6 +24,10 @@ for _layer in ["l1_nervous", "l2_brain", "l3_shield"]:
     if os.path.exists(_layer_path) and _layer_path not in sys.path:
         sys.path.insert(0, _layer_path)
 
+_hex_src = os.path.join(ROOT_DIR, "layers", "l2_brain", "src")
+if os.path.exists(_hex_src) and _hex_src not in sys.path:
+    sys.path.insert(0, _hex_src)
+
 from mcp.server.fastmcp import FastMCP
 
 # Importaciones locales (ahora seguras)

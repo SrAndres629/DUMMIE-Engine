@@ -97,16 +97,10 @@ async def main():
         await sv.launch("Elixir-Overseer", "mix", ["run", "--no-halt"], {
             "DUMMIE_ROOT_DIR": str(root)
         })
-
-        # MCP Gateway (L1/L2 Brain)
-        await sv.launch("MCP-Gateway", str(root / "layers/l2_brain/.venv/bin/python"), ["./layers/l1_nervous/mcp_server.py"], {
-            "DUMMIE_ROOT_DIR": str(root),
-            "DUMMIE_AIWG_DIR": str(aiwg),
-            "DUMMIE_KUZU_DB_PATH": str(kuzu_path),
-            "DUMMIE_DUMMIED_SOCKET_PATH": str(dummied_socket),
-            "DUMMIE_MCP_CONFIG_PATH": str(root / "dummie_gateway_config.json"),
-            "MEMORY_SOCKET_PATH": str(socket_path)
-        })
+        
+        # NOTA ARQUITECTÓNICA: MCP-Gateway no se levanta aquí. 
+        # Al usar transporte STDIO, debe ser instanciado bajo demanda por el cliente MCP 
+        # a través del wrapper /usr/local/bin/dummie-mcp. (Spec 52)
         
         await sv.run_forever()
     except Exception as e:

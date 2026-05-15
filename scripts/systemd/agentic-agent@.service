@@ -1,0 +1,15 @@
+[Unit]
+Description=DUMMIE Long-Lived Autonomous Agent (%i)
+PartOf=agentic.slice
+
+[Service]
+Slice=agentic.slice
+Type=simple
+# Execution context for an isolated agent
+ExecStart=/home/jorand/Escritorio/DUMMIE Engine/layers/l2_brain/.venv/bin/python /home/jorand/Escritorio/DUMMIE Engine/layers/l2_brain/agent_worker.py %i
+Restart=on-failure
+OOMPolicy=kill
+
+# Aislar el agente
+ProtectSystem=strict
+ReadWritePaths=/home/jorand/Escritorio/DUMMIE Engine/.aiwg

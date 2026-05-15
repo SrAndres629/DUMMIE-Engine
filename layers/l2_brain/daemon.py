@@ -96,6 +96,10 @@ class DummieDaemon:
         self.last_counterfactual_scores: List[float] = []
         self._current_counterfactual_threshold: float = 0.0
         self.last_cognitive_preflight: Dict[str, Any] = {"status": "SKIPPED"}
+        
+        # Integración Gobernador de Recursos (Spec 52)
+        from layers.l2_brain.resource_governor import ResourceGovernor
+        self.governor = ResourceGovernor()
 
         # Metacognitive Pipeline Integration
         self.metacognition_status = "MISSING"

@@ -27,21 +27,7 @@ def run_doctor() -> dict:
         return json.loads(json_str)
     return {}
 
-def kill_processes(pids: list):
-    for pid_info in pids:
-        try:
-            pid = int(pid_info.split()[0])
-            logger.info(f"Killing orphan PID {pid}...")
-            os.kill(pid, signal.SIGTERM)
-            time.sleep(0.5)
-            # Verify if still alive
-            try:
-                os.kill(pid, 0)
-                os.kill(pid, signal.SIGKILL)
-            except OSError:
-                pass # Already dead
-        except Exception as e:
-            logger.warning(f"Failed to kill {pid_info}: {e}")
+
 
 def clean_sockets():
     socket_dir = ROOT_DIR / ".aiwg" / "sockets"
@@ -58,10 +44,9 @@ def run_build():
     subprocess.run(["bash", str(ROOT_DIR / "scripts" / "build_factory.sh")], check=True)
 
 def restart_factory():
-    logger.info("Cycling Factory...")
-    subprocess.run(["bash", str(ROOT_DIR / "scripts" / "lab-off-safe.sh")])
+    logger.info("Cycling Factory via Systemd...")
+    subprocess.run(["systemctl", "--user", "restart", "dummie-engine.service"])
     time.sleep(2)
-    subprocess.run(["bash", str(ROOT_DIR / "scripts" / "lab-on-safe.sh")])
 
 def main():
     diagnostic = run_doctor()
@@ -69,21 +54,16 @@ def main():
         logger.error("Could not obtain diagnostic. Aborting.")
         return
 
-    # 1. Process Cleanup
-    relevant_pids = diagnostic.get("results", {}).get("processes", {}).get("relevant", [])
-    if relevant_pids:
-        kill_processes(relevant_pids)
+    # 1. Graceful Lifecycle Restart (Systemd)
+    restart_factory()
     
-    # 2. Filesystem Cleanup
+    # 2. Filesystem Cleanup (Stale locks)
     clean_sockets()
     
     # 3. Industrial Sync
     run_build()
     
-    # 4. State Cycle
-    restart_factory()
-    
-    # 5. Final Verification
+    # 4. Final Verification
     time.sleep(5)
     final_diagnostic = run_doctor()
     if final_diagnostic.get("ok"):

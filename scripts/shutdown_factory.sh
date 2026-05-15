@@ -9,46 +9,41 @@ FLIGHT_SOCKET_PATH="${MEMORY_SOCKET_PATH:-$AIWG_DIR/sockets/flight.sock}"
 
 echo "=== [SHUTDOWN] Cerrando DUMMIE Engine Factory ==="
 
-# 1. Matar procesos por nombre/patrón (Industrial Grade Reaper)
-echo "[*] Terminando procesos de todas las capas (L0-L2)..."
+# 1. Terminación Elegante vía Systemd y PID
+echo "[*] Deteniendo servicio dummie-engine de Systemd..."
+systemctl --user stop dummie-engine.service 2>/dev/null || true
 
-# Patrones específicos de DUMMIE Engine
-patterns=(
-    "dummied"
-    "mix run --no-halt"
-    "monitor"
-    "l1_nervous"
-    "l0_overseer"
-    "mcp_server.py"
-    "mcp_proxy.py"
-    "go run cmd/memory/main.go"
-    "mcp-server-sqlite"
-    "mcp-ripgrep"
-    "mcp-ctags"
-    "genkit-cli"
-    "arize-tracing-assistant"
-    "mcp-server-fetch"
-    "mcp-server-time"
-    "mcp_server_ssh"
-    "server-puppeteer"
-    "server-everything"
-    "openclaw-gateway"
-    "cloudcode_cli duet"
-    "pyrefly lsp"
-    "language_server.*DUMMIE_20Engine"
-    "Ollama"
-    "fastembed"
-    "uvicorn"
-    "gunicorn"
-)
+SUPERVISOR_PID_FILE="$AIWG_DIR/supervisor.pid"
+if [ -f "$SUPERVISOR_PID_FILE" ]; then
+    SUPERVISOR_PID=$(cat "$SUPERVISOR_PID_FILE")
+    if kill -0 "$SUPERVISOR_PID" 2>/dev/null; then
+        echo "[*] Enviando SIGTERM al L0 Supervisor (PID: $SUPERVISOR_PID)..."
+        kill -15 "$SUPERVISOR_PID"
+        
+        # Esperar hasta 10 segundos para apagado ordenado
+        for i in {1..10}; do
+            if ! kill -0 "$SUPERVISOR_PID" 2>/dev/null; then
+                echo "  [✓] L0 Supervisor y sub-procesos terminaron correctamente."
+                break
+            fi
+            sleep 1
+        done
+        
+        if kill -0 "$SUPERVISOR_PID" 2>/dev/null; then
+            echo "  [!] El Supervisor no respondió al SIGTERM. Forzando SIGKILL..."
+            kill -9 "$SUPERVISOR_PID"
+        fi
+    fi
+    rm -f "$SUPERVISOR_PID_FILE"
+else
+    echo "  [-] No se encontró supervisor.pid. (Omitiendo apagado primario)"
+fi
 
-for pattern in "${patterns[@]}"; do
-    # Intentar SIGTERM primero, luego SIGKILL si persiste
-    pids=$(pgrep -f "$pattern" | grep -v "$$" || true)
+# Fallback ultra-seguro solo para procesos zombis conocidos de dummie
+for z_pattern in "l1_nervous/mcp_server.py" "l0_overseer/supervisor.py" "bin/dummied"; do
+    pids=$(pgrep -f "$z_pattern" | grep -v "$$" || true)
     if [ -n "$pids" ]; then
-        echo "  [-] Killing $pattern (PIDs: $pids)..."
-        kill -15 $pids 2>/dev/null || true
-        sleep 0.5
+        echo "  [-] Limpiando proceso zombi: $z_pattern"
         kill -9 $pids 2>/dev/null || true
     fi
 done

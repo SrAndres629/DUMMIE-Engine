@@ -37,6 +37,7 @@ def gateway_env() -> dict[str, str]:
             "PYTHONPATH": ":".join(
                 [
                     str(ROOT / "layers" / "l2_brain"),
+                    str(ROOT / "layers" / "l2_brain" / "src"),
                     str(ROOT / "layers" / "l1_nervous"),
                     str(ROOT / "layers" / "l3_shield"),
                 ]

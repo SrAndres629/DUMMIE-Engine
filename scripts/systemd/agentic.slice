@@ -1,0 +1,15 @@
+[Unit]
+Description=DUMMIE Agentic Workload Slice
+Documentation=file:///home/jorand/Escritorio/DUMMIE%20Engine/doc/specs/52_agentic_systemd_runtime_and_resource_governance.rules.json
+Before=slices.target
+
+[Slice]
+# Asignación de Memoria: Proteger al Host
+# Límite "Suave": Linux intentará hacer swap/zram si pasamos esto
+MemoryHigh=12G
+# Límite "Duro": Linux matará al agente (OOM Killer) si pasa esto
+MemoryMax=14G
+
+# CPU: Prioridad normal-baja para no colapsar la interfaz gráfica del usuario
+CPUWeight=50
+CPUQuota=900%

@@ -22,11 +22,14 @@ bash "$ROOT_DIR/scripts/shutdown_factory.sh"
 mkdir -p "$AIWG_DIR/sockets"
 mkdir -p "$(dirname "$KUZU_PATH")"
 
-# 2. Iniciar L0 Supervisor (Control Plane Unificado)
-echo ">> Launching L0 Supervisor..."
-DUMMIE_ROOT="$ROOT_DIR" DUMMIE_AIWG_DIR="$AIWG_DIR" \
-    "./layers/l2_brain/.venv/bin/python" "./layers/l0_overseer/supervisor.py" > "$LOG_DIR/supervisor.log" 2>&1 &
+# 2. Iniciar L0 Supervisor (Control Plane Unificado) vía Systemd
+echo ">> Provisioning Systemd User Service..."
+mkdir -p "$HOME/.config/systemd/user"
+cp "$ROOT_DIR/scripts/dummie-engine.service" "$HOME/.config/systemd/user/"
+systemctl --user daemon-reload
+systemctl --user enable dummie-engine.service 2>/dev/null || true
+systemctl --user start dummie-engine.service
 
-echo "[✓] Factory is ONLINE."
+echo "[✓] Factory is ONLINE (Managed by systemd)."
 echo "Sockets: $DUMMIED_SOCKET_PATH, $SOCKET_PATH"
 echo "Kuzu: $KUZU_PATH"
