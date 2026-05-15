@@ -22,3 +22,4 @@ fi
 bash "$START_SCRIPT"
 
 echo "DUMMIE lab is ONLINE."
+echo ">> Run 'python3 scripts/dummie_status.py' to monitor the system health."
