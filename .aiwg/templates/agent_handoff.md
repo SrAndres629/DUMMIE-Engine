@@ -22,7 +22,7 @@
 - None
 
 ## Risks Remaining
-- None identified yet.
+- UNKNOWN: replace before handoff is valid.
 
 ## Scope Deviations
 - None

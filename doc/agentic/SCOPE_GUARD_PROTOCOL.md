@@ -99,7 +99,7 @@ changed_files:
 scope_verdict: PASS_WITH_PREEXISTING_FAILURE
 evidence:
   - "git status --short listed only allowed files."
-  - "python3 scripts/validate_specs_docs.py failed on preexisting spec 49 evidence path."
+  - "python3 scripts/validate_specs_docs.py failed on a documented preexisting issue outside the task scope."
 deviations: []
 ```
 

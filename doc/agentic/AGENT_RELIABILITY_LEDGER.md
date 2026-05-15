@@ -101,6 +101,21 @@ A ledger entry must cite:
 
 Do not score an agent on vibes, style preference, or unsupported memory.
 
+## Storage And Update Process
+The canonical schema for agent scoring is this document.
+
+Ledger entries are stored in the relevant task, phase, or closure report under a
+section named `## Agent Reliability Ledger`. Use `.aiwg/reports/` for these
+reports unless a task contract names a narrower location.
+
+Do not create a standalone ledger artifact unless a task contract explicitly
+authorizes it. When a standalone artifact is authorized later, it must use this
+schema and preserve existing report entries by reference or migration note.
+
+Append records rather than rewriting history. If a later Validator changes a
+score, add a new entry with a note explaining what earlier entry it supersedes
+and what new evidence changed the recommendation.
+
 ## Example Entry
 
 ```yaml
@@ -133,7 +148,7 @@ commands_run:
   - python3 scripts/validate_specs_docs.py
 notes:
   - "Docs-only scope respected."
-  - "Specs validation failed on a known preexisting spec 49 issue."
+  - "Specs validation failed on a documented preexisting issue outside task scope."
 recommended_future_use: allowed
 ```
 

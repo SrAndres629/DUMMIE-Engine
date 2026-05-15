@@ -37,8 +37,8 @@ evidence_required:
 
 handoff_required: true
 rollback_notes: ""
-max_files_changed: 0
-max_lines_changed: 0
+max_files_changed: null  # REQUIRED: replace with an explicit limit before work starts.
+max_lines_changed: null  # REQUIRED: replace with an explicit limit or justified null.
 
 assumptions:
   - ""

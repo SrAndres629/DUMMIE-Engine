@@ -82,9 +82,9 @@ Required contradiction record:
 ```yaml
 - claim: "Docs validation failed after a docs-only change."
   category: CONTRADICTION
-  source: "python3 scripts/validate_specs_docs.py and .aiwg/reports/duplication_audit.md"
-  result: "The same spec 49 failure was documented before the task."
-  limitations: "Requires a clean pre-task command or prior report to classify with confidence."
+  source: "python3 scripts/validate_specs_docs.py and pre-task validation evidence"
+  result: "The same validation failure was present before the task or is isolated to files outside the task scope."
+  limitations: "Requires a clean pre-task command, prior report, or commit-isolation evidence to classify with confidence."
 ```
 
 ## Evidence Quality Levels

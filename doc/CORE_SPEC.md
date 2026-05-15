@@ -44,6 +44,16 @@
 - `doc/agentic/SYSTEM_PROMPT_BASE.md`
 - `doc/agentic/SWARM_WORKFLOW.md`
 - `doc/agentic/EXECUTION_PROTOCOL.md`
+- `doc/agentic/AGENT_TASK_CONTRACT.md`
+- `doc/agentic/HANDOFF_CONTRACT.md`
+- `doc/agentic/VALIDATION_EVIDENCE.md`
+- `doc/agentic/SCOPE_GUARD_PROTOCOL.md`
+- `doc/agentic/AGENT_RELIABILITY_LEDGER.md`
+
+## Plantillas operativas
+- `.aiwg/templates/agent_task_contract.yaml`
+- `.aiwg/templates/agent_handoff.md`
+- `.aiwg/templates/validation_evidence.md`
 
 ## Criterio de mantenimiento
 Si cambia una spec (estado, nombre o ubicación), este índice se actualiza en el mismo lote.
