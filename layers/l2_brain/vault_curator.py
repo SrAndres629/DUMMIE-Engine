@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import json
 import logging
 import os
@@ -71,12 +72,13 @@ class VaultCurator:
         # Add common metadata
         for entry in entries:
             entry.update({
-                "vault_id": f"vlt-{uuid.uuid4().hex[:8]}",
                 "mission_id": mission_id,
                 "created_at": _now(),
                 "reuse_conditions": [],
                 "risk_notes": [],
             })
+            entry["content_hash"] = self._calculate_hash(entry)
+            entry["vault_id"] = self._derive_vault_id(entry)
 
         return entries
 
@@ -84,13 +86,26 @@ class VaultCurator:
         self._reject_private(entry)
 
         self.root.mkdir(parents=True, exist_ok=True)
-        vault_id = entry.get("vault_id") or f"vlt-{uuid.uuid4().hex[:8]}"
+
+        if "content_hash" not in entry:
+             entry["content_hash"] = self._calculate_hash(entry)
+
+        vault_id = entry.get("vault_id") or self._derive_vault_id(entry)
         entry["vault_id"] = vault_id
         entry["created_at"] = entry.get("created_at") or _now()
 
         entry_path = self.root / f"{vault_id}.json"
-        self._write_json(entry_path, entry)
 
+        # Deduplication check
+        if entry_path.exists():
+            try:
+                existing = json.loads(entry_path.read_text(encoding="utf-8"))
+                if existing.get("content_hash") == entry["content_hash"]:
+                     return existing
+            except Exception:
+                pass
+
+        self._write_json(entry_path, entry)
         self.build_vault_index()
         return entry
 
@@ -115,14 +130,20 @@ class VaultCurator:
             "total_entries": len(entries),
             "by_type": {},
             "by_mission": {},
+            "by_hash": {},
         }
 
         for e in entries:
+            vid = e["vault_id"]
             etype = e.get("entry_type", "unknown")
-            index["by_type"].setdefault(etype, []).append(e["vault_id"])
+            index["by_type"].setdefault(etype, []).append(vid)
 
             mid = e.get("mission_id", "unknown")
-            index["by_mission"].setdefault(mid, []).append(e["vault_id"])
+            index["by_mission"].setdefault(mid, []).append(vid)
+
+            chash = e.get("content_hash", "")
+            if chash:
+                index["by_hash"][chash] = vid
 
         self._write_json(self.root / "vault_index.json", index)
         return index
@@ -146,6 +167,22 @@ class VaultCurator:
             "stored_ids": [s["vault_id"] for s in stored],
             "cleanup_status": "retained",
         }
+
+    def _calculate_hash(self, entry: dict) -> str:
+        # Sort keys to ensure deterministic hash
+        relevant = {
+            "entry_type": entry.get("entry_type"),
+            "summary": entry.get("summary"),
+            "evidence_refs": entry.get("evidence_refs", []),
+        }
+        encoded = json.dumps(relevant, sort_keys=True).encode("utf-8")
+        return hashlib.sha256(encoded).hexdigest()
+
+    def _derive_vault_id(self, entry: dict) -> str:
+        etype = entry.get("entry_type", "unknown")
+        chash = entry.get("content_hash", "")[:8]
+        mid = entry.get("mission_id", "unknown")[:8]
+        return f"vlt-{etype}-{mid}-{chash}"
 
     def _reject_private(self, value: Any) -> None:
         if isinstance(value, dict):

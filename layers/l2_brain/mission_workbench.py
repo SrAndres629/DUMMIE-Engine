@@ -5,9 +5,15 @@ import logging
 import os
 import re
 import uuid
+from contextlib import contextmanager
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Iterable
+from typing import Any, Generator, Iterable
+
+try:
+    import fcntl
+except ImportError:
+    fcntl = None  # type: ignore
 
 logger = logging.getLogger(__name__)
 
@@ -164,8 +170,10 @@ class MissionWorkbenchManager:
         self._validate_id("mission_id", mission_id)
         self._reject_private(event)
 
+        event_id = event.get("event_id")
+
         normalized = {
-            "event_id": event.get("event_id") or f"dec-{uuid.uuid4().hex}",
+            "event_id": event_id or f"dec-{uuid.uuid4().hex}",
             "timestamp": event.get("timestamp") or _now(),
             "claim": str(event.get("claim", "")),
             "evidence": list(event.get("evidence", []) or []),
@@ -176,7 +184,17 @@ class MissionWorkbenchManager:
         }
 
         log_path = self._workbench_dir(mission_id) / "decision_log.jsonl"
-        with log_path.open("a", encoding="utf-8") as handle:
+        with self._lock_file(log_path) as handle:
+            # Idempotency check
+            if event_id:
+                handle.seek(0)
+                for line in handle:
+                    if line.strip():
+                        existing = json.loads(line)
+                        if existing.get("event_id") == event_id:
+                            return existing
+
+            handle.seek(0, os.SEEK_END)
             handle.write(json.dumps(normalized, ensure_ascii=True, sort_keys=True) + "\n")
             handle.flush()
             try:
@@ -186,6 +204,25 @@ class MissionWorkbenchManager:
 
         return normalized
 
+    @contextmanager
+    def _lock_file(self, path: Path, mode: str = "a+") -> Generator[Any, None, None]:
+        if not path.exists() and "r" not in mode:
+            path.touch()
+
+        with path.open(mode, encoding="utf-8") as handle:
+            if fcntl:
+                try:
+                    lock_type = (
+                        fcntl.LOCK_EX
+                        if "w" in mode or "a" in mode or "+" in mode
+                        else fcntl.LOCK_SH
+                    )
+                    fcntl.flock(handle, lock_type)
+                    yield handle
+                finally:
+                    fcntl.flock(handle, fcntl.LOCK_UN)
+            else:
+                yield handle
     def list_artifacts(self, mission_id: str) -> list[dict]:
         self._validate_id("mission_id", mission_id)
         target_dir = self._workbench_dir(mission_id)

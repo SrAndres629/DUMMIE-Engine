@@ -32,6 +32,11 @@ EVENT_TYPES = {
     "NEXT_ACTION_SELECTED",
     "MISSION_COMPLETED",
     "MISSION_FAILED",
+    "WORKBENCH_CREATED",
+    "WORKBENCH_ARTIFACT_WRITTEN",
+    "WORKBENCH_FINALIZED",
+    "VAULT_ENTRY_STORED",
+    "VAULT_INDEX_UPDATED",
 }
 _SAFE_ID = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_-]*$")
 
@@ -164,6 +169,8 @@ class PhaseLedger:
             "next_action": {},
             "recovery_packet_ref": "",
             "token_ledger_ref": f".aiwg/missions/{mission_id}/token_cost_ledger.jsonl" if mission_id else "",
+            "workbench_ref": "",
+            "vault_refs": [],
         }
         for event in self.iter_events(mission_id):
             self._apply_event(state, event)
@@ -327,6 +334,14 @@ class PhaseLedger:
         elif event_type == "MISSION_FAILED":
             state["status"] = "failed"
             state["known_failures"].append(event.get("reason", "mission_failed"))
+        elif event_type == "WORKBENCH_CREATED":
+            state["workbench_ref"] = event.get("workbench_ref", "")
+        elif event_type == "WORKBENCH_FINALIZED":
+            state["status"] = "finalized"
+        elif event_type == "VAULT_ENTRY_STORED":
+            v_ref = event.get("vault_ref")
+            if v_ref and v_ref not in state["vault_refs"]:
+                state["vault_refs"].append(v_ref)
 
     def _phase(self, state: dict, phase_id: str) -> dict:
         if phase_id not in state["phases"]:

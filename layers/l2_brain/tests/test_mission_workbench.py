@@ -70,3 +70,15 @@ def test_mission_workbench_path_traversal(tmp_path):
     manager = MissionWorkbenchManager(root=tmp_path)
     with pytest.raises(ValueError, match="path traversal"):
         manager.create_workbench("../bad", "goal")
+
+def test_mission_workbench_append_decision_idempotency(tmp_path):
+    manager = MissionWorkbenchManager(root=tmp_path)
+    manager.create_workbench("m1", "Goal 1")
+    
+    event = {"event_id": "unique-1", "claim": "C1", "decision": "D1"}
+    manager.append_decision("m1", event)
+    manager.append_decision("m1", event) # Should be ignored
+    
+    log_path = tmp_path / "m1" / "decision_log.jsonl"
+    lines = log_path.read_text().splitlines()
+    assert len(lines) == 1

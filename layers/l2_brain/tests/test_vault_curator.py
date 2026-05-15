@@ -32,14 +32,35 @@ def test_vault_curator_rejects_private(tmp_path):
     with pytest.raises(ValueError, match="forbidden secret"):
         curator.store_vault_entry({"summary": "secret is 123", "entry_type": "decision"})
 
-def test_vault_curator_list_entries(tmp_path):
+def test_vault_curator_deterministic_id_and_deduplication(tmp_path):
     curator = VaultCurator(root=tmp_path)
-    curator.store_vault_entry({"entry_type": "golden_path", "summary": "S1"})
-    curator.store_vault_entry({"entry_type": "decision", "summary": "D1"})
+    entry = {
+        "mission_id": "m1",
+        "entry_type": "decision",
+        "summary": "Use fcntl for locking",
+        "evidence_refs": ["file1.py"]
+    }
 
-    all_e = curator.list_entries()
-    assert len(all_e) == 2
+    e1 = curator.store_vault_entry(entry)
+    e2 = curator.store_vault_entry(entry) # Duplicate
 
-    goldens = curator.list_entries(entry_type="golden_path")
-    assert len(goldens) == 1
-    assert goldens[0]["summary"] == "S1"
+    assert e1["vault_id"] == e2["vault_id"]
+    assert e1["content_hash"] == e2["content_hash"]
+
+    files = list(tmp_path.glob("vlt-*.json"))
+    assert len(files) == 1 # Only one file stored due to deduplication
+
+def test_vault_curator_index_by_hash(tmp_path):
+    curator = VaultCurator(root=tmp_path)
+    entry = {
+        "mission_id": "m1",
+        "entry_type": "golden_path",
+        "summary": "Success",
+        "evidence_refs": ["ref1"]
+    }
+    e = curator.store_vault_entry(entry)
+
+    index = curator.build_vault_index()
+    assert e["content_hash"] in index["by_hash"]
+    assert index["by_hash"][e["content_hash"]] == e["vault_id"]
+
