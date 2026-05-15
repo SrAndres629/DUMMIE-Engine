@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dummie.local/schemas/mission_runtime_contract.schema.json",
+  "title": "MissionRuntimeContract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "mission_id",
+    "phase_id",
+    "status",
+    "resume_token",
+    "recovery_packet_ref",
+    "next_action_ref"
+  ],
+  "properties": {
+    "mission_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]*$"
+    },
+    "phase_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]*$"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "created",
+        "running",
+        "paused",
+        "blocked",
+        "completed",
+        "failed"
+      ]
+    },
+    "resume_token": {
+      "type": "string",
+      "pattern": "^resume-[a-f0-9]{24}$"
+    },
+    "recovery_packet_ref": {
+      "type": "string"
+    },
+    "next_action_ref": {
+      "type": "string"
+    }
+  }
+}

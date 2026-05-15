@@ -175,6 +175,18 @@ class DummieDaemon:
             self.token_ledger = None
             self.budget_manager = None
             logger.warning("Metabolic components (Meter/Ledger/Budget) not fully available")
+
+        try:
+            from layers.l2_brain.outcome_evaluator import OutcomeEvaluator
+            self.evaluator = OutcomeEvaluator(self)
+            self.outcome_contract_available = True
+            self.outcome_contract_error = ""
+        except Exception as e:
+            self.evaluator = None
+            self.outcome_contract_available = False
+            self.outcome_contract_error = str(e)
+            logger.warning(f"Daemon outcome contract degraded: {e}")
+
         if self.diagnostic_mode:
             try:
                 from layers.l2_brain.daemon_diagnostic import DiagnosticReporter
@@ -244,7 +256,54 @@ class DummieDaemon:
         return await self.orchestrator.execute_request(request)
 
     def _build_outcome(self, *args, **kwargs):
-        return self.evaluator.build_outcome(*args, **kwargs)
+        evaluator = getattr(self, "evaluator", None)
+        if evaluator and hasattr(evaluator, "build_outcome"):
+            return evaluator.build_outcome(*args, **kwargs)
+        return self._build_outcome_fallback(*args, **kwargs)
+
+    def build_daemon_outcome(self, *args, **kwargs):
+        evaluator = getattr(self, "evaluator", None)
+        if evaluator and hasattr(evaluator, "build_daemon_outcome"):
+            return evaluator.build_daemon_outcome(*args, **kwargs)
+        return self._build_outcome_fallback(*args, **kwargs)
+
+    def _build_outcome_fallback(self, *args, **kwargs):
+        status = kwargs.get("status", args[0] if len(args) > 0 else "DEGRADED")
+        transaction_id = kwargs.get("transaction_id", args[1] if len(args) > 1 else "")
+        saga = kwargs.get("saga", args[2] if len(args) > 2 else None)
+        gate_reasons = kwargs.get("gate_reasons") or ["outcome_contract_unavailable"]
+        steps = [
+            {"task_id": getattr(step, "task_id", ""), "status": getattr(step, "status", "")}
+            for step in getattr(saga, "steps", [])
+        ]
+
+        return {
+            "status": status,
+            "transaction_id": transaction_id,
+            "context_token": getattr(saga, "context_token", ""),
+            "session_id": kwargs.get("session_id", getattr(self, "session_id", "")),
+            "mission_id": kwargs.get("mission_id", getattr(self, "mission_id", "")),
+            "phase_id": kwargs.get("phase_id", getattr(self, "phase_id", "")),
+            "metacognition_status": getattr(self, "metacognition_status", "MISSING"),
+            "sensor_first": {
+                "mode": getattr(getattr(self.gateway_policy, "mode", None), "value", "WARN"),
+                "decision": "WARN",
+                "reason": "; ".join(gate_reasons),
+            },
+            "next_action": {
+                "recommended": "inspect",
+                "reason": "outcome_contract_unavailable",
+                "blocked_by": gate_reasons,
+            },
+            "recovery_hint": {
+                "can_resume": False,
+                "resume_from": kwargs.get("phase_id", getattr(self, "phase_id", "")),
+                "missing_context": ["daemon_outcome_contract"],
+            },
+            "outcome_contract_available": False,
+            "outcome_contract_error": getattr(self, "outcome_contract_error", ""),
+            "steps": steps,
+        }
 
     async def _compensate(self, saga: SagaTransaction):
         logger.warning(f"Saga Compensation Initiated: {saga.transaction_id}")

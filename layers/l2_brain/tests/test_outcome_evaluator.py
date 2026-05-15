@@ -2,6 +2,7 @@ import unittest
 from unittest.mock import MagicMock
 from layers.l2_brain.outcome_evaluator import OutcomeEvaluator
 from layers.l2_brain.gateway_contract import SagaTransaction, SagaStep
+from layers.l2_brain.daemon_outcome import DaemonOutcome
 
 class TestOutcomeEvaluator(unittest.TestCase):
     def setUp(self):
@@ -143,7 +144,87 @@ class TestOutcomeEvaluator(unittest.TestCase):
         )
         self.assertEqual(outcome["metacognition_status"], "UNKNOWN")
         self.assertEqual(outcome["gateway_first_policy"], "UNKNOWN")
-        self.assertNotIn("efficiency", outcome)
+        self.assertEqual(outcome["efficiency"]["measurement_type"], "estimated")
+
+    def test_build_daemon_outcome_without_runtime_meter(self):
+        self.mock_daemon.runtime_meter = None
+        saga = SagaTransaction(transaction_id="tx-no-meter", context_token="tok", steps=[])
+
+        outcome = self.evaluator.build_daemon_outcome(
+            status="SUCCESS",
+            transaction_id="tx-no-meter",
+            saga=saga,
+            mission_id="mission-1",
+            phase_id="phase-1",
+        )
+
+        self.assertIsInstance(outcome, DaemonOutcome)
+        self.assertEqual(outcome.mission_id, "mission-1")
+        self.assertEqual(outcome.phase_id, "phase-1")
+        self.assertEqual(outcome.efficiency.measurement_type, "estimated")
+
+    def test_build_daemon_outcome_with_runtime_meter(self):
+        self.mock_daemon.runtime_meter.get_stats.return_value = {
+            "actual_direct_tokens": 120,
+            "actual_gateway_tokens": 60,
+            "estimated_direct_tokens": 1000,
+            "estimated_gateway_tokens": 500,
+            "token_reduction_ratio": 0.5,
+            "measurement_type": "runtime_actual",
+        }
+        saga = SagaTransaction(transaction_id="tx-meter", context_token="tok", steps=[])
+
+        outcome = self.evaluator.build_daemon_outcome(
+            status="SUCCESS",
+            transaction_id="tx-meter",
+            saga=saga,
+        )
+
+        self.assertEqual(outcome.efficiency.input_tokens, 120)
+        self.assertEqual(outcome.efficiency.estimated_gateway_tokens, 500)
+        self.assertEqual(outcome.efficiency.token_reduction_ratio, 0.5)
+        self.assertEqual(outcome.efficiency.measurement_type, "runtime")
+
+    def test_build_daemon_outcome_with_metacognition_ready(self):
+        saga = SagaTransaction(transaction_id="tx-ready", context_token="tok", steps=[])
+
+        outcome = self.evaluator.build_daemon_outcome("SUCCESS", "tx-ready", saga)
+
+        self.assertEqual(outcome.metacognition.status, "READY")
+        self.assertEqual(outcome.metacognition.error, "")
+
+    def test_build_daemon_outcome_with_metacognition_degraded(self):
+        self.mock_daemon.metacognition_status = "DEGRADED"
+        self.mock_daemon.metacognition_error = "missing optional hook"
+        saga = SagaTransaction(transaction_id="tx-degraded", context_token="tok", steps=[])
+
+        outcome = self.evaluator.build_daemon_outcome("DEGRADED", "tx-degraded", saga)
+
+        self.assertEqual(outcome.metacognition.status, "DEGRADED")
+        self.assertEqual(outcome.metacognition.error, "missing optional hook")
+
+    def test_build_outcome_includes_mission_phase_and_next_action(self):
+        saga = SagaTransaction(transaction_id="tx-next", context_token="tok", steps=[])
+
+        outcome = self.evaluator.build_outcome(
+            status="PARTIAL",
+            transaction_id="tx-next",
+            saga=saga,
+            mission_id="mission-2",
+            phase_id="phase-2",
+            next_action={"recommended": "resume", "reason": "partial outcome"},
+        )
+
+        self.assertEqual(outcome["mission_id"], "mission-2")
+        self.assertEqual(outcome["phase_id"], "phase-2")
+        self.assertEqual(outcome["next_action"]["recommended"], "resume")
+
+    def test_build_outcome_serializes_json(self):
+        saga = SagaTransaction(transaction_id="tx-json", context_token="tok", steps=[])
+
+        outcome = self.evaluator.build_daemon_outcome("SUCCESS", "tx-json", saga)
+
+        self.assertIn('"transaction_id": "tx-json"', outcome.to_json())
 
 if __name__ == "__main__":
     unittest.main()

@@ -1,9 +1,9 @@
 {
-  "spec_id": "DE-V2-L0-50",
+  "spec_id": "DE-V2-CROSS-50",
   "title": "Daemon Telemetry & Outcome Contracts",
   "status": "ACTIVE",
-  "layer": "L0",
-  "last_verified_on": "2026-04-29",
+  "layer": "CROSS",
+  "last_verified_on": "2026-05-15",
   "required_frontmatter": [
     "spec_id",
     "title",
@@ -20,13 +20,40 @@
     "Traceability"
   ],
   "evidence_paths": [
-    "layers/l0_overseer/internal/orchestrator/daemon.go",
-    "doc/CORE_SPEC.md",
-    "doc/PHYSICAL_MAP.md"
+    "layers/l2_brain/daemon_outcome.py",
+    "layers/l2_brain/outcome_evaluator.py",
+    "layers/l2_brain/daemon.py",
+    "layers/l2_brain/mission_runtime_contract.py",
+    "layers/l2_brain/tests/test_daemon_outcome.py",
+    "layers/l2_brain/tests/test_outcome_evaluator.py",
+    "layers/l2_brain/tests/test_mission_runtime_contract.py",
+    ".aiwg/schemas/mission_runtime_contract.schema.json"
+  ],
+  "outcome_status_values": [
+    "SUCCESS",
+    "PARTIAL",
+    "FAILED",
+    "BLOCKED",
+    "DEGRADED"
+  ],
+  "metacognition_status_values": [
+    "READY",
+    "DEGRADED",
+    "MISSING"
+  ],
+  "mission_runtime_status_values": [
+    "created",
+    "running",
+    "paused",
+    "blocked",
+    "completed",
+    "failed"
   ],
   "policy": {
     "allow_legacy_narrative": false,
     "require_existing_links": true,
+    "physical_evidence_must_be_files": true,
+    "forbid_private_chain_of_thought_serialization": true,
     "status_values": [
       "ACTIVE",
       "DRAFT",
