@@ -292,7 +292,7 @@ class DummieDaemon:
                 try:
                     # Attempt semantic retrieval for the request intent
                     retrieval_context = await self.semantic_retrieval_runtime.retrieve_for_prompt(
-                        prompt=request.intent,
+                        prompt=request.goal,
                         hook_packet=None
                     )
                 except Exception as e:
@@ -401,8 +401,29 @@ class DummieDaemon:
             if cached:
                 return cached
 
+        # Phase 10.1: Context Injection
+        # Ensure the prompt uses the latest retrieved context block
+        context_block = getattr(self, "last_prompt_context_block", "")
+        if context_block:
+            # We inject the block into the system prompt to provide factual grounding
+            if system_prompt:
+                system_prompt = f"{system_prompt}\n\n{context_block}"
+            else:
+                system_prompt = context_block
+            logger.info(f"Context injection active: {len(context_block)} chars added to system prompt.")
+
         # 1. Routing & Tiers
-        decision = self.model_router.route(prompt)
+        # Pass hook_metadata if available for context-aware routing
+        hook_metadata = {}
+        if hasattr(self, "last_context_packet") and self.last_context_packet:
+            packet = self.last_context_packet
+            hook_metadata = {
+                "retrieved_context_count": len(packet.get("retrieved_context", [])),
+                "prompt_context_block_ref": "present" if packet.get("prompt_context_block") else "",
+                "retrieval_refs": packet.get("context_refs", [])
+            }
+
+        decision = self.model_router.route(prompt, hook_metadata=hook_metadata)
         tiers_to_try = [decision.tier, ModelTier.CLOUD_STD, ModelTier.LOCAL_FAST]
 
         # Identity injection
