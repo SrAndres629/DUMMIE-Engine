@@ -1,0 +1,47 @@
+# Agent Task Contract Template
+# Copy this file into the task workspace or include it in the prompt.
+
+task_id: ""
+phase: ""
+role: ""
+objective: ""
+
+context:
+  - ""
+
+allowed_files:
+  - ""
+
+forbidden_files:
+  - ""
+
+allowed_commands:
+  - "git status --short"
+
+forbidden_commands:
+  - "git reset --hard"
+  - "git clean -fd"
+  - "rm -rf"
+
+authority_required: "READ_ONLY"
+risk_level: "LOW"
+
+acceptance_criteria:
+  - ""
+
+validation_commands:
+  - "git status --short"
+
+evidence_required:
+  - ""
+
+handoff_required: true
+rollback_notes: ""
+max_files_changed: 0
+max_lines_changed: 0
+
+assumptions:
+  - ""
+
+known_risks:
+  - ""
