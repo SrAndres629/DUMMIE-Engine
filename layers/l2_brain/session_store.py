@@ -145,6 +145,40 @@ class SessionStore:
 
         return event
 
+    def append_learning_episode(self, session_id: str, episode_data: dict[str, Any]) -> Path:
+        """
+        Saves a LearningEpisode as an atomic artifact and appends a summary event.
+        """
+        session_path = self._session_path(session_id)
+        if not session_path.exists():
+            raise FileNotFoundError(f"Session not found: {session_id}")
+
+        episode_id = episode_data.get("episode_id", f"ep-{uuid.uuid4().hex[:8]}")
+        artifact_name = f"learning_episode_{episode_id}.json"
+        
+        # Security: already handled by LearningEpisode class but reinforced here
+        content = json.dumps(episode_data, indent=2, sort_keys=True)
+        if "chain-of-thought" in content.lower() or "private reasoning" in content.lower():
+             raise ValueError("private reasoning artifacts are not accepted in SessionStore artifacts")
+
+        path = self.save_artifact(session_id, artifact_name, content)
+        
+        # Also append to event log for causal trace
+        self.append_event(
+            session_id=session_id,
+            event_type="LEARNING_EPISODE_CREATED",
+            summary=f"Mission {episode_data.get('mission_id')} completed with outcome: {episode_data.get('outcome')}",
+            data={
+                "episode_id": episode_id,
+                "mission_id": episode_data.get("mission_id"),
+                "outcome": episode_data.get("outcome"),
+                "cas": episode_data.get("capability_amplification_score", 0.0)
+            },
+            evidence_refs=[str(path.relative_to(self.root_dir))]
+        )
+        
+        return path
+
     def iter_events(self, session_id: str):
         session_path = self._session_path(session_id)
         events_path = session_path / "events.jsonl"
