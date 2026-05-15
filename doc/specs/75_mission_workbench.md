@@ -16,8 +16,11 @@ Phase 3 of the Master Refactor. Replacing transient memory with structured files
 
 ## Physical Evidence
 - `layers/l2_brain/mission_workbench.py`
-- `.aiwg/workbench/{mission_id}/`
+- `layers/l2_brain/tests/test_mission_workbench.py`
 - `.aiwg/schemas/mission_workbench.schema.json`
+
+## Runtime Paths
+- `.aiwg/workbench/{mission_id}/` is created per mission at runtime and must not be treated as static Physical Evidence.
 
 ## Contract Invariants
 - Every mission MUST have a unique directory under `.aiwg/workbench/`.
@@ -36,7 +39,7 @@ Handles the lifecycle of the workbench:
 
 ## Verification
 - Unit tests: `layers/l2_brain/tests/test_mission_workbench.py`
-- Checkpoint: Presence of structured artifacts after a mission execution.
+- Runtime checkpoint: presence of structured artifacts after a mission execution.
 
 ## Traceability
 - Extends: SPEC-73 (Cognitive Body Architecture)

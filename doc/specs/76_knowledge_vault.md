@@ -16,8 +16,11 @@ Phase 4 of the Master Refactor. Establishing the transition from temporary execu
 
 ## Physical Evidence
 - `layers/l2_brain/vault_curator.py`
-- `.aiwg/vault/`
+- `layers/l2_brain/tests/test_vault_curator.py`
 - `.aiwg/schemas/vault_entry.schema.json`
+
+## Runtime Paths
+- `.aiwg/vault/` is a runtime storage root for promoted entries and must not be treated as static Physical Evidence.
 
 ## Contract Invariants
 - Only verified artifacts (from successful outcomes) SHOULD be promovoted to the Vault.
@@ -35,7 +38,7 @@ The logic engine that promotion:
 
 ## Verification
 - Unit tests: `layers/l2_brain/tests/test_vault_curator.py`
-- Evidence: Indexed JSON files in `.aiwg/vault/`.
+- Runtime evidence: indexed JSON files under `.aiwg/vault/` after promotion.
 
 ## Traceability
 - Extends: SPEC-75 (Mission Workbench)
