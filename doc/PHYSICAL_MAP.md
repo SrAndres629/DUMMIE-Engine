@@ -44,7 +44,7 @@ Mapa de verdad física del sistema para evitar deriva entre diseño teórico y e
 - Proyecto frontend con Vite/React/TypeScript (`package.json`).
 
 ## Brechas físico-teóricas prioritarias
-1. Contratos de modelos (`AuthorityLevel`, `IntentType`, `AgentIntent`) no alineados entre L1 y L2.
+1. Contratos de modelos (`AuthorityLevel`, `IntentType`, `AgentIntent`) alineados en la ruta oficial L1/L2: `layers/l1_nervous/domain/models.py` reexporta la SSoT de `layers/l2_brain/models.py`. Riesgo remanente: existen definiciones Protobuf generadas y modelos legacy bajo `layers/l2_brain/src/brain/domain/` que no deben tratarse como SSoT Python.
 2. Contratos de resultado/telemetría del daemon no están formalizados para consumidores inter-capa.
 3. Parte de specs sigue en plantilla genérica y sin verificación trazable (Specs 26 y 29 actualizadas a ACTIVE).
 4. Existen artefactos históricos fuera del contrato documental vigente que deben mantenerse fuera del contexto operativo.
