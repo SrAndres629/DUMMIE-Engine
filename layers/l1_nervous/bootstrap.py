@@ -9,7 +9,7 @@ from pathlib import Path
 try:
     from layers.l2_brain.models import SixDimensionalContext, AuthorityLevel, IntentType as ContextIntent
     from layers.l2_brain.models import AgentIntent, IntentType as FabricationIntent
-    from layers.l2_brain.orchestrator import CognitiveOrchestrator
+    from layers.l2_brain.src.brain.application.use_cases.orchestrator import CognitiveOrchestrator
     from layers.l2_brain.adapters import KuzuRepository, DecisionLedgerAdapter, SessionLedgerAdapter, NativeShieldAdapter, KuzuSkillRepository
 except ImportError:
     # Intento de redundancia si no está en PYTHONPATH directo
@@ -23,7 +23,7 @@ except ImportError:
     
     from models import SixDimensionalContext, AuthorityLevel, IntentType as ContextIntent
     from models import AgentIntent, IntentType as FabricationIntent
-    from orchestrator import CognitiveOrchestrator
+    from src.brain.application.use_cases.orchestrator import CognitiveOrchestrator
     from adapters import KuzuRepository, DecisionLedgerAdapter, SessionLedgerAdapter, NativeShieldAdapter, KuzuSkillRepository
 
 logger = logging.getLogger("dummie-mcp.infra")
