@@ -1,17 +1,20 @@
 ---
-spec_id: "DE-V2-L0-48"
-title: "Protocolo de Cristalización de Integridad Arquitectónica (ACIP)"
-status: "ACTIVE"
-version: "2.2.0"
-layer: "L0"
-namespace: "io.dummie.v2.overseer.integrity"
-authority: "ARCHITECT"
+spec_id: DE-V2-L0-48
+title: Protocolo de Cristalización de Integridad Arquitectónica (ACIP)
+status: ACTIVE
+version: 2.2.0
+layer: L0
+namespace: io.dummie.v2.overseer.integrity
+authority: ARCHITECT
 dependencies:
-  - id: "DE-V2-L0-06"
-    relationship: "REFINES"
-tags: ["governance", "integrity", "acip", "industrial_sdd"]
+- id: DE-V2-L0-06
+  relationship: REFINES
+tags:
+- governance
+- integrity
+- acip
+- industrial_sdd
 ---
-
 # 48. Protocolo de Cristalización de Integridad Arquitectónica (ACIP)
 
 ## Abstract

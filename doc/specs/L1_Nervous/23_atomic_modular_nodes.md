@@ -1,52 +1,41 @@
 ---
-spec_id: "DE-V2-L1-23"
-title: "Nodos Atómicos y Modularidad Plug & Play"
-status: "ACTIVE"
-version: "2.2.0"
-layer: "L1"
-namespace: "io.dummie.v2.atoms"
-authority: "ARCHITECT"
-dependencies:
-  - id: "DE-V2-L0-11"
-    relationship: "REQUIRES"
-tags: ["cognitive_core", "modular_nodes", "industrial_sdd"]
+spec_id: DE-V2-L1-23
+title: Nodos Atómicos y Modularidad Plug & Play
+status: ACTIVE
+layer: L1
+last_verified_on: '2026-04-24'
+version: 1.0.0
+namespace: dummie.engine.l1
 ---
+# Nodos Atómicos y Modularidad Plug & Play
 
-# 23. Nodos Atómicos y Modularidad Plug & Play
+## Purpose
+Definir el contrato operativo de esta capacidad y su relación con el estado físico vigente.
 
-## Abstract
-Para garantizar la inmunidad al acoplamiento accidental y facilitar la evolución del sistema, DUMMIE Engine define el **Nodo Atómico** como la unidad mínima de construcción funcional. Los nodos operan bajo el paradigma de Puertos y Adaptadores (Hexagonal), permitiendo el intercambio dinámico de implementaciones sin alterar la lógica de dominio.
+## Current State
+Capacidad activa con evidencia verificable en el repositorio.
 
-## 1. Cognitive Context Model (Ref)
-Para la arquitectura de estratos del nodo (Port, Core, Adapter, Shield), el esquema del manifiesto de nodo y los protocolos de Hot-Swapping bajo gobernanza de L0, consulte el archivo hermano [23_atomic_modular_nodes.rules.json](./23_atomic_modular_nodes.rules.json).
+## Physical Evidence
+- `doc/specs/23_atomic_modular_nodes.md`
+- `doc/specs/23_atomic_modular_nodes.feature`
+- `doc/specs/23_atomic_modular_nodes.rules.json`
+- `layers/l1_nervous/__init__.py`
+- `doc/CORE_SPEC.md`
+- `doc/PHYSICAL_MAP.md`
 
----
+## Contract Invariants
+- `status` debe estar dentro del conjunto permitido por `doc/CORE_SPEC.md`.
+- Los artefactos hermanos (`.feature`, `.rules.json`) deben existir junto a la spec.
+- Toda referencia en `Physical Evidence` debe resolver a una ruta real del repositorio.
 
-## 2. Anatomía del Nodo Atómico (Hexagonal)
-Cada nodo se compone de cuatro estratos herméticamente aislados:
-1. **Port (Definition):** Contrato abstracto definido en Protobuf ([Spec 10](10_protobuf_contracts.md)).
-2. **Core (Domain):** Lógica de negocio pura sin dependencias externas.
-3. **Adapter (Plug):** Implementación técnica específica (I/O).
-4. **Shield (Security):** Inyección de reglas SDD mediante el motor de Rust (L3).
+## Verification
+```bash
+python3 scripts/validate_specs_docs.py --check doc/specs/23_atomic_modular_nodes.md
+```
 
----
-
-## 3. Protocolo de Intercambio Dinámico (Atomic Swap)
-El sistema permite el **Hot-Swapping** de adaptadores bajo gobernanza de Layer 0 (Elixir):
-- **Candidate Validation:** El Auditor (L2) verifica que el nuevo adaptador satisfaga el Port mediante escaneo LST (L4).
-- **Consensus Commit:** Cambio de referencia en el contenedor de inyección de dependencias.
-- **Rollback Safety:** Restauración inmediata ante fallo de tests Causal-Invariant.
-
----
-
-## 4. Coreografía de Nodos
-La comunicación entre nodos atómicos se realiza exclusivamente a través del **Bus de Datos (NATS/Arrow)**:
-- **Zero-Copy Message Passing:** Compartición de punteros de memoria sin coste de serialización.
-- **Topological Discovery:** Registro en el Palacio de Loci ([Spec 18](../L4_Edge/18_loci_ontology_mapping.md)) para consultas de grafo (GraphRAG).
-
----
-
-## [MSA] Sibling Components Requeridos
-Todo documento maestro debe ir acompañado de sus archivos hermanos para convertirse en una *Active Architectural Fitness Function*:
-- **Executable Contract:** [23_atomic_modular_nodes.feature](./23_atomic_modular_nodes.feature)
-- **Machine Rules:** [23_atomic_modular_nodes.rules.json](./23_atomic_modular_nodes.rules.json)
+## Traceability
+| Invariant | Evidence | Verification |
+| --- | --- | --- |
+| Estado permitido | `doc/CORE_SPEC.md` + frontmatter de esta spec | `python3 scripts/validate_specs_docs.py --check doc/specs/23_atomic_modular_nodes.md` |
+| Artefactos hermanos presentes | `doc/specs/23_atomic_modular_nodes.feature` y `doc/specs/23_atomic_modular_nodes.rules.json` | `python3 scripts/validate_specs_docs.py --check doc/specs/23_atomic_modular_nodes.md` |
+| Evidencia física existente | sección `Physical Evidence` | `python3 scripts/validate_specs_docs.py --check doc/specs/23_atomic_modular_nodes.md` |

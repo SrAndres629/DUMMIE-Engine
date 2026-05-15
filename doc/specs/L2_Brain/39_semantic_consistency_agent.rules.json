@@ -1,20 +1,38 @@
 {
   "spec_id": "DE-V2-L2-39",
-  "domain": "L2_Sync",
-  "sync_mechanics": {
-    "root_of_truth": "SPEC_DRIVEN",
-    "mode": "STRICT_CASCADING",
-    "auto_correction_enabled": true
-  },
-  "invariants": {
-    "forbidden_manual_code_drift": true,
-    "mandatory_contract_alignment": true,
-    "required_agents": ["Synchronizer", "Architect", "Sentinel"]
-  },
-  "drift_handling": {
-    "detection": "LST_HASH_COMPARISON",
-    "action": "STRICT_REVERT_AND_ALERT"
-  },
-  "enforcement": "STRICT_BLOCK",
-  "personality_ref": "DE-V2-L0-33"
+  "title": "Agente de Consistencia Sem\u00e1ntica (Orchestration Synchronizer)",
+  "status": "DRAFT",
+  "layer": "L2",
+  "last_verified_on": "2026-04-24",
+  "required_frontmatter": [
+    "spec_id",
+    "title",
+    "status",
+    "layer",
+    "last_verified_on"
+  ],
+  "required_sections": [
+    "Purpose",
+    "Current State",
+    "Physical Evidence",
+    "Gaps",
+    "Next Actions",
+    "Sibling Artifacts"
+  ],
+  "evidence_paths": [
+    "layers/l2_brain",
+    ".aiwg",
+    "governance/session_context.json"
+  ],
+  "policy": {
+    "allow_legacy_narrative": false,
+    "require_existing_links": true,
+    "status_values": [
+      "ACTIVE",
+      "DRAFT",
+      "PROPOSED",
+      "DEPRECATED",
+      "REFERENCE"
+    ]
+  }
 }

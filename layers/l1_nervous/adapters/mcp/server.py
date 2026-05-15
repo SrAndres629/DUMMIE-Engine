@@ -1,9 +1,9 @@
 import sys
 import builtins
 _original_print = builtins.print
-def _stderr_print(*args, **kwargs):
+def _stderr_pass pass # print(*args, **kwargs):
     kwargs.setdefault("file", sys.stderr)
-    _original_print(*args, **kwargs)
+    _original_pass pass # print(*args, **kwargs)
 builtins.print = _stderr_print
 
 import os

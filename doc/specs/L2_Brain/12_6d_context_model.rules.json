@@ -1,22 +1,38 @@
 {
   "spec_id": "DE-V2-L2-12",
-  "domain": "L2_Context",
-  "vectors": {
-    "dimensions": 6,
-    "mapping": {
-      "x_y_z": "Spatial (Loci)",
-      "t": "Temporal (Lamport)",
-      "i": "Intent (Causalidad Intencional)",
-      "a": "Authority Level (RBAC)"
-    }
-  },
-  "invariants": {
-    "immutable_dims": ["x", "y", "z", "t", "i"],
-    "volatile_dims": ["a"],
-    "lst_enforced": true,
-    "handshake_mandatory": true,
-    "mcp_transport": "context://current"
-  },
-  "enforcement": "STRICT_BLOCK",
-  "personality_ref": "DE-V2-L0-33"
+  "title": "Modelo Formal de Memoria 6D-Context",
+  "status": "ACTIVE",
+  "layer": "L2",
+  "last_verified_on": "2026-04-24",
+  "required_frontmatter": [
+    "spec_id",
+    "title",
+    "status",
+    "layer",
+    "last_verified_on"
+  ],
+  "required_sections": [
+    "Purpose",
+    "Current State",
+    "Physical Evidence",
+    "Gaps",
+    "Next Actions",
+    "Sibling Artifacts"
+  ],
+  "evidence_paths": [
+    "layers/l2_brain",
+    ".aiwg",
+    "governance/session_context.json"
+  ],
+  "policy": {
+    "allow_legacy_narrative": false,
+    "require_existing_links": true,
+    "status_values": [
+      "ACTIVE",
+      "DRAFT",
+      "PROPOSED",
+      "DEPRECATED",
+      "REFERENCE"
+    ]
+  }
 }

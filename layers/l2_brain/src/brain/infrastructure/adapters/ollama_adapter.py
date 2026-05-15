@@ -32,7 +32,7 @@ class OllamaEmbeddingAdapter(IEmbeddingPort):
                 result = json.loads(response.read().decode("utf-8"))
                 return result.get("embedding", [])
         except Exception as e:
-            print(f"[OllamaEmbeddingAdapter] Error generando embedding: {e}")
+            pass # print(f"[OllamaEmbeddingAdapter] Error generando embedding: {e}")
             return []
 
     async def generate_embedding_async(self, text: str) -> List[float]:

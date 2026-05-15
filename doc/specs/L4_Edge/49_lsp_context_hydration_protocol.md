@@ -1,19 +1,22 @@
 ---
-spec_id: "DE-V2-L4-49"
-title: "Protocolo de Hidratación Semántica LSP (Semantic Bridge)"
-status: "ACTIVE"
-version: "2.2.0"
-layer: "L4"
-namespace: "io.dummie.v2.edge.lsp"
-authority: "ARCHITECT"
+spec_id: DE-V2-L4-49
+title: Protocolo de Hidratación Semántica LSP (Semantic Bridge)
+status: ACTIVE
+version: 2.2.0
+layer: L4
+namespace: io.dummie.v2.edge.lsp
+authority: ARCHITECT
 dependencies:
-  - id: "DE-V2-L4-18"
-    relationship: "REFINES_ONTOLOGY"
-  - id: "DE-V2-L1-41"
-    relationship: "CONSUMES_VIA_ACP"
-tags: ["edge_layer", "lsp", "semantic_hydration", "lst_analysis"]
+- id: DE-V2-L4-18
+  relationship: REFINES_ONTOLOGY
+- id: DE-V2-L1-41
+  relationship: CONSUMES_VIA_ACP
+tags:
+- edge_layer
+- lsp
+- semantic_hydration
+- lst_analysis
 ---
-
 # 49. Protocolo de Hidratación Semántica LSP (Semantic Bridge)
 
 ## Abstract

@@ -1,17 +1,19 @@
 ---
-spec_id: "DE-V2-L0-49"
-title: "Protocolo de Cierre Cognitivo Soberano (SCCP)"
-status: "ACTIVE"
-version: "2.2.0"
-layer: "L0"
-namespace: "io.dummie.v2.governance.closure"
-authority: "ARCHITECT"
+spec_id: DE-V2-L0-49
+title: Protocolo de Cierre Cognitivo Soberano (SCCP)
+status: ACTIVE
+version: 2.2.0
+layer: L0
+namespace: io.dummie.v2.governance.closure
+authority: ARCHITECT
 dependencies:
-  - id: "DE-V2-L0-48"
-    relationship: "REFINES"
-tags: ["cognitive_core", "knowledge_crystallization", "session_governance"]
+- id: DE-V2-L0-48
+  relationship: REFINES
+tags:
+- cognitive_core
+- knowledge_crystallization
+- session_governance
 ---
-
 # 49. Protocolo de Cierre Cognitivo Soberano (SCCP)
 
 ## Abstract

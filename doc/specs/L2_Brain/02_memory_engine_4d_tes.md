@@ -1,69 +1,85 @@
 ---
-spec_id: "DE-V2-L2-02"
-title: "Motor de Memoria Inmutable (4D-TES)"
-status: "ACTIVE"
-version: "2.2.0"
-layer: "L2"
-namespace: "io.dummie.v2.memory"
-authority: "ARCHITECT"
-dependencies:
-  - id: "DE-V2-L0-00"
-    relationship: "IMPLEMENTS"
-tags: ["cognitive_core", "memory_physics", "industrial_sdd"]
+spec_id: DE-V2-L2-02
+title: Motor de Memoria Inmutable (4D-TES)
+status: ACTIVE
+layer: L2
+last_verified_on: '2026-04-28'
+version: 1.0.0
+namespace: dummie.engine.l2
 ---
+# Motor de Memoria Inmutable (4D-TES)
 
-# 02. Motor de Memoria Inmutable (4D-TES)
+## Purpose
+Definir el contrato operativo del motor de memoria espacio-temporal de DUMMIE Engine. El 4D-TES (Temporal-Evolutionary Storage) garantiza que el conocimiento del sistema sea inmutable, rastreable y eficiente mediante técnicas de compresión semántica y persistencia en grafos.
 
-## Abstract
-El motor 4D-TES (Topological Event Sourcing) implementa un modelo de memoria inmutable basado en la flecha del tiempo de Lamport. Esta versión formaliza la física de memoria mediante estructuras algebraicas (Semilattices) y normalización en el Data Plane, alineándose con el estándar de **Memoria Tripartita**.
+## Current State
+El motor está en fase de despliegue activo. Se ha unificado el esquema `MemoryNode4D` entre las capas L1 y L2. El `CognitiveOrchestrator` implementa la persistencia de hitos causales en KùzuDB mediante un Merkle-DAG simplificado. La cristalización de memoria en L1 (`CompressiveMemory`) está alineada con el repositorio de L2.
 
-## 1. Cognitive Context Model (Ref)
-Para los modelos de causalidad (Lamport Ticks), las tasas de decaimiento de memoria (Decay Lambda) y los esquemas de persistencia en KùzuDB, consulte el archivo hermano [02_memory_engine_4d_tes.rules.json](./02_memory_engine_4d_tes.rules.json).
+## Arquitectura Técnica
 
----
+### 1. Dimensiones del Conocimiento (Spec 12)
+El motor opera sobre un modelo de 6 dimensiones para indexar cada evento cognitivo:
+- **Espacio (Locus X, Y, Z):** Coordenadas en la ontología del sistema (ej. `layers.l2_brain.logic`).
+- **Tiempo (Lamport T):** Orden lógico determinista.
+- **Autoridad (A):** Nivel de permiso del emisor (Human, Agent, Overseer).
+- **Intención (I):** Propósito del cambio (Fabrication, Audit, Resolution).
 
-## 2. Arquitectura de Retención
-La memoria se divide en tres estratos inyectables:
-- **Episódico (Timeline):** Registro inmutable de eventos causales.
-- **Semántico (Grafos):** Relaciones ontológicas y Palacio de Loci.
-- **Procedural (Skills):** Registro de habilidades y protocolos tácticos.
+### 2. Flujo de Datos y Cristalización
+```mermaid
+graph TB
+    subgraph "Capas Superiores (L3/L2)"
+        LLM[Agente LLM / L2 Brain]
+        Context[6D Context Model]
+    end
 
----
+    subgraph "Sistema Nervioso (L1)"
+        direction LR
+        TQ[TurboQuant: Context Quantizer]
+        CM[Compressive Memory: Cristalización]
+        Bridge[IPC Bridge: Apache Arrow / Zero-Copy]
+    end
 
-## 4. MCP Access Layer (USB-C Interface)
-Para asegurar la interoperabilidad, el motor 4D-TES expone sus capacidades mediante un servidor MCP:
-- **Resource: `memory://timeline`**: Stream de eventos inmutables.
-- **Resource: `memory://loci`**: Acceso al grafo de relaciones ontológicas.
-- **Tool: `crystallize(payload, context)`**: Punto de entrada único para la persistencia de conocimiento validado.
+    subgraph "Persistencia 4D-TES (Loci & Muscle)"
+        Kuzu[(KùzuDB: Palacio de Loci)]
+        Ledger[Decision Ledger: JSONL]
+        Muscle[L5 Muscle: Parquet Compactor]
+    end
 
----
-
-## 5. Formal Contract Boundary (CausalHash Enforced)
-Para garantizar el determinismo y la soberanía criptográfica, la actualización in-place de la memoria está prohibida. Toda mutación debe generar un nuevo nodo en el DAG:
-
-```protobuf
-// ==========================================
-// 4D-TES: IMMUTABLE MEMORY NODE
-// ==========================================
-message MemoryNode4DTES {
-    // SHA-256(parent_hash + payload_hash + 6d_context)
-    string causal_hash = 1;       
-    // Puntero criptográfico al nodo anterior (Merkle-like)
-    string parent_hash = 2;       
-    
-    // Coordenadas absolutas de génesis
-    SixDimensionalContext context = 3; 
-    
-    // Excitación inmutable (Zstd compressed JSON o LST, codificado en Base64 en KùzuDB)
-    bytes payload = 4;            
-    // Verificación de integridad del payload aislado
-    string payload_hash = 5;      
-}
+    LLM -- "Token Inflation" --> TQ
+    TQ -- "Poda Semántica" --> LLM
+    LLM -- "Validación de Hitos" --> CM
+    CM -- "IPC /tmp/dummie.sock" --> Bridge
+    Bridge -- "Grafo de Relaciones" --> Kuzu
+    Bridge -- "Invariantes Inmutables" --> Ledger
+    Kuzu -- "Necro-Learning Pipeline" --> Muscle
 ```
 
----
+### 3. Componentes Críticos
+- **TurboQuant:** Poda semántica del árbol de archivos y densificación de Markdown a YAML para optimizar el KV Cache.
+- **Compressive Memory:** Algoritmo de extracción de hitos (Decisiones, Errores, Estado) que resume el historial.
+- **Apache Arrow Bridge:** Plano de datos de baja latencia para el transporte de nodos de memoria entre procesos (Go/Python).
+- **KùzuDB (Palacio de Loci):** Base de datos de grafos embebida que almacena la topología del conocimiento.
 
-## [MSA] Sibling Components Requeridos
-Todo documento maestro debe ir acompañado de sus archivos hermanos para convertirse en una *Active Architectural Fitness Function*:
-- **Executable Contract:** [02_memory_engine_4d_tes.feature](./02_memory_engine_4d_tes.feature)
-- **Machine Rules:** [02_memory_engine_4d_tes.rules.json](./02_memory_engine_4d_tes.rules.json)
+## Contract Invariants
+- **Inmutabilidad:** Una vez que un nodo (`MemoryNode4D`) es persistido, su `causal_hash` no puede cambiar.
+- **Causalidad:** Todo nodo (excepto GENESIS) debe tener un `parent_hash` válido.
+- **Consistencia:** El estado del Loci Graph debe ser verificable mediante el `Decision Ledger`.
+
+## Physical Evidence
+- `layers/l1_nervous/compressive_memory.py`: Lógica de cristalización.
+- `layers/l1_nervous/resources.py`: Exposición de recursos de memoria.
+- `layers/l2_brain/orchestrator.py`: Implementación de persistencia causal.
+- `layers/l2_brain/adapters.py`: Repositorio Kùzu con soporte causal.
+- `.aiwg/memory/kuzu/state.db`: Base local runtime de Kùzu cuando existe en el entorno de desarrollo.
+
+## Verification
+```bash
+python3 scripts/validate_specs_docs.py --check doc/specs/02_memory_engine_4d_tes.md
+```
+
+## Traceability
+| Invariant | Evidence | Verification |
+| --- | --- | --- |
+| Inmutabilidad Causal | `layers/l2_brain/orchestrator.py` | SHA-256 Validation in tests |
+| Poda Semántica | `layers/l1_nervous/context_quantizer.py` | TurboQuant Benchmarks |
+| Persistencia Loci | `layers/l2_brain/adapters.py` | Kùzu repository tests |

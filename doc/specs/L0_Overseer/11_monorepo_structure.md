@@ -1,62 +1,41 @@
 ---
-spec_id: "DE-V2-L0-11"
-title: "Estructura de Monorepo Soberano"
-status: "ACTIVE"
-version: "2.2.0"
-layer: "L0"
-namespace: "io.dummie.v2.structure"
-authority: "ARCHITECT"
-dependencies:
-  - id: "DE-V2-L0-00"
-    relationship: "IMPLEMENTS"
-tags: ["cognitive_core", "monorepo_topology", "industrial_sdd"]
+spec_id: DE-V2-L0-11
+title: Estructura de Monorepo Soberano
+status: ACTIVE
+layer: L0
+last_verified_on: '2026-04-24'
+version: 1.0.0
+namespace: dummie.engine.l0
 ---
+# Estructura de Monorepo Soberano
 
-# 11. Estructura de Monorepo Soberano
+## Purpose
+Definir el contrato operativo de esta capacidad y su relación con el estado físico vigente.
 
-## Abstract
-La estructura del repositorio refleja la estratigrafía de 7 capas del Agentic OS. Se implementa un monorepo políglota diseñado para la hermeticidad de dependencias (Nix) y la visibilidad total de la arquitectura por parte de los agentes SFE. El repositorio actúa como el **Palacio de Loci Físico** del sistema.
+## Current State
+Capacidad activa con evidencia verificable en el repositorio.
 
-## 1. Cognitive Context Model (Ref)
-Para la topología detallada de directorios, los invariantes de hermeticidad y las reglas de RBAC topológico por capa, consulte el archivo hermano [11_monorepo_structure.rules.json](./11_monorepo_structure.rules.json).
+## Physical Evidence
+- `doc/specs/11_monorepo_structure.md`
+- `doc/specs/11_monorepo_structure.feature`
+- `doc/specs/11_monorepo_structure.rules.json`
+- `layers/l0_overseer/__init__.py`
+- `doc/CORE_SPEC.md`
+- `doc/PHYSICAL_MAP.md`
 
----
+## Contract Invariants
+- `status` debe estar dentro del conjunto permitido por `doc/CORE_SPEC.md`.
+- Los artefactos hermanos (`.feature`, `.rules.json`) deben existir junto a la spec.
+- Toda referencia en `Physical Evidence` debe resolver a una ruta real del repositorio.
 
-## 2. Topología de Directorios
-```text
-/
-├── doc/                 # SSoT: Specs, ADRs, Walkthroughs
-│   ├── 00_foundation/   # Manifiestos y Vision
-│   ├── 01_architecture/ # ADRs y Diagramas
-│   └── specs/           # Especificaciones por Capa (L0-L6)
-├── governance/          # Contratos Ejecutables e Invariantes
-├── proto/               # Definiciones .proto ([Spec 10](../L1_Nervous/10_protobuf_contracts.md))
-├── layers/              # El Stack Inmortal (L0-L6)
-├── pkg/                 # Librerías Compartidas
-├── .aiwg/               # Hipocampo Agéntico (Memoria y Evolución)
-└── flake.nix            # Entorno hermético funcional
+## Verification
+```bash
+python3 scripts/validate_specs_docs.py --check doc/specs/11_monorepo_structure.md
 ```
 
----
-
-## 3. Invariantes del Monorepo
-- **Hermeticidad:** Prohibición de dependencias globales. Todo binario es provisto por Nix.
-- **Topological RBAC:** Acceso de escritura restringido por capa de expertise.
-- **Spec-Driven Consistency:** Bloqueo de cambios en `/layers` sin correspondencia en `/doc/specs`.
-
----
-
-## 4. Gestión de Dependencias (Nix)
-Se utiliza **Nix Flakes** para garantizar un espacio de nombres unificado de librerías nativas (libarrow, CUDA). Esto asegura que el Data Plane mantenga una latencia mínima al evitar desajustes de versiones entre los 7 lenguajes.
-
----
-
-## 5. Formalización de Esquemas Arrow
-Bajo la **Ley de Schema-First**, todas las definiciones de buffers de memoria compartida residen en `/proto/arrow/`. Se prioriza el formato **FlatBuffers** para enlaces binarios de latencia cero con Zig (L4) y Rust (L3).
-
----
-
-## [MSA] Sibling Components Requeridos
-Todo documento maestro debe ir acompañado de sus archivos hermanos para convertirse en una *Active Architectural Fitness Function*:
-- **Executable Contract:** [11_monorepo_structure.feature](./11_monorepo_structure.feature)
-- **Machine Rules:** [11_monorepo_structure.rules.json](./11_monorepo_structure.rules.json)
+## Traceability
+| Invariant | Evidence | Verification |
+| --- | --- | --- |
+| Estado permitido | `doc/CORE_SPEC.md` + frontmatter de esta spec | `python3 scripts/validate_specs_docs.py --check doc/specs/11_monorepo_structure.md` |
+| Artefactos hermanos presentes | `doc/specs/11_monorepo_structure.feature` y `doc/specs/11_monorepo_structure.rules.json` | `python3 scripts/validate_specs_docs.py --check doc/specs/11_monorepo_structure.md` |
+| Evidencia física existente | sección `Physical Evidence` | `python3 scripts/validate_specs_docs.py --check doc/specs/11_monorepo_structure.md` |

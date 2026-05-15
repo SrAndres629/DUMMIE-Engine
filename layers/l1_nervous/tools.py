@@ -17,7 +17,7 @@ logger = logging.getLogger("dummie-mcp.tools")
 def register_tools(mcp: FastMCP, get_orchestrator, get_proxy, root_dir: str):
     """Dispatcher para el registro de herramientas (Arquitectura Hexagonal)."""
     
-    logger.info("Iniciando registro de herramientas Meta-Gateway (L1-Hexagonal)...")
+    logger.debug("Iniciando registro de herramientas Meta-Gateway (L1-Hexagonal)...")
     
     # 1. Instancia interna para encapsular TODAS las herramientas nativas
     internal_mcp = FastMCP("Internal-Registry")
@@ -70,7 +70,7 @@ def register_tools(mcp: FastMCP, get_orchestrator, get_proxy, root_dir: str):
 
         query_vec = None
         if query and query != "*":
-            logger.info(f"Generando vector semántico para búsqueda: '{query}'")
+            logger.debug(f"Generando vector semántico para búsqueda: '{query}'")
             query_vec = EmbeddingProvider.generate_vector(query)
 
         scored_tools = []
@@ -197,7 +197,7 @@ def register_tools(mcp: FastMCP, get_orchestrator, get_proxy, root_dir: str):
         Debes pasar los argumentos exactamente como los indica el schema.
         """
         orchestrator, proxy_manager = setup_internal()
-        logger.info(f"META-GATEWAY EXECUTION: {target}")
+        logger.debug(f"META-GATEWAY EXECUTION: {target}")
         
         if target.startswith("local."):
             name = target.split("local.", 1)[1]
@@ -220,7 +220,7 @@ def register_tools(mcp: FastMCP, get_orchestrator, get_proxy, root_dir: str):
                 from sdd_remote_guard import evaluate_remote_tool_admission
                 import hashlib
                 causal_id = hashlib.sha256(f"{server_name}.{tool_name}.{orchestrator.lamport_clock}".encode()).hexdigest()[:12]
-                logger.info(f"Meta-Gateway Proxy [CausalID:{causal_id}]: {server_name}.{tool_name}")
+                logger.debug(f"Meta-Gateway Proxy [CausalID:{causal_id}]: {server_name}.{tool_name}")
                 
                 admission = evaluate_remote_tool_admission(server_name, tool_name, arguments)
                 if admission.status != "ALLOW":
@@ -273,4 +273,4 @@ def register_tools(mcp: FastMCP, get_orchestrator, get_proxy, root_dir: str):
             return f"MISIÓN CUMPLIDA: Código generado e instalado en {result['file_path']}.\nPreview:\n{result['code_preview']}"
         return f"MISIÓN FALLIDA: {result.get('error')}"
 
-    logger.info("Registro de Meta-Gateway (5 Herramientas Universales) completado.")
+    logger.debug("Registro de Meta-Gateway (5 Herramientas Universales) completado.")

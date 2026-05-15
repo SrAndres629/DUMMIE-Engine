@@ -1,50 +1,41 @@
 ---
-spec_id: "DE-V2-L2-28"
-title: "Estándar de Habilidades Agénticas (YAML)"
-status: "ACTIVE"
-version: "2.2.0"
-layer: "L2"
-namespace: "io.dummie.v2.brain"
-authority: "ARCHITECT"
-dependencies:
-  - id: "DE-V2-L2-02"
-    relationship: "REQUIRES"
-tags: ["cognitive_core", "brain_logic", "industrial_sdd"]
+spec_id: DE-V2-L2-28
+title: Estándar de Habilidades Agénticas (YAML)
+status: DRAFT
+layer: L2
+last_verified_on: '2026-04-24'
+version: 1.0.0
+namespace: dummie.engine.l2
 ---
+# Estándar de Habilidades Agénticas (YAML)
 
-# 28. Estándar de Habilidades Agénticas (YAML)
+## Purpose
+Definir el contrato operativo de esta capacidad y su relación con el estado físico vigente.
 
-## Abstract
-Para que el Swarm de agentes pueda expandir sus capacidades de forma autónoma, el sistema formaliza el **Estándar de Habilidades (Skills)**. Este estándar define la estructura YAML de los manifiestos de habilidad, los protocolos de carga dinámica y el andamiaje recursivo necesario para que el sistema aprenda y ejecute nuevas funciones industriales.
+## Current State
+Capacidad en transición; requiere consolidación progresiva de contratos y pruebas.
 
-## 1. Cognitive Context Model (Ref)
-Para los invariantes de carga en caliente (Hotload), los archivos mandatarios de andamiaje y la política de versionado de habilidades, consulte el archivo hermano [28_skill_standard_yaml.rules.json](./28_skill_standard_yaml.rules.json).
+## Physical Evidence
+- `doc/specs/28_skill_standard_yaml.md`
+- `doc/specs/28_skill_standard_yaml.feature`
+- `doc/specs/28_skill_standard_yaml.rules.json`
+- `layers/l2_brain/daemon.py`
+- `doc/CORE_SPEC.md`
+- `doc/PHYSICAL_MAP.md`
 
----
+## Contract Invariants
+- `status` debe estar dentro del conjunto permitido por `doc/CORE_SPEC.md`.
+- Los artefactos hermanos (`.feature`, `.rules.json`) deben existir junto a la spec.
+- Toda referencia en `Physical Evidence` debe resolver a una ruta real del repositorio.
 
-## 2. Anatomía de una Skill
-Toda habilidad debe residir en su propio directorio dentro de `skills/` y contener:
-- **`SKILL.md`**: Narrativa y propósito de la habilidad.
-- **`.feature`**: Escenarios de validación funcional.
-- **`.rules.json`**: Invariantes técnicos y restricciones de ejecución.
+## Verification
+```bash
+python3 scripts/validate_specs_docs.py --check doc/specs/28_skill_standard_yaml.md
+```
 
----
-
-## 3. Evolución de Habilidades (Kaizen)
-Tras un ciclo de mejora **Kaizen ([Spec 27](27_kaizen_loop_refinement.md))**, el sistema puede emitir una nueva versión de la habilidad. El despliegue es atómico y cuenta con mecanismos de **Rollback de Habilidad** si se detectan regresiones en el Bucle Ralph.
-
----
-
-## 4. Andamiaje Recursivo (Recursive Skill Scaffolding)
-Inspirado por la capacidad de auto-crecimiento, el sistema permite generar nuevas capacidades ante gaps operacionales:
-1.  **Gap Discovery:** Identificación de una tarea sin skill activa.
-2.  **Contract Scaffolding:** Generación de directorio con archivos MSA válidos.
-3.  **Bootstrap Audit:** Auditoría de integridad por el Sentinel (L3).
-4.  **Hot-Registration:** Indexación dinámica en el registro de habilidades.
-
----
-
-## [MSA] Sibling Components Requeridos
-Todo documento maestro debe ir acompañado de sus archivos hermanos para convertirse en una *Active Architectural Fitness Function*:
-- **Executable Contract:** [28_skill_standard_yaml.feature](./28_skill_standard_yaml.feature)
-- **Machine Rules:** [28_skill_standard_yaml.rules.json](./28_skill_standard_yaml.rules.json)
+## Traceability
+| Invariant | Evidence | Verification |
+| --- | --- | --- |
+| Estado permitido | `doc/CORE_SPEC.md` + frontmatter de esta spec | `python3 scripts/validate_specs_docs.py --check doc/specs/28_skill_standard_yaml.md` |
+| Artefactos hermanos presentes | `doc/specs/28_skill_standard_yaml.feature` y `doc/specs/28_skill_standard_yaml.rules.json` | `python3 scripts/validate_specs_docs.py --check doc/specs/28_skill_standard_yaml.md` |
+| Evidencia física existente | sección `Physical Evidence` | `python3 scripts/validate_specs_docs.py --check doc/specs/28_skill_standard_yaml.md` |

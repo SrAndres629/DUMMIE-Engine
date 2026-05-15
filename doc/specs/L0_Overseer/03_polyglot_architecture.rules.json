@@ -1,21 +1,38 @@
 {
   "spec_id": "DE-V2-L0-03",
-  "domain": "L0_Topology",
-  "fsm_states": [
-    "IDLE",
-    "PLANNING",
-    "VALIDATION",
-    "EXECUTION",
-    "SIGNALING",
-    "ARBITRATION"
+  "title": "Arquitectura Pol\u00edglota de 7 Capas",
+  "status": "DRAFT",
+  "layer": "L0",
+  "last_verified_on": "2026-04-24",
+  "required_frontmatter": [
+    "spec_id",
+    "title",
+    "status",
+    "layer",
+    "last_verified_on"
   ],
-  "isolation_rules": {
-    "L2_Brain": {
-      "forbidden_std": ["fs", "net"],
-      "interaction_mode": "IO_REQUEST_Protobuf"
-    }
-  },
-  "shm_ownership": "L3_Shield_Owner",
-  "enforcement": "STRICT_BLOCK",
-  "personality_ref": "DE-V2-L0-33"
+  "required_sections": [
+    "Purpose",
+    "Current State",
+    "Physical Evidence",
+    "Gaps",
+    "Next Actions",
+    "Sibling Artifacts"
+  ],
+  "evidence_paths": [
+    "layers/l0_overseer",
+    "doc/CORE_SPEC.md",
+    "doc/PHYSICAL_MAP.md"
+  ],
+  "policy": {
+    "allow_legacy_narrative": false,
+    "require_existing_links": true,
+    "status_values": [
+      "ACTIVE",
+      "DRAFT",
+      "PROPOSED",
+      "DEPRECATED",
+      "REFERENCE"
+    ]
+  }
 }

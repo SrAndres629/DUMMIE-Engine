@@ -1,3 +1,13 @@
+import os
+import sys
+# [TABULA RASA] Asegurar que el paquete 'brain' en src/ es descubrible.
+_base_dir = os.path.dirname(os.path.abspath(__file__))
+if _base_dir not in sys.path:
+    sys.path.append(_base_dir)
+_src_dir = os.path.join(_base_dir, "src")
+if _src_dir not in sys.path:
+    sys.path.append(_src_dir)
+
 # [HARDENING] Lazy Loading de componentes pesados para evitar side-effects en imports de contratos.
 __all__ = ["DummieDaemon", "GatewayRequest", "SkillBinder"]
 

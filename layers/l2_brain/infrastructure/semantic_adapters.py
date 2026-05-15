@@ -1,9 +1,9 @@
 import tiktoken
-from layers.l2_brain.domain.embedding_contract import (
+from ..domain.embedding_contract import (
     EmbeddingRequest, EmbeddingResponse,
     CompressionRequest, CompressionResponse
 )
-from layers.l2_brain.domain.semantic_ports import IEmbeddingAdapter, IContextCompressor
+from ..domain.semantic_ports import IEmbeddingAdapter, IContextCompressor
 
 class FastEmbedAdapter(IEmbeddingAdapter):
     """

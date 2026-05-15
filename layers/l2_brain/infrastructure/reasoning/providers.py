@@ -84,3 +84,37 @@ class CascadingReasoningProvider:
             if result.error:
                 errors.append(f"{result.provider}:{result.error}")
         return ReasoningResult(self.name, "failed", {}, 0.0, "; ".join(errors))
+
+class OpenAICompatibleProvider:
+    name = "openai"
+    def __init__(self, base_url: str | None = None, api_key: str | None = None, model: str | None = None, timeout: float | None = None):
+        self.base_url = (base_url or os.getenv("DUMMIE_OPENAI_BASE_URL") or "https://api.openai.com/v1").rstrip("/")
+        self.api_key = api_key or os.getenv("DUMMIE_OPENAI_API_KEY") or "sk-fake"
+        self.model = model or os.getenv("DUMMIE_OPENAI_MODEL") or "gpt-4o"
+        self.timeout = float(timeout or os.getenv("DUMMIE_LOCAL_REASONING_TIMEOUT", "10.0"))
+
+    def complete_json(self, task: str, payload: dict[str, Any]) -> ReasoningResult:
+        started = time.perf_counter()
+        body = json.dumps({
+            "model": self.model,
+            "response_format": {"type": "json_object"},
+            "messages": [
+                {"role": "system", "content": f"Return only one strict JSON object. Task: {task}."},
+                {"role": "user", "content": json.dumps(payload, ensure_ascii=False)},
+            ],
+            "temperature": 0,
+        }).encode("utf-8")
+        
+        headers = {
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {self.api_key}"
+        }
+        
+        req = urlrequest.Request(f"{self.base_url}/chat/completions", data=body, headers=headers, method="POST")
+        try:
+            with urlrequest.urlopen(req, timeout=self.timeout) as resp:
+                raw = json.loads(resp.read().decode("utf-8"))
+            content = raw.get("choices", [{}])[0].get("message", {}).get("content") or "{}"
+            return ReasoningResult(self.name, "ok", json.loads(content), (time.perf_counter() - started) * 1000.0)
+        except Exception as exc:
+            return ReasoningResult(self.name, "unavailable", {}, (time.perf_counter() - started) * 1000.0, str(exc))

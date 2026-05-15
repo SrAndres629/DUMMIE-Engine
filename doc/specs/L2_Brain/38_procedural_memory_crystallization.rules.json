@@ -1,19 +1,38 @@
 {
   "spec_id": "DE-V2-L2-38",
-  "domain": "L2_Kaizen",
-  "crystallization": {
-    "necro_learning_trigger": "IDLE_PERIOD_EXCEEDED",
-    "output_formats": ["SKILL.yaml", "LINT_RULE"],
-    "apoptosis_lamport_threshold": 1000
-  },
-  "compliance": {
-    "personality_ref": "DE-V2-L0-33",
-    "strict_personality_alignment": true
-  },
-  "invariants": {
-    "no_redundant_skills": true,
-    "mandatory_contract_generation": true,
-    "strict_skill_provenance": true
-  },
-  "enforcement": "STRICT_BLOCK"
+  "title": "Cristalizaci\u00f3n de Memoria Procedimental (Kaizen Loop)",
+  "status": "DRAFT",
+  "layer": "L2",
+  "last_verified_on": "2026-04-24",
+  "required_frontmatter": [
+    "spec_id",
+    "title",
+    "status",
+    "layer",
+    "last_verified_on"
+  ],
+  "required_sections": [
+    "Purpose",
+    "Current State",
+    "Physical Evidence",
+    "Gaps",
+    "Next Actions",
+    "Sibling Artifacts"
+  ],
+  "evidence_paths": [
+    "layers/l2_brain",
+    ".aiwg",
+    "governance/session_context.json"
+  ],
+  "policy": {
+    "allow_legacy_narrative": false,
+    "require_existing_links": true,
+    "status_values": [
+      "ACTIVE",
+      "DRAFT",
+      "PROPOSED",
+      "DEPRECATED",
+      "REFERENCE"
+    ]
+  }
 }

@@ -1,20 +1,38 @@
 {
   "spec_id": "DE-V2-L2-36",
-  "domain": "L2_Memory",
-  "session_ledger": {
-    "path": ".aiwg/memory/session_ledger.jsonl",
-    "format": "JSONL_APPEND_ONLY",
-    "required_metadata": ["agent_id", "tick", "thought_vector", "action"]
-  },
-  "lifecycle": {
-    "persistence": "Transient (Per Session)",
-    "crystallization_ref": "DE-V2-L0-49",
-    "compression_trigger": "BUFFER_FULL_OR_EOS"
-  },
-  "invariants": {
-    "no_raw_pii_in_thought_vectors": true,
-    "mandatory_tick_sync": true
-  },
-  "enforcement": "STRICT_BLOCK",
-  "personality_ref": "DE-V2-L0-33"
+  "title": "Memoria Cognitiva y Ledger de Sesi\u00f3n",
+  "status": "DRAFT",
+  "layer": "L2",
+  "last_verified_on": "2026-04-24",
+  "required_frontmatter": [
+    "spec_id",
+    "title",
+    "status",
+    "layer",
+    "last_verified_on"
+  ],
+  "required_sections": [
+    "Purpose",
+    "Current State",
+    "Physical Evidence",
+    "Gaps",
+    "Next Actions",
+    "Sibling Artifacts"
+  ],
+  "evidence_paths": [
+    "layers/l2_brain",
+    ".aiwg",
+    "governance/session_context.json"
+  ],
+  "policy": {
+    "allow_legacy_narrative": false,
+    "require_existing_links": true,
+    "status_values": [
+      "ACTIVE",
+      "DRAFT",
+      "PROPOSED",
+      "DEPRECATED",
+      "REFERENCE"
+    ]
+  }
 }

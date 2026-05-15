@@ -1,32 +1,38 @@
 {
   "spec_id": "DE-V2-L1-23",
-  "node_architecture": {
-    "strata": ["Port (Definition)", "Core (Domain)", "Adapter (Plug)", "Shield (Security)"],
-    "pattern": "Ports & Adapters (Hexagonal)"
-  },
-  "manifest_schema": {
-    "node_uid": "UUID-V4",
-    "layer": "enum(L0..L6)",
-    "interface": {
-      "protobuf_svc": "string",
-      "shm_req_size_mb": "int",
-      "alignment": 64
-    },
-    "governance": {
-      "authority_level": "enum(ARCHITECT, AGENT_PROPOSAL, PAH)",
-      "sdd_rules": ["array"]
-    }
-  },
-  "lifecycle": {
-    "swap_protocol": "Atomic Swap via L0_Overseer",
-    "discovery": "NATS_Discovery",
-    "registry_ref": "DE-V2-L4-18"
-  },
-  "invariants": {
-    "no_direct_io_in_core": true,
-    "mandatory_shield_injection": true,
-    "atomic_rollback_on_failure": true
-  },
-  "enforcement": "STRICT_BLOCK",
-  "personality_ref": "DE-V2-L0-33"
+  "title": "Nodos At\u00f3micos y Modularidad Plug & Play",
+  "status": "ACTIVE",
+  "layer": "L1",
+  "last_verified_on": "2026-04-24",
+  "required_frontmatter": [
+    "spec_id",
+    "title",
+    "status",
+    "layer",
+    "last_verified_on"
+  ],
+  "required_sections": [
+    "Purpose",
+    "Current State",
+    "Physical Evidence",
+    "Gaps",
+    "Next Actions",
+    "Sibling Artifacts"
+  ],
+  "evidence_paths": [
+    "layers/l1_nervous",
+    "proto",
+    "dummie_agent_config.json"
+  ],
+  "policy": {
+    "allow_legacy_narrative": false,
+    "require_existing_links": true,
+    "status_values": [
+      "ACTIVE",
+      "DRAFT",
+      "PROPOSED",
+      "DEPRECATED",
+      "REFERENCE"
+    ]
+  }
 }

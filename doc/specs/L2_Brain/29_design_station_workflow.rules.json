@@ -1,23 +1,38 @@
 {
   "spec_id": "DE-V2-L2-29",
-  "domain": "L2_Design",
-  "workflow": {
-    "state_resolution": "CAUSAL_PROJECTION_FROM_DAG",
-    "authority_required": "ARCHITECT_L0",
-    "dependency_check": "RECURSIVE_DEEP"
-  },
-  "invariants": {
-    "no_in_place_state_mutation": true,
-    "state_is_derived_view": true,
-    "collision_detection": true,
-    "no_circular_dependencies": true,
-    "mandatory_audit_before_active": true
-  },
-  "audit_criteria": {
-    "contract_compliance": "feature_match",
-    "security_compliance": "shield_audit",
-    "ontological_fit": "loci_palace_sync"
-  },
-  "enforcement": "STRICT_BLOCK",
-  "personality_ref": "DE-V2-L0-33"
+  "title": "Arquitectura de la Estaci\u00f3n de Dise\u00f1o (Workflow)",
+  "status": "DRAFT",
+  "layer": "L2",
+  "last_verified_on": "2026-04-24",
+  "required_frontmatter": [
+    "spec_id",
+    "title",
+    "status",
+    "layer",
+    "last_verified_on"
+  ],
+  "required_sections": [
+    "Purpose",
+    "Current State",
+    "Physical Evidence",
+    "Gaps",
+    "Next Actions",
+    "Sibling Artifacts"
+  ],
+  "evidence_paths": [
+    "layers/l2_brain",
+    ".aiwg",
+    "governance/session_context.json"
+  ],
+  "policy": {
+    "allow_legacy_narrative": false,
+    "require_existing_links": true,
+    "status_values": [
+      "ACTIVE",
+      "DRAFT",
+      "PROPOSED",
+      "DEPRECATED",
+      "REFERENCE"
+    ]
+  }
 }

@@ -31,7 +31,7 @@ class MCPTransport:
             final_cmd = "bwrap"
             final_args = bwrap_args[1:] + args
 
-        logger.info(f"Spawning MCP Process: {server_name}")
+        logger.debug(f"Spawning MCP Process: {server_name}")
         return await asyncio.create_subprocess_exec(
             final_cmd, *final_args,
             stdin=asyncio.subprocess.PIPE,

@@ -1,25 +1,38 @@
 {
   "spec_id": "DE-V2-L1-41",
-  "wire_topology": {
-    "control_plane": "NATS JetStream",
-    "data_plane": "Apache Arrow SHM",
-    "acp_bridge": "JSON-RPC Over NATS"
-  },
-  "acp_config": {
-    "supported_versions": ["1.0", "1.1-AO"],
-    "serialization": "Protobuf_Nested_JSON"
-  },
-  "invariants": {
-    "forbidden_patterns": [
-      "UNVERSIONED_ACP_MESSAGE",
-      "RAW_JSON_TRANSIT_BYPASS",
-      "MALFORMED_RPC_ENVELOPE"
-    ],
-    "mandatory_headers": [
-      "X-AO-Protocol-Version",
-      "X-AO-Handshake-Type"
+  "title": "Protocolo de Handshake y Mensajer\u00eda (The Wire)",
+  "status": "ACTIVE",
+  "layer": "L1",
+  "last_verified_on": "2026-04-24",
+  "required_frontmatter": [
+    "spec_id",
+    "title",
+    "status",
+    "layer",
+    "last_verified_on"
+  ],
+  "required_sections": [
+    "Purpose",
+    "Current State",
+    "Physical Evidence",
+    "Gaps",
+    "Next Actions",
+    "Sibling Artifacts"
+  ],
+  "evidence_paths": [
+    "layers/l1_nervous",
+    "proto",
+    "dummie_agent_config.json"
+  ],
+  "policy": {
+    "allow_legacy_narrative": false,
+    "require_existing_links": true,
+    "status_values": [
+      "ACTIVE",
+      "DRAFT",
+      "PROPOSED",
+      "DEPRECATED",
+      "REFERENCE"
     ]
-  },
-  "enforcement": "STRICT_BLOCK",
-  "personality_ref": "DE-V2-L0-33"
+  }
 }

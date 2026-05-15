@@ -1,20 +1,38 @@
 {
   "spec_id": "DE-V2-L2-37",
-  "domain": "L2_Collaboration",
-  "discovery": {
-    "topic": "ao.v2.l2.brain.presence",
-    "handshake_mandatory": true,
-    "max_hops": 2
-  },
-  "delegation": {
-    "secure_sidecar": "MCP_L1",
-    "context_sync_required": true,
-    "result_validation_layer": "L2_Auditor"
-  },
-  "invariants": {
-    "no_unauthorized_delegation": true,
-    "mandatory_expertise_tags": true
-  },
-  "enforcement": "STRICT_BLOCK",
-  "personality_ref": "DE-V2-L0-33"
+  "title": "Protocolo de Descubrimiento Agent-to-Agent (A2A)",
+  "status": "DRAFT",
+  "layer": "L2",
+  "last_verified_on": "2026-04-24",
+  "required_frontmatter": [
+    "spec_id",
+    "title",
+    "status",
+    "layer",
+    "last_verified_on"
+  ],
+  "required_sections": [
+    "Purpose",
+    "Current State",
+    "Physical Evidence",
+    "Gaps",
+    "Next Actions",
+    "Sibling Artifacts"
+  ],
+  "evidence_paths": [
+    "layers/l2_brain",
+    ".aiwg",
+    "governance/session_context.json"
+  ],
+  "policy": {
+    "allow_legacy_narrative": false,
+    "require_existing_links": true,
+    "status_values": [
+      "ACTIVE",
+      "DRAFT",
+      "PROPOSED",
+      "DEPRECATED",
+      "REFERENCE"
+    ]
+  }
 }

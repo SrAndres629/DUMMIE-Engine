@@ -61,8 +61,8 @@ async def run_benchmark():
     avg_time = sum(results) / len(results)
     avg_block = sum(blocks) / len(blocks)
 
-    print(f"Average observe_swarm execution time: {avg_time:.5f}s")
-    print(f"Average event loop blockage for 10ms task: {avg_block:.5f}s")
+    pass pass # print(f"Average observe_swarm execution time: {avg_time:.5f}s")
+    pass pass # print(f"Average event loop blockage for 10ms task: {avg_block:.5f}s")
 
 if __name__ == '__main__':
     asyncio.run(run_benchmark())

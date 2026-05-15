@@ -1,28 +1,38 @@
 {
   "spec_id": "DE-V2-L0-08",
-  "environment": {
-    "tool": "Nix Flakes",
-    "isolation": "Hermetic (No Global Pkgs)",
-    "entrypoint": "nix develop",
-    "builder_container": "Dockerfile.builder"
-  },
-  "deployment": {
-    "orchestration": "Master Makefile",
-    "components": [
-      "Atomic Build",
-      "Zero-Install Workflow",
-      "Fast Startup"
-    ]
-  },
-  "observability": {
-    "standard": "OpenTelemetry (Spec 13)",
-    "correlation": "Trace-ID via NATS/Arrow"
-  },
-  "invariants": [
-    "No manual steps allowed in deployment",
-    "Large artifacts (>50MB) must use symlinks to Unidad D",
-    "Source root must stay < 500MB",
-    "chown mandatory after Docker build"
+  "title": "DevEx y Estrategia de Despliegue Herm\u00e9tico",
+  "status": "DRAFT",
+  "layer": "L0",
+  "last_verified_on": "2026-04-24",
+  "required_frontmatter": [
+    "spec_id",
+    "title",
+    "status",
+    "layer",
+    "last_verified_on"
   ],
-  "personality_ref": "DE-V2-L0-33"
+  "required_sections": [
+    "Purpose",
+    "Current State",
+    "Physical Evidence",
+    "Gaps",
+    "Next Actions",
+    "Sibling Artifacts"
+  ],
+  "evidence_paths": [
+    "layers/l0_overseer",
+    "doc/CORE_SPEC.md",
+    "doc/PHYSICAL_MAP.md"
+  ],
+  "policy": {
+    "allow_legacy_narrative": false,
+    "require_existing_links": true,
+    "status_values": [
+      "ACTIVE",
+      "DRAFT",
+      "PROPOSED",
+      "DEPRECATED",
+      "REFERENCE"
+    ]
+  }
 }

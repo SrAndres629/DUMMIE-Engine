@@ -21,7 +21,7 @@ class SessionLedgerAdapter(ISessionLedgerPort):
             with open(self.ledger_path, "a", encoding="utf-8") as f:
                 f.write(state.model_dump_json() + "\n")
         except Exception as e:
-            print(f"[SessionLedgerAdapter] Error al escribir ego state: {e}")
+            pass # print(f"[SessionLedgerAdapter] Error al escribir ego state: {e}")
 
     def get_session_history(self, session_id: str) -> List[EgoState]:
         """Escanea el ledger para recuperar pensamientos de una sesión específica."""
@@ -39,5 +39,5 @@ class SessionLedgerAdapter(ISessionLedgerPort):
                     history.append(EgoState(**data))
             return history
         except Exception as e:
-            print(f"[SessionLedgerAdapter] Error al leer historial: {e}")
+            pass # print(f"[SessionLedgerAdapter] Error al leer historial: {e}")
             return []

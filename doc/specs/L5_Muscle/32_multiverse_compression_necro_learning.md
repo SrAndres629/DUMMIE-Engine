@@ -1,44 +1,41 @@
 ---
-spec_id: "DE-V2-L5-32"
-title: "Motor de Ultra-Compresión del Multiverso"
-status: "ACTIVE"
-version: "2.2.0"
-layer: "L5"
-namespace: "io.dummie.v2.muscle"
-authority: "SYSTEM"
-dependencies:
-  - id: "DE-V2-L5-20"
-    relationship: "REQUIRES"
-tags: ["cognitive_core", "hardware_acceleration", "industrial_sdd"]
+spec_id: DE-V2-L5-32
+title: Motor de Ultra-Compresión del Multiverso
+status: DRAFT
+layer: L5
+last_verified_on: '2026-04-24'
+version: 1.0.0
+namespace: dummie.engine.l5
 ---
+# Motor de Ultra-Compresión del Multiverso
 
-# 32. Motor de Ultra-Compresión del Multiverso
+## Purpose
+Definir el contrato operativo de esta capacidad y su relación con el estado físico vigente.
 
-## Abstract
-El **Motor de Ultra-Compresión** es el componente de Layer 5 encargado de la persistencia eficiente de la memoria a largo plazo. Utilizando algoritmos de compresión de alta densidad (Zstd Nivel 19+), este motor comprime los snapshots del 4D-TES y el Multiverso semántico, garantizando que el sistema pueda almacenar décadas de experiencia técnica con un impacto mínimo en el almacenamiento físico NVMe.
+## Current State
+Capacidad en transición; requiere consolidación progresiva de contratos y pruebas.
 
-## 1. Cognitive Context Model (Ref)
-Para el algoritmo de compresión (Zstd), el nivel mínimo de compresión y los límites del buffer de descompresión en RAM, consulte el archivo hermano [32_multiverse_compression_necro_learning.rules.json](./32_multiverse_compression_necro_learning.rules.json).
+## Physical Evidence
+- `doc/specs/32_multiverse_compression_necro_learning.md`
+- `doc/specs/32_multiverse_compression_necro_learning.feature`
+- `doc/specs/32_multiverse_compression_necro_learning.rules.json`
+- `layers/l5_muscle/__init__.py`
+- `doc/CORE_SPEC.md`
+- `doc/PHYSICAL_MAP.md`
 
----
+## Contract Invariants
+- `status` debe estar dentro del conjunto permitido por `doc/CORE_SPEC.md`.
+- Los artefactos hermanos (`.feature`, `.rules.json`) deben existir junto a la spec.
+- Toda referencia en `Physical Evidence` debe resolver a una ruta real del repositorio.
 
-## 2. Compresión del Multiverso
-El sistema optimiza la huella de datos del conocimiento agéntico:
-- **Latent Snapshots:** Compresión de los estados del grafo LST para almacenamiento en frío.
-- **Differential Storage:** Solo se almacenan las diferencias (Deltas) entre versiones del multiverso, utilizando técnicas de deduplicación a nivel de bloque.
-- **Cold Storage Management:** Migración automática de experiencias poco frecuentes a zonas de alta compresión en Layer 5.
+## Verification
+```bash
+python3 scripts/validate_specs_docs.py --check doc/specs/32_multiverse_compression_necro_learning.md
+```
 
----
-
-## 3. Invariantes de Almacenamiento
-El motor de compresión opera bajo reglas estrictas:
-1.  **Integrity Check:** Cada bloque comprimido debe pasar una validación de suma de comprobación (Checksum) antes de ser considerado "Cristalizado".
-2.  **Resource Throttling:** La compresión masiva (Necro-learning) solo ocurre durante periodos de baja actividad del sistema nervioso para no interferir con la latencia de fabricación.
-3.  **Atomic Persistence:** Las operaciones de escritura en el almacén de ultra-compresión son atómicas; si falla el suministro eléctrico o el bus IPC, el sistema revierte al último snapshot válido.
-
----
-
-## [MSA] Sibling Components Requeridos
-Todo documento maestro debe ir acompañado de sus archivos hermanos para convertirse en una *Active Architectural Fitness Function*:
-- **Executable Contract:** [32_multiverse_compression_necro_learning.feature](./32_multiverse_compression_necro_learning.feature)
-- **Machine Rules:** [32_multiverse_compression_necro_learning.rules.json](./32_multiverse_compression_necro_learning.rules.json)
+## Traceability
+| Invariant | Evidence | Verification |
+| --- | --- | --- |
+| Estado permitido | `doc/CORE_SPEC.md` + frontmatter de esta spec | `python3 scripts/validate_specs_docs.py --check doc/specs/32_multiverse_compression_necro_learning.md` |
+| Artefactos hermanos presentes | `doc/specs/32_multiverse_compression_necro_learning.feature` y `doc/specs/32_multiverse_compression_necro_learning.rules.json` | `python3 scripts/validate_specs_docs.py --check doc/specs/32_multiverse_compression_necro_learning.md` |
+| Evidencia física existente | sección `Physical Evidence` | `python3 scripts/validate_specs_docs.py --check doc/specs/32_multiverse_compression_necro_learning.md` |

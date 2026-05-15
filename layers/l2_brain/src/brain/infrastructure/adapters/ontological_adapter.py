@@ -21,7 +21,7 @@ class OntologicalMapAdapter:
             with open(self.map_path, "w", encoding="utf-8") as f:
                 f.write(ont_map.model_dump_json(indent=2))
         except Exception as e:
-            print(f"[OntologicalMapAdapter] Error al guardar mapa: {e}")
+            pass # print(f"[OntologicalMapAdapter] Error al guardar mapa: {e}")
 
     def load_map(self) -> OntologicalMap:
         """Carga el mapa desde el disco."""
@@ -33,7 +33,7 @@ class OntologicalMapAdapter:
                 data = json.load(f)
                 return OntologicalMap(**data)
         except Exception as e:
-            print(f"[OntologicalMapAdapter] Error al cargar mapa: {e}")
+            pass # print(f"[OntologicalMapAdapter] Error al cargar mapa: {e}")
             return OntologicalMap(layers={}, updated_at=datetime.now())
 
     def update_layer(self, layer_certainty: LayerCertainty) -> None:

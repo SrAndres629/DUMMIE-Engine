@@ -189,7 +189,7 @@ class MemoryNode4D(BaseModel):
         )
 
         try:
-            from embedding_provider import EmbeddingProvider
+            from .embedding_provider import EmbeddingProvider
         except ImportError:
             from layers.l2_brain.embedding_provider import EmbeddingProvider
         
@@ -214,7 +214,7 @@ class MemoryNode4D(BaseModel):
         [LEGACY BRIDGE] Serializa el nodo de memoria a Cypher delegando en cypher_codec.
         """
         try:
-            from cypher_codec import node_to_create_cypher
+            from .cypher_codec import node_to_create_cypher
         except ImportError:
             from layers.l2_brain.cypher_codec import node_to_create_cypher
             

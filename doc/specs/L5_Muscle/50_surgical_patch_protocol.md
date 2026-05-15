@@ -1,19 +1,22 @@
 ---
-spec_id: "DE-V2-L5-50"
-title: "Protocolo de Parche Quirúrgico (Surgical Patching)"
-status: "ACTIVE"
-version: "2.2.0"
-layer: "L5"
-namespace: "io.dummie.v2.muscle.patching"
-authority: "ARCHITECT"
+spec_id: DE-V2-L5-50
+title: Protocolo de Parche Quirúrgico (Surgical Patching)
+status: ACTIVE
+version: 2.2.0
+layer: L5
+namespace: io.dummie.v2.muscle.patching
+authority: ARCHITECT
 dependencies:
-  - id: "DE-V2-L5-16"
-    relationship: "REFINES_IO"
-  - id: "DE-V2-L3-04"
-    relationship: "AUDITED_BY"
-tags: ["muscle_layer", "patching", "atomic_diff", "integrity_check"]
+- id: DE-V2-L5-16
+  relationship: REFINES_IO
+- id: DE-V2-L3-04
+  relationship: AUDITED_BY
+tags:
+- muscle_layer
+- patching
+- atomic_diff
+- integrity_check
 ---
-
 # 50. Protocolo de Parche Quirúrgico (Surgical Patching)
 
 ## Abstract

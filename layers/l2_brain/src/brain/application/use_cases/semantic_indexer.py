@@ -59,6 +59,6 @@ class SemanticFabricIndexer:
                         self.event_store.append_node(node)
                         indexed_count += 1
                     except Exception as e:
-                        print(f"[SemanticIndexer] Error indexando {file}: {e}")
+                        pass # print(f"[SemanticIndexer] Error indexando {file}: {e}")
                         
         return indexed_count

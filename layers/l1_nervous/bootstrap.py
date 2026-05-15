@@ -36,7 +36,7 @@ def bootstrap_orchestrator(kuzu_db_path: str, aiwg_dir: str):
     # Ignoramos el ArrowMemoryBridge y usamos Kuzu directamente.
     # El KuzuRepository ahora tiene safe_init_or_recover() para lidiar con locks
     try:
-        logger.info(f"Inicializando 4D-TES (Kuzu) en modo nativo en {kuzu_db_path}")
+        logger.debug(f"Inicializando 4D-TES (Kuzu) en modo nativo en {kuzu_db_path}")
         event_store = KuzuRepository(db_path=kuzu_db_path)
         db = event_store.db
     except Exception as e:

@@ -1,19 +1,21 @@
 ---
-spec_id: "DE-V2-L4-48"
-title: "Protocolo de Hidratación Remota de Habilidades (Agentic Skill Fetcher)"
-status: "ACTIVE"
-version: "2.2.0"
-layer: "L4"
-namespace: "io.dummie.v2.edge.hydration"
-authority: "SENTINEL"
+spec_id: DE-V2-L4-48
+title: Protocolo de Hidratación Remota de Habilidades (Agentic Skill Fetcher)
+status: ACTIVE
+version: 2.2.0
+layer: L4
+namespace: io.dummie.v2.edge.hydration
+authority: SENTINEL
 dependencies:
-  - id: "DE-V2-L2-28"
-    relationship: "INSTALLS_CONTRACT"
-  - id: "DE-V2-L3-04"
-    relationship: "AUDITED_BY"
-tags: ["edge_layer", "skill_hydration", "remote_fetching"]
+- id: DE-V2-L2-28
+  relationship: INSTALLS_CONTRACT
+- id: DE-V2-L3-04
+  relationship: AUDITED_BY
+tags:
+- edge_layer
+- skill_hydration
+- remote_fetching
 ---
-
 # 48. Protocolo de Hidratación Remota de Habilidades (Agentic Skill Fetcher)
 
 ## Abstract

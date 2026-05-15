@@ -37,7 +37,7 @@ class CompressiveMemory:
 
         import re
         combined_text = "\n".join(history)
-        logger.info(f"Crystallizing history: {len(combined_text)} chars")
+        logger.debug(f"Crystallizing history: {len(combined_text)} chars")
         
         # Extracción semántica estructurada (Ontology Alignment)
         patterns = {
@@ -104,7 +104,7 @@ class CompressiveMemory:
                 
                 repo = KuzuRepository(db=self.bridge)
                 parent_hash = repo.get_last_leaf_hash()
-                logger.info(f"Causal link identified: parent={parent_hash}")
+                logger.debug(f"Causal link identified: parent={parent_hash}")
             except Exception as e:
                 logger.warning(f"Causal link fallback to GENESIS: {e}")
                 parent_hash = "GENESIS"
@@ -123,7 +123,7 @@ class CompressiveMemory:
             cypher = node.to_cypher()
             
             self.bridge.ipc.execute(cypher)
-            logger.info(f"Crystallization persisted (SOVEREIGN-4D): {self.last_causal_hash}")
+            logger.debug(f"Crystallization persisted (SOVEREIGN-4D): {self.last_causal_hash}")
             self.last_persist_ok = True
         except Exception as e:
             self.last_error = str(e)

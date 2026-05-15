@@ -1,44 +1,41 @@
 ---
-spec_id: "DE-V2-L6-17"
-title: "Nervio Óptico (Visualización 4D)"
-status: "ACTIVE"
-version: "2.2.0"
-layer: "L6"
-namespace: "io.dummie.v2.skin"
-authority: "ARCHITECT"
-dependencies:
-  - id: "DE-V2-L6-13"
-    relationship: "EXTENDS"
-tags: ["cognitive_core", "telemetry_layer", "industrial_sdd"]
+spec_id: DE-V2-L6-17
+title: Nervio Óptico (Visualización 4D)
+status: DRAFT
+layer: L6
+last_verified_on: '2026-04-24'
+version: 1.0.0
+namespace: dummie.engine.l6
 ---
+# Nervio Óptico (Visualización 4D)
 
-# 17. Nervio Óptico (Visualización 4D)
+## Purpose
+Definir el contrato operativo de esta capacidad y su relación con el estado físico vigente.
 
-## Abstract
-El **Nervio Óptico** es el componente de Layer 6 encargado de la percepción visual y la destilación semántica del entorno. Su función es convertir flujos de datos visuales complejos (Navegadores, Terminales, IDE) en "Semantic Snapshots" que el Cerebro L2 puede procesar de forma eficiente, eliminando el ruido y optimizando la ventana de contexto para el razonamiento agéntico.
+## Current State
+Capacidad en transición; requiere consolidación progresiva de contratos y pruebas.
 
-## 1. Cognitive Context Model (Ref)
-Para la reducción mínima de tokens (80%), la profundidad máxima de destilación y los tipos de snapshot soportados, consulte el archivo hermano [17_optical_nerve_telemetry.rules.json](./17_optical_nerve_telemetry.rules.json).
+## Physical Evidence
+- `doc/specs/17_optical_nerve_telemetry.md`
+- `doc/specs/17_optical_nerve_telemetry.feature`
+- `doc/specs/17_optical_nerve_telemetry.rules.json`
+- `layers/l6_skin/__init__.py`
+- `doc/CORE_SPEC.md`
+- `doc/PHYSICAL_MAP.md`
 
----
+## Contract Invariants
+- `status` debe estar dentro del conjunto permitido por `doc/CORE_SPEC.md`.
+- Los artefactos hermanos (`.feature`, `.rules.json`) deben existir junto a la spec.
+- Toda referencia en `Physical Evidence` debe resolver a una ruta real del repositorio.
 
-## 2. Destilación Semántica (Snapshotting)
-Inspirado por el Browsing Engine de OpenClaw, el Nervio Óptico procesa la realidad visual:
-- **Visual Distillation:** Conversión de DOM/Screenshots en árboles de texto enriquecido.
-- **Noise Reduction:** Eliminación automática de elementos redundantes (Publicidad, barras laterales) para centrar la atención en el código o contenido de valor.
-- **Context Optimization:** Reducción masiva del payload original para permitir razonamientos multimodales de largo alcance.
+## Verification
+```bash
+python3 scripts/validate_specs_docs.py --check doc/specs/17_optical_nerve_telemetry.md
+```
 
----
-
-## 3. Telemetría 4D
-El Nervio Óptico proyecta los estados del sistema en el Visualizer:
-1.  **State Projection:** Mapeo de los datos binarios de Layer 5 en objetos visuales 3D.
-2.  **Temporal Depth:** Visualización de la evolución de los archivos a lo largo del tiempo (flecha del tiempo de Lamport).
-3.  **Blast Radius Visualization:** Representación visual del impacto de los cambios propuestos en el grafo de dependencias.
-
----
-
-## [MSA] Sibling Components Requeridos
-Todo documento maestro debe ir acompañado de sus archivos hermanos para convertirse en una *Active Architectural Fitness Function*:
-- **Executable Contract:** [17_optical_nerve_telemetry.feature](./17_optical_nerve_telemetry.feature)
-- **Machine Rules:** [17_optical_nerve_telemetry.rules.json](./17_optical_nerve_telemetry.rules.json)
+## Traceability
+| Invariant | Evidence | Verification |
+| --- | --- | --- |
+| Estado permitido | `doc/CORE_SPEC.md` + frontmatter de esta spec | `python3 scripts/validate_specs_docs.py --check doc/specs/17_optical_nerve_telemetry.md` |
+| Artefactos hermanos presentes | `doc/specs/17_optical_nerve_telemetry.feature` y `doc/specs/17_optical_nerve_telemetry.rules.json` | `python3 scripts/validate_specs_docs.py --check doc/specs/17_optical_nerve_telemetry.md` |
+| Evidencia física existente | sección `Physical Evidence` | `python3 scripts/validate_specs_docs.py --check doc/specs/17_optical_nerve_telemetry.md` |

@@ -1,23 +1,38 @@
 {
   "spec_id": "DE-V2-L0-11",
-  "topology": {
-    "doc/": "SSoT (Specs, ADRs)",
-    "doc/01_architecture/adr/": "Architectural Decision Records",
-    "governance/": "Executable Contracts",
-    "proto/": "Schema Definitions",
-    "layers/": "7-Layer Stack (L0-L6)",
-    "pkg/": "Shared Libraries",
-    "flake.nix": "Environment Hermeticity"
-  },
-  "invariants": {
-    "hermeticity": "Nix-Enforced",
-    "security_masks": ".aiwg/secrets",
-    "governance_path": "doc/01_architecture/adr/"
-  },
-  "rbac_topology": {
-    "sw.arch.*": ["doc/", "governance/", "proto/"],
-    "sw.plant.coder": ["layers/"],
-    "sw.strategy.*": [".aiwg/"]
-  },
-  "personality_ref": "DE-V2-L0-33"
+  "title": "Estructura de Monorepo Soberano",
+  "status": "ACTIVE",
+  "layer": "L0",
+  "last_verified_on": "2026-04-24",
+  "required_frontmatter": [
+    "spec_id",
+    "title",
+    "status",
+    "layer",
+    "last_verified_on"
+  ],
+  "required_sections": [
+    "Purpose",
+    "Current State",
+    "Physical Evidence",
+    "Gaps",
+    "Next Actions",
+    "Sibling Artifacts"
+  ],
+  "evidence_paths": [
+    "layers/l0_overseer",
+    "doc/CORE_SPEC.md",
+    "doc/PHYSICAL_MAP.md"
+  ],
+  "policy": {
+    "allow_legacy_narrative": false,
+    "require_existing_links": true,
+    "status_values": [
+      "ACTIVE",
+      "DRAFT",
+      "PROPOSED",
+      "DEPRECATED",
+      "REFERENCE"
+    ]
+  }
 }

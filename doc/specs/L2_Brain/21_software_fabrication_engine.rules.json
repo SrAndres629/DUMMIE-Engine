@@ -1,16 +1,38 @@
 {
   "spec_id": "DE-V2-L2-21",
-  "domain": "L2_Fabrication",
-  "invariants": {
-    "fabrication_modes": ["GREENFIELD", "REFACTOR", "BUGFIX"],
-    "spec_first": true,
-    "drift_prevention": "STRICT_REVERT",
-    "required_agents": ["Architect", "Coder", "Sentinel"]
-  },
-  "kaizen_loop": {
-    "steps": ["Spec-Analysis", "Implementation", "Audit"],
-    "min_certainty_threshold": 0.85
-  },
-  "enforcement": "STRICT_BLOCK",
-  "personality_ref": "DE-V2-L0-33"
+  "title": "Software Fabrication Engine (SFE)",
+  "status": "ACTIVE",
+  "layer": "L2",
+  "last_verified_on": "2026-04-24",
+  "required_frontmatter": [
+    "spec_id",
+    "title",
+    "status",
+    "layer",
+    "last_verified_on"
+  ],
+  "required_sections": [
+    "Purpose",
+    "Current State",
+    "Physical Evidence",
+    "Gaps",
+    "Next Actions",
+    "Sibling Artifacts"
+  ],
+  "evidence_paths": [
+    "layers/l2_brain",
+    ".aiwg",
+    "governance/session_context.json"
+  ],
+  "policy": {
+    "allow_legacy_narrative": false,
+    "require_existing_links": true,
+    "status_values": [
+      "ACTIVE",
+      "DRAFT",
+      "PROPOSED",
+      "DEPRECATED",
+      "REFERENCE"
+    ]
+  }
 }

@@ -23,16 +23,16 @@ class NatsController:
         nats_url = os.getenv("NATS_URL", "nats://127.0.0.1:4222")
         try:
             self.nc = await nats.connect(nats_url)
-            print(f"[NatsController] Conectado a NATS en {nats_url}")
+            pass # print(f"[NatsController] Conectado a NATS en {nats_url}")
         except Exception as e:
-            print(f"[NatsController] Error al conectar a NATS: {e}")
+            pass # print(f"[NatsController] Error al conectar a NATS: {e}")
 
     async def publish_event(self, subject: str, payload: bytes):
         """Publica un evento en NATS."""
         if self.nc and self.nc.is_connected:
             await self.nc.publish(subject, payload)
         else:
-            print(f"[NATSController] Error: No conectado. Omitiendo {subject}")
+            pass # print(f"[NATSController] Error: No conectado. Omitiendo {subject}")
 
     async def emit_heartbeat(self, agent_id: str, expertise: list):
         """Emite latidos de presencia (Spec 37)."""
@@ -45,7 +45,7 @@ class NatsController:
             "timestamp": datetime.utcnow().isoformat()
         }
         await self.publish_event(subject, json.dumps(heartbeat).encode())
-        print(f"[NATSController] Heartbeat emitido: {subject}")
+        pass # print(f"[NATSController] Heartbeat emitido: {subject}")
 
     async def listen_for_tasks(self):
         if not self.nc:
@@ -65,7 +65,7 @@ class NatsController:
                 pass
 
         await self.nc.subscribe("core.v2.life.heartbeat.full", cb=heartbeat_handler)
-        print("[NatsController] Escuchando Pulso Causal (core.v2.life.heartbeat.full)")
+        pass # print("[NatsController] Escuchando Pulso Causal (core.v2.life.heartbeat.full)")
 
         # 2. Escuchar tareas de orquestación
         async def message_handler(msg):
@@ -74,7 +74,7 @@ class NatsController:
             await msg.respond(response.encode())
 
         await self.nc.subscribe("core.v2.orchestration.tasks", cb=message_handler)
-        print("[NatsController] Escuchando tareas en core.v2.orchestration.tasks")
+        pass # print("[NatsController] Escuchando tareas en core.v2.orchestration.tasks")
 
     async def stop(self):
         self.is_running = False

@@ -1,57 +1,41 @@
 ---
-spec_id: "DE-V2-L0-42"
-title: "Protocolo de Heartbeat Proactivo (The Pulse)"
-status: "ACTIVE"
-version: "2.2.0"
-layer: "L0"
-namespace: "io.dummie.v2.orchestration.proactive"
-authority: "ARCHITECT"
-dependencies:
-  - id: "DE-V2-L0-05"
-    relationship: "EXTENDS"
-  - id: "DE-V2-L1-41"
-    relationship: "USES_WIRE"
-tags: ["proactive_autonomy", "heartbeat", "elixir_otp", "claw_ism"]
+spec_id: DE-V2-L0-42
+title: Protocolo de Heartbeat Proactivo (The Pulse)
+status: DRAFT
+layer: L0
+last_verified_on: '2026-04-24'
+version: 1.0.0
+namespace: dummie.engine.l0
 ---
+# Protocolo de Heartbeat Proactivo (The Pulse)
 
-# 42. Protocolo de Heartbeat Proactivo (The Pulse)
+## Purpose
+Definir el contrato operativo de esta capacidad y su relación con el estado físico vigente.
 
-## Abstract
-DUMMIE Engine trasciende el modelo reactivo mediante el **Protocolo de Heartbeat Proactivo**. El sistema se dota de capacidad de **Despertar Autónomo**, donde el Overseer (L0) orquesta auditorías y reflexiones automáticas basadas en el entorno físico y cognitivo, sin requerir intervención humana constante.
+## Current State
+Capacidad en transición; requiere consolidación progresiva de contratos y pruebas.
 
-## 1. Cognitive Context Model (Ref)
-Para los mecanismos de disparo (GenServer), el formato de señal NATS y las restricciones de tareas proactivas (Límite de Profundidad), consulte el archivo hermano [42_proactive_heartbeat_protocol.rules.json](./42_proactive_heartbeat_protocol.rules.json).
+## Physical Evidence
+- `doc/specs/42_proactive_heartbeat_protocol.md`
+- `doc/specs/42_proactive_heartbeat_protocol.feature`
+- `doc/specs/42_proactive_heartbeat_protocol.rules.json`
+- `layers/l0_overseer/__init__.py`
+- `doc/CORE_SPEC.md`
+- `doc/PHYSICAL_MAP.md`
 
----
+## Contract Invariants
+- `status` debe estar dentro del conjunto permitido por `doc/CORE_SPEC.md`.
+- Los artefactos hermanos (`.feature`, `.rules.json`) deben existir junto a la spec.
+- Toda referencia en `Physical Evidence` debe resolver a una ruta real del repositorio.
 
-## 2. El Ciclo de Vida del Pulso (The Pulse)
-El Overseer (L0) mantiene un proceso `PulseDaemon` (GenServer) que rige la proactividad del enjambre:
+## Verification
+```bash
+python3 scripts/validate_specs_docs.py --check doc/specs/42_proactive_heartbeat_protocol.md
+```
 
-1.  **Tick Generation:** Emisión de señal `pulse` a través del bus NATS en intervalos regulares.
-2.  **LST Context Injection:** Inyección del contenido de `doc/HEARTBEAT.md` en el contexto de los agentes L2.
-3.  **Autonomous Reasoning:** Análisis de tareas pendientes y cambios en el monorepo (L4 Zig).
-4.  **Action Proposal:** Generación de un `Intent` para ejecución tras validación de consenso.
-
----
-
-## 3. Contrato de HEARTBEAT.md
-El archivo `doc/HEARTBEAT.md` actúa como la **Memoria de Intenciones Proactivas**. Es un SSoT mutable que el agente audita en cada Pulso.
-
-### 3.1 Secciones Obligatorias
-- **## Daily Recurring Tasks:** Tareas de mantenimiento e integridad SDD.
-- **## Background Monitors:** Vigilancia de repositorios y servicios externos.
-- **## Pending Reflections:** Ambigüedades de diseño y mejoras ontológicas.
-
----
-
-## 4. Invariante de Red: Protección del Multiverso
-Para evitar bucles de autorreferencia infinitos:
-- **Depth Limit:** Las tareas iniciadas por un `pulse` no pueden generar otros `pulses` (Depth = 0).
-- **Budget Control:** Consumo limitado por el E-Shield ([Spec 14](14_value_engineering_and_governance.md)) al 15% del presupuesto diario.
-
----
-
-## [MSA] Sibling Components Requeridos
-Todo documento maestro debe ir acompañado de sus archivos hermanos para convertirse en una *Active Architectural Fitness Function*:
-- **Executable Contract:** [42_proactive_heartbeat_protocol.feature](./42_proactive_heartbeat_protocol.feature)
-- **Machine Rules:** [42_proactive_heartbeat_protocol.rules.json](./42_proactive_heartbeat_protocol.rules.json)
+## Traceability
+| Invariant | Evidence | Verification |
+| --- | --- | --- |
+| Estado permitido | `doc/CORE_SPEC.md` + frontmatter de esta spec | `python3 scripts/validate_specs_docs.py --check doc/specs/42_proactive_heartbeat_protocol.md` |
+| Artefactos hermanos presentes | `doc/specs/42_proactive_heartbeat_protocol.feature` y `doc/specs/42_proactive_heartbeat_protocol.rules.json` | `python3 scripts/validate_specs_docs.py --check doc/specs/42_proactive_heartbeat_protocol.md` |
+| Evidencia física existente | sección `Physical Evidence` | `python3 scripts/validate_specs_docs.py --check doc/specs/42_proactive_heartbeat_protocol.md` |

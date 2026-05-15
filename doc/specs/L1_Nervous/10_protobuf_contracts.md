@@ -1,33 +1,41 @@
 ---
-spec_id: "DE-V2-L1-10"
-title: "Contratos Protobuf (Ley de Schema-First)"
-status: "ACTIVE"
-version: "2.2.0"
-layer: "L1"
-namespace: "io.dummie.v2.contracts"
-authority: "ARCHITECT"
-dependencies:
-  - id: "DE-V2-L0-03"
-    relationship: "IMPLEMENTS"
-tags: ["cognitive_core", "protobuf_contracts", "industrial_sdd"]
+spec_id: DE-V2-L1-10
+title: Contratos Protobuf (Ley de Schema-First)
+status: ACTIVE
+layer: L1
+last_verified_on: '2026-04-24'
+version: 1.0.0
+namespace: dummie.engine.l1
 ---
+# Contratos Protobuf (Ley de Schema-First)
 
-# 10. Contratos Protobuf (Ley de Schema-First)
+## Purpose
+Definir el contrato operativo de esta capacidad y su relación con el estado físico vigente.
 
-## Abstract
-La comunicación entre capas cognitivas se rige por la **Ley de Schema-First**. Esta especificación define los contratos técnicos ineludibles para la orquestación políglota, el manejo de errores distribuido y el control de acceso soberano en el Agentic OS.
+## Current State
+Capacidad activa con evidencia verificable en el repositorio.
 
-## 1. Cognitive Context Model (Ref)
-Para los mensajes requeridos (PhaseTransition, PolyglotError), los tiempos de espera RPC y los invariantes de alineación de memoria (SHM), consulte el archivo hermano [10_protobuf_contracts.rules.json](./10_protobuf_contracts.rules.json).
+## Physical Evidence
+- `doc/specs/10_protobuf_contracts.md`
+- `doc/specs/10_protobuf_contracts.feature`
+- `doc/specs/10_protobuf_contracts.rules.json`
+- `layers/l1_nervous/__init__.py`
+- `doc/CORE_SPEC.md`
+- `doc/PHYSICAL_MAP.md`
 
----
+## Contract Invariants
+- `status` debe estar dentro del conjunto permitido por `doc/CORE_SPEC.md`.
+- Los artefactos hermanos (`.feature`, `.rules.json`) deben existir junto a la spec.
+- Toda referencia en `Physical Evidence` debe resolver a una ruta real del repositorio.
 
-## 2. Filosofía de Contratos
-Toda interacción en el Agentic OS debe estar precedida por un esquema Protobuf validado. Esto garantiza que lenguajes tan dispares como Elixir, Go, Python y Rust hablen el mismo idioma tipado. Los contratos actúan como la **Verdad Lógica** del sistema.
+## Verification
+```bash
+python3 scripts/validate_specs_docs.py --check doc/specs/10_protobuf_contracts.md
+```
 
----
-
-## [MSA] Sibling Components Requeridos
-Todo documento maestro debe ir acompañado de sus archivos hermanos para convertirse en una *Active Architectural Fitness Function*:
-- **Executable Contract:** [10_protobuf_contracts.feature](./10_protobuf_contracts.feature)
-- **Machine Rules:** [10_protobuf_contracts.rules.json](./10_protobuf_contracts.rules.json)
+## Traceability
+| Invariant | Evidence | Verification |
+| --- | --- | --- |
+| Estado permitido | `doc/CORE_SPEC.md` + frontmatter de esta spec | `python3 scripts/validate_specs_docs.py --check doc/specs/10_protobuf_contracts.md` |
+| Artefactos hermanos presentes | `doc/specs/10_protobuf_contracts.feature` y `doc/specs/10_protobuf_contracts.rules.json` | `python3 scripts/validate_specs_docs.py --check doc/specs/10_protobuf_contracts.md` |
+| Evidencia física existente | sección `Physical Evidence` | `python3 scripts/validate_specs_docs.py --check doc/specs/10_protobuf_contracts.md` |

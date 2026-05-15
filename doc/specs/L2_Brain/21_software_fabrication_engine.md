@@ -1,41 +1,41 @@
 ---
-spec_id: "DE-V2-L2-21"
-title: "Software Fabrication Engine (SFE)"
-status: "ACTIVE"
-version: "2.2.0"
-layer: "L2"
-namespace: "io.dummie.v2.brain"
-authority: "ARCHITECT"
-dependencies:
-  - id: "DE-V2-L2-02"
-    relationship: "REQUIRES"
-tags: ["cognitive_core", "brain_logic", "industrial_sdd"]
+spec_id: DE-V2-L2-21
+title: Software Fabrication Engine (SFE)
+status: ACTIVE
+layer: L2
+last_verified_on: '2026-04-24'
+version: 1.0.0
+namespace: dummie.engine.l2
 ---
+# Software Fabrication Engine (SFE)
 
-# 21. Software Fabrication Engine (SFE)
+## Purpose
+Definir el contrato operativo de esta capacidad y su relación con el estado físico vigente.
 
-## Abstract
-La Software Fabrication Engine (SFE) es el orquestador cognitivo del sistema. Este componente rige la inteligencia agéntica, la gestión de la consistencia semántica y el aprendizaje continuo mediante ciclos Kaizen, asegurando que el proceso de fabricación de software sea determinista, auditable y soberano.
+## Current State
+Capacidad activa con evidencia verificable en el repositorio.
 
-## 1. Cognitive Context Model (Ref)
-Para los modos de fabricación (Greenfield, Refactor), los invariantes de Spec-First y los agentes requeridos para el consenso cognitivo, consulte el archivo hermano [21_software_fabrication_engine.rules.json](./21_software_fabrication_engine.rules.json).
+## Physical Evidence
+- `doc/specs/21_software_fabrication_engine.md`
+- `doc/specs/21_software_fabrication_engine.feature`
+- `doc/specs/21_software_fabrication_engine.rules.json`
+- `layers/l2_brain/daemon.py`
+- `doc/CORE_SPEC.md`
+- `doc/PHYSICAL_MAP.md`
 
----
+## Contract Invariants
+- `status` debe estar dentro del conjunto permitido por `doc/CORE_SPEC.md`.
+- Los artefactos hermanos (`.feature`, `.rules.json`) deben existir junto a la spec.
+- Toda referencia en `Physical Evidence` debe resolver a una ruta real del repositorio.
 
-## 2. Alcance Operativo
-El componente opera dentro del Bounded Context del Cerebro (L2), interactuando con la Memoria 4D-TES y el Escudo L3. Su misión es garantizar que todo razonamiento agéntico sea coherente con la topología global y los invariantes de diseño del sistema.
+## Verification
+```bash
+python3 scripts/validate_specs_docs.py --check doc/specs/21_software_fabrication_engine.md
+```
 
----
-
-## 3. Ciclo de Fabricación (Kaizen Loop)
-La SFE implementa un bucle de refinamiento continuo:
-1.  **Spec-Driven Analysis:** Validación de la intención contra los contratos existentes.
-2.  **Sovereign Implementation:** Generación de código siguiendo la estratigrafía de 7 capas.
-3.  **Metacognitive Audit:** Validación del resultado contra los Shields y el Ledger de Decisiones.
-
----
-
-## [MSA] Sibling Components Requeridos
-Todo documento maestro debe ir acompañado de sus archivos hermanos para convertirse en una *Active Architectural Fitness Function*:
-- **Executable Contract:** [21_software_fabrication_engine.feature](./21_software_fabrication_engine.feature)
-- **Machine Rules:** [21_software_fabrication_engine.rules.json](./21_software_fabrication_engine.rules.json)
+## Traceability
+| Invariant | Evidence | Verification |
+| --- | --- | --- |
+| Estado permitido | `doc/CORE_SPEC.md` + frontmatter de esta spec | `python3 scripts/validate_specs_docs.py --check doc/specs/21_software_fabrication_engine.md` |
+| Artefactos hermanos presentes | `doc/specs/21_software_fabrication_engine.feature` y `doc/specs/21_software_fabrication_engine.rules.json` | `python3 scripts/validate_specs_docs.py --check doc/specs/21_software_fabrication_engine.md` |
+| Evidencia física existente | sección `Physical Evidence` | `python3 scripts/validate_specs_docs.py --check doc/specs/21_software_fabrication_engine.md` |

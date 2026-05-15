@@ -1,46 +1,41 @@
 ---
-spec_id: "DE-V2-L1-11"
-title: "Protocolo de Plano de Datos (Apache Arrow Zero-Copy)"
-status: "ACTIVE"
-version: "2.2.0"
-layer: "L1"
-namespace: "io.dummie.v2.dataplane"
-authority: "ARCHITECT"
-dependencies:
-  - id: "DE-V2-L0-03"
-    relationship: "IMPLEMENTS"
-tags: ["data_plane", "zero_copy", "apache_arrow"]
+spec_id: DE-V2-L1-11
+title: Protocolo de Plano de Datos (Apache Arrow Zero-Copy)
+status: DRAFT
+layer: L1
+last_verified_on: '2026-04-24'
+version: 1.0.0
+namespace: dummie.engine.l1
 ---
+# Protocolo de Plano de Datos (Apache Arrow Zero-Copy)
 
-# 11. Protocolo de Plano de Datos (Apache Arrow)
+## Purpose
+Definir el contrato operativo de esta capacidad y su relación con el estado físico vigente.
 
-## Abstract
-Este protocolo define el intercambio masivo de información entre las capas del Agentic OS utilizando **Apache Arrow**. Se garantiza una transferencia de datos con latencia cero (Zero-Copy) mediante el uso de memoria compartida (SHM) y esquemas rígidos de `RecordBatch` para asegurar la interoperabilidad políglota de alto rendimiento.
+## Current State
+Capacidad en transición; requiere consolidación progresiva de contratos y pruebas.
 
-## 1. Cognitive Context Model (Ref)
-Para los esquemas de RecordBatch, los controles de acceso por capa (RW/R) y los invariantes de serialización binaria, consulte el archivo hermano [11_arrow_data_plane.rules.json](./11_arrow_data_plane.rules.json).
+## Physical Evidence
+- `doc/specs/11_arrow_data_plane.md`
+- `doc/specs/11_arrow_data_plane.feature`
+- `doc/specs/11_arrow_data_plane.rules.json`
+- `layers/l1_nervous/__init__.py`
+- `doc/CORE_SPEC.md`
+- `doc/PHYSICAL_MAP.md`
 
----
+## Contract Invariants
+- `status` debe estar dentro del conjunto permitido por `doc/CORE_SPEC.md`.
+- Los artefactos hermanos (`.feature`, `.rules.json`) deben existir junto a la spec.
+- Toda referencia en `Physical Evidence` debe resolver a una ruta real del repositorio.
 
-## 2. Estructura del RecordBatch (Logical Layout)
-Para garantizar la interoperabilidad entre Go, Python y Zig, todo `RecordBatch` que circule por la memoria compartida (SHM) debe seguir este esquema:
+## Verification
+```bash
+python3 scripts/validate_specs_docs.py --check doc/specs/11_arrow_data_plane.md
+```
 
-| Campo | Tipo | Propósito |
-| :--- | :--- | :--- |
-| `event_id` | utf8 (UUID) | Identificador único de la transacción causal. |
-| `lamport_tick` | uint64 | Tiempo lógico asignado por el TimeKeeper (L1). |
-| `layer_source` | int8 (Enum) | Capa que originó el dato (0-6). |
-| `payload_type` | utf8 | Categoría del dato (LST, Cognitive, Telemetry). |
-| `payload_blob` | binary | Datos serializados (FlatBuffers) según el tipo. |
-
----
-
-## 3. Invariante de Acceso y Tiempo
-Solo la Capa L1 (Nervous) posee la autoridad para incrementar el `lamport_tick`. Las demás capas actúan como lectores o escritores de estados, pero nunca como árbitros de la causalidad temporal del sistema.
-
----
-
-## [MSA] Sibling Components Requeridos
-Todo documento maestro debe ir acompañado de sus archivos hermanos para convertirse en una *Active Architectural Fitness Function*:
-- **Executable Contract:** [11_arrow_data_plane.feature](./11_arrow_data_plane.feature)
-- **Machine Rules:** [11_arrow_data_plane.rules.json](./11_arrow_data_plane.rules.json)
+## Traceability
+| Invariant | Evidence | Verification |
+| --- | --- | --- |
+| Estado permitido | `doc/CORE_SPEC.md` + frontmatter de esta spec | `python3 scripts/validate_specs_docs.py --check doc/specs/11_arrow_data_plane.md` |
+| Artefactos hermanos presentes | `doc/specs/11_arrow_data_plane.feature` y `doc/specs/11_arrow_data_plane.rules.json` | `python3 scripts/validate_specs_docs.py --check doc/specs/11_arrow_data_plane.md` |
+| Evidencia física existente | sección `Physical Evidence` | `python3 scripts/validate_specs_docs.py --check doc/specs/11_arrow_data_plane.md` |

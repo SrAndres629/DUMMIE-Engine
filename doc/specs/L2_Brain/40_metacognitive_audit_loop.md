@@ -1,38 +1,41 @@
 ---
-spec_id: "DE-V2-L2-40"
-title: "Metacognitive Audit Loop (Observador del Observador)"
-status: "ACTIVE"
-version: "2.2.0"
-layer: "L2"
-namespace: "io.dummie.v2.brain.metacognition"
-authority: "OVERSEER"
-dependencies:
-  - id: "DE-V2-L2-36"
-    relationship: "REQUIRES"
-tags: ["cognitive_core", "self_awareness", "evolution"]
+spec_id: DE-V2-L2-40
+title: Metacognitive Audit Loop (Observador del Observador)
+status: DRAFT
+layer: L2
+last_verified_on: '2026-04-24'
+version: 1.0.0
+namespace: dummie.engine.l2
 ---
+# Metacognitive Audit Loop (Observador del Observador)
 
-# 40. Metacognitive Audit Loop (Observador del Observador)
+## Purpose
+Definir el contrato operativo de esta capacidad y su relación con el estado físico vigente.
 
-## Abstract
-El Metacognitive Audit Loop define el bucle de retroalimentación donde el sistema evalúa su propio rendimiento basándose en el historial de evolución y ambigüedades. Actúa como la **Consciencia Agéntica** que modifica proactivamente la identidad (`identity.json`) para adaptarse a fallos recurrentes y optimizar el determinismo de la Software Fabrication Engine.
+## Current State
+Capacidad en transición; requiere consolidación progresiva de contratos y pruebas.
 
-## 1. Cognitive Context Model (Ref)
-Para los disparadores de auditoría (Jidoka triggers), los límites de mutación de rasgos (Trait Mutation) y los requisitos de notificación al PAH, consulte el archivo hermano [40_metacognitive_audit_loop.rules.json](./40_metacognitive_audit_loop.rules.json).
+## Physical Evidence
+- `doc/specs/40_metacognitive_audit_loop.md`
+- `doc/specs/40_metacognitive_audit_loop.feature`
+- `doc/specs/40_metacognitive_audit_loop.rules.json`
+- `layers/l2_brain/daemon.py`
+- `doc/CORE_SPEC.md`
+- `doc/PHYSICAL_MAP.md`
 
----
+## Contract Invariants
+- `status` debe estar dentro del conjunto permitido por `doc/CORE_SPEC.md`.
+- Los artefactos hermanos (`.feature`, `.rules.json`) deben existir junto a la spec.
+- Toda referencia en `Physical Evidence` debe resolver a una ruta real del repositorio.
 
-## 2. Alcance Operativo
-El Audit Loop se dispara al finalizar el ciclo de sincronización de cada capa. Analiza la densidad de errores y el tiempo de resolución. Si detecta ineficiencias causadas por un nivel de abstracción inadecuado, ajusta los "traits" de la personalidad del enjambre ([Spec 33](../L0_Overseer/33_persistent_personality_mood.md)) para el siguiente ciclo operativo.
+## Verification
+```bash
+python3 scripts/validate_specs_docs.py --check doc/specs/40_metacognitive_audit_loop.md
+```
 
----
-
-## 3. Notificación de Mutación
-Toda mutación de identidad generada por el bucle metacognitivo es registrada en el Ledger de Decisiones ([Spec 34](34_decision_ledger_auditor.md)) y notificada explícitamente al PAH para mantener la transparencia evolutiva del Swarm. El sistema no permite mutaciones silenciosas en sus parámetros de personalidad base.
-
----
-
-## [MSA] Sibling Components Requeridos
-Todo documento maestro debe ir acompañado de sus archivos hermanos para convertirse en una *Active Architectural Fitness Function*:
-- **Executable Contract:** [40_metacognitive_audit_loop.feature](./40_metacognitive_audit_loop.feature)
-- **Machine Rules:** [40_metacognitive_audit_loop.rules.json](./40_metacognitive_audit_loop.rules.json)
+## Traceability
+| Invariant | Evidence | Verification |
+| --- | --- | --- |
+| Estado permitido | `doc/CORE_SPEC.md` + frontmatter de esta spec | `python3 scripts/validate_specs_docs.py --check doc/specs/40_metacognitive_audit_loop.md` |
+| Artefactos hermanos presentes | `doc/specs/40_metacognitive_audit_loop.feature` y `doc/specs/40_metacognitive_audit_loop.rules.json` | `python3 scripts/validate_specs_docs.py --check doc/specs/40_metacognitive_audit_loop.md` |
+| Evidencia física existente | sección `Physical Evidence` | `python3 scripts/validate_specs_docs.py --check doc/specs/40_metacognitive_audit_loop.md` |

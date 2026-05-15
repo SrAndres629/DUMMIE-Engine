@@ -1,21 +1,38 @@
 {
   "spec_id": "DE-V2-L2-28",
-  "domain": "L2_Skills",
-  "invariants": {
-    "forbidden_patterns": [
-      "UNAUDITED_SKILL_HOTLOAD",
-      "ORPHAN_SKILL_DIRECTORY",
-      "MISSING_CONTRACT_FILE"
-    ],
-    "mandatory_headers": [
-      "X-AO-Skill-ID",
-      "X-AO-Skill-Version"
+  "title": "Est\u00e1ndar de Habilidades Ag\u00e9nticas (YAML)",
+  "status": "DRAFT",
+  "layer": "L2",
+  "last_verified_on": "2026-04-24",
+  "required_frontmatter": [
+    "spec_id",
+    "title",
+    "status",
+    "layer",
+    "last_verified_on"
+  ],
+  "required_sections": [
+    "Purpose",
+    "Current State",
+    "Physical Evidence",
+    "Gaps",
+    "Next Actions",
+    "Sibling Artifacts"
+  ],
+  "evidence_paths": [
+    "layers/l2_brain",
+    ".aiwg",
+    "governance/session_context.json"
+  ],
+  "policy": {
+    "allow_legacy_narrative": false,
+    "require_existing_links": true,
+    "status_values": [
+      "ACTIVE",
+      "DRAFT",
+      "PROPOSED",
+      "DEPRECATED",
+      "REFERENCE"
     ]
-  },
-  "scaffolding_policy": {
-    "mandatory_files": ["SKILL.md", "*.feature", "*.rules.json"],
-    "enforced_linter": "sdd_validator.py"
-  },
-  "enforcement": "STRICT_BLOCK",
-  "personality_ref": "DE-V2-L0-33"
+  }
 }

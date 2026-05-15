@@ -5,7 +5,7 @@ from brain.application.use_cases.orchestrator import CognitiveOrchestrator
 from brain.infrastructure.adapters.nats_controller import NatsController
 
 async def main():
-    print("=== L2_BRAIN: Motor Cognitivo (Arquitectura Hexagonal) Iniciado ===")
+    pass # print("=== L2_BRAIN: Motor Cognitivo (Arquitectura Hexagonal) Iniciado ===")
     
     # 1. Instanciar Adaptadores de Salida (Infrastructure)
     shield_adapter = NativeShieldAdapter()
@@ -50,7 +50,7 @@ async def main():
     except asyncio.CancelledError:
         pass
         
-    print("=== L2_BRAIN: Apoptosis Causal Controlada ===")
+    pass # print("=== L2_BRAIN: Apoptosis Causal Controlada ===")
 
 if __name__ == "__main__":
     asyncio.run(main())

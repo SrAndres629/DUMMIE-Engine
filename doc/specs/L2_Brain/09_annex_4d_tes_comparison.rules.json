@@ -1,19 +1,38 @@
 {
   "spec_id": "DE-V2-L2-09",
-  "paradigms": {
-    "snapshotting": "Rejected (I/O & RAM Infection)",
-    "lambda_projection": "Adopted (4D-TES Efficiency)"
-  },
-  "memory_topology": {
-    "3D_Loci": "Spatial (WHERE) - KùzuDB",
-    "4D_TES": "Temporal (WHEN) - Redb"
-  },
-  "invariants": {
-    "persistence_model": "Delta_Immutable",
-    "ram_complexity": "O(1) - Active Window",
-    "consistency": "Lamport-Strict",
-    "recovery_strategy": "Bifurcation_And_Pruning"
-  },
-  "enforcement": "WARN",
-  "personality_ref": "DE-V2-L0-33"
+  "title": "Anexo: Autopsia Arquitect\u00f3nica y Comparativa (4D-TES)",
+  "status": "DRAFT",
+  "layer": "L2",
+  "last_verified_on": "2026-04-24",
+  "required_frontmatter": [
+    "spec_id",
+    "title",
+    "status",
+    "layer",
+    "last_verified_on"
+  ],
+  "required_sections": [
+    "Purpose",
+    "Current State",
+    "Physical Evidence",
+    "Gaps",
+    "Next Actions",
+    "Sibling Artifacts"
+  ],
+  "evidence_paths": [
+    "layers/l2_brain",
+    ".aiwg",
+    "governance/session_context.json"
+  ],
+  "policy": {
+    "allow_legacy_narrative": false,
+    "require_existing_links": true,
+    "status_values": [
+      "ACTIVE",
+      "DRAFT",
+      "PROPOSED",
+      "DEPRECATED",
+      "REFERENCE"
+    ]
+  }
 }

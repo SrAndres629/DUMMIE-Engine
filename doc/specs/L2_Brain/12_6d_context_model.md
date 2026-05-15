@@ -1,85 +1,74 @@
 ---
-spec_id: "DE-V2-L2-12"
-title: "Modelo Formal de Memoria 6D-Context"
-status: "ACTIVE"
-version: "2.2.0"
-layer: "L2"
-namespace: "io.dummie.v2.context"
-authority: "ARCHITECT"
-dependencies:
-  - id: "DE-V2-L2-02"
-    relationship: "REQUIRES"
-tags: ["cognitive_core", "epistemology", "industrial_sdd"]
+spec_id: DE-V2-L2-12
+title: Modelo Formal de Memoria 6D-Context
+status: ACTIVE
+layer: L2
+last_verified_on: '2026-04-26'
+version: 1.0.0
+namespace: dummie.engine.l2
 ---
+# Modelo Formal de Memoria 6D-Context
 
-# 12. Modelo Formal de Memoria 6D-Context
+## Purpose
+Establecer el sistema de coordenadas de 6 dimensiones utilizado por DUMMIE Engine para indexar, navegar y recuperar información del 4D-TES. Este modelo asegura que cada interacción sea situada en un contexto espacial, temporal, de autoridad e intención.
 
-## Abstract
-Para que los agentes operen con determinismo matemático sobre el **4D-TES** y el **Palacio de Loci**, deben compartir un modelo de referencia unívoco para la indexación de la realidad. El modelo **6D-Context** define los 6 vectores que rigen la soberanía cognitiva y la perseverancia de los datos en el sistema.
+## Current State
+El contrato 6D está implementado en `MemoryNode4D`, en los tipos de contexto de L2 y en el contrato protobuf compartido. La forma exacta de los nombres sigue teniendo puentes legacy, pero el sistema ya usa `locus_x`, `locus_y`, `locus_z`, `lamport_t`, `authority_a` e `intent_i` como base causal.
 
-## 1. Cognitive Context Model (Ref)
-Para la definición de los 6 vectores (espaciales, temporales, relevancia, autoridad), los rangos de relevancia semántica y los invariantes de inmutabilidad dimensional, consulte el archivo hermano [12_6d_context_model.rules.json](./12_6d_context_model.rules.json).
+## Definición de Dimensiones
 
----
+### Plano Espacial (Locus X, Y, Z)
+- **Locus X (Dominio/Módulo):** Identifica el área funcional (ej. `brain`, `nervous`, `muscle`).
+- **Locus Y (Capa Arquitectónica):** Identifica el nivel en la arquitectura hexagonal (ej. `domain`, `application`, `infrastructure`).
+- **Locus Z (Componente Físico):** Identifica el artefacto o archivo concreto (ej. `models.py`, `main.go`).
 
-## 2. Los 6 Vectores de Soberanía
-Toda entidad o evento en el sistema se indexa mediante un vector $V = \{x, y, z, t, i, a\}$:
-- **$\{x, y, z\}$**: Dimensiones espaciales (Loci).
-- **$\{t\}$**: Dimensión temporal (Lamport).
-- **$\{i\}$**: Causalidad Intencional (Intent). Razón inmutable de la existencia.
-- **$\{a\}$**: Nivel de autoridad (Authority).
+### Plano Temporal (Lamport T)
+- **Lamport T:** Reloj lógico de Lamport que garantiza el orden causal de los eventos. Permite resolver conflictos en sistemas distribuidos y reconstruir la línea de tiempo de decisiones.
 
----
+### Plano Ético y de Propósito (Authority A, Intent I)
+- **Authority A (Quién):** Nivel de privilegios y origen (ej. `HUMAN`, `AGENT`, `OVERSEER`).
+- **Intent I (Por qué):** La categoría semántica de la acción (ej. `FABRICATION` para código, `AUDIT` para validación, `RESOLUTION` para ambigüedades).
 
-## 3. MCP Vector Transport
-El vector 6D es inyectado en cada interacción agéntica a través del servidor MCP. Los agentes pueden consultar el contexto actual mediante el recurso `context://current` y deben adjuntar el vector validado en cada llamada a herramientas de mutación para garantizar la coherencia topológica.
+## Visualización del Modelo
+```mermaid
+graph LR
+    subgraph "Dimensiones Espaciales"
+        X[Locus X: Dominio]
+        Y[Locus Y: Capa]
+        Z[Locus Z: Componente]
+    end
+    
+    subgraph "Dimensiones Temporales"
+        T[Lamport T: Orden Causal]
+    end
+    
+    subgraph "Dimensiones Éticas/Propósito"
+        A[Authority A: Quién]
+        I[Intent I: Por qué]
+    end
 
----
-
-## 4. Formal Contract Boundary
-Para asegurar la viabilidad del determinismo, este es el contrato estructurado en Protobuf (v3) que actúa como *Single Source of Truth* (SSoT):
-
-```protobuf
-// ==========================================
-// 6D-CONTEXT: THE DETERMINISTIC VECTOR
-// ==========================================
-message SixDimensionalContext {
-    // [3D Espacial] Coordenadas en el Grafo Ontológico
-    string locus_x = 1;       // ID del Bounded Context
-    string locus_y = 2;       // ID del Aggregate Root
-    string locus_z = 3;       // ID de la Entidad Atómica
-
-    // [1D Temporal] La Flecha del Tiempo
-    uint64 lamport_t = 4;     // Contador monotónico local
-
-    // [1D Soberanía]
-    AuthorityLevel authority_a = 5;
-
-    // [1D Causalidad Intencional]
-    IntentType intent_i = 6;  // Razón inmutable
-}
-
-enum AuthorityLevel {
-    AUTHORITY_UNSPECIFIED = 0;
-    AGENT = 1;
-    ENGINEER = 2;
-    ARCHITECT = 3;
-    OVERSEER = 4;
-    HUMAN = 5;
-}
-
-enum IntentType {
-    INTENT_UNSPECIFIED = 0;
-    OBSERVATION = 1;
-    MUTATION = 2;
-    RESOLUTION = 3;
-    CRYSTALLIZATION = 4;
-}
+    X & Y & Z & T & A & I --> SixD((6D Context))
 ```
 
----
+## Contract Invariants
+- **Atomicidad:** Un contexto 6D debe estar presente en cada nodo de memoria creado.
+- **Trazabilidad:** La dimensión `Authority A` debe coincidir con los permisos del agente ejecutor.
+- **Determinismo:** El valor de `Lamport T` debe ser monótonamente creciente dentro de una misma rama causal.
 
-## [MSA] Sibling Components Requeridos
-Todo documento maestro debe ir acompañado de sus archivos hermanos para convertirse en una *Active Architectural Fitness Function*:
-- **Executable Contract:** [12_6d_context_model.feature](./12_6d_context_model.feature)
-- **Machine Rules:** [12_6d_context_model.rules.json](./12_6d_context_model.rules.json)
+## Physical Evidence
+- `layers/l2_brain/models.py`: Implementación de SixDimensionalContext y del nodo canónico MemoryNode4D.
+- `layers/l1_nervous/main.go`: Generación de contextos para eventos del sistema nervioso.
+- `proto/dummie/v2/core.proto`: Definición del contrato binario del contexto.
+
+## Verification
+```bash
+python3 scripts/validate_specs_docs.py --check doc/specs/12_6d_context_model.md
+cd layers/l2_brain && PYTHONPATH=../.. uv run pytest -q tests/test_domain_models.py tests/test_causal_integrity.py
+```
+
+## Traceability
+| Invariant | Evidence | Verification |
+| --- | --- | --- |
+| Estructura 6D | `layers/l2_brain/models.py` | Unit tests en `tests/test_domain_models.py` |
+| Reloj Lamport | `layers/l1_nervous/main.go` | Causal integrity tests |
+| Autoridad Validada | `layers/l3_shield` | RBAC Policy checks |

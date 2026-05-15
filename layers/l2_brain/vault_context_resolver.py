@@ -75,7 +75,7 @@ class VaultContextResolver:
 
             # Compress using semantic token budget
             if self.compressor:
-                from layers.l2_brain.domain.embedding_contract import CompressionRequest
+                from .domain.embedding_contract import CompressionRequest
                 req = CompressionRequest(raw_text=snippet_text, max_tokens=max_tokens)
                 resp = self.compressor.compress(req)
                 snippet_text = resp.compressed_text

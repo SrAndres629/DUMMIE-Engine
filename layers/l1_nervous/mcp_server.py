@@ -28,6 +28,16 @@ _hex_src = os.path.join(ROOT_DIR, "layers", "l2_brain", "src")
 if os.path.exists(_hex_src) and _hex_src not in sys.path:
     sys.path.insert(0, _hex_src)
 
+# [HARDENING] STDIO Purity Guard (Global Monkeypatch)
+# WHY: Any print() to stdout from any imported module will corrupt the MCP protocol.
+import builtins
+_orig_print = builtins.print
+def guarded_print(*args, **kwargs):
+    if kwargs.get('file') is None or kwargs.get('file') == sys.stdout:
+        kwargs['file'] = sys.stderr
+    _orig_print(*args, **kwargs)
+builtins.print = guarded_print
+
 from mcp.server.fastmcp import FastMCP
 
 # Importaciones locales (ahora seguras)
@@ -54,8 +64,10 @@ else:
     ]
     MCP_CONFIG_PATH = next((p for p in _candidates if os.path.exists(p)), _DEFAULT_REGISTRY_PATH)
 
-logging.basicConfig(level=logging.INFO, stream=sys.stderr)
+# [HARDENING] Silence all stdout logging
+logging.basicConfig(level=logging.WARNING, stream=sys.stderr, force=True)
 logger = logging.getLogger("dummie-mcp.main")
+logger.setLevel(logging.WARNING)
 
 mcp = FastMCP("DUMMIE-Brain-Gateway")
 
@@ -82,21 +94,16 @@ register_resources(mcp, get_orchestrator, get_proxy, ROOT_DIR)
 if __name__ == "__main__":
     # [TECHNICAL DEBT] STDIO Purity Guard
     # WHY: FastMCP STDIO transport requires exclusive control of stdout.
-    # Any print() or logging to stdout during bootstrap corrupts the MCP protocol.
+    # Any pass pass # print() or logging to stdout during bootstrap corrupts the MCP protocol.
     # The correct fix requires FastMCP to support a file descriptor override,
     # or running the server in a subprocess with controlled file descriptors.
     # SCOPE: stdout is redirected to stderr ONLY within this __main__ block.
-    _actual_stdout = sys.stdout
-    sys.stdout = sys.stderr
-
-    logger.info("DUMMIE Brain Gateway (FLAT-L1) Online.")
-    sys.stdout = _actual_stdout
     
     try:
         # Forzar el transporte STDIO de forma explícita y segura
         mcp.run(transport='stdio')
     except Exception as e:
-        logger.critical(f"Gateway Crash: {e}", file=sys.stderr)
+        logger.critical(f"Gateway Crash: {e}")
     finally:
         # Garantizar limpieza de procesos huérfanos al cerrarse el pipe STDIO
         import asyncio

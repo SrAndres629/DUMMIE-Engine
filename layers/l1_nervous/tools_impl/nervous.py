@@ -146,7 +146,7 @@ def register_nervous_tools(mcp: FastMCP, use_cases, root_dir: str):
 
         await asyncio.to_thread(_write_yield)
 
-        logger.info(f"[{time.strftime('%H:%M:%S')}] [HITL MOCK] A jorand: {message} (Branch: {branch_id})")
+        logger.debug(f"[{time.strftime('%H:%M:%S')}] [HITL MOCK] A jorand: {message} (Branch: {branch_id})")
         
         # En una integración completa (L0), esta herramienta retornaría un payload
         # que el Go Overseer interpretaría como ErrYieldWaitingHuman.

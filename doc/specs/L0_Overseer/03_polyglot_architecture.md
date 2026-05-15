@@ -1,33 +1,41 @@
 ---
-spec_id: "DE-V2-L0-03"
-title: "Arquitectura Políglota de 7 Capas"
-status: "ACTIVE"
-version: "2.2.0"
-layer: "L0"
-namespace: "io.dummie.v2.topology"
-authority: "ARCHITECT"
-dependencies:
-  - id: "DE-V2-L0-00"
-    relationship: "EXTENDS"
-tags: ["cognitive_core", "architecture_fsm", "industrial_sdd"]
+spec_id: DE-V2-L0-03
+title: Arquitectura Políglota de 7 Capas
+status: DRAFT
+layer: L0
+last_verified_on: '2026-04-24'
+version: 1.0.0
+namespace: dummie.engine.l0
 ---
+# Arquitectura Políglota de 7 Capas
 
-# 03. Arquitectura Políglota de 7 Capas (Agentic OS)
+## Purpose
+Definir el contrato operativo de esta capacidad y su relación con el estado físico vigente.
 
-## Abstract
-Este documento define la topología del Agentic OS, basada en la **Especialización Radical de Lenguajes**. El sistema se organiza en 7 capas desacopladas mediante un modelo de **Bus Dual** y gobernadas por una **Máquina de Estados de Soberanía** que previene violaciones del Modelo FEI (Functional Isolation).
+## Current State
+Capacidad en transición; requiere consolidación progresiva de contratos y pruebas.
 
-## 1. Cognitive Context Model (Ref)
-Para los estados de la FSM de Soberanía, las reglas de aislamiento por capa y la política de propiedad de memoria compartida (SHM), consulte el archivo hermano [03_polyglot_architecture.rules.json](./03_polyglot_architecture.rules.json).
+## Physical Evidence
+- `doc/specs/03_polyglot_architecture.md`
+- `doc/specs/03_polyglot_architecture.feature`
+- `doc/specs/03_polyglot_architecture.rules.json`
+- `layers/l0_overseer/__init__.py`
+- `doc/CORE_SPEC.md`
+- `doc/PHYSICAL_MAP.md`
 
----
+## Contract Invariants
+- `status` debe estar dentro del conjunto permitido por `doc/CORE_SPEC.md`.
+- Los artefactos hermanos (`.feature`, `.rules.json`) deben existir junto a la spec.
+- Toda referencia en `Physical Evidence` debe resolver a una ruta real del repositorio.
 
-## 2. Malla de Capas y Roles
-El sistema se divide en capas especializadas (L0 a L6) donde cada una posee una soberanía tecnológica única. El control reside en Elixir (L0) y la ejecución física en Rust/Zig (L3/L4), mientras que la cognición se delega a Python (L2).
+## Verification
+```bash
+python3 scripts/validate_specs_docs.py --check doc/specs/03_polyglot_architecture.md
+```
 
----
-
-## [MSA] Sibling Components Requeridos
-Todo documento maestro debe ir acompañado de sus archivos hermanos para convertirse en una *Active Architectural Fitness Function*:
-- **Executable Contract:** [03_polyglot_architecture.feature](./03_polyglot_architecture.feature)
-- **Machine Rules:** [03_polyglot_architecture.rules.json](./03_polyglot_architecture.rules.json)
+## Traceability
+| Invariant | Evidence | Verification |
+| --- | --- | --- |
+| Estado permitido | `doc/CORE_SPEC.md` + frontmatter de esta spec | `python3 scripts/validate_specs_docs.py --check doc/specs/03_polyglot_architecture.md` |
+| Artefactos hermanos presentes | `doc/specs/03_polyglot_architecture.feature` y `doc/specs/03_polyglot_architecture.rules.json` | `python3 scripts/validate_specs_docs.py --check doc/specs/03_polyglot_architecture.md` |
+| Evidencia física existente | sección `Physical Evidence` | `python3 scripts/validate_specs_docs.py --check doc/specs/03_polyglot_architecture.md` |

@@ -1,19 +1,38 @@
 {
   "spec_id": "DE-V2-L0-43",
-  "domain": "L0_Governance_Docs",
-  "invariants": {
-    "required_siblings": [".feature", ".rules.json"],
-    "folder_naming_pattern": "L[0-6]_[A-Za-z]+",
-    "enforce_layer_match": true,
-    "no_embedded_json": true,
-    "metrics_syntax": "And Performance Metric: .*"
-  },
-  "metadata_requirements": [
+  "title": "Documentation and Artifact Standards",
+  "status": "ACTIVE",
+  "layer": "L0",
+  "last_verified_on": "2026-04-24",
+  "required_frontmatter": [
     "spec_id",
+    "title",
+    "status",
     "layer",
-    "authority",
-    "namespace"
+    "last_verified_on"
   ],
-  "enforcement": "STRICT_BLOCK",
-  "personality_ref": "DE-V2-L0-33"
+  "required_sections": [
+    "Purpose",
+    "Current State",
+    "Physical Evidence",
+    "Gaps",
+    "Next Actions",
+    "Sibling Artifacts"
+  ],
+  "evidence_paths": [
+    "layers/l0_overseer",
+    "doc/CORE_SPEC.md",
+    "doc/PHYSICAL_MAP.md"
+  ],
+  "policy": {
+    "allow_legacy_narrative": false,
+    "require_existing_links": true,
+    "status_values": [
+      "ACTIVE",
+      "DRAFT",
+      "PROPOSED",
+      "DEPRECATED",
+      "REFERENCE"
+    ]
+  }
 }

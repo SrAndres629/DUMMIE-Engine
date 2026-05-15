@@ -1,43 +1,41 @@
 ---
-spec_id: "DE-V2-L1-41"
-title: "Protocolo de Handshake y Mensajería (The Wire)"
-status: "ACTIVE"
-version: "2.2.0"
-layer: "L1"
-namespace: "io.dummie.v2.wire"
-authority: "ARCHITECT"
-dependencies:
-  - id: "DE-V2-L1-10"
-    relationship: "REQUIRES"
-  - id: "DE-V2-L5-16"
-    relationship: "REFINES"
-tags: ["connectivity", "nats", "shm", "binary_contract"]
+spec_id: DE-V2-L1-41
+title: Protocolo de Handshake y Mensajería (The Wire)
+status: ACTIVE
+layer: L1
+last_verified_on: '2026-04-24'
+version: 1.0.0
+namespace: dummie.engine.l1
 ---
+# Protocolo de Handshake y Mensajería (The Wire)
 
-# 41. Protocolo de Handshake y Mensajería (The Wire)
+## Purpose
+Definir el contrato operativo de esta capacidad y su relación con el estado físico vigente.
 
-## Abstract
-Esta especificación define el **Tejido Conectivo** (The Wire) del Agentic OS. Establece la gramática de los tópicos NATS, los offsets del bus de memoria compartida (SHM) y el protocolo de negociación inicial (Handshake) para garantizar un determinismo total en la comunicación políglota entre las capas del sistema.
+## Current State
+Capacidad activa con evidencia verificable en el repositorio.
 
-## 1. Cognitive Context Model (Ref)
-Para la configuración de NATS (JetStream), los esquemas de envoltorio JSON-RPC (ACP) y los invariantes de versión de protocolo, consulte el archivo hermano [41_layer_handshake_protocol.rules.json](./41_layer_handshake_protocol.rules.json).
+## Physical Evidence
+- `doc/specs/41_layer_handshake_protocol.md`
+- `doc/specs/41_layer_handshake_protocol.feature`
+- `doc/specs/41_layer_handshake_protocol.rules.json`
+- `layers/l1_nervous/__init__.py`
+- `doc/CORE_SPEC.md`
+- `doc/PHYSICAL_MAP.md`
 
----
+## Contract Invariants
+- `status` debe estar dentro del conjunto permitido por `doc/CORE_SPEC.md`.
+- Los artefactos hermanos (`.feature`, `.rules.json`) deben existir junto a la spec.
+- Toda referencia en `Physical Evidence` debe resolver a una ruta real del repositorio.
 
-## 2. Topología de Red y Memoria
-El sistema opera sobre un plano de control basado en NATS y un plano de datos de latencia ultra-baja mediante Memoria Compartida (SHM) utilizando Apache Arrow. 
+## Verification
+```bash
+python3 scripts/validate_specs_docs.py --check doc/specs/41_layer_handshake_protocol.md
+```
 
----
-
-## 3. Alineación con ACP (Agent Client Protocol)
-Para integrarse con el ecosistema de IDEs modernos, el sistema nervioso implementa un puente de compatibilidad con **ACP**:
-- **Protocolo**: Envoltorio JSON-RPC sobre el bus NATS.
-- **Tipos de Mensajes**: Soporte nativo para `agent/initialize`, `textDocument/didOpen`, y `context/hydrate`.
-- **Determinismo**: Mapeo de mensajes ACP a `Intent` de Protobuf para auditoría en el Escudo L3.
-
----
-
-## [MSA] Sibling Components Requeridos
-Todo documento maestro debe ir acompañado de sus archivos hermanos para convertirse en una *Active Architectural Fitness Function*:
-- **Executable Contract:** [41_layer_handshake_protocol.feature](./41_layer_handshake_protocol.feature)
-- **Machine Rules:** [41_layer_handshake_protocol.rules.json](./41_layer_handshake_protocol.rules.json)
+## Traceability
+| Invariant | Evidence | Verification |
+| --- | --- | --- |
+| Estado permitido | `doc/CORE_SPEC.md` + frontmatter de esta spec | `python3 scripts/validate_specs_docs.py --check doc/specs/41_layer_handshake_protocol.md` |
+| Artefactos hermanos presentes | `doc/specs/41_layer_handshake_protocol.feature` y `doc/specs/41_layer_handshake_protocol.rules.json` | `python3 scripts/validate_specs_docs.py --check doc/specs/41_layer_handshake_protocol.md` |
+| Evidencia física existente | sección `Physical Evidence` | `python3 scripts/validate_specs_docs.py --check doc/specs/41_layer_handshake_protocol.md` |

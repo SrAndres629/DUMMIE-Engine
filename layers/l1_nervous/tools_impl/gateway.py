@@ -32,7 +32,7 @@ def register_gateway_tools(mcp: FastMCP, use_cases):
         """Ejecuta una herramienta en un servidor remoto."""
         try:
             causal_id = hashlib.sha256(f"{server_name}.{tool_name}.{orchestrator.lamport_clock}".encode()).hexdigest()[:12]
-            logger.info(f"Gateway [CausalID:{causal_id}]: Executing {server_name}.{tool_name}")
+            logger.debug(f"Gateway [CausalID:{causal_id}]: Executing {server_name}.{tool_name}")
             admission = evaluate_remote_tool_admission(server_name, tool_name, arguments)
             if admission.status != "ALLOW":
                 return f"SDD_BLOCKED: {admission.reason}"

@@ -1,19 +1,23 @@
 ---
-spec_id: "DE-V2-L0-46"
-title: "Protocolo de Transacción en Lane Queue (Orchestration Integrity)"
-status: "ACTIVE"
-version: "2.2.0"
-layer: "L0"
-namespace: "io.dummie.v2.orchestration.determinism"
-authority: "ARCHITECT"
+spec_id: DE-V2-L0-46
+title: Protocolo de Transacción en Lane Queue (Orchestration Integrity)
+status: ACTIVE
+version: 2.2.0
+layer: L0
+namespace: io.dummie.v2.orchestration.determinism
+authority: ARCHITECT
 dependencies:
-  - id: "DE-V2-L0-05"
-    relationship: "REFINES"
-  - id: "DE-V2-L1-41"
-    relationship: "USES_WIRE"
-tags: ["orchestration", "lane_queue", "serialization", "deadlock_prevention", "claw_ism"]
+- id: DE-V2-L0-05
+  relationship: REFINES
+- id: DE-V2-L1-41
+  relationship: USES_WIRE
+tags:
+- orchestration
+- lane_queue
+- serialization
+- deadlock_prevention
+- claw_ism
 ---
-
 # 46. Protocolo de Transacción en Lane Queue (Orchestration Integrity)
 
 ## Abstract

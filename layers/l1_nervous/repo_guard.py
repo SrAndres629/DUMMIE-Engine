@@ -34,13 +34,13 @@ class RepoGuard:
         """
         Pulls the latest changes from main to ensure the agent is working on fresh code.
         """
-        logger.info("[RepoGuard] Synchronizing with remote (pull --rebase)...")
+        logger.debug("[RepoGuard] Synchronizing with remote (pull --rebase)...")
         try:
             # Asegurar que estamos en main o la rama de trabajo
             # self._run_git(["checkout", "main"])
             self._run_git(["fetch", "origin"])
             self._run_git(["pull", "--rebase", "origin", "main"])
-            logger.info("[RepoGuard] Workspace is up to date.")
+            logger.debug("[RepoGuard] Workspace is up to date.")
         except Exception as e:
             logger.error(f"[RepoGuard] Sync failed: {e}")
             raise RuntimeError(f"Workspace synchronization failed: {e}")
@@ -66,7 +66,7 @@ class RepoGuard:
                     logger.critical(f"[RepoGuard] INTEGRITY BLOCK: Unresolved conflict markers in {f}")
                     raise RuntimeError(f"Integrity Violation: Conflict markers in {f}")
 
-        logger.info("[RepoGuard] Validation passed.")
+        logger.debug("[RepoGuard] Validation passed.")
 
     def commit_and_push_atomic(self, files: List[str], message: str):
         """
@@ -79,7 +79,7 @@ class RepoGuard:
         # [NEW] Validación de Política
         self.validate_state(files)
 
-        logger.info(f"[RepoGuard] Performing atomic commit for {len(files)} files...")
+        logger.debug(f"[RepoGuard] Performing atomic commit for {len(files)} files...")
         try:
             # 1. Stage files
             self._run_git(["add"] + files)
@@ -89,13 +89,13 @@ class RepoGuard:
             self._run_git(["commit", "-m", full_message])
             
             # 3. Sincronización Final (Evitar Out-of-Sync)
-            logger.info("[RepoGuard] Final sync before push...")
+            logger.debug("[RepoGuard] Final sync before push...")
             self._run_git(["pull", "--rebase", "origin", "main"])
             
             # 4. Push Seguro
             self._run_git(["push", "origin", "main"])
             
-            logger.info("[RepoGuard] Atomic push successful.")
+            logger.debug("[RepoGuard] Atomic push successful.")
         except Exception as e:
             logger.error(f"[RepoGuard] Atomic push failed: {e}")
             raise RuntimeError(f"Atomic evolution push failed: {e}")
@@ -104,12 +104,12 @@ class RepoGuard:
         """
         [WAVE 10] Intenta resolver problemas comunes en el repositorio automáticamente.
         """
-        logger.info("[RepoGuard] Running self-healing routines...")
+        logger.debug("[RepoGuard] Running self-healing routines...")
         # 1. Eliminar ramas locales huérfanas
         self._run_git(["remote", "prune", "origin"])
         # 2. Limpiar archivos no rastreados (excepto configuraciones críticas)
         # self._run_git(["clean", "-fd", "-e", "*.json"]) 
-        logger.info("[RepoGuard] Self-healing completed.")
+        logger.debug("[RepoGuard] Self-healing completed.")
 
     def reserve_locus(self, files: List[str]):
         """
@@ -117,7 +117,7 @@ class RepoGuard:
         (Stub para integración con mcp_gateway/event_store)
         """
         for f in files:
-            logger.info(f"[RepoGuard] RESERVING LOCUS for: {f}")
+            logger.debug(f"[RepoGuard] RESERVING LOCUS for: {f}")
             # Aquí se llamaría a dummie_execute_capability('local.crystallize', ...)
             # marcando el nodo como RESERVED.
 
@@ -126,5 +126,5 @@ class RepoGuard:
         Libera la reserva de archivos.
         """
         for f in files:
-            logger.info(f"[RepoGuard] RELEASING LOCUS for: {f}")
+            logger.debug(f"[RepoGuard] RELEASING LOCUS for: {f}")
 

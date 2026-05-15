@@ -1,44 +1,41 @@
 ---
-spec_id: "DE-V2-L3-24"
-title: "Blindaje Legal y Cumplimiento (L-Shield)"
-status: "ACTIVE"
-version: "2.2.0"
-layer: "L3"
-namespace: "io.dummie.v2.shield"
-authority: "ARCHITECT"
-dependencies:
-  - id: "DE-V2-L1-10"
-    relationship: "REQUIRES"
-tags: ["cognitive_core", "security_layer", "industrial_sdd"]
+spec_id: DE-V2-L3-24
+title: Blindaje Legal y Cumplimiento (L-Shield)
+status: DRAFT
+layer: L3
+last_verified_on: '2026-04-24'
+version: 1.0.0
+namespace: dummie.engine.l3
 ---
+# Blindaje Legal y Cumplimiento (L-Shield)
 
-# 24. Blindaje Legal y Cumplimiento (L-Shield)
+## Purpose
+Definir el contrato operativo de esta capacidad y su relación con el estado físico vigente.
 
-## Abstract
-El **L-Shield** es el componente de Layer 3 encargado de la gobernanza ética y legal del sistema. Su función es auditar las intenciones del Swarm para prevenir violaciones de licencias, asegurar la anonimización de datos sensibles y detectar patrones de código prohibidos que puedan comprometer la integridad legal del monorepo.
+## Current State
+Capacidad en transición; requiere consolidación progresiva de contratos y pruebas.
 
-## 1. Cognitive Context Model (Ref)
-Para la política de licencias permitidas, los umbrales de similitud estructural y los patrones de código prohibidos (Bypass, Exploit), consulte el archivo hermano [24_legal_compliance_shield.rules.json](./24_legal_compliance_shield.rules.json).
+## Physical Evidence
+- `doc/specs/24_legal_compliance_shield.md`
+- `doc/specs/24_legal_compliance_shield.feature`
+- `doc/specs/24_legal_compliance_shield.rules.json`
+- `layers/l3_shield/__init__.py`
+- `doc/CORE_SPEC.md`
+- `doc/PHYSICAL_MAP.md`
 
----
+## Contract Invariants
+- `status` debe estar dentro del conjunto permitido por `doc/CORE_SPEC.md`.
+- Los artefactos hermanos (`.feature`, `.rules.json`) deben existir junto a la spec.
+- Toda referencia en `Physical Evidence` debe resolver a una ruta real del repositorio.
 
-## 2. Invariantes Legales
-El Escudo Legal impone las siguientes restricciones:
-- **License Policy:** Solo se permite la incorporación de código bajo licencias compatibles (MIT/Apache).
-- **Provenance Mandatory:** Toda nueva pieza de código o documentación debe tener una procedencia clara registrada en el Ledger.
-- **PII Sanitization:** Los vectores de pensamiento y los registros de sesión no deben contener información de identificación personal (PII) sin cifrar.
+## Verification
+```bash
+python3 scripts/validate_specs_docs.py --check doc/specs/24_legal_compliance_shield.md
+```
 
----
-
-## 3. Detección de Patrones Prohibidos
-El motor de Rust escanea las intenciones agénticas buscando "Evil Patterns":
-- **Escalation Attempts:** Intentos de bypass de los niveles de autoridad.
-- **Unauthorized Data Access:** Intentos de leer archivos fuera de los Bounded Contexts permitidos.
-- **Ethical Violations:** Razonamientos que contradicen los principios de soberanía y fiduciaridad del sistema.
-
----
-
-## [MSA] Sibling Components Requeridos
-Todo documento maestro debe ir acompañado de sus archivos hermanos para convertirse en una *Active Architectural Fitness Function*:
-- **Executable Contract:** [24_legal_compliance_shield.feature](./24_legal_compliance_shield.feature)
-- **Machine Rules:** [24_legal_compliance_shield.rules.json](./24_legal_compliance_shield.rules.json)
+## Traceability
+| Invariant | Evidence | Verification |
+| --- | --- | --- |
+| Estado permitido | `doc/CORE_SPEC.md` + frontmatter de esta spec | `python3 scripts/validate_specs_docs.py --check doc/specs/24_legal_compliance_shield.md` |
+| Artefactos hermanos presentes | `doc/specs/24_legal_compliance_shield.feature` y `doc/specs/24_legal_compliance_shield.rules.json` | `python3 scripts/validate_specs_docs.py --check doc/specs/24_legal_compliance_shield.md` |
+| Evidencia física existente | sección `Physical Evidence` | `python3 scripts/validate_specs_docs.py --check doc/specs/24_legal_compliance_shield.md` |

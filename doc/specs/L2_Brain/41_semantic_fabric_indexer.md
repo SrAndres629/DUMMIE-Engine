@@ -1,41 +1,41 @@
 ---
-spec_id: "DE-V2-L2-41"
-title: "Semantic Fabric Indexer"
-status: "ACTIVE"
-version: "2.2.0"
-layer: "L2"
-namespace: "io.dummie.v2.brain.semantic"
-authority: "ARCHITECT"
-dependencies:
-  - id: "DE-V2-L2-39"
-    relationship: "REQUIRES"
-tags: ["cognitive_core", "documentation_as_code", "lsp"]
+spec_id: DE-V2-L2-41
+title: Semantic Fabric Indexer
+status: DRAFT
+layer: L2
+last_verified_on: '2026-04-24'
+version: 1.0.0
+namespace: dummie.engine.l2
 ---
+# Semantic Fabric Indexer
 
-# 41. Semantic Fabric Indexer (Tejido Semántico)
+## Purpose
+Definir el contrato operativo de esta capacidad y su relación con el estado físico vigente.
 
-## Abstract
-El Semantic Fabric Indexer actúa como un "Language Server Protocol" (LSP) para la documentación y la memoria del sistema. Garantiza que las entidades definidas en las Especificaciones (`doc/specs`) mantengan enlaces referenciales matemáticamente correctos hacia los ADRs y la memoria semántica. Evita las alucinaciones al forzar la consistencia transversal en el grafo de conocimiento.
+## Current State
+Capacidad en transición; requiere consolidación progresiva de contratos y pruebas.
 
-## 1. Cognitive Context Model (Ref)
-Para los requisitos de referencia cruzada, el manejo de orfandad cognitiva y los estados de gobernanza de los ADRs (Accepted, Superseded), consulte el archivo hermano [41_semantic_fabric_indexer.rules.json](./41_semantic_fabric_indexer.rules.json).
+## Physical Evidence
+- `doc/specs/41_semantic_fabric_indexer.md`
+- `doc/specs/41_semantic_fabric_indexer.feature`
+- `doc/specs/41_semantic_fabric_indexer.rules.json`
+- `layers/l2_brain/daemon.py`
+- `doc/CORE_SPEC.md`
+- `doc/PHYSICAL_MAP.md`
 
----
+## Contract Invariants
+- `status` debe estar dentro del conjunto permitido por `doc/CORE_SPEC.md`.
+- Los artefactos hermanos (`.feature`, `.rules.json`) deben existir junto a la spec.
+- Toda referencia en `Physical Evidence` debe resolver a una ruta real del repositorio.
 
-## 2. Alcance Operativo
-El Indexador se activa ante cualquier mutación en el núcleo arquitectónico (Specs o ADRs):
-1.  **Orphan Validation:** Verificación de que no existan referencias colgadas entre documentos.
-2.  **Domain Consistency:** Validación de que los términos coincidan con el Lenguaje Ubicuo.
-3.  **Governance Auditing:** Si un ADR es marcado como `SUPERSEDED`, el Indexador ignora sus reglas hermanas para evitar conflictos de gobernanza en el Swarm.
+## Verification
+```bash
+python3 scripts/validate_specs_docs.py --check doc/specs/41_semantic_fabric_indexer.md
+```
 
----
-
-## 3. Active Constraint Payload
-El Indexador consolida todas las reglas activas (`.rules.json`) de los ADRs aceptados y las Specs vigentes en un único payload de restricciones. Este payload es inyectado en cada sesión agéntica para garantizar que el Swarm opere bajo los invariantes de diseño más recientes, eliminando el drift entre la documentación histórica y la ejecución activa.
-
----
-
-## [MSA] Sibling Components Requeridos
-Todo documento maestro debe ir acompañado de sus archivos hermanos para convertirse en una *Active Architectural Fitness Function*:
-- **Executable Contract:** [41_semantic_fabric_indexer.feature](./41_semantic_fabric_indexer.feature)
-- **Machine Rules:** [41_semantic_fabric_indexer.rules.json](./41_semantic_fabric_indexer.rules.json)
+## Traceability
+| Invariant | Evidence | Verification |
+| --- | --- | --- |
+| Estado permitido | `doc/CORE_SPEC.md` + frontmatter de esta spec | `python3 scripts/validate_specs_docs.py --check doc/specs/41_semantic_fabric_indexer.md` |
+| Artefactos hermanos presentes | `doc/specs/41_semantic_fabric_indexer.feature` y `doc/specs/41_semantic_fabric_indexer.rules.json` | `python3 scripts/validate_specs_docs.py --check doc/specs/41_semantic_fabric_indexer.md` |
+| Evidencia física existente | sección `Physical Evidence` | `python3 scripts/validate_specs_docs.py --check doc/specs/41_semantic_fabric_indexer.md` |

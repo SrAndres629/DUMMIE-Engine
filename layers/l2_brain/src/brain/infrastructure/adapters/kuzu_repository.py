@@ -71,7 +71,7 @@ class KuzuRepository(IEventStorePort, IStructuralAnalysisPort):
             self.conn.execute("CREATE REL TABLE EXECUTED_BY(FROM MemoryNode4D TO Agent)")
             self.conn.execute("CREATE REL TABLE VALIDATES(FROM MemoryNode4D TO Requirement)")
             
-            print(f"[KuzuRepository] Esquema L2_Brain (Spec 02 FULL) inicializado en {self.db_path}")
+            pass # print(f"[KuzuRepository] Esquema L2_Brain (Spec 02 FULL) inicializado en {self.db_path}")
         except Exception:
             # Asumimos que ya existe
             pass
@@ -173,6 +173,20 @@ class KuzuRepository(IEventStorePort, IStructuralAnalysisPort):
         if result.has_next():
             return result.get_next()[0]
         return "GENESIS"
+
+    def get_max_lamport_tick(self) -> int:
+        """Recupera el tick máximo del 4D-TES para garantizar monotonía causal (Spec 02)."""
+        try:
+            result = self.conn.execute(
+                "MATCH (m:MemoryNode4D) RETURN max(m.lamport_t)"
+            )
+            if result.has_next():
+                max_tick = result.get_next()[0]
+                if max_tick is not None:
+                    return int(max_tick)
+        except Exception:
+            pass
+        return 0
 
     def get_causal_chain(self, leaf_hash: str) -> List[MemoryNode4DTES]:
         """Reconstruye la cadena de causalidad desde una hoja hasta la raíz."""

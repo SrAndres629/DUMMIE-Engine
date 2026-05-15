@@ -20,7 +20,7 @@ class EventBroker:
         if topic not in self.subscribers:
             self.subscribers[topic] = []
         self.subscribers[topic].append(callback)
-        logger.info(f"Subscriptor registrado para el tópico: {topic}")
+        logger.debug(f"Subscriptor registrado para el tópico: {topic}")
 
     async def publish(self, topic: str, data: Any):
         """Publica un evento unidireccional (Fire and Forget)."""

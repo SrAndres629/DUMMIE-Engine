@@ -17,7 +17,7 @@ class DynamicSDKGenerator:
         self.output_dir.mkdir(parents=True, exist_ok=True)
 
     async def generate_all(self):
-        logger.info("Iniciando generación de SDKs tipados...")
+        logger.debug("Iniciando generación de SDKs tipados...")
         servers = list(self.proxy.servers.keys())
         
         for server in servers:
@@ -56,4 +56,4 @@ class DynamicSDKGenerator:
         output_file = self.output_dir / f"{server_name.replace('-', '_')}_sdk.py"
         with open(output_file, "w") as f:
             f.write("\n".join(code))
-        logger.info(f"SDK generado exitosamente: {output_file}")
+        logger.debug(f"SDK generado exitosamente: {output_file}")

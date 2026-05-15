@@ -1,19 +1,22 @@
 ---
-spec_id: "DE-V2-L3-47"
-title: "Protocolo de Inyección de Secretos Soberano (Vault Shield)"
-status: "ACTIVE"
-version: "2.2.0"
-layer: "L3"
-namespace: "io.dummie.v2.shield.secrets"
-authority: "PAH"
+spec_id: DE-V2-L3-47
+title: Protocolo de Inyección de Secretos Soberano (Vault Shield)
+status: ACTIVE
+version: 2.2.0
+layer: L3
+namespace: io.dummie.v2.shield.secrets
+authority: PAH
 dependencies:
-  - id: "DE-V2-L3-04"
-    relationship: "GOVERNS"
-  - id: "DE-V2-L1-44"
-    relationship: "HYDRATES_VIA"
-tags: ["shield", "security", "secret_management", "blind_injection"]
+- id: DE-V2-L3-04
+  relationship: GOVERNS
+- id: DE-V2-L1-44
+  relationship: HYDRATES_VIA
+tags:
+- shield
+- security
+- secret_management
+- blind_injection
 ---
-
 # 47. Protocolo de Inyección de Secretos Soberano (Vault Shield)
 
 ## Abstract

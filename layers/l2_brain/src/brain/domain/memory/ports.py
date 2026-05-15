@@ -32,6 +32,10 @@ class IEventStorePort(Protocol):
         """Recupera el hash del último nodo (head) de la cadena causal. Retorna 'GENESIS' si no hay nodos."""
         ...
 
+    def get_max_lamport_tick(self) -> int:
+        """Recupera el valor máximo del reloj de Lamport en el almacén para garantizar monotonía."""
+        ...
+
 
 class ILedgerAuditPort(Protocol):
     """

@@ -1,29 +1,38 @@
 {
   "spec_id": "DE-V2-L0-07",
-  "failure_categories": {
-    "Cognitive": ["Infinite Loops", "Context Drift", "Hallucination"],
-    "Hardware": ["VRAM OOM", "Thermal Max", "Secret Leaks"],
-    "Causal": ["Grandfather Paradox", "Time Jitter", "Race Conditions"]
-  },
-  "resolution_mechanisms": {
-    "shields": ["E-Shield", "L-Shield", "S-Shield"],
-    "actions": [
-      "Time Dilation",
-      "VRAM Zeroing",
-      "Shadow Execution",
-      "Apoptosis Informada"
+  "title": "Resoluciones de Unknown Unknowns",
+  "status": "DRAFT",
+  "layer": "L0",
+  "last_verified_on": "2026-04-24",
+  "required_frontmatter": [
+    "spec_id",
+    "title",
+    "status",
+    "layer",
+    "last_verified_on"
+  ],
+  "required_sections": [
+    "Purpose",
+    "Current State",
+    "Physical Evidence",
+    "Gaps",
+    "Next Actions",
+    "Sibling Artifacts"
+  ],
+  "evidence_paths": [
+    "layers/l0_overseer",
+    "doc/CORE_SPEC.md",
+    "doc/PHYSICAL_MAP.md"
+  ],
+  "policy": {
+    "allow_legacy_narrative": false,
+    "require_existing_links": true,
+    "status_values": [
+      "ACTIVE",
+      "DRAFT",
+      "PROPOSED",
+      "DEPRECATED",
+      "REFERENCE"
     ]
-  },
-  "roles": {
-    "Writer": "Python",
-    "Tester": "Rust",
-    "Debugger": "Zig/C++",
-    "Orchestrator": "Elixir"
-  },
-  "invariants": {
-    "no_unauthorized_standard_libs": true,
-    "mandatory_necropsy": true,
-    "casuality_check": "Lamport Clocks"
-  },
-  "personality_ref": "DE-V2-L0-33"
+  }
 }

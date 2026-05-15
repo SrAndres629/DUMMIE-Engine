@@ -2,8 +2,8 @@ from __future__ import annotations
 
 import logging
 from typing import Any
-from layers.l2_brain.socraticode_gateway_adapter import SocraticodeGatewayAdapter
-from layers.l2_brain.vault_context_resolver import VaultContextResolver
+from .socraticode_gateway_adapter import SocraticodeGatewayAdapter
+from .vault_context_resolver import VaultContextResolver
 
 logger = logging.getLogger(__name__)
 

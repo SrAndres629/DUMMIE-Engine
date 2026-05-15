@@ -24,12 +24,12 @@ from datetime import datetime
 from abc import ABC, abstractmethod
 
 # Importaciones Isomórficas (Flat Structure)
-from layers.l2_brain.gateway_contract import GatewayRequest, SagaTransaction, SagaStep
-from layers.l2_brain.auditor_port import BaseAuditor, BaseExecutor
-from layers.l2_brain.model_router import ModelTier
+from .gateway_contract import GatewayRequest, SagaTransaction, SagaStep
+from .auditor_port import BaseAuditor, BaseExecutor
+from .model_router import ModelTier
 
 # Importaciones de Adaptadores (Cruce de Capas vía PYTHONPATH)
-from layers.l2_brain.safe_fallbacks import FailClosedAuditor, FailClosedExecutor
+from .safe_fallbacks import FailClosedAuditor, FailClosedExecutor
 
 try:
     from layers.l3_shield.topological_auditor import TopologicalAuditor
@@ -45,11 +45,11 @@ except ImportError as e:
 
 logger = logging.getLogger("dummie-daemon")
 
-from layers.l2_brain.event_bus import AsyncEventBus
+from .event_bus import AsyncEventBus
 
 from layers.l1_nervous.repo_guard import RepoGuard
 
-from layers.l2_brain.metagateway_policy import SensorFirstPolicy, PolicyDecision
+from .metagateway_policy import SensorFirstPolicy, PolicyDecision
 
 class DummieDaemon:
     """
@@ -98,7 +98,7 @@ class DummieDaemon:
         self.last_cognitive_preflight: Dict[str, Any] = {"status": "SKIPPED"}
         
         # Integración Gobernador de Recursos (Spec 52)
-        from layers.l2_brain.resource_governor import ResourceGovernor
+        from .resource_governor import ResourceGovernor
         self.governor = ResourceGovernor()
 
         # Metacognitive Pipeline Integration
@@ -106,18 +106,18 @@ class DummieDaemon:
         self.metacognition_error = ""
 
         try:
-            from layers.l2_brain.metacognition.pipeline import MetacognitivePipeline
-            from layers.l2_brain.metacognition.input_hooks import (
+            from .metacognition.pipeline import MetacognitivePipeline
+            from .metacognition.input_hooks import (
                 AuthorityClassifierHook,
                 ContextEnricherHook,
                 IntentClarifierHook,
                 PromptRefinerHook,
                 ToolNeedDetectorHook,
             )
-            from layers.l2_brain.metacognition.semantic_hooks import SemanticToolSelectorHook
-            from layers.l2_brain.metacognition.reasoning_hooks import ReasoningExpansionHook
-            from layers.l2_brain.metacognition.deliberation_hooks import MissionDecomposerHook, PlanCriticHook
-            from layers.l2_brain.metacognition.output_hooks import AnswerVerifierHook, MemoryUpdateHook
+            from .metacognition.semantic_hooks import SemanticToolSelectorHook
+            from .metacognition.reasoning_hooks import ReasoningExpansionHook
+            from .metacognition.deliberation_hooks import MissionDecomposerHook, PlanCriticHook
+            from .metacognition.output_hooks import AnswerVerifierHook, MemoryUpdateHook
 
             self.metacognition = MetacognitivePipeline(
                 input_hooks=[
@@ -169,8 +169,8 @@ class DummieDaemon:
 
         # Phase 10: Semantic Retrieval Wiring
         try:
-            from layers.l2_brain.socraticode_gateway_adapter import SocraticodeGatewayAdapter
-            from layers.l2_brain.semantic_retrieval_runtime import SemanticRetrievalRuntime
+            from .socraticode_gateway_adapter import SocraticodeGatewayAdapter
+            from .semantic_retrieval_runtime import SemanticRetrievalRuntime
 
             # Use mcp_gateway for socraticode adapter
             # We don't have direct access to the VaultEmbeddingIndex instance here typically,
@@ -187,9 +187,9 @@ class DummieDaemon:
             logger.warning(f"Semantic Retrieval degraded: {e}")
 
         try:
-            from layers.l2_brain.metagateway_runtime_meter import MetaGatewayRuntimeMeter
-            from layers.l2_brain.token_cost_ledger import TokenCostLedger
-            from layers.l2_brain.context_budget_manager import ContextBudgetManager
+            from .metagateway_runtime_meter import MetaGatewayRuntimeMeter
+            from .token_cost_ledger import TokenCostLedger
+            from .context_budget_manager import ContextBudgetManager
             self.runtime_meter = MetaGatewayRuntimeMeter()
             self.token_ledger = TokenCostLedger()
             self.budget_manager = ContextBudgetManager()
@@ -204,7 +204,7 @@ class DummieDaemon:
             logger.warning("Metabolic components (Meter/Ledger/Budget) not fully available")
 
         try:
-            from layers.l2_brain.outcome_evaluator import OutcomeEvaluator
+            from .outcome_evaluator import OutcomeEvaluator
             self.evaluator = OutcomeEvaluator(self)
             self.outcome_contract_available = True
             self.outcome_contract_error = ""
@@ -215,7 +215,7 @@ class DummieDaemon:
             logger.warning(f"Daemon outcome contract degraded: {e}")
 
         try:
-            from layers.l2_brain.long_running_mission import LongRunningMissionRuntime
+            from .long_running_mission import LongRunningMissionRuntime
             self.mission_runtime = LongRunningMissionRuntime()
             self.mission_runtime_available = True
             self.mission_runtime_error = ""
@@ -227,7 +227,7 @@ class DummieDaemon:
 
         if self.diagnostic_mode:
             try:
-                from layers.l2_brain.daemon_diagnostic import DiagnosticReporter
+                from .daemon_diagnostic import DiagnosticReporter
                 self.diagnostic_reporter = DiagnosticReporter(self)
             except ImportError:
                 self.diagnostic_reporter = None
@@ -305,7 +305,7 @@ class DummieDaemon:
 
             # Enforce SensorFirst policy
             try:
-                from layers.l2_brain.sensor_first_guard import SensorFirstGuard
+                from .sensor_first_guard import SensorFirstGuard
                 guard = SensorFirstGuard(retrieval_runtime=getattr(self, "semantic_retrieval_runtime", None))
                 # Build a pseudo-request dict for the guard
                 req_dict = {"purpose": request.context.get("purpose", "unknown"), "action": "direct_read"}
@@ -458,7 +458,7 @@ class DummieDaemon:
                                 try:
                                     from action_graph import ActionGraph
                                 except ImportError:
-                                    from layers.l2_brain.action_graph import ActionGraph
+                                    from .action_graph import ActionGraph
 
                                 graph = ActionGraph()
                             except ImportError:
@@ -561,7 +561,7 @@ class DummieDaemon:
             try:
                 from runtime_guards import GuardInput, evaluate_runtime_guards, InputGuard
             except ImportError:
-                from layers.l2_brain.runtime_guards import GuardInput, evaluate_runtime_guards, InputGuard
+                from .runtime_guards import GuardInput, evaluate_runtime_guards, InputGuard
 
             guard = InputGuard()
         except ImportError:

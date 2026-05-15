@@ -6,16 +6,18 @@ try:
     from infrastructure.adapters import (
         KuzuRepository, KuzuSkillRepository,
         DecisionLedgerAdapter, SessionLedgerAdapter,
-        NativeShieldAdapter,
+        NativeShieldAdapter, UnsafeBypassShieldAdapter,
         SocraticodeAdapter, PhoenixAdapter
     )
 except ImportError:
     import sys
-    sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    sys.path.append(base_dir)
+    sys.path.append(os.path.join(base_dir, "src"))
     from infrastructure.adapters import (
         KuzuRepository, KuzuSkillRepository,
         DecisionLedgerAdapter, SessionLedgerAdapter,
-        NativeShieldAdapter,
+        NativeShieldAdapter, UnsafeBypassShieldAdapter,
         SocraticodeAdapter, PhoenixAdapter
     )
 
@@ -28,5 +30,5 @@ logger = logging.getLogger("brain.adapters")
 __all__ = [
     "KuzuRepository", "KuzuSkillRepository",
     "DecisionLedgerAdapter", "SessionLedgerAdapter",
-    "NativeShieldAdapter", "SocraticodeAdapter", "PhoenixAdapter"
+    "NativeShieldAdapter", "UnsafeBypassShieldAdapter", "SocraticodeAdapter", "PhoenixAdapter"
 ]

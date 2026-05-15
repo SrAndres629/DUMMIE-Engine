@@ -37,7 +37,7 @@ class DecisionLedgerAdapter(ILedgerAuditPort):
                 f.write(json.dumps(data, default=str) + "\n")
             return True
         except Exception as e:
-            print(f"[DecisionLedgerAdapter] Error al escribir en el ledger: {e}")
+            pass # print(f"[DecisionLedgerAdapter] Error al escribir en el ledger: {e}")
             return False
 
     def get_certainty_for_locus(self, locus_x: str) -> LayerCertainty:
@@ -95,7 +95,7 @@ class DecisionLedgerAdapter(ILedgerAuditPort):
                         decisions.append(data)
             return decisions
         except Exception as e:
-            print(f"[DecisionLedgerAdapter] Error al leer historial: {e}")
+            pass # print(f"[DecisionLedgerAdapter] Error al leer historial: {e}")
             return []
 
     def record_lesson(self, lesson: LessonRecord) -> None:
@@ -104,7 +104,7 @@ class DecisionLedgerAdapter(ILedgerAuditPort):
             with open(self.lessons_path, "a", encoding="utf-8") as f:
                 f.write(lesson.model_dump_json() + "\n")
         except Exception as e:
-            print(f"[DecisionLedgerAdapter] Error al escribir lección: {e}")
+            pass # print(f"[DecisionLedgerAdapter] Error al escribir lección: {e}")
 
     def record_ambiguity(self, ambiguity: AmbiguityRecord) -> None:
         """Registra una ambigüedad (Spec 48)."""
@@ -112,7 +112,7 @@ class DecisionLedgerAdapter(ILedgerAuditPort):
             with open(self.ambiguities_path, "a", encoding="utf-8") as f:
                 f.write(ambiguity.model_dump_json() + "\n")
         except Exception as e:
-            print(f"[DecisionLedgerAdapter] Error al escribir ambigüedad: {e}")
+            pass # print(f"[DecisionLedgerAdapter] Error al escribir ambigüedad: {e}")
 
     def update_ontological_map(self, layer: str, update_data: dict) -> None:
         """Actualiza el mapa ontológico."""

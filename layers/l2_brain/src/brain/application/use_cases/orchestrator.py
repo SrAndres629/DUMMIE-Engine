@@ -49,15 +49,9 @@ class CognitiveOrchestrator(IBrainOrchestrator):
     def _recover_lamport_clock(self) -> int:
         """Recupera el tick máximo del 4D-TES para garantizar monotonía causal (Spec 02)."""
         try:
-            result = self.event_store.conn.execute(
-                "MATCH (m:MemoryNode4D) RETURN max(m.lamport_t)"
-            )
-            if result.has_next():
-                max_tick = result.get_next()[0]
-                if max_tick is not None:
-                    return int(max_tick)
-        except Exception as e:
-            print(f"[L2-Brain Orchestrator] Warning: Could not recover Lamport clock: {e}")
+            return self.event_store.get_max_lamport_tick()
+        except Exception:
+            pass
         return 0
 
     def sync_clock(self, external_tick: int) -> None:
@@ -65,7 +59,7 @@ class CognitiveOrchestrator(IBrainOrchestrator):
         if external_tick > self.lamport_clock:
             old_tick = self.lamport_clock
             self.lamport_clock = external_tick
-            print(f"[L2-Brain Orchestrator] Clock Synced: {old_tick} -> {self.lamport_clock}")
+            pass # print(f"[L2-Brain Orchestrator] Clock Synced: {old_tick} -> {self.lamport_clock}")
 
     async def handle_task(self, payload: Union[str, AgentIntent]) -> str:
         """
@@ -75,9 +69,9 @@ class CognitiveOrchestrator(IBrainOrchestrator):
         try:
             if isinstance(payload, AgentIntent):
                 intent = payload
-                print(f"[L2-Brain Orchestrator] Procesando intención directa: {intent.intent_type}")
+                pass # print(f"[L2-Brain Orchestrator] Procesando intención directa: {intent.intent_type}")
             else:
-                print(f"[L2-Brain Orchestrator] Procesando tarea en modo {self.mode}: {payload}")
+                pass # print(f"[L2-Brain Orchestrator] Procesando tarea en modo {self.mode}: {payload}")
                 # 1. Parsing de Intención (Spec 21)
                 intent = self._parse_intent(payload)
             
@@ -119,7 +113,7 @@ class CognitiveOrchestrator(IBrainOrchestrator):
                 node.embedding = await self.embedding_port.generate_embedding_async(intent.rationale)
 
             self.event_store.append(node)
-            print(f"[L2-Brain Orchestrator] Nodo 4D-TES encadenado: {node.causal_hash} (parent: {parent_hash})")
+            pass # print(f"[L2-Brain Orchestrator] Nodo 4D-TES encadenado: {node.causal_hash} (parent: {parent_hash})")
 
             # 6. Registro en el Ledger de Decisiones (Spec 34)
             self.ledger_audit.record_decision(DecisionRecord(
@@ -145,7 +139,7 @@ class CognitiveOrchestrator(IBrainOrchestrator):
             return "INTENT_QUEUED_L2_VALIDATED"
         except Exception as e:
             # AUTO-CRISTALIZACIÓN DE LECCIONES (Spec 48)
-            print(f"[L2-Brain Orchestrator] CRITICAL ERROR: {e}")
+            pass # print(f"[L2-Brain Orchestrator] CRITICAL ERROR: {e}")
             
             # Intentar capturar el contexto para la lección
             context_fallback = SixDimensionalContext(

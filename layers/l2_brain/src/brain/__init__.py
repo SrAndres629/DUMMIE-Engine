@@ -1,2 +1,5 @@
 def main() -> None:
-    print("Hello from brain!")
+    pass
+
+def hello() -> str:
+    return "Hello from brain!"
