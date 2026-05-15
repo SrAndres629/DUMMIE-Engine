@@ -1,0 +1,55 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string",
+      "enum": ["READY", "DEGRADED", "FAILED"]
+    },
+    "query": {
+      "type": "string"
+    },
+    "results": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "vault_id": {"type": "string"},
+          "score": {"type": "number"},
+          "summary": {"type": "string"},
+          "source": {"type": "string"}
+        }
+      }
+    },
+    "context_refs": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "vault_refs": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "memory_refs": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "graph_refs": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "budget_pressure": {
+      "type": "string"
+    },
+    "fallback_used": {
+      "type": "boolean"
+    },
+    "retrieval_reason": {
+      "type": "string"
+    },
+    "sensor_first_decision": {
+      "type": "string",
+      "enum": ["ALLOW", "WARN", "BLOCK"]
+    }
+  },
+  "required": ["status", "query", "results"]
+}

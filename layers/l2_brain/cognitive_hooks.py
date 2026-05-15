@@ -56,6 +56,12 @@ class CognitiveHookPacket:
     risk_flags: list[str] = field(default_factory=list)
     reasoning_mode: str = "deterministic"
     external_reasoning_artifacts: list[dict[str, Any]] = field(default_factory=list)
+    
+    # Phase 10: Semantic Retrieval metadata
+    retrieval_refs: list[str] = field(default_factory=list)
+    vault_refs: list[str] = field(default_factory=list)
+    memory_refs: list[str] = field(default_factory=list)
+    sensor_first_status: str = "READY"
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
@@ -72,6 +78,10 @@ class CognitiveHookPacket:
             "tool_hints": list(self.tool_hints),
             "risk_flags": list(self.risk_flags),
             "token_budget_hint": self.token_budget_hint,
+            "retrieval_refs": list(self.retrieval_refs),
+            "vault_refs": list(self.vault_refs),
+            "memory_refs": list(self.memory_refs),
+            "sensor_first_status": self.sensor_first_status
         }
 
 

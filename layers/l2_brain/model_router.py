@@ -409,10 +409,39 @@ def _merge_layers(existing: list[str] | None, hook_layers: Any) -> list[str]:
 
 def _tier_from_hook_metadata(hook_metadata: dict[str, Any]) -> ModelTier | None:
     reasoning_mode = str(hook_metadata.get("reasoning_mode", "")).strip().lower()
-    return {
+    
+    tier_map = {
         "deterministic": ModelTier.LOCAL_FAST,
         "local_fast": ModelTier.LOCAL_FAST,
         "local_deep": ModelTier.LOCAL_DEEP,
         "cloud_std": ModelTier.CLOUD_STD,
         "cloud_prem": ModelTier.CLOUD_PREM,
-    }.get(reasoning_mode)
+    }
+    target = tier_map.get(reasoning_mode)
+    
+    if not target:
+        return None
+
+    # Phase 10: Semantic Retrieval Context-Aware Downgrade
+    # If we have good local context, we can often solve the problem with a cheaper model.
+    authority = hook_metadata.get("authority_level", "A0")
+    retrieval_refs = hook_metadata.get("retrieval_refs", [])
+    
+    # Do not downgrade high-risk operations
+    if authority in {"A4", "A5"}:
+        return target
+        
+    risk_flags = hook_metadata.get("risk_flags", [])
+    if any(rf in risk_flags for rf in ["human_checkpoint_required", "explicit_human_veto_required"]):
+        return target
+
+    # If we have substantial retrieval refs, consider downgrade
+    if len(retrieval_refs) > 0:
+        if target == ModelTier.CLOUD_STD:
+            logger.info("Context-aware downgrade: CLOUD_STD -> LOCAL_DEEP due to rich retrieval refs.")
+            return ModelTier.LOCAL_DEEP
+        elif target == ModelTier.LOCAL_DEEP and len(retrieval_refs) > 3:
+            logger.info("Context-aware downgrade: LOCAL_DEEP -> LOCAL_FAST due to rich retrieval refs.")
+            return ModelTier.LOCAL_FAST
+
+    return target

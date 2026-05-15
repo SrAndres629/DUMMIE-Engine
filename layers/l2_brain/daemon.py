@@ -163,6 +163,25 @@ class DummieDaemon:
 
         self.gateway_policy = SensorFirstPolicy(mode=PolicyDecision.WARN)
 
+        # Phase 10: Semantic Retrieval Wiring
+        try:
+            from layers.l2_brain.socraticode_gateway_adapter import SocraticodeGatewayAdapter
+            from layers.l2_brain.semantic_retrieval_runtime import SemanticRetrievalRuntime
+            
+            # Use mcp_gateway for socraticode adapter
+            # We don't have direct access to the VaultEmbeddingIndex instance here typically,
+            # but in a real setup it would be passed or constructed. For now we use the adapter.
+            self.socraticode_adapter = SocraticodeGatewayAdapter(mcp_gateway=mcp_gateway)
+            self.semantic_retrieval_runtime = SemanticRetrievalRuntime(
+                socraticode_adapter=self.socraticode_adapter,
+                context_budget_manager=getattr(self, "budget_manager", None)
+            )
+            self.semantic_retrieval_status = "READY"
+        except ImportError as e:
+            self.semantic_retrieval_runtime = None
+            self.semantic_retrieval_status = "DEGRADED"
+            logger.warning(f"Semantic Retrieval degraded: {e}")
+
         try:
             from layers.l2_brain.metagateway_runtime_meter import MetaGatewayRuntimeMeter
             from layers.l2_brain.token_cost_ledger import TokenCostLedger
@@ -265,10 +284,41 @@ class DummieDaemon:
 
     async def _process_request_safe(self, request: GatewayRequest):
         async with self.concurrency_limit:
-            await self.orchestrator.execute_request(request)
+            # Phase 10: Semantic Retrieval & SensorFirst Enforcement
+            retrieval_context = None
+            sensor_first_decision = {"decision": "ALLOW", "reason": "not_applicable"}
+            
+            if hasattr(self, "semantic_retrieval_runtime") and self.semantic_retrieval_runtime:
+                try:
+                    # Attempt semantic retrieval for the request intent
+                    retrieval_context = await self.semantic_retrieval_runtime.retrieve_for_prompt(
+                        prompt=request.intent, 
+                        hook_packet=None
+                    )
+                except Exception as e:
+                    logger.warning(f"Semantic retrieval failed during request processing: {e}")
+                    retrieval_context = {"status": "FAILED", "results": [], "fallback_used": False}
+
+            # Enforce SensorFirst policy
+            try:
+                from layers.l2_brain.sensor_first_guard import SensorFirstGuard
+                guard = SensorFirstGuard(retrieval_runtime=getattr(self, "semantic_retrieval_runtime", None))
+                # Build a pseudo-request dict for the guard
+                req_dict = {"purpose": request.context.get("purpose", "unknown"), "action": "direct_read"}
+                sensor_first_decision = guard.evaluate_request(req_dict, retrieval_context)
+            except Exception as e:
+                logger.warning(f"SensorFirst evaluation failed: {e}")
+
+            # Store the latest context for the outcome evaluator
+            self.last_context_packet = retrieval_context or {}
+            self.last_gate_status = sensor_first_decision.get("decision", "ALLOW")
+            self.last_gate_reasons = [sensor_first_decision.get("reason", "unknown")]
+            
+            if hasattr(self, "orchestrator") and self.orchestrator:
+                await self.orchestrator.execute_request(request)
 
     async def process_request(self, request: GatewayRequest):
-        return await self.orchestrator.execute_request(request)
+        return await self._process_request_safe(request)
 
     def _build_outcome(self, *args, **kwargs):
         evaluator = getattr(self, "evaluator", None)

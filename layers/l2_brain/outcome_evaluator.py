@@ -74,6 +74,7 @@ class OutcomeEvaluator:
         evidence_refs: Optional[List[str]] = None,
         next_action: Optional[Dict[str, Any]] = None,
         learning_episode_ref: str = "",
+        retrieval_refs: Optional[List[str]] = None,
     ) -> Dict[str, Any]:
         """
         Construye el DTO final de resultado de la saga.
@@ -95,6 +96,7 @@ class OutcomeEvaluator:
             evidence_refs=evidence_refs,
             next_action=next_action,
             learning_episode_ref=learning_episode_ref,
+            retrieval_refs=retrieval_refs,
         )
         outcome = daemon_outcome.to_dict()
         outcome["error"] = error
@@ -135,8 +137,18 @@ class OutcomeEvaluator:
         evidence_refs: Optional[List[str]] = None,
         next_action: Optional[Dict[str, Any]] = None,
         learning_episode_ref: str = "",
+        retrieval_refs: Optional[List[str]] = None,
     ) -> DaemonOutcome:
         gate_reasons = gate_reasons or ["all_guards_passed"]
+        
+        # Phase 10: Inject retrieval refs from daemon state if missing
+        if retrieval_refs is None and self.daemon and hasattr(self.daemon, "last_context_packet"):
+            packet = getattr(self.daemon, "last_context_packet", {})
+            if isinstance(packet, dict):
+                retrieval_refs = packet.get("context_refs", [])
+            else:
+                retrieval_refs = []
+            
         return DaemonOutcome(
             outcome_id=f"outcome-{transaction_id}",
             status=status,
@@ -156,6 +168,7 @@ class OutcomeEvaluator:
             next_action=_next_action_from(next_action, status, gate_reasons),
             recovery_hint=RecoveryHint(can_resume=status in {"SUCCESS", "PARTIAL", "DEGRADED", "BLOCKED"}, resume_from=phase_id or ""),
             learning_episode_ref=learning_episode_ref,
+            retrieval_refs=retrieval_refs or [],
         )
 
     def enrich_with_metacognition(self, outcome: Dict[str, Any], frame: Any) -> Dict[str, Any]:

@@ -109,6 +109,7 @@ class DaemonOutcome:
     recovery_hint: RecoveryHint = field(default_factory=RecoveryHint)
     learning_episode_ref: str = ""
     memory_refs: list[str] = field(default_factory=list)
+    retrieval_refs: list[str] = field(default_factory=list)
 
     def __post_init__(self) -> None:
         if self.status not in OUTCOME_STATUSES:

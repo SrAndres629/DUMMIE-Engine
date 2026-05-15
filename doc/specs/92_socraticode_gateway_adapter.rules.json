@@ -1,0 +1,19 @@
+{
+  "rules": [
+    {
+      "id": "SGA-001",
+      "name": "GracefulFallback",
+      "description": "If Socraticode MCP is unavailable or fails, adapter must seamlessly fallback to VaultEmbeddingIndex and report DEGRADED."
+    },
+    {
+      "id": "SGA-002",
+      "name": "NoCrashPolicy",
+      "description": "Adapter must never throw unhandled exceptions from MCP gateway interactions."
+    },
+    {
+      "id": "SGA-003",
+      "name": "NormalizedResponse",
+      "description": "Responses from both MCP and fallback must be normalized into a standard shape containing query, status, and results."
+    }
+  ]
+}

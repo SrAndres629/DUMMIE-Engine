@@ -1,0 +1,14 @@
+{
+  "rules": [
+    {
+      "id": "SRR-001",
+      "name": "StandardPacket",
+      "description": "Retrieval runtime must return a standardized packet including context_refs, vault_refs, and budget pressure."
+    },
+    {
+      "id": "SRR-002",
+      "name": "BudgetAware",
+      "description": "Retrieval runtime must respect context budget limits when building the final context packet."
+    }
+  ]
+}

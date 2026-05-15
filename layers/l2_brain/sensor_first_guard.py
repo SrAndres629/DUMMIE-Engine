@@ -1,62 +1,53 @@
-from typing import Dict, Any, Optional
-from layers.l2_brain.metagateway_policy import SensorFirstPolicy, DirectReadRequest, Purpose, PolicyDecision
+from __future__ import annotations
+
+import logging
+from typing import Any
+
+logger = logging.getLogger(__name__)
 
 class SensorFirstGuard:
     """
-    Runtime guard that evaluates if a direct read request complies with the Sensor-First policy.
+    [L2_BRAIN] Enforces the SensorFirst policy.
+    Ensures that semantic retrieval is attempted before raw file reads during concept discovery.
     """
-    
-    def __init__(self, mode: PolicyDecision = PolicyDecision.WARN):
-        self.policy = SensorFirstPolicy(mode=mode)
+    def __init__(self, retrieval_runtime: Any = None):
+        self.retrieval_runtime = retrieval_runtime
 
-    def evaluate_direct_read(
-        self, 
-        purpose: str, 
-        semantic_search_attempted: bool, 
-        gateway_attempted: bool, 
-        justification: str = ""
-    ) -> Dict[str, Any]:
+    def evaluate_request(self, request: dict, context_packet: dict | None = None) -> dict:
         """
-        Evaluates a direct read request.
-        
-        Args:
-            purpose: One of 'concept_discovery', 'line_confirmation', 'debug_error', 'diff_review'.
-            semantic_search_attempted: Whether semantic search was tried before this.
-            gateway_attempted: Whether the Meta-Gateway was consulted before this.
-            justification: Optional justification for direct read.
-            
-        Returns:
-            A dictionary with the decision and reasoning.
+        Evaluates a request against the SensorFirst policy.
+        Returns a decision packet.
         """
-        try:
-            purpose_enum = Purpose(purpose)
-        except ValueError:
-            purpose_enum = Purpose.CONCEPT_DISCOVERY # Default to most restrictive
-            
-        request = DirectReadRequest(
-            purpose=purpose_enum,
-            semantic_search_attempted=semantic_search_attempted,
-            gateway_attempted=gateway_attempted,
-            justification=justification
-        )
+        purpose = request.get("purpose", "unknown")
+        action = request.get("action", "unknown")
         
-        decision = self.policy.evaluate(request)
-        
-        return {
-            "decision": decision.value,
-            "reason": self._get_reason(decision, request),
-            "mode": self.policy.mode.value,
-            "should_log": True
-        }
+        # Check for absolute blockers first
+        if "secret" in str(request).lower() or "chain_of_thought" in str(request).lower() or "private reasoning" in str(request).lower():
+            return {"decision": "BLOCK", "reason": "contains_secrets_or_private_reasoning"}
 
-    def _get_reason(self, decision: PolicyDecision, request: DirectReadRequest) -> str:
-        if decision == PolicyDecision.ALLOW:
-            return "Policy satisfied: prior discovery tools were used or purpose allows direct read."
-        
-        if request.purpose == Purpose.CONCEPT_DISCOVERY:
-            return "Sensor-First Policy Violation: Direct read attempted for concept discovery without prior semantic search or gateway consultation."
-        
-        if request.purpose == Purpose.LINE_CONFIRMATION:
-            return "Sensor-First Policy Warning: Direct read for line confirmation without prior discovery is discouraged."
-            
-        return "Policy restriction applied."
+        # SensorFirst applies primarily to concept discovery and broad reads
+        if purpose == "concept_discovery" or action == "direct_read":
+            if not context_packet:
+                # No retrieval context provided at all
+                if request.get("justification"):
+                    return {"decision": "ALLOW", "reason": "direct_read_justified"}
+                else:
+                    return {"decision": "WARN", "reason": "WARN_SENSOR_FIRST_REQUIRED"}
+
+            # Context packet was provided
+            status = context_packet.get("status")
+            if status == "FAILED":
+                 # We tried but it failed. Allow to proceed, perhaps degraded.
+                 return {"decision": "ALLOW", "reason": "retrieval_failed_proceeding"}
+                 
+            if len(context_packet.get("results", [])) == 0:
+                 return {"decision": "ALLOW", "reason": "no_semantic_hit"}
+                 
+            return {
+                "decision": "ALLOW", 
+                "reason": "semantic_context_provided", 
+                "context_refs": context_packet.get("context_refs", [])
+            }
+
+        # For other purposes, allow by default
+        return {"decision": "ALLOW", "reason": "purpose_exempt"}
