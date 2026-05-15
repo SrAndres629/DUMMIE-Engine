@@ -115,40 +115,56 @@ class TokenCostLedger:
 
     def cache_hit_ratio(self, mission_id: str = "", session_id: str = "") -> float:
         summary = self._summarize(self.iter_usage(mission_id, session_id))
-        total_input = summary["total_input_tokens"] + summary["total_cached_tokens"]
+        total_input = summary["total_input_tokens"]
         if total_input == 0:
             return 0.0
         return summary["total_cached_tokens"] / total_input
 
     def cloud_cost_estimate(self, mission_id: str = "", session_id: str = "") -> dict:
-        # Placeholder for actual pricing logic
         summary = self._summarize(self.iter_usage(mission_id, session_id))
         return {
             "currency": "USD",
-            "estimated_cost": 0.0,  # TODO: Implement pricing model
-            "total_tokens": summary["total_tokens"],
+            "estimated_cost": 0.0,
+            "pricing_available": False,
+            "reason": "pricing_table_not_configured",
+            "billable_tokens_estimate": summary["total_billable_tokens_estimate"],
         }
 
     def _summarize(self, events: Iterable[dict]) -> dict:
         summary = {
             "total_input_tokens": 0,
             "total_cached_tokens": 0,
+            "total_uncached_input_tokens": 0,
             "total_output_tokens": 0,
             "total_reasoning_tokens": 0,
-            "total_tokens": 0,
+            "total_billable_tokens_estimate": 0,
+            "total_raw_tokens_seen": 0,
             "event_count": 0,
         }
         for event in events:
-            summary["total_input_tokens"] += event.get("input_tokens", 0)
-            summary["total_cached_tokens"] += event.get("cached_tokens", 0)
-            summary["total_output_tokens"] += event.get("output_tokens", 0)
-            summary["total_reasoning_tokens"] += event.get("reasoning_tokens", 0)
+            input_t = int(event.get("input_tokens", 0))
+            cached_t = int(event.get("cached_tokens", 0))
+            output_t = int(event.get("output_tokens", 0))
+            reasoning_t = int(event.get("reasoning_tokens", 0))
+
+            summary["total_input_tokens"] += input_t
+            summary["total_cached_tokens"] += cached_t
+            summary["total_output_tokens"] += output_t
+            summary["total_reasoning_tokens"] += reasoning_t
             summary["event_count"] += 1
 
-        summary["total_tokens"] = (
-            summary["total_input_tokens"]
-            + summary["total_cached_tokens"]
+        summary["total_uncached_input_tokens"] = max(
+            0, summary["total_input_tokens"] - summary["total_cached_tokens"]
+        )
+        summary["total_billable_tokens_estimate"] = (
+            summary["total_uncached_input_tokens"]
             + summary["total_output_tokens"]
+            + summary["total_reasoning_tokens"]
+        )
+        summary["total_raw_tokens_seen"] = (
+            summary["total_input_tokens"]
+            + summary["total_output_tokens"]
+            + summary["total_reasoning_tokens"]
         )
         return summary
 

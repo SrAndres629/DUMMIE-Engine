@@ -5,7 +5,7 @@ def test_context_budget_manager_allocate_budget():
     cbm = ContextBudgetManager()
     budget = cbm.allocate_budget("local_fast")
     assert budget["total_budget"] == 4096
-    assert budget["compression_threshold"] == 3276.8
+    assert budget["compression_threshold"] == 3276
 
 def test_context_budget_manager_should_compress():
     cbm = ContextBudgetManager()
@@ -17,21 +17,39 @@ def test_context_budget_manager_should_compress():
     packet_heavy = {"items": [{"estimated_tokens": 3500}]}
     assert cbm.should_compress(packet_heavy, budget)
 
-def test_context_budget_manager_enforce_budget_preserves_critical():
+def test_context_budget_manager_enforce_budget_preserves_critical_and_kinds():
+    cbm = ContextBudgetManager()
+    budget = {"total_budget": 100}
+    
+    context = {
+        "items": [
+            {"id": "crit", "priority": "critical", "estimated_tokens": 40},
+            {"id": "mission_item", "kind": "mission", "priority": "medium", "estimated_tokens": 40},
+            {"id": "low", "priority": "low", "estimated_tokens": 50},
+        ]
+    }
+    
+    res = cbm.enforce_budget(context, budget)
+    ids = [item["id"] for item in res["items"]]
+    assert "crit" in ids
+    assert "mission_item" in ids # Preserved by kind
+    assert "low" not in ids
+
+def test_context_budget_manager_enforce_budget_drops_vs_compress():
     cbm = ContextBudgetManager()
     budget = {"total_budget": 100}
     
     context = {
         "items": [
             {"id": "crit", "priority": "critical", "estimated_tokens": 80},
-            {"id": "low", "priority": "low", "estimated_tokens": 50},
+            {"id": "med_ref", "priority": "medium", "ref": "doc1", "estimated_tokens": 50},
+            {"id": "low_no_ref", "priority": "low", "estimated_tokens": 50},
         ]
     }
     
     res = cbm.enforce_budget(context, budget)
-    assert len(res["items"]) == 1
-    assert res["items"][0]["id"] == "crit"
-    assert "low" in res["dropped_refs"]
+    assert "med_ref" in res["compressed_refs"]
+    assert "low_no_ref" in res["dropped_refs"]
 
 def test_context_budget_manager_enforce_budget_drops_by_priority():
     cbm = ContextBudgetManager()

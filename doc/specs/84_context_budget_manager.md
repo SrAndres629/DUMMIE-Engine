@@ -1,17 +1,38 @@
-# Spec 84: Context Budget Manager
+---
+spec_id: "DE-PHASE6-CBM-84"
+title: "Context Budget Manager"
+status: "DRAFT"
+layer: "L2"
+last_verified_on: "2025-05-15"
+priority: "MANDATORY"
+---
+# Context Budget Manager
 
-## Goal
-Manage the cognitive context window by allocating budgets, detecting pressure, and enforcing limits through compression or selective discarding of low-priority information.
+## Purpose
+Manage the cognitive context window by allocating budgets, detecting pressure, and enforcing limits through selective discarding of low-priority information.
 
-## Core Requirements
-- Allocate token budgets based on model tiers (local vs cloud).
-- Detect when context usage exceeds thresholds.
-- Enforce budgets by prioritizing "critical" items.
-- Preserve essential mission state: goals, authority levels, next actions, and recovery packets.
-- Identify items suitable for compression or discard (e.g., old scratchpad notes, redundant tool outputs).
+## Current State
+Implemented in `layers/l2_brain/context_budget_manager.py`. Supports tiered budgets, pressure detection, and budget enforcement.
 
-## Priority Levels
-- `critical`: Must never be discarded (Mission goals, Current Phase, Next Action).
-- `high`: Should be preserved if possible (Recent evidence, Key decisions).
-- `medium`: Can be compressed (Detailed tool outputs, older logs).
-- `low`: Can be discarded first (Historical scratchpad, redundant files).
+## Physical Evidence
+- `layers/l2_brain/context_budget_manager.py`
+- `layers/l2_brain/tests/test_context_budget_manager.py`
+- `.aiwg/schemas/context_budget.schema.json`
+
+## Contract Invariants
+- **Preserve Critical**: Never discard items marked as 'critical' priority.
+- **Tiered Budget**: Budgets vary based on `model_tier`.
+- **Sequential Discard**: Discard low priority items first.
+
+## Verification
+```bash
+python3 scripts/validate_specs_docs.py --check doc/specs/84_context_budget_manager.md
+layers/l2_brain/.venv/bin/python -m pytest -q layers/l2_brain/tests/test_context_budget_manager.py
+```
+
+## Traceability
+| Invariant | Evidence | Verification |
+| --- | --- | --- |
+| Preserve Critical | `layers/l2_brain/context_budget_manager.py` | `layers/l2_brain/tests/test_context_budget_manager.py` |
+| Tiered Budget | `layers/l2_brain/context_budget_manager.py` | `layers/l2_brain/tests/test_context_budget_manager.py` |
+| Sequential Discard | `layers/l2_brain/context_budget_manager.py` | `layers/l2_brain/tests/test_context_budget_manager.py` |

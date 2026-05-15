@@ -28,7 +28,7 @@ def test_integration_model_router_records_to_ledger(tmp_path):
     summary = ledger.summarize_mission("m1")
     assert summary["event_count"] == 1
     assert summary["total_input_tokens"] > 0
-    assert summary["total_tokens"] > 0
+    assert summary["total_raw_tokens_seen"] > 0
 
 def test_integration_outcome_evaluator_includes_token_economy(tmp_path):
     ledger = TokenCostLedger(root=tmp_path)
@@ -45,7 +45,7 @@ def test_integration_outcome_evaluator_includes_token_economy(tmp_path):
     
     efficiency = outcome["efficiency"]
     assert "token_economy_summary" in efficiency
-    assert efficiency["token_economy_summary"]["total_tokens"] == 150
+    assert efficiency["token_economy_summary"]["billable_tokens_estimate"] == 150
     assert efficiency["budget_pressure"] == "extreme" # 5000/4096 > 1.0
 
 def test_integration_model_router_explicit_usage(tmp_path):

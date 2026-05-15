@@ -255,7 +255,8 @@ def _efficiency_from(daemon: Any) -> EfficiencyMetrics:
             if token_economy_summary and "cost_estimate" not in token_economy_summary:
                 token_economy_summary["cost_estimate"] = ledger.cloud_cost_estimate(mission_id, session_id)
                 token_economy_summary["cache_hit_ratio"] = ledger.cache_hit_ratio(mission_id, session_id)
-
+                # Use billable estimate as a primary metric if available
+                token_economy_summary["billable_tokens_estimate"] = token_economy_summary.get("total_billable_tokens_estimate", 0)
     # [WAVE 6] Budget Pressure from BudgetManager
     if daemon and hasattr(daemon, "budget_manager"):
         manager = getattr(daemon, "budget_manager", None)

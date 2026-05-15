@@ -11,7 +11,7 @@ def test_token_cost_ledger_records_and_summarizes_mission(tmp_path):
         "mission_id": mission_id,
         "phase_id": "p1",
         "model_tier": "cloud_std",
-        "input_tokens": 100,
+        "input_tokens": 100, # Total input
         "output_tokens": 50,
         "source": "router"
     })
@@ -19,20 +19,21 @@ def test_token_cost_ledger_records_and_summarizes_mission(tmp_path):
     ledger.record_usage({
         "mission_id": mission_id,
         "phase_id": "p1",
-        "cached_tokens": 200,
+        "input_tokens": 200, # Total input
+        "cached_tokens": 150, # 150 of those were cached
         "output_tokens": 10,
         "source": "provider_response"
     })
     
     summary = ledger.summarize_mission(mission_id)
-    assert summary["total_input_tokens"] == 100
-    assert summary["total_cached_tokens"] == 200
+    assert summary["total_input_tokens"] == 300
+    assert summary["total_cached_tokens"] == 150
     assert summary["total_output_tokens"] == 60
-    assert summary["total_tokens"] == 360
+    assert summary["total_billable_tokens_estimate"] == 210 # (300-150) + 60
     assert summary["event_count"] == 2
     
     ratio = ledger.cache_hit_ratio(mission_id=mission_id)
-    assert ratio == 200 / 300
+    assert ratio == 150 / 300
 
 def test_token_cost_ledger_idempotency(tmp_path):
     ledger = TokenCostLedger(root=tmp_path)
