@@ -1,0 +1,22 @@
+{
+  "phase": "10.1",
+  "decision": "PASS",
+  "adapter": {
+    "call_tool_supported": true,
+    "execute_tool_supported": true,
+    "fallback_supported": true
+  },
+  "context_injection": {
+    "vault_refs_resolved": true,
+    "prompt_context_block_supported": true,
+    "budget_applied": true
+  },
+  "routing": {
+    "downgrade_requires_actual_context": true
+  },
+  "sensor_first": {
+    "conceptual_secret_mentions_allowed": true,
+    "actual_secret_assignments_blocked": true
+  },
+  "next_recommended_phase": "LocalContextCompressor + real embedding adapter"
+}

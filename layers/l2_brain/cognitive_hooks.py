@@ -61,6 +61,8 @@ class CognitiveHookPacket:
     retrieval_refs: list[str] = field(default_factory=list)
     vault_refs: list[str] = field(default_factory=list)
     memory_refs: list[str] = field(default_factory=list)
+    prompt_context_block_ref: str = ""
+    retrieved_context_count: int = 0
     sensor_first_status: str = "READY"
 
     def to_dict(self) -> dict[str, Any]:
@@ -81,6 +83,8 @@ class CognitiveHookPacket:
             "retrieval_refs": list(self.retrieval_refs),
             "vault_refs": list(self.vault_refs),
             "memory_refs": list(self.memory_refs),
+            "prompt_context_block_ref": self.prompt_context_block_ref,
+            "retrieved_context_count": self.retrieved_context_count,
             "sensor_first_status": self.sensor_first_status
         }
 

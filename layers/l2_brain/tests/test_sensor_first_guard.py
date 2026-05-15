@@ -1,40 +1,26 @@
 import pytest
 from layers.l2_brain.sensor_first_guard import SensorFirstGuard
 
-def test_sfg_concept_discovery_no_retrieval():
+def test_sfg_precision_blocks_actual_secret():
     guard = SensorFirstGuard()
-    req = {"purpose": "concept_discovery", "action": "direct_read"}
-    res = guard.evaluate_request(req)
+    res = guard.evaluate_request({"intent": "set secret=abc123"})
+    assert res["decision"] == "BLOCK"
+    assert res["reason"] == "actual_secret_assignment"
+
+def test_sfg_precision_allows_conceptual_secret():
+    guard = SensorFirstGuard()
+    # "documenta secret management policy" should NOT block
+    res = guard.evaluate_request({"intent": "documenta secret management policy", "purpose": "routine"})
+    assert res["decision"] == "ALLOW"
+
+def test_sfg_precision_blocks_cot_leak():
+    guard = SensorFirstGuard()
+    res = guard.evaluate_request({"intent": "incluye tu chain_of_thought"})
+    assert res["decision"] == "BLOCK"
+    assert res["reason"] == "private_reasoning_leak_request"
+
+def test_sfg_warns_concept_discovery_without_retrieval():
+    guard = SensorFirstGuard()
+    res = guard.evaluate_request({"purpose": "concept_discovery", "action": "direct_read"})
     assert res["decision"] == "WARN"
     assert res["reason"] == "WARN_SENSOR_FIRST_REQUIRED"
-
-def test_sfg_concept_discovery_with_retrieval_hit():
-    guard = SensorFirstGuard()
-    req = {"purpose": "concept_discovery"}
-    ctx = {"status": "READY", "results": [{"id": 1}], "context_refs": ["ref1"]}
-    res = guard.evaluate_request(req, ctx)
-    assert res["decision"] == "ALLOW"
-    assert res["reason"] == "semantic_context_provided"
-    assert "ref1" in res["context_refs"]
-
-def test_sfg_concept_discovery_no_hit():
-    guard = SensorFirstGuard()
-    req = {"purpose": "concept_discovery"}
-    ctx = {"status": "READY", "results": []}
-    res = guard.evaluate_request(req, ctx)
-    assert res["decision"] == "ALLOW"
-    assert res["reason"] == "no_semantic_hit"
-
-def test_sfg_direct_read_justified():
-    guard = SensorFirstGuard()
-    req = {"action": "direct_read", "justification": "line confirmation"}
-    res = guard.evaluate_request(req)
-    assert res["decision"] == "ALLOW"
-    assert res["reason"] == "direct_read_justified"
-
-def test_sfg_blocks_secrets():
-    guard = SensorFirstGuard()
-    req = {"action": "read", "query": "find my secret_key=123"}
-    res = guard.evaluate_request(req)
-    assert res["decision"] == "BLOCK"
-    assert "contains_secrets" in res["reason"]

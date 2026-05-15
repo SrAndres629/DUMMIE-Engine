@@ -425,7 +425,8 @@ def _tier_from_hook_metadata(hook_metadata: dict[str, Any]) -> ModelTier | None:
     # Phase 10: Semantic Retrieval Context-Aware Downgrade
     # If we have good local context, we can often solve the problem with a cheaper model.
     authority = hook_metadata.get("authority_level", "A0")
-    retrieval_refs = hook_metadata.get("retrieval_refs", [])
+    retrieved_count = hook_metadata.get("retrieved_context_count", 0)
+    context_block = hook_metadata.get("prompt_context_block_ref", "")
     
     # Do not downgrade high-risk operations
     if authority in {"A4", "A5"}:
@@ -435,13 +436,13 @@ def _tier_from_hook_metadata(hook_metadata: dict[str, Any]) -> ModelTier | None:
     if any(rf in risk_flags for rf in ["human_checkpoint_required", "explicit_human_veto_required"]):
         return target
 
-    # If we have substantial retrieval refs, consider downgrade
-    if len(retrieval_refs) > 0:
+    # If we have actual retrieved context, consider downgrade
+    if retrieved_count > 0 and context_block:
         if target == ModelTier.CLOUD_STD:
-            logger.info("Context-aware downgrade: CLOUD_STD -> LOCAL_DEEP due to rich retrieval refs.")
+            logger.info("Context-aware downgrade: CLOUD_STD -> LOCAL_DEEP due to resolved retrieval context.")
             return ModelTier.LOCAL_DEEP
-        elif target == ModelTier.LOCAL_DEEP and len(retrieval_refs) > 3:
-            logger.info("Context-aware downgrade: LOCAL_DEEP -> LOCAL_FAST due to rich retrieval refs.")
+        elif target == ModelTier.LOCAL_DEEP and retrieved_count > 3:
+            logger.info("Context-aware downgrade: LOCAL_DEEP -> LOCAL_FAST due to resolved retrieval context.")
             return ModelTier.LOCAL_FAST
 
     return target

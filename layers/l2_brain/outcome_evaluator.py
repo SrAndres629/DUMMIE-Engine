@@ -118,6 +118,17 @@ class OutcomeEvaluator:
             if not next_action and mission_state.get("next_action"):
                 outcome["next_action"] = mission_state["next_action"]
 
+        # Phase 10.1: Retrieval Summary
+        if self.daemon and hasattr(self.daemon, "last_context_packet"):
+            packet = getattr(self.daemon, "last_context_packet", {})
+            if isinstance(packet, dict):
+                outcome["retrieval_summary"] = {
+                    "vault_refs": packet.get("vault_refs", []),
+                    "retrieved_context_count": len(packet.get("retrieved_context", [])),
+                    "prompt_context_tokens_estimate": len(packet.get("prompt_context_block", "")) // 4,
+                    "fallback_used": packet.get("fallback_used", False)
+                }
+
         return outcome
 
     def build_daemon_outcome(
@@ -138,6 +149,7 @@ class OutcomeEvaluator:
         next_action: Optional[Dict[str, Any]] = None,
         learning_episode_ref: str = "",
         retrieval_refs: Optional[List[str]] = None,
+        retrieval_summary: Optional[Dict[str, Any]] = None,
     ) -> DaemonOutcome:
         gate_reasons = gate_reasons or ["all_guards_passed"]
         
@@ -146,6 +158,13 @@ class OutcomeEvaluator:
             packet = getattr(self.daemon, "last_context_packet", {})
             if isinstance(packet, dict):
                 retrieval_refs = packet.get("context_refs", [])
+                if retrieval_summary is None:
+                    retrieval_summary = {
+                        "vault_refs": packet.get("vault_refs", []),
+                        "retrieved_context_count": len(packet.get("retrieved_context", [])),
+                        "prompt_context_tokens_estimate": len(packet.get("prompt_context_block", "")) // 4,
+                        "fallback_used": packet.get("fallback_used", False)
+                    }
             else:
                 retrieval_refs = []
             
@@ -169,6 +188,7 @@ class OutcomeEvaluator:
             recovery_hint=RecoveryHint(can_resume=status in {"SUCCESS", "PARTIAL", "DEGRADED", "BLOCKED"}, resume_from=phase_id or ""),
             learning_episode_ref=learning_episode_ref,
             retrieval_refs=retrieval_refs or [],
+            retrieval_summary=retrieval_summary or {},
         )
 
     def enrich_with_metacognition(self, outcome: Dict[str, Any], frame: Any) -> Dict[str, Any]:

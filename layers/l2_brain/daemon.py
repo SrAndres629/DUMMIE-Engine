@@ -167,7 +167,7 @@ class DummieDaemon:
         try:
             from layers.l2_brain.socraticode_gateway_adapter import SocraticodeGatewayAdapter
             from layers.l2_brain.semantic_retrieval_runtime import SemanticRetrievalRuntime
-            
+
             # Use mcp_gateway for socraticode adapter
             # We don't have direct access to the VaultEmbeddingIndex instance here typically,
             # but in a real setup it would be passed or constructed. For now we use the adapter.
@@ -189,7 +189,7 @@ class DummieDaemon:
             self.runtime_meter = MetaGatewayRuntimeMeter()
             self.token_ledger = TokenCostLedger()
             self.budget_manager = ContextBudgetManager()
-            
+
             # [WAVE 6] Link ledger to router if both available
             if self.model_router and hasattr(self.model_router, "ledger") and not self.model_router.ledger:
                 self.model_router.ledger = self.token_ledger
@@ -287,12 +287,12 @@ class DummieDaemon:
             # Phase 10: Semantic Retrieval & SensorFirst Enforcement
             retrieval_context = None
             sensor_first_decision = {"decision": "ALLOW", "reason": "not_applicable"}
-            
+
             if hasattr(self, "semantic_retrieval_runtime") and self.semantic_retrieval_runtime:
                 try:
                     # Attempt semantic retrieval for the request intent
                     retrieval_context = await self.semantic_retrieval_runtime.retrieve_for_prompt(
-                        prompt=request.intent, 
+                        prompt=request.intent,
                         hook_packet=None
                     )
                 except Exception as e:
@@ -309,11 +309,14 @@ class DummieDaemon:
             except Exception as e:
                 logger.warning(f"SensorFirst evaluation failed: {e}")
 
-            # Store the latest context for the outcome evaluator
+            # Store the latest context for the outcome evaluator and downstream reasoning
             self.last_context_packet = retrieval_context or {}
             self.last_gate_status = sensor_first_decision.get("decision", "ALLOW")
             self.last_gate_reasons = [sensor_first_decision.get("reason", "unknown")]
-            
+
+            # Phase 10.1: Expose prompt_context_block for subsequent use
+            self.last_prompt_context_block = self.last_context_packet.get("prompt_context_block", "")
+
             if hasattr(self, "orchestrator") and self.orchestrator:
                 await self.orchestrator.execute_request(request)
 

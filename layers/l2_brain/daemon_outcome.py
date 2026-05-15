@@ -110,6 +110,7 @@ class DaemonOutcome:
     learning_episode_ref: str = ""
     memory_refs: list[str] = field(default_factory=list)
     retrieval_refs: list[str] = field(default_factory=list)
+    retrieval_summary: dict[str, Any] = field(default_factory=dict)
 
     def __post_init__(self) -> None:
         if self.status not in OUTCOME_STATUSES:
