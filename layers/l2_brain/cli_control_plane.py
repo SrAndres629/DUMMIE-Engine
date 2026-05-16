@@ -25,6 +25,8 @@ from layers.l2_brain.state_coherence_guard import run_state_coherence_guard
 from layers.l2_brain.strategic_partner_swarm import run_strategic_partner_swarm
 from layers.l2_brain.tui_process_monitor import TuiProcessMonitor
 from layers.l6_skin.dashboard_renderer import DashboardRenderer
+from layers.l2_brain.debate_review_runtime import run_debate_review
+from layers.l2_brain.mission_autonomy_contract import run_mission_autonomy_contract
 
 
 @dataclass
@@ -67,6 +69,10 @@ class CliControlPlane:
             "mission-coherence": self._cmd_mission_coherence,
             "strategic-swarm": self._cmd_strategic_swarm,
             "swarm": self._cmd_strategic_swarm,
+            "debate-review": self._cmd_debate_review,
+            "debate": self._cmd_debate_review,
+            "autonomy-contract": self._cmd_autonomy_contract,
+            "autonomy": self._cmd_autonomy_contract,
         }
 
         if command not in handlers:
@@ -291,6 +297,28 @@ class CliControlPlane:
             payload=decision.to_dict(),
             warnings=decision.blocking_reasons,
             evidence_refs=[".aiwg/reports/strategic_partner_swarm_latest.json"],
+            generated_at=self._utc_now(),
+        )
+
+    def _cmd_debate_review(self) -> CliCommandResult:
+        result = run_debate_review(aiwg_root=self.aiwg_root)
+        return CliCommandResult(
+            command="debate-review",
+            decision="PASS" if result.decision in ["accept_plan", "accept_with_objections"] else "FAIL",
+            payload=result.to_dict(),
+            warnings=result.objections,
+            evidence_refs=[".aiwg/reports/debate_review_latest.json"],
+            generated_at=self._utc_now(),
+        )
+
+    def _cmd_autonomy_contract(self) -> CliCommandResult:
+        result = run_mission_autonomy_contract(aiwg_root=self.aiwg_root)
+        return CliCommandResult(
+            command="autonomy-contract",
+            decision=result.get("decision", "PASS"),
+            payload=result,
+            warnings=result.get("warnings", []),
+            evidence_refs=[".aiwg/reports/mission_autonomy_contract_latest.json"],
             generated_at=self._utc_now(),
         )
 

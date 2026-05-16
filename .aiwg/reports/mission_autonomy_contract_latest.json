@@ -1,0 +1,42 @@
+{
+  "contract_id": "mission_autonomy_contract",
+  "phase": "P28",
+  "mission_id": "MISSION_P29",
+  "decision": "PASS",
+  "default_allowed_scopes": [
+    "ADVISORY_ONLY",
+    "READ_ONLY_ANALYSIS",
+    "PLAN_GENERATION"
+  ],
+  "restricted_scopes": [
+    "HUMAN_APPROVED_WORKSPACE_EDIT",
+    "TRUSTED_WORKSTATION_REQUIRED"
+  ],
+  "sample_decisions": [
+    {
+      "request_id": "p28-init-check",
+      "decision": "ALLOW",
+      "granted_scope": "ADVISORY_ONLY",
+      "reason": "safe_advisory_scope",
+      "required_authorizations": [],
+      "blocked_reasons": [],
+      "risk_flags": [],
+      "evidence_refs": [
+        ".aiwg/reports/debate_review_latest.json"
+      ],
+      "expires_after_phase": "",
+      "can_execute_now": true
+    }
+  ],
+  "policy": {
+    "advisory_only_default": true,
+    "workspace_mutation_requires_authorization": true,
+    "trusted_workstation_deferred_to_p29": true,
+    "credentials_access_denied": true,
+    "external_actions_denied_by_default": true
+  },
+  "evidence_refs": [
+    ".aiwg/reports/debate_review_latest.json"
+  ],
+  "generated_at": "2026-05-16T14:25:28Z"
+}

@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MissionAutonomyContractReport",
+  "type": "object",
+  "required": ["contract_id", "phase", "mission_id", "decision", "policy", "generated_at"],
+  "properties": {
+    "contract_id": { "type": "string" },
+    "phase": { "type": "string" },
+    "mission_id": { "type": "string" },
+    "decision": { "type": "string", "enum": ["PASS", "PASS_WITH_WARNINGS", "FAIL"] },
+    "policy": {
+      "type": "object",
+      "required": ["advisory_only_default", "workspace_mutation_requires_authorization"],
+      "properties": {
+        "advisory_only_default": { "type": "boolean" },
+        "workspace_mutation_requires_authorization": { "type": "boolean" },
+        "trusted_workstation_deferred_to_p29": { "type": "boolean" },
+        "credentials_access_denied": { "type": "boolean" },
+        "external_actions_denied_by_default": { "type": "boolean" }
+      }
+    },
+    "sample_decisions": { "type": "array" },
+    "generated_at": { "type": "string", "format": "date-time" }
+  }
+}

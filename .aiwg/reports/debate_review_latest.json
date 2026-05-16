@@ -1,0 +1,113 @@
+{
+  "debate_id": "debate_review_runtime",
+  "phase": "P28",
+  "mission_id": "MISSION_P29",
+  "decision": "accept_plan",
+  "roles": [
+    {
+      "role": "proposer",
+      "claim": "Mission MISSION_P29 is ready for execution",
+      "evidence_refs": [],
+      "objections": [],
+      "counterarguments": [],
+      "risk_flags": [],
+      "recommended_action": "",
+      "confidence": 0.9
+    },
+    {
+      "role": "skeptic",
+      "claim": "Challenging mission assumptions",
+      "evidence_refs": [],
+      "objections": [
+        "consensus_bias_risk: swarm confidence too high without dissent"
+      ],
+      "counterarguments": [],
+      "risk_flags": [],
+      "recommended_action": "",
+      "confidence": 0.8
+    },
+    {
+      "role": "evidence_auditor",
+      "claim": "Verifying evidence grounding",
+      "evidence_refs": [],
+      "objections": [],
+      "counterarguments": [],
+      "risk_flags": [],
+      "recommended_action": "",
+      "confidence": 1.0
+    },
+    {
+      "role": "risk_challenger",
+      "claim": "Auditing operational risks",
+      "evidence_refs": [],
+      "objections": [],
+      "counterarguments": [],
+      "risk_flags": [],
+      "recommended_action": "",
+      "confidence": 1.0
+    },
+    {
+      "role": "implementation_reviewer",
+      "claim": "Reviewing SDD/TDD compliance",
+      "evidence_refs": [],
+      "objections": [
+        "missing_tests: microphase L2_1_M1 lacks test paths",
+        "missing_tests: microphase L2_2_M1 lacks test paths",
+        "missing_tests: microphase L2_3_M1 lacks test paths",
+        "missing_tests: microphase L2_3_M2 lacks test paths",
+        "missing_tests: microphase L2_4_M1 lacks test paths",
+        "missing_tests: microphase L2_4_M2 lacks test paths",
+        "missing_tests: microphase L2_5_M1 lacks test paths",
+        "missing_tests: microphase L2_5_M2 lacks test paths"
+      ],
+      "counterarguments": [],
+      "risk_flags": [],
+      "recommended_action": "",
+      "confidence": 1.0
+    },
+    {
+      "role": "mentor_judge",
+      "claim": "Plan accepted with minor observations",
+      "evidence_refs": [],
+      "objections": [],
+      "counterarguments": [],
+      "risk_flags": [],
+      "recommended_action": "accept_plan",
+      "confidence": 1.0
+    }
+  ],
+  "claims": [
+    "Mission MISSION_P29 is ready for execution",
+    "Challenging mission assumptions",
+    "Verifying evidence grounding",
+    "Auditing operational risks",
+    "Reviewing SDD/TDD compliance",
+    "Plan accepted with minor observations"
+  ],
+  "objections": [
+    "consensus_bias_risk: swarm confidence too high without dissent",
+    "missing_tests: microphase L2_1_M1 lacks test paths",
+    "missing_tests: microphase L2_2_M1 lacks test paths",
+    "missing_tests: microphase L2_3_M1 lacks test paths",
+    "missing_tests: microphase L2_3_M2 lacks test paths",
+    "missing_tests: microphase L2_4_M1 lacks test paths",
+    "missing_tests: microphase L2_4_M2 lacks test paths",
+    "missing_tests: microphase L2_5_M1 lacks test paths",
+    "missing_tests: microphase L2_5_M2 lacks test paths"
+  ],
+  "contradictions": [],
+  "evidence_gaps": [],
+  "risk_flags": [],
+  "judge_verdict": {
+    "verdict": "accept_plan",
+    "reason": "Plan accepted with minor observations",
+    "allowed_to_continue": true
+  },
+  "recommended_next_action": "accept_plan",
+  "evidence_refs": [
+    ".aiwg/reports/mission_plan_latest.json",
+    ".aiwg/reports/strategic_partner_swarm_latest.json"
+  ],
+  "confidence": 0.9500000000000001,
+  "generated_at": "2026-05-16T14:25:28Z"
+}

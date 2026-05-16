@@ -1,0 +1,21 @@
+{
+  "spec_id": "129",
+  "name": "Autonomy Contract Rules",
+  "rules": [
+    {
+      "id": "R1",
+      "description": "Credentials and .env access MUST be blocked.",
+      "priority": "CRITICAL"
+    },
+    {
+      "id": "R2",
+      "description": "Workspace mutation MUST require human approval in P28.",
+      "priority": "CRITICAL"
+    },
+    {
+      "id": "R3",
+      "description": "External and network actions MUST be denied in P28.",
+      "priority": "CRITICAL"
+    }
+  ]
+}

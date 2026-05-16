@@ -1,28 +1,29 @@
 {
-  "next_phase": "P27",
-  "name": "Debate & Adversarial Review Runtime",
-  "objective": "Implement a bounded debate and adversarial review runtime that allows role-specific agents to challenge plans, identify contradictions, test assumptions and produce evidence-backed objections before implementation proceeds.",
-  "why_now": "P26 introduced a bounded advisory swarm. P27 must add structured debate and adversarial review so the swarm does not become a consensus machine or amplify planner bias.",
+  "next_phase": "P29",
+  "name": "TrustedWorkstationMode",
+  "objective": "Implement a bounded TrustedWorkstationMode scaffold that can evaluate workstation-level actions under explicit authority contracts without executing dangerous operations by default.",
+  "why_now": "P28 defined the MissionAutonomyContract. P29 can now create a safe workstation-mode scaffold that classifies and gates local actions before any future execution capability.",
   "required_outputs": [
-    "layers/l2_brain/debate_review_runtime.py",
-    "layers/l2_brain/tests/test_debate_review_runtime.py",
-    ".aiwg/reports/plan_v1_phase_27_debate_review_runtime.md",
-    ".aiwg/reports/plan_v1_phase_27_debate_review_runtime.json",
-    ".aiwg/reports/debate_review_latest.json"
+    "layers/l2_brain/trusted_workstation_mode.py",
+    "layers/l2_brain/tests/test_trusted_workstation_mode.py",
+    ".aiwg/reports/plan_v1_phase_29_trusted_workstation_mode.md",
+    ".aiwg/reports/plan_v1_phase_29_trusted_workstation_mode.json",
+    ".aiwg/reports/trusted_workstation_mode_latest.json"
   ],
   "must_not_create": [
     "unbounded autonomy",
-    "workspace mutation without authorization",
-    "TrustedWorkstationMode",
-    "external paid calls without explicit config"
+    "credential access",
+    ".env reads",
+    "external posting",
+    "browser control without explicit future authorization",
+    "dangerous OS operations"
   ],
   "success_conditions": [
-    "debate roles defined",
-    "adversarial objections generated",
-    "evidence-backed claims required",
-    "contradiction detection implemented",
-    "judge/mentor verdict generated",
-    "no direct mutation authority",
+    "workstation action classifier implemented",
+    "authority gate integrated with MissionAutonomyContract",
+    "dangerous operations denied by default",
+    "safe dry-run mode implemented",
+    "no actual OS mutation by default",
     "tests pass"
   ]
 }

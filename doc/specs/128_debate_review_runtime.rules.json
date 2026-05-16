@@ -1,0 +1,21 @@
+{
+  "spec_id": "128",
+  "name": "Debate Review Rules",
+  "rules": [
+    {
+      "id": "R1",
+      "description": "Must include roles: proposer, skeptic, evidence_auditor, risk_challenger, implementation_reviewer, mentor_judge.",
+      "priority": "CRITICAL"
+    },
+    {
+      "id": "R2",
+      "description": "Must block if mission coherence failed.",
+      "priority": "CRITICAL"
+    },
+    {
+      "id": "R3",
+      "description": "Must detect and flag consensus bias if swarm confidence is too high without dissent.",
+      "priority": "HIGH"
+    }
+  ]
+}

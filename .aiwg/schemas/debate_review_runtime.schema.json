@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DebateReviewResult",
+  "type": "object",
+  "required": ["debate_id", "phase", "mission_id", "decision", "roles", "generated_at"],
+  "properties": {
+    "debate_id": { "type": "string" },
+    "phase": { "type": "string" },
+    "mission_id": { "type": "string" },
+    "decision": { "type": "string", "enum": ["accept_plan", "accept_with_objections", "repair_before_next_phase", "request_human_review", "block"] },
+    "roles": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["role", "claim"],
+        "properties": {
+          "role": { "type": "string" },
+          "claim": { "type": "string" },
+          "objections": { "type": "array", "items": { "type": "string" } },
+          "risk_flags": { "type": "array", "items": { "type": "string" } },
+          "confidence": { "type": "number" }
+        }
+      }
+    },
+    "judge_verdict": { "type": "object" },
+    "generated_at": { "type": "string", "format": "date-time" }
+  }
+}
