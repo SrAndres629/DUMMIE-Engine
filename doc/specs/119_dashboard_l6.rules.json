@@ -1,0 +1,18 @@
+{
+  "spec_id": "119_dashboard_l6",
+  "dashboard_l6": {
+    "required_files": [
+      "layers/l6_skin/dashboard_renderer.py",
+      ".aiwg/reports/dashboard_l6_latest.json",
+      ".aiwg/reports/dashboard_l6_latest.html"
+    ],
+    "required_fields": [
+      "current_phase",
+      "next_phase",
+      "restart_gate_decision",
+      "flywheel_decision",
+      "context_efficiency_decision"
+    ],
+    "static_html_only": true
+  }
+}

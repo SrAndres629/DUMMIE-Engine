@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ProcessMonitorSnapshot",
+  "type": "object",
+  "required": [
+    "current_phase",
+    "next_phase",
+    "restart_gate_decision",
+    "flywheel_decision",
+    "context_efficiency_decision",
+    "cache_hit_ratio",
+    "stale_findings",
+    "known_warnings",
+    "recommended_action",
+    "decision",
+    "warnings",
+    "evidence_refs",
+    "generated_at"
+  ],
+  "properties": {
+    "current_phase": {
+      "type": "string"
+    },
+    "next_phase": {
+      "type": "string"
+    },
+    "restart_gate_decision": {
+      "type": "string"
+    },
+    "flywheel_decision": {
+      "type": "string"
+    },
+    "context_efficiency_decision": {
+      "type": "string"
+    },
+    "cache_hit_ratio": {
+      "type": "number"
+    },
+    "stale_findings": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "known_warnings": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "recommended_action": {
+      "type": "string"
+    },
+    "decision": {
+      "type": "string",
+      "enum": [
+        "PASS",
+        "PASS_WITH_WARNINGS",
+        "FAIL"
+      ]
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "generated_at": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "spec_id": "117_cli_control_plane",
+  "cli_control_plane": {
+    "required_files": [
+      "layers/l2_brain/cli_control_plane.py",
+      ".aiwg/reports/cli_control_plane_latest.json"
+    ],
+    "required_commands": [
+      "status",
+      "health",
+      "latest-context",
+      "latest-frame",
+      "cache-summary",
+      "restart-gate",
+      "benchmark",
+      "flywheel",
+      "next-action",
+      "compress-context",
+      "dashboard-data"
+    ],
+    "required_result_fields": [
+      "command",
+      "decision",
+      "payload",
+      "warnings",
+      "evidence_refs"
+    ]
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "command": "dashboard-data",
+  "decision": "PASS",
+  "payload": {
+    "plan": "DUMMIE PLAN V1 \u2014 Cognitive Evolution Operating Layer",
+    "current_phase": "P17",
+    "next_phase": "P18",
+    "restart_gate_decision": "PASS",
+    "flywheel_decision": "continue_next_phase",
+    "context_efficiency_decision": "IMPROVED",
+    "cache_hit_ratio": 1.0,
+    "stale_findings": 4,
+    "latest_prompt_frame_ref": ".aiwg/reports/prompt_frame_latest.json",
+    "warnings": [],
+    "evidence_refs": [
+      ".aiwg/evolution/current_position.json",
+      ".aiwg/evolution/next_phase_seed.json",
+      ".aiwg/reports/restart_integration_gate_latest.json",
+      ".aiwg/reports/evolution_flywheel_latest.json",
+      ".aiwg/reports/context_efficiency_benchmark_latest.json",
+      ".aiwg/reports/prompt_cache_summary_latest.json",
+      ".aiwg/reports/stale_memory_report.json"
+    ],
+    "generated_at": "2026-05-16T13:43:51Z"
+  },
+  "warnings": [],
+  "evidence_refs": [
+    ".aiwg/reports/dashboard_l6_latest.json",
+    ".aiwg/reports/dashboard_l6_latest.html"
+  ],
+  "generated_at": "2026-05-16T13:43:51Z"
+}

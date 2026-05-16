@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CliCommandResult",
+  "type": "object",
+  "required": [
+    "command",
+    "decision",
+    "payload",
+    "warnings",
+    "evidence_refs",
+    "generated_at"
+  ],
+  "properties": {
+    "command": {
+      "type": "string"
+    },
+    "decision": {
+      "type": "string",
+      "enum": [
+        "PASS",
+        "PASS_WITH_WARNINGS",
+        "FAIL"
+      ]
+    },
+    "payload": {
+      "type": "object"
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "generated_at": {
+      "type": "string"
+    }
+  }
+}

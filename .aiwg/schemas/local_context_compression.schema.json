@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "LocalContextCompression",
+  "type": "object",
+  "required": [
+    "input_estimated_tokens",
+    "output_estimated_tokens",
+    "reduction_ratio",
+    "items_preserved",
+    "items_compressed",
+    "items_dropped",
+    "required_preserved",
+    "warnings",
+    "items",
+    "generated_at",
+    "source_refs"
+  ],
+  "properties": {
+    "input_estimated_tokens": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "output_estimated_tokens": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "reduction_ratio": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "items_preserved": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "items_compressed": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "items_dropped": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "required_preserved": {
+      "type": "boolean"
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "ref",
+          "decision",
+          "summary",
+          "input_estimated_tokens",
+          "output_estimated_tokens",
+          "required",
+          "reason"
+        ],
+        "properties": {
+          "ref": {
+            "type": "string"
+          },
+          "decision": {
+            "type": "string",
+            "enum": [
+              "preserve",
+              "compress",
+              "drop"
+            ]
+          },
+          "summary": {
+            "type": "string"
+          },
+          "input_estimated_tokens": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "output_estimated_tokens": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "reason": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "generated_at": {
+      "type": "string"
+    },
+    "source_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

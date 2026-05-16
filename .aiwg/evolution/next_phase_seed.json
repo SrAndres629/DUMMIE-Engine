@@ -1,25 +1,26 @@
 {
-  "next_phase": "P18",
-  "name": "CLI Control Plane",
-  "objective": "Expose compact local control commands for governed operations using prompt runtime, cache summaries, restart gate and flywheel decisions.",
-  "why_now": "P14-P17 implemented prompt frames, cache ledger, restart gate, benchmark, and flywheel. P18 should surface these capabilities through a practical CLI control interface.",
+  "next_phase": "P22",
+  "name": "Real Embedding Adapter",
+  "objective": "Implement a real or adapter-ready embedding interface that can replace deterministic hash similarity with provider-backed or local embedding vectors while preserving offline fallback.",
+  "why_now": "P18-P21 exposed runtime status, monitoring, dashboard artifacts and deterministic compression. P22 should upgrade semantic retrieval quality by introducing a real embedding adapter interface without breaking offline operation.",
   "required_outputs": [
-    "layers/l2_brain/cli_control_plane.py",
-    "layers/l2_brain/tests/test_cli_control_plane.py",
-    ".aiwg/reports/plan_v1_phase_18_cli_control_plane.md",
-    ".aiwg/reports/plan_v1_phase_18_cli_control_plane.json"
+    "layers/l2_brain/embedding_adapter.py",
+    "layers/l2_brain/tests/test_embedding_adapter.py",
+    ".aiwg/reports/plan_v1_phase_22_embedding_adapter.md",
+    ".aiwg/reports/plan_v1_phase_22_embedding_adapter.json"
   ],
   "must_not_create": [
     "swarm agents",
     "Obsidian adapter",
-    "dashboard",
-    "autonomy permissions"
+    "autonomy permissions",
+    "external paid calls without explicit config"
   ],
   "success_conditions": [
-    "CLI command map for runtime reports implemented",
-    "prompt frame and cache summaries inspectable via CLI",
-    "restart gate and benchmark invocable via CLI",
-    "flywheel decision inspectable via CLI",
-    "tests pass"
+    "embedding adapter interface implemented",
+    "offline deterministic fallback preserved",
+    "real provider hook defined but disabled by default",
+    "vault embedding index can consume adapter",
+    "tests pass",
+    "no secrets or API keys required"
   ]
 }

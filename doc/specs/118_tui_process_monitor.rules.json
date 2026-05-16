@@ -1,0 +1,18 @@
+{
+  "spec_id": "118_tui_process_monitor",
+  "tui_process_monitor": {
+    "required_files": [
+      "layers/l2_brain/tui_process_monitor.py",
+      ".aiwg/reports/process_monitor_latest.json",
+      ".aiwg/reports/process_monitor_latest.txt"
+    ],
+    "required_fields": [
+      "current_phase",
+      "next_phase",
+      "restart_gate_decision",
+      "flywheel_decision",
+      "decision",
+      "recommended_action"
+    ]
+  }
+}

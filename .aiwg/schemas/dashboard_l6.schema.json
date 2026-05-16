@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DashboardState",
+  "type": "object",
+  "required": [
+    "plan",
+    "current_phase",
+    "next_phase",
+    "restart_gate_decision",
+    "flywheel_decision",
+    "context_efficiency_decision",
+    "cache_hit_ratio",
+    "stale_findings",
+    "latest_prompt_frame_ref",
+    "warnings",
+    "evidence_refs",
+    "generated_at"
+  ],
+  "properties": {
+    "plan": {
+      "type": "string"
+    },
+    "current_phase": {
+      "type": "string"
+    },
+    "next_phase": {
+      "type": "string"
+    },
+    "restart_gate_decision": {
+      "type": "string"
+    },
+    "flywheel_decision": {
+      "type": "string"
+    },
+    "context_efficiency_decision": {
+      "type": "string"
+    },
+    "cache_hit_ratio": {
+      "type": "number"
+    },
+    "stale_findings": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "latest_prompt_frame_ref": {
+      "type": "string"
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "generated_at": {
+      "type": "string"
+    }
+  }
+}

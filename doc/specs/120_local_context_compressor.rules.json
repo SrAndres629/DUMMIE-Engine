@@ -1,0 +1,23 @@
+{
+  "spec_id": "120_local_context_compressor",
+  "local_context_compressor": {
+    "required_files": [
+      "layers/l2_brain/local_context_compressor.py",
+      ".aiwg/reports/local_context_compression_latest.json"
+    ],
+    "required_fields": [
+      "input_estimated_tokens",
+      "output_estimated_tokens",
+      "reduction_ratio",
+      "items_preserved",
+      "items_compressed",
+      "items_dropped",
+      "required_preserved"
+    ],
+    "required_decisions": [
+      "preserve",
+      "compress",
+      "drop"
+    ]
+  }
+}

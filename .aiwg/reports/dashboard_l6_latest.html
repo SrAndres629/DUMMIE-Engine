@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DUMMIE L6 Dashboard</title>
+  <style>
+    :root { --bg:#f3f6e9; --card:#ffffff; --ink:#1f2a1f; --accent:#276749; --warn:#b7791f; }
+    body { margin:0; background:linear-gradient(135deg,#f3f6e9,#e8f0df); color:var(--ink); font-family:'IBM Plex Sans', sans-serif; }
+    .wrap { max-width:980px; margin:24px auto; padding:0 16px; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px; }
+    .card { background:var(--card); border:1px solid #d7e2cd; border-radius:12px; padding:14px; box-shadow:0 4px 10px rgba(0,0,0,.05); }
+    h1 { margin:0 0 12px; font-size:1.4rem; color:var(--accent); }
+    .k { font-size:.78rem; text-transform:uppercase; opacity:.75; }
+    .v { font-size:1.05rem; font-weight:700; }
+    ul { margin:0; padding-left:18px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>DUMMIE Control Dashboard (L6 MVP)</h1>
+    <div class="grid">
+      <div class="card"><div class="k">Plan State</div><div class="v">DUMMIE PLAN V1 — Cognitive Evolution Operating Layer</div></div>
+      <div class="card"><div class="k">Current Phase</div><div class="v">P17</div></div>
+      <div class="card"><div class="k">Next Phase</div><div class="v">P18</div></div>
+      <div class="card"><div class="k">Restart Gate</div><div class="v">PASS</div></div>
+      <div class="card"><div class="k">Flywheel</div><div class="v">continue_next_phase</div></div>
+      <div class="card"><div class="k">Context Efficiency</div><div class="v">IMPROVED</div></div>
+      <div class="card"><div class="k">Cache Hit Ratio</div><div class="v">1.000</div></div>
+      <div class="card"><div class="k">Stale Findings</div><div class="v">4</div></div>
+      <div class="card"><div class="k">Prompt Frame Ref</div><div class="v">.aiwg/reports/prompt_frame_latest.json</div></div>
+      <div class="card"><div class="k">Warnings</div><ul><li>none</li></ul></div>
+    </div>
+  </div>
+</body>
+</html>
