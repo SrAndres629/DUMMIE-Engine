@@ -17,6 +17,9 @@ if __package__ in {None, ""}:
         sys.path.append(str(_L2))
 
 from layers.l2_brain.local_context_compressor import LocalContextCompressor
+from layers.l2_brain.mission_orchestrator_dag import build_dag_from_mission_plan
+from layers.l2_brain.mission_planner import create_mission_plan
+from layers.l2_brain.repo_probe_runner import run_repo_probe
 from layers.l2_brain.state_coherence_guard import run_state_coherence_guard
 from layers.l2_brain.tui_process_monitor import TuiProcessMonitor
 from layers.l6_skin.dashboard_renderer import DashboardRenderer
@@ -55,6 +58,10 @@ class CliControlPlane:
             "compress-context": self._cmd_compress_context,
             "dashboard-data": self._cmd_dashboard_data,
             "state-coherence": self._cmd_state_coherence,
+            "repo-probe": self._cmd_repo_probe,
+            "mission-plan": self._cmd_mission_plan,
+            "mission-dag": self._cmd_mission_dag,
+            "next-node": self._cmd_next_node,
         }
 
         if command not in handlers:
@@ -179,6 +186,84 @@ class CliControlPlane:
             payload=report.to_dict(),
             warnings=[f.message for f in report.findings if f.severity == "WARNING"],
             evidence_refs=[".aiwg/reports/state_coherence_guard_latest.json"],
+            generated_at=self._utc_now(),
+        )
+
+    def _cmd_repo_probe(self) -> CliCommandResult:
+        result = run_repo_probe(root=self.aiwg_root.parent)
+        return CliCommandResult(
+            command="repo-probe",
+            decision=result.decision,
+            payload=result.to_dict(),
+            warnings=[f.message for f in result.findings if f.severity == "WARNING"],
+            evidence_refs=[".aiwg/reports/repo_probe_latest.json"],
+            generated_at=self._utc_now(),
+        )
+
+    def _cmd_mission_plan(self) -> CliCommandResult:
+        plan = create_mission_plan(root=self.aiwg_root.parent)
+        return CliCommandResult(
+            command="mission-plan",
+            decision=plan.decision,
+            payload=plan.to_dict(),
+            warnings=plan.risk_register,
+            evidence_refs=[
+                ".aiwg/reports/mission_plan_latest.json",
+                ".aiwg/reports/mission_plan_latest.md",
+            ],
+            generated_at=self._utc_now(),
+        )
+
+    def _cmd_mission_dag(self) -> CliCommandResult:
+        # We need a plan first
+        plan_path = self.reports_root / "mission_plan_latest.json"
+        if not plan_path.exists():
+             self._cmd_mission_plan()
+        
+        try:
+            with open(plan_path, "r") as f:
+                plan_data = json.load(f)
+            # Re-wrap in a simple object for the DAG builder
+            class PlanMock: pass
+            plan = PlanMock()
+            plan.mission_id = plan_data["mission_id"]
+            plan.l2_phases = [type("Phase", (), p) for p in plan_data["l2_phases"]]
+            plan.l3_microphases = [type("MicroPhase", (), m) for m in plan_data["l3_microphases"]]
+            
+            dag = build_dag_from_mission_plan(plan, root=self.aiwg_root.parent)
+            return CliCommandResult(
+                command="mission-dag",
+                decision=dag.decision,
+                payload=dag.to_dict(),
+                warnings=[],
+                evidence_refs=[".aiwg/reports/mission_orchestrator_dag_latest.json"],
+                generated_at=self._utc_now(),
+            )
+        except Exception as exc:
+            return CliCommandResult(
+                command="mission-dag",
+                decision="FAIL",
+                payload={"error": str(exc)},
+                generated_at=self._utc_now(),
+            )
+
+    def _cmd_next_node(self) -> CliCommandResult:
+        dag_path = self.reports_root / "mission_orchestrator_dag_latest.json"
+        if not dag_path.exists():
+            return CliCommandResult(
+                command="next-node",
+                decision="FAIL",
+                payload={"error": "DAG missing. Run mission-dag first."},
+                generated_at=self._utc_now(),
+            )
+        
+        data = self._read_latest("next_executable_node_latest.json")
+        return CliCommandResult(
+            command="next-node",
+            decision=data.decision,
+            payload=data.payload,
+            warnings=data.warnings,
+            evidence_refs=data.evidence_refs,
             generated_at=self._utc_now(),
         )
 

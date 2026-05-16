@@ -1,0 +1,12 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MissionDAG",
+  "type": "object",
+  "required": ["mission_id", "nodes", "decision", "generated_at"],
+  "properties": {
+    "mission_id": { "type": "string" },
+    "nodes": { "type": "object" },
+    "decision": { "type": "string" },
+    "generated_at": { "type": "string", "format": "date-time" }
+  }
+}

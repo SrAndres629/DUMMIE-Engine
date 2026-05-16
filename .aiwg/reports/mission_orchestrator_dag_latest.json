@@ -1,0 +1,256 @@
+{
+  "mission_id": "MISSION_P23",
+  "nodes": {
+    "START": {
+      "node_id": "START",
+      "node_type": "L1",
+      "title": "Start MISSION_P23",
+      "status": "ready",
+      "depends_on": [],
+      "produces": [],
+      "tests": [],
+      "risk_level": "low",
+      "evidence_refs": []
+    },
+    "L2_1": {
+      "node_id": "L2_1",
+      "node_type": "L2",
+      "title": "Produce layers/l2_brain/repo_probe_runner.py",
+      "status": "pending",
+      "depends_on": [
+        "L2_1_M2"
+      ],
+      "produces": [
+        "layers/l2_brain/repo_probe_runner.py"
+      ],
+      "tests": [],
+      "risk_level": "low",
+      "evidence_refs": []
+    },
+    "L2_1_M1": {
+      "node_id": "L2_1_M1",
+      "node_type": "L3",
+      "title": "Draft layers/l2_brain/repo_probe_runner.py",
+      "status": "pending",
+      "depends_on": [
+        "START"
+      ],
+      "produces": [
+        "layers/l2_brain/repo_probe_runner.py"
+      ],
+      "tests": [],
+      "risk_level": "low",
+      "evidence_refs": []
+    },
+    "L2_1_M2": {
+      "node_id": "L2_1_M2",
+      "node_type": "L3",
+      "title": "Verify layers/l2_brain/repo_probe_runner.py",
+      "status": "pending",
+      "depends_on": [
+        "L2_1_M1"
+      ],
+      "produces": [],
+      "tests": [
+        "tests/test_repo_probe_runner.py"
+      ],
+      "risk_level": "low",
+      "evidence_refs": []
+    },
+    "L2_2": {
+      "node_id": "L2_2",
+      "node_type": "L2",
+      "title": "Produce layers/l2_brain/tests/test_repo_probe_runner.py",
+      "status": "pending",
+      "depends_on": [
+        "L2_2_M2"
+      ],
+      "produces": [
+        "layers/l2_brain/tests/test_repo_probe_runner.py"
+      ],
+      "tests": [],
+      "risk_level": "low",
+      "evidence_refs": []
+    },
+    "L2_2_M1": {
+      "node_id": "L2_2_M1",
+      "node_type": "L3",
+      "title": "Draft layers/l2_brain/tests/test_repo_probe_runner.py",
+      "status": "pending",
+      "depends_on": [
+        "L2_1"
+      ],
+      "produces": [
+        "layers/l2_brain/tests/test_repo_probe_runner.py"
+      ],
+      "tests": [],
+      "risk_level": "low",
+      "evidence_refs": []
+    },
+    "L2_2_M2": {
+      "node_id": "L2_2_M2",
+      "node_type": "L3",
+      "title": "Verify layers/l2_brain/tests/test_repo_probe_runner.py",
+      "status": "pending",
+      "depends_on": [
+        "L2_2_M1"
+      ],
+      "produces": [],
+      "tests": [
+        "tests/test_test_repo_probe_runner.py"
+      ],
+      "risk_level": "low",
+      "evidence_refs": []
+    },
+    "L2_3": {
+      "node_id": "L2_3",
+      "node_type": "L2",
+      "title": "Produce .aiwg/reports/plan_v1_phase_23_repo_probe_runner.md",
+      "status": "pending",
+      "depends_on": [
+        "L2_3_M2"
+      ],
+      "produces": [
+        ".aiwg/reports/plan_v1_phase_23_repo_probe_runner.md"
+      ],
+      "tests": [],
+      "risk_level": "low",
+      "evidence_refs": []
+    },
+    "L2_3_M1": {
+      "node_id": "L2_3_M1",
+      "node_type": "L3",
+      "title": "Draft .aiwg/reports/plan_v1_phase_23_repo_probe_runner.md",
+      "status": "pending",
+      "depends_on": [
+        "L2_2"
+      ],
+      "produces": [
+        ".aiwg/reports/plan_v1_phase_23_repo_probe_runner.md"
+      ],
+      "tests": [],
+      "risk_level": "low",
+      "evidence_refs": []
+    },
+    "L2_3_M2": {
+      "node_id": "L2_3_M2",
+      "node_type": "L3",
+      "title": "Verify .aiwg/reports/plan_v1_phase_23_repo_probe_runner.md",
+      "status": "pending",
+      "depends_on": [
+        "L2_3_M1"
+      ],
+      "produces": [],
+      "tests": [
+        "tests/test_plan_v1_phase_23_repo_probe_runner.py"
+      ],
+      "risk_level": "low",
+      "evidence_refs": []
+    },
+    "L2_4": {
+      "node_id": "L2_4",
+      "node_type": "L2",
+      "title": "Produce .aiwg/reports/plan_v1_phase_23_repo_probe_runner.json",
+      "status": "pending",
+      "depends_on": [
+        "L2_4_M2"
+      ],
+      "produces": [
+        ".aiwg/reports/plan_v1_phase_23_repo_probe_runner.json"
+      ],
+      "tests": [],
+      "risk_level": "low",
+      "evidence_refs": []
+    },
+    "L2_4_M1": {
+      "node_id": "L2_4_M1",
+      "node_type": "L3",
+      "title": "Draft .aiwg/reports/plan_v1_phase_23_repo_probe_runner.json",
+      "status": "pending",
+      "depends_on": [
+        "L2_3"
+      ],
+      "produces": [
+        ".aiwg/reports/plan_v1_phase_23_repo_probe_runner.json"
+      ],
+      "tests": [],
+      "risk_level": "low",
+      "evidence_refs": []
+    },
+    "L2_4_M2": {
+      "node_id": "L2_4_M2",
+      "node_type": "L3",
+      "title": "Verify .aiwg/reports/plan_v1_phase_23_repo_probe_runner.json",
+      "status": "pending",
+      "depends_on": [
+        "L2_4_M1"
+      ],
+      "produces": [],
+      "tests": [
+        "tests/test_plan_v1_phase_23_repo_probe_runner.py"
+      ],
+      "risk_level": "low",
+      "evidence_refs": []
+    },
+    "L2_5": {
+      "node_id": "L2_5",
+      "node_type": "L2",
+      "title": "Produce .aiwg/reports/repo_probe_latest.json",
+      "status": "pending",
+      "depends_on": [
+        "L2_5_M2"
+      ],
+      "produces": [
+        ".aiwg/reports/repo_probe_latest.json"
+      ],
+      "tests": [],
+      "risk_level": "low",
+      "evidence_refs": []
+    },
+    "L2_5_M1": {
+      "node_id": "L2_5_M1",
+      "node_type": "L3",
+      "title": "Draft .aiwg/reports/repo_probe_latest.json",
+      "status": "pending",
+      "depends_on": [
+        "L2_4"
+      ],
+      "produces": [
+        ".aiwg/reports/repo_probe_latest.json"
+      ],
+      "tests": [],
+      "risk_level": "low",
+      "evidence_refs": []
+    },
+    "L2_5_M2": {
+      "node_id": "L2_5_M2",
+      "node_type": "L3",
+      "title": "Verify .aiwg/reports/repo_probe_latest.json",
+      "status": "pending",
+      "depends_on": [
+        "L2_5_M1"
+      ],
+      "produces": [],
+      "tests": [
+        "tests/test_repo_probe_latest.py"
+      ],
+      "risk_level": "low",
+      "evidence_refs": []
+    },
+    "END": {
+      "node_id": "END",
+      "node_type": "validation",
+      "title": "Final Mission Validation",
+      "status": "pending",
+      "depends_on": [
+        "L2_5"
+      ],
+      "produces": [],
+      "tests": [],
+      "risk_level": "low",
+      "evidence_refs": []
+    }
+  },
+  "decision": "PASS",
+  "generated_at": "2026-05-16T14:02:11Z"
+}

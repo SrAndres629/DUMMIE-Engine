@@ -1,0 +1,21 @@
+{
+  "spec_id": "124",
+  "name": "Mission Planner Rules",
+  "rules": [
+    {
+      "id": "R1",
+      "description": "Must use next_phase_seed as the primary source for objectives.",
+      "priority": "HIGH"
+    },
+    {
+      "id": "R2",
+      "description": "Every runtime microphase must include a verification/test step.",
+      "priority": "CRITICAL"
+    },
+    {
+      "id": "R3",
+      "description": "Plan must be exported to both JSON and Markdown.",
+      "priority": "MEDIUM"
+    }
+  ]
+}

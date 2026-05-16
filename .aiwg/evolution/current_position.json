@@ -1,18 +1,17 @@
 {
   "plan": "DUMMIE PLAN V1 — Cognitive Evolution Operating Layer",
-  "current_phase": "P22",
-  "current_phase_name": "Real Embedding Adapter",
-  "last_completed_phase": "P21",
-  "completed_bundle": "P21.1-P22",
-  "next_required_phase": "P23",
-  "next_required_phase_name": "Polyglot RepoProbeRunner",
-  "current_block": "semantic_retrieval_and_repo_probes",
+  "current_phase": "P25",
+  "current_phase_name": "MissionOrchestrator DAG",
+  "last_completed_phase": "P22",
+  "completed_bundle": "P23-P25",
+  "next_required_phase": "P26",
+  "next_required_phase_name": "StrategicPartnerSwarm",
+  "current_block": "mission_planning_and_orchestration",
   "forbidden_skips": [
-    "do not start swarm before lifecycle and context governance",
     "do not start autonomy before MissionAutonomyContract",
-    "do not start Obsidian before internal notes and truth hierarchy",
     "do not start TrustedWorkstationMode before permission contracts",
-    "do not treat dashboard as source of truth"
+    "do not treat dashboard as source of truth",
+    "do not let swarm mutate workspace without mission DAG and authorization"
   ],
   "canonical_roadmap_files": [
     ".aiwg/evolution/phases.yaml",

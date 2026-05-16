@@ -1,28 +1,29 @@
 {
-  "next_phase": "P23",
-  "name": "Polyglot RepoProbeRunner",
-  "objective": "Implement deterministic repo probes that inspect DUMMIE's polyglot layers, languages, specs, tests and runtime capabilities so global project understanding is grounded in physical evidence instead of chat memory.",
-  "why_now": "P22 introduced an embedding adapter interface with offline fallback. P23 must add physical repo probes so retrieval and world-model updates can be grounded in fresh polyglot evidence.",
+  "next_phase": "P26",
+  "name": "StrategicPartnerSwarm",
+  "objective": "Implement a bounded strategic partner swarm runtime that creates role-specific advisory agents for planning, critique, validation and execution recommendations without granting autonomous mutation authority.",
+  "why_now": "P23-P25 implemented repo probes, SDD/TDD mission planning and MissionOrchestrator DAG. P26 can now introduce a controlled swarm that reasons over physical evidence and mission DAGs instead of free-form chat memory.",
   "required_outputs": [
-    "layers/l2_brain/repo_probe_runner.py",
-    "layers/l2_brain/tests/test_repo_probe_runner.py",
-    ".aiwg/reports/plan_v1_phase_23_repo_probe_runner.md",
-    ".aiwg/reports/plan_v1_phase_23_repo_probe_runner.json",
-    ".aiwg/reports/repo_probe_latest.json"
+    "layers/l2_brain/strategic_partner_swarm.py",
+    "layers/l2_brain/tests/test_strategic_partner_swarm.py",
+    ".aiwg/reports/plan_v1_phase_26_strategic_partner_swarm.md",
+    ".aiwg/reports/plan_v1_phase_26_strategic_partner_swarm.json",
+    ".aiwg/reports/strategic_partner_swarm_latest.json"
   ],
   "must_not_create": [
-    "swarm agents",
+    "unbounded autonomy",
+    "workspace mutation without authorization",
+    "TrustedWorkstationMode",
     "Obsidian adapter",
-    "autonomy permissions",
     "external paid calls without explicit config"
   ],
   "success_conditions": [
-    "repo probe runner implemented",
-    "polyglot language probes implemented",
-    "layer probes implemented",
-    "spec/test probes implemented",
-    "fresh physical evidence report generated",
-    "tests pass",
-    "no secrets or API keys required"
+    "swarm roles defined",
+    "swarm consumes mission DAG",
+    "swarm produces advisory outputs only",
+    "critic/reviewer role included",
+    "judge/mentor role included",
+    "no direct mutation authority",
+    "tests pass"
   ]
 }

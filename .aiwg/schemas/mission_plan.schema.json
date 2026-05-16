@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MissionPlan",
+  "type": "object",
+  "required": ["mission_id", "objective", "l1_goal", "l2_phases", "l3_microphases", "decision", "generated_at"],
+  "properties": {
+    "mission_id": { "type": "string" },
+    "objective": { "type": "string" },
+    "source_phase": { "type": "string" },
+    "current_phase": { "type": "string" },
+    "next_phase": { "type": "string" },
+    "l1_goal": { "type": "object" },
+    "l2_phases": { "type": "array" },
+    "l3_microphases": { "type": "array" },
+    "sdd_requirements": { "type": "array" },
+    "tdd_requirements": { "type": "array" },
+    "evidence_requirements": { "type": "array" },
+    "risk_register": { "type": "array" },
+    "decision": { "type": "string" },
+    "generated_at": { "type": "string", "format": "date-time" }
+  }
+}

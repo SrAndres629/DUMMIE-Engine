@@ -1,0 +1,21 @@
+{
+  "spec_id": "123",
+  "name": "Repo Probe Runner Rules",
+  "rules": [
+    {
+      "id": "R1",
+      "description": "Must use git ls-files for file discovery.",
+      "priority": "HIGH"
+    },
+    {
+      "id": "R2",
+      "description": "Must report missing critical runtime modules as ERROR.",
+      "priority": "CRITICAL"
+    },
+    {
+      "id": "R3",
+      "description": "Must detect Python-only bias if other languages are absent.",
+      "priority": "MEDIUM"
+    }
+  ]
+}

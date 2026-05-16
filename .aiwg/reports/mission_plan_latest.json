@@ -1,0 +1,254 @@
+{
+  "mission_id": "MISSION_P23",
+  "objective": "Implement deterministic repo probes that inspect DUMMIE's polyglot layers, languages, specs, tests and runtime capabilities so global project understanding is grounded in physical evidence instead of chat memory.",
+  "source_phase": "P22",
+  "current_phase": "P22",
+  "next_phase": "P23",
+  "l1_goal": {
+    "title": "Polyglot RepoProbeRunner",
+    "success_conditions": [
+      "repo probe runner implemented",
+      "polyglot language probes implemented",
+      "layer probes implemented",
+      "spec/test probes implemented",
+      "fresh physical evidence report generated",
+      "tests pass",
+      "no secrets or API keys required"
+    ]
+  },
+  "l2_phases": [
+    {
+      "phase_id": "L2_1",
+      "title": "Produce layers/l2_brain/repo_probe_runner.py",
+      "purpose": "Implement and verify layers/l2_brain/repo_probe_runner.py",
+      "inputs": [],
+      "outputs": [
+        "layers/l2_brain/repo_probe_runner.py"
+      ],
+      "required_specs": [],
+      "required_tests": [],
+      "acceptance_criteria": [
+        "File layers/l2_brain/repo_probe_runner.py exists",
+        "Tests for layers/l2_brain/repo_probe_runner.py pass"
+      ],
+      "risks": [],
+      "depends_on": []
+    },
+    {
+      "phase_id": "L2_2",
+      "title": "Produce layers/l2_brain/tests/test_repo_probe_runner.py",
+      "purpose": "Implement and verify layers/l2_brain/tests/test_repo_probe_runner.py",
+      "inputs": [],
+      "outputs": [
+        "layers/l2_brain/tests/test_repo_probe_runner.py"
+      ],
+      "required_specs": [],
+      "required_tests": [],
+      "acceptance_criteria": [
+        "File layers/l2_brain/tests/test_repo_probe_runner.py exists",
+        "Tests for layers/l2_brain/tests/test_repo_probe_runner.py pass"
+      ],
+      "risks": [],
+      "depends_on": []
+    },
+    {
+      "phase_id": "L2_3",
+      "title": "Produce .aiwg/reports/plan_v1_phase_23_repo_probe_runner.md",
+      "purpose": "Implement and verify .aiwg/reports/plan_v1_phase_23_repo_probe_runner.md",
+      "inputs": [],
+      "outputs": [
+        ".aiwg/reports/plan_v1_phase_23_repo_probe_runner.md"
+      ],
+      "required_specs": [],
+      "required_tests": [],
+      "acceptance_criteria": [
+        "File .aiwg/reports/plan_v1_phase_23_repo_probe_runner.md exists",
+        "Tests for .aiwg/reports/plan_v1_phase_23_repo_probe_runner.md pass"
+      ],
+      "risks": [],
+      "depends_on": []
+    },
+    {
+      "phase_id": "L2_4",
+      "title": "Produce .aiwg/reports/plan_v1_phase_23_repo_probe_runner.json",
+      "purpose": "Implement and verify .aiwg/reports/plan_v1_phase_23_repo_probe_runner.json",
+      "inputs": [],
+      "outputs": [
+        ".aiwg/reports/plan_v1_phase_23_repo_probe_runner.json"
+      ],
+      "required_specs": [],
+      "required_tests": [],
+      "acceptance_criteria": [
+        "File .aiwg/reports/plan_v1_phase_23_repo_probe_runner.json exists",
+        "Tests for .aiwg/reports/plan_v1_phase_23_repo_probe_runner.json pass"
+      ],
+      "risks": [],
+      "depends_on": []
+    },
+    {
+      "phase_id": "L2_5",
+      "title": "Produce .aiwg/reports/repo_probe_latest.json",
+      "purpose": "Implement and verify .aiwg/reports/repo_probe_latest.json",
+      "inputs": [],
+      "outputs": [
+        ".aiwg/reports/repo_probe_latest.json"
+      ],
+      "required_specs": [],
+      "required_tests": [],
+      "acceptance_criteria": [
+        "File .aiwg/reports/repo_probe_latest.json exists",
+        "Tests for .aiwg/reports/repo_probe_latest.json pass"
+      ],
+      "risks": [],
+      "depends_on": []
+    }
+  ],
+  "l3_microphases": [
+    {
+      "microphase_id": "L2_1_M1",
+      "parent_phase_id": "L2_1",
+      "title": "Draft layers/l2_brain/repo_probe_runner.py",
+      "action": "Create/Update layers/l2_brain/repo_probe_runner.py",
+      "expected_file_changes": [
+        "layers/l2_brain/repo_probe_runner.py"
+      ],
+      "tests_to_run": [],
+      "validation_commands": [],
+      "rollback_notes": "",
+      "done_criteria": ""
+    },
+    {
+      "microphase_id": "L2_1_M2",
+      "parent_phase_id": "L2_1",
+      "title": "Verify layers/l2_brain/repo_probe_runner.py",
+      "action": "Run tests for layers/l2_brain/repo_probe_runner.py",
+      "expected_file_changes": [],
+      "tests_to_run": [
+        "tests/test_repo_probe_runner.py"
+      ],
+      "validation_commands": [],
+      "rollback_notes": "",
+      "done_criteria": ""
+    },
+    {
+      "microphase_id": "L2_2_M1",
+      "parent_phase_id": "L2_2",
+      "title": "Draft layers/l2_brain/tests/test_repo_probe_runner.py",
+      "action": "Create/Update layers/l2_brain/tests/test_repo_probe_runner.py",
+      "expected_file_changes": [
+        "layers/l2_brain/tests/test_repo_probe_runner.py"
+      ],
+      "tests_to_run": [],
+      "validation_commands": [],
+      "rollback_notes": "",
+      "done_criteria": ""
+    },
+    {
+      "microphase_id": "L2_2_M2",
+      "parent_phase_id": "L2_2",
+      "title": "Verify layers/l2_brain/tests/test_repo_probe_runner.py",
+      "action": "Run tests for layers/l2_brain/tests/test_repo_probe_runner.py",
+      "expected_file_changes": [],
+      "tests_to_run": [
+        "tests/test_test_repo_probe_runner.py"
+      ],
+      "validation_commands": [],
+      "rollback_notes": "",
+      "done_criteria": ""
+    },
+    {
+      "microphase_id": "L2_3_M1",
+      "parent_phase_id": "L2_3",
+      "title": "Draft .aiwg/reports/plan_v1_phase_23_repo_probe_runner.md",
+      "action": "Create/Update .aiwg/reports/plan_v1_phase_23_repo_probe_runner.md",
+      "expected_file_changes": [
+        ".aiwg/reports/plan_v1_phase_23_repo_probe_runner.md"
+      ],
+      "tests_to_run": [],
+      "validation_commands": [],
+      "rollback_notes": "",
+      "done_criteria": ""
+    },
+    {
+      "microphase_id": "L2_3_M2",
+      "parent_phase_id": "L2_3",
+      "title": "Verify .aiwg/reports/plan_v1_phase_23_repo_probe_runner.md",
+      "action": "Run tests for .aiwg/reports/plan_v1_phase_23_repo_probe_runner.md",
+      "expected_file_changes": [],
+      "tests_to_run": [
+        "tests/test_plan_v1_phase_23_repo_probe_runner.py"
+      ],
+      "validation_commands": [],
+      "rollback_notes": "",
+      "done_criteria": ""
+    },
+    {
+      "microphase_id": "L2_4_M1",
+      "parent_phase_id": "L2_4",
+      "title": "Draft .aiwg/reports/plan_v1_phase_23_repo_probe_runner.json",
+      "action": "Create/Update .aiwg/reports/plan_v1_phase_23_repo_probe_runner.json",
+      "expected_file_changes": [
+        ".aiwg/reports/plan_v1_phase_23_repo_probe_runner.json"
+      ],
+      "tests_to_run": [],
+      "validation_commands": [],
+      "rollback_notes": "",
+      "done_criteria": ""
+    },
+    {
+      "microphase_id": "L2_4_M2",
+      "parent_phase_id": "L2_4",
+      "title": "Verify .aiwg/reports/plan_v1_phase_23_repo_probe_runner.json",
+      "action": "Run tests for .aiwg/reports/plan_v1_phase_23_repo_probe_runner.json",
+      "expected_file_changes": [],
+      "tests_to_run": [
+        "tests/test_plan_v1_phase_23_repo_probe_runner.py"
+      ],
+      "validation_commands": [],
+      "rollback_notes": "",
+      "done_criteria": ""
+    },
+    {
+      "microphase_id": "L2_5_M1",
+      "parent_phase_id": "L2_5",
+      "title": "Draft .aiwg/reports/repo_probe_latest.json",
+      "action": "Create/Update .aiwg/reports/repo_probe_latest.json",
+      "expected_file_changes": [
+        ".aiwg/reports/repo_probe_latest.json"
+      ],
+      "tests_to_run": [],
+      "validation_commands": [],
+      "rollback_notes": "",
+      "done_criteria": ""
+    },
+    {
+      "microphase_id": "L2_5_M2",
+      "parent_phase_id": "L2_5",
+      "title": "Verify .aiwg/reports/repo_probe_latest.json",
+      "action": "Run tests for .aiwg/reports/repo_probe_latest.json",
+      "expected_file_changes": [],
+      "tests_to_run": [
+        "tests/test_repo_probe_latest.py"
+      ],
+      "validation_commands": [],
+      "rollback_notes": "",
+      "done_criteria": ""
+    }
+  ],
+  "sdd_requirements": [
+    "SDD: Every change must have a spec triplet",
+    "SDD: No runtime without spec"
+  ],
+  "tdd_requirements": [
+    "TDD: Every runtime module must have matching tests",
+    "TDD: Tests must pass before commit"
+  ],
+  "evidence_requirements": [
+    "Repo probe must reflect changes",
+    "Latest outputs must be coherent"
+  ],
+  "risk_register": [],
+  "blocked_actions": [],
+  "decision": "PASS",
+  "generated_at": "2026-05-16T14:02:11Z"
+}

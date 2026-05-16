@@ -1,0 +1,21 @@
+{
+  "spec_id": "125",
+  "name": "Mission Orchestrator DAG Rules",
+  "rules": [
+    {
+      "id": "R1",
+      "description": "Must fail the DAG creation if a cycle is detected.",
+      "priority": "CRITICAL"
+    },
+    {
+      "id": "R2",
+      "description": "Must correctly identify 'ready' nodes based on dependency status.",
+      "priority": "HIGH"
+    },
+    {
+      "id": "R3",
+      "description": "Commit nodes must depend on validation/test nodes.",
+      "priority": "HIGH"
+    }
+  ]
+}
