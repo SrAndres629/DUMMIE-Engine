@@ -87,8 +87,17 @@ class MemorySpineEntrypoint:
                     if not sid:
                         continue
                     for ep in self._session_store.iter_learning_episodes(sid):
-                        ep_text = (ep.get("mission_id", "") + " " + ep.get("outcome", "")).lower()
+                        # Join all relevant fields for keyword scanning
+                        searchable_fields = [
+                            ep.get("mission_id", ""),
+                            ep.get("outcome", ""),
+                            ep.get("query", ""),
+                            ep.get("intent", ""),
+                            ep.get("answer", "")
+                        ]
+                        ep_text = " ".join(searchable_fields).lower()
                         if any(kw in ep_text for kw in keywords):
+
                             learning_episode_refs.append(f"sid:{sid}/ep:{ep.get('episode_id')}")
                             evidence_refs.append(f".aiwg/sessions/{sid}/learning_episodes.jsonl")
             except Exception as exc:

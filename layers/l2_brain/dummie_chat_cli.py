@@ -123,7 +123,32 @@ class DummieChatCli:
         if memory_result.status == "DEGRADED_WITH_FILE_BACKED_MEMORY":
             response.warnings.append("Memory spine is DEGRADED. Using file-backed fallback.")
 
+        # Record Learning Episode (Cognitive Loop) - Operationalization Pack 4
+        try:
+            from layers.l2_brain.session_store import SessionStore
+            # aiwg_root is .aiwg, SessionStore needs repo_root
+            store = SessionStore(self.aiwg_root.resolve().parent)
+            
+            # Ensure CURRENT session exists
+            try:
+                store.load_session("CURRENT")
+            except FileNotFoundError:
+                store.create_session("CURRENT", {"description": "Auto-generated daily cockpit session"})
+
+            episode = {
+                "query": query_text,
+                "intent": intent,
+                "answer": response.answer,
+                "timestamp": self._utc_now(),
+                "evidence_refs": response.evidence_refs,
+                "decision": response.decision
+            }
+            store.append_learning_episode("CURRENT", episode)
+        except Exception as e:
+            response.warnings.append(f"Learning loop warning: could not record episode in CURRENT session ({e})")
+
         return response
+
 
     def _cmd_status(self, gate: Any) -> DummieChatResponse:
         pos = self._load_json(self.aiwg_root / "evolution" / "current_position.json")

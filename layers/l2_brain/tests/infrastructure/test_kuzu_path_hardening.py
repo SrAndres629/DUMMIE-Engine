@@ -4,6 +4,15 @@ import shutil
 import sys
 from pathlib import Path
 
+try:
+    import kuzu
+    HAS_KUZU = True
+except ImportError:
+    HAS_KUZU = False
+
+pytestmark = pytest.mark.skipif(not HAS_KUZU, reason="kuzu not available")
+
+
 # Alinear con el estilo de tests del proyecto
 ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:

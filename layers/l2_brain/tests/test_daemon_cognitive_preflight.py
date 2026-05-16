@@ -4,12 +4,12 @@ from pathlib import Path
 
 import pytest
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[3]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from daemon import DummieDaemon
-from gateway_contract import GatewayRequest
+from layers.l2_brain.daemon import DummieDaemon
+from layers.l2_brain.gateway_contract import GatewayRequest
 
 
 class _AllowAllAuditor:

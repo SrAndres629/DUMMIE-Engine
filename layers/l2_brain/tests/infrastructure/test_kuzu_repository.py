@@ -9,6 +9,15 @@ except ImportError:
     sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..")))
     from adapters import KuzuRepository
 
+try:
+    import kuzu
+    HAS_KUZU = True
+except ImportError:
+    HAS_KUZU = False
+
+pytestmark = pytest.mark.skipif(not HAS_KUZU, reason="kuzu not available")
+
+
 @pytest.fixture
 def temp_kuzu(tmp_path):
     db_path = str(tmp_path / "test_db")

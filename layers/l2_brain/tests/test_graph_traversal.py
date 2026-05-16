@@ -2,6 +2,15 @@ import pytest
 from layers.l2_brain.adapters import KuzuRepository
 from layers.l2_brain.models import MemoryNode4D, AuthorityLevel, IntentType
 
+try:
+    import kuzu
+    HAS_KUZU = True
+except ImportError:
+    HAS_KUZU = False
+
+pytestmark = pytest.mark.skipif(not HAS_KUZU, reason="kuzu not available")
+
+
 def test_graph_traversal(tmp_path):
     db_file = str(tmp_path / "test_db")
     repo = KuzuRepository(db_path=db_file)

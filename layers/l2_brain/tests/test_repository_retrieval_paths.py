@@ -1,4 +1,14 @@
+import pytest
 from pathlib import Path
+
+try:
+    import kuzu
+    HAS_KUZU = True
+except ImportError:
+    HAS_KUZU = False
+
+pytestmark = pytest.mark.skipif(not HAS_KUZU, reason="kuzu not available")
+
 
 from layers.l2_brain.adapters import KuzuRepository
 from layers.l2_brain.models import MemoryNode4D

@@ -55,9 +55,10 @@ class SessionStore:
 
     def create_session(self, session_id: str, metadata: dict[str, Any] | None = None) -> dict[str, Any]:
         session_path = self._session_path(session_id)
-        session_path.mkdir(parents=True, exist_ok=False)
+        session_path.mkdir(parents=True, exist_ok=True)
         (session_path / "artifacts").mkdir(exist_ok=True)
         (session_path / "events.jsonl").touch(exist_ok=True)
+
 
         now = self._now()
         state = {
@@ -78,8 +79,11 @@ class SessionStore:
         if not session_path.exists():
             raise FileNotFoundError(f"Session not found: {session_id}")
         state_path = session_path / "state.json"
-        state = self._read_json(state_path) if state_path.exists() else {"session_id": session_id}
+        if not state_path.exists():
+            raise FileNotFoundError(f"Session state not found: {session_id}")
+        state = self._read_json(state_path)
         events = self._read_events(session_path)
+
         artifacts_path = session_path / "artifacts"
         artifacts = sorted(path.name for path in artifacts_path.iterdir() if path.is_file())
         return {

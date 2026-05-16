@@ -32,7 +32,7 @@ async def test_metagateway_adapter_supports_execute_tool():
     mock_gateway.execute_tool.assert_called_once()
 
 def test_sensor_first_guard_logic():
-    guard = SensorFirstGuard(mode=PolicyDecision.BLOCK)
+    guard = SensorFirstGuard()
     
     # Discovery without prior work -> BLOCK
     result = guard.evaluate_direct_read("concept_discovery", False, False)

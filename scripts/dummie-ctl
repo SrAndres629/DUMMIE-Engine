@@ -1,0 +1,56 @@
+#!/usr/bin/env python3
+import sys
+import subprocess
+import json
+from pathlib import Path
+
+# Setup paths
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.append(str(ROOT))
+sys.path.append(str(ROOT / "layers" / "l2_brain"))
+
+def run_python(module_path, args):
+    cmd = [sys.executable, str(ROOT / module_path)] + args
+    return subprocess.run(cmd, capture_output=False)
+
+def show_help():
+    print("DUMMIE Engine Control Utility (dummie-ctl)")
+    print("Usage: dummie-ctl <command> [args]")
+    print("\nCommands:")
+    print("  status       Show system status and phase")
+    print("  chat <text>  Interact with DUMMIE Brain (records learning episode)")
+    print("  calibrate    Run sovereign readiness calibration")
+    print("  triage       Show test debt triage report")
+    print("  help         Show this help")
+
+def main():
+    if len(sys.argv) < 2:
+        show_help()
+        return
+
+    cmd = sys.argv[1].lower()
+    args = sys.argv[2:]
+
+    if cmd == "status":
+        run_python("layers/l2_brain/dummie_chat_cli.py", ["status"])
+    elif cmd == "chat":
+        if not args:
+            print("Error: chat requires query text")
+            return
+        run_python("layers/l2_brain/dummie_chat_cli.py", args)
+    elif cmd == "calibrate":
+        run_python("layers/l2_brain/cli_control_plane.py", ["readiness-calibration"])
+    elif cmd == "triage":
+        triage_md = ROOT / ".aiwg" / "reports" / "test_debt_triage_latest.md"
+        if triage_md.exists():
+            print(triage_md.read_text())
+        else:
+            print("Triage report not found. Run tests first.")
+    elif cmd == "help":
+        show_help()
+    else:
+        print(f"Unknown command: {cmd}")
+        show_help()
+
+if __name__ == "__main__":
+    main()

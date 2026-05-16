@@ -2,8 +2,8 @@ import pytest
 import os
 import json
 from unittest.mock import MagicMock
-from daemon import DummieDaemon
-from safe_fallbacks import FailClosedAuditor, FailClosedExecutor
+from layers.l2_brain.daemon import DummieDaemon
+from layers.l2_brain.safe_fallbacks import FailClosedAuditor, FailClosedExecutor
 
 @pytest.mark.asyncio
 async def test_daemon_diagnostic_report_generation(tmp_path):

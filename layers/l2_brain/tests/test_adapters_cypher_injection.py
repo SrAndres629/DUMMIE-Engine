@@ -1,6 +1,15 @@
 import pytest
 import re
 
+try:
+    import kuzu
+    HAS_KUZU = True
+except ImportError:
+    HAS_KUZU = False
+
+pytestmark = pytest.mark.skipif(not HAS_KUZU, reason="kuzu not available")
+
+
 def test_query_fallback_no_injection():
     # Test the fix directly by invoking the logic in adapters
     from layers.l2_brain.adapters import KuzuRepository

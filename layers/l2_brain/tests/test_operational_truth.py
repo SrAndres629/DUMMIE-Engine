@@ -1,11 +1,16 @@
 import json
 import subprocess
 import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[3]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 import types
 from pathlib import Path
 
-from operational_truth import TruthCheck, TruthReport, TruthStatus
-from operational_truth_collectors import _dummied_check, _kuzu_check, collect_truth
+from layers.l2_brain.operational_truth import TruthCheck, TruthReport, TruthStatus
+from layers.l2_brain.operational_truth_collectors import _dummied_check, _kuzu_check, collect_truth
 
 
 def test_truth_report_counts_statuses():

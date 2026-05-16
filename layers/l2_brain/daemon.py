@@ -651,3 +651,51 @@ class GovernanceGateError(RuntimeError):
         super().__init__(message)
         self.gate_status = gate_status
         self.reasons = reasons
+
+
+if __name__ == "__main__":
+    import sys
+    import argparse
+
+    # Minimal stubs for standalone execution
+    class MockEventBus(AsyncEventBus):
+        async def start(self): pass
+        def subscribe(self, topic, handler): pass
+
+    class MockGateway:
+        async def call_tool(self, server, tool, args):
+            print(f"DEBUG: MockGateway call -> {server}.{tool}({args})")
+            return {"ok": True, "result": {"status": "mocked_success"}}
+
+    async def run_mission(goal: str, xml_path: str | None = None):
+        dag_xml = "<dag><task id='t1' server='dummie-brain' tool='noop'><arguments>{}</arguments></task></dag>"
+        if xml_path and os.path.exists(xml_path):
+            dag_xml = Path(xml_path).read_text(encoding="utf-8")
+
+        event_bus = MockEventBus()
+        daemon = DummieDaemon(
+            ledger_path=".aiwg",
+            mcp_gateway=MockGateway(),
+            event_bus=event_bus
+        )
+
+        request = GatewayRequest(
+            session_id="S-MAIN",
+            goal=goal,
+            dag_xml=dag_xml
+        )
+
+        print(f"--- DUMMIE DAEMON INVOCATION: {goal} ---")
+        outcome = await daemon.process_request(request)
+        print(json.dumps(outcome, indent=2))
+
+    parser = argparse.ArgumentParser(description="DUMMIE Daemon Invocation Mode")
+    parser.add_argument("goal", help="The mission goal")
+    parser.add_argument("--xml", help="Path to DAG XML file", default=None)
+    
+    args = parser.parse_args()
+    try:
+        asyncio.run(run_mission(args.goal, args.xml))
+    except KeyboardInterrupt:
+        pass
+
