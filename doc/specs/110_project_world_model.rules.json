@@ -1,0 +1,72 @@
+{
+  "spec_id": "110_project_world_model",
+  "project_world_model": {
+    "required_files": [
+      ".aiwg/world_model/project_world_model.json",
+      ".aiwg/world_model/project_world_model.md",
+      ".aiwg/schemas/project_world_model.schema.json"
+    ],
+    "required_fields": [
+      "plan",
+      "world_model_id",
+      "version",
+      "generated_from_commit",
+      "truth_basis",
+      "current_state",
+      "roadmap_state",
+      "architecture_state",
+      "polyglot_state",
+      "artifact_governance_state",
+      "truth_hierarchy_state",
+      "capability_state",
+      "memory_state",
+      "spec_test_state",
+      "known_debt",
+      "risk_register",
+      "context_loading_policy",
+      "anti_bias_guards",
+      "next_phase_requirements"
+    ],
+    "must_load_for_tasks": {
+      "global_audit": [
+        ".aiwg/world_model/project_world_model.json",
+        ".aiwg/architecture/polyglot_architecture_registry.yaml",
+        ".aiwg/architecture/layer_language_map.json"
+      ],
+      "phase_execution": [
+        ".aiwg/evolution/current_position.json",
+        ".aiwg/evolution/next_phase_seed.json",
+        ".aiwg/evolution/phases.yaml"
+      ]
+    },
+    "anti_bias_guards": {
+      "python_only_bias_guard": true,
+      "chat_memory_drift_guard": true,
+      "raw_repo_bulk_load_guard": true
+    },
+    "context_loading_policy": {
+      "prefer_compact_world_model": true,
+      "dynamic_state_must_reload": [
+        ".aiwg/evolution/current_position.json",
+        ".aiwg/evolution/next_phase_seed.json"
+      ],
+      "never_prompt_by_default": [
+        "raw .aiwg/memory dumps",
+        "raw .aiwg/vault dumps",
+        "chat transcript as truth source"
+      ]
+    },
+    "freshness_policy": {
+      "world_model_requires_regeneration_when": [
+        "current_position_or_next_phase_seed_changes",
+        "polyglot_registry_changes",
+        "truth_hierarchy_or_artifact_schema_changes"
+      ]
+    },
+    "future_consumers": [
+      "P8 SpecCoverageGate",
+      "P13 ContextQuantRuntime",
+      "future CLI and dashboard context loaders"
+    ]
+  }
+}

@@ -1,0 +1,319 @@
+{
+  "plan": "DUMMIE PLAN V1 — Cognitive Evolution Operating Layer",
+  "world_model_id": "project_world_model",
+  "version": "1.0.0",
+  "generated_from_commit": "e1e65000996880260922ccd1ca24873871e8366b",
+  "truth_basis": [
+    ".aiwg/evolution/current_position.json",
+    ".aiwg/evolution/next_phase_seed.json",
+    ".aiwg/evolution/phases.yaml",
+    ".aiwg/architecture/polyglot_architecture_registry.yaml",
+    ".aiwg/architecture/layer_language_map.json",
+    ".aiwg/schemas/cognitive_artifact.schema.json",
+    ".aiwg/schemas/truth_hierarchy.schema.json",
+    ".aiwg/reports/plan_v1_phase_6_1_polyglot_registry_hardening.json"
+  ],
+  "current_state": {
+    "current_phase": "P7",
+    "last_completed_phase": "P6",
+    "next_required_phase": "P8",
+    "next_required_phase_name": "SpecCoverageGate",
+    "current_block": "truth_and_lifecycle"
+  },
+  "roadmap_state": {
+    "phase_chain_summary": "P1->P2->P3->P4->P5->P6->P6.1 correction->P7",
+    "next_phase": "P8",
+    "future_phases_compact": "P9-P31 remain planned; consume phases.yaml for full detail.",
+    "blocked_skips": [
+      "do not start swarm before lifecycle and context governance",
+      "do not start autonomy before MissionAutonomyContract",
+      "do not start Obsidian before internal notes and truth hierarchy",
+      "do not start TrustedWorkstationMode before permission contracts",
+      "do not treat dashboard as source of truth"
+    ],
+    "dependency_graph_ref": ".aiwg/evolution/phase_dependencies.graph.json"
+  },
+  "architecture_state": {
+    "layers": [
+      {
+        "layer_id": "L0",
+        "name": "overseer/orchestration",
+        "confidence": "high"
+      },
+      {
+        "layer_id": "L1",
+        "name": "nervous/protocol/gateway/data plane",
+        "confidence": "high"
+      },
+      {
+        "layer_id": "L2",
+        "name": "brain/cognition/memory/reasoning",
+        "confidence": "high"
+      },
+      {
+        "layer_id": "L3",
+        "name": "shield/security",
+        "confidence": "medium"
+      },
+      {
+        "layer_id": "L4",
+        "name": "edge/adapters/sensors",
+        "confidence": "medium"
+      },
+      {
+        "layer_id": "L5",
+        "name": "muscle/execution",
+        "confidence": "medium"
+      },
+      {
+        "layer_id": "L6",
+        "name": "skin/UI",
+        "confidence": "low"
+      }
+    ],
+    "layer_map_ref": ".aiwg/architecture/layer_language_map.json"
+  },
+  "polyglot_state": {
+    "facts": [
+      "Python first-party across L1-L6.",
+      "Go first-party in L0/L1.",
+      "Elixir first-party exists in L0 under layers/l0_overseer/lib and test.",
+      "Elixir deps/build are separate and not architecture identity.",
+      "Rust first-party exists in L3.",
+      "TypeScript/JavaScript in L6 are dependency-only under node_modules in targeted scan.",
+      "Protobuf appears as inter-layer contract shape.",
+      "Shell/config/docs are supporting artifacts."
+    ],
+    "must_load_for_global_architecture_tasks": [
+      ".aiwg/architecture/polyglot_architecture_registry.yaml",
+      ".aiwg/architecture/layer_language_map.json"
+    ],
+    "anti_python_only_bias_guard": true
+  },
+  "artifact_governance_state": {
+    "artifact_lifecycle_matrix_ref": ".aiwg/reports/artifact_lifecycle_matrix.json",
+    "cognitive_artifact_schema_ref": ".aiwg/schemas/cognitive_artifact.schema.json",
+    "highlights": [
+      "Lifecycle states, canonicality classes, token roles, freshness and invalidation rules are defined.",
+      "Reports are evidence/derived unless promoted.",
+      "Specs are canonical contracts with freshness requirements.",
+      "Chat history and mirrors are non-canonical by default."
+    ]
+  },
+  "truth_hierarchy_state": {
+    "truth_schema_ref": ".aiwg/schemas/truth_hierarchy.schema.json",
+    "highlights": [
+      "Code + passing tests strongest behavioral truth.",
+      "Specs are canonical intent; schemas are canonical shape.",
+      "Ledgers are operational history if validated.",
+      "Reports are evidence-only; vault/notes are not automatic truth.",
+      "Mirrors/chat non-canonical by default.",
+      "Unsafe artifacts hard-zero.",
+      "Effective rank uses evidence bonus and staleness/risk penalties."
+    ]
+  },
+  "capability_state": [
+    {
+      "capability": "PhaseLedger",
+      "path": "layers/l2_brain/phase_ledger.py",
+      "role": "append-only mission phase events and state transitions",
+      "truth_status": "present"
+    },
+    {
+      "capability": "ContextBudgetManager",
+      "path": "layers/l2_brain/context_budget_manager.py",
+      "role": "context token budget computation and enforcement inputs",
+      "truth_status": "present"
+    },
+    {
+      "capability": "SemanticRetrievalRuntime",
+      "path": "layers/l2_brain/semantic_retrieval_runtime.py",
+      "role": "semantic retrieval runtime and candidate selection",
+      "truth_status": "present"
+    },
+    {
+      "capability": "MemoryGraphRuntime",
+      "path": "layers/l2_brain/memory_graph_runtime.py",
+      "role": "memory graph relation runtime and sync path",
+      "truth_status": "present"
+    },
+    {
+      "capability": "MissionWorkbench",
+      "path": "layers/l2_brain/mission_workbench.py",
+      "role": "mission workbench manager and mission staging",
+      "truth_status": "present"
+    },
+    {
+      "capability": "OutcomeEvaluator",
+      "path": "layers/l2_brain/outcome_evaluator.py",
+      "role": "outcome scoring and capability amplification metrics",
+      "truth_status": "present"
+    },
+    {
+      "capability": "TokenCostLedger",
+      "path": "layers/l2_brain/token_cost_ledger.py",
+      "role": "token usage recording and accounting",
+      "truth_status": "present"
+    },
+    {
+      "capability": "SessionStore",
+      "path": "layers/l2_brain/session_store.py",
+      "role": "session and learning episode persistence",
+      "truth_status": "present"
+    },
+    {
+      "capability": "LearningEpisode",
+      "path": "layers/l2_brain/learning_episode.py",
+      "role": "episode artifact contract and serialization",
+      "truth_status": "present"
+    },
+    {
+      "capability": "VaultCurator",
+      "path": "layers/l2_brain/vault_curator.py",
+      "role": "vault entry curation and metadata shaping",
+      "truth_status": "present"
+    },
+    {
+      "capability": "CognitiveHooks",
+      "path": "layers/l2_brain/cognitive_hooks.py",
+      "role": "hook points for cognitive loop instrumentation",
+      "truth_status": "present"
+    },
+    {
+      "capability": "ModelRouter",
+      "path": "layers/l2_brain/model_router.py",
+      "role": "model tier routing and selection policy",
+      "truth_status": "present"
+    }
+  ],
+  "memory_state": {
+    "systems": [
+      ".aiwg/reports",
+      ".aiwg/vault",
+      "learning episodes",
+      "session store",
+      "memory refs",
+      "graph sync plan",
+      "semantic retrieval runtime",
+      "polyglot registry",
+      "project world model"
+    ],
+    "notes": [
+      "Do not bulk-load raw .aiwg/memory or .aiwg/vault into prompt.",
+      "Graph runtime exists but real sovereign graph writes should not be assumed active by default."
+    ]
+  },
+  "spec_test_state": {
+    "known_legacy_spec_debt": [
+      "doc/guides/mcp_server_usage.md references missing Specs 2, 7, 15, 35, 41, 42, 44"
+    ],
+    "specs_present": [
+      "107_cognitive_artifact_protocol",
+      "108_truth_hierarchy_canonicality_policy",
+      "109_polyglot_architecture_registry"
+    ],
+    "test_observations": [
+      "Tests are concentrated in L2 with selected layer coverage elsewhere.",
+      "Coverage confidence is uneven and must be measured by P8 SpecCoverageGate."
+    ]
+  },
+  "known_debt": [
+    "DEBT-SPEC-LEGACY-MCP-GUIDE",
+    "DEBT-AIWG-COUNTING-SEMANTICS"
+  ],
+  "risk_register": [
+    {
+      "id": "DEBT-SPEC-LEGACY-MCP-GUIDE",
+      "severity": "medium",
+      "status": "open",
+      "note": "Preexisting missing spec references in mcp_server_usage.md."
+    },
+    {
+      "id": "LOW-CONFIDENCE-L6-FIRST-PARTY-UI",
+      "severity": "medium",
+      "status": "open",
+      "note": "L6 first-party UI language evidence is low confidence in current scan."
+    },
+    {
+      "id": "COUNTING-DEPS-BUILD-INFLATION",
+      "severity": "medium",
+      "status": "open",
+      "note": "Tracked dependency/build artifacts can skew language/file counts."
+    },
+    {
+      "id": "RUNTIME-ENFORCEMENT-DEFERRED",
+      "severity": "medium",
+      "status": "open",
+      "note": "Governance policies exist but runtime enforcement phases are pending."
+    },
+    {
+      "id": "WORLD-MODEL-FRESHNESS-DRIFT",
+      "severity": "medium",
+      "status": "open",
+      "note": "World model must be regenerated when canonical sources materially change."
+    },
+    {
+      "id": "SPEC-COVERAGE-UNKNOWN",
+      "severity": "high",
+      "status": "open",
+      "note": "Coverage gates are not yet formalized before P8."
+    }
+  ],
+  "context_loading_policy": {
+    "stable_prefix_candidates": [
+      ".aiwg/world_model/project_world_model.json",
+      ".aiwg/schemas/truth_hierarchy.schema.json",
+      ".aiwg/schemas/cognitive_artifact.schema.json"
+    ],
+    "dynamic_context_refs": [
+      ".aiwg/evolution/current_position.json",
+      ".aiwg/evolution/next_phase_seed.json"
+    ],
+    "never_prompt_by_default": [
+      "raw .aiwg/memory dumps",
+      "raw .aiwg/vault dumps",
+      "chat transcript as truth source"
+    ],
+    "summary_only": [
+      ".aiwg/reports/*.md",
+      ".aiwg/reports/*.json",
+      "doc/specs/* when not directly in-scope"
+    ],
+    "must_load_for_global_architecture_tasks": [
+      ".aiwg/world_model/project_world_model.json",
+      ".aiwg/architecture/polyglot_architecture_registry.yaml",
+      ".aiwg/architecture/layer_language_map.json",
+      ".aiwg/schemas/truth_hierarchy.schema.json"
+    ],
+    "must_load_for_phase_execution": [
+      ".aiwg/evolution/current_position.json",
+      ".aiwg/evolution/next_phase_seed.json",
+      ".aiwg/evolution/phases.yaml",
+      ".aiwg/evolution/phase_dependencies.graph.json"
+    ]
+  },
+  "anti_bias_guards": {
+    "python_only_bias_guard": true,
+    "chat_memory_drift_guard": true,
+    "raw_repo_bulk_load_guard": true
+  },
+  "next_phase_requirements": {
+    "phase": "P8",
+    "name": "SpecCoverageGate",
+    "must_consume": [
+      ".aiwg/world_model/project_world_model.json",
+      ".aiwg/architecture/polyglot_architecture_registry.yaml",
+      ".aiwg/architecture/layer_language_map.json",
+      ".aiwg/schemas/truth_hierarchy.schema.json",
+      ".aiwg/schemas/cognitive_artifact.schema.json",
+      ".aiwg/evolution/phases.yaml",
+      "doc/specs",
+      "layer test paths"
+    ]
+  },
+  "mentor_notes": [
+    "Use this world model for global orientation before repo-wide analysis.",
+    "Prioritize canonical files over chat memory and non-canonical mirrors.",
+    "Regenerate world model when major plan or architecture artifacts change."
+  ]
+}

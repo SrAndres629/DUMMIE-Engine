@@ -1,32 +1,31 @@
 {
-  "next_phase": "P7",
-  "name": "ProjectWorldModel",
-  "objective": "Create a compact canonical world model of DUMMIE that unifies plan state, layers, languages, specs, tests, artifacts, memory systems, known debt and next actions into a high-value context source.",
-  "why_now": "P6 established canonical polyglot architecture. P7 must compile the project world model so future agents can load one compact, truthful view instead of reconstructing the repo from raw files or chat memory.",
+  "next_phase": "P8",
+  "name": "SpecCoverageGate",
+  "objective": "Create the coverage gate that measures whether specs, rules, features, layers, languages, tests and runtime capabilities are sufficiently connected before future implementation phases proceed.",
+  "why_now": "P7 created a compact world model. P8 must turn that world model into measurable coverage gates so future agents can detect missing specs, weak test coverage, layer/language blind spots and stale documentation before implementation.",
   "required_outputs": [
-    ".aiwg/reports/plan_v1_phase_7_project_world_model.md",
-    ".aiwg/reports/plan_v1_phase_7_project_world_model.json",
-    ".aiwg/world_model/project_world_model.json",
-    ".aiwg/world_model/project_world_model.md",
-    ".aiwg/schemas/project_world_model.schema.json",
-    "doc/specs/110_project_world_model.md",
-    "doc/specs/110_project_world_model.feature",
-    "doc/specs/110_project_world_model.rules.json"
+    ".aiwg/reports/plan_v1_phase_8_spec_coverage_gate.md",
+    ".aiwg/reports/plan_v1_phase_8_spec_coverage_gate.json",
+    ".aiwg/reports/spec_coverage_matrix.json",
+    ".aiwg/schemas/spec_coverage_gate.schema.json",
+    "doc/specs/111_spec_coverage_gate.md",
+    "doc/specs/111_spec_coverage_gate.feature",
+    "doc/specs/111_spec_coverage_gate.rules.json"
   ],
   "must_not_create": [
     "new runtime modules",
     "swarm agents",
     "Obsidian adapter",
     "dashboard",
-    "runtime-heavy ContextQuant implementation before ProjectWorldModel exists"
+    "runtime-heavy ContextQuant implementation before SpecCoverageGate exists"
   ],
   "success_conditions": [
-    "world model consumes polyglot registry",
-    "world model consumes truth hierarchy",
-    "world model references current_position and next_phase_seed",
-    "world model summarizes layers L0-L6",
-    "world model summarizes known capabilities and debt",
-    "world model is compact enough for future context loading",
-    "world model blocks Python-only global summaries"
+    "spec coverage matrix created",
+    "layer/language coverage assessed",
+    "spec-feature-rules triplets checked",
+    "test linkage assessed",
+    "legacy missing spec references recorded",
+    "coverage thresholds defined",
+    "P9 FolderNotes + NotePlans receives coverage constraints"
   ]
 }
