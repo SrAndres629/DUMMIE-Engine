@@ -1,31 +1,32 @@
 {
-  "next_phase": "P8",
-  "name": "SpecCoverageGate",
-  "objective": "Create the coverage gate that measures whether specs, rules, features, layers, languages, tests and runtime capabilities are sufficiently connected before future implementation phases proceed.",
-  "why_now": "P7 created a compact world model. P8 must turn that world model into measurable coverage gates so future agents can detect missing specs, weak test coverage, layer/language blind spots and stale documentation before implementation.",
+  "next_phase": "P9",
+  "name": "FolderNotes + NotePlans",
+  "objective": "Create governed folder-level notes and noteplans that summarize repo areas using the cognitive artifact protocol, truth hierarchy, world model and spec coverage gate.",
+  "why_now": "P8 established coverage constraints. P9 can now create notes without becoming stale narrative debt because notes must be linked to coverage, freshness, source hashes, truth rank and context roles.",
   "required_outputs": [
-    ".aiwg/reports/plan_v1_phase_8_spec_coverage_gate.md",
-    ".aiwg/reports/plan_v1_phase_8_spec_coverage_gate.json",
-    ".aiwg/reports/spec_coverage_matrix.json",
-    ".aiwg/schemas/spec_coverage_gate.schema.json",
-    "doc/specs/111_spec_coverage_gate.md",
-    "doc/specs/111_spec_coverage_gate.feature",
-    "doc/specs/111_spec_coverage_gate.rules.json"
+    ".aiwg/reports/plan_v1_phase_9_folder_notes_noteplans.md",
+    ".aiwg/reports/plan_v1_phase_9_folder_notes_noteplans.json",
+    ".aiwg/notes/folder_notes_manifest.json",
+    ".aiwg/schemas/folder_note.schema.json",
+    ".aiwg/schemas/noteplan.schema.json",
+    "doc/specs/112_folder_notes_noteplans.md",
+    "doc/specs/112_folder_notes_noteplans.feature",
+    "doc/specs/112_folder_notes_noteplans.rules.json"
   ],
   "must_not_create": [
     "new runtime modules",
     "swarm agents",
     "Obsidian adapter",
     "dashboard",
-    "runtime-heavy ContextQuant implementation before SpecCoverageGate exists"
+    "runtime-heavy ContextQuant implementation before FolderNotes lifecycle exists"
   ],
   "success_conditions": [
-    "spec coverage matrix created",
-    "layer/language coverage assessed",
-    "spec-feature-rules triplets checked",
-    "test linkage assessed",
-    "legacy missing spec references recorded",
-    "coverage thresholds defined",
-    "P9 FolderNotes + NotePlans receives coverage constraints"
+    "folder note schema created",
+    "noteplan schema created",
+    "notes manifest created",
+    "notes require source hashes or freshness",
+    "notes link to spec coverage matrix",
+    "notes use summary-only or retrieval-candidate token roles",
+    "notes do not override canonical source files"
   ]
 }

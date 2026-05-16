@@ -1,0 +1,68 @@
+{
+  "spec_id": "111_spec_coverage_gate",
+  "spec_coverage_gate": {
+    "required_files": [
+      ".aiwg/reports/spec_coverage_matrix.json",
+      ".aiwg/schemas/spec_coverage_gate.schema.json",
+      "doc/specs/111_spec_coverage_gate.md",
+      "doc/specs/111_spec_coverage_gate.feature",
+      "doc/specs/111_spec_coverage_gate.rules.json"
+    ],
+    "required_fields": [
+      "plan",
+      "phase",
+      "generated_from_commit",
+      "coverage_summary",
+      "spec_families",
+      "layer_coverage",
+      "language_coverage",
+      "capability_coverage",
+      "test_linkage",
+      "known_debt",
+      "gate_decision",
+      "coverage_thresholds"
+    ],
+    "coverage_thresholds": {
+      "spec_triplet_integrity": {
+        "pass": ">= 90% complete triplets or only known legacy debt prevents full pass",
+        "warning": ">= 70% complete triplets",
+        "fail": "< 70% complete triplets"
+      },
+      "layer_coverage": {
+        "pass": "L0-L6 all have at least partial spec coverage or documented low-confidence reason",
+        "warning": "any layer weak but documented",
+        "fail": "any layer missing from registry/world model"
+      },
+      "language_coverage": {
+        "pass": "all first-party languages have at least one spec or architecture reference",
+        "warning": "dependency languages not covered but classified as non-identity",
+        "fail": "first-party language omitted from coverage"
+      },
+      "capability_coverage": {
+        "pass": "all 12 native capabilities have path-backed presence and at least one spec/report/test reference",
+        "warning": "capability present but weakly linked",
+        "fail": "capability missing from world model or path absent"
+      },
+      "test_linkage": {
+        "pass": "core L2 capabilities have test linkage",
+        "warning": "tests uneven across layers",
+        "fail": "no test linkage discovered"
+      }
+    },
+    "gate_decisions": [
+      "PASS",
+      "PASS_WITH_WARNINGS",
+      "FAIL"
+    ],
+    "known_debt_policy": {
+      "legacy_missing_spec_refs": "isolate_as_inherited_debt",
+      "introduced_by_p8": false,
+      "gate_effect": "warning_until_repair_phase"
+    },
+    "future_consumers": [
+      "P9 FolderNotes + NotePlans",
+      "P13 ContextQuantRuntime",
+      "Project world-model refresh workflows"
+    ]
+  }
+}
