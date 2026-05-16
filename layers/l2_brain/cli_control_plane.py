@@ -43,6 +43,11 @@ from layers.l2_brain.readiness_score_calibrator import run_readiness_score_calib
 from layers.l2_brain.memory_spine_entrypoint import retrieve_memory_for_intent
 from layers.l2_brain.token_economy_benchmark import run_token_economy_benchmark
 from layers.l2_brain.entrypoint_enforcement_auditor import run_entrypoint_enforcement_audit
+from layers.l2_brain.metacognitive_loop_runtime import run_metacognitive_loop
+from layers.l2_brain.mental_model_runtime import build_mental_model_for_intent
+from layers.l2_brain.semantic_ontology_mapper import map_semantic_ontology
+from layers.l2_brain.cognitive_frame_builder import build_cognitive_frame
+
 
 @dataclass
 class CliCommandResult:
@@ -110,7 +115,12 @@ class CliControlPlane:
             "memory-spine": self._cmd_memory_spine,
             "entrypoint-audit": self._cmd_entrypoint_audit,
             "token-benchmark": self._cmd_token_benchmark,
+            "mental-model": self._cmd_mental_model,
+            "ontology-map": self._cmd_ontology_map,
+            "cognitive-frame": self._cmd_cognitive_frame,
+            "metacognitive-loop": self._cmd_metacognitive_loop,
         }
+
 
         if command not in handlers:
             result = CliCommandResult(
@@ -523,6 +533,28 @@ class CliControlPlane:
             evidence_refs=[".aiwg/reports/entrypoint_enforcement_audit_latest.json"],
             generated_at=self._utc_now(),
         )
+
+    def _cmd_mental_model(self) -> CliCommandResult:
+        intent = "show current project mental model"
+        model = build_mental_model_for_intent(intent, "analysis")
+        return CliCommandResult("mental-model", "PASS", model.to_dict(), [], [".aiwg/reports/mental_model_runtime_latest.json"], model.created_at)
+
+    def _cmd_ontology_map(self) -> CliCommandResult:
+        intent = "show current project ontology"
+        res = map_semantic_ontology(intent)
+        return CliCommandResult("ontology-map", res["decision"], res, [], [".aiwg/reports/semantic_ontology_map_latest.json"], res["timestamp"])
+
+    def _cmd_cognitive_frame(self) -> CliCommandResult:
+        intent = "show current cognitive frame"
+        model = build_mental_model_for_intent(intent, "analysis")
+        frame = build_cognitive_frame(intent, model)
+        return CliCommandResult("cognitive-frame", "PASS", frame.to_dict(), [], [".aiwg/reports/cognitive_frame_latest.json"], frame.created_at)
+
+    def _cmd_metacognitive_loop(self) -> CliCommandResult:
+        intent = "what should I do next?"
+        res = run_metacognitive_loop(intent)
+        return CliCommandResult("metacognitive-loop", res["decision"], res, res.get("warnings", []), [".aiwg/reports/metacognitive_loop_latest.json"], self._utc_now())
+
 
     def _cmd_token_benchmark(self) -> CliCommandResult:
         res = run_token_economy_benchmark()

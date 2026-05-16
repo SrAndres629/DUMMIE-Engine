@@ -19,6 +19,9 @@ if __package__ in {None, ""}:
 from layers.l2_brain.repo_intelligence_query import query_repo_intelligence
 from layers.l2_brain.context_enforcement_gate import run_context_enforcement_gate
 from layers.l2_brain.memory_spine_entrypoint import retrieve_memory_for_intent
+from layers.l2_brain.metacognitive_loop_runtime import run_metacognitive_loop
+from layers.l2_brain.session_store import SessionStore
+
 
 
 @dataclass
@@ -31,7 +34,11 @@ class DummieChatResponse:
     warnings: list[str] = field(default_factory=list)
     memory_spine: dict[str, Any] = field(default_factory=dict)
     memory_spine_used: bool = False
+    mental_model: dict[str, Any] = field(default_factory=dict)
+    cognitive_frame: dict[str, Any] = field(default_factory=dict)
+    metacognitive_loop: dict[str, Any] = field(default_factory=dict)
     generated_at: str = ""
+
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
@@ -123,9 +130,25 @@ class DummieChatCli:
         if memory_result.status == "DEGRADED_WITH_FILE_BACKED_MEMORY":
             response.warnings.append("Memory spine is DEGRADED. Using file-backed fallback.")
 
+        # Phase Pack 5: Metacognitive Loop
+        try:
+            m_loop = run_metacognitive_loop(query_text)
+            # Add to response - we use __dict__ update for non-dataclass fields if needed, 
+            # but since we print the response dict in CLI, we add it to a tracking dict
+            response.metacognitive_loop = m_loop
+            
+            reports_root = Path(".aiwg/reports")
+            if (reports_root / "mental_model_runtime_latest.json").exists():
+                response.mental_model = json.loads((reports_root / "mental_model_runtime_latest.json").read_text())
+            if (reports_root / "cognitive_frame_latest.json").exists():
+                response.cognitive_frame = json.loads((reports_root / "cognitive_frame_latest.json").read_text())
+        except Exception as e:
+            response.warnings.append(f"metacognition_degraded: {e}")
+
         # Record Learning Episode (Cognitive Loop) - Operationalization Pack 4
         try:
-            from layers.l2_brain.session_store import SessionStore
+
+
             # aiwg_root is .aiwg, SessionStore needs repo_root
             store = SessionStore(self.aiwg_root.resolve().parent)
             

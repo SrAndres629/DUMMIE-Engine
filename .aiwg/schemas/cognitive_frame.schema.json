@@ -1,7 +1,7 @@
 {
   "type": "object",
   "properties": {
-    "model_id": {
+    "frame_id": {
       "type": "string"
     }
   }

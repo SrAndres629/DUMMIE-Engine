@@ -1,8 +1,8 @@
 {
   "type": "object",
   "properties": {
-    "model_id": {
-      "type": "string"
+    "count": {
+      "type": "integer"
     }
   }
 }
