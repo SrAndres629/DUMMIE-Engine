@@ -1,0 +1,59 @@
+{
+  "plan": "DUMMIE PLAN V1 — Cognitive Evolution Operating Layer",
+  "phase": "P2",
+  "phase_name": "Baseline Reset & Reality Lock",
+  "mentor_decision": "ACCEPTED_WITH_WARNINGS",
+  "snowball_result": "improved",
+  "accepted_commit": "48141e6c1ed48445d5453940bbaa0b14236755d5",
+  "next_phase": "P3",
+  "next_phase_name": "Artifact Lifecycle Reconciliation Audit",
+  "why_accepted": [
+    "P2 baseline reports exist.",
+    "current_position.json points to P2.",
+    "next_phase_seed.json points to P3.",
+    "phase graph contains P2 -> P3.",
+    "31 phases exist.",
+    "All 12 expected engine-native capabilities are mapped.",
+    "80 tests passed.",
+    "No runtime code was modified.",
+    "Known legacy spec debt remains isolated and registered."
+  ],
+  "known_warnings": [
+    {
+      "id": "DEBT-SPEC-LEGACY-MCP-GUIDE",
+      "description": "Full specs validation remains blocked by preexisting references in doc/guides/mcp_server_usage.md to missing Specs 2, 7, 15, 35, 41, 42, 44.",
+      "introduced_by_p2": false,
+      "status": "open",
+      "recommended_phase": "P3 or dedicated documentation repair phase"
+    },
+    {
+      "id": "DEBT-AIWG-COUNTING-SEMANTICS",
+      "description": "P2 and Gemini audits produced different .aiwg file counts: Codex reported 7598 while Gemini reported 27378. Likely cause is traversal depth or inclusion/exclusion of .aiwg/memory and .aiwg/vault.",
+      "introduced_by_p2": false,
+      "status": "open",
+      "recommended_phase": "P3"
+    },
+    {
+      "id": "PROCESS-GEMINI-AUDIT-TOKEN-WASTE",
+      "description": "Gemini read-only audit was useful but too verbose for the marginal value produced. Future Gemini audits should be objection-focused delta audits.",
+      "introduced_by_p2": false,
+      "status": "accepted_policy_change",
+      "recommended_phase": "applies_immediately"
+    }
+  ],
+  "gemini_audit_reconciliation": {
+    "decision": "useful_but_too_verbose",
+    "accepted_findings": [
+      "P2 reports exist",
+      "current_position points to P2",
+      "next_phase_seed points to P3",
+      "phase graph contains P2 -> P3",
+      "runtime code was not modified",
+      "80 tests passed",
+      "known legacy spec debt remains isolated",
+      "AIWG count discrepancy should be handled in P3"
+    ],
+    "process_change": "Future Gemini audits must avoid full recap and focus on contradictions, red flags, missing files, scope violations, regressions, and actionable objections."
+  },
+  "recommendation": "Proceed to P3 after this mentor acceptance artifact and audit-token policy update are committed."
+}
