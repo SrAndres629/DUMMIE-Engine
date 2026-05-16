@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PromptFrame",
+  "type": "object",
+  "required": [
+    "frame_id",
+    "mission_id",
+    "phase_id",
+    "system_refs",
+    "mission_refs",
+    "context_refs",
+    "compressed_refs",
+    "dropped_refs",
+    "retrieval_refs",
+    "token_budget",
+    "estimated_tokens",
+    "staleness_warnings",
+    "truth_policy_refs",
+    "prompt_sections",
+    "receipt_ref",
+    "source_hash",
+    "created_at"
+  ],
+  "properties": {
+    "frame_id": {
+      "type": "string"
+    },
+    "mission_id": {
+      "type": "string"
+    },
+    "phase_id": {
+      "type": "string"
+    },
+    "system_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "mission_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "context_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "compressed_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "dropped_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "retrieval_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "token_budget": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "estimated_tokens": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "staleness_warnings": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "truth_policy_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "prompt_sections": {
+      "type": "object"
+    },
+    "receipt_ref": {
+      "type": "string"
+    },
+    "source_hash": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string"
+    }
+  }
+}

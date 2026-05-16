@@ -1,8 +1,8 @@
 {
-  "result_id": "cqr-aa49b54034f5",
-  "package_id": "pkg-442433907d24",
-  "mission_id": "bundle_p10_p13",
-  "phase": "P13",
+  "result_id": "cqr-b843a6852185",
+  "package_id": "pkg-bf667a2fd718",
+  "mission_id": "bundle_p14_p17",
+  "phase": "P17",
   "kept_refs": [
     "state:current_position",
     "state:next_phase_seed",
@@ -14,26 +14,26 @@
     "note:world_model",
     "note:l0_overseer",
     "note:l1_nervous",
-    "note:l2_brain",
     "note:l3_shield",
     "note:l5_muscle",
     "note:architecture"
   ],
   "dropped_refs": [],
   "compressed_refs": [
-    "note:specs"
+    "note:specs",
+    "note:l2_brain"
   ],
   "selected_items": [
     {
       "ref": "state:current_position",
       "kind": "phase_state",
       "title": "Current Position",
-      "summary": "Current phase is P9 and next required phase is P10.",
+      "summary": "Current phase is P17 and next required phase is P18.",
       "source_path": ".aiwg/evolution/current_position.json",
       "token_role": "summary_only",
       "truth_rank": 90,
       "freshness_status": "fresh",
-      "estimated_tokens": 12,
+      "estimated_tokens": 13,
       "priority": "critical",
       "required": true,
       "evidence_refs": [
@@ -45,12 +45,12 @@
       "ref": "state:next_phase_seed",
       "kind": "phase_seed",
       "title": "Next Phase Seed",
-      "summary": "Next phase seed: P10 - FreshnessLedger + StaleMemoryDetector.",
+      "summary": "Next phase seed: P18 - CLI Control Plane.",
       "source_path": ".aiwg/evolution/next_phase_seed.json",
       "token_role": "summary_only",
       "truth_rank": 90,
       "freshness_status": "fresh",
-      "estimated_tokens": 15,
+      "estimated_tokens": 10,
       "priority": "high",
       "required": true,
       "evidence_refs": [
@@ -213,26 +213,6 @@
       ]
     },
     {
-      "ref": "note:l2_brain",
-      "kind": "folder_note",
-      "title": "Folder Note l2_brain",
-      "summary": "Folder l2_brain status=active, specs=3, tests=6.",
-      "source_path": ".aiwg/notes/folders/l2_brain/notes.md",
-      "token_role": "summary_only",
-      "truth_rank": 40,
-      "freshness_status": "fresh",
-      "estimated_tokens": 12,
-      "priority": "medium",
-      "required": false,
-      "evidence_refs": [
-        ".aiwg/notes/folder_notes_manifest.json",
-        ".aiwg/notes/folders/l2_brain/notes.md"
-      ],
-      "risk_flags": [
-        "Potential freshness drift if source files change and note is not refreshed."
-      ]
-    },
-    {
       "ref": "note:l3_shield",
       "kind": "folder_note",
       "title": "Folder Note l3_shield",
@@ -293,11 +273,11 @@
       ]
     }
   ],
-  "estimated_total_tokens": 169,
+  "estimated_total_tokens": 153,
   "budget_limit": 1800,
   "decision": "WARN",
   "warnings": [
     "stale_memory_findings_present"
   ],
-  "created_at": "2026-05-16T13:13:58Z"
+  "created_at": "2026-05-16T13:30:28Z"
 }

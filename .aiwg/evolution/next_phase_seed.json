@@ -1,15 +1,13 @@
 {
-  "next_phase": "P14",
-  "name": "PromptFrameBuilder + PromptCacheLedger",
-  "objective": "Implement the prompt frame builder and prompt cache ledger that transform selected context packages into reusable prompt frames with stable prefixes, dynamic context sections, cache receipts and token-efficiency evidence.",
-  "why_now": "P10-P13 implemented freshness, stale detection, context packaging, value scoring and context quantization. P14 must convert selected context into model-ready prompt frames and track cache reuse.",
+  "next_phase": "P18",
+  "name": "CLI Control Plane",
+  "objective": "Expose compact local control commands for governed operations using prompt runtime, cache summaries, restart gate and flywheel decisions.",
+  "why_now": "P14-P17 implemented prompt frames, cache ledger, restart gate, benchmark, and flywheel. P18 should surface these capabilities through a practical CLI control interface.",
   "required_outputs": [
-    "layers/l2_brain/prompt_frame_builder.py",
-    "layers/l2_brain/prompt_cache_ledger.py",
-    "layers/l2_brain/tests/test_prompt_frame_builder.py",
-    "layers/l2_brain/tests/test_prompt_cache_ledger.py",
-    ".aiwg/reports/plan_v1_phase_14_prompt_frame_cache.md",
-    ".aiwg/reports/plan_v1_phase_14_prompt_frame_cache.json"
+    "layers/l2_brain/cli_control_plane.py",
+    "layers/l2_brain/tests/test_cli_control_plane.py",
+    ".aiwg/reports/plan_v1_phase_18_cli_control_plane.md",
+    ".aiwg/reports/plan_v1_phase_18_cli_control_plane.json"
   ],
   "must_not_create": [
     "swarm agents",
@@ -18,12 +16,10 @@
     "autonomy permissions"
   ],
   "success_conditions": [
-    "prompt frame builder implemented",
-    "prompt cache ledger implemented",
-    "stable prefix separated from dynamic context",
-    "context receipts embedded",
-    "cacheable sections identified",
-    "tests pass",
-    "runtime demo creates prompt frame"
+    "CLI command map for runtime reports implemented",
+    "prompt frame and cache summaries inspectable via CLI",
+    "restart gate and benchmark invocable via CLI",
+    "flywheel decision inspectable via CLI",
+    "tests pass"
   ]
 }

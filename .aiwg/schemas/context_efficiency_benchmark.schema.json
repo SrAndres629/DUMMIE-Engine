@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ContextEfficiencyBenchmark",
+  "type": "object",
+  "required": [
+    "generated_at",
+    "baseline_strategy",
+    "cases",
+    "decision",
+    "summary"
+  ],
+  "properties": {
+    "generated_at": {
+      "type": "string"
+    },
+    "baseline_strategy": {
+      "type": "string"
+    },
+    "decision": {
+      "type": "string"
+    },
+    "summary": {
+      "type": "object"
+    },
+    "cases": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "strategy",
+          "measurement_type",
+          "estimated_input_tokens",
+          "estimated_output_tokens",
+          "estimated_billable_tokens",
+          "kept_context_count",
+          "dropped_context_count",
+          "compressed_context_count",
+          "stale_context_count",
+          "required_context_preserved",
+          "value_per_token",
+          "cache_reuse_possible",
+          "expected_cloud_context_reduction_ratio"
+        ],
+        "properties": {
+          "strategy": {
+            "type": "string"
+          },
+          "measurement_type": {
+            "type": "string"
+          },
+          "estimated_input_tokens": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "estimated_output_tokens": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "estimated_billable_tokens": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "kept_context_count": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "dropped_context_count": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "compressed_context_count": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "stale_context_count": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "required_context_preserved": {
+            "type": "boolean"
+          },
+          "value_per_token": {
+            "type": "number"
+          },
+          "cache_reuse_possible": {
+            "type": "boolean"
+          },
+          "expected_cloud_context_reduction_ratio": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        }
+      }
+    }
+  }
+}

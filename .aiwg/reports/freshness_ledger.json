@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-16T13:13:58Z",
+  "generated_at": "2026-05-16T13:30:28Z",
   "aiwg_root": ".aiwg",
   "entries": [
     {
@@ -9,7 +9,7 @@
       "source_hash": "e394df7cd08a0c5e39c7a51a2562ca4db814a7c348d0474f9099651a85104893",
       "hash_method": "sha256(file_bytes)",
       "freshness_status": "fresh",
-      "last_verified": "2026-05-16T13:13:58Z",
+      "last_verified": "2026-05-16T13:30:28Z",
       "invalidation_triggers": [
         "source_file_changed",
         "phase_state_changed"
@@ -26,7 +26,7 @@
       "source_hash": "8d4da37ad7abebbd92f950362af3682973bb0a056f924b1827338012612caf91",
       "hash_method": "sha256(file_bytes)",
       "freshness_status": "fresh",
-      "last_verified": "2026-05-16T13:13:58Z",
+      "last_verified": "2026-05-16T13:30:28Z",
       "invalidation_triggers": [
         "source_file_changed",
         "spec_triplet_changed",
@@ -44,7 +44,7 @@
       "source_hash": "8849460fe7dea194a45ee07b73b8336951edb2d765414d0c565a2db48b8935d5",
       "hash_method": "sha256(sorted_git_ls_files_plus_counts)",
       "freshness_status": "fresh",
-      "last_verified": "2026-05-16T13:13:58Z",
+      "last_verified": "2026-05-16T13:30:28Z",
       "invalidation_triggers": [
         "source_file_changed",
         "linked_spec_changed",
@@ -66,7 +66,7 @@
       "source_hash": "3c88551efb5d0190636fcf017702b54bc6f28780bfd64ee139dca35621236d70",
       "hash_method": "sha256(sorted_git_ls_files_plus_counts)",
       "freshness_status": "fresh",
-      "last_verified": "2026-05-16T13:13:58Z",
+      "last_verified": "2026-05-16T13:30:28Z",
       "invalidation_triggers": [
         "source_file_changed",
         "linked_spec_changed",
@@ -88,7 +88,7 @@
       "source_hash": "f096ff91829000d7bb7c6d3c750622227f3da1c50957f3180370097cbd0581e4",
       "hash_method": "sha256(sorted_git_ls_files_plus_counts)",
       "freshness_status": "fresh",
-      "last_verified": "2026-05-16T13:13:58Z",
+      "last_verified": "2026-05-16T13:30:28Z",
       "invalidation_triggers": [
         "source_file_changed",
         "linked_spec_changed",
@@ -110,7 +110,7 @@
       "source_hash": "65786b3ef3505a7ff3598395272aca307d3f5b591f0dfff0788c889105afb3f5",
       "hash_method": "sha256(sorted_git_ls_files_plus_counts)",
       "freshness_status": "stale",
-      "last_verified": "2026-05-16T13:13:58Z",
+      "last_verified": "2026-05-16T13:30:28Z",
       "invalidation_triggers": [
         "source_file_changed",
         "linked_spec_changed",
@@ -133,7 +133,7 @@
       "source_hash": "e9166bf45dae761030b09475a4895777dddf2f4d75471d3ab65431933652d75c",
       "hash_method": "sha256(sorted_git_ls_files_plus_counts)",
       "freshness_status": "fresh",
-      "last_verified": "2026-05-16T13:13:58Z",
+      "last_verified": "2026-05-16T13:30:28Z",
       "invalidation_triggers": [
         "source_file_changed",
         "linked_spec_changed",
@@ -155,7 +155,7 @@
       "source_hash": "34308b370b4d2917f361c040b09fef08bea1b7f5f045b452c4e55e8afd46f2be",
       "hash_method": "sha256(sorted_git_ls_files_plus_counts)",
       "freshness_status": "fresh",
-      "last_verified": "2026-05-16T13:13:58Z",
+      "last_verified": "2026-05-16T13:30:28Z",
       "invalidation_triggers": [
         "source_file_changed",
         "linked_spec_changed",
@@ -174,10 +174,10 @@
       "artifact_id": "folder_note:l2_brain",
       "artifact_type": "folder_note",
       "artifact_path": ".aiwg/notes/folders/l2_brain/notes.md",
-      "source_hash": "aa182002281fdae8e6ff856d0ad057f77949a5c8ef4a2a3deb0bb38b481da347",
+      "source_hash": "0916e6f8aed3afbab56fbcf76a81f7712c2727c01d369c94bb4d11612cdb0861",
       "hash_method": "sha256(sorted_git_ls_files_plus_counts)",
-      "freshness_status": "fresh",
-      "last_verified": "2026-05-16T13:13:58Z",
+      "freshness_status": "stale",
+      "last_verified": "2026-05-16T13:30:28Z",
       "invalidation_triggers": [
         "source_file_changed",
         "linked_spec_changed",
@@ -189,7 +189,8 @@
         ".aiwg/reports/spec_coverage_matrix.json"
       ],
       "risk_flags": [
-        "Potential freshness drift if source files change and note is not refreshed."
+        "Potential freshness drift if source files change and note is not refreshed.",
+        "folder_note_hash_mismatch"
       ]
     },
     {
@@ -199,7 +200,7 @@
       "source_hash": "6c54c1705c2f8f8399a489b2dd3142decdc77383867139856286d5ea5ebb99f9",
       "hash_method": "sha256(sorted_git_ls_files_plus_counts)",
       "freshness_status": "fresh",
-      "last_verified": "2026-05-16T13:13:58Z",
+      "last_verified": "2026-05-16T13:30:28Z",
       "invalidation_triggers": [
         "source_file_changed",
         "linked_spec_changed",
@@ -221,7 +222,7 @@
       "source_hash": "1022c96ab2a13b77987175de1fc16696d4f5d9849313957398f422e6ebd7454f",
       "hash_method": "sha256(sorted_git_ls_files_plus_counts)",
       "freshness_status": "fresh",
-      "last_verified": "2026-05-16T13:13:58Z",
+      "last_verified": "2026-05-16T13:30:28Z",
       "invalidation_triggers": [
         "source_file_changed",
         "linked_spec_changed",
@@ -243,7 +244,7 @@
       "source_hash": "f974a7336a00243d10c93eeac0799c7bdbe284b750c051af0f0bc7c534e88a30",
       "hash_method": "sha256(sorted_git_ls_files_plus_counts)",
       "freshness_status": "fresh",
-      "last_verified": "2026-05-16T13:13:58Z",
+      "last_verified": "2026-05-16T13:30:28Z",
       "invalidation_triggers": [
         "source_file_changed",
         "linked_spec_changed",
@@ -265,7 +266,7 @@
       "source_hash": "4b48ceb7a634e1f292dbd655aabd28a5050d9ff2241d5392967861f04777aaf2",
       "hash_method": "sha256(sorted_git_ls_files_plus_counts)",
       "freshness_status": "fresh",
-      "last_verified": "2026-05-16T13:13:58Z",
+      "last_verified": "2026-05-16T13:30:28Z",
       "invalidation_triggers": [
         "source_file_changed",
         "linked_spec_changed",
@@ -282,8 +283,8 @@
     }
   ],
   "summary": {
-    "fresh": 12,
-    "stale": 1,
+    "fresh": 11,
+    "stale": 2,
     "unknown": 0,
     "missing": 0,
     "total": 13

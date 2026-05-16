@@ -1,0 +1,24 @@
+{
+  "spec_id": "114_prompt_cache_ledger",
+  "prompt_cache_ledger": {
+    "required_files": [
+      "layers/l2_brain/prompt_cache_ledger.py",
+      ".aiwg/prompt_cache/prompt_cache_ledger.jsonl",
+      ".aiwg/reports/prompt_cache_summary_latest.json"
+    ],
+    "required_fields": [
+      "frame_id",
+      "source_hash",
+      "receipt_ref",
+      "estimated_tokens"
+    ],
+    "append_only": true,
+    "invalidation_triggers": [
+      "source_hash_mismatch",
+      "phase_id_mismatch",
+      "freshness_drift",
+      "context_receipt_mismatch",
+      "stale_memory_report_newer_than_frame"
+    ]
+  }
+}

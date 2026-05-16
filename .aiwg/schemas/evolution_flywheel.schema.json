@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EvolutionFlywheelDecision",
+  "type": "object",
+  "required": [
+    "decision",
+    "snowball_gain_score",
+    "confidence",
+    "blocking_reasons",
+    "recommended_next_phase",
+    "why_this_is_the_next_lever",
+    "expected_capability_gain",
+    "expected_token_efficiency_gain",
+    "required_tests_next",
+    "signals",
+    "generated_at"
+  ],
+  "properties": {
+    "decision": {
+      "type": "string",
+      "enum": [
+        "continue_next_phase",
+        "repair_before_next_phase",
+        "rerun_benchmark",
+        "refresh_notes",
+        "block_due_to_runtime_failure"
+      ]
+    },
+    "snowball_gain_score": {
+      "type": "number"
+    },
+    "confidence": {
+      "type": "number"
+    },
+    "blocking_reasons": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "recommended_next_phase": {
+      "type": "string"
+    },
+    "why_this_is_the_next_lever": {
+      "type": "string"
+    },
+    "expected_capability_gain": {
+      "type": "string"
+    },
+    "expected_token_efficiency_gain": {
+      "type": "string"
+    },
+    "required_tests_next": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "signals": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "generated_at": {
+      "type": "string"
+    }
+  }
+}

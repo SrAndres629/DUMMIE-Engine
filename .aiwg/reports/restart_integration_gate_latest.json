@@ -1,0 +1,108 @@
+{
+  "decision": "PASS",
+  "checks": [
+    {
+      "name": "json:.aiwg/evolution/current_position.json",
+      "status": "PASS"
+    },
+    {
+      "name": "json:.aiwg/evolution/next_phase_seed.json",
+      "status": "PASS"
+    },
+    {
+      "name": "yaml:.aiwg/evolution/phases.yaml",
+      "status": "PASS"
+    },
+    {
+      "name": "json:.aiwg/evolution/phase_dependencies.graph.json",
+      "status": "PASS"
+    },
+    {
+      "name": "state_alignment",
+      "status": "PASS"
+    },
+    {
+      "name": "phase_chain_p14_p18",
+      "status": "PASS"
+    },
+    {
+      "name": "json:.aiwg/world_model/project_world_model.json",
+      "status": "PASS"
+    },
+    {
+      "name": "yaml:.aiwg/architecture/polyglot_architecture_registry.yaml",
+      "status": "PASS"
+    },
+    {
+      "name": "json:.aiwg/reports/spec_coverage_matrix.json",
+      "status": "PASS"
+    },
+    {
+      "name": "json:.aiwg/notes/folder_notes_manifest.json",
+      "status": "PASS"
+    },
+    {
+      "name": "json:.aiwg/reports/freshness_ledger.json",
+      "status": "PASS"
+    },
+    {
+      "name": "json:.aiwg/reports/stale_memory_report.json",
+      "status": "PASS"
+    },
+    {
+      "name": "json:.aiwg/reports/context_package_latest.json",
+      "status": "PASS"
+    },
+    {
+      "name": "json:.aiwg/reports/context_receipt_latest.json",
+      "status": "PASS"
+    },
+    {
+      "name": "json:.aiwg/reports/prompt_cache_summary_latest.json",
+      "status": "PASS"
+    },
+    {
+      "name": "import:layers.l2_brain.freshness_ledger",
+      "status": "PASS"
+    },
+    {
+      "name": "import:layers.l2_brain.stale_memory_detector",
+      "status": "PASS"
+    },
+    {
+      "name": "import:layers.l2_brain.context_package",
+      "status": "PASS"
+    },
+    {
+      "name": "import:layers.l2_brain.context_value_scorer",
+      "status": "PASS"
+    },
+    {
+      "name": "import:layers.l2_brain.context_quant_runtime",
+      "status": "PASS"
+    },
+    {
+      "name": "import:layers.l2_brain.prompt_frame_builder",
+      "status": "PASS"
+    },
+    {
+      "name": "import:layers.l2_brain.prompt_cache_ledger",
+      "status": "PASS"
+    },
+    {
+      "name": "import:layers.l2_brain.restart_integration_gate",
+      "status": "PASS"
+    },
+    {
+      "name": "import:layers.l2_brain.context_efficiency_benchmark",
+      "status": "PASS"
+    },
+    {
+      "name": "import:layers.l2_brain.evolution_flywheel_runtime",
+      "status": "PASS"
+    }
+  ],
+  "failures": [],
+  "warnings": [],
+  "generated_at": "2026-05-16T13:30:28Z"
+}

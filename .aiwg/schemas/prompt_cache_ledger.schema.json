@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PromptCacheLedgerEntry",
+  "type": "object",
+  "required": [
+    "entry_id",
+    "frame_id",
+    "mission_id",
+    "phase_id",
+    "source_hash",
+    "receipt_ref",
+    "estimated_tokens",
+    "created_at",
+    "invalidated",
+    "invalidation_reasons"
+  ],
+  "properties": {
+    "entry_id": {
+      "type": "string"
+    },
+    "frame_id": {
+      "type": "string"
+    },
+    "mission_id": {
+      "type": "string"
+    },
+    "phase_id": {
+      "type": "string"
+    },
+    "source_hash": {
+      "type": "string"
+    },
+    "receipt_ref": {
+      "type": "string"
+    },
+    "estimated_tokens": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "invalidated": {
+      "type": "boolean"
+    },
+    "invalidation_reasons": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

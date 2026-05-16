@@ -1,6 +1,6 @@
 {
-  "receipt_id": "receipt-6fe094718001",
-  "package_id": "pkg-442433907d24",
+  "receipt_id": "receipt-5bfce3d28c25",
+  "package_id": "pkg-bf667a2fd718",
   "kept_refs": [
     "state:current_position",
     "state:next_phase_seed",
@@ -12,19 +12,19 @@
     "note:world_model",
     "note:l0_overseer",
     "note:l1_nervous",
-    "note:l2_brain",
     "note:l3_shield",
     "note:l5_muscle",
     "note:architecture"
   ],
   "dropped_refs": [],
   "compressed_refs": [
-    "note:specs"
+    "note:specs",
+    "note:l2_brain"
   ],
   "warnings": [
     "stale_memory_findings_present"
   ],
   "budget_limit": 1800,
-  "estimated_total_tokens": 169,
+  "estimated_total_tokens": 153,
   "decision": "WARN"
 }

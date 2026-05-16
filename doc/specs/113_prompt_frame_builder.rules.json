@@ -1,0 +1,27 @@
+{
+  "spec_id": "113_prompt_frame_builder",
+  "prompt_frame_builder": {
+    "required_files": [
+      "layers/l2_brain/prompt_frame_builder.py",
+      ".aiwg/reports/prompt_frame_latest.json"
+    ],
+    "required_fields": [
+      "frame_id",
+      "mission_id",
+      "phase_id",
+      "context_refs",
+      "token_budget",
+      "estimated_tokens",
+      "receipt_ref",
+      "source_hash"
+    ],
+    "forbidden_patterns": [
+      "chain_of_thought",
+      "private reasoning",
+      ".env=",
+      "secret=",
+      "password="
+    ],
+    "no_raw_repo_dump": true
+  }
+}

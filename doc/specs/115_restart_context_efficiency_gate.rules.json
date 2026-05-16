@@ -1,0 +1,22 @@
+{
+  "spec_id": "115_restart_context_efficiency_gate",
+  "restart_context_efficiency_gate": {
+    "required_files": [
+      "layers/l2_brain/restart_integration_gate.py",
+      "layers/l2_brain/context_efficiency_benchmark.py",
+      ".aiwg/reports/restart_integration_gate_latest.json",
+      ".aiwg/reports/context_efficiency_benchmark_latest.json"
+    ],
+    "required_decisions": [
+      "PASS",
+      "PASS_WITH_WARNINGS",
+      "FAIL"
+    ],
+    "benchmark_strategies": [
+      "raw_naive_estimate",
+      "folder_notes_only",
+      "quantized_context_frame"
+    ],
+    "measurement_type_default": "estimated"
+  }
+}

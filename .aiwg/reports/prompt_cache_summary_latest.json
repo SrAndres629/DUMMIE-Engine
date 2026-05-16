@@ -1,0 +1,16 @@
+{
+  "total_frames": 1,
+  "reusable_frames": 1,
+  "invalidated_frames": 0,
+  "estimated_tokens_saved": 153,
+  "cache_hit_ratio": 1.0,
+  "entries": [
+    {
+      "frame_id": "frame-77b148350ba4",
+      "phase_id": "P17",
+      "reusable": true,
+      "invalidation_reasons": []
+    }
+  ],
+  "generated_at": "2026-05-16T13:30:28Z"
+}

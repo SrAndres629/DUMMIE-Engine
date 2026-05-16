@@ -1,0 +1,25 @@
+{
+  "spec_id": "116_evolution_flywheel_runtime",
+  "evolution_flywheel_runtime": {
+    "required_files": [
+      "layers/l2_brain/evolution_flywheel_runtime.py",
+      ".aiwg/reports/evolution_flywheel_latest.json"
+    ],
+    "required_fields": [
+      "decision",
+      "snowball_gain_score",
+      "confidence",
+      "blocking_reasons",
+      "recommended_next_phase",
+      "expected_capability_gain",
+      "expected_token_efficiency_gain"
+    ],
+    "allowed_decisions": [
+      "continue_next_phase",
+      "repair_before_next_phase",
+      "rerun_benchmark",
+      "refresh_notes",
+      "block_due_to_runtime_failure"
+    ]
+  }
+}
