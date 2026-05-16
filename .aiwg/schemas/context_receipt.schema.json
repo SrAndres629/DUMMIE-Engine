@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ContextReceipt",
+  "type": "object",
+  "required": [
+    "receipt_id",
+    "package_id",
+    "kept_refs",
+    "dropped_refs",
+    "compressed_refs",
+    "warnings",
+    "budget_limit",
+    "estimated_total_tokens",
+    "decision"
+  ],
+  "properties": {
+    "receipt_id": {
+      "type": "string"
+    },
+    "package_id": {
+      "type": "string"
+    },
+    "kept_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "dropped_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "compressed_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "budget_limit": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "estimated_total_tokens": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "decision": {
+      "type": "string",
+      "enum": [
+        "ALLOW",
+        "WARN",
+        "BLOCK"
+      ]
+    }
+  }
+}

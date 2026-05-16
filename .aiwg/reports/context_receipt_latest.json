@@ -1,0 +1,30 @@
+{
+  "receipt_id": "receipt-6fe094718001",
+  "package_id": "pkg-442433907d24",
+  "kept_refs": [
+    "state:current_position",
+    "state:next_phase_seed",
+    "wm:project_world_model",
+    "coverage:spec_coverage_matrix",
+    "note:l4_edge",
+    "note:l6_skin",
+    "note:evolution",
+    "note:world_model",
+    "note:l0_overseer",
+    "note:l1_nervous",
+    "note:l2_brain",
+    "note:l3_shield",
+    "note:l5_muscle",
+    "note:architecture"
+  ],
+  "dropped_refs": [],
+  "compressed_refs": [
+    "note:specs"
+  ],
+  "warnings": [
+    "stale_memory_findings_present"
+  ],
+  "budget_limit": 1800,
+  "estimated_total_tokens": 169,
+  "decision": "WARN"
+}

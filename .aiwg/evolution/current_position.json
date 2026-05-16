@@ -1,11 +1,12 @@
 {
   "plan": "DUMMIE PLAN V1 \u2014 Cognitive Evolution Operating Layer",
-  "current_phase": "P9",
-  "current_phase_name": "FolderNotes + NotePlans",
-  "last_completed_phase": "P8",
-  "next_required_phase": "P10",
-  "next_required_phase_name": "FreshnessLedger + StaleMemoryDetector",
-  "current_block": "truth_and_lifecycle",
+  "current_phase": "P13",
+  "current_phase_name": "ContextQuantRuntime",
+  "last_completed_phase": "P9",
+  "completed_bundle": "P10-P13",
+  "next_required_phase": "P14",
+  "next_required_phase_name": "PromptFrameBuilder + PromptCacheLedger",
+  "current_block": "context_runtime",
   "forbidden_skips": [
     "do not start swarm before lifecycle and context governance",
     "do not start autonomy before MissionAutonomyContract",

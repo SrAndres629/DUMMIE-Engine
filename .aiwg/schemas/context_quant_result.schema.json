@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ContextQuantResult",
+  "type": "object",
+  "required": [
+    "result_id",
+    "package_id",
+    "mission_id",
+    "phase",
+    "kept_refs",
+    "dropped_refs",
+    "compressed_refs",
+    "selected_items",
+    "estimated_total_tokens",
+    "budget_limit",
+    "decision",
+    "warnings",
+    "created_at"
+  ],
+  "properties": {
+    "result_id": {
+      "type": "string"
+    },
+    "package_id": {
+      "type": "string"
+    },
+    "mission_id": {
+      "type": "string"
+    },
+    "phase": {
+      "type": "string"
+    },
+    "kept_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "dropped_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "compressed_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "selected_items": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "estimated_total_tokens": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "budget_limit": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "decision": {
+      "type": "string",
+      "enum": [
+        "ALLOW",
+        "WARN",
+        "BLOCK"
+      ]
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "created_at": {
+      "type": "string"
+    }
+  }
+}

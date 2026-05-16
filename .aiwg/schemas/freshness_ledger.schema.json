@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "FreshnessLedger",
+  "type": "object",
+  "required": [
+    "generated_at",
+    "aiwg_root",
+    "entries",
+    "summary"
+  ],
+  "properties": {
+    "generated_at": {
+      "type": "string"
+    },
+    "aiwg_root": {
+      "type": "string"
+    },
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "artifact_id",
+          "artifact_type",
+          "artifact_path",
+          "source_hash",
+          "hash_method",
+          "freshness_status",
+          "last_verified",
+          "invalidation_triggers",
+          "evidence_refs",
+          "risk_flags"
+        ],
+        "properties": {
+          "artifact_id": {
+            "type": "string"
+          },
+          "artifact_type": {
+            "type": "string"
+          },
+          "artifact_path": {
+            "type": "string"
+          },
+          "source_hash": {
+            "type": "string"
+          },
+          "hash_method": {
+            "type": "string"
+          },
+          "freshness_status": {
+            "type": "string",
+            "enum": [
+              "fresh",
+              "stale",
+              "unknown",
+              "missing"
+            ]
+          },
+          "last_verified": {
+            "type": "string"
+          },
+          "invalidation_triggers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "evidence_refs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "risk_flags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "summary": {
+      "type": "object"
+    }
+  }
+}

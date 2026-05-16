@@ -1,0 +1,116 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ContextPackage",
+  "type": "object",
+  "required": [
+    "package_id",
+    "mission_id",
+    "phase",
+    "items",
+    "estimated_total_tokens",
+    "created_at"
+  ],
+  "properties": {
+    "package_id": {
+      "type": "string"
+    },
+    "mission_id": {
+      "type": "string"
+    },
+    "phase": {
+      "type": "string"
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "ref",
+          "kind",
+          "title",
+          "summary",
+          "source_path",
+          "token_role",
+          "truth_rank",
+          "freshness_status",
+          "estimated_tokens",
+          "priority",
+          "required",
+          "evidence_refs",
+          "risk_flags"
+        ],
+        "properties": {
+          "ref": {
+            "type": "string"
+          },
+          "kind": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "summary": {
+            "type": "string"
+          },
+          "source_path": {
+            "type": "string"
+          },
+          "token_role": {
+            "type": "string",
+            "enum": [
+              "summary_only",
+              "retrieval_candidate",
+              "evidence",
+              "dynamic_context",
+              "stable_prefix",
+              "never_prompt",
+              "human_mirror",
+              "debug_only"
+            ]
+          },
+          "truth_rank": {
+            "type": "integer"
+          },
+          "freshness_status": {
+            "type": "string",
+            "enum": [
+              "fresh",
+              "stale",
+              "unknown",
+              "missing"
+            ]
+          },
+          "estimated_tokens": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "priority": {
+            "type": "string"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "evidence_refs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "risk_flags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "estimated_total_tokens": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "created_at": {
+      "type": "string"
+    }
+  }
+}

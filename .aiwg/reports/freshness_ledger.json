@@ -1,0 +1,291 @@
+{
+  "generated_at": "2026-05-16T13:13:58Z",
+  "aiwg_root": ".aiwg",
+  "entries": [
+    {
+      "artifact_id": "project_world_model",
+      "artifact_type": "world_model",
+      "artifact_path": "world_model/project_world_model.json",
+      "source_hash": "e394df7cd08a0c5e39c7a51a2562ca4db814a7c348d0474f9099651a85104893",
+      "hash_method": "sha256(file_bytes)",
+      "freshness_status": "fresh",
+      "last_verified": "2026-05-16T13:13:58Z",
+      "invalidation_triggers": [
+        "source_file_changed",
+        "phase_state_changed"
+      ],
+      "evidence_refs": [
+        ".aiwg/world_model/project_world_model.json"
+      ],
+      "risk_flags": []
+    },
+    {
+      "artifact_id": "spec_coverage_matrix",
+      "artifact_type": "coverage_matrix",
+      "artifact_path": "reports/spec_coverage_matrix.json",
+      "source_hash": "8d4da37ad7abebbd92f950362af3682973bb0a056f924b1827338012612caf91",
+      "hash_method": "sha256(file_bytes)",
+      "freshness_status": "fresh",
+      "last_verified": "2026-05-16T13:13:58Z",
+      "invalidation_triggers": [
+        "source_file_changed",
+        "spec_triplet_changed",
+        "test_linkage_changed"
+      ],
+      "evidence_refs": [
+        ".aiwg/reports/spec_coverage_matrix.json"
+      ],
+      "risk_flags": []
+    },
+    {
+      "artifact_id": "folder_note:evolution",
+      "artifact_type": "folder_note",
+      "artifact_path": ".aiwg/notes/folders/evolution/notes.md",
+      "source_hash": "8849460fe7dea194a45ee07b73b8336951edb2d765414d0c565a2db48b8935d5",
+      "hash_method": "sha256(sorted_git_ls_files_plus_counts)",
+      "freshness_status": "fresh",
+      "last_verified": "2026-05-16T13:13:58Z",
+      "invalidation_triggers": [
+        "source_file_changed",
+        "linked_spec_changed",
+        "linked_test_failed",
+        "coverage_matrix_changed"
+      ],
+      "evidence_refs": [
+        ".aiwg/notes/folder_notes_manifest.json",
+        ".aiwg/reports/spec_coverage_matrix.json"
+      ],
+      "risk_flags": [
+        "Potential freshness drift if source files change and note is not refreshed."
+      ]
+    },
+    {
+      "artifact_id": "folder_note:world_model",
+      "artifact_type": "folder_note",
+      "artifact_path": ".aiwg/notes/folders/world_model/notes.md",
+      "source_hash": "3c88551efb5d0190636fcf017702b54bc6f28780bfd64ee139dca35621236d70",
+      "hash_method": "sha256(sorted_git_ls_files_plus_counts)",
+      "freshness_status": "fresh",
+      "last_verified": "2026-05-16T13:13:58Z",
+      "invalidation_triggers": [
+        "source_file_changed",
+        "linked_spec_changed",
+        "linked_test_failed",
+        "coverage_matrix_changed"
+      ],
+      "evidence_refs": [
+        ".aiwg/notes/folder_notes_manifest.json",
+        ".aiwg/reports/spec_coverage_matrix.json"
+      ],
+      "risk_flags": [
+        "Derived summary must be refreshed when phase state or architecture registry changes."
+      ]
+    },
+    {
+      "artifact_id": "folder_note:architecture",
+      "artifact_type": "folder_note",
+      "artifact_path": ".aiwg/notes/folders/architecture/notes.md",
+      "source_hash": "f096ff91829000d7bb7c6d3c750622227f3da1c50957f3180370097cbd0581e4",
+      "hash_method": "sha256(sorted_git_ls_files_plus_counts)",
+      "freshness_status": "fresh",
+      "last_verified": "2026-05-16T13:13:58Z",
+      "invalidation_triggers": [
+        "source_file_changed",
+        "linked_spec_changed",
+        "linked_test_failed",
+        "coverage_matrix_changed"
+      ],
+      "evidence_refs": [
+        ".aiwg/notes/folder_notes_manifest.json",
+        ".aiwg/reports/spec_coverage_matrix.json"
+      ],
+      "risk_flags": [
+        "Potential freshness drift if source files change and note is not refreshed."
+      ]
+    },
+    {
+      "artifact_id": "folder_note:specs",
+      "artifact_type": "folder_note",
+      "artifact_path": ".aiwg/notes/folders/specs/notes.md",
+      "source_hash": "65786b3ef3505a7ff3598395272aca307d3f5b591f0dfff0788c889105afb3f5",
+      "hash_method": "sha256(sorted_git_ls_files_plus_counts)",
+      "freshness_status": "stale",
+      "last_verified": "2026-05-16T13:13:58Z",
+      "invalidation_triggers": [
+        "source_file_changed",
+        "linked_spec_changed",
+        "linked_test_failed",
+        "coverage_matrix_changed"
+      ],
+      "evidence_refs": [
+        ".aiwg/notes/folder_notes_manifest.json",
+        ".aiwg/reports/spec_coverage_matrix.json"
+      ],
+      "risk_flags": [
+        "Large specification surface can drift without coverage gating.",
+        "folder_note_hash_mismatch"
+      ]
+    },
+    {
+      "artifact_id": "folder_note:l0_overseer",
+      "artifact_type": "folder_note",
+      "artifact_path": ".aiwg/notes/folders/l0_overseer/notes.md",
+      "source_hash": "e9166bf45dae761030b09475a4895777dddf2f4d75471d3ab65431933652d75c",
+      "hash_method": "sha256(sorted_git_ls_files_plus_counts)",
+      "freshness_status": "fresh",
+      "last_verified": "2026-05-16T13:13:58Z",
+      "invalidation_triggers": [
+        "source_file_changed",
+        "linked_spec_changed",
+        "linked_test_failed",
+        "coverage_matrix_changed"
+      ],
+      "evidence_refs": [
+        ".aiwg/notes/folder_notes_manifest.json",
+        ".aiwg/reports/spec_coverage_matrix.json"
+      ],
+      "risk_flags": [
+        "Tracked deps/_build content can inflate language perception without first-party filtering."
+      ]
+    },
+    {
+      "artifact_id": "folder_note:l1_nervous",
+      "artifact_type": "folder_note",
+      "artifact_path": ".aiwg/notes/folders/l1_nervous/notes.md",
+      "source_hash": "34308b370b4d2917f361c040b09fef08bea1b7f5f045b452c4e55e8afd46f2be",
+      "hash_method": "sha256(sorted_git_ls_files_plus_counts)",
+      "freshness_status": "fresh",
+      "last_verified": "2026-05-16T13:13:58Z",
+      "invalidation_triggers": [
+        "source_file_changed",
+        "linked_spec_changed",
+        "linked_test_failed",
+        "coverage_matrix_changed"
+      ],
+      "evidence_refs": [
+        ".aiwg/notes/folder_notes_manifest.json",
+        ".aiwg/reports/spec_coverage_matrix.json"
+      ],
+      "risk_flags": [
+        "Potential freshness drift if source files change and note is not refreshed."
+      ]
+    },
+    {
+      "artifact_id": "folder_note:l2_brain",
+      "artifact_type": "folder_note",
+      "artifact_path": ".aiwg/notes/folders/l2_brain/notes.md",
+      "source_hash": "aa182002281fdae8e6ff856d0ad057f77949a5c8ef4a2a3deb0bb38b481da347",
+      "hash_method": "sha256(sorted_git_ls_files_plus_counts)",
+      "freshness_status": "fresh",
+      "last_verified": "2026-05-16T13:13:58Z",
+      "invalidation_triggers": [
+        "source_file_changed",
+        "linked_spec_changed",
+        "linked_test_failed",
+        "coverage_matrix_changed"
+      ],
+      "evidence_refs": [
+        ".aiwg/notes/folder_notes_manifest.json",
+        ".aiwg/reports/spec_coverage_matrix.json"
+      ],
+      "risk_flags": [
+        "Potential freshness drift if source files change and note is not refreshed."
+      ]
+    },
+    {
+      "artifact_id": "folder_note:l3_shield",
+      "artifact_type": "folder_note",
+      "artifact_path": ".aiwg/notes/folders/l3_shield/notes.md",
+      "source_hash": "6c54c1705c2f8f8399a489b2dd3142decdc77383867139856286d5ea5ebb99f9",
+      "hash_method": "sha256(sorted_git_ls_files_plus_counts)",
+      "freshness_status": "fresh",
+      "last_verified": "2026-05-16T13:13:58Z",
+      "invalidation_triggers": [
+        "source_file_changed",
+        "linked_spec_changed",
+        "linked_test_failed",
+        "coverage_matrix_changed"
+      ],
+      "evidence_refs": [
+        ".aiwg/notes/folder_notes_manifest.json",
+        ".aiwg/reports/spec_coverage_matrix.json"
+      ],
+      "risk_flags": [
+        "Potential freshness drift if source files change and note is not refreshed."
+      ]
+    },
+    {
+      "artifact_id": "folder_note:l4_edge",
+      "artifact_type": "folder_note",
+      "artifact_path": ".aiwg/notes/folders/l4_edge/notes.md",
+      "source_hash": "1022c96ab2a13b77987175de1fc16696d4f5d9849313957398f422e6ebd7454f",
+      "hash_method": "sha256(sorted_git_ls_files_plus_counts)",
+      "freshness_status": "fresh",
+      "last_verified": "2026-05-16T13:13:58Z",
+      "invalidation_triggers": [
+        "source_file_changed",
+        "linked_spec_changed",
+        "linked_test_failed",
+        "coverage_matrix_changed"
+      ],
+      "evidence_refs": [
+        ".aiwg/notes/folder_notes_manifest.json",
+        ".aiwg/reports/spec_coverage_matrix.json"
+      ],
+      "risk_flags": [
+        "Potential freshness drift if source files change and note is not refreshed."
+      ]
+    },
+    {
+      "artifact_id": "folder_note:l5_muscle",
+      "artifact_type": "folder_note",
+      "artifact_path": ".aiwg/notes/folders/l5_muscle/notes.md",
+      "source_hash": "f974a7336a00243d10c93eeac0799c7bdbe284b750c051af0f0bc7c534e88a30",
+      "hash_method": "sha256(sorted_git_ls_files_plus_counts)",
+      "freshness_status": "fresh",
+      "last_verified": "2026-05-16T13:13:58Z",
+      "invalidation_triggers": [
+        "source_file_changed",
+        "linked_spec_changed",
+        "linked_test_failed",
+        "coverage_matrix_changed"
+      ],
+      "evidence_refs": [
+        ".aiwg/notes/folder_notes_manifest.json",
+        ".aiwg/reports/spec_coverage_matrix.json"
+      ],
+      "risk_flags": [
+        "Potential freshness drift if source files change and note is not refreshed."
+      ]
+    },
+    {
+      "artifact_id": "folder_note:l6_skin",
+      "artifact_type": "folder_note",
+      "artifact_path": ".aiwg/notes/folders/l6_skin/notes.md",
+      "source_hash": "4b48ceb7a634e1f292dbd655aabd28a5050d9ff2241d5392967861f04777aaf2",
+      "hash_method": "sha256(sorted_git_ls_files_plus_counts)",
+      "freshness_status": "fresh",
+      "last_verified": "2026-05-16T13:13:58Z",
+      "invalidation_triggers": [
+        "source_file_changed",
+        "linked_spec_changed",
+        "linked_test_failed",
+        "coverage_matrix_changed"
+      ],
+      "evidence_refs": [
+        ".aiwg/notes/folder_notes_manifest.json",
+        ".aiwg/reports/spec_coverage_matrix.json"
+      ],
+      "risk_flags": [
+        "TypeScript/JavaScript evidence is dominated by node_modules dependency files in current tracked scan."
+      ]
+    }
+  ],
+  "summary": {
+    "fresh": 12,
+    "stale": 1,
+    "unknown": 0,
+    "missing": 0,
+    "total": 13
+  }
+}

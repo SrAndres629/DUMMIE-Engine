@@ -1,33 +1,29 @@
 {
-  "next_phase": "P10",
-  "name": "FreshnessLedger + StaleMemoryDetector",
-  "objective": "Create the freshness ledger and stale memory detector that track when folder notes, world model, coverage matrix, reports and derived artifacts must be refreshed because canonical sources changed.",
-  "why_now": "P9 created derived folder notes with source hashes and freshness requirements. P10 must make freshness measurable and detect stale memory before DUMMIE uses outdated notes or world model context.",
+  "next_phase": "P14",
+  "name": "PromptFrameBuilder + PromptCacheLedger",
+  "objective": "Implement the prompt frame builder and prompt cache ledger that transform selected context packages into reusable prompt frames with stable prefixes, dynamic context sections, cache receipts and token-efficiency evidence.",
+  "why_now": "P10-P13 implemented freshness, stale detection, context packaging, value scoring and context quantization. P14 must convert selected context into model-ready prompt frames and track cache reuse.",
   "required_outputs": [
-    ".aiwg/reports/plan_v1_phase_10_freshness_ledger_stale_memory_detector.md",
-    ".aiwg/reports/plan_v1_phase_10_freshness_ledger_stale_memory_detector.json",
-    ".aiwg/reports/freshness_ledger.json",
-    ".aiwg/reports/stale_memory_report.json",
-    ".aiwg/schemas/freshness_ledger.schema.json",
-    ".aiwg/schemas/stale_memory_report.schema.json",
-    "doc/specs/113_freshness_ledger_stale_memory_detector.md",
-    "doc/specs/113_freshness_ledger_stale_memory_detector.feature",
-    "doc/specs/113_freshness_ledger_stale_memory_detector.rules.json"
+    "layers/l2_brain/prompt_frame_builder.py",
+    "layers/l2_brain/prompt_cache_ledger.py",
+    "layers/l2_brain/tests/test_prompt_frame_builder.py",
+    "layers/l2_brain/tests/test_prompt_cache_ledger.py",
+    ".aiwg/reports/plan_v1_phase_14_prompt_frame_cache.md",
+    ".aiwg/reports/plan_v1_phase_14_prompt_frame_cache.json"
   ],
   "must_not_create": [
-    "Obsidian adapter",
     "swarm agents",
-    "autonomy permissions",
+    "Obsidian adapter",
     "dashboard",
-    "runtime-heavy ContextQuant implementation before freshness ledger exists"
+    "autonomy permissions"
   ],
   "success_conditions": [
-    "freshness ledger created",
-    "stale memory report created",
-    "folder notes freshness checked",
-    "world model freshness checked",
-    "coverage matrix freshness checked",
-    "derived artifacts have refresh triggers",
-    "P11 ContextPackage receives freshness constraints"
+    "prompt frame builder implemented",
+    "prompt cache ledger implemented",
+    "stable prefix separated from dynamic context",
+    "context receipts embedded",
+    "cacheable sections identified",
+    "tests pass",
+    "runtime demo creates prompt frame"
   ]
 }
