@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dummie.ai/schemas/noteplan.schema.json",
+  "title": "Folder NotePlan Contract",
+  "type": "object",
+  "required": [
+    "folder_id",
+    "folder_path",
+    "noteplan_path",
+    "objective",
+    "coverage_constraints",
+    "missing_links",
+    "required_future_probes",
+    "stale_risk",
+    "suggested_p10_freshness_rules",
+    "suggested_p11_context_package_rules",
+    "suggested_p13_context_quant_rules",
+    "done_criteria"
+  ],
+  "properties": {
+    "folder_id": {
+      "type": "string"
+    },
+    "folder_path": {
+      "type": "string"
+    },
+    "noteplan_path": {
+      "type": "string"
+    },
+    "objective": {
+      "type": "string"
+    },
+    "coverage_constraints": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "missing_links": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "required_future_probes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "stale_risk": {
+      "type": "string"
+    },
+    "suggested_p10_freshness_rules": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "suggested_p11_context_package_rules": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "suggested_p13_context_quant_rules": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "done_criteria": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": true
+}

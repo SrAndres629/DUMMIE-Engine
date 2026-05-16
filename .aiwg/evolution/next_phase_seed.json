@@ -1,32 +1,33 @@
 {
-  "next_phase": "P9",
-  "name": "FolderNotes + NotePlans",
-  "objective": "Create governed folder-level notes and noteplans that summarize repo areas using the cognitive artifact protocol, truth hierarchy, world model and spec coverage gate.",
-  "why_now": "P8 established coverage constraints. P9 can now create notes without becoming stale narrative debt because notes must be linked to coverage, freshness, source hashes, truth rank and context roles.",
+  "next_phase": "P10",
+  "name": "FreshnessLedger + StaleMemoryDetector",
+  "objective": "Create the freshness ledger and stale memory detector that track when folder notes, world model, coverage matrix, reports and derived artifacts must be refreshed because canonical sources changed.",
+  "why_now": "P9 created derived folder notes with source hashes and freshness requirements. P10 must make freshness measurable and detect stale memory before DUMMIE uses outdated notes or world model context.",
   "required_outputs": [
-    ".aiwg/reports/plan_v1_phase_9_folder_notes_noteplans.md",
-    ".aiwg/reports/plan_v1_phase_9_folder_notes_noteplans.json",
-    ".aiwg/notes/folder_notes_manifest.json",
-    ".aiwg/schemas/folder_note.schema.json",
-    ".aiwg/schemas/noteplan.schema.json",
-    "doc/specs/112_folder_notes_noteplans.md",
-    "doc/specs/112_folder_notes_noteplans.feature",
-    "doc/specs/112_folder_notes_noteplans.rules.json"
+    ".aiwg/reports/plan_v1_phase_10_freshness_ledger_stale_memory_detector.md",
+    ".aiwg/reports/plan_v1_phase_10_freshness_ledger_stale_memory_detector.json",
+    ".aiwg/reports/freshness_ledger.json",
+    ".aiwg/reports/stale_memory_report.json",
+    ".aiwg/schemas/freshness_ledger.schema.json",
+    ".aiwg/schemas/stale_memory_report.schema.json",
+    "doc/specs/113_freshness_ledger_stale_memory_detector.md",
+    "doc/specs/113_freshness_ledger_stale_memory_detector.feature",
+    "doc/specs/113_freshness_ledger_stale_memory_detector.rules.json"
   ],
   "must_not_create": [
-    "new runtime modules",
-    "swarm agents",
     "Obsidian adapter",
+    "swarm agents",
+    "autonomy permissions",
     "dashboard",
-    "runtime-heavy ContextQuant implementation before FolderNotes lifecycle exists"
+    "runtime-heavy ContextQuant implementation before freshness ledger exists"
   ],
   "success_conditions": [
-    "folder note schema created",
-    "noteplan schema created",
-    "notes manifest created",
-    "notes require source hashes or freshness",
-    "notes link to spec coverage matrix",
-    "notes use summary-only or retrieval-candidate token roles",
-    "notes do not override canonical source files"
+    "freshness ledger created",
+    "stale memory report created",
+    "folder notes freshness checked",
+    "world model freshness checked",
+    "coverage matrix freshness checked",
+    "derived artifacts have refresh triggers",
+    "P11 ContextPackage receives freshness constraints"
   ]
 }

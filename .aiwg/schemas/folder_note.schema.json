@@ -1,0 +1,139 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dummie.ai/schemas/folder_note.schema.json",
+  "title": "Folder Note Manifest Entry",
+  "type": "object",
+  "required": [
+    "folder_id",
+    "folder_path",
+    "note_path",
+    "status",
+    "canonicality",
+    "truth_rank",
+    "token_role",
+    "source_hash",
+    "hash_method",
+    "linked_specs",
+    "linked_tests",
+    "linked_capabilities",
+    "linked_layers",
+    "linked_languages",
+    "freshness",
+    "risks"
+  ],
+  "properties": {
+    "folder_id": {
+      "type": "string"
+    },
+    "folder_path": {
+      "type": "string"
+    },
+    "note_path": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "low_confidence",
+        "path_missing"
+      ]
+    },
+    "canonicality": {
+      "type": "string",
+      "enum": [
+        "derived"
+      ]
+    },
+    "truth_rank": {
+      "type": "integer"
+    },
+    "token_role": {
+      "type": "string",
+      "enum": [
+        "summary_only",
+        "retrieval_candidate"
+      ]
+    },
+    "source_hash": {
+      "type": "string"
+    },
+    "hash_method": {
+      "type": "string"
+    },
+    "tracked_file_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "sample_paths": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "linked_specs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "linked_tests": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "linked_capabilities": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "linked_layers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "linked_languages": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "freshness": {
+      "type": "object",
+      "required": [
+        "status",
+        "last_verified",
+        "invalidation_triggers"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "fresh",
+            "unknown",
+            "stale"
+          ]
+        },
+        "last_verified": {
+          "type": "string"
+        },
+        "invalidation_triggers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "risks": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": true
+}

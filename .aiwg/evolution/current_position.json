@@ -1,10 +1,10 @@
 {
-  "plan": "DUMMIE PLAN V1 — Cognitive Evolution Operating Layer",
-  "current_phase": "P8",
-  "current_phase_name": "SpecCoverageGate",
-  "last_completed_phase": "P7",
-  "next_required_phase": "P9",
-  "next_required_phase_name": "FolderNotes + NotePlans",
+  "plan": "DUMMIE PLAN V1 \u2014 Cognitive Evolution Operating Layer",
+  "current_phase": "P9",
+  "current_phase_name": "FolderNotes + NotePlans",
+  "last_completed_phase": "P8",
+  "next_required_phase": "P10",
+  "next_required_phase_name": "FreshnessLedger + StaleMemoryDetector",
   "current_block": "truth_and_lifecycle",
   "forbidden_skips": [
     "do not start swarm before lifecycle and context governance",

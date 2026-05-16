@@ -1,0 +1,632 @@
+{
+  "plan": "DUMMIE PLAN V1 \u2014 Cognitive Evolution Operating Layer",
+  "phase": "P9",
+  "manifest_id": "folder_notes_manifest",
+  "version": "1.0.0",
+  "generated_from_commit": "bfd8619265a2b634c89b8e0158da846762c623d4",
+  "truth_policy": {
+    "canonicality": "derived",
+    "truth_rank": 40,
+    "source_basis": [
+      ".aiwg/world_model/project_world_model.json",
+      ".aiwg/reports/spec_coverage_matrix.json",
+      ".aiwg/schemas/cognitive_artifact.schema.json",
+      ".aiwg/schemas/truth_hierarchy.schema.json",
+      "git ls-files"
+    ],
+    "notes_do_not_override": [
+      "source_code",
+      "tests",
+      "active_specs",
+      "schemas",
+      "phase_ledgers",
+      "world_model"
+    ]
+  },
+  "token_policy": {
+    "default_token_role": "summary_only",
+    "allowed_token_roles": [
+      "summary_only",
+      "retrieval_candidate"
+    ],
+    "never_bulk_load_raw_folders": true
+  },
+  "freshness_policy": {
+    "hash_method": "sha256(sorted_git_ls_files_plus_counts)",
+    "requires_refresh_when_source_hash_changes": true,
+    "p10_must_harden": true
+  },
+  "coverage_policy": {
+    "must_link_to_spec_coverage_matrix": true,
+    "coverage_matrix_ref": ".aiwg/reports/spec_coverage_matrix.json"
+  },
+  "folders": [
+    {
+      "folder_id": "evolution",
+      "folder_path": ".aiwg/evolution",
+      "note_path": ".aiwg/notes/folders/evolution/notes.md",
+      "noteplan_path": ".aiwg/notes/folders/evolution/noteplan.md",
+      "status": "active",
+      "canonicality": "derived",
+      "truth_rank": 40,
+      "token_role": "summary_only",
+      "source_hash": "8849460fe7dea194a45ee07b73b8336951edb2d765414d0c565a2db48b8935d5",
+      "hash_method": "sha256(sorted_git_ls_files_plus_counts)",
+      "tracked_file_count": 13,
+      "sample_paths": [
+        ".aiwg/evolution/PLAN_V1_COGNITIVE_EVOLUTION_OPERATING_LAYER.md",
+        ".aiwg/evolution/current_position.json",
+        ".aiwg/evolution/hot_path_validation_protocol.md",
+        ".aiwg/evolution/long_term_objectives.yaml",
+        ".aiwg/evolution/mentor_review_protocol.md",
+        ".aiwg/evolution/next_phase_seed.json",
+        ".aiwg/evolution/phase_acceptance_contract.yaml",
+        ".aiwg/evolution/phase_dependencies.graph.json"
+      ],
+      "linked_specs": [
+        "doc/specs/104_plan_v1_cognitive_evolution_operating_layer.md",
+        "doc/specs/106_agent_session_operating_contracts.md",
+        "doc/specs/110_project_world_model.md"
+      ],
+      "linked_tests": [
+        "scripts/validate_specs_docs.py"
+      ],
+      "linked_capabilities": [
+        "PhaseLedger"
+      ],
+      "linked_layers": [
+        "L0-L6"
+      ],
+      "linked_languages": [
+        "JSON",
+        "YAML",
+        "Markdown"
+      ],
+      "freshness": {
+        "status": "fresh",
+        "last_verified": "2026-05-16T13:02:11Z",
+        "invalidation_triggers": [
+          "source_file_changed",
+          "linked_spec_changed",
+          "linked_test_failed",
+          "coverage_matrix_changed"
+        ]
+      },
+      "risks": [
+        "Potential freshness drift if source files change and note is not refreshed."
+      ]
+    },
+    {
+      "folder_id": "world_model",
+      "folder_path": ".aiwg/world_model",
+      "note_path": ".aiwg/notes/folders/world_model/notes.md",
+      "noteplan_path": ".aiwg/notes/folders/world_model/noteplan.md",
+      "status": "active",
+      "canonicality": "derived",
+      "truth_rank": 40,
+      "token_role": "summary_only",
+      "source_hash": "3c88551efb5d0190636fcf017702b54bc6f28780bfd64ee139dca35621236d70",
+      "hash_method": "sha256(sorted_git_ls_files_plus_counts)",
+      "tracked_file_count": 2,
+      "sample_paths": [
+        ".aiwg/world_model/project_world_model.json",
+        ".aiwg/world_model/project_world_model.md"
+      ],
+      "linked_specs": [
+        "doc/specs/110_project_world_model.md"
+      ],
+      "linked_tests": [],
+      "linked_capabilities": [
+        "ContextBudgetManager"
+      ],
+      "linked_layers": [
+        "L0-L6"
+      ],
+      "linked_languages": [
+        "JSON",
+        "Markdown"
+      ],
+      "freshness": {
+        "status": "fresh",
+        "last_verified": "2026-05-16T13:02:11Z",
+        "invalidation_triggers": [
+          "source_file_changed",
+          "linked_spec_changed",
+          "linked_test_failed",
+          "coverage_matrix_changed"
+        ]
+      },
+      "risks": [
+        "Derived summary must be refreshed when phase state or architecture registry changes."
+      ]
+    },
+    {
+      "folder_id": "architecture",
+      "folder_path": ".aiwg/architecture",
+      "note_path": ".aiwg/notes/folders/architecture/notes.md",
+      "noteplan_path": ".aiwg/notes/folders/architecture/noteplan.md",
+      "status": "active",
+      "canonicality": "derived",
+      "truth_rank": 40,
+      "token_role": "summary_only",
+      "source_hash": "f096ff91829000d7bb7c6d3c750622227f3da1c50957f3180370097cbd0581e4",
+      "hash_method": "sha256(sorted_git_ls_files_plus_counts)",
+      "tracked_file_count": 2,
+      "sample_paths": [
+        ".aiwg/architecture/layer_language_map.json",
+        ".aiwg/architecture/polyglot_architecture_registry.yaml"
+      ],
+      "linked_specs": [
+        "doc/specs/109_polyglot_architecture_registry.md"
+      ],
+      "linked_tests": [],
+      "linked_capabilities": [
+        "ModelRouter"
+      ],
+      "linked_layers": [
+        "L0-L6"
+      ],
+      "linked_languages": [
+        "YAML",
+        "JSON"
+      ],
+      "freshness": {
+        "status": "fresh",
+        "last_verified": "2026-05-16T13:02:11Z",
+        "invalidation_triggers": [
+          "source_file_changed",
+          "linked_spec_changed",
+          "linked_test_failed",
+          "coverage_matrix_changed"
+        ]
+      },
+      "risks": [
+        "Potential freshness drift if source files change and note is not refreshed."
+      ]
+    },
+    {
+      "folder_id": "specs",
+      "folder_path": "doc/specs",
+      "note_path": ".aiwg/notes/folders/specs/notes.md",
+      "noteplan_path": ".aiwg/notes/folders/specs/noteplan.md",
+      "status": "active",
+      "canonicality": "derived",
+      "truth_rank": 40,
+      "token_role": "summary_only",
+      "source_hash": "ac2029b9ff370dae0051b624dcc1cc0b904fee06d2fefd1f0e36efd938a6da0a",
+      "hash_method": "sha256(sorted_git_ls_files_plus_counts)",
+      "tracked_file_count": 299,
+      "sample_paths": [
+        "doc/specs/104_plan_v1_cognitive_evolution_operating_layer.feature",
+        "doc/specs/104_plan_v1_cognitive_evolution_operating_layer.md",
+        "doc/specs/104_plan_v1_cognitive_evolution_operating_layer.rules.json",
+        "doc/specs/105_mental_model_abstraction_layer.feature",
+        "doc/specs/105_mental_model_abstraction_layer.md",
+        "doc/specs/105_mental_model_abstraction_layer.rules.json",
+        "doc/specs/106_agent_session_operating_contracts.feature",
+        "doc/specs/106_agent_session_operating_contracts.md"
+      ],
+      "linked_specs": [
+        "doc/specs/107_cognitive_artifact_protocol.md",
+        "doc/specs/108_truth_hierarchy_canonicality_policy.md",
+        "doc/specs/109_polyglot_architecture_registry.md",
+        "doc/specs/110_project_world_model.md",
+        "doc/specs/111_spec_coverage_gate.md"
+      ],
+      "linked_tests": [
+        "scripts/validate_specs_docs.py"
+      ],
+      "linked_capabilities": [
+        "CognitiveHooks"
+      ],
+      "linked_layers": [
+        "L0-L6"
+      ],
+      "linked_languages": [
+        "Markdown",
+        "Gherkin",
+        "JSON"
+      ],
+      "freshness": {
+        "status": "fresh",
+        "last_verified": "2026-05-16T13:02:11Z",
+        "invalidation_triggers": [
+          "source_file_changed",
+          "linked_spec_changed",
+          "linked_test_failed",
+          "coverage_matrix_changed"
+        ]
+      },
+      "risks": [
+        "Large specification surface can drift without coverage gating."
+      ]
+    },
+    {
+      "folder_id": "l0_overseer",
+      "folder_path": "layers/l0_overseer",
+      "note_path": ".aiwg/notes/folders/l0_overseer/notes.md",
+      "noteplan_path": ".aiwg/notes/folders/l0_overseer/noteplan.md",
+      "status": "active",
+      "canonicality": "derived",
+      "truth_rank": 40,
+      "token_role": "summary_only",
+      "source_hash": "e9166bf45dae761030b09475a4895777dddf2f4d75471d3ab65431933652d75c",
+      "hash_method": "sha256(sorted_git_ls_files_plus_counts)",
+      "tracked_file_count": 1027,
+      "sample_paths": [
+        "layers/l0_overseer/__init__.py",
+        "layers/l0_overseer/_build/dev/lib/chacha20/.mix/compile.app_tracer",
+        "layers/l0_overseer/_build/dev/lib/chacha20/.mix/compile.elixir",
+        "layers/l0_overseer/_build/dev/lib/chacha20/.mix/compile.elixir_scm",
+        "layers/l0_overseer/_build/dev/lib/chacha20/.mix/compile.fetch",
+        "layers/l0_overseer/_build/dev/lib/chacha20/ebin/Elixir.Chacha20.beam",
+        "layers/l0_overseer/_build/dev/lib/chacha20/ebin/chacha20.app",
+        "layers/l0_overseer/_build/dev/lib/complex/.mix/compile.app_tracer"
+      ],
+      "linked_specs": [
+        "doc/specs/L0_Overseer/03_polyglot_architecture.md",
+        "doc/specs/109_polyglot_architecture_registry.md"
+      ],
+      "linked_tests": [
+        "layers/l0_overseer/cmd/dummied/main_test.go",
+        "layers/l0_overseer/internal/orchestrator/integrity_test.go",
+        "layers/l0_overseer/internal/orchestrator/security_test.go",
+        "layers/l0_overseer/internal/orchestrator/socket_path_test.go",
+        "layers/l0_overseer/test/overseer_ipc_test.exs",
+        "layers/l0_overseer/test/test_helper.exs"
+      ],
+      "linked_capabilities": [],
+      "linked_layers": [
+        "L0"
+      ],
+      "linked_languages": [
+        "Go",
+        "Elixir",
+        "Python"
+      ],
+      "freshness": {
+        "status": "fresh",
+        "last_verified": "2026-05-16T13:02:11Z",
+        "invalidation_triggers": [
+          "source_file_changed",
+          "linked_spec_changed",
+          "linked_test_failed",
+          "coverage_matrix_changed"
+        ]
+      },
+      "risks": [
+        "Tracked deps/_build content can inflate language perception without first-party filtering."
+      ]
+    },
+    {
+      "folder_id": "l1_nervous",
+      "folder_path": "layers/l1_nervous",
+      "note_path": ".aiwg/notes/folders/l1_nervous/notes.md",
+      "noteplan_path": ".aiwg/notes/folders/l1_nervous/noteplan.md",
+      "status": "active",
+      "canonicality": "derived",
+      "truth_rank": 40,
+      "token_role": "summary_only",
+      "source_hash": "34308b370b4d2917f361c040b09fef08bea1b7f5f045b452c4e55e8afd46f2be",
+      "hash_method": "sha256(sorted_git_ls_files_plus_counts)",
+      "tracked_file_count": 105,
+      "sample_paths": [
+        "layers/l1_nervous/__init__.py",
+        "layers/l1_nervous/adapters/mcp/pyproject.toml",
+        "layers/l1_nervous/adapters/mcp/pyrightconfig.json",
+        "layers/l1_nervous/adapters/mcp/server.py",
+        "layers/l1_nervous/adapters/mcp/uv.lock",
+        "layers/l1_nervous/application/__init__.py",
+        "layers/l1_nervous/application/use_cases.py",
+        "layers/l1_nervous/bootstrap.py"
+      ],
+      "linked_specs": [
+        "doc/specs/L1_Nervous/10_protobuf_contracts.md",
+        "doc/specs/109_polyglot_architecture_registry.md"
+      ],
+      "linked_tests": [
+        "layers/l1_nervous/tests/conftest.py",
+        "layers/l1_nervous/tests/industrial/test_e2e_flow.py",
+        "layers/l1_nervous/tests/industrial/test_fencing.sh",
+        "layers/l1_nervous/tests/industrial/test_observe_swarm_perf.py",
+        "layers/l1_nervous/tests/industrial/test_swarm_race.py",
+        "layers/l1_nervous/tests/test_causal_chaining.py"
+      ],
+      "linked_capabilities": [],
+      "linked_layers": [
+        "L1"
+      ],
+      "linked_languages": [
+        "Python",
+        "Go"
+      ],
+      "freshness": {
+        "status": "fresh",
+        "last_verified": "2026-05-16T13:02:11Z",
+        "invalidation_triggers": [
+          "source_file_changed",
+          "linked_spec_changed",
+          "linked_test_failed",
+          "coverage_matrix_changed"
+        ]
+      },
+      "risks": [
+        "Potential freshness drift if source files change and note is not refreshed."
+      ]
+    },
+    {
+      "folder_id": "l2_brain",
+      "folder_path": "layers/l2_brain",
+      "note_path": ".aiwg/notes/folders/l2_brain/notes.md",
+      "noteplan_path": ".aiwg/notes/folders/l2_brain/noteplan.md",
+      "status": "active",
+      "canonicality": "derived",
+      "truth_rank": 40,
+      "token_role": "summary_only",
+      "source_hash": "aa182002281fdae8e6ff856d0ad057f77949a5c8ef4a2a3deb0bb38b481da347",
+      "hash_method": "sha256(sorted_git_ls_files_plus_counts)",
+      "tracked_file_count": 252,
+      "sample_paths": [
+        "layers/l2_brain/.aiwg/identity.json",
+        "layers/l2_brain/.python-version",
+        "layers/l2_brain/README.md",
+        "layers/l2_brain/__init__.py",
+        "layers/l2_brain/action_graph.py",
+        "layers/l2_brain/adapters.py",
+        "layers/l2_brain/application/cognitive/use_cases.py",
+        "layers/l2_brain/ast_indexer.py"
+      ],
+      "linked_specs": [
+        "doc/specs/107_cognitive_artifact_protocol.md",
+        "doc/specs/108_truth_hierarchy_canonicality_policy.md",
+        "doc/specs/110_project_world_model.md"
+      ],
+      "linked_tests": [
+        "layers/l2_brain/tests/conftest.py",
+        "layers/l2_brain/tests/infrastructure/test_kuzu_path_hardening.py",
+        "layers/l2_brain/tests/infrastructure/test_kuzu_repository.py",
+        "layers/l2_brain/tests/test_adapters_cypher_injection.py",
+        "layers/l2_brain/tests/test_agent_office_models.py",
+        "layers/l2_brain/tests/test_architectural_boundaries.py"
+      ],
+      "linked_capabilities": [
+        "PhaseLedger",
+        "ContextBudgetManager",
+        "SemanticRetrievalRuntime",
+        "MemoryGraphRuntime",
+        "MissionWorkbench",
+        "OutcomeEvaluator",
+        "TokenCostLedger",
+        "SessionStore",
+        "LearningEpisode",
+        "VaultCurator",
+        "CognitiveHooks",
+        "ModelRouter"
+      ],
+      "linked_layers": [
+        "L2"
+      ],
+      "linked_languages": [
+        "Python"
+      ],
+      "freshness": {
+        "status": "fresh",
+        "last_verified": "2026-05-16T13:02:11Z",
+        "invalidation_triggers": [
+          "source_file_changed",
+          "linked_spec_changed",
+          "linked_test_failed",
+          "coverage_matrix_changed"
+        ]
+      },
+      "risks": [
+        "Potential freshness drift if source files change and note is not refreshed."
+      ]
+    },
+    {
+      "folder_id": "l3_shield",
+      "folder_path": "layers/l3_shield",
+      "note_path": ".aiwg/notes/folders/l3_shield/notes.md",
+      "noteplan_path": ".aiwg/notes/folders/l3_shield/noteplan.md",
+      "status": "active",
+      "canonicality": "derived",
+      "truth_rank": 40,
+      "token_role": "summary_only",
+      "source_hash": "6c54c1705c2f8f8399a489b2dd3142decdc77383867139856286d5ea5ebb99f9",
+      "hash_method": "sha256(sorted_git_ls_files_plus_counts)",
+      "tracked_file_count": 14,
+      "sample_paths": [
+        "layers/l3_shield/Cargo.lock",
+        "layers/l3_shield/Cargo.toml",
+        "layers/l3_shield/README.md",
+        "layers/l3_shield/__init__.py",
+        "layers/l3_shield/authority_gate.py",
+        "layers/l3_shield/budget_auditor.py",
+        "layers/l3_shield/compliance_auditor.py",
+        "layers/l3_shield/knowledge_policy.py"
+      ],
+      "linked_specs": [
+        "doc/specs/L3_Shield/04_anti_ignorance_shields.md",
+        "doc/specs/L3_Shield/22_sdd_executable_contracts.md"
+      ],
+      "linked_tests": [
+        "layers/l3_shield/tests/test_authority_gate.py",
+        "layers/l3_shield/tests/test_knowledge_policy.py",
+        "layers/l3_shield/tests/test_topological_auditor.py"
+      ],
+      "linked_capabilities": [],
+      "linked_layers": [
+        "L3"
+      ],
+      "linked_languages": [
+        "Python",
+        "Rust"
+      ],
+      "freshness": {
+        "status": "fresh",
+        "last_verified": "2026-05-16T13:02:11Z",
+        "invalidation_triggers": [
+          "source_file_changed",
+          "linked_spec_changed",
+          "linked_test_failed",
+          "coverage_matrix_changed"
+        ]
+      },
+      "risks": [
+        "Potential freshness drift if source files change and note is not refreshed."
+      ]
+    },
+    {
+      "folder_id": "l4_edge",
+      "folder_path": "layers/l4_edge",
+      "note_path": ".aiwg/notes/folders/l4_edge/notes.md",
+      "noteplan_path": ".aiwg/notes/folders/l4_edge/noteplan.md",
+      "status": "active",
+      "canonicality": "derived",
+      "truth_rank": 40,
+      "token_role": "summary_only",
+      "source_hash": "1022c96ab2a13b77987175de1fc16696d4f5d9849313957398f422e6ebd7454f",
+      "hash_method": "sha256(sorted_git_ls_files_plus_counts)",
+      "tracked_file_count": 10,
+      "sample_paths": [
+        "layers/l4_edge/README.md",
+        "layers/l4_edge/__init__.py",
+        "layers/l4_edge/build.zig",
+        "layers/l4_edge/file_watcher.py",
+        "layers/l4_edge/lst_scanner.zig",
+        "layers/l4_edge/protocol.zig",
+        "layers/l4_edge/src/lst_scanner.zig",
+        "layers/l4_edge/tool_discovery.py"
+      ],
+      "linked_specs": [
+        "doc/specs/L4_Edge/18_loci_ontology_mapping.md",
+        "doc/specs/109_polyglot_architecture_registry.md"
+      ],
+      "linked_tests": [],
+      "linked_capabilities": [],
+      "linked_layers": [
+        "L4"
+      ],
+      "linked_languages": [
+        "Python",
+        "Zig"
+      ],
+      "freshness": {
+        "status": "fresh",
+        "last_verified": "2026-05-16T13:02:11Z",
+        "invalidation_triggers": [
+          "source_file_changed",
+          "linked_spec_changed",
+          "linked_test_failed",
+          "coverage_matrix_changed"
+        ]
+      },
+      "risks": [
+        "Potential freshness drift if source files change and note is not refreshed."
+      ]
+    },
+    {
+      "folder_id": "l5_muscle",
+      "folder_path": "layers/l5_muscle",
+      "note_path": ".aiwg/notes/folders/l5_muscle/notes.md",
+      "noteplan_path": ".aiwg/notes/folders/l5_muscle/noteplan.md",
+      "status": "active",
+      "canonicality": "derived",
+      "truth_rank": 40,
+      "token_role": "summary_only",
+      "source_hash": "f974a7336a00243d10c93eeac0799c7bdbe284b750c051af0f0bc7c534e88a30",
+      "hash_method": "sha256(sorted_git_ls_files_plus_counts)",
+      "tracked_file_count": 9,
+      "sample_paths": [
+        "layers/l5_muscle/README.md",
+        "layers/l5_muscle/__init__.py",
+        "layers/l5_muscle/compactor.py",
+        "layers/l5_muscle/manager.py",
+        "layers/l5_muscle/math_ops.mojo",
+        "layers/l5_muscle/mcp_driver.py",
+        "layers/l5_muscle/src/muscle/__init__.py",
+        "layers/l5_muscle/tests/test_workstation_operator.py"
+      ],
+      "linked_specs": [
+        "doc/specs/L5_Muscle/01_environment_and_hardware.md",
+        "doc/specs/109_polyglot_architecture_registry.md"
+      ],
+      "linked_tests": [
+        "layers/l5_muscle/tests/test_workstation_operator.py"
+      ],
+      "linked_capabilities": [],
+      "linked_layers": [
+        "L5"
+      ],
+      "linked_languages": [
+        "Python",
+        "Mojo"
+      ],
+      "freshness": {
+        "status": "fresh",
+        "last_verified": "2026-05-16T13:02:11Z",
+        "invalidation_triggers": [
+          "source_file_changed",
+          "linked_spec_changed",
+          "linked_test_failed",
+          "coverage_matrix_changed"
+        ]
+      },
+      "risks": [
+        "Potential freshness drift if source files change and note is not refreshed."
+      ]
+    },
+    {
+      "folder_id": "l6_skin",
+      "folder_path": "layers/l6_skin",
+      "note_path": ".aiwg/notes/folders/l6_skin/notes.md",
+      "noteplan_path": ".aiwg/notes/folders/l6_skin/noteplan.md",
+      "status": "active",
+      "canonicality": "derived",
+      "truth_rank": 40,
+      "token_role": "summary_only",
+      "source_hash": "4b48ceb7a634e1f292dbd655aabd28a5050d9ff2241d5392967861f04777aaf2",
+      "hash_method": "sha256(sorted_git_ls_files_plus_counts)",
+      "tracked_file_count": 670,
+      "sample_paths": [
+        "layers/l6_skin/__init__.py",
+        "layers/l6_skin/index.html",
+        "layers/l6_skin/node_modules/.bin/nanoid",
+        "layers/l6_skin/node_modules/.bin/rolldown",
+        "layers/l6_skin/node_modules/.bin/tsc",
+        "layers/l6_skin/node_modules/.bin/tsserver",
+        "layers/l6_skin/node_modules/.bin/vite",
+        "layers/l6_skin/node_modules/.package-lock.json"
+      ],
+      "linked_specs": [
+        "doc/specs/L6_Skin/13_observability_opentelemetry.md",
+        "doc/specs/109_polyglot_architecture_registry.md"
+      ],
+      "linked_tests": [
+        "layers/l6_skin/node_modules/@types/node/test/reporters.d.ts"
+      ],
+      "linked_capabilities": [],
+      "linked_layers": [
+        "L6"
+      ],
+      "linked_languages": [
+        "Python",
+        "TypeScript",
+        "JavaScript"
+      ],
+      "freshness": {
+        "status": "fresh",
+        "last_verified": "2026-05-16T13:02:11Z",
+        "invalidation_triggers": [
+          "source_file_changed",
+          "linked_spec_changed",
+          "linked_test_failed",
+          "coverage_matrix_changed"
+        ]
+      },
+      "risks": [
+        "TypeScript/JavaScript evidence is dominated by node_modules dependency files in current tracked scan."
+      ]
+    }
+  ]
+}

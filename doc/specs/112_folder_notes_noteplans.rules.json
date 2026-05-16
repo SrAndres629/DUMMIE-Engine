@@ -1,0 +1,48 @@
+{
+  "spec_id": "112_folder_notes_noteplans",
+  "folder_notes_noteplans": {
+    "required_files": [
+      ".aiwg/notes/folder_notes_manifest.json",
+      ".aiwg/schemas/folder_note.schema.json",
+      ".aiwg/schemas/noteplan.schema.json"
+    ],
+    "required_fields": [
+      "folder_id",
+      "folder_path",
+      "status",
+      "canonicality",
+      "truth_rank",
+      "token_role",
+      "source_hash",
+      "freshness",
+      "linked_specs",
+      "linked_tests",
+      "linked_layers"
+    ],
+    "truth_policy": {
+      "canonicality": "derived",
+      "truth_rank": 40,
+      "notes_do_not_override_canonical_sources": true
+    },
+    "freshness_policy": {
+      "hash_method": "sha256(sorted_git_ls_files_plus_counts)",
+      "requires_refresh_when_source_hash_changes": true
+    },
+    "token_policy": {
+      "default_token_role": "summary_only",
+      "allowed_token_roles": [
+        "summary_only",
+        "retrieval_candidate"
+      ]
+    },
+    "coverage_policy": {
+      "must_link_to_spec_coverage_matrix": true,
+      "coverage_matrix_ref": ".aiwg/reports/spec_coverage_matrix.json"
+    },
+    "future_consumers": [
+      "P10 FreshnessLedger + StaleMemoryDetector",
+      "P11 ContextPackage + ContextReceipt",
+      "P13 ContextQuantRuntime"
+    ]
+  }
+}

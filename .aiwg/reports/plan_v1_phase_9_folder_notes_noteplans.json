@@ -1,0 +1,87 @@
+{
+  "plan": "DUMMIE PLAN V1 \u2014 Cognitive Evolution Operating Layer",
+  "phase": "P9",
+  "phase_name": "FolderNotes + NotePlans",
+  "decision": "PASS_WITH_WARNINGS",
+  "baseline_commit": "bfd8619265a2b634c89b8e0158da846762c623d4",
+  "branch": "main",
+  "validations": {
+    "git_diff_check": "PASS",
+    "spec_validation": "PASS_WITH_KNOWN_LEGACY_DEBT",
+    "json_parse": "PASS",
+    "yaml_parse": "PASS"
+  },
+  "advanced_reasoning_summary": {
+    "claims": [
+      "Folder-level compression is required for repeatable global orientation without raw-folder scans.",
+      "FolderNotes must remain derived to avoid overriding canonical truth sources.",
+      "P10 requires deterministic source-hash hooks from P9 outputs."
+    ],
+    "objections": [
+      "Notes can become stale narrative debt without freshness governance.",
+      "Dependency-heavy folders can distort architecture summaries.",
+      "Coverage linkage can drift if not tracked with invalidation triggers."
+    ],
+    "decisions": [
+      "Limit scope to tier-0 folders only.",
+      "Default token role to summary_only for all generated notes.",
+      "Attach source hash and refresh triggers per folder entry."
+    ],
+    "risks": [
+      "Freshness drift remains until P10 detector is active.",
+      "Dependency-heavy folders require continued classification hardening.",
+      "Inherited legacy spec debt remains open and warning-scoped."
+    ]
+  },
+  "manifest": {
+    "path": ".aiwg/notes/folder_notes_manifest.json",
+    "valid_json": true,
+    "folder_count": 11,
+    "active_count": 11,
+    "low_confidence_count": 0,
+    "path_missing_count": 0
+  },
+  "schemas": {
+    "folder_note": ".aiwg/schemas/folder_note.schema.json",
+    "noteplan": ".aiwg/schemas/noteplan.schema.json"
+  },
+  "spec": {
+    "md": "doc/specs/112_folder_notes_noteplans.md",
+    "feature": "doc/specs/112_folder_notes_noteplans.feature",
+    "rules_json": "doc/specs/112_folder_notes_noteplans.rules.json"
+  },
+  "notes_policy": {
+    "canonicality": "derived",
+    "truth_rank": 40,
+    "default_token_role": "summary_only",
+    "notes_do_not_override_canonical_sources": true,
+    "source_hashes_required": true,
+    "coverage_matrix_link_required": true
+  },
+  "p10_recommendation": {
+    "next_phase": "P10",
+    "name": "FreshnessLedger + StaleMemoryDetector",
+    "must_consume": [
+      ".aiwg/notes/folder_notes_manifest.json",
+      ".aiwg/schemas/folder_note.schema.json",
+      ".aiwg/schemas/noteplan.schema.json",
+      ".aiwg/reports/spec_coverage_matrix.json",
+      ".aiwg/world_model/project_world_model.json"
+    ]
+  },
+  "snowball_assessment": {
+    "decision": "improved",
+    "snowball_gain_score": 8,
+    "reason": "P9 adds governed compression artifacts with freshness and truth controls instead of ad-hoc narrative notes."
+  },
+  "warnings": [
+    "DEBT-SPEC-LEGACY-MCP-GUIDE remains inherited.",
+    "Freshness enforcement runtime remains deferred to P10."
+  ],
+  "evidence_refs": [
+    ".aiwg/world_model/project_world_model.json",
+    ".aiwg/reports/spec_coverage_matrix.json",
+    ".aiwg/schemas/cognitive_artifact.schema.json",
+    ".aiwg/schemas/truth_hierarchy.schema.json"
+  ]
+}
