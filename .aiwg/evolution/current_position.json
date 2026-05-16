@@ -1,10 +1,10 @@
 {
   "plan": "DUMMIE PLAN V1 — Cognitive Evolution Operating Layer",
-  "current_phase": "P3",
-  "current_phase_name": "Artifact Lifecycle Reconciliation Audit",
-  "last_completed_phase": "P2",
-  "next_required_phase": "P4",
-  "next_required_phase_name": "Cognitive Artifact Protocol",
+  "current_phase": "P4",
+  "current_phase_name": "Cognitive Artifact Protocol",
+  "last_completed_phase": "P3",
+  "next_required_phase": "P5",
+  "next_required_phase_name": "Truth Hierarchy & Canonicality Policy",
   "current_block": "truth_and_lifecycle",
   "forbidden_skips": [
     "do not start swarm before lifecycle and context governance",

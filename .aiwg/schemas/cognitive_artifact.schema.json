@@ -1,0 +1,233 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dummie.aiwg/schemas/cognitive_artifact.schema.json",
+  "title": "DUMMIE Cognitive Artifact Protocol",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "artifact_id",
+    "artifact_type",
+    "canonicality",
+    "truth_rank",
+    "lifecycle_state",
+    "token_role",
+    "freshness",
+    "evidence_refs"
+  ],
+  "properties": {
+    "artifact_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "artifact_type": {
+      "type": "string",
+      "minLength": 1
+    },
+    "artifact_version": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "summary": {
+      "type": "string"
+    },
+    "canonicality": {
+      "type": "string",
+      "enum": [
+        "canonical",
+        "derived",
+        "candidate",
+        "mirror",
+        "deprecated",
+        "unknown"
+      ]
+    },
+    "truth_rank": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "lifecycle_state": {
+      "type": "string",
+      "enum": [
+        "candidate",
+        "draft",
+        "verified",
+        "active",
+        "used_in_context",
+        "evaluated",
+        "promoted",
+        "indexed",
+        "stale",
+        "superseded",
+        "archived",
+        "deprecated",
+        "rejected"
+      ]
+    },
+    "owner_runtime": {
+      "type": "string"
+    },
+    "source_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "source_hashes": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "linked_specs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "linked_tests": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "linked_layers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "linked_languages": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "token_role": {
+      "type": "string",
+      "enum": [
+        "stable_prefix",
+        "dynamic_context",
+        "evidence",
+        "retrieval_candidate",
+        "summary_only",
+        "never_prompt",
+        "human_mirror",
+        "debug_only"
+      ]
+    },
+    "freshness": {
+      "type": "object",
+      "required": [
+        "status",
+        "last_verified",
+        "source_hashes",
+        "invalidation_triggers",
+        "stale_reason"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "fresh",
+            "stale",
+            "unknown",
+            "not_applicable"
+          ]
+        },
+        "last_verified": {
+          "type": "string"
+        },
+        "source_hashes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "invalidation_triggers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "stale_reason": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "promotion_rules": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "demotion_rules": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "invalidation_rules": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "runtime_consumers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "risk_flags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "updated_at": {
+      "type": "string"
+    }
+  },
+  "allOf": [
+    {
+      "description": "Security restriction: artifact payloads must not include private chain-of-thought, chain-of-thought, secrets, credentials, or .env assignment values. Enforce via ingestion checks and validators.",
+      "not": {
+        "anyOf": [
+          {
+            "required": [
+              "private_chain_of_thought"
+            ]
+          },
+          {
+            "required": [
+              "chain_of_thought"
+            ]
+          },
+          {
+            "required": [
+              "secrets"
+            ]
+          },
+          {
+            "required": [
+              "credentials"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

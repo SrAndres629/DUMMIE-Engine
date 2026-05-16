@@ -1,0 +1,114 @@
+{
+  "spec_id": "107_cognitive_artifact_protocol",
+  "artifact_protocol": {
+    "canonicality": [
+      "canonical",
+      "derived",
+      "candidate",
+      "mirror",
+      "deprecated",
+      "unknown"
+    ],
+    "lifecycle_states": [
+      "candidate",
+      "draft",
+      "verified",
+      "active",
+      "used_in_context",
+      "evaluated",
+      "promoted",
+      "indexed",
+      "stale",
+      "superseded",
+      "archived",
+      "deprecated",
+      "rejected"
+    ],
+    "token_roles": [
+      "stable_prefix",
+      "dynamic_context",
+      "evidence",
+      "retrieval_candidate",
+      "summary_only",
+      "never_prompt",
+      "human_mirror",
+      "debug_only"
+    ],
+    "truth_rank": {
+      "100": "physical source code + passing tests",
+      "90": "active specs and rules",
+      "80": "phase ledger / mission runtime state",
+      "75": "daemon outcome / validation result",
+      "70": "learning episode with evidence",
+      "65": "vault entry with evidence",
+      "60": "cognitive artifact marked active",
+      "50": "report with evidence",
+      "40": "note/folder note with freshness",
+      "30": "human mirror / Obsidian export",
+      "20": "chat transcript",
+      "10": "unknown legacy doc",
+      "0": "rejected/deprecated artifact"
+    },
+    "required_fields": [
+      "artifact_id",
+      "artifact_type",
+      "artifact_version",
+      "title",
+      "summary",
+      "canonicality",
+      "truth_rank",
+      "lifecycle_state",
+      "owner_runtime",
+      "source_refs",
+      "source_hashes",
+      "linked_specs",
+      "linked_tests",
+      "linked_layers",
+      "linked_languages",
+      "token_role",
+      "freshness",
+      "promotion_rules",
+      "demotion_rules",
+      "invalidation_rules",
+      "runtime_consumers",
+      "evidence_refs",
+      "risk_flags",
+      "created_at",
+      "updated_at"
+    ],
+    "security_forbidden_terms": [
+      "private_chain_of_thought",
+      "chain_of_thought",
+      "secrets",
+      "credentials",
+      ".env="
+    ],
+    "promotion_rules": [
+      "candidate->draft requires required metadata",
+      "draft->verified requires evidence_refs and validation pass",
+      "verified->active requires owner runtime or phase acceptance",
+      "active->used_in_context requires context receipt or prompt frame reference",
+      "used_in_context->evaluated requires outcome impact record",
+      "evaluated->promoted requires reusable positive learning or canonical decision",
+      "promoted->indexed requires indexing success"
+    ],
+    "demotion_rules": [
+      "active->stale on source/spec/test invalidation",
+      "active->superseded on accepted replacement",
+      "active->deprecated by governance",
+      "candidate_or_draft->rejected on failed validation or higher-truth conflict"
+    ],
+    "invalidation_triggers": [
+      "source_file_changed",
+      "linked_spec_changed",
+      "linked_test_failed",
+      "runtime_consumer_changed",
+      "truth_hierarchy_conflict",
+      "manual_mentor_rejection",
+      "security_policy_violation",
+      "secret_detected",
+      "private_reasoning_detected",
+      "duplicate_truth_detected"
+    ]
+  }
+}

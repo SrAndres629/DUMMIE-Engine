@@ -1,30 +1,29 @@
 {
-  "next_phase": "P4",
-  "name": "Cognitive Artifact Protocol",
-  "objective": "Define the canonical lifecycle, truth rank, freshness, ownership, token role, promotion rules and invalidation rules for DUMMIE cognitive artifacts.",
-  "why_now": "P3 identified which artifact types exist and what lifecycle/freshness/canonicality gaps must be governed before creating notes, noteplans, ContextQuant or autonomy systems.",
+  "next_phase": "P5",
+  "name": "Truth Hierarchy & Canonicality Policy",
+  "objective": "Define how DUMMIE resolves conflicts between source code, tests, specs, ledgers, reports, vault entries, notes, mirrors and chat history.",
+  "why_now": "P4 defined artifact lifecycle and truth rank fields. P5 must formalize precedence and conflict resolution so agents stop choosing truth by availability or recency bias.",
   "required_outputs": [
-    ".aiwg/reports/plan_v1_phase_4_cognitive_artifact_protocol.md",
-    ".aiwg/reports/plan_v1_phase_4_cognitive_artifact_protocol.json",
-    ".aiwg/schemas/cognitive_artifact.schema.json",
-    "doc/specs/107_cognitive_artifact_protocol.md",
-    "doc/specs/107_cognitive_artifact_protocol.feature",
-    "doc/specs/107_cognitive_artifact_protocol.rules.json"
+    ".aiwg/reports/plan_v1_phase_5_truth_hierarchy_policy.md",
+    ".aiwg/reports/plan_v1_phase_5_truth_hierarchy_policy.json",
+    ".aiwg/schemas/truth_hierarchy.schema.json",
+    "doc/specs/108_truth_hierarchy_canonicality_policy.md",
+    "doc/specs/108_truth_hierarchy_canonicality_policy.feature",
+    "doc/specs/108_truth_hierarchy_canonicality_policy.rules.json"
   ],
   "must_not_create": [
     "Obsidian adapter",
     "swarm agents",
     "autonomy permissions",
     "dashboard",
-    "runtime-heavy ContextQuant implementation before artifact protocol exists"
+    "runtime-heavy ContextQuant implementation before truth hierarchy exists"
   ],
   "success_conditions": [
-    "artifact lifecycle states defined",
-    "canonicality classes defined",
-    "truth hierarchy hooks defined",
-    "freshness/source hash requirements defined",
-    "token roles defined",
-    "promotion/demotion rules defined",
-    "artifact protocol validates against P3 matrix"
+    "truth precedence defined",
+    "conflict resolution rules defined",
+    "canonical source policy defined",
+    "stale artifact demotion rules linked",
+    "chat history non-canonical default defined",
+    "mirror artifacts non-canonical default defined"
   ]
 }

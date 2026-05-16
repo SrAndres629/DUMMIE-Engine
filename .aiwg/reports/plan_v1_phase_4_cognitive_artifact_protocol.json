@@ -1,0 +1,109 @@
+{
+  "plan": "DUMMIE PLAN V1 — Cognitive Evolution Operating Layer",
+  "phase": "P4",
+  "phase_name": "Cognitive Artifact Protocol",
+  "decision": "PASS_WITH_WARNINGS",
+  "baseline_commit": "149e7ec418ea400a4026ed2db266e141d25c37ee",
+  "branch": "main",
+  "validations": {
+    "git_diff_check": "PASS",
+    "spec_validation": "PASS_WITH_KNOWN_LEGACY_DEBT",
+    "json_parse": "PASS",
+    "yaml_parse": "PASS"
+  },
+  "schema": {
+    "path": ".aiwg/schemas/cognitive_artifact.schema.json",
+    "valid_json": true,
+    "required_fields_count": 8
+  },
+  "spec": {
+    "md": "doc/specs/107_cognitive_artifact_protocol.md",
+    "feature": "doc/specs/107_cognitive_artifact_protocol.feature",
+    "rules_json": "doc/specs/107_cognitive_artifact_protocol.rules.json"
+  },
+  "protocol_coverage": {
+    "lifecycle_states_defined": true,
+    "canonicality_classes_defined": true,
+    "truth_rank_defined": true,
+    "freshness_defined": true,
+    "token_roles_defined": true,
+    "promotion_rules_defined": true,
+    "demotion_rules_defined": true,
+    "invalidation_rules_defined": true,
+    "security_restrictions_defined": true
+  },
+  "p3_matrix_alignment": {
+    "artifact_matrix_used": true,
+    "artifact_families_covered": [
+      "spec_md",
+      "spec_feature",
+      "spec_rules_json",
+      "schema_json",
+      "report_md",
+      "report_json",
+      "phase_ledger",
+      "mission_state",
+      "recovery_packet",
+      "next_action",
+      "learning_episode",
+      "vault_entry",
+      "memory_ref",
+      "context_package",
+      "context_receipt",
+      "prompt_frame",
+      "prompt_cache_ledger",
+      "session_contract",
+      "evolution_roadmap",
+      "mental_model",
+      "context_transform",
+      "tool_manifest",
+      "skill_manifest",
+      "agent_manifest",
+      "mcp_manifest",
+      "registry",
+      "folder_note",
+      "noteplan",
+      "walkthrough",
+      "task",
+      "decision_record",
+      "research_brief",
+      "evidence_card",
+      "world_model",
+      "source_code_runtime",
+      "test_file",
+      "legacy_doc"
+    ]
+  },
+  "known_debt": [
+    "DEBT-SPEC-LEGACY-MCP-GUIDE"
+  ],
+  "p5_recommendation": {
+    "next_phase": "P5",
+    "name": "Truth Hierarchy & Canonicality Policy",
+    "must_govern": [
+      "conflict resolution",
+      "truth rank enforcement",
+      "canonical source precedence",
+      "Obsidian/human mirror non-canonical default",
+      "stale artifact demotion"
+    ]
+  },
+  "snowball_assessment": {
+    "decision": "improved",
+    "snowball_gain_score": 8,
+    "reason": "P4 converts P3 audit output into a canonical artifact contract usable by subsequent phases without runtime changes."
+  },
+  "warnings": [
+    "Legacy spec debt remains in doc/guides/mcp_server_usage.md references to missing specs.",
+    "Protocol is contract-only; enforcement runtimes are intentionally deferred to later phases."
+  ],
+  "evidence_refs": [
+    ".aiwg/reports/artifact_lifecycle_matrix.json",
+    ".aiwg/reports/plan_v1_phase_3_artifact_lifecycle_audit.json",
+    ".aiwg/reports/plan_v1_phase_3_artifact_counting_semantics.json",
+    ".aiwg/schemas/cognitive_artifact.schema.json",
+    "doc/specs/107_cognitive_artifact_protocol.md",
+    "doc/specs/107_cognitive_artifact_protocol.feature",
+    "doc/specs/107_cognitive_artifact_protocol.rules.json"
+  ]
+}
