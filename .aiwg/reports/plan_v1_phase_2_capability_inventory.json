@@ -1,0 +1,85 @@
+{
+  "phase": "P2",
+  "capabilities": {
+    "phase_ledger": {
+      "path": "layers/l2_brain/phase_ledger.py",
+      "exists": true,
+      "role": "mission/phase event ledger"
+    },
+    "context_budget_manager": {
+      "path": "layers/l2_brain/context_budget_manager.py",
+      "exists": true,
+      "role": "context budget enforcement"
+    },
+    "semantic_retrieval_runtime": {
+      "path": "layers/l2_brain/semantic_retrieval_runtime.py",
+      "exists": true,
+      "role": "semantic retrieval and context candidate selection"
+    },
+    "memory_graph_runtime": {
+      "path": "layers/l2_brain/memory_graph_runtime.py",
+      "exists": true,
+      "role": "memory graph runtime integration"
+    },
+    "mission_workbench": {
+      "path": "layers/l2_brain/mission_workbench.py",
+      "exists": true,
+      "role": "mission workspace runtime artifacts"
+    },
+    "outcome_evaluator": {
+      "path": "layers/l2_brain/outcome_evaluator.py",
+      "exists": true,
+      "role": "outcome evaluation and metrics"
+    },
+    "token_cost_ledger": {
+      "path": "layers/l2_brain/token_cost_ledger.py",
+      "exists": true,
+      "role": "token usage accounting"
+    },
+    "session_store": {
+      "path": "layers/l2_brain/session_store.py",
+      "exists": true,
+      "role": "session state persistence"
+    },
+    "learning_episode": {
+      "path": "layers/l2_brain/learning_episode.py",
+      "exists": true,
+      "role": "learning episode model and serialization"
+    },
+    "vault_curator": {
+      "path": "layers/l2_brain/vault_curator.py",
+      "exists": true,
+      "role": "knowledge vault curation"
+    },
+    "cognitive_hooks": {
+      "path": "layers/l2_brain/cognitive_hooks.py",
+      "exists": true,
+      "role": "cognitive event hooks"
+    },
+    "model_router": {
+      "path": "layers/l2_brain/model_router.py",
+      "exists": true,
+      "role": "model routing policy"
+    }
+  },
+  "missing_capabilities": [],
+  "present_capabilities": [
+    "phase_ledger",
+    "context_budget_manager",
+    "semantic_retrieval_runtime",
+    "memory_graph_runtime",
+    "mission_workbench",
+    "outcome_evaluator",
+    "token_cost_ledger",
+    "session_store",
+    "learning_episode",
+    "vault_curator",
+    "cognitive_hooks",
+    "model_router"
+  ],
+  "notes": [
+    "All requested engine-native capability files are present.",
+    "P2 records capability presence only and does not modify runtime modules."
+  ]
+}
+

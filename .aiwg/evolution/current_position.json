@@ -1,11 +1,11 @@
 {
   "plan": "DUMMIE PLAN V1 — Cognitive Evolution Operating Layer",
-  "current_phase": "P1",
-  "current_phase_name": "Mental Model Abstraction Layer + Session Operating Contract",
-  "last_completed_phase": null,
-  "next_required_phase": "P2",
-  "next_required_phase_name": "Baseline Reset & Reality Lock",
-  "current_block": "foundation",
+  "current_phase": "P2",
+  "current_phase_name": "Baseline Reset & Reality Lock",
+  "last_completed_phase": "P1",
+  "next_required_phase": "P3",
+  "next_required_phase_name": "Artifact Lifecycle Reconciliation Audit",
+  "current_block": "truth_and_lifecycle",
   "forbidden_skips": [
     "do not start swarm before lifecycle and context governance",
     "do not start autonomy before MissionAutonomyContract",
@@ -20,4 +20,3 @@
     ".aiwg/evolution/next_phase_seed.json"
   ]
 }
-

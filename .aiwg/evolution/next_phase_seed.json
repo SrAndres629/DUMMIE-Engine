@@ -1,25 +1,26 @@
 {
-  "next_phase": "P2",
-  "name": "Baseline Reset & Reality Lock",
-  "objective": "Create a clean operational baseline before auditing artifact lifecycle or implementing new runtime modules.",
-  "why_now": "DUMMIE needs measurable baseline state before any snowball gain can be computed.",
+  "next_phase": "P3",
+  "name": "Artifact Lifecycle Reconciliation Audit",
+  "objective": "Audit existing cognitive artifacts before creating new protocols or lifecycle systems.",
+  "why_now": "DUMMIE must know which artifacts already exist, which are canonical, which are stale-prone, which enter prompts, and which are dead documentation before building more artifact infrastructure.",
   "required_outputs": [
-    ".aiwg/reports/plan_v1_phase_2_baseline_reality_lock.md",
-    ".aiwg/reports/plan_v1_phase_2_baseline_reality_lock.json"
+    ".aiwg/reports/plan_v1_phase_3_artifact_lifecycle_audit.md",
+    ".aiwg/reports/plan_v1_phase_3_artifact_lifecycle_audit.json",
+    ".aiwg/reports/artifact_lifecycle_matrix.json"
   ],
   "must_not_create": [
     "new runtime modules",
     "new swarm agents",
     "Obsidian adapter",
     "autonomy permissions",
-    "large dashboard"
+    "new artifact protocol before audit is complete"
   ],
   "success_conditions": [
-    "git status captured",
-    "spec validation captured",
-    "test status captured",
-    "known risks captured",
-    "baseline metrics captured"
+    "artifact types inventoried",
+    "runtime consumers mapped",
+    "dead documentation identified",
+    "duplicate truth sources identified",
+    "stale-prone artifacts identified",
+    "recommendation produced for P4"
   ]
 }
-

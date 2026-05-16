@@ -1,0 +1,89 @@
+{
+  "plan": "DUMMIE PLAN V1 — Cognitive Evolution Operating Layer",
+  "phase": "P2",
+  "phase_name": "Baseline Reset & Reality Lock",
+  "decision": "PASS_WITH_WARNINGS",
+  "baseline_commit": "c1d616a0d39422364a1d6f00dae08ef861d9681f",
+  "branch": "main",
+  "validations": {
+    "git_diff_check": "PASS",
+    "spec_validation": "PASS_WITH_KNOWN_LEGACY_DEBT",
+    "json_parse": "PASS",
+    "yaml_parse": "PASS"
+  },
+  "tests": {
+    "tests_run": [
+      "layers/l2_brain/tests/test_phase_ledger.py",
+      "layers/l2_brain/tests/test_context_budget_manager.py",
+      "layers/l2_brain/tests/test_semantic_retrieval_runtime.py",
+      "layers/l2_brain/tests/test_memory_graph_runtime.py",
+      "layers/l2_brain/tests/test_vault_embedding_index.py",
+      "layers/l2_brain/tests/test_workbench_vault_runtime.py",
+      "layers/l2_brain/tests/test_token_cost_ledger.py",
+      "layers/l2_brain/tests/test_session_store.py",
+      "layers/l2_brain/tests/test_learning_episode.py",
+      "layers/l2_brain/tests/test_cognitive_hooks.py",
+      "layers/l2_brain/tests/test_model_router.py"
+    ],
+    "tests_missing": [],
+    "tests_passed": 80,
+    "tests_failed": 0
+  },
+  "engine_capabilities": {
+    "present": [
+      "phase_ledger",
+      "context_budget_manager",
+      "semantic_retrieval_runtime",
+      "memory_graph_runtime",
+      "mission_workbench",
+      "outcome_evaluator",
+      "token_cost_ledger",
+      "session_store",
+      "learning_episode",
+      "vault_curator",
+      "cognitive_hooks",
+      "model_router"
+    ],
+    "missing": []
+  },
+  "artifact_counts": {
+    "aiwg_files": 7598,
+    "spec_md_files": 3,
+    "spec_feature_files": 4,
+    "spec_rules_json_files": 5,
+    "l2_test_files": 91,
+    "layer_directories": 63,
+    "plan_v1_files": 24
+  },
+  "known_debt": [
+    "DEBT-SPEC-LEGACY-MCP-GUIDE"
+  ],
+  "plan_v1_integrity": {
+    "phases_registered": 31,
+    "current_position_updated": true,
+    "next_phase_seed_updated": true
+  },
+  "cold_read_baseline": {
+    "decision": "PASS",
+    "current_position_loaded": true,
+    "next_phase_seed_loaded": true,
+    "phase_graph_loaded": true
+  },
+  "snowball_assessment": {
+    "decision": "improved",
+    "snowball_gain_score": 0.45,
+    "reason": "P2 establishes an auditable baseline commit, test state, capability inventory, artifact counts, and debt registry for future phase comparison."
+  },
+  "next_phase": "P3",
+  "warnings": [
+    "Full specs validation still fails due preexisting legacy references in doc/guides/mcp_server_usage.md."
+  ],
+  "evidence_refs": [
+    ".aiwg/reports/plan_v1_phase_2_baseline_reality_lock.md",
+    ".aiwg/reports/plan_v1_phase_2_baseline_reality_lock.json",
+    ".aiwg/reports/plan_v1_phase_2_baseline_metrics.json",
+    ".aiwg/reports/plan_v1_phase_2_capability_inventory.json",
+    ".aiwg/reports/plan_v1_phase_2_known_debt.json"
+  ]
+}
+

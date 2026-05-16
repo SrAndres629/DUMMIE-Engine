@@ -1,0 +1,16 @@
+{
+  "phase": "P2",
+  "known_debt": [
+    {
+      "id": "DEBT-SPEC-LEGACY-MCP-GUIDE",
+      "type": "spec_reference_drift",
+      "severity": "medium",
+      "path": "doc/guides/mcp_server_usage.md",
+      "description": "Full specs validation is blocked by preexisting legacy references to missing Specs 2, 7, 15, 35, 41, 42, 44.",
+      "introduced_by_p2": false,
+      "recommended_phase": "P3 or dedicated documentation repair phase",
+      "status": "open"
+    }
+  ]
+}
+
