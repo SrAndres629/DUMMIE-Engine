@@ -1,3 +1,15 @@
+---
+spec_id: "121_state_coherence_guard"
+title: "121 State Coherence Guard"
+status: "ACTIVE"
+canonicality: "canonical"
+artifact_type: "spec"
+plan: "DUMMIE PLAN V1"
+layer: "l2_brain"
+created_by: "operationalization_pack_1"
+last_verified_on: "2026-05-16"
+---
+
 # Spec 121: State Coherence Guard
 
 ## Purpose
@@ -28,3 +40,18 @@ Ensure that all generated reports and control surface outputs (latest artifacts)
 - Do not modify canonical state files.
 - Read-only access to evolution files.
 - Report only; do not attempt auto-repair unless requested.
+
+## Current State
+- TBD
+
+## Physical Evidence
+- TBD
+
+## Contract Invariants
+- TBD
+
+## Verification
+- TBD
+
+## Traceability
+- TBD

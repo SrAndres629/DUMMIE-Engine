@@ -1,3 +1,15 @@
+---
+spec_id: "135_technical_debt_intelligence"
+title: "135 Technical Debt Intelligence"
+status: "ACTIVE"
+canonicality: "canonical"
+artifact_type: "spec"
+plan: "DUMMIE PLAN V1"
+layer: "l2_brain"
+created_by: "operationalization_pack_1"
+last_verified_on: "2026-05-16"
+---
+
 # Spec 135: Technical Debt Intelligence
 
 ## Purpose
@@ -15,3 +27,18 @@ Identify integration gaps, broken specs, missing tests, and architectural drift 
 
 ## Safety Rules
 - Report-only. Does not delete or rewrite files autonomously.
+
+## Current State
+- TBD
+
+## Physical Evidence
+- TBD
+
+## Contract Invariants
+- TBD
+
+## Verification
+- TBD
+
+## Traceability
+- TBD

@@ -1,3 +1,15 @@
+---
+spec_id: "128_debate_review_runtime"
+title: "128 Debate Review Runtime"
+status: "ACTIVE"
+canonicality: "canonical"
+artifact_type: "spec"
+plan: "DUMMIE PLAN V1"
+layer: "l2_brain"
+created_by: "operationalization_pack_1"
+last_verified_on: "2026-05-16"
+---
+
 # Spec 128: Debate & Adversarial Review Runtime
 
 ## Purpose
@@ -22,3 +34,18 @@ Prevent consensus bias and identify planning flaws by forcing a structured debat
 
 ## Relationship to P26
 Consumes StrategicPartnerSwarm outputs to challenge their consensus.
+
+## Current State
+- TBD
+
+## Physical Evidence
+- TBD
+
+## Contract Invariants
+- TBD
+
+## Verification
+- TBD
+
+## Traceability
+- TBD

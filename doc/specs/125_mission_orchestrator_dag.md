@@ -1,3 +1,15 @@
+---
+spec_id: "125_mission_orchestrator_dag"
+title: "125 Mission Orchestrator Dag"
+status: "ACTIVE"
+canonicality: "canonical"
+artifact_type: "spec"
+plan: "DUMMIE PLAN V1"
+layer: "l2_brain"
+created_by: "operationalization_pack_1"
+last_verified_on: "2026-05-16"
+---
+
 # Spec 125: Mission Orchestrator DAG
 
 ## Purpose
@@ -20,3 +32,18 @@ Convert mission plans into Directed Acyclic Graphs (DAGs) to govern execution or
 ## Safety Rules
 - Fail if a cycle is detected.
 - Do not grant mutation authority; this is a coordination layer.
+
+## Current State
+- TBD
+
+## Physical Evidence
+- TBD
+
+## Contract Invariants
+- TBD
+
+## Verification
+- TBD
+
+## Traceability
+- TBD

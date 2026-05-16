@@ -1,0 +1,26 @@
+{
+  "decision": "PASS",
+  "repaired_count": 20,
+  "repaired_files": [
+    "doc/specs/121_state_coherence_guard.md",
+    "doc/specs/122_embedding_adapter.md",
+    "doc/specs/123_repo_probe_runner.md",
+    "doc/specs/124_sdd_tdd_mission_planner.md",
+    "doc/specs/125_mission_orchestrator_dag.md",
+    "doc/specs/126_mission_coherence_guard.md",
+    "doc/specs/127_strategic_partner_swarm.md",
+    "doc/specs/128_debate_review_runtime.md",
+    "doc/specs/129_mission_autonomy_contract.md",
+    "doc/specs/130_trusted_workstation_mode.md",
+    "doc/specs/131_chaos_regression_testing.md",
+    "doc/specs/132_autonomous_strategic_partner_runtime.md",
+    "doc/specs/133_repo_intelligence_runtime.md",
+    "doc/specs/134_folder_file_dossiers.md",
+    "doc/specs/135_technical_debt_intelligence.md",
+    "doc/specs/136_plan_v1_completion_review.md",
+    "doc/specs/137_context_enforcement_gate.md",
+    "doc/specs/138_repo_intelligence_query.md",
+    "doc/specs/139_dummie_chat_cli.md",
+    "doc/specs/140_operationalization_review.md"
+  ]
+}

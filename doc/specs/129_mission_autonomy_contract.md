@@ -1,3 +1,15 @@
+---
+spec_id: "129_mission_autonomy_contract"
+title: "129 Mission Autonomy Contract"
+status: "ACTIVE"
+canonicality: "canonical"
+artifact_type: "spec"
+plan: "DUMMIE PLAN V1"
+layer: "l2_brain"
+created_by: "operationalization_pack_1"
+last_verified_on: "2026-05-16"
+---
+
 # Spec 129: Mission Autonomy Contract
 
 ## Purpose
@@ -22,3 +34,18 @@ Define and enforce authority boundaries for agentic actions based on risk, missi
 
 ## Relationship to P29
 This contract is the prerequisite gate for `TrustedWorkstationMode`.
+
+## Current State
+- TBD
+
+## Physical Evidence
+- TBD
+
+## Contract Invariants
+- TBD
+
+## Verification
+- TBD
+
+## Traceability
+- TBD

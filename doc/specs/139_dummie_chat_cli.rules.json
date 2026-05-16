@@ -1,0 +1,16 @@
+{
+  "spec_id": "139",
+  "name": "Chat CLI Rules",
+  "rules": [
+    {
+      "id": "R1",
+      "description": "Must enforce ContextEnforcementGate for every query.",
+      "priority": "CRITICAL"
+    },
+    {
+      "id": "R2",
+      "description": "Must remain purely local/deterministic in Pack 1.",
+      "priority": "CRITICAL"
+    }
+  ]
+}

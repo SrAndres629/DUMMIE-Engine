@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ContextEnforcementDecision",
+  "type": "object",
+  "required": ["request_id", "decision", "reason", "generated_at"],
+  "properties": {
+    "request_id": { "type": "string" },
+    "decision": { "type": "string", "enum": ["ALLOW_MANIFEST_ONLY", "ALLOW_DOSSIER_CONTEXT", "ALLOW_SELECTED_FILE_READ", "BLOCK_RAW_FOLDER_BULK_LOAD", "REQUIRE_REPO_INTELLIGENCE_REFRESH"] },
+    "reason": { "type": "string" },
+    "recommended_strategy": { "type": "string" },
+    "risk_score": { "type": "number" },
+    "evidence_refs": { "type": "array", "items": { "type": "string" } },
+    "generated_at": { "type": "string", "format": "date-time" }
+  }
+}

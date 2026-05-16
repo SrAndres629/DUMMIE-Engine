@@ -1,3 +1,15 @@
+---
+spec_id: "122_embedding_adapter"
+title: "122 Embedding Adapter"
+status: "ACTIVE"
+canonicality: "canonical"
+artifact_type: "spec"
+plan: "DUMMIE PLAN V1"
+layer: "l2_brain"
+created_by: "operationalization_pack_1"
+last_verified_on: "2026-05-16"
+---
+
 # Spec 122: Embedding Adapter
 
 ## Purpose
@@ -28,3 +40,18 @@ Provide a unified interface for text embeddings with a mandatory offline determi
 - No external network calls by default.
 - Reject inputs that look like secrets or private chain-of-thought (heuristically).
 - Vectors must be JSON serializable.
+
+## Current State
+- TBD
+
+## Physical Evidence
+- TBD
+
+## Contract Invariants
+- TBD
+
+## Verification
+- TBD
+
+## Traceability
+- TBD

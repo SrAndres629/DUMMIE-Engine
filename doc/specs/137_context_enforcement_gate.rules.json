@@ -1,0 +1,16 @@
+{
+  "spec_id": "137",
+  "name": "Context Enforcement Rules",
+  "rules": [
+    {
+      "id": "R1",
+      "description": "Must block raw folder bulk scans if folder dossiers exist.",
+      "priority": "CRITICAL"
+    },
+    {
+      "id": "R2",
+      "description": "Must prefer dossiers or manifests over raw file reads for analysis/planning.",
+      "priority": "HIGH"
+    }
+  ]
+}

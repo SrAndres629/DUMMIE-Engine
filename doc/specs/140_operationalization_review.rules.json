@@ -1,0 +1,16 @@
+{
+  "spec_id": "140",
+  "name": "Operationalization Review Rules",
+  "rules": [
+    {
+      "id": "R1",
+      "description": "Must report on the status of all repair packs.",
+      "priority": "HIGH"
+    },
+    {
+      "id": "R2",
+      "description": "Must verify context gate enforcement.",
+      "priority": "CRITICAL"
+    }
+  ]
+}

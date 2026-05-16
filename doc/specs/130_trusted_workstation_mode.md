@@ -1,3 +1,15 @@
+---
+spec_id: "130_trusted_workstation_mode"
+title: "130 Trusted Workstation Mode"
+status: "ACTIVE"
+canonicality: "canonical"
+artifact_type: "spec"
+plan: "DUMMIE PLAN V1"
+layer: "l2_brain"
+created_by: "operationalization_pack_1"
+last_verified_on: "2026-05-16"
+---
+
 # Spec 130: Trusted Workstation Mode
 
 ## Purpose
@@ -21,3 +33,18 @@ Provide a secure classification and evaluation gate for workstation-level action
 
 ## Relationship to P28
 Consumes the MissionAutonomyContract policies to authorize or deny specific local actions.
+
+## Current State
+- TBD
+
+## Physical Evidence
+- TBD
+
+## Contract Invariants
+- TBD
+
+## Verification
+- TBD
+
+## Traceability
+- TBD

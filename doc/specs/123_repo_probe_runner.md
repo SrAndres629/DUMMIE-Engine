@@ -1,3 +1,15 @@
+---
+spec_id: "123_repo_probe_runner"
+title: "123 Repo Probe Runner"
+status: "ACTIVE"
+canonicality: "canonical"
+artifact_type: "spec"
+plan: "DUMMIE PLAN V1"
+layer: "l2_brain"
+created_by: "operationalization_pack_1"
+last_verified_on: "2026-05-16"
+---
+
 # Spec 123: Repo Probe Runner
 
 ## Purpose
@@ -22,3 +34,18 @@ Ground the DUMMIE engine's world model in physical evidence by deterministic ins
 - Do not read entire file contents; use metadata and path analysis.
 - Do not include secrets or API keys in evidence.
 - Do not modify any files.
+
+## Current State
+- TBD
+
+## Physical Evidence
+- TBD
+
+## Contract Invariants
+- TBD
+
+## Verification
+- TBD
+
+## Traceability
+- TBD

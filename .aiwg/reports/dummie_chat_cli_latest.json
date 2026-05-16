@@ -1,0 +1,9 @@
+{
+  "decision": "PASS",
+  "answer": "I understood your intent as 'context', but I don't have a specific handler for it yet.",
+  "evidence_refs": [],
+  "recommended_next_actions": [],
+  "context_strategy": "ALLOW_MANIFEST_ONLY",
+  "warnings": [],
+  "generated_at": "2026-05-16T15:13:56Z"
+}

@@ -1,3 +1,15 @@
+---
+spec_id: "127_strategic_partner_swarm"
+title: "127 Strategic Partner Swarm"
+status: "ACTIVE"
+canonicality: "canonical"
+artifact_type: "spec"
+plan: "DUMMIE PLAN V1"
+layer: "l2_brain"
+created_by: "operationalization_pack_1"
+last_verified_on: "2026-05-16"
+---
+
 # Spec 127: Strategic Partner Swarm
 
 ## Purpose
@@ -23,3 +35,18 @@ Provide a bounded, advisory-only reasoning layer where multiple specialized role
 
 ## Advisory Policy
 The swarm is a cognitive mirror. It reflects the consistency (or lack thereof) of the system's own artifacts.
+
+## Current State
+- TBD
+
+## Physical Evidence
+- TBD
+
+## Contract Invariants
+- TBD
+
+## Verification
+- TBD
+
+## Traceability
+- TBD

@@ -1,0 +1,16 @@
+{
+  "spec_id": "138",
+  "name": "Repo Query Rules",
+  "rules": [
+    {
+      "id": "R1",
+      "description": "Must not read physical file content during query.",
+      "priority": "CRITICAL"
+    },
+    {
+      "id": "R2",
+      "description": "Must use repo_inventory.json as primary data source.",
+      "priority": "HIGH"
+    }
+  ]
+}

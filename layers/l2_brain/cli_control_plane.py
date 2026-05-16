@@ -35,6 +35,10 @@ from layers.l2_brain.folder_dossier_generator import generate_folder_dossiers
 from layers.l2_brain.file_dossier_generator import generate_file_dossiers
 from layers.l2_brain.technical_debt_intelligence import run_technical_debt_intelligence
 from layers.l2_brain.plan_v1_completion_review import run_plan_v1_completion_review
+from layers.l2_brain.context_enforcement_gate import run_context_enforcement_gate
+from layers.l2_brain.repo_intelligence_query import query_repo_intelligence
+from layers.l2_brain.operationalization_review import run_operationalization_review
+from layers.l2_brain.spec_frontmatter_repair import repair_frontmatter
 
 @dataclass
 class CliCommandResult:
@@ -94,6 +98,10 @@ class CliControlPlane:
             "completion-review": self._cmd_completion_review,
             "capability-scorecard": lambda: self._read_latest("plan_v1_runtime_capability_scorecard.json"),
             "integration-backlog": lambda: self._read_latest("integration_backlog.json"),
+            "context-gate": self._cmd_context_gate,
+            "repo-query": self._cmd_repo_query,
+            "operationalization-review": self._cmd_operationalization_review,
+            "repair-frontmatter": self._cmd_repair_frontmatter,
         }
 
         if command not in handlers:
@@ -432,6 +440,46 @@ class CliControlPlane:
             decision=res.decision,
             payload=res.to_dict(),
             evidence_refs=[".aiwg/reports/plan_v1_completion_review.json"],
+            generated_at=self._utc_now(),
+        )
+
+    def _cmd_context_gate(self) -> CliCommandResult:
+        res = run_context_enforcement_gate({}, aiwg_root=self.aiwg_root)
+        return CliCommandResult(
+            command="context-gate",
+            decision="PASS",
+            payload=res.to_dict(),
+            evidence_refs=[".aiwg/reports/context_enforcement_gate_latest.json"],
+            generated_at=self._utc_now(),
+        )
+
+    def _cmd_repo_query(self) -> CliCommandResult:
+        res = query_repo_intelligence({}, aiwg_root=self.aiwg_root)
+        return CliCommandResult(
+            command="repo-query",
+            decision=res.decision,
+            payload=res.to_dict(),
+            evidence_refs=[".aiwg/reports/repo_intelligence_query_latest.json"],
+            generated_at=self._utc_now(),
+        )
+
+    def _cmd_operationalization_review(self) -> CliCommandResult:
+        res = run_operationalization_review(aiwg_root=self.aiwg_root)
+        return CliCommandResult(
+            command="operationalization-review",
+            decision=res["decision"],
+            payload=res,
+            evidence_refs=[".aiwg/reports/operationalization_review_latest.json"],
+            generated_at=self._utc_now(),
+        )
+
+    def _cmd_repair_frontmatter(self) -> CliCommandResult:
+        res = repair_frontmatter()
+        return CliCommandResult(
+            command="repair-frontmatter",
+            decision=res["decision"],
+            payload=res,
+            evidence_refs=[".aiwg/reports/spec_frontmatter_repair_latest.json"],
             generated_at=self._utc_now(),
         )
 

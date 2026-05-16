@@ -1,3 +1,15 @@
+---
+spec_id: "134_folder_file_dossiers"
+title: "134 Folder File Dossiers"
+status: "ACTIVE"
+canonicality: "canonical"
+artifact_type: "spec"
+plan: "DUMMIE PLAN V1"
+layer: "l2_brain"
+created_by: "operationalization_pack_1"
+last_verified_on: "2026-05-16"
+---
+
 # Spec 134: Folder and File Dossiers
 
 ## Purpose
@@ -17,3 +29,18 @@ Generate compact, hierarchical summaries (dossiers) of folders and files to prov
 ## Safety Rules
 - Must not use LLM for generation.
 - Must restrict standard dossiers to max 100, and deep dossiers to max 40.
+
+## Current State
+- TBD
+
+## Physical Evidence
+- TBD
+
+## Contract Invariants
+- TBD
+
+## Verification
+- TBD
+
+## Traceability
+- TBD

@@ -1,0 +1,13 @@
+{
+  "decision": "PASS",
+  "repaired_count": 5,
+  "repaired_files": [
+    "layers/l2_brain/action_graph.py",
+    "layers/l2_brain/human_intent.py",
+    "layers/l2_brain/event_bus.py",
+    "layers/l2_brain/safe_fallbacks.py",
+    "layers/l2_brain/runtime_guards.py"
+  ],
+  "test_file": "layers/l2_brain/tests/test_runtime_repairs.py",
+  "generated_at": "2026-05-16T15:10:00Z"
+}

@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "OperationalizationReviewReport",
+  "type": "object",
+  "required": ["review_id", "decision", "generated_at"],
+  "properties": {
+    "review_id": { "type": "string" },
+    "decision": { "type": "string" },
+    "findings": { "type": "array" },
+    "token_economy_impact": { "type": "string" },
+    "context_strategy_enforced": { "type": "boolean" },
+    "generated_at": { "type": "string", "format": "date-time" }
+  }
+}
