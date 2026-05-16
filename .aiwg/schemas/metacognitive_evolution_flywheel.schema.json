@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "decision": {
+      "type": "string"
+    },
+    "step_id": {
+      "type": "string"
+    },
+    "evolution_delta": {
+      "type": "object"
+    }
+  }
+}

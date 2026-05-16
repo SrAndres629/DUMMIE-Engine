@@ -1,6 +1,29 @@
 {
-  "decision": "PASS",
-  "quality_score": 100.0,
-  "findings": [],
-  "warnings": []
+  "decision": "FAIL",
+  "quality_score": 25.0,
+  "findings": [
+    {
+      "category": "MODEL",
+      "message": "No relations extracted",
+      "severity": "WARN"
+    },
+    {
+      "category": "EPISTEMIC",
+      "message": "Found 1 epistemic debts",
+      "severity": "WARN"
+    },
+    {
+      "category": "EPISTEMIC",
+      "message": "Low epistemic confidence",
+      "severity": "WARN"
+    },
+    {
+      "category": "BIAS",
+      "message": "Found 1 cognitive biases",
+      "severity": "FAIL"
+    }
+  ],
+  "warnings": [],
+  "epistemic_debt_count": 1,
+  "bias_count": 1
 }

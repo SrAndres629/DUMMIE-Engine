@@ -1,0 +1,11 @@
+{
+  "decision": "PASS",
+  "step_id": "flywheel-2d38d818",
+  "evolution_delta": {
+    "belief_changed": "From 'System is ready' to 'System has epistemic debt'",
+    "evidence_source": "readiness_score_calibration_latest.json",
+    "revision_type": "humility_calibration",
+    "next_check_recommended": "repair_kuzu_persistence"
+  },
+  "timestamp": "2026-05-16T17:01:05.766483+00:00"
+}

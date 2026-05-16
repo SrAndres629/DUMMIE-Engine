@@ -1,0 +1,22 @@
+{
+  "decision": "PASS_WITH_WARNINGS",
+  "claims": [],
+  "knowns": [
+    "Technical debt: None failing tests"
+  ],
+  "unknowns": [],
+  "assumptions": [],
+  "contradictions": [
+    "Kuzu claim: PASS vs Reality: DEGRADED findings in readiness report"
+  ],
+  "epistemic_debts": [
+    "Unresolved graph persistence (Kuzu)"
+  ],
+  "confidence": 0.6,
+  "evidence_refs": [
+    ".aiwg/reports/readiness_score_calibration_latest.json"
+  ],
+  "warnings": [
+    "Unresolved epistemic debt"
+  ]
+}

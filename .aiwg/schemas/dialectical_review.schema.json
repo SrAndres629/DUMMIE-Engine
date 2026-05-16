@@ -1,0 +1,34 @@
+{
+  "type": "object",
+  "required": [
+    "thesis",
+    "antithesis",
+    "synthesis",
+    "decision"
+  ],
+  "properties": {
+    "thesis": {
+      "type": "string"
+    },
+    "antithesis": {
+      "type": "string"
+    },
+    "counterexamples": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "synthesis": {
+      "type": "string"
+    },
+    "decision": {
+      "enum": [
+        "proceed",
+        "repair_first",
+        "human_review",
+        "block"
+      ]
+    }
+  }
+}

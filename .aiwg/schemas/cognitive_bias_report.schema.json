@@ -1,0 +1,22 @@
+{
+  "type": "object",
+  "required": [
+    "decision",
+    "findings"
+  ],
+  "properties": {
+    "decision": {
+      "enum": [
+        "PASS",
+        "WARN",
+        "FAIL"
+      ]
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    }
+  }
+}

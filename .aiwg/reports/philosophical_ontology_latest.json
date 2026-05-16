@@ -1,0 +1,50 @@
+{
+  "decision": "PASS",
+  "nodes": [
+    {
+      "id": "DUMMIE",
+      "type": "AGENT",
+      "role": "SOVEREIGN"
+    },
+    {
+      "id": "KUZU",
+      "type": "COMPONENT",
+      "state": "DEGRADED"
+    },
+    {
+      "id": "INTENT",
+      "type": "TELEOLOGY",
+      "goal": "decide whether DUMMIE should proceed to autonomous skill synthesis while Kuzu is degraded and tests are missing"
+    }
+  ],
+  "edges": [
+    {
+      "source": "DUMMIE",
+      "target": "KUZU",
+      "type": "DEPENDS_ON"
+    },
+    {
+      "source": "DUMMIE",
+      "target": "INTENT",
+      "type": "ACTS_TOWARDS"
+    }
+  ],
+  "dimensions": [
+    "Being",
+    "Teleology",
+    "Agency"
+  ],
+  "teleology": {
+    "goal": "decide whether DUMMIE should proceed to autonomous skill synthesis while Kuzu is degraded and tests are missing",
+    "impact": "evolution"
+  },
+  "authority_constraints": [
+    "ADVISORY_ONLY"
+  ],
+  "truth_constraints": [
+    "EVIDENCE_BACKED_ONLY"
+  ],
+  "risk_constraints": [
+    "SAFETY_FIRST"
+  ]
+}

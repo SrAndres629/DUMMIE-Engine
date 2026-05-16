@@ -1,0 +1,21 @@
+{
+  "type": "object",
+  "required": [
+    "belief_changed",
+    "evidence_source"
+  ],
+  "properties": {
+    "belief_changed": {
+      "type": "string"
+    },
+    "evidence_source": {
+      "type": "string"
+    },
+    "revision_type": {
+      "type": "string"
+    },
+    "next_check_recommended": {
+      "type": "string"
+    }
+  }
+}

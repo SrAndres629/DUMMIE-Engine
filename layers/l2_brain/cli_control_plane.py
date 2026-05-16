@@ -121,7 +121,13 @@ class CliControlPlane:
             "cognitive-frame": self._cmd_cognitive_frame,
             "metacognitive-loop": self._cmd_metacognitive_loop,
             "metacognitive-quality": self._cmd_metacognitive_quality,
+            "epistemic-state": self._cmd_epistemic_state,
+            "dialectical-review": self._cmd_dialectical_review,
+            "philosophical-ontology": self._cmd_philosophical_ontology,
+            "bias-report": self._cmd_bias_report,
+            "metacognitive-flywheel": self._cmd_metacognitive_flywheel,
         }
+
 
 
 
@@ -564,6 +570,32 @@ class CliControlPlane:
         res = run_metacognitive_loop(intent, aiwg_root=self.aiwg_root)
         quality = res.get("quality_gate", {})
         return CliCommandResult("metacognitive-quality", quality.get("decision", "FAIL"), quality, quality.get("warnings", []), [".aiwg/reports/metacognitive_quality_gate_latest.json"], self._utc_now())
+
+    def _cmd_epistemic_state(self) -> CliCommandResult:
+        res = run_metacognitive_loop("what do I know?", aiwg_root=self.aiwg_root)
+        ep = res.get("epistemic_state", {})
+        return CliCommandResult("epistemic-state", ep.get("decision", "FAIL"), ep, ep.get("warnings", []), [".aiwg/reports/epistemic_state_latest.json"], self._utc_now())
+
+    def _cmd_dialectical_review(self) -> CliCommandResult:
+        res = run_metacognitive_loop("challenge my current state", aiwg_root=self.aiwg_root)
+        dial = res.get("dialectical_review", {})
+        return CliCommandResult("dialectical-review", "PASS", dial, [], [".aiwg/reports/dialectical_review_latest.json"], self._utc_now())
+
+    def _cmd_philosophical_ontology(self) -> CliCommandResult:
+        res = run_metacognitive_loop("map my being", aiwg_root=self.aiwg_root)
+        onto = res.get("philosophical_ontology", {})
+        return CliCommandResult("philosophical-ontology", "PASS", onto, [], [".aiwg/reports/philosophical_ontology_latest.json"], self._utc_now())
+
+    def _cmd_bias_report(self) -> CliCommandResult:
+        res = run_metacognitive_loop("check my biases", aiwg_root=self.aiwg_root)
+        bias = res.get("bias_report", {})
+        return CliCommandResult("bias-report", bias.get("decision", "FAIL"), bias, [], [".aiwg/reports/cognitive_bias_report_latest.json"], self._utc_now())
+
+    def _cmd_metacognitive_flywheel(self) -> CliCommandResult:
+        res = run_metacognitive_loop("evolve my thought", aiwg_root=self.aiwg_root)
+        delta = res.get("evolution_delta", {})
+        return CliCommandResult("metacognitive-flywheel", "PASS", delta, [], [".aiwg/reports/metacognitive_evolution_delta_latest.json"], self._utc_now())
+
 
 
 

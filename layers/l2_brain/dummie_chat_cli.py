@@ -38,7 +38,12 @@ class DummieChatResponse:
     cognitive_frame: dict[str, Any] = field(default_factory=dict)
     metacognitive_loop: dict[str, Any] = field(default_factory=dict)
     quality_gate: dict[str, Any] = field(default_factory=dict)
+    epistemic_state: dict[str, Any] = field(default_factory=dict)
+    bias_report: dict[str, Any] = field(default_factory=dict)
+    dialectic: dict[str, Any] = field(default_factory=dict)
+    evolution_delta: dict[str, Any] = field(default_factory=dict)
     generated_at: str = ""
+
 
 
 
@@ -137,6 +142,10 @@ class DummieChatCli:
             m_loop = run_metacognitive_loop(query_text, aiwg_root=self.aiwg_root)
             response.metacognitive_loop = m_loop
             response.quality_gate = m_loop.get("quality_gate", {})
+            response.epistemic_state = m_loop.get("epistemic_state", {})
+            response.bias_report = m_loop.get("bias_report", {})
+            response.dialectic = m_loop.get("dialectical_review", {})
+            response.evolution_delta = m_loop.get("evolution_delta", {})
             
             reports_root = self.aiwg_root / "reports"
             if (reports_root / "mental_model_runtime_latest.json").exists():
@@ -145,6 +154,7 @@ class DummieChatCli:
                 response.cognitive_frame = json.loads((reports_root / "cognitive_frame_latest.json").read_text())
         except Exception as e:
             response.warnings.append(f"metacognition_degraded: {e}")
+
 
 
         # Record Learning Episode (Cognitive Loop) - Operationalization Pack 4

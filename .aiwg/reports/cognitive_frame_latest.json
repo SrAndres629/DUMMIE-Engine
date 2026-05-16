@@ -1,6 +1,6 @@
 {
-  "frame_id": "frame-e79d703c",
-  "intent": "plan the next DUMMIE refactor using technical debt, memory spine, Kuzu degraded status, and test triage",
+  "frame_id": "frame-f8f59863",
+  "intent": "decide whether DUMMIE should proceed to autonomous skill synthesis while Kuzu is degraded and tests are missing",
   "operating_mode": "answer",
   "must_preserve": [
     "current_phase",
@@ -13,29 +13,24 @@
     "private_chain_of_thought"
   ],
   "mental_model_refs": [
-    "mm-bbd1b1ba"
+    "mm-012bd0b9"
   ],
   "memory_refs": [],
   "ontology_refs": [
-    "DEBT",
-    "MEMORY",
-    "REPORT"
+    "UNKNOWN"
   ],
   "evidence_refs": [
     ".aiwg/reports/test_debt_triage_latest.json",
     ".aiwg/reports/readiness_score_calibration_latest.json",
     ".aiwg/reports/entrypoint_enforcement_audit_latest.json",
-    ".aiwg/reports/memory_spine_entrypoint_latest.json",
-    ".aiwg/reports/token_economy_benchmark_latest.json"
+    ".aiwg/reports/memory_spine_entrypoint_latest.json"
   ],
   "token_budget_hint": "low",
   "context_strategy": "MANIFEST_ONLY",
-  "dispatch_recommendation": "antigravity",
+  "dispatch_recommendation": "local",
   "risks": [
-    "Low readiness score: 0%",
-    "Memory spine DEGRADED (file-backed fallback)",
-    "Dirty working tree detected"
+    "Memory spine DEGRADED (Kuzu persistence unavailable)"
   ],
   "next_actions": [],
-  "created_at": "2026-05-16T16:54:45.269767+00:00"
+  "created_at": "2026-05-16T17:01:05.766452+00:00"
 }

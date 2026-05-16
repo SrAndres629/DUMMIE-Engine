@@ -1,0 +1,64 @@
+{
+  "type": "object",
+  "required": [
+    "decision",
+    "claims",
+    "confidence"
+  ],
+  "properties": {
+    "decision": {
+      "enum": [
+        "PASS",
+        "PASS_WITH_WARNINGS",
+        "FAIL"
+      ]
+    },
+    "claims": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "knowns": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "unknowns": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "assumptions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "contradictions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "epistemic_debts": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "confidence": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1.0
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "belief_changed": "From 'System is ready' to 'System has epistemic debt'",
+  "evidence_source": "readiness_score_calibration_latest.json",
+  "revision_type": "humility_calibration",
+  "next_check_recommended": "repair_kuzu_persistence"
+}

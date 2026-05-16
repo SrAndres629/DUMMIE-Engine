@@ -1,61 +1,23 @@
 {
-  "decision": "PASS",
+  "decision": "PASS_WITH_WARNINGS",
   "concepts": [
-    "plan the next DUMMIE refactor using technical debt, memory spine, Kuzu degraded status, and test triage"
+    "decide whether DUMMIE should proceed to autonomous skill synthesis while Kuzu is degraded and tests are missing"
   ],
   "classes": [
-    "DEBT",
-    "MEMORY",
-    "REPORT"
+    "UNKNOWN"
   ],
   "ontology_graph": {
     "nodes": [
       {
         "id": "INTENT",
-        "label": "plan the next DUMMIE refactor using technical debt, memory spine, Kuzu degraded status, and test triage",
+        "label": "decide whether DUMMIE should proceed to autonomous skill synthesis while Kuzu is degraded and tests are missing",
         "type": "INTENT"
-      },
-      {
-        "id": "DEBT",
-        "label": "DEBT",
-        "type": "CLASS"
-      },
-      {
-        "id": "MEMORY",
-        "label": "MEMORY",
-        "type": "CLASS"
-      },
-      {
-        "id": "REPORT",
-        "label": "REPORT",
-        "type": "CLASS"
       }
     ],
-    "edges": [
-      {
-        "source": "INTENT",
-        "target": "DEBT",
-        "type": "IS_A"
-      },
-      {
-        "source": "INTENT",
-        "target": "MEMORY",
-        "type": "IS_A"
-      },
-      {
-        "source": "INTENT",
-        "target": "REPORT",
-        "type": "IS_A"
-      },
-      {
-        "source": "DEBT",
-        "target": "MEMORY",
-        "type": "DEPENDS_ON"
-      }
-    ]
+    "edges": []
   },
-  "timestamp": "2026-05-16T16:54:45.269670+00:00",
+  "timestamp": "2026-05-16T17:01:05.766413+00:00",
   "warnings": [
-    ""
+    "No ontology classes matched"
   ]
 }
