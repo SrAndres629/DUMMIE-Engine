@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dummie.aiwg/schemas/polyglot_architecture_registry.schema.json",
+  "title": "DUMMIE Polyglot Architecture Registry",
+  "type": "object",
+  "required": [
+    "plan",
+    "phase",
+    "registry_id",
+    "version",
+    "generated_from_commit",
+    "truth_policy",
+    "anti_bias_policy",
+    "languages",
+    "layers",
+    "interfaces",
+    "risks",
+    "future_probe_requirements"
+  ],
+  "properties": {
+    "plan": {"type": "string"},
+    "phase": {"type": "string"},
+    "registry_id": {"type": "string"},
+    "version": {"type": "string"},
+    "generated_from_commit": {"type": "string"},
+    "truth_policy": {"type": "object"},
+    "anti_bias_policy": {
+      "type": "object",
+      "required": ["python_only_bias_guard"],
+      "properties": {
+        "python_only_bias_guard": {"type": "boolean"},
+        "global_architecture_tasks_must_load_registry": {"type": "boolean"},
+        "global_architecture_tasks_must_report_language_coverage": {"type": "boolean"}
+      }
+    },
+    "languages": {"type": "array"},
+    "layers": {"type": "array"},
+    "interfaces": {"type": "array"},
+    "risks": {"type": "array"},
+    "future_probe_requirements": {"type": "array"}
+  }
+}

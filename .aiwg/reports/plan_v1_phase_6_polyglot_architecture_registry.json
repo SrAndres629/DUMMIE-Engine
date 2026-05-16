@@ -1,0 +1,111 @@
+{
+  "plan": "DUMMIE PLAN V1 — Cognitive Evolution Operating Layer",
+  "phase": "P6",
+  "phase_name": "PolyglotArchitectureRegistry",
+  "decision": "PASS_WITH_WARNINGS",
+  "baseline_commit": "cf56165d42e735297994d049ff66e4b494283e48",
+  "branch": "main",
+  "validations": {
+    "git_diff_check": "PASS",
+    "spec_validation": "PASS_WITH_KNOWN_LEGACY_DEBT",
+    "json_parse": "PASS",
+    "yaml_parse": "PASS"
+  },
+  "advanced_reasoning_summary": {
+    "claims": [
+      "DUMMIE cannot be globally understood from L2/Python only.",
+      "Language/layer mapping must be canonical before ProjectWorldModel.",
+      "Vendored/dependency code must not define architectural identity."
+    ],
+    "objections": [
+      "File counts can be misleading because deps/build/node_modules are tracked.",
+      "Some layers may have low-confidence or sparse implementation.",
+      "Specs may describe more than current physical code proves."
+    ],
+    "decisions": [
+      "Registry uses physical repo scan as evidence.",
+      "Registry distinguishes first_party from dependency/generated/config/docs.",
+      "Future global tasks must load registry and report language coverage.",
+      "P7 must consume registry instead of inferring architecture from memory."
+    ],
+    "risks": [
+      "Registry is only as fresh as its generation commit.",
+      "Layer naming may drift.",
+      "Some language roles may need refinement after P7/P8."
+    ]
+  },
+  "registry": {
+    "path": ".aiwg/architecture/polyglot_architecture_registry.yaml",
+    "valid_yaml": true,
+    "languages_count": 10,
+    "layers_count": 7,
+    "anti_python_only_bias_guard": true
+  },
+  "layer_map": {
+    "path": ".aiwg/architecture/layer_language_map.json",
+    "valid_json": true,
+    "layers_mapped": ["L0", "L1", "L2", "L3", "L4", "L5", "L6"]
+  },
+  "schema": {
+    "path": ".aiwg/schemas/polyglot_architecture_registry.schema.json",
+    "valid_json": true
+  },
+  "spec": {
+    "md": "doc/specs/109_polyglot_architecture_registry.md",
+    "feature": "doc/specs/109_polyglot_architecture_registry.feature",
+    "rules_json": "doc/specs/109_polyglot_architecture_registry.rules.json"
+  },
+  "language_summary": [
+    {"language": "Python", "classification": "first_party", "file_count": 1014, "layers": ["L1", "L2", "L3", "L4", "L5", "L6"], "confidence": "high"},
+    {"language": "Go", "classification": "first_party", "file_count": 35, "layers": ["L0", "L1"], "confidence": "high"},
+    {"language": "Elixir", "classification": "dependency", "file_count": 225, "layers": ["L0"], "confidence": "medium"},
+    {"language": "Rust", "classification": "first_party", "file_count": 1, "layers": ["L3"], "confidence": "medium"},
+    {"language": "TypeScript", "classification": "dependency", "file_count": 327, "layers": ["L6"], "confidence": "low"},
+    {"language": "JavaScript", "classification": "dependency", "file_count": 171, "layers": ["L6"], "confidence": "low"},
+    {"language": "Protobuf", "classification": "unknown", "file_count": 8, "layers": ["L0", "L1", "L2"], "confidence": "medium"},
+    {"language": "Shell", "classification": "first_party", "file_count": 29, "layers": ["L1"], "confidence": "medium"},
+    {"language": "YAML/JSON/TOML", "classification": "configuration", "file_count": 430, "layers": ["L0", "L1", "L2", "L3", "L6"], "confidence": "high"},
+    {"language": "Markdown/spec docs", "classification": "documentation", "file_count": 464, "layers": ["L0", "L1", "L2", "L3", "L4", "L5", "L6"], "confidence": "high"}
+  ],
+  "layer_summary": [
+    {"layer_id": "L0", "primary_languages": ["Go", "Elixir", "Python"], "confidence": "high"},
+    {"layer_id": "L1", "primary_languages": ["Python", "Go", "Protobuf"], "confidence": "high"},
+    {"layer_id": "L2", "primary_languages": ["Python"], "confidence": "high"},
+    {"layer_id": "L3", "primary_languages": ["Python", "Rust"], "confidence": "medium"},
+    {"layer_id": "L4", "primary_languages": ["Python"], "confidence": "medium"},
+    {"layer_id": "L5", "primary_languages": ["Python"], "confidence": "medium"},
+    {"layer_id": "L6", "primary_languages": ["Python"], "confidence": "low"}
+  ],
+  "anti_bias_policy": {
+    "python_only_bias_guard": true,
+    "global_tasks_must_load_registry": true
+  },
+  "known_debt": [
+    "DEBT-SPEC-LEGACY-MCP-GUIDE"
+  ],
+  "p7_recommendation": {
+    "next_phase": "P7",
+    "name": "ProjectWorldModel",
+    "must_consume": [
+      ".aiwg/architecture/polyglot_architecture_registry.yaml",
+      ".aiwg/architecture/layer_language_map.json",
+      ".aiwg/schemas/polyglot_architecture_registry.schema.json",
+      "doc/specs/109_polyglot_architecture_registry.md"
+    ]
+  },
+  "snowball_assessment": {
+    "decision": "improved",
+    "snowball_gain_score": 8,
+    "reason": "P6 converts physical polyglot evidence into canonical context artifacts and blocks Python-only global summaries."
+  },
+  "warnings": [
+    "Known legacy spec debt remains in doc/guides/mcp_server_usage.md.",
+    "Tracked dependency/generated folders inflate raw language counts; registry separates classification."
+  ],
+  "evidence_refs": [
+    "git ls-files",
+    "find layers -maxdepth 3 -type d",
+    ".aiwg/schemas/truth_hierarchy.schema.json",
+    "doc/specs/108_truth_hierarchy_canonicality_policy.md"
+  ]
+}

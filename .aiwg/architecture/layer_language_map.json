@@ -1,0 +1,66 @@
+{
+  "plan": "DUMMIE PLAN V1 — Cognitive Evolution Operating Layer",
+  "phase": "P6",
+  "generated_from_commit": "cf56165d42e735297994d049ff66e4b494283e48",
+  "layers": {
+    "L0": {
+      "physical_paths": ["layers/l0_overseer"],
+      "primary_languages": ["Go", "Elixir", "Python"],
+      "secondary_languages": ["Protobuf", "YAML/JSON/TOML"],
+      "runtime_role": "overseer/orchestration, daemon boundary, Elixir/Go control plane",
+      "confidence": "high"
+    },
+    "L1": {
+      "physical_paths": ["layers/l1_nervous"],
+      "primary_languages": ["Python", "Go", "Protobuf"],
+      "secondary_languages": ["Shell", "YAML/JSON/TOML"],
+      "runtime_role": "nervous system, protocol adapters, MCP/gateway/data plane",
+      "confidence": "high"
+    },
+    "L2": {
+      "physical_paths": ["layers/l2_brain"],
+      "primary_languages": ["Python"],
+      "secondary_languages": ["Protobuf", "YAML/JSON/TOML"],
+      "runtime_role": "brain, cognition, memory, reasoning and Python application layer",
+      "confidence": "high"
+    },
+    "L3": {
+      "physical_paths": ["layers/l3_shield"],
+      "primary_languages": ["Python", "Rust"],
+      "secondary_languages": [],
+      "runtime_role": "shield/security boundary and Rust-oriented enforcement",
+      "confidence": "medium"
+    },
+    "L4": {
+      "physical_paths": ["layers/l4_edge", "layers/l4_ext"],
+      "primary_languages": ["Python"],
+      "secondary_languages": [],
+      "runtime_role": "edge/external adapters and sensors",
+      "confidence": "medium"
+    },
+    "L5": {
+      "physical_paths": ["layers/l5_muscle"],
+      "primary_languages": ["Python"],
+      "secondary_languages": [],
+      "runtime_role": "muscle/workstation/execution layer",
+      "confidence": "medium"
+    },
+    "L6": {
+      "physical_paths": ["layers/l6_skin"],
+      "primary_languages": ["Python"],
+      "secondary_languages": ["TypeScript", "JavaScript"],
+      "runtime_role": "skin/UI/dashboard layer with dependency-heavy node_modules evidence",
+      "confidence": "low"
+    }
+  },
+  "anti_python_only_bias_guard": {
+    "enabled": true,
+    "required_for_tasks": [
+      "global architecture review",
+      "full project audit",
+      "context planning",
+      "project world model generation",
+      "spec coverage planning"
+    ]
+  }
+}

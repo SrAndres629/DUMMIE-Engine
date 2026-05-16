@@ -1,0 +1,49 @@
+{
+  "spec_id": "109_polyglot_architecture_registry",
+  "polyglot_registry": {
+    "required_files": [
+      ".aiwg/architecture/polyglot_architecture_registry.yaml",
+      ".aiwg/architecture/layer_language_map.json",
+      ".aiwg/schemas/polyglot_architecture_registry.schema.json"
+    ],
+    "required_fields": [
+      "plan",
+      "phase",
+      "registry_id",
+      "version",
+      "generated_from_commit",
+      "truth_policy",
+      "anti_bias_policy",
+      "languages",
+      "layers",
+      "interfaces",
+      "risks",
+      "future_probe_requirements"
+    ],
+    "required_layers": ["L0", "L1", "L2", "L3", "L4", "L5", "L6"],
+    "language_classifications": [
+      "first_party",
+      "vendored",
+      "generated",
+      "dependency",
+      "configuration",
+      "documentation",
+      "unknown"
+    ],
+    "anti_python_only_bias_guard": {
+      "enabled": true,
+      "future_global_tasks_must_load": [
+        ".aiwg/architecture/polyglot_architecture_registry.yaml",
+        ".aiwg/architecture/layer_language_map.json"
+      ],
+      "python_only_global_summary_decision": "reject"
+    },
+    "future_consumers": [
+      "P7 ProjectWorldModel",
+      "P8 SpecCoverageGate",
+      "P13 ContextQuantRuntime",
+      "global architecture review",
+      "full project audit"
+    ]
+  }
+}

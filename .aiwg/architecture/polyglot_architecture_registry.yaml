@@ -1,0 +1,196 @@
+plan: "DUMMIE PLAN V1 — Cognitive Evolution Operating Layer"
+phase: "P6"
+registry_id: "polyglot_architecture_registry"
+version: "1.0.0"
+generated_from_commit: "cf56165d42e735297994d049ff66e4b494283e48"
+truth_policy:
+  canonicality: "canonical"
+  truth_rank: 85
+  source_basis:
+    - "git ls-files"
+    - "physical repo scan"
+    - "P5 truth hierarchy policy"
+anti_bias_policy:
+  python_only_bias_guard: true
+  global_architecture_tasks_must_load_registry: true
+  global_architecture_tasks_must_report_language_coverage: true
+languages:
+  - language: "Python"
+    classification: "first_party"
+    file_count: 1014
+    source_paths_sample: ["layers/l1_nervous", "layers/l2_brain", "layers/l3_shield", "layers/l4_edge", "layers/l4_ext", "layers/l5_muscle", "layers/l6_skin", "scripts"]
+    layers: ["L1", "L2", "L3", "L4", "L5", "L6"]
+    runtime_roles: ["brain/cognition", "nervous/adapters", "shield helpers", "edge adapters", "muscle execution"]
+    confidence: "high"
+  - language: "Go"
+    classification: "first_party"
+    file_count: 35
+    source_paths_sample: ["layers/l0_overseer/cmd", "layers/l0_overseer/internal", "layers/l1_nervous/cmd", "layers/l1_nervous/internal", "layers/l1_nervous/pkg"]
+    layers: ["L0", "L1"]
+    runtime_roles: ["overseer/control plane", "nervous services"]
+    confidence: "high"
+  - language: "Elixir"
+    classification: "dependency"
+    file_count: 225
+    source_paths_sample: ["layers/l0_overseer/lib", "layers/l0_overseer/deps", "layers/l0_overseer/_build"]
+    layers: ["L0"]
+    runtime_roles: ["overseer runtime with tracked dependency/build inflation"]
+    confidence: "medium"
+  - language: "Rust"
+    classification: "first_party"
+    file_count: 1
+    source_paths_sample: ["layers/l3_shield/src"]
+    layers: ["L3"]
+    runtime_roles: ["shield/security boundary"]
+    confidence: "medium"
+  - language: "TypeScript"
+    classification: "dependency"
+    file_count: 327
+    source_paths_sample: ["layers/l6_skin/node_modules"]
+    layers: ["L6"]
+    runtime_roles: ["skin/UI dependency evidence; first-party TS not established by scan"]
+    confidence: "low"
+  - language: "JavaScript"
+    classification: "dependency"
+    file_count: 171
+    source_paths_sample: ["layers/l6_skin/node_modules", ".aiwg/obsidian_vault"]
+    layers: ["L6"]
+    runtime_roles: ["UI/dependency/mirror support evidence"]
+    confidence: "low"
+  - language: "Protobuf"
+    classification: "unknown"
+    file_count: 8
+    source_paths_sample: ["layers/l1_nervous/proto", "layers/l2_brain/proto", "layers/l0_overseer/lib/proto"]
+    layers: ["L0", "L1", "L2"]
+    runtime_roles: ["inter-layer contract shape"]
+    confidence: "medium"
+  - language: "Shell"
+    classification: "first_party"
+    file_count: 29
+    source_paths_sample: ["scripts", "layers/l1_nervous/bin"]
+    layers: ["L1"]
+    runtime_roles: ["operator scripts and diagnostics"]
+    confidence: "medium"
+  - language: "YAML/JSON/TOML"
+    classification: "configuration"
+    file_count: 430
+    source_paths_sample: [".aiwg", ".agents", "doc/specs", "layers"]
+    layers: ["L0", "L1", "L2", "L3", "L6"]
+    runtime_roles: ["configuration, schemas, registries, governance"]
+    confidence: "high"
+  - language: "Markdown/spec docs"
+    classification: "documentation"
+    file_count: 464
+    source_paths_sample: ["doc/specs", ".aiwg/reports", ".aiwg/control", ".agents/prompts"]
+    layers: ["L0", "L1", "L2", "L3", "L4", "L5", "L6"]
+    runtime_roles: ["specs, reports, governance docs"]
+    confidence: "high"
+layers:
+  - layer_id: "L0"
+    canonical_name: "l0_overseer"
+    physical_paths: ["layers/l0_overseer"]
+    primary_languages: ["Go", "Elixir", "Python"]
+    secondary_languages: ["Protobuf", "YAML/JSON/TOML"]
+    runtime_role: "overseer/orchestration, daemon boundary, Elixir/Go control plane"
+    specs_sample: ["doc/specs/L0_Overseer/03_polyglot_architecture.md", "doc/specs/L0_Overseer/05_orchestration_stack_and_glue.md", "doc/specs/L0_Overseer/46_sovereign_daemon_dummied.md"]
+    tests_sample: ["layers/l0_overseer/test"]
+    confidence: "high"
+  - layer_id: "L1"
+    canonical_name: "l1_nervous"
+    physical_paths: ["layers/l1_nervous"]
+    primary_languages: ["Python", "Go", "Protobuf"]
+    secondary_languages: ["Shell", "YAML/JSON/TOML"]
+    runtime_role: "nervous system, protocol adapters, MCP/gateway/data plane"
+    specs_sample: ["doc/specs/L1_Nervous/10_protobuf_contracts.md", "doc/specs/L1_Nervous/41_layer_handshake_protocol.md", "doc/specs/L1_Nervous/44_local_reasoning_gateway.md"]
+    tests_sample: ["layers/l1_nervous/tests", "layers/l1_nervous/tests/industrial"]
+    confidence: "high"
+  - layer_id: "L2"
+    canonical_name: "l2_brain"
+    physical_paths: ["layers/l2_brain"]
+    primary_languages: ["Python"]
+    secondary_languages: ["Protobuf", "YAML/JSON/TOML"]
+    runtime_role: "brain, cognition, memory, reasoning and Python application layer"
+    specs_sample: ["doc/specs/L2_Brain/02_memory_engine_4d_tes.md"]
+    tests_sample: ["layers/l2_brain/tests", "layers/l2_brain/tests/infrastructure"]
+    confidence: "high"
+  - layer_id: "L3"
+    canonical_name: "l3_shield"
+    physical_paths: ["layers/l3_shield"]
+    primary_languages: ["Python", "Rust"]
+    secondary_languages: []
+    runtime_role: "shield/security boundary and Rust-oriented enforcement"
+    specs_sample: []
+    tests_sample: ["layers/l3_shield/tests"]
+    confidence: "medium"
+  - layer_id: "L4"
+    canonical_name: "l4_edge"
+    physical_paths: ["layers/l4_edge", "layers/l4_ext"]
+    primary_languages: ["Python"]
+    secondary_languages: []
+    runtime_role: "edge/external adapters and sensors"
+    specs_sample: []
+    tests_sample: []
+    confidence: "medium"
+  - layer_id: "L5"
+    canonical_name: "l5_muscle"
+    physical_paths: ["layers/l5_muscle"]
+    primary_languages: ["Python"]
+    secondary_languages: []
+    runtime_role: "muscle/workstation/execution layer"
+    specs_sample: []
+    tests_sample: ["layers/l5_muscle/tests"]
+    confidence: "medium"
+  - layer_id: "L6"
+    canonical_name: "l6_skin"
+    physical_paths: ["layers/l6_skin"]
+    primary_languages: ["Python"]
+    secondary_languages: ["TypeScript", "JavaScript"]
+    runtime_role: "skin/UI/dashboard layer with dependency-heavy node_modules evidence"
+    specs_sample: []
+    tests_sample: []
+    confidence: "low"
+interfaces:
+  - from_layer: "L0"
+    to_layer: "L1"
+    interface_type: "grpc"
+    evidence_refs: ["layers/l0_overseer/deps/grpc", "layers/l1_nervous/proto", "doc/specs/L1_Nervous/10_protobuf_contracts.md"]
+  - from_layer: "L1"
+    to_layer: "L2"
+    interface_type: "schema"
+    evidence_refs: ["layers/l1_nervous/proto", "layers/l2_brain/proto", "doc/specs/L1_Nervous/41_layer_handshake_protocol.md"]
+  - from_layer: "L2"
+    to_layer: "L3"
+    interface_type: "unknown"
+    evidence_refs: ["layers/l2_brain", "layers/l3_shield"]
+risks:
+  - id: "POLYGLOT-PYTHON-ONLY-BIAS"
+    description: "Agents may overfocus on layers/l2_brain Python and miss L0/L1/L3/L6 runtime evidence."
+    severity: "high"
+    mitigation: "Global architecture tasks must load registry and layer_language_map before summarizing."
+  - id: "COUNTING-DEPS-BUILD-INFLATION"
+    description: "Tracked deps/build/node_modules/target files can inflate language counts and distort architectural identity."
+    severity: "medium"
+    mitigation: "Classify dependency/generated separately from first_party."
+  - id: "LOW-CONFIDENCE-LAYER-GAPS"
+    description: "Some layers have sparse or ambiguous first-party evidence relative to specs."
+    severity: "medium"
+    mitigation: "P7/P8 should refine ownership and coverage using this registry."
+future_probe_requirements:
+  - language: "Python"
+    probe: "pytest layer-scoped smoke"
+    purpose: "validate L1/L2/L5 Python ownership and tests"
+  - language: "Go"
+    probe: "go test ./... per layer"
+    purpose: "validate L0/L1 Go components without Python-only assumptions"
+  - language: "Rust"
+    probe: "cargo test per crate"
+    purpose: "validate L3 shield implementation"
+  - language: "Elixir"
+    probe: "mix test in l0_overseer"
+    purpose: "validate L0 overseer runtime and deps separation"
+  - language: "TypeScript"
+    probe: "npm test/build in l6_skin"
+    purpose: "validate L6 skin/UI code path"
+  - language: "Protobuf"
+    probe: "protobuf contract generation/check"
+    purpose: "validate inter-layer contract shape"
