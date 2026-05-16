@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "TokenEconomyBenchmarkReport",
+  "type": "object",
+  "required": ["decision", "cases", "raw_to_dossier_reduction_ratio", "token_efficiency_score", "measurement_type", "generated_at"],
+  "properties": {
+    "decision": { "type": "string", "enum": ["PASS", "PASS_WITH_WARNINGS", "FAIL"] },
+    "cases": {
+      "type": "array",
+      "minItems": 4,
+      "items": {
+        "type": "object",
+        "required": ["strategy", "estimated_input_tokens", "estimated_context_items", "required_evidence_preserved", "description"],
+        "properties": {
+          "strategy": { "type": "string" },
+          "estimated_input_tokens": { "type": "integer" },
+          "estimated_context_items": { "type": "integer" },
+          "required_evidence_preserved": { "type": "boolean" },
+          "description": { "type": "string" }
+        }
+      }
+    },
+    "raw_to_dossier_reduction_ratio": { "type": "number" },
+    "token_efficiency_score": { "type": "number" },
+    "measurement_type": { "type": "string" },
+    "generated_at": { "type": "string" }
+  }
+}

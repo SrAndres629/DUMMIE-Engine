@@ -1,0 +1,62 @@
+{
+  "pack": "POST_PLAN_V1_OPERATIONALIZATION_PACK_3",
+  "status": "recovery_started",
+  "dirty_worktree": true,
+  "partial_files_detected": [
+    "layers/l2_brain/readiness_score_calibrator.py",
+    "layers/l2_brain/memory_spine_entrypoint.py",
+    "layers/l2_brain/token_economy_benchmark.py",
+    "layers/l2_brain/entrypoint_enforcement_auditor.py",
+    "layers/l2_brain/dummie_chat_cli.py",
+    "doc/specs/146_readiness_score_calibrator.md",
+    "doc/specs/147_memory_spine_entrypoint.md",
+    "doc/specs/148_token_economy_benchmark.md"
+  ],
+  "syntax_risks": [
+    "token_economy_benchmark.py:46 uses json.load(string) instead of json.loads(string)",
+    "memory_spine_entrypoint.py:10 bare import 'from session_store import SessionStore' fails from repo root"
+  ],
+  "api_contract_risks": [
+    "SessionStore.__init__ expects base_dir (repo root), not aiwg_root",
+    "dummie_chat_cli latest JSON missing memory_spine key in old format"
+  ],
+  "missing_specs": [
+    "doc/specs/148_token_economy_benchmark.feature",
+    "doc/specs/149_entrypoint_enforcement_auditor.md",
+    "doc/specs/149_entrypoint_enforcement_auditor.feature",
+    "doc/specs/149_entrypoint_enforcement_auditor.rules.json"
+  ],
+  "missing_schemas": [
+    ".aiwg/schemas/readiness_score_calibration.schema.json",
+    ".aiwg/schemas/memory_spine_entrypoint.schema.json",
+    ".aiwg/schemas/token_economy_benchmark.schema.json",
+    ".aiwg/schemas/entrypoint_enforcement_audit.schema.json"
+  ],
+  "missing_tests": [
+    "layers/l2_brain/tests/test_readiness_score_calibrator.py",
+    "layers/l2_brain/tests/test_memory_spine_entrypoint.py",
+    "layers/l2_brain/tests/test_entrypoint_enforcement_auditor.py",
+    "layers/l2_brain/tests/test_token_economy_benchmark.py",
+    "layers/l2_brain/tests/test_operationalization_pack_3_integration.py"
+  ],
+  "missing_reports": [
+    ".aiwg/reports/readiness_score_calibration_latest.json",
+    ".aiwg/reports/memory_spine_entrypoint_latest.json",
+    ".aiwg/reports/entrypoint_enforcement_audit_latest.json",
+    ".aiwg/reports/token_economy_benchmark_latest.json",
+    ".aiwg/reports/post_plan_v1_operationalization_pack_3.json"
+  ],
+  "recovery_strategy": [
+    "fix_json_load_bug_in_token_benchmark",
+    "fix_import_in_memory_spine_entrypoint",
+    "add_advisory_dry_run_findings_to_calibrator",
+    "wire_memory_spine_to_chat_cli",
+    "add_pack3_commands_to_control_plane",
+    "update_sovereign_runtime_to_consume_pack3",
+    "complete_all_specs_with_required_sections",
+    "create_all_missing_schemas",
+    "create_all_missing_tests",
+    "generate_all_reports_via_runtime",
+    "validate_and_commit"
+  ]
+}

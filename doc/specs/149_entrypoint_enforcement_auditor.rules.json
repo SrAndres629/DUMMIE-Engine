@@ -1,0 +1,10 @@
+{
+  "rule_id": "RULE_DE_V2_L2_149",
+  "spec_ref": "149_entrypoint_enforcement_auditor",
+  "invariants": {
+    "must_audit_at_least_eight_entrypoints": true,
+    "must_not_fail_on_missing_files": true,
+    "must_report_warnings_for_gaps": true
+  },
+  "enforcement": "STRICT_BLOCK"
+}

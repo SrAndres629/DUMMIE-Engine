@@ -1,0 +1,9 @@
+{
+  "rule_id": "RULE_DE_V2_L2_148",
+  "spec_ref": "DE-V2-L2-148",
+  "invariants": {
+    "must_compare_minimum_four_strategies": true,
+    "measurement_must_be_deterministic": true
+  },
+  "enforcement": "STRICT_BLOCK"
+}

@@ -39,6 +39,10 @@ from layers.l2_brain.context_enforcement_gate import run_context_enforcement_gat
 from layers.l2_brain.repo_intelligence_query import query_repo_intelligence
 from layers.l2_brain.operationalization_review import run_operationalization_review
 from layers.l2_brain.spec_frontmatter_repair import repair_frontmatter
+from layers.l2_brain.readiness_score_calibrator import run_readiness_score_calibration
+from layers.l2_brain.memory_spine_entrypoint import retrieve_memory_for_intent
+from layers.l2_brain.token_economy_benchmark import run_token_economy_benchmark
+from layers.l2_brain.entrypoint_enforcement_auditor import run_entrypoint_enforcement_audit
 
 @dataclass
 class CliCommandResult:
@@ -102,6 +106,10 @@ class CliControlPlane:
             "repo-query": self._cmd_repo_query,
             "operationalization-review": self._cmd_operationalization_review,
             "repair-frontmatter": self._cmd_repair_frontmatter,
+            "readiness-calibration": self._cmd_readiness_calibration,
+            "memory-spine": self._cmd_memory_spine,
+            "entrypoint-audit": self._cmd_entrypoint_audit,
+            "token-benchmark": self._cmd_token_benchmark,
         }
 
         if command not in handlers:
@@ -480,6 +488,49 @@ class CliControlPlane:
             decision=res["decision"],
             payload=res,
             evidence_refs=[".aiwg/reports/spec_frontmatter_repair_latest.json"],
+            generated_at=self._utc_now(),
+        )
+
+    def _cmd_readiness_calibration(self) -> CliCommandResult:
+        res = run_readiness_score_calibration()
+        return CliCommandResult(
+            command="readiness-calibration",
+            decision=res.decision,
+            payload=res.to_dict(),
+            warnings=[f.id for f in res.findings],
+            evidence_refs=[".aiwg/reports/readiness_score_calibration_latest.json"],
+            generated_at=self._utc_now(),
+        )
+
+    def _cmd_memory_spine(self) -> CliCommandResult:
+        res = retrieve_memory_for_intent("status", aiwg_root=self.aiwg_root)
+        return CliCommandResult(
+            command="memory-spine",
+            decision=res.decision,
+            payload=res.to_dict(),
+            warnings=res.warnings,
+            evidence_refs=[".aiwg/reports/memory_spine_entrypoint_latest.json"],
+            generated_at=self._utc_now(),
+        )
+
+    def _cmd_entrypoint_audit(self) -> CliCommandResult:
+        res = run_entrypoint_enforcement_audit()
+        return CliCommandResult(
+            command="entrypoint-audit",
+            decision=res.get("decision", "PASS"),
+            payload=res,
+            warnings=[a["entrypoint"] for a in res.get("audits", []) if not a.get("uses_memory_spine")],
+            evidence_refs=[".aiwg/reports/entrypoint_enforcement_audit_latest.json"],
+            generated_at=self._utc_now(),
+        )
+
+    def _cmd_token_benchmark(self) -> CliCommandResult:
+        res = run_token_economy_benchmark()
+        return CliCommandResult(
+            command="token-benchmark",
+            decision=res.decision,
+            payload=res.to_dict(),
+            evidence_refs=[".aiwg/reports/token_economy_benchmark_latest.json"],
             generated_at=self._utc_now(),
         )
 

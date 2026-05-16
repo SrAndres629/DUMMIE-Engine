@@ -1,0 +1,9 @@
+{
+  "rule_id": "RULE_DE_V2_L2_147",
+  "spec_ref": "DE-V2-L2-147",
+  "invariants": {
+    "must_return_degraded_if_kuzu_unavailable": true,
+    "must_not_expose_private_reasoning": true
+  },
+  "enforcement": "STRICT_BLOCK"
+}

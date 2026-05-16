@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "EntrypointEnforcementAuditReport",
+  "type": "object",
+  "required": ["decision", "audits", "generated_at"],
+  "properties": {
+    "decision": { "type": "string", "enum": ["PASS", "PASS_WITH_WARNINGS", "FAIL"] },
+    "audits": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["entrypoint", "bypasses_context_gate", "uses_repo_intelligence", "records_outcome", "records_token_cost", "uses_memory_spine", "writes_latest_report", "is_exposed_by_cli"],
+        "properties": {
+          "entrypoint": { "type": "string" },
+          "bypasses_context_gate": { "type": "boolean" },
+          "uses_repo_intelligence": { "type": "boolean" },
+          "records_outcome": { "type": "boolean" },
+          "records_token_cost": { "type": "boolean" },
+          "uses_memory_spine": { "type": "boolean" },
+          "writes_latest_report": { "type": "boolean" },
+          "is_exposed_by_cli": { "type": "boolean" }
+        }
+      }
+    },
+    "generated_at": { "type": "string" }
+  }
+}

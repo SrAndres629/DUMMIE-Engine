@@ -1,0 +1,9 @@
+{
+  "rule_id": "RULE_DE_V2_L2_146",
+  "spec_ref": "DE-V2-L2-146",
+  "invariants": {
+    "no_perfect_score_if_degraded": true,
+    "mandatory_findings_if_score_below_8": true
+  },
+  "enforcement": "STRICT_BLOCK"
+}

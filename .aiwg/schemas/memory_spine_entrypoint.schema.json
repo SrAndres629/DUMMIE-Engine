@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MemorySpineEntrypointReport",
+  "type": "object",
+  "required": ["decision", "query", "status", "graph_status", "used_before_chat_response", "generated_at"],
+  "properties": {
+    "decision": { "type": "string", "enum": ["PASS", "PASS_WITH_WARNINGS", "FAIL"] },
+    "query": { "type": "string" },
+    "status": { "type": "string", "enum": ["READY", "DEGRADED_WITH_FILE_BACKED_MEMORY", "FAIL"] },
+    "memory_refs": { "type": "array", "items": { "type": "object" } },
+    "learning_episode_refs": { "type": "array", "items": { "type": "string" } },
+    "vault_refs": { "type": "array", "items": { "type": "string" } },
+    "graph_status": { "type": "string", "enum": ["READY", "DEGRADED", "SIMULATED", "UNKNOWN"] },
+    "used_before_chat_response": { "type": "boolean" },
+    "warnings": { "type": "array", "items": { "type": "string" } },
+    "evidence_refs": { "type": "array", "items": { "type": "string" } },
+    "generated_at": { "type": "string" }
+  }
+}

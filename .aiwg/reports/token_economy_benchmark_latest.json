@@ -1,0 +1,44 @@
+{
+  "decision": "PASS",
+  "cases": [
+    {
+      "strategy": "raw_folder_naive_estimate",
+      "estimated_input_tokens": 78364286,
+      "estimated_context_items": 4515,
+      "required_evidence_preserved": true,
+      "description": "Read everything in the workspace."
+    },
+    {
+      "strategy": "repo_inventory_only",
+      "estimated_input_tokens": 5000,
+      "estimated_context_items": 1,
+      "required_evidence_preserved": false,
+      "description": "Read only the git-tracked file list."
+    },
+    {
+      "strategy": "folder_dossier_context",
+      "estimated_input_tokens": 20000,
+      "estimated_context_items": 2257,
+      "required_evidence_preserved": true,
+      "description": "Read AST dossiers for relevant layers."
+    },
+    {
+      "strategy": "repo_intelligence_plus_selected_dossiers",
+      "estimated_input_tokens": 8000,
+      "estimated_context_items": 10,
+      "required_evidence_preserved": true,
+      "description": "Read manifest + targeted deep dossiers."
+    },
+    {
+      "strategy": "memory_spine_plus_selected_dossiers",
+      "estimated_input_tokens": 3000,
+      "estimated_context_items": 5,
+      "required_evidence_preserved": true,
+      "description": "Read causal memory + surgical deep dossiers."
+    }
+  ],
+  "raw_to_dossier_reduction_ratio": 26121.43,
+  "token_efficiency_score": 100.0,
+  "measurement_type": "deterministic_estimate",
+  "generated_at": "2026-05-16T16:16:27Z"
+}

@@ -18,6 +18,7 @@ if __package__ in {None, ""}:
 
 from layers.l2_brain.repo_intelligence_query import query_repo_intelligence
 from layers.l2_brain.context_enforcement_gate import run_context_enforcement_gate
+from layers.l2_brain.memory_spine_entrypoint import retrieve_memory_for_intent
 
 
 @dataclass
@@ -28,6 +29,8 @@ class DummieChatResponse:
     recommended_next_actions: list[str] = field(default_factory=list)
     context_strategy: str = ""
     warnings: list[str] = field(default_factory=list)
+    memory_spine: dict[str, Any] = field(default_factory=dict)
+    memory_spine_used: bool = False
     generated_at: str = ""
 
     def to_dict(self) -> dict[str, Any]:
@@ -41,48 +44,86 @@ class DummieChatCli:
 
     def handle_query(self, query_text: str) -> DummieChatResponse:
         query_text = query_text.strip().lower()
-        
+
         # Determine intent
         intent = "unknown"
-        if "status" in query_text: intent = "status"
-        elif "next" in query_text or "do next" in query_text: intent = "next"
-        elif "debt" in query_text: intent = "technical_debt"
-        elif "capabilities" in query_text or "scorecard" in query_text: intent = "capabilities"
-        elif "backlog" in query_text: intent = "integration_backlog"
-        elif "find" in query_text: intent = "repo_query"
-        elif "context" in query_text: intent = "context"
-        elif "help" in query_text: intent = "help"
+        if "status" in query_text:
+            intent = "status"
+        elif "next" in query_text or "do next" in query_text:
+            intent = "next"
+        elif "debt" in query_text:
+            intent = "technical_debt"
+        elif "capabilities" in query_text or "scorecard" in query_text:
+            intent = "capabilities"
+        elif "backlog" in query_text:
+            intent = "integration_backlog"
+        elif "find" in query_text and "untested" in query_text:
+            intent = "repo_query"
+        elif "context for" in query_text:
+            intent = "context"
+        elif "repo intelligence" in query_text or "find" in query_text:
+            intent = "repo_query"
+        elif "benchmark" in query_text or "token" in query_text:
+            intent = "token_benchmark"
+        elif "ready" in query_text or "calibration" in query_text:
+            intent = "readiness_calibration"
+        elif "memory" in query_text or "spine" in query_text:
+            intent = "memory_spine"
+        elif "audit" in query_text or "entrypoint" in query_text or "enforcement" in query_text:
+            intent = "entrypoint_audit"
+        elif "help" in query_text:
+            intent = "help"
 
         # Context Gate Enforcement
         gate_request = {
             "request_id": f"chat_{self._utc_now()}",
             "user_intent": intent,
-            "task_type": "analysis" if intent in ["status", "next", "technical_debt"] else "unknown",
+            "task_type": "analysis" if intent in ["status", "next", "technical_debt", "readiness_calibration", "entrypoint_audit"] else "unknown",
             "requires_code_read": False
         }
         gate_decision = run_context_enforcement_gate(gate_request, aiwg_root=self.aiwg_root)
-        
+
+        # Memory Spine Retrieval (BEFORE response generation)
+        memory_result = retrieve_memory_for_intent(intent, aiwg_root=self.aiwg_root)
+
+        response: DummieChatResponse | None = None
         if intent == "status":
-            return self._cmd_status(gate_decision)
+            response = self._cmd_status(gate_decision)
         elif intent == "next":
-            return self._cmd_next(gate_decision)
+            response = self._cmd_next(gate_decision)
         elif intent == "technical_debt":
-            return self._cmd_debt(gate_decision)
+            response = self._cmd_debt(gate_decision)
         elif intent == "capabilities":
-            return self._cmd_capabilities(gate_decision)
+            response = self._cmd_capabilities(gate_decision)
         elif intent == "integration_backlog":
-            return self._cmd_backlog(gate_decision)
+            response = self._cmd_backlog(gate_decision)
         elif intent == "repo_query":
-            return self._cmd_query(query_text, gate_decision)
+            response = self._cmd_query(query_text, gate_decision)
+        elif intent == "token_benchmark":
+            response = self._cmd_token_benchmark(gate_decision)
+        elif intent == "readiness_calibration":
+            response = self._cmd_readiness_calibration(gate_decision)
+        elif intent == "memory_spine":
+            response = self._cmd_memory_spine(gate_decision, memory_result)
+        elif intent == "entrypoint_audit":
+            response = self._cmd_entrypoint_audit(gate_decision)
         elif intent == "help":
-            return self._cmd_help()
-        
-        return DummieChatResponse(
-            decision="PASS",
-            answer=f"I understood your intent as '{intent}', but I don't have a specific handler for it yet.",
-            context_strategy=gate_decision.decision,
-            generated_at=self._utc_now()
-        )
+            response = self._cmd_help()
+        else:
+            response = DummieChatResponse(
+                decision="PASS",
+                answer=f"I understood your intent as '{intent}', but I don't have a specific handler for it yet.",
+                context_strategy=gate_decision.decision,
+                generated_at=self._utc_now()
+            )
+
+        # Attach memory metadata to every response
+        response.memory_spine = memory_result.to_dict()
+        response.memory_spine_used = True
+        if memory_result.status == "DEGRADED_WITH_FILE_BACKED_MEMORY":
+            response.warnings.append("Memory spine is DEGRADED. Using file-backed fallback.")
+
+        return response
 
     def _cmd_status(self, gate: Any) -> DummieChatResponse:
         pos = self._load_json(self.aiwg_root / "evolution" / "current_position.json")
@@ -106,6 +147,92 @@ class DummieChatCli:
             generated_at=self._utc_now()
         )
 
+    def _cmd_token_benchmark(self, gate: Any) -> DummieChatResponse:
+        bench = self._load_json(self.reports_root / "token_economy_benchmark_latest.json")
+        if not bench:
+            # Run benchmark inline
+            try:
+                from layers.l2_brain.token_economy_benchmark import run_token_economy_benchmark
+                result = run_token_economy_benchmark()
+                bench = result.to_dict()
+            except Exception as exc:
+                return DummieChatResponse(
+                    answer=f"Token benchmark not available: {exc}",
+                    warnings=[str(exc)],
+                    context_strategy=gate.decision,
+                    generated_at=self._utc_now()
+                )
+        ratio = bench.get("raw_to_dossier_reduction_ratio", 0)
+        score = bench.get("token_efficiency_score", 0)
+        return DummieChatResponse(
+            answer=f"Token Economy Benchmark: {ratio}x reduction ratio, Efficiency Score: {score}/100. Measurement: deterministic_estimate.",
+            evidence_refs=[".aiwg/reports/token_economy_benchmark_latest.json"],
+            context_strategy=gate.decision,
+            generated_at=self._utc_now()
+        )
+
+    def _cmd_readiness_calibration(self, gate: Any) -> DummieChatResponse:
+        cal = self._load_json(self.reports_root / "readiness_score_calibration_latest.json")
+        if not cal:
+            try:
+                from layers.l2_brain.readiness_score_calibrator import run_readiness_score_calibration
+                result = run_readiness_score_calibration()
+                cal = result.to_dict()
+            except Exception as exc:
+                return DummieChatResponse(
+                    answer=f"Readiness calibration not available: {exc}",
+                    warnings=[str(exc)],
+                    context_strategy=gate.decision,
+                    generated_at=self._utc_now()
+                )
+        scores = cal.get("calibrated_scores", {})
+        findings = cal.get("findings", [])
+        summary = "Calibrated Readiness Scores:\n" + "\n".join([f"- {k}: {v}" for k, v in scores.items()])
+        if findings:
+            summary += f"\n\nFindings ({len(findings)}):"
+            for f in findings:
+                summary += f"\n- [{f['severity']}] {f['id']}: {f['description']}"
+        return DummieChatResponse(
+            answer=summary,
+            evidence_refs=[".aiwg/reports/readiness_score_calibration_latest.json"],
+            context_strategy=gate.decision,
+            generated_at=self._utc_now()
+        )
+
+    def _cmd_memory_spine(self, gate: Any, memory: Any) -> DummieChatResponse:
+        return DummieChatResponse(
+            answer=f"Memory Spine Status: {memory.status}. Graph: {memory.graph_status}. Found {len(memory.learning_episode_refs)} episode refs, {len(memory.vault_refs)} vault refs.",
+            evidence_refs=[".aiwg/reports/memory_spine_entrypoint_latest.json"],
+            context_strategy=gate.decision,
+            generated_at=self._utc_now()
+        )
+
+    def _cmd_entrypoint_audit(self, gate: Any) -> DummieChatResponse:
+        audit = self._load_json(self.reports_root / "entrypoint_enforcement_audit_latest.json")
+        if not audit:
+            try:
+                from layers.l2_brain.entrypoint_enforcement_auditor import run_entrypoint_enforcement_audit
+                audit = run_entrypoint_enforcement_audit()
+            except Exception as exc:
+                return DummieChatResponse(
+                    answer=f"Entrypoint audit not available: {exc}",
+                    warnings=[str(exc)],
+                    context_strategy=gate.decision,
+                    generated_at=self._utc_now()
+                )
+        audits = audit.get("audits", [])
+        no_spine = [a for a in audits if not a.get("uses_memory_spine")]
+        no_gate = [a for a in audits if a.get("bypasses_context_gate")]
+        summary = f"Entrypoint Audit: {len(audits)} entrypoints checked.\n"
+        summary += f"- {len(no_spine)} missing memory spine integration\n"
+        summary += f"- {len(no_gate)} bypass context gate"
+        return DummieChatResponse(
+            answer=summary,
+            evidence_refs=[".aiwg/reports/entrypoint_enforcement_audit_latest.json"],
+            context_strategy=gate.decision,
+            generated_at=self._utc_now()
+        )
+
     def _cmd_debt(self, gate: Any) -> DummieChatResponse:
         debt = self._load_json(self.reports_root / "technical_debt_intelligence_latest.json")
         findings = debt.get("findings", [])
@@ -114,7 +241,6 @@ class DummieChatCli:
             summary += "\nTop items:"
             for f in findings[:3]:
                 summary += f"\n- [{f['severity']}] {f['finding_id']}: {f['recommended_action']}"
-        
         return DummieChatResponse(
             answer=summary,
             evidence_refs=[".aiwg/reports/technical_debt_intelligence_latest.json"],
@@ -143,13 +269,16 @@ class DummieChatCli:
         )
 
     def _cmd_query(self, query_text: str, gate: Any) -> DummieChatResponse:
-        # Naive extraction of query params
-        q = {}
-        if "runtime" in query_text: q["is_runtime"] = True
-        if "test" in query_text: q["is_test"] = True
-        if "untested" in query_text: q["no_tests"] = True
-        if "python" in query_text: q["language"] = "python"
-        
+        q: dict[str, Any] = {}
+        if "runtime" in query_text:
+            q["is_runtime"] = True
+        if "test" in query_text:
+            q["is_test"] = True
+        if "untested" in query_text:
+            q["no_tests"] = True
+        if "python" in query_text:
+            q["language"] = "python"
+
         res = query_repo_intelligence(q, aiwg_root=self.aiwg_root)
         answer = f"Found {res.count} files matching your query."
         if res.results:
@@ -171,12 +300,19 @@ class DummieChatCli:
 - technical debt: Show top debt findings.
 - capabilities: Show capability scorecard summary.
 - integration backlog: Show backlog items.
-- find [runtime|test|untested|python]: Query the repository intelligence.
+- repo intelligence / find [runtime|test|untested]: Query the repository intelligence.
+- find untested runtime: Find runtimes without tests.
+- context for <path>: Get context for a path.
+- show memory spine: Show memory spine status.
+- benchmark token economy: Run token economy benchmark.
+- show readiness calibration / am I really ready?: Show readiness calibration.
+- show entrypoint enforcement: Show entrypoint enforcement audit.
 - help: Show this message."""
         return DummieChatResponse(answer=help_text, generated_at=self._utc_now())
 
     def _load_json(self, path: Path) -> dict[str, Any]:
-        if not path.exists(): return {}
+        if not path.exists():
+            return {}
         try:
             return json.loads(path.read_text(encoding="utf-8"))
         except Exception:
@@ -190,15 +326,16 @@ def main():
     chat = DummieChatCli()
     query = " ".join(sys.argv[1:]) if len(sys.argv) > 1 else "status"
     response = chat.handle_query(query)
-    
+
     # Save output
     reports_dir = Path(".aiwg/reports")
     reports_dir.mkdir(parents=True, exist_ok=True)
     (reports_dir / "dummie_chat_cli_latest.json").write_text(
         json.dumps(response.to_dict(), indent=2) + "\n", encoding="utf-8"
     )
-    
+
     print(json.dumps(response.to_dict(), indent=2))
+
 
 if __name__ == "__main__":
     main()

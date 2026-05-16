@@ -1,0 +1,15 @@
+{
+  "decision": "PASS_WITH_WARNINGS",
+  "query": "token_benchmark",
+  "status": "DEGRADED_WITH_FILE_BACKED_MEMORY",
+  "memory_refs": [],
+  "learning_episode_refs": [],
+  "vault_refs": [],
+  "graph_status": "DEGRADED",
+  "used_before_chat_response": true,
+  "warnings": [
+    "Kuzu DEGRADED. Falling back to file-backed session memory scan."
+  ],
+  "evidence_refs": [],
+  "generated_at": "2026-05-16T16:16:44Z"
+}
