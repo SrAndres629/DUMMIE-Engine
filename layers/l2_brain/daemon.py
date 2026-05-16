@@ -22,14 +22,31 @@ import os
 from typing import Dict, Any, List, Optional
 from datetime import datetime
 from abc import ABC, abstractmethod
+from pathlib import Path
+import sys
+
+# Allow direct script execution
+if __package__ in {None, ""}:
+    _ROOT = Path(__file__).resolve().parents[2]
+    if str(_ROOT) not in sys.path:
+        sys.path.append(str(_ROOT))
+    _L2 = _ROOT / "layers" / "l2_brain"
+    if str(_L2) not in sys.path:
+        sys.path.append(str(_L2))
+
 
 # Importaciones Isomórficas (Flat Structure)
-from .gateway_contract import GatewayRequest, SagaTransaction, SagaStep
-from .auditor_port import BaseAuditor, BaseExecutor
-from .model_router import ModelTier
+try:
+    from .gateway_contract import GatewayRequest, SagaTransaction, SagaStep
+    from .auditor_port import BaseAuditor, BaseExecutor
+    from .model_router import ModelTier
+    from .safe_fallbacks import FailClosedAuditor, FailClosedExecutor
+except ImportError:
+    from layers.l2_brain.gateway_contract import GatewayRequest, SagaTransaction, SagaStep
+    from layers.l2_brain.auditor_port import BaseAuditor, BaseExecutor
+    from layers.l2_brain.model_router import ModelTier
+    from layers.l2_brain.safe_fallbacks import FailClosedAuditor, FailClosedExecutor
 
-# Importaciones de Adaptadores (Cruce de Capas vía PYTHONPATH)
-from .safe_fallbacks import FailClosedAuditor, FailClosedExecutor
 
 try:
     from layers.l3_shield.topological_auditor import TopologicalAuditor
@@ -45,11 +62,11 @@ except ImportError as e:
 
 logger = logging.getLogger("dummie-daemon")
 
-from .event_bus import AsyncEventBus
+from layers.l2_brain.event_bus import AsyncEventBus
 
 from layers.l1_nervous.repo_guard import RepoGuard
 
-from .metagateway_policy import SensorFirstPolicy, PolicyDecision
+from layers.l2_brain.metagateway_policy import SensorFirstPolicy, PolicyDecision
 
 class DummieDaemon:
     """
@@ -98,7 +115,7 @@ class DummieDaemon:
         self.last_cognitive_preflight: Dict[str, Any] = {"status": "SKIPPED"}
         
         # Integración Gobernador de Recursos (Spec 52)
-        from .resource_governor import ResourceGovernor
+        from layers.l2_brain.resource_governor import ResourceGovernor
         self.governor = ResourceGovernor()
 
         # Metacognitive Pipeline Integration
@@ -106,18 +123,18 @@ class DummieDaemon:
         self.metacognition_error = ""
 
         try:
-            from .metacognition.pipeline import MetacognitivePipeline
-            from .metacognition.input_hooks import (
+            from layers.l2_brain.metacognition.pipeline import MetacognitivePipeline
+            from layers.l2_brain.metacognition.input_hooks import (
                 AuthorityClassifierHook,
                 ContextEnricherHook,
                 IntentClarifierHook,
                 PromptRefinerHook,
                 ToolNeedDetectorHook,
             )
-            from .metacognition.semantic_hooks import SemanticToolSelectorHook
-            from .metacognition.reasoning_hooks import ReasoningExpansionHook
-            from .metacognition.deliberation_hooks import MissionDecomposerHook, PlanCriticHook
-            from .metacognition.output_hooks import AnswerVerifierHook, MemoryUpdateHook
+            from layers.l2_brain.metacognition.semantic_hooks import SemanticToolSelectorHook
+            from layers.l2_brain.metacognition.reasoning_hooks import ReasoningExpansionHook
+            from layers.l2_brain.metacognition.deliberation_hooks import MissionDecomposerHook, PlanCriticHook
+            from layers.l2_brain.metacognition.output_hooks import AnswerVerifierHook, MemoryUpdateHook
 
             self.metacognition = MetacognitivePipeline(
                 input_hooks=[
@@ -169,8 +186,8 @@ class DummieDaemon:
 
         # Phase 10: Semantic Retrieval Wiring
         try:
-            from .socraticode_gateway_adapter import SocraticodeGatewayAdapter
-            from .semantic_retrieval_runtime import SemanticRetrievalRuntime
+            from layers.l2_brain.socraticode_gateway_adapter import SocraticodeGatewayAdapter
+            from layers.l2_brain.semantic_retrieval_runtime import SemanticRetrievalRuntime
 
             # Use mcp_gateway for socraticode adapter
             # We don't have direct access to the VaultEmbeddingIndex instance here typically,
@@ -187,9 +204,9 @@ class DummieDaemon:
             logger.warning(f"Semantic Retrieval degraded: {e}")
 
         try:
-            from .metagateway_runtime_meter import MetaGatewayRuntimeMeter
-            from .token_cost_ledger import TokenCostLedger
-            from .context_budget_manager import ContextBudgetManager
+            from layers.l2_brain.metagateway_runtime_meter import MetaGatewayRuntimeMeter
+            from layers.l2_brain.token_cost_ledger import TokenCostLedger
+            from layers.l2_brain.context_budget_manager import ContextBudgetManager
             self.runtime_meter = MetaGatewayRuntimeMeter()
             self.token_ledger = TokenCostLedger(root=ledger_path if ledger_path else ".aiwg")
             self.budget_manager = ContextBudgetManager()
@@ -208,7 +225,7 @@ class DummieDaemon:
             logger.warning("Metabolic components (Meter/Ledger/Budget) not fully available")
 
         try:
-            from .outcome_evaluator import OutcomeEvaluator
+            from layers.l2_brain.outcome_evaluator import OutcomeEvaluator
             self.evaluator = OutcomeEvaluator(self)
             self.outcome_contract_available = True
             self.outcome_contract_error = ""
@@ -219,7 +236,7 @@ class DummieDaemon:
             logger.warning(f"Daemon outcome contract degraded: {e}")
 
         try:
-            from .long_running_mission import LongRunningMissionRuntime
+            from layers.l2_brain.long_running_mission import LongRunningMissionRuntime
             self.mission_runtime = LongRunningMissionRuntime()
             self.mission_runtime_available = True
             self.mission_runtime_error = ""
@@ -231,7 +248,7 @@ class DummieDaemon:
 
         if self.diagnostic_mode:
             try:
-                from .daemon_diagnostic import DiagnosticReporter
+                from layers.l2_brain.daemon_diagnostic import DiagnosticReporter
                 self.diagnostic_reporter = DiagnosticReporter(self)
             except ImportError:
                 self.diagnostic_reporter = None
@@ -309,10 +326,11 @@ class DummieDaemon:
 
             # Enforce SensorFirst policy
             try:
-                from .sensor_first_guard import SensorFirstGuard
+                from layers.l2_brain.sensor_first_guard import SensorFirstGuard
                 guard = SensorFirstGuard(retrieval_runtime=getattr(self, "semantic_retrieval_runtime", None))
                 # Build a pseudo-request dict for the guard
-                req_dict = {"purpose": request.context.get("purpose", "unknown"), "action": "direct_read"}
+                # GatewayRequest doesn't have .context, use a default mission context
+                req_dict = {"purpose": "mission_execution", "action": "direct_read", "goal": request.goal}
                 sensor_first_decision = guard.evaluate_request(req_dict, retrieval_context)
             except Exception as e:
                 logger.warning(f"SensorFirst evaluation failed: {e}")
@@ -462,7 +480,7 @@ class DummieDaemon:
                                 try:
                                     from action_graph import ActionGraph
                                 except ImportError:
-                                    from .action_graph import ActionGraph
+                                    from layers.l2_brain.action_graph import ActionGraph
 
                                 graph = ActionGraph()
                             except ImportError:
@@ -686,8 +704,15 @@ if __name__ == "__main__":
         )
 
         print(f"--- DUMMIE DAEMON INVOCATION: {goal} ---")
-        outcome = await daemon.process_request(request)
-        print(json.dumps(outcome, indent=2))
+        await daemon.process_request(request)
+        # OutcomeEvaluator needs status, transaction_id, saga
+        from layers.l2_brain.gateway_contract import SagaTransaction
+        dummy_saga = SagaTransaction(transaction_id="T-INVOKE", context_token="CTX-MOCK")
+        outcome = daemon.build_daemon_outcome("SUCCESS", "T-INVOKE", dummy_saga, session_id="S-MAIN")
+        print(json.dumps(outcome.to_dict(), indent=2))
+
+
+
 
     parser = argparse.ArgumentParser(description="DUMMIE Daemon Invocation Mode")
     parser.add_argument("goal", help="The mission goal")

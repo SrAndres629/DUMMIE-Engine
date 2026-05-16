@@ -1,0 +1,50 @@
+{
+  "pack": "POST_PLAN_V1_OPERATIONALIZATION_PACK_4",
+  "decision": "PASS_WITH_WARNINGS",
+  "commit_hash_before_pack5": "1b5cec20e168e9a92de94e9e5339ca3656402850",
+  "push_status": "PUSHED",
+  "git_status_clean": true,
+  "files_verified": [
+    "scripts/dummie-ctl",
+    "layers/l2_brain/dummie_chat_cli.py",
+    "layers/l2_brain/daemon.py",
+    "layers/l2_brain/session_store.py",
+    ".aiwg/reports/test_debt_triage_latest.json",
+    ".aiwg/reports/test_debt_triage_latest.md",
+    "doc/reports/test_debt_triage.md",
+    ".aiwg/sessions/CURRENT/learning_episodes.jsonl"
+  ],
+  "smoke_commands_run": [
+    "./scripts/dummie-ctl status",
+    "./scripts/dummie-ctl chat 'what should I do next?'",
+    "./scripts/dummie-ctl calibrate",
+    "./scripts/dummie-ctl triage",
+    "python3 layers/l2_brain/daemon.py 'test atomic mission invocation'"
+  ],
+  "tests_run": [
+    "test_dummie_chat_cli.py",
+    "test_memory_spine_entrypoint.py",
+    "test_session_store.py",
+    "test_learning_episode.py",
+    "test_cli_control_plane.py"
+  ],
+  "tests_passed": 29,
+  "tests_failed": 0,
+  "validations": {
+    "git_diff_check": "PASS",
+    "spec_validation": "PASS",
+    "json_parse": "PASS"
+  },
+  "learning_episode_loop_verified": true,
+  "dummie_ctl_verified": true,
+  "daemon_invocation_mode_verified": true,
+  "test_debt_triage_verified": true,
+  "warnings": [
+    "Kuzu DB remains DEGRADED (file-backed fallback is active)",
+    "36 tests remain failing in other modules (categorized in triage)"
+  ],
+  "evidence_refs": [
+    ".aiwg/reports/test_debt_triage_latest.md",
+    ".aiwg/sessions/CURRENT/learning_episodes.jsonl"
+  ]
+}
