@@ -1,0 +1,26 @@
+{
+  "spec_id": "121",
+  "name": "State Coherence Guard Rules",
+  "rules": [
+    {
+      "id": "R1",
+      "description": "Must read current_position.json and next_phase_seed.json as sources of truth.",
+      "priority": "CRITICAL"
+    },
+    {
+      "id": "R2",
+      "description": "Must check CLI, Monitor, and Dashboard latest outputs.",
+      "priority": "HIGH"
+    },
+    {
+      "id": "R3",
+      "description": "Phase mismatch between truth and artifact results in FAIL decision.",
+      "priority": "CRITICAL"
+    },
+    {
+      "id": "R4",
+      "description": "Missing artifacts results in PASS_WITH_WARNINGS if no other errors.",
+      "priority": "MEDIUM"
+    }
+  ]
+}

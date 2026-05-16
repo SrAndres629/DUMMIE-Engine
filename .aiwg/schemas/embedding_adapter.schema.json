@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "EmbeddingResult",
+  "type": "object",
+  "required": ["vector", "model", "measurement_type", "status", "generated_at"],
+  "properties": {
+    "vector": {
+      "type": "object",
+      "required": ["vector", "dim", "normalized"],
+      "properties": {
+        "vector": { "type": "array", "items": { "type": "number" } },
+        "dim": { "type": "integer" },
+        "normalized": { "type": "boolean" }
+      }
+    },
+    "model": { "type": "string" },
+    "measurement_type": { "type": "string", "enum": ["deterministic_fallback", "real_embedding", "none"] },
+    "status": { "type": "string", "enum": ["SUCCESS", "PROVIDER_DISABLED", "ERROR"] },
+    "generated_at": { "type": "string", "format": "date-time" }
+  }
+}

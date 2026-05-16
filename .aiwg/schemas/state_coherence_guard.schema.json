@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "StateCoherenceReport",
+  "type": "object",
+  "required": ["decision", "findings", "generated_at"],
+  "properties": {
+    "decision": { "type": "string", "enum": ["PASS", "PASS_WITH_WARNINGS", "FAIL"] },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["artifact", "message", "expected", "actual", "severity"],
+        "properties": {
+          "artifact": { "type": "string" },
+          "message": { "type": "string" },
+          "expected": { "type": ["string", "number", "boolean", "null", "object", "array"] },
+          "actual": { "type": ["string", "number", "boolean", "null", "object", "array"] },
+          "severity": { "type": "string", "enum": ["ERROR", "WARNING"] }
+        }
+      }
+    },
+    "generated_at": { "type": "string", "format": "date-time" }
+  }
+}

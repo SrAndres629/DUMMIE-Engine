@@ -17,6 +17,7 @@ if __package__ in {None, ""}:
         sys.path.append(str(_L2))
 
 from layers.l2_brain.local_context_compressor import LocalContextCompressor
+from layers.l2_brain.state_coherence_guard import run_state_coherence_guard
 from layers.l2_brain.tui_process_monitor import TuiProcessMonitor
 from layers.l6_skin.dashboard_renderer import DashboardRenderer
 
@@ -53,6 +54,7 @@ class CliControlPlane:
             "next-action": self._cmd_next_action,
             "compress-context": self._cmd_compress_context,
             "dashboard-data": self._cmd_dashboard_data,
+            "state-coherence": self._cmd_state_coherence,
         }
 
         if command not in handlers:
@@ -166,6 +168,17 @@ class CliControlPlane:
                 ".aiwg/reports/dashboard_l6_latest.json",
                 ".aiwg/reports/dashboard_l6_latest.html",
             ],
+            generated_at=self._utc_now(),
+        )
+
+    def _cmd_state_coherence(self) -> CliCommandResult:
+        report = run_state_coherence_guard(aiwg_root=self.aiwg_root)
+        return CliCommandResult(
+            command="state-coherence",
+            decision=report.decision,
+            payload=report.to_dict(),
+            warnings=[f.message for f in report.findings if f.severity == "WARNING"],
+            evidence_refs=[".aiwg/reports/state_coherence_guard_latest.json"],
             generated_at=self._utc_now(),
         )
 

@@ -1,13 +1,14 @@
 {
-  "next_phase": "P22",
-  "name": "Real Embedding Adapter",
-  "objective": "Implement a real or adapter-ready embedding interface that can replace deterministic hash similarity with provider-backed or local embedding vectors while preserving offline fallback.",
-  "why_now": "P18-P21 exposed runtime status, monitoring, dashboard artifacts and deterministic compression. P22 should upgrade semantic retrieval quality by introducing a real embedding adapter interface without breaking offline operation.",
+  "next_phase": "P23",
+  "name": "Polyglot RepoProbeRunner",
+  "objective": "Implement deterministic repo probes that inspect DUMMIE's polyglot layers, languages, specs, tests and runtime capabilities so global project understanding is grounded in physical evidence instead of chat memory.",
+  "why_now": "P22 introduced an embedding adapter interface with offline fallback. P23 must add physical repo probes so retrieval and world-model updates can be grounded in fresh polyglot evidence.",
   "required_outputs": [
-    "layers/l2_brain/embedding_adapter.py",
-    "layers/l2_brain/tests/test_embedding_adapter.py",
-    ".aiwg/reports/plan_v1_phase_22_embedding_adapter.md",
-    ".aiwg/reports/plan_v1_phase_22_embedding_adapter.json"
+    "layers/l2_brain/repo_probe_runner.py",
+    "layers/l2_brain/tests/test_repo_probe_runner.py",
+    ".aiwg/reports/plan_v1_phase_23_repo_probe_runner.md",
+    ".aiwg/reports/plan_v1_phase_23_repo_probe_runner.json",
+    ".aiwg/reports/repo_probe_latest.json"
   ],
   "must_not_create": [
     "swarm agents",
@@ -16,10 +17,11 @@
     "external paid calls without explicit config"
   ],
   "success_conditions": [
-    "embedding adapter interface implemented",
-    "offline deterministic fallback preserved",
-    "real provider hook defined but disabled by default",
-    "vault embedding index can consume adapter",
+    "repo probe runner implemented",
+    "polyglot language probes implemented",
+    "layer probes implemented",
+    "spec/test probes implemented",
+    "fresh physical evidence report generated",
     "tests pass",
     "no secrets or API keys required"
   ]

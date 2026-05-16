@@ -1,0 +1,26 @@
+{
+  "spec_id": "122",
+  "name": "Embedding Adapter Rules",
+  "rules": [
+    {
+      "id": "R1",
+      "description": "Must provide a deterministic offline fallback.",
+      "priority": "CRITICAL"
+    },
+    {
+      "id": "R2",
+      "description": "Must not require API keys or .env for fallback.",
+      "priority": "CRITICAL"
+    },
+    {
+      "id": "R3",
+      "description": "Vectors must be normalized by default.",
+      "priority": "HIGH"
+    },
+    {
+      "id": "R4",
+      "description": "Provider adapters must be disabled unless explicitly configured.",
+      "priority": "HIGH"
+    }
+  ]
+}
