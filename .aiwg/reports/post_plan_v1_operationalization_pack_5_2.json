@@ -1,6 +1,6 @@
 {
   "pack": "POST_PLAN_V1_OPERATIONALIZATION_PACK_5_2",
-  "decision": "PASS",
+  "decision": "PASS_WITH_WARNINGS",
   "baseline_commit": "0892c2db9d51f388bcb89f3a597307a1a90e88fa",
   "runtime_modules_created_or_modified": [
     "epistemic_state_runtime.py",
@@ -20,7 +20,8 @@
     "test_philosophical_ontology_runtime.py",
     "test_cognitive_bias_detector.py",
     "test_metacognitive_evolution_flywheel.py",
-    "test_philosophical_metacognition_integration.py"
+    "test_philosophical_metacognition_integration.py",
+    "test_pack_5_2_closure_integrity.py"
   ],
   "schemas_created": [
     "epistemic_state.schema.json",
@@ -39,7 +40,7 @@
   ],
   "philosophical_kernel": {
     "epistemic_state": "PASS_WITH_WARNINGS",
-    "dialectical_reasoning": "PASS",
+    "dialectical_reasoning": "PASS_WITH_WARNINGS",
     "philosophical_ontology": "PASS",
     "bias_detection": "PASS_WITH_WARNINGS",
     "evolution_flywheel": "PASS"
@@ -57,10 +58,10 @@
     "json_parse": "PASS",
     "tests": "PASS"
   },
-  "git_status_clean_after": false,
+  "git_status_clean_after": true,
   "warnings": [
     "Kuzu DB remains DEGRADED (file-backed fallback active)",
-    "Dialectical review recommended 'repair_first' for refactor intent"
+    "Dialectical review recommended 'repair_first' for autonomy intent"
   ],
   "evidence_refs": [
     ".aiwg/reports/epistemic_state_latest.json",

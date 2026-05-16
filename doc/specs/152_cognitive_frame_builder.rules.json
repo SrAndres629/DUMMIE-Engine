@@ -1,4 +1,5 @@
 {
+  "spec_id": "152_cognitive_frame_builder",
   "policy": "no_private_cot",
   "evidence_required": true,
   "quality_threshold": 80

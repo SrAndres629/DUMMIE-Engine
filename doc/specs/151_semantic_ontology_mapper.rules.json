@@ -1,4 +1,5 @@
 {
+  "spec_id": "151_semantic_ontology_mapper",
   "policy": "no_private_cot",
   "evidence_required": true,
   "quality_threshold": 80

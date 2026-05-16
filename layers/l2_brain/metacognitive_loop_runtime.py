@@ -1,4 +1,3 @@
-
 import json
 from pathlib import Path
 from mental_model_runtime import build_mental_model_for_intent
@@ -47,7 +46,7 @@ def run_metacognitive_loop(intent: str, aiwg_root: Path = Path(".aiwg")):
     # 7. Build Frame
     frame = build_cognitive_frame(intent, model, taxonomy_onto)
     
-    # 8. Quality Gate (Harden 5.2)
+    # 8. Quality Gate (Harden 5.2.1)
     quality = run_metacognitive_quality_gate(model, philosophical_onto, frame, epistemic=epistemic, bias_report=bias_report)
     
     # 9. Evolution Flywheel
@@ -55,6 +54,19 @@ def run_metacognitive_loop(intent: str, aiwg_root: Path = Path(".aiwg")):
     (reports / "metacognitive_evolution_flywheel_latest.json").write_text(json.dumps(flywheel.to_dict(), indent=2))
     (reports / "metacognitive_evolution_delta_latest.json").write_text(json.dumps(flywheel.evolution_delta, indent=2))
     
+    # Safety Propagation (Pack 5.2.1 specific rules)
+    loop_decision = quality.decision
+    if quality.decision == "FAIL":
+        loop_decision = "FAIL"
+    elif quality.decision == "NEEDS_HUMAN_REVIEW":
+        loop_decision = "NEEDS_HUMAN_REVIEW"
+        
+    recommended_action = "respond_via_frame"
+    if dialectical.decision == "repair_first":
+        recommended_action = "repair_first"
+    elif loop_decision == "FAIL":
+        recommended_action = "request_clarification"
+
     # Save reports
     (reports / "mental_model_runtime_latest.json").write_text(json.dumps(model.to_dict(), indent=2))
     (reports / "semantic_ontology_map_latest.json").write_text(json.dumps(taxonomy_onto, indent=2))
@@ -62,7 +74,7 @@ def run_metacognitive_loop(intent: str, aiwg_root: Path = Path(".aiwg")):
     (reports / "metacognitive_quality_gate_latest.json").write_text(json.dumps(quality.to_dict(), indent=2))
     
     result = {
-        "decision": quality.decision,
+        "decision": loop_decision,
         "intent": intent,
         "mental_model_id": model.model_id,
         "frame_id": frame.frame_id,
@@ -72,7 +84,7 @@ def run_metacognitive_loop(intent: str, aiwg_root: Path = Path(".aiwg")):
         "philosophical_ontology": philosophical_onto.to_dict(),
         "dialectical_review": dialectical.to_dict(),
         "evolution_delta": flywheel.evolution_delta,
-        "recommended_next_action": "respond_via_frame" if quality.decision != "FAIL" else "request_clarification",
+        "recommended_next_action": recommended_action,
         "dispatch_recommendation": frame.dispatch_recommendation,
         "warnings": quality.warnings
     }
@@ -82,5 +94,5 @@ def run_metacognitive_loop(intent: str, aiwg_root: Path = Path(".aiwg")):
 
 if __name__ == "__main__":
     import sys
-    intent = sys.argv[1] if len(sys.argv) > 1 else "plan the next refactor"
+    intent = sys.argv[1] if len(sys.argv) > 1 else "decide whether DUMMIE should proceed to autonomous skill synthesis while Kuzu is degraded and tests are missing"
     print(json.dumps(run_metacognitive_loop(intent), indent=2))

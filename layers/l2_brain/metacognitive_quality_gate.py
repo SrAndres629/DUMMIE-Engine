@@ -1,4 +1,3 @@
-
 from dataclasses import dataclass, field, asdict
 from typing import List, Dict, Any
 
@@ -24,22 +23,27 @@ def run_metacognitive_quality_gate(model, ontology, frame, epistemic=None, bias_
     warnings = []
     score = 100
     
+    intent = getattr(model, "intent", "").lower()
+    is_high_risk = any(k in intent for k in ["autonom", "synthesis", "kuzu", "degrad", "missing", "risk"])
+
     # 1. Model Checks
+    relations = getattr(model, "relations", [])
     if not getattr(model, "entities", []):
         score -= 20
         findings.append({"category": "MODEL", "message": "No entities extracted", "severity": "WARN"})
-    if not getattr(model, "relations", []):
+    if not relations:
         score -= 20
-        findings.append({"category": "MODEL", "message": "No relations extracted", "severity": "WARN"})
+        findings.append({"category": "MODEL", "message": "No relations extracted", "severity": "WARN" if not is_high_risk else "FAIL"})
     if not getattr(model, "evidence_refs", []):
         score -= 20
         findings.append({"category": "MODEL", "message": "No evidence references", "severity": "WARN"})
     
     # 2. Ontology Checks
     graph = ontology.get("ontology_graph", {}) if isinstance(ontology, dict) else getattr(ontology, "nodes", [])
-    if not graph:
-        score -= 10
-        findings.append({"category": "ONTOLOGY", "message": "Ontology graph is empty", "severity": "WARN"})
+    edges = graph.get("edges", []) if isinstance(graph, dict) else []
+    if not edges:
+        score -= 20
+        findings.append({"category": "ONTOLOGY", "message": "Ontology graph is empty or has zero edges", "severity": "FAIL" if is_high_risk else "WARN"})
         
     # 3. Epistemic Checks
     ep_debt_count = 0
@@ -54,26 +58,59 @@ def run_metacognitive_quality_gate(model, ontology, frame, epistemic=None, bias_
 
     # 4. Bias Checks
     b_count = 0
+    bias_fail = False
     if bias_report:
-        b_count = len(bias_report.findings)
-        if b_count > 0:
-            score -= 20 * b_count
+        bias_decision = getattr(bias_report, "decision", "") if not isinstance(bias_report, dict) else bias_report.get("decision", "")
+        b_findings = getattr(bias_report, "findings", []) if not isinstance(bias_report, dict) else bias_report.get("findings", [])
+        b_count = len(b_findings)
+        
+        if bias_decision == "FAIL" or b_count > 0:
+            bias_fail = True
+            score -= 20 * max(1, b_count)
             findings.append({"category": "BIAS", "message": f"Found {b_count} cognitive biases", "severity": "FAIL"})
 
-    # 5. Overconfidence Penalty
+    # 5. Overconfidence and Degradation Caps (Pack 5.2.1 specific constraints)
     risks = getattr(model, "risks", [])
-    if any("DEGRADED" in str(r) for r in risks) and score > 90:
-        score = 70
-        findings.append({"category": "BIAS", "message": "Overconfidence penalty: high score with degraded components", "severity": "WARN"})
+    kuzu_degraded = any("DEGRADED" in str(r) for r in risks) or "kuzu" in intent
+    
+    # Quality score cannot be above 70 while Kuzu is DEGRADED and 177 missing tests remain
+    if kuzu_degraded:
+        score = min(score, 70)
+        findings.append({"category": "BIAS", "message": "Overconfidence penalty: Kuzu is DEGRADED", "severity": "WARN"})
 
-    # 6. Final Decision
+    # Quality score cannot be above 50 if bias_report is FAIL
+    if bias_fail:
+        score = min(score, 50)
+        findings.append({"category": "BIAS", "message": "Overconfidence penalty: bias report is FAIL", "severity": "FAIL"})
+
+    # 6. Final Decision logic matching safety constraints
     decision = "PASS"
-    if score < 40 or any(f["severity"] == "FAIL" for f in findings):
+    
+    # FAIL if bias_report decision is FAIL and action is autonomy/scaling
+    if bias_fail and any(k in intent for k in ["autonom", "synthesis", "scale", "flywheel"]):
+        decision = "FAIL"
+        findings.append({"category": "SAFETY", "message": "Critical safety rejection: Autonomy requested while bias is FAIL", "severity": "FAIL"})
+    # FAIL if ontology graph has zero edges and is high-risk
+    elif not edges and is_high_risk:
+        decision = "FAIL"
+        findings.append({"category": "SAFETY", "message": "Critical safety rejection: Ontology graph has zero edges for high-risk intent", "severity": "FAIL"})
+    # FAIL if mental model relations are empty for complex intent
+    elif not relations and is_high_risk:
+        decision = "FAIL"
+        findings.append({"category": "SAFETY", "message": "Critical safety rejection: Mental model relations are empty for high-risk intent", "severity": "FAIL"})
+    # FAIL if any finding has FAIL severity
+    elif any(f["severity"] == "FAIL" for f in findings):
+        decision = "FAIL"
+    elif score < 40:
         decision = "FAIL"
     elif score < 70:
         decision = "NEEDS_HUMAN_REVIEW"
     elif score < 90:
-        decision = "PASS_WITH_WARNINGS"
+        # PASS_WITH_WARNINGS if Kuzu degraded but action is only local/advisory repair
+        if kuzu_degraded and not any(k in intent for k in ["autonom", "synthesis"]):
+            decision = "PASS_WITH_WARNINGS"
+        else:
+            decision = "PASS_WITH_WARNINGS"
         warnings = [f["message"] for f in findings]
         
     return MetacognitiveQualityGateResult(

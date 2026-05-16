@@ -1,5 +1,6 @@
 {
+  "spec_id": "160_metacognitive_evolution_flywheel",
   "policy": "no_private_cot",
   "evidence_required": true,
-  "epistemic_humility": true
+  "quality_threshold": 80
 }

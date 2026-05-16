@@ -1,9 +1,7 @@
 {
   "decision": "PASS",
-  "answer": "Memory Spine Status: DEGRADED_WITH_FILE_BACKED_MEMORY. Graph: DEGRADED. Found 0 episode refs, 0 vault refs.",
-  "evidence_refs": [
-    ".aiwg/reports/memory_spine_entrypoint_latest.json"
-  ],
+  "answer": "I understood your intent as 'unknown', but I don't have a specific handler for it yet.",
+  "evidence_refs": [],
   "recommended_next_actions": [],
   "context_strategy": "ALLOW_MANIFEST_ONLY",
   "warnings": [
@@ -11,19 +9,319 @@
   ],
   "memory_spine": {
     "decision": "PASS_WITH_WARNINGS",
-    "query": "memory_spine",
+    "query": "unknown",
     "status": "DEGRADED_WITH_FILE_BACKED_MEMORY",
     "memory_refs": [],
-    "learning_episode_refs": [],
+    "learning_episode_refs": [
+      "sid:CURRENT/ep:ep-d87485f1",
+      "sid:CURRENT/ep:ep-69f7fc7b",
+      "sid:CURRENT/ep:ep-8265aac4",
+      "sid:CURRENT/ep:ep-e10b5b15",
+      "sid:CURRENT/ep:ep-f813da20",
+      "sid:CURRENT/ep:ep-48428bac",
+      "sid:CURRENT/ep:ep-9e09ad1c"
+    ],
     "vault_refs": [],
     "graph_status": "DEGRADED",
     "used_before_chat_response": true,
     "warnings": [
       "Kuzu DEGRADED. Falling back to file-backed session memory scan."
     ],
-    "evidence_refs": [],
-    "generated_at": "2026-05-16T16:42:32Z"
+    "evidence_refs": [
+      ".aiwg/sessions/CURRENT/learning_episodes.jsonl"
+    ],
+    "generated_at": "2026-05-16T23:53:56Z"
   },
   "memory_spine_used": true,
-  "generated_at": "2026-05-16T16:42:32Z"
+  "mental_model": {
+    "model_id": "mm-8eb9b245",
+    "intent": "run evolution flywheel",
+    "task_type": "unknown",
+    "entities": [
+      "ReadinessScore",
+      "TechnicalDebt"
+    ],
+    "relations": [],
+    "assumptions": [],
+    "decisions": [],
+    "risks": [
+      "Memory spine DEGRADED (Kuzu persistence unavailable)"
+    ],
+    "constraints": [],
+    "semantic_tags": [],
+    "ontology_classes": [],
+    "evidence_refs": [
+      ".aiwg/reports/test_debt_triage_latest.json",
+      ".aiwg/reports/readiness_score_calibration_latest.json",
+      ".aiwg/reports/entrypoint_enforcement_audit_latest.json",
+      ".aiwg/reports/memory_spine_entrypoint_latest.json"
+    ],
+    "confidence": 0.9,
+    "contradictions": [],
+    "next_actions": [],
+    "context_strategy": "ALLOW_MANIFEST_ONLY",
+    "memory_refs": [],
+    "created_at": "2026-05-16T23:53:56Z",
+    "quality_score": 70,
+    "quality_findings": [],
+    "epistemic_state_ref": "epistemic_state_latest.json",
+    "dialectical_review_ref": "dialectical_review_latest.json",
+    "bias_findings": [],
+    "teleology": {
+      "goal": "run evolution flywheel",
+      "impact_type": "architectural_integrity"
+    },
+    "falsification_tests": [
+      "verify run evolution flywheel with 0 new regressions"
+    ],
+    "belief_revision": ""
+  },
+  "cognitive_frame": {
+    "frame_id": "frame-6edfbdc4",
+    "intent": "run evolution flywheel",
+    "operating_mode": "answer",
+    "must_preserve": [
+      "current_phase",
+      "sovereign_identity",
+      "technical_debt_refs"
+    ],
+    "should_include": [],
+    "must_not_include": [
+      "secrets",
+      "private_chain_of_thought"
+    ],
+    "mental_model_refs": [
+      "mm-8eb9b245"
+    ],
+    "memory_refs": [],
+    "ontology_refs": [
+      "UNKNOWN"
+    ],
+    "evidence_refs": [
+      ".aiwg/reports/test_debt_triage_latest.json",
+      ".aiwg/reports/readiness_score_calibration_latest.json",
+      ".aiwg/reports/entrypoint_enforcement_audit_latest.json",
+      ".aiwg/reports/memory_spine_entrypoint_latest.json"
+    ],
+    "token_budget_hint": "low",
+    "context_strategy": "MANIFEST_ONLY",
+    "dispatch_recommendation": "local",
+    "risks": [
+      "Memory spine DEGRADED (Kuzu persistence unavailable)"
+    ],
+    "next_actions": [],
+    "created_at": "2026-05-16T23:53:56.671601+00:00"
+  },
+  "metacognitive_loop": {
+    "decision": "FAIL",
+    "intent": "run evolution flywheel",
+    "mental_model_id": "mm-8eb9b245",
+    "frame_id": "frame-6edfbdc4",
+    "quality_gate": {
+      "decision": "FAIL",
+      "quality_score": 25.0,
+      "findings": [
+        {
+          "category": "MODEL",
+          "message": "No relations extracted",
+          "severity": "WARN"
+        },
+        {
+          "category": "ONTOLOGY",
+          "message": "Ontology graph is empty or has zero edges",
+          "severity": "WARN"
+        },
+        {
+          "category": "EPISTEMIC",
+          "message": "Found 1 epistemic debts",
+          "severity": "WARN"
+        },
+        {
+          "category": "EPISTEMIC",
+          "message": "Low epistemic confidence",
+          "severity": "WARN"
+        },
+        {
+          "category": "BIAS",
+          "message": "Overconfidence penalty: Kuzu is DEGRADED",
+          "severity": "WARN"
+        }
+      ],
+      "warnings": [],
+      "epistemic_debt_count": 1,
+      "bias_count": 0
+    },
+    "epistemic_state": {
+      "decision": "PASS_WITH_WARNINGS",
+      "claims": [],
+      "knowns": [
+        "Technical debt: None failing tests"
+      ],
+      "unknowns": [],
+      "assumptions": [],
+      "contradictions": [
+        "Kuzu claim: PASS vs Reality: DEGRADED findings in readiness report"
+      ],
+      "epistemic_debts": [
+        "Unresolved graph persistence (Kuzu)"
+      ],
+      "confidence": 0.6,
+      "evidence_refs": [
+        ".aiwg/reports/readiness_score_calibration_latest.json"
+      ],
+      "warnings": [
+        "Unresolved epistemic debt"
+      ]
+    },
+    "bias_report": {
+      "decision": "PASS",
+      "findings": []
+    },
+    "philosophical_ontology": {
+      "decision": "PASS",
+      "nodes": [
+        {
+          "id": "DUMMIE",
+          "type": "AGENT",
+          "role": "SOVEREIGN"
+        },
+        {
+          "id": "KUZU",
+          "type": "COMPONENT",
+          "state": "DEGRADED"
+        },
+        {
+          "id": "INTENT",
+          "type": "TELEOLOGY",
+          "goal": "run evolution flywheel"
+        }
+      ],
+      "edges": [
+        {
+          "source": "DUMMIE",
+          "target": "KUZU",
+          "type": "DEPENDS_ON"
+        },
+        {
+          "source": "DUMMIE",
+          "target": "INTENT",
+          "type": "ACTS_TOWARDS"
+        }
+      ],
+      "dimensions": [
+        "Being",
+        "Teleology",
+        "Agency"
+      ],
+      "teleology": {
+        "goal": "run evolution flywheel",
+        "impact": "evolution"
+      },
+      "authority_constraints": [
+        "ADVISORY_ONLY"
+      ],
+      "truth_constraints": [
+        "EVIDENCE_BACKED_ONLY"
+      ],
+      "risk_constraints": [
+        "SAFETY_FIRST"
+      ]
+    },
+    "dialectical_review": {
+      "thesis": "Proceed with run evolution flywheel to improve the system.",
+      "antithesis": "Propose delay until core regressions (Kuzu/Tests) are resolved.",
+      "counterexamples": [
+        "Previous failed refactor attempts",
+        "Incomplete test coverage"
+      ],
+      "synthesis": "Proceed with caution using local mock-fallback; prioritize test repair first.",
+      "decision": "proceed"
+    },
+    "evolution_delta": {
+      "belief_changed": "From 'System is ready' to 'System has epistemic debt'",
+      "evidence_source": "readiness_score_calibration_latest.json",
+      "revision_type": "humility_calibration",
+      "next_check_recommended": "repair_kuzu_persistence"
+    },
+    "recommended_next_action": "request_clarification",
+    "dispatch_recommendation": "local",
+    "warnings": []
+  },
+  "quality_gate": {
+    "decision": "FAIL",
+    "quality_score": 25.0,
+    "findings": [
+      {
+        "category": "MODEL",
+        "message": "No relations extracted",
+        "severity": "WARN"
+      },
+      {
+        "category": "ONTOLOGY",
+        "message": "Ontology graph is empty or has zero edges",
+        "severity": "WARN"
+      },
+      {
+        "category": "EPISTEMIC",
+        "message": "Found 1 epistemic debts",
+        "severity": "WARN"
+      },
+      {
+        "category": "EPISTEMIC",
+        "message": "Low epistemic confidence",
+        "severity": "WARN"
+      },
+      {
+        "category": "BIAS",
+        "message": "Overconfidence penalty: Kuzu is DEGRADED",
+        "severity": "WARN"
+      }
+    ],
+    "warnings": [],
+    "epistemic_debt_count": 1,
+    "bias_count": 0
+  },
+  "epistemic_state": {
+    "decision": "PASS_WITH_WARNINGS",
+    "claims": [],
+    "knowns": [
+      "Technical debt: None failing tests"
+    ],
+    "unknowns": [],
+    "assumptions": [],
+    "contradictions": [
+      "Kuzu claim: PASS vs Reality: DEGRADED findings in readiness report"
+    ],
+    "epistemic_debts": [
+      "Unresolved graph persistence (Kuzu)"
+    ],
+    "confidence": 0.6,
+    "evidence_refs": [
+      ".aiwg/reports/readiness_score_calibration_latest.json"
+    ],
+    "warnings": [
+      "Unresolved epistemic debt"
+    ]
+  },
+  "bias_report": {
+    "decision": "PASS",
+    "findings": []
+  },
+  "dialectic": {
+    "thesis": "Proceed with run evolution flywheel to improve the system.",
+    "antithesis": "Propose delay until core regressions (Kuzu/Tests) are resolved.",
+    "counterexamples": [
+      "Previous failed refactor attempts",
+      "Incomplete test coverage"
+    ],
+    "synthesis": "Proceed with caution using local mock-fallback; prioritize test repair first.",
+    "decision": "proceed"
+  },
+  "evolution_delta": {
+    "belief_changed": "From 'System is ready' to 'System has epistemic debt'",
+    "evidence_source": "readiness_score_calibration_latest.json",
+    "revision_type": "humility_calibration",
+    "next_check_recommended": "repair_kuzu_persistence"
+  },
+  "generated_at": "2026-05-16T23:53:56Z"
 }

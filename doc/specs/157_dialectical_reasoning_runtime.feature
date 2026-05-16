@@ -1,2 +1,2 @@
 Feature: Dialectical Reasoning Runtime
-  Scenario: Standard runtime execution
+  Scenario: Standard runtime execution of Dialectical Reasoning Runtime

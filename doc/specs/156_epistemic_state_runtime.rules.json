@@ -1,5 +1,6 @@
 {
+  "spec_id": "156_epistemic_state_runtime",
   "policy": "no_private_cot",
   "evidence_required": true,
-  "epistemic_humility": true
+  "quality_threshold": 80
 }

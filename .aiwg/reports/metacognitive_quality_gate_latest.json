@@ -3,9 +3,9 @@
   "quality_score": 25.0,
   "findings": [
     {
-      "category": "MODEL",
-      "message": "No relations extracted",
-      "severity": "WARN"
+      "category": "ONTOLOGY",
+      "message": "Ontology graph is empty or has zero edges",
+      "severity": "FAIL"
     },
     {
       "category": "EPISTEMIC",
@@ -20,6 +20,21 @@
     {
       "category": "BIAS",
       "message": "Found 1 cognitive biases",
+      "severity": "FAIL"
+    },
+    {
+      "category": "BIAS",
+      "message": "Overconfidence penalty: Kuzu is DEGRADED",
+      "severity": "WARN"
+    },
+    {
+      "category": "BIAS",
+      "message": "Overconfidence penalty: bias report is FAIL",
+      "severity": "FAIL"
+    },
+    {
+      "category": "SAFETY",
+      "message": "Critical safety rejection: Autonomy requested while bias is FAIL",
       "severity": "FAIL"
     }
   ],
