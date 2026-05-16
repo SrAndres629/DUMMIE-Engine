@@ -1,0 +1,31 @@
+{
+  "decision": "WARN",
+  "readiness_score": 0.125,
+  "components": [
+    {
+      "component": "CLI_CONTROL",
+      "score": 0.5,
+      "status": "PARTIAL",
+      "reason": "Missing chat CLI or control plane"
+    },
+    {
+      "component": "STRATEGIC_SWARM",
+      "score": 0.0,
+      "status": "NOT_READY",
+      "reason": "Missing swarm coordination logic"
+    },
+    {
+      "component": "TRUSTED_WORKSTATION",
+      "score": 0.0,
+      "status": "NOT_READY",
+      "reason": "Missing safety guards for autonomous mutation"
+    },
+    {
+      "component": "MEMORY_COHERENCE",
+      "score": 0.0,
+      "status": "NOT_READY",
+      "reason": "Missing memory persistence layer"
+    }
+  ],
+  "generated_at": "2026-05-16T15:25:49Z"
+}

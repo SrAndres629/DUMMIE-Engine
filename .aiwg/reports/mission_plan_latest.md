@@ -1,44 +1,38 @@
-# Mission Plan: MISSION_P27
-**Objective:** Implement a bounded debate and adversarial review runtime that allows role-specific agents to challenge plans, identify contradictions, test assumptions and produce evidence-backed objections before implementation proceeds.
-**Generated at:** 2026-05-16T14:15:21Z
+# Mission Plan: MISSION_PLAN_V1_COMPLETION_REVIEW
+**Objective:** Review all Plan V1 runtime capabilities, identify integration gaps, score real operational gains, and produce the next development backlog for turning DUMMIE into a native strategic partner system.
+**Generated at:** 2026-05-16T14:37:44Z
 
 ## L1 Goal
-### Debate & Adversarial Review Runtime
+### Mentor Review + Integration Backlog
 **Success Conditions:**
-- debate roles defined
-- adversarial objections generated
-- evidence-backed claims required
-- contradiction detection implemented
-- judge/mentor verdict generated
-- no direct mutation authority
-- tests pass
+- all P1-P31 artifacts reviewed
+- runtime capabilities scored
+- simulated vs real capabilities separated
+- security boundaries verified
+- token/context improvements assessed
+- next backlog created
 
 ## L2 Phases
-### L2_1: Produce layers/l2_brain/debate_review_runtime.py
-- **Purpose:** Implement and verify layers/l2_brain/debate_review_runtime.py
+### L2_1: Produce .aiwg/reports/plan_v1_completion_review.md
+- **Purpose:** Implement and verify .aiwg/reports/plan_v1_completion_review.md
 - **Acceptance Criteria:**
-  - File layers/l2_brain/debate_review_runtime.py exists
-  - Validation for layers/l2_brain/debate_review_runtime.py pass
-### L2_2: Produce layers/l2_brain/tests/test_debate_review_runtime.py
-- **Purpose:** Implement and verify layers/l2_brain/tests/test_debate_review_runtime.py
+  - File .aiwg/reports/plan_v1_completion_review.md exists
+  - Validation for .aiwg/reports/plan_v1_completion_review.md pass
+### L2_2: Produce .aiwg/reports/plan_v1_completion_review.json
+- **Purpose:** Implement and verify .aiwg/reports/plan_v1_completion_review.json
 - **Acceptance Criteria:**
-  - File layers/l2_brain/tests/test_debate_review_runtime.py exists
-  - Validation for layers/l2_brain/tests/test_debate_review_runtime.py pass
-### L2_3: Produce .aiwg/reports/plan_v1_phase_27_debate_review_runtime.md
-- **Purpose:** Implement and verify .aiwg/reports/plan_v1_phase_27_debate_review_runtime.md
+  - File .aiwg/reports/plan_v1_completion_review.json exists
+  - Validation for .aiwg/reports/plan_v1_completion_review.json pass
+### L2_3: Produce .aiwg/reports/plan_v1_runtime_capability_scorecard.json
+- **Purpose:** Implement and verify .aiwg/reports/plan_v1_runtime_capability_scorecard.json
 - **Acceptance Criteria:**
-  - File .aiwg/reports/plan_v1_phase_27_debate_review_runtime.md exists
-  - Validation for .aiwg/reports/plan_v1_phase_27_debate_review_runtime.md pass
-### L2_4: Produce .aiwg/reports/plan_v1_phase_27_debate_review_runtime.json
-- **Purpose:** Implement and verify .aiwg/reports/plan_v1_phase_27_debate_review_runtime.json
+  - File .aiwg/reports/plan_v1_runtime_capability_scorecard.json exists
+  - Validation for .aiwg/reports/plan_v1_runtime_capability_scorecard.json pass
+### L2_4: Produce .aiwg/reports/plan_v1_integration_backlog.json
+- **Purpose:** Implement and verify .aiwg/reports/plan_v1_integration_backlog.json
 - **Acceptance Criteria:**
-  - File .aiwg/reports/plan_v1_phase_27_debate_review_runtime.json exists
-  - Validation for .aiwg/reports/plan_v1_phase_27_debate_review_runtime.json pass
-### L2_5: Produce .aiwg/reports/debate_review_latest.json
-- **Purpose:** Implement and verify .aiwg/reports/debate_review_latest.json
-- **Acceptance Criteria:**
-  - File .aiwg/reports/debate_review_latest.json exists
-  - Validation for .aiwg/reports/debate_review_latest.json pass
+  - File .aiwg/reports/plan_v1_integration_backlog.json exists
+  - Validation for .aiwg/reports/plan_v1_integration_backlog.json pass
 
 ## SDD/TDD Requirements
 - SDD: Every change must have a spec triplet

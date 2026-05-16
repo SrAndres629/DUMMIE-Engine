@@ -1,0 +1,13 @@
+{
+  "decision": "WARN",
+  "conflict_count": 1,
+  "conflicts": [
+    {
+      "type": "MISSING_CRITICAL_REPORT",
+      "severity": "HIGH",
+      "description": "Critical report repo_intelligence_latest.json is missing from reports folder",
+      "affected_files": []
+    }
+  ],
+  "generated_at": "2026-05-16T15:25:49Z"
+}

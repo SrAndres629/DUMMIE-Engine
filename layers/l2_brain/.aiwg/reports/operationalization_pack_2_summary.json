@@ -1,0 +1,11 @@
+{
+  "decision": "WARN",
+  "generated_at": "2026-05-16T15:25:49Z",
+  "results": {
+    "truth_scan": "PASS",
+    "lifecycle": "BROKEN",
+    "conflicts": 1,
+    "context_audit": "PASS",
+    "readiness_score": 0.125
+  }
+}

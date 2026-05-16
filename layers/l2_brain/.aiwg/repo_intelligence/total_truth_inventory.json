@@ -1,0 +1,3029 @@
+{
+  "generated_at": "2026-05-16T15:25:49Z",
+  "fingerprints": [
+    {
+      "path": ".python-version",
+      "sha256": "49a506dd32096b010d75205acf3430c9ae6c40351888129499e5a5e487126c93",
+      "size_bytes": 5,
+      "modified_at": "2026-04-18T14:42:20.955760Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "action_graph.py",
+      "sha256": "0d498297dd39f7cc1a0628a6101b35622a24bc28bad829bcc482a6befd2dd7fc",
+      "size_bytes": 1747,
+      "modified_at": "2026-05-09T13:20:31.723435Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "adapters.py",
+      "sha256": "23150e97ff81281109efc4fbcfcd241412a32776f67efc2bd9508ffaf789c9d2",
+      "size_bytes": 1189,
+      "modified_at": "2026-05-15T20:37:17.028029Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "ast_indexer.py",
+      "sha256": "be48d1b9d7b20a42a7d7bdb6f268a4629865ea38667912a08f776b623f246627",
+      "size_bytes": 2713,
+      "modified_at": "2026-04-29T08:04:41.167628Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "auditor_port.py",
+      "sha256": "28e5753b216a8f4c065e71105a5b91b32f27cf2e666563cc98e52ab096085150",
+      "size_bytes": 720,
+      "modified_at": "2026-05-11T11:09:28.517016Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "autonomous_strategic_partner_runtime.py",
+      "sha256": "0323f6b2e4e7c31d980590e2dce4fd8a3558ba68aebabaa7e8348ec871da4674",
+      "size_bytes": 5849,
+      "modified_at": "2026-05-16T14:31:04.415520Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "auto_evolution.py",
+      "sha256": "d6d22c8691d41c0ec9dc30a47db3c4eb97915f85b78fc57e39dc69c1c582419b",
+      "size_bytes": 8491,
+      "modified_at": "2026-05-10T06:48:04.212232Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "branch_memory.py",
+      "sha256": "b3e497cf5cafe753fe33bdff0a79041090d22d0b842efaa6ba4922c665ba63ca",
+      "size_bytes": 688,
+      "modified_at": "2026-04-26T23:25:32.818564Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "business_orchestrator.py",
+      "sha256": "bb2c16ef38be5230c4f115b6e2d28722b931de8110fd635e4826e3338f6dc1c8",
+      "size_bytes": 4100,
+      "modified_at": "2026-05-05T08:15:38.991731Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "causal_replay.py",
+      "sha256": "fe678c261636791dccc5fc21d11f377d84f8de0786319638cb32fcde36869209",
+      "size_bytes": 907,
+      "modified_at": "2026-04-28T23:27:27.835121Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "chaos_regression_testing.py",
+      "sha256": "2df464b8b61f39660b8e069b563f172870e89899244ba125a090de6f66cc56eb",
+      "size_bytes": 4361,
+      "modified_at": "2026-05-16T14:30:52.663088Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "cli_control_plane.py",
+      "sha256": "e40782eca7ab1f5da3f75dea0c5b9748b34144782cabeeba6b4e69e8a40c4b18",
+      "size_bytes": 23782,
+      "modified_at": "2026-05-16T15:01:34.675984Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "cognitive_hooks.py",
+      "sha256": "6e9c567c60c3bc6c2915888199778979bd3e8f9a92234ba33e1e50e8189de169",
+      "size_bytes": 16214,
+      "modified_at": "2026-05-15T07:18:12.331669Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "consensus.py",
+      "sha256": "56aa0ff4a593c3f37b140fe9ad5b968b95afc8b4016681bf14f7c5f8ac9ff8c3",
+      "size_bytes": 490,
+      "modified_at": "2026-04-26T22:59:28.419212Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "context_budget_manager.py",
+      "sha256": "ceedf699e8ccfd0d92f00506806fa5c1148d6a099e53beef8b98528654672d16",
+      "size_bytes": 5246,
+      "modified_at": "2026-05-15T05:15:35.991890Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "context_coverage_auditor.py",
+      "sha256": "11669d0bcd862e8099478640c352ca9c39d3d4b2a520ea3f1adb0d7851080874",
+      "size_bytes": 4335,
+      "modified_at": "2026-05-16T15:25:23.285557Z",
+      "is_tracked": false,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "context_efficiency_benchmark.py",
+      "sha256": "af99069fdb2e90fb691481c40fc8d6c8b8de047ec4c76fd607b4e7b24958039b",
+      "size_bytes": 8260,
+      "modified_at": "2026-05-16T13:24:02.220471Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "context_enforcement_gate.py",
+      "sha256": "43dc0079f754e67a3b40543aeeeb4532c4293d7cd23fcedfc8d736a8911be1e4",
+      "size_bytes": 4631,
+      "modified_at": "2026-05-16T15:00:30.544149Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "context_package.py",
+      "sha256": "922e52a9a9402d2e5308736530524b6dd660d7395b80134160d22d7d3c17d1f3",
+      "size_bytes": 11302,
+      "modified_at": "2026-05-16T13:11:12.999449Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "context_quant_runtime.py",
+      "sha256": "d77a82cb629c7eae2bc93cc829040faf4b31131fdf34b0929a3888e4b3fe15c7",
+      "size_bytes": 5853,
+      "modified_at": "2026-05-16T13:11:42.884467Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "context_value_scorer.py",
+      "sha256": "5bfd3622250100163c907bf04c1e5a36aa8ad7b89fbd97c59fa67348725d170e",
+      "size_bytes": 4156,
+      "modified_at": "2026-05-16T13:10:18.765846Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "cypher_codec.py",
+      "sha256": "0bb29bf3e78e97cafe0df196c7f880c89eb9e06815d8fbcbbce03eb73dfa69f0",
+      "size_bytes": 1666,
+      "modified_at": "2026-05-05T09:07:53.907768Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "daemon.py",
+      "sha256": "e253d283f524b0d280c5321419e6a8059694823fe8cd45388ba68260bc1c7add",
+      "size_bytes": 28981,
+      "modified_at": "2026-05-15T20:33:19.397418Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "daemon_diagnostic.py",
+      "sha256": "5af0ebb78de152934931ef89d26ba144d4ab57b28d77fecc3ba917eb74cda864",
+      "size_bytes": 4288,
+      "modified_at": "2026-05-11T11:09:19.399650Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "daemon_outcome.py",
+      "sha256": "16933b52d380db2a80733622516f152e41e49d4e7b2a12813e0c95a847b8af7f",
+      "size_bytes": 4459,
+      "modified_at": "2026-05-15T07:18:47.955279Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "debate_review_runtime.py",
+      "sha256": "eadb10abb81afa467de07853e055f6a9a84dba7c34a0b9178f7159a4c532f528",
+      "size_bytes": 8597,
+      "modified_at": "2026-05-16T14:21:49.376428Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "operationalization_pack_2_runner.py",
+      "sha256": "d78923443a3e82888e4384e1adb49385c4a91e1ca275e86b13d59d587ef9c0e3",
+      "size_bytes": 2738,
+      "modified_at": "2026-05-16T15:25:40.798499Z",
+      "is_tracked": false,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "operationalization_review.py",
+      "sha256": "a3bf88f6751e4bc7923c83084a0af7dfa9607d94e7d6b39221286fb84cfd4a23",
+      "size_bytes": 3283,
+      "modified_at": "2026-05-16T15:01:14.540630Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "operational_truth.py",
+      "sha256": "6b834b35244e570bfbbb4daee8b41bd0b60d36f7aad3eba172cc24c24b15c825",
+      "size_bytes": 1483,
+      "modified_at": "2026-05-09T13:59:37.418284Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "operational_truth_collectors.py",
+      "sha256": "894fee830979afa8bb209748e337fbd63ab136883fabc844ca2430f4bbec00b7",
+      "size_bytes": 9918,
+      "modified_at": "2026-05-09T14:02:02.243604Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "orchestrator.py",
+      "sha256": "36081d1d1449e388038708af4ec9006ceb93be78467b68edd295fb926c11bfa3",
+      "size_bytes": 8624,
+      "modified_at": "2026-05-11T11:14:20.826637Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "outcome_evaluator.py",
+      "sha256": "87f775c160aa37d7c146a9de3cfc6b7194f6ee41460e1595f21c8fa1480887f2",
+      "size_bytes": 16201,
+      "modified_at": "2026-05-15T07:18:57.455454Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "patch_transaction.py",
+      "sha256": "7fec7774997e8093d99c2b292c367a0b79f5f9637fb7b2f749d7f1dc9799c851",
+      "size_bytes": 2604,
+      "modified_at": "2026-05-05T10:09:59.759493Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "patch_transaction_manager.py",
+      "sha256": "4ca7184de5128531e99d2b7208d6d768fd4a30a60425dbd94cfc48a1a728cc69",
+      "size_bytes": 3616,
+      "modified_at": "2026-05-05T10:10:10.791825Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "phase_ledger.py",
+      "sha256": "7d17d365f80a9c598796fec62ce9916dfaf5bbe9e7bff18190b5d3082aba3bb0",
+      "size_bytes": 19709,
+      "modified_at": "2026-05-15T05:31:38.165498Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "plan_v1_completion_review.py",
+      "sha256": "163f9c3b24bd411b6b2418478511e92f50eff03bd33ce477621dab34455f42e7",
+      "size_bytes": 6888,
+      "modified_at": "2026-05-16T14:49:39.155930Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "ports.py",
+      "sha256": "41e33d017a4493d27484120d30bebed88ae3d98663c64881ceed57b7d17b72ca",
+      "size_bytes": 492,
+      "modified_at": "2026-04-28T07:04:51.559011Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "post_mortem_agent.py",
+      "sha256": "d79637b3dc92f45bb2205baaa04e6669dc1ee97e0401298bae8ab83710a61711",
+      "size_bytes": 3779,
+      "modified_at": "2026-05-11T09:34:20.385993Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "preflight.py",
+      "sha256": "24ae6735369a76a064d98ff41b033966a092c70ef79efb737136b3effa1833fc",
+      "size_bytes": 437,
+      "modified_at": "2026-04-26T22:59:28.418212Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "prompt_cache_ledger.py",
+      "sha256": "729c39225e839b2d199f76e0ade3034537575045490938d93bc459b1aa273c77",
+      "size_bytes": 8636,
+      "modified_at": "2026-05-16T13:22:41.049586Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "prompt_frame_builder.py",
+      "sha256": "21c7453b978d16a7254e5ce24fe026f8bd741a20b2370fa2f942c533bcc442bb",
+      "size_bytes": 9456,
+      "modified_at": "2026-05-16T13:21:58.864040Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "prompt_preprocessor.py",
+      "sha256": "f9ca9fcbbb5cea492df0c5bb11051f6393829660a809eae1ec07d0e7601e5244",
+      "size_bytes": 14353,
+      "modified_at": "2026-05-11T10:51:15.543657Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "prompt_to_mission.py",
+      "sha256": "2fd3339f1505348ae60151228900f124483068211345a4f258a4cd6d246982a2",
+      "size_bytes": 5442,
+      "modified_at": "2026-05-05T09:42:36.265236Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "pyproject.toml",
+      "sha256": "b59c9b3ab5844d3ace1bd97259b934c8e106d70942d03d49d29e6ba5143a945e",
+      "size_bytes": 828,
+      "modified_at": "2026-05-15T20:50:55.845383Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "config"
+    },
+    {
+      "path": "README.md",
+      "sha256": "5c409432baded36f2297d605078d00de78adb49070b5ddec716556197ac05f6e",
+      "size_bytes": 998,
+      "modified_at": "2026-04-24T20:16:26.158707Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "doc"
+    },
+    {
+      "path": "rehydration.py",
+      "sha256": "04f81264c8c5f592c1e9718b4d02ef7a02776897e44fa94b417ec2ed51aeb642",
+      "size_bytes": 1194,
+      "modified_at": "2026-04-26T22:59:28.419212Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "repo_intelligence_query.py",
+      "sha256": "c59d569569a7e149d3e1b179df562a15d979c391e1a149fc313c2e6aa3743ceb",
+      "size_bytes": 3292,
+      "modified_at": "2026-05-16T15:00:46.904013Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "repo_intelligence_runtime.py",
+      "sha256": "ecfe9bfa220565acc2183cbb39787ed59e19ca719afc46a72b4c9abd367061b7",
+      "size_bytes": 6255,
+      "modified_at": "2026-05-16T14:48:13.879676Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "repo_probe_runner.py",
+      "sha256": "8a6cdf27d9dbcccb631a2e03aaf082f7b073212c5bc6fe9790c9cdff924b59bc",
+      "size_bytes": 8118,
+      "modified_at": "2026-05-16T13:57:58.769260Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "resource_governor.py",
+      "sha256": "070bc4fabfd0081d13b99336cd575f3301755408520f8442c88f250c89026ae7",
+      "size_bytes": 2603,
+      "modified_at": "2026-05-15T08:03:15.827595Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "restart_integration_gate.py",
+      "sha256": "563ae05b8b34cf085c4f3a9fab47ce2148186ba853fa578c08f7c99df24dbfb3",
+      "size_bytes": 8177,
+      "modified_at": "2026-05-16T13:23:21.913740Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "runtime_guards.py",
+      "sha256": "6e0a765b9fb95d7049615dd0f389f40efc31f3fe44d5d70cdf2066ed02ce85e3",
+      "size_bytes": 997,
+      "modified_at": "2026-04-26T23:18:07.682690Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "safe_fallbacks.py",
+      "sha256": "63976ec2b9556be8692bfd1960f3958c37dc472775605beaa3a255d7ae31dd57",
+      "size_bytes": 1081,
+      "modified_at": "2026-05-05T09:39:57.248663Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "dummie_chat_cli.py",
+      "sha256": "e7b7f45f5ecb0efc3b3ff6e8cfbec14143e973272522369f50f718c1e2c16307",
+      "size_bytes": 8286,
+      "modified_at": "2026-05-16T15:01:02.787213Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "embedding_adapter.py",
+      "sha256": "7b44e1a6186cde8de036d3f08ce038de73066967f2c4529d07236344ee19a61e",
+      "size_bytes": 5423,
+      "modified_at": "2026-05-16T13:51:32.465122Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "embedding_provider.py",
+      "sha256": "da254d38e36a1aec278c8583cbbccbb4ed7c839bd9358d5248766029005236ad",
+      "size_bytes": 1746,
+      "modified_at": "2026-04-29T06:16:29.198692Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "entity_voice.py",
+      "sha256": "e76f69a9152918f78bc8e1cacce2080fd73f3c027d46119b634cb4331189ed7c",
+      "size_bytes": 4226,
+      "modified_at": "2026-05-09T13:57:49.996874Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "entropy_governor.py",
+      "sha256": "a1cd413043eb6e812b976c86d3be484ac5658c92e2573f059558ac1e68ec0438",
+      "size_bytes": 1055,
+      "modified_at": "2026-04-26T22:59:28.418212Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "event_bus.py",
+      "sha256": "aa95b96a41c11670317cb47f6c0adcd133cfcaeb619b6ae2aa14ea51187c20fa",
+      "size_bytes": 2850,
+      "modified_at": "2026-05-09T12:30:33.130185Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "evolution_feedback_loop.py",
+      "sha256": "6c371754ce1f95aae4e3c077a89cd903d917b3a8584241632b119a3eb8f70195",
+      "size_bytes": 4660,
+      "modified_at": "2026-05-10T06:47:57.307349Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "evolution_flywheel_runtime.py",
+      "sha256": "4a9574746c17424a0c5a40cc2dd5174085efc866976bdbd153510c3a4e76b992",
+      "size_bytes": 7959,
+      "modified_at": "2026-05-16T13:24:40.019752Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "expansion_policy.py",
+      "sha256": "ff2758e332b5a2ca3a4be28d0c42864bb138e0de51b5c332f2fdee21130a8c73",
+      "size_bytes": 2046,
+      "modified_at": "2026-05-09T14:05:43.189169Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "file_dossier_generator.py",
+      "sha256": "b55bf0359432bae61e26cea39c9e53aa5de844c317642b6446154e85865a08d3",
+      "size_bytes": 4904,
+      "modified_at": "2026-05-16T14:49:01.478650Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "folder_dossier_generator.py",
+      "sha256": "0f8adbd91d162401a918f9bfb3e23f2ff647b72447dbf50994d5173c4001752e",
+      "size_bytes": 3986,
+      "modified_at": "2026-05-16T14:48:45.187346Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "formal_bridge.py",
+      "sha256": "c97922833335ad01aee16d8c795b71eb7a82cce2c1b338b72c24a0e37214c20a",
+      "size_bytes": 667,
+      "modified_at": "2026-04-26T23:25:32.817564Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "freshness_ledger.py",
+      "sha256": "c713ff5f39cf7d2ac9443ebc4edbaa442e12c7577077fb1d97bbe790ea398b3f",
+      "size_bytes": 10070,
+      "modified_at": "2026-05-16T13:09:26.485733Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "gateway_contract.py",
+      "sha256": "719cc9fbc2c426daa19cde4b7cbe69ed2c4121541d1ef50570f48a0caac44432",
+      "size_bytes": 3352,
+      "modified_at": "2026-05-05T09:41:33.056421Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "golden_path.py",
+      "sha256": "1610dece169a952e1cbf5326a9642f4907ed89f14eb70577179734568f75f38f",
+      "size_bytes": 788,
+      "modified_at": "2026-04-26T23:25:32.817564Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "graph_sync_ledger.py",
+      "sha256": "38e58337b843e181124072f778074cfe05930ea6d2705fe3285eee78ba163e64",
+      "size_bytes": 3947,
+      "modified_at": "2026-05-15T06:53:40.597208Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "graph_sync_plan.py",
+      "sha256": "3cefa8c51df8c63bbd5cbaf24845402a9a77e3afa49c19bb39b8d40b993770bc",
+      "size_bytes": 3762,
+      "modified_at": "2026-05-15T06:48:35.298731Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "human_intent.py",
+      "sha256": "d7475641588444233afca58ad1a95c28d1879a02a0adc9f82a578185aa2de698",
+      "size_bytes": 869,
+      "modified_at": "2026-04-26T23:25:32.818564Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "implementation_plan.md",
+      "sha256": "ed1f30d80bcc622dc84eba12c0a1bb37dec1d77082b713ab50867ef6394e5490",
+      "size_bytes": 2097,
+      "modified_at": "2026-04-21T05:18:46.886353Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "doc"
+    },
+    {
+      "path": "knowledge_ports.py",
+      "sha256": "b8808c28e85f24b882f3f0cbd6b88107356dd3412d63675b035a12822d6f09d5",
+      "size_bytes": 1170,
+      "modified_at": "2026-04-26T22:59:28.418212Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "kuzu_graph_sync_adapter.py",
+      "sha256": "b88893c3ae8f3222d67e1c65f923bfbc80f0034c41eef7dd0c0954013784bfc8",
+      "size_bytes": 2915,
+      "modified_at": "2026-05-15T06:51:51.953438Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "learning_episode.py",
+      "sha256": "e18bef37e3998d84ac1051c188f71df78227c416aba422ce488d1d8900aab0ff",
+      "size_bytes": 3886,
+      "modified_at": "2026-05-15T05:54:36.668564Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "lifecycle_integration_mapper.py",
+      "sha256": "44f8dd1d520547bc94988d1802cf285af438808309c504de422aa7df5320b175",
+      "size_bytes": 4202,
+      "modified_at": "2026-05-16T15:25:03.979154Z",
+      "is_tracked": false,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "local_context_compressor.py",
+      "sha256": "e0d89b296caf7485cb5877828b2847eb183b83aa6a24375af50355d6afd9e333",
+      "size_bytes": 9002,
+      "modified_at": "2026-05-16T13:43:35.431813Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "self_healing_planner.py",
+      "sha256": "d349d3cd1699ecbb4978a8941f1065aadabaa037eadc7268b0f5755cc6b9c207",
+      "size_bytes": 1688,
+      "modified_at": "2026-05-05T10:10:28.018343Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "self_optimization.py",
+      "sha256": "de4dcb82cd99bc4ea33c08fec7a7bdfa2441685d0f8070c5a2c4b6e0a947747a",
+      "size_bytes": 872,
+      "modified_at": "2026-04-29T07:55:45.328910Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "self_worktree_orchestrator.py",
+      "sha256": "e0713bc6ca124064539d0e88773c12f42f63661194dfc5b6b10e3540f260954b",
+      "size_bytes": 12331,
+      "modified_at": "2026-05-05T09:17:53.852162Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "semantic_cache.py",
+      "sha256": "70d4b361c06b21c6b3775fd10284522e07b44ec48a13a6185a14c16602595522",
+      "size_bytes": 2278,
+      "modified_at": "2026-05-09T13:28:23.804769Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "semantic_graph_rag.py",
+      "sha256": "a203583b21e3fb71601a83219029e77018cd0ba9f46ec7cab4931bbf925d55d4",
+      "size_bytes": 871,
+      "modified_at": "2026-04-26T23:25:32.817564Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "semantic_retrieval_runtime.py",
+      "sha256": "f08f36baaac1a4ffde31ca14a449d72bf406955d269e10753008a109320280bd",
+      "size_bytes": 4601,
+      "modified_at": "2026-05-15T20:31:13.384018Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "sensor_first_guard.py",
+      "sha256": "ccecc3020fdf07a0d7fba6ca9ddec32290e9424fbd5951663ae93d4be94534b3",
+      "size_bytes": 2649,
+      "modified_at": "2026-05-15T07:20:37.044405Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "session_store.py",
+      "sha256": "46758ce51bab25c92a5bd487ee0fdaf2d60659f0fbb62491f82e4193d5dd5db4",
+      "size_bytes": 12544,
+      "modified_at": "2026-05-15T05:55:41.744961Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "skill_binder.py",
+      "sha256": "f175d12e03e103022ec82bcc9c86b8734d1fcb176ec4bc229aa8011ba5ec5a82",
+      "size_bytes": 14936,
+      "modified_at": "2026-04-24T19:45:48.948300Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "socraticode_gateway_adapter.py",
+      "sha256": "6334b24b451d9e490a92b7ecf358e98801bf5fcb9e44d114562c7bc401b818f4",
+      "size_bytes": 5739,
+      "modified_at": "2026-05-15T07:20:37.042701Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "source_of_truth_conflict_detector.py",
+      "sha256": "17614499dae233423b9f858b7ad797443ff2fad947607c74b3d7d9235bd1fb0f",
+      "size_bytes": 3523,
+      "modified_at": "2026-05-16T15:25:12.226579Z",
+      "is_tracked": false,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "sovereign_runtime_readiness.py",
+      "sha256": "3d6f666f412edc47e20513e8ed8a140189de87986a1975976062257a894cf991",
+      "size_bytes": 3745,
+      "modified_at": "2026-05-16T15:25:33.232512Z",
+      "is_tracked": false,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "spec_frontmatter_repair.py",
+      "sha256": "921e7b87d8a1a8b0f3793851191e68159a9215971a53562b885c1c88fb69499e",
+      "size_bytes": 2063,
+      "modified_at": "2026-05-16T15:15:18.024822Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "stale_memory_detector.py",
+      "sha256": "1562f033f842311ce2cde728704deb38c22629026afd7c4d4afcd31cce702765",
+      "size_bytes": 6202,
+      "modified_at": "2026-05-16T13:09:55.802676Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "state_coherence_guard.py",
+      "sha256": "8bb33caeeac745e35c153fa3420fb48846b31d43a565a95be02e8c3ed76e797c",
+      "size_bytes": 5817,
+      "modified_at": "2026-05-16T13:51:07.829189Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "strategic_partner_swarm.py",
+      "sha256": "8a6127090a6b0edbcc1c2d9f1ae10b036aee9b5c5e54c627954d373be4471364",
+      "size_bytes": 7692,
+      "modified_at": "2026-05-16T14:07:14.499557Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "local_reasoning.py",
+      "sha256": "f58876024964f9553bbac67c64c401f2740151c81661e26c263278f69bdb32a3",
+      "size_bytes": 2851,
+      "modified_at": "2026-05-11T11:17:01.626566Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "observability.py",
+      "sha256": "e811ca4d813465a0fa6de3e106972eb13673bbbe50eb8e2820b816a2b53b8632",
+      "size_bytes": 658,
+      "modified_at": "2026-04-24T17:18:48.145983Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "sdd_governance.py",
+      "sha256": "99dfd32963d3df927e43dde634f5dd7558abd27ae448c0e22e5ea6b767116a77",
+      "size_bytes": 9148,
+      "modified_at": "2026-04-26T23:54:32.997536Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "supervisor_protocol.py",
+      "sha256": "190ab4271a9ca609a3289fa296b8d9637455ec5cf2d7439b48d4729ec8cdea61",
+      "size_bytes": 2206,
+      "modified_at": "2026-05-09T13:12:02.864310Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "long_running_mission.py",
+      "sha256": "63df155a3c50c81fe0645b9d1ca5ee16e311b2096905a638b7fea9e41eb9306c",
+      "size_bytes": 3872,
+      "modified_at": "2026-05-15T04:48:41.146272Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "memory_graph_runtime.py",
+      "sha256": "36be73a14496ffae68e4d4670d5e905dcd33fa022a4b08c5872fd1e711045aaa",
+      "size_bytes": 6960,
+      "modified_at": "2026-05-15T06:49:25.643386Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "memory_refs.py",
+      "sha256": "b0022d930a992ab5808b46864dffdbd848eae5ea8d54f57061ed3d9c0f28b83d",
+      "size_bytes": 2385,
+      "modified_at": "2026-05-15T05:58:49.665364Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "metagateway_adapter.py",
+      "sha256": "34aac34cf4517a77985d472a5aa62fad7472e94cc441dec07f4dde391ac7b644",
+      "size_bytes": 3384,
+      "modified_at": "2026-05-11T11:17:35.733067Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "metagateway_benchmark.py",
+      "sha256": "543eed92be3081f894e6ba5d27a435297c8e092f847e06ef59fabddb5b7b6fa4",
+      "size_bytes": 2799,
+      "modified_at": "2026-05-11T11:17:24.085243Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "metagateway_policy.py",
+      "sha256": "82a0945a0148aa7feed6521682b76f05e68ad7e8465423f00636324b91417816",
+      "size_bytes": 1933,
+      "modified_at": "2026-05-11T10:59:25.261235Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "metagateway_runtime_meter.py",
+      "sha256": "7a3dd6f821563c15f751b5adefd6a6b9708d36f9f2cde705f1fa4a3ad5470a6c",
+      "size_bytes": 3273,
+      "modified_at": "2026-05-11T11:24:43.812216Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "mission_autonomy_contract.py",
+      "sha256": "0fed3dad2829e2e677d991c04dc10ef1bb77ec58fc841862627e001bbe9f142e",
+      "size_bytes": 7540,
+      "modified_at": "2026-05-16T14:22:05.954749Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "mission_coherence_guard.py",
+      "sha256": "0d51c1cc2b12c76d60f7555db302aff31585c80a901c349be2cc998d9d0ec5bb",
+      "size_bytes": 5637,
+      "modified_at": "2026-05-16T14:06:47.520454Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "mission_orchestrator_dag.py",
+      "sha256": "d48c6afe3de797c99c2bf9d97e0b3c76c98f929e4c31d14c026b8754e057dcad",
+      "size_bytes": 5422,
+      "modified_at": "2026-05-16T13:58:26.183147Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "mission_planner.py",
+      "sha256": "c693a57bb1b6fbeb79a49437d99e90e352d806830deb60b22069cc222ca0444f",
+      "size_bytes": 8322,
+      "modified_at": "2026-05-16T14:13:55.606465Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "mission_runtime_contract.py",
+      "sha256": "dd5752b1f794058cb043affa5d12aa2ce3505274a7c463b5434873ca6d09cc3f",
+      "size_bytes": 1842,
+      "modified_at": "2026-05-15T04:29:43.060461Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "mission_workbench.py",
+      "sha256": "f759fd97474f5aa5b01a46eb04b6f0dbaf05a11371596173d6d51405492534bf",
+      "size_bytes": 12645,
+      "modified_at": "2026-05-15T05:44:44.140649Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "models.py",
+      "sha256": "97a20179c2809068b4b9000f07c8255bac3423cc8084842f26a569d5cda3d797",
+      "size_bytes": 10672,
+      "modified_at": "2026-05-15T20:33:52.694579Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "model_discovery.py",
+      "sha256": "5bcacae43262fc4f1e980f4a43952eb709aad84ee36d3b823022db550a3704a4",
+      "size_bytes": 4394,
+      "modified_at": "2026-05-09T13:25:08.409404Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "model_executor.py",
+      "sha256": "f610207aa4df83264766a0b6d1ba9e3de5ed7510b43e17ab2b5dfc38a0c30892",
+      "size_bytes": 5146,
+      "modified_at": "2026-05-11T11:09:37.275050Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "model_router.py",
+      "sha256": "4c6e4f4d444615957e1af1a2e60eaa3a26cbf237aca1bc978eabba494ad1c10a",
+      "size_bytes": 16977,
+      "modified_at": "2026-05-15T07:18:23.411133Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "nervous_pulse.py",
+      "sha256": "bfcb05fc21ea95c05537bf221bce053aa5fe077c5b8800dc96bcd4b4f29e12bf",
+      "size_bytes": 1148,
+      "modified_at": "2026-04-26T23:25:32.817564Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "neuron_ledger.py",
+      "sha256": "ec8eaf12012e09bb85146e9241683c57afcb639c76db0ac4ba1bbdbec4b9e038",
+      "size_bytes": 1986,
+      "modified_at": "2026-05-09T13:04:01.880448Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "technical_debt_intelligence.py",
+      "sha256": "92ce78a04fb9abbae96336b5ef77f647720907db4b711a3b2cb43717f619f167",
+      "size_bytes": 6338,
+      "modified_at": "2026-05-16T14:49:20.255826Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "token_cost_ledger.py",
+      "sha256": "2cedd6d262ef0d05fed7a9fb9812be53b06146e4a4e082df7fd909b5c988a9d6",
+      "size_bytes": 8571,
+      "modified_at": "2026-05-15T05:15:05.408593Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "token_ledger.py",
+      "sha256": "ac2793a76ac7d01af941af1f04465734c33555f6b73eb882aa1d98296060befd",
+      "size_bytes": 2960,
+      "modified_at": "2026-05-09T12:55:45.762468Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "total_project_truth_scan.py",
+      "sha256": "a543a9562ea972df7c6803b65445392eee0756ba15acd36fcc9182787a796d76",
+      "size_bytes": 5935,
+      "modified_at": "2026-05-16T15:24:46.261410Z",
+      "is_tracked": false,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "trusted_workstation_mode.py",
+      "sha256": "0c94ae9e969723c32b2df9606495a6f9cba1ae24a9503f7a8a676596e9c41f47",
+      "size_bytes": 6405,
+      "modified_at": "2026-05-16T14:30:40.439172Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tui_process_monitor.py",
+      "sha256": "73da3579b4b8382b9da0955d01a9397b1fb6a4d3914dd017e20588b4ec79a145",
+      "size_bytes": 5667,
+      "modified_at": "2026-05-16T13:39:56.618882Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "uv.lock",
+      "sha256": "8ea82de67504db4d88d5dc0c64aedcf9854fd2b744b39d1bc0c1afe6cc4b9ddb",
+      "size_bytes": 515298,
+      "modified_at": "2026-05-15T20:50:55.933434Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "vault_context_resolver.py",
+      "sha256": "369dba918330f6f7009990bde17f0b4108c228b11fd038b3582878c6c41c1b76",
+      "size_bytes": 4194,
+      "modified_at": "2026-05-15T20:31:09.087156Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "vault_curator.py",
+      "sha256": "ee76a7089e749d83dd1ad483ce12801f4a21cd055cf4679cc38db61d0914e1c6",
+      "size_bytes": 7957,
+      "modified_at": "2026-05-15T05:45:54.262899Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "vault_embedding_index.py",
+      "sha256": "1211ce9279c7cd61fee97113dc76e3a2b1e7af2bb0d57c043cfacbdda3191d95",
+      "size_bytes": 5832,
+      "modified_at": "2026-05-15T06:51:08.323476Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "witness.py",
+      "sha256": "6a69f5ff373502ad82568965b11283d00bf9623755cf27ea3588a197209ded4b",
+      "size_bytes": 788,
+      "modified_at": "2026-04-28T23:29:12.889528Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "workbench_vault_runtime.py",
+      "sha256": "91d3ee05e5ba71bef7a42570fcec4506d11a816dc8e3d8b4f30768f7dcd27732",
+      "size_bytes": 4159,
+      "modified_at": "2026-05-15T05:57:16.014387Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "__init__.py",
+      "sha256": "ddf84f90cabdcb8f63a46036bc41c93120e03427ba722b85ecb4c62f5170b044",
+      "size_bytes": 885,
+      "modified_at": "2026-05-15T20:37:49.784664Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": ".aiwg/identity.json",
+      "sha256": "4a95bcfc9bdb6885dd3e2844f9029f042d58f134c76e89b788863fed0bb5d1de",
+      "size_bytes": 63,
+      "modified_at": "2026-04-22T10:27:45.126950Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "config"
+    },
+    {
+      "path": "cognition/cold_planner.py",
+      "sha256": "8f7b2e9ad17c0a277d1f47794870299ff695a546a674f66f76bf3ae6053d3a67",
+      "size_bytes": 2732,
+      "modified_at": "2026-05-05T08:30:31.643611Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "cognition/epistemic_judge.py",
+      "sha256": "b2627ddaa6092acd9e29cfa75e443a34feaec2a8ee4e03a44a9def1988dccf17",
+      "size_bytes": 3760,
+      "modified_at": "2026-05-05T09:12:13.580743Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "cognition/pattern_miner.py",
+      "sha256": "232ce8e3e3e17ffc2dc1a7425c886f5d9519ac23f9bbf0e481202f81ea601fa7",
+      "size_bytes": 258,
+      "modified_at": "2026-05-05T09:49:27.032737Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "cognition/pattern_miner_v2.py",
+      "sha256": "b38288951277edc566ae5be882dd9b72abf5755e77a249d9c56ea0fd2e51b75d",
+      "size_bytes": 15894,
+      "modified_at": "2026-05-05T09:42:10.151486Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "cognition/persona_guardian.py",
+      "sha256": "4bb7d8f1b5f9ee30ad28f85b02efec8e36f2b4371dcab3abc12bbd6ff57dc711",
+      "size_bytes": 2447,
+      "modified_at": "2026-05-05T08:14:11.445328Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "infrastructure/semantic_adapters.py",
+      "sha256": "9d2890aeda67eb6021e1aafeb73c3cd717fa8250d6b65e837bd6956665a27fbe",
+      "size_bytes": 2782,
+      "modified_at": "2026-05-15T20:31:36.549455Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "sdk/client.py",
+      "sha256": "5dbb40eef41631de20992fc010dc96fe30936e35f5e3ac38ebccaff197ab35bf",
+      "size_bytes": 427,
+      "modified_at": "2026-05-11T09:22:00.161208Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "sdk/sdk_core_api_pb2.py",
+      "sha256": "4bafcd05161289080411992f51e3323f940ec336cfe074ba2017be7fe18c8594",
+      "size_bytes": 2247,
+      "modified_at": "2026-05-11T09:22:00.161484Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "sdk/sdk_core_api_pb2_grpc.py",
+      "sha256": "a3982061bab79f32e061824d5ddf0cdbfdd146c69867e361f7830fe768fb6656",
+      "size_bytes": 5282,
+      "modified_at": "2026-05-11T09:22:00.161608Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "sdk/session.py",
+      "sha256": "0f255aeebc8243be31ce0990cd8de586cf25afba942d4d975e7afe446a0785a6",
+      "size_bytes": 699,
+      "modified_at": "2026-05-11T09:22:00.161698Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "sdk/__init__.py",
+      "sha256": "39829df3066ea13dc715116c2c9b6387f247314bae58b318a2003cf7bc51f5c4",
+      "size_bytes": 171,
+      "modified_at": "2026-05-11T09:22:00.161111Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "domain/counterfactual_service.py",
+      "sha256": "335562465b1b614a6b29c589c33be4768c8250e232f61c29eac2d4985e458222",
+      "size_bytes": 1672,
+      "modified_at": "2026-04-29T00:07:47.552965Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "domain/dtos.py",
+      "sha256": "bfc57557c986f541b20c729186f5e2a1d193e211f9567fe68b3294049a33dd5f",
+      "size_bytes": 1389,
+      "modified_at": "2026-04-28T23:34:18.622719Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "domain/embedding_contract.py",
+      "sha256": "517455d245d1e1768fe17a195fc4af4b125a437c19d5c853f4a8baa875a3b21b",
+      "size_bytes": 1199,
+      "modified_at": "2026-05-15T08:12:53.101779Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "domain/hypothesis_service.py",
+      "sha256": "610aab05fc9a0bc25cdff22289d622b6234bfa459fff34ba0646977a41e98979",
+      "size_bytes": 2213,
+      "modified_at": "2026-04-29T00:07:47.551965Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "domain/reasoning_logic.py",
+      "sha256": "cda6698b033505cdefea1996d5ba8ef626fe5ecd4f48be988b0481224746224b",
+      "size_bytes": 2981,
+      "modified_at": "2026-05-11T11:16:49.060738Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "domain/retrieval_service.py",
+      "sha256": "2f8db9a38483f698a6d9ba502218d82765b91531adcde291ea1565b2e982e730",
+      "size_bytes": 7610,
+      "modified_at": "2026-04-28T23:49:40.180940Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "domain/semantic_ports.py",
+      "sha256": "85f867ad12f277db01557b13a77dd2f657cc73b8f4b697222ae5f2cc96f536f7",
+      "size_bytes": 586,
+      "modified_at": "2026-05-15T08:16:37.002310Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "domain/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0,
+      "modified_at": "2026-05-11T11:09:49.700451Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "metacognition/contracts.py",
+      "sha256": "3d1b3d6d60a44316943f3064080520e49ba4a71a9b5557e04f57acb69d6f4875",
+      "size_bytes": 927,
+      "modified_at": "2026-05-11T11:10:14.773057Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "metacognition/deliberation_hooks.py",
+      "sha256": "d144a7cf8f4ba31876fc63125ff38d5be024e96935e1aae2624cd2c9ba06833e",
+      "size_bytes": 2692,
+      "modified_at": "2026-05-11T11:10:14.776136Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "metacognition/input_hooks.py",
+      "sha256": "475760d5c9368641d5c6f60dafcc374aa398b812dea21b8aa729d9f7fa141bd2",
+      "size_bytes": 3679,
+      "modified_at": "2026-05-11T11:10:14.780339Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "metacognition/output_hooks.py",
+      "sha256": "0f7079acb689cdcf30fa3a03e01ad7f353d71e53f42c0665c6f35f22dbad6f28",
+      "size_bytes": 793,
+      "modified_at": "2026-05-11T11:10:14.783773Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "metacognition/pipeline.py",
+      "sha256": "fe5da0ebf2430f750dcdd053db498f5201ddbef9e199f86870afb93801bb8a76",
+      "size_bytes": 2251,
+      "modified_at": "2026-05-11T11:10:14.786862Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "metacognition/reasoning_hooks.py",
+      "sha256": "a52ba1da51d5fba6a20f2939cd6a6f1a80137824ffbb672d73788ab6ffb5cb65",
+      "size_bytes": 1868,
+      "modified_at": "2026-05-11T11:10:14.790196Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "metacognition/semantic_hooks.py",
+      "sha256": "3086c6259b60c704e61afd89d266946accb7e60dbda94849dcf0e709dfc80129",
+      "size_bytes": 1919,
+      "modified_at": "2026-05-11T11:17:43.194473Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "metacognition/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0,
+      "modified_at": "2026-05-11T11:10:14.777228Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/conftest.py",
+      "sha256": "83c83a724710c1818cd1f77ab92e4d75583ed7984f14f07f4ebef68c0773d0b5",
+      "size_bytes": 258,
+      "modified_at": "2026-04-29T00:07:47.551965Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_adapters_cypher_injection.py",
+      "sha256": "eeb3f64a4b8b3b63ca50f90be3c06754a78eb3dd2e12f073fd66ed3b1169d01b",
+      "size_bytes": 1707,
+      "modified_at": "2026-05-11T09:34:08.362902Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_agent_office_models.py",
+      "sha256": "e8d4ada9dc2e4eee13da7da3307e95fbe0c8b071647a46b0a8e9d586196fe40c",
+      "size_bytes": 3417,
+      "modified_at": "2026-05-11T09:22:41.738398Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_architectural_boundaries.py",
+      "sha256": "74ad377b268b5df7aabe6a165ad0f579e6e2c835fc6495ff60101cf86d6b4814",
+      "size_bytes": 4112,
+      "modified_at": "2026-04-29T08:22:47.146169Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_authority_classification.py",
+      "sha256": "93062f238c293928045571a865b1e64b7af7d4f0213e54610ea1b96ce4e3abc7",
+      "size_bytes": 3853,
+      "modified_at": "2026-05-11T12:07:43.348409Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_autonomous_strategic_partner_runtime.py",
+      "sha256": "dc57be5d7c86510515bdb0c03bc0c43ac32c6b34677bd5331e60081be2efa1c8",
+      "size_bytes": 1964,
+      "modified_at": "2026-05-16T14:34:30.650808Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_auto_evolution.py",
+      "sha256": "9bacbeb2219c3e2e0a39a97b3c439edb0ef61d6f17b6eaaeebb6cee4161a6388",
+      "size_bytes": 969,
+      "modified_at": "2026-05-09T13:33:35.405900Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_business_orchestrator.py",
+      "sha256": "9fc41c55bbbf1bb8c98c8af322367c3ce2fbb7b6ee8f0c1cb0e162b3684ea7a6",
+      "size_bytes": 1086,
+      "modified_at": "2026-05-05T08:13:29.531181Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_causal_integrity.py",
+      "sha256": "3c056454ad06c382ba391bea512194c369023faa88e19fd0ac7358d5bf6b1dbf",
+      "size_bytes": 3995,
+      "modified_at": "2026-04-29T04:04:18.830329Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_causal_integrity_suite.py",
+      "sha256": "d1e08262c5ad4062cb6ffd6819fb60dcb774127404a3a99cc30e9f7e091ae48b",
+      "size_bytes": 2266,
+      "modified_at": "2026-04-29T07:55:45.328910Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_causal_replay_runtime_guards.py",
+      "sha256": "748d63447f19bcaa82b2f0fc2b4637a447f46f456d77899048d34784a1eb5e12",
+      "size_bytes": 1654,
+      "modified_at": "2026-04-28T23:29:52.161861Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_chaos_regression_testing.py",
+      "sha256": "67d7a15dff9b72f753087967d4d61ec0c85922d65329dff8c72eab22d48ba332",
+      "size_bytes": 826,
+      "modified_at": "2026-05-16T14:34:22.881813Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_cli_control_plane.py",
+      "sha256": "5aea22beb2af34f33ef68b9ba883d50834ab6db5c481b8e04db1d665d0257b88",
+      "size_bytes": 3299,
+      "modified_at": "2026-05-16T13:42:15.455962Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_cognition.py",
+      "sha256": "be7dee4b6a7a30253f7235e99cb666030baa6c165b8d69fbcd4c3a3e577eb39d",
+      "size_bytes": 1381,
+      "modified_at": "2026-05-05T08:30:31.643820Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_cognitive_efficiency.py",
+      "sha256": "d2708cf8165d2228d9faf3cc89caaff9c95331bcf420fd252ae940bbdb0803c6",
+      "size_bytes": 1474,
+      "modified_at": "2026-04-29T04:42:45.643872Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_cognitive_hooks.py",
+      "sha256": "a92a52e24b145b89625f7736872d7f1d310d6cfa65e712801a264fa6eda80f8c",
+      "size_bytes": 5596,
+      "modified_at": "2026-05-11T11:18:04.004469Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_evolution_flywheel_runtime.py",
+      "sha256": "8992f4655463d1e170e9dd3ce7b3fc6ccb69f77d72614b1323f420f1a39b92d4",
+      "size_bytes": 2105,
+      "modified_at": "2026-05-16T13:26:22.550339Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_file_dossier_generator.py",
+      "sha256": "b47d9dcc1a5ffc7684dd08cf43fdee8635ae0a67701f48c70b16e4df155d9779",
+      "size_bytes": 1472,
+      "modified_at": "2026-05-16T14:50:44.897856Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_final_runtime_integration.py",
+      "sha256": "0cc4a0f152cb603d5b39a2b250bf964b98615880c34b99c1e4fdd8de357bab23",
+      "size_bytes": 1562,
+      "modified_at": "2026-05-16T14:34:46.506072Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_folder_dossier_generator.py",
+      "sha256": "98460404bac3fa70e6b344e5614918d7f56116c3077fd26816ad9e4fccc2f380",
+      "size_bytes": 951,
+      "modified_at": "2026-05-16T14:50:34.964411Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_freshness_ledger.py",
+      "sha256": "028cd1fefa24082d4743eef7f62aebe21121904e72871747123bce9650f54180",
+      "size_bytes": 3284,
+      "modified_at": "2026-05-16T13:12:21.277037Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_graph_sync_ledger.py",
+      "sha256": "21430d1103dcde132a48511bafcf2c14f9d1f2d025967485f7d6f4cdb14fc81b",
+      "size_bytes": 818,
+      "modified_at": "2026-05-15T06:40:23.189349Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_graph_sync_plan.py",
+      "sha256": "ec62b0723683907fe33fef6671379f1377ba5f2db3eca0245c3066a1c55d82d2",
+      "size_bytes": 1344,
+      "modified_at": "2026-05-15T06:39:32.982815Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_graph_traversal.py",
+      "sha256": "51be05e4b7e9bb3910875bece3d82514e5f9bd7908e623478863bfb8a5c3cce6",
+      "size_bytes": 1409,
+      "modified_at": "2026-04-29T06:17:43.510635Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_hypothesis_bundle.py",
+      "sha256": "8a3cb60e1c2b3a268039425a214c6802605a950ece3484dbffdb0c12306cb612",
+      "size_bytes": 1564,
+      "modified_at": "2026-04-28T23:34:43.139307Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_industrial_phases.py",
+      "sha256": "52ff6a877f2a315f66a18fb036ac07535e8da8c837c41ea55292d10653156f83",
+      "size_bytes": 2584,
+      "modified_at": "2026-05-05T08:21:20.494185Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_knowledge_ports.py",
+      "sha256": "46598dc4e141c0ff02a2cf3737435a3aad06bbeba1c57dd124cc69f855629531",
+      "size_bytes": 540,
+      "modified_at": "2026-04-26T22:58:37.807624Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_kuzu_graph_sync_adapter.py",
+      "sha256": "3a85cd72feacaa81b89048f81131fbee725e9d6e0932ea21b369f3bb61d6836f",
+      "size_bytes": 1528,
+      "modified_at": "2026-05-15T06:52:09.914389Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_learning_episode.py",
+      "sha256": "68527bd856da30ec0e4c900f29ae0af0ca70b1b9db4466b24af5a1991a67f74c",
+      "size_bytes": 2275,
+      "modified_at": "2026-05-11T10:48:19.921746Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_learning_episode_persistence.py",
+      "sha256": "bea02a2fc0c86403241a00ef47bb331afeb7c0b7bb0d049a65730522e4c28765",
+      "size_bytes": 1472,
+      "modified_at": "2026-05-15T05:55:57.925082Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_local_context_compressor.py",
+      "sha256": "8c011edee04556048c31db424faa5eab2f54b6c7e6f7a8a257ccf56bc5fc8156",
+      "size_bytes": 2775,
+      "modified_at": "2026-05-16T13:41:45.151623Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_local_reasoning.py",
+      "sha256": "4c2c966b7529d933934033a06f66b4b9904c90fb7a93550e2664835fb469f7f4",
+      "size_bytes": 4000,
+      "modified_at": "2026-04-29T07:55:45.328910Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_long_running_mission.py",
+      "sha256": "6acdec4ea580250ae1c49ed468796796bc1602cb5d0e6017e61ed8a0259ca3ec",
+      "size_bytes": 5358,
+      "modified_at": "2026-05-15T04:47:48.291357Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_memory_graph_runtime.py",
+      "sha256": "ef9e58a42c09d6c7caf720232a5267f3d5b3a8d405bbb9f6e0fdbb144abb790d",
+      "size_bytes": 2967,
+      "modified_at": "2026-05-15T06:49:34.209649Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_memory_refs.py",
+      "sha256": "2f50a28d26d5142327457348256c7ee1c219b52b10a768b98afd45ccfa7a725b",
+      "size_bytes": 1861,
+      "modified_at": "2026-05-15T05:59:00.446418Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_metacognitive_pipeline.py",
+      "sha256": "e66460eeb56a284c54614d00f778bd013cc4283a68593623d65e9db395101027",
+      "size_bytes": 3516,
+      "modified_at": "2026-05-11T10:29:52.234792Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_metacognitive_prompt_safety.py",
+      "sha256": "f8355c6bc025c75fc4b00a969ff87d1da3b08cbdc05f93b728dab7b99d7331f7",
+      "size_bytes": 351,
+      "modified_at": "2026-05-11T10:29:56.936325Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_metagateway_hardening.py",
+      "sha256": "5dcd3a61a95965f81f449373cd17a3f1c4885d44168068685ad5669b1f1e2906",
+      "size_bytes": 2758,
+      "modified_at": "2026-05-11T11:24:53.674662Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_metagateway_operational.py",
+      "sha256": "bad7aec637ea6b1f620dd0792dc6b7c964571036fc27c54d4f73bc8e981401b0",
+      "size_bytes": 1875,
+      "modified_at": "2026-05-11T10:58:14.624827Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_mission_autonomy_contract.py",
+      "sha256": "130e851f749c7aaeea43e73566fe8913123f805fad31027d326a736ab3d34b29",
+      "size_bytes": 2091,
+      "modified_at": "2026-05-16T14:24:25.297015Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_mission_coherence_guard.py",
+      "sha256": "6b7b261bbb358856af4e9128242fb8cff6d2b2ce15fb802d559bfb00b5ff4494",
+      "size_bytes": 2489,
+      "modified_at": "2026-05-16T14:13:29.662648Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_mission_orchestrator_dag.py",
+      "sha256": "3ff1c875941cfc63de6f16f06ac2373dca21955e8b07fb81c41819762ef190b8",
+      "size_bytes": 2290,
+      "modified_at": "2026-05-16T14:01:16.851914Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_mission_planner.py",
+      "sha256": "515157c965d6e3ac7853ad2967864a1cfa4d52342f7b40f2c9cdbb88fc9fb98e",
+      "size_bytes": 1328,
+      "modified_at": "2026-05-16T14:01:00.834504Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_mission_runtime_contract.py",
+      "sha256": "096403fe30a941d2ecccb40474a7fe82f921b37f54c261d1ab946f1d358514e0",
+      "size_bytes": 1717,
+      "modified_at": "2026-05-15T04:29:52.608212Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_prompt_cache_ledger.py",
+      "sha256": "884ac9a877fe5b0d76085a1ae48cd8811b34e8efc960063da8363dce2571f4e2",
+      "size_bytes": 2880,
+      "modified_at": "2026-05-16T13:25:34.582444Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_prompt_frame_builder.py",
+      "sha256": "c12870957d9a445bbab72b788387f824f7f23cb69f49ea3f57a0f2448c979c62",
+      "size_bytes": 3967,
+      "modified_at": "2026-05-16T13:25:16.706271Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_prompt_runtime_integration.py",
+      "sha256": "cf09884b0f1861b8a77ee9702dd2ea08cb04fc0c7b90df20fcd01a26ccda9008",
+      "size_bytes": 4981,
+      "modified_at": "2026-05-16T13:26:50.479151Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_prompt_to_mission.py",
+      "sha256": "553254f300f3d81de9e148edc6c859cb142c3f43ae55cdfcab8b2e561484266f",
+      "size_bytes": 2356,
+      "modified_at": "2026-05-05T09:43:17.757427Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_rehydration.py",
+      "sha256": "3c15b388c56ceb6246741b32af092c58bfcd3fa143658394fdb965d397242db4",
+      "size_bytes": 1009,
+      "modified_at": "2026-04-26T22:58:37.808624Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_repository_retrieval_paths.py",
+      "sha256": "6ab5773939ae3d87811cfd243b22b682d5ab2c748746d7135fb8f57fe2bb29c8",
+      "size_bytes": 1433,
+      "modified_at": "2026-04-29T00:12:25.986082Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_repo_intelligence_integration.py",
+      "sha256": "a8ae9dacc2fa6fdc1675c7382d304774b9adf45c05c809ffa0881b1af2fc6371",
+      "size_bytes": 1957,
+      "modified_at": "2026-05-16T14:51:14.749222Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_repo_intelligence_query.py",
+      "sha256": "ae0c328dc5b0012a6258c868eddd499ac9279fc067a02a15e3e181cdc7454c0c",
+      "size_bytes": 1927,
+      "modified_at": "2026-05-16T15:12:24.699535Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_repo_intelligence_runtime.py",
+      "sha256": "d4d15dca4f87194f0b202fda343f4fc0d6d480af63d15a6c71546fe2ffbbdcb2",
+      "size_bytes": 1008,
+      "modified_at": "2026-05-16T14:50:25.127669Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_repo_probe_mission_integration.py",
+      "sha256": "5f8d873fc799ff878a009dbf10401b35145faf4f07a852ffc4c1d71f3d8daa0e",
+      "size_bytes": 2069,
+      "modified_at": "2026-05-16T14:01:55.616884Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_repo_probe_runner.py",
+      "sha256": "aee46a300b4fe2975278557cd13a74e78d558e1c6d9edd3249e4db050edb916b",
+      "size_bytes": 1940,
+      "modified_at": "2026-05-16T14:01:36.502953Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_resource_governor.py",
+      "sha256": "07a8b0bff2ca4a446dbfc55b18fd55f4738c379444cd128680d3def2d94afef0",
+      "size_bytes": 1353,
+      "modified_at": "2026-05-15T08:03:15.047113Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_restart_integration_gate.py",
+      "sha256": "a830a4b794de1d30203586adc71ed8d11af199ddb2aecf9a9a8452f349e55eeb",
+      "size_bytes": 2714,
+      "modified_at": "2026-05-16T13:25:51.383723Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_runtime_repairs.py",
+      "sha256": "33abb327d125491fb981816748b7764d8cb305afbbb28e2de2171e3977561e9c",
+      "size_bytes": 1904,
+      "modified_at": "2026-05-16T15:11:39.615125Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_sdd_advanced_capabilities.py",
+      "sha256": "abcc70da92fad9aa130dd2263405f701e1c83dcf4214e5ea61a7010dcd0dab46",
+      "size_bytes": 4493,
+      "modified_at": "2026-04-28T23:28:52.955374Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_sdd_governance.py",
+      "sha256": "93e62b2c678b24037720b202673c1b39fce99972cc6a8bba9513941025dcb774",
+      "size_bytes": 5731,
+      "modified_at": "2026-04-26T23:53:58.852113Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_sdk_core.py",
+      "sha256": "62444bfa4938a4f48323a5f6c15f81a715ebf015a31516fbc3bdcff43bdbb3cc",
+      "size_bytes": 800,
+      "modified_at": "2026-05-11T09:22:00.161979Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_self_healing_planner.py",
+      "sha256": "d94f7bf7a418b52f4262ffab55aa382c2b550c029a2a4938fdbc109bdbe75541",
+      "size_bytes": 994,
+      "modified_at": "2026-05-05T10:11:06.845510Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_self_optimization.py",
+      "sha256": "82ce3e0adc829cdef42278b169978aed5d3b8e7ee61a2b72d6562ad24325b0ad",
+      "size_bytes": 2871,
+      "modified_at": "2026-04-29T08:23:04.613843Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_self_programming.py",
+      "sha256": "3bc3c36185661b44476d152680df8d3abfeb90e0819574dda7e1c7f14fedd117",
+      "size_bytes": 2687,
+      "modified_at": "2026-05-09T13:50:09.342047Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_self_worktree_orchestrator.py",
+      "sha256": "65fcd23f765d969f55ee0e1f68e24c2db4ea9fde9613cd958d0869ca38b30965",
+      "size_bytes": 3594,
+      "modified_at": "2026-05-05T09:17:36.537561Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_cold_planner.py",
+      "sha256": "61bd58eb6dda6528884cc7a29ea5654f378cd3310917c97462044a3ba8672a7b",
+      "size_bytes": 3352,
+      "modified_at": "2026-05-05T08:13:13.912690Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_compression_adapter.py",
+      "sha256": "cf64939b415978feab02fd668ceb6c67d5e51b6d5887023da3e5320e582904d4",
+      "size_bytes": 960,
+      "modified_at": "2026-05-15T08:16:47.940889Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_consensus.py",
+      "sha256": "40d82e6862f4e62318a6758daa63a0c2d76f9523180cd05e28997bf4ddfaf1da",
+      "size_bytes": 647,
+      "modified_at": "2026-04-26T22:58:37.808624Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_context_budget_manager.py",
+      "sha256": "ec9cf365f5cee3cb5ab1ab561650b0a58be5de1b0a6f9089855c0b4dbe10b228",
+      "size_bytes": 2935,
+      "modified_at": "2026-05-15T05:16:27.028375Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_context_efficiency_benchmark.py",
+      "sha256": "1337580c637b401b866eb7a4b5964d2a77c9f8ff171e6c42c8b0f1c0ff10c7f6",
+      "size_bytes": 3037,
+      "modified_at": "2026-05-16T13:26:09.215621Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_context_enforcement_gate.py",
+      "sha256": "d03abd2477ad9c9e657f6e070a3605dc0c1d3dc04789762034b9cddebad29596",
+      "size_bytes": 1266,
+      "modified_at": "2026-05-16T15:05:21.173922Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_context_package.py",
+      "sha256": "ef3a70f78d43c65c0701da80860baa9f7a6cb9078ebf560fcfe09632f697f63c",
+      "size_bytes": 3995,
+      "modified_at": "2026-05-16T13:13:00.815312Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_context_quant_runtime.py",
+      "sha256": "c4f18d2704462f3d3987f3e085dc12fdac4d4ed25573953dcd4121b4eb8d1625",
+      "size_bytes": 3552,
+      "modified_at": "2026-05-16T13:13:37.465990Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_context_value_scorer.py",
+      "sha256": "3cd55cb789c1a5405d522370da918753c5c2cf41243afe342065787e7aa6e2f8",
+      "size_bytes": 2208,
+      "modified_at": "2026-05-16T13:13:15.864195Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_contract_drift.py",
+      "sha256": "9066c05fb2dd406793b4559cfa33ef43f558230fa9d617c964b8c74c3c103478",
+      "size_bytes": 2130,
+      "modified_at": "2026-04-28T07:41:06.858887Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_control_surface_integration.py",
+      "sha256": "07defd18129428f3b59ad703e28289c01d283fa3b310ea0a15b60ce777c8c672",
+      "size_bytes": 3159,
+      "modified_at": "2026-05-16T13:42:35.992113Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_counterfactual_service.py",
+      "sha256": "1f2998b977de9c1562fe4f5baf8ee573427337c9205375fd729a995237b05382",
+      "size_bytes": 1534,
+      "modified_at": "2026-04-28T23:35:18.481387Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_daemon_causal_gates.py",
+      "sha256": "e95375a12fe9a66c5536aae34bee1042d241e322a513d84347524a65bddb1f70",
+      "size_bytes": 5758,
+      "modified_at": "2026-05-11T10:30:05.083820Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_daemon_cognitive_preflight.py",
+      "sha256": "b614f887e5f5ed2e0f02690800dcc15f5c21db1fde0dbb00c79b6ffb95656906",
+      "size_bytes": 4332,
+      "modified_at": "2026-04-29T04:59:49.377414Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_daemon_diagnostic.py",
+      "sha256": "126e2f07ec03fdb07b8d8b3f26a2837a09d98c9126d9622a3b1e79e482bba57c",
+      "size_bytes": 1889,
+      "modified_at": "2026-05-05T10:13:18.595458Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_daemon_hierarchical_planner.py",
+      "sha256": "820467e8dc1c519e3c7d01d8ef253d7771e98252ccc45b2801defb014c1238ee",
+      "size_bytes": 4805,
+      "modified_at": "2026-04-24T20:05:45.833030Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_daemon_outcome.py",
+      "sha256": "a955272b0ae947ce76c3eea3f1b7b9a1a7d80d285d0424626825ad959f57a34d",
+      "size_bytes": 4713,
+      "modified_at": "2026-05-15T04:31:08.743968Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_daemon_runtime_truth.py",
+      "sha256": "9ce8e49363db95ce70932222601a5e26d4e626f8838a5b816372518d76edb909",
+      "size_bytes": 3416,
+      "modified_at": "2026-05-15T07:29:14.679047Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_debate_autonomy_integration.py",
+      "sha256": "f6a3afd56036271d40c968f65722d026ebc326b999c0ef9894c0917a2746b172",
+      "size_bytes": 1943,
+      "modified_at": "2026-05-16T14:24:39.706568Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_debate_review_runtime.py",
+      "sha256": "33d261533a553b1a217dcf6a4839a846be8d4caf60dd7615f02bf02b0328f3f6",
+      "size_bytes": 1889,
+      "modified_at": "2026-05-16T14:24:18.200992Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_domain_models.py",
+      "sha256": "8d1d4efdef676d2678a1a9d45aaaf74d3654ebb8012628d16de372d0ebeba8d2",
+      "size_bytes": 2834,
+      "modified_at": "2026-04-28T23:20:02.439392Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_dummied_ctl.py",
+      "sha256": "623c124f8823135e3663e69fbdc8b49a926b40b95930cf64b5f2dc8307d8c991",
+      "size_bytes": 2429,
+      "modified_at": "2026-05-09T14:06:35.946009Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_dummie_chat_cli.py",
+      "sha256": "ebe731060ee5ffc1bd2131257f7a5808594f7706aa75598addaa8f9b46230eed",
+      "size_bytes": 1166,
+      "modified_at": "2026-05-16T15:07:59.447527Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_embeddings.py",
+      "sha256": "ad1e82eaf408d31519feea59f7c8044eeef419639310946254acf53f1d2bc220",
+      "size_bytes": 1193,
+      "modified_at": "2026-04-28T07:55:28.816130Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_embedding_adapter.py",
+      "sha256": "e2160a7d3b1cf3976091673e4334f3d5c37edc27f17ca37c6e256f523847b0e6",
+      "size_bytes": 1423,
+      "modified_at": "2026-05-16T13:52:34.638077Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_embedding_contracts.py",
+      "sha256": "b0b1c7fcab022f9f7cf88d51e144f237fac722fa5165f31193403de86f044860",
+      "size_bytes": 1051,
+      "modified_at": "2026-05-15T08:13:03.340291Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_entropy_governor.py",
+      "sha256": "f088e11b12232d5e1c71be9d738726b335db57add90a7c90103b185834c2fe7b",
+      "size_bytes": 1039,
+      "modified_at": "2026-04-26T22:58:37.808624Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_epistemic_judge.py",
+      "sha256": "eb7218c8af90688a3c4359f95dba93cbff5bb88e7f41240ec97a56b690e384fc",
+      "size_bytes": 4083,
+      "modified_at": "2026-05-05T09:12:58.217944Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_cognitive_loop_e2e.py",
+      "sha256": "7e0ad9f492ee7a84f5e763f08063079a40929cf58b7b3277b7273c5d039fce53",
+      "size_bytes": 10126,
+      "modified_at": "2026-05-05T09:14:43.184302Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_epistemic_retrieval.py",
+      "sha256": "d9266adb4792ccc2831ef812534f1931b32655b9bc057d1300526ab6734aa03f",
+      "size_bytes": 3848,
+      "modified_at": "2026-04-28T23:33:49.471214Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_mission_workbench.py",
+      "sha256": "04dee7586c2db353362e195aa5afe68930fd7548d62076494f2a8cd0b1494e80",
+      "size_bytes": 3126,
+      "modified_at": "2026-05-15T05:47:38.815789Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_preflight.py",
+      "sha256": "546f3ce230843723e3d6618ee533718abee482b28437f4ff900b3fc076eca8d0",
+      "size_bytes": 556,
+      "modified_at": "2026-04-26T22:58:37.808624Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_semantic_retrieval_runtime.py",
+      "sha256": "68f4cb4d63608b2ec40e29369fb662cc6607a916549e6ef143dfdd99b5748278",
+      "size_bytes": 2345,
+      "modified_at": "2026-05-15T07:20:37.043025Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_model_router.py",
+      "sha256": "ab5e60259a86f948fa9615079e1535195a9c2349d3214f706fd399538d920cc5",
+      "size_bytes": 7951,
+      "modified_at": "2026-05-09T03:12:41.090303Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_operationalization_review.py",
+      "sha256": "1d159425e890f990d42f1b3a7334829d66cb9b33cdbc894a74bdd3eb42be9d24",
+      "size_bytes": 949,
+      "modified_at": "2026-05-16T15:09:14.105551Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_operational_truth.py",
+      "sha256": "66b033ef30250109bff858eec1999525695d48ec21a7320e0eb75d66d77c13fc",
+      "size_bytes": 4011,
+      "modified_at": "2026-05-09T14:06:35.945813Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_orchestrator_bridge_contract.py",
+      "sha256": "0325e59df2315982426c8ed94a193200b6b116129e59a813193ab7b22a44503d",
+      "size_bytes": 1143,
+      "modified_at": "2026-04-24T22:27:55.270712Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_outcome_evaluator.py",
+      "sha256": "6522617791c7397d74d88411ccb77cad77f28b0a0cb4b3de2e44847a8166291e",
+      "size_bytes": 9082,
+      "modified_at": "2026-05-15T04:23:17.064073Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_patch_transaction.py",
+      "sha256": "3025fdbc8889c8b745bbb930b1945796650b8e847bdf2a68e31b48b03f7616a8",
+      "size_bytes": 1502,
+      "modified_at": "2026-05-05T10:11:19.535891Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_patch_transaction_manager.py",
+      "sha256": "6520dfcd01f73a80e894aa88b311df7da77b3171d99a35b2850c665110290922",
+      "size_bytes": 3089,
+      "modified_at": "2026-05-05T10:10:20.002102Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_pattern_miner.py",
+      "sha256": "099c71ba49d6553d38904fae1bb5dbb1d37f02ab10c4beb2062970b32ec2ba8c",
+      "size_bytes": 2432,
+      "modified_at": "2026-05-05T09:13:11.469301Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_pattern_to_mission_loop.py",
+      "sha256": "f5433dfc5c0b5f321823505e3f4327cdba5bc141006d9c9ed9d611d1fb9f4df6",
+      "size_bytes": 2884,
+      "modified_at": "2026-05-05T09:19:05.008598Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_pattern_to_patch_transaction_e2e.py",
+      "sha256": "e82ae7520668a15e538c529a2db73763041d040a340c2178dcec252c90c3cf50",
+      "size_bytes": 3268,
+      "modified_at": "2026-05-05T10:10:48.466958Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_persona_guardian.py",
+      "sha256": "624f0b1bdefc9acf815d7602d291b4462109c4401effc3f6e1bc665d38c0cd72",
+      "size_bytes": 1819,
+      "modified_at": "2026-05-05T08:12:58.162325Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_phase_ledger.py",
+      "sha256": "8d248398c97678c23dab1b68851291f5c200ee5958b919b57bc742b5112e7345",
+      "size_bytes": 5247,
+      "modified_at": "2026-05-15T04:59:22.492182Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_phase_ledger_hardening.py",
+      "sha256": "cd603e64123f93065b0ed54aad35165f1635f7f481a32dae645dbc54a0213049",
+      "size_bytes": 4843,
+      "modified_at": "2026-05-15T04:59:09.627429Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_plan_v1_completion_review.py",
+      "sha256": "c51e658af6ca5900ff6fb5c8f0cdd0056538bc22cbda775e959f13aaf9caac5e",
+      "size_bytes": 771,
+      "modified_at": "2026-05-16T14:51:02.920902Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_post_mortem_agent.py",
+      "sha256": "e7ab2836404017835daed9e7ad3497fb99c10a9716d9595f8595526e0d043bda",
+      "size_bytes": 1323,
+      "modified_at": "2026-05-11T09:34:20.386180Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_post_plan_v1_operationalization_integration.py",
+      "sha256": "fce798cb640a4c754dfa2afd504bc10fc374c2d08f8c1785a3f3bbb3ef110492",
+      "size_bytes": 1753,
+      "modified_at": "2026-05-16T15:09:36.706217Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_sensor_first_guard.py",
+      "sha256": "9a9945bfef347d21741535c9378846a5310788bc511d501513a36e806f65b269",
+      "size_bytes": 1127,
+      "modified_at": "2026-05-15T07:20:37.044638Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_session_store.py",
+      "sha256": "eebe6916df25f6bc35d5d1fd37a4e4f92b7ce16f87e12dfe3c169314f4740e18",
+      "size_bytes": 2241,
+      "modified_at": "2026-05-05T09:43:03.770025Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_shield_bypass_blocked.py",
+      "sha256": "aa46bca74d646e34002d0883cb9eff2496b6102afedbc111d1fdae03516ada79",
+      "size_bytes": 1916,
+      "modified_at": "2026-04-29T08:17:14.182387Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_socraticode_gateway_adapter.py",
+      "sha256": "aa867fc8f5b3d5d83bdc1e8d5336911384118dc7b596b91c09703b6ad87db299",
+      "size_bytes": 1837,
+      "modified_at": "2026-05-15T07:20:37.043339Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_stale_memory_detector.py",
+      "sha256": "058da3b32f10fe7773870b2832d3fa87cd7dd79171fc09c00ea295cfeecd60b6",
+      "size_bytes": 2857,
+      "modified_at": "2026-05-16T13:12:38.324011Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_state_coherence_control_surface_integration.py",
+      "sha256": "b2491f1635e5252aad13f7cd56cfd990d6c4032142688bf5778913653beab4d7",
+      "size_bytes": 2511,
+      "modified_at": "2026-05-16T13:53:03.238803Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_state_coherence_guard.py",
+      "sha256": "146bb2c43ef17c85be3a7c43dbadc6ee3046e433a1607c9056d819bd89d65b18",
+      "size_bytes": 2537,
+      "modified_at": "2026-05-16T13:52:58.509857Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_strategic_partner_swarm.py",
+      "sha256": "a16a50e280804ca3ab09034fbf269ccbca2c16175dc2c0fea3891a9e7da0c92f",
+      "size_bytes": 1667,
+      "modified_at": "2026-05-16T14:10:59.375174Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_swarm_mission_coherence_integration.py",
+      "sha256": "94659a8587346375ad3948a50b7e1588ba7160ccc95345d2855ecc16e742a2de",
+      "size_bytes": 1518,
+      "modified_at": "2026-05-16T14:13:00.012158Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_technical_debt_intelligence.py",
+      "sha256": "419ad55b17918c478c72ea9a247b47b704d708bc1e3cd6025923200f07e01a9e",
+      "size_bytes": 954,
+      "modified_at": "2026-05-16T14:50:54.009607Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_token_cost_ledger.py",
+      "sha256": "e61eaad4c70b4c67cb76bdd138040bcda4083601fa5fb50618cd13599caff812",
+      "size_bytes": 2774,
+      "modified_at": "2026-05-15T05:15:20.978174Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_token_economy_integration.py",
+      "sha256": "6af55d5467d3a4190f8deb66945fd2332631fdc88b322368a74b520f1dfce455",
+      "size_bytes": 2820,
+      "modified_at": "2026-05-15T05:16:37.872101Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_trusted_workstation_mode.py",
+      "sha256": "3a752accb10d056e3325c116d590712ee9b73aeafe47aeab85943afe01ba01d3",
+      "size_bytes": 1434,
+      "modified_at": "2026-05-16T14:34:59.157078Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_tui_process_monitor.py",
+      "sha256": "e180b1d36f27405ad7f62e3769733834bd3c89bd7d4455525151939cd8ca6c0c",
+      "size_bytes": 1959,
+      "modified_at": "2026-05-16T13:41:45.152010Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_vault_context_resolver.py",
+      "sha256": "5532e98a8fdc7f44010ba776332cec6811e10d0921c566b6966fb21e2a8e6e83",
+      "size_bytes": 1536,
+      "modified_at": "2026-05-15T07:20:37.044047Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_vault_curator.py",
+      "sha256": "2de304117f0eaf2132d6433c6671673f0df90423497e51c6951d51cf6c820466",
+      "size_bytes": 2259,
+      "modified_at": "2026-05-15T05:46:26.323761Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_vault_embedding_index.py",
+      "sha256": "1e7196921d125003222c051dd45e4af0af4ea82e3cf46b3772338600d1466c7a",
+      "size_bytes": 1604,
+      "modified_at": "2026-05-15T06:51:26.377413Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_workbench_vault_integration.py",
+      "sha256": "c8d62a19bff5fe72c68afd3dd850278eca32f9abf8f6945b48f05f1943de5cae",
+      "size_bytes": 1542,
+      "modified_at": "2026-05-15T05:23:52.956740Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/test_workbench_vault_runtime.py",
+      "sha256": "fa38dd06b2271a3a293d68dc1a5daf90aae93cf152d48e49a84fec235098df4d",
+      "size_bytes": 2241,
+      "modified_at": "2026-05-15T05:57:26.463980Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/verify_wave8.py",
+      "sha256": "2262ea3a474f34857ff981fa7af65dc79156b1b2bd848e9edcd8ece5fea856a5",
+      "size_bytes": 1473,
+      "modified_at": "2026-05-09T13:58:52.685460Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "application/cognitive/use_cases.py",
+      "sha256": "66e6b9e7c83b73078897e24138dbfdc88f84b3e1a10162636fda317a83e5fbff",
+      "size_bytes": 1268,
+      "modified_at": "2026-04-29T04:42:08.643558Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "proto/proto/dummie/v2/core_pb2.py",
+      "sha256": "35047d60b375828746b555d813c5d06672e1f1c6f446d99f69910b86b1ac32e1",
+      "size_bytes": 5098,
+      "modified_at": "2026-04-24T11:06:54.769333Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "proto/proto/dummie/v2/core_pb2_grpc.py",
+      "sha256": "ff8b45a56a149a3778914116b66932bd9f5ce7c3fca508cd4f33491af8f6015c",
+      "size_bytes": 901,
+      "modified_at": "2026-04-24T11:06:54.770333Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "proto/proto/dummie/v2/memory_pb2.py",
+      "sha256": "5551e319cbff73baf63530d6c2f07403a30d60e125fb42b354b79c249cf1f954",
+      "size_bytes": 5896,
+      "modified_at": "2026-04-28T23:44:51.572093Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "proto/proto/dummie/v2/memory_pb2_grpc.py",
+      "sha256": "19188e61921c815803760336522aac8b7f53597798cee38c4eb85cc62c1ced84",
+      "size_bytes": 903,
+      "modified_at": "2026-04-24T11:06:54.770333Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "proto/proto/dummie/v2/orchestration_pb2.py",
+      "sha256": "e1623d62ed23d3543fc1849ef5b45d1b127550b035c58d9048553dd1c5e97fc3",
+      "size_bytes": 8376,
+      "modified_at": "2026-04-24T11:06:54.770333Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "proto/proto/dummie/v2/orchestration_pb2_grpc.py",
+      "sha256": "b9802e708c673f54bb4d3a703368ef6bfb66dab7220c8fdf2c674f299ace3e1e",
+      "size_bytes": 23955,
+      "modified_at": "2026-04-24T11:06:54.770333Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "infrastructure/adapters/external.py",
+      "sha256": "2bcdc58f0f863a0b880a2342b1ead75dc26f18af1a18b35b87b70585ecb0203d",
+      "size_bytes": 2140,
+      "modified_at": "2026-05-11T09:15:47.166386Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "infrastructure/adapters/kuzu.py",
+      "sha256": "9b7b8889cd471532c1d540883e8af0166ca541048c021f9ce34e214e4d67a248",
+      "size_bytes": 15151,
+      "modified_at": "2026-05-11T09:15:59.118260Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "infrastructure/adapters/ledger.py",
+      "sha256": "18ab7e82f8e30ed2f4452ae81bd24a6bfa205a18a6f459bc8fa8f50c882ef16a",
+      "size_bytes": 1335,
+      "modified_at": "2026-05-10T06:50:49.735075Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "infrastructure/adapters/__init__.py",
+      "sha256": "74f891b33f62a3e9ad7f17eb530db923124476d64a29857c0f200f1adfd129e1",
+      "size_bytes": 431,
+      "modified_at": "2026-05-11T09:15:19.253161Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "infrastructure/cognitive/adapters.py",
+      "sha256": "c3524d99a0f0fecd9a3bb773e2f6eec9772771181357ecf775f62d99c1e0182e",
+      "size_bytes": 967,
+      "modified_at": "2026-04-29T04:42:14.452291Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "infrastructure/reasoning/providers.py",
+      "sha256": "5f07e477f63e6721884880d1e60363cf7a4bacd2c48c05ffe986ba8483ae38c3",
+      "size_bytes": 5639,
+      "modified_at": "2026-05-15T20:42:00.335817Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "src/brain/main.py",
+      "sha256": "504dd530ed2ba2f0bf18fcd8af0dc0c971cebdef89a9befa8e5fb05c4c02bc2e",
+      "size_bytes": 2038,
+      "modified_at": "2026-05-15T21:01:16.531968Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "src/brain/__init__.py",
+      "sha256": "58090363f7b4edbd1590d0ff74b1cd9edf0a71ff631971d9af920adfcb950d77",
+      "size_bytes": 81,
+      "modified_at": "2026-05-15T21:01:16.532179Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "src/brain/application/interfaces.py",
+      "sha256": "3747fb93e7988079dc6b475dfd11bd95338da8a210e968e4ed04db1cd97d8e54",
+      "size_bytes": 521,
+      "modified_at": "2026-05-15T21:01:16.525788Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "src/brain/application/use_cases/crystallization.py",
+      "sha256": "9d0590e8dd23bcc234b173665a418bae20795ecbb7efbc2993b1828de5ae19b1",
+      "size_bytes": 3324,
+      "modified_at": "2026-05-15T21:01:16.526173Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "src/brain/application/use_cases/kaizen_loop.py",
+      "sha256": "caf32c6ea13e3deb13b9ffd20d632c7d463a8417a9d68e8a7b103bba6b7fd5e0",
+      "size_bytes": 2068,
+      "modified_at": "2026-05-15T21:01:16.526416Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "src/brain/application/use_cases/lessons_use_case.py",
+      "sha256": "1d1adf9b3ed18f3bd3d7f608492552ed6d6d196964f160a9ec41dc8804d38de2",
+      "size_bytes": 2482,
+      "modified_at": "2026-05-15T21:01:16.526734Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "src/brain/application/use_cases/metacognitive_audit.py",
+      "sha256": "3cf5d408e80e82fd7562974b5ce8b08228314d581299b75694b0fda8eb1730f9",
+      "size_bytes": 1672,
+      "modified_at": "2026-05-15T21:01:16.526936Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "src/brain/application/use_cases/orchestrator.py",
+      "sha256": "113e9c97ebfa161702601d47af07847a738f03218da3fc3673b0d95ef48aa549",
+      "size_bytes": 7852,
+      "modified_at": "2026-05-15T21:01:16.527200Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "src/brain/application/use_cases/semantic_consistency.py",
+      "sha256": "0e3c5cd3fa0c9494cac7619f9a96a847cc9f9ad61c3fd07a303778e47ca0b52b",
+      "size_bytes": 1848,
+      "modified_at": "2026-05-15T21:01:16.527455Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "src/brain/application/use_cases/semantic_indexer.py",
+      "sha256": "6a34bddeeafda20dacc8972c5130c44e5e7420092d219e8a5752e83fcc2e2f1c",
+      "size_bytes": 2806,
+      "modified_at": "2026-05-15T21:01:16.527670Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "src/brain/application/use_cases/__init__.py",
+      "sha256": "78024f24c1a7539c573fc6d9c818ae76011133aaf72b0f509ebe4e30b62c267e",
+      "size_bytes": 28,
+      "modified_at": "2026-05-15T21:01:16.527882Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "src/brain/domain/context/models.py",
+      "sha256": "095fa4b169255683d3bba94ae83180db5758483b52fe1f1da40b4e68e8637e14",
+      "size_bytes": 1682,
+      "modified_at": "2026-05-15T21:01:16.528110Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "src/brain/domain/context/__init__.py",
+      "sha256": "7d37b4d21b538f9ffaf02de85758e4ea3c4b9ff8ec4c519f683d7e5c4fdd3801",
+      "size_bytes": 38,
+      "modified_at": "2026-05-15T21:01:16.528290Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "src/brain/domain/fabrication/models.py",
+      "sha256": "d6e71ad21c0991c9b772720db4797f74a8aa1ccf3d203412da18ba1730519217",
+      "size_bytes": 1536,
+      "modified_at": "2026-05-15T21:01:16.528531Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "src/brain/domain/fabrication/__init__.py",
+      "sha256": "8271fa875bac48215b9c3c319c252a04b49a64d923d6d2b3cf1d8a680ee88645",
+      "size_bytes": 55,
+      "modified_at": "2026-05-15T21:01:16.528759Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "src/brain/domain/governance/models.py",
+      "sha256": "cbd34b68d5d36843c5fa01f9e31831e6928f619c017aa3607c15906d78f3c567",
+      "size_bytes": 2231,
+      "modified_at": "2026-05-15T21:01:16.528956Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "src/brain/domain/governance/__init__.py",
+      "sha256": "4bb7f5a5f344e548f20f67ab1d67e0b496e07904e2295d87bd4362a811b8e503",
+      "size_bytes": 54,
+      "modified_at": "2026-05-15T21:01:16.529151Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "src/brain/domain/memory/models.py",
+      "sha256": "7d021354bd8fe39f1f04717af3ed676414c400a0240a65a65c9049790d6e72f8",
+      "size_bytes": 2609,
+      "modified_at": "2026-05-15T21:01:16.529366Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "src/brain/domain/memory/ports.py",
+      "sha256": "ca684ecbfa03e826b326fa4be7285235a25c73f334a637a570787d34af8e8aca",
+      "size_bytes": 4856,
+      "modified_at": "2026-05-15T21:01:16.529588Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "src/brain/domain/memory/__init__.py",
+      "sha256": "bda30fe125bfe7bc1c9b6793bce0aa345e8d286dc8de175ac649112d19d3844b",
+      "size_bytes": 50,
+      "modified_at": "2026-05-15T21:01:16.529790Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "src/brain/infrastructure/adapters/kuzu_repository.py",
+      "sha256": "b15c5428f4398509fdb548fdf7ee6512f5f27f1a234a87f17d39fc757dd685cf",
+      "size_bytes": 9597,
+      "modified_at": "2026-05-15T21:01:16.530066Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "src/brain/infrastructure/adapters/ledger_adapter.py",
+      "sha256": "d4e28eb74cdf1799bdfe3979e46447bfc244cd4f4b354609a4ebfc9431b8a76b",
+      "size_bytes": 5280,
+      "modified_at": "2026-05-15T21:01:16.530311Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "src/brain/infrastructure/adapters/nats_controller.py",
+      "sha256": "102c64c97d943639e172a5b35fab085e99a69f44ca8d2c8b09a250ada5579304",
+      "size_bytes": 3187,
+      "modified_at": "2026-05-15T21:01:16.530528Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "src/brain/infrastructure/adapters/ollama_adapter.py",
+      "sha256": "bd890c5439b233945a23c96c84f101c19a87c754929bfea2f3820b2a161747a5",
+      "size_bytes": 1624,
+      "modified_at": "2026-05-15T21:01:16.530731Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "src/brain/infrastructure/adapters/ontological_adapter.py",
+      "sha256": "96b844dc406a8d66aea665c244d2ca58ec566052fc38d4eaf3c713738b3606ef",
+      "size_bytes": 1819,
+      "modified_at": "2026-05-15T21:01:16.530947Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "src/brain/infrastructure/adapters/session_ledger_adapter.py",
+      "sha256": "20dac308a59fca4e74f9ac709630632a6d4cff68f2e9c6897cb9cfbb2da64dea",
+      "size_bytes": 1848,
+      "modified_at": "2026-05-15T21:01:16.531155Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "src/brain/infrastructure/adapters/shield_adapter.py",
+      "sha256": "4a961601a87512db6b4d4de4cef5abfe046cacf9e39ffb9ee7745ff6e05f67b8",
+      "size_bytes": 656,
+      "modified_at": "2026-05-15T21:01:16.531323Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "src/brain/infrastructure/adapters/skill_adapter.py",
+      "sha256": "5d79bdbe638092fc9926ebecbc0c4ce2b1744ef9b60233fc0f27343a361449d9",
+      "size_bytes": 2175,
+      "modified_at": "2026-05-15T21:01:16.531496Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "src/brain/infrastructure/adapters/__init__.py",
+      "sha256": "4f412672d6cdaf7218395cd4ba1504d280be622091ca5a4bd8a1c4d865462687",
+      "size_bytes": 443,
+      "modified_at": "2026-05-15T21:01:16.531659Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "domain/cognitive/models.py",
+      "sha256": "7841e201f8cdab720a2a28e7259f4306643600c440ef3e5f2de930a95c0dd396",
+      "size_bytes": 810,
+      "modified_at": "2026-04-29T04:42:01.875869Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/infrastructure/test_kuzu_path_hardening.py",
+      "sha256": "2d8fad18696c11af3a261fc0a6ded8e4d03f8b0a76790b979faf7e906745810d",
+      "size_bytes": 1678,
+      "modified_at": "2026-04-28T06:57:58.777693Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    },
+    {
+      "path": "tests/infrastructure/test_kuzu_repository.py",
+      "sha256": "b2862b21f4339d2fd946b70ac737d1cd68690eb77a4ac846ba2416a0b5a84acc",
+      "size_bytes": 1108,
+      "modified_at": "2026-04-28T07:42:06.083104Z",
+      "is_tracked": true,
+      "layer": "unknown",
+      "category": "first_party"
+    }
+  ]
+}

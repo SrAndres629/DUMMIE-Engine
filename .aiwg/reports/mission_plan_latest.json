@@ -1,103 +1,85 @@
 {
-  "mission_id": "MISSION_P27",
-  "objective": "Implement a bounded debate and adversarial review runtime that allows role-specific agents to challenge plans, identify contradictions, test assumptions and produce evidence-backed objections before implementation proceeds.",
-  "source_phase": "P26",
-  "current_phase": "P26",
-  "next_phase": "P27",
+  "mission_id": "MISSION_PLAN_V1_COMPLETION_REVIEW",
+  "objective": "Review all Plan V1 runtime capabilities, identify integration gaps, score real operational gains, and produce the next development backlog for turning DUMMIE into a native strategic partner system.",
+  "source_phase": "P31",
+  "current_phase": "P31",
+  "next_phase": "PLAN_V1_COMPLETION_REVIEW",
   "l1_goal": {
-    "title": "Debate & Adversarial Review Runtime",
+    "title": "Mentor Review + Integration Backlog",
     "success_conditions": [
-      "debate roles defined",
-      "adversarial objections generated",
-      "evidence-backed claims required",
-      "contradiction detection implemented",
-      "judge/mentor verdict generated",
-      "no direct mutation authority",
-      "tests pass"
+      "all P1-P31 artifacts reviewed",
+      "runtime capabilities scored",
+      "simulated vs real capabilities separated",
+      "security boundaries verified",
+      "token/context improvements assessed",
+      "next backlog created"
     ]
   },
   "l2_phases": [
     {
       "phase_id": "L2_1",
-      "title": "Produce layers/l2_brain/debate_review_runtime.py",
-      "purpose": "Implement and verify layers/l2_brain/debate_review_runtime.py",
+      "title": "Produce .aiwg/reports/plan_v1_completion_review.md",
+      "purpose": "Implement and verify .aiwg/reports/plan_v1_completion_review.md",
       "inputs": [],
       "outputs": [
-        "layers/l2_brain/debate_review_runtime.py"
+        ".aiwg/reports/plan_v1_completion_review.md"
       ],
       "required_specs": [],
       "required_tests": [],
       "acceptance_criteria": [
-        "File layers/l2_brain/debate_review_runtime.py exists",
-        "Validation for layers/l2_brain/debate_review_runtime.py pass"
+        "File .aiwg/reports/plan_v1_completion_review.md exists",
+        "Validation for .aiwg/reports/plan_v1_completion_review.md pass"
       ],
       "risks": [],
       "depends_on": []
     },
     {
       "phase_id": "L2_2",
-      "title": "Produce layers/l2_brain/tests/test_debate_review_runtime.py",
-      "purpose": "Implement and verify layers/l2_brain/tests/test_debate_review_runtime.py",
+      "title": "Produce .aiwg/reports/plan_v1_completion_review.json",
+      "purpose": "Implement and verify .aiwg/reports/plan_v1_completion_review.json",
       "inputs": [],
       "outputs": [
-        "layers/l2_brain/tests/test_debate_review_runtime.py"
+        ".aiwg/reports/plan_v1_completion_review.json"
       ],
       "required_specs": [],
       "required_tests": [],
       "acceptance_criteria": [
-        "File layers/l2_brain/tests/test_debate_review_runtime.py exists",
-        "Validation for layers/l2_brain/tests/test_debate_review_runtime.py pass"
+        "File .aiwg/reports/plan_v1_completion_review.json exists",
+        "Validation for .aiwg/reports/plan_v1_completion_review.json pass"
       ],
       "risks": [],
       "depends_on": []
     },
     {
       "phase_id": "L2_3",
-      "title": "Produce .aiwg/reports/plan_v1_phase_27_debate_review_runtime.md",
-      "purpose": "Implement and verify .aiwg/reports/plan_v1_phase_27_debate_review_runtime.md",
+      "title": "Produce .aiwg/reports/plan_v1_runtime_capability_scorecard.json",
+      "purpose": "Implement and verify .aiwg/reports/plan_v1_runtime_capability_scorecard.json",
       "inputs": [],
       "outputs": [
-        ".aiwg/reports/plan_v1_phase_27_debate_review_runtime.md"
+        ".aiwg/reports/plan_v1_runtime_capability_scorecard.json"
       ],
       "required_specs": [],
       "required_tests": [],
       "acceptance_criteria": [
-        "File .aiwg/reports/plan_v1_phase_27_debate_review_runtime.md exists",
-        "Validation for .aiwg/reports/plan_v1_phase_27_debate_review_runtime.md pass"
+        "File .aiwg/reports/plan_v1_runtime_capability_scorecard.json exists",
+        "Validation for .aiwg/reports/plan_v1_runtime_capability_scorecard.json pass"
       ],
       "risks": [],
       "depends_on": []
     },
     {
       "phase_id": "L2_4",
-      "title": "Produce .aiwg/reports/plan_v1_phase_27_debate_review_runtime.json",
-      "purpose": "Implement and verify .aiwg/reports/plan_v1_phase_27_debate_review_runtime.json",
+      "title": "Produce .aiwg/reports/plan_v1_integration_backlog.json",
+      "purpose": "Implement and verify .aiwg/reports/plan_v1_integration_backlog.json",
       "inputs": [],
       "outputs": [
-        ".aiwg/reports/plan_v1_phase_27_debate_review_runtime.json"
+        ".aiwg/reports/plan_v1_integration_backlog.json"
       ],
       "required_specs": [],
       "required_tests": [],
       "acceptance_criteria": [
-        "File .aiwg/reports/plan_v1_phase_27_debate_review_runtime.json exists",
-        "Validation for .aiwg/reports/plan_v1_phase_27_debate_review_runtime.json pass"
-      ],
-      "risks": [],
-      "depends_on": []
-    },
-    {
-      "phase_id": "L2_5",
-      "title": "Produce .aiwg/reports/debate_review_latest.json",
-      "purpose": "Implement and verify .aiwg/reports/debate_review_latest.json",
-      "inputs": [],
-      "outputs": [
-        ".aiwg/reports/debate_review_latest.json"
-      ],
-      "required_specs": [],
-      "required_tests": [],
-      "acceptance_criteria": [
-        "File .aiwg/reports/debate_review_latest.json exists",
-        "Validation for .aiwg/reports/debate_review_latest.json pass"
+        "File .aiwg/reports/plan_v1_integration_backlog.json exists",
+        "Validation for .aiwg/reports/plan_v1_integration_backlog.json pass"
       ],
       "risks": [],
       "depends_on": []
@@ -107,136 +89,106 @@
     {
       "microphase_id": "L2_1_M1",
       "parent_phase_id": "L2_1",
-      "title": "Draft layers/l2_brain/debate_review_runtime.py",
-      "action": "Create/Update layers/l2_brain/debate_review_runtime.py",
+      "title": "Draft .aiwg/reports/plan_v1_completion_review.md",
+      "action": "Create/Update .aiwg/reports/plan_v1_completion_review.md",
       "expected_file_changes": [
-        "layers/l2_brain/debate_review_runtime.py"
+        ".aiwg/reports/plan_v1_completion_review.md"
       ],
       "tests_to_run": [],
       "validation_commands": [],
       "rollback_notes": "",
-      "done_criteria": "File layers/l2_brain/debate_review_runtime.py is written with expected content"
+      "done_criteria": "File .aiwg/reports/plan_v1_completion_review.md is written with expected content"
     },
     {
       "microphase_id": "L2_1_M2",
       "parent_phase_id": "L2_1",
-      "title": "Verify layers/l2_brain/debate_review_runtime.py",
-      "action": "Run validation for layers/l2_brain/debate_review_runtime.py",
+      "title": "Verify .aiwg/reports/plan_v1_completion_review.md",
+      "action": "Run validation for .aiwg/reports/plan_v1_completion_review.md",
       "expected_file_changes": [],
-      "tests_to_run": [
-        "layers/l2_brain/tests/test_debate_review_runtime.py"
-      ],
+      "tests_to_run": [],
       "validation_commands": [
-        "pytest layers/l2_brain/tests/test_debate_review_runtime.py"
+        "ls .aiwg/reports/plan_v1_completion_review.md"
       ],
       "rollback_notes": "",
-      "done_criteria": "Validation for layers/l2_brain/debate_review_runtime.py reports PASS"
+      "done_criteria": "Validation for .aiwg/reports/plan_v1_completion_review.md reports PASS"
     },
     {
       "microphase_id": "L2_2_M1",
       "parent_phase_id": "L2_2",
-      "title": "Draft layers/l2_brain/tests/test_debate_review_runtime.py",
-      "action": "Create/Update layers/l2_brain/tests/test_debate_review_runtime.py",
+      "title": "Draft .aiwg/reports/plan_v1_completion_review.json",
+      "action": "Create/Update .aiwg/reports/plan_v1_completion_review.json",
       "expected_file_changes": [
-        "layers/l2_brain/tests/test_debate_review_runtime.py"
+        ".aiwg/reports/plan_v1_completion_review.json"
       ],
       "tests_to_run": [],
       "validation_commands": [],
       "rollback_notes": "",
-      "done_criteria": "File layers/l2_brain/tests/test_debate_review_runtime.py is written with expected content"
+      "done_criteria": "File .aiwg/reports/plan_v1_completion_review.json is written with expected content"
     },
     {
       "microphase_id": "L2_2_M2",
       "parent_phase_id": "L2_2",
-      "title": "Verify layers/l2_brain/tests/test_debate_review_runtime.py",
-      "action": "Run validation for layers/l2_brain/tests/test_debate_review_runtime.py",
+      "title": "Verify .aiwg/reports/plan_v1_completion_review.json",
+      "action": "Run validation for .aiwg/reports/plan_v1_completion_review.json",
       "expected_file_changes": [],
-      "tests_to_run": [
-        "layers/l2_brain/tests/tests/test_debate_review_runtime.py"
-      ],
+      "tests_to_run": [],
       "validation_commands": [
-        "pytest layers/l2_brain/tests/tests/test_debate_review_runtime.py"
+        "ls .aiwg/reports/plan_v1_completion_review.json"
       ],
       "rollback_notes": "",
-      "done_criteria": "Validation for layers/l2_brain/tests/test_debate_review_runtime.py reports PASS"
+      "done_criteria": "Validation for .aiwg/reports/plan_v1_completion_review.json reports PASS"
     },
     {
       "microphase_id": "L2_3_M1",
       "parent_phase_id": "L2_3",
-      "title": "Draft .aiwg/reports/plan_v1_phase_27_debate_review_runtime.md",
-      "action": "Create/Update .aiwg/reports/plan_v1_phase_27_debate_review_runtime.md",
+      "title": "Draft .aiwg/reports/plan_v1_runtime_capability_scorecard.json",
+      "action": "Create/Update .aiwg/reports/plan_v1_runtime_capability_scorecard.json",
       "expected_file_changes": [
-        ".aiwg/reports/plan_v1_phase_27_debate_review_runtime.md"
+        ".aiwg/reports/plan_v1_runtime_capability_scorecard.json"
       ],
       "tests_to_run": [],
       "validation_commands": [],
       "rollback_notes": "",
-      "done_criteria": "File .aiwg/reports/plan_v1_phase_27_debate_review_runtime.md is written with expected content"
+      "done_criteria": "File .aiwg/reports/plan_v1_runtime_capability_scorecard.json is written with expected content"
     },
     {
       "microphase_id": "L2_3_M2",
       "parent_phase_id": "L2_3",
-      "title": "Verify .aiwg/reports/plan_v1_phase_27_debate_review_runtime.md",
-      "action": "Run validation for .aiwg/reports/plan_v1_phase_27_debate_review_runtime.md",
+      "title": "Verify .aiwg/reports/plan_v1_runtime_capability_scorecard.json",
+      "action": "Run validation for .aiwg/reports/plan_v1_runtime_capability_scorecard.json",
       "expected_file_changes": [],
       "tests_to_run": [],
       "validation_commands": [
-        "ls .aiwg/reports/plan_v1_phase_27_debate_review_runtime.md"
+        "ls .aiwg/reports/plan_v1_runtime_capability_scorecard.json"
       ],
       "rollback_notes": "",
-      "done_criteria": "Validation for .aiwg/reports/plan_v1_phase_27_debate_review_runtime.md reports PASS"
+      "done_criteria": "Validation for .aiwg/reports/plan_v1_runtime_capability_scorecard.json reports PASS"
     },
     {
       "microphase_id": "L2_4_M1",
       "parent_phase_id": "L2_4",
-      "title": "Draft .aiwg/reports/plan_v1_phase_27_debate_review_runtime.json",
-      "action": "Create/Update .aiwg/reports/plan_v1_phase_27_debate_review_runtime.json",
+      "title": "Draft .aiwg/reports/plan_v1_integration_backlog.json",
+      "action": "Create/Update .aiwg/reports/plan_v1_integration_backlog.json",
       "expected_file_changes": [
-        ".aiwg/reports/plan_v1_phase_27_debate_review_runtime.json"
+        ".aiwg/reports/plan_v1_integration_backlog.json"
       ],
       "tests_to_run": [],
       "validation_commands": [],
       "rollback_notes": "",
-      "done_criteria": "File .aiwg/reports/plan_v1_phase_27_debate_review_runtime.json is written with expected content"
+      "done_criteria": "File .aiwg/reports/plan_v1_integration_backlog.json is written with expected content"
     },
     {
       "microphase_id": "L2_4_M2",
       "parent_phase_id": "L2_4",
-      "title": "Verify .aiwg/reports/plan_v1_phase_27_debate_review_runtime.json",
-      "action": "Run validation for .aiwg/reports/plan_v1_phase_27_debate_review_runtime.json",
+      "title": "Verify .aiwg/reports/plan_v1_integration_backlog.json",
+      "action": "Run validation for .aiwg/reports/plan_v1_integration_backlog.json",
       "expected_file_changes": [],
       "tests_to_run": [],
       "validation_commands": [
-        "ls .aiwg/reports/plan_v1_phase_27_debate_review_runtime.json"
+        "ls .aiwg/reports/plan_v1_integration_backlog.json"
       ],
       "rollback_notes": "",
-      "done_criteria": "Validation for .aiwg/reports/plan_v1_phase_27_debate_review_runtime.json reports PASS"
-    },
-    {
-      "microphase_id": "L2_5_M1",
-      "parent_phase_id": "L2_5",
-      "title": "Draft .aiwg/reports/debate_review_latest.json",
-      "action": "Create/Update .aiwg/reports/debate_review_latest.json",
-      "expected_file_changes": [
-        ".aiwg/reports/debate_review_latest.json"
-      ],
-      "tests_to_run": [],
-      "validation_commands": [],
-      "rollback_notes": "",
-      "done_criteria": "File .aiwg/reports/debate_review_latest.json is written with expected content"
-    },
-    {
-      "microphase_id": "L2_5_M2",
-      "parent_phase_id": "L2_5",
-      "title": "Verify .aiwg/reports/debate_review_latest.json",
-      "action": "Run validation for .aiwg/reports/debate_review_latest.json",
-      "expected_file_changes": [],
-      "tests_to_run": [],
-      "validation_commands": [
-        "ls .aiwg/reports/debate_review_latest.json"
-      ],
-      "rollback_notes": "",
-      "done_criteria": "Validation for .aiwg/reports/debate_review_latest.json reports PASS"
+      "done_criteria": "Validation for .aiwg/reports/plan_v1_integration_backlog.json reports PASS"
     }
   ],
   "sdd_requirements": [
@@ -254,5 +206,5 @@
   "risk_register": [],
   "blocked_actions": [],
   "decision": "PASS",
-  "generated_at": "2026-05-16T14:15:21Z"
+  "generated_at": "2026-05-16T14:37:44Z"
 }

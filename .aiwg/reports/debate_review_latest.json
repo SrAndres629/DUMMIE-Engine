@@ -1,12 +1,12 @@
 {
   "debate_id": "debate_review_runtime",
-  "phase": "P28",
-  "mission_id": "MISSION_P29",
+  "phase": "P31",
+  "mission_id": "MISSION_PLAN_V1_COMPLETION_REVIEW",
   "decision": "accept_plan",
   "roles": [
     {
       "role": "proposer",
-      "claim": "Mission MISSION_P29 is ready for execution",
+      "claim": "Mission MISSION_PLAN_V1_COMPLETION_REVIEW is ready for execution",
       "evidence_refs": [],
       "objections": [],
       "counterarguments": [],
@@ -52,13 +52,13 @@
       "evidence_refs": [],
       "objections": [
         "missing_tests: microphase L2_1_M1 lacks test paths",
+        "missing_tests: microphase L2_1_M2 lacks test paths",
         "missing_tests: microphase L2_2_M1 lacks test paths",
+        "missing_tests: microphase L2_2_M2 lacks test paths",
         "missing_tests: microphase L2_3_M1 lacks test paths",
         "missing_tests: microphase L2_3_M2 lacks test paths",
         "missing_tests: microphase L2_4_M1 lacks test paths",
-        "missing_tests: microphase L2_4_M2 lacks test paths",
-        "missing_tests: microphase L2_5_M1 lacks test paths",
-        "missing_tests: microphase L2_5_M2 lacks test paths"
+        "missing_tests: microphase L2_4_M2 lacks test paths"
       ],
       "counterarguments": [],
       "risk_flags": [],
@@ -77,7 +77,7 @@
     }
   ],
   "claims": [
-    "Mission MISSION_P29 is ready for execution",
+    "Mission MISSION_PLAN_V1_COMPLETION_REVIEW is ready for execution",
     "Challenging mission assumptions",
     "Verifying evidence grounding",
     "Auditing operational risks",
@@ -87,13 +87,13 @@
   "objections": [
     "consensus_bias_risk: swarm confidence too high without dissent",
     "missing_tests: microphase L2_1_M1 lacks test paths",
+    "missing_tests: microphase L2_1_M2 lacks test paths",
     "missing_tests: microphase L2_2_M1 lacks test paths",
+    "missing_tests: microphase L2_2_M2 lacks test paths",
     "missing_tests: microphase L2_3_M1 lacks test paths",
     "missing_tests: microphase L2_3_M2 lacks test paths",
     "missing_tests: microphase L2_4_M1 lacks test paths",
-    "missing_tests: microphase L2_4_M2 lacks test paths",
-    "missing_tests: microphase L2_5_M1 lacks test paths",
-    "missing_tests: microphase L2_5_M2 lacks test paths"
+    "missing_tests: microphase L2_4_M2 lacks test paths"
   ],
   "contradictions": [],
   "evidence_gaps": [],
@@ -109,5 +109,5 @@
     ".aiwg/reports/strategic_partner_swarm_latest.json"
   ],
   "confidence": 0.9500000000000001,
-  "generated_at": "2026-05-16T14:25:28Z"
+  "generated_at": "2026-05-16T14:37:44Z"
 }

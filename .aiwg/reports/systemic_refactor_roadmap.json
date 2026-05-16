@@ -9,7 +9,7 @@
   },
   {
     "component": "SensorFirstPolicy",
-    "current_state": "wired",
+    "current_state": "operational",
     "missing_connection": "Enforcement across all IO boundaries",
     "what_it_unlocks": ["Significant token savings", "Reduced context noise"],
     "risk_if_skipped": "LLMs continue reading whole files unnecessarily",
@@ -17,7 +17,7 @@
   },
   {
     "component": "MetaGatewayRuntimeMeter",
-    "current_state": "declared",
+    "current_state": "operational",
     "missing_connection": "DummieDaemon integration",
     "what_it_unlocks": ["Empirical ROI of the cognitive architecture"],
     "risk_if_skipped": "Refactors are based on estimates, not reality",
@@ -25,7 +25,7 @@
   },
   {
     "component": "TokenCostLedger",
-    "current_state": "missing",
+    "current_state": "operational",
     "missing_connection": "LearningEpisode integration",
     "what_it_unlocks": ["Automated token budget enforcement"],
     "risk_if_skipped": "Session costs can explode without warning",
@@ -33,7 +33,7 @@
   },
   {
     "component": "MissionWorkbench",
-    "current_state": "missing",
+    "current_state": "operational",
     "missing_connection": "Filesystem per-mission directories",
     "what_it_unlocks": ["Transparent reasoning traces", "Checkpoints for recovery"],
     "risk_if_skipped": "Cognitive artifacts are lost after the session ends",
@@ -41,7 +41,7 @@
   },
   {
     "component": "VaultCurator",
-    "current_state": "missing",
+    "current_state": "operational",
     "missing_connection": "Workbench to SessionStore mapping",
     "what_it_unlocks": ["Permanent capability amplification"],
     "risk_if_skipped": "DUMMIE repeats the same mistakes in new sessions",

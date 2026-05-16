@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-05-09T14:02:27+00:00",
+  "generated_at": "2026-05-16T15:30:14+00:00",
   "repo_root": "/media/datasets/DUMMIE Engine",
   "summary": {
     "PASS": 29,
-    "DEGRADED": 1,
-    "BLOCKED": 0,
+    "DEGRADED": 0,
+    "BLOCKED": 1,
     "UNKNOWN": 2
   },
   "checks": [
@@ -209,13 +209,11 @@
     {
       "name": "l1.gateway.import",
       "layer": "L1",
-      "status": "PASS",
-      "evidence": [
-        "import mcp_server ok"
-      ],
+      "status": "BLOCKED",
+      "evidence": [],
       "command": "",
-      "error": "",
-      "next_repair": ""
+      "error": "No module named 'mcp'",
+      "next_repair": "repair L1 import path or dependencies"
     },
     {
       "name": "l2.model_router.import",
@@ -297,13 +295,13 @@
     {
       "name": "l0.dummied.runtime",
       "layer": "L0",
-      "status": "DEGRADED",
+      "status": "PASS",
       "evidence": [
-        "no live process containing dummied"
+        "process contains dummied"
       ],
       "command": "ps -eo cmd",
       "error": "",
-      "next_repair": "start L0 daemon"
+      "next_repair": ""
     },
     {
       "name": "infra.nats.runtime",

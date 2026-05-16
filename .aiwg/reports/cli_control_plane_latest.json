@@ -1,42 +1,36 @@
 {
-  "command": "status",
-  "decision": "PASS_WITH_WARNINGS",
+  "command": "operationalization-review",
+  "decision": "PASS",
   "payload": {
-    "current_phase": "P31",
-    "next_phase": "PLAN_V1_COMPLETION_REVIEW",
-    "restart_gate_decision": "PASS",
-    "flywheel_decision": "continue_next_phase",
-    "context_efficiency_decision": "IMPROVED",
-    "cache_hit_ratio": 1.0,
-    "stale_findings": 4,
-    "known_warnings": [],
-    "recommended_action": "advance_to_PLAN_V1_COMPLETION_REVIEW",
-    "decision": "PASS_WITH_WARNINGS",
-    "warnings": [],
-    "evidence_refs": [
-      ".aiwg/evolution/current_position.json",
-      ".aiwg/evolution/next_phase_seed.json",
-      ".aiwg/reports/restart_integration_gate_latest.json",
-      ".aiwg/reports/context_efficiency_benchmark_latest.json",
-      ".aiwg/reports/evolution_flywheel_latest.json",
-      ".aiwg/reports/prompt_cache_summary_latest.json",
-      ".aiwg/reports/stale_memory_report.json",
-      ".aiwg/reports/context_quant_result_latest.json",
-      ".aiwg/reports/context_quant_result_latest.json"
+    "review_id": "operationalization_pack_1",
+    "decision": "PASS",
+    "findings": [
+      {
+        "id": "frontmatter_repaired",
+        "status": "PASS",
+        "count": 16
+      },
+      {
+        "id": "context_gate_active",
+        "status": "PASS",
+        "decision": "ALLOW_MANIFEST_ONLY"
+      },
+      {
+        "id": "repo_query_active",
+        "status": "PASS"
+      },
+      {
+        "id": "chat_cli_active",
+        "status": "PASS"
+      }
     ],
-    "generated_at": "2026-05-16T14:37:45Z"
+    "token_economy_impact": "improved",
+    "context_strategy_enforced": true,
+    "generated_at": "2026-05-16T15:13:56Z"
   },
   "warnings": [],
   "evidence_refs": [
-    ".aiwg/evolution/current_position.json",
-    ".aiwg/evolution/next_phase_seed.json",
-    ".aiwg/reports/restart_integration_gate_latest.json",
-    ".aiwg/reports/context_efficiency_benchmark_latest.json",
-    ".aiwg/reports/evolution_flywheel_latest.json",
-    ".aiwg/reports/prompt_cache_summary_latest.json",
-    ".aiwg/reports/stale_memory_report.json",
-    ".aiwg/reports/context_quant_result_latest.json",
-    ".aiwg/reports/context_quant_result_latest.json"
+    ".aiwg/reports/operationalization_review_latest.json"
   ],
-  "generated_at": "2026-05-16T14:37:45Z"
+  "generated_at": "2026-05-16T15:13:56Z"
 }

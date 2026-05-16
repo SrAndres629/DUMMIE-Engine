@@ -1,0 +1,65 @@
+{
+  "nodes": [
+    {
+      "name": "SENSORY_INPUT",
+      "description": "Ingesta de prompt y clasificaci\u00f3n de intenci\u00f3n",
+      "layer": "L2",
+      "file_path": "layers/l2_brain/prompt_to_mission.py",
+      "status": "MISSING",
+      "dependencies": [
+        "mission_planner.py"
+      ]
+    },
+    {
+      "name": "MISSION_PLANNING",
+      "description": "Descomposici\u00f3n de tareas en Mission DAG",
+      "layer": "L2",
+      "file_path": "layers/l2_brain/mission_planner.py",
+      "status": "MISSING",
+      "dependencies": [
+        "daemon.py"
+      ]
+    },
+    {
+      "name": "EXECUTIVE_DAEMON",
+      "description": "Ejecuci\u00f3n de misiones y gesti\u00f3n de herramientas",
+      "layer": "L2",
+      "file_path": "layers/l2_brain/daemon.py",
+      "status": "MISSING",
+      "dependencies": [
+        "outcome_evaluator.py",
+        "learning_episode.py"
+      ]
+    },
+    {
+      "name": "OUTCOME_EVALUATION",
+      "description": "Validaci\u00f3n de resultados vs objetivos",
+      "layer": "L2",
+      "file_path": "layers/l2_brain/outcome_evaluator.py",
+      "status": "MISSING",
+      "dependencies": [
+        "learning_episode.py"
+      ]
+    },
+    {
+      "name": "LEARNING_PERSISTENCE",
+      "description": "Cierre de episodio de aprendizaje y guardado en 4D-TES",
+      "layer": "L2",
+      "file_path": "layers/l2_brain/learning_episode.py",
+      "status": "MISSING",
+      "dependencies": [
+        "session_store.py"
+      ]
+    },
+    {
+      "name": "COGNITIVE_MEMORY",
+      "description": "Almacenamiento causal inmutable",
+      "layer": "L2",
+      "file_path": "layers/l2_brain/session_store.py",
+      "status": "MISSING",
+      "dependencies": []
+    }
+  ],
+  "data_flow_integrity": "BROKEN",
+  "generated_at": "2026-05-16T15:25:49Z"
+}

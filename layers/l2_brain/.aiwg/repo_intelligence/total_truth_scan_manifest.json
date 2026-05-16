@@ -1,0 +1,16 @@
+{
+  "repo_id": "dummie_engine",
+  "total_files": 336,
+  "tracked_files": 330,
+  "untracked_files": 6,
+  "physical_sovereignty": {
+    "l0_overseer": false,
+    "l1_nervous": false,
+    "l2_brain": false,
+    "l3_shield": false,
+    "l4_edge": false,
+    "l5_muscle": false,
+    "l6_skin": false
+  },
+  "generated_at": "2026-05-16T15:25:49Z"
+}

@@ -1,0 +1,15 @@
+{
+  "decision": "WARN",
+  "conflict_count": 1,
+  "conflicts": [
+    {
+      "type": "STALE_REPORT",
+      "severity": "MEDIUM",
+      "description": "Report plan_v1_phase_21_1_22_state_coherence_embedding_adapter.json is older than 24 hours",
+      "affected_files": [
+        ".aiwg/reports/plan_v1_phase_21_1_22_state_coherence_embedding_adapter.json"
+      ]
+    }
+  ],
+  "generated_at": "2026-05-16T15:37:01Z"
+}

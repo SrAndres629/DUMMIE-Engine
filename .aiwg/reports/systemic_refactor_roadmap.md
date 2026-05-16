@@ -9,11 +9,11 @@ DUMMIE has transitioned from "ideas" to a "wired" state with the implementation 
 | Component | Current State | Missing Connection | What it Unlocks | Recommended Phase |
 | :--- | :--- | :--- | :--- | :--- |
 | **CognitiveHookPipeline** | Operational | Feedback loop from evaluation | Dynamic authority adjustment | 0 |
-| **SensorFirstPolicy** | Wired | Enforcement in all read paths | Drastic token reduction | 1 |
-| **MetaGatewayRuntimeMeter** | Declared | Integration into Daemon flow | Empirical efficiency proof | 1 |
-| **TokenCostLedger** | Missing | LearningEpisode data stream | Real-time economy management | 2 |
-| **MissionWorkbench** | Missing | Filesystem artifact storage | Transparency and persistence | 3 |
-| **VaultCurator** | Missing | Workbench -> Vault pipeline | Long-term learning crystallization | 3 |
+| **SensorFirstPolicy** | Operational | Enforcement in all read paths | Drastic token reduction | 1 |
+| **MetaGatewayRuntimeMeter** | Operational | Integration into Daemon flow | Empirical efficiency proof | 1 |
+| **TokenCostLedger** | Operational | LearningEpisode data stream | Real-time economy management | 2 |
+| **MissionWorkbench** | Operational | Filesystem artifact storage | Transparency and persistence | 3 |
+| **VaultCurator** | Operational | Workbench -> Vault pipeline | Long-term learning crystallization | 3 |
 | **LearningEpisode** | Operational | SessionStore / 4D-TES | Causal memory association | 4 |
 | **MissionOrchestrator** | Wired (Basic) | DAG / MissionState persistence | Multi-step complex missions | 5 |
 | **LocalModelRuntime** | Declared | PromptRefiner / Summarizer | Low-cost pre-processing | 6 |

@@ -1,7 +1,7 @@
 {
   "contract_id": "mission_autonomy_contract",
   "phase": "P28",
-  "mission_id": "MISSION_P29",
+  "mission_id": "MISSION_PLAN_V1_COMPLETION_REVIEW",
   "decision": "PASS",
   "default_allowed_scopes": [
     "ADVISORY_ONLY",
@@ -38,5 +38,5 @@
   "evidence_refs": [
     ".aiwg/reports/debate_review_latest.json"
   ],
-  "generated_at": "2026-05-16T14:25:28Z"
+  "generated_at": "2026-05-16T14:37:44Z"
 }
