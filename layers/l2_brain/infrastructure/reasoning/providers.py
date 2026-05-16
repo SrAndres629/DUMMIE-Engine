@@ -13,6 +13,9 @@ class ReasoningResult:
     data: dict[str, Any]
     latency_ms: float = 0.0
     error: str = ""
+    prompt_tokens: int = 0
+    completion_tokens: int = 0
+    cached_tokens: int = 0
 
 class LocalReasoningProvider(Protocol):
     name: str
@@ -66,7 +69,17 @@ class OllamaGemmaProvider:
             with urlrequest.urlopen(req, timeout=self.timeout) as resp:
                 raw = json.loads(resp.read().decode("utf-8"))
             content = raw.get("message", {}).get("content") or raw.get("response") or "{}"
-            return ReasoningResult(self.name, "ok", json.loads(content), (time.perf_counter() - started) * 1000.0)
+            
+            # Ollama token extraction
+            prompt_t = raw.get("prompt_eval_count", 0)
+            completion_t = raw.get("eval_count", 0)
+            
+            return ReasoningResult(
+                self.name, "ok", json.loads(content), 
+                (time.perf_counter() - started) * 1000.0,
+                prompt_tokens=prompt_t,
+                completion_tokens=completion_t
+            )
         except Exception as exc:
             return ReasoningResult(self.name, "unavailable", {}, (time.perf_counter() - started) * 1000.0, str(exc))
 
@@ -114,7 +127,16 @@ class OpenAICompatibleProvider:
         try:
             with urlrequest.urlopen(req, timeout=self.timeout) as resp:
                 raw = json.loads(resp.read().decode("utf-8"))
+            
+            usage = raw.get("usage", {})
             content = raw.get("choices", [{}])[0].get("message", {}).get("content") or "{}"
-            return ReasoningResult(self.name, "ok", json.loads(content), (time.perf_counter() - started) * 1000.0)
+            
+            return ReasoningResult(
+                self.name, "ok", json.loads(content), 
+                (time.perf_counter() - started) * 1000.0,
+                prompt_tokens=usage.get("prompt_tokens", 0),
+                completion_tokens=usage.get("completion_tokens", 0),
+                cached_tokens=usage.get("prompt_tokens_details", {}).get("cached_tokens", 0)
+            )
         except Exception as exc:
             return ReasoningResult(self.name, "unavailable", {}, (time.perf_counter() - started) * 1000.0, str(exc))

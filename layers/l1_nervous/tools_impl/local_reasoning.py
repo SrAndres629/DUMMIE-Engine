@@ -27,7 +27,7 @@ class LocalReasoningToolService:
             except ImportError:
                 from local_reasoning import LocalReasoningService
 
-            reasoning_service = LocalReasoningService()
+            reasoning_service = LocalReasoningService(ledger=getattr(self.orchestrator, "token_ledger", None))
         self.reasoning_service = reasoning_service
 
     async def semantic_recall(

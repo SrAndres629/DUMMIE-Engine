@@ -35,10 +35,17 @@ class TokenCostLedger:
     def __init__(self, root: str | Path = ".aiwg"):
         self.root = Path(root)
 
-    def record_usage(self, event: dict) -> dict:
-        session_id = str(event.get("session_id", ""))
-        mission_id = str(event.get("mission_id", ""))
-        phase_id = str(event.get("phase_id", ""))
+    def record_usage(self, event: dict | None = None, **kwargs) -> dict:
+        """
+        Records token usage. Supports passing a single dict (for ModelRouter)
+        or keyword arguments (for ModelExecutor).
+        """
+        data = event if isinstance(event, dict) else kwargs
+        
+        session_id = str(data.get("session_id", ""))
+        mission_id = str(data.get("mission_id", ""))
+        phase_id = str(data.get("phase_id", ""))
+        concept = str(data.get("concept", "general"))
 
         if mission_id:
             self._validate_id("mission_id", mission_id)
@@ -47,24 +54,32 @@ class TokenCostLedger:
         if phase_id:
             self._validate_id("phase_id", phase_id)
 
-        self._reject_private(event)
+        self._reject_private(data)
 
-        event_id = event.get("event_id") or f"evt-{uuid.uuid4().hex}"
-        timestamp = event.get("timestamp") or _now()
+        event_id = data.get("event_id") or f"evt-{uuid.uuid4().hex}"
+        timestamp = data.get("timestamp") or _now()
+
+        # Handle different naming conventions between router and executor
+        input_tokens = int(data.get("input_tokens") or data.get("prompt_tokens") or 0)
+        output_tokens = int(data.get("output_tokens") or data.get("completion_tokens") or 0)
+        cached_tokens = int(data.get("cached_tokens") or 0)
+        reasoning_tokens = int(data.get("reasoning_tokens") or 0)
 
         normalized = {
             "event_id": event_id,
             "session_id": session_id,
             "mission_id": mission_id,
             "phase_id": phase_id,
-            "model_tier": event.get("model_tier", "unknown"),
-            "provider": event.get("provider", "unknown"),
-            "source": event.get("source", "unknown"),
-            "input_tokens": int(event.get("input_tokens") or 0),
-            "cached_tokens": int(event.get("cached_tokens") or 0),
-            "output_tokens": int(event.get("output_tokens") or 0),
-            "reasoning_tokens": int(event.get("reasoning_tokens") or 0),
-            "estimated": bool(event.get("estimated", False)),
+            "concept": concept,
+            "model_tier": data.get("model_tier", data.get("tier", "unknown")),
+            "model_id": data.get("model_id", "unknown"),
+            "provider": data.get("provider", "unknown"),
+            "source": data.get("source", "unknown"),
+            "input_tokens": input_tokens,
+            "cached_tokens": cached_tokens,
+            "output_tokens": output_tokens,
+            "reasoning_tokens": reasoning_tokens,
+            "estimated": bool(data.get("estimated", False)),
             "timestamp": timestamp,
         }
 
@@ -76,9 +91,12 @@ class TokenCostLedger:
             handle.seek(0)
             for line in handle:
                 if line.strip():
-                    existing = json.loads(line)
-                    if existing.get("event_id") == event_id:
-                        return existing
+                    try:
+                        existing = json.loads(line)
+                        if existing.get("event_id") == event_id:
+                            return existing
+                    except json.JSONDecodeError:
+                        continue
 
             handle.seek(0, os.SEEK_END)
             handle.write(json.dumps(normalized, ensure_ascii=True, sort_keys=True) + "\n")
@@ -99,7 +117,10 @@ class TokenCostLedger:
             with self._lock_ledger(path, mode="r") as handle:
                 for line in handle:
                     if line.strip():
-                        yield json.loads(line)
+                        try:
+                            yield json.loads(line)
+                        except json.JSONDecodeError:
+                            continue
 
         return _reader()
 
@@ -140,18 +161,55 @@ class TokenCostLedger:
             "total_billable_tokens_estimate": 0,
             "total_raw_tokens_seen": 0,
             "event_count": 0,
+            "estimated_input_tokens": 0,
+            "by_concept": {},
+            "by_model": {},
+        }
+        VALID_CONCEPTS = {
+            "main", "utility_router", "utility_summarizer", "utility_shaper", 
+            "utility_rerank", "utility_debate", "utility_audit", "utility_repair",
+            "utility_intelligence", "utility_planning", "utility_discovery"
         }
         for event in events:
             input_t = int(event.get("input_tokens", 0))
             cached_t = int(event.get("cached_tokens", 0))
             output_t = int(event.get("output_tokens", 0))
             reasoning_t = int(event.get("reasoning_tokens", 0))
+            concept = event.get("concept", "unknown")
+            model_id = event.get("model_id", "unknown")
+            is_estimated = bool(event.get("estimated", False))
+
+            # Filter hallucinated concepts
+            if concept not in VALID_CONCEPTS and not concept.startswith("mission_"):
+                concept = "unknown_artifact"
+
+            summary["event_count"] += 1
+            
+            if is_estimated:
+                summary["estimated_input_tokens"] += input_t
+                # We don't add to main totals if it's just an estimation to avoid double counting
+                # unless we want to track "intended" usage. 
+                # For this engine, we prefer actual usage.
+                continue
 
             summary["total_input_tokens"] += input_t
             summary["total_cached_tokens"] += cached_t
             summary["total_output_tokens"] += output_t
             summary["total_reasoning_tokens"] += reasoning_t
-            summary["event_count"] += 1
+
+            # Group by concept (only for actual usage to keep report clean)
+            if concept not in summary["by_concept"]:
+                summary["by_concept"][concept] = {"input": 0, "output": 0, "cached": 0, "reqs": 0}
+            summary["by_concept"][concept]["input"] += input_t
+            summary["by_concept"][concept]["output"] += output_t
+            summary["by_concept"][concept]["cached"] += cached_t
+            summary["by_concept"][concept]["reqs"] += 1
+
+            # Group by model
+            if model_id not in summary["by_model"]:
+                summary["by_model"][model_id] = {"input": 0, "output": 0}
+            summary["by_model"][model_id]["input"] += input_t
+            summary["by_model"][model_id]["output"] += output_t
 
         summary["total_uncached_input_tokens"] = max(
             0, summary["total_input_tokens"] - summary["total_cached_tokens"]

@@ -50,12 +50,19 @@ class ContextBudgetManager:
         )
         return total_estimated > budget.get("compression_threshold", 0)
 
-    def enforce_budget(self, context_packet: dict, budget: dict) -> dict:
+    def enforce_budget(self, context_packet: dict, budget: dict, session_tokens: int = 0, daily_limit: int = 0) -> dict:
         limit = budget["total_budget"]
         items = list(context_packet.get("items", []))
 
         # Calculate total tokens
         total_tokens = sum(item.get("estimated_tokens", 0) for item in items)
+        
+        # High pressure detection (session vs daily budget)
+        is_high_pressure = False
+        if daily_limit > 0 and session_tokens > (daily_limit * 0.8):
+            is_high_pressure = True
+            limit = int(limit * 0.5) # Aggressive reduction
+            logger.info(f"Budget high pressure detected ({session_tokens}/{daily_limit}). Reducing local limit to {limit}.")
 
         if total_tokens <= limit:
             return {
@@ -64,8 +71,8 @@ class ContextBudgetManager:
                 "kept_refs": [item.get("id") for item in items if item.get("id")],
                 "compressed_refs": [],
                 "budget_exceeded": False,
-                "pressure": "low" if total_tokens < limit * 0.5 else "medium",
-                "reason": "under_budget",
+                "pressure": "high" if is_high_pressure else "low" if total_tokens < limit * 0.5 else "medium",
+                "reason": "under_budget" if not is_high_pressure else "high_pressure_enforced",
             }
 
         # Rules:

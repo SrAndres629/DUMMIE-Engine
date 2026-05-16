@@ -1,9 +1,29 @@
 {
   "decision": "PASS",
-  "answer": "I understood your intent as 'context', but I don't have a specific handler for it yet.",
-  "evidence_refs": [],
+  "answer": "Token Economy Benchmark: 26121.43x reduction ratio, Efficiency Score: 100.0/100. Measurement: deterministic_estimate.",
+  "evidence_refs": [
+    ".aiwg/reports/token_economy_benchmark_latest.json"
+  ],
   "recommended_next_actions": [],
   "context_strategy": "ALLOW_MANIFEST_ONLY",
-  "warnings": [],
-  "generated_at": "2026-05-16T15:13:56Z"
+  "warnings": [
+    "Memory spine is DEGRADED. Using file-backed fallback."
+  ],
+  "memory_spine": {
+    "decision": "PASS_WITH_WARNINGS",
+    "query": "token_benchmark",
+    "status": "DEGRADED_WITH_FILE_BACKED_MEMORY",
+    "memory_refs": [],
+    "learning_episode_refs": [],
+    "vault_refs": [],
+    "graph_status": "DEGRADED",
+    "used_before_chat_response": true,
+    "warnings": [
+      "Kuzu DEGRADED. Falling back to file-backed session memory scan."
+    ],
+    "evidence_refs": [],
+    "generated_at": "2026-05-16T16:16:44Z"
+  },
+  "memory_spine_used": true,
+  "generated_at": "2026-05-16T16:16:44Z"
 }

@@ -191,12 +191,16 @@ class DummieDaemon:
             from .token_cost_ledger import TokenCostLedger
             from .context_budget_manager import ContextBudgetManager
             self.runtime_meter = MetaGatewayRuntimeMeter()
-            self.token_ledger = TokenCostLedger()
+            self.token_ledger = TokenCostLedger(root=ledger_path if ledger_path else ".aiwg")
             self.budget_manager = ContextBudgetManager()
 
-            # [WAVE 6] Link ledger to router if both available
-            if self.model_router and hasattr(self.model_router, "ledger") and not self.model_router.ledger:
+            # [WAVE 6] Link ledger to router and executor
+            if self.model_router:
                 self.model_router.ledger = self.token_ledger
+            
+            if self.model_executor:
+                self.model_executor.token_ledger = self.token_ledger
+                
         except ImportError:
             self.runtime_meter = None
             self.token_ledger = None

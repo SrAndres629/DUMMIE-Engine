@@ -266,6 +266,7 @@ class ModelRouter:
         session_id: str = "",
         mission_id: str = "",
         phase_id: str = "",
+        concept: str = "routing",
     ) -> RoutingDecision:
         """
         Determine the optimal model tier and return a RoutingDecision.
@@ -320,6 +321,7 @@ class ModelRouter:
                     "session_id": session_id,
                     "mission_id": mission_id,
                     "phase_id": phase_id,
+                    "concept": concept,
                     "model_tier": target_tier.value,
                     "provider": model.provider,
                     "source": "router",
@@ -360,6 +362,7 @@ class ModelRouter:
         phase_id: str = "",
         cached_tokens: int = 0,
         reasoning_tokens: int = 0,
+        concept: str = "general",
     ) -> dict | None:
         """Explicitly emit a usage event to the ledger."""
         if not self.ledger:
@@ -369,6 +372,7 @@ class ModelRouter:
             "session_id": session_id,
             "mission_id": mission_id,
             "phase_id": phase_id,
+            "concept": concept,
             "model_tier": tier.value if isinstance(tier, ModelTier) else str(tier),
             "provider": provider,
             "source": "provider_response",
@@ -390,7 +394,10 @@ class ModelRouter:
 
 
 def _estimate_prompt_tokens(text: str) -> int:
-    """Rough token estimation: ~4 chars per token."""
+    """
+    Conservative token estimation: ~3.5 chars per token for code/structured text.
+    DE-PHASE1-ROUTER uses 4.0 as a floor.
+    """
     return max(1, len(text) // 4)
 
 

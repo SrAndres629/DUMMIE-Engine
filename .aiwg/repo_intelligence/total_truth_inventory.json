@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-16T15:37:01Z",
+  "generated_at": "2026-05-16T15:47:13Z",
   "fingerprints": [
     {
       "path": ".agentignore",
@@ -3378,10 +3378,10 @@
     },
     {
       "path": ".aiwg/reports/context_coverage_latest.json",
-      "sha256": "151ebaee92200175f98d06c70134a08e59119009771c949aaa03554a2a898f8c",
-      "size_bytes": 177884,
-      "modified_at": "2026-05-16T15:31:40.705357Z",
-      "is_tracked": false,
+      "sha256": "6e6ad3a3855f88d18e7232811d48c1daa6f91517957687e63e4ac2aafc06fb93",
+      "size_bytes": 177825,
+      "modified_at": "2026-05-16T15:37:01.862068Z",
+      "is_tracked": true,
       "layer": "unknown",
       "category": "generated"
     },
@@ -3498,7 +3498,7 @@
       "sha256": "3f0c7d926a74b85832411fca74713c754aa5cc4ecc3f8dbebdf01d028c76363b",
       "size_bytes": 128,
       "modified_at": "2026-05-16T14:51:40.053402Z",
-      "is_tracked": false,
+      "is_tracked": true,
       "layer": "unknown",
       "category": "generated"
     },
@@ -4566,10 +4566,10 @@
     },
     {
       "path": ".aiwg/reports/lifecycle_integration_latest.json",
-      "sha256": "bf8379daa03af49242b5172f2d5e31e14b2e7f82736cc459cf460853ae4366ec",
+      "sha256": "bef6c9233b065582401a6a58f0e76f883ac636e8e4b48d4a9ba0fae7a8f8766e",
       "size_bytes": 1763,
-      "modified_at": "2026-05-16T15:31:40.671363Z",
-      "is_tracked": false,
+      "modified_at": "2026-05-16T15:37:01.819791Z",
+      "is_tracked": true,
       "layer": "unknown",
       "category": "generated"
     },
@@ -4613,8 +4613,8 @@
       "path": ".aiwg/reports/memory_spine_sync_latest.json",
       "sha256": "4d4ec74cc4929562c197c55dd11508f3239892a08f1a259ac38b47785a45aa4b",
       "size_bytes": 116,
-      "modified_at": "2026-05-16T15:31:40.707507Z",
-      "is_tracked": false,
+      "modified_at": "2026-05-16T15:37:01.864217Z",
+      "is_tracked": true,
       "layer": "unknown",
       "category": "generated"
     },
@@ -4710,10 +4710,10 @@
     },
     {
       "path": ".aiwg/reports/operationalization_pack_2_summary.json",
-      "sha256": "82c491a257124885f275d080a317371ccf16152b9445e1491d355d4a3393657a",
+      "sha256": "279f8c6a88d0608608ecc29e45f6d2009bdf2656357a7e1c07326aaec929006e",
       "size_bytes": 243,
-      "modified_at": "2026-05-16T15:31:40.707598Z",
-      "is_tracked": false,
+      "modified_at": "2026-05-16T15:37:01.864309Z",
+      "is_tracked": true,
       "layer": "unknown",
       "category": "generated"
     },
@@ -4755,19 +4755,19 @@
     },
     {
       "path": ".aiwg/reports/source_of_truth_conflicts_latest.json",
-      "sha256": "bc26528667d6bb9393869f197af53d963ceb68ab83b4e69d67043688ba525ff1",
+      "sha256": "f421c5f49df5fac8f755d1b6b85f213a23c15828ba6e090b0345f60235b0d64d",
       "size_bytes": 416,
-      "modified_at": "2026-05-16T15:31:40.678603Z",
-      "is_tracked": false,
+      "modified_at": "2026-05-16T15:37:01.827990Z",
+      "is_tracked": true,
       "layer": "unknown",
       "category": "generated"
     },
     {
       "path": ".aiwg/reports/sovereign_readiness_latest.json",
-      "sha256": "a9248c6fc0a5e488a0e7a59b9e89056e3e6837437a5c6f853a64522c4e495d6d",
+      "sha256": "c7c40134f95d348540ea0df40daaaf55616f9591e30f7ce076e63973a1ac9305",
       "size_bytes": 739,
-      "modified_at": "2026-05-16T15:31:40.706547Z",
-      "is_tracked": false,
+      "modified_at": "2026-05-16T15:37:01.863282Z",
+      "is_tracked": true,
       "layer": "unknown",
       "category": "generated"
     },
@@ -4854,10 +4854,10 @@
     },
     {
       "path": ".aiwg/reports/total_truth_scan_latest.json",
-      "sha256": "e65293971c1de05eda623be157058e8c8bce7848938fc1e74e3d433f3559df9b",
+      "sha256": "040d0ab3eb178918a5d6b7e80e70b9db86ce2e791510f622db48ca979b5ef162",
       "size_bytes": 455,
-      "modified_at": "2026-05-16T15:31:40.663601Z",
-      "is_tracked": false,
+      "modified_at": "2026-05-16T15:37:01.795020Z",
+      "is_tracked": true,
       "layer": "unknown",
       "category": "generated"
     },
@@ -4890,19 +4890,19 @@
     },
     {
       "path": ".aiwg/repo_intelligence/total_truth_inventory.json",
-      "sha256": "d82ec2dd8d381c28d34828943d72374e8f419f3f0e9d51fa5afaa64f3eb6fbd6",
-      "size_bytes": 13606960,
-      "modified_at": "2026-05-16T15:31:40.662625Z",
-      "is_tracked": false,
+      "sha256": "bfe98bffbe4e955ba6b290d38e07678e374d80104501b9198d24c6914a810a2f",
+      "size_bytes": 13607600,
+      "modified_at": "2026-05-16T15:37:01.793600Z",
+      "is_tracked": true,
       "layer": "unknown",
       "category": "config"
     },
     {
       "path": ".aiwg/repo_intelligence/total_truth_scan_manifest.json",
-      "sha256": "7108e61f7ea556ad2aa78d99b3b3924a062745b674a9d00b8d50b476683b94eb",
+      "sha256": "20d53a3adb151e3f91b263a09be801dbc7f70d9d7c314bf94d8d047d1cb06182",
       "size_bytes": 343,
-      "modified_at": "2026-05-16T15:31:40.413296Z",
-      "is_tracked": false,
+      "modified_at": "2026-05-16T15:37:01.498009Z",
+      "is_tracked": true,
       "layer": "unknown",
       "category": "config"
     },
@@ -280122,7 +280122,7 @@
       "sha256": "11669d0bcd862e8099478640c352ca9c39d3d4b2a520ea3f1adb0d7851080874",
       "size_bytes": 4335,
       "modified_at": "2026-05-16T15:25:23.285557Z",
-      "is_tracked": false,
+      "is_tracked": true,
       "layer": "l2_brain",
       "category": "runtime"
     },
@@ -280221,7 +280221,7 @@
       "sha256": "33bf05061c90d837e5dc656f626988b77720f7a1b6359a56426ae4f353228ca6",
       "size_bytes": 3017,
       "modified_at": "2026-05-16T15:27:08.833028Z",
-      "is_tracked": false,
+      "is_tracked": true,
       "layer": "l2_brain",
       "category": "runtime"
     },
@@ -280662,7 +280662,7 @@
       "sha256": "44f8dd1d520547bc94988d1802cf285af438808309c504de422aa7df5320b175",
       "size_bytes": 4202,
       "modified_at": "2026-05-16T15:25:03.979154Z",
-      "is_tracked": false,
+      "is_tracked": true,
       "layer": "l2_brain",
       "category": "runtime"
     },
@@ -280770,7 +280770,7 @@
       "sha256": "68a98e6e4bfd0fe4c2fa245ef3168807c9188f42c97a4dbd93df480decc2d54a",
       "size_bytes": 5909,
       "modified_at": "2026-05-16T15:30:24.830151Z",
-      "is_tracked": false,
+      "is_tracked": true,
       "layer": "l2_brain",
       "category": "runtime"
     },
@@ -280779,7 +280779,7 @@
       "sha256": "3d6f666f412edc47e20513e8ed8a140189de87986a1975976062257a894cf991",
       "size_bytes": 3745,
       "modified_at": "2026-05-16T15:25:33.232512Z",
-      "is_tracked": false,
+      "is_tracked": true,
       "layer": "l2_brain",
       "category": "runtime"
     },
@@ -280887,7 +280887,7 @@
       "sha256": "8630dac1c5570007171476f307a338652ac5aa4d406b26c0f68c9fd995443065",
       "size_bytes": 2991,
       "modified_at": "2026-05-16T15:27:45.162486Z",
-      "is_tracked": false,
+      "is_tracked": true,
       "layer": "l2_brain",
       "category": "runtime"
     },
@@ -281067,7 +281067,7 @@
       "sha256": "a543a9562ea972df7c6803b65445392eee0756ba15acd36fcc9182787a796d76",
       "size_bytes": 5935,
       "modified_at": "2026-05-16T15:24:46.261410Z",
-      "is_tracked": false,
+      "is_tracked": true,
       "layer": "l2_brain",
       "category": "runtime"
     },
@@ -296687,6 +296687,15 @@
       "category": "runtime"
     },
     {
+      "path": "layers/l2_brain/tests/test_context_coverage_auditor.py",
+      "sha256": "5116bcd41570c1ad9a3022369c3ca6592f688fbdef24f3d629e1a2bba4cb63cd",
+      "size_bytes": 1225,
+      "modified_at": "2026-05-16T15:46:08.109080Z",
+      "is_tracked": true,
+      "layer": "l2_brain",
+      "category": "runtime"
+    },
+    {
       "path": "layers/l2_brain/tests/test_context_efficiency_benchmark.py",
       "sha256": "1337580c637b401b866eb7a4b5964d2a77c9f8ff171e6c42c8b0f1c0ff10c7f6",
       "size_bytes": 3037,
@@ -297213,7 +297222,7 @@
       "sha256": "e65a9eefbdc285c04b83a131670103b2cbe051f981b5f257aea5c69dbfc26f8b",
       "size_bytes": 1150,
       "modified_at": "2026-05-16T15:36:37.446491Z",
-      "is_tracked": false,
+      "is_tracked": true,
       "layer": "l2_brain",
       "category": "runtime"
     },
@@ -297330,7 +297339,7 @@
       "sha256": "c6c6225aae7e628f45cab9f1bc4335e3715697e261313c1fe7bec04c3281ec99",
       "size_bytes": 1737,
       "modified_at": "2026-05-16T15:32:54.580305Z",
-      "is_tracked": false,
+      "is_tracked": true,
       "layer": "l2_brain",
       "category": "runtime"
     },
@@ -297420,7 +297429,7 @@
       "sha256": "a3b126e41ab039e6c7726911db0177e0da09f15414ba67e309430e982218bf7e",
       "size_bytes": 84,
       "modified_at": "2026-05-16T15:25:49.062176Z",
-      "is_tracked": false,
+      "is_tracked": true,
       "layer": "l2_brain",
       "category": "generated"
     },
@@ -297429,7 +297438,7 @@
       "sha256": "6ddf2db4cd062de2064713514d50db53d03f86f47aac3034ae4643025d6c9909",
       "size_bytes": 1793,
       "modified_at": "2026-05-16T15:25:49.061446Z",
-      "is_tracked": false,
+      "is_tracked": true,
       "layer": "l2_brain",
       "category": "generated"
     },
@@ -297438,7 +297447,7 @@
       "sha256": "72c51b4f41a7b693b7739c07b04a33737b44d45a2a338176d67852c7eaa35e32",
       "size_bytes": 218,
       "modified_at": "2026-05-16T15:25:49.062508Z",
-      "is_tracked": false,
+      "is_tracked": true,
       "layer": "l2_brain",
       "category": "generated"
     },
@@ -297447,7 +297456,7 @@
       "sha256": "52244cdeef9bccabf8b153b4af23f3a6cc729f75ac10d820e163423351526a1e",
       "size_bytes": 319,
       "modified_at": "2026-05-16T15:25:49.061979Z",
-      "is_tracked": false,
+      "is_tracked": true,
       "layer": "l2_brain",
       "category": "generated"
     },
@@ -297456,7 +297465,7 @@
       "sha256": "1fe8b1cd19eedd9e614128e53cbec0c6cadacb121f96b6c4f45da7e6d56ad367",
       "size_bytes": 734,
       "modified_at": "2026-05-16T15:25:49.062424Z",
-      "is_tracked": false,
+      "is_tracked": true,
       "layer": "l2_brain",
       "category": "generated"
     },
@@ -297465,7 +297474,7 @@
       "sha256": "3ed254adb979cc438cf220a07a300ae46f3d4f99923e596349b63f5c240f88d9",
       "size_bytes": 455,
       "modified_at": "2026-05-16T15:25:49.061028Z",
-      "is_tracked": false,
+      "is_tracked": true,
       "layer": "l2_brain",
       "category": "generated"
     },
@@ -297474,7 +297483,7 @@
       "sha256": "703a128f4a6143c7c9b60740294e8451d4c7cc318aca4157678f8ddb6d381160",
       "size_bytes": 102910,
       "modified_at": "2026-05-16T15:25:49.060887Z",
-      "is_tracked": false,
+      "is_tracked": true,
       "layer": "l2_brain",
       "category": "config"
     },
@@ -297483,7 +297492,7 @@
       "sha256": "3e10f54968cb6cfe65052c93cddfb6312ba12bfa8313cd39e6d6933b62833f29",
       "size_bytes": 343,
       "modified_at": "2026-05-16T15:25:49.058722Z",
-      "is_tracked": false,
+      "is_tracked": true,
       "layer": "l2_brain",
       "category": "config"
     },
