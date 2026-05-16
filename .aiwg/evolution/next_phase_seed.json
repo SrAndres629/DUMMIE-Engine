@@ -1,26 +1,30 @@
 {
-  "next_phase": "P3",
-  "name": "Artifact Lifecycle Reconciliation Audit",
-  "objective": "Audit existing cognitive artifacts before creating new protocols or lifecycle systems.",
-  "why_now": "DUMMIE must know which artifacts already exist, which are canonical, which are stale-prone, which enter prompts, and which are dead documentation before building more artifact infrastructure.",
+  "next_phase": "P4",
+  "name": "Cognitive Artifact Protocol",
+  "objective": "Define the canonical lifecycle, truth rank, freshness, ownership, token role, promotion rules and invalidation rules for DUMMIE cognitive artifacts.",
+  "why_now": "P3 identified which artifact types exist and what lifecycle/freshness/canonicality gaps must be governed before creating notes, noteplans, ContextQuant or autonomy systems.",
   "required_outputs": [
-    ".aiwg/reports/plan_v1_phase_3_artifact_lifecycle_audit.md",
-    ".aiwg/reports/plan_v1_phase_3_artifact_lifecycle_audit.json",
-    ".aiwg/reports/artifact_lifecycle_matrix.json"
+    ".aiwg/reports/plan_v1_phase_4_cognitive_artifact_protocol.md",
+    ".aiwg/reports/plan_v1_phase_4_cognitive_artifact_protocol.json",
+    ".aiwg/schemas/cognitive_artifact.schema.json",
+    "doc/specs/107_cognitive_artifact_protocol.md",
+    "doc/specs/107_cognitive_artifact_protocol.feature",
+    "doc/specs/107_cognitive_artifact_protocol.rules.json"
   ],
   "must_not_create": [
-    "new runtime modules",
-    "new swarm agents",
     "Obsidian adapter",
+    "swarm agents",
     "autonomy permissions",
-    "new artifact protocol before audit is complete"
+    "dashboard",
+    "runtime-heavy ContextQuant implementation before artifact protocol exists"
   ],
   "success_conditions": [
-    "artifact types inventoried",
-    "runtime consumers mapped",
-    "dead documentation identified",
-    "duplicate truth sources identified",
-    "stale-prone artifacts identified",
-    "recommendation produced for P4"
+    "artifact lifecycle states defined",
+    "canonicality classes defined",
+    "truth hierarchy hooks defined",
+    "freshness/source hash requirements defined",
+    "token roles defined",
+    "promotion/demotion rules defined",
+    "artifact protocol validates against P3 matrix"
   ]
 }
