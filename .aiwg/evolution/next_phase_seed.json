@@ -1,29 +1,32 @@
 {
-  "next_phase": "P5",
-  "name": "Truth Hierarchy & Canonicality Policy",
-  "objective": "Define how DUMMIE resolves conflicts between source code, tests, specs, ledgers, reports, vault entries, notes, mirrors and chat history.",
-  "why_now": "P4 defined artifact lifecycle and truth rank fields. P5 must formalize precedence and conflict resolution so agents stop choosing truth by availability or recency bias.",
+  "next_phase": "P6",
+  "name": "PolyglotArchitectureRegistry",
+  "objective": "Create the canonical registry that maps DUMMIE layers, languages, runtimes, source directories, specs, tests and ownership so the engine cannot forget its polyglot architecture.",
+  "why_now": "P5 defined how truth is ranked. P6 must encode the physical polyglot architecture as canonical structured knowledge so future global tasks cannot collapse DUMMIE into a Python-only mental model.",
   "required_outputs": [
-    ".aiwg/reports/plan_v1_phase_5_truth_hierarchy_policy.md",
-    ".aiwg/reports/plan_v1_phase_5_truth_hierarchy_policy.json",
-    ".aiwg/schemas/truth_hierarchy.schema.json",
-    "doc/specs/108_truth_hierarchy_canonicality_policy.md",
-    "doc/specs/108_truth_hierarchy_canonicality_policy.feature",
-    "doc/specs/108_truth_hierarchy_canonicality_policy.rules.json"
+    ".aiwg/reports/plan_v1_phase_6_polyglot_architecture_registry.md",
+    ".aiwg/reports/plan_v1_phase_6_polyglot_architecture_registry.json",
+    ".aiwg/architecture/polyglot_architecture_registry.yaml",
+    ".aiwg/architecture/layer_language_map.json",
+    ".aiwg/schemas/polyglot_architecture_registry.schema.json",
+    "doc/specs/109_polyglot_architecture_registry.md",
+    "doc/specs/109_polyglot_architecture_registry.feature",
+    "doc/specs/109_polyglot_architecture_registry.rules.json"
   ],
   "must_not_create": [
-    "Obsidian adapter",
+    "new runtime modules",
     "swarm agents",
-    "autonomy permissions",
+    "Obsidian adapter",
     "dashboard",
-    "runtime-heavy ContextQuant implementation before truth hierarchy exists"
+    "runtime-heavy ContextQuant implementation before polyglot registry exists"
   ],
   "success_conditions": [
-    "truth precedence defined",
-    "conflict resolution rules defined",
-    "canonical source policy defined",
-    "stale artifact demotion rules linked",
-    "chat history non-canonical default defined",
-    "mirror artifacts non-canonical default defined"
+    "all layers L0-L6 mapped",
+    "all active languages mapped",
+    "source directories mapped to languages",
+    "specs mapped to layers where possible",
+    "tests mapped to language/layer where possible",
+    "anti-Python-only bias guard defined",
+    "future global tasks require polyglot coverage"
   ]
 }

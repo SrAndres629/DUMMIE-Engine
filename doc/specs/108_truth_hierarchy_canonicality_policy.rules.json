@@ -1,0 +1,214 @@
+{
+  "spec_id": "108_truth_hierarchy_canonicality_policy",
+  "truth_hierarchy": {
+    "truth_sources": [
+      {
+        "rank": 100,
+        "class": "physical_source_code_with_passing_tests",
+        "wins_over": [
+          "all_lower"
+        ],
+        "caveat": "If tests are stale or not run, confidence is reduced."
+      },
+      {
+        "rank": 95,
+        "class": "passing_tests_and_validation_results",
+        "wins_over": [
+          "spec_claims",
+          "reports",
+          "notes",
+          "chat"
+        ],
+        "caveat": "Tests prove behavior, not intent."
+      },
+      {
+        "rank": 90,
+        "class": "active_specs_rules_features",
+        "wins_over": [
+          "reports",
+          "vault_entries",
+          "notes",
+          "chat"
+        ],
+        "caveat": "Specs lose confidence if stale or contradicted by code/tests."
+      },
+      {
+        "rank": 85,
+        "class": "schemas_and_machine_contracts",
+        "wins_over": [
+          "human_docs",
+          "reports",
+          "notes"
+        ],
+        "caveat": "Schemas define shape, not full semantics."
+      },
+      {
+        "rank": 80,
+        "class": "phase_ledger_and_mission_runtime_state",
+        "wins_over": [
+          "reports",
+          "chat",
+          "ad_hoc_memory"
+        ],
+        "caveat": "Runtime state must be append-only or validated."
+      },
+      {
+        "rank": 75,
+        "class": "daemon_outcome_validation_result",
+        "wins_over": [
+          "agent_claims",
+          "reports_without_tests"
+        ],
+        "caveat": "Must include evidence refs."
+      },
+      {
+        "rank": 70,
+        "class": "learning_episode_with_evidence",
+        "wins_over": [
+          "raw_report",
+          "notes",
+          "chat"
+        ],
+        "caveat": "Reusable learning must remain linked to evidence."
+      },
+      {
+        "rank": 65,
+        "class": "vault_entry_with_evidence",
+        "wins_over": [
+          "notes",
+          "chat",
+          "human_mirror"
+        ],
+        "caveat": "Vault entries need freshness and semantic dedup."
+      },
+      {
+        "rank": 60,
+        "class": "active_cognitive_artifact",
+        "wins_over": [
+          "reports",
+          "notes",
+          "chat"
+        ],
+        "caveat": "Must comply with P4 schema."
+      },
+      {
+        "rank": 50,
+        "class": "report_with_evidence",
+        "wins_over": [
+          "chat",
+          "unverified_notes"
+        ],
+        "caveat": "Reports are derived and cannot override code/tests/specs."
+      },
+      {
+        "rank": 40,
+        "class": "note_or_folder_note_with_freshness",
+        "wins_over": [
+          "chat",
+          "human_mirror"
+        ],
+        "caveat": "Notes without freshness cannot be high-confidence context."
+      },
+      {
+        "rank": 30,
+        "class": "human_mirror_or_obsidian_export",
+        "wins_over": [
+          "chat_only"
+        ],
+        "caveat": "Mirror by default, not canonical."
+      },
+      {
+        "rank": 20,
+        "class": "chat_transcript_or_agent_memory",
+        "wins_over": [],
+        "caveat": "Never canonical by default."
+      },
+      {
+        "rank": 10,
+        "class": "unknown_legacy_doc",
+        "wins_over": [],
+        "caveat": "Must be audited before use."
+      },
+      {
+        "rank": 0,
+        "class": "rejected_deprecated_secret_or_private_reasoning_artifact",
+        "wins_over": [],
+        "caveat": "Must not be used for reasoning."
+      }
+    ],
+    "effective_rank_policy": {
+      "formula": "effective_truth_rank = base_truth_rank + evidence_bonus - staleness_penalty - risk_penalty",
+      "evidence_bonus": {
+        "passing_tests": 5,
+        "schema_validated": 3,
+        "has_evidence_refs": 3,
+        "runtime_owned": 2
+      },
+      "staleness_penalty": {
+        "stale": 30,
+        "unknown_freshness": 15,
+        "linked_test_failed": 40,
+        "source_hash_changed": 30
+      },
+      "risk_penalty": {
+        "duplicate_truth_detected": 10,
+        "missing_owner_runtime": 10,
+        "weak_or_no_evidence": 10,
+        "legacy_unknown": 20
+      },
+      "hard_zero": {
+        "rejected": true,
+        "deprecated_for_reasoning": true,
+        "secret_detected": true,
+        "private_reasoning_detected": true
+      }
+    },
+    "conflict_resolution_steps": [
+      "collect_candidate_sources",
+      "reject_unsafe_artifacts",
+      "normalize_artifact_metadata",
+      "apply_lifecycle_demotion",
+      "apply_canonicality_preference",
+      "apply_evidence_quality",
+      "resolve_by_effective_rank_then_tiebreakers",
+      "record_decision_and_next_action"
+    ],
+    "canonical_source_policy": {
+      "code_plus_passing_tests": "strongest_behavioral_truth",
+      "specs": "canonical_intent_not_implementation_proof",
+      "schemas": "canonical_shape_contracts",
+      "ledgers": "canonical_operational_history_if_append_only_and_validated",
+      "reports": "evidence_not_primary_truth",
+      "vault_entries": "reusable_memory_not_automatic_truth",
+      "notes": "compressed_understanding_requires_freshness_and_links",
+      "obsidian_or_human_mirror": "non_canonical_by_default",
+      "chat_history": "non_canonical_by_default",
+      "agent_claims": "non_canonical_until_evidence_backed"
+    },
+    "mirror_policy": {
+      "default_canonicality": "mirror",
+      "override_allowed": false,
+      "reason": "prevent_human_copy_from_overriding_internal_truth"
+    },
+    "chat_policy": {
+      "default_canonicality": "unknown",
+      "high_confidence_allowed": false,
+      "requires_evidence_refs_for_promotion": true
+    },
+    "security_rejection_policy": {
+      "forbidden": [
+        "secrets",
+        "credentials",
+        "private_chain_of_thought",
+        "chain_of_thought",
+        ".env_assignment_values"
+      ],
+      "decision": "reject_unsafe_artifact"
+    },
+    "stale_demotion_policy": {
+      "stale_reduces_rank": true,
+      "deprecated_or_rejected_rank_zero": true,
+      "unknown_freshness_blocks_high_confidence": true
+    }
+  }
+}

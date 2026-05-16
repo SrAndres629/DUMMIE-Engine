@@ -1,0 +1,88 @@
+{
+  "plan": "DUMMIE PLAN V1 — Cognitive Evolution Operating Layer",
+  "phase": "P5",
+  "phase_name": "Truth Hierarchy & Canonicality Policy",
+  "decision": "PASS_WITH_WARNINGS",
+  "baseline_commit": "d959d971ed58e1eef351e83dafe88ecac5d9983e",
+  "branch": "main",
+  "validations": {
+    "git_diff_check": "PASS",
+    "spec_validation": "PASS_WITH_KNOWN_LEGACY_DEBT",
+    "json_parse": "PASS",
+    "yaml_parse": "PASS"
+  },
+  "advanced_reasoning_summary": {
+    "claims": [
+      "Without ranked truth policy, agents overfit recency/availability and can override code facts with narrative artifacts.",
+      "P4 metadata is insufficient unless conflict decisions apply effective rank + freshness + safety rejection.",
+      "Mirror/chat/report sources must be explicitly non-canonical by default to prevent drift."
+    ],
+    "objections": [
+      "High-rank artifacts can still be stale; rank alone is unsafe.",
+      "Reports may claim PASS while tests fail.",
+      "Vault and notes can preserve outdated claims without freshness checks."
+    ],
+    "decisions": [
+      "Adopt explicit truth-source rank ladder with caveats.",
+      "Use policy-level effective rank formula with evidence bonus and stale/risk penalties.",
+      "Hard reject unsafe artifacts and assign hard zero rank.",
+      "Require deterministic tie-breakers and human review fallback."
+    ],
+    "risks": [
+      "No runtime enforcement yet; policy can be bypassed until integrated.",
+      "Legacy docs may continue injecting low-confidence contradictions.",
+      "Freshness instrumentation is incomplete in some artifact families."
+    ]
+  },
+  "schema": {
+    "path": ".aiwg/schemas/truth_hierarchy.schema.json",
+    "valid_json": true
+  },
+  "spec": {
+    "md": "doc/specs/108_truth_hierarchy_canonicality_policy.md",
+    "feature": "doc/specs/108_truth_hierarchy_canonicality_policy.feature",
+    "rules_json": "doc/specs/108_truth_hierarchy_canonicality_policy.rules.json"
+  },
+  "policy_coverage": {
+    "truth_sources_defined": true,
+    "conflict_resolution_defined": true,
+    "effective_rank_defined": true,
+    "canonical_source_policy_defined": true,
+    "stale_demotion_defined": true,
+    "mirror_policy_defined": true,
+    "chat_policy_defined": true,
+    "security_rejection_defined": true
+  },
+  "known_debt": [
+    "DEBT-SPEC-LEGACY-MCP-GUIDE"
+  ],
+  "p6_recommendation": {
+    "next_phase": "P6",
+    "name": "PolyglotArchitectureRegistry",
+    "must_govern": [
+      "layer-language map",
+      "runtime ownership by language",
+      "polyglot coverage in global tasks",
+      "language-specific probes",
+      "anti-Python-only bias"
+    ]
+  },
+  "snowball_assessment": {
+    "decision": "improved",
+    "snowball_gain_score": 8,
+    "reason": "P5 adds deterministic truth conflict policy over P4 metadata, reducing ambiguity and recency bias without runtime changes."
+  },
+  "warnings": [
+    "Legacy spec debt remains in doc/guides/mcp_server_usage.md.",
+    "Policy enforcement is declarative until future runtime integration phases."
+  ],
+  "evidence_refs": [
+    ".aiwg/schemas/cognitive_artifact.schema.json",
+    "doc/specs/107_cognitive_artifact_protocol.md",
+    ".aiwg/reports/plan_v1_phase_4_cognitive_artifact_protocol.json",
+    ".aiwg/reports/artifact_lifecycle_matrix.json",
+    ".aiwg/schemas/truth_hierarchy.schema.json",
+    "doc/specs/108_truth_hierarchy_canonicality_policy.md",
+    "doc/specs/108_truth_hierarchy_canonicality_policy.rules.json"
+  ]
+}

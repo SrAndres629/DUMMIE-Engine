@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dummie.aiwg/schemas/truth_hierarchy.schema.json",
+  "title": "DUMMIE Truth Hierarchy Policy",
+  "type": "object",
+  "required": [
+    "policy_id",
+    "version",
+    "truth_sources",
+    "conflict_resolution",
+    "effective_rank_policy",
+    "canonical_source_policy",
+    "stale_demotion_policy",
+    "mirror_policy",
+    "chat_policy",
+    "security_rejection_policy"
+  ],
+  "properties": {
+    "policy_id": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+    "truth_sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "rank",
+          "class",
+          "wins_over",
+          "caveat"
+        ],
+        "properties": {
+          "rank": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 100
+          },
+          "class": {
+            "type": "string"
+          },
+          "wins_over": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "caveat": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "conflict_resolution": {
+      "type": "object",
+      "required": [
+        "steps",
+        "decision_enums"
+      ],
+      "properties": {
+        "steps": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "decision_enums": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "accept_higher_rank",
+              "accept_fresher_source",
+              "accept_runtime_owned_source",
+              "requires_human_review",
+              "reject_unsafe_artifact",
+              "mark_stale",
+              "mark_deprecated"
+            ]
+          }
+        }
+      }
+    },
+    "effective_rank_policy": {
+      "type": "object"
+    },
+    "canonical_source_policy": {
+      "type": "object"
+    },
+    "stale_demotion_policy": {
+      "type": "object"
+    },
+    "mirror_policy": {
+      "type": "object"
+    },
+    "chat_policy": {
+      "type": "object"
+    },
+    "security_rejection_policy": {
+      "type": "object"
+    },
+    "canonicality_enum": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "canonical",
+          "derived",
+          "candidate",
+          "mirror",
+          "deprecated",
+          "unknown"
+        ]
+      }
+    }
+  }
+}
