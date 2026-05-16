@@ -30,12 +30,19 @@ languages:
     runtime_roles: ["overseer/control plane", "nervous services"]
     confidence: "high"
   - language: "Elixir"
-    classification: "dependency"
-    file_count: 225
-    source_paths_sample: ["layers/l0_overseer/lib", "layers/l0_overseer/deps", "layers/l0_overseer/_build"]
+    classification: "first_party"
+    file_count: 6
+    source_paths_sample: ["layers/l0_overseer/lib/overseer/application.ex", "layers/l0_overseer/lib/proto/proto/dummie/v2/core.pb.ex", "layers/l0_overseer/test/overseer_ipc_test.exs", "layers/l0_overseer/test/test_helper.exs"]
     layers: ["L0"]
-    runtime_roles: ["overseer runtime with tracked dependency/build inflation"]
-    confidence: "medium"
+    runtime_roles: ["overseer runtime and generated protobuf Elixir bindings owned by L0"]
+    confidence: "high"
+  - language: "Elixir"
+    classification: "dependency"
+    file_count: 521
+    source_paths_sample: ["layers/l0_overseer/deps", "layers/l0_overseer/_build"]
+    layers: ["L0"]
+    runtime_roles: ["tracked dependency/build inflation; not architecture identity"]
+    confidence: "high"
   - language: "Rust"
     classification: "first_party"
     file_count: 1
@@ -144,8 +151,8 @@ layers:
     canonical_name: "l6_skin"
     physical_paths: ["layers/l6_skin"]
     primary_languages: ["Python"]
-    secondary_languages: ["TypeScript", "JavaScript"]
-    runtime_role: "skin/UI/dashboard layer with dependency-heavy node_modules evidence"
+    secondary_languages: []
+    runtime_role: "skin/UI/dashboard layer; TS/JS evidence is dependency-only under node_modules in this scan"
     specs_sample: []
     tests_sample: []
     confidence: "low"

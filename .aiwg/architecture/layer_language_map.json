@@ -48,8 +48,8 @@
     "L6": {
       "physical_paths": ["layers/l6_skin"],
       "primary_languages": ["Python"],
-      "secondary_languages": ["TypeScript", "JavaScript"],
-      "runtime_role": "skin/UI/dashboard layer with dependency-heavy node_modules evidence",
+      "secondary_languages": [],
+      "runtime_role": "skin/UI/dashboard layer; TS/JS evidence is dependency-only under node_modules in this scan",
       "confidence": "low"
     }
   },

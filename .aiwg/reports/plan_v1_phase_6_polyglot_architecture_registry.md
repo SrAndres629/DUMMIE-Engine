@@ -43,6 +43,8 @@ Python, Go, Elixir, Rust, TypeScript, JavaScript, Protobuf, Shell, YAML/JSON/TOM
 
 First-party source is separated from dependency/generated/configuration/documentation classifications. Tracked `deps`, `_build`, `node_modules`, `.venv`, `target`, and `generated` paths are treated as non-identity evidence for architecture.
 
+P6.1 hardening corrected Elixir classification: L0 has first-party Elixir under `layers/l0_overseer/lib` and `layers/l0_overseer/test`, while `layers/l0_overseer/deps` and `layers/l0_overseer/_build` remain dependency/build evidence. L6 TypeScript/JavaScript evidence is dependency-only under `node_modules` in the targeted scan.
+
 ## Layer-Language Map
 
 All L0-L6 layers are present in `.aiwg/architecture/layer_language_map.json`; low or medium confidence indicates sparse/ambiguous first-party evidence, not absence from the roadmap.
@@ -87,7 +89,7 @@ Future global architecture tasks must load `.aiwg/architecture/polyglot_architec
 
 ## Remaining Risks
 
-- Raw language counts remain noisy because dependency/generated folders are tracked.
+- Raw language counts remain noisy because dependency/generated folders are tracked; P6.1 separates Elixir first-party identity from dependency/build evidence.
 - P7/P8 should refine owner/runtime confidence and coverage gates.
 
 ## Next Phase

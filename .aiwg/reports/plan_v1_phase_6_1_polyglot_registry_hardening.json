@@ -1,0 +1,49 @@
+{
+  "plan": "DUMMIE PLAN V1 — Cognitive Evolution Operating Layer",
+  "phase": "P6.1",
+  "phase_name": "Polyglot Registry Classification Hardening",
+  "decision": "PASS_WITH_WARNINGS",
+  "baseline_commit": "7dbbd72e836309aec890e5cece7b2fd8ab271e77",
+  "branch": "main",
+  "reason": "Correct mixed first-party/dependency language classification before P7 ProjectWorldModel consumes the registry.",
+  "checks": {
+    "elixir_first_party_checked": true,
+    "elixir_deps_checked": true,
+    "typescript_first_party_checked": true,
+    "javascript_first_party_checked": true,
+    "rust_first_party_checked": true
+  },
+  "classification_changes": [
+    {
+      "language": "Elixir",
+      "change": "split first_party L0 lib/test evidence from dependency/build evidence",
+      "first_party_file_count": 6,
+      "dependency_file_count": 218,
+      "generated_file_count": 303
+    },
+    {
+      "language": "TypeScript",
+      "change": "confirmed dependency-only L6 evidence under node_modules",
+      "first_party_file_count": 0,
+      "dependency_file_count": 327
+    },
+    {
+      "language": "JavaScript",
+      "change": "confirmed dependency-only L6 evidence under node_modules",
+      "first_party_file_count": 0,
+      "dependency_file_count": 170
+    },
+    {
+      "language": "Rust",
+      "change": "confirmed first-party L3 evidence under layers/l3_shield/src/lib.rs",
+      "first_party_file_count": 1
+    }
+  ],
+  "remaining_warnings": [
+    "Raw language counts remain noisy because dependency and build artifact folders are tracked.",
+    "L6 remains low-confidence as first-party UI architecture because TS/JS evidence is dependency-only in the targeted scan.",
+    "DEBT-SPEC-LEGACY-MCP-GUIDE remains open and unchanged."
+  ],
+  "p7_impact": "P7 can consume a corrected polyglot registry without inheriting Elixir/TS dependency misclassification.",
+  "runtime_modified": false
+}

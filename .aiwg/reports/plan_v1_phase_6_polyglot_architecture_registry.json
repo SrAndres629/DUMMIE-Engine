@@ -37,7 +37,7 @@
   "registry": {
     "path": ".aiwg/architecture/polyglot_architecture_registry.yaml",
     "valid_yaml": true,
-    "languages_count": 10,
+    "languages_count": 11,
     "layers_count": 7,
     "anti_python_only_bias_guard": true
   },
@@ -58,7 +58,8 @@
   "language_summary": [
     {"language": "Python", "classification": "first_party", "file_count": 1014, "layers": ["L1", "L2", "L3", "L4", "L5", "L6"], "confidence": "high"},
     {"language": "Go", "classification": "first_party", "file_count": 35, "layers": ["L0", "L1"], "confidence": "high"},
-    {"language": "Elixir", "classification": "dependency", "file_count": 225, "layers": ["L0"], "confidence": "medium"},
+    {"language": "Elixir", "classification": "first_party", "file_count": 6, "layers": ["L0"], "confidence": "high"},
+    {"language": "Elixir", "classification": "dependency", "file_count": 521, "layers": ["L0"], "confidence": "high"},
     {"language": "Rust", "classification": "first_party", "file_count": 1, "layers": ["L3"], "confidence": "medium"},
     {"language": "TypeScript", "classification": "dependency", "file_count": 327, "layers": ["L6"], "confidence": "low"},
     {"language": "JavaScript", "classification": "dependency", "file_count": 171, "layers": ["L6"], "confidence": "low"},
@@ -74,7 +75,7 @@
     {"layer_id": "L3", "primary_languages": ["Python", "Rust"], "confidence": "medium"},
     {"layer_id": "L4", "primary_languages": ["Python"], "confidence": "medium"},
     {"layer_id": "L5", "primary_languages": ["Python"], "confidence": "medium"},
-    {"layer_id": "L6", "primary_languages": ["Python"], "confidence": "low"}
+    {"layer_id": "L6", "primary_languages": ["Python"], "dependency_languages": ["TypeScript", "JavaScript"], "confidence": "low"}
   ],
   "anti_bias_policy": {
     "python_only_bias_guard": true,
@@ -100,7 +101,8 @@
   },
   "warnings": [
     "Known legacy spec debt remains in doc/guides/mcp_server_usage.md.",
-    "Tracked dependency/generated folders inflate raw language counts; registry separates classification."
+    "Tracked dependency/generated folders inflate raw language counts; registry separates classification.",
+    "P6.1 corrected Elixir first-party/dependency split and confirmed L6 TS/JS as dependency-only evidence in the targeted scan."
   ],
   "evidence_refs": [
     "git ls-files",
