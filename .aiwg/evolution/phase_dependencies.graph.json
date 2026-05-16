@@ -1,0 +1,44 @@
+{
+  "plan": "DUMMIE PLAN V1",
+  "phase": "P1",
+  "edges": [
+    {"from": "P1", "to": "P2", "relation": "unlocks"},
+    {"from": "P2", "to": "P3", "relation": "unlocks"},
+    {"from": "P3", "to": "P4", "relation": "unlocks"},
+    {"from": "P4", "to": "P5", "relation": "unlocks"},
+    {"from": "P5", "to": "P6", "relation": "unlocks"},
+    {"from": "P6", "to": "P7", "relation": "unlocks"},
+    {"from": "P7", "to": "P8", "relation": "unlocks"},
+    {"from": "P8", "to": "P9", "relation": "unlocks"},
+    {"from": "P9", "to": "P10", "relation": "unlocks"},
+    {"from": "P10", "to": "P11", "relation": "unlocks"},
+    {"from": "P11", "to": "P12", "relation": "unlocks"},
+    {"from": "P12", "to": "P13", "relation": "unlocks"},
+    {"from": "P13", "to": "P14", "relation": "unlocks"},
+    {"from": "P14", "to": "P15", "relation": "unlocks"},
+    {"from": "P15", "to": "P16", "relation": "unlocks"},
+    {"from": "P16", "to": "P17", "relation": "unlocks"},
+    {"from": "P17", "to": "P18", "relation": "unlocks"},
+    {"from": "P18", "to": "P19", "relation": "unlocks"},
+    {"from": "P19", "to": "P20", "relation": "unlocks"},
+    {"from": "P20", "to": "P21", "relation": "unlocks"},
+    {"from": "P21", "to": "P22", "relation": "unlocks"},
+    {"from": "P22", "to": "P23", "relation": "unlocks"},
+    {"from": "P23", "to": "P24", "relation": "unlocks"},
+    {"from": "P24", "to": "P25", "relation": "unlocks"},
+    {"from": "P25", "to": "P26", "relation": "unlocks"},
+    {"from": "P26", "to": "P27", "relation": "unlocks"},
+    {"from": "P27", "to": "P28", "relation": "unlocks"},
+    {"from": "P28", "to": "P29", "relation": "unlocks"},
+    {"from": "P29", "to": "P30", "relation": "unlocks"},
+    {"from": "P30", "to": "P31", "relation": "unlocks"}
+  ],
+  "blocked_skips": [
+    "no_swarm_before_context_governance",
+    "no_autonomy_before_mission_autonomy_contract",
+    "no_obsidian_before_internal_notes",
+    "no_trusted_workstation_before_permission_contract",
+    "no_dashboard_as_source_of_truth"
+  ]
+}
+

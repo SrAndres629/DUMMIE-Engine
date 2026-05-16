@@ -1,0 +1,31 @@
+phase_acceptance_contract:
+  required:
+    - reality_lock
+    - evidence_report_md
+    - evidence_report_json
+    - tests_or_documented_absence
+    - restart_validation_plan
+    - hot_path_validation_plan
+    - snowball_metric_estimate
+    - next_phase_seed
+    - engine_native_reuse_map
+  decisions:
+    improved:
+      requires:
+        - measurable_capability_gain
+        - no_critical_regression
+        - integration_verified
+    neutral:
+      when:
+        - files_added_but_no_capability_gain
+        - documentation_added_without_runtime_effect
+        - engine_reuse_not_integrated
+    regressed:
+      when:
+        - tests_fail
+        - context_quality_decreases
+        - polyglot_awareness_decreases
+        - stale_context_increases
+        - restart_breaks
+        - roadmap_drift_introduced
+

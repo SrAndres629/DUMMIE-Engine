@@ -1,0 +1,25 @@
+short_term_objectives:
+  - id: "STO-001"
+    name: "Create DUMMIE PLAN V1 operating layer"
+    phase: "P1"
+    supports:
+      - "LTO-001"
+      - "LTO-002"
+      - "LTO-003"
+      - "LTO-004"
+      - "LTO-005"
+    status: "active"
+  - id: "STO-002"
+    name: "Establish baseline reset and reality lock"
+    phase: "P2"
+    supports:
+      - "LTO-005"
+    status: "planned"
+  - id: "STO-003"
+    name: "Audit artifact lifecycle before building more artifacts"
+    phase: "P3"
+    supports:
+      - "LTO-004"
+      - "LTO-005"
+    status: "planned"
+

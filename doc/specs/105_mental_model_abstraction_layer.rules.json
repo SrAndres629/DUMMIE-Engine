@@ -1,0 +1,17 @@
+{
+  "spec_id": "105",
+  "name": "Mental Model Abstraction Layer",
+  "required_files": [
+    ".aiwg/mental_models/mental_model_registry.yaml",
+    ".aiwg/mental_models/context_laplace_transform.md",
+    ".aiwg/mental_models/context_state_space.json",
+    ".aiwg/mental_models/cognitive_operating_principles.md"
+  ],
+  "rules": [
+    "mental_model_registry_exists",
+    "context_transform_exists",
+    "context_state_space_exists",
+    "laplace_metaphor_is_operational_not_decorative_math"
+  ]
+}
+

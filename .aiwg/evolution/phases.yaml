@@ -1,0 +1,529 @@
+phases:
+  - id: "P1"
+    name: "Mental Model Abstraction Layer + Session Operating Contract"
+    block: "foundation"
+    purpose: "Create the operating layer that allows DUMMIE to manage long-term objectives, short-term objectives, cognitive artifacts, context transformation, session contracts and evolution governance."
+    depends_on: []
+    status: "active"
+    priority_now: 10
+    priority_final: 10
+    creates: [".aiwg/evolution", ".aiwg/mental_models", ".aiwg/session_contracts", ".aiwg/context_transform", "doc/specs/104-106"]
+    modifies: []
+    validates: ["reality_lock", "json_parse", "yaml_parse", "cold_read_operability", "spec_validation"]
+    forbidden_actions: ["sudo", "git_push", "git_commit", "git_reset", "git_clean", "kuzu_real_writes", "parallel_runtime"]
+    snowball_metrics: ["engine_native_reuse_delta", "context_quality_delta", "restart_verified", "hot_path_verified"]
+    restart_validation: "cold-read simulation must load P1/P2 state without chat memory"
+    hot_path_validation: "agent must identify P2 and forbidden skips from canonical files"
+    decision_gate: "Phase 1 may pass only when canonical files parse and cold-read operability passes."
+    next_phase: "P2"
+  - id: "P2"
+    name: "Baseline Reset & Reality Lock"
+    block: "foundation"
+    purpose: "Create a clean operational baseline before lifecycle audit or new runtime implementation."
+    depends_on: ["P1"]
+    status: "planned"
+    priority_now: 9
+    priority_final: 10
+    creates: [".aiwg/reports/plan_v1_phase_2_baseline_reality_lock.md", ".aiwg/reports/plan_v1_phase_2_baseline_reality_lock.json"]
+    modifies: []
+    validates: ["git_status", "spec_validation", "test_status", "baseline_metrics"]
+    forbidden_actions: ["new_runtime_modules", "swarm_agents", "obsidian_adapter", "autonomy_permissions", "large_dashboard"]
+    snowball_metrics: ["baseline_completeness", "known_risk_visibility"]
+    restart_validation: "baseline report discoverable after cold read"
+    hot_path_validation: "P2 outputs and forbidden creations are discoverable"
+    decision_gate: "baseline captured without introducing new runtime"
+    next_phase: "P3"
+  - id: "P3"
+    name: "Artifact Lifecycle Reconciliation Audit"
+    block: "foundation"
+    purpose: "Audit existing cognitive artifacts before expanding lifecycle governance."
+    depends_on: ["P2"]
+    status: "planned"
+    priority_now: 8
+    priority_final: 10
+    creates: ["artifact_lifecycle_audit_report"]
+    modifies: ["lifecycle_register_if_existing"]
+    validates: ["artifact_inventory", "truth_rank_gaps"]
+    forbidden_actions: ["delete_legacy", "mass_move", "parallel_runtime"]
+    snowball_metrics: ["stale_artifact_visibility", "lifecycle_coverage_delta"]
+    restart_validation: "audit report discoverable"
+    hot_path_validation: "artifact lifecycle next action clear"
+    decision_gate: "no new lifecycle runtime before audit"
+    next_phase: "P4"
+  - id: "P4"
+    name: "Cognitive Artifact Protocol"
+    block: "foundation"
+    purpose: "Define the protocol for artifact ownership, lifecycle, freshness, truth rank and context role."
+    depends_on: ["P3"]
+    status: "planned"
+    priority_now: 7
+    priority_final: 10
+    creates: ["cognitive_artifact_protocol"]
+    modifies: ["artifact_contracts"]
+    validates: ["protocol_parse", "sample_artifact_classification"]
+    forbidden_actions: ["runtime_rewrite", "destructive_migration"]
+    snowball_metrics: ["artifact_governance_delta"]
+    restart_validation: "protocol available after cold read"
+    hot_path_validation: "agent can classify artifact role"
+    decision_gate: "protocol usable before truth hierarchy"
+    next_phase: "P5"
+  - id: "P5"
+    name: "Truth Hierarchy & Canonicality Policy"
+    block: "foundation"
+    purpose: "Define how DUMMIE resolves conflicting claims across specs, reports, memory and chat."
+    depends_on: ["P4"]
+    status: "planned"
+    priority_now: 7
+    priority_final: 10
+    creates: ["truth_hierarchy_policy"]
+    modifies: ["artifact_protocol_refs"]
+    validates: ["conflict_resolution_examples"]
+    forbidden_actions: ["overwrite_specs_without_evidence"]
+    snowball_metrics: ["roadmap_drift_reduction"]
+    restart_validation: "truth hierarchy discoverable"
+    hot_path_validation: "agent can identify canonical source"
+    decision_gate: "canonicality policy exists before architecture registry"
+    next_phase: "P6"
+  - id: "P6"
+    name: "PolyglotArchitectureRegistry"
+    block: "architecture"
+    purpose: "Register language-layer responsibilities across DUMMIE Engine."
+    depends_on: ["P5"]
+    status: "planned"
+    priority_now: 6
+    priority_final: 10
+    creates: ["polyglot_architecture_registry"]
+    modifies: ["architecture_docs"]
+    validates: ["layer_language_coverage"]
+    forbidden_actions: ["python_only_global_claims"]
+    snowball_metrics: ["polyglot_coverage_delta"]
+    restart_validation: "registry discoverable"
+    hot_path_validation: "agent can inspect layer-language contract"
+    decision_gate: "polyglot registry before world model"
+    next_phase: "P7"
+  - id: "P7"
+    name: "ProjectWorldModel"
+    block: "architecture"
+    purpose: "Create a governed world model for projects, layers, capabilities and dependencies."
+    depends_on: ["P6"]
+    status: "planned"
+    priority_now: 6
+    priority_final: 10
+    creates: ["project_world_model"]
+    modifies: ["architecture_refs"]
+    validates: ["world_model_consistency"]
+    forbidden_actions: ["duplicate_capability_registry"]
+    snowball_metrics: ["capability_state_delta"]
+    restart_validation: "world model seed discoverable"
+    hot_path_validation: "agent can locate project state"
+    decision_gate: "world model supports spec coverage"
+    next_phase: "P8"
+  - id: "P8"
+    name: "SpecCoverageGate"
+    block: "governance"
+    purpose: "Gate changes through explicit spec coverage and docs validation."
+    depends_on: ["P7"]
+    status: "planned"
+    priority_now: 6
+    priority_final: 10
+    creates: ["spec_coverage_gate"]
+    modifies: ["spec_validation_policy"]
+    validates: ["spec_docs_validation"]
+    forbidden_actions: ["PASS_with_failing_specs_without_explanation"]
+    snowball_metrics: ["spec_coverage_delta"]
+    restart_validation: "gate status discoverable"
+    hot_path_validation: "agent can explain spec gate"
+    decision_gate: "spec coverage before folder notes"
+    next_phase: "P9"
+  - id: "P9"
+    name: "FolderNotes + NotePlans"
+    block: "context"
+    purpose: "Create internal notes before external note adapters."
+    depends_on: ["P8"]
+    status: "planned"
+    priority_now: 5
+    priority_final: 9
+    creates: ["folder_notes_policy", "note_plans"]
+    modifies: ["context_docs"]
+    validates: ["note_discovery"]
+    forbidden_actions: ["obsidian_adapter"]
+    snowball_metrics: ["local_memory_reuse_delta"]
+    restart_validation: "notes are locally discoverable"
+    hot_path_validation: "agent can load scoped notes"
+    decision_gate: "internal notes before freshness ledger"
+    next_phase: "P10"
+  - id: "P10"
+    name: "FreshnessLedger + StaleMemoryDetector"
+    block: "context"
+    purpose: "Track freshness and detect stale memory before context packaging."
+    depends_on: ["P9"]
+    status: "planned"
+    priority_now: 5
+    priority_final: 9
+    creates: ["freshness_ledger", "stale_memory_detector"]
+    modifies: ["note_lifecycle_refs"]
+    validates: ["stale_detection_examples"]
+    forbidden_actions: ["silent_stale_context_use"]
+    snowball_metrics: ["stale_context_reduction"]
+    restart_validation: "freshness state discoverable"
+    hot_path_validation: "agent can flag stale note"
+    decision_gate: "freshness before context receipts"
+    next_phase: "P11"
+  - id: "P11"
+    name: "ContextPackage + ContextReceipt"
+    block: "context"
+    purpose: "Package selected context and record loaded/skipped context."
+    depends_on: ["P10"]
+    status: "planned"
+    priority_now: 5
+    priority_final: 9
+    creates: ["context_package", "context_receipt"]
+    modifies: ["context_transform_contracts"]
+    validates: ["receipt_parse", "scope_traceability"]
+    forbidden_actions: ["raw_repo_dump_without_scope"]
+    snowball_metrics: ["context_quality_delta", "token_efficiency_delta"]
+    restart_validation: "receipt explains context selection"
+    hot_path_validation: "agent can load package"
+    decision_gate: "receipts before context scoring"
+    next_phase: "P12"
+  - id: "P12"
+    name: "ContextValueScorer"
+    block: "context"
+    purpose: "Score context value before heavier context quant runtime."
+    depends_on: ["P11"]
+    status: "planned"
+    priority_now: 5
+    priority_final: 9
+    creates: ["context_value_scorer"]
+    modifies: ["context_receipt_fields"]
+    validates: ["scoring_examples"]
+    forbidden_actions: ["opaque_scoring"]
+    snowball_metrics: ["useful_context_per_token_delta"]
+    restart_validation: "scorer contract discoverable"
+    hot_path_validation: "agent can explain score basis"
+    decision_gate: "scorer before ContextQuant runtime"
+    next_phase: "P13"
+  - id: "P13"
+    name: "ContextQuantRuntime"
+    block: "optimization"
+    purpose: "Implement bounded context quant runtime after scorer exists."
+    depends_on: ["P12"]
+    status: "planned"
+    priority_now: 4
+    priority_final: 9
+    creates: ["context_quant_runtime"]
+    modifies: ["context_pipeline"]
+    validates: ["quant_runtime_tests"]
+    forbidden_actions: ["heavy_runtime_without_contract"]
+    snowball_metrics: ["token_efficiency_delta"]
+    restart_validation: "runtime config discoverable"
+    hot_path_validation: "agent can choose quant path"
+    decision_gate: "runtime before prompt frame builder"
+    next_phase: "P14"
+  - id: "P14"
+    name: "PromptFrameBuilder + PromptCacheLedger"
+    block: "optimization"
+    purpose: "Build stable prompt frames and track reusable prompt prefixes."
+    depends_on: ["P13"]
+    status: "planned"
+    priority_now: 4
+    priority_final: 9
+    creates: ["prompt_frame_builder", "prompt_cache_ledger"]
+    modifies: ["context_pipeline"]
+    validates: ["prompt_cache_trace"]
+    forbidden_actions: ["untracked_prompt_prefix_mutation"]
+    snowball_metrics: ["stable_prefix_delta"]
+    restart_validation: "prompt frame contract discoverable"
+    hot_path_validation: "agent can identify stable prefix"
+    decision_gate: "prompt frames before restart gate"
+    next_phase: "P15"
+  - id: "P15"
+    name: "Restart Integration Gate"
+    block: "resilience"
+    purpose: "Gate integration claims on restart survival."
+    depends_on: ["P14"]
+    status: "planned"
+    priority_now: 4
+    priority_final: 10
+    creates: ["restart_integration_gate"]
+    modifies: ["acceptance_contracts"]
+    validates: ["restart_simulation"]
+    forbidden_actions: ["integration_claim_without_restart_validation"]
+    snowball_metrics: ["restart_success_delta"]
+    restart_validation: "gate validates itself"
+    hot_path_validation: "agent can run restart checklist"
+    decision_gate: "restart gate before efficiency benchmark"
+    next_phase: "P16"
+  - id: "P16"
+    name: "Context Efficiency Benchmark"
+    block: "optimization"
+    purpose: "Benchmark context quality and token efficiency."
+    depends_on: ["P15"]
+    status: "planned"
+    priority_now: 4
+    priority_final: 9
+    creates: ["context_efficiency_benchmark"]
+    modifies: ["metrics_reports"]
+    validates: ["benchmark_repeatability"]
+    forbidden_actions: ["false_efficiency_claims"]
+    snowball_metrics: ["token_efficiency_delta"]
+    restart_validation: "benchmark report discoverable"
+    hot_path_validation: "agent can compare runs"
+    decision_gate: "benchmark before flywheel runtime"
+    next_phase: "P17"
+  - id: "P17"
+    name: "EvolutionFlywheelRuntime"
+    block: "evolution"
+    purpose: "Turn phase outcomes into learning episodes and next-phase improvements."
+    depends_on: ["P16"]
+    status: "planned"
+    priority_now: 4
+    priority_final: 10
+    creates: ["evolution_flywheel_runtime"]
+    modifies: ["phase_reporting"]
+    validates: ["learning_episode_generation"]
+    forbidden_actions: ["memory_write_without_contract"]
+    snowball_metrics: ["future_phase_improvement_delta"]
+    restart_validation: "learning episodes discoverable"
+    hot_path_validation: "agent can apply prior phase outcome"
+    decision_gate: "flywheel before control plane"
+    next_phase: "P18"
+  - id: "P18"
+    name: "CLI Control Plane"
+    block: "control"
+    purpose: "Expose compact local control commands for governed operations."
+    depends_on: ["P17"]
+    status: "planned"
+    priority_now: 3
+    priority_final: 8
+    creates: ["cli_control_plane"]
+    modifies: ["operator_docs"]
+    validates: ["command_contract_tests"]
+    forbidden_actions: ["unscoped_external_actions"]
+    snowball_metrics: ["manual_intervention_delta"]
+    restart_validation: "commands documented"
+    hot_path_validation: "agent can locate CLI entrypoints"
+    decision_gate: "CLI before TUI"
+    next_phase: "P19"
+  - id: "P19"
+    name: "TUI / Process Monitor"
+    block: "control"
+    purpose: "Add local process observability after CLI control exists."
+    depends_on: ["P18"]
+    status: "planned"
+    priority_now: 3
+    priority_final: 8
+    creates: ["tui_process_monitor"]
+    modifies: ["operator_docs"]
+    validates: ["process_monitor_smoke"]
+    forbidden_actions: ["dashboard_as_source_of_truth"]
+    snowball_metrics: ["observability_delta"]
+    restart_validation: "TUI docs discoverable"
+    hot_path_validation: "agent can inspect local process state"
+    decision_gate: "TUI before dashboard"
+    next_phase: "P20"
+  - id: "P20"
+    name: "Dashboard L6"
+    block: "observability"
+    purpose: "Add dashboard as view over canonical state, not source of truth."
+    depends_on: ["P19"]
+    status: "planned"
+    priority_now: 2
+    priority_final: 8
+    creates: ["dashboard_l6"]
+    modifies: ["l6_skin"]
+    validates: ["dashboard_reads_canonical_state"]
+    forbidden_actions: ["dashboard_as_source_of_truth"]
+    snowball_metrics: ["operator_visibility_delta"]
+    restart_validation: "dashboard sources discoverable"
+    hot_path_validation: "agent can identify canonical backing files"
+    decision_gate: "dashboard before compressor"
+    next_phase: "P21"
+  - id: "P21"
+    name: "LocalContextCompressor"
+    block: "optimization"
+    purpose: "Compress local context after governance and observability are established."
+    depends_on: ["P20"]
+    status: "planned"
+    priority_now: 2
+    priority_final: 8
+    creates: ["local_context_compressor"]
+    modifies: ["context_pipeline"]
+    validates: ["compression_quality"]
+    forbidden_actions: ["lossy_unexplained_compression"]
+    snowball_metrics: ["compression_value_delta"]
+    restart_validation: "compression receipts available"
+    hot_path_validation: "agent can choose compressed context"
+    decision_gate: "compressor before real embeddings"
+    next_phase: "P22"
+  - id: "P22"
+    name: "Real Embedding Adapter"
+    block: "retrieval"
+    purpose: "Integrate real embeddings after local context compression."
+    depends_on: ["P21"]
+    status: "planned"
+    priority_now: 2
+    priority_final: 8
+    creates: ["real_embedding_adapter"]
+    modifies: ["semantic_retrieval_runtime"]
+    validates: ["embedding_adapter_tests"]
+    forbidden_actions: ["secret_storage", "untracked_external_api"]
+    snowball_metrics: ["retrieval_quality_delta"]
+    restart_validation: "adapter config discoverable"
+    hot_path_validation: "agent can identify embedding provider"
+    decision_gate: "embedding before repo probes"
+    next_phase: "P23"
+  - id: "P23"
+    name: "Polyglot RepoProbeRunner"
+    block: "architecture"
+    purpose: "Run language-aware repo probes across polyglot layers."
+    depends_on: ["P22"]
+    status: "planned"
+    priority_now: 2
+    priority_final: 8
+    creates: ["repo_probe_runner"]
+    modifies: ["polyglot_registry"]
+    validates: ["language_probe_results"]
+    forbidden_actions: ["single_language_global_audit"]
+    snowball_metrics: ["polyglot_probe_delta"]
+    restart_validation: "probe results discoverable"
+    hot_path_validation: "agent can run scoped probe"
+    decision_gate: "repo probes before SDD/TDD planner"
+    next_phase: "P24"
+  - id: "P24"
+    name: "SDD/TDD Mission Planner L1/L2/L3"
+    block: "mission"
+    purpose: "Plan missions with SDD/TDD across nervous, brain and shield layers."
+    depends_on: ["P23"]
+    status: "planned"
+    priority_now: 2
+    priority_final: 9
+    creates: ["sdd_tdd_mission_planner"]
+    modifies: ["mission_workbench"]
+    validates: ["planner_contract_tests"]
+    forbidden_actions: ["mission_without_tests_or_specs"]
+    snowball_metrics: ["mission_quality_delta"]
+    restart_validation: "mission plans resumable"
+    hot_path_validation: "agent can select mission plan"
+    decision_gate: "planner before orchestrator DAG"
+    next_phase: "P25"
+  - id: "P25"
+    name: "MissionOrchestrator DAG"
+    block: "mission"
+    purpose: "Coordinate mission steps as governed DAGs."
+    depends_on: ["P24"]
+    status: "planned"
+    priority_now: 2
+    priority_final: 9
+    creates: ["mission_orchestrator_dag"]
+    modifies: ["mission_runtime"]
+    validates: ["dag_execution_trace"]
+    forbidden_actions: ["ungoverned_parallel_execution"]
+    snowball_metrics: ["orchestration_reliability_delta"]
+    restart_validation: "DAG state resumable"
+    hot_path_validation: "agent can inspect DAG next node"
+    decision_gate: "DAG before swarm"
+    next_phase: "P26"
+  - id: "P26"
+    name: "StrategicPartnerSwarm"
+    block: "swarm"
+    purpose: "Introduce governed swarm only after context, lifecycle and mission DAG governance."
+    depends_on: ["P25"]
+    status: "deferred"
+    priority_now: 1
+    priority_final: 8
+    creates: ["strategic_partner_swarm"]
+    modifies: ["mission_orchestrator"]
+    validates: ["swarm_scope_guardrails"]
+    forbidden_actions: ["swarm_before_context_governance"]
+    snowball_metrics: ["parallel_review_quality_delta"]
+    restart_validation: "swarm state recoverable"
+    hot_path_validation: "agent can refuse premature swarm"
+    decision_gate: "swarm before adversarial review"
+    next_phase: "P27"
+  - id: "P27"
+    name: "Debate & Adversarial Review Runtime"
+    block: "swarm"
+    purpose: "Add structured debate and adversarial review for high-risk decisions."
+    depends_on: ["P26"]
+    status: "deferred"
+    priority_now: 1
+    priority_final: 8
+    creates: ["adversarial_review_runtime"]
+    modifies: ["review_protocols"]
+    validates: ["debate_trace_quality"]
+    forbidden_actions: ["performative_objection_without_evidence"]
+    snowball_metrics: ["review_defect_detection_delta"]
+    restart_validation: "review traces discoverable"
+    hot_path_validation: "agent can invoke review gate"
+    decision_gate: "review before autonomy contract"
+    next_phase: "P28"
+  - id: "P28"
+    name: "MissionAutonomyContract"
+    block: "autonomy"
+    purpose: "Define full mission autonomy permissions and boundaries."
+    depends_on: ["P27"]
+    status: "deferred"
+    priority_now: 1
+    priority_final: 10
+    creates: ["mission_autonomy_contract"]
+    modifies: ["authority_model"]
+    validates: ["permission_gate_tests"]
+    forbidden_actions: ["autonomy_before_contract"]
+    snowball_metrics: ["safe_autonomy_delta"]
+    restart_validation: "autonomy contract discoverable"
+    hot_path_validation: "agent can classify authority level"
+    decision_gate: "autonomy contract before workstation mode"
+    next_phase: "P29"
+  - id: "P29"
+    name: "TrustedWorkstationMode"
+    block: "autonomy"
+    purpose: "Enable workstation actions only after permission contracts exist."
+    depends_on: ["P28"]
+    status: "deferred"
+    priority_now: 1
+    priority_final: 9
+    creates: ["trusted_workstation_mode"]
+    modifies: ["permission_enforcement"]
+    validates: ["workstation_permission_tests"]
+    forbidden_actions: ["workstation_without_permission_contract"]
+    snowball_metrics: ["trusted_action_reliability_delta"]
+    restart_validation: "workstation state recoverable"
+    hot_path_validation: "agent can refuse unsafe workstation action"
+    decision_gate: "trusted workstation before chaos testing"
+    next_phase: "P30"
+  - id: "P30"
+    name: "Chaos & Regression Testing"
+    block: "resilience"
+    purpose: "Stress DUMMIE runtime and governance under failures."
+    depends_on: ["P29"]
+    status: "deferred"
+    priority_now: 1
+    priority_final: 9
+    creates: ["chaos_regression_suite"]
+    modifies: ["test_harnesses"]
+    validates: ["chaos_results"]
+    forbidden_actions: ["destructive_test_without_sandbox"]
+    snowball_metrics: ["regression_resistance_delta"]
+    restart_validation: "failure recovery validated"
+    hot_path_validation: "agent can run bounded chaos suite"
+    decision_gate: "chaos before autonomous runtime"
+    next_phase: "P31"
+  - id: "P31"
+    name: "Autonomous Strategic Partner Runtime"
+    block: "autonomy"
+    purpose: "Operate as an autonomous strategic partner under all previous governance layers."
+    depends_on: ["P30"]
+    status: "deferred"
+    priority_now: 1
+    priority_final: 10
+    creates: ["autonomous_strategic_partner_runtime"]
+    modifies: ["mission_autonomy_runtime"]
+    validates: ["end_to_end_autonomy_governance"]
+    forbidden_actions: ["ungoverned_autonomy", "secret_storage", "external_action_without_A4_authority"]
+    snowball_metrics: ["strategic_partner_capability_delta"]
+    restart_validation: "runtime survives restart"
+    hot_path_validation: "agent can operate governed long mission"
+    decision_gate: "final governed autonomy gate"
+    next_phase: null
+

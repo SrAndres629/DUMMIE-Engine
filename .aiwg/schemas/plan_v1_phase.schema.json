@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DUMMIE Plan V1 Phase",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "block",
+    "purpose",
+    "depends_on",
+    "status",
+    "priority_now",
+    "priority_final",
+    "creates",
+    "modifies",
+    "validates",
+    "forbidden_actions",
+    "snowball_metrics",
+    "restart_validation",
+    "hot_path_validation",
+    "decision_gate",
+    "next_phase"
+  ],
+  "properties": {
+    "id": {"type": "string", "pattern": "^P[0-9]+$"},
+    "name": {"type": "string"},
+    "block": {"type": "string"},
+    "purpose": {"type": "string"},
+    "depends_on": {"type": "array", "items": {"type": "string"}},
+    "status": {"enum": ["active", "planned", "deferred", "completed", "blocked"]},
+    "priority_now": {"type": "integer", "minimum": 0, "maximum": 10},
+    "priority_final": {"type": "integer", "minimum": 0, "maximum": 10},
+    "creates": {"type": "array", "items": {"type": "string"}},
+    "modifies": {"type": "array", "items": {"type": "string"}},
+    "validates": {"type": "array", "items": {"type": "string"}},
+    "forbidden_actions": {"type": "array", "items": {"type": "string"}},
+    "snowball_metrics": {"type": "array", "items": {"type": "string"}},
+    "restart_validation": {"type": "string"},
+    "hot_path_validation": {"type": "string"},
+    "decision_gate": {"type": "string"},
+    "next_phase": {"type": ["string", "null"]}
+  }
+}
+

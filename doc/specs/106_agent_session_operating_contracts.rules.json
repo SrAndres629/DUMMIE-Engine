@@ -1,0 +1,18 @@
+{
+  "spec_id": "106",
+  "name": "Agent Session Operating Contracts",
+  "required_files": [
+    ".aiwg/session_contracts/UNIVERSAL_AGENT_SESSION_CONTRACT.md",
+    ".aiwg/session_contracts/GEMINI_CLI_SESSION_CONTRACT.md",
+    ".aiwg/session_contracts/CODEX_CLI_SESSION_CONTRACT.md",
+    ".aiwg/session_contracts/ANTIGRAVITY_IDE_SESSION_CONTRACT.md"
+  ],
+  "rules": [
+    "gemini_cli_obeys_session_contract",
+    "codex_cli_obeys_session_contract",
+    "antigravity_ide_obeys_session_contract",
+    "every_session_loads_current_position_and_next_phase_seed",
+    "every_session_avoids_roadmap_drift"
+  ]
+}
+

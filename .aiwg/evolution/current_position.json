@@ -1,0 +1,23 @@
+{
+  "plan": "DUMMIE PLAN V1 — Cognitive Evolution Operating Layer",
+  "current_phase": "P1",
+  "current_phase_name": "Mental Model Abstraction Layer + Session Operating Contract",
+  "last_completed_phase": null,
+  "next_required_phase": "P2",
+  "next_required_phase_name": "Baseline Reset & Reality Lock",
+  "current_block": "foundation",
+  "forbidden_skips": [
+    "do not start swarm before lifecycle and context governance",
+    "do not start autonomy before MissionAutonomyContract",
+    "do not start Obsidian before internal notes and truth hierarchy",
+    "do not start TrustedWorkstationMode before permission contracts",
+    "do not treat dashboard as source of truth"
+  ],
+  "canonical_roadmap_files": [
+    ".aiwg/evolution/phases.yaml",
+    ".aiwg/evolution/phase_dependencies.graph.json",
+    ".aiwg/evolution/current_position.json",
+    ".aiwg/evolution/next_phase_seed.json"
+  ]
+}
+

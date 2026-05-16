@@ -1,0 +1,23 @@
+{
+  "spec_id": "104",
+  "name": "Plan V1 Cognitive Evolution Operating Layer",
+  "required_files": [
+    ".aiwg/evolution/PLAN_V1_COGNITIVE_EVOLUTION_OPERATING_LAYER.md",
+    ".aiwg/evolution/phases.yaml",
+    ".aiwg/evolution/phase_dependencies.graph.json",
+    ".aiwg/evolution/long_term_objectives.yaml",
+    ".aiwg/evolution/short_term_objectives.yaml",
+    ".aiwg/evolution/current_position.json",
+    ".aiwg/evolution/next_phase_seed.json"
+  ],
+  "rules": [
+    "plan_v1_exists",
+    "31_phases_exist",
+    "phase_dependencies_exist",
+    "long_and_short_objectives_exist",
+    "current_position_exists",
+    "next_phase_seed_exists",
+    "roadmap_not_redefined_from_chat_memory"
+  ]
+}
+

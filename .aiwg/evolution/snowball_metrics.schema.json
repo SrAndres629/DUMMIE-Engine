@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DUMMIE Snowball Metrics",
+  "type": "object",
+  "required": [
+    "phase",
+    "decision",
+    "snowball_gain_score",
+    "restart_verified",
+    "hot_path_verified"
+  ],
+  "properties": {
+    "phase": {"type": "string"},
+    "decision": {"enum": ["improved", "neutral", "regressed", "unknown"]},
+    "snowball_gain_score": {"type": "number", "minimum": -1, "maximum": 1},
+    "context_quality_delta": {"type": "number"},
+    "token_efficiency_delta": {"type": "number"},
+    "spec_coverage_delta": {"type": "number"},
+    "polyglot_coverage_delta": {"type": "number"},
+    "test_coverage_delta": {"type": "number"},
+    "memory_reuse_delta": {"type": "number"},
+    "manual_intervention_delta": {"type": "number"},
+    "engine_native_reuse_delta": {"type": "number"},
+    "restart_verified": {"type": "boolean"},
+    "hot_path_verified": {"type": "boolean"},
+    "evidence_refs": {
+      "type": "array",
+      "items": {"type": "string"}
+    }
+  }
+}
+

@@ -1,0 +1,28 @@
+per_message_operating_contract:
+  before_response:
+    - read_current_position_if_available
+    - read_next_phase_seed_if_available
+    - identify_task_scope
+    - check_forbidden_skips
+    - select_context_minimally
+    - prefer_engine_native_capabilities
+  during_execution:
+    - preserve_scope
+    - prefer_existing_contracts
+    - use_tests_before_claims
+    - avoid_raw_repo_loads
+    - emit_evidence
+    - record_missing_capabilities_explicitly
+  after_execution:
+    - generate_report
+    - update_current_position_if_phase_completed
+    - generate_next_phase_seed
+    - score_snowball_gain_if_possible
+    - list_remaining_risks
+  forbidden:
+    - private_chain_of_thought_storage
+    - secret_storage
+    - unsanctioned_roadmap_rewrite
+    - direct_obsolete_memory_use
+    - duplicate_parallel_runtime
+

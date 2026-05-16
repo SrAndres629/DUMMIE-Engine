@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DUMMIE Context Transform Receipt",
+  "type": "object",
+  "required": [
+    "receipt_id",
+    "input_signals",
+    "transformed_states",
+    "decision"
+  ],
+  "properties": {
+    "receipt_id": {"type": "string"},
+    "input_signals": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "transformed_states": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "decision": {"enum": ["ALLOW", "WARN", "BLOCK"]},
+    "warnings": {
+      "type": "array",
+      "items": {"type": "string"}
+    }
+  }
+}
+

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DUMMIE Session Contract",
+  "type": "object",
+  "required": ["agent_type", "must_load", "forbidden", "outputs"],
+  "properties": {
+    "agent_type": {"type": "string"},
+    "must_load": {"type": "array", "items": {"type": "string"}},
+    "forbidden": {"type": "array", "items": {"type": "string"}},
+    "outputs": {"type": "array", "items": {"type": "string"}},
+    "authority_scope": {"type": "array", "items": {"type": "string"}}
+  }
+}
+

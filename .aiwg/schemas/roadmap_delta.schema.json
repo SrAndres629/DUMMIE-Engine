@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DUMMIE Roadmap Delta",
+  "type": "object",
+  "required": ["delta_id", "phase", "change_type", "reason", "evidence_refs", "decision"],
+  "properties": {
+    "delta_id": {"type": "string"},
+    "phase": {"type": "string"},
+    "change_type": {"enum": ["add", "modify", "defer", "remove", "clarify"]},
+    "reason": {"type": "string"},
+    "evidence_refs": {"type": "array", "items": {"type": "string"}},
+    "decision": {"enum": ["ALLOW", "WARN", "BLOCK"]},
+    "strategic_objection": {"type": "boolean"},
+    "rollback_plan": {"type": "string"}
+  }
+}
+

@@ -1,0 +1,25 @@
+{
+  "next_phase": "P2",
+  "name": "Baseline Reset & Reality Lock",
+  "objective": "Create a clean operational baseline before auditing artifact lifecycle or implementing new runtime modules.",
+  "why_now": "DUMMIE needs measurable baseline state before any snowball gain can be computed.",
+  "required_outputs": [
+    ".aiwg/reports/plan_v1_phase_2_baseline_reality_lock.md",
+    ".aiwg/reports/plan_v1_phase_2_baseline_reality_lock.json"
+  ],
+  "must_not_create": [
+    "new runtime modules",
+    "new swarm agents",
+    "Obsidian adapter",
+    "autonomy permissions",
+    "large dashboard"
+  ],
+  "success_conditions": [
+    "git status captured",
+    "spec validation captured",
+    "test status captured",
+    "known risks captured",
+    "baseline metrics captured"
+  ]
+}
+

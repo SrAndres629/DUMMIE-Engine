@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DUMMIE Objective",
+  "type": "object",
+  "required": ["id", "name", "description", "success_conditions"],
+  "properties": {
+    "id": {"type": "string"},
+    "name": {"type": "string"},
+    "description": {"type": "string"},
+    "phase": {"type": "string"},
+    "supports": {"type": "array", "items": {"type": "string"}},
+    "status": {"enum": ["active", "planned", "deferred", "completed", "blocked"]},
+    "success_conditions": {"type": "array", "items": {"type": "string"}}
+  }
+}
+

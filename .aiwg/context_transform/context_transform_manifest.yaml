@@ -1,0 +1,22 @@
+context_transform_manifest:
+  purpose: "Transform temporal context into governed cognitive state."
+  inputs:
+    - user_request
+    - agent_report
+    - test_result
+    - spec_change
+    - file_change
+    - vault_entry
+    - learning_episode
+    - mentor_review
+  outputs:
+    - objective_state
+    - phase_state
+    - context_receipt
+    - next_phase_seed
+    - snowball_gain_report
+  forbidden:
+    - private_chain_of_thought
+    - secrets
+    - raw_repo_dump_without_scope
+

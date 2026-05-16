@@ -1,0 +1,41 @@
+long_term_objectives:
+  - id: "LTO-001"
+    name: "Autonomous Strategic Partner Runtime"
+    description: "DUMMIE must become a strategic partner capable of managing long missions, memory, planning, self-evaluation and progressive autonomy."
+    success_conditions:
+      - "long missions survive restart"
+      - "phase outcomes generate learning episodes"
+      - "context is compiled and measured"
+      - "autonomy is governed by permissions"
+      - "DUMMIE can improve future phases from past outcomes"
+  - id: "LTO-002"
+    name: "Context Governance and Token Efficiency"
+    description: "DUMMIE must maximize useful context per token and minimize raw, stale, duplicated or irrelevant context."
+    success_conditions:
+      - "context packages are generated before major phases"
+      - "context receipts record loaded and skipped context"
+      - "stable prompt prefix can be tracked"
+      - "raw context ratio decreases over time"
+  - id: "LTO-003"
+    name: "Polyglot Cognitive Software OS"
+    description: "DUMMIE must preserve its layered polyglot architecture across Go, Elixir, Python, Rust, TypeScript, Protobuf, shell and config artifacts."
+    success_conditions:
+      - "global architecture tasks include polyglot coverage"
+      - "layer-language relationships are explicit"
+      - "repo probes are language-aware"
+  - id: "LTO-004"
+    name: "Cognitive Artifact Lifecycle"
+    description: "Every cognitive artifact must have lifecycle, freshness, truth rank, ownership and context role."
+    success_conditions:
+      - "artifacts have lifecycle state"
+      - "notes have freshness"
+      - "stale artifacts are detected"
+      - "truth hierarchy resolves conflicts"
+  - id: "LTO-005"
+    name: "Measured Evolution Flywheel"
+    description: "Every phase must be measured as improved, neutral or regressed using snowball gain metrics."
+    success_conditions:
+      - "every phase has evidence report"
+      - "every phase has snowball metrics"
+      - "restart and hot-path validation are tracked"
+
