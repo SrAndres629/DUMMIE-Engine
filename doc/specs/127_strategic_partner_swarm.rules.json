@@ -1,0 +1,21 @@
+{
+  "spec_id": "127",
+  "name": "Strategic Partner Swarm Rules",
+  "rules": [
+    {
+      "id": "R1",
+      "description": "Swarm is advisory-only and cannot mutate workspace directly.",
+      "priority": "CRITICAL"
+    },
+    {
+      "id": "R2",
+      "description": "Must include roles: planner, critic, validator, mentor, risk_officer, execution_advisor.",
+      "priority": "HIGH"
+    },
+    {
+      "id": "R3",
+      "description": "If mission coherence failed, swarm must not recommend 'continue_next_phase'.",
+      "priority": "CRITICAL"
+    }
+  ]
+}

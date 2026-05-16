@@ -2,7 +2,7 @@
   "next_node": {
     "node_id": "START",
     "node_type": "L1",
-    "title": "Start MISSION_P23",
+    "title": "Start MISSION_P27",
     "status": "ready",
     "depends_on": [],
     "produces": [],
@@ -10,5 +10,5 @@
     "risk_level": "low",
     "evidence_refs": []
   },
-  "generated_at": "2026-05-16T14:02:11Z"
+  "generated_at": "2026-05-16T14:15:21Z"
 }

@@ -84,8 +84,11 @@ class MissionPlanner:
         next_seed = self._load_json(self.aiwg_root / "evolution" / "next_phase_seed.json")
         repo_probe = self._load_json(self.reports_root / "repo_probe_latest.json")
 
-        mission_id = f"MISSION_{next_seed.get('next_phase', 'UNKNOWN')}"
-        objective = next_seed.get("objective", "Execute next evolutionary step")
+        current_phase = str(current_pos.get("current_phase", "unknown"))
+        next_phase = str(next_seed.get("next_phase", "unknown"))
+        
+        mission_id = f"MISSION_{next_phase}"
+        objective = next_seed.get("objective", f"Execute {next_phase}")
         
         # L1 Goal
         l1_goal = {
@@ -93,7 +96,7 @@ class MissionPlanner:
             "success_conditions": next_seed.get("success_conditions", [])
         }
 
-        # Mock L2 and L3 planning based on next_seed required_outputs
+        # Mission planning based on next_seed required_outputs
         l2_phases = []
         l3_microphases = []
         
@@ -105,7 +108,7 @@ class MissionPlanner:
                 title=f"Produce {out}",
                 purpose=f"Implement and verify {out}",
                 outputs=[out],
-                acceptance_criteria=[f"File {out} exists", f"Tests for {out} pass"]
+                acceptance_criteria=[f"File {out} exists", f"Validation for {out} pass"]
             )
             l2_phases.append(l2)
             
@@ -115,22 +118,36 @@ class MissionPlanner:
                 parent_phase_id=phase_id,
                 title=f"Draft {out}",
                 action=f"Create/Update {out}",
-                expected_file_changes=[out]
+                expected_file_changes=[out],
+                done_criteria=f"File {out} is written with expected content"
             ))
+            
+            # Smart test path selection
+            tests = []
+            if out.endswith(".py") and "layers/" in out:
+                # Real runtime module needs real test
+                p = Path(out)
+                # Ensure no double test prefix
+                test_name = p.name if p.name.startswith("test_") else f"test_{p.name}"
+                test_path = str(p.parent / "tests" / test_name)
+                tests = [test_path]
+
             l3_microphases.append(MissionMicroPhase(
                 microphase_id=f"{phase_id}_M2",
                 parent_phase_id=phase_id,
                 title=f"Verify {out}",
-                action=f"Run tests for {out}",
-                tests_to_run=[f"tests/test_{Path(out).stem}.py"]
+                action=f"Run validation for {out}",
+                tests_to_run=tests if out.endswith(".py") else [],
+                validation_commands=[f"ls {out}"] if not tests else [f"pytest {tests[0]}"],
+                done_criteria=f"Validation for {out} reports PASS"
             ))
 
         plan = MissionPlan(
             mission_id=mission_id,
             objective=objective,
-            source_phase=str(current_pos.get("current_phase", "P24")),
-            current_phase=str(current_pos.get("current_phase", "P24")),
-            next_phase=str(next_seed.get("next_phase", "P25")),
+            source_phase=current_phase,
+            current_phase=current_phase,
+            next_phase=next_phase,
             l1_goal=l1_goal,
             l2_phases=l2_phases,
             l3_microphases=l3_microphases,

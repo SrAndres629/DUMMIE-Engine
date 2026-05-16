@@ -1,0 +1,21 @@
+{
+  "spec_id": "126",
+  "name": "Mission Coherence Guard Rules",
+  "rules": [
+    {
+      "id": "R1",
+      "description": "Must fail if mission_id in artifacts does not match next_phase_seed.json.",
+      "priority": "CRITICAL"
+    },
+    {
+      "id": "R2",
+      "description": "Must detect and report 'invented' test paths in the DAG nodes.",
+      "priority": "HIGH"
+    },
+    {
+      "id": "R3",
+      "description": "Must produce a machine-readable JSON report for swarm consumption.",
+      "priority": "MEDIUM"
+    }
+  ]
+}

@@ -1,44 +1,44 @@
-# Mission Plan: MISSION_P23
-**Objective:** Implement deterministic repo probes that inspect DUMMIE's polyglot layers, languages, specs, tests and runtime capabilities so global project understanding is grounded in physical evidence instead of chat memory.
-**Generated at:** 2026-05-16T14:02:11Z
+# Mission Plan: MISSION_P27
+**Objective:** Implement a bounded debate and adversarial review runtime that allows role-specific agents to challenge plans, identify contradictions, test assumptions and produce evidence-backed objections before implementation proceeds.
+**Generated at:** 2026-05-16T14:15:21Z
 
 ## L1 Goal
-### Polyglot RepoProbeRunner
+### Debate & Adversarial Review Runtime
 **Success Conditions:**
-- repo probe runner implemented
-- polyglot language probes implemented
-- layer probes implemented
-- spec/test probes implemented
-- fresh physical evidence report generated
+- debate roles defined
+- adversarial objections generated
+- evidence-backed claims required
+- contradiction detection implemented
+- judge/mentor verdict generated
+- no direct mutation authority
 - tests pass
-- no secrets or API keys required
 
 ## L2 Phases
-### L2_1: Produce layers/l2_brain/repo_probe_runner.py
-- **Purpose:** Implement and verify layers/l2_brain/repo_probe_runner.py
+### L2_1: Produce layers/l2_brain/debate_review_runtime.py
+- **Purpose:** Implement and verify layers/l2_brain/debate_review_runtime.py
 - **Acceptance Criteria:**
-  - File layers/l2_brain/repo_probe_runner.py exists
-  - Tests for layers/l2_brain/repo_probe_runner.py pass
-### L2_2: Produce layers/l2_brain/tests/test_repo_probe_runner.py
-- **Purpose:** Implement and verify layers/l2_brain/tests/test_repo_probe_runner.py
+  - File layers/l2_brain/debate_review_runtime.py exists
+  - Validation for layers/l2_brain/debate_review_runtime.py pass
+### L2_2: Produce layers/l2_brain/tests/test_debate_review_runtime.py
+- **Purpose:** Implement and verify layers/l2_brain/tests/test_debate_review_runtime.py
 - **Acceptance Criteria:**
-  - File layers/l2_brain/tests/test_repo_probe_runner.py exists
-  - Tests for layers/l2_brain/tests/test_repo_probe_runner.py pass
-### L2_3: Produce .aiwg/reports/plan_v1_phase_23_repo_probe_runner.md
-- **Purpose:** Implement and verify .aiwg/reports/plan_v1_phase_23_repo_probe_runner.md
+  - File layers/l2_brain/tests/test_debate_review_runtime.py exists
+  - Validation for layers/l2_brain/tests/test_debate_review_runtime.py pass
+### L2_3: Produce .aiwg/reports/plan_v1_phase_27_debate_review_runtime.md
+- **Purpose:** Implement and verify .aiwg/reports/plan_v1_phase_27_debate_review_runtime.md
 - **Acceptance Criteria:**
-  - File .aiwg/reports/plan_v1_phase_23_repo_probe_runner.md exists
-  - Tests for .aiwg/reports/plan_v1_phase_23_repo_probe_runner.md pass
-### L2_4: Produce .aiwg/reports/plan_v1_phase_23_repo_probe_runner.json
-- **Purpose:** Implement and verify .aiwg/reports/plan_v1_phase_23_repo_probe_runner.json
+  - File .aiwg/reports/plan_v1_phase_27_debate_review_runtime.md exists
+  - Validation for .aiwg/reports/plan_v1_phase_27_debate_review_runtime.md pass
+### L2_4: Produce .aiwg/reports/plan_v1_phase_27_debate_review_runtime.json
+- **Purpose:** Implement and verify .aiwg/reports/plan_v1_phase_27_debate_review_runtime.json
 - **Acceptance Criteria:**
-  - File .aiwg/reports/plan_v1_phase_23_repo_probe_runner.json exists
-  - Tests for .aiwg/reports/plan_v1_phase_23_repo_probe_runner.json pass
-### L2_5: Produce .aiwg/reports/repo_probe_latest.json
-- **Purpose:** Implement and verify .aiwg/reports/repo_probe_latest.json
+  - File .aiwg/reports/plan_v1_phase_27_debate_review_runtime.json exists
+  - Validation for .aiwg/reports/plan_v1_phase_27_debate_review_runtime.json pass
+### L2_5: Produce .aiwg/reports/debate_review_latest.json
+- **Purpose:** Implement and verify .aiwg/reports/debate_review_latest.json
 - **Acceptance Criteria:**
-  - File .aiwg/reports/repo_probe_latest.json exists
-  - Tests for .aiwg/reports/repo_probe_latest.json pass
+  - File .aiwg/reports/debate_review_latest.json exists
+  - Validation for .aiwg/reports/debate_review_latest.json pass
 
 ## SDD/TDD Requirements
 - SDD: Every change must have a spec triplet

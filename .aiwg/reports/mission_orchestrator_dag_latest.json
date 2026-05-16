@@ -1,10 +1,10 @@
 {
-  "mission_id": "MISSION_P23",
+  "mission_id": "MISSION_P27",
   "nodes": {
     "START": {
       "node_id": "START",
       "node_type": "L1",
-      "title": "Start MISSION_P23",
+      "title": "Start MISSION_P27",
       "status": "ready",
       "depends_on": [],
       "produces": [],
@@ -15,13 +15,13 @@
     "L2_1": {
       "node_id": "L2_1",
       "node_type": "L2",
-      "title": "Produce layers/l2_brain/repo_probe_runner.py",
+      "title": "Produce layers/l2_brain/debate_review_runtime.py",
       "status": "pending",
       "depends_on": [
         "L2_1_M2"
       ],
       "produces": [
-        "layers/l2_brain/repo_probe_runner.py"
+        "layers/l2_brain/debate_review_runtime.py"
       ],
       "tests": [],
       "risk_level": "low",
@@ -30,13 +30,13 @@
     "L2_1_M1": {
       "node_id": "L2_1_M1",
       "node_type": "L3",
-      "title": "Draft layers/l2_brain/repo_probe_runner.py",
+      "title": "Draft layers/l2_brain/debate_review_runtime.py",
       "status": "pending",
       "depends_on": [
         "START"
       ],
       "produces": [
-        "layers/l2_brain/repo_probe_runner.py"
+        "layers/l2_brain/debate_review_runtime.py"
       ],
       "tests": [],
       "risk_level": "low",
@@ -45,14 +45,14 @@
     "L2_1_M2": {
       "node_id": "L2_1_M2",
       "node_type": "L3",
-      "title": "Verify layers/l2_brain/repo_probe_runner.py",
+      "title": "Verify layers/l2_brain/debate_review_runtime.py",
       "status": "pending",
       "depends_on": [
         "L2_1_M1"
       ],
       "produces": [],
       "tests": [
-        "tests/test_repo_probe_runner.py"
+        "layers/l2_brain/tests/test_debate_review_runtime.py"
       ],
       "risk_level": "low",
       "evidence_refs": []
@@ -60,13 +60,13 @@
     "L2_2": {
       "node_id": "L2_2",
       "node_type": "L2",
-      "title": "Produce layers/l2_brain/tests/test_repo_probe_runner.py",
+      "title": "Produce layers/l2_brain/tests/test_debate_review_runtime.py",
       "status": "pending",
       "depends_on": [
         "L2_2_M2"
       ],
       "produces": [
-        "layers/l2_brain/tests/test_repo_probe_runner.py"
+        "layers/l2_brain/tests/test_debate_review_runtime.py"
       ],
       "tests": [],
       "risk_level": "low",
@@ -75,13 +75,13 @@
     "L2_2_M1": {
       "node_id": "L2_2_M1",
       "node_type": "L3",
-      "title": "Draft layers/l2_brain/tests/test_repo_probe_runner.py",
+      "title": "Draft layers/l2_brain/tests/test_debate_review_runtime.py",
       "status": "pending",
       "depends_on": [
         "L2_1"
       ],
       "produces": [
-        "layers/l2_brain/tests/test_repo_probe_runner.py"
+        "layers/l2_brain/tests/test_debate_review_runtime.py"
       ],
       "tests": [],
       "risk_level": "low",
@@ -90,14 +90,14 @@
     "L2_2_M2": {
       "node_id": "L2_2_M2",
       "node_type": "L3",
-      "title": "Verify layers/l2_brain/tests/test_repo_probe_runner.py",
+      "title": "Verify layers/l2_brain/tests/test_debate_review_runtime.py",
       "status": "pending",
       "depends_on": [
         "L2_2_M1"
       ],
       "produces": [],
       "tests": [
-        "tests/test_test_repo_probe_runner.py"
+        "layers/l2_brain/tests/tests/test_debate_review_runtime.py"
       ],
       "risk_level": "low",
       "evidence_refs": []
@@ -105,13 +105,13 @@
     "L2_3": {
       "node_id": "L2_3",
       "node_type": "L2",
-      "title": "Produce .aiwg/reports/plan_v1_phase_23_repo_probe_runner.md",
+      "title": "Produce .aiwg/reports/plan_v1_phase_27_debate_review_runtime.md",
       "status": "pending",
       "depends_on": [
         "L2_3_M2"
       ],
       "produces": [
-        ".aiwg/reports/plan_v1_phase_23_repo_probe_runner.md"
+        ".aiwg/reports/plan_v1_phase_27_debate_review_runtime.md"
       ],
       "tests": [],
       "risk_level": "low",
@@ -120,13 +120,13 @@
     "L2_3_M1": {
       "node_id": "L2_3_M1",
       "node_type": "L3",
-      "title": "Draft .aiwg/reports/plan_v1_phase_23_repo_probe_runner.md",
+      "title": "Draft .aiwg/reports/plan_v1_phase_27_debate_review_runtime.md",
       "status": "pending",
       "depends_on": [
         "L2_2"
       ],
       "produces": [
-        ".aiwg/reports/plan_v1_phase_23_repo_probe_runner.md"
+        ".aiwg/reports/plan_v1_phase_27_debate_review_runtime.md"
       ],
       "tests": [],
       "risk_level": "low",
@@ -135,28 +135,26 @@
     "L2_3_M2": {
       "node_id": "L2_3_M2",
       "node_type": "L3",
-      "title": "Verify .aiwg/reports/plan_v1_phase_23_repo_probe_runner.md",
+      "title": "Verify .aiwg/reports/plan_v1_phase_27_debate_review_runtime.md",
       "status": "pending",
       "depends_on": [
         "L2_3_M1"
       ],
       "produces": [],
-      "tests": [
-        "tests/test_plan_v1_phase_23_repo_probe_runner.py"
-      ],
+      "tests": [],
       "risk_level": "low",
       "evidence_refs": []
     },
     "L2_4": {
       "node_id": "L2_4",
       "node_type": "L2",
-      "title": "Produce .aiwg/reports/plan_v1_phase_23_repo_probe_runner.json",
+      "title": "Produce .aiwg/reports/plan_v1_phase_27_debate_review_runtime.json",
       "status": "pending",
       "depends_on": [
         "L2_4_M2"
       ],
       "produces": [
-        ".aiwg/reports/plan_v1_phase_23_repo_probe_runner.json"
+        ".aiwg/reports/plan_v1_phase_27_debate_review_runtime.json"
       ],
       "tests": [],
       "risk_level": "low",
@@ -165,13 +163,13 @@
     "L2_4_M1": {
       "node_id": "L2_4_M1",
       "node_type": "L3",
-      "title": "Draft .aiwg/reports/plan_v1_phase_23_repo_probe_runner.json",
+      "title": "Draft .aiwg/reports/plan_v1_phase_27_debate_review_runtime.json",
       "status": "pending",
       "depends_on": [
         "L2_3"
       ],
       "produces": [
-        ".aiwg/reports/plan_v1_phase_23_repo_probe_runner.json"
+        ".aiwg/reports/plan_v1_phase_27_debate_review_runtime.json"
       ],
       "tests": [],
       "risk_level": "low",
@@ -180,28 +178,26 @@
     "L2_4_M2": {
       "node_id": "L2_4_M2",
       "node_type": "L3",
-      "title": "Verify .aiwg/reports/plan_v1_phase_23_repo_probe_runner.json",
+      "title": "Verify .aiwg/reports/plan_v1_phase_27_debate_review_runtime.json",
       "status": "pending",
       "depends_on": [
         "L2_4_M1"
       ],
       "produces": [],
-      "tests": [
-        "tests/test_plan_v1_phase_23_repo_probe_runner.py"
-      ],
+      "tests": [],
       "risk_level": "low",
       "evidence_refs": []
     },
     "L2_5": {
       "node_id": "L2_5",
       "node_type": "L2",
-      "title": "Produce .aiwg/reports/repo_probe_latest.json",
+      "title": "Produce .aiwg/reports/debate_review_latest.json",
       "status": "pending",
       "depends_on": [
         "L2_5_M2"
       ],
       "produces": [
-        ".aiwg/reports/repo_probe_latest.json"
+        ".aiwg/reports/debate_review_latest.json"
       ],
       "tests": [],
       "risk_level": "low",
@@ -210,13 +206,13 @@
     "L2_5_M1": {
       "node_id": "L2_5_M1",
       "node_type": "L3",
-      "title": "Draft .aiwg/reports/repo_probe_latest.json",
+      "title": "Draft .aiwg/reports/debate_review_latest.json",
       "status": "pending",
       "depends_on": [
         "L2_4"
       ],
       "produces": [
-        ".aiwg/reports/repo_probe_latest.json"
+        ".aiwg/reports/debate_review_latest.json"
       ],
       "tests": [],
       "risk_level": "low",
@@ -225,15 +221,13 @@
     "L2_5_M2": {
       "node_id": "L2_5_M2",
       "node_type": "L3",
-      "title": "Verify .aiwg/reports/repo_probe_latest.json",
+      "title": "Verify .aiwg/reports/debate_review_latest.json",
       "status": "pending",
       "depends_on": [
         "L2_5_M1"
       ],
       "produces": [],
-      "tests": [
-        "tests/test_repo_probe_latest.py"
-      ],
+      "tests": [],
       "risk_level": "low",
       "evidence_refs": []
     },
@@ -252,5 +246,5 @@
     }
   },
   "decision": "PASS",
-  "generated_at": "2026-05-16T14:02:11Z"
+  "generated_at": "2026-05-16T14:15:21Z"
 }

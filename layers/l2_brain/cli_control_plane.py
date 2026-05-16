@@ -17,10 +17,12 @@ if __package__ in {None, ""}:
         sys.path.append(str(_L2))
 
 from layers.l2_brain.local_context_compressor import LocalContextCompressor
+from layers.l2_brain.mission_coherence_guard import run_mission_coherence_guard
 from layers.l2_brain.mission_orchestrator_dag import build_dag_from_mission_plan
 from layers.l2_brain.mission_planner import create_mission_plan
 from layers.l2_brain.repo_probe_runner import run_repo_probe
 from layers.l2_brain.state_coherence_guard import run_state_coherence_guard
+from layers.l2_brain.strategic_partner_swarm import run_strategic_partner_swarm
 from layers.l2_brain.tui_process_monitor import TuiProcessMonitor
 from layers.l6_skin.dashboard_renderer import DashboardRenderer
 
@@ -62,6 +64,9 @@ class CliControlPlane:
             "mission-plan": self._cmd_mission_plan,
             "mission-dag": self._cmd_mission_dag,
             "next-node": self._cmd_next_node,
+            "mission-coherence": self._cmd_mission_coherence,
+            "strategic-swarm": self._cmd_strategic_swarm,
+            "swarm": self._cmd_strategic_swarm,
         }
 
         if command not in handlers:
@@ -264,6 +269,28 @@ class CliControlPlane:
             payload=data.payload,
             warnings=data.warnings,
             evidence_refs=data.evidence_refs,
+            generated_at=self._utc_now(),
+        )
+
+    def _cmd_mission_coherence(self) -> CliCommandResult:
+        report = run_mission_coherence_guard(aiwg_root=self.aiwg_root)
+        return CliCommandResult(
+            command="mission-coherence",
+            decision=report.decision,
+            payload=report.to_dict(),
+            warnings=[f.message for f in report.findings if f.severity == "WARNING"],
+            evidence_refs=[".aiwg/reports/mission_coherence_guard_latest.json"],
+            generated_at=self._utc_now(),
+        )
+
+    def _cmd_strategic_swarm(self) -> CliCommandResult:
+        decision = run_strategic_partner_swarm(aiwg_root=self.aiwg_root)
+        return CliCommandResult(
+            command="strategic-swarm",
+            decision="PASS" if decision.decision == "continue_next_phase" else "PASS_WITH_WARNINGS" if "repair" in decision.decision else "FAIL",
+            payload=decision.to_dict(),
+            warnings=decision.blocking_reasons,
+            evidence_refs=[".aiwg/reports/strategic_partner_swarm_latest.json"],
             generated_at=self._utc_now(),
         )
 

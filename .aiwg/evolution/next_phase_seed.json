@@ -1,28 +1,27 @@
 {
-  "next_phase": "P26",
-  "name": "StrategicPartnerSwarm",
-  "objective": "Implement a bounded strategic partner swarm runtime that creates role-specific advisory agents for planning, critique, validation and execution recommendations without granting autonomous mutation authority.",
-  "why_now": "P23-P25 implemented repo probes, SDD/TDD mission planning and MissionOrchestrator DAG. P26 can now introduce a controlled swarm that reasons over physical evidence and mission DAGs instead of free-form chat memory.",
+  "next_phase": "P27",
+  "name": "Debate & Adversarial Review Runtime",
+  "objective": "Implement a bounded debate and adversarial review runtime that allows role-specific agents to challenge plans, identify contradictions, test assumptions and produce evidence-backed objections before implementation proceeds.",
+  "why_now": "P26 introduced a bounded advisory swarm. P27 must add structured debate and adversarial review so the swarm does not become a consensus machine or amplify planner bias.",
   "required_outputs": [
-    "layers/l2_brain/strategic_partner_swarm.py",
-    "layers/l2_brain/tests/test_strategic_partner_swarm.py",
-    ".aiwg/reports/plan_v1_phase_26_strategic_partner_swarm.md",
-    ".aiwg/reports/plan_v1_phase_26_strategic_partner_swarm.json",
-    ".aiwg/reports/strategic_partner_swarm_latest.json"
+    "layers/l2_brain/debate_review_runtime.py",
+    "layers/l2_brain/tests/test_debate_review_runtime.py",
+    ".aiwg/reports/plan_v1_phase_27_debate_review_runtime.md",
+    ".aiwg/reports/plan_v1_phase_27_debate_review_runtime.json",
+    ".aiwg/reports/debate_review_latest.json"
   ],
   "must_not_create": [
     "unbounded autonomy",
     "workspace mutation without authorization",
     "TrustedWorkstationMode",
-    "Obsidian adapter",
     "external paid calls without explicit config"
   ],
   "success_conditions": [
-    "swarm roles defined",
-    "swarm consumes mission DAG",
-    "swarm produces advisory outputs only",
-    "critic/reviewer role included",
-    "judge/mentor role included",
+    "debate roles defined",
+    "adversarial objections generated",
+    "evidence-backed claims required",
+    "contradiction detection implemented",
+    "judge/mentor verdict generated",
     "no direct mutation authority",
     "tests pass"
   ]
