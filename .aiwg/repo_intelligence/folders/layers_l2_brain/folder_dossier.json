@@ -1,0 +1,13 @@
+{
+  "folder_path": "layers/l2_brain",
+  "layer": "l2_brain",
+  "dominant_languages": [
+    "json",
+    "markdown",
+    "python"
+  ],
+  "file_count": 308,
+  "context_strategy": "load_folder_dossier",
+  "risk_flags": [],
+  "generated_at": "2026-05-16T14:51:39Z"
+}

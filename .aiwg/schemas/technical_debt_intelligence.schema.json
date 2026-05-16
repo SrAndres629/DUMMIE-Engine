@@ -1,0 +1,12 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "TechnicalDebtIntelligenceReport",
+  "type": "object",
+  "required": ["report_id", "decision", "findings", "generated_at"],
+  "properties": {
+    "report_id": { "type": "string" },
+    "decision": { "type": "string" },
+    "findings": { "type": "array" },
+    "generated_at": { "type": "string", "format": "date-time" }
+  }
+}

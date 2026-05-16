@@ -1,0 +1,25 @@
+{
+  "decision": "PASS",
+  "tracked_files_count": 4515,
+  "layers_detected": [
+    "__init__.py",
+    "l0_overseer",
+    "l1_nervous",
+    "l2_brain",
+    "l3_shield",
+    "l4_edge",
+    "l4_ext",
+    "l5_muscle",
+    "l6_skin"
+  ],
+  "languages_detected": [
+    "bash",
+    "javascript",
+    "json",
+    "markdown",
+    "python",
+    "typescript",
+    "yaml"
+  ],
+  "generated_at": "2026-05-16T14:51:39Z"
+}

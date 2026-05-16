@@ -1,0 +1,16 @@
+{
+  "spec_id": "136",
+  "name": "Completion Review Rules",
+  "rules": [
+    {
+      "id": "R1",
+      "description": "Must output a capability scorecard.",
+      "priority": "CRITICAL"
+    },
+    {
+      "id": "R2",
+      "description": "Must clearly separate physical execution from dry-run/simulation.",
+      "priority": "HIGH"
+    }
+  ]
+}

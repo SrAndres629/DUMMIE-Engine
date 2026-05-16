@@ -1,0 +1,35 @@
+{
+  "file_path": "layers/l1_nervous/memory_ipc.py",
+  "layer": "l1_nervous",
+  "language": "python",
+  "artifact_type": "runtime",
+  "size_bytes": 3631,
+  "context_strategy": "load_deep_dossier",
+  "tier": "deep",
+  "risk_flags": [],
+  "ast_summary": {
+    "classes": [
+      "MemoryPlaneError",
+      "KuzuQueryResultProxy",
+      "KuzuConnectionProxy",
+      "ArrowMemoryBridge"
+    ],
+    "functions": [
+      "__init__",
+      "__init__",
+      "has_next",
+      "get_next",
+      "get_column_names",
+      "reset_iterator",
+      "__iter__",
+      "__next__",
+      "__init__",
+      "execute",
+      "__init__",
+      "heartbeat",
+      "ipc",
+      "close"
+    ]
+  },
+  "generated_at": "2026-05-16T14:51:39Z"
+}

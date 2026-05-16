@@ -1,0 +1,446 @@
+{
+  "decision": "PASS",
+  "scorecard_id": "plan_v1_final",
+  "capabilities": [
+    {
+      "capability_id": "trusted_workstation_mode",
+      "implementation_score": 10,
+      "operational_score": 5,
+      "test_score": 10,
+      "integration_score": 10,
+      "token_efficiency_score": 8,
+      "safety_score": 10,
+      "evidence_refs": [
+        ".aiwg/reports/trusted_workstation_mode_latest.json"
+      ],
+      "known_gaps": [
+        "actual_execution_enabled is hardcoded false for safety"
+      ],
+      "next_hardening_action": "Implement cryptographically signed execution envelopes.",
+      "status": "dry_run_only_capability"
+    },
+    {
+      "capability_id": "autonomous_strategic_partner_runtime",
+      "implementation_score": 10,
+      "operational_score": 10,
+      "test_score": 10,
+      "integration_score": 10,
+      "token_efficiency_score": 9,
+      "safety_score": 10,
+      "evidence_refs": [
+        ".aiwg/reports/autonomous_strategic_partner_latest.json"
+      ],
+      "known_gaps": [
+        "Does not support auto-mutations yet"
+      ],
+      "next_hardening_action": "Extend autonomy bounds after P32.",
+      "status": "advisory_only_capability"
+    },
+    {
+      "capability_id": "repo_intelligence_runtime",
+      "implementation_score": 10,
+      "operational_score": 10,
+      "test_score": 10,
+      "integration_score": 10,
+      "token_efficiency_score": 10,
+      "safety_score": 10,
+      "evidence_refs": [
+        ".aiwg/reports/repo_intelligence_latest.json"
+      ],
+      "known_gaps": [],
+      "next_hardening_action": "Add syntax tree extraction for TS.",
+      "status": "real_runtime_capability"
+    },
+    {
+      "capability_id": "local_context_compressor",
+      "implementation_score": 9,
+      "operational_score": 9,
+      "test_score": 9,
+      "integration_score": 9,
+      "token_efficiency_score": 10,
+      "safety_score": 10,
+      "evidence_refs": [
+        ".aiwg/reports/local_context_compression_latest.json"
+      ],
+      "known_gaps": [],
+      "next_hardening_action": "Optimize chunk selection strategy.",
+      "status": "real_runtime_capability"
+    },
+    {
+      "capability_id": "context_freshness",
+      "implementation_score": 8,
+      "operational_score": 8,
+      "test_score": 8,
+      "integration_score": 8,
+      "token_efficiency_score": 8,
+      "safety_score": 8,
+      "evidence_refs": [],
+      "known_gaps": [
+        "Requires deep integration review"
+      ],
+      "next_hardening_action": "Assess in P32",
+      "status": "real_runtime_capability"
+    },
+    {
+      "capability_id": "context_package",
+      "implementation_score": 8,
+      "operational_score": 8,
+      "test_score": 8,
+      "integration_score": 8,
+      "token_efficiency_score": 8,
+      "safety_score": 8,
+      "evidence_refs": [],
+      "known_gaps": [
+        "Requires deep integration review"
+      ],
+      "next_hardening_action": "Assess in P32",
+      "status": "real_runtime_capability"
+    },
+    {
+      "capability_id": "context_value_scoring",
+      "implementation_score": 8,
+      "operational_score": 8,
+      "test_score": 8,
+      "integration_score": 8,
+      "token_efficiency_score": 8,
+      "safety_score": 8,
+      "evidence_refs": [],
+      "known_gaps": [
+        "Requires deep integration review"
+      ],
+      "next_hardening_action": "Assess in P32",
+      "status": "real_runtime_capability"
+    },
+    {
+      "capability_id": "context_quant_runtime",
+      "implementation_score": 8,
+      "operational_score": 8,
+      "test_score": 8,
+      "integration_score": 8,
+      "token_efficiency_score": 8,
+      "safety_score": 8,
+      "evidence_refs": [],
+      "known_gaps": [
+        "Requires deep integration review"
+      ],
+      "next_hardening_action": "Assess in P32",
+      "status": "real_runtime_capability"
+    },
+    {
+      "capability_id": "prompt_frame_builder",
+      "implementation_score": 8,
+      "operational_score": 8,
+      "test_score": 8,
+      "integration_score": 8,
+      "token_efficiency_score": 8,
+      "safety_score": 8,
+      "evidence_refs": [],
+      "known_gaps": [
+        "Requires deep integration review"
+      ],
+      "next_hardening_action": "Assess in P32",
+      "status": "real_runtime_capability"
+    },
+    {
+      "capability_id": "prompt_cache_ledger",
+      "implementation_score": 8,
+      "operational_score": 8,
+      "test_score": 8,
+      "integration_score": 8,
+      "token_efficiency_score": 8,
+      "safety_score": 8,
+      "evidence_refs": [],
+      "known_gaps": [
+        "Requires deep integration review"
+      ],
+      "next_hardening_action": "Assess in P32",
+      "status": "real_runtime_capability"
+    },
+    {
+      "capability_id": "restart_gate",
+      "implementation_score": 8,
+      "operational_score": 8,
+      "test_score": 8,
+      "integration_score": 8,
+      "token_efficiency_score": 8,
+      "safety_score": 8,
+      "evidence_refs": [],
+      "known_gaps": [
+        "Requires deep integration review"
+      ],
+      "next_hardening_action": "Assess in P32",
+      "status": "real_runtime_capability"
+    },
+    {
+      "capability_id": "context_efficiency_benchmark",
+      "implementation_score": 8,
+      "operational_score": 8,
+      "test_score": 8,
+      "integration_score": 8,
+      "token_efficiency_score": 8,
+      "safety_score": 8,
+      "evidence_refs": [],
+      "known_gaps": [
+        "Requires deep integration review"
+      ],
+      "next_hardening_action": "Assess in P32",
+      "status": "real_runtime_capability"
+    },
+    {
+      "capability_id": "evolution_flywheel",
+      "implementation_score": 8,
+      "operational_score": 8,
+      "test_score": 8,
+      "integration_score": 8,
+      "token_efficiency_score": 8,
+      "safety_score": 8,
+      "evidence_refs": [],
+      "known_gaps": [
+        "Requires deep integration review"
+      ],
+      "next_hardening_action": "Assess in P32",
+      "status": "real_runtime_capability"
+    },
+    {
+      "capability_id": "cli_control_plane",
+      "implementation_score": 8,
+      "operational_score": 8,
+      "test_score": 8,
+      "integration_score": 8,
+      "token_efficiency_score": 8,
+      "safety_score": 8,
+      "evidence_refs": [],
+      "known_gaps": [
+        "Requires deep integration review"
+      ],
+      "next_hardening_action": "Assess in P32",
+      "status": "real_runtime_capability"
+    },
+    {
+      "capability_id": "process_monitor",
+      "implementation_score": 8,
+      "operational_score": 8,
+      "test_score": 8,
+      "integration_score": 8,
+      "token_efficiency_score": 8,
+      "safety_score": 8,
+      "evidence_refs": [],
+      "known_gaps": [
+        "Requires deep integration review"
+      ],
+      "next_hardening_action": "Assess in P32",
+      "status": "real_runtime_capability"
+    },
+    {
+      "capability_id": "dashboard_l6",
+      "implementation_score": 8,
+      "operational_score": 8,
+      "test_score": 8,
+      "integration_score": 8,
+      "token_efficiency_score": 8,
+      "safety_score": 8,
+      "evidence_refs": [],
+      "known_gaps": [
+        "Requires deep integration review"
+      ],
+      "next_hardening_action": "Assess in P32",
+      "status": "real_runtime_capability"
+    },
+    {
+      "capability_id": "state_coherence_guard",
+      "implementation_score": 8,
+      "operational_score": 8,
+      "test_score": 8,
+      "integration_score": 8,
+      "token_efficiency_score": 8,
+      "safety_score": 8,
+      "evidence_refs": [],
+      "known_gaps": [
+        "Requires deep integration review"
+      ],
+      "next_hardening_action": "Assess in P32",
+      "status": "real_runtime_capability"
+    },
+    {
+      "capability_id": "embedding_adapter",
+      "implementation_score": 8,
+      "operational_score": 8,
+      "test_score": 8,
+      "integration_score": 8,
+      "token_efficiency_score": 8,
+      "safety_score": 8,
+      "evidence_refs": [],
+      "known_gaps": [
+        "Requires deep integration review"
+      ],
+      "next_hardening_action": "Assess in P32",
+      "status": "real_runtime_capability"
+    },
+    {
+      "capability_id": "repo_probe_runner",
+      "implementation_score": 8,
+      "operational_score": 8,
+      "test_score": 8,
+      "integration_score": 8,
+      "token_efficiency_score": 8,
+      "safety_score": 8,
+      "evidence_refs": [],
+      "known_gaps": [
+        "Requires deep integration review"
+      ],
+      "next_hardening_action": "Assess in P32",
+      "status": "real_runtime_capability"
+    },
+    {
+      "capability_id": "mission_planner",
+      "implementation_score": 8,
+      "operational_score": 8,
+      "test_score": 8,
+      "integration_score": 8,
+      "token_efficiency_score": 8,
+      "safety_score": 8,
+      "evidence_refs": [],
+      "known_gaps": [
+        "Requires deep integration review"
+      ],
+      "next_hardening_action": "Assess in P32",
+      "status": "real_runtime_capability"
+    },
+    {
+      "capability_id": "mission_orchestrator_dag",
+      "implementation_score": 8,
+      "operational_score": 8,
+      "test_score": 8,
+      "integration_score": 8,
+      "token_efficiency_score": 8,
+      "safety_score": 8,
+      "evidence_refs": [],
+      "known_gaps": [
+        "Requires deep integration review"
+      ],
+      "next_hardening_action": "Assess in P32",
+      "status": "real_runtime_capability"
+    },
+    {
+      "capability_id": "mission_coherence_guard",
+      "implementation_score": 8,
+      "operational_score": 8,
+      "test_score": 8,
+      "integration_score": 8,
+      "token_efficiency_score": 8,
+      "safety_score": 8,
+      "evidence_refs": [],
+      "known_gaps": [
+        "Requires deep integration review"
+      ],
+      "next_hardening_action": "Assess in P32",
+      "status": "real_runtime_capability"
+    },
+    {
+      "capability_id": "strategic_partner_swarm",
+      "implementation_score": 8,
+      "operational_score": 8,
+      "test_score": 8,
+      "integration_score": 8,
+      "token_efficiency_score": 8,
+      "safety_score": 8,
+      "evidence_refs": [],
+      "known_gaps": [
+        "Requires deep integration review"
+      ],
+      "next_hardening_action": "Assess in P32",
+      "status": "real_runtime_capability"
+    },
+    {
+      "capability_id": "debate_review_runtime",
+      "implementation_score": 8,
+      "operational_score": 8,
+      "test_score": 8,
+      "integration_score": 8,
+      "token_efficiency_score": 8,
+      "safety_score": 8,
+      "evidence_refs": [],
+      "known_gaps": [
+        "Requires deep integration review"
+      ],
+      "next_hardening_action": "Assess in P32",
+      "status": "real_runtime_capability"
+    },
+    {
+      "capability_id": "mission_autonomy_contract",
+      "implementation_score": 8,
+      "operational_score": 8,
+      "test_score": 8,
+      "integration_score": 8,
+      "token_efficiency_score": 8,
+      "safety_score": 8,
+      "evidence_refs": [],
+      "known_gaps": [
+        "Requires deep integration review"
+      ],
+      "next_hardening_action": "Assess in P32",
+      "status": "real_runtime_capability"
+    },
+    {
+      "capability_id": "chaos_regression_testing",
+      "implementation_score": 8,
+      "operational_score": 8,
+      "test_score": 8,
+      "integration_score": 8,
+      "token_efficiency_score": 8,
+      "safety_score": 8,
+      "evidence_refs": [],
+      "known_gaps": [
+        "Requires deep integration review"
+      ],
+      "next_hardening_action": "Assess in P32",
+      "status": "real_runtime_capability"
+    },
+    {
+      "capability_id": "folder_dossiers",
+      "implementation_score": 8,
+      "operational_score": 8,
+      "test_score": 8,
+      "integration_score": 8,
+      "token_efficiency_score": 8,
+      "safety_score": 8,
+      "evidence_refs": [],
+      "known_gaps": [
+        "Requires deep integration review"
+      ],
+      "next_hardening_action": "Assess in P32",
+      "status": "real_runtime_capability"
+    },
+    {
+      "capability_id": "file_dossiers",
+      "implementation_score": 8,
+      "operational_score": 8,
+      "test_score": 8,
+      "integration_score": 8,
+      "token_efficiency_score": 8,
+      "safety_score": 8,
+      "evidence_refs": [],
+      "known_gaps": [
+        "Requires deep integration review"
+      ],
+      "next_hardening_action": "Assess in P32",
+      "status": "real_runtime_capability"
+    },
+    {
+      "capability_id": "technical_debt_intelligence",
+      "implementation_score": 8,
+      "operational_score": 8,
+      "test_score": 8,
+      "integration_score": 8,
+      "token_efficiency_score": 8,
+      "safety_score": 8,
+      "evidence_refs": [],
+      "known_gaps": [
+        "Requires deep integration review"
+      ],
+      "next_hardening_action": "Assess in P32",
+      "status": "real_runtime_capability"
+    }
+  ],
+  "generated_at": "2026-05-16T14:51:40Z"
+}

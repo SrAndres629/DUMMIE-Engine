@@ -1,0 +1,16 @@
+{
+  "spec_id": "135",
+  "name": "Technical Debt Rules",
+  "rules": [
+    {
+      "id": "R1",
+      "description": "Must cross-reference runtime files with test paths.",
+      "priority": "HIGH"
+    },
+    {
+      "id": "R2",
+      "description": "Must output an integration backlog.",
+      "priority": "CRITICAL"
+    }
+  ]
+}

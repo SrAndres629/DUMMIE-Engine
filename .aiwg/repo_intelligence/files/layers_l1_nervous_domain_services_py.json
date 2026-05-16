@@ -1,0 +1,20 @@
+{
+  "file_path": "layers/l1_nervous/domain/services.py",
+  "layer": "l1_nervous",
+  "language": "python",
+  "artifact_type": "runtime",
+  "size_bytes": 1931,
+  "context_strategy": "load_deep_dossier",
+  "tier": "deep",
+  "risk_flags": [],
+  "ast_summary": {
+    "classes": [
+      "NervousDomainService"
+    ],
+    "functions": [
+      "__init__",
+      "record_lesson"
+    ]
+  },
+  "generated_at": "2026-05-16T14:51:39Z"
+}

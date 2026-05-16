@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "FileDossier",
+  "type": "object",
+  "required": ["file_path", "artifact_type", "context_strategy", "generated_at"],
+  "properties": {
+    "file_path": { "type": "string" },
+    "layer": { "type": "string" },
+    "language": { "type": "string" },
+    "artifact_type": { "type": "string" },
+    "size_bytes": { "type": "integer" },
+    "context_strategy": { "type": "string" },
+    "risk_flags": { "type": "array", "items": { "type": "string" } },
+    "generated_at": { "type": "string", "format": "date-time" }
+  }
+}

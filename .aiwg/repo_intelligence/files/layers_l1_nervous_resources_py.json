@@ -1,0 +1,26 @@
+{
+  "file_path": "layers/l1_nervous/resources.py",
+  "layer": "l1_nervous",
+  "language": "python",
+  "artifact_type": "runtime",
+  "size_bytes": 6847,
+  "context_strategy": "load_deep_dossier",
+  "tier": "deep",
+  "risk_flags": [],
+  "ast_summary": {
+    "classes": [],
+    "functions": [
+      "_load_agent_identity",
+      "register_resources",
+      "get_brain_identity",
+      "get_brain_dashboard",
+      "get_recent_decisions",
+      "get_memory_timeline",
+      "get_memory_loci",
+      "get_brain_health",
+      "get_session_context",
+      "get_active_specs_list"
+    ]
+  },
+  "generated_at": "2026-05-16T14:51:39Z"
+}

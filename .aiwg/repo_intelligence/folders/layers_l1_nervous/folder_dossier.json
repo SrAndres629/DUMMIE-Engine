@@ -1,0 +1,14 @@
+{
+  "folder_path": "layers/l1_nervous",
+  "layer": "l1_nervous",
+  "dominant_languages": [
+    "bash",
+    "json",
+    "markdown",
+    "python"
+  ],
+  "file_count": 105,
+  "context_strategy": "load_folder_dossier",
+  "risk_flags": [],
+  "generated_at": "2026-05-16T14:51:39Z"
+}

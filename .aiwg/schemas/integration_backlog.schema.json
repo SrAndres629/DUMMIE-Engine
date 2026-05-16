@@ -1,0 +1,11 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "IntegrationBacklog",
+  "type": "object",
+  "required": ["backlog_id", "items", "generated_at"],
+  "properties": {
+    "backlog_id": { "type": "string" },
+    "items": { "type": "array" },
+    "generated_at": { "type": "string", "format": "date-time" }
+  }
+}

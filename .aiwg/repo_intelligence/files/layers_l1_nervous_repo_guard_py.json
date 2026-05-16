@@ -1,0 +1,26 @@
+{
+  "file_path": "layers/l1_nervous/repo_guard.py",
+  "layer": "l1_nervous",
+  "language": "python",
+  "artifact_type": "runtime",
+  "size_bytes": 5293,
+  "context_strategy": "load_deep_dossier",
+  "tier": "deep",
+  "risk_flags": [],
+  "ast_summary": {
+    "classes": [
+      "RepoGuard"
+    ],
+    "functions": [
+      "__init__",
+      "_run_git",
+      "sync_before_action",
+      "validate_state",
+      "commit_and_push_atomic",
+      "self_heal_workspace",
+      "reserve_locus",
+      "release_locus"
+    ]
+  },
+  "generated_at": "2026-05-16T14:51:39Z"
+}

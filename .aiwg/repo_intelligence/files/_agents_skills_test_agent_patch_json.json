@@ -1,0 +1,12 @@
+{
+  "file_path": ".agents/skills/test_agent.patch.json",
+  "layer": "unknown",
+  "language": "json",
+  "artifact_type": "test",
+  "size_bytes": 28,
+  "context_strategy": "load_standard_dossier",
+  "tier": "standard",
+  "risk_flags": [],
+  "ast_summary": {},
+  "generated_at": "2026-05-16T14:51:39Z"
+}

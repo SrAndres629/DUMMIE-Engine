@@ -1,0 +1,15 @@
+{
+  "file_path": "layers/l0_overseer/__init__.py",
+  "layer": "l0_overseer",
+  "language": "python",
+  "artifact_type": "runtime",
+  "size_bytes": 360,
+  "context_strategy": "load_deep_dossier",
+  "tier": "deep",
+  "risk_flags": [],
+  "ast_summary": {
+    "classes": [],
+    "functions": []
+  },
+  "generated_at": "2026-05-16T14:51:39Z"
+}

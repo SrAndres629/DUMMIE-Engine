@@ -1,0 +1,16 @@
+{
+  "spec_id": "134",
+  "name": "Dossier Rules",
+  "rules": [
+    {
+      "id": "R1",
+      "description": "Must not exceed dossier generation limits (100 standard, 40 deep).",
+      "priority": "CRITICAL"
+    },
+    {
+      "id": "R2",
+      "description": "Must extract Python signatures using AST, not LLMs.",
+      "priority": "HIGH"
+    }
+  ]
+}

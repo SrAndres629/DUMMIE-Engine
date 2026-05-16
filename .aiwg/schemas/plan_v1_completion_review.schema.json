@@ -1,0 +1,12 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PlanV1CompletionReviewReport",
+  "type": "object",
+  "required": ["review_id", "decision", "capabilities_scored", "generated_at"],
+  "properties": {
+    "review_id": { "type": "string" },
+    "decision": { "type": "string" },
+    "capabilities_scored": { "type": "integer" },
+    "generated_at": { "type": "string", "format": "date-time" }
+  }
+}

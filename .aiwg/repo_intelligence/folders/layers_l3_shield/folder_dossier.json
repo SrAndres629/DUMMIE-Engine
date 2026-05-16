@@ -1,0 +1,12 @@
+{
+  "folder_path": "layers/l3_shield",
+  "layer": "l3_shield",
+  "dominant_languages": [
+    "markdown",
+    "python"
+  ],
+  "file_count": 14,
+  "context_strategy": "load_folder_dossier",
+  "risk_flags": [],
+  "generated_at": "2026-05-16T14:51:39Z"
+}

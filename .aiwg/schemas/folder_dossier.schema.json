@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "FolderDossier",
+  "type": "object",
+  "required": ["folder_path", "layer", "file_count", "context_strategy", "generated_at"],
+  "properties": {
+    "folder_path": { "type": "string" },
+    "layer": { "type": "string" },
+    "dominant_languages": { "type": "array", "items": { "type": "string" } },
+    "file_count": { "type": "integer" },
+    "context_strategy": { "type": "string" },
+    "risk_flags": { "type": "array", "items": { "type": "string" } },
+    "generated_at": { "type": "string", "format": "date-time" }
+  }
+}

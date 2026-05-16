@@ -1,0 +1,11 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CapabilityScorecard",
+  "type": "object",
+  "required": ["scorecard_id", "capabilities", "generated_at"],
+  "properties": {
+    "scorecard_id": { "type": "string" },
+    "capabilities": { "type": "array" },
+    "generated_at": { "type": "string", "format": "date-time" }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "file_path": "layers/l1_nervous/generated/arize_tracing_assistant_sdk.py",
+  "layer": "l1_nervous",
+  "language": "python",
+  "artifact_type": "runtime",
+  "size_bytes": 2050,
+  "context_strategy": "load_deep_dossier",
+  "tier": "deep",
+  "risk_flags": [],
+  "ast_summary": {
+    "classes": [
+      "ArizeTracingAssistantClient"
+    ],
+    "functions": [
+      "__init__"
+    ]
+  },
+  "generated_at": "2026-05-16T14:51:39Z"
+}

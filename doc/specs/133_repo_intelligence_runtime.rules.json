@@ -1,0 +1,16 @@
+{
+  "spec_id": "133",
+  "name": "Repo Intelligence Rules",
+  "rules": [
+    {
+      "id": "R1",
+      "description": "Must use git ls-files to enumerate tracked paths.",
+      "priority": "CRITICAL"
+    },
+    {
+      "id": "R2",
+      "description": "Must not invoke LLM or external APIs.",
+      "priority": "CRITICAL"
+    }
+  ]
+}

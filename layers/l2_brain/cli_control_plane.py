@@ -30,7 +30,11 @@ from layers.l2_brain.mission_autonomy_contract import run_mission_autonomy_contr
 from layers.l2_brain.trusted_workstation_mode import run_trusted_workstation_mode
 from layers.l2_brain.chaos_regression_testing import run_chaos_regression_tests
 from layers.l2_brain.autonomous_strategic_partner_runtime import run_autonomous_strategic_partner_runtime
-
+from layers.l2_brain.repo_intelligence_runtime import run_repo_intelligence_scan
+from layers.l2_brain.folder_dossier_generator import generate_folder_dossiers
+from layers.l2_brain.file_dossier_generator import generate_file_dossiers
+from layers.l2_brain.technical_debt_intelligence import run_technical_debt_intelligence
+from layers.l2_brain.plan_v1_completion_review import run_plan_v1_completion_review
 
 @dataclass
 class CliCommandResult:
@@ -83,6 +87,13 @@ class CliControlPlane:
             "autonomous-runtime": self._cmd_autonomous_runtime,
             "autonomous": self._cmd_autonomous_runtime,
             "plan-v1-status": self._cmd_plan_v1_status,
+            "repo-intelligence": self._cmd_repo_intelligence,
+            "folder-dossiers": self._cmd_folder_dossiers,
+            "file-dossiers": self._cmd_file_dossiers,
+            "technical-debt": self._cmd_technical_debt,
+            "completion-review": self._cmd_completion_review,
+            "capability-scorecard": lambda: self._read_latest("plan_v1_runtime_capability_scorecard.json"),
+            "integration-backlog": lambda: self._read_latest("integration_backlog.json"),
         }
 
         if command not in handlers:
@@ -371,6 +382,56 @@ class CliControlPlane:
             command="plan-v1-status",
             decision="PASS" if decision.plan_v1_completion_status == "complete" else "PASS_WITH_WARNINGS",
             payload={"status": decision.plan_v1_completion_status},
+            generated_at=self._utc_now(),
+        )
+
+    def _cmd_repo_intelligence(self) -> CliCommandResult:
+        res = run_repo_intelligence_scan(repo_root=self.aiwg_root.parent, aiwg_root=self.aiwg_root.name)
+        return CliCommandResult(
+            command="repo-intelligence",
+            decision=res.decision,
+            payload=res.to_dict(),
+            evidence_refs=[".aiwg/reports/repo_intelligence_latest.json"],
+            generated_at=self._utc_now(),
+        )
+
+    def _cmd_folder_dossiers(self) -> CliCommandResult:
+        res = generate_folder_dossiers(aiwg_root=self.aiwg_root)
+        return CliCommandResult(
+            command="folder-dossiers",
+            decision=res.decision,
+            payload=res.to_dict(),
+            evidence_refs=[".aiwg/reports/folder_dossier_index.json"],
+            generated_at=self._utc_now(),
+        )
+
+    def _cmd_file_dossiers(self) -> CliCommandResult:
+        res = generate_file_dossiers(repo_root=self.aiwg_root.parent, aiwg_root=self.aiwg_root.name)
+        return CliCommandResult(
+            command="file-dossiers",
+            decision=res.decision,
+            payload=res.to_dict(),
+            evidence_refs=[".aiwg/reports/file_dossier_index.json"],
+            generated_at=self._utc_now(),
+        )
+
+    def _cmd_technical_debt(self) -> CliCommandResult:
+        res = run_technical_debt_intelligence(aiwg_root=self.aiwg_root)
+        return CliCommandResult(
+            command="technical-debt",
+            decision=res.decision,
+            payload=res.to_dict(),
+            evidence_refs=[".aiwg/reports/technical_debt_intelligence_latest.json"],
+            generated_at=self._utc_now(),
+        )
+
+    def _cmd_completion_review(self) -> CliCommandResult:
+        res = run_plan_v1_completion_review(aiwg_root=self.aiwg_root)
+        return CliCommandResult(
+            command="completion-review",
+            decision=res.decision,
+            payload=res.to_dict(),
+            evidence_refs=[".aiwg/reports/plan_v1_completion_review.json"],
             generated_at=self._utc_now(),
         )
 

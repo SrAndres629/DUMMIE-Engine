@@ -1,0 +1,12 @@
+{
+  "file_path": ".aiwg/schemas/chaos_regression_testing.schema.json",
+  "layer": "unknown",
+  "language": "json",
+  "artifact_type": "schema",
+  "size_bytes": 624,
+  "context_strategy": "load_standard_dossier",
+  "tier": "standard",
+  "risk_flags": [],
+  "ast_summary": {},
+  "generated_at": "2026-05-16T14:51:39Z"
+}
