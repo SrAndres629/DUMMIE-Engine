@@ -1,0 +1,63 @@
+{
+  "pack": "POST_PLAN_V1_OPERATIONALIZATION_PACK_5_1",
+  "decision": "PASS",
+  "baseline_commit": "220e872a4f25160e401f496dc769df05a479cc00",
+  "runtime_modules_created_or_modified": [
+    "mental_model_runtime.py",
+    "semantic_ontology_mapper.py",
+    "cognitive_frame_builder.py",
+    "metacognitive_quality_gate.py",
+    "metacognitive_loop_runtime.py",
+    "mental_model_store.py",
+    "dummie_chat_cli.py",
+    "cli_control_plane.py"
+  ],
+  "tests_created_or_modified": [
+    "test_metacognitive_quality_gate.py",
+    "test_mental_model_runtime.py",
+    "test_semantic_ontology_mapper.py",
+    "test_metacognitive_loop_runtime.py"
+  ],
+  "schemas_repaired_or_created": [
+    "mental_model.schema.json",
+    "semantic_ontology_map.schema.json",
+    "cognitive_frame.schema.json",
+    "metacognitive_quality_gate.schema.json"
+  ],
+  "specs_repaired_or_created": [
+    "150",
+    "151",
+    "152",
+    "153",
+    "154",
+    "155"
+  ],
+  "reports_created": [
+    "pack_5_1_metacognitive_hardening_reality_lock",
+    "post_plan_v1_operationalization_pack_5_1"
+  ],
+  "quality_gate": {
+    "decision": "PASS",
+    "quality_score": 100,
+    "warnings": []
+  },
+  "metacognitive_gain": {
+    "before": "keyword-based shallow MVP",
+    "after": "evidence-backed structured model with ontology graph and quality gate",
+    "snowball_gain_score": 85
+  },
+  "validations": {
+    "git_diff_check": "PASS",
+    "spec_validation": "PASS",
+    "json_parse": "PASS",
+    "tests": "PASS"
+  },
+  "git_status_clean_after": true,
+  "warnings": [
+    "Kuzu DB remains DEGRADED (file-backed fallback active)"
+  ],
+  "evidence_refs": [
+    ".aiwg/reports/metacognitive_loop_latest.json",
+    ".aiwg/reports/metacognitive_quality_gate_latest.json"
+  ]
+}

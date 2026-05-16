@@ -1,36 +1,39 @@
 {
-  "command": "operationalization-review",
-  "decision": "PASS",
+  "command": "readiness-calibration",
+  "decision": "PASS_WITH_WARNINGS",
   "payload": {
-    "review_id": "operationalization_pack_1",
-    "decision": "PASS",
+    "decision": "PASS_WITH_WARNINGS",
+    "calibrated_scores": {
+      "daily_use_readiness": 6.5,
+      "memory_spine_readiness": 6.5,
+      "token_economy_readiness": 10.0,
+      "entrypoint_sovereignty_readiness": 10.0,
+      "autonomy_readiness": 2.5
+    },
     "findings": [
       {
-        "id": "frontmatter_repaired",
-        "status": "PASS",
-        "count": 16
+        "id": "score_1_with_degraded_kuzu",
+        "severity": "HIGH",
+        "description": "Kuzu/4D-TES persistence is DEGRADED. No physical graph writes occur.",
+        "impact": "Memory Spine is logical-only. Causal retrieval depends on file parsing.",
+        "score_penalty": 3.5
       },
       {
-        "id": "context_gate_active",
-        "status": "PASS",
-        "decision": "ALLOW_MANIFEST_ONLY"
-      },
-      {
-        "id": "repo_query_active",
-        "status": "PASS"
-      },
-      {
-        "id": "chat_cli_active",
-        "status": "PASS"
+        "id": "score_1_with_partial_context_coverage",
+        "severity": "MEDIUM",
+        "description": "Partial context coverage: 177 missing runtime tests.",
+        "impact": "Validation integrity is not absolute.",
+        "score_penalty": 2.0
       }
     ],
-    "token_economy_impact": "improved",
-    "context_strategy_enforced": true,
-    "generated_at": "2026-05-16T15:13:56Z"
+    "generated_at": "2026-05-16T16:42:32Z"
   },
-  "warnings": [],
-  "evidence_refs": [
-    ".aiwg/reports/operationalization_review_latest.json"
+  "warnings": [
+    "score_1_with_degraded_kuzu",
+    "score_1_with_partial_context_coverage"
   ],
-  "generated_at": "2026-05-16T15:13:56Z"
+  "evidence_refs": [
+    ".aiwg/reports/readiness_score_calibration_latest.json"
+  ],
+  "generated_at": "2026-05-16T16:42:32Z"
 }

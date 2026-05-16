@@ -1,11 +1,11 @@
 {
   "decision": "PASS_WITH_WARNINGS",
   "calibrated_scores": {
-    "daily_use_readiness": 2.5,
-    "memory_spine_readiness": 2.5,
-    "token_economy_readiness": 8.5,
-    "entrypoint_sovereignty_readiness": 6.0,
-    "autonomy_readiness": 0.0
+    "daily_use_readiness": 6.5,
+    "memory_spine_readiness": 6.5,
+    "token_economy_readiness": 10.0,
+    "entrypoint_sovereignty_readiness": 10.0,
+    "autonomy_readiness": 2.5
   },
   "findings": [
     {
@@ -21,21 +21,7 @@
       "description": "Partial context coverage: 177 missing runtime tests.",
       "impact": "Validation integrity is not absolute.",
       "score_penalty": 2.0
-    },
-    {
-      "id": "score_1_without_entrypoint_memory_retrieval",
-      "severity": "HIGH",
-      "description": "DUMMIE Chat CLI does not retrieve causal memory before response.",
-      "impact": "Chat remains stateless/amnesic despite memory spine availability.",
-      "score_penalty": 4.0
-    },
-    {
-      "id": "score_1_without_token_benchmark_evidence",
-      "severity": "MEDIUM",
-      "description": "No empirical token economy benchmark exists.",
-      "impact": "Context strategy ROI is asserted but not measured.",
-      "score_penalty": 1.5
     }
   ],
-  "generated_at": "2026-05-16T16:16:27Z"
+  "generated_at": "2026-05-16T16:42:32Z"
 }

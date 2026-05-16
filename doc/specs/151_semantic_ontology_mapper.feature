@@ -1,2 +1,2 @@
-Feature: 151_semantic_ontology_mapper
+Feature: Semantic Ontology Mapper
   Scenario: Standard runtime execution

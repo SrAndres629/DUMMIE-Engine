@@ -1,8 +1,144 @@
 {
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DUMMIE Mental Model",
   "type": "object",
+  "required": [
+    "model_id",
+    "intent",
+    "entities",
+    "relations",
+    "assumptions",
+    "risks",
+    "quality_score"
+  ],
   "properties": {
     "model_id": {
+      "type": "string",
+      "pattern": "^mm-[a-f0-9]{8}$"
+    },
+    "intent": {
       "type": "string"
+    },
+    "task_type": {
+      "type": "string"
+    },
+    "entities": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "relations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "source": {
+            "type": "string"
+          },
+          "target": {
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "blocks",
+              "depends_on",
+              "produces",
+              "consumes",
+              "validates",
+              "records",
+              "routes_to",
+              "degrades",
+              "improves",
+              "conflicts_with"
+            ]
+          }
+        }
+      }
+    },
+    "assumptions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "decisions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "risks": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "constraints": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "semantic_tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "ontology_classes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "confidence": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1.0
+    },
+    "contradictions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "next_actions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "context_strategy": {
+      "type": "string"
+    },
+    "memory_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "quality_score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "quality_findings": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
     }
-  }
+  },
+  "description": "Policy: No private chain-of-thought. No secrets."
 }

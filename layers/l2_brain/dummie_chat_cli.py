@@ -37,7 +37,9 @@ class DummieChatResponse:
     mental_model: dict[str, Any] = field(default_factory=dict)
     cognitive_frame: dict[str, Any] = field(default_factory=dict)
     metacognitive_loop: dict[str, Any] = field(default_factory=dict)
+    quality_gate: dict[str, Any] = field(default_factory=dict)
     generated_at: str = ""
+
 
 
     def to_dict(self) -> dict[str, Any]:
@@ -132,18 +134,18 @@ class DummieChatCli:
 
         # Phase Pack 5: Metacognitive Loop
         try:
-            m_loop = run_metacognitive_loop(query_text)
-            # Add to response - we use __dict__ update for non-dataclass fields if needed, 
-            # but since we print the response dict in CLI, we add it to a tracking dict
+            m_loop = run_metacognitive_loop(query_text, aiwg_root=self.aiwg_root)
             response.metacognitive_loop = m_loop
+            response.quality_gate = m_loop.get("quality_gate", {})
             
-            reports_root = Path(".aiwg/reports")
+            reports_root = self.aiwg_root / "reports"
             if (reports_root / "mental_model_runtime_latest.json").exists():
                 response.mental_model = json.loads((reports_root / "mental_model_runtime_latest.json").read_text())
             if (reports_root / "cognitive_frame_latest.json").exists():
                 response.cognitive_frame = json.loads((reports_root / "cognitive_frame_latest.json").read_text())
         except Exception as e:
             response.warnings.append(f"metacognition_degraded: {e}")
+
 
         # Record Learning Episode (Cognitive Loop) - Operationalization Pack 4
         try:

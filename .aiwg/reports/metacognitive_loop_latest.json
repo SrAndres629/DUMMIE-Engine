@@ -1,11 +1,25 @@
 {
   "decision": "PASS",
-  "intent": "plan the next DUMMIE refactor using technical debt and memory spine",
-  "mental_model_id": "mm-3d712dc7",
-  "frame_id": "frame-060adf40",
+  "intent": "plan the next DUMMIE refactor using technical debt, memory spine, Kuzu degraded status, and test triage",
+  "mental_model_id": "mm-bbd1b1ba",
+  "frame_id": "frame-e79d703c",
+  "quality_gate": {
+    "decision": "PASS",
+    "quality_score": 100.0,
+    "findings": [],
+    "warnings": []
+  },
   "recommended_next_action": "respond_via_frame",
   "dispatch_recommendation": "antigravity",
   "evidence_refs": [
-    ".aiwg/reports/technical_debt_intelligence_latest.json"
+    ".aiwg/reports/test_debt_triage_latest.json",
+    ".aiwg/reports/readiness_score_calibration_latest.json",
+    ".aiwg/reports/entrypoint_enforcement_audit_latest.json",
+    ".aiwg/reports/memory_spine_entrypoint_latest.json",
+    ".aiwg/reports/token_economy_benchmark_latest.json"
+  ],
+  "warnings": [],
+  "degraded_integrations": [
+    "MemorySpine"
   ]
 }

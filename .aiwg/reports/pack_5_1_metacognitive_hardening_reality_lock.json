@@ -1,0 +1,39 @@
+{
+  "pack": "POST_PLAN_V1_OPERATIONALIZATION_PACK_5_1",
+  "dirty_worktree_before": true,
+  "head": "220e872a4f25160e401f496dc769df05a479cc00",
+  "pack_5_commit_verified": "220e872a4f25160e401f496dc769df05a479cc00",
+  "detected_issues": [
+    "mental_model.schema.json is shallow (only model_id)",
+    "mental_model_runtime.py uses simple keyword matching",
+    "semantic_ontology_mapper.py lacks graph structure (nodes/edges)",
+    "metacognitive_loop_runtime.py is shallow MVP",
+    "reports latest are modified in working tree",
+    "specs are minimal"
+  ],
+  "schema_regressions": [
+    ".aiwg/schemas/mental_model.schema.json (regressed from MM-00x standard)"
+  ],
+  "shallow_model_findings": [
+    "relations empty",
+    "assumptions empty",
+    "risks empty",
+    "contradictions empty",
+    "quality_score missing"
+  ],
+  "dirty_report_files": [
+    "M .aiwg/reports/cli_control_plane_latest.json",
+    " M .aiwg/reports/context_enforcement_gate_latest.json",
+    " M .aiwg/reports/dummie_chat_cli_latest.json",
+    " M .aiwg/reports/memory_spine_entrypoint_latest.json",
+    " M .aiwg/reports/readiness_score_calibration_latest.json",
+    " M .aiwg/reports/readiness_score_calibration_latest.md"
+  ],
+  "planned_repairs": [
+    "Harden all metacognitive schemas",
+    "Implement evidence-backed mental model extraction",
+    "Implement ontology graph generation",
+    "Create Metacognitive Quality Gate",
+    "Clean closure and commit everything"
+  ]
+}

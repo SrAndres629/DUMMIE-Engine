@@ -1,2 +1,2 @@
-Feature: 150_mental_model_runtime
+Feature: Mental Model Runtime
   Scenario: Standard runtime execution

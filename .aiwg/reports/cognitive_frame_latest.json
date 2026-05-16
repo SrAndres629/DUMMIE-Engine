@@ -1,17 +1,41 @@
 {
-  "frame_id": "frame-060adf40",
-  "intent": "plan the next DUMMIE refactor using technical debt and memory spine",
+  "frame_id": "frame-e79d703c",
+  "intent": "plan the next DUMMIE refactor using technical debt, memory spine, Kuzu degraded status, and test triage",
   "operating_mode": "answer",
-  "must_preserve": [],
+  "must_preserve": [
+    "current_phase",
+    "sovereign_identity",
+    "technical_debt_refs"
+  ],
+  "should_include": [],
+  "must_not_include": [
+    "secrets",
+    "private_chain_of_thought"
+  ],
   "mental_model_refs": [
-    "mm-3d712dc7"
+    "mm-bbd1b1ba"
   ],
   "memory_refs": [],
   "ontology_refs": [
     "DEBT",
-    "MEMORY"
+    "MEMORY",
+    "REPORT"
   ],
-  "evidence_refs": [],
+  "evidence_refs": [
+    ".aiwg/reports/test_debt_triage_latest.json",
+    ".aiwg/reports/readiness_score_calibration_latest.json",
+    ".aiwg/reports/entrypoint_enforcement_audit_latest.json",
+    ".aiwg/reports/memory_spine_entrypoint_latest.json",
+    ".aiwg/reports/token_economy_benchmark_latest.json"
+  ],
+  "token_budget_hint": "low",
+  "context_strategy": "MANIFEST_ONLY",
   "dispatch_recommendation": "antigravity",
-  "created_at": "2026-05-16T16:46:21.286147+00:00"
+  "risks": [
+    "Low readiness score: 0%",
+    "Memory spine DEGRADED (file-backed fallback)",
+    "Dirty working tree detected"
+  ],
+  "next_actions": [],
+  "created_at": "2026-05-16T16:54:45.269767+00:00"
 }

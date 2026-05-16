@@ -1,2 +1,2 @@
-Feature: 154_mental_model_store
+Feature: Mental Model Store
   Scenario: Standard runtime execution

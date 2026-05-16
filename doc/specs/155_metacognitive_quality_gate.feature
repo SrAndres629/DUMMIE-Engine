@@ -1,2 +1,2 @@
-Feature: Cognitive Frame Builder
+Feature: Metacognitive Quality Gate
   Scenario: Standard runtime execution

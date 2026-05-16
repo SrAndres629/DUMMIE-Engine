@@ -38,6 +38,7 @@ from layers.l2_brain.plan_v1_completion_review import run_plan_v1_completion_rev
 from layers.l2_brain.context_enforcement_gate import run_context_enforcement_gate
 from layers.l2_brain.repo_intelligence_query import query_repo_intelligence
 from layers.l2_brain.operationalization_review import run_operationalization_review
+from layers.l2_brain.metacognitive_quality_gate import run_metacognitive_quality_gate
 from layers.l2_brain.spec_frontmatter_repair import repair_frontmatter
 from layers.l2_brain.readiness_score_calibrator import run_readiness_score_calibration
 from layers.l2_brain.memory_spine_entrypoint import retrieve_memory_for_intent
@@ -119,7 +120,9 @@ class CliControlPlane:
             "ontology-map": self._cmd_ontology_map,
             "cognitive-frame": self._cmd_cognitive_frame,
             "metacognitive-loop": self._cmd_metacognitive_loop,
+            "metacognitive-quality": self._cmd_metacognitive_quality,
         }
+
 
 
         if command not in handlers:
@@ -552,8 +555,16 @@ class CliControlPlane:
 
     def _cmd_metacognitive_loop(self) -> CliCommandResult:
         intent = "what should I do next?"
-        res = run_metacognitive_loop(intent)
+        res = run_metacognitive_loop(intent, aiwg_root=self.aiwg_root)
         return CliCommandResult("metacognitive-loop", res["decision"], res, res.get("warnings", []), [".aiwg/reports/metacognitive_loop_latest.json"], self._utc_now())
+
+    def _cmd_metacognitive_quality(self) -> CliCommandResult:
+        intent = "show current quality gate status"
+        # Need to run a loop or mock one to get quality result
+        res = run_metacognitive_loop(intent, aiwg_root=self.aiwg_root)
+        quality = res.get("quality_gate", {})
+        return CliCommandResult("metacognitive-quality", quality.get("decision", "FAIL"), quality, quality.get("warnings", []), [".aiwg/reports/metacognitive_quality_gate_latest.json"], self._utc_now())
+
 
 
     def _cmd_token_benchmark(self) -> CliCommandResult:

@@ -1,9 +1,9 @@
-# Spec 150: Mental Model Runtime
-Purpose: Evidence-backed structured abstraction of intent context.
+# Spec 155: Metacognitive Quality Gate
+Purpose: Audits the quality of the thinking process.
 Scope: L2 Brain Metacognition
 
 ## Runtime Behavior
-Extracts entities, relations, risks and contradictions from repo reports and intent.
+Evaluates model, ontology and frame completeness and safety.
 
 ## Quality Gate
 - FAIL if secrets/private Reasoning detected.

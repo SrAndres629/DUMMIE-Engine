@@ -1,2 +1,2 @@
-Feature: 153_metacognitive_loop_runtime
+Feature: Metacognitive Loop Runtime
   Scenario: Standard runtime execution

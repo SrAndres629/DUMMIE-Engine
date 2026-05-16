@@ -1,13 +1,11 @@
 {
   "decision": "PASS_WITH_WARNINGS",
-  "query": "unknown",
+  "query": "next",
   "status": "DEGRADED_WITH_FILE_BACKED_MEMORY",
   "memory_refs": [],
   "learning_episode_refs": [
-    "sid:CURRENT/ep:ep-d87485f1",
-    "sid:CURRENT/ep:ep-69f7fc7b",
-    "sid:CURRENT/ep:ep-8265aac4",
-    "sid:CURRENT/ep:ep-e10b5b15"
+    "sid:CURRENT/ep:ep-2592067a",
+    "sid:CURRENT/ep:ep-e12f9026"
   ],
   "vault_refs": [],
   "graph_status": "DEGRADED",
@@ -18,5 +16,5 @@
   "evidence_refs": [
     ".aiwg/sessions/CURRENT/learning_episodes.jsonl"
   ],
-  "generated_at": "2026-05-16T16:38:01Z"
+  "generated_at": "2026-05-16T16:54:44Z"
 }

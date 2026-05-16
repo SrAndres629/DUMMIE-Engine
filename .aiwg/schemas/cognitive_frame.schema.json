@@ -3,6 +3,27 @@
   "properties": {
     "frame_id": {
       "type": "string"
+    },
+    "must_preserve": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "dispatch_recommendation": {
+      "enum": [
+        "local",
+        "antigravity",
+        "codex",
+        "gemini",
+        "human_review"
+      ]
     }
   }
 }
