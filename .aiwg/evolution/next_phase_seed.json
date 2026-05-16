@@ -1,14 +1,13 @@
 {
-  "next_phase": "P29",
-  "name": "TrustedWorkstationMode",
-  "objective": "Implement a bounded TrustedWorkstationMode scaffold that can evaluate workstation-level actions under explicit authority contracts without executing dangerous operations by default.",
-  "why_now": "P28 defined the MissionAutonomyContract. P29 can now create a safe workstation-mode scaffold that classifies and gates local actions before any future execution capability.",
+  "next_phase": "PLAN_V1_COMPLETION_REVIEW",
+  "name": "Mentor Review + Integration Backlog",
+  "objective": "Review all Plan V1 runtime capabilities, identify integration gaps, score real operational gains, and produce the next development backlog for turning DUMMIE into a native strategic partner system.",
+  "why_now": "P31 completed the Plan V1 cognitive evolution operating layer. The next step is not another blind phase; it is an evidence-backed review of what is actually implemented, what is simulated, what is advisory-only, what is safe, and what must be hardened next.",
   "required_outputs": [
-    "layers/l2_brain/trusted_workstation_mode.py",
-    "layers/l2_brain/tests/test_trusted_workstation_mode.py",
-    ".aiwg/reports/plan_v1_phase_29_trusted_workstation_mode.md",
-    ".aiwg/reports/plan_v1_phase_29_trusted_workstation_mode.json",
-    ".aiwg/reports/trusted_workstation_mode_latest.json"
+    ".aiwg/reports/plan_v1_completion_review.md",
+    ".aiwg/reports/plan_v1_completion_review.json",
+    ".aiwg/reports/plan_v1_runtime_capability_scorecard.json",
+    ".aiwg/reports/plan_v1_integration_backlog.json"
   ],
   "must_not_create": [
     "unbounded autonomy",
@@ -19,11 +18,11 @@
     "dangerous OS operations"
   ],
   "success_conditions": [
-    "workstation action classifier implemented",
-    "authority gate integrated with MissionAutonomyContract",
-    "dangerous operations denied by default",
-    "safe dry-run mode implemented",
-    "no actual OS mutation by default",
-    "tests pass"
+    "all P1-P31 artifacts reviewed",
+    "runtime capabilities scored",
+    "simulated vs real capabilities separated",
+    "security boundaries verified",
+    "token/context improvements assessed",
+    "next backlog created"
   ]
 }

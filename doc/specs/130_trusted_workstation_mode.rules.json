@@ -1,0 +1,21 @@
+{
+  "spec_id": "130",
+  "name": "Trusted Workstation Rules",
+  "rules": [
+    {
+      "id": "R1",
+      "description": "Actual execution MUST be disabled by default.",
+      "priority": "CRITICAL"
+    },
+    {
+      "id": "R2",
+      "description": "Sensitive paths (.env, .ssh) MUST be blocked.",
+      "priority": "CRITICAL"
+    },
+    {
+      "id": "R3",
+      "description": "Mutation actions MUST require human approval.",
+      "priority": "CRITICAL"
+    }
+  ]
+}

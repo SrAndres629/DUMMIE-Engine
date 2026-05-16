@@ -1,0 +1,38 @@
+{
+  "tester_id": "chaos_regression_testing",
+  "phase": "P30",
+  "decision": "PASS",
+  "scenarios_total": 4,
+  "scenarios_passed": 4,
+  "scenarios_failed": 0,
+  "findings": [
+    {
+      "scenario_id": "chaos_1",
+      "result": "PASS",
+      "message": "Expected FAIL, got FAIL",
+      "actual_decision": "FAIL"
+    },
+    {
+      "scenario_id": "chaos_2",
+      "result": "PASS",
+      "message": "Expected BLOCK, got BLOCK",
+      "actual_decision": "BLOCK"
+    },
+    {
+      "scenario_id": "chaos_3",
+      "result": "PASS",
+      "message": "Expected BLOCK, got BLOCK",
+      "actual_decision": "BLOCK"
+    },
+    {
+      "scenario_id": "chaos_4",
+      "result": "PASS",
+      "message": "Expected BLOCK, got BLOCK",
+      "actual_decision": "BLOCK"
+    }
+  ],
+  "regression_risks": [],
+  "evidence_refs": [],
+  "warnings": [],
+  "generated_at": "2026-05-16T14:37:44Z"
+}

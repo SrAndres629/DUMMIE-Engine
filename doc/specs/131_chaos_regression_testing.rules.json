@@ -1,0 +1,21 @@
+{
+  "spec_id": "131",
+  "name": "Chaos Testing Rules",
+  "rules": [
+    {
+      "id": "R1",
+      "description": "Must simulate safety gate failures and verify block decisions.",
+      "priority": "CRITICAL"
+    },
+    {
+      "id": "R2",
+      "description": "Whole report MUST fail if any unsafe scenario is allowed.",
+      "priority": "CRITICAL"
+    },
+    {
+      "id": "R3",
+      "description": "Must remain non-destructive (simulated inputs only).",
+      "priority": "HIGH"
+    }
+  ]
+}

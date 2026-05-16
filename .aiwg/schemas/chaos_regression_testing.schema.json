@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ChaosRegressionReport",
+  "type": "object",
+  "required": ["tester_id", "phase", "decision", "scenarios_total", "generated_at"],
+  "properties": {
+    "tester_id": { "type": "string" },
+    "phase": { "type": "string" },
+    "decision": { "type": "string", "enum": ["PASS", "PASS_WITH_WARNINGS", "FAIL"] },
+    "scenarios_total": { "type": "integer" },
+    "scenarios_passed": { "type": "integer" },
+    "scenarios_failed": { "type": "integer" },
+    "findings": { "type": "array" },
+    "generated_at": { "type": "string", "format": "date-time" }
+  }
+}

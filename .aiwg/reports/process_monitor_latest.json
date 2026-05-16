@@ -1,13 +1,13 @@
 {
-  "current_phase": "P28",
-  "next_phase": "P29",
+  "current_phase": "P31",
+  "next_phase": "PLAN_V1_COMPLETION_REVIEW",
   "restart_gate_decision": "PASS",
   "flywheel_decision": "continue_next_phase",
   "context_efficiency_decision": "IMPROVED",
   "cache_hit_ratio": 1.0,
   "stale_findings": 4,
   "known_warnings": [],
-  "recommended_action": "advance_to_P29",
+  "recommended_action": "advance_to_PLAN_V1_COMPLETION_REVIEW",
   "decision": "PASS_WITH_WARNINGS",
   "warnings": [],
   "evidence_refs": [
@@ -21,5 +21,5 @@
     ".aiwg/reports/context_quant_result_latest.json",
     ".aiwg/reports/context_quant_result_latest.json"
   ],
-  "generated_at": "2026-05-16T14:25:28Z"
+  "generated_at": "2026-05-16T14:37:45Z"
 }

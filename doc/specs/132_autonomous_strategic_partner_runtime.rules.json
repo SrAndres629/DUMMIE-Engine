@@ -1,0 +1,21 @@
+{
+  "spec_id": "132",
+  "name": "Autonomous Runtime Rules",
+  "rules": [
+    {
+      "id": "R1",
+      "description": "Must coordinate all governance gates (Chaos, Coherence, Debate, Autonomy).",
+      "priority": "CRITICAL"
+    },
+    {
+      "id": "R2",
+      "description": "Must block if any safety gate reports FAIL or BLOCK.",
+      "priority": "CRITICAL"
+    },
+    {
+      "id": "R3",
+      "description": "Must NOT execute workspace mutations without explicit authorization.",
+      "priority": "CRITICAL"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AutonomousStrategicPartnerDecision",
+  "type": "object",
+  "required": ["runtime_id", "phase", "decision", "generated_at"],
+  "properties": {
+    "runtime_id": { "type": "string" },
+    "phase": { "type": "string" },
+    "decision": { "type": "string" },
+    "recommended_next_action": { "type": "string" },
+    "can_execute_now": { "type": "boolean" },
+    "plan_v1_completion_status": { "type": "string", "enum": ["complete", "complete_with_warnings", "incomplete"] },
+    "generated_at": { "type": "string", "format": "date-time" }
+  }
+}

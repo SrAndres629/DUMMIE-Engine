@@ -27,6 +27,9 @@ from layers.l2_brain.tui_process_monitor import TuiProcessMonitor
 from layers.l6_skin.dashboard_renderer import DashboardRenderer
 from layers.l2_brain.debate_review_runtime import run_debate_review
 from layers.l2_brain.mission_autonomy_contract import run_mission_autonomy_contract
+from layers.l2_brain.trusted_workstation_mode import run_trusted_workstation_mode
+from layers.l2_brain.chaos_regression_testing import run_chaos_regression_tests
+from layers.l2_brain.autonomous_strategic_partner_runtime import run_autonomous_strategic_partner_runtime
 
 
 @dataclass
@@ -73,6 +76,13 @@ class CliControlPlane:
             "debate": self._cmd_debate_review,
             "autonomy-contract": self._cmd_autonomy_contract,
             "autonomy": self._cmd_autonomy_contract,
+            "trusted-workstation": self._cmd_trusted_workstation,
+            "workstation": self._cmd_trusted_workstation,
+            "chaos-regression": self._cmd_chaos_regression,
+            "chaos": self._cmd_chaos_regression,
+            "autonomous-runtime": self._cmd_autonomous_runtime,
+            "autonomous": self._cmd_autonomous_runtime,
+            "plan-v1-status": self._cmd_plan_v1_status,
         }
 
         if command not in handlers:
@@ -319,6 +329,48 @@ class CliControlPlane:
             payload=result,
             warnings=result.get("warnings", []),
             evidence_refs=[".aiwg/reports/mission_autonomy_contract_latest.json"],
+            generated_at=self._utc_now(),
+        )
+
+    def _cmd_trusted_workstation(self) -> CliCommandResult:
+        report = run_trusted_workstation_mode(aiwg_root=self.aiwg_root)
+        return CliCommandResult(
+            command="trusted-workstation",
+            decision=report.get("decision", "PASS"),
+            payload=report,
+            warnings=report.get("warnings", []),
+            evidence_refs=[".aiwg/reports/trusted_workstation_mode_latest.json"],
+            generated_at=self._utc_now(),
+        )
+
+    def _cmd_chaos_regression(self) -> CliCommandResult:
+        report = run_chaos_regression_tests(aiwg_root=self.aiwg_root)
+        return CliCommandResult(
+            command="chaos-regression",
+            decision=report.decision,
+            payload=report.to_dict(),
+            warnings=report.warnings,
+            evidence_refs=[".aiwg/reports/chaos_regression_report_latest.json"],
+            generated_at=self._utc_now(),
+        )
+
+    def _cmd_autonomous_runtime(self) -> CliCommandResult:
+        decision = run_autonomous_strategic_partner_runtime(aiwg_root=self.aiwg_root)
+        return CliCommandResult(
+            command="autonomous-runtime",
+            decision="PASS" if decision.decision != "block_due_to_safety" else "FAIL",
+            payload=decision.to_dict(),
+            warnings=decision.blocking_reasons,
+            evidence_refs=[".aiwg/reports/autonomous_strategic_partner_latest.json"],
+            generated_at=self._utc_now(),
+        )
+
+    def _cmd_plan_v1_status(self) -> CliCommandResult:
+        decision = run_autonomous_strategic_partner_runtime(aiwg_root=self.aiwg_root)
+        return CliCommandResult(
+            command="plan-v1-status",
+            decision="PASS" if decision.plan_v1_completion_status == "complete" else "PASS_WITH_WARNINGS",
+            payload={"status": decision.plan_v1_completion_status},
             generated_at=self._utc_now(),
         )
 

@@ -1,0 +1,88 @@
+{
+  "mode_id": "trusted_workstation_mode",
+  "phase": "P29",
+  "decision": "PASS",
+  "dry_run_only": true,
+  "actual_execution_enabled": false,
+  "policy": {
+    "safe_read_only_allowed": true,
+    "workspace_mutation_requires_authorization": true,
+    "credentials_access_denied": true,
+    "env_access_denied": true,
+    "browser_control_denied_by_default": true,
+    "network_action_denied_by_default": true,
+    "install_dependency_denied_by_default": true
+  },
+  "sample_evaluations": [
+    {
+      "action_id": "s1",
+      "decision": "ALLOW",
+      "category": "READ_ONLY_STATUS",
+      "reason": "safe_read_only_or_advisory_category",
+      "can_execute_now": true,
+      "requires_authorization": false,
+      "blocked_reasons": [],
+      "safety_flags": []
+    },
+    {
+      "action_id": "s2",
+      "decision": "ALLOW",
+      "category": "PATCH_PROPOSAL",
+      "reason": "safe_read_only_or_advisory_category",
+      "can_execute_now": true,
+      "requires_authorization": false,
+      "blocked_reasons": [],
+      "safety_flags": []
+    },
+    {
+      "action_id": "s3",
+      "decision": "ALLOW_WITH_HUMAN_APPROVAL",
+      "category": "WORKSPACE_EDIT",
+      "reason": "workspace_mutation_requires_manual_authorization",
+      "can_execute_now": false,
+      "requires_authorization": true,
+      "blocked_reasons": [],
+      "safety_flags": []
+    },
+    {
+      "action_id": "s4",
+      "decision": "BLOCK",
+      "category": "ENV_ACCESS",
+      "reason": "policy_violation: category ENV_ACCESS is strictly forbidden",
+      "can_execute_now": false,
+      "requires_authorization": false,
+      "blocked_reasons": [
+        "security_policy_enforcement"
+      ],
+      "safety_flags": []
+    },
+    {
+      "action_id": "s5",
+      "decision": "BLOCK",
+      "category": "BROWSER_CONTROL",
+      "reason": "policy_violation: category BROWSER_CONTROL is strictly forbidden",
+      "can_execute_now": false,
+      "requires_authorization": false,
+      "blocked_reasons": [
+        "security_policy_enforcement"
+      ],
+      "safety_flags": []
+    },
+    {
+      "action_id": "s6",
+      "decision": "BLOCK",
+      "category": "INSTALL_DEPENDENCY",
+      "reason": "policy_violation: category INSTALL_DEPENDENCY is strictly forbidden",
+      "can_execute_now": false,
+      "requires_authorization": false,
+      "blocked_reasons": [
+        "security_policy_enforcement"
+      ],
+      "safety_flags": []
+    }
+  ],
+  "evidence_refs": [
+    ".aiwg/reports/mission_autonomy_contract_latest.json"
+  ],
+  "generated_at": "2026-05-16T14:37:44Z"
+}

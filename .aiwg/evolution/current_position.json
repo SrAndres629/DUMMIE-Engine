@@ -1,18 +1,18 @@
 {
   "plan": "DUMMIE PLAN V1 — Cognitive Evolution Operating Layer",
-  "current_phase": "P28",
-  "current_phase_name": "MissionAutonomyContract",
-  "last_completed_phase": "P26",
-  "completed_bundle": "P27-P28",
-  "next_required_phase": "P29",
-  "next_required_phase_name": "TrustedWorkstationMode",
-  "current_block": "adversarial_review_and_autonomy_governance",
+  "current_phase": "P31",
+  "current_phase_name": "Autonomous Strategic Partner Runtime",
+  "last_completed_phase": "P28",
+  "completed_bundle": "P29-P31",
+  "next_required_phase": "PLAN_V1_COMPLETION_REVIEW",
+  "next_required_phase_name": "Mentor Review + Integration Backlog",
+  "current_block": "plan_v1_completion",
   "forbidden_skips": [
-    "do not start TrustedWorkstationMode before MissionAutonomyContract",
-    "do not let dashboard act as source of truth",
-    "do not let swarm mutate workspace without mission DAG and authorization",
-    "do not let debate agents override physical evidence",
-    "do not allow workstation actions without explicit authority contract"
+    "do not execute workstation actions without explicit authority contract",
+    "do not treat dashboard as source of truth",
+    "do not let swarm/debate agents override physical evidence",
+    "do not allow credential/.env access",
+    "do not allow autonomous mutation without human/orchestrator authorization"
   ],
   "canonical_roadmap_files": [
     ".aiwg/evolution/phases.yaml",

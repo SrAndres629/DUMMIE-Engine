@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "TrustedWorkstationModeReport",
+  "type": "object",
+  "required": ["mode_id", "phase", "decision", "policy", "generated_at"],
+  "properties": {
+    "mode_id": { "type": "string" },
+    "phase": { "type": "string" },
+    "decision": { "type": "string", "enum": ["PASS", "PASS_WITH_WARNINGS", "FAIL"] },
+    "dry_run_only": { "type": "boolean" },
+    "actual_execution_enabled": { "type": "boolean" },
+    "policy": { "type": "object" },
+    "sample_evaluations": { "type": "array" },
+    "generated_at": { "type": "string", "format": "date-time" }
+  }
+}
