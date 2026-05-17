@@ -340,5 +340,32 @@
     "quality_score": 70,
     "superseded_by": "mm-dbabda26",
     "created_at": "2026-05-17T00:25:32Z"
+  },
+  {
+    "model_id": "mm-c89256e3",
+    "intent_hash": "123d31f05f9c",
+    "intent": "heartbeat: what is the current system state and next safe action?",
+    "status": "needs_review",
+    "quality_score": 70,
+    "superseded_by": "",
+    "created_at": "2026-05-17T00:25:35Z"
+  },
+  {
+    "model_id": "mm-e70e0e05",
+    "intent_hash": "123d31f05f9c",
+    "intent": "heartbeat: what is the current system state and next safe action?",
+    "status": "needs_review",
+    "quality_score": 70,
+    "superseded_by": "",
+    "created_at": "2026-05-17T00:29:43Z"
+  },
+  {
+    "model_id": "mm-d7383bc7",
+    "intent_hash": "31310362340d",
+    "intent": "what should DUMMIE improve next before autonomous scaling?",
+    "status": "valid",
+    "quality_score": 70,
+    "superseded_by": "",
+    "created_at": "2026-05-17T00:29:43Z"
   }
 ]

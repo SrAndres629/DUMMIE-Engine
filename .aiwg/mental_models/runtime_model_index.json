@@ -761,9 +761,52 @@
   },
   "mm-c89256e3": {
     "path": ".aiwg/mental_models/runtime_models.jsonl",
-    "status": "valid",
+    "status": "needs_review",
     "quality_score": 70,
     "created_at": "2026-05-17T00:25:35Z",
+    "intent_hash": "123d31f05f9c",
+    "superseded_by": "",
+    "hygiene_findings": [
+      {
+        "model_id": "mm-c89256e3",
+        "finding_type": "empty_decisions_for_planning_intent",
+        "message": "No decisions for planning intent: heartbeat: what is the current system state and next safe ac",
+        "severity": "WARN",
+        "recommended_status": "needs_review"
+      }
+    ]
+  },
+  "mm-e70e0e05": {
+    "path": ".aiwg/mental_models/runtime_models.jsonl",
+    "status": "needs_review",
+    "quality_score": 70,
+    "created_at": "2026-05-17T00:29:43Z",
+    "intent_hash": "123d31f05f9c",
+    "superseded_by": "",
+    "hygiene_findings": [
+      {
+        "model_id": "mm-e70e0e05",
+        "finding_type": "empty_decisions_for_planning_intent",
+        "message": "No decisions for planning intent: heartbeat: what is the current system state and next safe ac",
+        "severity": "WARN",
+        "recommended_status": "needs_review"
+      }
+    ]
+  },
+  "mm-d7383bc7": {
+    "path": ".aiwg/mental_models/runtime_models.jsonl",
+    "status": "valid",
+    "quality_score": 70,
+    "created_at": "2026-05-17T00:29:43Z",
+    "intent_hash": "31310362340d",
+    "superseded_by": "",
+    "hygiene_findings": []
+  },
+  "mm-9514b213": {
+    "path": ".aiwg/mental_models/runtime_models.jsonl",
+    "status": "valid",
+    "quality_score": 70,
+    "created_at": "2026-05-17T00:29:43Z",
     "intent_hash": "",
     "superseded_by": "",
     "hygiene_findings": []

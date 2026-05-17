@@ -1,0 +1,14 @@
+{
+  "previous_heartbeat_id": "hb-7f98dc58",
+  "previous_decision": "FAIL",
+  "next_action": "increase_test_coverage",
+  "dispatch": "codex",
+  "blocked_actions": [
+    "autonomous_scaling",
+    "quarantine_overconfident_models",
+    "repair_kuzu_persistence"
+  ],
+  "kuzu_degraded": true,
+  "quarantined_models": 4,
+  "created_at": "2026-05-17T00:29:43.811727+00:00"
+}

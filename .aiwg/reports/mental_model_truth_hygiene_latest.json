@@ -1,12 +1,12 @@
 {
   "decision": "PASS_WITH_WARNINGS",
-  "models_scanned": 38,
-  "valid_count": 12,
+  "models_scanned": 41,
+  "valid_count": 13,
   "stale_count": 5,
   "superseded_count": 11,
   "quarantined_count": 4,
   "unsafe_rejected_count": 0,
-  "needs_review_count": 6,
+  "needs_review_count": 8,
   "findings": [
     {
       "model_id": "mm-de1c78e6",
@@ -399,6 +399,20 @@
       "message": "Superseded by mm-dbabda26 with higher quality for same intent",
       "severity": "WARN",
       "recommended_status": "superseded"
+    },
+    {
+      "model_id": "mm-c89256e3",
+      "finding_type": "empty_decisions_for_planning_intent",
+      "message": "No decisions for planning intent: heartbeat: what is the current system state and next safe ac",
+      "severity": "WARN",
+      "recommended_status": "needs_review"
+    },
+    {
+      "model_id": "mm-e70e0e05",
+      "finding_type": "empty_decisions_for_planning_intent",
+      "message": "No decisions for planning intent: heartbeat: what is the current system state and next safe ac",
+      "severity": "WARN",
+      "recommended_status": "needs_review"
     }
   ],
   "decisions": [
@@ -663,22 +677,43 @@
     },
     {
       "model_id": "mm-947c6c76",
-      "previous_status": "valid",
+      "previous_status": "superseded",
       "new_status": "superseded",
       "reason": "Superseded by mm-dbabda26 with higher quality for same intent",
       "superseded_by": "mm-dbabda26"
+    },
+    {
+      "model_id": "mm-c89256e3",
+      "previous_status": "needs_review",
+      "new_status": "needs_review",
+      "reason": "No decisions for planning intent: heartbeat: what is the current system state and next safe ac",
+      "superseded_by": ""
+    },
+    {
+      "model_id": "mm-e70e0e05",
+      "previous_status": "needs_review",
+      "new_status": "needs_review",
+      "reason": "No decisions for planning intent: heartbeat: what is the current system state and next safe ac",
+      "superseded_by": ""
+    },
+    {
+      "model_id": "mm-d7383bc7",
+      "previous_status": "valid",
+      "new_status": "valid",
+      "reason": "No issues found",
+      "superseded_by": ""
     }
   ],
   "summary": {
-    "models_scanned": 38,
-    "valid_count": 12,
+    "models_scanned": 41,
+    "valid_count": 13,
     "stale_count": 5,
     "superseded_count": 11,
     "quarantined_count": 4,
     "unsafe_rejected_count": 0,
-    "needs_review_count": 6,
+    "needs_review_count": 8,
     "overconfidence_count": 4,
     "kuzu_degraded": true
   },
-  "timestamp": "2026-05-17T00:25:35.900882+00:00"
+  "timestamp": "2026-05-17T00:29:43.942701+00:00"
 }

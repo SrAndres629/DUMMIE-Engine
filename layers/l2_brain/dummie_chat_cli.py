@@ -99,6 +99,8 @@ class DummieChatCli:
             intent = "repo_query"
         elif "context for" in query_text:
             intent = "context"
+        elif "scan" in query_text or "coherence" in query_text:
+            intent = "whole_body_scan"
         elif "repo intelligence" in query_text or "find" in query_text:
             intent = "repo_query"
         elif "benchmark" in query_text or "token" in query_text:
@@ -167,6 +169,8 @@ class DummieChatCli:
             response = self._cmd_heartbeat_ledger(gate_decision)
         elif intent == "heartbeat_why":
             response = self._cmd_heartbeat_why(gate_decision)
+        elif intent == "whole_body_scan":
+            response = self._cmd_whole_body_scan(gate_decision)
         elif intent == "help":
             response = self._cmd_help()
         else:
@@ -525,6 +529,23 @@ class DummieChatCli:
         answer = f"Why this action: {data.get('reason', 'unknown')}"
         return DummieChatResponse(answer=answer, evidence_refs=[".aiwg/reports/heartbeat_decision_policy_latest.json"],
                                   context_strategy=gate.decision, generated_at=self._utc_now())
+
+    def _cmd_whole_body_scan(self, gate) -> DummieChatResponse:
+        from whole_body_scanner import WholeBodyScanner
+        scanner = WholeBodyScanner()
+        res = scanner.run_scan()
+        answer = (f"Whole-Body Scan completed. Systemic Coherence Score: {res.get('overall_coherence_score', '?')}%.\n"
+                  f"Shadow modules found: {res.get('metrics', {}).get('shadow_modules_count', '?')}, "
+                  f"Orphaned tests: {res.get('metrics', {}).get('orphaned_tests_count', '?')}, "
+                  f"Unvalidated specs: {res.get('metrics', {}).get('unvalidated_specs_count', '?')}.\n"
+                  f"Report saved to .aiwg/reports/whole_body_scan_latest.md")
+        return DummieChatResponse(answer=answer,
+                                  evidence_refs=[
+                                      ".aiwg/reports/whole_body_scan_latest.json",
+                                      ".aiwg/reports/whole_body_scan_latest.md"
+                                  ],
+                                  context_strategy=gate.decision,
+                                  generated_at=self._utc_now())
 
     def _cmd_help(self) -> DummieChatResponse:
         help_text = """Available commands:

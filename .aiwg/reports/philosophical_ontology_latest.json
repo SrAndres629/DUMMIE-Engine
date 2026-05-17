@@ -14,7 +14,7 @@
     {
       "id": "INTENT",
       "type": "TELEOLOGY",
-      "goal": "heartbeat: what is the current system state and next safe action?"
+      "goal": "refactor memory"
     }
   ],
   "edges": [
@@ -35,7 +35,7 @@
     "Agency"
   ],
   "teleology": {
-    "goal": "heartbeat: what is the current system state and next safe action?",
+    "goal": "refactor memory",
     "impact": "evolution"
   },
   "authority_constraints": [

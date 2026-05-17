@@ -138,6 +138,7 @@ class CliControlPlane:
             "heartbeat-seed": self._cmd_heartbeat_seed,
             "heartbeat-status": self._cmd_heartbeat_status,
             "heartbeat-ledger": self._cmd_heartbeat_ledger,
+            "whole-body-scan": self._cmd_whole_body_scan,
         }
 
 
@@ -694,6 +695,18 @@ class CliControlPlane:
         return CliCommandResult("heartbeat-ledger", "PASS", {"count": count},
                                  evidence_refs=[".aiwg/heartbeat/heartbeat_ledger.jsonl"],
                                  generated_at=self._utc_now())
+
+    def _cmd_whole_body_scan(self) -> CliCommandResult:
+        from whole_body_scanner import WholeBodyScanner
+        scanner = WholeBodyScanner()
+        res = scanner.run_scan()
+        return CliCommandResult("whole-body-scan", "PASS", res,
+                                 evidence_refs=[
+                                     ".aiwg/reports/whole_body_scan_latest.json",
+                                     ".aiwg/reports/whole_body_scan_latest.md"
+                                 ],
+                                 generated_at=self._utc_now())
+
 
     def _cmd_token_benchmark(self) -> CliCommandResult:
         res = run_token_economy_benchmark()

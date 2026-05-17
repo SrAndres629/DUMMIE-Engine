@@ -25,6 +25,7 @@ def show_help():
     print("  heartbeat-dry-run   Perform simulated dry-run heartbeat cycle")
     print("  heartbeat-status    Show status of last recorded heartbeat")
     print("  next-heartbeat      Show next heartbeat seed information")
+    print("  scan                Run whole-body scan and shadow detector")
     print("  help                Show this help")
 
 def main():
@@ -58,6 +59,8 @@ def main():
         run_python("layers/l2_brain/cli_control_plane.py", ["heartbeat-status"])
     elif cmd == "next-heartbeat":
         run_python("layers/l2_brain/cli_control_plane.py", ["heartbeat-seed"])
+    elif cmd == "scan":
+        run_python("layers/l2_brain/cli_control_plane.py", ["whole-body-scan"])
     elif cmd == "help":
         show_help()
     else:

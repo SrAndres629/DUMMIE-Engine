@@ -1,17 +1,12 @@
 {
-  "decision": "FAIL",
-  "intent": "heartbeat: what is the current system state and next safe action?",
-  "mental_model_id": "mm-c89256e3",
-  "frame_id": "frame-6d75af0b",
+  "decision": "NEEDS_HUMAN_REVIEW",
+  "intent": "refactor memory",
+  "mental_model_id": "mm-9514b213",
+  "frame_id": "frame-48ed90b0",
   "quality_gate": {
-    "decision": "FAIL",
-    "quality_score": 25.0,
+    "decision": "NEEDS_HUMAN_REVIEW",
+    "quality_score": 45.0,
     "findings": [
-      {
-        "category": "MODEL",
-        "message": "No relations extracted",
-        "severity": "WARN"
-      },
       {
         "category": "ONTOLOGY",
         "message": "Ontology graph is empty or has zero edges",
@@ -43,8 +38,12 @@
     "knowns": [
       "Technical debt: None failing tests"
     ],
-    "unknowns": [],
-    "assumptions": [],
+    "unknowns": [
+      "Full side-effect graph of refactor"
+    ],
+    "assumptions": [
+      "Refactor target exists and is documented"
+    ],
     "contradictions": [
       "Kuzu claim: PASS vs Reality: DEGRADED findings in readiness report"
     ],
@@ -79,7 +78,7 @@
       {
         "id": "INTENT",
         "type": "TELEOLOGY",
-        "goal": "heartbeat: what is the current system state and next safe action?"
+        "goal": "refactor memory"
       }
     ],
     "edges": [
@@ -100,7 +99,7 @@
       "Agency"
     ],
     "teleology": {
-      "goal": "heartbeat: what is the current system state and next safe action?",
+      "goal": "refactor memory",
       "impact": "evolution"
     },
     "authority_constraints": [
@@ -114,14 +113,14 @@
     ]
   },
   "dialectical_review": {
-    "thesis": "Proceed with heartbeat: what is the current system state and next safe action? to improve the system.",
+    "thesis": "Proceed with refactor memory to improve the system.",
     "antithesis": "Propose delay until core regressions (Kuzu/Tests) are resolved.",
     "counterexamples": [
       "Previous failed refactor attempts",
       "Incomplete test coverage"
     ],
-    "synthesis": "Proceed with caution using local mock-fallback; prioritize test repair first.",
-    "decision": "proceed"
+    "synthesis": "Do not proceed with active refactoring until test debt is mitigated.",
+    "decision": "repair_first"
   },
   "evolution_delta": {
     "belief_changed": "From 'System is ready' to 'System has epistemic debt'",
@@ -129,13 +128,13 @@
     "revision_type": "humility_calibration",
     "next_check_recommended": "repair_kuzu_persistence"
   },
-  "recommended_next_action": "request_clarification",
+  "recommended_next_action": "repair_first",
   "next_self_improvement_action": "increase_test_coverage",
   "self_improvement_blocked_actions": [
-    "quarantine_overconfident_models",
     "autonomous_scaling",
-    "repair_kuzu_persistence"
+    "repair_kuzu_persistence",
+    "quarantine_overconfident_models"
   ],
-  "dispatch_recommendation": "local",
+  "dispatch_recommendation": "antigravity",
   "warnings": []
 }

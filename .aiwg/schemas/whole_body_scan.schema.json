@@ -1,0 +1,45 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "WholeBodyScan",
+  "type": "OBJECT",
+  "required": [
+    "timestamp",
+    "overall_coherence_score",
+    "metrics",
+    "findings",
+    "matrix"
+  ],
+  "properties": {
+    "timestamp": {
+      "type": "STRING"
+    },
+    "overall_coherence_score": {
+      "type": "NUMBER"
+    },
+    "metrics": {
+      "type": "OBJECT",
+      "required": [
+        "total_python_files",
+        "total_spec_files",
+        "total_schema_files",
+        "total_report_files",
+        "shadow_modules_count",
+        "orphaned_tests_count",
+        "stale_reports_count",
+        "unvalidated_specs_count"
+      ]
+    },
+    "findings": {
+      "type": "OBJECT",
+      "required": [
+        "shadow_modules",
+        "orphaned_tests",
+        "stale_reports",
+        "unvalidated_specs"
+      ]
+    },
+    "matrix": {
+      "type": "OBJECT"
+    }
+  }
+}

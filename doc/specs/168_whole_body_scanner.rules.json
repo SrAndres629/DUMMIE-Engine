@@ -1,0 +1,14 @@
+{
+  "spec_id": "168_whole_body_scanner",
+  "title": "Whole-Body Scan, Wiring Matrix, and Shadow Detector Runtime",
+  "invariants": {
+    "ast_parsing": "Must parse module imports recursively using AST.",
+    "wiring_matrix": "Must map specifications physical evidence targets to python modules.",
+    "shadow_runtime": "Must classify unimported, unmapped modules as orphaned shadow files."
+  },
+  "gates": {
+    "unvalidated_specs": "Spec file has 0 physical evidence targets in workspace.",
+    "orphaned_tests": "Test file exists but its tested module does not exist.",
+    "stale_reports": "Report file in .aiwg/reports/ is older than 24 hours."
+  }
+}
