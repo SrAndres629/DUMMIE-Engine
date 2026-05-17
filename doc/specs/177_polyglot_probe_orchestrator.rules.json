@@ -1,0 +1,11 @@
+{
+  "spec_id": "177_polyglot_probe_orchestrator",
+  "title": "Polyglot Probe Orchestrator Rules",
+  "invariants": {
+    "monitored_manifests": ["requirements.txt", "package.json", "Cargo.toml", "go.mod", "mix.exs"]
+  },
+  "gates": {
+    "exclusion_gate": "Under no circumstances shall the probe scan directories like node_modules, target, .venv, or _build.",
+    "build_gate": "No compiling or building is allowed during probing."
+  }
+}

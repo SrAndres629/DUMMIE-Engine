@@ -55,6 +55,7 @@ class HeartbeatOutcome:
     warnings: List[str]
     evidence_refs: List[str]
     created_at: str
+    circulation_summary: Dict[str, Any] = field(default_factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         return asdict(self)
@@ -172,6 +173,22 @@ def run_heartbeat(mode: str = "observe_only", aiwg_root: Path = Path(".aiwg")) -
 
     if missing:
         warnings.append(f"Missing canonical inputs: {', '.join(missing)}")
+
+    # ---- STEP 1.1: COGNITIVE CIRCULATION ORCHESTRATION ----
+    circulation_summary = {}
+    try:
+        from context_circulation_runtime import run_cognitive_circulation
+        circulation_summary = run_cognitive_circulation("heartbeat loop observation", aiwg_root=aiwg_root.parent)
+        evidence.extend([
+            ".aiwg/reports/6d_context_packet_latest.json",
+            ".aiwg/reports/context_packet_optimization_latest.json",
+            ".aiwg/reports/embedding_memory_router_latest.json",
+            ".aiwg/reports/4dtes_persistence_preflight_latest.json",
+            ".aiwg/reports/daemon_gateway_heartbeat_bridge_latest.json",
+            ".aiwg/reports/polyglot_probe_latest.json"
+        ])
+    except Exception as e:
+        warnings.append(f"context_circulation_degraded: {e}")
 
     # ---- STEP 2: TRUTH HYGIENE ----
     try:
@@ -317,6 +334,7 @@ def run_heartbeat(mode: str = "observe_only", aiwg_root: Path = Path(".aiwg")) -
         warnings=warnings,
         evidence_refs=evidence,
         created_at=datetime.now(timezone.utc).isoformat(),
+        circulation_summary=circulation_summary,
     )
 
     result = outcome.to_dict()

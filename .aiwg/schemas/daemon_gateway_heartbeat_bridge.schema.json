@@ -1,0 +1,59 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DaemonGatewayHeartbeatBridge",
+  "type": "object",
+  "properties": {
+    "decision": { "type": "string", "enum": ["PASS", "PASS_WITH_WARNINGS", "FAIL"] },
+    "daemon_status": { "type": "string", "enum": ["UNKNOWN", "INVOCATION_ONLY", "READY", "DEGRADED"] },
+    "gateway_status": { "type": "string", "enum": ["UNKNOWN", "MAPPED", "DEGRADED", "READY"] },
+    "dispatch_envelope": {
+      "type": "object",
+      "properties": {
+        "dispatch_id": { "type": "string" },
+        "selected_action": { "type": "object" },
+        "target": { "type": "string", "enum": ["local", "daemon_invocation", "gateway", "antigravity", "codex", "gemini", "human_review"] },
+        "mode": { "type": "string", "enum": ["observe_only", "advisory", "repair_planning", "patch_proposal"] },
+        "context_packet_ref": { "type": "string" },
+        "memory_refs": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "safety_constraints": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "requires_human_approval": { "type": "boolean" },
+        "can_execute_now": { "type": "boolean" },
+        "reason": { "type": "string" }
+      },
+      "required": [
+        "dispatch_id",
+        "selected_action",
+        "target",
+        "mode",
+        "context_packet_ref",
+        "memory_refs",
+        "safety_constraints",
+        "requires_human_approval",
+        "can_execute_now",
+        "reason"
+      ]
+    },
+    "warnings": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "required": [
+    "decision",
+    "daemon_status",
+    "gateway_status",
+    "dispatch_envelope",
+    "warnings",
+    "evidence_refs"
+  ]
+}

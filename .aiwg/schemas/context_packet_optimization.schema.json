@@ -1,0 +1,41 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ContextPacketOptimization",
+  "type": "object",
+  "properties": {
+    "decision": { "type": "string", "enum": ["PASS", "PASS_WITH_WARNINGS", "FAIL"] },
+    "selected_strategy": { "type": "string" },
+    "estimated_input_tokens": { "type": "integer" },
+    "optimized_tokens": { "type": "integer" },
+    "reduction_ratio": { "type": "number" },
+    "evidence_preserved": { "type": "boolean" },
+    "freshness_score": { "type": "number" },
+    "semantic_relevance_score": { "type": "number" },
+    "authority_score": { "type": "number" },
+    "context_quality_score": { "type": "number" },
+    "token_efficiency_score": { "type": "number" },
+    "warnings": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "required": [
+    "decision",
+    "selected_strategy",
+    "estimated_input_tokens",
+    "optimized_tokens",
+    "reduction_ratio",
+    "evidence_preserved",
+    "freshness_score",
+    "semantic_relevance_score",
+    "authority_score",
+    "context_quality_score",
+    "token_efficiency_score",
+    "warnings",
+    "evidence_refs"
+  ]
+}

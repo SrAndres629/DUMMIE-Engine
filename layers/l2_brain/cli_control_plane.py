@@ -143,6 +143,14 @@ class CliControlPlane:
             "wiring-matrix": self._cmd_wiring_matrix,
             "shadow-runtime": self._cmd_shadow_runtime,
             "systemic-coherence": self._cmd_systemic_coherence,
+            # Heartbeat-2
+            "6d-context": self._cmd_six_d_context,
+            "context-optimize": self._cmd_context_optimize,
+            "embedding-router": self._cmd_embedding_router,
+            "4dtes-preflight": self._cmd_four_dtes_preflight,
+            "daemon-gateway-bridge": self._cmd_daemon_gateway_bridge,
+            "polyglot-probe": self._cmd_polyglot_probe,
+            "context-circulation": self._cmd_context_circulation,
         }
 
 
@@ -708,6 +716,82 @@ class CliControlPlane:
                                  evidence_refs=[
                                      ".aiwg/reports/whole_body_scan_latest.json",
                                      ".aiwg/reports/whole_body_scan_latest.md"
+                                 ],
+                                 generated_at=self._utc_now())
+
+    def _cmd_six_d_context(self) -> CliCommandResult:
+        from six_dimensional_context_runtime import build_6d_context_packet
+        res = build_6d_context_packet(intent="repair kuzu", aiwg_root=self.aiwg_root.parent)
+        return CliCommandResult("6d-context", res.get("decision", "PASS"), res,
+                                 evidence_refs=[
+                                     ".aiwg/reports/6d_context_packet_latest.json",
+                                     ".aiwg/reports/6d_context_packet_latest.md"
+                                 ],
+                                 generated_at=self._utc_now())
+
+    def _cmd_context_optimize(self) -> CliCommandResult:
+        from six_dimensional_context_runtime import build_6d_context_packet
+        from context_packet_optimizer import optimize_context_packet
+        packet = build_6d_context_packet(intent="repair kuzu", aiwg_root=self.aiwg_root.parent)
+        res = optimize_context_packet(packet=packet, aiwg_root=self.aiwg_root.parent)
+        return CliCommandResult("context-optimize", res.get("decision", "PASS"), res,
+                                 evidence_refs=[
+                                     ".aiwg/reports/context_packet_optimization_latest.json",
+                                     ".aiwg/reports/context_packet_optimization_latest.md"
+                                 ],
+                                 generated_at=self._utc_now())
+
+    def _cmd_embedding_router(self) -> CliCommandResult:
+        from embedding_memory_router import run_embedding_memory_router_demo
+        res = run_embedding_memory_router_demo(intent="repair kuzu", aiwg_root=self.aiwg_root.parent)
+        return CliCommandResult("embedding-router", res.get("decision", "PASS"), res,
+                                 evidence_refs=[
+                                     ".aiwg/reports/embedding_memory_router_latest.json",
+                                     ".aiwg/reports/embedding_memory_router_latest.md"
+                                 ],
+                                 generated_at=self._utc_now())
+
+    def _cmd_four_dtes_preflight(self) -> CliCommandResult:
+        from four_dtes_persistence_preflight import run_4dtes_preflight
+        res = run_4dtes_preflight(aiwg_root=self.aiwg_root.parent)
+        return CliCommandResult("4dtes-preflight", res.get("decision", "PASS"), res,
+                                 evidence_refs=[
+                                     ".aiwg/reports/4dtes_persistence_preflight_latest.json",
+                                     ".aiwg/reports/4dtes_persistence_preflight_latest.md"
+                                 ],
+                                 generated_at=self._utc_now())
+
+    def _cmd_daemon_gateway_bridge(self) -> CliCommandResult:
+        from daemon_gateway_heartbeat_bridge import run_daemon_gateway_bridge_demo
+        res = run_daemon_gateway_bridge_demo(intent="repair kuzu", aiwg_root=self.aiwg_root.parent)
+        return CliCommandResult("daemon-gateway-bridge", res.get("decision", "PASS"), res,
+                                 evidence_refs=[
+                                     ".aiwg/reports/daemon_gateway_heartbeat_bridge_latest.json",
+                                     ".aiwg/reports/daemon_gateway_heartbeat_bridge_latest.md"
+                                 ],
+                                 generated_at=self._utc_now())
+
+    def _cmd_polyglot_probe(self) -> CliCommandResult:
+        from polyglot_probe_orchestrator import run_polyglot_probe
+        res = run_polyglot_probe(aiwg_root=self.aiwg_root.parent)
+        return CliCommandResult("polyglot-probe", res.get("decision", "PASS"), res,
+                                 evidence_refs=[
+                                     ".aiwg/reports/polyglot_probe_latest.json",
+                                     ".aiwg/reports/polyglot_probe_latest.md"
+                                 ],
+                                 generated_at=self._utc_now())
+
+    def _cmd_context_circulation(self) -> CliCommandResult:
+        from context_circulation_runtime import run_cognitive_circulation
+        res = run_cognitive_circulation(intent="repair kuzu", aiwg_root=self.aiwg_root.parent)
+        return CliCommandResult("context-circulation", "PASS", res,
+                                 evidence_refs=[
+                                     ".aiwg/reports/6d_context_packet_latest.json",
+                                     ".aiwg/reports/context_packet_optimization_latest.json",
+                                     ".aiwg/reports/embedding_memory_router_latest.json",
+                                     ".aiwg/reports/4dtes_persistence_preflight_latest.json",
+                                     ".aiwg/reports/daemon_gateway_heartbeat_bridge_latest.json",
+                                     ".aiwg/reports/polyglot_probe_latest.json"
                                  ],
                                  generated_at=self._utc_now())
 

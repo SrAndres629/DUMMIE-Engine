@@ -17,20 +17,27 @@ def show_help():
     print("DUMMIE Engine Control Utility (dummie-ctl)")
     print("Usage: dummie-ctl <command> [args]")
     print("\nCommands:")
-    print("  status              Show system status and phase")
-    print("  chat <text>         Interact with DUMMIE Brain (records learning episode)")
-    print("  calibrate           Run sovereign readiness calibration")
-    print("  triage              Show test debt triage report")
-    print("  heartbeat           Execute manual observe-only heartbeat cycle")
-    print("  heartbeat-dry-run   Perform simulated dry-run heartbeat cycle")
-    print("  heartbeat-status    Show status of last recorded heartbeat")
-    print("  next-heartbeat      Show next heartbeat seed information")
-    print("  scan                Run whole-body scan and shadow detector")
-    print("  scan-calibration    Calibrate whole-body scan metrics against pytest and reports")
-    print("  wiring-matrix       Construct directed module dependency wiring matrix")
-    print("  shadow-runtime      Safely audit and classify shadow (unwired) Python modules")
-    print("  systemic-coherence  Display current systemic coherence percentage")
-    print("  help                Show this help")
+    print("  status                 Show system status and phase")
+    print("  chat <text>            Interact with DUMMIE Brain (records learning episode)")
+    print("  calibrate              Run sovereign readiness calibration")
+    print("  triage                 Show test debt triage report")
+    print("  heartbeat              Execute manual observe-only heartbeat cycle")
+    print("  heartbeat-dry-run      Perform simulated dry-run heartbeat cycle")
+    print("  heartbeat-status       Show status of last recorded heartbeat")
+    print("  next-heartbeat         Show next heartbeat seed information")
+    print("  scan                   Run whole-body scan and shadow detector")
+    print("  scan-calibration       Calibrate whole-body scan metrics against pytest and reports")
+    print("  wiring-matrix          Construct directed module dependency wiring matrix")
+    print("  shadow-runtime         Safely audit and classify shadow (unwired) Python modules")
+    print("  systemic-coherence     Display current systemic coherence percentage")
+    print("  circulation            Execute context circulation orchestrator")
+    print("  6d-context             Build six-dimensional context packet")
+    print("  context-optimize       Build optimized strategy comparison for context packet")
+    print("  embedding-router       Seed offline search router directory maps")
+    print("  4dtes-preflight        Verify Kùzu/memory spine schema readiness checks")
+    print("  daemon-gateway-bridge  Formulate gateway safe-dispatch contract packages")
+    print("  polyglot-probe         Compile multi-language file extension manifest")
+    print("  help                   Show this help")
 
 def main():
     if len(sys.argv) < 2:
@@ -73,6 +80,20 @@ def main():
         run_python("layers/l2_brain/cli_control_plane.py", ["shadow-runtime"])
     elif cmd == "systemic-coherence":
         run_python("layers/l2_brain/cli_control_plane.py", ["systemic-coherence"])
+    elif cmd == "circulation":
+        run_python("layers/l2_brain/cli_control_plane.py", ["context-circulation"])
+    elif cmd == "6d-context":
+        run_python("layers/l2_brain/cli_control_plane.py", ["6d-context"])
+    elif cmd == "context-optimize":
+        run_python("layers/l2_brain/cli_control_plane.py", ["context-optimize"])
+    elif cmd == "embedding-router":
+        run_python("layers/l2_brain/cli_control_plane.py", ["embedding-router"])
+    elif cmd == "4dtes-preflight":
+        run_python("layers/l2_brain/cli_control_plane.py", ["4dtes-preflight"])
+    elif cmd == "daemon-gateway-bridge":
+        run_python("layers/l2_brain/cli_control_plane.py", ["daemon-gateway-bridge"])
+    elif cmd == "polyglot-probe":
+        run_python("layers/l2_brain/cli_control_plane.py", ["polyglot-probe"])
     elif cmd == "help":
         show_help()
     else:

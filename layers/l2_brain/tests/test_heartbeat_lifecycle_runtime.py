@@ -10,6 +10,42 @@ def _setup_aiwg(tmp: Path, mock_actions: list = None, kuzu_degraded: bool = True
     (aiwg / "heartbeat").mkdir(parents=True)
     (aiwg / "mental_models").mkdir(parents=True)
 
+    # Write a mock Python file so polyglot probe PASSes
+    (tmp / "mock_app.py").write_text("print('hello')", encoding="utf-8")
+
+    # Seed mock scanner files so context circulation & mental model compile successfully
+    scan = {
+        "overall_coherence_score": 55.0,
+        "systemic_coherence": 55.0,
+        "scan_metrics": {
+            "total_files": 100,
+            "shadow_modules": 0,
+            "orphaned_tests": 0,
+            "stale_reports": 0,
+            "unvalidated_specs": 0
+        }
+    }
+    (aiwg / "reports" / "whole_body_scan_latest.json").write_text(json.dumps(scan), encoding="utf-8")
+    
+    cal = {
+        "decision": "PASS",
+        "calibration_score": 100
+    }
+    (aiwg / "reports" / "whole_body_scan_calibration_latest.json").write_text(json.dumps(cal), encoding="utf-8")
+    
+    wir = {
+        "decision": "PASS",
+        "nodes": [],
+        "edges": []
+    }
+    (aiwg / "reports" / "wiring_matrix_latest.json").write_text(json.dumps(wir), encoding="utf-8")
+    
+    sha = {
+        "decision": "PASS",
+        "findings": []
+    }
+    (aiwg / "reports" / "shadow_runtime_classification_latest.json").write_text(json.dumps(sha), encoding="utf-8")
+
     # Readiness scoring
     kuzu_finding = {"id": "score_1_with_degraded_kuzu", "description": "Kuzu degraded"} if kuzu_degraded else {"id": "ok", "description": "ok"}
     (aiwg / "reports" / "readiness_score_calibration_latest.json").write_text(json.dumps({

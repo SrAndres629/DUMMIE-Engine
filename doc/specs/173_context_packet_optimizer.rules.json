@@ -1,0 +1,11 @@
+{
+  "spec_id": "173_context_packet_optimizer",
+  "title": "Context Packet Optimizer Rules",
+  "invariants": {
+    "minimum_reduction_ratio": 1.01
+  },
+  "gates": {
+    "reduction_gate": "Optimization decision is FAIL if reduction ratio is less than or equal to 1.0.",
+    "evidence_gate": "Active evidence files must be completely preserved."
+  }
+}

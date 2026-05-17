@@ -1,0 +1,11 @@
+{
+  "spec_id": "174_embedding_memory_router",
+  "title": "Embedding Memory Router Rules",
+  "invariants": {
+    "supported_modes": ["DETERMINISTIC_FALLBACK", "PROVIDER_DISABLED", "READY"]
+  },
+  "gates": {
+    "network_gate": "External provider connections are strictly prohibited.",
+    "warning_gate": "If mode is DETERMINISTIC_FALLBACK, warnings list must contain semantic fallback explanations."
+  }
+}

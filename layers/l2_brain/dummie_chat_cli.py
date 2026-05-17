@@ -119,6 +119,14 @@ class DummieChatCli:
             intent = "memory_spine"
         elif "audit" in query_text or "entrypoint" in query_text or "enforcement" in query_text:
             intent = "entrypoint_audit"
+        elif "circulation" in query_text:
+            intent = "circulation"
+        elif "6d context" in query_text or "six-dimensional" in query_text:
+            intent = "six_d_context"
+        elif "polyglot" in query_text or "probe" in query_text:
+            intent = "polyglot"
+        elif "four_dtes" in query_text or "4dtes" in query_text:
+            intent = "four_dtes"
         elif "help" in query_text:
             intent = "help"
 
@@ -187,6 +195,14 @@ class DummieChatCli:
             response = self._cmd_shadow_runtime(gate_decision)
         elif intent == "systemic_coherence":
             response = self._cmd_systemic_coherence(gate_decision)
+        elif intent == "circulation":
+            response = self._cmd_circulation(gate_decision)
+        elif intent == "six_d_context":
+            response = self._cmd_six_d_context(gate_decision)
+        elif intent == "polyglot":
+            response = self._cmd_polyglot(gate_decision)
+        elif intent == "four_dtes":
+            response = self._cmd_four_dtes(gate_decision)
         elif intent == "help":
             response = self._cmd_help()
         else:
@@ -616,6 +632,63 @@ class DummieChatCli:
                                   context_strategy=gate.decision,
                                   generated_at=self._utc_now())
 
+    def _cmd_circulation(self, gate) -> DummieChatResponse:
+        from context_circulation_runtime import run_cognitive_circulation
+        res = run_cognitive_circulation(intent="chat request", aiwg_root=self.aiwg_root.parent)
+        answer = f"Circulation status: 6D context decision: {res['six_d_context']['decision']}, optimized strategy: {res['context_optimization']['strategy']}, languages found: {', '.join(res['polyglot_probe']['languages'])}"
+        return DummieChatResponse(
+            decision="PASS",
+            answer=answer,
+            evidence_refs=[
+                ".aiwg/reports/6d_context_packet_latest.json",
+                ".aiwg/reports/context_packet_optimization_latest.json",
+                ".aiwg/reports/embedding_memory_router_latest.json",
+                ".aiwg/reports/4dtes_persistence_preflight_latest.json",
+                ".aiwg/reports/daemon_gateway_heartbeat_bridge_latest.json",
+                ".aiwg/reports/polyglot_probe_latest.json"
+            ],
+            context_strategy=gate.decision,
+            generated_at=self._utc_now()
+        )
+
+    def _cmd_six_d_context(self, gate) -> DummieChatResponse:
+        from six_dimensional_context_runtime import build_6d_context_packet
+        res = build_6d_context_packet(intent="chat request", aiwg_root=self.aiwg_root.parent)
+        answer = f"6D Context compiled successfully. Decided: {res.get('decision')}. Matches {len(res.get('items', []))} surgical files. Quality score: {res.get('quality_score')}%"
+        return DummieChatResponse(
+            decision=res.get("decision", "PASS"),
+            answer=answer,
+            evidence_refs=[".aiwg/reports/6d_context_packet_latest.json"],
+            context_strategy=gate.decision,
+            generated_at=self._utc_now()
+        )
+
+    def _cmd_polyglot(self, gate) -> DummieChatResponse:
+        from polyglot_probe_orchestrator import run_polyglot_probe
+        res = run_polyglot_probe(aiwg_root=self.aiwg_root.parent)
+        langs = ", ".join(f"{lang} ({count} files)" for lang, count in res.get("languages", {}).items())
+        answer = f"Polyglot Probe compiled. Decided: {res.get('decision')}. Active languages in workspace: {langs}."
+        return DummieChatResponse(
+            decision=res.get("decision", "PASS"),
+            answer=answer,
+            evidence_refs=[".aiwg/reports/polyglot_probe_latest.json"],
+            context_strategy=gate.decision,
+            generated_at=self._utc_now()
+        )
+
+    def _cmd_four_dtes(self, gate) -> DummieChatResponse:
+        from four_dtes_persistence_preflight import run_4dtes_preflight
+        res = run_4dtes_preflight(aiwg_root=self.aiwg_root.parent)
+        plan = ", ".join(res.get("repair_plan", []))
+        answer = f"4D-TES Preflight checks completed. Status: {res.get('memory_spine_status')}, Mode: {res.get('graph_write_mode')}. Proposed Repair steps: {plan}."
+        return DummieChatResponse(
+            decision=res.get("decision", "PASS"),
+            answer=answer,
+            evidence_refs=[".aiwg/reports/4dtes_persistence_preflight_latest.json"],
+            context_strategy=gate.decision,
+            generated_at=self._utc_now()
+        )
+
     def _cmd_help(self) -> DummieChatResponse:
         help_text = """Available commands:
 - status: Show current system phase.
@@ -646,6 +719,10 @@ class DummieChatCli:
 - build wiring matrix: Map bidirectional dependency graph.
 - audit shadow modules: Classify unimported modules safely.
 - show systemic coherence: Display systemic coherence percentage.
+- run circulation: Execute context circulation orchestrator.
+- show 6d context: Build six-dimensional context packet.
+- run polyglot: Run multi-language polyglot probe.
+- show four_dtes: Run Kùzu/4D-TES persistence preflight checks.
 - help: Show this message."""
         return DummieChatResponse(answer=help_text, generated_at=self._utc_now())
 

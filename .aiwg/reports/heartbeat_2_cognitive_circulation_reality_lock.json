@@ -1,0 +1,38 @@
+{
+  "heartbeat": "HEARTBEAT-2",
+  "baseline_commit": "8b55d2836468e422ac820258c7d7b9a308bc33f9",
+  "mode": "observe_only_advisory",
+  "git_status_clean_before": true,
+  "heartbeat_1_1_runtime_modules_found": [
+    "layers/l2_brain/whole_body_scanner.py",
+    "layers/l2_brain/whole_body_scan_calibrator.py",
+    "layers/l2_brain/wiring_matrix_builder.py",
+    "layers/l2_brain/shadow_runtime_classifier.py",
+    "layers/l2_brain/heartbeat_lifecycle_runtime.py",
+    "layers/l2_brain/heartbeat_decision_policy.py"
+  ],
+  "heartbeat_1_1_reports_found": [
+    ".aiwg/reports/whole_body_scan_latest.json",
+    ".aiwg/reports/whole_body_scan_calibration_latest.json",
+    ".aiwg/reports/wiring_matrix_latest.json",
+    ".aiwg/reports/shadow_runtime_classification_latest.json"
+  ],
+  "systemic_coherence_score": 51.33,
+  "active_blockers": [
+    "kuzu_degraded"
+  ],
+  "kuzu_status": "DEGRADED",
+  "embedding_status": "DETERMINISTIC_FALLBACK",
+  "daemon_status": "INVOCATION_ONLY",
+  "gateway_status": "MAPPED",
+  "context_optimization_status": "DETERMINISTIC_ESTIMATE",
+  "planned_runtime": [
+    "layers/l2_brain/six_dimensional_context_runtime.py",
+    "layers/l2_brain/context_circulation_runtime.py",
+    "layers/l2_brain/context_packet_optimizer.py",
+    "layers/l2_brain/embedding_memory_router.py",
+    "layers/l2_brain/four_dtes_persistence_preflight.py",
+    "layers/l2_brain/daemon_gateway_heartbeat_bridge.py",
+    "layers/l2_brain/polyglot_probe_orchestrator.py"
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SixDContextPacket",
+  "type": "object",
+  "properties": {
+    "packet_id": { "type": "string" },
+    "intent": { "type": "string" },
+    "decision": { "type": "string", "enum": ["PASS", "PASS_WITH_WARNINGS", "FAIL"] },
+    "axes": {
+      "type": "object",
+      "properties": {
+        "temporal": { "type": "object" },
+        "semantic": { "type": "object" },
+        "ontological": { "type": "object" },
+        "causal": { "type": "object" },
+        "authority_safety": { "type": "object" },
+        "resource": { "type": "object" }
+      },
+      "required": ["temporal", "semantic", "ontological", "causal", "authority_safety", "resource"]
+    },
+    "items": {
+      "type": "array",
+      "items": { "type": "object" }
+    },
+    "must_preserve": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "should_include": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "must_not_include": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "estimated_tokens": { "type": "integer" },
+    "compressed_tokens": { "type": "integer" },
+    "reduction_ratio": { "type": "number" },
+    "freshness_status": { "type": "string" },
+    "quality_score": { "type": "number" },
+    "warnings": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "required": [
+    "packet_id",
+    "intent",
+    "decision",
+    "axes",
+    "items",
+    "must_preserve",
+    "should_include",
+    "must_not_include",
+    "evidence_refs",
+    "estimated_tokens",
+    "compressed_tokens",
+    "reduction_ratio",
+    "freshness_status",
+    "quality_score",
+    "warnings"
+  ]
+}

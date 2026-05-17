@@ -1,0 +1,41 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "FourDTESPersistencePreflight",
+  "type": "object",
+  "properties": {
+    "decision": { "type": "string", "enum": ["PASS", "PASS_WITH_WARNINGS", "FAIL"] },
+    "kuzu_importable": { "type": "boolean" },
+    "db_path_detected": { "type": "string" },
+    "graph_write_mode": { "type": "string", "enum": ["DRY_RUN_ONLY", "SIMULATED", "READY", "DEGRADED"] },
+    "memory_spine_status": { "type": "string" },
+    "safe_to_attempt_repair": { "type": "boolean" },
+    "repair_plan": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "blocked_actions": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "warnings": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "required": [
+    "decision",
+    "kuzu_importable",
+    "db_path_detected",
+    "graph_write_mode",
+    "memory_spine_status",
+    "safe_to_attempt_repair",
+    "repair_plan",
+    "blocked_actions",
+    "warnings",
+    "evidence_refs"
+  ]
+}

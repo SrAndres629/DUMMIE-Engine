@@ -1,0 +1,50 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PolyglotProbe",
+  "type": "object",
+  "properties": {
+    "decision": { "type": "string", "enum": ["PASS", "PASS_WITH_WARNINGS", "FAIL"] },
+    "languages": { "type": "object" },
+    "layers": { "type": "object" },
+    "first_party_files": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "dependency_exclusions": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "build_exclusions": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "test_roots": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "runtime_roles": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "warnings": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "required": [
+    "decision",
+    "languages",
+    "layers",
+    "first_party_files",
+    "dependency_exclusions",
+    "build_exclusions",
+    "test_roots",
+    "runtime_roles",
+    "warnings",
+    "evidence_refs"
+  ]
+}

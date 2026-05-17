@@ -1,0 +1,11 @@
+{
+  "spec_id": "175_4dtes_persistence_preflight",
+  "title": "4D-TES Persistence Preflight Rules",
+  "invariants": {
+    "supported_write_modes": ["DRY_RUN_ONLY", "SIMULATED", "READY", "DEGRADED"]
+  },
+  "gates": {
+    "write_gate": "Under no circumstances shall preflight execute write transactions on a physical Kùzu DB.",
+    "status_gate": "If graph_write_mode is DEGRADED or SIMULATED, decision MUST NOT be an unconditional PASS."
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "EmbeddingMemoryRouter",
+  "type": "object",
+  "properties": {
+    "decision": { "type": "string", "enum": ["PASS", "PASS_WITH_WARNINGS", "FAIL"] },
+    "embedding_mode": { "type": "string", "enum": ["DETERMINISTIC_FALLBACK", "PROVIDER_DISABLED", "READY"] },
+    "indexed_items": { "type": "integer" },
+    "query": { "type": "string" },
+    "results": {
+      "type": "array",
+      "items": { "type": "object" }
+    },
+    "warnings": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "required": [
+    "decision",
+    "embedding_mode",
+    "indexed_items",
+    "query",
+    "results",
+    "warnings",
+    "evidence_refs"
+  ]
+}

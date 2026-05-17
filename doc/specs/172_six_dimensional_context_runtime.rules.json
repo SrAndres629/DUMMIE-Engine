@@ -1,0 +1,12 @@
+{
+  "spec_id": "172_six_dimensional_context_runtime",
+  "title": "Six-Dimensional Context Runtime Rules",
+  "invariants": {
+    "required_axes": ["temporal", "semantic", "ontological", "causal", "authority_safety", "resource"],
+    "max_advisory_token_limit": 500000
+  },
+  "gates": {
+    "empty_evidence_gate": "Packets with empty evidence_refs cannot set PASS decision.",
+    "stale_items_gate": "Presence of elements with age greater than 24h shifts decision to PASS_WITH_WARNINGS."
+  }
+}
