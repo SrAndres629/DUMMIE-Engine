@@ -1,7 +1,7 @@
 {
   "decision": "PASS_WITH_WARNINGS",
   "concepts": [
-    "what should improve next?"
+    "heartbeat: what is the current system state and next safe action?"
   ],
   "classes": [
     "UNKNOWN"
@@ -10,13 +10,13 @@
     "nodes": [
       {
         "id": "INTENT",
-        "label": "what should improve next?",
+        "label": "heartbeat: what is the current system state and next safe action?",
         "type": "INTENT"
       }
     ],
     "edges": []
   },
-  "timestamp": "2026-05-17T00:09:51.077551+00:00",
+  "timestamp": "2026-05-17T00:25:35.911779+00:00",
   "warnings": [
     "No ontology classes matched"
   ]

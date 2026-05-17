@@ -1,6 +1,6 @@
 {
   "decision": "PASS_WITH_WARNINGS",
-  "query": "what_should_improve",
+  "query": "heartbeat",
   "status": "DEGRADED_WITH_FILE_BACKED_MEMORY",
   "memory_refs": [],
   "learning_episode_refs": [],
@@ -11,5 +11,5 @@
     "Kuzu DEGRADED. Falling back to file-backed session memory scan."
   ],
   "evidence_refs": [],
-  "generated_at": "2026-05-17T00:09:51Z"
+  "generated_at": "2026-05-17T00:25:35Z"
 }

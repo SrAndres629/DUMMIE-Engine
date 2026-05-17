@@ -1,0 +1,38 @@
+{
+  "type": "dry_run",
+  "decision": "PASS_WITH_WARNINGS",
+  "next_seed": {
+    "previous_heartbeat_id": "hb-96b3c26b",
+    "previous_decision": "FAIL",
+    "next_action": "increase_test_coverage",
+    "dispatch": "codex",
+    "blocked_actions": [
+      "autonomous_scaling",
+      "quarantine_overconfident_models",
+      "repair_kuzu_persistence"
+    ],
+    "kuzu_degraded": true,
+    "quarantined_models": 4,
+    "created_at": "2026-05-17T00:25:32.292461+00:00"
+  },
+  "would_select": {
+    "action_id": "eda-aa21eebe",
+    "source_delta": "mental_model_truth_hygiene_latest.json",
+    "action_type": "increase_test_coverage",
+    "priority": "high",
+    "blocks_autonomy": true,
+    "blocks_daily_use": false,
+    "evidence_refs": [
+      ".aiwg/reports/mental_model_truth_hygiene_latest.json"
+    ],
+    "recommended_pack": "PACK_5_3",
+    "status": "proposed"
+  },
+  "would_dispatch": "codex",
+  "blocked": [
+    "autonomous_scaling",
+    "quarantine_overconfident_models",
+    "repair_kuzu_persistence"
+  ],
+  "timestamp": "2026-05-17T00:25:35.730680+00:00"
+}

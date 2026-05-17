@@ -1,0 +1,120 @@
+{
+  "heartbeat_id": "hb-948bef94",
+  "mode": "observe_only",
+  "decision": "FAIL",
+  "observation": {
+    "git_clean": true,
+    "canonical_inputs": [
+      "self_improvement_action_queue.json",
+      "mental_model_truth_hygiene_latest.json",
+      "evolution_delta_application_latest.json",
+      "readiness_score_calibration_latest.json",
+      "memory_spine_entrypoint_latest.json",
+      "epistemic_state_latest.json",
+      "metacognitive_loop_latest.json",
+      "cognitive_bias_report_latest.json"
+    ],
+    "missing_inputs": [],
+    "active_blockers": [
+      "kuzu_degraded",
+      "quarantined_models_4"
+    ],
+    "kuzu_degraded": true,
+    "readiness_score": 0,
+    "quarantined_models": 4,
+    "test_debt_count": 0
+  },
+  "truth_hygiene": {
+    "decision": "PASS_WITH_WARNINGS",
+    "summary": {
+      "models_scanned": 38,
+      "valid_count": 12,
+      "stale_count": 5,
+      "superseded_count": 11,
+      "quarantined_count": 4,
+      "unsafe_rejected_count": 0,
+      "needs_review_count": 6,
+      "overconfidence_count": 4,
+      "kuzu_degraded": true
+    }
+  },
+  "epistemic_state": {
+    "decision": "PASS_WITH_WARNINGS",
+    "confidence": 0.6
+  },
+  "bias_report": {
+    "decision": "PASS",
+    "findings_count": 0
+  },
+  "memory_spine": {
+    "status": "DEGRADED_WITH_FILE_BACKED_MEMORY",
+    "graph_status": "DEGRADED"
+  },
+  "mental_model": {
+    "model_id": "mm-c89256e3"
+  },
+  "dialectic": {
+    "thesis": "Proceed with heartbeat: what is the current system state and next safe action? to improve the system.",
+    "antithesis": "Propose delay until core regressions (Kuzu/Tests) are resolved.",
+    "counterexamples": [
+      "Previous failed refactor attempts",
+      "Incomplete test coverage"
+    ],
+    "synthesis": "Proceed with caution using local mock-fallback; prioritize test repair first.",
+    "decision": "proceed"
+  },
+  "quality_gate": {
+    "decision": "FAIL",
+    "quality_score": 25.0
+  },
+  "self_improvement_queue": {
+    "actions_count": 6,
+    "next": "increase_test_coverage"
+  },
+  "selected_action": {
+    "action_id": "eda-aa21eebe",
+    "source_delta": "mental_model_truth_hygiene_latest.json",
+    "action_type": "increase_test_coverage",
+    "priority": "high",
+    "blocks_autonomy": true,
+    "blocks_daily_use": false,
+    "evidence_refs": [
+      ".aiwg/reports/mental_model_truth_hygiene_latest.json"
+    ],
+    "recommended_pack": "PACK_5_3",
+    "status": "proposed"
+  },
+  "blocked_actions": [
+    "autonomous_scaling",
+    "quarantine_overconfident_models",
+    "repair_kuzu_persistence"
+  ],
+  "dispatch_recommendation": "codex",
+  "outcome_ref": ".aiwg/reports/heartbeat_latest.json",
+  "learning_episode_ref": "sessions/CURRENT/learning_episodes (heartbeat hb-948bef94)",
+  "next_heartbeat_seed": {
+    "previous_heartbeat_id": "hb-948bef94",
+    "previous_decision": "FAIL",
+    "next_action": "increase_test_coverage",
+    "dispatch": "codex",
+    "blocked_actions": [
+      "autonomous_scaling",
+      "quarantine_overconfident_models",
+      "repair_kuzu_persistence"
+    ],
+    "kuzu_degraded": true,
+    "quarantined_models": 4,
+    "created_at": "2026-05-17T00:25:35.947474+00:00"
+  },
+  "warnings": [],
+  "evidence_refs": [
+    ".aiwg/reports/mental_model_truth_hygiene_latest.json",
+    ".aiwg/reports/epistemic_state_latest.json",
+    ".aiwg/reports/cognitive_bias_report_latest.json",
+    ".aiwg/reports/memory_spine_entrypoint_latest.json",
+    ".aiwg/reports/metacognitive_loop_latest.json",
+    ".aiwg/reports/self_improvement_action_queue.json",
+    ".aiwg/reports/heartbeat_decision_policy_latest.json"
+  ],
+  "created_at": "2026-05-17T00:25:35.947541+00:00"
+}

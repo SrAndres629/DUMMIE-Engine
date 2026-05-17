@@ -1,6 +1,6 @@
 {
-  "frame_id": "frame-b2d60979",
-  "intent": "what should improve next?",
+  "frame_id": "frame-6d75af0b",
+  "intent": "heartbeat: what is the current system state and next safe action?",
   "operating_mode": "answer",
   "must_preserve": [
     "current_phase",
@@ -13,7 +13,7 @@
     "private_chain_of_thought"
   ],
   "mental_model_refs": [
-    "mm-ebe4338e"
+    "mm-c89256e3"
   ],
   "memory_refs": [],
   "ontology_refs": [
@@ -32,5 +32,5 @@
     "Memory spine DEGRADED (Kuzu persistence unavailable)"
   ],
   "next_actions": [],
-  "created_at": "2026-05-17T00:09:51.077628+00:00"
+  "created_at": "2026-05-17T00:25:35.911815+00:00"
 }

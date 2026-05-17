@@ -14,7 +14,7 @@
     {
       "id": "INTENT",
       "type": "TELEOLOGY",
-      "goal": "what should improve next?"
+      "goal": "heartbeat: what is the current system state and next safe action?"
     }
   ],
   "edges": [
@@ -35,7 +35,7 @@
     "Agency"
   ],
   "teleology": {
-    "goal": "what should improve next?",
+    "goal": "heartbeat: what is the current system state and next safe action?",
     "impact": "evolution"
   },
   "authority_constraints": [

@@ -1,39 +1,23 @@
 {
-  "command": "readiness-calibration",
-  "decision": "PASS_WITH_WARNINGS",
+  "command": "heartbeat-seed",
+  "decision": "PASS",
   "payload": {
-    "decision": "PASS_WITH_WARNINGS",
-    "calibrated_scores": {
-      "daily_use_readiness": 6.5,
-      "memory_spine_readiness": 6.5,
-      "token_economy_readiness": 10.0,
-      "entrypoint_sovereignty_readiness": 10.0,
-      "autonomy_readiness": 2.5
-    },
-    "findings": [
-      {
-        "id": "score_1_with_degraded_kuzu",
-        "severity": "HIGH",
-        "description": "Kuzu/4D-TES persistence is DEGRADED. No physical graph writes occur.",
-        "impact": "Memory Spine is logical-only. Causal retrieval depends on file parsing.",
-        "score_penalty": 3.5
-      },
-      {
-        "id": "score_1_with_partial_context_coverage",
-        "severity": "MEDIUM",
-        "description": "Partial context coverage: 177 missing runtime tests.",
-        "impact": "Validation integrity is not absolute.",
-        "score_penalty": 2.0
-      }
+    "previous_heartbeat_id": "hb-948bef94",
+    "previous_decision": "FAIL",
+    "next_action": "increase_test_coverage",
+    "dispatch": "codex",
+    "blocked_actions": [
+      "autonomous_scaling",
+      "quarantine_overconfident_models",
+      "repair_kuzu_persistence"
     ],
-    "generated_at": "2026-05-16T16:42:32Z"
+    "kuzu_degraded": true,
+    "quarantined_models": 4,
+    "created_at": "2026-05-17T00:25:35.947474+00:00"
   },
-  "warnings": [
-    "score_1_with_degraded_kuzu",
-    "score_1_with_partial_context_coverage"
-  ],
+  "warnings": [],
   "evidence_refs": [
-    ".aiwg/reports/readiness_score_calibration_latest.json"
+    ".aiwg/heartbeat/next_heartbeat_seed.json"
   ],
-  "generated_at": "2026-05-16T16:42:32Z"
+  "generated_at": "2026-05-17T00:25:36Z"
 }

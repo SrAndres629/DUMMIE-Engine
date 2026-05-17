@@ -1,0 +1,24 @@
+{
+  "selected_action": {
+    "action_id": "eda-aa21eebe",
+    "source_delta": "mental_model_truth_hygiene_latest.json",
+    "action_type": "increase_test_coverage",
+    "priority": "high",
+    "blocks_autonomy": true,
+    "blocks_daily_use": false,
+    "evidence_refs": [
+      ".aiwg/reports/mental_model_truth_hygiene_latest.json"
+    ],
+    "recommended_pack": "PACK_5_3",
+    "status": "proposed"
+  },
+  "dispatch_recommendation": "codex",
+  "blocked_actions": [
+    "autonomous_scaling",
+    "quarantine_overconfident_models",
+    "repair_kuzu_persistence"
+  ],
+  "reason": "Selected 'increase_test_coverage' (priority=high) from self-improvement queue. Dispatch: codex.",
+  "warnings": [],
+  "timestamp": "2026-05-17T00:25:35.915906+00:00"
+}

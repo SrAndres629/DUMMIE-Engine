@@ -1,10 +1,10 @@
 {
-  "model_id": "mm-ebe4338e",
-  "intent": "what should improve next?",
+  "model_id": "mm-c89256e3",
+  "intent": "heartbeat: what is the current system state and next safe action?",
   "task_type": "unknown",
   "entities": [
-    "ReadinessScore",
-    "TechnicalDebt"
+    "TechnicalDebt",
+    "ReadinessScore"
   ],
   "relations": [],
   "assumptions": [],
@@ -26,18 +26,18 @@
   "next_actions": [],
   "context_strategy": "ALLOW_MANIFEST_ONLY",
   "memory_refs": [],
-  "created_at": "2026-05-17T00:09:51Z",
+  "created_at": "2026-05-17T00:25:35Z",
   "quality_score": 70,
   "quality_findings": [],
   "epistemic_state_ref": "epistemic_state_latest.json",
   "dialectical_review_ref": "dialectical_review_latest.json",
   "bias_findings": [],
   "teleology": {
-    "goal": "what should improve next?",
+    "goal": "heartbeat: what is the current system state and next safe action?",
     "impact_type": "architectural_integrity"
   },
   "falsification_tests": [
-    "verify what should improve next? with 0 new regressions"
+    "verify heartbeat: what is the current system state and next safe action? with 0 new regressions"
   ],
   "belief_revision": ""
 }
