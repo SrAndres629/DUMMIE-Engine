@@ -1,0 +1,39 @@
+{
+  "decision": "PASS",
+  "embedding_mode": "DETERMINISTIC_FALLBACK",
+  "indexed_items": 20,
+  "query": "heartbeat loop observation",
+  "results": [
+    {
+      "path": "layers/l2_brain/metacognitive_loop_runtime.py",
+      "score": 34.019287109375,
+      "status": "fresh"
+    },
+    {
+      "path": "layers/l2_brain/daemon.py",
+      "score": 33.71221923828125,
+      "status": "fresh"
+    },
+    {
+      "path": "layers/l2_brain/tests/test_pattern_to_mission_loop.py",
+      "score": 33.56744384765625,
+      "status": "orphaned"
+    },
+    {
+      "path": "layers/l2_brain/tests/test_heartbeat_integration.py",
+      "score": 32.3255615234375,
+      "status": "orphaned"
+    },
+    {
+      "path": "layers/l2_brain/heartbeat_scheduler.py",
+      "score": 31.74798583984375,
+      "status": "fresh"
+    }
+  ],
+  "warnings": [
+    "Deterministic offline projection fallback is active. Semantic accuracy may be limited."
+  ],
+  "evidence_refs": [
+    ".aiwg/reports/6d_context_packet_latest.json"
+  ]
+}

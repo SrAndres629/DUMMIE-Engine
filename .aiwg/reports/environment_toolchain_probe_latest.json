@@ -1,0 +1,55 @@
+{
+  "decision": "PASS",
+  "python": {
+    "installed": true,
+    "version": "Python 3.12.3",
+    "command": "python3 --version"
+  },
+  "go": {
+    "installed": true,
+    "version": "go version go1.23.2 linux/amd64",
+    "command": "go version"
+  },
+  "rust": {
+    "installed": true,
+    "version": "rustc 1.93.1 (01f6ddf75 2026-02-11)",
+    "command": "rustc --version"
+  },
+  "elixir": {
+    "installed": true,
+    "version": "Erlang/OTP 25 [erts-13.2.2.5] [source] [64-bit] [smp:16:16] [ds:16:16:10] [async-threads:1] [jit:ns]\n\nElixir 1.14.0 (compiled with Erlang/OTP 24)",
+    "command": "elixir --version"
+  },
+  "node": {
+    "installed": true,
+    "version": "v22.22.2",
+    "command": "node --version"
+  },
+  "protobuf": {
+    "installed": true,
+    "version": "libprotoc 28.2",
+    "command": "protoc --version"
+  },
+  "package_managers": {
+    "cargo": {
+      "installed": true,
+      "version": "cargo 1.93.1 (083ac5135 2025-12-15)",
+      "command": "cargo --version"
+    },
+    "mix": {
+      "installed": true,
+      "version": "Erlang/OTP 25 [erts-13.2.2.5] [source] [64-bit] [smp:16:16] [ds:16:16:10] [async-threads:1] [jit:ns]\n\nMix 1.14.0 (compiled with Erlang/OTP 24)",
+      "command": "mix --version"
+    },
+    "npm": {
+      "installed": true,
+      "version": "10.9.7",
+      "command": "npm --version"
+    }
+  },
+  "missing_toolchains": [],
+  "warnings": [],
+  "evidence_refs": [
+    "/usr/bin/env"
+  ]
+}

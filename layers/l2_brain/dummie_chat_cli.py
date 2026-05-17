@@ -127,6 +127,14 @@ class DummieChatCli:
             intent = "polyglot"
         elif "four_dtes" in query_text or "4dtes" in query_text:
             intent = "four_dtes"
+        elif "why is kuzu still degraded" in query_text or "kuzu degraded" in query_text:
+            intent = "kuzu_degraded_reason"
+        elif "what dependencies are missing" in query_text or "dependencies missing" in query_text:
+            intent = "missing_dependencies"
+        elif "what must be installed or configured" in query_text or "installed or configured" in query_text:
+            intent = "install_or_configure"
+        elif "what is still degraded" in query_text or "still degraded" in query_text:
+            intent = "still_degraded"
         elif "help" in query_text:
             intent = "help"
 
@@ -203,6 +211,14 @@ class DummieChatCli:
             response = self._cmd_polyglot(gate_decision)
         elif intent == "four_dtes":
             response = self._cmd_four_dtes(gate_decision)
+        elif intent == "kuzu_degraded_reason":
+            response = self._cmd_kuzu_degraded_reason(gate_decision)
+        elif intent == "missing_dependencies":
+            response = self._cmd_missing_dependencies(gate_decision)
+        elif intent == "install_or_configure":
+            response = self._cmd_install_or_configure(gate_decision)
+        elif intent == "still_degraded":
+            response = self._cmd_still_degraded(gate_decision)
         elif intent == "help":
             response = self._cmd_help()
         else:
@@ -685,6 +701,75 @@ class DummieChatCli:
             decision=res.get("decision", "PASS"),
             answer=answer,
             evidence_refs=[".aiwg/reports/4dtes_persistence_preflight_latest.json"],
+            context_strategy=gate.decision,
+            generated_at=self._utc_now()
+        )
+
+    def _cmd_kuzu_degraded_reason(self, gate) -> DummieChatResponse:
+        from degraded_capability_registry import run_degraded_capability_registry
+        res = run_degraded_capability_registry(aiwg_root=self.aiwg_root.parent)
+        kuzu_cap = {}
+        for c in res.get("capabilities", []):
+            if c.get("capability_id") == "kuzu_4dtes_persistence":
+                kuzu_cap = c
+                break
+        ans = f"Kùzu 4D-TES Persistence actual status is **{kuzu_cap.get('actual_status')}**.\nReason: {kuzu_cap.get('reason')}"
+        return DummieChatResponse(
+            decision=res.get("decision", "PASS"),
+            answer=ans,
+            evidence_refs=[".aiwg/reports/degraded_capability_registry_latest.json"],
+            context_strategy=gate.decision,
+            generated_at=self._utc_now()
+        )
+
+    def _cmd_missing_dependencies(self, gate) -> DummieChatResponse:
+        from runtime_dependency_auditor import run_runtime_dependency_audit
+        res = run_runtime_dependency_audit(aiwg_root=self.aiwg_root.parent)
+        missing = res.get("missing_dependencies", [])
+        if missing:
+            ans = f"The following dependencies are missing on this host environment: {', '.join(missing)}."
+        else:
+            ans = "No missing python dependencies detected! All monitored packages are successfully installed."
+        return DummieChatResponse(
+            decision=res.get("decision", "PASS"),
+            answer=ans,
+            evidence_refs=[".aiwg/reports/runtime_dependency_audit_latest.json"],
+            context_strategy=gate.decision,
+            generated_at=self._utc_now()
+        )
+
+    def _cmd_install_or_configure(self, gate) -> DummieChatResponse:
+        from runtime_closure_planner import run_runtime_closure_plan
+        res = run_runtime_closure_plan(aiwg_root=self.aiwg_root.parent)
+        actions = res.get("actions", [])
+        if actions:
+            ans = "Here is what must be installed or configured (gated actions):\n"
+            for act in actions:
+                ans += f"- **{act.get('title')}** ({act.get('action_type')}): Run: `{', '.join(act.get('commands_to_run', []))}`. Verify: `{', '.join(act.get('verification_commands', []))}`. (Requires Human Approval: {act.get('requires_human_approval')})\n"
+        else:
+            ans = "There are no pending installation or configuration actions required at this moment."
+        return DummieChatResponse(
+            decision=res.get("decision", "PASS"),
+            answer=ans,
+            evidence_refs=[".aiwg/reports/runtime_closure_plan_latest.json"],
+            context_strategy=gate.decision,
+            generated_at=self._utc_now()
+        )
+
+    def _cmd_still_degraded(self, gate) -> DummieChatResponse:
+        from degraded_capability_registry import run_degraded_capability_registry
+        res = run_degraded_capability_registry(aiwg_root=self.aiwg_root.parent)
+        degraded = [c for c in res.get("capabilities", []) if c.get("actual_status") != "READY"]
+        if degraded:
+            ans = "The following capabilities are currently degraded or simulated:\n"
+            for c in degraded:
+                ans += f"- **{c.get('name')}**: actual status is **{c.get('actual_status')}** (Claimed: {c.get('claimed_status')}). Reason: {c.get('reason')}\n"
+        else:
+            ans = "All registered capabilities are perfectly READY and fully operational!"
+        return DummieChatResponse(
+            decision=res.get("decision", "PASS"),
+            answer=ans,
+            evidence_refs=[".aiwg/reports/degraded_capability_registry_latest.json"],
             context_strategy=gate.decision,
             generated_at=self._utc_now()
         )

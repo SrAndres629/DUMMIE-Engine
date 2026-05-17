@@ -367,5 +367,14 @@
     "quality_score": 70,
     "superseded_by": "",
     "created_at": "2026-05-17T00:29:43Z"
+  },
+  {
+    "model_id": "mm-9514b213",
+    "intent_hash": "2d49faecea0b",
+    "intent": "refactor memory",
+    "status": "superseded",
+    "quality_score": 70,
+    "superseded_by": "mm-dbabda26",
+    "created_at": "2026-05-17T00:29:43Z"
   }
 ]

@@ -1,14 +1,17 @@
 {
-  "previous_heartbeat_id": "hb-7f98dc58",
+  "previous_heartbeat_id": "hb-d84d0742",
   "previous_decision": "FAIL",
-  "next_action": "increase_test_coverage",
-  "dispatch": "codex",
+  "next_action": "resolve_dependency_first",
+  "dispatch": "antigravity",
   "blocked_actions": [
+    "autonomous_execution",
+    "autonomous_runtime",
     "autonomous_scaling",
+    "graph_persistence_transaction_write",
     "quarantine_overconfident_models",
     "repair_kuzu_persistence"
   ],
   "kuzu_degraded": true,
   "quarantined_models": 4,
-  "created_at": "2026-05-17T00:29:43.811727+00:00"
+  "created_at": "2026-05-17T01:32:04.272678+00:00"
 }

@@ -1,16 +1,16 @@
 {
-  "decision": "NEEDS_HUMAN_REVIEW",
-  "intent": "refactor memory",
-  "mental_model_id": "mm-9514b213",
-  "frame_id": "frame-48ed90b0",
+  "decision": "FAIL",
+  "intent": "what is still degraded",
+  "mental_model_id": "mm-bc483c04",
+  "frame_id": "frame-efb9cb6f",
   "quality_gate": {
-    "decision": "NEEDS_HUMAN_REVIEW",
+    "decision": "FAIL",
     "quality_score": 45.0,
     "findings": [
       {
         "category": "ONTOLOGY",
         "message": "Ontology graph is empty or has zero edges",
-        "severity": "WARN"
+        "severity": "FAIL"
       },
       {
         "category": "EPISTEMIC",
@@ -26,6 +26,11 @@
         "category": "BIAS",
         "message": "Overconfidence penalty: Kuzu is DEGRADED",
         "severity": "WARN"
+      },
+      {
+        "category": "SAFETY",
+        "message": "Critical safety rejection: Ontology graph has zero edges for high-risk intent",
+        "severity": "FAIL"
       }
     ],
     "warnings": [],
@@ -38,12 +43,8 @@
     "knowns": [
       "Technical debt: None failing tests"
     ],
-    "unknowns": [
-      "Full side-effect graph of refactor"
-    ],
-    "assumptions": [
-      "Refactor target exists and is documented"
-    ],
+    "unknowns": [],
+    "assumptions": [],
     "contradictions": [
       "Kuzu claim: PASS vs Reality: DEGRADED findings in readiness report"
     ],
@@ -78,7 +79,7 @@
       {
         "id": "INTENT",
         "type": "TELEOLOGY",
-        "goal": "refactor memory"
+        "goal": "what is still degraded"
       }
     ],
     "edges": [
@@ -99,7 +100,7 @@
       "Agency"
     ],
     "teleology": {
-      "goal": "refactor memory",
+      "goal": "what is still degraded",
       "impact": "evolution"
     },
     "authority_constraints": [
@@ -113,13 +114,13 @@
     ]
   },
   "dialectical_review": {
-    "thesis": "Proceed with refactor memory to improve the system.",
-    "antithesis": "Propose delay until core regressions (Kuzu/Tests) are resolved.",
+    "thesis": "Proceed with what is still degraded to improve the system.",
+    "antithesis": "Propose immediate halt of autonomous skill synthesis to prevent catastrophic state desync. Autonomy without persistent memory is an existential safety failure.",
     "counterexamples": [
-      "Previous failed refactor attempts",
-      "Incomplete test coverage"
+      "Kuzu persistence layer is DEGRADED, meaning memory spine state cannot survive restarts.",
+      "177 missing or failing tests prevent DUMMIE from verifying regression invariants."
     ],
-    "synthesis": "Do not proceed with active refactoring until test debt is mitigated.",
+    "synthesis": "Do not proceed to autonomous skill synthesis until memory persistence and test debt are repaired.",
     "decision": "repair_first"
   },
   "evolution_delta": {
@@ -131,10 +132,10 @@
   "recommended_next_action": "repair_first",
   "next_self_improvement_action": "increase_test_coverage",
   "self_improvement_blocked_actions": [
-    "autonomous_scaling",
+    "quarantine_overconfident_models",
     "repair_kuzu_persistence",
-    "quarantine_overconfident_models"
+    "autonomous_scaling"
   ],
-  "dispatch_recommendation": "antigravity",
+  "dispatch_recommendation": "local",
   "warnings": []
 }

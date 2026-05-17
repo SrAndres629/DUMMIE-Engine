@@ -1,0 +1,84 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "RuntimeClosurePlan",
+  "type": "object",
+  "properties": {
+    "decision": {
+      "type": "string",
+      "enum": ["PASS", "PASS_WITH_WARNINGS", "FAIL"]
+    },
+    "actions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "action_id": { "type": "string" },
+          "capability_id": { "type": "string" },
+          "title": { "type": "string" },
+          "action_type": {
+            "type": "string",
+            "enum": [
+              "install_dependency",
+              "configure_path",
+              "write_integration_test",
+              "enable_adapter",
+              "repair_mapping",
+              "run_full_regression",
+              "manual_decision"
+            ]
+          },
+          "priority": {
+            "type": "string",
+            "enum": ["low", "medium", "high", "critical"]
+          },
+          "can_execute_now": { "type": "boolean" },
+          "requires_human_approval": { "type": "boolean" },
+          "commands_to_run": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "files_to_modify": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "verification_commands": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "rollback_plan": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "risk_level": {
+            "type": "string",
+            "enum": ["low", "medium", "high", "critical"]
+          },
+          "evidence_refs": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        },
+        "required": [
+          "action_id",
+          "capability_id",
+          "title",
+          "action_type",
+          "priority",
+          "can_execute_now",
+          "requires_human_approval",
+          "commands_to_run",
+          "files_to_modify",
+          "verification_commands",
+          "rollback_plan",
+          "risk_level",
+          "evidence_refs"
+        ]
+      }
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "required": ["decision", "actions", "evidence_refs"]
+}

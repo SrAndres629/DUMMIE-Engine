@@ -1,0 +1,22 @@
+{
+  "decision": "PASS",
+  "selected_strategy": "6d_context_packet",
+  "estimated_input_tokens": 78742,
+  "optimized_tokens": 1411,
+  "reduction_ratio": 55.805811481218996,
+  "evidence_preserved": true,
+  "freshness_score": 95.0,
+  "semantic_relevance_score": 100.0,
+  "authority_score": 100.0,
+  "context_quality_score": 90.0,
+  "token_efficiency_score": 100.0,
+  "warnings": [],
+  "evidence_refs": [
+    ".aiwg/reports/whole_body_scan_latest.json",
+    ".aiwg/reports/wiring_matrix_latest.json",
+    ".aiwg/reports/shadow_runtime_classification_latest.json",
+    ".aiwg/reports/readiness_score_calibration_latest.json",
+    ".aiwg/reports/token_economy_benchmark_latest.json",
+    ".aiwg/reports/6d_context_packet_latest.json"
+  ]
+}

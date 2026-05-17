@@ -1,11 +1,11 @@
 {
-  "decision": "NEEDS_HUMAN_REVIEW",
+  "decision": "FAIL",
   "quality_score": 45.0,
   "findings": [
     {
       "category": "ONTOLOGY",
       "message": "Ontology graph is empty or has zero edges",
-      "severity": "WARN"
+      "severity": "FAIL"
     },
     {
       "category": "EPISTEMIC",
@@ -21,6 +21,11 @@
       "category": "BIAS",
       "message": "Overconfidence penalty: Kuzu is DEGRADED",
       "severity": "WARN"
+    },
+    {
+      "category": "SAFETY",
+      "message": "Critical safety rejection: Ontology graph has zero edges for high-risk intent",
+      "severity": "FAIL"
     }
   ],
   "warnings": [],

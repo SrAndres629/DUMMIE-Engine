@@ -56,6 +56,10 @@ class HeartbeatOutcome:
     evidence_refs: List[str]
     created_at: str
     circulation_summary: Dict[str, Any] = field(default_factory=dict)
+    dependency_reality: Dict[str, Any] = field(default_factory=dict)
+    degraded_capabilities: Dict[str, Any] = field(default_factory=dict)
+    toolchain_probe: Dict[str, Any] = field(default_factory=dict)
+    runtime_closure_plan: Dict[str, Any] = field(default_factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         return asdict(self)
@@ -189,6 +193,31 @@ def run_heartbeat(mode: str = "observe_only", aiwg_root: Path = Path(".aiwg")) -
         ])
     except Exception as e:
         warnings.append(f"context_circulation_degraded: {e}")
+
+    # ---- STEP 1.2: ENVIRONMENT DEP AND CAPABILITY AUDIT ----
+    dependency_reality = {}
+    degraded_capabilities = {}
+    toolchain_probe = {}
+    runtime_closure_plan = {}
+    try:
+        from runtime_dependency_auditor import run_runtime_dependency_audit
+        from degraded_capability_registry import run_degraded_capability_registry
+        from environment_toolchain_probe import run_environment_toolchain_probe
+        from runtime_closure_planner import run_runtime_closure_plan
+
+        dependency_reality = run_runtime_dependency_audit(aiwg_root=aiwg_root.parent)
+        degraded_capabilities = run_degraded_capability_registry(aiwg_root=aiwg_root.parent)
+        toolchain_probe = run_environment_toolchain_probe(aiwg_root=aiwg_root.parent)
+        runtime_closure_plan = run_runtime_closure_plan(aiwg_root=aiwg_root.parent)
+
+        evidence.extend([
+            ".aiwg/reports/runtime_dependency_audit_latest.json",
+            ".aiwg/reports/degraded_capability_registry_latest.json",
+            ".aiwg/reports/environment_toolchain_probe_latest.json",
+            ".aiwg/reports/runtime_closure_plan_latest.json"
+        ])
+    except Exception as e:
+        warnings.append(f"dependency_reality_audit_failed: {e}")
 
     # ---- STEP 2: TRUTH HYGIENE ----
     try:
@@ -335,6 +364,10 @@ def run_heartbeat(mode: str = "observe_only", aiwg_root: Path = Path(".aiwg")) -
         evidence_refs=evidence,
         created_at=datetime.now(timezone.utc).isoformat(),
         circulation_summary=circulation_summary,
+        dependency_reality=dependency_reality,
+        degraded_capabilities=degraded_capabilities,
+        toolchain_probe=toolchain_probe,
+        runtime_closure_plan=runtime_closure_plan,
     )
 
     result = outcome.to_dict()

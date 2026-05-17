@@ -1,0 +1,77 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "RuntimeDependencyAudit",
+  "type": "object",
+  "properties": {
+    "decision": {
+      "type": "string",
+      "enum": ["PASS", "PASS_WITH_WARNINGS", "FAIL"]
+    },
+    "dependencies": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "status": { "type": "string" },
+          "version": { "type": ["string", "null"] }
+        },
+        "required": ["name", "status"]
+      }
+    },
+    "missing_dependencies": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "optional_missing_dependencies": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "required_missing_dependencies": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "simulated_capabilities": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "fallback_capabilities": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "dry_run_capabilities": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "ready_capabilities": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "unsafe_to_enable": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "warnings": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "required": [
+    "decision",
+    "dependencies",
+    "missing_dependencies",
+    "optional_missing_dependencies",
+    "required_missing_dependencies",
+    "simulated_capabilities",
+    "fallback_capabilities",
+    "dry_run_capabilities",
+    "ready_capabilities",
+    "unsafe_to_enable",
+    "warnings",
+    "evidence_refs"
+  ]
+}

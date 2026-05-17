@@ -1,8 +1,8 @@
-# Heartbeat hb-7f98dc58
+# Heartbeat hb-d84d0742
 
 Mode: observe_only
 Decision: FAIL
-Selected: increase_test_coverage
-Dispatch: codex
+Selected: resolve_dependency_first
+Dispatch: antigravity
 Kuzu: DEGRADED
-Warnings: 0
+Warnings: 4

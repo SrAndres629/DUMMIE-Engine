@@ -1,35 +1,65 @@
 {
-  "model_id": "mm-9514b213",
-  "intent": "refactor memory",
+  "model_id": "mm-bc483c04",
+  "intent": "what is still degraded",
   "task_type": "unknown",
   "entities": [
-    "MemoryContext",
+    "MemorySpine",
     "TechnicalDebt",
+    "EpistemicState",
+    "MissingTests",
+    "KuzuDegraded",
     "ReadinessScore",
-    "RefactorTarget"
+    "AutonomousSkillSynthesis",
+    "DialecticalReview",
+    "QualityGate"
   ],
   "relations": [
     {
-      "source": "RefactorTarget",
-      "target": "TechnicalDebt",
-      "type": "mitigates"
+      "source": "AutonomousSkillSynthesis",
+      "target": "KuzuDegraded",
+      "type": "blocked_by"
     },
     {
-      "source": "MemoryContext",
-      "target": "MemorySpine",
-      "type": "consumes"
+      "source": "AutonomousSkillSynthesis",
+      "target": "MissingTests",
+      "type": "blocked_by"
+    },
+    {
+      "source": "MemorySpine",
+      "target": "KuzuPersistence",
+      "type": "depends_on"
+    },
+    {
+      "source": "QualityGate",
+      "target": "MentalModel",
+      "type": "validates"
+    },
+    {
+      "source": "DialecticalReview",
+      "target": "Thesis",
+      "type": "challenges"
+    },
+    {
+      "source": "EpistemicState",
+      "target": "Decision",
+      "type": "constrains"
     }
   ],
   "assumptions": [
-    "Target codebase is stable enough for modification"
+    "Belief that autonomous action is safe without persistent memory spine",
+    "Assumption that zero regressions can be validated despite 177 missing tests"
   ],
   "decisions": [
-    "Audit technical debt report before execution"
+    "Postpone autonomous skill synthesis until memory persistence is repaired",
+    "Audit all code changes against strict epistemic gate"
   ],
   "risks": [
     "Memory spine DEGRADED (Kuzu persistence unavailable)"
   ],
-  "constraints": [],
+  "constraints": [
+    "No execution without persistent memory backing",
+    "Reject autonomy when safety status is FAIL"
+  ],
   "semantic_tags": [],
   "ontology_classes": [],
   "evidence_refs": [
@@ -40,23 +70,25 @@
   ],
   "confidence": 0.9,
   "contradictions": [
-    "Claim: PASS while 177 tests are missing"
+    "Autonomy requested while baseline memory spine (Kuzu) is DEGRADED",
+    "System readiness score claim of 100 with active technical test debt"
   ],
   "next_actions": [],
   "context_strategy": "ALLOW_MANIFEST_ONLY",
   "memory_refs": [],
-  "created_at": "2026-05-17T00:29:43Z",
+  "created_at": "2026-05-17T01:32:12Z",
   "quality_score": 70,
   "quality_findings": [],
   "epistemic_state_ref": "epistemic_state_latest.json",
   "dialectical_review_ref": "dialectical_review_latest.json",
   "bias_findings": [],
   "teleology": {
-    "goal": "refactor memory",
+    "goal": "what is still degraded",
     "impact_type": "architectural_integrity"
   },
   "falsification_tests": [
-    "verify refactor memory with 0 new regressions"
+    "Verify 100% test coverage before enabling full autonomy",
+    "Ensure Kuzu writes succeed consistently before running skill binder"
   ],
   "belief_revision": ""
 }

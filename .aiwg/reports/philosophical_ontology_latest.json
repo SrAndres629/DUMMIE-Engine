@@ -14,7 +14,7 @@
     {
       "id": "INTENT",
       "type": "TELEOLOGY",
-      "goal": "refactor memory"
+      "goal": "what is still degraded"
     }
   ],
   "edges": [
@@ -35,7 +35,7 @@
     "Agency"
   ],
   "teleology": {
-    "goal": "refactor memory",
+    "goal": "what is still degraded",
     "impact": "evolution"
   },
   "authority_constraints": [

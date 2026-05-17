@@ -1,44 +1,48 @@
 {
   "decision": "PASS",
   "concepts": [
-    "refactor memory"
+    "what is still degraded"
   ],
   "classes": [
-    "DEBT",
-    "MEMORY"
+    "RISK"
   ],
   "ontology_graph": {
     "nodes": [
       {
         "id": "INTENT",
-        "label": "refactor memory",
+        "label": "what is still degraded",
         "type": "INTENT"
       },
       {
-        "id": "DEBT",
-        "label": "DEBT",
+        "id": "RISK",
+        "label": "RISK",
         "type": "CLASS"
       },
       {
-        "id": "MEMORY",
-        "label": "MEMORY",
+        "id": "SAFETY",
+        "label": "SAFETY",
         "type": "CLASS"
       }
     ],
     "edges": [
       {
         "source": "INTENT",
-        "target": "DEBT",
+        "target": "RISK",
         "type": "IS_A"
       },
       {
-        "source": "INTENT",
+        "source": "SAFETY",
+        "target": "ACTION",
+        "type": "CONSTRAINS"
+      },
+      {
+        "source": "AUTONOMY",
         "target": "MEMORY",
-        "type": "IS_A"
+        "type": "BLOCKED_BY"
       }
     ]
   },
-  "timestamp": "2026-05-17T00:29:43.962197+00:00",
+  "timestamp": "2026-05-17T01:32:12.717183+00:00",
   "warnings": [
     ""
   ]

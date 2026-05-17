@@ -1,9 +1,9 @@
 {
-  "request_id": "chat_2026-05-17T00:09:51Z",
+  "request_id": "chat_2026-05-17T01:32:12Z",
   "decision": "ALLOW_MANIFEST_ONLY",
   "reason": "Defaulting to manifest-only context for unknown task types.",
   "recommended_strategy": "Load repo_intelligence_manifest.json.",
   "risk_score": 0.2,
   "evidence_refs": [],
-  "generated_at": "2026-05-17T00:09:51Z"
+  "generated_at": "2026-05-17T01:32:12Z"
 }

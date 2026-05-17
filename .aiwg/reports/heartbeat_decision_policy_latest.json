@@ -1,24 +1,25 @@
 {
   "selected_action": {
-    "action_id": "eda-aa21eebe",
-    "source_delta": "mental_model_truth_hygiene_latest.json",
-    "action_type": "increase_test_coverage",
-    "priority": "high",
-    "blocks_autonomy": true,
-    "blocks_daily_use": false,
-    "evidence_refs": [
-      ".aiwg/reports/mental_model_truth_hygiene_latest.json"
-    ],
-    "recommended_pack": "PACK_5_3",
+    "action_id": "dep-repair",
+    "action_type": "resolve_dependency_first",
+    "priority": "critical",
     "status": "proposed"
   },
-  "dispatch_recommendation": "codex",
+  "dispatch_recommendation": "antigravity",
   "blocked_actions": [
+    "autonomous_execution",
+    "autonomous_runtime",
     "autonomous_scaling",
+    "graph_persistence_transaction_write",
     "quarantine_overconfident_models",
     "repair_kuzu_persistence"
   ],
-  "reason": "Selected 'increase_test_coverage' (priority=high) from self-improvement queue. Dispatch: codex.",
-  "warnings": [],
-  "timestamp": "2026-05-17T00:29:43.736544+00:00"
+  "reason": "Required python dependencies are missing: pytest. Resolving them is critical.",
+  "warnings": [
+    "Systemic Coherence Score (51.33%) is under 60% \u2014 autonomous execution is strictly blocked.",
+    "K\u00f9zu DB 4D-TES Persistence is DEGRADED \u2014 graph-dependent actions are locked except repair.",
+    "Real semantic retrieval is not ready; memory router operates under deterministic mock projection.",
+    "Daemon background runtime is simulated \u2014 autonomous runtime claim is blocked."
+  ],
+  "timestamp": "2026-05-17T01:32:04.141718+00:00"
 }

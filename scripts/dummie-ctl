@@ -37,6 +37,10 @@ def show_help():
     print("  4dtes-preflight        Verify Kùzu/memory spine schema readiness checks")
     print("  daemon-gateway-bridge  Formulate gateway safe-dispatch contract packages")
     print("  polyglot-probe         Compile multi-language file extension manifest")
+    print("  dependency-audit       Inspect Python package import diagnostic data structure")
+    print("  degraded-capabilities  Consolidate central capability status mappings")
+    print("  toolchain-probe        Query host multi-language command probes")
+    print("  runtime-closure-plan   Generate human-approval gated closure action plans")
     print("  help                   Show this help")
 
 def main():
@@ -94,6 +98,14 @@ def main():
         run_python("layers/l2_brain/cli_control_plane.py", ["daemon-gateway-bridge"])
     elif cmd == "polyglot-probe":
         run_python("layers/l2_brain/cli_control_plane.py", ["polyglot-probe"])
+    elif cmd == "dependency-audit":
+        run_python("layers/l2_brain/cli_control_plane.py", ["dependency-audit"])
+    elif cmd == "degraded-capabilities":
+        run_python("layers/l2_brain/cli_control_plane.py", ["degraded-capabilities"])
+    elif cmd == "toolchain-probe":
+        run_python("layers/l2_brain/cli_control_plane.py", ["toolchain-probe"])
+    elif cmd == "runtime-closure-plan":
+        run_python("layers/l2_brain/cli_control_plane.py", ["runtime-closure-plan"])
     elif cmd == "help":
         show_help()
     else:

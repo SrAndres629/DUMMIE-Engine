@@ -1,0 +1,19 @@
+{
+  "spec_id": "181_runtime_closure_planner",
+  "title": "Runtime Closure Planner Rules",
+  "invariants": {
+    "supported_action_types": [
+      "install_dependency",
+      "configure_path",
+      "write_integration_test",
+      "enable_adapter",
+      "repair_mapping",
+      "run_full_regression",
+      "manual_decision"
+    ]
+  },
+  "gates": {
+    "auto_install_block_gate": "install_dependency action types must have can_execute_now set to false.",
+    "human_approval_gate": "install_dependency action types must have requires_human_approval set to true."
+  }
+}

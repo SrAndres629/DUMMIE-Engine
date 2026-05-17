@@ -1,0 +1,40 @@
+{
+  "decision": "PASS",
+  "daemon_status": "INVOCATION_ONLY",
+  "gateway_status": "MAPPED",
+  "dispatch_envelope": {
+    "dispatch_id": "0d1407eb-0520-4ac4-a538-346a6a8624e0",
+    "selected_action": {
+      "action_id": "eda-aa21eebe",
+      "source_delta": "mental_model_truth_hygiene_latest.json",
+      "action_type": "increase_test_coverage",
+      "priority": "high",
+      "blocks_autonomy": true,
+      "blocks_daily_use": false,
+      "evidence_refs": [
+        ".aiwg/reports/mental_model_truth_hygiene_latest.json"
+      ],
+      "recommended_pack": "PACK_5_3",
+      "status": "proposed"
+    },
+    "target": "human_review",
+    "mode": "repair_planning",
+    "context_packet_ref": "069e6497-fc0d-4356-968c-efd4c1e27be5",
+    "memory_refs": [
+      ".aiwg/reports/memory_spine_entrypoint_latest.json"
+    ],
+    "safety_constraints": [
+      "no_unauthorized_execution",
+      "no_network_connections",
+      "sandbox_only"
+    ],
+    "requires_human_approval": true,
+    "can_execute_now": false,
+    "reason": "System action requires explicit human verification for intent: \"heartbeat loop observation\""
+  },
+  "warnings": [],
+  "evidence_refs": [
+    ".aiwg/reports/6d_context_packet_latest.json",
+    ".aiwg/reports/heartbeat_latest.json"
+  ]
+}

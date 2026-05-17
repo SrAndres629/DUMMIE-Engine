@@ -1,8 +1,8 @@
 {
-  "decision": "PASS",
-  "answer": "Next improvement: increase_test_coverage. Blocked actions: quarantine_overconfident_models, autonomous_scaling, repair_kuzu_persistence.",
+  "decision": "PASS_WITH_WARNINGS",
+  "answer": "The following capabilities are currently degraded or simulated:\n- **K\u00f9zu DB 4D-TES Persistence**: actual status is **SIMULATED** (Claimed: READY). Reason: K\u00f9zu library is not installed on this host environment. Falling back to logically simulated memory.\n- **Real Semantic Vector Embeddings**: actual status is **FALLBACK** (Claimed: READY). Reason: External upstream embedding APIs are disabled. Local SHA256 deterministic mock routing is active.\n- **Daemon Persistent Background Supervisor**: actual status is **SIMULATED** (Claimed: READY). Reason: Sovereign background daemon loop is disabled. Operational lifecycle is invocation-only.\n- **MCP Gateway Active Dispatcher**: actual status is **DRY_RUN_ONLY** (Claimed: READY). Reason: Daemon Gateway is invocation-only and enforces absolute manual review constraints.\n- **Polyglot Language Build & Test Orchestration**: actual status is **FALLBACK** (Claimed: READY). Reason: Language Probes detect languages but do not execute active builds or test runtimes dynamically.\n- **Upstream Token Usage Telemetry**: actual status is **FALLBACK** (Claimed: READY). Reason: Token Cost Ledger compiles static estimates rather than connecting to active provider usage counters.\n- **Comprehensive Codebase Regression Testing**: actual status is **DEGRADED** (Claimed: READY). Reason: Missing or orphan tests exist; the full regression run is not fully automated under single invoke.\n- **Dynamic Shadow Module Resolution**: actual status is **SIMULATED** (Claimed: READY). Reason: Shadow modules are classified but not actively cleaned, archived, or resolved.\n- **Active Spec and Runtime Validation**: actual status is **DEGRADED** (Claimed: READY). Reason: Spec validations fail due to physical evidence files that do not exist dynamically.\n- **Physical upstream token measurement**: actual status is **FALLBACK** (Claimed: READY). Reason: Tokenizer uses simplified string-based cost models rather than active tiktoken/model libraries.\n",
   "evidence_refs": [
-    ".aiwg/reports/self_improvement_action_queue.json"
+    ".aiwg/reports/degraded_capability_registry_latest.json"
   ],
   "recommended_next_actions": [],
   "context_strategy": "ALLOW_MANIFEST_ONLY",
@@ -11,7 +11,7 @@
   ],
   "memory_spine": {
     "decision": "PASS_WITH_WARNINGS",
-    "query": "what_should_improve",
+    "query": "still_degraded",
     "status": "DEGRADED_WITH_FILE_BACKED_MEMORY",
     "memory_refs": [],
     "learning_episode_refs": [],
@@ -22,24 +22,71 @@
       "Kuzu DEGRADED. Falling back to file-backed session memory scan."
     ],
     "evidence_refs": [],
-    "generated_at": "2026-05-17T00:09:51Z"
+    "generated_at": "2026-05-17T01:32:12Z"
   },
   "memory_spine_used": true,
   "mental_model": {
-    "model_id": "mm-ebe4338e",
-    "intent": "what should improve next?",
+    "model_id": "mm-bc483c04",
+    "intent": "what is still degraded",
     "task_type": "unknown",
     "entities": [
+      "MemorySpine",
+      "TechnicalDebt",
+      "EpistemicState",
+      "MissingTests",
+      "KuzuDegraded",
       "ReadinessScore",
-      "TechnicalDebt"
+      "AutonomousSkillSynthesis",
+      "DialecticalReview",
+      "QualityGate"
     ],
-    "relations": [],
-    "assumptions": [],
-    "decisions": [],
+    "relations": [
+      {
+        "source": "AutonomousSkillSynthesis",
+        "target": "KuzuDegraded",
+        "type": "blocked_by"
+      },
+      {
+        "source": "AutonomousSkillSynthesis",
+        "target": "MissingTests",
+        "type": "blocked_by"
+      },
+      {
+        "source": "MemorySpine",
+        "target": "KuzuPersistence",
+        "type": "depends_on"
+      },
+      {
+        "source": "QualityGate",
+        "target": "MentalModel",
+        "type": "validates"
+      },
+      {
+        "source": "DialecticalReview",
+        "target": "Thesis",
+        "type": "challenges"
+      },
+      {
+        "source": "EpistemicState",
+        "target": "Decision",
+        "type": "constrains"
+      }
+    ],
+    "assumptions": [
+      "Belief that autonomous action is safe without persistent memory spine",
+      "Assumption that zero regressions can be validated despite 177 missing tests"
+    ],
+    "decisions": [
+      "Postpone autonomous skill synthesis until memory persistence is repaired",
+      "Audit all code changes against strict epistemic gate"
+    ],
     "risks": [
       "Memory spine DEGRADED (Kuzu persistence unavailable)"
     ],
-    "constraints": [],
+    "constraints": [
+      "No execution without persistent memory backing",
+      "Reject autonomy when safety status is FAIL"
+    ],
     "semantic_tags": [],
     "ontology_classes": [],
     "evidence_refs": [
@@ -49,28 +96,32 @@
       ".aiwg/reports/memory_spine_entrypoint_latest.json"
     ],
     "confidence": 0.9,
-    "contradictions": [],
+    "contradictions": [
+      "Autonomy requested while baseline memory spine (Kuzu) is DEGRADED",
+      "System readiness score claim of 100 with active technical test debt"
+    ],
     "next_actions": [],
     "context_strategy": "ALLOW_MANIFEST_ONLY",
     "memory_refs": [],
-    "created_at": "2026-05-17T00:09:51Z",
+    "created_at": "2026-05-17T01:32:12Z",
     "quality_score": 70,
     "quality_findings": [],
     "epistemic_state_ref": "epistemic_state_latest.json",
     "dialectical_review_ref": "dialectical_review_latest.json",
     "bias_findings": [],
     "teleology": {
-      "goal": "what should improve next?",
+      "goal": "what is still degraded",
       "impact_type": "architectural_integrity"
     },
     "falsification_tests": [
-      "verify what should improve next? with 0 new regressions"
+      "Verify 100% test coverage before enabling full autonomy",
+      "Ensure Kuzu writes succeed consistently before running skill binder"
     ],
     "belief_revision": ""
   },
   "cognitive_frame": {
-    "frame_id": "frame-b2d60979",
-    "intent": "what should improve next?",
+    "frame_id": "frame-efb9cb6f",
+    "intent": "what is still degraded",
     "operating_mode": "answer",
     "must_preserve": [
       "current_phase",
@@ -83,11 +134,11 @@
       "private_chain_of_thought"
     ],
     "mental_model_refs": [
-      "mm-ebe4338e"
+      "mm-bc483c04"
     ],
     "memory_refs": [],
     "ontology_refs": [
-      "UNKNOWN"
+      "RISK"
     ],
     "evidence_refs": [
       ".aiwg/reports/test_debt_triage_latest.json",
@@ -102,26 +153,21 @@
       "Memory spine DEGRADED (Kuzu persistence unavailable)"
     ],
     "next_actions": [],
-    "created_at": "2026-05-17T00:09:51.077628+00:00"
+    "created_at": "2026-05-17T01:32:12.717203+00:00"
   },
   "metacognitive_loop": {
     "decision": "FAIL",
-    "intent": "what should improve next?",
-    "mental_model_id": "mm-ebe4338e",
-    "frame_id": "frame-b2d60979",
+    "intent": "what is still degraded",
+    "mental_model_id": "mm-bc483c04",
+    "frame_id": "frame-efb9cb6f",
     "quality_gate": {
       "decision": "FAIL",
-      "quality_score": 25.0,
+      "quality_score": 45.0,
       "findings": [
-        {
-          "category": "MODEL",
-          "message": "No relations extracted",
-          "severity": "WARN"
-        },
         {
           "category": "ONTOLOGY",
           "message": "Ontology graph is empty or has zero edges",
-          "severity": "WARN"
+          "severity": "FAIL"
         },
         {
           "category": "EPISTEMIC",
@@ -137,6 +183,11 @@
           "category": "BIAS",
           "message": "Overconfidence penalty: Kuzu is DEGRADED",
           "severity": "WARN"
+        },
+        {
+          "category": "SAFETY",
+          "message": "Critical safety rejection: Ontology graph has zero edges for high-risk intent",
+          "severity": "FAIL"
         }
       ],
       "warnings": [],
@@ -185,7 +236,7 @@
         {
           "id": "INTENT",
           "type": "TELEOLOGY",
-          "goal": "what should improve next?"
+          "goal": "what is still degraded"
         }
       ],
       "edges": [
@@ -206,7 +257,7 @@
         "Agency"
       ],
       "teleology": {
-        "goal": "what should improve next?",
+        "goal": "what is still degraded",
         "impact": "evolution"
       },
       "authority_constraints": [
@@ -220,14 +271,14 @@
       ]
     },
     "dialectical_review": {
-      "thesis": "Proceed with what should improve next? to improve the system.",
-      "antithesis": "Propose delay until core regressions (Kuzu/Tests) are resolved.",
+      "thesis": "Proceed with what is still degraded to improve the system.",
+      "antithesis": "Propose immediate halt of autonomous skill synthesis to prevent catastrophic state desync. Autonomy without persistent memory is an existential safety failure.",
       "counterexamples": [
-        "Previous failed refactor attempts",
-        "Incomplete test coverage"
+        "Kuzu persistence layer is DEGRADED, meaning memory spine state cannot survive restarts.",
+        "177 missing or failing tests prevent DUMMIE from verifying regression invariants."
       ],
-      "synthesis": "Proceed with caution using local mock-fallback; prioritize test repair first.",
-      "decision": "proceed"
+      "synthesis": "Do not proceed to autonomous skill synthesis until memory persistence and test debt are repaired.",
+      "decision": "repair_first"
     },
     "evolution_delta": {
       "belief_changed": "From 'System is ready' to 'System has epistemic debt'",
@@ -235,7 +286,7 @@
       "revision_type": "humility_calibration",
       "next_check_recommended": "repair_kuzu_persistence"
     },
-    "recommended_next_action": "request_clarification",
+    "recommended_next_action": "repair_first",
     "next_self_improvement_action": "increase_test_coverage",
     "self_improvement_blocked_actions": [
       "quarantine_overconfident_models",
@@ -247,17 +298,12 @@
   },
   "quality_gate": {
     "decision": "FAIL",
-    "quality_score": 25.0,
+    "quality_score": 45.0,
     "findings": [
-      {
-        "category": "MODEL",
-        "message": "No relations extracted",
-        "severity": "WARN"
-      },
       {
         "category": "ONTOLOGY",
         "message": "Ontology graph is empty or has zero edges",
-        "severity": "WARN"
+        "severity": "FAIL"
       },
       {
         "category": "EPISTEMIC",
@@ -273,6 +319,11 @@
         "category": "BIAS",
         "message": "Overconfidence penalty: Kuzu is DEGRADED",
         "severity": "WARN"
+      },
+      {
+        "category": "SAFETY",
+        "message": "Critical safety rejection: Ontology graph has zero edges for high-risk intent",
+        "severity": "FAIL"
       }
     ],
     "warnings": [],
@@ -306,14 +357,14 @@
     "findings": []
   },
   "dialectic": {
-    "thesis": "Proceed with what should improve next? to improve the system.",
-    "antithesis": "Propose delay until core regressions (Kuzu/Tests) are resolved.",
+    "thesis": "Proceed with what is still degraded to improve the system.",
+    "antithesis": "Propose immediate halt of autonomous skill synthesis to prevent catastrophic state desync. Autonomy without persistent memory is an existential safety failure.",
     "counterexamples": [
-      "Previous failed refactor attempts",
-      "Incomplete test coverage"
+      "Kuzu persistence layer is DEGRADED, meaning memory spine state cannot survive restarts.",
+      "177 missing or failing tests prevent DUMMIE from verifying regression invariants."
     ],
-    "synthesis": "Proceed with caution using local mock-fallback; prioritize test repair first.",
-    "decision": "proceed"
+    "synthesis": "Do not proceed to autonomous skill synthesis until memory persistence and test debt are repaired.",
+    "decision": "repair_first"
   },
   "evolution_delta": {
     "belief_changed": "From 'System is ready' to 'System has epistemic debt'",
@@ -321,5 +372,5 @@
     "revision_type": "humility_calibration",
     "next_check_recommended": "repair_kuzu_persistence"
   },
-  "generated_at": "2026-05-17T00:09:51Z"
+  "generated_at": "2026-05-17T01:32:12Z"
 }

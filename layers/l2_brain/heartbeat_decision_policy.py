@@ -1,7 +1,7 @@
-"""Heartbeat Decision Policy — HEARTBEAT-0
+"""Heartbeat Decision Policy — HEARTBEAT-2.1
 
 Selects the next action from the self-improvement queue, classifies
-dispatch target, and enforces safety blockers.  Never executes mutations.
+dispatch target, and enforces safety blockers. Never executes mutations.
 """
 
 import json
@@ -48,6 +48,7 @@ _DISPATCH_MAP = {
     "repair_scanner":                "antigravity",
     "build_wiring_matrix":           "local",
     "classify_shadow_modules":       "local",
+    "resolve_dependency_first":      "antigravity",
 }
 
 
@@ -63,14 +64,14 @@ def select_next_action(aiwg_root: Path = Path(".aiwg")) -> HeartbeatDecisionPoli
     reports = aiwg_root / "reports"
 
     queue = _load(reports / "self_improvement_action_queue.json")
-    delta = _load(reports / "evolution_delta_application_latest.json")
-    hygiene = _load(reports / "mental_model_truth_hygiene_latest.json")
     readiness = _load(reports / "readiness_score_calibration_latest.json")
-
-    calibration = _load(reports / "whole_body_scan_calibration_latest.json")
-    wiring = _load(reports / "wiring_matrix_latest.json")
-    shadow = _load(reports / "shadow_runtime_classification_latest.json")
     scan_latest = _load(reports / "whole_body_scan_latest.json")
+
+    # Load 2.1 reality audit structures
+    audit = _load(reports / "runtime_dependency_audit_latest.json")
+    registry = _load(reports / "degraded_capability_registry_latest.json")
+    tools = _load(reports / "environment_toolchain_probe_latest.json")
+    closure = _load(reports / "runtime_closure_plan_latest.json")
 
     actions = queue.get("actions", [])
     blocked_types = set(queue.get("blocked", []))
@@ -86,37 +87,58 @@ def select_next_action(aiwg_root: Path = Path(".aiwg")) -> HeartbeatDecisionPoli
         blocked_types.add("autonomous_execution")
         warnings.append(f"Systemic Coherence Score ({coherence_score}%) is under 60% — autonomous execution is strictly blocked.")
 
+    # 1. Check Kùzu database status
+    kuzu_cap = {}
+    for c in registry.get("capabilities", []):
+        if c.get("capability_id") == "kuzu_4dtes_persistence":
+            kuzu_cap = c
+            break
+
+    kuzu_degraded = kuzu_cap.get("actual_status", "DEGRADED") in ("DEGRADED", "SIMULATED", "MISSING")
+    
+    if kuzu_degraded:
+        # Enforce that if Kuzu is degraded, we block any action that relies on graph persistence, except repair
+        blocked_types.add("graph_persistence_transaction_write")
+        warnings.append("Kùzu DB 4D-TES Persistence is DEGRADED — graph-dependent actions are locked except repair.")
+
+    # 2. Check Embeddings status
+    embed_cap = {}
+    for c in registry.get("capabilities", []):
+        if c.get("capability_id") == "real_semantic_embeddings":
+            embed_cap = c
+            break
+
+    if embed_cap.get("actual_status") == "FALLBACK":
+        warnings.append("Real semantic retrieval is not ready; memory router operates under deterministic mock projection.")
+
+    # 3. Check Daemon status
+    daemon_cap = {}
+    for c in registry.get("capabilities", []):
+        if c.get("capability_id") == "daemon_persistent_runtime":
+            daemon_cap = c
+            break
+
+    if daemon_cap.get("actual_status") == "SIMULATED":
+        blocked_types.add("autonomous_runtime")
+        warnings.append("Daemon background runtime is simulated — autonomous runtime claim is blocked.")
+
+    # 4. Check Polyglot status
+    missing_toolchains = tools.get("missing_toolchains", [])
+    if missing_toolchains:
+        warnings.append(f"Optional polyglot toolchains are missing: {', '.join(missing_toolchains)} — full operational readiness is disabled.")
+
     # Apply strict priority gates before queue evaluation
-    # Rule 1: Scanner Calibration failures
-    if not calibration or calibration.get("decision") == "FAIL":
+    # Rule 1: Missing core python libraries
+    required_missing = audit.get("required_missing_dependencies", [])
+    if required_missing:
         selected = {
-            "action_id": "cal-repair",
-            "action_type": "repair_scanner",
+            "action_id": "dep-repair",
+            "action_type": "resolve_dependency_first",
             "priority": "critical",
             "status": "proposed"
         }
         dispatch = "antigravity"
-        reason = "Scanner calibration has FAILED. Repairing the AST/Whole-Body scanner is critical."
-    # Rule 2: Wiring Matrix Builder failures
-    elif not wiring or wiring.get("decision") == "FAIL":
-        selected = {
-            "action_id": "wir-build",
-            "action_type": "build_wiring_matrix",
-            "priority": "critical",
-            "status": "proposed"
-        }
-        dispatch = "local"
-        reason = "Wiring matrix is incomplete or has FAILED. Re-generating the graph is required."
-    # Rule 3: Shadow Runtime Classifier failures
-    elif not shadow or shadow.get("decision") == "FAIL":
-        selected = {
-            "action_id": "sha-classify",
-            "action_type": "classify_shadow_modules",
-            "priority": "critical",
-            "status": "proposed"
-        }
-        dispatch = "local"
-        reason = "Shadow module classification is incomplete or has FAILED. Non-destructive classification is required."
+        reason = f"Required python dependencies are missing: {', '.join(required_missing)}. Resolving them is critical."
     else:
         # Priority order: critical > high > medium > low
         priority_rank = {"critical": 0, "high": 1, "medium": 2, "low": 3}
@@ -140,9 +162,6 @@ def select_next_action(aiwg_root: Path = Path(".aiwg")) -> HeartbeatDecisionPoli
         action_type = selected.get("action_type", "unknown")
         dispatch = classify_dispatch(action_type)
 
-        # Extra safety: if Kuzu required and DEGRADED, force human_review
-        kuzu_degraded = any("degraded" in f.get("id", "").lower() or "degraded" in f.get("description", "").lower()
-                            for f in readiness.get("findings", []))
         if kuzu_degraded and action_type in ("repair_kuzu_persistence",):
             dispatch = "antigravity"
             warnings.append("Kuzu DEGRADED — repair requires implementation plan + human approval")
@@ -163,7 +182,7 @@ def select_next_action(aiwg_root: Path = Path(".aiwg")) -> HeartbeatDecisionPoli
         json.dumps(result.to_dict(), indent=2), encoding="utf-8")
     (reports / "heartbeat_decision_policy_latest.md").write_text(
         f"# Heartbeat Decision Policy\n\n"
-        f"Selected: {action_type}\n"
+        f"Selected: {selected.get('action_type', 'unknown')}\n"
         f"Dispatch: {dispatch}\n"
         f"Blocked: {', '.join(sorted(blocked_types))}\n"
         f"Reason: {reason}\n",

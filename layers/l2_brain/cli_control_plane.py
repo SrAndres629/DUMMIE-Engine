@@ -151,6 +151,11 @@ class CliControlPlane:
             "daemon-gateway-bridge": self._cmd_daemon_gateway_bridge,
             "polyglot-probe": self._cmd_polyglot_probe,
             "context-circulation": self._cmd_context_circulation,
+            # Heartbeat-2.1
+            "dependency-audit": self._cmd_dependency_audit,
+            "degraded-capabilities": self._cmd_degraded_capabilities,
+            "toolchain-probe": self._cmd_toolchain_probe,
+            "runtime-closure-plan": self._cmd_runtime_closure_plan,
         }
 
 
@@ -719,6 +724,43 @@ class CliControlPlane:
                                  ],
                                  generated_at=self._utc_now())
 
+    def _cmd_scan_calibration(self) -> CliCommandResult:
+        from whole_body_scan_calibrator import run_whole_body_scan_calibration
+        res = run_whole_body_scan_calibration()
+        return CliCommandResult("scan-calibration", "PASS", res,
+                                 evidence_refs=[
+                                     ".aiwg/reports/whole_body_scan_calibration_latest.json",
+                                     ".aiwg/reports/whole_body_scan_calibration_latest.md"
+                                 ],
+                                 generated_at=self._utc_now())
+
+    def _cmd_wiring_matrix(self) -> CliCommandResult:
+        from wiring_matrix_builder import run_wiring_matrix_builder
+        res = run_wiring_matrix_builder()
+        return CliCommandResult("wiring-matrix", "PASS", res,
+                                 evidence_refs=[
+                                     ".aiwg/reports/wiring_matrix_latest.json",
+                                     ".aiwg/reports/wiring_matrix_latest.md"
+                                 ],
+                                 generated_at=self._utc_now())
+
+    def _cmd_shadow_runtime(self) -> CliCommandResult:
+        from shadow_runtime_classifier import run_shadow_runtime_classifier
+        res = run_shadow_runtime_classifier()
+        return CliCommandResult("shadow-runtime", "PASS", res,
+                                 evidence_refs=[
+                                     ".aiwg/reports/shadow_runtime_classification_latest.json",
+                                     ".aiwg/reports/shadow_runtime_classification_latest.md"
+                                 ],
+                                 generated_at=self._utc_now())
+
+    def _cmd_systemic_coherence(self) -> CliCommandResult:
+        scan_latest = self._load_json(self.reports_root / "whole_body_scan_latest.json")
+        score = scan_latest.get("overall_coherence_score", 0.0)
+        return CliCommandResult("systemic-coherence", "PASS", {"score": score},
+                                 evidence_refs=[".aiwg/reports/whole_body_scan_latest.json"],
+                                 generated_at=self._utc_now())
+
     def _cmd_six_d_context(self) -> CliCommandResult:
         from six_dimensional_context_runtime import build_6d_context_packet
         res = build_6d_context_packet(intent="repair kuzu", aiwg_root=self.aiwg_root.parent)
@@ -836,6 +878,46 @@ class CliControlPlane:
                 evidence_refs=[path.as_posix()],
                 generated_at=self._utc_now(),
             )
+
+    def _cmd_dependency_audit(self) -> CliCommandResult:
+        from runtime_dependency_auditor import run_runtime_dependency_audit
+        res = run_runtime_dependency_audit(aiwg_root=self.aiwg_root.parent)
+        return CliCommandResult("dependency-audit", res.get("decision", "PASS"), res,
+                                 evidence_refs=[
+                                     ".aiwg/reports/runtime_dependency_audit_latest.json",
+                                     ".aiwg/reports/runtime_dependency_audit_latest.md"
+                                 ],
+                                 generated_at=self._utc_now())
+
+    def _cmd_degraded_capabilities(self) -> CliCommandResult:
+        from degraded_capability_registry import run_degraded_capability_registry
+        res = run_degraded_capability_registry(aiwg_root=self.aiwg_root.parent)
+        return CliCommandResult("degraded-capabilities", res.get("decision", "PASS"), res,
+                                 evidence_refs=[
+                                     ".aiwg/reports/degraded_capability_registry_latest.json",
+                                     ".aiwg/reports/degraded_capability_registry_latest.md"
+                                 ],
+                                 generated_at=self._utc_now())
+
+    def _cmd_toolchain_probe(self) -> CliCommandResult:
+        from environment_toolchain_probe import run_environment_toolchain_probe
+        res = run_environment_toolchain_probe(aiwg_root=self.aiwg_root.parent)
+        return CliCommandResult("toolchain-probe", res.get("decision", "PASS"), res,
+                                 evidence_refs=[
+                                     ".aiwg/reports/environment_toolchain_probe_latest.json",
+                                     ".aiwg/reports/environment_toolchain_probe_latest.md"
+                                 ],
+                                 generated_at=self._utc_now())
+
+    def _cmd_runtime_closure_plan(self) -> CliCommandResult:
+        from runtime_closure_planner import run_runtime_closure_plan
+        res = run_runtime_closure_plan(aiwg_root=self.aiwg_root.parent)
+        return CliCommandResult("runtime-closure-plan", res.get("decision", "PASS"), res,
+                                 evidence_refs=[
+                                     ".aiwg/reports/runtime_closure_plan_latest.json",
+                                     ".aiwg/reports/runtime_closure_plan_latest.md"
+                                 ],
+                                 generated_at=self._utc_now())
 
     def _write_latest(self, result: CliCommandResult) -> None:
         self.reports_root.mkdir(parents=True, exist_ok=True)

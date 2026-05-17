@@ -1,0 +1,71 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DegradedCapabilityRegistry",
+  "type": "object",
+  "properties": {
+    "decision": {
+      "type": "string",
+      "enum": ["PASS", "PASS_WITH_WARNINGS", "FAIL"]
+    },
+    "capabilities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "capability_id": { "type": "string" },
+          "name": { "type": "string" },
+          "claimed_status": { "type": "string" },
+          "actual_status": {
+            "type": "string",
+            "enum": ["READY", "DEGRADED", "SIMULATED", "DRY_RUN_ONLY", "FALLBACK", "MISSING", "UNKNOWN"]
+          },
+          "reason": { "type": "string" },
+          "required_dependencies": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "required_config": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "required_verification": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "blocks": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "safe_repair_possible_now": { "type": "boolean" },
+          "risk_level": {
+            "type": "string",
+            "enum": ["low", "medium", "high", "critical"]
+          },
+          "evidence_refs": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        },
+        "required": [
+          "capability_id",
+          "name",
+          "claimed_status",
+          "actual_status",
+          "reason",
+          "required_dependencies",
+          "required_config",
+          "required_verification",
+          "blocks",
+          "safe_repair_possible_now",
+          "risk_level",
+          "evidence_refs"
+        ]
+      }
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "required": ["decision", "capabilities", "evidence_refs"]
+}

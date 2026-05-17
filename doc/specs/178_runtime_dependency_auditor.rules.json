@@ -1,0 +1,12 @@
+{
+  "spec_id": "178_runtime_dependency_auditor",
+  "title": "Runtime Dependency Auditor Rules",
+  "invariants": {
+    "monitored_imports": ["kuzu", "pytest", "yaml", "networkx", "numpy", "pydantic", "fastapi", "typer", "rich", "click"],
+    "allowed_modes": ["READY", "DEGRADED", "SIMULATED", "DRY_RUN_ONLY", "FALLBACK", "MISSING", "UNKNOWN"]
+  },
+  "gates": {
+    "safety_enforce_gate": "Installing python packages during auditing is strictly prohibited.",
+    "kuzu_import_gate": "If import kuzu fails, kuzu capability must be marked as DEGRADED or MISSING."
+  }
+}

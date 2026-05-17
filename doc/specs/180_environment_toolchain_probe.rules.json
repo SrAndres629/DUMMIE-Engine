@@ -1,0 +1,20 @@
+{
+  "spec_id": "180_environment_toolchain_probe",
+  "title": "Environment Toolchain Probe Rules",
+  "invariants": {
+    "safe_commands": {
+      "python3": ["python3", "--version"],
+      "go": ["go", "version"],
+      "rustc": ["rustc", "--version"],
+      "cargo": ["cargo", "--version"],
+      "elixir": ["elixir", "--version"],
+      "node": ["node", "--version"],
+      "npm": ["npm", "--version"],
+      "protoc": ["protoc", "--version"]
+    },
+    "timeout_ms": 3000
+  },
+  "gates": {
+    "no_destruct_commands_gate": "Only read-only safe version queries are allowed to run."
+  }
+}

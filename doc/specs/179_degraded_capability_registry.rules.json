@@ -1,0 +1,17 @@
+{
+  "spec_id": "179_degraded_capability_registry",
+  "title": "Degraded Capability Registry Rules",
+  "invariants": {
+    "required_capability_ids": [
+      "kuzu_4dtes_persistence",
+      "real_semantic_embeddings",
+      "daemon_persistent_runtime",
+      "gateway_live_dispatch",
+      "polyglot_build_test_runtime",
+      "token_usage_measurement"
+    ]
+  },
+  "gates": {
+    "degradation_downgrade_gate": "If any dependency or preflight check flags a module as degraded, actual_status must not be READY."
+  }
+}

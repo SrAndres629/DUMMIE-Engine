@@ -1,9 +1,9 @@
 {
   "decision": "PASS_WITH_WARNINGS",
-  "models_scanned": 41,
+  "models_scanned": 42,
   "valid_count": 13,
   "stale_count": 5,
-  "superseded_count": 11,
+  "superseded_count": 12,
   "quarantined_count": 4,
   "unsafe_rejected_count": 0,
   "needs_review_count": 8,
@@ -413,6 +413,13 @@
       "message": "No decisions for planning intent: heartbeat: what is the current system state and next safe ac",
       "severity": "WARN",
       "recommended_status": "needs_review"
+    },
+    {
+      "model_id": "mm-9514b213",
+      "finding_type": "duplicate_model",
+      "message": "Superseded by mm-dbabda26 with higher quality for same intent",
+      "severity": "WARN",
+      "recommended_status": "superseded"
     }
   ],
   "decisions": [
@@ -702,18 +709,25 @@
       "new_status": "valid",
       "reason": "No issues found",
       "superseded_by": ""
+    },
+    {
+      "model_id": "mm-9514b213",
+      "previous_status": "valid",
+      "new_status": "superseded",
+      "reason": "Superseded by mm-dbabda26 with higher quality for same intent",
+      "superseded_by": "mm-dbabda26"
     }
   ],
   "summary": {
-    "models_scanned": 41,
+    "models_scanned": 42,
     "valid_count": 13,
     "stale_count": 5,
-    "superseded_count": 11,
+    "superseded_count": 12,
     "quarantined_count": 4,
     "unsafe_rejected_count": 0,
     "needs_review_count": 8,
     "overconfidence_count": 4,
     "kuzu_degraded": true
   },
-  "timestamp": "2026-05-17T00:29:43.942701+00:00"
+  "timestamp": "2026-05-17T01:32:04.127804+00:00"
 }

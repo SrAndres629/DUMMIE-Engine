@@ -804,9 +804,71 @@
   },
   "mm-9514b213": {
     "path": ".aiwg/mental_models/runtime_models.jsonl",
-    "status": "valid",
+    "status": "superseded",
     "quality_score": 70,
     "created_at": "2026-05-17T00:29:43Z",
+    "intent_hash": "2d49faecea0b",
+    "superseded_by": "mm-dbabda26",
+    "hygiene_findings": [
+      {
+        "model_id": "mm-9514b213",
+        "finding_type": "duplicate_model",
+        "message": "Superseded by mm-dbabda26 with higher quality for same intent",
+        "severity": "WARN",
+        "recommended_status": "superseded"
+      }
+    ]
+  },
+  "mm-3d1474eb": {
+    "path": ".aiwg/mental_models/runtime_models.jsonl",
+    "status": "valid",
+    "quality_score": 70,
+    "created_at": "2026-05-17T01:32:04Z",
+    "intent_hash": "",
+    "superseded_by": "",
+    "hygiene_findings": []
+  },
+  "mm-d651c0b8": {
+    "path": ".aiwg/mental_models/runtime_models.jsonl",
+    "status": "valid",
+    "quality_score": 70,
+    "created_at": "2026-05-17T01:32:06Z",
+    "intent_hash": "",
+    "superseded_by": "",
+    "hygiene_findings": []
+  },
+  "mm-3b835a70": {
+    "path": ".aiwg/mental_models/runtime_models.jsonl",
+    "status": "valid",
+    "quality_score": 70,
+    "created_at": "2026-05-17T01:32:09Z",
+    "intent_hash": "",
+    "superseded_by": "",
+    "hygiene_findings": []
+  },
+  "mm-11dee8e5": {
+    "path": ".aiwg/mental_models/runtime_models.jsonl",
+    "status": "valid",
+    "quality_score": 70,
+    "created_at": "2026-05-17T01:32:12Z",
+    "intent_hash": "",
+    "superseded_by": "",
+    "hygiene_findings": []
+  },
+  "mm-52c0c2d9": {
+    "path": ".aiwg/mental_models/runtime_models.jsonl",
+    "status": "valid",
+    "quality_score": 70,
+    "created_at": "2026-05-17T01:32:12Z",
+    "intent_hash": "",
+    "superseded_by": "",
+    "hygiene_findings": []
+  },
+  "mm-bc483c04": {
+    "path": ".aiwg/mental_models/runtime_models.jsonl",
+    "status": "valid",
+    "quality_score": 70,
+    "created_at": "2026-05-17T01:32:12Z",
     "intent_hash": "",
     "superseded_by": "",
     "hygiene_findings": []
