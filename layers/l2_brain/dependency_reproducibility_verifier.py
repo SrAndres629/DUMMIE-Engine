@@ -50,7 +50,7 @@ def run_dependency_reproducibility_verification() -> dict:
     ]
 
     # Parse declared packages from pyproject.toml
-    pyproject_path = Path(__file__).resolve().parents[1] / "pyproject.toml"
+    pyproject_path = Path(__file__).resolve().parent / "pyproject.toml"
     if pyproject_path.exists():
         try:
             with open(pyproject_path, "rb") as f:

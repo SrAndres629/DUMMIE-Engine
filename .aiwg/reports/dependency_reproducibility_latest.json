@@ -1,5 +1,5 @@
 {
-  "decision": "FAIL",
+  "decision": "PASS",
   "installed_packages": [
     "kuzu",
     "networkx",
@@ -7,25 +7,38 @@
     "sentence_transformers",
     "torch"
   ],
-  "declared_packages": [],
-  "undeclared_installed_packages": [
+  "declared_packages": [
+    "grpcio_tools",
     "kuzu",
+    "maturin",
+    "mcp",
+    "nats_py",
+    "pandas",
+    "protobuf",
+    "pyarrow",
+    "pydantic",
+    "pydantic_ai",
+    "pyyaml",
+    "zstd",
+    "fastembed",
+    "numpy",
+    "aiofiles",
+    "tiktoken",
+    "grpcio",
     "networkx",
     "fastapi",
     "sentence_transformers",
     "torch"
   ],
+  "undeclared_installed_packages": [],
   "missing_declared_packages": [],
   "heavy_dependencies": [
     "kuzu (20.6 MB)",
     "networkx (11.2 MB)",
     "torch (1098.7 MB)"
   ],
-  "reproducibility_status": "BROKEN",
-  "warnings": [
-    "pyproject.toml not found",
-    "Critical dependencies (torch/sentence_transformers) are installed but not declared in pyproject.toml!"
-  ],
+  "reproducibility_status": "REPRODUCIBLE",
+  "warnings": [],
   "evidence_refs": [
     "layers/l2_brain/pyproject.toml",
     "layers/l2_brain/.venv"

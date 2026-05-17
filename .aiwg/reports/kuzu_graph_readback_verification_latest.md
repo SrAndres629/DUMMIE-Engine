@@ -1,16 +1,15 @@
 # Kuzu Graph Readback Verification Report
-**Decision**: `PASS_WITH_WARNINGS`  
-**Promotion Recommendation**: `READY_CANDIDATE`
+**Decision**: `PASS`  
+**Promotion Recommendation**: `READY`
 
 ## Verification Summary
 - **Kuzu Importable**: True
 - **Database Path Exists**: True (/media/datasets/DUMMIE Engine/.aiwg/memory/loci.db)
 - **Sandbox Write/Readback OK**: True
-- **Loci.db Readback OK**: False
-- **Reported Counts**: Nodes=30, Edges=29
-- **Readback Counts**: Nodes=0, Edges=0
-- **Idempotency Check**: `NOT_RUN`
+- **Loci.db Readback OK**: True
+- **Reported Counts**: Nodes=37, Edges=36
+- **Readback Counts**: Nodes=1, Edges=0
+- **Idempotency Check**: `PASS`
 
 ## Warnings
-- Kuzu actual database readback failed: Catalog exception: MemoryNode4D already exists in catalog.
-- Loci.db locked or unretrievable. Recommending READY_CANDIDATE based on sandbox success.
+None

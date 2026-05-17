@@ -2,23 +2,6 @@
   "decision": "PASS",
   "actions": [
     {
-      "action_id": "integrate_kuzu_graph_sync",
-      "body_part": "memory",
-      "capability_id": "kuzu_4dtes_persistence",
-      "title": "Integrate Kuzu Graph Sync and Loci.db Readback",
-      "priority": "high",
-      "action_type": "wire",
-      "requires_human_approval": true,
-      "can_execute_now": false,
-      "recommended_agent": "antigravity",
-      "evidence_refs": [
-        ".aiwg/reports/kuzu_graph_readback_verification_latest.json"
-      ],
-      "verification_commands": [
-        "dummie-ctl kuzu-readback"
-      ]
-    },
-    {
       "action_id": "activate_local_embedding_model_or_label_fallback",
       "body_part": "memory",
       "capability_id": "real_semantic_embeddings",

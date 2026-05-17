@@ -48,56 +48,59 @@ def run_full_body_operational_audit() -> dict:
         top_body_gaps.append("Whole-Body Scanner not fully active or scan reports missing.")
 
     # 2. Brain
-    brain_status = "READY"
+    # Brain is READY as the cognitive coordinator operates actively.
     ready_organs.append("brain")
 
     # 3. Memory
     kuzu_stat = cap_statuses.get("kuzu_4dtes_persistence", "DEGRADED")
     emb_stat = cap_statuses.get("real_semantic_embeddings", "FALLBACK")
     if kuzu_stat == "READY" and emb_stat == "READY":
-        memory_status = "READY"
         ready_organs.append("memory")
-    elif kuzu_stat in ["READY", "READY_CANDIDATE"] or emb_stat == "REAL_LOCAL":
-        memory_status = "READY_CANDIDATE"
-        ready_organs.append("memory")
+    elif kuzu_stat == "READY_CANDIDATE":
+        degraded_organs.append("memory")
         fallback_organs.append("memory")
+        top_body_gaps.append("Kùzu DB 4D-TES is READY_CANDIDATE (verified in sandbox only, lacks production readback).")
     else:
-        memory_status = "DEGRADED"
         degraded_organs.append("memory")
         top_body_gaps.append("Memory spine or embeddings are degraded or fallback.")
 
     # 4. Nervous System
+    # Nervous system is active in local Python mode.
     ready_organs.append("nervous_system")
 
     # 5. Metabolism
-    metabolism_status = "FALLBACK"
+    # Metabolism is FALLBACK because token usage is based on static estimates.
     fallback_organs.append("metabolism")
+    top_body_gaps.append("Metabolism uses static token cost estimation instead of dynamic metrics.")
 
     # 6. Mouth
+    # Mouth is active (chat CLI and control plane verified).
     ready_organs.append("mouth")
 
     # 7. Hands
     hands_status = cap_statuses.get("gateway_live_dispatch", "DRY_RUN_ONLY")
-    if hands_status in ["READY", "READY_CANDIDATE"]:
+    if hands_status in ["READY"]:
         ready_organs.append("hands")
     else:
         fallback_organs.append("hands")
         unwired_organs.append("hands")
-        top_body_gaps.append("Gateway live dispatch runs in dry-run/manual-only mode.")
+        top_body_gaps.append("Hands (Gateway live dispatch) runs in dry-run/manual-only mode.")
 
     # 8. Immune System
+    # Immune system is active (spec validation suite is fully operational).
     ready_organs.append("immune_system")
 
     # 9. Skin
-    skin_status = "READY"
+    # Skin is active (workspace is protected under safety rules).
     ready_organs.append("skin")
 
     # 10. Polyglot Body
     poly_status = cap_statuses.get("polyglot_build_test_runtime", "FALLBACK")
-    if poly_status in ["READY", "READY_CANDIDATE"]:
+    if poly_status == "READY":
         ready_organs.append("polyglot_body")
     else:
         fallback_organs.append("polyglot_body")
+        top_body_gaps.append("Polyglot Body runs in Python-only fallback. Compile/test lifecycles are unwired.")
 
     # Dynamic Scoring Algorithm
     organ_scores = {
@@ -105,12 +108,12 @@ def run_full_body_operational_audit() -> dict:
         "brain": 1.0,
         "memory": 1.0 if "memory" in ready_organs and "memory" not in fallback_organs else 0.7,
         "nervous_system": 1.0,
-        "metabolism": 0.7, # Fallback
+        "metabolism": 0.5, # Fallback
         "mouth": 1.0,
-        "hands": 1.0 if "hands" in ready_organs else 0.5,
+        "hands": 0.5, # Unwired/Dry-run
         "immune_system": 1.0,
         "skin": 1.0,
-        "polyglot_body": 1.0 if "polyglot_body" in ready_organs and "polyglot_body" not in fallback_organs else 0.7
+        "polyglot_body": 0.5 # Fallback
     }
 
     body_score = float(sum(organ_scores.values()) / len(organ_scores) * 100)

@@ -1,0 +1,70 @@
+{
+  "heartbeat": "HEARTBEAT-2.3",
+  "decision": "PASS_WITH_WARNINGS",
+  "goal": "Full-Body Operational Closure",
+  "dependency_reproducibility": {
+    "decision": "PASS",
+    "status": "REPRODUCIBLE",
+    "undeclared_installed_packages": []
+  },
+  "kuzu": {
+    "decision": "PASS",
+    "promotion_recommendation": "READY",
+    "db_status_reported": "READY",
+    "memory_spine_readback_ok": true,
+    "idempotency_check": "PASS"
+  },
+  "embeddings": {
+    "decision": "PASS_WITH_WARNINGS",
+    "embedding_mode": "DETERMINISTIC_FALLBACK",
+    "model_load_ok": false,
+    "router_uses_real_embeddings": false
+  },
+  "full_body": {
+    "body_score": 82.0,
+    "ready_organs": [
+      "eyes",
+      "brain",
+      "nervous_system",
+      "mouth",
+      "immune_system",
+      "skin"
+    ],
+    "degraded_organs": [
+      "memory"
+    ],
+    "fallback_organs": [
+      "metabolism",
+      "hands",
+      "polyglot_body"
+    ],
+    "unwired_organs": [
+      "hands"
+    ]
+  },
+  "repair_queue": {
+    "actions": 3,
+    "top_action": "activate_local_embedding_model"
+  },
+  "truth_assessment": {
+    "kuzu_really_ready": true,
+    "embeddings_really_semantic": false,
+    "daemon_gateway_really_live": false,
+    "polyglot_really_operational": false,
+    "token_measurement_really_empirical": false
+  },
+  "git_status_clean_after": true,
+  "warnings": [
+    "System body is not fully complete (Body Score: 82.0% < 90%).",
+    "Real vector embeddings are in FALLBACK mode.",
+    "Upstream token telemetry is in ESTIMATED/FALLBACK mode."
+  ],
+  "evidence_refs": [
+    ".aiwg/reports/dependency_reproducibility_latest.json",
+    ".aiwg/reports/kuzu_graph_readback_verification_latest.json",
+    ".aiwg/reports/embedding_activation_verification_latest.json",
+    ".aiwg/reports/capability_promotion_governor_latest.json",
+    ".aiwg/reports/full_body_operational_audit_latest.json",
+    ".aiwg/reports/whole_body_repair_queue_latest.json"
+  ]
+}

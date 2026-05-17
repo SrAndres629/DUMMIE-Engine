@@ -1,14 +1,13 @@
 # Dependency Reproducibility Audit Report
-**Decision**: `FAIL`  
-**Status**: `BROKEN`
+**Decision**: `PASS`  
+**Status**: `REPRODUCIBLE`
 
 ## Verification Summary
 - **Installed Monitored**: ['kuzu', 'networkx', 'fastapi', 'sentence_transformers', 'torch']
-- **Declared Dependencies**: []
-- **Undeclared Installed**: ['kuzu', 'networkx', 'fastapi', 'sentence_transformers', 'torch']
+- **Declared Dependencies**: ['grpcio_tools', 'kuzu', 'maturin', 'mcp', 'nats_py', 'pandas', 'protobuf', 'pyarrow', 'pydantic', 'pydantic_ai', 'pyyaml', 'zstd', 'fastembed', 'numpy', 'aiofiles', 'tiktoken', 'grpcio', 'networkx', 'fastapi', 'sentence_transformers', 'torch']
+- **Undeclared Installed**: []
 - **Missing Declared**: []
 - **Heavy Dependencies (>10MB)**: ['kuzu (20.6 MB)', 'networkx (11.2 MB)', 'torch (1098.7 MB)']
 
 ## Warnings
-- pyproject.toml not found
-- Critical dependencies (torch/sentence_transformers) are installed but not declared in pyproject.toml!
+None

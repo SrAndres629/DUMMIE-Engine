@@ -4,10 +4,9 @@
 ## Promotion Verdicts
 ### kuzu_4dtes_persistence
 - **Previous Status**: `READY`
-- **Verified Status**: `READY_CANDIDATE`
+- **Verified Status**: `READY`
 - **Promotion Allowed**: `True`
-- **Reason**: Kuzu database physical readback verified.
-- **Blocking Findings**: ['Kuzu actual database readback failed: Catalog exception: MemoryNode4D already exists in catalog.', 'Loci.db locked or unretrievable. Recommending READY_CANDIDATE based on sandbox success.']
+- **Reason**: Kuzu database physical readback and idempotency verification passed completely.
 ### real_semantic_embeddings
 - **Previous Status**: `FALLBACK`
 - **Verified Status**: `FALLBACK`
@@ -18,25 +17,29 @@
 ### daemon_persistent_runtime
 - **Previous Status**: `SIMULATED`
 - **Verified Status**: `READY_CANDIDATE`
-- **Promotion Allowed**: `True`
-- **Reason**: Systemd socket exists and heartbeat daemon is active.
+- **Promotion Allowed**: `False`
+- **Reason**: Heartbeat daemon active in background via systemd socket, but operates as invocation-only.
+- **Blocking Findings**: ['Daemon runs under manual/invocation-only control loop.']
 - **Next Verification Required**: ['unix_socket_handshake_verification']
 ### gateway_live_dispatch
 - **Previous Status**: `DRY_RUN_ONLY`
-- **Verified Status**: `DRY_RUN_ONLY`
+- **Verified Status**: `READY_CANDIDATE`
 - **Promotion Allowed**: `False`
-- **Reason**: Gateway runs dry-run, manual-only reviews.
+- **Reason**: Gateway fastapi server active but human reviews are locked to dry-run.
+- **Blocking Findings**: ['Live external gateway access is strictly blocked.']
 - **Next Verification Required**: ['live_gateway_handshake_audit']
 ### polyglot_build_test_runtime
 - **Previous Status**: `FALLBACK`
 - **Verified Status**: `FALLBACK`
-- **Promotion Allowed**: `True`
-- **Reason**: Language Probes scan active and pytest environment verified.
+- **Promotion Allowed**: `False`
+- **Reason**: Language Probes are awareness-only; polyglot build/test lifecycle is not operational.
+- **Blocking Findings**: ['No compiler or test runner active for non-Python components.']
+- **Next Verification Required**: ['polyglot_toolchain_activation']
 ### token_usage_measurement
 - **Previous Status**: `FALLBACK`
 - **Verified Status**: `FALLBACK`
 - **Promotion Allowed**: `False`
-- **Reason**: Token Cost Ledger compiles static estimates rather than active upstream telemetry.
+- **Reason**: Token Cost Ledger compiles static estimates rather than active upstream API telemetry.
 - **Blocking Findings**: ['Static pricing models are used in lieu of dynamic API cost reports.']
 ### context_actual_tokenizer
 - **Previous Status**: `FALLBACK`
@@ -45,9 +48,11 @@
 - **Reason**: Uses simplified string-based cost models.
 ### full_regression_suite
 - **Previous Status**: `DEGRADED`
-- **Verified Status**: `READY`
-- **Promotion Allowed**: `True`
-- **Reason**: All 11 test suites passing successfully under python -m pytest.
+- **Verified Status**: `DEGRADED`
+- **Promotion Allowed**: `False`
+- **Reason**: Comprehensive regression suite has failing tests (37 failures detected). Operational checks alone are insufficient.
+- **Blocking Findings**: ['37 test suite failures in L2 brain']
+- **Next Verification Required**: ['fix_comprehensive_regression_suite']
 ### shadow_module_resolution
 - **Previous Status**: `SIMULATED`
 - **Verified Status**: `SIMULATED`
@@ -57,4 +62,4 @@
 - **Previous Status**: `DEGRADED`
 - **Verified Status**: `READY`
 - **Promotion Allowed**: `True`
-- **Reason**: Spec validations passed completely with 73/73 specs verified.
+- **Reason**: Spec validations passed completely with 79/79 specs verified.

@@ -21,6 +21,8 @@ class KuzuRepository:
                 import kuzu
                 self.conn = kuzu.Connection(db)
                 logger.info(f"KuzuRepository: Native connection created: {self.conn}")
+        elif db_path:
+            import kuzu
             import glob
             
             # [HARDENING] Verificación de integridad de ruta
