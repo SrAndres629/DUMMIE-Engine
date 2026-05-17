@@ -1,13 +1,21 @@
 {
-  "timestamp": "2026-05-17T00:36:36.239024+00:00",
-  "overall_coherence_score": 50.5,
+  "timestamp": "2026-05-17T00:53:46.977488+00:00",
+  "overall_coherence_score": 51.33,
+  "profiling_profile": "active_workspace_scan",
+  "report_version": "1.1",
+  "freshness_timestamp": "2026-05-17T00:53:46.977510+00:00",
+  "runtime_seconds": 8.4631,
+  "reproducibility_hash": "eab2ea9848c06c5711cc801a9d41d394da2053f680520a878167dd75faf7cd66",
+  "evidence_refs": [
+    ".aiwg/reports/whole_body_scan_latest.json"
+  ],
   "metrics": {
-    "total_python_files": 509,
-    "total_spec_files": 150,
-    "total_schema_files": 89,
+    "total_python_files": 516,
+    "total_spec_files": 153,
+    "total_schema_files": 92,
     "total_report_files": 233,
     "shadow_modules_count": 152,
-    "orphaned_tests_count": 78,
+    "orphaned_tests_count": 79,
     "stale_reports_count": 59,
     "unvalidated_specs_count": 42
   },
@@ -241,6 +249,7 @@
       "layers/l2_brain/tests/test_swarm_mission_coherence_integration.py",
       "layers/l2_brain/tests/test_token_economy_integration.py",
       "layers/l2_brain/tests/test_token_ledger.py",
+      "layers/l2_brain/tests/test_whole_body_integration_heartbeat.py",
       "layers/l2_brain/tests/test_workbench_vault_integration.py",
       "layers/l2_brain/tests/validate_heartbeat_jsons.py",
       "layers/l2_brain/tests/verify_wave8.py",
@@ -1936,12 +1945,13 @@
     },
     "layers/l2_brain/cli_control_plane.py": {
       "path": "layers/l2_brain/cli_control_plane.py",
-      "size_bytes": 36949,
-      "lines_count": 783,
+      "size_bytes": 37183,
+      "lines_count": 787,
       "owner_module": "layers",
       "mapped_specs": [
         "doc/specs/117_cli_control_plane.md",
-        "doc/specs/117_cli_control_plane.md"
+        "doc/specs/117_cli_control_plane.md",
+        "doc/specs/168_whole_body_scanner.md"
       ],
       "mapped_tests": [
         "layers/l2_brain/tests/test_cli_control_plane.py"
@@ -2565,10 +2575,12 @@
     },
     "layers/l2_brain/dummie_chat_cli.py": {
       "path": "layers/l2_brain/dummie_chat_cli.py",
-      "size_bytes": 30881,
-      "lines_count": 606,
+      "size_bytes": 35794,
+      "lines_count": 680,
       "owner_module": "layers",
-      "mapped_specs": [],
+      "mapped_specs": [
+        "doc/specs/168_whole_body_scanner.md"
+      ],
       "mapped_tests": [
         "layers/l2_brain/tests/test_dummie_chat_cli.py"
       ],
@@ -2579,12 +2591,15 @@
         ".aiwg/reports/dummie_chat_cli_latest.json"
       ],
       "imports_from": [
-        "layers/l2_brain/whole_body_scanner.py"
+        "layers/l2_brain/shadow_runtime_classifier.py",
+        "layers/l2_brain/whole_body_scan_calibrator.py",
+        "layers/l2_brain/whole_body_scanner.py",
+        "layers/l2_brain/wiring_matrix_builder.py"
       ],
       "imported_by": [
         "layers/l2_brain/tests/test_metacognitive_chat_integration.py"
       ],
-      "coherence_score": 70.0,
+      "coherence_score": 100.0,
       "status": "fresh"
     },
     "layers/l2_brain/embedding_adapter.py": {
@@ -2941,8 +2956,8 @@
     },
     "layers/l2_brain/heartbeat_decision_policy.py": {
       "path": "layers/l2_brain/heartbeat_decision_policy.py",
-      "size_bytes": 5203,
-      "lines_count": 143,
+      "size_bytes": 7453,
+      "lines_count": 188,
       "owner_module": "layers",
       "mapped_specs": [
         "doc/specs/166_heartbeat_decision_policy.md"
@@ -2968,8 +2983,8 @@
     },
     "layers/l2_brain/heartbeat_lifecycle_runtime.py": {
       "path": "layers/l2_brain/heartbeat_lifecycle_runtime.py",
-      "size_bytes": 12841,
-      "lines_count": 318,
+      "size_bytes": 14484,
+      "lines_count": 349,
       "owner_module": "layers",
       "mapped_specs": [
         "doc/specs/164_heartbeat_lifecycle_runtime.md"
@@ -2992,7 +3007,8 @@
       "imported_by": [
         "layers/l2_brain/heartbeat_scheduler.py",
         "layers/l2_brain/tests/test_heartbeat_integration.py",
-        "layers/l2_brain/tests/test_heartbeat_lifecycle_runtime.py"
+        "layers/l2_brain/tests/test_heartbeat_lifecycle_runtime.py",
+        "layers/l2_brain/tests/test_whole_body_integration_heartbeat.py"
       ],
       "coherence_score": 100.0,
       "status": "fresh"
@@ -5034,6 +5050,27 @@
         "layers/l2_brain/tests/test_cognitive_loop_e2e.py",
         "layers/l2_brain/tests/test_memory_spine_bridge.py",
         "layers/l2_brain/tests/test_session_store.py"
+      ],
+      "coherence_score": 100.0,
+      "status": "fresh"
+    },
+    "layers/l2_brain/shadow_runtime_classifier.py": {
+      "path": "layers/l2_brain/shadow_runtime_classifier.py",
+      "size_bytes": 7575,
+      "lines_count": 186,
+      "owner_module": "layers",
+      "mapped_specs": [
+        "doc/specs/171_shadow_runtime_classifier.md"
+      ],
+      "mapped_tests": [
+        "layers/l2_brain/tests/test_shadow_runtime_classifier.py"
+      ],
+      "mapped_schemas": [],
+      "mapped_reports": [],
+      "imports_from": [],
+      "imported_by": [
+        "layers/l2_brain/dummie_chat_cli.py",
+        "layers/l2_brain/tests/test_shadow_runtime_classifier.py"
       ],
       "coherence_score": 100.0,
       "status": "fresh"
@@ -8076,6 +8113,24 @@
       "coherence_score": 40.0,
       "status": "fresh"
     },
+    "layers/l2_brain/tests/test_shadow_runtime_classifier.py": {
+      "path": "layers/l2_brain/tests/test_shadow_runtime_classifier.py",
+      "size_bytes": 1644,
+      "lines_count": 46,
+      "owner_module": "layers",
+      "mapped_specs": [
+        "doc/specs/171_shadow_runtime_classifier.md"
+      ],
+      "mapped_tests": [],
+      "mapped_schemas": [],
+      "mapped_reports": [],
+      "imports_from": [
+        "layers/l2_brain/shadow_runtime_classifier.py"
+      ],
+      "imported_by": [],
+      "coherence_score": 70.0,
+      "status": "fresh"
+    },
     "layers/l2_brain/tests/test_shield_bypass_blocked.py": {
       "path": "layers/l2_brain/tests/test_shield_bypass_blocked.py",
       "size_bytes": 1916,
@@ -8326,6 +8381,40 @@
       "coherence_score": 20.0,
       "status": "fresh"
     },
+    "layers/l2_brain/tests/test_whole_body_integration_heartbeat.py": {
+      "path": "layers/l2_brain/tests/test_whole_body_integration_heartbeat.py",
+      "size_bytes": 2877,
+      "lines_count": 76,
+      "owner_module": "layers",
+      "mapped_specs": [],
+      "mapped_tests": [],
+      "mapped_schemas": [],
+      "mapped_reports": [],
+      "imports_from": [
+        "layers/l2_brain/heartbeat_lifecycle_runtime.py"
+      ],
+      "imported_by": [],
+      "coherence_score": 40.0,
+      "status": "orphaned"
+    },
+    "layers/l2_brain/tests/test_whole_body_scan_calibrator.py": {
+      "path": "layers/l2_brain/tests/test_whole_body_scan_calibrator.py",
+      "size_bytes": 2140,
+      "lines_count": 60,
+      "owner_module": "layers",
+      "mapped_specs": [
+        "doc/specs/169_whole_body_scan_calibrator.md"
+      ],
+      "mapped_tests": [],
+      "mapped_schemas": [],
+      "mapped_reports": [],
+      "imports_from": [
+        "layers/l2_brain/whole_body_scan_calibrator.py"
+      ],
+      "imported_by": [],
+      "coherence_score": 70.0,
+      "status": "fresh"
+    },
     "layers/l2_brain/tests/test_whole_body_scanner.py": {
       "path": "layers/l2_brain/tests/test_whole_body_scanner.py",
       "size_bytes": 2713,
@@ -8339,6 +8428,24 @@
       "mapped_reports": [],
       "imports_from": [
         "layers/l2_brain/whole_body_scanner.py"
+      ],
+      "imported_by": [],
+      "coherence_score": 70.0,
+      "status": "fresh"
+    },
+    "layers/l2_brain/tests/test_wiring_matrix_builder.py": {
+      "path": "layers/l2_brain/tests/test_wiring_matrix_builder.py",
+      "size_bytes": 1776,
+      "lines_count": 53,
+      "owner_module": "layers",
+      "mapped_specs": [
+        "doc/specs/170_wiring_matrix_builder.md"
+      ],
+      "mapped_tests": [],
+      "mapped_schemas": [],
+      "mapped_reports": [],
+      "imports_from": [
+        "layers/l2_brain/wiring_matrix_builder.py"
       ],
       "imported_by": [],
       "coherence_score": 70.0,
@@ -8563,10 +8670,31 @@
       "coherence_score": 80.0,
       "status": "stale"
     },
+    "layers/l2_brain/whole_body_scan_calibrator.py": {
+      "path": "layers/l2_brain/whole_body_scan_calibrator.py",
+      "size_bytes": 8468,
+      "lines_count": 206,
+      "owner_module": "layers",
+      "mapped_specs": [
+        "doc/specs/169_whole_body_scan_calibrator.md"
+      ],
+      "mapped_tests": [
+        "layers/l2_brain/tests/test_whole_body_scan_calibrator.py"
+      ],
+      "mapped_schemas": [],
+      "mapped_reports": [],
+      "imports_from": [],
+      "imported_by": [
+        "layers/l2_brain/dummie_chat_cli.py",
+        "layers/l2_brain/tests/test_whole_body_scan_calibrator.py"
+      ],
+      "coherence_score": 100.0,
+      "status": "fresh"
+    },
     "layers/l2_brain/whole_body_scanner.py": {
       "path": "layers/l2_brain/whole_body_scanner.py",
-      "size_bytes": 16696,
-      "lines_count": 381,
+      "size_bytes": 17370,
+      "lines_count": 395,
       "owner_module": "layers",
       "mapped_specs": [
         "doc/specs/168_whole_body_scanner.md"
@@ -8581,6 +8709,27 @@
         "layers/l2_brain/cli_control_plane.py",
         "layers/l2_brain/dummie_chat_cli.py",
         "layers/l2_brain/tests/test_whole_body_scanner.py"
+      ],
+      "coherence_score": 100.0,
+      "status": "fresh"
+    },
+    "layers/l2_brain/wiring_matrix_builder.py": {
+      "path": "layers/l2_brain/wiring_matrix_builder.py",
+      "size_bytes": 11823,
+      "lines_count": 315,
+      "owner_module": "layers",
+      "mapped_specs": [
+        "doc/specs/170_wiring_matrix_builder.md"
+      ],
+      "mapped_tests": [
+        "layers/l2_brain/tests/test_wiring_matrix_builder.py"
+      ],
+      "mapped_schemas": [],
+      "mapped_reports": [],
+      "imports_from": [],
+      "imported_by": [
+        "layers/l2_brain/dummie_chat_cli.py",
+        "layers/l2_brain/tests/test_wiring_matrix_builder.py"
       ],
       "coherence_score": 100.0,
       "status": "fresh"

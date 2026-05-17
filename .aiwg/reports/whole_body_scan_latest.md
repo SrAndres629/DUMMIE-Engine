@@ -1,18 +1,18 @@
 # DUMMIE Whole-Body Scan Coherence Report
 
-**Execution Timestamp:** 2026-05-17T00:36:36.239024+00:00
+**Execution Timestamp:** 2026-05-17T00:53:46.977488+00:00
 
-## Systemic Coherence Score: `50.5%`
+## Systemic Coherence Score: `51.33%`
 
 ### Summary Metrics
 | Metric | Count |
 |---|---|
-| Python Modules Scanned | 509 |
-| Specifications Scanned | 150 |
-| JSON Schemas Scanned | 89 |
+| Python Modules Scanned | 516 |
+| Specifications Scanned | 153 |
+| JSON Schemas Scanned | 92 |
 | Reports Scanned | 233 |
 | Mapped Shadow Modules | **152** |
-| Orphaned Test Files | **78** |
+| Orphaned Test Files | **79** |
 | Stale Reports (>24h) | **59** |
 | Unvalidated Specifications | **42** |
 
@@ -248,6 +248,7 @@
 - [test_swarm_mission_coherence_integration.py](file:////media/datasets/DUMMIE Engine/layers/l2_brain/tests/test_swarm_mission_coherence_integration.py)
 - [test_token_economy_integration.py](file:////media/datasets/DUMMIE Engine/layers/l2_brain/tests/test_token_economy_integration.py)
 - [test_token_ledger.py](file:////media/datasets/DUMMIE Engine/layers/l2_brain/tests/test_token_ledger.py)
+- [test_whole_body_integration_heartbeat.py](file:////media/datasets/DUMMIE Engine/layers/l2_brain/tests/test_whole_body_integration_heartbeat.py)
 - [test_workbench_vault_integration.py](file:////media/datasets/DUMMIE Engine/layers/l2_brain/tests/test_workbench_vault_integration.py)
 - [validate_heartbeat_jsons.py](file:////media/datasets/DUMMIE Engine/layers/l2_brain/tests/validate_heartbeat_jsons.py)
 - [verify_wave8.py](file:////media/datasets/DUMMIE Engine/layers/l2_brain/tests/verify_wave8.py)

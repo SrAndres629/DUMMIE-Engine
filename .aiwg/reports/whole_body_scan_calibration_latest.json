@@ -1,0 +1,28 @@
+{
+  "calibration_id": "cal-2c32acbc",
+  "timestamp": "2026-05-17T00:53:49.134245+00:00",
+  "decision": "PASS_WITH_WARNINGS",
+  "scan_metrics": {
+    "active_modules": 364,
+    "shadow_modules": 152,
+    "orphaned_tests": 79,
+    "stale_reports": 59,
+    "unvalidated_specs": 42
+  },
+  "reproducibility": {
+    "runtime_seconds": 8.4631,
+    "reproducibility_hash": "eab2ea9848c06c5711cc801a9d41d394da2053f680520a878167dd75faf7cd66",
+    "freshness_timestamp": "2026-05-17T00:53:46.977510+00:00"
+  },
+  "test_reconciliation": {
+    "suite_total_tests": 46,
+    "reconciled": true,
+    "explanation": "The repository contains 46 passing tests in the complete test suite. Executing 'test_whole_body_scanner.py' alone correctly outputs '1 passed' as it only verifies the AST whole-body scanner in isolation."
+  },
+  "warnings": [
+    "Scanner runtime is high: 8.4631s (threshold: 8.0s)"
+  ],
+  "evidence_refs": [
+    ".aiwg/reports/whole_body_scan_latest.json"
+  ]
+}
