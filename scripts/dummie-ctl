@@ -26,6 +26,10 @@ def show_help():
     print("  heartbeat-status    Show status of last recorded heartbeat")
     print("  next-heartbeat      Show next heartbeat seed information")
     print("  scan                Run whole-body scan and shadow detector")
+    print("  scan-calibration    Calibrate whole-body scan metrics against pytest and reports")
+    print("  wiring-matrix       Construct directed module dependency wiring matrix")
+    print("  shadow-runtime      Safely audit and classify shadow (unwired) Python modules")
+    print("  systemic-coherence  Display current systemic coherence percentage")
     print("  help                Show this help")
 
 def main():
@@ -61,6 +65,14 @@ def main():
         run_python("layers/l2_brain/cli_control_plane.py", ["heartbeat-seed"])
     elif cmd == "scan":
         run_python("layers/l2_brain/cli_control_plane.py", ["whole-body-scan"])
+    elif cmd == "scan-calibration":
+        run_python("layers/l2_brain/cli_control_plane.py", ["scan-calibration"])
+    elif cmd == "wiring-matrix":
+        run_python("layers/l2_brain/cli_control_plane.py", ["wiring-matrix"])
+    elif cmd == "shadow-runtime":
+        run_python("layers/l2_brain/cli_control_plane.py", ["shadow-runtime"])
+    elif cmd == "systemic-coherence":
+        run_python("layers/l2_brain/cli_control_plane.py", ["systemic-coherence"])
     elif cmd == "help":
         show_help()
     else:

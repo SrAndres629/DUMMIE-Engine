@@ -1,0 +1,12 @@
+{
+  "spec_id": "170_wiring_matrix_builder",
+  "title": "Wiring Matrix Builder Rules",
+  "invariants": {
+    "node_kinds": ["source", "test", "spec", "schema", "report", "cli", "heartbeat", "unknown"],
+    "edge_types": ["tests", "specifies", "validates", "produces", "consumes", "imports", "routes", "reports", "heartbeat_consumes"]
+  },
+  "gates": {
+    "unwired_elements": "Must identify all nodes with 0 incoming or outgoing edges.",
+    "missing_tests": "Must list source_without_tests for any source module without test files."
+  }
+}

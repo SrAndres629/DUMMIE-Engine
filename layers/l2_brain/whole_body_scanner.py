@@ -77,6 +77,9 @@ class WholeBodyScanner:
 
     def run_scan(self) -> Dict[str, Any]:
         import os
+        import time
+        import hashlib
+        start_time = time.time()
         py_files: List[Path] = []
         spec_files: List[Path] = []
         schema_files: List[Path] = []
@@ -267,9 +270,20 @@ class WholeBodyScanner:
         overall_coherence = round(sum(active_weights) / len(active_weights), 2) if active_weights else 0.0
 
         # Build output structure
+        runtime_seconds = round(time.time() - start_time, 4)
+        sorted_paths = sorted(list(file_matrix.keys()))
+        paths_str = ",".join(sorted_paths).encode("utf-8")
+        reproducibility_hash = hashlib.sha256(paths_str).hexdigest()
+
         result = {
             "timestamp": datetime.now(timezone.utc).isoformat(),
             "overall_coherence_score": overall_coherence,
+            "profiling_profile": "active_workspace_scan",
+            "report_version": "1.1",
+            "freshness_timestamp": datetime.now(timezone.utc).isoformat(),
+            "runtime_seconds": runtime_seconds,
+            "reproducibility_hash": reproducibility_hash,
+            "evidence_refs": [".aiwg/reports/whole_body_scan_latest.json"],
             "metrics": {
                 "total_python_files": len(file_matrix),
                 "total_spec_files": len(spec_files),

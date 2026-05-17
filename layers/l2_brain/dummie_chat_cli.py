@@ -99,6 +99,14 @@ class DummieChatCli:
             intent = "repo_query"
         elif "context for" in query_text:
             intent = "context"
+        elif "scan calibration" in query_text or "calibrator" in query_text:
+            intent = "scan_calibration"
+        elif "wiring matrix" in query_text or "dependency matrix" in query_text:
+            intent = "wiring_matrix"
+        elif "shadow runtime" in query_text or "shadow modules" in query_text:
+            intent = "shadow_runtime"
+        elif "systemic coherence" in query_text:
+            intent = "systemic_coherence"
         elif "scan" in query_text or "coherence" in query_text:
             intent = "whole_body_scan"
         elif "repo intelligence" in query_text or "find" in query_text:
@@ -171,6 +179,14 @@ class DummieChatCli:
             response = self._cmd_heartbeat_why(gate_decision)
         elif intent == "whole_body_scan":
             response = self._cmd_whole_body_scan(gate_decision)
+        elif intent == "scan_calibration":
+            response = self._cmd_scan_calibration(gate_decision)
+        elif intent == "wiring_matrix":
+            response = self._cmd_wiring_matrix(gate_decision)
+        elif intent == "shadow_runtime":
+            response = self._cmd_shadow_runtime(gate_decision)
+        elif intent == "systemic_coherence":
+            response = self._cmd_systemic_coherence(gate_decision)
         elif intent == "help":
             response = self._cmd_help()
         else:
@@ -547,6 +563,59 @@ class DummieChatCli:
                                   context_strategy=gate.decision,
                                   generated_at=self._utc_now())
 
+    def _cmd_scan_calibration(self, gate) -> DummieChatResponse:
+        from whole_body_scan_calibrator import run_whole_body_scan_calibration
+        res = run_whole_body_scan_calibration()
+        answer = (f"Sensory Scanner Calibration Completed. Decision: **{res.get('decision', 'unknown')}**.\n"
+                  f"Active modules verified: {res.get('scan_metrics', {}).get('active_modules', 0)}, "
+                  f"Shadow modules: {res.get('scan_metrics', {}).get('shadow_modules', 0)}.\n"
+                  f"Pytest suite count: {res.get('test_reconciliation', {}).get('suite_total_tests', 0)} (Reconciled: {res.get('test_reconciliation', {}).get('reconciled', False)}).")
+        return DummieChatResponse(answer=answer,
+                                  evidence_refs=[
+                                      ".aiwg/reports/whole_body_scan_calibration_latest.json",
+                                      ".aiwg/reports/whole_body_scan_calibration_latest.md"
+                                  ],
+                                  context_strategy=gate.decision,
+                                  generated_at=self._utc_now())
+
+    def _cmd_wiring_matrix(self, gate) -> DummieChatResponse:
+        from wiring_matrix_builder import run_wiring_matrix_builder
+        res = run_wiring_matrix_builder()
+        answer = (f"Systemic Wiring Matrix Graph Mapped. Decision: **{res.get('decision', 'unknown')}**.\n"
+                  f"Total structural nodes: {len(res.get('nodes', []))}, total directed dependency edges: {len(res.get('edges', []))}.\n"
+                  f"Unwired components: {len(res.get('anomaly_summary', {}).get('unwired_source_modules', []))}, "
+                  f"Modules without tests: {len(res.get('anomaly_summary', {}).get('source_without_tests', []))}.")
+        return DummieChatResponse(answer=answer,
+                                  evidence_refs=[
+                                      ".aiwg/reports/wiring_matrix_latest.json",
+                                      ".aiwg/reports/wiring_matrix_latest.md"
+                                  ],
+                                  context_strategy=gate.decision,
+                                  generated_at=self._utc_now())
+
+    def _cmd_shadow_runtime(self, gate) -> DummieChatResponse:
+        from shadow_runtime_classifier import run_shadow_runtime_classifier
+        res = run_shadow_runtime_classifier()
+        answer = (f"Non-Destructive Shadow Runtime Audit Completed. Decision: **{res.get('decision', 'unknown')}**.\n"
+                  f"Audited shadow modules: {len(res.get('findings', []))}.\n"
+                  f"Classification summary saved to `.aiwg/reports/shadow_runtime_classification_latest.md`.")
+        return DummieChatResponse(answer=answer,
+                                  evidence_refs=[
+                                      ".aiwg/reports/shadow_runtime_classification_latest.json",
+                                      ".aiwg/reports/shadow_runtime_classification_latest.md"
+                                  ],
+                                  context_strategy=gate.decision,
+                                  generated_at=self._utc_now())
+
+    def _cmd_systemic_coherence(self, gate) -> DummieChatResponse:
+        scan_latest = self._load_json(self.reports_root / "whole_body_scan_latest.json")
+        score = scan_latest.get("overall_coherence_score", 0.0)
+        answer = f"The current DUMMIE Systemic Coherence Score is: `{score}%`."
+        return DummieChatResponse(answer=answer,
+                                  evidence_refs=[".aiwg/reports/whole_body_scan_latest.json"],
+                                  context_strategy=gate.decision,
+                                  generated_at=self._utc_now())
+
     def _cmd_help(self) -> DummieChatResponse:
         help_text = """Available commands:
 - status: Show current system phase.
@@ -572,6 +641,11 @@ class DummieChatCli:
 - next heartbeat: Show next heartbeat seed.
 - show heartbeat ledger: Show heartbeat history count.
 - why this action?: Explain current action selection.
+- run body scan: Execute whole-body repository scanner.
+- run scan calibration: Execute calibrator on scanner metrics.
+- build wiring matrix: Map bidirectional dependency graph.
+- audit shadow modules: Classify unimported modules safely.
+- show systemic coherence: Display systemic coherence percentage.
 - help: Show this message."""
         return DummieChatResponse(answer=help_text, generated_at=self._utc_now())
 

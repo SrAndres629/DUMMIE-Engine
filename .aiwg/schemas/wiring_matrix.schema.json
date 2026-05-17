@@ -1,0 +1,64 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "WiringMatrix",
+  "type": "OBJECT",
+  "properties": {
+    "matrix_id": { "type": "STRING" },
+    "timestamp": { "type": "STRING" },
+    "decision": { "type": "STRING", "enum": ["PASS", "PASS_WITH_WARNINGS", "FAIL"] },
+    "nodes": {
+      "type": "ARRAY",
+      "items": {
+        "type": "OBJECT",
+        "properties": {
+          "path": { "type": "STRING" },
+          "kind": { "type": "STRING", "enum": ["source", "test", "spec", "schema", "report", "cli", "heartbeat", "unknown"] },
+          "layer": { "type": "STRING" },
+          "language": { "type": "STRING" },
+          "status": { "type": "STRING", "enum": ["wired", "partial", "shadow", "orphan", "stale", "unknown"] },
+          "consumers": { "type": "ARRAY", "items": { "type": "STRING" } },
+          "producers": { "type": "ARRAY", "items": { "type": "STRING" } },
+          "tests": { "type": "ARRAY", "items": { "type": "STRING" } },
+          "specs": { "type": "ARRAY", "items": { "type": "STRING" } },
+          "schemas": { "type": "ARRAY", "items": { "type": "STRING" } },
+          "reports": { "type": "ARRAY", "items": { "type": "STRING" } },
+          "evidence_refs": { "type": "ARRAY", "items": { "type": "STRING" } }
+        },
+        "required": ["path", "kind", "layer", "language", "status", "consumers", "producers", "tests", "specs", "schemas", "reports", "evidence_refs"]
+      }
+    },
+    "edges": {
+      "type": "ARRAY",
+      "items": {
+        "type": "OBJECT",
+        "properties": {
+          "from": { "type": "STRING" },
+          "to": { "type": "STRING" },
+          "edge_type": { "type": "STRING", "enum": ["tests", "specifies", "validates", "produces", "consumes", "imports", "routes", "reports", "heartbeat_consumes"] },
+          "confidence": { "type": "NUMBER" },
+          "evidence_refs": { "type": "ARRAY", "items": { "type": "STRING" } }
+        },
+        "required": ["from", "to", "edge_type", "confidence", "evidence_refs"]
+      }
+    },
+    "anomaly_summary": {
+      "type": "OBJECT",
+      "properties": {
+        "unwired_source_modules": { "type": "ARRAY", "items": { "type": "STRING" } },
+        "source_without_tests": { "type": "ARRAY", "items": { "type": "STRING" } },
+        "source_without_specs": { "type": "ARRAY", "items": { "type": "STRING" } },
+        "spec_without_source": { "type": "ARRAY", "items": { "type": "STRING" } },
+        "test_without_source": { "type": "ARRAY", "items": { "type": "STRING" } },
+        "schema_without_consumer": { "type": "ARRAY", "items": { "type": "STRING" } },
+        "report_without_consumer": { "type": "ARRAY", "items": { "type": "STRING" } },
+        "heartbeat_unwired_reports": { "type": "ARRAY", "items": { "type": "STRING" } }
+      },
+      "required": [
+        "unwired_source_modules", "source_without_tests", "source_without_specs",
+        "spec_without_source", "test_without_source", "schema_without_consumer",
+        "report_without_consumer", "heartbeat_unwired_reports"
+      ]
+    }
+  },
+  "required": ["matrix_id", "timestamp", "decision", "nodes", "edges", "anomaly_summary"]
+}

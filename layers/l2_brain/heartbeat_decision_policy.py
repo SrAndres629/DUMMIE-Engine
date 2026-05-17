@@ -45,6 +45,9 @@ _DISPATCH_MAP = {
     "run_truth_hygiene_before_planning": "local",
     "block_autonomous_scaling":      "local",
     "generate_action_queue":         "local",
+    "repair_scanner":                "antigravity",
+    "build_wiring_matrix":           "local",
+    "classify_shadow_modules":       "local",
 }
 
 
@@ -64,6 +67,11 @@ def select_next_action(aiwg_root: Path = Path(".aiwg")) -> HeartbeatDecisionPoli
     hygiene = _load(reports / "mental_model_truth_hygiene_latest.json")
     readiness = _load(reports / "readiness_score_calibration_latest.json")
 
+    calibration = _load(reports / "whole_body_scan_calibration_latest.json")
+    wiring = _load(reports / "wiring_matrix_latest.json")
+    shadow = _load(reports / "shadow_runtime_classification_latest.json")
+    scan_latest = _load(reports / "whole_body_scan_latest.json")
+
     actions = queue.get("actions", [])
     blocked_types = set(queue.get("blocked", []))
     blocked_types.update(a.get("action_type", "") for a in actions if a.get("status") == "blocked")
@@ -71,38 +79,75 @@ def select_next_action(aiwg_root: Path = Path(".aiwg")) -> HeartbeatDecisionPoli
     # Always block autonomous_scaling
     blocked_types.add("autonomous_scaling")
 
-    # Priority order: critical > high > medium > low
-    priority_rank = {"critical": 0, "high": 1, "medium": 2, "low": 3}
-    eligible = [a for a in actions
-                if a.get("status") != "blocked"
-                and a.get("action_type") not in blocked_types]
-    eligible.sort(key=lambda a: priority_rank.get(a.get("priority", "low"), 9))
-
+    # If systemic coherence score is under 60%, block autonomous scaling explicitly
+    coherence_score = scan_latest.get("overall_coherence_score", 0.0)
     warnings: List[str] = []
+    if coherence_score < 60.0:
+        blocked_types.add("autonomous_execution")
+        warnings.append(f"Systemic Coherence Score ({coherence_score}%) is under 60% — autonomous execution is strictly blocked.")
 
-    if not eligible:
-        # Fallback: generate_action_queue
+    # Apply strict priority gates before queue evaluation
+    # Rule 1: Scanner Calibration failures
+    if not calibration or calibration.get("decision") == "FAIL":
         selected = {
-            "action_id": "hb-fallback",
-            "action_type": "generate_action_queue",
-            "priority": "medium",
-            "status": "proposed",
+            "action_id": "cal-repair",
+            "action_type": "repair_scanner",
+            "priority": "critical",
+            "status": "proposed"
         }
-        warnings.append("No eligible actions in queue; recommending action queue regeneration")
-    else:
-        selected = eligible[0]
-
-    action_type = selected.get("action_type", "unknown")
-    dispatch = classify_dispatch(action_type)
-
-    # Extra safety: if Kuzu required and DEGRADED, force human_review
-    kuzu_degraded = any("degraded" in f.get("id", "").lower() or "degraded" in f.get("description", "").lower()
-                        for f in readiness.get("findings", []))
-    if kuzu_degraded and action_type in ("repair_kuzu_persistence",):
         dispatch = "antigravity"
-        warnings.append("Kuzu DEGRADED — repair requires implementation plan + human approval")
+        reason = "Scanner calibration has FAILED. Repairing the AST/Whole-Body scanner is critical."
+    # Rule 2: Wiring Matrix Builder failures
+    elif not wiring or wiring.get("decision") == "FAIL":
+        selected = {
+            "action_id": "wir-build",
+            "action_type": "build_wiring_matrix",
+            "priority": "critical",
+            "status": "proposed"
+        }
+        dispatch = "local"
+        reason = "Wiring matrix is incomplete or has FAILED. Re-generating the graph is required."
+    # Rule 3: Shadow Runtime Classifier failures
+    elif not shadow or shadow.get("decision") == "FAIL":
+        selected = {
+            "action_id": "sha-classify",
+            "action_type": "classify_shadow_modules",
+            "priority": "critical",
+            "status": "proposed"
+        }
+        dispatch = "local"
+        reason = "Shadow module classification is incomplete or has FAILED. Non-destructive classification is required."
+    else:
+        # Priority order: critical > high > medium > low
+        priority_rank = {"critical": 0, "high": 1, "medium": 2, "low": 3}
+        eligible = [a for a in actions
+                    if a.get("status") != "blocked"
+                    and a.get("action_type") not in blocked_types]
+        eligible.sort(key=lambda a: priority_rank.get(a.get("priority", "low"), 9))
 
-    reason = f"Selected '{action_type}' (priority={selected.get('priority')}) from self-improvement queue. Dispatch: {dispatch}."
+        if not eligible:
+            # Fallback: generate_action_queue
+            selected = {
+                "action_id": "hb-fallback",
+                "action_type": "generate_action_queue",
+                "priority": "medium",
+                "status": "proposed",
+            }
+            warnings.append("No eligible actions in queue; recommending action queue regeneration")
+        else:
+            selected = eligible[0]
+
+        action_type = selected.get("action_type", "unknown")
+        dispatch = classify_dispatch(action_type)
+
+        # Extra safety: if Kuzu required and DEGRADED, force human_review
+        kuzu_degraded = any("degraded" in f.get("id", "").lower() or "degraded" in f.get("description", "").lower()
+                            for f in readiness.get("findings", []))
+        if kuzu_degraded and action_type in ("repair_kuzu_persistence",):
+            dispatch = "antigravity"
+            warnings.append("Kuzu DEGRADED — repair requires implementation plan + human approval")
+
+        reason = f"Selected '{action_type}' (priority={selected.get('priority')}) from self-improvement queue. Dispatch: {dispatch}."
 
     result = HeartbeatDecisionPolicy(
         selected_action=selected,

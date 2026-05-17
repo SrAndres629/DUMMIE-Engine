@@ -1,0 +1,12 @@
+{
+  "spec_id": "169_whole_body_scan_calibrator",
+  "title": "Whole-Body Scan Calibrator Rules",
+  "invariants": {
+    "timing_threshold_seconds": 8.0,
+    "report_freshness_hours": 24
+  },
+  "gates": {
+    "schema_conformance": "Scanner output must perfectly match its schema.",
+    "test_reconciliation": "System must account for test suite total mismatch."
+  }
+}

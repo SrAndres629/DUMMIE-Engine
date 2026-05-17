@@ -108,6 +108,10 @@ def run_heartbeat(mode: str = "observe_only", aiwg_root: Path = Path(".aiwg")) -
         "epistemic_state_latest.json",
         "metacognitive_loop_latest.json",
         "cognitive_bias_report_latest.json",
+        "whole_body_scan_latest.json",
+        "whole_body_scan_calibration_latest.json",
+        "wiring_matrix_latest.json",
+        "shadow_runtime_classification_latest.json",
     ]
     found = [c for c in canonical if (reports / c).exists()]
     missing = [c for c in canonical if c not in found]
@@ -119,6 +123,13 @@ def run_heartbeat(mode: str = "observe_only", aiwg_root: Path = Path(".aiwg")) -
     readiness_data = _load(reports / "readiness_score_calibration_latest.json")
     readiness_score = readiness_data.get("calibrated_scores", {}).get("overall", 0)
 
+    calibration = _load(reports / "whole_body_scan_calibration_latest.json")
+    wiring = _load(reports / "wiring_matrix_latest.json")
+    shadow = _load(reports / "shadow_runtime_classification_latest.json")
+    scan_latest = _load(reports / "whole_body_scan_latest.json")
+
+    coherence_score = scan_latest.get("overall_coherence_score", 0.0)
+
     # Count test debt
     test_triage = _load(reports / "test_debt_triage_latest.json")
     test_debt = test_triage.get("missing_tests_count", 0) + test_triage.get("failing_tests_count", 0)
@@ -128,6 +139,12 @@ def run_heartbeat(mode: str = "observe_only", aiwg_root: Path = Path(".aiwg")) -
         active_blockers.append("kuzu_degraded")
     if quarantined_count > 0:
         active_blockers.append(f"quarantined_models_{quarantined_count}")
+    if calibration.get("decision") == "FAIL":
+        active_blockers.append("scanner_calibration_failed")
+    if wiring.get("decision") == "FAIL":
+        active_blockers.append("wiring_matrix_failed")
+    if shadow.get("decision") == "FAIL":
+        active_blockers.append("shadow_classification_failed")
 
     observation = HeartbeatObservation(
         git_clean=True,
@@ -139,6 +156,20 @@ def run_heartbeat(mode: str = "observe_only", aiwg_root: Path = Path(".aiwg")) -
         quarantined_models=quarantined_count,
         test_debt_count=test_debt,
     )
+    
+    observation_dict = observation.to_dict()
+    observation_dict["whole_body_scan"] = {
+        "overall_coherence_score": coherence_score,
+        "calibration_decision": calibration.get("decision", "unknown"),
+        "wiring_matrix_decision": wiring.get("decision", "unknown"),
+        "shadow_classification_decision": shadow.get("decision", "unknown"),
+        "active_modules": calibration.get("scan_metrics", {}).get("active_modules", 0),
+        "shadow_modules": calibration.get("scan_metrics", {}).get("shadow_modules", 0),
+        "orphaned_tests": calibration.get("scan_metrics", {}).get("orphaned_tests", 0),
+        "stale_reports": calibration.get("scan_metrics", {}).get("stale_reports", 0),
+        "unvalidated_specs": calibration.get("scan_metrics", {}).get("unvalidated_specs", 0),
+    }
+
     if missing:
         warnings.append(f"Missing canonical inputs: {', '.join(missing)}")
 
@@ -268,7 +299,7 @@ def run_heartbeat(mode: str = "observe_only", aiwg_root: Path = Path(".aiwg")) -
         heartbeat_id=hb_id,
         mode=mode,
         decision=hb_decision,
-        observation=observation.to_dict(),
+        observation=observation_dict,
         truth_hygiene={"decision": truth_hygiene.get("decision", ""), "summary": truth_hygiene.get("summary", {})},
         epistemic_state={"decision": epistemic.get("decision", ""), "confidence": epistemic.get("confidence", 0)},
         bias_report={"decision": bias.get("decision", ""), "findings_count": len(bias.get("findings", []))},

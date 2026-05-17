@@ -5,6 +5,12 @@
   "required": [
     "timestamp",
     "overall_coherence_score",
+    "profiling_profile",
+    "report_version",
+    "freshness_timestamp",
+    "runtime_seconds",
+    "reproducibility_hash",
+    "evidence_refs",
     "metrics",
     "findings",
     "matrix"
@@ -15,6 +21,25 @@
     },
     "overall_coherence_score": {
       "type": "NUMBER"
+    },
+    "profiling_profile": {
+      "type": "STRING"
+    },
+    "report_version": {
+      "type": "STRING"
+    },
+    "freshness_timestamp": {
+      "type": "STRING"
+    },
+    "runtime_seconds": {
+      "type": "NUMBER"
+    },
+    "reproducibility_hash": {
+      "type": "STRING"
+    },
+    "evidence_refs": {
+      "type": "ARRAY",
+      "items": { "type": "STRING" }
     },
     "metrics": {
       "type": "OBJECT",

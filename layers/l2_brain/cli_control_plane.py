@@ -139,6 +139,10 @@ class CliControlPlane:
             "heartbeat-status": self._cmd_heartbeat_status,
             "heartbeat-ledger": self._cmd_heartbeat_ledger,
             "whole-body-scan": self._cmd_whole_body_scan,
+            "scan-calibration": self._cmd_scan_calibration,
+            "wiring-matrix": self._cmd_wiring_matrix,
+            "shadow-runtime": self._cmd_shadow_runtime,
+            "systemic-coherence": self._cmd_systemic_coherence,
         }
 
 

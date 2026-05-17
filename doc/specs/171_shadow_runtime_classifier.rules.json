@@ -1,0 +1,22 @@
+{
+  "spec_id": "171_shadow_runtime_classifier",
+  "title": "Shadow Runtime Classifier Rules",
+  "invariants": {
+    "categories": [
+      "cli_entrypoint",
+      "script_entrypoint",
+      "dynamic_import_candidate",
+      "test_only_support",
+      "legacy_candidate",
+      "orphan_candidate",
+      "generated_or_build_artifact",
+      "documentation_support",
+      "needs_manual_review",
+      "safe_to_ignore"
+    ],
+    "actions": ["wire", "test", "spec", "archive", "ignore", "manual_review", "do_not_touch"]
+  },
+  "gates": {
+    "non_destructive_integrity": "Must never run os.remove, shutil.rmtree, or move commands on workspace."
+  }
+}
