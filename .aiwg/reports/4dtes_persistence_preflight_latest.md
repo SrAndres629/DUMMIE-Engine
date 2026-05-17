@@ -1,6 +1,6 @@
 # 4D-TES Persistence Preflight Report
 - **Decision**: **PASS_WITH_WARNINGS**
-- **Kùzu Importable**: False
+- **Kùzu Importable**: True
 - **Database Path Detected**: `.aiwg/memory/loci.db`
 - **Graph Write Mode**: `SIMULATED`
 - **Memory Spine Status**: `degraded_logical_only`
@@ -14,5 +14,4 @@
 1. Restore PyArrow IPC data buffers mapping for zero-copy memory transport.
 
 ## Warnings
-- [WARNING] Kùzu library is not installed or importable in current Python environment.
 - [WARNING] Kùzu/4D-TES persistence is currently DEGRADED. Actions requiring write transactions will be simulated.

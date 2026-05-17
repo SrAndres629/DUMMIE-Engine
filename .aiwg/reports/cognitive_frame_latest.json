@@ -1,6 +1,6 @@
 {
-  "frame_id": "frame-efb9cb6f",
-  "intent": "what is still degraded",
+  "frame_id": "frame-ba2b876d",
+  "intent": "heartbeat: what is the current system state and next safe action?",
   "operating_mode": "answer",
   "must_preserve": [
     "current_phase",
@@ -13,11 +13,11 @@
     "private_chain_of_thought"
   ],
   "mental_model_refs": [
-    "mm-bc483c04"
+    "mm-f4dbea4f"
   ],
   "memory_refs": [],
   "ontology_refs": [
-    "RISK"
+    "UNKNOWN"
   ],
   "evidence_refs": [
     ".aiwg/reports/test_debt_triage_latest.json",
@@ -28,9 +28,7 @@
   "token_budget_hint": "low",
   "context_strategy": "MANIFEST_ONLY",
   "dispatch_recommendation": "local",
-  "risks": [
-    "Memory spine DEGRADED (Kuzu persistence unavailable)"
-  ],
+  "risks": [],
   "next_actions": [],
-  "created_at": "2026-05-17T01:32:12.717203+00:00"
+  "created_at": "2026-05-17T01:35:26.005746+00:00"
 }

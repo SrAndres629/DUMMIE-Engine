@@ -1,10 +1,10 @@
 {
-  "thesis": "Proceed with what is still degraded to improve the system.",
-  "antithesis": "Propose immediate halt of autonomous skill synthesis to prevent catastrophic state desync. Autonomy without persistent memory is an existential safety failure.",
+  "thesis": "Proceed with heartbeat: what is the current system state and next safe action? to improve the system.",
+  "antithesis": "Propose delay until core regressions (Kuzu/Tests) are resolved.",
   "counterexamples": [
-    "Kuzu persistence layer is DEGRADED, meaning memory spine state cannot survive restarts.",
-    "177 missing or failing tests prevent DUMMIE from verifying regression invariants."
+    "Previous failed refactor attempts",
+    "Incomplete test coverage"
   ],
-  "synthesis": "Do not proceed to autonomous skill synthesis until memory persistence and test debt are repaired.",
-  "decision": "repair_first"
+  "synthesis": "Proceed with caution using local mock-fallback; prioritize test repair first.",
+  "decision": "proceed"
 }

@@ -28,5 +28,11 @@
     "decision": "FAIL",
     "selected_action": "resolve_dependency_first",
     "created_at": "2026-05-17T01:32:04.272691+00:00"
+  },
+  "hb-e8453a01": {
+    "mode": "observe_only",
+    "decision": "PASS_WITH_WARNINGS",
+    "selected_action": "increase_test_coverage",
+    "created_at": "2026-05-17T01:35:26.035543+00:00"
   }
 }

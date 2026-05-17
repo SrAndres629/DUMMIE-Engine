@@ -1,12 +1,12 @@
 {
-  "packet_id": "069e6497-fc0d-4356-968c-efd4c1e27be5",
+  "packet_id": "7f5778b8-dc8d-4fd8-aa1b-5a73f2a3fdce",
   "intent": "heartbeat loop observation",
   "decision": "PASS",
   "axes": {
     "temporal": {
       "freshness_status": "fresh",
-      "timestamp": "2026-05-17T01:31:55.966890+00:00",
-      "chronology_id": "06d2cb00"
+      "timestamp": "2026-05-17T01:35:21.638269+00:00",
+      "chronology_id": "d53934e9"
     },
     "semantic": {
       "intent_keywords": [
@@ -25,7 +25,7 @@
       "anomalies_detected": 195
     },
     "authority_safety": {
-      "daily_readiness": 6.5,
+      "daily_readiness": 10.0,
       "autonomy_authorized": false,
       "warnings_count": 0
     },

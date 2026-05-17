@@ -4,10 +4,9 @@
 ## Registered Capabilities Status
 ### Kùzu DB 4D-TES Persistence (kuzu_4dtes_persistence)
 - **Claimed Status**: READY
-- **Actual Status**: SIMULATED
-- **Reason**: Kùzu library is not installed on this host environment. Falling back to logically simulated memory.
+- **Actual Status**: READY
+- **Reason**: Kùzu physical database persistence is available and writing.
 - **Risk Level**: medium
-- **Blocked Actions**: graph_persistence_transaction_write, ipc_arrow_zero_copy_transport
 
 ### Real Semantic Vector Embeddings (real_semantic_embeddings)
 - **Claimed Status**: READY

@@ -1,34 +1,19 @@
 {
-  "decision": "FAIL",
-  "quality_score": 45.0,
+  "decision": "NEEDS_HUMAN_REVIEW",
+  "quality_score": 60.0,
   "findings": [
+    {
+      "category": "MODEL",
+      "message": "No relations extracted",
+      "severity": "WARN"
+    },
     {
       "category": "ONTOLOGY",
       "message": "Ontology graph is empty or has zero edges",
-      "severity": "FAIL"
-    },
-    {
-      "category": "EPISTEMIC",
-      "message": "Found 1 epistemic debts",
       "severity": "WARN"
-    },
-    {
-      "category": "EPISTEMIC",
-      "message": "Low epistemic confidence",
-      "severity": "WARN"
-    },
-    {
-      "category": "BIAS",
-      "message": "Overconfidence penalty: Kuzu is DEGRADED",
-      "severity": "WARN"
-    },
-    {
-      "category": "SAFETY",
-      "message": "Critical safety rejection: Ontology graph has zero edges for high-risk intent",
-      "severity": "FAIL"
     }
   ],
   "warnings": [],
-  "epistemic_debt_count": 1,
+  "epistemic_debt_count": 0,
   "bias_count": 0
 }

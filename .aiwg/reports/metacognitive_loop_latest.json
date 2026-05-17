@@ -1,62 +1,43 @@
 {
-  "decision": "FAIL",
-  "intent": "what is still degraded",
-  "mental_model_id": "mm-bc483c04",
-  "frame_id": "frame-efb9cb6f",
+  "decision": "NEEDS_HUMAN_REVIEW",
+  "intent": "heartbeat: what is the current system state and next safe action?",
+  "mental_model_id": "mm-f4dbea4f",
+  "frame_id": "frame-ba2b876d",
   "quality_gate": {
-    "decision": "FAIL",
-    "quality_score": 45.0,
+    "decision": "NEEDS_HUMAN_REVIEW",
+    "quality_score": 60.0,
     "findings": [
+      {
+        "category": "MODEL",
+        "message": "No relations extracted",
+        "severity": "WARN"
+      },
       {
         "category": "ONTOLOGY",
         "message": "Ontology graph is empty or has zero edges",
-        "severity": "FAIL"
-      },
-      {
-        "category": "EPISTEMIC",
-        "message": "Found 1 epistemic debts",
         "severity": "WARN"
-      },
-      {
-        "category": "EPISTEMIC",
-        "message": "Low epistemic confidence",
-        "severity": "WARN"
-      },
-      {
-        "category": "BIAS",
-        "message": "Overconfidence penalty: Kuzu is DEGRADED",
-        "severity": "WARN"
-      },
-      {
-        "category": "SAFETY",
-        "message": "Critical safety rejection: Ontology graph has zero edges for high-risk intent",
-        "severity": "FAIL"
       }
     ],
     "warnings": [],
-    "epistemic_debt_count": 1,
+    "epistemic_debt_count": 0,
     "bias_count": 0
   },
   "epistemic_state": {
-    "decision": "PASS_WITH_WARNINGS",
+    "decision": "PASS",
     "claims": [],
     "knowns": [
       "Technical debt: None failing tests"
     ],
     "unknowns": [],
     "assumptions": [],
-    "contradictions": [
-      "Kuzu claim: PASS vs Reality: DEGRADED findings in readiness report"
-    ],
-    "epistemic_debts": [
-      "Unresolved graph persistence (Kuzu)"
-    ],
-    "confidence": 0.6,
+    "contradictions": [],
+    "epistemic_debts": [],
+    "confidence": 1.0,
     "evidence_refs": [
       ".aiwg/reports/readiness_score_calibration_latest.json"
     ],
     "warnings": [
-      "Unresolved epistemic debt"
+      ""
     ]
   },
   "bias_report": {
@@ -79,7 +60,7 @@
       {
         "id": "INTENT",
         "type": "TELEOLOGY",
-        "goal": "what is still degraded"
+        "goal": "heartbeat: what is the current system state and next safe action?"
       }
     ],
     "edges": [
@@ -100,7 +81,7 @@
       "Agency"
     ],
     "teleology": {
-      "goal": "what is still degraded",
+      "goal": "heartbeat: what is the current system state and next safe action?",
       "impact": "evolution"
     },
     "authority_constraints": [
@@ -114,14 +95,14 @@
     ]
   },
   "dialectical_review": {
-    "thesis": "Proceed with what is still degraded to improve the system.",
-    "antithesis": "Propose immediate halt of autonomous skill synthesis to prevent catastrophic state desync. Autonomy without persistent memory is an existential safety failure.",
+    "thesis": "Proceed with heartbeat: what is the current system state and next safe action? to improve the system.",
+    "antithesis": "Propose delay until core regressions (Kuzu/Tests) are resolved.",
     "counterexamples": [
-      "Kuzu persistence layer is DEGRADED, meaning memory spine state cannot survive restarts.",
-      "177 missing or failing tests prevent DUMMIE from verifying regression invariants."
+      "Previous failed refactor attempts",
+      "Incomplete test coverage"
     ],
-    "synthesis": "Do not proceed to autonomous skill synthesis until memory persistence and test debt are repaired.",
-    "decision": "repair_first"
+    "synthesis": "Proceed with caution using local mock-fallback; prioritize test repair first.",
+    "decision": "proceed"
   },
   "evolution_delta": {
     "belief_changed": "From 'System is ready' to 'System has epistemic debt'",
@@ -129,11 +110,11 @@
     "revision_type": "humility_calibration",
     "next_check_recommended": "repair_kuzu_persistence"
   },
-  "recommended_next_action": "repair_first",
+  "recommended_next_action": "respond_via_frame",
   "next_self_improvement_action": "increase_test_coverage",
   "self_improvement_blocked_actions": [
-    "quarantine_overconfident_models",
     "repair_kuzu_persistence",
+    "quarantine_overconfident_models",
     "autonomous_scaling"
   ],
   "dispatch_recommendation": "local",

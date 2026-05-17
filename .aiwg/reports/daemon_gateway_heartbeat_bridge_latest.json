@@ -3,23 +3,16 @@
   "daemon_status": "INVOCATION_ONLY",
   "gateway_status": "MAPPED",
   "dispatch_envelope": {
-    "dispatch_id": "0d1407eb-0520-4ac4-a538-346a6a8624e0",
+    "dispatch_id": "23f0f364-3393-4d24-9091-ee55698d2521",
     "selected_action": {
-      "action_id": "eda-aa21eebe",
-      "source_delta": "mental_model_truth_hygiene_latest.json",
-      "action_type": "increase_test_coverage",
-      "priority": "high",
-      "blocks_autonomy": true,
-      "blocks_daily_use": false,
-      "evidence_refs": [
-        ".aiwg/reports/mental_model_truth_hygiene_latest.json"
-      ],
-      "recommended_pack": "PACK_5_3",
+      "action_id": "dep-repair",
+      "action_type": "resolve_dependency_first",
+      "priority": "critical",
       "status": "proposed"
     },
     "target": "human_review",
     "mode": "repair_planning",
-    "context_packet_ref": "069e6497-fc0d-4356-968c-efd4c1e27be5",
+    "context_packet_ref": "7f5778b8-dc8d-4fd8-aa1b-5a73f2a3fdce",
     "memory_refs": [
       ".aiwg/reports/memory_spine_entrypoint_latest.json"
     ],

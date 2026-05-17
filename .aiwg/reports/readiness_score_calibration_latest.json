@@ -1,20 +1,13 @@
 {
   "decision": "PASS_WITH_WARNINGS",
   "calibrated_scores": {
-    "daily_use_readiness": 6.5,
-    "memory_spine_readiness": 6.5,
+    "daily_use_readiness": 10.0,
+    "memory_spine_readiness": 10.0,
     "token_economy_readiness": 10.0,
     "entrypoint_sovereignty_readiness": 10.0,
-    "autonomy_readiness": 2.5
+    "autonomy_readiness": 6.0
   },
   "findings": [
-    {
-      "id": "score_1_with_degraded_kuzu",
-      "severity": "HIGH",
-      "description": "Kuzu/4D-TES persistence is DEGRADED. No physical graph writes occur.",
-      "impact": "Memory Spine is logical-only. Causal retrieval depends on file parsing.",
-      "score_penalty": 3.5
-    },
     {
       "id": "score_1_with_partial_context_coverage",
       "severity": "MEDIUM",
@@ -23,5 +16,5 @@
       "score_penalty": 2.0
     }
   ],
-  "generated_at": "2026-05-16T16:42:32Z"
+  "generated_at": "2026-05-17T01:35:17Z"
 }

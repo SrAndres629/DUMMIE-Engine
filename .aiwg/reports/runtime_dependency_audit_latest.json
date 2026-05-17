@@ -1,45 +1,45 @@
 {
-  "decision": "FAIL",
+  "decision": "PASS_WITH_WARNINGS",
   "dependencies": [
     {
       "name": "kuzu",
-      "status": "MISSING",
-      "version": null
+      "status": "READY",
+      "version": "0.11.3"
     },
     {
       "name": "pytest",
-      "status": "MISSING",
-      "version": null
+      "status": "READY",
+      "version": "9.0.3"
     },
     {
       "name": "yaml",
       "status": "READY",
-      "version": "6.0.1"
+      "version": "6.0.3"
     },
     {
       "name": "networkx",
-      "status": "MISSING",
-      "version": null
+      "status": "READY",
+      "version": "3.6.1"
     },
     {
       "name": "numpy",
-      "status": "MISSING",
-      "version": null
+      "status": "READY",
+      "version": "2.4.4"
     },
     {
       "name": "pydantic",
       "status": "READY",
-      "version": "2.12.5"
+      "version": "2.13.2"
     },
     {
       "name": "fastapi",
-      "status": "MISSING",
-      "version": null
+      "status": "READY",
+      "version": "0.136.1"
     },
     {
       "name": "typer",
-      "status": "MISSING",
-      "version": null
+      "status": "READY",
+      "version": "0.24.1"
     },
     {
       "name": "rich",
@@ -49,29 +49,13 @@
     {
       "name": "click",
       "status": "READY",
-      "version": "8.1.6"
+      "version": "8.3.2"
     }
   ],
-  "missing_dependencies": [
-    "kuzu",
-    "pytest",
-    "networkx",
-    "numpy",
-    "fastapi",
-    "typer"
-  ],
-  "optional_missing_dependencies": [
-    "kuzu",
-    "networkx",
-    "numpy",
-    "fastapi",
-    "typer"
-  ],
-  "required_missing_dependencies": [
-    "pytest"
-  ],
+  "missing_dependencies": [],
+  "optional_missing_dependencies": [],
+  "required_missing_dependencies": [],
   "simulated_capabilities": [
-    "kuzu_4dtes_persistence",
     "daemon_persistent_runtime"
   ],
   "fallback_capabilities": [
@@ -82,10 +66,11 @@
   "dry_run_capabilities": [
     "gateway_live_dispatch"
   ],
-  "ready_capabilities": [],
+  "ready_capabilities": [
+    "kuzu_4dtes_persistence"
+  ],
   "unsafe_to_enable": [],
   "warnings": [
-    "K\u00f9zu Python package is missing; 4D-TES database persistence falls back to logical simulated mode.",
     "External embedding provider APIs are disabled. Memory Router uses deterministic fallback projection.",
     "Persistent background daemon is disabled. Life cycle runs in invocation-only advisory mode.",
     "MCP tool dispatch is human-gated (can_execute_now: false).",

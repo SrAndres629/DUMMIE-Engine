@@ -376,5 +376,59 @@
     "quality_score": 70,
     "superseded_by": "mm-dbabda26",
     "created_at": "2026-05-17T00:29:43Z"
+  },
+  {
+    "model_id": "mm-3d1474eb",
+    "intent_hash": "123d31f05f9c",
+    "intent": "heartbeat: what is the current system state and next safe action?",
+    "status": "needs_review",
+    "quality_score": 70,
+    "superseded_by": "",
+    "created_at": "2026-05-17T01:32:04Z"
+  },
+  {
+    "model_id": "mm-d651c0b8",
+    "intent_hash": "9a06f9ff57a5",
+    "intent": "why is kuzu still degraded",
+    "status": "valid",
+    "quality_score": 70,
+    "superseded_by": "",
+    "created_at": "2026-05-17T01:32:06Z"
+  },
+  {
+    "model_id": "mm-3b835a70",
+    "intent_hash": "9a06f9ff57a5",
+    "intent": "why is kuzu still degraded",
+    "status": "valid",
+    "quality_score": 70,
+    "superseded_by": "",
+    "created_at": "2026-05-17T01:32:09Z"
+  },
+  {
+    "model_id": "mm-11dee8e5",
+    "intent_hash": "20635a1fb271",
+    "intent": "what dependencies are missing",
+    "status": "valid",
+    "quality_score": 70,
+    "superseded_by": "",
+    "created_at": "2026-05-17T01:32:12Z"
+  },
+  {
+    "model_id": "mm-52c0c2d9",
+    "intent_hash": "df18e3d2d879",
+    "intent": "what must be installed or configured",
+    "status": "valid",
+    "quality_score": 70,
+    "superseded_by": "",
+    "created_at": "2026-05-17T01:32:12Z"
+  },
+  {
+    "model_id": "mm-bc483c04",
+    "intent_hash": "c754866dff8b",
+    "intent": "what is still degraded",
+    "status": "valid",
+    "quality_score": 70,
+    "superseded_by": "",
+    "created_at": "2026-05-17T01:32:12Z"
   }
 ]

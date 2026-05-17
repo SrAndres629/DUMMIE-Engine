@@ -5,8 +5,8 @@
       "capability_id": "kuzu_4dtes_persistence",
       "name": "K\u00f9zu DB 4D-TES Persistence",
       "claimed_status": "READY",
-      "actual_status": "SIMULATED",
-      "reason": "K\u00f9zu library is not installed on this host environment. Falling back to logically simulated memory.",
+      "actual_status": "READY",
+      "reason": "K\u00f9zu physical database persistence is available and writing.",
       "required_dependencies": [
         "kuzu"
       ],
@@ -19,10 +19,7 @@
         "dry_run_write",
         "readback_test"
       ],
-      "blocks": [
-        "graph_persistence_transaction_write",
-        "ipc_arrow_zero_copy_transport"
-      ],
+      "blocks": [],
       "safe_repair_possible_now": true,
       "risk_level": "medium",
       "evidence_refs": [

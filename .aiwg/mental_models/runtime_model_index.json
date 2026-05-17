@@ -821,19 +821,27 @@
   },
   "mm-3d1474eb": {
     "path": ".aiwg/mental_models/runtime_models.jsonl",
-    "status": "valid",
+    "status": "needs_review",
     "quality_score": 70,
     "created_at": "2026-05-17T01:32:04Z",
-    "intent_hash": "",
+    "intent_hash": "123d31f05f9c",
     "superseded_by": "",
-    "hygiene_findings": []
+    "hygiene_findings": [
+      {
+        "model_id": "mm-3d1474eb",
+        "finding_type": "empty_decisions_for_planning_intent",
+        "message": "No decisions for planning intent: heartbeat: what is the current system state and next safe ac",
+        "severity": "WARN",
+        "recommended_status": "needs_review"
+      }
+    ]
   },
   "mm-d651c0b8": {
     "path": ".aiwg/mental_models/runtime_models.jsonl",
     "status": "valid",
     "quality_score": 70,
     "created_at": "2026-05-17T01:32:06Z",
-    "intent_hash": "",
+    "intent_hash": "9a06f9ff57a5",
     "superseded_by": "",
     "hygiene_findings": []
   },
@@ -842,7 +850,7 @@
     "status": "valid",
     "quality_score": 70,
     "created_at": "2026-05-17T01:32:09Z",
-    "intent_hash": "",
+    "intent_hash": "9a06f9ff57a5",
     "superseded_by": "",
     "hygiene_findings": []
   },
@@ -851,7 +859,7 @@
     "status": "valid",
     "quality_score": 70,
     "created_at": "2026-05-17T01:32:12Z",
-    "intent_hash": "",
+    "intent_hash": "20635a1fb271",
     "superseded_by": "",
     "hygiene_findings": []
   },
@@ -860,7 +868,7 @@
     "status": "valid",
     "quality_score": 70,
     "created_at": "2026-05-17T01:32:12Z",
-    "intent_hash": "",
+    "intent_hash": "df18e3d2d879",
     "superseded_by": "",
     "hygiene_findings": []
   },
@@ -869,6 +877,15 @@
     "status": "valid",
     "quality_score": 70,
     "created_at": "2026-05-17T01:32:12Z",
+    "intent_hash": "c754866dff8b",
+    "superseded_by": "",
+    "hygiene_findings": []
+  },
+  "mm-f4dbea4f": {
+    "path": ".aiwg/mental_models/runtime_models.jsonl",
+    "status": "valid",
+    "quality_score": 60,
+    "created_at": "2026-05-17T01:35:26Z",
     "intent_hash": "",
     "superseded_by": "",
     "hygiene_findings": []

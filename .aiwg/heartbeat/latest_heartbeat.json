@@ -1,7 +1,7 @@
 {
-  "heartbeat_id": "hb-d84d0742",
+  "heartbeat_id": "hb-e8453a01",
   "mode": "observe_only",
-  "decision": "FAIL",
+  "decision": "PASS_WITH_WARNINGS",
   "observation": {
     "git_clean": true,
     "canonical_inputs": [
@@ -42,31 +42,31 @@
   "truth_hygiene": {
     "decision": "PASS_WITH_WARNINGS",
     "summary": {
-      "models_scanned": 42,
-      "valid_count": 13,
+      "models_scanned": 48,
+      "valid_count": 18,
       "stale_count": 5,
       "superseded_count": 12,
       "quarantined_count": 4,
       "unsafe_rejected_count": 0,
-      "needs_review_count": 8,
+      "needs_review_count": 9,
       "overconfidence_count": 4,
       "kuzu_degraded": true
     }
   },
   "epistemic_state": {
-    "decision": "PASS_WITH_WARNINGS",
-    "confidence": 0.6
+    "decision": "PASS",
+    "confidence": 1.0
   },
   "bias_report": {
     "decision": "PASS",
     "findings_count": 0
   },
   "memory_spine": {
-    "status": "DEGRADED_WITH_FILE_BACKED_MEMORY",
-    "graph_status": "DEGRADED"
+    "status": "READY",
+    "graph_status": "READY"
   },
   "mental_model": {
-    "model_id": "mm-3d1474eb"
+    "model_id": "mm-f4dbea4f"
   },
   "dialectic": {
     "thesis": "Proceed with heartbeat: what is the current system state and next safe action? to improve the system.",
@@ -79,50 +79,54 @@
     "decision": "proceed"
   },
   "quality_gate": {
-    "decision": "FAIL",
-    "quality_score": 25.0
+    "decision": "NEEDS_HUMAN_REVIEW",
+    "quality_score": 60.0
   },
   "self_improvement_queue": {
     "actions_count": 6,
     "next": "increase_test_coverage"
   },
   "selected_action": {
-    "action_id": "dep-repair",
-    "action_type": "resolve_dependency_first",
-    "priority": "critical",
+    "action_id": "eda-fdcbabff",
+    "source_delta": "mental_model_truth_hygiene_latest.json",
+    "action_type": "increase_test_coverage",
+    "priority": "high",
+    "blocks_autonomy": true,
+    "blocks_daily_use": false,
+    "evidence_refs": [
+      ".aiwg/reports/mental_model_truth_hygiene_latest.json"
+    ],
+    "recommended_pack": "PACK_5_3",
     "status": "proposed"
   },
   "blocked_actions": [
     "autonomous_execution",
     "autonomous_runtime",
     "autonomous_scaling",
-    "graph_persistence_transaction_write",
     "quarantine_overconfident_models",
     "repair_kuzu_persistence"
   ],
-  "dispatch_recommendation": "antigravity",
+  "dispatch_recommendation": "codex",
   "outcome_ref": ".aiwg/reports/heartbeat_latest.json",
-  "learning_episode_ref": "sessions/CURRENT/learning_episodes (heartbeat hb-d84d0742)",
+  "learning_episode_ref": "sessions/CURRENT/learning_episodes (heartbeat hb-e8453a01)",
   "next_heartbeat_seed": {
-    "previous_heartbeat_id": "hb-d84d0742",
-    "previous_decision": "FAIL",
-    "next_action": "resolve_dependency_first",
-    "dispatch": "antigravity",
+    "previous_heartbeat_id": "hb-e8453a01",
+    "previous_decision": "PASS_WITH_WARNINGS",
+    "next_action": "increase_test_coverage",
+    "dispatch": "codex",
     "blocked_actions": [
       "autonomous_execution",
       "autonomous_runtime",
       "autonomous_scaling",
-      "graph_persistence_transaction_write",
       "quarantine_overconfident_models",
       "repair_kuzu_persistence"
     ],
     "kuzu_degraded": true,
     "quarantined_models": 4,
-    "created_at": "2026-05-17T01:32:04.272678+00:00"
+    "created_at": "2026-05-17T01:35:26.035529+00:00"
   },
   "warnings": [
     "Systemic Coherence Score (51.33%) is under 60% \u2014 autonomous execution is strictly blocked.",
-    "K\u00f9zu DB 4D-TES Persistence is DEGRADED \u2014 graph-dependent actions are locked except repair.",
     "Real semantic retrieval is not ready; memory router operates under deterministic mock projection.",
     "Daemon background runtime is simulated \u2014 autonomous runtime claim is blocked."
   ],
@@ -145,7 +149,7 @@
     ".aiwg/reports/self_improvement_action_queue.json",
     ".aiwg/reports/heartbeat_decision_policy_latest.json"
   ],
-  "created_at": "2026-05-17T01:32:04.272691+00:00",
+  "created_at": "2026-05-17T01:35:26.035543+00:00",
   "circulation_summary": {
     "intent": "heartbeat loop observation",
     "six_d_context": {
@@ -170,7 +174,7 @@
     },
     "daemon_gateway_bridge": {
       "decision": "PASS",
-      "dispatch_id": "0d1407eb-0520-4ac4-a538-346a6a8624e0",
+      "dispatch_id": "23f0f364-3393-4d24-9091-ee55698d2521",
       "target": "human_review"
     },
     "polyglot_probe": {
@@ -185,47 +189,47 @@
     }
   },
   "dependency_reality": {
-    "decision": "FAIL",
+    "decision": "PASS_WITH_WARNINGS",
     "dependencies": [
       {
         "name": "kuzu",
-        "status": "MISSING",
-        "version": null
+        "status": "READY",
+        "version": "0.11.3"
       },
       {
         "name": "pytest",
-        "status": "MISSING",
-        "version": null
+        "status": "READY",
+        "version": "9.0.3"
       },
       {
         "name": "yaml",
         "status": "READY",
-        "version": "6.0.1"
+        "version": "6.0.3"
       },
       {
         "name": "networkx",
-        "status": "MISSING",
-        "version": null
+        "status": "READY",
+        "version": "3.6.1"
       },
       {
         "name": "numpy",
-        "status": "MISSING",
-        "version": null
+        "status": "READY",
+        "version": "2.4.4"
       },
       {
         "name": "pydantic",
         "status": "READY",
-        "version": "2.12.5"
+        "version": "2.13.2"
       },
       {
         "name": "fastapi",
-        "status": "MISSING",
-        "version": null
+        "status": "READY",
+        "version": "0.136.1"
       },
       {
         "name": "typer",
-        "status": "MISSING",
-        "version": null
+        "status": "READY",
+        "version": "0.24.1"
       },
       {
         "name": "rich",
@@ -235,29 +239,13 @@
       {
         "name": "click",
         "status": "READY",
-        "version": "8.1.6"
+        "version": "8.3.2"
       }
     ],
-    "missing_dependencies": [
-      "kuzu",
-      "pytest",
-      "networkx",
-      "numpy",
-      "fastapi",
-      "typer"
-    ],
-    "optional_missing_dependencies": [
-      "kuzu",
-      "networkx",
-      "numpy",
-      "fastapi",
-      "typer"
-    ],
-    "required_missing_dependencies": [
-      "pytest"
-    ],
+    "missing_dependencies": [],
+    "optional_missing_dependencies": [],
+    "required_missing_dependencies": [],
     "simulated_capabilities": [
-      "kuzu_4dtes_persistence",
       "daemon_persistent_runtime"
     ],
     "fallback_capabilities": [
@@ -268,10 +256,11 @@
     "dry_run_capabilities": [
       "gateway_live_dispatch"
     ],
-    "ready_capabilities": [],
+    "ready_capabilities": [
+      "kuzu_4dtes_persistence"
+    ],
     "unsafe_to_enable": [],
     "warnings": [
-      "K\u00f9zu Python package is missing; 4D-TES database persistence falls back to logical simulated mode.",
       "External embedding provider APIs are disabled. Memory Router uses deterministic fallback projection.",
       "Persistent background daemon is disabled. Life cycle runs in invocation-only advisory mode.",
       "MCP tool dispatch is human-gated (can_execute_now: false).",
@@ -289,8 +278,8 @@
         "capability_id": "kuzu_4dtes_persistence",
         "name": "K\u00f9zu DB 4D-TES Persistence",
         "claimed_status": "READY",
-        "actual_status": "SIMULATED",
-        "reason": "K\u00f9zu library is not installed on this host environment. Falling back to logically simulated memory.",
+        "actual_status": "READY",
+        "reason": "K\u00f9zu physical database persistence is available and writing.",
         "required_dependencies": [
           "kuzu"
         ],
@@ -303,10 +292,7 @@
           "dry_run_write",
           "readback_test"
         ],
-        "blocks": [
-          "graph_persistence_transaction_write",
-          "ipc_arrow_zero_copy_transport"
-        ],
+        "blocks": [],
         "safe_repair_possible_now": true,
         "risk_level": "medium",
         "evidence_refs": [
@@ -588,92 +574,6 @@
   "runtime_closure_plan": {
     "decision": "PASS_WITH_WARNINGS",
     "actions": [
-      {
-        "action_id": "install_kuzu_library",
-        "capability_id": "kuzu_4dtes_persistence",
-        "title": "Install K\u00f9zu Python Bindings",
-        "action_type": "install_dependency",
-        "priority": "critical",
-        "can_execute_now": false,
-        "requires_human_approval": true,
-        "commands_to_run": [
-          ".venv/bin/pip install kuzu==0.7.1"
-        ],
-        "files_to_modify": [],
-        "verification_commands": [
-          ".venv/bin/python -c 'import kuzu; print(kuzu.__version__)'"
-        ],
-        "rollback_plan": [
-          ".venv/bin/pip uninstall -y kuzu"
-        ],
-        "risk_level": "medium",
-        "evidence_refs": [
-          "/media/datasets/DUMMIE Engine/.aiwg/reports/degraded_capability_registry_latest.json"
-        ]
-      },
-      {
-        "action_id": "configure_kuzu_db_path",
-        "capability_id": "kuzu_4dtes_persistence",
-        "title": "Configure K\u00f9zu Database Directory",
-        "action_type": "configure_path",
-        "priority": "high",
-        "can_execute_now": false,
-        "requires_human_approval": true,
-        "commands_to_run": [
-          "mkdir -p .aiwg/memory/loci.db"
-        ],
-        "files_to_modify": [
-          "layers/l2_brain/models.py"
-        ],
-        "verification_commands": [
-          "test -d .aiwg/memory/loci.db"
-        ],
-        "rollback_plan": [],
-        "risk_level": "low",
-        "evidence_refs": [
-          "/media/datasets/DUMMIE Engine/.aiwg/reports/degraded_capability_registry_latest.json"
-        ]
-      },
-      {
-        "action_id": "test_kuzu_readwrite_connectivity",
-        "capability_id": "kuzu_4dtes_persistence",
-        "title": "Verify Non-Destructive K\u00f9zu DB Write/Readback Sequence",
-        "action_type": "write_integration_test",
-        "priority": "high",
-        "can_execute_now": false,
-        "requires_human_approval": true,
-        "commands_to_run": [
-          ".venv/bin/python layers/l2_brain/tests/test_four_dtes_persistence_preflight.py"
-        ],
-        "files_to_modify": [],
-        "verification_commands": [],
-        "rollback_plan": [],
-        "risk_level": "medium",
-        "evidence_refs": [
-          "/media/datasets/DUMMIE Engine/.aiwg/reports/degraded_capability_registry_latest.json"
-        ]
-      },
-      {
-        "action_id": "enable_production_kuzu_adapter",
-        "capability_id": "kuzu_4dtes_persistence",
-        "title": "Toggle Production K\u00f9zu Persistent Database Adapter",
-        "action_type": "enable_adapter",
-        "priority": "medium",
-        "can_execute_now": false,
-        "requires_human_approval": true,
-        "commands_to_run": [],
-        "files_to_modify": [
-          "layers/l2_brain/four_dtes_persistence_preflight.py"
-        ],
-        "verification_commands": [
-          "dummie-ctl 4dtes-preflight"
-        ],
-        "rollback_plan": [],
-        "risk_level": "high",
-        "evidence_refs": [
-          "/media/datasets/DUMMIE Engine/.aiwg/reports/degraded_capability_registry_latest.json"
-        ]
-      },
       {
         "action_id": "configure_local_sentence_transformers",
         "capability_id": "real_semantic_embeddings",

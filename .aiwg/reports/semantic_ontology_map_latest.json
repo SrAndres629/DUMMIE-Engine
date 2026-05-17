@@ -1,49 +1,23 @@
 {
-  "decision": "PASS",
+  "decision": "PASS_WITH_WARNINGS",
   "concepts": [
-    "what is still degraded"
+    "heartbeat: what is the current system state and next safe action?"
   ],
   "classes": [
-    "RISK"
+    "UNKNOWN"
   ],
   "ontology_graph": {
     "nodes": [
       {
         "id": "INTENT",
-        "label": "what is still degraded",
+        "label": "heartbeat: what is the current system state and next safe action?",
         "type": "INTENT"
-      },
-      {
-        "id": "RISK",
-        "label": "RISK",
-        "type": "CLASS"
-      },
-      {
-        "id": "SAFETY",
-        "label": "SAFETY",
-        "type": "CLASS"
       }
     ],
-    "edges": [
-      {
-        "source": "INTENT",
-        "target": "RISK",
-        "type": "IS_A"
-      },
-      {
-        "source": "SAFETY",
-        "target": "ACTION",
-        "type": "CONSTRAINS"
-      },
-      {
-        "source": "AUTONOMY",
-        "target": "MEMORY",
-        "type": "BLOCKED_BY"
-      }
-    ]
+    "edges": []
   },
-  "timestamp": "2026-05-17T01:32:12.717183+00:00",
+  "timestamp": "2026-05-17T01:35:26.005713+00:00",
   "warnings": [
-    ""
+    "No ontology classes matched"
   ]
 }
