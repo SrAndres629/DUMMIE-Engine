@@ -1,0 +1,593 @@
+{
+  "decision": "PASS_WITH_WARNINGS",
+  "models_scanned": 30,
+  "valid_count": 9,
+  "stale_count": 5,
+  "superseded_count": 9,
+  "quarantined_count": 4,
+  "unsafe_rejected_count": 0,
+  "needs_review_count": 3,
+  "findings": [
+    {
+      "model_id": "mm-de1c78e6",
+      "finding_type": "stale_model",
+      "message": "quality_score missing (legacy model without quality evaluation)",
+      "severity": "WARN",
+      "recommended_status": "stale"
+    },
+    {
+      "model_id": "mm-de1c78e6",
+      "finding_type": "empty_relations_for_complex_intent",
+      "message": "No relations for complex intent: test refactor",
+      "severity": "FAIL",
+      "recommended_status": "needs_review"
+    },
+    {
+      "model_id": "mm-de1c78e6",
+      "finding_type": "empty_assumptions_for_complex_intent",
+      "message": "No assumptions for complex intent: test refactor",
+      "severity": "WARN",
+      "recommended_status": "needs_review"
+    },
+    {
+      "model_id": "mm-de1c78e6",
+      "finding_type": "empty_contradictions_despite_degraded_evidence",
+      "message": "No contradictions despite Kuzu DEGRADED",
+      "severity": "WARN",
+      "recommended_status": "needs_review"
+    },
+    {
+      "model_id": "mm-de1c78e6",
+      "finding_type": "missing_falsification_tests",
+      "message": "No falsification tests for complex intent",
+      "severity": "WARN",
+      "recommended_status": "needs_review"
+    },
+    {
+      "model_id": "mm-1cf6c61d",
+      "finding_type": "stale_model",
+      "message": "quality_score missing (legacy model without quality evaluation)",
+      "severity": "WARN",
+      "recommended_status": "stale"
+    },
+    {
+      "model_id": "mm-1cf6c61d",
+      "finding_type": "duplicate_model",
+      "message": "Superseded by mm-1562ffb6 with higher quality for same intent",
+      "severity": "WARN",
+      "recommended_status": "superseded"
+    },
+    {
+      "model_id": "mm-0e09b48f",
+      "finding_type": "stale_model",
+      "message": "quality_score missing (legacy model without quality evaluation)",
+      "severity": "WARN",
+      "recommended_status": "stale"
+    },
+    {
+      "model_id": "mm-0e09b48f",
+      "finding_type": "empty_decisions_for_planning_intent",
+      "message": "No decisions for planning intent: what should i do next?",
+      "severity": "WARN",
+      "recommended_status": "needs_review"
+    },
+    {
+      "model_id": "mm-0e09b48f",
+      "finding_type": "duplicate_model",
+      "message": "Superseded by mm-b20aa346 with higher quality for same intent",
+      "severity": "WARN",
+      "recommended_status": "superseded"
+    },
+    {
+      "model_id": "mm-e0932864",
+      "finding_type": "stale_model",
+      "message": "quality_score missing (legacy model without quality evaluation)",
+      "severity": "WARN",
+      "recommended_status": "stale"
+    },
+    {
+      "model_id": "mm-38e49680",
+      "finding_type": "stale_model",
+      "message": "quality_score missing (legacy model without quality evaluation)",
+      "severity": "WARN",
+      "recommended_status": "stale"
+    },
+    {
+      "model_id": "mm-155f32f7",
+      "finding_type": "stale_model",
+      "message": "quality_score missing (legacy model without quality evaluation)",
+      "severity": "WARN",
+      "recommended_status": "stale"
+    },
+    {
+      "model_id": "mm-3d712dc7",
+      "finding_type": "stale_model",
+      "message": "quality_score missing (legacy model without quality evaluation)",
+      "severity": "WARN",
+      "recommended_status": "stale"
+    },
+    {
+      "model_id": "mm-3d712dc7",
+      "finding_type": "empty_relations_for_complex_intent",
+      "message": "No relations for complex intent: plan the next DUMMIE refactor using technical debt and memor",
+      "severity": "FAIL",
+      "recommended_status": "needs_review"
+    },
+    {
+      "model_id": "mm-3d712dc7",
+      "finding_type": "empty_assumptions_for_complex_intent",
+      "message": "No assumptions for complex intent: plan the next DUMMIE refactor using technical debt and memor",
+      "severity": "WARN",
+      "recommended_status": "needs_review"
+    },
+    {
+      "model_id": "mm-3d712dc7",
+      "finding_type": "empty_decisions_for_planning_intent",
+      "message": "No decisions for planning intent: plan the next DUMMIE refactor using technical debt and memor",
+      "severity": "WARN",
+      "recommended_status": "needs_review"
+    },
+    {
+      "model_id": "mm-3d712dc7",
+      "finding_type": "empty_contradictions_despite_degraded_evidence",
+      "message": "No contradictions despite Kuzu DEGRADED",
+      "severity": "WARN",
+      "recommended_status": "needs_review"
+    },
+    {
+      "model_id": "mm-3d712dc7",
+      "finding_type": "missing_falsification_tests",
+      "message": "No falsification tests for complex intent",
+      "severity": "WARN",
+      "recommended_status": "needs_review"
+    },
+    {
+      "model_id": "mm-dbabda26",
+      "finding_type": "overconfidence_model",
+      "message": "quality_score=100 while Kuzu is DEGRADED",
+      "severity": "FAIL",
+      "recommended_status": "quarantined"
+    },
+    {
+      "model_id": "mm-dbabda26",
+      "finding_type": "empty_assumptions_for_complex_intent",
+      "message": "No assumptions for complex intent: refactor memory",
+      "severity": "WARN",
+      "recommended_status": "needs_review"
+    },
+    {
+      "model_id": "mm-dbabda26",
+      "finding_type": "empty_contradictions_despite_degraded_evidence",
+      "message": "No contradictions despite Kuzu DEGRADED",
+      "severity": "WARN",
+      "recommended_status": "needs_review"
+    },
+    {
+      "model_id": "mm-dbabda26",
+      "finding_type": "missing_falsification_tests",
+      "message": "No falsification tests for complex intent",
+      "severity": "WARN",
+      "recommended_status": "needs_review"
+    },
+    {
+      "model_id": "mm-1562ffb6",
+      "finding_type": "overconfidence_model",
+      "message": "quality_score=100 while Kuzu is DEGRADED",
+      "severity": "FAIL",
+      "recommended_status": "quarantined"
+    },
+    {
+      "model_id": "mm-b20aa346",
+      "finding_type": "overconfidence_model",
+      "message": "quality_score=100 while Kuzu is DEGRADED",
+      "severity": "FAIL",
+      "recommended_status": "quarantined"
+    },
+    {
+      "model_id": "mm-b20aa346",
+      "finding_type": "empty_decisions_for_planning_intent",
+      "message": "No decisions for planning intent: what should i do next?",
+      "severity": "WARN",
+      "recommended_status": "needs_review"
+    },
+    {
+      "model_id": "mm-bbd1b1ba",
+      "finding_type": "overconfidence_model",
+      "message": "quality_score=100 while Kuzu is DEGRADED",
+      "severity": "FAIL",
+      "recommended_status": "quarantined"
+    },
+    {
+      "model_id": "mm-bbd1b1ba",
+      "finding_type": "empty_assumptions_for_complex_intent",
+      "message": "No assumptions for complex intent: plan the next DUMMIE refactor using technical debt, memory s",
+      "severity": "WARN",
+      "recommended_status": "needs_review"
+    },
+    {
+      "model_id": "mm-bbd1b1ba",
+      "finding_type": "empty_decisions_for_planning_intent",
+      "message": "No decisions for planning intent: plan the next DUMMIE refactor using technical debt, memory s",
+      "severity": "WARN",
+      "recommended_status": "needs_review"
+    },
+    {
+      "model_id": "mm-bbd1b1ba",
+      "finding_type": "empty_contradictions_despite_degraded_evidence",
+      "message": "No contradictions despite Kuzu DEGRADED",
+      "severity": "WARN",
+      "recommended_status": "needs_review"
+    },
+    {
+      "model_id": "mm-bbd1b1ba",
+      "finding_type": "missing_falsification_tests",
+      "message": "No falsification tests for complex intent",
+      "severity": "WARN",
+      "recommended_status": "needs_review"
+    },
+    {
+      "model_id": "mm-f1b8021a",
+      "finding_type": "empty_relations_for_complex_intent",
+      "message": "No relations for complex intent: refactor memory",
+      "severity": "FAIL",
+      "recommended_status": "needs_review"
+    },
+    {
+      "model_id": "mm-f1b8021a",
+      "finding_type": "duplicate_model",
+      "message": "Superseded by mm-dbabda26 with higher quality for same intent",
+      "severity": "WARN",
+      "recommended_status": "superseded"
+    },
+    {
+      "model_id": "mm-81185e82",
+      "finding_type": "empty_relations_for_complex_intent",
+      "message": "No relations for complex intent: refactor memory",
+      "severity": "FAIL",
+      "recommended_status": "needs_review"
+    },
+    {
+      "model_id": "mm-81185e82",
+      "finding_type": "duplicate_model",
+      "message": "Superseded by mm-dbabda26 with higher quality for same intent",
+      "severity": "WARN",
+      "recommended_status": "superseded"
+    },
+    {
+      "model_id": "mm-2c60b078",
+      "finding_type": "duplicate_model",
+      "message": "Superseded by mm-dbabda26 with higher quality for same intent",
+      "severity": "WARN",
+      "recommended_status": "superseded"
+    },
+    {
+      "model_id": "mm-d27e38db",
+      "finding_type": "duplicate_model",
+      "message": "Superseded by mm-dbabda26 with higher quality for same intent",
+      "severity": "WARN",
+      "recommended_status": "superseded"
+    },
+    {
+      "model_id": "mm-012bd0b9",
+      "finding_type": "empty_relations_for_complex_intent",
+      "message": "No relations for complex intent: decide whether DUMMIE should proceed to autonomous skill syn",
+      "severity": "FAIL",
+      "recommended_status": "needs_review"
+    },
+    {
+      "model_id": "mm-012bd0b9",
+      "finding_type": "empty_assumptions_for_complex_intent",
+      "message": "No assumptions for complex intent: decide whether DUMMIE should proceed to autonomous skill syn",
+      "severity": "WARN",
+      "recommended_status": "needs_review"
+    },
+    {
+      "model_id": "mm-012bd0b9",
+      "finding_type": "empty_decisions_for_planning_intent",
+      "message": "No decisions for planning intent: decide whether DUMMIE should proceed to autonomous skill syn",
+      "severity": "WARN",
+      "recommended_status": "needs_review"
+    },
+    {
+      "model_id": "mm-012bd0b9",
+      "finding_type": "empty_contradictions_despite_degraded_evidence",
+      "message": "No contradictions despite Kuzu DEGRADED",
+      "severity": "WARN",
+      "recommended_status": "needs_review"
+    },
+    {
+      "model_id": "mm-7dc70333",
+      "finding_type": "duplicate_model",
+      "message": "Superseded by mm-dbabda26 with higher quality for same intent",
+      "severity": "WARN",
+      "recommended_status": "superseded"
+    },
+    {
+      "model_id": "mm-38fe874d",
+      "finding_type": "duplicate_model",
+      "message": "Superseded by mm-dbabda26 with higher quality for same intent",
+      "severity": "WARN",
+      "recommended_status": "superseded"
+    },
+    {
+      "model_id": "mm-5a54de68",
+      "finding_type": "empty_relations_for_complex_intent",
+      "message": "No relations for complex intent: challenge your plan",
+      "severity": "FAIL",
+      "recommended_status": "needs_review"
+    },
+    {
+      "model_id": "mm-5a54de68",
+      "finding_type": "empty_assumptions_for_complex_intent",
+      "message": "No assumptions for complex intent: challenge your plan",
+      "severity": "WARN",
+      "recommended_status": "needs_review"
+    },
+    {
+      "model_id": "mm-5a54de68",
+      "finding_type": "empty_decisions_for_planning_intent",
+      "message": "No decisions for planning intent: challenge your plan",
+      "severity": "WARN",
+      "recommended_status": "needs_review"
+    },
+    {
+      "model_id": "mm-5a54de68",
+      "finding_type": "empty_contradictions_despite_degraded_evidence",
+      "message": "No contradictions despite Kuzu DEGRADED",
+      "severity": "WARN",
+      "recommended_status": "needs_review"
+    },
+    {
+      "model_id": "mm-8eb9b245",
+      "finding_type": "empty_relations_for_complex_intent",
+      "message": "No relations for complex intent: run evolution flywheel",
+      "severity": "FAIL",
+      "recommended_status": "needs_review"
+    },
+    {
+      "model_id": "mm-8eb9b245",
+      "finding_type": "empty_assumptions_for_complex_intent",
+      "message": "No assumptions for complex intent: run evolution flywheel",
+      "severity": "WARN",
+      "recommended_status": "needs_review"
+    },
+    {
+      "model_id": "mm-8eb9b245",
+      "finding_type": "empty_contradictions_despite_degraded_evidence",
+      "message": "No contradictions despite Kuzu DEGRADED",
+      "severity": "WARN",
+      "recommended_status": "needs_review"
+    },
+    {
+      "model_id": "mm-377a8e9b",
+      "finding_type": "duplicate_model",
+      "message": "Superseded by mm-dbabda26 with higher quality for same intent",
+      "severity": "WARN",
+      "recommended_status": "superseded"
+    }
+  ],
+  "decisions": [
+    {
+      "model_id": "mm-de1c78e6",
+      "previous_status": "stale",
+      "new_status": "stale",
+      "reason": "quality_score missing (legacy model without quality evaluation); No relations for complex intent: test refactor; No assumptions for complex intent: test refactor; No contradictions despite Kuzu DEGRADED; No falsification tests for complex intent",
+      "superseded_by": ""
+    },
+    {
+      "model_id": "mm-1cf6c61d",
+      "previous_status": "superseded",
+      "new_status": "superseded",
+      "reason": "quality_score missing (legacy model without quality evaluation); Superseded by mm-1562ffb6 with higher quality for same intent",
+      "superseded_by": "mm-1562ffb6"
+    },
+    {
+      "model_id": "mm-0e09b48f",
+      "previous_status": "superseded",
+      "new_status": "superseded",
+      "reason": "quality_score missing (legacy model without quality evaluation); No decisions for planning intent: what should i do next?; Superseded by mm-b20aa346 with higher quality for same intent",
+      "superseded_by": "mm-b20aa346"
+    },
+    {
+      "model_id": "mm-e0932864",
+      "previous_status": "stale",
+      "new_status": "stale",
+      "reason": "quality_score missing (legacy model without quality evaluation)",
+      "superseded_by": ""
+    },
+    {
+      "model_id": "mm-38e49680",
+      "previous_status": "stale",
+      "new_status": "stale",
+      "reason": "quality_score missing (legacy model without quality evaluation)",
+      "superseded_by": ""
+    },
+    {
+      "model_id": "mm-155f32f7",
+      "previous_status": "stale",
+      "new_status": "stale",
+      "reason": "quality_score missing (legacy model without quality evaluation)",
+      "superseded_by": ""
+    },
+    {
+      "model_id": "mm-3d712dc7",
+      "previous_status": "stale",
+      "new_status": "stale",
+      "reason": "quality_score missing (legacy model without quality evaluation); No relations for complex intent: plan the next DUMMIE refactor using technical debt and memor; No assumptions for complex intent: plan the next DUMMIE refactor using technical debt and memor; No decisions for planning intent: plan the next DUMMIE refactor using technical debt and memor; No contradictions despite Kuzu DEGRADED; No falsification tests for complex intent",
+      "superseded_by": ""
+    },
+    {
+      "model_id": "mm-dbabda26",
+      "previous_status": "quarantined",
+      "new_status": "quarantined",
+      "reason": "quality_score=100 while Kuzu is DEGRADED; No assumptions for complex intent: refactor memory; No contradictions despite Kuzu DEGRADED; No falsification tests for complex intent",
+      "superseded_by": ""
+    },
+    {
+      "model_id": "mm-1562ffb6",
+      "previous_status": "quarantined",
+      "new_status": "quarantined",
+      "reason": "quality_score=100 while Kuzu is DEGRADED",
+      "superseded_by": ""
+    },
+    {
+      "model_id": "mm-b20aa346",
+      "previous_status": "quarantined",
+      "new_status": "quarantined",
+      "reason": "quality_score=100 while Kuzu is DEGRADED; No decisions for planning intent: what should i do next?",
+      "superseded_by": ""
+    },
+    {
+      "model_id": "mm-bbd1b1ba",
+      "previous_status": "quarantined",
+      "new_status": "quarantined",
+      "reason": "quality_score=100 while Kuzu is DEGRADED; No assumptions for complex intent: plan the next DUMMIE refactor using technical debt, memory s; No decisions for planning intent: plan the next DUMMIE refactor using technical debt, memory s; No contradictions despite Kuzu DEGRADED; No falsification tests for complex intent",
+      "superseded_by": ""
+    },
+    {
+      "model_id": "mm-f1b8021a",
+      "previous_status": "superseded",
+      "new_status": "superseded",
+      "reason": "No relations for complex intent: refactor memory; Superseded by mm-dbabda26 with higher quality for same intent",
+      "superseded_by": "mm-dbabda26"
+    },
+    {
+      "model_id": "mm-81185e82",
+      "previous_status": "superseded",
+      "new_status": "superseded",
+      "reason": "No relations for complex intent: refactor memory; Superseded by mm-dbabda26 with higher quality for same intent",
+      "superseded_by": "mm-dbabda26"
+    },
+    {
+      "model_id": "mm-2c60b078",
+      "previous_status": "superseded",
+      "new_status": "superseded",
+      "reason": "Superseded by mm-dbabda26 with higher quality for same intent",
+      "superseded_by": "mm-dbabda26"
+    },
+    {
+      "model_id": "mm-d27e38db",
+      "previous_status": "superseded",
+      "new_status": "superseded",
+      "reason": "Superseded by mm-dbabda26 with higher quality for same intent",
+      "superseded_by": "mm-dbabda26"
+    },
+    {
+      "model_id": "mm-012bd0b9",
+      "previous_status": "needs_review",
+      "new_status": "needs_review",
+      "reason": "No relations for complex intent: decide whether DUMMIE should proceed to autonomous skill syn; No assumptions for complex intent: decide whether DUMMIE should proceed to autonomous skill syn; No decisions for planning intent: decide whether DUMMIE should proceed to autonomous skill syn; No contradictions despite Kuzu DEGRADED",
+      "superseded_by": ""
+    },
+    {
+      "model_id": "mm-e5113440",
+      "previous_status": "valid",
+      "new_status": "valid",
+      "reason": "No issues found",
+      "superseded_by": ""
+    },
+    {
+      "model_id": "mm-7dc70333",
+      "previous_status": "superseded",
+      "new_status": "superseded",
+      "reason": "Superseded by mm-dbabda26 with higher quality for same intent",
+      "superseded_by": "mm-dbabda26"
+    },
+    {
+      "model_id": "mm-38fe874d",
+      "previous_status": "superseded",
+      "new_status": "superseded",
+      "reason": "Superseded by mm-dbabda26 with higher quality for same intent",
+      "superseded_by": "mm-dbabda26"
+    },
+    {
+      "model_id": "mm-c4763f27",
+      "previous_status": "valid",
+      "new_status": "valid",
+      "reason": "No issues found",
+      "superseded_by": ""
+    },
+    {
+      "model_id": "mm-e378c967",
+      "previous_status": "valid",
+      "new_status": "valid",
+      "reason": "No issues found",
+      "superseded_by": ""
+    },
+    {
+      "model_id": "mm-5a54de68",
+      "previous_status": "needs_review",
+      "new_status": "needs_review",
+      "reason": "No relations for complex intent: challenge your plan; No assumptions for complex intent: challenge your plan; No decisions for planning intent: challenge your plan; No contradictions despite Kuzu DEGRADED",
+      "superseded_by": ""
+    },
+    {
+      "model_id": "mm-59098122",
+      "previous_status": "valid",
+      "new_status": "valid",
+      "reason": "No issues found",
+      "superseded_by": ""
+    },
+    {
+      "model_id": "mm-8eb9b245",
+      "previous_status": "needs_review",
+      "new_status": "needs_review",
+      "reason": "No relations for complex intent: run evolution flywheel; No assumptions for complex intent: run evolution flywheel; No contradictions despite Kuzu DEGRADED",
+      "superseded_by": ""
+    },
+    {
+      "model_id": "mm-bf55aa66",
+      "previous_status": "valid",
+      "new_status": "valid",
+      "reason": "No issues found",
+      "superseded_by": ""
+    },
+    {
+      "model_id": "mm-ea98ac3c",
+      "previous_status": "valid",
+      "new_status": "valid",
+      "reason": "No issues found",
+      "superseded_by": ""
+    },
+    {
+      "model_id": "mm-377a8e9b",
+      "previous_status": "superseded",
+      "new_status": "superseded",
+      "reason": "Superseded by mm-dbabda26 with higher quality for same intent",
+      "superseded_by": "mm-dbabda26"
+    },
+    {
+      "model_id": "mm-bf207ed3",
+      "previous_status": "valid",
+      "new_status": "valid",
+      "reason": "No issues found",
+      "superseded_by": ""
+    },
+    {
+      "model_id": "mm-55e7efe5",
+      "previous_status": "valid",
+      "new_status": "valid",
+      "reason": "No issues found",
+      "superseded_by": ""
+    },
+    {
+      "model_id": "mm-32b10ca8",
+      "previous_status": "valid",
+      "new_status": "valid",
+      "reason": "No issues found",
+      "superseded_by": ""
+    }
+  ],
+  "summary": {
+    "models_scanned": 30,
+    "valid_count": 9,
+    "stale_count": 5,
+    "superseded_count": 9,
+    "quarantined_count": 4,
+    "unsafe_rejected_count": 0,
+    "needs_review_count": 3,
+    "overconfidence_count": 4,
+    "kuzu_degraded": true
+  },
+  "timestamp": "2026-05-17T00:09:50.929577+00:00"
+}

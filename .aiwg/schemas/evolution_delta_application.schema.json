@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "EvolutionDeltaApplication",
+  "type": "object",
+  "required": [
+    "decision",
+    "actions",
+    "blocked_actions"
+  ],
+  "properties": {
+    "decision": {
+      "type": "string"
+    },
+    "actions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "action_id",
+          "action_type",
+          "priority",
+          "status"
+        ]
+      }
+    },
+    "blocked_actions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

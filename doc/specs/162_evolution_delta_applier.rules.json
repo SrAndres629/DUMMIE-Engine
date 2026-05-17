@@ -1,0 +1,6 @@
+{
+  "spec_id": "162_evolution_delta_applier",
+  "policy": "no_private_cot",
+  "evidence_required": true,
+  "quality_threshold": 80
+}

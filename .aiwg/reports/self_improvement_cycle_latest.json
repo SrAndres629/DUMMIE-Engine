@@ -1,0 +1,120 @@
+{
+  "decision": "PASS_WITH_WARNINGS",
+  "cycle_id": "sic-2b870ddf",
+  "hygiene_summary": {
+    "models_scanned": 30,
+    "valid_count": 9,
+    "stale_count": 5,
+    "superseded_count": 9,
+    "quarantined_count": 4,
+    "unsafe_rejected_count": 0,
+    "needs_review_count": 3,
+    "overconfidence_count": 4,
+    "kuzu_degraded": true
+  },
+  "epistemic_summary": {
+    "decision": "PASS_WITH_WARNINGS",
+    "confidence": 0.6,
+    "debts": 1
+  },
+  "bias_summary": {
+    "decision": "PASS",
+    "findings_count": 0
+  },
+  "delta_summary": {
+    "decision": "PASS_WITH_WARNINGS",
+    "actions_count": 6,
+    "blocked_count": 3
+  },
+  "action_queue": [
+    {
+      "action_id": "eda-6f3d57a7",
+      "source_delta": "metacognitive_evolution_delta_latest.json",
+      "action_type": "repair_kuzu_persistence",
+      "priority": "critical",
+      "blocks_autonomy": true,
+      "blocks_daily_use": false,
+      "evidence_refs": [
+        ".aiwg/reports/metacognitive_evolution_delta_latest.json"
+      ],
+      "recommended_pack": "PACK_5_3_KUZU_REPAIR",
+      "status": "proposed"
+    },
+    {
+      "action_id": "eda-d84b047b",
+      "source_delta": "system_policy",
+      "action_type": "autonomous_scaling",
+      "priority": "critical",
+      "blocks_autonomy": true,
+      "blocks_daily_use": false,
+      "evidence_refs": [
+        ".aiwg/reports/readiness_score_calibration_latest.json",
+        ".aiwg/reports/mental_model_truth_hygiene_latest.json"
+      ],
+      "recommended_pack": "PACK_5_3_KUZU_REPAIR",
+      "status": "blocked"
+    },
+    {
+      "action_id": "eda-3a769a3a",
+      "source_delta": "mental_model_truth_hygiene_latest.json",
+      "action_type": "quarantine_overconfident_models",
+      "priority": "high",
+      "blocks_autonomy": true,
+      "blocks_daily_use": false,
+      "evidence_refs": [
+        ".aiwg/reports/mental_model_truth_hygiene_latest.json"
+      ],
+      "recommended_pack": "PACK_5_2_2",
+      "status": "proposed"
+    },
+    {
+      "action_id": "eda-30b5a113",
+      "source_delta": "mental_model_truth_hygiene_latest.json",
+      "action_type": "increase_test_coverage",
+      "priority": "high",
+      "blocks_autonomy": true,
+      "blocks_daily_use": false,
+      "evidence_refs": [
+        ".aiwg/reports/mental_model_truth_hygiene_latest.json"
+      ],
+      "recommended_pack": "PACK_5_3",
+      "status": "proposed"
+    },
+    {
+      "action_id": "eda-ef49c0dd",
+      "source_delta": "metacognitive_evolution_delta_latest.json",
+      "action_type": "wire_memory_spine_to_entrypoints",
+      "priority": "medium",
+      "blocks_autonomy": false,
+      "blocks_daily_use": false,
+      "evidence_refs": [
+        ".aiwg/reports/metacognitive_evolution_delta_latest.json"
+      ],
+      "recommended_pack": "PACK_5_3",
+      "status": "proposed"
+    },
+    {
+      "action_id": "eda-b44579eb",
+      "source_delta": "self_improvement_policy",
+      "action_type": "run_truth_hygiene_before_planning",
+      "priority": "medium",
+      "blocks_autonomy": false,
+      "blocks_daily_use": false,
+      "evidence_refs": [],
+      "recommended_pack": "ONGOING",
+      "status": "proposed"
+    }
+  ],
+  "blocked_actions": [
+    "quarantine_overconfident_models",
+    "autonomous_scaling",
+    "repair_kuzu_persistence"
+  ],
+  "next_self_improvement_action": "increase_test_coverage",
+  "autonomous_scaling_blocked": true,
+  "warnings": [
+    "Autonomous scaling is BLOCKED until Kuzu repair and model hygiene cleanup",
+    "Epistemic debts detected: 1"
+  ],
+  "timestamp": "2026-05-17T00:09:50.937823+00:00"
+}

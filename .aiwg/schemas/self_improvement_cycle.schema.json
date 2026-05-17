@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SelfImprovementCycle",
+  "type": "object",
+  "required": [
+    "decision",
+    "cycle_id",
+    "action_queue",
+    "next_self_improvement_action"
+  ],
+  "properties": {
+    "decision": {
+      "type": "string"
+    },
+    "cycle_id": {
+      "type": "string"
+    },
+    "action_queue": {
+      "type": "array"
+    },
+    "next_self_improvement_action": {
+      "type": "string"
+    },
+    "autonomous_scaling_blocked": {
+      "type": "boolean"
+    }
+  }
+}

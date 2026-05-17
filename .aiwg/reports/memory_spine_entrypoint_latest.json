@@ -1,25 +1,15 @@
 {
   "decision": "PASS_WITH_WARNINGS",
-  "query": "unknown",
+  "query": "what_should_improve",
   "status": "DEGRADED_WITH_FILE_BACKED_MEMORY",
   "memory_refs": [],
-  "learning_episode_refs": [
-    "sid:CURRENT/ep:ep-d87485f1",
-    "sid:CURRENT/ep:ep-69f7fc7b",
-    "sid:CURRENT/ep:ep-8265aac4",
-    "sid:CURRENT/ep:ep-e10b5b15",
-    "sid:CURRENT/ep:ep-f813da20",
-    "sid:CURRENT/ep:ep-48428bac",
-    "sid:CURRENT/ep:ep-9e09ad1c"
-  ],
+  "learning_episode_refs": [],
   "vault_refs": [],
   "graph_status": "DEGRADED",
   "used_before_chat_response": true,
   "warnings": [
     "Kuzu DEGRADED. Falling back to file-backed session memory scan."
   ],
-  "evidence_refs": [
-    ".aiwg/sessions/CURRENT/learning_episodes.jsonl"
-  ],
-  "generated_at": "2026-05-16T23:53:56Z"
+  "evidence_refs": [],
+  "generated_at": "2026-05-17T00:09:51Z"
 }

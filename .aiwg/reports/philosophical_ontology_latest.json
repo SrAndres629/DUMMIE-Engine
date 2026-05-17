@@ -14,7 +14,7 @@
     {
       "id": "INTENT",
       "type": "TELEOLOGY",
-      "goal": "decide whether DUMMIE should proceed to autonomous skill synthesis while Kuzu is degraded and tests are missing"
+      "goal": "what should improve next?"
     }
   ],
   "edges": [
@@ -35,7 +35,7 @@
     "Agency"
   ],
   "teleology": {
-    "goal": "decide whether DUMMIE should proceed to autonomous skill synthesis while Kuzu is degraded and tests are missing",
+    "goal": "what should improve next?",
     "impact": "evolution"
   },
   "authority_constraints": [

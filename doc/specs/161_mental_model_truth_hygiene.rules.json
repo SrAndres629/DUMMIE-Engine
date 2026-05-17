@@ -1,0 +1,6 @@
+{
+  "spec_id": "161_mental_model_truth_hygiene",
+  "policy": "no_private_cot",
+  "evidence_required": true,
+  "quality_threshold": 80
+}

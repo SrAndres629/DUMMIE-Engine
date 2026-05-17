@@ -1,143 +1,23 @@
 {
-  "decision": "PASS",
+  "decision": "PASS_WITH_WARNINGS",
   "concepts": [
-    "decide whether DUMMIE should proceed to autonomous skill synthesis while Kuzu is degraded and tests are missing"
+    "what should improve next?"
   ],
   "classes": [
-    "MEMORY",
-    "AUTONOMY",
-    "RISK",
-    "TEST",
-    "DECISION"
+    "UNKNOWN"
   ],
   "ontology_graph": {
     "nodes": [
       {
         "id": "INTENT",
-        "label": "decide whether DUMMIE should proceed to autonomous skill synthesis while Kuzu is degraded and tests are missing",
+        "label": "what should improve next?",
         "type": "INTENT"
-      },
-      {
-        "id": "MEMORY",
-        "label": "MEMORY",
-        "type": "CLASS"
-      },
-      {
-        "id": "AUTONOMY",
-        "label": "AUTONOMY",
-        "type": "CLASS"
-      },
-      {
-        "id": "RISK",
-        "label": "RISK",
-        "type": "CLASS"
-      },
-      {
-        "id": "TEST",
-        "label": "TEST",
-        "type": "CLASS"
-      },
-      {
-        "id": "DECISION",
-        "label": "DECISION",
-        "type": "CLASS"
-      },
-      {
-        "id": "KUZU",
-        "label": "KUZU",
-        "type": "COMPONENT"
-      },
-      {
-        "id": "TEST_DEBT",
-        "label": "TEST_DEBT",
-        "type": "CLASS"
-      },
-      {
-        "id": "AUTONOMY_READINESS",
-        "label": "AUTONOMY_READINESS",
-        "type": "CLASS"
-      },
-      {
-        "id": "SAFETY",
-        "label": "SAFETY",
-        "type": "CLASS"
-      },
-      {
-        "id": "EVIDENCE",
-        "label": "EVIDENCE",
-        "type": "CLASS"
       }
     ],
-    "edges": [
-      {
-        "source": "INTENT",
-        "target": "MEMORY",
-        "type": "IS_A"
-      },
-      {
-        "source": "INTENT",
-        "target": "AUTONOMY",
-        "type": "IS_A"
-      },
-      {
-        "source": "INTENT",
-        "target": "RISK",
-        "type": "IS_A"
-      },
-      {
-        "source": "INTENT",
-        "target": "TEST",
-        "type": "IS_A"
-      },
-      {
-        "source": "INTENT",
-        "target": "DECISION",
-        "type": "IS_A"
-      },
-      {
-        "source": "INTENT",
-        "target": "KUZU",
-        "type": "IS_A"
-      },
-      {
-        "source": "TEST",
-        "target": "TEST_DEBT",
-        "type": "HAS_SUBCLASS"
-      },
-      {
-        "source": "AUTONOMY",
-        "target": "AUTONOMY_READINESS",
-        "type": "HAS_PROPERTY"
-      },
-      {
-        "source": "AUTONOMY",
-        "target": "MEMORY",
-        "type": "BLOCKED_BY"
-      },
-      {
-        "source": "MEMORY",
-        "target": "KUZU",
-        "type": "DEGRADED_BY"
-      },
-      {
-        "source": "TEST_DEBT",
-        "target": "AUTONOMY_READINESS",
-        "type": "DEGRADES"
-      },
-      {
-        "source": "SAFETY",
-        "target": "ACTION",
-        "type": "CONSTRAINS"
-      },
-      {
-        "source": "DECISION",
-        "target": "EVIDENCE",
-        "type": "DEPENDS_ON"
-      }
-    ]
+    "edges": []
   },
-  "timestamp": "2026-05-16T23:54:06.401283+00:00",
+  "timestamp": "2026-05-17T00:09:51.077551+00:00",
   "warnings": [
-    ""
+    "No ontology classes matched"
   ]
 }

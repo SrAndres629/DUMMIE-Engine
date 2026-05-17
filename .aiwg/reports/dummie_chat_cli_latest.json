@@ -1,7 +1,9 @@
 {
   "decision": "PASS",
-  "answer": "I understood your intent as 'unknown', but I don't have a specific handler for it yet.",
-  "evidence_refs": [],
+  "answer": "Next improvement: increase_test_coverage. Blocked actions: quarantine_overconfident_models, autonomous_scaling, repair_kuzu_persistence.",
+  "evidence_refs": [
+    ".aiwg/reports/self_improvement_action_queue.json"
+  ],
   "recommended_next_actions": [],
   "context_strategy": "ALLOW_MANIFEST_ONLY",
   "warnings": [
@@ -9,33 +11,23 @@
   ],
   "memory_spine": {
     "decision": "PASS_WITH_WARNINGS",
-    "query": "unknown",
+    "query": "what_should_improve",
     "status": "DEGRADED_WITH_FILE_BACKED_MEMORY",
     "memory_refs": [],
-    "learning_episode_refs": [
-      "sid:CURRENT/ep:ep-d87485f1",
-      "sid:CURRENT/ep:ep-69f7fc7b",
-      "sid:CURRENT/ep:ep-8265aac4",
-      "sid:CURRENT/ep:ep-e10b5b15",
-      "sid:CURRENT/ep:ep-f813da20",
-      "sid:CURRENT/ep:ep-48428bac",
-      "sid:CURRENT/ep:ep-9e09ad1c"
-    ],
+    "learning_episode_refs": [],
     "vault_refs": [],
     "graph_status": "DEGRADED",
     "used_before_chat_response": true,
     "warnings": [
       "Kuzu DEGRADED. Falling back to file-backed session memory scan."
     ],
-    "evidence_refs": [
-      ".aiwg/sessions/CURRENT/learning_episodes.jsonl"
-    ],
-    "generated_at": "2026-05-16T23:53:56Z"
+    "evidence_refs": [],
+    "generated_at": "2026-05-17T00:09:51Z"
   },
   "memory_spine_used": true,
   "mental_model": {
-    "model_id": "mm-8eb9b245",
-    "intent": "run evolution flywheel",
+    "model_id": "mm-ebe4338e",
+    "intent": "what should improve next?",
     "task_type": "unknown",
     "entities": [
       "ReadinessScore",
@@ -61,24 +53,24 @@
     "next_actions": [],
     "context_strategy": "ALLOW_MANIFEST_ONLY",
     "memory_refs": [],
-    "created_at": "2026-05-16T23:53:56Z",
+    "created_at": "2026-05-17T00:09:51Z",
     "quality_score": 70,
     "quality_findings": [],
     "epistemic_state_ref": "epistemic_state_latest.json",
     "dialectical_review_ref": "dialectical_review_latest.json",
     "bias_findings": [],
     "teleology": {
-      "goal": "run evolution flywheel",
+      "goal": "what should improve next?",
       "impact_type": "architectural_integrity"
     },
     "falsification_tests": [
-      "verify run evolution flywheel with 0 new regressions"
+      "verify what should improve next? with 0 new regressions"
     ],
     "belief_revision": ""
   },
   "cognitive_frame": {
-    "frame_id": "frame-6edfbdc4",
-    "intent": "run evolution flywheel",
+    "frame_id": "frame-b2d60979",
+    "intent": "what should improve next?",
     "operating_mode": "answer",
     "must_preserve": [
       "current_phase",
@@ -91,7 +83,7 @@
       "private_chain_of_thought"
     ],
     "mental_model_refs": [
-      "mm-8eb9b245"
+      "mm-ebe4338e"
     ],
     "memory_refs": [],
     "ontology_refs": [
@@ -110,13 +102,13 @@
       "Memory spine DEGRADED (Kuzu persistence unavailable)"
     ],
     "next_actions": [],
-    "created_at": "2026-05-16T23:53:56.671601+00:00"
+    "created_at": "2026-05-17T00:09:51.077628+00:00"
   },
   "metacognitive_loop": {
     "decision": "FAIL",
-    "intent": "run evolution flywheel",
-    "mental_model_id": "mm-8eb9b245",
-    "frame_id": "frame-6edfbdc4",
+    "intent": "what should improve next?",
+    "mental_model_id": "mm-ebe4338e",
+    "frame_id": "frame-b2d60979",
     "quality_gate": {
       "decision": "FAIL",
       "quality_score": 25.0,
@@ -193,7 +185,7 @@
         {
           "id": "INTENT",
           "type": "TELEOLOGY",
-          "goal": "run evolution flywheel"
+          "goal": "what should improve next?"
         }
       ],
       "edges": [
@@ -214,7 +206,7 @@
         "Agency"
       ],
       "teleology": {
-        "goal": "run evolution flywheel",
+        "goal": "what should improve next?",
         "impact": "evolution"
       },
       "authority_constraints": [
@@ -228,7 +220,7 @@
       ]
     },
     "dialectical_review": {
-      "thesis": "Proceed with run evolution flywheel to improve the system.",
+      "thesis": "Proceed with what should improve next? to improve the system.",
       "antithesis": "Propose delay until core regressions (Kuzu/Tests) are resolved.",
       "counterexamples": [
         "Previous failed refactor attempts",
@@ -244,6 +236,12 @@
       "next_check_recommended": "repair_kuzu_persistence"
     },
     "recommended_next_action": "request_clarification",
+    "next_self_improvement_action": "increase_test_coverage",
+    "self_improvement_blocked_actions": [
+      "quarantine_overconfident_models",
+      "repair_kuzu_persistence",
+      "autonomous_scaling"
+    ],
     "dispatch_recommendation": "local",
     "warnings": []
   },
@@ -308,7 +306,7 @@
     "findings": []
   },
   "dialectic": {
-    "thesis": "Proceed with run evolution flywheel to improve the system.",
+    "thesis": "Proceed with what should improve next? to improve the system.",
     "antithesis": "Propose delay until core regressions (Kuzu/Tests) are resolved.",
     "counterexamples": [
       "Previous failed refactor attempts",
@@ -323,5 +321,5 @@
     "revision_type": "humility_calibration",
     "next_check_recommended": "repair_kuzu_persistence"
   },
-  "generated_at": "2026-05-16T23:53:56Z"
+  "generated_at": "2026-05-17T00:09:51Z"
 }

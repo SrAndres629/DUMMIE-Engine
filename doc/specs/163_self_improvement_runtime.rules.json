@@ -1,0 +1,6 @@
+{
+  "spec_id": "163_self_improvement_runtime",
+  "policy": "no_private_cot",
+  "evidence_required": true,
+  "quality_threshold": 80
+}

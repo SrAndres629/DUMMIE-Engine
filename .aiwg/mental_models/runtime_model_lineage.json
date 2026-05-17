@@ -1,0 +1,272 @@
+[
+  {
+    "model_id": "mm-de1c78e6",
+    "intent_hash": "6e97a2da9a50",
+    "intent": "test refactor",
+    "status": "stale",
+    "quality_score": -1,
+    "superseded_by": "",
+    "created_at": "2026-05-16T16:46:20Z"
+  },
+  {
+    "model_id": "mm-1cf6c61d",
+    "intent_hash": "9f86d081884c",
+    "intent": "test",
+    "status": "superseded",
+    "quality_score": -1,
+    "superseded_by": "mm-1562ffb6",
+    "created_at": "2026-05-16T16:46:20Z"
+  },
+  {
+    "model_id": "mm-0e09b48f",
+    "intent_hash": "d4eea87f7130",
+    "intent": "what should i do next?",
+    "status": "superseded",
+    "quality_score": -1,
+    "superseded_by": "mm-b20aa346",
+    "created_at": "2026-05-16T16:46:20Z"
+  },
+  {
+    "model_id": "mm-e0932864",
+    "intent_hash": "073c1634c496",
+    "intent": "status",
+    "status": "stale",
+    "quality_score": -1,
+    "superseded_by": "",
+    "created_at": "2026-05-16T16:46:20Z"
+  },
+  {
+    "model_id": "mm-38e49680",
+    "intent_hash": "106a5842fc5f",
+    "intent": "help",
+    "status": "stale",
+    "quality_score": -1,
+    "superseded_by": "",
+    "created_at": "2026-05-16T16:46:20Z"
+  },
+  {
+    "model_id": "mm-155f32f7",
+    "intent_hash": "90d63ed00de8",
+    "intent": "find python files",
+    "status": "stale",
+    "quality_score": -1,
+    "superseded_by": "",
+    "created_at": "2026-05-16T16:46:20Z"
+  },
+  {
+    "model_id": "mm-3d712dc7",
+    "intent_hash": "3eb404e686bd",
+    "intent": "plan the next DUMMIE refactor using technical debt and memory spine",
+    "status": "stale",
+    "quality_score": -1,
+    "superseded_by": "",
+    "created_at": "2026-05-16T16:46:21Z"
+  },
+  {
+    "model_id": "mm-dbabda26",
+    "intent_hash": "2d49faecea0b",
+    "intent": "refactor memory",
+    "status": "quarantined",
+    "quality_score": 100,
+    "superseded_by": "",
+    "created_at": "2026-05-16T16:54:43Z"
+  },
+  {
+    "model_id": "mm-1562ffb6",
+    "intent_hash": "9f86d081884c",
+    "intent": "test",
+    "status": "quarantined",
+    "quality_score": 100,
+    "superseded_by": "",
+    "created_at": "2026-05-16T16:54:44Z"
+  },
+  {
+    "model_id": "mm-b20aa346",
+    "intent_hash": "d4eea87f7130",
+    "intent": "what should i do next?",
+    "status": "quarantined",
+    "quality_score": 100,
+    "superseded_by": "",
+    "created_at": "2026-05-16T16:54:44Z"
+  },
+  {
+    "model_id": "mm-bbd1b1ba",
+    "intent_hash": "ce936962a735",
+    "intent": "plan the next DUMMIE refactor using technical debt, memory spine, Kuzu degraded ",
+    "status": "quarantined",
+    "quality_score": 100,
+    "superseded_by": "",
+    "created_at": "2026-05-16T16:54:45Z"
+  },
+  {
+    "model_id": "mm-f1b8021a",
+    "intent_hash": "2d49faecea0b",
+    "intent": "refactor memory",
+    "status": "superseded",
+    "quality_score": 70,
+    "superseded_by": "mm-dbabda26",
+    "created_at": "2026-05-16T17:00:43Z"
+  },
+  {
+    "model_id": "mm-81185e82",
+    "intent_hash": "2d49faecea0b",
+    "intent": "refactor memory",
+    "status": "superseded",
+    "quality_score": 70,
+    "superseded_by": "mm-dbabda26",
+    "created_at": "2026-05-16T17:00:43Z"
+  },
+  {
+    "model_id": "mm-2c60b078",
+    "intent_hash": "2d49faecea0b",
+    "intent": "refactor memory",
+    "status": "superseded",
+    "quality_score": 70,
+    "superseded_by": "mm-dbabda26",
+    "created_at": "2026-05-16T17:01:05Z"
+  },
+  {
+    "model_id": "mm-d27e38db",
+    "intent_hash": "2d49faecea0b",
+    "intent": "refactor memory",
+    "status": "superseded",
+    "quality_score": 70,
+    "superseded_by": "mm-dbabda26",
+    "created_at": "2026-05-16T17:01:05Z"
+  },
+  {
+    "model_id": "mm-012bd0b9",
+    "intent_hash": "eb46d92529c4",
+    "intent": "decide whether DUMMIE should proceed to autonomous skill synthesis while Kuzu is",
+    "status": "needs_review",
+    "quality_score": 70,
+    "superseded_by": "",
+    "created_at": "2026-05-16T17:01:05Z"
+  },
+  {
+    "model_id": "mm-e5113440",
+    "intent_hash": "eb46d92529c4",
+    "intent": "decide whether DUMMIE should proceed to autonomous skill synthesis while Kuzu is",
+    "status": "valid",
+    "quality_score": 70,
+    "superseded_by": "",
+    "created_at": "2026-05-16T23:53:26Z"
+  },
+  {
+    "model_id": "mm-7dc70333",
+    "intent_hash": "2d49faecea0b",
+    "intent": "refactor memory",
+    "status": "superseded",
+    "quality_score": 70,
+    "superseded_by": "mm-dbabda26",
+    "created_at": "2026-05-16T23:53:26Z"
+  },
+  {
+    "model_id": "mm-38fe874d",
+    "intent_hash": "2d49faecea0b",
+    "intent": "refactor memory",
+    "status": "superseded",
+    "quality_score": 70,
+    "superseded_by": "mm-dbabda26",
+    "created_at": "2026-05-16T23:53:26Z"
+  },
+  {
+    "model_id": "mm-c4763f27",
+    "intent_hash": "eb46d92529c4",
+    "intent": "decide whether DUMMIE should proceed to autonomous skill synthesis while Kuzu is",
+    "status": "valid",
+    "quality_score": 70,
+    "superseded_by": "",
+    "created_at": "2026-05-16T23:53:50Z"
+  },
+  {
+    "model_id": "mm-e378c967",
+    "intent_hash": "eb46d92529c4",
+    "intent": "decide whether DUMMIE should proceed to autonomous skill synthesis while Kuzu is",
+    "status": "valid",
+    "quality_score": 70,
+    "superseded_by": "",
+    "created_at": "2026-05-16T23:53:53Z"
+  },
+  {
+    "model_id": "mm-5a54de68",
+    "intent_hash": "16d0298eac95",
+    "intent": "challenge your plan",
+    "status": "needs_review",
+    "quality_score": 70,
+    "superseded_by": "",
+    "created_at": "2026-05-16T23:53:56Z"
+  },
+  {
+    "model_id": "mm-59098122",
+    "intent_hash": "23079d97a323",
+    "intent": "show epistemic state",
+    "status": "valid",
+    "quality_score": 70,
+    "superseded_by": "",
+    "created_at": "2026-05-16T23:53:56Z"
+  },
+  {
+    "model_id": "mm-8eb9b245",
+    "intent_hash": "34ff075e5b12",
+    "intent": "run evolution flywheel",
+    "status": "needs_review",
+    "quality_score": 70,
+    "superseded_by": "",
+    "created_at": "2026-05-16T23:53:56Z"
+  },
+  {
+    "model_id": "mm-bf55aa66",
+    "intent_hash": "eb46d92529c4",
+    "intent": "decide whether DUMMIE should proceed to autonomous skill synthesis while Kuzu is",
+    "status": "valid",
+    "quality_score": 70,
+    "superseded_by": "",
+    "created_at": "2026-05-16T23:54:06Z"
+  },
+  {
+    "model_id": "mm-ea98ac3c",
+    "intent_hash": "31310362340d",
+    "intent": "what should DUMMIE improve next before autonomous scaling?",
+    "status": "valid",
+    "quality_score": 70,
+    "superseded_by": "",
+    "created_at": "2026-05-17T00:09:34Z"
+  },
+  {
+    "model_id": "mm-377a8e9b",
+    "intent_hash": "2d49faecea0b",
+    "intent": "refactor memory",
+    "status": "superseded",
+    "quality_score": 70,
+    "superseded_by": "mm-dbabda26",
+    "created_at": "2026-05-17T00:09:34Z"
+  },
+  {
+    "model_id": "mm-bf207ed3",
+    "intent_hash": "31310362340d",
+    "intent": "what should DUMMIE improve next before autonomous scaling?",
+    "status": "valid",
+    "quality_score": 70,
+    "superseded_by": "",
+    "created_at": "2026-05-17T00:09:43Z"
+  },
+  {
+    "model_id": "mm-55e7efe5",
+    "intent_hash": "d83ee16b1f81",
+    "intent": "show model hygiene",
+    "status": "valid",
+    "quality_score": 70,
+    "superseded_by": "",
+    "created_at": "2026-05-17T00:09:50Z"
+  },
+  {
+    "model_id": "mm-32b10ca8",
+    "intent_hash": "e2f288211863",
+    "intent": "show quarantined models",
+    "status": "valid",
+    "quality_score": 70,
+    "superseded_by": "",
+    "created_at": "2026-05-17T00:09:50Z"
+  }
+]

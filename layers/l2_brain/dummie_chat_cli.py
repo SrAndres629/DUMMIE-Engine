@@ -61,7 +61,20 @@ class DummieChatCli:
 
         # Determine intent
         intent = "unknown"
-        if "status" in query_text:
+        if "model hygiene" in query_text or "truth hygiene" in query_text:
+            intent = "model_hygiene"
+        elif "quarantined" in query_text:
+            intent = "quarantined_models"
+        elif "self improvement" in query_text or "self-improvement" in query_text:
+            if "queue" in query_text:
+                intent = "self_improvement_queue"
+            else:
+                intent = "self_improvement"
+        elif "apply evolution" in query_text or "evolution delta" in query_text:
+            intent = "apply_evolution_delta"
+        elif "what should improve" in query_text or "improve next" in query_text:
+            intent = "what_should_improve"
+        elif "status" in query_text:
             intent = "status"
         elif "next" in query_text or "do next" in query_text:
             intent = "next"
@@ -121,6 +134,18 @@ class DummieChatCli:
             response = self._cmd_memory_spine(gate_decision, memory_result)
         elif intent == "entrypoint_audit":
             response = self._cmd_entrypoint_audit(gate_decision)
+        elif intent == "model_hygiene":
+            response = self._cmd_model_hygiene(gate_decision)
+        elif intent == "quarantined_models":
+            response = self._cmd_quarantined_models(gate_decision)
+        elif intent == "self_improvement":
+            response = self._cmd_self_improvement(gate_decision)
+        elif intent == "self_improvement_queue":
+            response = self._cmd_self_improvement_queue(gate_decision)
+        elif intent == "apply_evolution_delta":
+            response = self._cmd_apply_evolution_delta(gate_decision)
+        elif intent == "what_should_improve":
+            response = self._cmd_what_should_improve(gate_decision)
         elif intent == "help":
             response = self._cmd_help()
         else:
@@ -353,6 +378,84 @@ class DummieChatCli:
             generated_at=self._utc_now()
         )
 
+    def _cmd_model_hygiene(self, gate) -> DummieChatResponse:
+        try:
+            from layers.l2_brain.mental_model_truth_hygiene import run_mental_model_truth_hygiene
+            res = run_mental_model_truth_hygiene(aiwg_root=self.aiwg_root)
+            s = res.get("summary", {})
+            answer = (f"Model Hygiene: {s.get('models_scanned', 0)} scanned. "
+                      f"Valid: {s.get('valid_count', 0)}, Stale: {s.get('stale_count', 0)}, "
+                      f"Quarantined: {s.get('quarantined_count', 0)}, Needs Review: {s.get('needs_review_count', 0)}")
+            return DummieChatResponse(answer=answer, evidence_refs=[".aiwg/reports/mental_model_truth_hygiene_latest.json"],
+                                      context_strategy=gate.decision, generated_at=self._utc_now())
+        except Exception as e:
+            return DummieChatResponse(answer=f"Model hygiene error: {e}", warnings=[str(e)], generated_at=self._utc_now())
+
+    def _cmd_quarantined_models(self, gate) -> DummieChatResponse:
+        data = self._load_json(self.aiwg_root / "mental_models" / "runtime_model_quarantine.json")
+        if isinstance(data, list):
+            models = data
+        else:
+            models = data.get("quarantined", []) if data else []
+        if not models:
+            return DummieChatResponse(answer="No quarantined models found.", generated_at=self._utc_now())
+        lines = [f"- {m.get('model_id', '?')}: {m.get('intent', '?')[:60]} (qs={m.get('quality_score', '?')})" for m in models[:10]]
+        return DummieChatResponse(answer=f"Quarantined models ({len(models)}):\n" + "\n".join(lines),
+                                  evidence_refs=[".aiwg/mental_models/runtime_model_quarantine.json"],
+                                  context_strategy=gate.decision, generated_at=self._utc_now())
+
+    def _cmd_self_improvement(self, gate) -> DummieChatResponse:
+        try:
+            from layers.l2_brain.self_improvement_runtime import run_self_improvement_cycle
+            res = run_self_improvement_cycle(aiwg_root=self.aiwg_root)
+            answer = (f"Self-Improvement: {res.get('decision', '?')}. "
+                      f"Next action: {res.get('next_self_improvement_action', 'none')}. "
+                      f"Autonomous scaling blocked: {res.get('autonomous_scaling_blocked', False)}")
+            return DummieChatResponse(answer=answer, evidence_refs=[".aiwg/reports/self_improvement_cycle_latest.json"],
+                                      context_strategy=gate.decision, generated_at=self._utc_now())
+        except Exception as e:
+            return DummieChatResponse(answer=f"Self-improvement error: {e}", warnings=[str(e)], generated_at=self._utc_now())
+
+    def _cmd_self_improvement_queue(self, gate) -> DummieChatResponse:
+        data = self._load_json(self.aiwg_root / "reports" / "self_improvement_action_queue.json")
+        actions = data.get("actions", [])
+        if not actions:
+            return DummieChatResponse(answer="Self-improvement action queue is empty.", generated_at=self._utc_now())
+        lines = [f"- [{a.get('priority', '?')}] {a.get('action_type', '?')} ({a.get('status', '?')})" for a in actions[:10]]
+        return DummieChatResponse(answer=f"Action queue ({len(actions)} items):\n" + "\n".join(lines),
+                                  evidence_refs=[".aiwg/reports/self_improvement_action_queue.json"],
+                                  context_strategy=gate.decision, generated_at=self._utc_now())
+
+    def _cmd_apply_evolution_delta(self, gate) -> DummieChatResponse:
+        try:
+            from layers.l2_brain.evolution_delta_applier import apply_evolution_delta
+            res = apply_evolution_delta(aiwg_root=self.aiwg_root)
+            answer = f"Evolution Delta Applied: {res.get('decision', '?')}. Actions: {len(res.get('actions', []))}. Blocked: {', '.join(res.get('blocked_actions', [])) or 'none'}"
+            return DummieChatResponse(answer=answer, evidence_refs=[".aiwg/reports/evolution_delta_application_latest.json"],
+                                      context_strategy=gate.decision, generated_at=self._utc_now())
+        except Exception as e:
+            return DummieChatResponse(answer=f"Evolution delta error: {e}", warnings=[str(e)], generated_at=self._utc_now())
+
+    def _cmd_what_should_improve(self, gate) -> DummieChatResponse:
+        data = self._load_json(self.aiwg_root / "reports" / "self_improvement_action_queue.json")
+        actions = data.get("actions", [])
+        next_action = data.get("next", "")
+        blocked = data.get("blocked", [])
+        if not actions:
+            # Try to generate
+            try:
+                from layers.l2_brain.self_improvement_runtime import run_self_improvement_cycle
+                res = run_self_improvement_cycle(aiwg_root=self.aiwg_root)
+                next_action = res.get("next_self_improvement_action", "")
+                blocked = res.get("blocked_actions", [])
+            except Exception:
+                pass
+        answer = f"Next improvement: {next_action or 'review_system_state'}."
+        if blocked:
+            answer += f" Blocked actions: {', '.join(blocked)}."
+        return DummieChatResponse(answer=answer, evidence_refs=[".aiwg/reports/self_improvement_action_queue.json"],
+                                  context_strategy=gate.decision, generated_at=self._utc_now())
+
     def _cmd_help(self) -> DummieChatResponse:
         help_text = """Available commands:
 - status: Show current system phase.
@@ -367,6 +470,12 @@ class DummieChatCli:
 - benchmark token economy: Run token economy benchmark.
 - show readiness calibration / am I really ready?: Show readiness calibration.
 - show entrypoint enforcement: Show entrypoint enforcement audit.
+- show model hygiene: Show mental model truth hygiene.
+- show quarantined models: Show quarantined mental models.
+- run self improvement: Run self-improvement cycle.
+- show self improvement queue: Show self-improvement action queue.
+- apply evolution delta: Apply evolution delta to generate actions.
+- what should improve next?: Show next evidence-based improvement.
 - help: Show this message."""
         return DummieChatResponse(answer=help_text, generated_at=self._utc_now())
 

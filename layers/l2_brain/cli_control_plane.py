@@ -126,6 +126,12 @@ class CliControlPlane:
             "philosophical-ontology": self._cmd_philosophical_ontology,
             "bias-report": self._cmd_bias_report,
             "metacognitive-flywheel": self._cmd_metacognitive_flywheel,
+            # Pack 5.2.2
+            "model-hygiene": self._cmd_model_hygiene,
+            "quarantined-models": self._cmd_quarantined_models,
+            "apply-evolution-delta": self._cmd_apply_evolution_delta,
+            "self-improvement": self._cmd_self_improvement,
+            "self-improvement-queue": self._cmd_self_improvement_queue,
         }
 
 
@@ -597,6 +603,46 @@ class CliControlPlane:
         return CliCommandResult("metacognitive-flywheel", "PASS", delta, [], [".aiwg/reports/metacognitive_evolution_delta_latest.json"], self._utc_now())
 
 
+    # --- Pack 5.2.2 commands ------------------------------------------------
+
+    def _cmd_model_hygiene(self) -> CliCommandResult:
+        from layers.l2_brain.mental_model_truth_hygiene import run_mental_model_truth_hygiene
+        res = run_mental_model_truth_hygiene(aiwg_root=self.aiwg_root)
+        return CliCommandResult("model-hygiene", res.get("decision", "PASS"), res,
+                                 evidence_refs=[".aiwg/reports/mental_model_truth_hygiene_latest.json"],
+                                 generated_at=self._utc_now())
+
+    def _cmd_quarantined_models(self) -> CliCommandResult:
+        path = self.aiwg_root / "mental_models" / "runtime_model_quarantine.json"
+        data = self._load_json(path)
+        if isinstance(data, list):
+            payload = {"quarantined": data, "count": len(data)}
+        else:
+            payload = data or {"quarantined": [], "count": 0}
+        return CliCommandResult("quarantined-models", "PASS", payload,
+                                 evidence_refs=[".aiwg/mental_models/runtime_model_quarantine.json"],
+                                 generated_at=self._utc_now())
+
+    def _cmd_apply_evolution_delta(self) -> CliCommandResult:
+        from layers.l2_brain.evolution_delta_applier import apply_evolution_delta
+        res = apply_evolution_delta(aiwg_root=self.aiwg_root)
+        return CliCommandResult("apply-evolution-delta", res.get("decision", "PASS"), res,
+                                 evidence_refs=[".aiwg/reports/evolution_delta_application_latest.json"],
+                                 generated_at=self._utc_now())
+
+    def _cmd_self_improvement(self) -> CliCommandResult:
+        from layers.l2_brain.self_improvement_runtime import run_self_improvement_cycle
+        res = run_self_improvement_cycle(aiwg_root=self.aiwg_root)
+        return CliCommandResult("self-improvement", res.get("decision", "PASS"), res,
+                                 warnings=res.get("warnings", []),
+                                 evidence_refs=[".aiwg/reports/self_improvement_cycle_latest.json"],
+                                 generated_at=self._utc_now())
+
+    def _cmd_self_improvement_queue(self) -> CliCommandResult:
+        data = self._load_json(self.aiwg_root / "reports" / "self_improvement_action_queue.json")
+        return CliCommandResult("self-improvement-queue", "PASS", data or {"actions": []},
+                                 evidence_refs=[".aiwg/reports/self_improvement_action_queue.json"],
+                                 generated_at=self._utc_now())
 
 
     def _cmd_token_benchmark(self) -> CliCommandResult:
