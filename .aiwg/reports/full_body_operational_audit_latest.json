@@ -1,0 +1,47 @@
+{
+  "decision": "PASS_WITH_WARNINGS",
+  "body_score": 86.0,
+  "organs": [
+    "eyes",
+    "brain",
+    "memory",
+    "nervous_system",
+    "metabolism",
+    "mouth",
+    "hands",
+    "immune_system",
+    "skin",
+    "polyglot_body"
+  ],
+  "ready_organs": [
+    "eyes",
+    "brain",
+    "memory",
+    "nervous_system",
+    "mouth",
+    "immune_system",
+    "skin"
+  ],
+  "degraded_organs": [],
+  "fallback_organs": [
+    "memory",
+    "metabolism",
+    "hands",
+    "polyglot_body"
+  ],
+  "shadow_organs": [],
+  "unwired_organs": [
+    "hands"
+  ],
+  "top_body_gaps": [
+    "Gateway live dispatch runs in dry-run/manual-only mode."
+  ],
+  "next_repair_recommendation": "activate_local_embedding_model",
+  "warnings": [
+    "System body is not fully complete (Body Score: 86.0% < 90%)."
+  ],
+  "evidence_refs": [
+    ".aiwg/reports/capability_promotion_governor_latest.json",
+    ".aiwg/reports/whole_body_scan_latest.json"
+  ]
+}

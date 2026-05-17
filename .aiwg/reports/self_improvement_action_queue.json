@@ -1,7 +1,7 @@
 {
   "actions": [
     {
-      "action_id": "eda-78af151c",
+      "action_id": "eda-f81707c0",
       "source_delta": "metacognitive_evolution_delta_latest.json",
       "action_type": "repair_kuzu_persistence",
       "priority": "critical",
@@ -14,7 +14,7 @@
       "status": "proposed"
     },
     {
-      "action_id": "eda-3a6da4d8",
+      "action_id": "eda-fd524bdf",
       "source_delta": "system_policy",
       "action_type": "autonomous_scaling",
       "priority": "critical",
@@ -28,7 +28,7 @@
       "status": "blocked"
     },
     {
-      "action_id": "eda-5d676865",
+      "action_id": "eda-c27d4922",
       "source_delta": "mental_model_truth_hygiene_latest.json",
       "action_type": "quarantine_overconfident_models",
       "priority": "high",
@@ -41,7 +41,7 @@
       "status": "proposed"
     },
     {
-      "action_id": "eda-fdcbabff",
+      "action_id": "eda-0f32797e",
       "source_delta": "mental_model_truth_hygiene_latest.json",
       "action_type": "increase_test_coverage",
       "priority": "high",
@@ -54,7 +54,7 @@
       "status": "proposed"
     },
     {
-      "action_id": "eda-94770e31",
+      "action_id": "eda-d5273935",
       "source_delta": "metacognitive_evolution_delta_latest.json",
       "action_type": "wire_memory_spine_to_entrypoints",
       "priority": "medium",
@@ -67,7 +67,7 @@
       "status": "proposed"
     },
     {
-      "action_id": "eda-9b9121b3",
+      "action_id": "eda-6f3a5071",
       "source_delta": "self_improvement_policy",
       "action_type": "run_truth_hygiene_before_planning",
       "priority": "medium",
@@ -79,10 +79,10 @@
     }
   ],
   "blocked": [
-    "autonomous_scaling",
     "repair_kuzu_persistence",
+    "autonomous_scaling",
     "quarantine_overconfident_models"
   ],
   "next": "increase_test_coverage",
-  "timestamp": "2026-05-17T00:29:43.949983+00:00"
+  "timestamp": "2026-05-17T01:58:45.282143+00:00"
 }

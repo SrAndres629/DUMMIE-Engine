@@ -1,0 +1,11 @@
+{
+  "spec_id": "187_kuzu_graph_readback_verifier",
+  "title": "Kuzu Graph Readback Rules",
+  "invariants": {
+    "db_target_path": ".aiwg/memory/loci.db",
+    "promotion_states": ["DEGRADED", "SANDBOX_READY", "READY_CANDIDATE", "READY"]
+  },
+  "gates": {
+    "idempotency_gate": "Only recommend READY if memory_spine_readback_ok is true and idempotency_check PASS."
+  }
+}

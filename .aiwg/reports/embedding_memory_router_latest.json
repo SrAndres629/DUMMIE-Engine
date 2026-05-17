@@ -1,32 +1,32 @@
 {
-  "decision": "PASS",
+  "decision": "PASS_WITH_WARNINGS",
   "embedding_mode": "DETERMINISTIC_FALLBACK",
   "indexed_items": 20,
   "query": "heartbeat loop observation",
   "results": [
     {
-      "path": "layers/l2_brain/metacognitive_loop_runtime.py",
-      "score": 34.019287109375,
+      "path": "layers/l2_brain/tests/test_pattern_to_mission_loop.py",
+      "score": 0.7916869702500096,
+      "status": "orphaned"
+    },
+    {
+      "path": "layers/l2_brain/tests/test_heartbeat_lifecycle_runtime.py",
+      "score": 0.7757358946842825,
       "status": "fresh"
     },
     {
       "path": "layers/l2_brain/daemon.py",
-      "score": 33.71221923828125,
+      "score": 0.7747420467696066,
       "status": "fresh"
     },
     {
-      "path": "layers/l2_brain/tests/test_pattern_to_mission_loop.py",
-      "score": 33.56744384765625,
+      "path": "layers/l2_brain/tests/validate_heartbeat_jsons.py",
+      "score": 0.7582058257455623,
       "status": "orphaned"
     },
     {
-      "path": "layers/l2_brain/tests/test_heartbeat_integration.py",
-      "score": 32.3255615234375,
-      "status": "orphaned"
-    },
-    {
-      "path": "layers/l2_brain/heartbeat_scheduler.py",
-      "score": 31.74798583984375,
+      "path": "layers/l2_brain/metacognitive_loop_runtime.py",
+      "score": 0.7540808645049952,
       "status": "fresh"
     }
   ],

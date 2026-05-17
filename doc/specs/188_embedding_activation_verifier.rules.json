@@ -1,0 +1,10 @@
+{
+  "spec_id": "188_embedding_activation_verifier",
+  "title": "Embedding Activation Rules",
+  "invariants": {
+    "embedding_modes": ["REAL_LOCAL", "DETERMINISTIC_FALLBACK", "PACKAGE_ONLY", "UNKNOWN"]
+  },
+  "gates": {
+    "truth_gate": "Do not claim real semantic embeddings READY unless model_load_ok and router_uses_real_embeddings are true."
+  }
+}

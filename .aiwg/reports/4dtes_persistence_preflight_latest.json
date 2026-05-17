@@ -6,16 +6,15 @@
   "memory_spine_status": "degraded_logical_only",
   "safe_to_attempt_repair": false,
   "repair_plan": [
-    "Install K\u00f9zu library in virtual environment via offline safe compilation.",
-    "Restore PyArrow IPC data buffers mapping for zero-copy memory transport."
+    "Run Kuzu readback verification suite to validate loci.db."
   ],
   "blocked_actions": [
     "graph_persistence_transaction_write"
   ],
   "warnings": [
-    "K\u00f9zu/4D-TES persistence is currently DEGRADED. Actions requiring write transactions will be simulated."
+    "K\u00f9zu/4D-TES readback verification is incomplete or locked. Actions requiring write transactions will be simulated."
   ],
   "evidence_refs": [
-    ".aiwg/reports/readiness_score_calibration_latest.json"
+    ".aiwg/reports/kuzu_graph_readback_verification_latest.json"
   ]
 }

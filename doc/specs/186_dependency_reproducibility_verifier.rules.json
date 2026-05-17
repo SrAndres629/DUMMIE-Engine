@@ -1,0 +1,11 @@
+{
+  "spec_id": "186_dependency_reproducibility_verifier",
+  "title": "Dependency Reproducibility Rules",
+  "invariants": {
+    "monitored_packages": ["kuzu", "networkx", "fastapi", "sentence-transformers", "torch"],
+    "reproducibility_modes": ["REPRODUCIBLE", "LOCAL_ONLY", "UNKNOWN", "BROKEN"]
+  },
+  "gates": {
+    "declaration_gate": "Any package used at runtime must be declared in pyproject.toml."
+  }
+}

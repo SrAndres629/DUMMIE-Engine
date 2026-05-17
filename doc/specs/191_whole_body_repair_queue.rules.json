@@ -1,0 +1,11 @@
+{
+  "spec_id": "191_whole_body_repair_queue",
+  "title": "Whole Body Repair Queue Rules",
+  "invariants": {
+    "priorities": ["critical", "high", "medium", "low"],
+    "action_types": ["verify", "wire", "test", "configure", "promote", "repair", "deprecate", "manual_review"]
+  },
+  "gates": {
+    "priority_rules_gate": "Priority order must be: 1. false READY claims, 2. Kuzu readback, 3. embedding activation, 4. context/token, 5. polyglot, 6. daemon/gateway, 7. shadow modules."
+  }
+}

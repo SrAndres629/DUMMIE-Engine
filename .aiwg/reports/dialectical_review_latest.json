@@ -1,5 +1,5 @@
 {
-  "thesis": "Proceed with status to improve the system.",
+  "thesis": "Proceed with heartbeat: what is the current system state and next safe action? to improve the system.",
   "antithesis": "Propose delay until core regressions (Kuzu/Tests) are resolved.",
   "counterexamples": [
     "Previous failed refactor attempts",

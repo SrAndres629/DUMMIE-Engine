@@ -1,0 +1,54 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "KuzuGraphReadbackVerification",
+  "type": "object",
+  "properties": {
+    "decision": {
+      "type": "string",
+      "enum": ["PASS", "PASS_WITH_WARNINGS", "FAIL"]
+    },
+    "kuzu_importable": { "type": "boolean" },
+    "db_status_reported": { "type": "string" },
+    "db_path": { "type": "string" },
+    "db_path_exists": { "type": "boolean" },
+    "sandbox_write_readback_ok": { "type": "boolean" },
+    "memory_spine_readback_ok": { "type": "boolean" },
+    "reported_nodes": { "type": "integer" },
+    "reported_edges": { "type": "integer" },
+    "readback_nodes": { "type": "integer" },
+    "readback_edges": { "type": "integer" },
+    "idempotency_check": {
+      "type": "string",
+      "enum": ["PASS", "FAIL", "NOT_RUN"]
+    },
+    "promotion_recommendation": {
+      "type": "string",
+      "enum": ["DEGRADED", "SANDBOX_READY", "READY_CANDIDATE", "READY"]
+    },
+    "warnings": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "required": [
+    "decision",
+    "kuzu_importable",
+    "db_status_reported",
+    "db_path",
+    "db_path_exists",
+    "sandbox_write_readback_ok",
+    "memory_spine_readback_ok",
+    "reported_nodes",
+    "reported_edges",
+    "readback_nodes",
+    "readback_edges",
+    "idempotency_check",
+    "promotion_recommendation",
+    "warnings",
+    "evidence_refs"
+  ]
+}

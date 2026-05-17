@@ -1,0 +1,62 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "WholeBodyRepairQueue",
+  "type": "object",
+  "properties": {
+    "decision": {
+      "type": "string",
+      "enum": ["PASS", "PASS_WITH_WARNINGS", "FAIL"]
+    },
+    "actions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "action_id": { "type": "string" },
+          "body_part": { "type": "string" },
+          "capability_id": { "type": "string" },
+          "title": { "type": "string" },
+          "priority": {
+            "type": "string",
+            "enum": ["critical", "high", "medium", "low"]
+          },
+          "action_type": {
+            "type": "string",
+            "enum": ["verify", "wire", "test", "configure", "promote", "repair", "deprecate", "manual_review"]
+          },
+          "requires_human_approval": { "type": "boolean" },
+          "can_execute_now": { "type": "boolean" },
+          "recommended_agent": {
+            "type": "string",
+            "enum": ["antigravity", "codex", "gemini", "human", "local"]
+          },
+          "evidence_refs": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "verification_commands": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        },
+        "required": [
+          "action_id",
+          "body_part",
+          "capability_id",
+          "title",
+          "priority",
+          "action_type",
+          "requires_human_approval",
+          "can_execute_now",
+          "recommended_agent",
+          "evidence_refs",
+          "verification_commands"
+        ]
+      }
+    }
+  },
+  "required": [
+    "decision",
+    "actions"
+  ]
+}

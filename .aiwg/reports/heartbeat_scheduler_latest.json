@@ -1,35 +1,33 @@
 {
   "type": "run_once",
-  "heartbeat_id": "hb-7f98dc58",
-  "decision": "FAIL",
+  "heartbeat_id": "hb-61e67636",
+  "decision": "PASS_WITH_WARNINGS",
   "mode": "observe_only",
   "selected_action": {
-    "action_id": "eda-aa21eebe",
-    "source_delta": "mental_model_truth_hygiene_latest.json",
-    "action_type": "increase_test_coverage",
+    "action_id": "integrate_kuzu_graph_sync",
+    "action_type": "integrate_kuzu_graph_sync",
     "priority": "high",
-    "blocks_autonomy": true,
-    "blocks_daily_use": false,
+    "status": "proposed",
     "evidence_refs": [
-      ".aiwg/reports/mental_model_truth_hygiene_latest.json"
-    ],
-    "recommended_pack": "PACK_5_3",
-    "status": "proposed"
+      ".aiwg/reports/kuzu_graph_readback_verification_latest.json"
+    ]
   },
-  "dispatch_recommendation": "codex",
+  "dispatch_recommendation": "antigravity",
   "next_heartbeat_seed": {
-    "previous_heartbeat_id": "hb-7f98dc58",
-    "previous_decision": "FAIL",
-    "next_action": "increase_test_coverage",
-    "dispatch": "codex",
+    "previous_heartbeat_id": "hb-61e67636",
+    "previous_decision": "PASS_WITH_WARNINGS",
+    "next_action": "integrate_kuzu_graph_sync",
+    "dispatch": "antigravity",
     "blocked_actions": [
+      "autonomous_execution",
+      "autonomous_runtime",
       "autonomous_scaling",
       "quarantine_overconfident_models",
       "repair_kuzu_persistence"
     ],
-    "kuzu_degraded": true,
+    "kuzu_degraded": false,
     "quarantined_models": 4,
-    "created_at": "2026-05-17T00:29:43.811727+00:00"
+    "created_at": "2026-05-17T01:58:39.133813+00:00"
   },
-  "timestamp": "2026-05-17T00:29:43.813166+00:00"
+  "timestamp": "2026-05-17T01:58:39.141089+00:00"
 }

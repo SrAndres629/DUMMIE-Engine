@@ -30,9 +30,9 @@
     "model_id": "mm-e0932864",
     "intent_hash": "073c1634c496",
     "intent": "status",
-    "status": "stale",
+    "status": "superseded",
     "quality_score": -1,
-    "superseded_by": "",
+    "superseded_by": "mm-c0b35caf",
     "created_at": "2026-05-16T16:46:20Z"
   },
   {
@@ -228,9 +228,9 @@
     "model_id": "mm-ea98ac3c",
     "intent_hash": "31310362340d",
     "intent": "what should DUMMIE improve next before autonomous scaling?",
-    "status": "valid",
+    "status": "superseded",
     "quality_score": 70,
-    "superseded_by": "",
+    "superseded_by": "mm-3f8223c6",
     "created_at": "2026-05-17T00:09:34Z"
   },
   {
@@ -246,9 +246,9 @@
     "model_id": "mm-bf207ed3",
     "intent_hash": "31310362340d",
     "intent": "what should DUMMIE improve next before autonomous scaling?",
-    "status": "valid",
+    "status": "superseded",
     "quality_score": 70,
-    "superseded_by": "",
+    "superseded_by": "mm-3f8223c6",
     "created_at": "2026-05-17T00:09:43Z"
   },
   {
@@ -300,9 +300,9 @@
     "model_id": "mm-f14a56cd",
     "intent_hash": "31310362340d",
     "intent": "what should DUMMIE improve next before autonomous scaling?",
-    "status": "valid",
+    "status": "superseded",
     "quality_score": 70,
-    "superseded_by": "",
+    "superseded_by": "mm-3f8223c6",
     "created_at": "2026-05-17T00:25:22Z"
   },
   {
@@ -327,9 +327,9 @@
     "model_id": "mm-2d0bd2c9",
     "intent_hash": "31310362340d",
     "intent": "what should DUMMIE improve next before autonomous scaling?",
-    "status": "valid",
+    "status": "superseded",
     "quality_score": 70,
-    "superseded_by": "",
+    "superseded_by": "mm-3f8223c6",
     "created_at": "2026-05-17T00:25:32Z"
   },
   {
@@ -363,9 +363,9 @@
     "model_id": "mm-d7383bc7",
     "intent_hash": "31310362340d",
     "intent": "what should DUMMIE improve next before autonomous scaling?",
-    "status": "valid",
+    "status": "superseded",
     "quality_score": 70,
-    "superseded_by": "",
+    "superseded_by": "mm-3f8223c6",
     "created_at": "2026-05-17T00:29:43Z"
   },
   {
@@ -430,5 +430,77 @@
     "quality_score": 70,
     "superseded_by": "",
     "created_at": "2026-05-17T01:32:12Z"
+  },
+  {
+    "model_id": "mm-f4dbea4f",
+    "intent_hash": "123d31f05f9c",
+    "intent": "heartbeat: what is the current system state and next safe action?",
+    "status": "superseded",
+    "quality_score": 60,
+    "superseded_by": "mm-1a9e488f",
+    "created_at": "2026-05-17T01:35:26Z"
+  },
+  {
+    "model_id": "mm-c0b35caf",
+    "intent_hash": "073c1634c496",
+    "intent": "status",
+    "status": "valid",
+    "quality_score": 60,
+    "superseded_by": "",
+    "created_at": "2026-05-17T01:49:52Z"
+  },
+  {
+    "model_id": "mm-e11967f2",
+    "intent_hash": "123d31f05f9c",
+    "intent": "heartbeat: what is the current system state and next safe action?",
+    "status": "superseded",
+    "quality_score": 60,
+    "superseded_by": "mm-1a9e488f",
+    "created_at": "2026-05-17T01:58:39Z"
+  },
+  {
+    "model_id": "mm-3474dd58",
+    "intent_hash": "d4eea87f7130",
+    "intent": "what should i do next?",
+    "status": "superseded",
+    "quality_score": 60,
+    "superseded_by": "mm-b20aa346",
+    "created_at": "2026-05-17T01:58:45Z"
+  },
+  {
+    "model_id": "mm-6f981f29",
+    "intent_hash": "2d49faecea0b",
+    "intent": "refactor memory",
+    "status": "superseded",
+    "quality_score": 90,
+    "superseded_by": "mm-dbabda26",
+    "created_at": "2026-05-17T01:58:45Z"
+  },
+  {
+    "model_id": "mm-3f8223c6",
+    "intent_hash": "31310362340d",
+    "intent": "what should DUMMIE improve next before autonomous scaling?",
+    "status": "valid",
+    "quality_score": 90,
+    "superseded_by": "",
+    "created_at": "2026-05-17T01:58:45Z"
+  },
+  {
+    "model_id": "mm-66c89bf8",
+    "intent_hash": "eb46d92529c4",
+    "intent": "decide whether DUMMIE should proceed to autonomous skill synthesis while Kuzu is",
+    "status": "valid",
+    "quality_score": 70,
+    "superseded_by": "",
+    "created_at": "2026-05-17T01:58:45Z"
+  },
+  {
+    "model_id": "mm-b1f9077e",
+    "intent_hash": "2d49faecea0b",
+    "intent": "refactor memory",
+    "status": "superseded",
+    "quality_score": 90,
+    "superseded_by": "mm-dbabda26",
+    "created_at": "2026-05-17T01:58:45Z"
   }
 ]

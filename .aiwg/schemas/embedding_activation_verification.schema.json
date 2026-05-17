@@ -1,0 +1,43 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "EmbeddingActivationVerification",
+  "type": "object",
+  "properties": {
+    "decision": {
+      "type": "string",
+      "enum": ["PASS", "PASS_WITH_WARNINGS", "FAIL"]
+    },
+    "sentence_transformers_importable": { "type": "boolean" },
+    "torch_importable": { "type": "boolean" },
+    "torch_cuda_available": { "type": "boolean" },
+    "local_model_available": { "type": "boolean" },
+    "model_load_ok": { "type": "boolean" },
+    "embedding_mode": {
+      "type": "string",
+      "enum": ["REAL_LOCAL", "DETERMINISTIC_FALLBACK", "PACKAGE_ONLY", "UNKNOWN"]
+    },
+    "vector_dimension": { "type": "integer" },
+    "router_uses_real_embeddings": { "type": "boolean" },
+    "warnings": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "required": [
+    "decision",
+    "sentence_transformers_importable",
+    "torch_importable",
+    "torch_cuda_available",
+    "local_model_available",
+    "model_load_ok",
+    "embedding_mode",
+    "vector_dimension",
+    "router_uses_real_embeddings",
+    "warnings",
+    "evidence_refs"
+  ]
+}

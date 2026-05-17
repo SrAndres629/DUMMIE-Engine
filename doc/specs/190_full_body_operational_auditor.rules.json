@@ -1,0 +1,10 @@
+{
+  "spec_id": "190_full_body_operational_auditor",
+  "title": "Full Body Operational Audit Rules",
+  "invariants": {
+    "tracked_organs": ["eyes", "brain", "memory", "nervous_system", "metabolism", "mouth", "hands", "immune_system", "skin", "polyglot_body"]
+  },
+  "gates": {
+    "honesty_gate": "Do not claim body complete if body_score is under 90."
+  }
+}

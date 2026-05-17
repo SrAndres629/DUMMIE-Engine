@@ -1,0 +1,11 @@
+{
+  "spec_id": "189_capability_promotion_governor",
+  "title": "Capability Promotion Rules",
+  "invariants": {
+    "monitored_capabilities": ["kuzu_4dtes_persistence", "real_semantic_embeddings", "daemon_persistent_runtime", "gateway_live_dispatch"],
+    "allowed_promoted_states": ["READY", "READY_CANDIDATE", "SANDBOX_READY", "FALLBACK", "SIMULATED", "DEGRADED", "UNKNOWN"]
+  },
+  "gates": {
+    "ready_integrity_gate": "READY status requires dependency_reproducibility PASS + physical verifier PASS."
+  }
+}

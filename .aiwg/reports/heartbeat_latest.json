@@ -1,5 +1,5 @@
 {
-  "heartbeat_id": "hb-e8453a01",
+  "heartbeat_id": "hb-b5abcb42",
   "mode": "observe_only",
   "decision": "PASS_WITH_WARNINGS",
   "observation": {
@@ -16,14 +16,19 @@
       "whole_body_scan_latest.json",
       "whole_body_scan_calibration_latest.json",
       "wiring_matrix_latest.json",
-      "shadow_runtime_classification_latest.json"
+      "shadow_runtime_classification_latest.json",
+      "dependency_reproducibility_latest.json",
+      "kuzu_graph_readback_verification_latest.json",
+      "embedding_activation_verification_latest.json",
+      "capability_promotion_governor_latest.json",
+      "full_body_operational_audit_latest.json",
+      "whole_body_repair_queue_latest.json"
     ],
     "missing_inputs": [],
     "active_blockers": [
-      "kuzu_degraded",
       "quarantined_models_4"
     ],
-    "kuzu_degraded": true,
+    "kuzu_degraded": false,
     "readiness_score": 0,
     "quarantined_models": 4,
     "test_debt_count": 0,
@@ -42,10 +47,10 @@
   "truth_hygiene": {
     "decision": "PASS_WITH_WARNINGS",
     "summary": {
-      "models_scanned": 48,
-      "valid_count": 18,
-      "stale_count": 5,
-      "superseded_count": 12,
+      "models_scanned": 56,
+      "valid_count": 16,
+      "stale_count": 4,
+      "superseded_count": 23,
       "quarantined_count": 4,
       "unsafe_rejected_count": 0,
       "needs_review_count": 9,
@@ -66,7 +71,7 @@
     "graph_status": "READY"
   },
   "mental_model": {
-    "model_id": "mm-f4dbea4f"
+    "model_id": "mm-1fd9634e"
   },
   "dialectic": {
     "thesis": "Proceed with heartbeat: what is the current system state and next safe action? to improve the system.",
@@ -87,17 +92,13 @@
     "next": "increase_test_coverage"
   },
   "selected_action": {
-    "action_id": "eda-fdcbabff",
-    "source_delta": "mental_model_truth_hygiene_latest.json",
-    "action_type": "increase_test_coverage",
+    "action_id": "integrate_kuzu_graph_sync",
+    "action_type": "integrate_kuzu_graph_sync",
     "priority": "high",
-    "blocks_autonomy": true,
-    "blocks_daily_use": false,
+    "status": "proposed",
     "evidence_refs": [
-      ".aiwg/reports/mental_model_truth_hygiene_latest.json"
-    ],
-    "recommended_pack": "PACK_5_3",
-    "status": "proposed"
+      ".aiwg/reports/kuzu_graph_readback_verification_latest.json"
+    ]
   },
   "blocked_actions": [
     "autonomous_execution",
@@ -106,14 +107,14 @@
     "quarantine_overconfident_models",
     "repair_kuzu_persistence"
   ],
-  "dispatch_recommendation": "codex",
+  "dispatch_recommendation": "antigravity",
   "outcome_ref": ".aiwg/reports/heartbeat_latest.json",
-  "learning_episode_ref": "sessions/CURRENT/learning_episodes (heartbeat hb-e8453a01)",
+  "learning_episode_ref": "sessions/CURRENT/learning_episodes (heartbeat hb-b5abcb42)",
   "next_heartbeat_seed": {
-    "previous_heartbeat_id": "hb-e8453a01",
+    "previous_heartbeat_id": "hb-b5abcb42",
     "previous_decision": "PASS_WITH_WARNINGS",
-    "next_action": "increase_test_coverage",
-    "dispatch": "codex",
+    "next_action": "integrate_kuzu_graph_sync",
+    "dispatch": "antigravity",
     "blocked_actions": [
       "autonomous_execution",
       "autonomous_runtime",
@@ -121,16 +122,23 @@
       "quarantine_overconfident_models",
       "repair_kuzu_persistence"
     ],
-    "kuzu_degraded": true,
+    "kuzu_degraded": false,
     "quarantined_models": 4,
-    "created_at": "2026-05-17T01:35:26.035529+00:00"
+    "created_at": "2026-05-17T01:59:17.557242+00:00"
   },
   "warnings": [
     "Systemic Coherence Score (51.33%) is under 60% \u2014 autonomous execution is strictly blocked.",
+    "Systemic Body Score (86.0%) is under 90% \u2014 autonomous scaling and execution are strictly blocked.",
     "Real semantic retrieval is not ready; memory router operates under deterministic mock projection.",
     "Daemon background runtime is simulated \u2014 autonomous runtime claim is blocked."
   ],
   "evidence_refs": [
+    ".aiwg/reports/dependency_reproducibility_latest.json",
+    ".aiwg/reports/kuzu_graph_readback_verification_latest.json",
+    ".aiwg/reports/embedding_activation_verification_latest.json",
+    ".aiwg/reports/capability_promotion_governor_latest.json",
+    ".aiwg/reports/full_body_operational_audit_latest.json",
+    ".aiwg/reports/whole_body_repair_queue_latest.json",
     ".aiwg/reports/6d_context_packet_latest.json",
     ".aiwg/reports/context_packet_optimization_latest.json",
     ".aiwg/reports/embedding_memory_router_latest.json",
@@ -149,7 +157,7 @@
     ".aiwg/reports/self_improvement_action_queue.json",
     ".aiwg/reports/heartbeat_decision_policy_latest.json"
   ],
-  "created_at": "2026-05-17T01:35:26.035543+00:00",
+  "created_at": "2026-05-17T01:59:17.557270+00:00",
   "circulation_summary": {
     "intent": "heartbeat loop observation",
     "six_d_context": {
@@ -163,7 +171,7 @@
       "reduction_ratio": 55.805811481218996
     },
     "embedding_memory": {
-      "decision": "PASS",
+      "decision": "PASS_WITH_WARNINGS",
       "mode": "DETERMINISTIC_FALLBACK",
       "indexed_items": 20
     },
@@ -174,7 +182,7 @@
     },
     "daemon_gateway_bridge": {
       "decision": "PASS",
-      "dispatch_id": "23f0f364-3393-4d24-9091-ee55698d2521",
+      "dispatch_id": "68fb8541-2f19-4141-83b5-b01332f07a3c",
       "target": "human_review"
     },
     "polyglot_probe": {

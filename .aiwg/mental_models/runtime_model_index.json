@@ -101,11 +101,11 @@
   },
   "mm-e0932864": {
     "path": ".aiwg/mental_models/runtime_models.jsonl",
-    "status": "stale",
+    "status": "superseded",
     "quality_score": -1,
     "created_at": "2026-05-16T16:46:20Z",
     "intent_hash": "073c1634c496",
-    "superseded_by": "",
+    "superseded_by": "mm-c0b35caf",
     "hygiene_findings": [
       {
         "model_id": "mm-e0932864",
@@ -113,6 +113,13 @@
         "message": "quality_score missing (legacy model without quality evaluation)",
         "severity": "WARN",
         "recommended_status": "stale"
+      },
+      {
+        "model_id": "mm-e0932864",
+        "finding_type": "duplicate_model",
+        "message": "Superseded by mm-c0b35caf with higher quality for same intent",
+        "severity": "WARN",
+        "recommended_status": "superseded"
       }
     ]
   },
@@ -596,12 +603,20 @@
   },
   "mm-ea98ac3c": {
     "path": ".aiwg/mental_models/runtime_models.jsonl",
-    "status": "valid",
+    "status": "superseded",
     "quality_score": 70,
     "created_at": "2026-05-17T00:09:34Z",
     "intent_hash": "31310362340d",
-    "superseded_by": "",
-    "hygiene_findings": []
+    "superseded_by": "mm-3f8223c6",
+    "hygiene_findings": [
+      {
+        "model_id": "mm-ea98ac3c",
+        "finding_type": "duplicate_model",
+        "message": "Superseded by mm-3f8223c6 with higher quality for same intent",
+        "severity": "WARN",
+        "recommended_status": "superseded"
+      }
+    ]
   },
   "mm-377a8e9b": {
     "path": ".aiwg/mental_models/runtime_models.jsonl",
@@ -622,12 +637,20 @@
   },
   "mm-bf207ed3": {
     "path": ".aiwg/mental_models/runtime_models.jsonl",
-    "status": "valid",
+    "status": "superseded",
     "quality_score": 70,
     "created_at": "2026-05-17T00:09:43Z",
     "intent_hash": "31310362340d",
-    "superseded_by": "",
-    "hygiene_findings": []
+    "superseded_by": "mm-3f8223c6",
+    "hygiene_findings": [
+      {
+        "model_id": "mm-bf207ed3",
+        "finding_type": "duplicate_model",
+        "message": "Superseded by mm-3f8223c6 with higher quality for same intent",
+        "severity": "WARN",
+        "recommended_status": "superseded"
+      }
+    ]
   },
   "mm-55e7efe5": {
     "path": ".aiwg/mental_models/runtime_models.jsonl",
@@ -692,12 +715,20 @@
   },
   "mm-f14a56cd": {
     "path": ".aiwg/mental_models/runtime_models.jsonl",
-    "status": "valid",
+    "status": "superseded",
     "quality_score": 70,
     "created_at": "2026-05-17T00:25:22Z",
     "intent_hash": "31310362340d",
-    "superseded_by": "",
-    "hygiene_findings": []
+    "superseded_by": "mm-3f8223c6",
+    "hygiene_findings": [
+      {
+        "model_id": "mm-f14a56cd",
+        "finding_type": "duplicate_model",
+        "message": "Superseded by mm-3f8223c6 with higher quality for same intent",
+        "severity": "WARN",
+        "recommended_status": "superseded"
+      }
+    ]
   },
   "mm-8befbdb6": {
     "path": ".aiwg/mental_models/runtime_models.jsonl",
@@ -735,12 +766,20 @@
   },
   "mm-2d0bd2c9": {
     "path": ".aiwg/mental_models/runtime_models.jsonl",
-    "status": "valid",
+    "status": "superseded",
     "quality_score": 70,
     "created_at": "2026-05-17T00:25:32Z",
     "intent_hash": "31310362340d",
-    "superseded_by": "",
-    "hygiene_findings": []
+    "superseded_by": "mm-3f8223c6",
+    "hygiene_findings": [
+      {
+        "model_id": "mm-2d0bd2c9",
+        "finding_type": "duplicate_model",
+        "message": "Superseded by mm-3f8223c6 with higher quality for same intent",
+        "severity": "WARN",
+        "recommended_status": "superseded"
+      }
+    ]
   },
   "mm-947c6c76": {
     "path": ".aiwg/mental_models/runtime_models.jsonl",
@@ -795,12 +834,20 @@
   },
   "mm-d7383bc7": {
     "path": ".aiwg/mental_models/runtime_models.jsonl",
-    "status": "valid",
+    "status": "superseded",
     "quality_score": 70,
     "created_at": "2026-05-17T00:29:43Z",
     "intent_hash": "31310362340d",
-    "superseded_by": "",
-    "hygiene_findings": []
+    "superseded_by": "mm-3f8223c6",
+    "hygiene_findings": [
+      {
+        "model_id": "mm-d7383bc7",
+        "finding_type": "duplicate_model",
+        "message": "Superseded by mm-3f8223c6 with higher quality for same intent",
+        "severity": "WARN",
+        "recommended_status": "superseded"
+      }
+    ]
   },
   "mm-9514b213": {
     "path": ".aiwg/mental_models/runtime_models.jsonl",
@@ -883,18 +930,142 @@
   },
   "mm-f4dbea4f": {
     "path": ".aiwg/mental_models/runtime_models.jsonl",
-    "status": "valid",
+    "status": "superseded",
     "quality_score": 60,
     "created_at": "2026-05-17T01:35:26Z",
-    "intent_hash": "",
-    "superseded_by": "",
-    "hygiene_findings": []
+    "intent_hash": "123d31f05f9c",
+    "superseded_by": "mm-1a9e488f",
+    "hygiene_findings": [
+      {
+        "model_id": "mm-f4dbea4f",
+        "finding_type": "empty_decisions_for_planning_intent",
+        "message": "No decisions for planning intent: heartbeat: what is the current system state and next safe ac",
+        "severity": "WARN",
+        "recommended_status": "needs_review"
+      },
+      {
+        "model_id": "mm-f4dbea4f",
+        "finding_type": "duplicate_model",
+        "message": "Superseded by mm-1a9e488f with higher quality for same intent",
+        "severity": "WARN",
+        "recommended_status": "superseded"
+      }
+    ]
   },
   "mm-c0b35caf": {
     "path": ".aiwg/mental_models/runtime_models.jsonl",
     "status": "valid",
     "quality_score": 60,
     "created_at": "2026-05-17T01:49:52Z",
+    "intent_hash": "073c1634c496",
+    "superseded_by": "",
+    "hygiene_findings": []
+  },
+  "mm-e11967f2": {
+    "path": ".aiwg/mental_models/runtime_models.jsonl",
+    "status": "superseded",
+    "quality_score": 60,
+    "created_at": "2026-05-17T01:58:39Z",
+    "intent_hash": "123d31f05f9c",
+    "superseded_by": "mm-1a9e488f",
+    "hygiene_findings": [
+      {
+        "model_id": "mm-e11967f2",
+        "finding_type": "empty_decisions_for_planning_intent",
+        "message": "No decisions for planning intent: heartbeat: what is the current system state and next safe ac",
+        "severity": "WARN",
+        "recommended_status": "needs_review"
+      },
+      {
+        "model_id": "mm-e11967f2",
+        "finding_type": "duplicate_model",
+        "message": "Superseded by mm-1a9e488f with higher quality for same intent",
+        "severity": "WARN",
+        "recommended_status": "superseded"
+      }
+    ]
+  },
+  "mm-3474dd58": {
+    "path": ".aiwg/mental_models/runtime_models.jsonl",
+    "status": "superseded",
+    "quality_score": 60,
+    "created_at": "2026-05-17T01:58:45Z",
+    "intent_hash": "d4eea87f7130",
+    "superseded_by": "mm-b20aa346",
+    "hygiene_findings": [
+      {
+        "model_id": "mm-3474dd58",
+        "finding_type": "empty_decisions_for_planning_intent",
+        "message": "No decisions for planning intent: what should i do next?",
+        "severity": "WARN",
+        "recommended_status": "needs_review"
+      },
+      {
+        "model_id": "mm-3474dd58",
+        "finding_type": "duplicate_model",
+        "message": "Superseded by mm-b20aa346 with higher quality for same intent",
+        "severity": "WARN",
+        "recommended_status": "superseded"
+      }
+    ]
+  },
+  "mm-6f981f29": {
+    "path": ".aiwg/mental_models/runtime_models.jsonl",
+    "status": "superseded",
+    "quality_score": 90,
+    "created_at": "2026-05-17T01:58:45Z",
+    "intent_hash": "2d49faecea0b",
+    "superseded_by": "mm-dbabda26",
+    "hygiene_findings": [
+      {
+        "model_id": "mm-6f981f29",
+        "finding_type": "duplicate_model",
+        "message": "Superseded by mm-dbabda26 with higher quality for same intent",
+        "severity": "WARN",
+        "recommended_status": "superseded"
+      }
+    ]
+  },
+  "mm-3f8223c6": {
+    "path": ".aiwg/mental_models/runtime_models.jsonl",
+    "status": "valid",
+    "quality_score": 90,
+    "created_at": "2026-05-17T01:58:45Z",
+    "intent_hash": "31310362340d",
+    "superseded_by": "",
+    "hygiene_findings": []
+  },
+  "mm-66c89bf8": {
+    "path": ".aiwg/mental_models/runtime_models.jsonl",
+    "status": "valid",
+    "quality_score": 70,
+    "created_at": "2026-05-17T01:58:45Z",
+    "intent_hash": "eb46d92529c4",
+    "superseded_by": "",
+    "hygiene_findings": []
+  },
+  "mm-b1f9077e": {
+    "path": ".aiwg/mental_models/runtime_models.jsonl",
+    "status": "superseded",
+    "quality_score": 90,
+    "created_at": "2026-05-17T01:58:45Z",
+    "intent_hash": "2d49faecea0b",
+    "superseded_by": "mm-dbabda26",
+    "hygiene_findings": [
+      {
+        "model_id": "mm-b1f9077e",
+        "finding_type": "duplicate_model",
+        "message": "Superseded by mm-dbabda26 with higher quality for same intent",
+        "severity": "WARN",
+        "recommended_status": "superseded"
+      }
+    ]
+  },
+  "mm-1fd9634e": {
+    "path": ".aiwg/mental_models/runtime_models.jsonl",
+    "status": "valid",
+    "quality_score": 60,
+    "created_at": "2026-05-17T01:59:17Z",
     "intent_hash": "",
     "superseded_by": "",
     "hygiene_findings": []

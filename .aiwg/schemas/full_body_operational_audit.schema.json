@@ -1,0 +1,63 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "FullBodyOperationalAudit",
+  "type": "object",
+  "properties": {
+    "decision": {
+      "type": "string",
+      "enum": ["PASS", "PASS_WITH_WARNINGS", "FAIL"]
+    },
+    "body_score": { "type": "number" },
+    "organs": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "ready_organs": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "degraded_organs": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "fallback_organs": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "shadow_organs": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "unwired_organs": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "top_body_gaps": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "next_repair_recommendation": { "type": "string" },
+    "warnings": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "required": [
+    "decision",
+    "body_score",
+    "organs",
+    "ready_organs",
+    "degraded_organs",
+    "fallback_organs",
+    "shadow_organs",
+    "unwired_organs",
+    "top_body_gaps",
+    "next_repair_recommendation",
+    "warnings",
+    "evidence_refs"
+  ]
+}

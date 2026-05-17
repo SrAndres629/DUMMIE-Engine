@@ -1,0 +1,54 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DependencyReproducibility",
+  "type": "object",
+  "properties": {
+    "decision": {
+      "type": "string",
+      "enum": ["PASS", "PASS_WITH_WARNINGS", "FAIL"]
+    },
+    "installed_packages": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "declared_packages": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "undeclared_installed_packages": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "missing_declared_packages": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "heavy_dependencies": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "reproducibility_status": {
+      "type": "string",
+      "enum": ["REPRODUCIBLE", "LOCAL_ONLY", "UNKNOWN", "BROKEN"]
+    },
+    "warnings": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "required": [
+    "decision",
+    "installed_packages",
+    "declared_packages",
+    "undeclared_installed_packages",
+    "missing_declared_packages",
+    "heavy_dependencies",
+    "reproducibility_status",
+    "warnings",
+    "evidence_refs"
+  ]
+}

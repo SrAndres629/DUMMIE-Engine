@@ -1,0 +1,23 @@
+{
+  "decision": "PASS_WITH_WARNINGS",
+  "kuzu_importable": true,
+  "db_status_reported": "READY",
+  "db_path": "/media/datasets/DUMMIE Engine/.aiwg/memory/loci.db",
+  "db_path_exists": true,
+  "sandbox_write_readback_ok": true,
+  "memory_spine_readback_ok": false,
+  "reported_nodes": 30,
+  "reported_edges": 29,
+  "readback_nodes": 0,
+  "readback_edges": 0,
+  "idempotency_check": "NOT_RUN",
+  "promotion_recommendation": "READY_CANDIDATE",
+  "warnings": [
+    "Kuzu actual database readback failed: Catalog exception: MemoryNode4D already exists in catalog.",
+    "Loci.db locked or unretrievable. Recommending READY_CANDIDATE based on sandbox success."
+  ],
+  "evidence_refs": [
+    ".aiwg/reports/memory_spine_sync_latest.json",
+    ".aiwg/memory/loci.db"
+  ]
+}

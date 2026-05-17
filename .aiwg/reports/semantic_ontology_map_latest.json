@@ -1,34 +1,23 @@
 {
-  "decision": "PASS",
+  "decision": "PASS_WITH_WARNINGS",
   "concepts": [
-    "status"
+    "heartbeat: what is the current system state and next safe action?"
   ],
   "classes": [
-    "REPORT"
+    "UNKNOWN"
   ],
   "ontology_graph": {
     "nodes": [
       {
         "id": "INTENT",
-        "label": "status",
+        "label": "heartbeat: what is the current system state and next safe action?",
         "type": "INTENT"
-      },
-      {
-        "id": "REPORT",
-        "label": "REPORT",
-        "type": "CLASS"
       }
     ],
-    "edges": [
-      {
-        "source": "INTENT",
-        "target": "REPORT",
-        "type": "IS_A"
-      }
-    ]
+    "edges": []
   },
-  "timestamp": "2026-05-17T01:49:52.336417+00:00",
+  "timestamp": "2026-05-17T01:59:17.545237+00:00",
   "warnings": [
-    ""
+    "No ontology classes matched"
   ]
 }

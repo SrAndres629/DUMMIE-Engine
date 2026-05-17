@@ -5,8 +5,10 @@ Mode: observe_only | advisory | repair_planning
 Never executes mutations autonomously.
 """
 
+# Spec Reference: 190_full_body_operational_auditor
 import json
 import uuid
+import sys
 from dataclasses import dataclass, field, asdict
 from datetime import datetime, timezone
 from pathlib import Path
@@ -79,7 +81,14 @@ def _load(path: Path) -> Dict[str, Any]:
 
 
 def _is_kuzu_degraded(aiwg_root: Path) -> bool:
-    readiness = _load(aiwg_root / "reports" / "readiness_score_calibration_latest.json")
+    reports = aiwg_root / "reports"
+    governor = _load(reports / "capability_promotion_governor_latest.json")
+    for cap in governor.get("capabilities", []):
+        if cap.get("capability_id") == "kuzu_4dtes_persistence":
+            return cap.get("verified_status") in ("DEGRADED", "SIMULATED", "MISSING")
+    
+    # fallback to old logic
+    readiness = _load(reports / "readiness_score_calibration_latest.json")
     for f in readiness.get("findings", []):
         if "degraded" in f.get("id", "").lower() or "degraded" in f.get("description", "").lower():
             return True
@@ -92,7 +101,6 @@ def _is_kuzu_degraded(aiwg_root: Path) -> bool:
 
 def run_heartbeat(mode: str = "observe_only", aiwg_root: Path = Path(".aiwg")) -> Dict[str, Any]:
     """Execute one full heartbeat cycle."""
-    import sys
     l2 = Path("layers/l2_brain").resolve()
     if str(l2) not in sys.path:
         sys.path.insert(0, str(l2))
@@ -102,6 +110,33 @@ def run_heartbeat(mode: str = "observe_only", aiwg_root: Path = Path(".aiwg")) -
     hb_id = f"hb-{uuid.uuid4().hex[:8]}"
     warnings: List[str] = []
     evidence: List[str] = []
+
+    # ---- STEP 0: WHOLE-BODY OPERATIONAL VERIFICATION AUDITS ----
+    try:
+        from dependency_reproducibility_verifier import run_dependency_reproducibility_verification
+        from kuzu_graph_readback_verifier import run_kuzu_graph_readback_verification
+        from embedding_activation_verifier import run_embedding_activation_verification
+        from capability_promotion_governor import run_capability_promotion_governor
+        from full_body_operational_auditor import run_full_body_operational_audit
+        from whole_body_repair_queue import run_whole_body_repair_queue
+
+        run_dependency_reproducibility_verification()
+        run_kuzu_graph_readback_verification()
+        run_embedding_activation_verification()
+        run_capability_promotion_governor()
+        run_full_body_operational_audit()
+        run_whole_body_repair_queue()
+        
+        evidence.extend([
+            ".aiwg/reports/dependency_reproducibility_latest.json",
+            ".aiwg/reports/kuzu_graph_readback_verification_latest.json",
+            ".aiwg/reports/embedding_activation_verification_latest.json",
+            ".aiwg/reports/capability_promotion_governor_latest.json",
+            ".aiwg/reports/full_body_operational_audit_latest.json",
+            ".aiwg/reports/whole_body_repair_queue_latest.json"
+        ])
+    except Exception as e:
+        warnings.append(f"whole_body_verification_audits_failed: {e}")
 
     # ---- STEP 1: OBSERVE ----
     canonical = [
@@ -117,6 +152,12 @@ def run_heartbeat(mode: str = "observe_only", aiwg_root: Path = Path(".aiwg")) -
         "whole_body_scan_calibration_latest.json",
         "wiring_matrix_latest.json",
         "shadow_runtime_classification_latest.json",
+        "dependency_reproducibility_latest.json",
+        "kuzu_graph_readback_verification_latest.json",
+        "embedding_activation_verification_latest.json",
+        "capability_promotion_governor_latest.json",
+        "full_body_operational_audit_latest.json",
+        "whole_body_repair_queue_latest.json"
     ]
     found = [c for c in canonical if (reports / c).exists()]
     missing = [c for c in canonical if c not in found]
@@ -302,7 +343,7 @@ def run_heartbeat(mode: str = "observe_only", aiwg_root: Path = Path(".aiwg")) -
     if kuzu_degraded:
         if hb_decision == "PASS":
             hb_decision = "PASS_WITH_WARNINGS"
-    if selected_action.get("action_type") in ("repair_kuzu_persistence",) and dispatch in ("antigravity", "human_review"):
+    if selected_action.get("action_type") in ("repair_kuzu_persistence", "repair_kuzu_ready_truth") and dispatch in ("antigravity", "human_review"):
         hb_decision = "NEEDS_HUMAN_REVIEW"
 
     # ---- STEP 10: LEARNING EPISODE ----
@@ -317,7 +358,7 @@ def run_heartbeat(mode: str = "observe_only", aiwg_root: Path = Path(".aiwg")) -
         episode = {
             "heartbeat_id": hb_id,
             "selected_action": selected_action.get("action_type", ""),
-            "why_selected": f"Highest priority non-blocked action from self-improvement queue",
+            "why_selected": f"Highest priority non-blocked action from whole-body repair or self-improvement queues",
             "blocked_actions": blocked,
             "evidence_refs": evidence[:5],
             "warnings": warnings[:5],
@@ -394,7 +435,6 @@ def run_heartbeat(mode: str = "observe_only", aiwg_root: Path = Path(".aiwg")) -
 
 
 if __name__ == "__main__":
-    import sys
-    mode = sys.argv[1] if len(sys.argv) > 1 else "observe_only"
-    result = run_heartbeat(mode=mode)
-    print(json.dumps(result, indent=2))
+    mode_arg = sys.argv[1] if len(sys.argv) > 1 else "observe_only"
+    res = run_heartbeat(mode=mode_arg)
+    print(json.dumps(res, indent=2))

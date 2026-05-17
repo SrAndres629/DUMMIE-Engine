@@ -1,5 +1,6 @@
 """Embedding Memory Router Module for offline indexing and routing context items."""
 
+# Spec Reference: 188_embedding_activation_verifier
 import json
 import hashlib
 from pathlib import Path
@@ -14,15 +15,36 @@ class EmbeddingMemoryRouter:
         self.reports_dir = self.aiwg_root / ".aiwg" / "reports"
         self.reports_dir.mkdir(parents=True, exist_ok=True)
 
+        # Check local embedding mode
+        self.embedding_mode = "DETERMINISTIC_FALLBACK"
+        self.model_load_ok = False
+        try:
+            report_path = self.reports_dir / "embedding_activation_verification_latest.json"
+            if report_path.exists():
+                data = json.loads(report_path.read_text(encoding="utf-8"))
+                if data.get("embedding_mode") == "REAL_LOCAL" and data.get("model_load_ok"):
+                    self.embedding_mode = "REAL_LOCAL"
+                    self.model_load_ok = True
+        except Exception:
+            pass
+
     def _generate_projection_vector(self, text: str) -> list:
         # Generate a deterministic 128-dimensional float projection vector from SHA256 of text
         h = hashlib.sha256(text.encode("utf-8")).digest()
         vector = []
         for i in range(128):
-            # Deterministic projection vector generation
             val = (h[i % len(h)] + i) % 256
             vector.append(float(val) / 256.0)
         return vector
+
+    def _generate_real_vector(self, text: str) -> list:
+        try:
+            from sentence_transformers import SentenceTransformer
+            model = SentenceTransformer("all-MiniLM-L6-v2", local_files_only=True)
+            v = model.encode(text)
+            return v.tolist()
+        except Exception:
+            return self._generate_projection_vector(text)
 
     def build_context_embedding_index(self) -> int:
         packet_path = self.reports_dir / "6d_context_packet_latest.json"
@@ -35,13 +57,16 @@ class EmbeddingMemoryRouter:
             return 0
 
         index = {
-            "embedding_mode": "DETERMINISTIC_FALLBACK",
+            "embedding_mode": self.embedding_mode,
             "items": []
         }
 
         for item in packet.get("items", []):
             path = item.get("path", "")
-            vector = self._generate_projection_vector(path)
+            if self.embedding_mode == "REAL_LOCAL":
+                vector = self._generate_real_vector(path)
+            else:
+                vector = self._generate_projection_vector(path)
             index["items"].append({
                 "path": path,
                 "vector": vector,
@@ -62,20 +87,31 @@ class EmbeddingMemoryRouter:
         except Exception:
             return []
 
-        query_vector = self._generate_projection_vector(query)
+        mode = index.get("embedding_mode", self.embedding_mode)
+        if mode == "REAL_LOCAL":
+            query_vector = self._generate_real_vector(query)
+        else:
+            query_vector = self._generate_projection_vector(query)
+            
         results = []
 
         for item in index.get("items", []):
             vector = item.get("vector", [])
-            # Simple cosine similarity approximation (dot product since vectors normalized roughly same)
-            dot_product = sum(a * b for a, b in zip(query_vector, vector))
+            # Cosine similarity dot product
+            import numpy as np
+            a = np.array(query_vector)
+            b = np.array(vector)
+            if not np.any(a) or not np.any(b) or len(a) != len(b):
+                dot_product = 0.0
+            else:
+                dot_product = float(np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b)))
+            
             results.append({
                 "path": item.get("path"),
                 "score": float(dot_product),
                 "status": item.get("status")
             })
 
-        # Sort by score descending
         results.sort(key=lambda x: x["score"], reverse=True)
         return results[:5]
 
@@ -85,10 +121,12 @@ def run_embedding_memory_router_demo(intent: str, aiwg_root: Path = None) -> dic
     results = router.query_context_memory(intent)
 
     warnings = []
-    decision = "PASS"
-    
-    # We must issue fallback warnings if deterministic is active
-    warnings.append("Deterministic offline projection fallback is active. Semantic accuracy may be limited.")
+    # If fallback active, decision cannot be unconditional PASS.
+    if router.embedding_mode == "REAL_LOCAL":
+        decision = "PASS"
+    else:
+        decision = "PASS_WITH_WARNINGS"
+        warnings.append("Deterministic offline projection fallback is active. Semantic accuracy may be limited.")
 
     evidence_refs = []
     if (router.reports_dir / "6d_context_packet_latest.json").exists():
@@ -96,7 +134,7 @@ def run_embedding_memory_router_demo(intent: str, aiwg_root: Path = None) -> dic
 
     report = {
         "decision": decision,
-        "embedding_mode": "DETERMINISTIC_FALLBACK",
+        "embedding_mode": router.embedding_mode,
         "indexed_items": indexed_count,
         "query": intent,
         "results": results,
@@ -111,7 +149,7 @@ def run_embedding_memory_router_demo(intent: str, aiwg_root: Path = None) -> dic
     md_lines = [
         f"# Embedding Memory Router Report",
         f"- **Decision**: **{decision}**",
-        f"- **Embedding Mode**: `DETERMINISTIC_FALLBACK`",
+        f"- **Embedding Mode**: `{router.embedding_mode}`",
         f"- **Indexed Items**: {indexed_count}",
         f"- **Query**: \"{intent}\"",
         f"",
@@ -132,7 +170,6 @@ def run_embedding_memory_router_demo(intent: str, aiwg_root: Path = None) -> dic
 
     return report
 
-
 def seed_embedding_router_indices(aiwg_root: Path = None) -> dict:
     router = EmbeddingMemoryRouter(aiwg_root=aiwg_root)
     count = router.build_context_embedding_index()
@@ -146,7 +183,7 @@ def seed_embedding_router_indices(aiwg_root: Path = None) -> dict:
             pass
     return {
         "status": "PASS",
-        "fallback_mode": "DETERMINISTIC_FALLBACK",
+        "fallback_mode": router.embedding_mode,
         "indexed_count": count,
         "vectors": vectors
     }

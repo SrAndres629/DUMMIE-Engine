@@ -10,8 +10,7 @@
 - `[BLOCKED]` graph_persistence_transaction_write
 
 ## Repair Plan
-1. Install Kùzu library in virtual environment via offline safe compilation.
-1. Restore PyArrow IPC data buffers mapping for zero-copy memory transport.
+1. Run Kuzu readback verification suite to validate loci.db.
 
 ## Warnings
-- [WARNING] Kùzu/4D-TES persistence is currently DEGRADED. Actions requiring write transactions will be simulated.
+- [WARNING] Kùzu/4D-TES readback verification is incomplete or locked. Actions requiring write transactions will be simulated.

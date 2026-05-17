@@ -22,6 +22,10 @@ dependencies = [
     "aiofiles>=23.2.1",
     "tiktoken>=0.13.0",
     "grpcio>=1.80.0",
+    "networkx>=3.0.0",
+    "fastapi>=0.100.0",
+    "sentence-transformers>=2.2.2",
+    "torch>=2.0.0",
 ]
 
 [project.scripts]
