@@ -889,5 +889,14 @@
     "intent_hash": "",
     "superseded_by": "",
     "hygiene_findings": []
+  },
+  "mm-c0b35caf": {
+    "path": ".aiwg/mental_models/runtime_models.jsonl",
+    "status": "valid",
+    "quality_score": 60,
+    "created_at": "2026-05-17T01:49:52Z",
+    "intent_hash": "",
+    "superseded_by": "",
+    "hygiene_findings": []
   }
 }

@@ -1,8 +1,8 @@
 {
   "decision": "NEEDS_HUMAN_REVIEW",
-  "intent": "heartbeat: what is the current system state and next safe action?",
-  "mental_model_id": "mm-f4dbea4f",
-  "frame_id": "frame-ba2b876d",
+  "intent": "status",
+  "mental_model_id": "mm-c0b35caf",
+  "frame_id": "frame-3e9b4dc0",
   "quality_gate": {
     "decision": "NEEDS_HUMAN_REVIEW",
     "quality_score": 60.0,
@@ -60,7 +60,7 @@
       {
         "id": "INTENT",
         "type": "TELEOLOGY",
-        "goal": "heartbeat: what is the current system state and next safe action?"
+        "goal": "status"
       }
     ],
     "edges": [
@@ -81,7 +81,7 @@
       "Agency"
     ],
     "teleology": {
-      "goal": "heartbeat: what is the current system state and next safe action?",
+      "goal": "status",
       "impact": "evolution"
     },
     "authority_constraints": [
@@ -95,7 +95,7 @@
     ]
   },
   "dialectical_review": {
-    "thesis": "Proceed with heartbeat: what is the current system state and next safe action? to improve the system.",
+    "thesis": "Proceed with status to improve the system.",
     "antithesis": "Propose delay until core regressions (Kuzu/Tests) are resolved.",
     "counterexamples": [
       "Previous failed refactor attempts",
@@ -113,8 +113,8 @@
   "recommended_next_action": "respond_via_frame",
   "next_self_improvement_action": "increase_test_coverage",
   "self_improvement_blocked_actions": [
-    "repair_kuzu_persistence",
     "quarantine_overconfident_models",
+    "repair_kuzu_persistence",
     "autonomous_scaling"
   ],
   "dispatch_recommendation": "local",

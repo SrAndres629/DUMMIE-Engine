@@ -1,9 +1,11 @@
 {
-  "request_id": "chat_2026-05-17T01:32:12Z",
-  "decision": "ALLOW_MANIFEST_ONLY",
-  "reason": "Defaulting to manifest-only context for unknown task types.",
-  "recommended_strategy": "Load repo_intelligence_manifest.json.",
-  "risk_score": 0.2,
-  "evidence_refs": [],
-  "generated_at": "2026-05-17T01:32:12Z"
+  "request_id": "chat_2026-05-17T01:49:52Z",
+  "decision": "ALLOW_DOSSIER_CONTEXT",
+  "reason": "Task type allows dossier-only context.",
+  "recommended_strategy": "Load relevant folder and file dossiers.",
+  "risk_score": 0.1,
+  "evidence_refs": [
+    ".aiwg/reports/folder_dossier_index.json"
+  ],
+  "generated_at": "2026-05-17T01:49:52Z"
 }

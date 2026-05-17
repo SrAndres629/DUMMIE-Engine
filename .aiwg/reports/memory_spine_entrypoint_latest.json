@@ -1,13 +1,30 @@
 {
   "decision": "PASS",
-  "query": "heartbeat",
+  "query": "status",
   "status": "READY",
-  "memory_refs": [],
-  "learning_episode_refs": [],
+  "memory_refs": [
+    {
+      "source": ".aiwg/reports/memory_spine_sync_latest.json",
+      "match_type": "keyword"
+    }
+  ],
+  "learning_episode_refs": [
+    "sid:CURRENT/ep:ep-fd82db34",
+    "sid:CURRENT/ep:ep-2eaeaacc",
+    "sid:CURRENT/ep:ep-661ad5fb",
+    "sid:CURRENT/ep:ep-f71ac1ea",
+    "sid:CURRENT/ep:ep-8093669b",
+    "sid:CURRENT/ep:ep-3234eff5",
+    "sid:CURRENT/ep:ep-e972424f",
+    "sid:CURRENT/ep:ep-9736881f"
+  ],
   "vault_refs": [],
   "graph_status": "READY",
   "used_before_chat_response": true,
   "warnings": [],
-  "evidence_refs": [],
-  "generated_at": "2026-05-17T01:35:26Z"
+  "evidence_refs": [
+    ".aiwg/reports/memory_spine_sync_latest.json",
+    ".aiwg/sessions/CURRENT/learning_episodes.jsonl"
+  ],
+  "generated_at": "2026-05-17T01:49:52Z"
 }
