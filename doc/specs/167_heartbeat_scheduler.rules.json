@@ -1,0 +1,6 @@
+{
+  "spec_id": "167_heartbeat_scheduler",
+  "policy": "no_private_cot",
+  "evidence_required": true,
+  "quality_threshold": 80
+}

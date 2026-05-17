@@ -61,7 +61,18 @@ class DummieChatCli:
 
         # Determine intent
         intent = "unknown"
-        if "model hygiene" in query_text or "truth hygiene" in query_text:
+        if "heartbeat" in query_text:
+            if "status" in query_text:
+                intent = "heartbeat_status"
+            elif "ledger" in query_text:
+                intent = "heartbeat_ledger"
+            elif "next heartbeat" in query_text:
+                intent = "next_heartbeat"
+            elif "why this action" in query_text:
+                intent = "heartbeat_why"
+            else:
+                intent = "heartbeat"
+        elif "model hygiene" in query_text or "truth hygiene" in query_text:
             intent = "model_hygiene"
         elif "quarantined" in query_text:
             intent = "quarantined_models"
@@ -146,6 +157,16 @@ class DummieChatCli:
             response = self._cmd_apply_evolution_delta(gate_decision)
         elif intent == "what_should_improve":
             response = self._cmd_what_should_improve(gate_decision)
+        elif intent == "heartbeat":
+            response = self._cmd_heartbeat(gate_decision)
+        elif intent == "heartbeat_status":
+            response = self._cmd_heartbeat_status(gate_decision)
+        elif intent == "next_heartbeat":
+            response = self._cmd_next_heartbeat(gate_decision)
+        elif intent == "heartbeat_ledger":
+            response = self._cmd_heartbeat_ledger(gate_decision)
+        elif intent == "heartbeat_why":
+            response = self._cmd_heartbeat_why(gate_decision)
         elif intent == "help":
             response = self._cmd_help()
         else:
@@ -456,6 +477,55 @@ class DummieChatCli:
         return DummieChatResponse(answer=answer, evidence_refs=[".aiwg/reports/self_improvement_action_queue.json"],
                                   context_strategy=gate.decision, generated_at=self._utc_now())
 
+    def _cmd_heartbeat(self, gate) -> DummieChatResponse:
+        try:
+            from layers.l2_brain.heartbeat_lifecycle_runtime import run_heartbeat
+            res = run_heartbeat(mode="observe_only", aiwg_root=self.aiwg_root)
+            sa = res.get("selected_action", {}).get("action_type", "none")
+            answer = (f"Heartbeat: {res.get('decision', '?')}. "
+                      f"Selected: {sa}. Dispatch: {res.get('dispatch_recommendation', '?')}. "
+                      f"Blocked: {', '.join(res.get('blocked_actions', [])) or 'none'}")
+            return DummieChatResponse(answer=answer, evidence_refs=[".aiwg/reports/heartbeat_latest.json"],
+                                      context_strategy=gate.decision, generated_at=self._utc_now())
+        except Exception as e:
+            return DummieChatResponse(answer=f"Heartbeat error: {e}", warnings=[str(e)], generated_at=self._utc_now())
+
+    def _cmd_heartbeat_status(self, gate) -> DummieChatResponse:
+        data = self._load_json(self.aiwg_root / "heartbeat" / "latest_heartbeat.json")
+        if not data:
+            return DummieChatResponse(answer="No heartbeat has run yet.", generated_at=self._utc_now())
+        answer = (f"Last heartbeat: {data.get('heartbeat_id', '?')}. "
+                  f"Decision: {data.get('decision', '?')}. Mode: {data.get('mode', '?')}. "
+                  f"Action: {data.get('selected_action', {}).get('action_type', '?')}")
+        return DummieChatResponse(answer=answer, evidence_refs=[".aiwg/heartbeat/latest_heartbeat.json"],
+                                  context_strategy=gate.decision, generated_at=self._utc_now())
+
+    def _cmd_next_heartbeat(self, gate) -> DummieChatResponse:
+        data = self._load_json(self.aiwg_root / "heartbeat" / "next_heartbeat_seed.json")
+        if not data:
+            return DummieChatResponse(answer="No heartbeat seed found. Run a heartbeat first.", generated_at=self._utc_now())
+        answer = (f"Next heartbeat seed: action={data.get('next_action', '?')}, "
+                  f"dispatch={data.get('dispatch', '?')}, kuzu={data.get('kuzu_degraded', '?')}")
+        return DummieChatResponse(answer=answer, evidence_refs=[".aiwg/heartbeat/next_heartbeat_seed.json"],
+                                  context_strategy=gate.decision, generated_at=self._utc_now())
+
+    def _cmd_heartbeat_ledger(self, gate) -> DummieChatResponse:
+        ledger_path = self.aiwg_root / "heartbeat" / "heartbeat_ledger.jsonl"
+        if not ledger_path.exists():
+            return DummieChatResponse(answer="No heartbeat ledger found.", generated_at=self._utc_now())
+        count = sum(1 for _ in ledger_path.open("r"))
+        return DummieChatResponse(answer=f"Heartbeat ledger contains {count} entries.",
+                                  evidence_refs=[".aiwg/heartbeat/heartbeat_ledger.jsonl"],
+                                  context_strategy=gate.decision, generated_at=self._utc_now())
+
+    def _cmd_heartbeat_why(self, gate) -> DummieChatResponse:
+        data = self._load_json(self.aiwg_root / "reports" / "heartbeat_decision_policy_latest.json")
+        if not data:
+            return DummieChatResponse(answer="No decision policy found. Run a heartbeat first.", generated_at=self._utc_now())
+        answer = f"Why this action: {data.get('reason', 'unknown')}"
+        return DummieChatResponse(answer=answer, evidence_refs=[".aiwg/reports/heartbeat_decision_policy_latest.json"],
+                                  context_strategy=gate.decision, generated_at=self._utc_now())
+
     def _cmd_help(self) -> DummieChatResponse:
         help_text = """Available commands:
 - status: Show current system phase.
@@ -476,6 +546,11 @@ class DummieChatCli:
 - show self improvement queue: Show self-improvement action queue.
 - apply evolution delta: Apply evolution delta to generate actions.
 - what should improve next?: Show next evidence-based improvement.
+- run heartbeat: Execute one heartbeat cycle.
+- heartbeat status: Show last heartbeat result.
+- next heartbeat: Show next heartbeat seed.
+- show heartbeat ledger: Show heartbeat history count.
+- why this action?: Explain current action selection.
 - help: Show this message."""
         return DummieChatResponse(answer=help_text, generated_at=self._utc_now())
 

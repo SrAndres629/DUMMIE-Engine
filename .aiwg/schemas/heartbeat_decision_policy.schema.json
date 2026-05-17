@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "HeartbeatDecisionPolicy",
+  "type": "object",
+  "required": [
+    "selected_action",
+    "dispatch_recommendation",
+    "blocked_actions",
+    "reason"
+  ],
+  "properties": {
+    "selected_action": {
+      "type": "object"
+    },
+    "dispatch_recommendation": {
+      "type": "string"
+    },
+    "blocked_actions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "reason": {
+      "type": "string"
+    }
+  }
+}

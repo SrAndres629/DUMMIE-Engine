@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "HeartbeatStateStore",
+  "type": "object",
+  "required": [
+    "heartbeat_id",
+    "decision",
+    "created_at"
+  ],
+  "properties": {
+    "heartbeat_id": {
+      "type": "string"
+    },
+    "decision": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string"
+    }
+  }
+}

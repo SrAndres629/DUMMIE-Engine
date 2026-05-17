@@ -25,6 +25,20 @@ def _seed(aiwg: Path) -> None:
     _write_json(reports / "context_receipt_latest.json", {"decision": "ALLOW", "budget_limit": 100})
     _write_json(reports / "prompt_frame_latest.json", {"prompt_sections": {"system": ["sys"]}, "frame_id": "f1"})
     _write_json(aiwg / "notes" / "folder_notes_manifest.json", {"folders": []})
+    _write_json(aiwg / "mental_models" / "runtime_model_index.json", {})
+
+    # Seed for heartbeat
+    _write_json(reports / "self_improvement_action_queue.json", {
+        "actions": [{"action_type": "increase_test_coverage", "priority": "high", "status": "proposed"}],
+        "blocked": []
+    })
+    _write_json(reports / "readiness_score_calibration_latest.json", {"findings": []})
+    _write_json(reports / "mental_model_truth_hygiene_latest.json", {})
+    _write_json(reports / "evolution_delta_application_latest.json", {})
+    _write_json(reports / "epistemic_state_latest.json", {})
+    _write_json(reports / "cognitive_bias_report_latest.json", {})
+    _write_json(reports / "memory_spine_entrypoint_latest.json", {})
+    _write_json(reports / "metacognitive_loop_latest.json", {})
 
 
 def test_cli_status_returns_json_result(tmp_path: Path):
@@ -66,3 +80,25 @@ def test_cli_compress_context_produces_output(tmp_path: Path):
     res = cli.run_command("compress-context")
     assert res.decision in {"PASS", "PASS_WITH_WARNINGS"}
     assert (aiwg / "reports" / "local_context_compression_latest.json").exists()
+
+
+def test_cli_heartbeat(tmp_path: Path):
+    aiwg = tmp_path / ".aiwg"
+    _seed(aiwg)
+    cli = CliControlPlane(aiwg_root=aiwg)
+
+    res = cli.run_command("heartbeat")
+    assert res.command == "heartbeat"
+    assert res.decision in {"PASS", "PASS_WITH_WARNINGS", "NEEDS_HUMAN_REVIEW"}
+    assert (aiwg / "reports" / "heartbeat_latest.json").exists()
+
+
+def test_cli_heartbeat_dry_run(tmp_path: Path):
+    aiwg = tmp_path / ".aiwg"
+    _seed(aiwg)
+    cli = CliControlPlane(aiwg_root=aiwg)
+
+    res = cli.run_command("heartbeat-dry-run")
+    assert res.command == "heartbeat-dry-run"
+    assert res.decision in {"PASS", "PASS_WITH_WARNINGS"}
+    assert (aiwg / "reports" / "heartbeat_scheduler_latest.json").exists()

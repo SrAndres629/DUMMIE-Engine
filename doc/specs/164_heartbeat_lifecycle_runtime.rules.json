@@ -1,0 +1,6 @@
+{
+  "spec_id": "164_heartbeat_lifecycle_runtime",
+  "policy": "no_private_cot",
+  "evidence_required": true,
+  "quality_threshold": 80
+}

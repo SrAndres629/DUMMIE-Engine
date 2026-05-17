@@ -132,6 +132,12 @@ class CliControlPlane:
             "apply-evolution-delta": self._cmd_apply_evolution_delta,
             "self-improvement": self._cmd_self_improvement,
             "self-improvement-queue": self._cmd_self_improvement_queue,
+            # Heartbeat-0
+            "heartbeat": self._cmd_heartbeat,
+            "heartbeat-dry-run": self._cmd_heartbeat_dry_run,
+            "heartbeat-seed": self._cmd_heartbeat_seed,
+            "heartbeat-status": self._cmd_heartbeat_status,
+            "heartbeat-ledger": self._cmd_heartbeat_ledger,
         }
 
 
@@ -644,6 +650,50 @@ class CliControlPlane:
                                  evidence_refs=[".aiwg/reports/self_improvement_action_queue.json"],
                                  generated_at=self._utc_now())
 
+    # --- Heartbeat-0 commands -----------------------------------------------
+
+    def _cmd_heartbeat(self) -> CliCommandResult:
+        from layers.l2_brain.heartbeat_lifecycle_runtime import run_heartbeat
+        res = run_heartbeat(mode="observe_only", aiwg_root=self.aiwg_root)
+        return CliCommandResult("heartbeat", res.get("decision", "PASS"), res,
+                                 warnings=res.get("warnings", []),
+                                 evidence_refs=[".aiwg/reports/heartbeat_latest.json"],
+                                 generated_at=self._utc_now())
+
+    def _cmd_heartbeat_dry_run(self) -> CliCommandResult:
+        from layers.l2_brain.heartbeat_scheduler import HeartbeatScheduler
+        scheduler = HeartbeatScheduler(aiwg_root=self.aiwg_root)
+        res = scheduler.dry_run()
+        return CliCommandResult("heartbeat-dry-run", res.get("decision", "PASS"), res,
+                                 evidence_refs=[".aiwg/reports/heartbeat_scheduler_latest.json"],
+                                 generated_at=self._utc_now())
+
+    def _cmd_heartbeat_seed(self) -> CliCommandResult:
+        from layers.l2_brain.heartbeat_scheduler import HeartbeatScheduler
+        scheduler = HeartbeatScheduler(aiwg_root=self.aiwg_root)
+        res = scheduler.load_next_seed()
+        return CliCommandResult("heartbeat-seed", "PASS", res,
+                                 evidence_refs=[".aiwg/heartbeat/next_heartbeat_seed.json"],
+                                 generated_at=self._utc_now())
+
+    def _cmd_heartbeat_status(self) -> CliCommandResult:
+        path = self.aiwg_root / "heartbeat" / "latest_heartbeat.json"
+        data = self._load_json(path)
+        return CliCommandResult("heartbeat-status", "PASS", data or {},
+                                 evidence_refs=[".aiwg/heartbeat/latest_heartbeat.json"],
+                                 generated_at=self._utc_now())
+
+    def _cmd_heartbeat_ledger(self) -> CliCommandResult:
+        path = self.aiwg_root / "heartbeat" / "heartbeat_ledger.jsonl"
+        count = 0
+        if path.exists():
+            try:
+                count = sum(1 for _ in path.open("r", encoding="utf-8"))
+            except Exception:
+                pass
+        return CliCommandResult("heartbeat-ledger", "PASS", {"count": count},
+                                 evidence_refs=[".aiwg/heartbeat/heartbeat_ledger.jsonl"],
+                                 generated_at=self._utc_now())
 
     def _cmd_token_benchmark(self) -> CliCommandResult:
         res = run_token_economy_benchmark()

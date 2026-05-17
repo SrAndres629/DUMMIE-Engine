@@ -1,0 +1,6 @@
+{
+  "spec_id": "165_heartbeat_state_store",
+  "policy": "no_private_cot",
+  "evidence_required": true,
+  "quality_threshold": 80
+}

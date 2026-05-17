@@ -1,0 +1,6 @@
+{
+  "spec_id": "166_heartbeat_decision_policy",
+  "policy": "no_private_cot",
+  "evidence_required": true,
+  "quality_threshold": 80
+}

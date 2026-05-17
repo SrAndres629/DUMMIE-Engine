@@ -1,0 +1,52 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "HeartbeatLifecycle",
+  "type": "object",
+  "required": [
+    "heartbeat_id",
+    "mode",
+    "decision",
+    "selected_action",
+    "next_heartbeat_seed",
+    "evidence_refs"
+  ],
+  "properties": {
+    "heartbeat_id": {
+      "type": "string"
+    },
+    "mode": {
+      "type": "string",
+      "enum": [
+        "observe_only",
+        "advisory",
+        "repair_planning",
+        "patch_proposal",
+        "authorized_execution"
+      ]
+    },
+    "decision": {
+      "type": "string"
+    },
+    "selected_action": {
+      "type": "object"
+    },
+    "blocked_actions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "dispatch_recommendation": {
+      "type": "string"
+    },
+    "next_heartbeat_seed": {
+      "type": "object"
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

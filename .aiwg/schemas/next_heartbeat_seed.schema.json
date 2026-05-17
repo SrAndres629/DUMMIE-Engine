@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "NextHeartbeatSeed",
+  "type": "object",
+  "required": [
+    "previous_heartbeat_id",
+    "previous_decision",
+    "next_action",
+    "dispatch",
+    "blocked_actions"
+  ],
+  "properties": {
+    "previous_heartbeat_id": {
+      "type": "string"
+    },
+    "previous_decision": {
+      "type": "string"
+    },
+    "next_action": {
+      "type": "string"
+    },
+    "dispatch": {
+      "type": "string"
+    },
+    "blocked_actions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "kuzu_degraded": {
+      "type": "boolean"
+    }
+  }
+}

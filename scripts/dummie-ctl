@@ -17,11 +17,15 @@ def show_help():
     print("DUMMIE Engine Control Utility (dummie-ctl)")
     print("Usage: dummie-ctl <command> [args]")
     print("\nCommands:")
-    print("  status       Show system status and phase")
-    print("  chat <text>  Interact with DUMMIE Brain (records learning episode)")
-    print("  calibrate    Run sovereign readiness calibration")
-    print("  triage       Show test debt triage report")
-    print("  help         Show this help")
+    print("  status              Show system status and phase")
+    print("  chat <text>         Interact with DUMMIE Brain (records learning episode)")
+    print("  calibrate           Run sovereign readiness calibration")
+    print("  triage              Show test debt triage report")
+    print("  heartbeat           Execute manual observe-only heartbeat cycle")
+    print("  heartbeat-dry-run   Perform simulated dry-run heartbeat cycle")
+    print("  heartbeat-status    Show status of last recorded heartbeat")
+    print("  next-heartbeat      Show next heartbeat seed information")
+    print("  help                Show this help")
 
 def main():
     if len(sys.argv) < 2:
@@ -46,6 +50,14 @@ def main():
             print(triage_md.read_text())
         else:
             print("Triage report not found. Run tests first.")
+    elif cmd == "heartbeat":
+        run_python("layers/l2_brain/cli_control_plane.py", ["heartbeat"])
+    elif cmd == "heartbeat-dry-run":
+        run_python("layers/l2_brain/cli_control_plane.py", ["heartbeat-dry-run"])
+    elif cmd == "heartbeat-status":
+        run_python("layers/l2_brain/cli_control_plane.py", ["heartbeat-status"])
+    elif cmd == "next-heartbeat":
+        run_python("layers/l2_brain/cli_control_plane.py", ["heartbeat-seed"])
     elif cmd == "help":
         show_help()
     else:
