@@ -1,8 +1,8 @@
-# Heartbeat hb-b5abcb42
+# Heartbeat hb-54c4fe83
 
 Mode: observe_only
 Decision: PASS_WITH_WARNINGS
-Selected: integrate_kuzu_graph_sync
-Dispatch: antigravity
+Selected: activate_local_embedding_model_or_label_fallback
+Dispatch: human_review
 Kuzu: OK
 Warnings: 4

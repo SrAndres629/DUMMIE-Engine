@@ -3,7 +3,7 @@
   "daemon_status": "INVOCATION_ONLY",
   "gateway_status": "MAPPED",
   "dispatch_envelope": {
-    "dispatch_id": "68fb8541-2f19-4141-83b5-b01332f07a3c",
+    "dispatch_id": "1f429a92-5de1-4de1-aa67-3b474aab5da1",
     "selected_action": {
       "action_id": "integrate_kuzu_graph_sync",
       "action_type": "integrate_kuzu_graph_sync",
@@ -15,7 +15,7 @@
     },
     "target": "human_review",
     "mode": "repair_planning",
-    "context_packet_ref": "e1bd01e5-fd9d-4a52-a8fe-0acfcd4518e2",
+    "context_packet_ref": "e4c99096-6423-42a6-a650-00e6ce9ccfa1",
     "memory_refs": [
       ".aiwg/reports/memory_spine_entrypoint_latest.json"
     ],

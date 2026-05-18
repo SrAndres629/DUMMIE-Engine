@@ -1,19 +1,13 @@
 {
-  "decision": "PASS_WITH_WARNINGS",
+  "decision": "PASS",
   "kuzu_importable": true,
   "db_path_detected": ".aiwg/memory/loci.db",
-  "graph_write_mode": "SIMULATED",
-  "memory_spine_status": "degraded_logical_only",
+  "graph_write_mode": "READY",
+  "memory_spine_status": "ready_persisted",
   "safe_to_attempt_repair": false,
-  "repair_plan": [
-    "Run Kuzu readback verification suite to validate loci.db."
-  ],
-  "blocked_actions": [
-    "graph_persistence_transaction_write"
-  ],
-  "warnings": [
-    "K\u00f9zu/4D-TES readback verification is incomplete or locked. Actions requiring write transactions will be simulated."
-  ],
+  "repair_plan": [],
+  "blocked_actions": [],
+  "warnings": [],
   "evidence_refs": [
     ".aiwg/reports/kuzu_graph_readback_verification_latest.json"
   ]

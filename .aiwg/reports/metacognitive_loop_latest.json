@@ -1,8 +1,8 @@
 {
   "decision": "NEEDS_HUMAN_REVIEW",
   "intent": "heartbeat: what is the current system state and next safe action?",
-  "mental_model_id": "mm-1fd9634e",
-  "frame_id": "frame-fefbd076",
+  "mental_model_id": "mm-da09847a",
+  "frame_id": "frame-728d2125",
   "quality_gate": {
     "decision": "NEEDS_HUMAN_REVIEW",
     "quality_score": 60.0,
@@ -113,8 +113,8 @@
   "recommended_next_action": "respond_via_frame",
   "next_self_improvement_action": "increase_test_coverage",
   "self_improvement_blocked_actions": [
-    "repair_kuzu_persistence",
     "quarantine_overconfident_models",
+    "repair_kuzu_persistence",
     "autonomous_scaling"
   ],
   "dispatch_recommendation": "local",

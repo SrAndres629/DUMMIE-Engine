@@ -502,5 +502,32 @@
     "quality_score": 90,
     "superseded_by": "mm-dbabda26",
     "created_at": "2026-05-17T01:58:45Z"
+  },
+  {
+    "model_id": "mm-1fd9634e",
+    "intent_hash": "123d31f05f9c",
+    "intent": "heartbeat: what is the current system state and next safe action?",
+    "status": "superseded",
+    "quality_score": 60,
+    "superseded_by": "mm-1a9e488f",
+    "created_at": "2026-05-17T01:59:17Z"
+  },
+  {
+    "model_id": "mm-5da64ba7",
+    "intent_hash": "123d31f05f9c",
+    "intent": "heartbeat: what is the current system state and next safe action?",
+    "status": "superseded",
+    "quality_score": 60,
+    "superseded_by": "mm-1a9e488f",
+    "created_at": "2026-05-17T02:04:57Z"
+  },
+  {
+    "model_id": "mm-aa00530c",
+    "intent_hash": "123d31f05f9c",
+    "intent": "heartbeat: what is the current system state and next safe action?",
+    "status": "superseded",
+    "quality_score": 60,
+    "superseded_by": "mm-1a9e488f",
+    "created_at": "2026-05-17T02:07:01Z"
   }
 ]

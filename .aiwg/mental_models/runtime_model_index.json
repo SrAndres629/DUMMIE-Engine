@@ -1063,9 +1063,81 @@
   },
   "mm-1fd9634e": {
     "path": ".aiwg/mental_models/runtime_models.jsonl",
-    "status": "valid",
+    "status": "superseded",
     "quality_score": 60,
     "created_at": "2026-05-17T01:59:17Z",
+    "intent_hash": "123d31f05f9c",
+    "superseded_by": "mm-1a9e488f",
+    "hygiene_findings": [
+      {
+        "model_id": "mm-1fd9634e",
+        "finding_type": "empty_decisions_for_planning_intent",
+        "message": "No decisions for planning intent: heartbeat: what is the current system state and next safe ac",
+        "severity": "WARN",
+        "recommended_status": "needs_review"
+      },
+      {
+        "model_id": "mm-1fd9634e",
+        "finding_type": "duplicate_model",
+        "message": "Superseded by mm-1a9e488f with higher quality for same intent",
+        "severity": "WARN",
+        "recommended_status": "superseded"
+      }
+    ]
+  },
+  "mm-5da64ba7": {
+    "path": ".aiwg/mental_models/runtime_models.jsonl",
+    "status": "superseded",
+    "quality_score": 60,
+    "created_at": "2026-05-17T02:04:57Z",
+    "intent_hash": "123d31f05f9c",
+    "superseded_by": "mm-1a9e488f",
+    "hygiene_findings": [
+      {
+        "model_id": "mm-5da64ba7",
+        "finding_type": "empty_decisions_for_planning_intent",
+        "message": "No decisions for planning intent: heartbeat: what is the current system state and next safe ac",
+        "severity": "WARN",
+        "recommended_status": "needs_review"
+      },
+      {
+        "model_id": "mm-5da64ba7",
+        "finding_type": "duplicate_model",
+        "message": "Superseded by mm-1a9e488f with higher quality for same intent",
+        "severity": "WARN",
+        "recommended_status": "superseded"
+      }
+    ]
+  },
+  "mm-aa00530c": {
+    "path": ".aiwg/mental_models/runtime_models.jsonl",
+    "status": "superseded",
+    "quality_score": 60,
+    "created_at": "2026-05-17T02:07:01Z",
+    "intent_hash": "123d31f05f9c",
+    "superseded_by": "mm-1a9e488f",
+    "hygiene_findings": [
+      {
+        "model_id": "mm-aa00530c",
+        "finding_type": "empty_decisions_for_planning_intent",
+        "message": "No decisions for planning intent: heartbeat: what is the current system state and next safe ac",
+        "severity": "WARN",
+        "recommended_status": "needs_review"
+      },
+      {
+        "model_id": "mm-aa00530c",
+        "finding_type": "duplicate_model",
+        "message": "Superseded by mm-1a9e488f with higher quality for same intent",
+        "severity": "WARN",
+        "recommended_status": "superseded"
+      }
+    ]
+  },
+  "mm-da09847a": {
+    "path": ".aiwg/mental_models/runtime_models.jsonl",
+    "status": "valid",
+    "quality_score": 60,
+    "created_at": "2026-05-17T02:08:07Z",
     "intent_hash": "",
     "superseded_by": "",
     "hygiene_findings": []

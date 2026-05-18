@@ -1,9 +1,9 @@
 {
   "decision": "PASS_WITH_WARNINGS",
-  "models_scanned": 56,
+  "models_scanned": 59,
   "valid_count": 16,
   "stale_count": 4,
-  "superseded_count": 23,
+  "superseded_count": 26,
   "quarantined_count": 4,
   "unsafe_rejected_count": 0,
   "needs_review_count": 9,
@@ -525,6 +525,48 @@
       "message": "Superseded by mm-dbabda26 with higher quality for same intent",
       "severity": "WARN",
       "recommended_status": "superseded"
+    },
+    {
+      "model_id": "mm-1fd9634e",
+      "finding_type": "empty_decisions_for_planning_intent",
+      "message": "No decisions for planning intent: heartbeat: what is the current system state and next safe ac",
+      "severity": "WARN",
+      "recommended_status": "needs_review"
+    },
+    {
+      "model_id": "mm-1fd9634e",
+      "finding_type": "duplicate_model",
+      "message": "Superseded by mm-1a9e488f with higher quality for same intent",
+      "severity": "WARN",
+      "recommended_status": "superseded"
+    },
+    {
+      "model_id": "mm-5da64ba7",
+      "finding_type": "empty_decisions_for_planning_intent",
+      "message": "No decisions for planning intent: heartbeat: what is the current system state and next safe ac",
+      "severity": "WARN",
+      "recommended_status": "needs_review"
+    },
+    {
+      "model_id": "mm-5da64ba7",
+      "finding_type": "duplicate_model",
+      "message": "Superseded by mm-1a9e488f with higher quality for same intent",
+      "severity": "WARN",
+      "recommended_status": "superseded"
+    },
+    {
+      "model_id": "mm-aa00530c",
+      "finding_type": "empty_decisions_for_planning_intent",
+      "message": "No decisions for planning intent: heartbeat: what is the current system state and next safe ac",
+      "severity": "WARN",
+      "recommended_status": "needs_review"
+    },
+    {
+      "model_id": "mm-aa00530c",
+      "finding_type": "duplicate_model",
+      "message": "Superseded by mm-1a9e488f with higher quality for same intent",
+      "severity": "WARN",
+      "recommended_status": "superseded"
     }
   ],
   "decisions": [
@@ -915,22 +957,43 @@
     },
     {
       "model_id": "mm-b1f9077e",
-      "previous_status": "valid",
+      "previous_status": "superseded",
       "new_status": "superseded",
       "reason": "Superseded by mm-dbabda26 with higher quality for same intent",
       "superseded_by": "mm-dbabda26"
+    },
+    {
+      "model_id": "mm-1fd9634e",
+      "previous_status": "superseded",
+      "new_status": "superseded",
+      "reason": "No decisions for planning intent: heartbeat: what is the current system state and next safe ac; Superseded by mm-1a9e488f with higher quality for same intent",
+      "superseded_by": "mm-1a9e488f"
+    },
+    {
+      "model_id": "mm-5da64ba7",
+      "previous_status": "superseded",
+      "new_status": "superseded",
+      "reason": "No decisions for planning intent: heartbeat: what is the current system state and next safe ac; Superseded by mm-1a9e488f with higher quality for same intent",
+      "superseded_by": "mm-1a9e488f"
+    },
+    {
+      "model_id": "mm-aa00530c",
+      "previous_status": "valid",
+      "new_status": "superseded",
+      "reason": "No decisions for planning intent: heartbeat: what is the current system state and next safe ac; Superseded by mm-1a9e488f with higher quality for same intent",
+      "superseded_by": "mm-1a9e488f"
     }
   ],
   "summary": {
-    "models_scanned": 56,
+    "models_scanned": 59,
     "valid_count": 16,
     "stale_count": 4,
-    "superseded_count": 23,
+    "superseded_count": 26,
     "quarantined_count": 4,
     "unsafe_rejected_count": 0,
     "needs_review_count": 9,
     "overconfidence_count": 4,
     "kuzu_degraded": true
   },
-  "timestamp": "2026-05-17T01:59:17.519506+00:00"
+  "timestamp": "2026-05-17T02:08:07.382631+00:00"
 }

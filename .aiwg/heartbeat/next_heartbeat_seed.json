@@ -1,8 +1,8 @@
 {
-  "previous_heartbeat_id": "hb-b5abcb42",
+  "previous_heartbeat_id": "hb-54c4fe83",
   "previous_decision": "PASS_WITH_WARNINGS",
-  "next_action": "integrate_kuzu_graph_sync",
-  "dispatch": "antigravity",
+  "next_action": "activate_local_embedding_model_or_label_fallback",
+  "dispatch": "human_review",
   "blocked_actions": [
     "autonomous_execution",
     "autonomous_runtime",
@@ -12,5 +12,5 @@
   ],
   "kuzu_degraded": false,
   "quarantined_models": 4,
-  "created_at": "2026-05-17T01:59:17.557242+00:00"
+  "created_at": "2026-05-17T02:08:07.425088+00:00"
 }

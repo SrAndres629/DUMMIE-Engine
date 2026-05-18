@@ -1,5 +1,5 @@
 {
-  "frame_id": "frame-fefbd076",
+  "frame_id": "frame-728d2125",
   "intent": "heartbeat: what is the current system state and next safe action?",
   "operating_mode": "answer",
   "must_preserve": [
@@ -13,7 +13,7 @@
     "private_chain_of_thought"
   ],
   "mental_model_refs": [
-    "mm-1fd9634e"
+    "mm-da09847a"
   ],
   "memory_refs": [],
   "ontology_refs": [
@@ -30,5 +30,5 @@
   "dispatch_recommendation": "local",
   "risks": [],
   "next_actions": [],
-  "created_at": "2026-05-17T01:59:17.545292+00:00"
+  "created_at": "2026-05-17T02:08:07.402843+00:00"
 }
