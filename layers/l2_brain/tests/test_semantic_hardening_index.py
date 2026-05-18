@@ -189,3 +189,69 @@ def test_report_json_structure(tmp_path):
 
     assert "records" in matrix_payload
     assert isinstance(matrix_payload.get("records"), list)
+    assert "pack_status" in matrix_payload
+    assert "repo_health_status" in matrix_payload
+
+
+def test_semantic_hardening_exclusions_and_statuses(tmp_path):
+    repo = tmp_path / "repo"
+
+    # 1. Create included paths
+    (repo / "layers" / "l2_brain").mkdir(parents=True)
+    (repo / "doc" / "specs").mkdir(parents=True)
+    (repo / "scripts").mkdir(parents=True)
+
+    (repo / "layers" / "l2_brain" / "core.py").write_text("print('core')\n", encoding="utf-8")
+    (repo / "doc" / "specs" / "192_spec.md").write_text("# 192 Spec\n", encoding="utf-8")
+    (repo / "scripts" / "run.py").write_text("print('run')\n", encoding="utf-8")
+
+    # 2. Create excluded nested paths
+    (repo / "doc" / ".deprecated" / "scratchpad" / "venv" / "lib" / "python3.12" / "site-packages" / "dependency").mkdir(parents=True)
+    (repo / "doc" / ".deprecated" / "scratchpad" / "venv" / "lib" / "python3.12" / "site-packages" / "dependency" / "bad.py").write_text("print('bad')\n", encoding="utf-8")
+    (repo / "layers" / "l2_brain" / "venv" / "bin").mkdir(parents=True)
+    (repo / "layers" / "l2_brain" / "venv" / "bin" / "activate").write_text("# script\n", encoding="utf-8")
+    (repo / "vendor").mkdir(parents=True, exist_ok=True)
+    (repo / "vendor" / "lib.py").write_text("print('vendor')\n", encoding="utf-8")
+
+    # 3. Instantiate and scan
+    indexer = RepoIndexer(repo_root=str(repo), max_file_bytes=100000)
+    scan_report = indexer.scan(generate_embeddings=False)
+
+    # Verify file counts and exclusions
+    indexed_paths = {f["path"] for f in scan_report["files"]}
+
+    # Preserved paths
+    assert "layers/l2_brain/core.py" in indexed_paths
+    assert "doc/specs/192_spec.md" in indexed_paths
+    assert "scripts/run.py" in indexed_paths
+
+    # Excluded paths
+    for path in indexed_paths:
+        parts = path.split("/")
+        assert "venv" not in parts
+        assert "site-packages" not in parts
+        assert "vendor" not in parts
+        assert "doc/.deprecated/scratchpad/venv" not in path
+
+    # Verify noise metrics presence
+    assert "excluded_files_count" in scan_report
+    assert "excluded_dirs_count" in scan_report
+    assert "indexed_first_party_files" in scan_report
+    assert "indexed_legacy_files" in scan_report
+    assert "indexed_generated_files" in scan_report
+    assert "indexed_vendor_files" in scan_report
+
+    assert scan_report["excluded_files_count"] > 0
+    assert scan_report["excluded_dirs_count"] > 0
+
+    # 4. Generate matrix and verify separate statuses
+    matrix = HardeningMatrix.generate(scan_report)
+    assert "pack_status" in matrix
+    assert "repo_health_status" in matrix
+
+    # Pack status should acknowledge fallback/degraded operation
+    assert matrix["pack_status"] == "PASS_WITH_WARNINGS"
+    # Repo health status should be FAIL here because layers/l2_brain/core.py has no spec/test in the mock
+    assert matrix["repo_health_status"] == "FAIL"
+    assert matrix["semantic_mode"] == "degraded_semantic_mode"
+    assert matrix["index_mode"] == "deterministic_index_mode"

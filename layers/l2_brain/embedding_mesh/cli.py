@@ -38,13 +38,39 @@ def build_semantic_hardening_index(repo_root: str, max_file_bytes: int, write_re
 
 def _build_index_markdown(scan_report: Dict[str, Any]) -> str:
     files = scan_report.get("files", [])
+    degraded_count = sum(1 for row in files if row.get("embedding_degraded"))
+    semantic_mode = "degraded_semantic_mode" if degraded_count > 0 else "semantic_mode_active"
+    index_mode = "deterministic_index_mode" if degraded_count > 0 else "model_index_mode"
+    pack_status = "PASS_WITH_WARNINGS" if degraded_count > 0 else "PASS"
+
     lines: List[str] = []
     lines.append("# DUMMIE Engine - Semantic Repository Index")
     lines.append("")
+    lines.append("## Calibration Mode")
+    lines.append(f"- pack_status: {pack_status}")
+    lines.append(f"- index_mode: {index_mode}")
+    lines.append(f"- semantic_mode: {semantic_mode}")
+    lines.append("")
+    lines.append("## Summary Metrics")
     lines.append(f"- generated_at: {scan_report.get('generated_at')}")
     lines.append(f"- files_scanned: {scan_report.get('files_scanned', 0)}")
     lines.append(f"- files_indexed: {scan_report.get('files_indexed', len(files))}")
+    lines.append(f"- excluded_files_count: {scan_report.get('excluded_files_count', 0)}")
+    lines.append(f"- excluded_dirs_count: {scan_report.get('excluded_dirs_count', 0)}")
+    lines.append(f"- indexed_first_party_files: {scan_report.get('indexed_first_party_files', 0)}")
+    lines.append(f"- indexed_legacy_files: {scan_report.get('indexed_legacy_files', 0)}")
+    lines.append(f"- indexed_generated_files: {scan_report.get('indexed_generated_files', 0)}")
+    lines.append(f"- indexed_vendor_files: {scan_report.get('indexed_vendor_files', 0)}")
     lines.append(f"- max_file_bytes: {scan_report.get('max_file_bytes')}")
+    lines.append(f"- degraded_embeddings: {degraded_count}")
+
+    ex_by_reason = scan_report.get("excluded_by_reason", {})
+    if ex_by_reason:
+        lines.append("")
+        lines.append("### Excluded by Reason")
+        for reason, count in sorted(ex_by_reason.items()):
+            lines.append(f"- {reason}: {count}")
+
     lines.append("")
     lines.append("## Indexed Files")
 
@@ -76,11 +102,10 @@ def _build_matrix_markdown(scan_report: Dict[str, Any], matrix_report: Dict[str,
         1 for row in records if row.get("classification") == "ACTIVE_TEST" and row.get("recommendation") == "map_to_runtime"
     )
 
-    decision = "PASS"
-    if any(r.get("risk") == "high" for r in records):
-        decision = "FAIL"
-    elif degraded_embeddings > 0 or any(r.get("risk") == "medium" for r in records):
-        decision = "PASS_WITH_WARNINGS"
+    pack_status = matrix_report.get("pack_status", "PASS_WITH_WARNINGS")
+    repo_health_status = matrix_report.get("repo_health_status", "FAIL")
+    semantic_mode = matrix_report.get("semantic_mode", "degraded_semantic_mode")
+    index_mode = matrix_report.get("index_mode", "deterministic_index_mode")
 
     risk_counter = Counter(f"{r.get('risk')}::{r.get('recommendation')}" for r in records)
     top_actions = [
@@ -95,20 +120,36 @@ def _build_matrix_markdown(scan_report: Dict[str, Any], matrix_report: Dict[str,
     lines: List[str] = []
     lines.append("# DUMMIE Engine - Semantic Hardening Matrix")
     lines.append("")
-    lines.append("## Decision")
-    lines.append(decision)
+    lines.append("## Status Calibration")
+    lines.append(f"- pack_status: {pack_status}")
+    lines.append(f"- repo_health_status: {repo_health_status}")
+    lines.append(f"- index_mode: {index_mode}")
+    lines.append(f"- semantic_mode: {semantic_mode}")
     lines.append("")
-    lines.append("## Summary counts")
-    lines.append(f"- files_scanned: {scan_report.get('files_scanned', 0)}")
-    lines.append(f"- files_indexed: {scan_report.get('files_indexed', len(files))}")
+    lines.append("## Summary Counts")
+    lines.append(f"- files_scanned: {matrix_report.get('files_scanned', 0)}")
+    lines.append(f"- files_indexed: {matrix_report.get('files_indexed', 0)}")
     lines.append(f"- degraded_embeddings: {degraded_embeddings}")
-    lines.append(f"- vector_spaces_used: {len(vector_spaces)}")
+    lines.append(f"- excluded_files_count: {matrix_report.get('excluded_files_count', 0)}")
+    lines.append(f"- excluded_dirs_count: {matrix_report.get('excluded_dirs_count', 0)}")
+    lines.append(f"- indexed_first_party_files: {matrix_report.get('indexed_first_party_files', 0)}")
+    lines.append(f"- indexed_legacy_files: {matrix_report.get('indexed_legacy_files', 0)}")
+    lines.append(f"- indexed_generated_files: {matrix_report.get('indexed_generated_files', 0)}")
+    lines.append(f"- indexed_vendor_files: {matrix_report.get('indexed_vendor_files', 0)}")
+    lines.append(f"- vector_spaces_used: {', '.join(vector_spaces)}")
     lines.append(f"- active_runtime_candidates: {active_runtime_candidates}")
     lines.append(f"- shadow_candidates: {shadow_candidates}")
     lines.append(f"- orphan_test_candidates: {orphan_test_candidates}")
     lines.append(f"- generated_candidates: {generated_candidates}")
     lines.append(f"- legacy_candidates: {legacy_candidates}")
     lines.append("")
+
+    ex_by_reason = matrix_report.get("excluded_by_reason", {})
+    if ex_by_reason:
+        lines.append("## Exclusion Metrics")
+        for reason, count in sorted(ex_by_reason.items()):
+            lines.append(f"- {reason}: {count}")
+        lines.append("")
 
     lines.append("## Top risks")
     for key, count in risk_counter.most_common(10):
@@ -130,7 +171,7 @@ def _build_matrix_markdown(scan_report: Dict[str, Any], matrix_report: Dict[str,
     lines.append("")
 
     lines.append("## Next recommended phase")
-    lines.append("Structural Hardening Pack 2: contract enforcement and targeted cleanup of high/medium-risk modules.")
+    lines.append("ready_for_structural_hardening_input — Structural Hardening Pack 2: contract enforcement and targeted cleanup of high/medium-risk modules.")
     lines.append("")
 
     lines.append("## Explicit limitations")

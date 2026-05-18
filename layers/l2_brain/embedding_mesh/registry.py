@@ -1,3 +1,4 @@
+# Spec Reference: 192_embedding_mesh_foundation
 import logging
 
 from layers.l2_brain.embedding_mesh.contracts import EmbeddingCapability

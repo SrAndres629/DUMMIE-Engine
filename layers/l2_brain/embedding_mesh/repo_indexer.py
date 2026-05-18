@@ -1,3 +1,4 @@
+# Spec Reference: 192_embedding_mesh_foundation
 import hashlib
 import logging
 from datetime import datetime, timezone
@@ -21,12 +22,22 @@ class RepoIndexer:
     DEFAULT_EXCLUDE_DIRS = {
         ".git",
         ".venv",
+        "venv",
+        "env",
         "node_modules",
         "__pycache__",
         ".pytest_cache",
+        "site-packages",
         "dist",
         "build",
         "target",
+        ".mypy_cache",
+        ".ruff_cache",
+        ".tox",
+        ".nox",
+        ".uv",
+        "vendor",
+        "deps",
     }
 
     DEFAULT_EXCLUDE_PATH_PREFIXES = {
@@ -63,19 +74,47 @@ class RepoIndexer:
         self.max_file_bytes = max_file_bytes
         self.embedding_store_dims = embedding_store_dims
         self.registry = EmbeddingRegistry()
+        self.excluded_files_count = 0
+        self.excluded_dirs_count = 0
+        self.excluded_by_reason = {
+            "exclude_dir": 0,
+            "exclude_prefix": 0,
+            "not_included": 0,
+            "too_large": 0,
+            "binary": 0,
+        }
 
     def scan(self, generate_embeddings: bool = True) -> Dict[str, Any]:
         files_indexed: List[Dict[str, Any]] = []
         files_scanned = 0
+
+        self.excluded_files_count = 0
+        self.excluded_dirs_count = 0
+        self.excluded_by_reason = {
+            "exclude_dir": 0,
+            "exclude_prefix": 0,
+            "not_included": 0,
+            "too_large": 0,
+            "binary": 0,
+        }
+
+        indexed_first_party_files = 0
+        indexed_legacy_files = 0
+        indexed_generated_files = 0
+        indexed_vendor_files = 0
 
         for rel_path, abs_path in self._iter_candidate_paths():
             files_scanned += 1
             try:
                 size_bytes = abs_path.stat().st_size
                 if size_bytes > self.max_file_bytes:
+                    self.excluded_files_count += 1
+                    self.excluded_by_reason["too_large"] += 1
                     continue
 
                 if abs_path.suffix.lower() in self.BINARY_EXTENSIONS:
+                    self.excluded_files_count += 1
+                    self.excluded_by_reason["binary"] += 1
                     continue
 
                 content = abs_path.read_text(encoding="utf-8", errors="ignore")
@@ -124,6 +163,15 @@ class RepoIndexer:
                 classification = self._heuristically_classify(rel_path, content_type)
                 summary = self._generate_summary(content, rel_path)
 
+                if classification == "LEGACY":
+                    indexed_legacy_files += 1
+                elif classification == "GENERATED":
+                    indexed_generated_files += 1
+                elif classification == "VENDOR":
+                    indexed_vendor_files += 1
+                else:
+                    indexed_first_party_files += 1
+
                 files_indexed.append(
                     {
                         "path": rel_path,
@@ -154,17 +202,65 @@ class RepoIndexer:
             "max_file_bytes": self.max_file_bytes,
             "embedding_store_dims": self.embedding_store_dims,
             "embeddings_enabled": generate_embeddings,
+            "excluded_files_count": self.excluded_files_count,
+            "excluded_dirs_count": self.excluded_dirs_count,
+            "excluded_by_reason": self.excluded_by_reason,
+            "indexed_first_party_files": indexed_first_party_files,
+            "indexed_legacy_files": indexed_legacy_files,
+            "indexed_generated_files": indexed_generated_files,
+            "indexed_vendor_files": indexed_vendor_files,
         }
 
     def _iter_candidate_paths(self) -> Iterable[Tuple[str, Path]]:
+        excluded_dirs = set()
         for abs_path in self.repo_root.rglob("*"):
+            rel_path = abs_path.relative_to(self.repo_root).as_posix()
+
+            if abs_path.is_dir():
+                parts = rel_path.split("/")
+                is_dir_ex = False
+                for part in parts:
+                    if part in self.DEFAULT_EXCLUDE_DIRS:
+                        is_dir_ex = True
+                        break
+                for prefix in self.DEFAULT_EXCLUDE_PATH_PREFIXES:
+                    if rel_path.startswith(prefix):
+                        is_dir_ex = True
+                        break
+                if is_dir_ex:
+                    if rel_path not in excluded_dirs:
+                        excluded_dirs.add(rel_path)
+                        self.excluded_dirs_count += 1
+                continue
+
             if not abs_path.is_file():
                 continue
 
-            rel_path = abs_path.relative_to(self.repo_root).as_posix()
-            if self._is_excluded(rel_path):
+            parts = rel_path.split("/")
+            has_excluded_dir = False
+            for part in parts:
+                if part in self.DEFAULT_EXCLUDE_DIRS:
+                    has_excluded_dir = True
+                    break
+
+            if has_excluded_dir:
+                self.excluded_files_count += 1
+                self.excluded_by_reason["exclude_dir"] += 1
                 continue
+
+            has_excluded_prefix = False
+            for prefix in self.DEFAULT_EXCLUDE_PATH_PREFIXES:
+                if rel_path.startswith(prefix):
+                    has_excluded_prefix = True
+                    break
+            if has_excluded_prefix:
+                self.excluded_files_count += 1
+                self.excluded_by_reason["exclude_prefix"] += 1
+                continue
+
             if not self._is_included(rel_path):
+                self.excluded_files_count += 1
+                self.excluded_by_reason["not_included"] += 1
                 continue
 
             yield rel_path, abs_path
@@ -196,10 +292,12 @@ class RepoIndexer:
             return "SPEC"
         if content_type == ContentType.REPORT:
             return "REPORT"
+        if (path_lower.startswith("doc/") or path_lower.startswith("docs/")) and content_type == ContentType.TEXT:
+            return "REPORT"
         if "legacy" in path_lower or "deprecated" in path_lower:
             return "LEGACY"
         if "/deps/" in f"/{path_lower}" or "/vendor/" in f"/{path_lower}":
-            return "GENERATED"
+            return "VENDOR"
         if "generated" in path_lower or path_lower.endswith("_pb2.py") or path_lower.endswith("_pb2_grpc.py"):
             return "GENERATED"
         if path_lower.startswith("layers/") and content_type == ContentType.CODE:

@@ -1,3 +1,4 @@
+# Spec Reference: 192_embedding_mesh_foundation
 import re
 from collections import Counter
 from datetime import datetime, timezone
@@ -52,6 +53,17 @@ class HardeningMatrix:
 
         counts = Counter(r["classification"] for r in records)
         recommendations = Counter(r["recommendation"] for r in records)
+        degraded_embeddings = sum(1 for file_rec in files if file_rec.get("embedding_degraded"))
+        high_risk_count = sum(1 for row in records if row.get("risk") == "high")
+        medium_risk_count = sum(1 for row in records if row.get("risk") == "medium")
+
+        pack_status = _compute_pack_status(
+            files_indexed=scan_report.get("files_indexed", len(files)),
+            degraded_embeddings=degraded_embeddings,
+        )
+        repo_health_status = _compute_repo_health_status(high_risk_count=high_risk_count, medium_risk_count=medium_risk_count)
+        semantic_mode = "degraded_semantic_mode" if degraded_embeddings > 0 else "semantic_mode_active"
+        index_mode = "deterministic_index_mode" if degraded_embeddings > 0 else "model_index_mode"
 
         return {
             "generated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
@@ -60,6 +72,18 @@ class HardeningMatrix:
             "total_modules": len(records),
             "classification_counts": dict(sorted(counts.items())),
             "recommendation_counts": dict(sorted(recommendations.items())),
+            "pack_status": pack_status,
+            "repo_health_status": repo_health_status,
+            "semantic_mode": semantic_mode,
+            "index_mode": index_mode,
+            "degraded_embeddings": degraded_embeddings,
+            "excluded_files_count": scan_report.get("excluded_files_count", 0),
+            "excluded_dirs_count": scan_report.get("excluded_dirs_count", 0),
+            "excluded_by_reason": scan_report.get("excluded_by_reason", {}),
+            "indexed_first_party_files": scan_report.get("indexed_first_party_files", 0),
+            "indexed_legacy_files": scan_report.get("indexed_legacy_files", 0),
+            "indexed_generated_files": scan_report.get("indexed_generated_files", 0),
+            "indexed_vendor_files": scan_report.get("indexed_vendor_files", 0),
             "records": records,
         }
 
@@ -78,6 +102,8 @@ def _matrix_classification(file_rec: Dict[str, Any]) -> str:
     if classification == "SPEC":
         return "ACTIVE_SPEC"
     if classification == "GENERATED":
+        return "GENERATED"
+    if classification == "VENDOR":
         return "GENERATED"
     if classification == "LEGACY":
         return "LEGACY"
@@ -266,3 +292,19 @@ def _risk_and_recommendation(
 
 def _normalized_tokens(text: str) -> List[str]:
     return re.findall(r"[a-zA-Z0-9]+", text.replace("-", "_").lower())
+
+
+def _compute_pack_status(files_indexed: int, degraded_embeddings: int) -> str:
+    if files_indexed <= 0:
+        return "FAIL"
+    if degraded_embeddings > 0:
+        return "PASS_WITH_WARNINGS"
+    return "PASS"
+
+
+def _compute_repo_health_status(high_risk_count: int, medium_risk_count: int) -> str:
+    if high_risk_count > 0:
+        return "FAIL"
+    if medium_risk_count > 0:
+        return "PASS_WITH_WARNINGS"
+    return "PASS"
