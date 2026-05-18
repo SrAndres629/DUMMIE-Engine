@@ -1,0 +1,21 @@
+{
+  "spec_id": "192",
+  "name": "EmbeddingMesh Foundation and Repo Self-Knowledge",
+  "rules": [
+    {
+      "id": "RULE-192-01",
+      "rule": "Vector space safety is non-negotiable. No comparison or mathematical operations shall be allowed across incompatible vector spaces.",
+      "level": "CRITICAL"
+    },
+    {
+      "id": "RULE-192-02",
+      "rule": "High offline availability must be guaranteed via high-quality, normalized deterministic fallbacks.",
+      "level": "MANDATORY"
+    },
+    {
+      "id": "RULE-192-03",
+      "rule": "The repository indexer must exclude heavy cache directories, node_modules, and git internals to protect performance.",
+      "level": "MANDATORY"
+    }
+  ]
+}
