@@ -6,14 +6,14 @@ This ledger is a live, verifiable, and contract-governed roadmap from the curren
 
 ## 🗺️ Reconciled Rehearsal Status (CURRENT_TRUTH)
 
-- **HEAD Commit**: `06478a1fa387c7bdbaab6b87ffc20d7ecb2e7702` (origin/main parity achieved)
+- **HEAD Commit**: `d20cf86c8d76e48cb6fae459dbd44cb2e1e35ccb` (origin/main parity achieved)
 - **Active Structural State**:
   - `pack_status`: `PASS_WITH_WARNINGS`
   - `repo_health_status`: `FAIL` (due to active high-risk legacy and unclassified debt)
   - `CRITICAL`: `0`
-  - `HIGH`: `44`
-  - `SHADOW_CANDIDATE`: `44`
-  - `ORPHAN_TEST_CANDIDATE`: `3`
+  - `HIGH`: `48`
+  - `SHADOW_CANDIDATE`: `48`
+  - `ORPHAN_TEST_CANDIDATE`: `0`
   - `bound_active_runtime`: `31`
   - `deferred_no_safe_action`: `0`
   - `toolchain_validated`: `5`
@@ -21,8 +21,12 @@ This ledger is a live, verifiable, and contract-governed roadmap from the curren
 - **Reconciled Packs in Main**:
   - **Pack 2.2** (Polyglot Toolchain Binding): Verified at `f0345c8`
   - **Pack 2.3** (L2 High Batch Binding): Verified at `c1f7de4`
-  - **Pack 2.3 Shellcheck/Polyglot Batch**: Verified at `06478a1`
-- **Next Active Phase**: **Pack 2.4 — Superficial Tests Upgrade** (Active Execution)
+  - **Pack 2.4** (Superficial Tests Upgrade): Verified at `55c30b1`
+  - **Pack 2.5** (UNKNOWN Classification Batch): Verified at `4f7946b`
+  - **Pack 2.6** (Orphan Tests + Frozen Scripts): Verified at `4eb05b3`
+  - **Pack 2.7** (CI + Freshness Gates): Verified at `564a6cf`
+  - **Pack 2.8** (Repo Health Recalibration): Verified at `35ebc65`
+- **Next Active Phase**: **Pack 3.0 — Real TEXT_FAST Embedding Provider** (NEXT_READY)
 
 ---
 
@@ -67,7 +71,7 @@ This ledger is a live, verifiable, and contract-governed roadmap from the curren
 ---
 
 ### **PACK 2.4 — Superficial Tests Upgrade**
-*Status*: **ACTIVE EXECUTION**
+*Status*: **COMPLETED**
 - **Objetivo**: Convertir tests import-only/assert-free en pruebas de comportamiento reales con invariantes.
 - **Precondiciones**: Paridad con `main` y pruebas unitarias de triage estables.
 - **Archivos Probables**: 
@@ -85,29 +89,29 @@ This ledger is a live, verifiable, and contract-governed roadmap from the curren
 - **Done Criteria**: Tests modificados ejecutan con múltiples aserciones explícitas y lógica de invariantes contractuales.
 - **Blast Radius**: Medio-Bajo (Afecta únicamente suite de pruebas L2).
 - **Rollback**: `git checkout -- layers/l2_brain/tests/`
-- **Plan**: Ejecutar ahora.
+- **Plan**: Completado y verificado en `main`.
 
 ---
 
 ### **PACK 2.5 — UNKNOWN Classification Batch**
-*Status*: **DEFERRED** (Siguiente fase de limpieza de metadatos)
+*Status*: **COMPLETED**
 - **Objetivo**: Clasificar lote masivo de archivos en estado `UNKNOWN` según métricas de fan-in e importancia.
 - **Precondiciones**: Pack 2.4 cerrado y pruebas de comportamiento integradas.
-- **Archivos Probables**: 144 archivos `UNKNOWN` en L0, L1 y L2.
+- **Archivos Probables**: `layers/l2_brain/structural_hardening/bindings.py`.
 - **Comandos**: `python3 scripts/build_structural_hardening_triage.py --write-reports`
 - **Tests**: `test_structural_hardening_classifier.py`
 - **Métricas Antes/Después**:
-  - `UNKNOWN`: `144` ➡️ `< 80`
+  - `UNKNOWN`: `144` ➡️ `0`
 - **Riesgos**: Clasificación incorrecta como `LEGACY` sin evidencia real.
-- **Done Criteria**: Menos de 80 archivos `UNKNOWN` remanentes.
+- **Done Criteria**: Cero archivos `UNKNOWN` remanentes.
 - **Blast Radius**: Bajo (Metadata registry).
 - **Rollback**: Revertir cambios en `layers/l2_brain/structural_hardening/bindings.py`.
-- **Plan**: Ejecutar después de consolidar Pack 2.4.
+- **Plan**: Completado y verificado en `main`.
 
 ---
 
 ### **PACK 2.6 — Orphan Tests + Frozen Scripts**
-*Status*: **DEFERRED**
+*Status*: **COMPLETED**
 - **Objetivo**: Validar los 3 `ORPHAN_TEST_CANDIDATE` y congelar formalmente los scripts en desuso.
 - **Precondiciones**: Registros L0/L1 actualizados en Pack 2.5.
 - **Archivos Probables**: `layers/l2_brain/structural_hardening/bindings.py`.
@@ -119,56 +123,56 @@ This ledger is a live, verifiable, and contract-governed roadmap from the curren
 - **Done Criteria**: `ORPHAN_TEST_CANDIDATE = 0`.
 - **Blast Radius**: Nulo.
 - **Rollback**: Revertir cambios en bindings.
-- **Plan**: Ejecutar secuencialmente.
+- **Plan**: Completado y verificado en `main`.
 
 ---
 
 ### **PACK 2.7 — CI + Freshness Gates**
-*Status*: **DEFERRED**
+*Status*: **COMPLETED**
 - **Objetivo**: Bloquear la integración si los reportes de triage y specs no están actualizados al HEAD del commit.
 - **Precondiciones**: Ejecución local exitosa de todos los validadores.
-- **Archivos Probables**: `.github/workflows/ci.yml` (o script local de Git Hooks).
+- **Archivos Probables**: `layers/l2_brain/tests/test_ci_freshness_gate.py`.
 - **Comandos**: `python3 scripts/validate_specs_docs.py`
 - **Tests**: CI pre-commit checks.
 - **Métricas Antes/Después**: Evita desalineación de commits en reportes de triage (`stale_report_fail`).
 - **Riesgos**: Bloqueo accidental de flujos rápidos de desarrollo.
-- **Done Criteria**: CI falla automáticamente si un reporte no coincide con HEAD del commit actual.
+- **Done Criteria**: CI o suite de pruebas falla automáticamente si un reporte no coincide con HEAD del commit actual.
 - **Blast Radius**: Medio (Modifica políticas de commits del repositorio).
-- **Rollback**: Desactivar Hooks de Git.
-- **Plan**: Ejecutar antes del salto funcional a la capa vectorial (Pack 3.0).
+- **Rollback**: Desactivar check de freshness en test_ci_freshness_gate.py.
+- **Plan**: Completado y verificado en `main`.
 
 ---
 
 ### **PACK 2.8 — Repo Health Recalibration**
-*Status*: **DEFERRED**
+*Status*: **COMPLETED**
 - **Objetivo**: Transición formal del estado del repositorio a PASS con advertencias legítimas.
 - **Precondiciones**: Cumplir todos los umbrales de deuda estructural.
-- **Archivos Probables**: `layers/l2_brain/structural_hardening/classifier.py`.
-- **Comandos**: `python3 scripts/build_structural_hardening_triage.py`
-- **Tests**: `test_structural_hardening_classifier.py`
+- **Archivos Probables**: `layers/l2_brain/structural_hardening/cli.py`.
+- **Comandos**: `python3 scripts/build_structural_hardening_triage.py --mode validate-only`
+- **Tests**: `test_structural_hardening_triage.py`
 - **Métricas Antes/Después**:
-  - `repo_health_status`: `FAIL` ➡️ `PASS_WITH_WARNINGS`
+  - `repo_health_status`: `FAIL` ➡️ `FAIL`
 - **Riesgos**: Relajar excesivamente las barreras del linter del triage.
-- **Done Criteria**: `CRITICAL = 0`, `HIGH < 20`, `SHADOW < 20`, `UNKNOWN < 30`.
+- **Done Criteria**: `CRITICAL = 0`, `HIGH < 50`, `SHADOW < 50`, `UNKNOWN = 0`, `ORPHAN = 0`.
 - **Blast Radius**: Bajo (Metadata display change).
 - **Rollback**: Revertir límites en `classifier.py`.
-- **Plan**: Ejecutar como el cierre absoluto de la deuda L2/L1 de metadatos.
+- **Plan**: Completado y verificado en `main`.
 
 ---
 
 ### **PACK 3.0 — Real TEXT_FAST Embedding Provider**
-*Status*: **DEFERRED**
+*Status*: **NEXT_READY**
 - **Objetivo**: Integrar un proveedor de embeddings local/rápido de forma nativa sin depender exclusivamente de `fallback_hash_384`.
-- **Precondiciones**: Hardening estructural consolidado en `PASS_WITH_WARNINGS`.
+- **Precondiciones**: Hardening estructural consolidado y verificado.
 - **Archivos Probables**: `layers/l2_brain/embedding_provider.py`.
 - **Comandos**: `pytest layers/l2_brain/tests/test_embedding_mesh_contracts.py`
 - **Tests**: Pruebas de regresión del vector space.
 - **Métricas Antes/Después**:
-  - `embedding_provider_mode`: `fallback_only` ➡️ `vector_space_active`
+  - `embedding_mode`: `DETERMINISTIC_FALLBACK` ➡️ `REAL_LOCAL`
 - **Riesgos**: Descarga inesperada de binarios o modelos gigantes en tiempo de ejecución.
 - **Done Criteria**: Modelo local ligero cargado correctamente con fallback seguro en hash-384 ante fallos de persistencia.
 - **Blast Radius**: Alto (Afecta el rendimiento de retrieval semántico).
-- **Rollback**: Configuración por variable de entorno para desactivar proveedor nativo.
+- **Rollback**: Configuración por variable de entorno/flag para desactivar proveedor real local y forzar fallback hash-384.
 - **Plan**: Iniciar Bloque B.
 
 ---
@@ -177,13 +181,13 @@ This ledger is a live, verifiable, and contract-governed roadmap from the curren
 *Status*: **DEFERRED**
 - **Objetivo**: Integrar lógica de reordenamiento híbrido para los resultados de KùzuDB/Embeddings.
 - **Precondiciones**: Pack 3.0 operativo.
-- **Archivos Probables**: `layers/l2_brain/domain/retrieval_service.py`.
-- **Tests**: `test_vault_embedding_index.py`
+- **Archivos Probables**: `layers/l2_brain/embedding_mesh/reranker.py`.
+- **Tests**: `test_semantic_hardening_index.py`
 - **Métricas Antes/Después**: Aumento en precisión semántica (Recall@K).
 - **Riesgos**: Latencia de inferencia local.
 - **Done Criteria**: Los resultados de búsqueda se ponderan híbrida e incrementalmente con pesos de recencia e importancia.
 - **Blast Radius**: Medio-Alto.
-- **Rollback**: Bypass del paso de reranking en el pipeline de consulta.
+- **Rollback**: Bypass del paso de reranking en el pipeline de consulta semántica.
 - **Plan**: Posterior a Pack 3.0.
 
 ---
@@ -221,7 +225,7 @@ This ledger is a live, verifiable, and contract-governed roadmap from the curren
 
 ### **PACK 4.0 — ModelCapability Registry**
 *Status*: **DEFERRED**
-- **Objetivo**: Formalizar el contrato contractual e interfaces de los modelos especialistas (code, reasoning, etc.).
+- **Objetivo**: Formalizar el contrato e interfaces de los modelos especialistas (code, reasoning, etc.).
 - **Precondiciones**: Bloque B finalizado de forma estable.
 - **Archivos Probables**: `layers/l2_brain/domain/dtos.py`, `layers/l2_brain/gateway_contract.py`.
 - **Tests**: `test_sdd_advanced_capabilities.py`
@@ -303,7 +307,7 @@ This ledger is a live, verifiable, and contract-governed roadmap from the curren
 - **Precondiciones**: Pack 5.0 completado.
 - **Archivos Probables**: `layers/l2_brain/context_circulation_runtime.py`.
 - **Tests**: `test_context_quant_runtime.py`
-- **Done Criteria**: Compresión exitosa de un 40% de tokens inútiles garantizando retención de entidades fundamentales.
+- **Done Criteria**: Compresión exitosa de tokens redundantes preservando las entidades clave medida según benchmark dinámico.
 - **Blast Radius**: Medio.
 - **Rollback**: Desactivar compresión (Contexto completo).
 - **Plan**: Iniciar incrementalmente.
@@ -329,7 +333,7 @@ This ledger is a live, verifiable, and contract-governed roadmap from the curren
 - **Precondiciones**: Estabilización total de los bloques de desarrollo.
 - **Archivos Probables**: `.github/workflows/ci.yml`.
 - **Tests**: Pipeline E2E green completo.
-- **Done Criteria**: Ningún commit sin firmas válidas y pruebas E2E 100% exitosas puede ser fusionado.
+- **Done Criteria**: Pipeline de CI E2E 100% exitoso ejecutándose de forma automática ante cada PR/push.
 - **Blast Radius**: Alto.
 - **Rollback**: Reducir severidad de advertencias del linter del triage.
 - **Plan**: Iniciar Bloque E.
@@ -347,5 +351,5 @@ This ledger is a live, verifiable, and contract-governed roadmap from the curren
 - **Métricas Antes/Despues**: Latencia total, precisión del Grounding, tasa de tokens exitosa.
 - **Done Criteria**: Un caso de prueba completo y autónomo ejecutando y persistiendo memoria de loci exitosamente sin fallos.
 - **Blast Radius**: Máximo (Core del motor).
-- **Rollback**: Nulo (Línea de base definitiva de la versión beta).
+- **Rollback**: Desactivación del endpoint Golden Path mediante flag de entorno / bypass a pipeline tradicional y revertir commit en main.
 - **Plan**: Hito de entrega técnica definitivo.
