@@ -79,3 +79,68 @@ def test_triage_cli_generates_reports_without_internet(tmp_path):
 
     bindings = json.loads(bindings_json.read_text(encoding="utf-8"))
     assert "bindings" in bindings
+
+
+def test_triage_mode_selector(tmp_path):
+    repo = tmp_path / "repo"
+    reports = repo / ".aiwg" / "reports"
+    reports.mkdir(parents=True)
+    (repo / "layers" / "l2_brain" / "tests").mkdir(parents=True)
+    (repo / "doc" / "specs").mkdir(parents=True)
+
+    semantic_index = {
+        "files": [
+            {"path": "layers/l2_brain/model_router.py", "classification": "ACTIVE_RUNTIME", "content_type": "CODE"},
+        ]
+    }
+    semantic_matrix = {"records": []}
+
+    (reports / "semantic_repo_index_latest.json").write_text(json.dumps(semantic_index), encoding="utf-8")
+    (reports / "semantic_hardening_matrix_latest.json").write_text(json.dumps(semantic_matrix), encoding="utf-8")
+    (repo / "layers" / "l2_brain" / "model_router.py").write_text("", encoding="utf-8")
+
+    # test dry-run mode (no report files written)
+    payload, exit_code = build_structural_hardening_triage(
+        repo_root=str(repo),
+        write_reports_flag=True,
+        max_actions=50,
+        include_low_risk=False,
+        fail_on_critical=False,
+        mode="dry-run",
+    )
+    assert exit_code == 0
+    triage_json = reports / "structural_hardening_triage_latest.json"
+    assert not triage_json.exists()
+
+    from unittest.mock import patch
+    with patch("layers.l2_brain.structural_hardening.bindings.ContractBindingRegistry.get_all_bindings", return_value=[]):
+        # test validate-only with clean repo
+        payload, exit_code = build_structural_hardening_triage(
+            repo_root=str(repo),
+            write_reports_flag=False,
+            max_actions=50,
+            include_low_risk=False,
+            fail_on_critical=False,
+            mode="validate-only",
+        )
+        assert exit_code == 0
+
+        # test validate-only with UNKNOWN file
+        semantic_index_unk = {
+            "files": [
+                {"path": "xyz/random.xyz", "classification": "UNKNOWN", "content_type": "CODE"},
+            ]
+        }
+        (reports / "semantic_repo_index_latest.json").write_text(json.dumps(semantic_index_unk), encoding="utf-8")
+        (repo / "xyz").mkdir(parents=True, exist_ok=True)
+        (repo / "xyz" / "random.xyz").write_text("", encoding="utf-8")
+
+        payload, exit_code = build_structural_hardening_triage(
+            repo_root=str(repo),
+            write_reports_flag=False,
+            max_actions=50,
+            include_low_risk=False,
+            fail_on_critical=False,
+            mode="validate-only",
+        )
+        assert exit_code == 3

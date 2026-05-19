@@ -16,6 +16,7 @@ def main() -> int:
     parser.add_argument("--max-actions", type=int, default=50)
     parser.add_argument("--include-low-risk", action="store_true")
     parser.add_argument("--fail-on-critical", action="store_true")
+    parser.add_argument("--mode", choices=["write-reports", "dry-run", "validate-only"], default="write-reports")
     args = parser.parse_args()
 
     repo_root = Path(args.repo_root).resolve()
@@ -27,6 +28,8 @@ def main() -> int:
         str(repo_root),
         "--max-actions",
         str(args.max_actions),
+        "--mode",
+        args.mode,
     ]
 
     if args.write_reports:
