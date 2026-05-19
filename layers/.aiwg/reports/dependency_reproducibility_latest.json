@@ -1,0 +1,33 @@
+{
+  "decision": "FAIL",
+  "installed_packages": [
+    "kuzu",
+    "networkx",
+    "fastapi",
+    "sentence_transformers",
+    "torch"
+  ],
+  "declared_packages": [],
+  "undeclared_installed_packages": [
+    "kuzu",
+    "networkx",
+    "fastapi",
+    "sentence_transformers",
+    "torch"
+  ],
+  "missing_declared_packages": [],
+  "heavy_dependencies": [
+    "kuzu (20.5 MB)",
+    "networkx (11.2 MB)",
+    "torch (1098.7 MB)"
+  ],
+  "reproducibility_status": "BROKEN",
+  "warnings": [
+    "pyproject.toml not found",
+    "Critical dependencies (torch/sentence_transformers) are installed but not declared in pyproject.toml!"
+  ],
+  "evidence_refs": [
+    "layers/l2_brain/pyproject.toml",
+    "layers/l2_brain/.venv"
+  ]
+}
