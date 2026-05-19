@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-05-19T01:11:12.789445Z",
-  "base_commit": "ce5849eb462010757b19ba50a3f9e7a441d80185",
-  "analysis_base_commit": "ce5849eb462010757b19ba50a3f9e7a441d80185",
-  "report_generated_at_commit": "ce5849eb462010757b19ba50a3f9e7a441d80185",
-  "head_commit": "ce5849eb462010757b19ba50a3f9e7a441d80185",
+  "generated_at": "2026-05-19T01:20:45.519409Z",
+  "base_commit": "41aeb7d225349ba01f69ccfabf9b0abda0153376",
+  "analysis_base_commit": "41aeb7d225349ba01f69ccfabf9b0abda0153376",
+  "report_generated_at_commit": "41aeb7d225349ba01f69ccfabf9b0abda0153376",
+  "head_commit": "41aeb7d225349ba01f69ccfabf9b0abda0153376",
   "pack_name": "Structural Hardening Pack 2 - Contract-First Triage",
   "pack_status": "PASS_WITH_WARNINGS",
   "repo_health_status": "FAIL",
@@ -20821,9 +20821,9 @@
     {
       "path": "layers/l1_nervous/sidecar.go",
       "current_class": "UNKNOWN",
-      "proposed_class": "SHADOW_CANDIDATE",
-      "risk": "HIGH",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
+      "proposed_class": "ACTIVE_RUNTIME",
+      "risk": "MEDIUM",
+      "recommendation": "KEEP_AND_TEST",
       "confidence": 0.72,
       "evidence_refs": [
         "FILE_EXISTS",
@@ -20834,7 +20834,7 @@
       "reasons": [
         "Bound to contract: Polyglot runtime without deterministic compile/test evidence in this phase.",
         "binding_status=DEFERRED_NO_SAFE_ACTION",
-        "resolved_status=DEFERRED_NO_SAFE_ACTION"
+        "resolved_status=TOOLCHAIN_VALIDATED"
       ],
       "related_specs": [
         "doc/specs/L1_Nervous/15_mcp_sidecar_isolation.md",
@@ -20843,15 +20843,15 @@
       ],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "layers/l1_nervous/ssh_sandbox_wrapper.sh",
       "current_class": "UNKNOWN",
-      "proposed_class": "SHADOW_CANDIDATE",
-      "risk": "HIGH",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
+      "proposed_class": "ACTIVE_RUNTIME",
+      "risk": "MEDIUM",
+      "recommendation": "KEEP_AND_TEST",
       "confidence": 0.72,
       "evidence_refs": [
         "FILE_EXISTS",
@@ -20862,7 +20862,7 @@
       "reasons": [
         "Bound to contract: Polyglot runtime without deterministic compile/test evidence in this phase.",
         "binding_status=DEFERRED_NO_SAFE_ACTION",
-        "resolved_status=DEFERRED_NO_SAFE_ACTION"
+        "resolved_status=TOOLCHAIN_VALIDATED"
       ],
       "related_specs": [
         "doc/specs/L1_Nervous/15_mcp_sidecar_isolation.md",
@@ -20871,8 +20871,8 @@
       ],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "layers/l1_nervous/test_diag_kuzu",
@@ -27038,9 +27038,9 @@
     {
       "path": "layers/l0_overseer/lib/overseer/application.ex",
       "current_class": "UNKNOWN",
-      "proposed_class": "SHADOW_CANDIDATE",
-      "risk": "HIGH",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
+      "proposed_class": "ACTIVE_RUNTIME",
+      "risk": "MEDIUM",
+      "recommendation": "KEEP_AND_TEST",
       "confidence": 0.72,
       "evidence_refs": [
         "FILE_EXISTS",
@@ -27051,7 +27051,7 @@
       "reasons": [
         "Bound to contract: Polyglot runtime without deterministic compile/test evidence in this phase.",
         "binding_status=DEFERRED_NO_SAFE_ACTION",
-        "resolved_status=DEFERRED_NO_SAFE_ACTION"
+        "resolved_status=CONTRACT_BOUND"
       ],
       "related_specs": [
         "doc/specs/L0_Overseer/03_polyglot_architecture.md",
@@ -27060,8 +27060,8 @@
       ],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "layers/l0_overseer/lib/proto/proto/dummie/v2/core.pb.ex",
@@ -29013,9 +29013,9 @@
     {
       "path": "layers/l1_nervous/tools_impl/nervous.py",
       "current_class": "UNKNOWN",
-      "proposed_class": "SHADOW_CANDIDATE",
-      "risk": "HIGH",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
+      "proposed_class": "ACTIVE_RUNTIME",
+      "risk": "MEDIUM",
+      "recommendation": "KEEP_AND_TEST",
       "confidence": 0.76,
       "evidence_refs": [
         "FILE_EXISTS",
@@ -29027,7 +29027,7 @@
       "reasons": [
         "Bound to contract: Depends on optional 'mcp' package; import contract must remain deferred.",
         "binding_status=DEFERRED_NO_SAFE_ACTION",
-        "resolved_status=DEFERRED_NO_SAFE_ACTION"
+        "resolved_status=CONTRACT_BOUND"
       ],
       "related_specs": [
         "doc/specs/L1_Nervous/16_mcp_dynamic_gateway.md",
@@ -29039,8 +29039,8 @@
       "related_runtime": [
         "layers/l1_nervous/mcp_registry.py"
       ],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "layers/l1_nervous/tools_impl/patch_transactions.py",
@@ -29430,9 +29430,9 @@
     {
       "path": "layers/l1_nervous/internal/skill/blueprint.go",
       "current_class": "UNKNOWN",
-      "proposed_class": "SHADOW_CANDIDATE",
-      "risk": "HIGH",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
+      "proposed_class": "ACTIVE_RUNTIME",
+      "risk": "MEDIUM",
+      "recommendation": "KEEP_AND_TEST",
       "confidence": 0.72,
       "evidence_refs": [
         "FILE_EXISTS",
@@ -29443,7 +29443,7 @@
       "reasons": [
         "Bound to contract: Polyglot runtime without deterministic compile/test evidence in this phase.",
         "binding_status=DEFERRED_NO_SAFE_ACTION",
-        "resolved_status=DEFERRED_NO_SAFE_ACTION"
+        "resolved_status=TOOLCHAIN_VALIDATED"
       ],
       "related_specs": [
         "doc/specs/L1_Nervous/15_mcp_sidecar_isolation.md",
@@ -29452,15 +29452,15 @@
       ],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "layers/l1_nervous/internal/skill/mcp_client.go",
       "current_class": "UNKNOWN",
-      "proposed_class": "SHADOW_CANDIDATE",
-      "risk": "HIGH",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
+      "proposed_class": "ACTIVE_RUNTIME",
+      "risk": "MEDIUM",
+      "recommendation": "KEEP_AND_TEST",
       "confidence": 0.72,
       "evidence_refs": [
         "FILE_EXISTS",
@@ -29471,7 +29471,7 @@
       "reasons": [
         "Bound to contract: Polyglot runtime without deterministic compile/test evidence in this phase.",
         "binding_status=DEFERRED_NO_SAFE_ACTION",
-        "resolved_status=DEFERRED_NO_SAFE_ACTION"
+        "resolved_status=TOOLCHAIN_VALIDATED"
       ],
       "related_specs": [
         "doc/specs/L1_Nervous/15_mcp_sidecar_isolation.md",
@@ -29480,15 +29480,15 @@
       ],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "layers/l1_nervous/internal/skill/types.go",
       "current_class": "UNKNOWN",
-      "proposed_class": "SHADOW_CANDIDATE",
-      "risk": "HIGH",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
+      "proposed_class": "ACTIVE_RUNTIME",
+      "risk": "MEDIUM",
+      "recommendation": "KEEP_AND_TEST",
       "confidence": 0.72,
       "evidence_refs": [
         "FILE_EXISTS",
@@ -29499,7 +29499,7 @@
       "reasons": [
         "Bound to contract: Polyglot runtime without deterministic compile/test evidence in this phase.",
         "binding_status=DEFERRED_NO_SAFE_ACTION",
-        "resolved_status=DEFERRED_NO_SAFE_ACTION"
+        "resolved_status=TOOLCHAIN_VALIDATED"
       ],
       "related_specs": [
         "doc/specs/L1_Nervous/15_mcp_sidecar_isolation.md",
@@ -29508,8 +29508,8 @@
       ],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "layers/l1_nervous/pkg/proto/skill/skill.pb.go",
@@ -40929,7 +40929,7 @@
   ],
   "summary_counts": {
     "by_class": {
-      "ACTIVE_RUNTIME": 247,
+      "ACTIVE_RUNTIME": 254,
       "ACTIVE_TEST": 235,
       "ACTIVE_SPEC": 559,
       "GENERATED": 38,
@@ -40937,19 +40937,19 @@
       "EXPERIMENTAL": 1,
       "CONFIG": 12,
       "REPORT": 0,
-      "SHADOW_CANDIDATE": 71,
+      "SHADOW_CANDIDATE": 64,
       "ORPHAN_TEST_CANDIDATE": 3,
       "UNKNOWN": 144
     },
     "by_risk": {
       "LOW": 322,
-      "MEDIUM": 947,
-      "HIGH": 71,
+      "MEDIUM": 954,
+      "HIGH": 64,
       "CRITICAL": 0
     },
     "by_recommendation": {
-      "FREEZE_UNTIL_REVIEW": 151,
-      "KEEP_AND_TEST": 248,
+      "FREEZE_UNTIL_REVIEW": 144,
+      "KEEP_AND_TEST": 255,
       "MAP_TO_RUNTIME": 561,
       "MAP_TO_SPEC": 255,
       "MAP_TO_TEST": 20,
@@ -40961,16 +40961,26 @@
     "bindings_summary": {
       "bound_active_runtime": 11,
       "needs_manual_owner": 0,
-      "deferred_no_safe_action": 7
+      "deferred_no_safe_action": 0,
+      "toolchain_validated": 5,
+      "toolchain_missing": 0,
+      "smoke_passed": 0,
+      "smoke_failed": 0,
+      "contract_bound": 2
     }
   },
   "explicit_metrics": {
     "CRITICAL": 0,
-    "HIGH": 71,
-    "SHADOW_CANDIDATE": 71,
+    "HIGH": 64,
+    "SHADOW_CANDIDATE": 64,
     "ORPHAN_TEST_CANDIDATE": 3,
     "bound_active_runtime": 11,
-    "deferred_no_safe_action": 7
+    "deferred_no_safe_action": 0,
+    "toolchain_validated": 5,
+    "toolchain_missing": 0,
+    "smoke_passed": 0,
+    "smoke_failed": 0,
+    "contract_bound": 2
   },
   "top_actions": [
     {
@@ -41979,5 +41989,5 @@
     "No physical file moves/deletes performed in this phase.",
     "Classification depends on currently indexed artifacts and deterministic references."
   ],
-  "next_recommended_phase": "Structural Hardening Pack 2.2 - Deferred Polyglot Toolchain Binding"
+  "next_recommended_phase": "Structural Hardening Pack 2.3 - Compilation Sandbox and Orchestration Boundary Hardening"
 }

@@ -18,6 +18,14 @@ class BindingStatus(str, Enum):
     MARKED_GENERATED_WITH_EVIDENCE = "MARKED_GENERATED_WITH_EVIDENCE"
     NEEDS_MANUAL_OWNER = "NEEDS_MANUAL_OWNER"
     DEFERRED_NO_SAFE_ACTION = "DEFERRED_NO_SAFE_ACTION"
+    TOOLCHAIN_VALIDATED = "TOOLCHAIN_VALIDATED"
+    TOOLCHAIN_MISSING = "TOOLCHAIN_MISSING"
+    SMOKE_PASSED = "SMOKE_PASSED"
+    SMOKE_FAILED = "SMOKE_FAILED"
+    CONTRACT_BOUND = "CONTRACT_BOUND"
+    REMAINS_DEFERRED = "REMAINS_DEFERRED"
+    NEEDS_MANUAL_REVIEW = "NEEDS_MANUAL_REVIEW"
+
 
 
 class ContractBinding(BaseModel):
@@ -414,10 +422,34 @@ class ContractBindingRegistry:
         has_importable_evidence = "IMPORTABLE" in evidence_refs
         py_file = binding.path.endswith(".py")
 
+        # Check polyglot ledger first for risk & status calibration
+        ledger_path = repo_root / ".aiwg" / "reports" / "structural_polyglot_toolchain_ledger_latest.json"
+        polyglot_entry = None
+        if ledger_path.exists():
+            try:
+                import json
+                with open(ledger_path, "r", encoding="utf-8") as f:
+                    ledger_data = json.load(f)
+                    for entry in ledger_data:
+                        if entry.get("path") == binding.path:
+                            polyglot_entry = entry
+                            break
+            except Exception:
+                pass
+
         resolved_status = binding.binding_status
         effective_risk = binding.risk_after
         effective_recommendation = binding.action
         issues: List[str] = []
+
+        if polyglot_entry:
+            resolved_status = BindingStatus(polyglot_entry["binding_decision"])
+            effective_risk = RiskLevel(polyglot_entry["risk_after"])
+            if polyglot_entry["binding_decision"] == "TOOLCHAIN_MISSING":
+                issues.append(f"toolchain_missing:{polyglot_entry.get('required_toolchain')}")
+            # Add dynamic evidence refs
+            evidence_refs.add(f"POLYGLOT_TOOLCHAIN:{polyglot_entry.get('required_toolchain')}")
+            evidence_refs.add(f"PROBE:{polyglot_entry.get('binding_decision')}")
 
         if not _ref_exists(repo_root, binding.path):
             resolved_status = BindingStatus.NEEDS_MANUAL_OWNER
@@ -461,13 +493,20 @@ class ContractBindingRegistry:
                 issues.append("runtime binding lacks spec/test linkage")
 
         if binding.binding_status == BindingStatus.DEFERRED_NO_SAFE_ACTION:
-            effective_recommendation = Recommendation.FREEZE_UNTIL_REVIEW
-            if has_scoped_spec or has_strong_spec:
-                effective_risk = _max_risk(binding.risk_after, RiskLevel.HIGH)
+            if polyglot_entry:
+                if resolved_status in {BindingStatus.TOOLCHAIN_VALIDATED, BindingStatus.CONTRACT_BOUND, BindingStatus.SMOKE_PASSED}:
+                    effective_recommendation = Recommendation.KEEP_AND_TEST
+                else:
+                    effective_recommendation = Recommendation.FREEZE_UNTIL_REVIEW
             else:
-                effective_risk = RiskLevel.CRITICAL
-                resolved_status = BindingStatus.NEEDS_MANUAL_OWNER
-                issues.append("deferred binding lacks spec ownership")
+                effective_recommendation = Recommendation.FREEZE_UNTIL_REVIEW
+                if has_scoped_spec or has_strong_spec:
+                    effective_risk = _max_risk(binding.risk_after, RiskLevel.HIGH)
+                else:
+                    effective_risk = RiskLevel.CRITICAL
+                    resolved_status = BindingStatus.NEEDS_MANUAL_OWNER
+                    issues.append("deferred binding lacks spec ownership")
+
 
         confidence = binding.confidence
         if missing_specs:

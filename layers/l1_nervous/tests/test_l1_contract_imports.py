@@ -36,3 +36,19 @@ def test_l1_nervous_module_import_contract(contract: ModuleContract) -> None:
         if contract.optional_dependency and exc.name == contract.optional_dependency:
             pytest.skip(f"optional dependency required for {contract.module}: {exc.name}")
         raise
+
+
+def test_register_nervous_tools_signature() -> None:
+    try:
+        from layers.l1_nervous.tools_impl.nervous import register_nervous_tools
+        import inspect
+        sig = inspect.signature(register_nervous_tools)
+        assert "mcp" in sig.parameters
+        assert "use_cases" in sig.parameters
+        assert "root_dir" in sig.parameters
+    except (ModuleNotFoundError, ImportError) as exc:
+        # Check if missing 'mcp' or other dependency caused it
+        if hasattr(exc, "name") and exc.name == "mcp":
+            pytest.skip("optional dependency 'mcp' not installed")
+        raise
+

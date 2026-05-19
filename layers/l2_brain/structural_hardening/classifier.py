@@ -38,11 +38,20 @@ class StructuralClassifier:
         binding, validation = self._bindings.evaluate(path, self.repo_root, evidence=evidence)
         if binding and validation:
             proposed_class = binding.structural_class
-            if validation.resolved_status in {BindingStatus.DEFERRED_NO_SAFE_ACTION, BindingStatus.NEEDS_MANUAL_OWNER}:
+            if validation.resolved_status in {
+                BindingStatus.DEFERRED_NO_SAFE_ACTION,
+                BindingStatus.NEEDS_MANUAL_OWNER,
+                BindingStatus.TOOLCHAIN_MISSING,
+                BindingStatus.SMOKE_FAILED,
+                BindingStatus.REMAINS_DEFERRED,
+                BindingStatus.NEEDS_MANUAL_REVIEW,
+            }:
                 proposed_class = StructuralClass.SHADOW_CANDIDATE
 
             if path.endswith((".go", ".ex", ".sh")) and not validation.linked_test_hits:
-                proposed_class = StructuralClass.SHADOW_CANDIDATE
+                if validation.resolved_status not in {BindingStatus.TOOLCHAIN_VALIDATED, BindingStatus.CONTRACT_BOUND, BindingStatus.SMOKE_PASSED}:
+                    proposed_class = StructuralClass.SHADOW_CANDIDATE
+
 
             reasons_combined = reasons + [
                 f"Bound to contract: {binding.notes}",

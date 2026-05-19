@@ -78,6 +78,11 @@ class StructuralTriageMatrix:
         bound_runtime = sum(1 for v in validated if v.resolved_status == BindingStatus.BOUND_ACTIVE_RUNTIME)
         needs_manual = sum(1 for v in validated if v.resolved_status == BindingStatus.NEEDS_MANUAL_OWNER)
         deferred = sum(1 for v in validated if v.resolved_status == BindingStatus.DEFERRED_NO_SAFE_ACTION)
+        toolchain_validated = sum(1 for v in validated if v.resolved_status == BindingStatus.TOOLCHAIN_VALIDATED)
+        toolchain_missing = sum(1 for v in validated if v.resolved_status == BindingStatus.TOOLCHAIN_MISSING)
+        smoke_passed = sum(1 for v in validated if v.resolved_status == BindingStatus.SMOKE_PASSED)
+        smoke_failed = sum(1 for v in validated if v.resolved_status == BindingStatus.SMOKE_FAILED)
+        contract_bound = sum(1 for v in validated if v.resolved_status == BindingStatus.CONTRACT_BOUND)
 
         class_counts = {c.value: by_class.get(c.value, 0) for c in StructuralClass}
         risk_counts = {r.value: by_risk.get(r.value, 0) for r in RiskLevel}
@@ -90,6 +95,11 @@ class StructuralTriageMatrix:
                 "bound_active_runtime": bound_runtime,
                 "needs_manual_owner": needs_manual,
                 "deferred_no_safe_action": deferred,
+                "toolchain_validated": toolchain_validated,
+                "toolchain_missing": toolchain_missing,
+                "smoke_passed": smoke_passed,
+                "smoke_failed": smoke_failed,
+                "contract_bound": contract_bound,
             }
         }
 
@@ -101,6 +111,11 @@ class StructuralTriageMatrix:
             "ORPHAN_TEST_CANDIDATE": class_counts.get(StructuralClass.ORPHAN_TEST_CANDIDATE.value, 0),
             "bound_active_runtime": bound_runtime,
             "deferred_no_safe_action": deferred,
+            "toolchain_validated": toolchain_validated,
+            "toolchain_missing": toolchain_missing,
+            "smoke_passed": smoke_passed,
+            "smoke_failed": smoke_failed,
+            "contract_bound": contract_bound,
         }
 
         report = StructuralTriageReport(
@@ -122,7 +137,7 @@ class StructuralTriageMatrix:
                 "No physical file moves/deletes performed in this phase.",
                 "Classification depends on currently indexed artifacts and deterministic references.",
             ],
-            next_recommended_phase="Structural Hardening Pack 2.2 - Deferred Polyglot Toolchain Binding",
+            next_recommended_phase="Structural Hardening Pack 2.3 - Compilation Sandbox and Orchestration Boundary Hardening",
         )
         return report
 
