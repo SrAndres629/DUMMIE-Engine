@@ -1,3 +1,4 @@
+# Spec: 166_l2_brain_organ_migration_contract
 __spec_id__ = "DE-V2-L2-42B"
 __spec_id__ = "DE-V2-L2-34"
 __spec_id__ = "DE-V2-L2-27B"
@@ -242,15 +243,11 @@ class DummieDaemon:
             logger.warning(f"Daemon outcome contract degraded: {e}")
 
         try:
-            from layers.l2_brain.flat_brain.orchestrator import CognitiveOrchestrator
+            from layers.l2_brain.cognition.orchestrator import CognitiveOrchestrator
             self.orchestrator = CognitiveOrchestrator(self)
-        except ImportError:
-            try:
-                from .orchestrator import CognitiveOrchestrator
-                self.orchestrator = CognitiveOrchestrator(self)
-            except ImportError as e:
-                self.orchestrator = None
-                logger.warning(f"CognitiveOrchestrator degraded: {e}")
+        except ImportError as e:
+            self.orchestrator = None
+            logger.warning(f"CognitiveOrchestrator degraded: {e}")
 
         try:
             from layers.l2_brain.long_running_mission import LongRunningMissionRuntime
@@ -779,4 +776,3 @@ if __name__ == "__main__":
         asyncio.run(run_mission(args.goal, args.xml))
     except KeyboardInterrupt:
         pass
-

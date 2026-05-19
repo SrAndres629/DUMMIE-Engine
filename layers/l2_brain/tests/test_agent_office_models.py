@@ -1,13 +1,23 @@
 from dataclasses import asdict
 
-from agent_office.models import (
-    AgentSession,
-    ContextPacket,
-    DecisionRecord,
-    EvidencePacket,
-    RepoManifest,
-    WorkRoom,
-)
+try:
+    from layers.l2_brain.strategic.agent_office_models import (
+        AgentSession,
+        ContextPacket,
+        DecisionRecord,
+        EvidencePacket,
+        RepoManifest,
+        WorkRoom,
+    )
+except ImportError:
+    from agent_office.models import (
+        AgentSession,
+        ContextPacket,
+        DecisionRecord,
+        EvidencePacket,
+        RepoManifest,
+        WorkRoom,
+    )
 
 
 def test_repo_manifest_is_json_safe_contract():

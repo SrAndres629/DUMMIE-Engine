@@ -2,8 +2,18 @@ from __future__ import annotations
 
 import logging
 from typing import Any
-from .socraticode_gateway_adapter import SocraticodeGatewayAdapter
-from .vault_context_resolver import VaultContextResolver
+
+try:
+    from layers.l2_brain.model_mesh.socraticode_gateway_adapter import SocraticodeGatewayAdapter
+except ImportError:
+    from .socraticode_gateway_adapter import SocraticodeGatewayAdapter
+
+
+try:
+    from layers.l2_brain.memory.vault_context_resolver import VaultContextResolver
+except ImportError:
+    from .vault_context_resolver import VaultContextResolver
+
 
 logger = logging.getLogger(__name__)
 

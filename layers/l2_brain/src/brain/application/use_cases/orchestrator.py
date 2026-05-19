@@ -1,7 +1,7 @@
 import json
 import hashlib
 from datetime import datetime
-from typing import Optional, List, Union
+from typing import Any, Optional, List, Union
 from brain.application.interfaces import IBrainOrchestrator
 from brain.application.use_cases.crystallization import CrystallizeProceduralMemoryUseCase
 from brain.application.use_cases.lessons_use_case import CrystallizeLessonsUseCase

@@ -12,7 +12,7 @@ class MetacognitiveFrame:
     raw_user_input: str
     refined_intent: str = ""
     strategic_objective: str = ""
-    authority_level: AuthorityLevel = AuthorityLevel.A0_OBSERVER
+    authority_level: AuthorityLevel = getattr(AuthorityLevel, "A0_OBSERVER", AuthorityLevel.AGENT)
     risk_level: str = "low"
     required_tools: List[str] = field(default_factory=list)
     missing_context: List[str] = field(default_factory=list)
