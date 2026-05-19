@@ -88,8 +88,29 @@ def _build_triage_markdown(report: StructuralTriageReport, max_actions: int) -> 
     lines.append(f"- pack_status: {report.pack_status}")
     lines.append(f"- repo_health_status: {report.repo_health_status}")
     lines.append(f"- base_commit: {report.base_commit}")
+    if report.analysis_base_commit:
+        lines.append(f"- analysis_base_commit: {report.analysis_base_commit}")
+    if report.report_generated_at_commit:
+        lines.append(f"- report_generated_at_commit: {report.report_generated_at_commit}")
+    if report.head_commit:
+        lines.append(f"- head_commit: {report.head_commit}")
     lines.append(f"- files_analyzed: {report.files_analyzed}")
     lines.append("")
+
+    if report.explicit_metrics:
+        lines.append("## Explicit Metrics")
+        for key in [
+            "CRITICAL",
+            "HIGH",
+            "SHADOW_CANDIDATE",
+            "ORPHAN_TEST_CANDIDATE",
+            "bound_active_runtime",
+            "deferred_no_safe_action",
+        ]:
+            if key in report.explicit_metrics:
+                lines.append(f"- {key}: {report.explicit_metrics[key]}")
+        lines.append(f"- repo_health_status: {report.repo_health_status}")
+        lines.append("")
 
     lines.append("## Counts by Class")
     for k, v in sorted(by_class.items()):
@@ -99,6 +120,13 @@ def _build_triage_markdown(report: StructuralTriageReport, max_actions: int) -> 
     lines.append("## Counts by Recommendation")
     for k, v in sorted(by_rec.items()):
         lines.append(f"- {k}: {v}")
+    lines.append("")
+
+    bindings_summary = report.summary_counts.get("bindings_summary", {})
+    lines.append("## Bindings Summary")
+    lines.append(f"- bound_active_runtime: {bindings_summary.get('bound_active_runtime', 0)}")
+    lines.append(f"- needs_manual_owner: {bindings_summary.get('needs_manual_owner', 0)}")
+    lines.append(f"- deferred_no_safe_action: {bindings_summary.get('deferred_no_safe_action', 0)}")
     lines.append("")
 
     lines.append("## Counts by Risk")

@@ -81,12 +81,16 @@ class StructuralFinding(BaseModel):
 class StructuralTriageReport(BaseModel):
     generated_at: str
     base_commit: str
+    analysis_base_commit: str | None = None
+    report_generated_at_commit: str | None = None
+    head_commit: str | None = None
     pack_name: str
     pack_status: str
     repo_health_status: str
     files_analyzed: int
     findings: List[StructuralFinding]
     summary_counts: Dict[str, Dict[str, int]]
+    explicit_metrics: Dict[str, int] = Field(default_factory=dict)
     top_actions: List[StructuralFinding]
     limitations: List[str]
     next_recommended_phase: str

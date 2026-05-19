@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import Any, Dict, List
 
 from .classifier import StructuralClassifier
-from .contracts import Recommendation, RiskLevel, StructuralFinding, StructuralTriageReport
+from .contracts import Recommendation, RiskLevel, StructuralClass, StructuralFinding, StructuralTriageReport
 from .evidence import EvidenceCollector
 
 
@@ -79,9 +79,12 @@ class StructuralTriageMatrix:
         needs_manual = sum(1 for v in validated if v.resolved_status == BindingStatus.NEEDS_MANUAL_OWNER)
         deferred = sum(1 for v in validated if v.resolved_status == BindingStatus.DEFERRED_NO_SAFE_ACTION)
 
+        class_counts = {c.value: by_class.get(c.value, 0) for c in StructuralClass}
+        risk_counts = {r.value: by_risk.get(r.value, 0) for r in RiskLevel}
+
         summary_counts = {
-            "by_class": dict(sorted(by_class.items())),
-            "by_risk": dict(sorted(by_risk.items())),
+            "by_class": class_counts,
+            "by_risk": risk_counts,
             "by_recommendation": dict(sorted(by_recommendation.items())),
             "bindings_summary": {
                 "bound_active_runtime": bound_runtime,
@@ -90,23 +93,36 @@ class StructuralTriageMatrix:
             }
         }
 
+        head_commit = _git_head(self.repo_root)
+        explicit_metrics = {
+            "CRITICAL": risk_counts.get(RiskLevel.CRITICAL.value, 0),
+            "HIGH": risk_counts.get(RiskLevel.HIGH.value, 0),
+            "SHADOW_CANDIDATE": class_counts.get(StructuralClass.SHADOW_CANDIDATE.value, 0),
+            "ORPHAN_TEST_CANDIDATE": class_counts.get(StructuralClass.ORPHAN_TEST_CANDIDATE.value, 0),
+            "bound_active_runtime": bound_runtime,
+            "deferred_no_safe_action": deferred,
+        }
 
         report = StructuralTriageReport(
             generated_at=datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
-            base_commit=_git_head(self.repo_root),
+            base_commit=head_commit,
+            analysis_base_commit=head_commit,
+            report_generated_at_commit=head_commit,
+            head_commit=head_commit,
             pack_name="Structural Hardening Pack 2 - Contract-First Triage",
             pack_status=pack_status,
             repo_health_status=repo_health_status,
             files_analyzed=len(findings),
             findings=findings,
             summary_counts=summary_counts,
+            explicit_metrics=explicit_metrics,
             top_actions=top_actions,
             limitations=[
                 "Deterministic evidence only; no embedding or ML-based reasoning used.",
                 "No physical file moves/deletes performed in this phase.",
                 "Classification depends on currently indexed artifacts and deterministic references.",
             ],
-            next_recommended_phase="Structural Hardening Pack 2.1 - targeted contract binding and safe physical changes",
+            next_recommended_phase="Structural Hardening Pack 2.2 - Deferred Polyglot Toolchain Binding",
         )
         return report
 

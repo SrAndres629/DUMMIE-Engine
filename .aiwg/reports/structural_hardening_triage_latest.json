@@ -1,6 +1,9 @@
 {
-  "generated_at": "2026-05-19T00:47:03.341067Z",
-  "base_commit": "3706c9f03aaa985c2a5fbcb254dac5f2d63009c2",
+  "generated_at": "2026-05-19T01:11:12.789445Z",
+  "base_commit": "ce5849eb462010757b19ba50a3f9e7a441d80185",
+  "analysis_base_commit": "ce5849eb462010757b19ba50a3f9e7a441d80185",
+  "report_generated_at_commit": "ce5849eb462010757b19ba50a3f9e7a441d80185",
+  "head_commit": "ce5849eb462010757b19ba50a3f9e7a441d80185",
   "pack_name": "Structural Hardening Pack 2 - Contract-First Triage",
   "pack_status": "PASS_WITH_WARNINGS",
   "repo_health_status": "FAIL",
@@ -40927,20 +40930,22 @@
   "summary_counts": {
     "by_class": {
       "ACTIVE_RUNTIME": 247,
-      "ACTIVE_SPEC": 559,
       "ACTIVE_TEST": 235,
-      "CONFIG": 12,
-      "EXPERIMENTAL": 1,
+      "ACTIVE_SPEC": 559,
       "GENERATED": 38,
       "LEGACY": 30,
-      "ORPHAN_TEST_CANDIDATE": 3,
+      "EXPERIMENTAL": 1,
+      "CONFIG": 12,
+      "REPORT": 0,
       "SHADOW_CANDIDATE": 71,
+      "ORPHAN_TEST_CANDIDATE": 3,
       "UNKNOWN": 144
     },
     "by_risk": {
-      "HIGH": 71,
       "LOW": 322,
-      "MEDIUM": 947
+      "MEDIUM": 947,
+      "HIGH": 71,
+      "CRITICAL": 0
     },
     "by_recommendation": {
       "FREEZE_UNTIL_REVIEW": 151,
@@ -40958,6 +40963,14 @@
       "needs_manual_owner": 0,
       "deferred_no_safe_action": 7
     }
+  },
+  "explicit_metrics": {
+    "CRITICAL": 0,
+    "HIGH": 71,
+    "SHADOW_CANDIDATE": 71,
+    "ORPHAN_TEST_CANDIDATE": 3,
+    "bound_active_runtime": 11,
+    "deferred_no_safe_action": 7
   },
   "top_actions": [
     {
@@ -41966,5 +41979,5 @@
     "No physical file moves/deletes performed in this phase.",
     "Classification depends on currently indexed artifacts and deterministic references."
   ],
-  "next_recommended_phase": "Structural Hardening Pack 2.1 - targeted contract binding and safe physical changes"
+  "next_recommended_phase": "Structural Hardening Pack 2.2 - Deferred Polyglot Toolchain Binding"
 }

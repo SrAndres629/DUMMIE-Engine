@@ -1,0 +1,408 @@
+{
+  "generated_at": "2026-05-19T01:11:12.789445Z",
+  "head_commit": "ce5849eb462010757b19ba50a3f9e7a441d80185",
+  "pack_context": "Post Pack 2.1 Integrity Pass",
+  "summary": {
+    "files_analyzed": 1340,
+    "shadow_candidates": 71,
+    "orphan_test_candidates": 3,
+    "unknown": 144,
+    "critical": 0,
+    "high": 71,
+    "bound_active_runtime": 11,
+    "deferred_no_safe_action": 7
+  },
+  "files_not_analyzed": {
+    "count": 0,
+    "bucket_counts": {},
+    "sample": []
+  },
+  "frozen_modules": [
+    {
+      "path": "README.md",
+      "risk": "MEDIUM",
+      "reason": "insufficient structural evidence; referenced in CORE_SPEC"
+    },
+    {
+      "path": "doc/ATLAS.md",
+      "risk": "MEDIUM",
+      "reason": "insufficient structural evidence"
+    },
+    {
+      "path": "doc/CORE_SPEC.md",
+      "risk": "MEDIUM",
+      "reason": "insufficient structural evidence; referenced in PHYSICAL_MAP"
+    },
+    {
+      "path": "doc/ENGINEERING_PRINCIPLES.md",
+      "risk": "MEDIUM",
+      "reason": "insufficient structural evidence"
+    },
+    {
+      "path": "doc/PHYSICAL_MAP.md",
+      "risk": "MEDIUM",
+      "reason": "insufficient structural evidence; referenced in CORE_SPEC"
+    },
+    {
+      "path": "scripts/install_tools_user_space.sh",
+      "risk": "MEDIUM",
+      "reason": "insufficient structural evidence; spec links found"
+    },
+    {
+      "path": "scripts/benchmark_local_reasoning.py",
+      "risk": "MEDIUM",
+      "reason": "insufficient structural evidence; spec links found"
+    },
+    {
+      "path": "scripts/bootstrap.sh",
+      "risk": "MEDIUM",
+      "reason": "insufficient structural evidence"
+    },
+    {
+      "path": "scripts/bootstrap_memory_native.sh",
+      "risk": "MEDIUM",
+      "reason": "insufficient structural evidence"
+    },
+    {
+      "path": "scripts/build_factory.sh",
+      "risk": "MEDIUM",
+      "reason": "insufficient structural evidence"
+    },
+    {
+      "path": "scripts/build_inventory.py",
+      "risk": "MEDIUM",
+      "reason": "insufficient structural evidence"
+    },
+    {
+      "path": "scripts/build_repo_maps.py",
+      "risk": "MEDIUM",
+      "reason": "insufficient structural evidence"
+    },
+    {
+      "path": "scripts/build_semantic_hardening_index.py",
+      "risk": "MEDIUM",
+      "reason": "insufficient structural evidence; spec links found"
+    },
+    {
+      "path": "scripts/consciousness_audit.py",
+      "risk": "MEDIUM",
+      "reason": "insufficient structural evidence"
+    },
+    {
+      "path": "scripts/context_oracle.py",
+      "risk": "MEDIUM",
+      "reason": "insufficient structural evidence"
+    },
+    {
+      "path": "scripts/dummie-ctl",
+      "risk": "MEDIUM",
+      "reason": "insufficient structural evidence; spec links found"
+    },
+    {
+      "path": "scripts/dummie-doctor-repair.sh",
+      "risk": "MEDIUM",
+      "reason": "insufficient structural evidence"
+    },
+    {
+      "path": "scripts/dummie-engine.service",
+      "risk": "MEDIUM",
+      "reason": "insufficient structural evidence"
+    },
+    {
+      "path": "scripts/dummie_mcp_doctor.py",
+      "risk": "MEDIUM",
+      "reason": "insufficient structural evidence; spec links found"
+    },
+    {
+      "path": "scripts/dummie_orchestrator.py",
+      "risk": "MEDIUM",
+      "reason": "insufficient structural evidence"
+    }
+  ],
+  "superficial_tests": {
+    "count": 8,
+    "sample": [
+      "layers/l1_nervous/tests/test_swarm_perf_run.py",
+      "layers/l2_brain/tests/test_context_packet_optimizer.py",
+      "layers/l2_brain/tests/test_daemon_gateway_heartbeat_bridge.py",
+      "layers/l2_brain/tests/test_embedding_memory_router.py",
+      "layers/l2_brain/tests/test_four_dtes_persistence_preflight.py",
+      "layers/l2_brain/tests/test_polyglot_probe_orchestrator.py",
+      "layers/l2_brain/tests/test_semantic_hardening_index.py",
+      "layers/l2_brain/tests/test_six_dimensional_context_runtime.py"
+    ],
+    "heuristic": "import-only/skip-heavy/assert-true patterns"
+  },
+  "generic_specs": {
+    "count": 11,
+    "sample": [
+      {
+        "path": "layers/l1_nervous/bootstrap.py",
+        "scoped_hits": [
+          "doc/specs/L1_Nervous/15_mcp_sidecar_isolation.md",
+          "doc/specs/L1_Nervous/16_mcp_dynamic_gateway.md",
+          "doc/specs/L1_Nervous/41_layer_handshake_protocol.md",
+          "doc/specs/L1_Nervous/44_pervasive_channel_adapters.md"
+        ],
+        "test_hits": [
+          "layers/l1_nervous/tests/test_l1_contract_imports.py"
+        ]
+      },
+      {
+        "path": "layers/l1_nervous/application/use_cases.py",
+        "scoped_hits": [
+          "doc/specs/L1_Nervous/15_mcp_sidecar_isolation.md",
+          "doc/specs/L1_Nervous/16_mcp_dynamic_gateway.md",
+          "doc/specs/L1_Nervous/41_layer_handshake_protocol.md",
+          "doc/specs/L1_Nervous/44_pervasive_channel_adapters.md"
+        ],
+        "test_hits": [
+          "layers/l1_nervous/tests/test_l1_contract_imports.py"
+        ]
+      },
+      {
+        "path": "layers/l1_nervous/domain/services.py",
+        "scoped_hits": [
+          "doc/specs/L1_Nervous/15_mcp_sidecar_isolation.md",
+          "doc/specs/L1_Nervous/16_mcp_dynamic_gateway.md",
+          "doc/specs/L1_Nervous/41_layer_handshake_protocol.md",
+          "doc/specs/L1_Nervous/44_pervasive_channel_adapters.md"
+        ],
+        "test_hits": [
+          "layers/l1_nervous/tests/test_l1_contract_imports.py"
+        ]
+      },
+      {
+        "path": "layers/l1_nervous/knowledge_adapters.py",
+        "scoped_hits": [
+          "doc/specs/L1_Nervous/15_mcp_sidecar_isolation.md",
+          "doc/specs/L1_Nervous/16_mcp_dynamic_gateway.md",
+          "doc/specs/L1_Nervous/41_layer_handshake_protocol.md",
+          "doc/specs/L1_Nervous/44_pervasive_channel_adapters.md"
+        ],
+        "test_hits": [
+          "layers/l1_nervous/tests/test_l1_contract_imports.py",
+          "layers/l1_nervous/tests/test_obsidian_knowledge_adapter.py"
+        ]
+      },
+      {
+        "path": "layers/l1_nervous/mcp_registry.py",
+        "scoped_hits": [
+          "doc/specs/L1_Nervous/15_mcp_sidecar_isolation.md",
+          "doc/specs/L1_Nervous/16_mcp_dynamic_gateway.md",
+          "doc/specs/L1_Nervous/41_layer_handshake_protocol.md",
+          "doc/specs/L1_Nervous/44_pervasive_channel_adapters.md"
+        ],
+        "test_hits": [
+          "layers/l1_nervous/tests/test_l1_contract_imports.py"
+        ]
+      },
+      {
+        "path": "layers/l1_nervous/mcp_transport.py",
+        "scoped_hits": [
+          "doc/specs/L1_Nervous/15_mcp_sidecar_isolation.md",
+          "doc/specs/L1_Nervous/16_mcp_dynamic_gateway.md",
+          "doc/specs/L1_Nervous/41_layer_handshake_protocol.md",
+          "doc/specs/L1_Nervous/44_pervasive_channel_adapters.md"
+        ],
+        "test_hits": [
+          "layers/l1_nervous/tests/test_l1_contract_imports.py"
+        ]
+      },
+      {
+        "path": "layers/l1_nervous/repo_guard.py",
+        "scoped_hits": [
+          "doc/specs/L1_Nervous/15_mcp_sidecar_isolation.md",
+          "doc/specs/L1_Nervous/16_mcp_dynamic_gateway.md",
+          "doc/specs/L1_Nervous/41_layer_handshake_protocol.md",
+          "doc/specs/L1_Nervous/44_pervasive_channel_adapters.md"
+        ],
+        "test_hits": [
+          "layers/l1_nervous/tests/test_l1_contract_imports.py"
+        ]
+      },
+      {
+        "path": "layers/l1_nervous/runtime_paths.py",
+        "scoped_hits": [
+          "doc/specs/L0_Overseer/47_path_normalization.md",
+          "doc/specs/L1_Nervous/15_mcp_sidecar_isolation.md",
+          "doc/specs/L1_Nervous/16_mcp_dynamic_gateway.md",
+          "doc/specs/L1_Nervous/41_layer_handshake_protocol.md",
+          "doc/specs/L1_Nervous/44_pervasive_channel_adapters.md"
+        ],
+        "test_hits": [
+          "layers/l1_nervous/tests/test_l1_contract_imports.py",
+          "layers/l1_nervous/tests/test_runtime_contracts.py"
+        ]
+      },
+      {
+        "path": "layers/l1_nervous/tools_impl/patch_transactions.py",
+        "scoped_hits": [
+          "doc/specs/L1_Nervous/15_mcp_sidecar_isolation.md",
+          "doc/specs/L1_Nervous/16_mcp_dynamic_gateway.md",
+          "doc/specs/L1_Nervous/41_layer_handshake_protocol.md",
+          "doc/specs/L1_Nervous/44_pervasive_channel_adapters.md"
+        ],
+        "test_hits": [
+          "layers/l1_nervous/tests/test_l1_contract_imports.py"
+        ]
+      },
+      {
+        "path": "layers/l1_nervous/utils.py",
+        "scoped_hits": [
+          "doc/specs/L1_Nervous/15_mcp_sidecar_isolation.md",
+          "doc/specs/L1_Nervous/16_mcp_dynamic_gateway.md",
+          "doc/specs/L1_Nervous/41_layer_handshake_protocol.md",
+          "doc/specs/L1_Nervous/44_pervasive_channel_adapters.md"
+        ],
+        "test_hits": [
+          "layers/l1_nervous/tests/test_l1_contract_imports.py"
+        ]
+      },
+      {
+        "path": "layers/l0_overseer/supervisor.py",
+        "scoped_hits": [
+          "doc/specs/L0_Overseer/03_polyglot_architecture.md",
+          "doc/specs/L0_Overseer/05_orchestration_stack_and_glue.md",
+          "doc/specs/L0_Overseer/11_monorepo_structure.md"
+        ],
+        "test_hits": [
+          "layers/l0_overseer/tests/test_l0_contract_imports.py"
+        ]
+      }
+    ]
+  },
+  "debt_lowered_not_closed": {
+    "count": 18,
+    "sample": [
+      {
+        "path": "layers/l1_nervous/bootstrap.py",
+        "risk_after": "MEDIUM",
+        "resolved_status": "BOUND_ACTIVE_RUNTIME",
+        "recommendation": "MAP_TO_SPEC"
+      },
+      {
+        "path": "layers/l1_nervous/application/use_cases.py",
+        "risk_after": "MEDIUM",
+        "resolved_status": "BOUND_ACTIVE_RUNTIME",
+        "recommendation": "MAP_TO_SPEC"
+      },
+      {
+        "path": "layers/l1_nervous/domain/services.py",
+        "risk_after": "MEDIUM",
+        "resolved_status": "BOUND_ACTIVE_RUNTIME",
+        "recommendation": "MAP_TO_SPEC"
+      },
+      {
+        "path": "layers/l1_nervous/knowledge_adapters.py",
+        "risk_after": "MEDIUM",
+        "resolved_status": "BOUND_ACTIVE_RUNTIME",
+        "recommendation": "MAP_TO_SPEC"
+      },
+      {
+        "path": "layers/l1_nervous/mcp_registry.py",
+        "risk_after": "MEDIUM",
+        "resolved_status": "BOUND_ACTIVE_RUNTIME",
+        "recommendation": "MAP_TO_SPEC"
+      },
+      {
+        "path": "layers/l1_nervous/mcp_transport.py",
+        "risk_after": "MEDIUM",
+        "resolved_status": "BOUND_ACTIVE_RUNTIME",
+        "recommendation": "MAP_TO_SPEC"
+      },
+      {
+        "path": "layers/l1_nervous/repo_guard.py",
+        "risk_after": "MEDIUM",
+        "resolved_status": "BOUND_ACTIVE_RUNTIME",
+        "recommendation": "MAP_TO_SPEC"
+      },
+      {
+        "path": "layers/l1_nervous/runtime_paths.py",
+        "risk_after": "MEDIUM",
+        "resolved_status": "BOUND_ACTIVE_RUNTIME",
+        "recommendation": "MAP_TO_SPEC"
+      },
+      {
+        "path": "layers/l1_nervous/tools_impl/nervous.py",
+        "risk_after": "HIGH",
+        "resolved_status": "DEFERRED_NO_SAFE_ACTION",
+        "recommendation": "FREEZE_UNTIL_REVIEW"
+      },
+      {
+        "path": "layers/l1_nervous/tools_impl/patch_transactions.py",
+        "risk_after": "MEDIUM",
+        "resolved_status": "BOUND_ACTIVE_RUNTIME",
+        "recommendation": "MAP_TO_SPEC"
+      },
+      {
+        "path": "layers/l1_nervous/utils.py",
+        "risk_after": "MEDIUM",
+        "resolved_status": "BOUND_ACTIVE_RUNTIME",
+        "recommendation": "MAP_TO_SPEC"
+      },
+      {
+        "path": "layers/l0_overseer/supervisor.py",
+        "risk_after": "MEDIUM",
+        "resolved_status": "BOUND_ACTIVE_RUNTIME",
+        "recommendation": "MAP_TO_SPEC"
+      },
+      {
+        "path": "layers/l1_nervous/internal/skill/blueprint.go",
+        "risk_after": "HIGH",
+        "resolved_status": "DEFERRED_NO_SAFE_ACTION",
+        "recommendation": "FREEZE_UNTIL_REVIEW"
+      },
+      {
+        "path": "layers/l1_nervous/internal/skill/mcp_client.go",
+        "risk_after": "HIGH",
+        "resolved_status": "DEFERRED_NO_SAFE_ACTION",
+        "recommendation": "FREEZE_UNTIL_REVIEW"
+      },
+      {
+        "path": "layers/l1_nervous/internal/skill/types.go",
+        "risk_after": "HIGH",
+        "resolved_status": "DEFERRED_NO_SAFE_ACTION",
+        "recommendation": "FREEZE_UNTIL_REVIEW"
+      },
+      {
+        "path": "layers/l1_nervous/sidecar.go",
+        "risk_after": "HIGH",
+        "resolved_status": "DEFERRED_NO_SAFE_ACTION",
+        "recommendation": "FREEZE_UNTIL_REVIEW"
+      },
+      {
+        "path": "layers/l1_nervous/ssh_sandbox_wrapper.sh",
+        "risk_after": "HIGH",
+        "resolved_status": "DEFERRED_NO_SAFE_ACTION",
+        "recommendation": "FREEZE_UNTIL_REVIEW"
+      },
+      {
+        "path": "layers/l0_overseer/lib/overseer/application.ex",
+        "risk_after": "HIGH",
+        "resolved_status": "DEFERRED_NO_SAFE_ACTION",
+        "recommendation": "FREEZE_UNTIL_REVIEW"
+      }
+    ]
+  },
+  "top_10_objectives": [
+    "Bind deferred polyglot files to executable toolchain checks (go test/mix test/shellcheck) without moving files.",
+    "Add direct file-level spec evidence for 11 BOUND_ACTIVE_RUNTIME modules; reduce scoped-only spec linkage.",
+    "Replace import-only L1 contract tests with behavior contracts for bootstrap/runtime_paths/mcp transport primitives.",
+    "Add contract tests for repo_guard invariants (non-destructive git guardrails).",
+    "Add deterministic smoke checks for sidecar.go and internal/skill/*.go entrypoints in CI-like local probe.",
+    "Classify UNKNOWN (144) by highest fan-in imports first to reduce ambiguous runtime surface.",
+    "Add orphan test reconciliation for the 3 ORPHAN_TEST_CANDIDATE files with runtime mapping evidence.",
+    "Introduce report freshness gate: fail if base_commit != HEAD when reports are regenerated.",
+    "Add binding quality metric (direct_spec_hit_rate) to triage summary for anti-overclaiming.",
+    "Generate Pack 2.2 action ledger with owners, evidence command, and done-definition per deferred file."
+  ],
+  "risks_of_rushing": [
+    "Premature physical cleanup can orphan polyglot runtime contracts and hide real ownership debt.",
+    "Import-only test green status may mask runtime regressions until integration time.",
+    "Scoped spec links without direct module evidence can overstate readiness and mis-prioritize hardening.",
+    "Skipping deferred toolchain validation keeps HIGH risk latent in L0/L1 execution boundary.",
+    "Regenerating reports from stale commits can create false confidence during phase handoff."
+  ],
+  "next_phase_ready": "Structural Hardening Pack 2.2 - Deferred Polyglot Toolchain Binding"
+}

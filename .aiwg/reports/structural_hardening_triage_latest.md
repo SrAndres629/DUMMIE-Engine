@@ -3,8 +3,20 @@
 ## Status
 - pack_status: PASS_WITH_WARNINGS
 - repo_health_status: FAIL
-- base_commit: 3706c9f03aaa985c2a5fbcb254dac5f2d63009c2
+- base_commit: ce5849eb462010757b19ba50a3f9e7a441d80185
+- analysis_base_commit: ce5849eb462010757b19ba50a3f9e7a441d80185
+- report_generated_at_commit: ce5849eb462010757b19ba50a3f9e7a441d80185
+- head_commit: ce5849eb462010757b19ba50a3f9e7a441d80185
 - files_analyzed: 1340
+
+## Explicit Metrics
+- CRITICAL: 0
+- HIGH: 71
+- SHADOW_CANDIDATE: 71
+- ORPHAN_TEST_CANDIDATE: 3
+- bound_active_runtime: 11
+- deferred_no_safe_action: 7
+- repo_health_status: FAIL
 
 ## Counts by Class
 - ACTIVE_RUNTIME: 247
@@ -15,6 +27,7 @@
 - GENERATED: 38
 - LEGACY: 30
 - ORPHAN_TEST_CANDIDATE: 3
+- REPORT: 0
 - SHADOW_CANDIDATE: 71
 - UNKNOWN: 144
 
@@ -29,7 +42,13 @@
 - MARK_LEGACY: 30
 - NO_ACTION: 36
 
+## Bindings Summary
+- bound_active_runtime: 11
+- needs_manual_owner: 0
+- deferred_no_safe_action: 7
+
 ## Counts by Risk
+- CRITICAL: 0
 - HIGH: 71
 - LOW: 322
 - MEDIUM: 947
@@ -101,7 +120,7 @@
 - shadow_candidates: 71
 
 ## Next Phase
-Structural Hardening Pack 2.1 - targeted contract binding and safe physical changes
+Structural Hardening Pack 2.2 - Deferred Polyglot Toolchain Binding
 
 ## Limitations
 - Deterministic evidence only; no embedding or ML-based reasoning used.
