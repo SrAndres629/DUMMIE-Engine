@@ -1,0 +1,52 @@
+{
+  "report_id": "c0_research_reality_lock",
+  "timestamp_utc": "2026-05-19T07:42:42.443409+00:00",
+  "scope": "local_repo_non_destructive_census",
+  "methodology": {
+    "destructive_actions_performed": false,
+    "moves_performed": false,
+    "deletions_performed": false,
+    "refactors_performed": false,
+    "evidence_priority": [
+      "git_status",
+      "tracked_untracked_ignored",
+      "filesystem_inventory",
+      "layer_inventory"
+    ]
+  },
+  "git_baseline": {
+    "branch": "main",
+    "head": "8398f87b906af4c520d5ad51eacce0ba7a9c41d1",
+    "status_short": [
+      "?? .aiwg/roadmap/architecture_eradication_program_v1.md",
+      "?? docs/ops/sustainable-code-program-v1.md",
+      "?? docs/superpowers/plans/2026-05-19-architecture-eradication-sustainable-code.md",
+      "?? state/auditoria_l0_l1_l2_2026-05-19.md",
+      "?? state/cleanup_candidates_2026-05-19.csv",
+      "?? state/cleanup_candidates_2026-05-19.md"
+    ],
+    "recent_commits": [
+      "8398f87 fix(c0): stabilize syntax and runtime path defaults before pack 6.1",
+      "5de0554 feat: complete Pack 4.1 ModelRouter v2 and add DE-V2-L2-200 spec",
+      "6e8ef67 feat: complete Pack 4.0 ModelCapability Registry and integration",
+      "c38b2d4 feat: complete Pack 3.3 Direct Spec Linkage Engine and harden validator",
+      "e32df856 feat: complete Pack 3.2 infrastructure and architectural hardening",
+      "d63cd3f docs(aiwg): sync technical reports, mental models and add housekeeping scripts",
+      "e7d85a0 feat(mcp): enhance gateway with env expansion, proxy tool registration and lazy infra loading",
+      "e37587a fix(aiwg): support symbolic head commits for versioned governance snapshots",
+      "5387885 fix(aiwg): finalize governance paradox resolution and CI dependency fix",
+      "95a06f5 feat: implement AIWG native operating kernel, context capsule engine, and guarded execution pipeline"
+    ],
+    "commands_rc": {
+      "status": 0,
+      "branch": 0,
+      "head": 0,
+      "log": 0
+    }
+  },
+  "acceptance_gate": {
+    "git_status_captured": true,
+    "inventory_generated": true,
+    "non_destructive": true
+  }
+}
