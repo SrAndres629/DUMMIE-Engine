@@ -25,7 +25,10 @@ _canonical_organs = {
 _canonical_root_modules = {
     "action_graph", "token_cost_ledger", "neuron_ledger",
     "model_router", "model_discovery", "model_executor",
-    "supervisor_protocol", "models"
+    "supervisor_protocol", "models", "embedding_mesh",
+    "metagateway_adapter", "metagateway_policy",
+    "metagateway_runtime_meter", "safe_fallbacks",
+    "sensor_first_guard"
 }
 
 # Redirect module imports from layers.l2_brain.xxx to canonical organs first,
