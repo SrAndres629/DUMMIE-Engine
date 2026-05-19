@@ -3,18 +3,18 @@
 ## Status
 - pack_status: PASS_WITH_WARNINGS
 - repo_health_status: FAIL
-- base_commit: df0ae2396b14b9e88664f0b503ce7c9e25c9bf45
-- analysis_base_commit: df0ae2396b14b9e88664f0b503ce7c9e25c9bf45
-- report_generated_at_commit: df0ae2396b14b9e88664f0b503ce7c9e25c9bf45
-- head_commit: df0ae2396b14b9e88664f0b503ce7c9e25c9bf45
+- base_commit: 78466c7001de1a0375179210faa4ccea7386518c
+- analysis_base_commit: 78466c7001de1a0375179210faa4ccea7386518c
+- report_generated_at_commit: 78466c7001de1a0375179210faa4ccea7386518c
+- head_commit: 78466c7001de1a0375179210faa4ccea7386518c
 - files_analyzed: 1340
 
 ## Explicit Metrics
 - CRITICAL: 0
-- HIGH: 65
-- SHADOW_CANDIDATE: 65
+- HIGH: 45
+- SHADOW_CANDIDATE: 45
 - ORPHAN_TEST_CANDIDATE: 3
-- bound_active_runtime: 11
+- bound_active_runtime: 31
 - deferred_no_safe_action: 0
 - toolchain_validated: 4
 - toolchain_missing: 1
@@ -24,7 +24,7 @@
 - repo_health_status: FAIL
 
 ## Counts by Class
-- ACTIVE_RUNTIME: 253
+- ACTIVE_RUNTIME: 273
 - ACTIVE_SPEC: 559
 - ACTIVE_TEST: 235
 - CONFIG: 12
@@ -33,7 +33,7 @@
 - LEGACY: 30
 - ORPHAN_TEST_CANDIDATE: 3
 - REPORT: 0
-- SHADOW_CANDIDATE: 65
+- SHADOW_CANDIDATE: 45
 - UNKNOWN: 144
 
 ## Counts by Recommendation
@@ -48,7 +48,7 @@
 - NO_ACTION: 36
 
 ## Bindings Summary
-- bound_active_runtime: 11
+- bound_active_runtime: 31
 - needs_manual_owner: 0
 - deferred_no_safe_action: 0
 - toolchain_validated: 4
@@ -59,41 +59,41 @@
 
 ## Counts by Risk
 - CRITICAL: 0
-- HIGH: 65
+- HIGH: 45
 - LOW: 322
-- MEDIUM: 953
+- MEDIUM: 973
 
 ## Top 30 High-Risk Actions
-1. layers/l2_brain/action_graph.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
-2. layers/l2_brain/application/cognitive/use_cases.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
-3. layers/l2_brain/ast_indexer.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
-4. layers/l2_brain/auditor_port.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
-5. layers/l2_brain/branch_memory.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
-6. layers/l2_brain/cognition/pattern_miner_v2.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
-7. layers/l2_brain/context_circulation_runtime.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
-8. layers/l2_brain/cypher_codec.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
-9. layers/l2_brain/domain/dtos.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
-10. layers/l2_brain/domain/hypothesis_service.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
-11. layers/l2_brain/domain/reasoning_logic.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
-12. layers/l2_brain/domain/retrieval_service.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
-13. layers/l2_brain/domain/semantic_ports.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
-14. layers/l2_brain/embedding_provider.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
-15. layers/l2_brain/entity_voice.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
-16. layers/l2_brain/event_bus.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
-17. layers/l2_brain/evolution_feedback_loop.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
-18. layers/l2_brain/expansion_policy.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
-19. layers/l2_brain/formal_bridge.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
-20. layers/l2_brain/gateway_contract.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
-21. layers/l2_brain/golden_path.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
-22. layers/l2_brain/human_intent.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
-23. layers/l2_brain/infrastructure/adapters/external.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
-24. layers/l2_brain/infrastructure/semantic_adapters.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
-25. layers/l2_brain/lifecycle_integration_mapper.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
-26. layers/l2_brain/metacognition/deliberation_hooks.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
-27. layers/l2_brain/metacognition/input_hooks.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
-28. layers/l2_brain/metacognition/output_hooks.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
-29. layers/l2_brain/metacognition/reasoning_hooks.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
-30. layers/l2_brain/metacognition/semantic_hooks.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
+1. layers/l2_brain/golden_path.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
+2. layers/l2_brain/human_intent.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
+3. layers/l2_brain/infrastructure/adapters/external.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
+4. layers/l2_brain/infrastructure/semantic_adapters.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
+5. layers/l2_brain/lifecycle_integration_mapper.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
+6. layers/l2_brain/metacognition/deliberation_hooks.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
+7. layers/l2_brain/metacognition/input_hooks.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
+8. layers/l2_brain/metacognition/output_hooks.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
+9. layers/l2_brain/metacognition/reasoning_hooks.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
+10. layers/l2_brain/metacognition/semantic_hooks.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
+11. layers/l2_brain/metagateway_adapter.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
+12. layers/l2_brain/metagateway_benchmark.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
+13. layers/l2_brain/model_discovery.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
+14. layers/l2_brain/model_executor.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
+15. layers/l2_brain/nervous_pulse.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
+16. layers/l2_brain/neuron_ledger.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
+17. layers/l2_brain/observability.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
+18. layers/l2_brain/operational_truth_collectors.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
+19. layers/l2_brain/operationalization_pack_2_runner.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
+20. layers/l2_brain/prompt_preprocessor.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
+21. layers/l2_brain/safe_fallbacks.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
+22. layers/l2_brain/sdk/client.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
+23. layers/l2_brain/semantic_cache.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
+24. layers/l2_brain/semantic_graph_rag.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
+25. layers/l2_brain/skill_binder.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
+26. layers/l2_brain/source_of_truth_conflict_detector.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
+27. layers/l2_brain/spec_frontmatter_repair.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
+28. layers/l2_brain/src/brain/application/interfaces.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
+29. layers/l2_brain/src/brain/application/use_cases/crystallization.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
+30. layers/l2_brain/src/brain/application/use_cases/lessons_use_case.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
 
 ## False-Positive Corrections
 - init_runtime_low_risk_corrections: 24
@@ -127,7 +127,7 @@
 
 ## Orphan Test Candidates
 - orphan_test_candidates: 3
-- shadow_candidates: 65
+- shadow_candidates: 45
 
 ## Next Phase
 Structural Hardening Pack 2.3 - Compilation Sandbox and Orchestration Boundary Hardening

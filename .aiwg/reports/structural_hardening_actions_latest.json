@@ -1,406 +1,6 @@
 {
   "actions": [
     {
-      "path": "layers/l2_brain/action_graph.py",
-      "current_class": "UNKNOWN",
-      "proposed_class": "SHADOW_CANDIDATE",
-      "risk": "HIGH",
-      "recommendation": "MAP_TO_SPEC",
-      "confidence": 0.84,
-      "evidence_refs": [
-        "FILE_EXISTS",
-        "IMPORTABLE"
-      ],
-      "reasons": [
-        "runtime candidate missing spec/test linkage"
-      ],
-      "related_specs": [],
-      "related_tests": [],
-      "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
-    },
-    {
-      "path": "layers/l2_brain/application/cognitive/use_cases.py",
-      "current_class": "UNKNOWN",
-      "proposed_class": "SHADOW_CANDIDATE",
-      "risk": "HIGH",
-      "recommendation": "MAP_TO_SPEC",
-      "confidence": 0.84,
-      "evidence_refs": [
-        "FILE_EXISTS",
-        "IMPORTABLE"
-      ],
-      "reasons": [
-        "runtime candidate missing spec/test linkage"
-      ],
-      "related_specs": [],
-      "related_tests": [],
-      "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
-    },
-    {
-      "path": "layers/l2_brain/ast_indexer.py",
-      "current_class": "UNKNOWN",
-      "proposed_class": "SHADOW_CANDIDATE",
-      "risk": "HIGH",
-      "recommendation": "MAP_TO_SPEC",
-      "confidence": 0.84,
-      "evidence_refs": [
-        "FILE_EXISTS",
-        "IMPORTABLE"
-      ],
-      "reasons": [
-        "runtime candidate missing spec/test linkage"
-      ],
-      "related_specs": [],
-      "related_tests": [],
-      "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
-    },
-    {
-      "path": "layers/l2_brain/auditor_port.py",
-      "current_class": "UNKNOWN",
-      "proposed_class": "SHADOW_CANDIDATE",
-      "risk": "HIGH",
-      "recommendation": "MAP_TO_SPEC",
-      "confidence": 0.84,
-      "evidence_refs": [
-        "FILE_EXISTS",
-        "IMPORTABLE"
-      ],
-      "reasons": [
-        "runtime candidate missing spec/test linkage"
-      ],
-      "related_specs": [],
-      "related_tests": [],
-      "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
-    },
-    {
-      "path": "layers/l2_brain/branch_memory.py",
-      "current_class": "UNKNOWN",
-      "proposed_class": "SHADOW_CANDIDATE",
-      "risk": "HIGH",
-      "recommendation": "MAP_TO_SPEC",
-      "confidence": 0.84,
-      "evidence_refs": [
-        "FILE_EXISTS",
-        "IMPORTABLE"
-      ],
-      "reasons": [
-        "runtime candidate missing spec/test linkage"
-      ],
-      "related_specs": [],
-      "related_tests": [],
-      "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
-    },
-    {
-      "path": "layers/l2_brain/cognition/pattern_miner_v2.py",
-      "current_class": "UNKNOWN",
-      "proposed_class": "SHADOW_CANDIDATE",
-      "risk": "HIGH",
-      "recommendation": "MAP_TO_SPEC",
-      "confidence": 0.84,
-      "evidence_refs": [
-        "FILE_EXISTS",
-        "IMPORTABLE"
-      ],
-      "reasons": [
-        "runtime candidate missing spec/test linkage"
-      ],
-      "related_specs": [],
-      "related_tests": [],
-      "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
-    },
-    {
-      "path": "layers/l2_brain/context_circulation_runtime.py",
-      "current_class": "UNKNOWN",
-      "proposed_class": "SHADOW_CANDIDATE",
-      "risk": "HIGH",
-      "recommendation": "MAP_TO_SPEC",
-      "confidence": 0.84,
-      "evidence_refs": [
-        "FILE_EXISTS",
-        "IMPORTABLE"
-      ],
-      "reasons": [
-        "runtime candidate missing spec/test linkage"
-      ],
-      "related_specs": [],
-      "related_tests": [],
-      "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
-    },
-    {
-      "path": "layers/l2_brain/cypher_codec.py",
-      "current_class": "UNKNOWN",
-      "proposed_class": "SHADOW_CANDIDATE",
-      "risk": "HIGH",
-      "recommendation": "MAP_TO_SPEC",
-      "confidence": 0.84,
-      "evidence_refs": [
-        "FILE_EXISTS",
-        "IMPORTABLE"
-      ],
-      "reasons": [
-        "runtime candidate missing spec/test linkage"
-      ],
-      "related_specs": [],
-      "related_tests": [],
-      "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
-    },
-    {
-      "path": "layers/l2_brain/domain/dtos.py",
-      "current_class": "UNKNOWN",
-      "proposed_class": "SHADOW_CANDIDATE",
-      "risk": "HIGH",
-      "recommendation": "MAP_TO_SPEC",
-      "confidence": 0.84,
-      "evidence_refs": [
-        "FILE_EXISTS",
-        "IMPORTABLE"
-      ],
-      "reasons": [
-        "runtime candidate missing spec/test linkage"
-      ],
-      "related_specs": [],
-      "related_tests": [],
-      "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
-    },
-    {
-      "path": "layers/l2_brain/domain/hypothesis_service.py",
-      "current_class": "UNKNOWN",
-      "proposed_class": "SHADOW_CANDIDATE",
-      "risk": "HIGH",
-      "recommendation": "MAP_TO_SPEC",
-      "confidence": 0.84,
-      "evidence_refs": [
-        "FILE_EXISTS",
-        "IMPORTABLE"
-      ],
-      "reasons": [
-        "runtime candidate missing spec/test linkage"
-      ],
-      "related_specs": [],
-      "related_tests": [],
-      "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
-    },
-    {
-      "path": "layers/l2_brain/domain/reasoning_logic.py",
-      "current_class": "UNKNOWN",
-      "proposed_class": "SHADOW_CANDIDATE",
-      "risk": "HIGH",
-      "recommendation": "MAP_TO_SPEC",
-      "confidence": 0.84,
-      "evidence_refs": [
-        "FILE_EXISTS",
-        "IMPORTABLE"
-      ],
-      "reasons": [
-        "runtime candidate missing spec/test linkage"
-      ],
-      "related_specs": [],
-      "related_tests": [],
-      "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
-    },
-    {
-      "path": "layers/l2_brain/domain/retrieval_service.py",
-      "current_class": "UNKNOWN",
-      "proposed_class": "SHADOW_CANDIDATE",
-      "risk": "HIGH",
-      "recommendation": "MAP_TO_SPEC",
-      "confidence": 0.84,
-      "evidence_refs": [
-        "FILE_EXISTS",
-        "IMPORTABLE"
-      ],
-      "reasons": [
-        "runtime candidate missing spec/test linkage"
-      ],
-      "related_specs": [],
-      "related_tests": [],
-      "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
-    },
-    {
-      "path": "layers/l2_brain/domain/semantic_ports.py",
-      "current_class": "UNKNOWN",
-      "proposed_class": "SHADOW_CANDIDATE",
-      "risk": "HIGH",
-      "recommendation": "MAP_TO_SPEC",
-      "confidence": 0.84,
-      "evidence_refs": [
-        "FILE_EXISTS",
-        "IMPORTABLE"
-      ],
-      "reasons": [
-        "runtime candidate missing spec/test linkage"
-      ],
-      "related_specs": [],
-      "related_tests": [],
-      "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
-    },
-    {
-      "path": "layers/l2_brain/embedding_provider.py",
-      "current_class": "UNKNOWN",
-      "proposed_class": "SHADOW_CANDIDATE",
-      "risk": "HIGH",
-      "recommendation": "MAP_TO_SPEC",
-      "confidence": 0.84,
-      "evidence_refs": [
-        "FILE_EXISTS",
-        "IMPORTABLE"
-      ],
-      "reasons": [
-        "runtime candidate missing spec/test linkage"
-      ],
-      "related_specs": [],
-      "related_tests": [],
-      "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
-    },
-    {
-      "path": "layers/l2_brain/entity_voice.py",
-      "current_class": "UNKNOWN",
-      "proposed_class": "SHADOW_CANDIDATE",
-      "risk": "HIGH",
-      "recommendation": "MAP_TO_SPEC",
-      "confidence": 0.84,
-      "evidence_refs": [
-        "FILE_EXISTS",
-        "IMPORTABLE"
-      ],
-      "reasons": [
-        "runtime candidate missing spec/test linkage"
-      ],
-      "related_specs": [],
-      "related_tests": [],
-      "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
-    },
-    {
-      "path": "layers/l2_brain/event_bus.py",
-      "current_class": "UNKNOWN",
-      "proposed_class": "SHADOW_CANDIDATE",
-      "risk": "HIGH",
-      "recommendation": "MAP_TO_SPEC",
-      "confidence": 0.84,
-      "evidence_refs": [
-        "FILE_EXISTS",
-        "IMPORTABLE"
-      ],
-      "reasons": [
-        "runtime candidate missing spec/test linkage"
-      ],
-      "related_specs": [],
-      "related_tests": [],
-      "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
-    },
-    {
-      "path": "layers/l2_brain/evolution_feedback_loop.py",
-      "current_class": "UNKNOWN",
-      "proposed_class": "SHADOW_CANDIDATE",
-      "risk": "HIGH",
-      "recommendation": "MAP_TO_SPEC",
-      "confidence": 0.84,
-      "evidence_refs": [
-        "FILE_EXISTS",
-        "IMPORTABLE"
-      ],
-      "reasons": [
-        "runtime candidate missing spec/test linkage"
-      ],
-      "related_specs": [],
-      "related_tests": [],
-      "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
-    },
-    {
-      "path": "layers/l2_brain/expansion_policy.py",
-      "current_class": "UNKNOWN",
-      "proposed_class": "SHADOW_CANDIDATE",
-      "risk": "HIGH",
-      "recommendation": "MAP_TO_SPEC",
-      "confidence": 0.84,
-      "evidence_refs": [
-        "FILE_EXISTS",
-        "IMPORTABLE"
-      ],
-      "reasons": [
-        "runtime candidate missing spec/test linkage"
-      ],
-      "related_specs": [],
-      "related_tests": [],
-      "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
-    },
-    {
-      "path": "layers/l2_brain/formal_bridge.py",
-      "current_class": "UNKNOWN",
-      "proposed_class": "SHADOW_CANDIDATE",
-      "risk": "HIGH",
-      "recommendation": "MAP_TO_SPEC",
-      "confidence": 0.84,
-      "evidence_refs": [
-        "FILE_EXISTS",
-        "IMPORTABLE"
-      ],
-      "reasons": [
-        "runtime candidate missing spec/test linkage"
-      ],
-      "related_specs": [],
-      "related_tests": [],
-      "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
-    },
-    {
-      "path": "layers/l2_brain/gateway_contract.py",
-      "current_class": "UNKNOWN",
-      "proposed_class": "SHADOW_CANDIDATE",
-      "risk": "HIGH",
-      "recommendation": "MAP_TO_SPEC",
-      "confidence": 0.84,
-      "evidence_refs": [
-        "FILE_EXISTS",
-        "IMPORTABLE"
-      ],
-      "reasons": [
-        "runtime candidate missing spec/test linkage"
-      ],
-      "related_specs": [],
-      "related_tests": [],
-      "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
-    },
-    {
       "path": "layers/l2_brain/golden_path.py",
       "current_class": "UNKNOWN",
       "proposed_class": "SHADOW_CANDIDATE",
@@ -999,6 +599,414 @@
       "related_runtime": [],
       "safe_to_change": false,
       "requires_human_review": true
+    },
+    {
+      "path": "layers/l2_brain/src/brain/infrastructure/adapters/ledger_adapter.py",
+      "current_class": "UNKNOWN",
+      "proposed_class": "SHADOW_CANDIDATE",
+      "risk": "HIGH",
+      "recommendation": "MAP_TO_SPEC",
+      "confidence": 0.84,
+      "evidence_refs": [
+        "FILE_EXISTS",
+        "IMPORTABLE"
+      ],
+      "reasons": [
+        "runtime candidate missing spec/test linkage"
+      ],
+      "related_specs": [],
+      "related_tests": [],
+      "related_runtime": [],
+      "safe_to_change": false,
+      "requires_human_review": true
+    },
+    {
+      "path": "layers/l2_brain/src/brain/infrastructure/adapters/nats_controller.py",
+      "current_class": "UNKNOWN",
+      "proposed_class": "SHADOW_CANDIDATE",
+      "risk": "HIGH",
+      "recommendation": "MAP_TO_SPEC",
+      "confidence": 0.84,
+      "evidence_refs": [
+        "FILE_EXISTS",
+        "IMPORTABLE"
+      ],
+      "reasons": [
+        "runtime candidate missing spec/test linkage"
+      ],
+      "related_specs": [],
+      "related_tests": [],
+      "related_runtime": [],
+      "safe_to_change": false,
+      "requires_human_review": true
+    },
+    {
+      "path": "layers/l2_brain/src/brain/infrastructure/adapters/ollama_adapter.py",
+      "current_class": "UNKNOWN",
+      "proposed_class": "SHADOW_CANDIDATE",
+      "risk": "HIGH",
+      "recommendation": "MAP_TO_SPEC",
+      "confidence": 0.84,
+      "evidence_refs": [
+        "FILE_EXISTS",
+        "IMPORTABLE"
+      ],
+      "reasons": [
+        "runtime candidate missing spec/test linkage"
+      ],
+      "related_specs": [],
+      "related_tests": [],
+      "related_runtime": [],
+      "safe_to_change": false,
+      "requires_human_review": true
+    },
+    {
+      "path": "layers/l2_brain/src/brain/infrastructure/adapters/ontological_adapter.py",
+      "current_class": "UNKNOWN",
+      "proposed_class": "SHADOW_CANDIDATE",
+      "risk": "HIGH",
+      "recommendation": "MAP_TO_SPEC",
+      "confidence": 0.84,
+      "evidence_refs": [
+        "FILE_EXISTS",
+        "IMPORTABLE"
+      ],
+      "reasons": [
+        "runtime candidate missing spec/test linkage"
+      ],
+      "related_specs": [],
+      "related_tests": [],
+      "related_runtime": [],
+      "safe_to_change": false,
+      "requires_human_review": true
+    },
+    {
+      "path": "layers/l2_brain/src/brain/infrastructure/adapters/shield_adapter.py",
+      "current_class": "UNKNOWN",
+      "proposed_class": "SHADOW_CANDIDATE",
+      "risk": "HIGH",
+      "recommendation": "MAP_TO_SPEC",
+      "confidence": 0.84,
+      "evidence_refs": [
+        "FILE_EXISTS",
+        "IMPORTABLE"
+      ],
+      "reasons": [
+        "runtime candidate missing spec/test linkage"
+      ],
+      "related_specs": [],
+      "related_tests": [],
+      "related_runtime": [],
+      "safe_to_change": false,
+      "requires_human_review": true
+    },
+    {
+      "path": "layers/l2_brain/src/brain/infrastructure/adapters/skill_adapter.py",
+      "current_class": "UNKNOWN",
+      "proposed_class": "SHADOW_CANDIDATE",
+      "risk": "HIGH",
+      "recommendation": "MAP_TO_SPEC",
+      "confidence": 0.84,
+      "evidence_refs": [
+        "FILE_EXISTS",
+        "IMPORTABLE"
+      ],
+      "reasons": [
+        "runtime candidate missing spec/test linkage"
+      ],
+      "related_specs": [],
+      "related_tests": [],
+      "related_runtime": [],
+      "safe_to_change": false,
+      "requires_human_review": true
+    },
+    {
+      "path": "layers/l2_brain/supervisor_protocol.py",
+      "current_class": "UNKNOWN",
+      "proposed_class": "SHADOW_CANDIDATE",
+      "risk": "HIGH",
+      "recommendation": "MAP_TO_SPEC",
+      "confidence": 0.84,
+      "evidence_refs": [
+        "FILE_EXISTS",
+        "IMPORTABLE"
+      ],
+      "reasons": [
+        "runtime candidate missing spec/test linkage"
+      ],
+      "related_specs": [],
+      "related_tests": [],
+      "related_runtime": [],
+      "safe_to_change": false,
+      "requires_human_review": true
+    },
+    {
+      "path": "layers/l2_brain/total_project_truth_scan.py",
+      "current_class": "UNKNOWN",
+      "proposed_class": "SHADOW_CANDIDATE",
+      "risk": "HIGH",
+      "recommendation": "MAP_TO_SPEC",
+      "confidence": 0.84,
+      "evidence_refs": [
+        "FILE_EXISTS",
+        "IMPORTABLE"
+      ],
+      "reasons": [
+        "runtime candidate missing spec/test linkage"
+      ],
+      "related_specs": [],
+      "related_tests": [],
+      "related_runtime": [],
+      "safe_to_change": false,
+      "requires_human_review": true
+    },
+    {
+      "path": "layers/l2_brain/witness.py",
+      "current_class": "UNKNOWN",
+      "proposed_class": "SHADOW_CANDIDATE",
+      "risk": "HIGH",
+      "recommendation": "MAP_TO_SPEC",
+      "confidence": 0.84,
+      "evidence_refs": [
+        "FILE_EXISTS",
+        "IMPORTABLE"
+      ],
+      "reasons": [
+        "runtime candidate missing spec/test linkage"
+      ],
+      "related_specs": [],
+      "related_tests": [],
+      "related_runtime": [],
+      "safe_to_change": false,
+      "requires_human_review": true
+    },
+    {
+      "path": "layers/l3_shield/budget_auditor.py",
+      "current_class": "UNKNOWN",
+      "proposed_class": "SHADOW_CANDIDATE",
+      "risk": "HIGH",
+      "recommendation": "MAP_TO_SPEC",
+      "confidence": 0.84,
+      "evidence_refs": [
+        "FILE_EXISTS",
+        "IMPORTABLE"
+      ],
+      "reasons": [
+        "runtime candidate missing spec/test linkage"
+      ],
+      "related_specs": [],
+      "related_tests": [],
+      "related_runtime": [],
+      "safe_to_change": false,
+      "requires_human_review": true
+    },
+    {
+      "path": "layers/l3_shield/compliance_auditor.py",
+      "current_class": "UNKNOWN",
+      "proposed_class": "SHADOW_CANDIDATE",
+      "risk": "HIGH",
+      "recommendation": "MAP_TO_SPEC",
+      "confidence": 0.84,
+      "evidence_refs": [
+        "FILE_EXISTS",
+        "IMPORTABLE"
+      ],
+      "reasons": [
+        "runtime candidate missing spec/test linkage"
+      ],
+      "related_specs": [],
+      "related_tests": [],
+      "related_runtime": [],
+      "safe_to_change": false,
+      "requires_human_review": true
+    },
+    {
+      "path": "layers/l4_edge/file_watcher.py",
+      "current_class": "UNKNOWN",
+      "proposed_class": "SHADOW_CANDIDATE",
+      "risk": "HIGH",
+      "recommendation": "MAP_TO_SPEC",
+      "confidence": 0.84,
+      "evidence_refs": [
+        "FILE_EXISTS",
+        "IMPORTABLE"
+      ],
+      "reasons": [
+        "runtime candidate missing spec/test linkage"
+      ],
+      "related_specs": [],
+      "related_tests": [],
+      "related_runtime": [],
+      "safe_to_change": false,
+      "requires_human_review": true
+    },
+    {
+      "path": "layers/l4_edge/tool_discovery.py",
+      "current_class": "UNKNOWN",
+      "proposed_class": "SHADOW_CANDIDATE",
+      "risk": "HIGH",
+      "recommendation": "MAP_TO_SPEC",
+      "confidence": 0.84,
+      "evidence_refs": [
+        "FILE_EXISTS",
+        "IMPORTABLE"
+      ],
+      "reasons": [
+        "runtime candidate missing spec/test linkage"
+      ],
+      "related_specs": [],
+      "related_tests": [],
+      "related_runtime": [],
+      "safe_to_change": false,
+      "requires_human_review": true
+    },
+    {
+      "path": "layers/l5_muscle/mcp_driver.py",
+      "current_class": "UNKNOWN",
+      "proposed_class": "SHADOW_CANDIDATE",
+      "risk": "HIGH",
+      "recommendation": "MAP_TO_SPEC",
+      "confidence": 0.84,
+      "evidence_refs": [
+        "FILE_EXISTS",
+        "IMPORTABLE"
+      ],
+      "reasons": [
+        "runtime candidate missing spec/test linkage"
+      ],
+      "related_specs": [],
+      "related_tests": [],
+      "related_runtime": [],
+      "safe_to_change": false,
+      "requires_human_review": true
+    },
+    {
+      "path": "layers/l1_nervous/ssh_sandbox_wrapper.sh",
+      "current_class": "UNKNOWN",
+      "proposed_class": "SHADOW_CANDIDATE",
+      "risk": "HIGH",
+      "recommendation": "FREEZE_UNTIL_REVIEW",
+      "confidence": 0.72,
+      "evidence_refs": [
+        "FILE_EXISTS",
+        "POLYGLOT_TOOLCHAIN_NOT_VERIFIED",
+        "valid_specs=['doc/specs/L1_Nervous/15_mcp_sidecar_isolation.md', 'doc/specs/L1_Nervous/16_mcp_dynamic_gateway.md', 'doc/specs/L1_Nervous/41_layer_handshake_protocol.md']",
+        "valid_tests=[]"
+      ],
+      "reasons": [
+        "Bound to contract: Polyglot runtime without deterministic compile/test evidence in this phase.",
+        "binding_issues=toolchain_missing:shellcheck",
+        "binding_status=DEFERRED_NO_SAFE_ACTION",
+        "resolved_status=TOOLCHAIN_MISSING"
+      ],
+      "related_specs": [
+        "doc/specs/L1_Nervous/15_mcp_sidecar_isolation.md",
+        "doc/specs/L1_Nervous/16_mcp_dynamic_gateway.md",
+        "doc/specs/L1_Nervous/41_layer_handshake_protocol.md"
+      ],
+      "related_tests": [],
+      "related_runtime": [],
+      "safe_to_change": false,
+      "requires_human_review": true
+    },
+    {
+      "path": "doc/.deprecated/.gitkeep",
+      "current_class": "LEGACY",
+      "proposed_class": "LEGACY",
+      "risk": "MEDIUM",
+      "recommendation": "MARK_LEGACY",
+      "confidence": 0.95,
+      "evidence_refs": [
+        "FILE_EXISTS"
+      ],
+      "reasons": [
+        "legacy/deprecated path"
+      ],
+      "related_specs": [],
+      "related_tests": [],
+      "related_runtime": [],
+      "safe_to_change": false,
+      "requires_human_review": false
+    },
+    {
+      "path": "doc/.deprecated/scratchpad/batch_fix_specs.py",
+      "current_class": "LEGACY",
+      "proposed_class": "LEGACY",
+      "risk": "MEDIUM",
+      "recommendation": "MARK_LEGACY",
+      "confidence": 0.95,
+      "evidence_refs": [
+        "FILE_EXISTS",
+        "IMPORTABLE"
+      ],
+      "reasons": [
+        "legacy/deprecated path"
+      ],
+      "related_specs": [],
+      "related_tests": [],
+      "related_runtime": [],
+      "safe_to_change": false,
+      "requires_human_review": false
+    },
+    {
+      "path": "doc/.deprecated/scratchpad/check_mcp_dummie.py",
+      "current_class": "LEGACY",
+      "proposed_class": "LEGACY",
+      "risk": "MEDIUM",
+      "recommendation": "MARK_LEGACY",
+      "confidence": 0.95,
+      "evidence_refs": [
+        "FILE_EXISTS",
+        "IMPORTABLE"
+      ],
+      "reasons": [
+        "legacy/deprecated path"
+      ],
+      "related_specs": [],
+      "related_tests": [],
+      "related_runtime": [],
+      "safe_to_change": false,
+      "requires_human_review": false
+    },
+    {
+      "path": "doc/.deprecated/scratchpad/det_step.py",
+      "current_class": "LEGACY",
+      "proposed_class": "LEGACY",
+      "risk": "MEDIUM",
+      "recommendation": "MARK_LEGACY",
+      "confidence": 0.95,
+      "evidence_refs": [
+        "FILE_EXISTS",
+        "IMPORTABLE"
+      ],
+      "reasons": [
+        "legacy/deprecated path"
+      ],
+      "related_specs": [],
+      "related_tests": [],
+      "related_runtime": [],
+      "safe_to_change": false,
+      "requires_human_review": false
+    },
+    {
+      "path": "doc/.deprecated/scratchpad/deterministic_audit.py",
+      "current_class": "LEGACY",
+      "proposed_class": "LEGACY",
+      "risk": "MEDIUM",
+      "recommendation": "MARK_LEGACY",
+      "confidence": 0.95,
+      "evidence_refs": [
+        "FILE_EXISTS",
+        "IMPORTABLE"
+      ],
+      "reasons": [
+        "legacy/deprecated path"
+      ],
+      "related_specs": [],
+      "related_tests": [],
+      "related_runtime": [],
+      "safe_to_change": false,
+      "requires_human_review": false
     }
   ]
 }

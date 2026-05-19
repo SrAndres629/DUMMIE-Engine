@@ -1063,6 +1063,1036 @@
         "linked_test_hits": [],
         "issues": []
       }
+    },
+    {
+      "binding": {
+        "path": "layers/l2_brain/action_graph.py",
+        "layer": "L2",
+        "owner_domain": "Action Orchestration",
+        "structural_class": "ACTIVE_RUNTIME",
+        "binding_status": "BOUND_ACTIVE_RUNTIME",
+        "spec_refs": [
+          "doc/specs/L0_Overseer/26_langgraph_quantum_swarm.md",
+          "doc/specs/L2_Brain/12_6d_context_model.md"
+        ],
+        "test_refs": [
+          "layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"
+        ],
+        "runtime_refs": [],
+        "evidence_refs": [
+          "FILE_EXISTS",
+          "IMPORTABLE"
+        ],
+        "action": "KEEP_AND_TEST",
+        "risk_before": "HIGH",
+        "risk_after": "MEDIUM",
+        "confidence": 0.9,
+        "notes": "Bound during Pack 2.3 batch triage."
+      },
+      "validation": {
+        "path": "layers/l2_brain/action_graph.py",
+        "resolved_status": "BOUND_ACTIVE_RUNTIME",
+        "effective_risk": "MEDIUM",
+        "effective_recommendation": "MAP_TO_SPEC",
+        "confidence": 0.9,
+        "valid_spec_refs": [
+          "doc/specs/L0_Overseer/26_langgraph_quantum_swarm.md",
+          "doc/specs/L2_Brain/12_6d_context_model.md"
+        ],
+        "valid_test_refs": [
+          "layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"
+        ],
+        "valid_runtime_refs": [],
+        "missing_spec_refs": [],
+        "missing_test_refs": [],
+        "missing_runtime_refs": [],
+        "direct_spec_hits": [],
+        "scoped_spec_hits": [
+          "doc/specs/L2_Brain/12_6d_context_model.md"
+        ],
+        "linked_test_hits": [
+          "layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"
+        ],
+        "issues": []
+      }
+    },
+    {
+      "binding": {
+        "path": "layers/l2_brain/application/cognitive/use_cases.py",
+        "layer": "L2",
+        "owner_domain": "Cognitive Orchestration",
+        "structural_class": "ACTIVE_RUNTIME",
+        "binding_status": "BOUND_ACTIVE_RUNTIME",
+        "spec_refs": [
+          "doc/specs/L2_Brain/12_6d_context_model.md"
+        ],
+        "test_refs": [
+          "layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"
+        ],
+        "runtime_refs": [],
+        "evidence_refs": [
+          "FILE_EXISTS",
+          "IMPORTABLE"
+        ],
+        "action": "KEEP_AND_TEST",
+        "risk_before": "HIGH",
+        "risk_after": "MEDIUM",
+        "confidence": 0.9,
+        "notes": "Bound during Pack 2.3 batch triage."
+      },
+      "validation": {
+        "path": "layers/l2_brain/application/cognitive/use_cases.py",
+        "resolved_status": "BOUND_ACTIVE_RUNTIME",
+        "effective_risk": "MEDIUM",
+        "effective_recommendation": "MAP_TO_SPEC",
+        "confidence": 0.9,
+        "valid_spec_refs": [
+          "doc/specs/L2_Brain/12_6d_context_model.md"
+        ],
+        "valid_test_refs": [
+          "layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"
+        ],
+        "valid_runtime_refs": [],
+        "missing_spec_refs": [],
+        "missing_test_refs": [],
+        "missing_runtime_refs": [],
+        "direct_spec_hits": [],
+        "scoped_spec_hits": [
+          "doc/specs/L2_Brain/12_6d_context_model.md"
+        ],
+        "linked_test_hits": [
+          "layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"
+        ],
+        "issues": []
+      }
+    },
+    {
+      "binding": {
+        "path": "layers/l2_brain/ast_indexer.py",
+        "layer": "L2",
+        "owner_domain": "Code Indexing",
+        "structural_class": "ACTIVE_RUNTIME",
+        "binding_status": "BOUND_ACTIVE_RUNTIME",
+        "spec_refs": [
+          "doc/specs/L0_Overseer/03_polyglot_architecture.md",
+          "doc/specs/L2_Brain/12_6d_context_model.md"
+        ],
+        "test_refs": [
+          "layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"
+        ],
+        "runtime_refs": [],
+        "evidence_refs": [
+          "FILE_EXISTS",
+          "IMPORTABLE"
+        ],
+        "action": "KEEP_AND_TEST",
+        "risk_before": "HIGH",
+        "risk_after": "MEDIUM",
+        "confidence": 0.9,
+        "notes": "Bound during Pack 2.3 batch triage."
+      },
+      "validation": {
+        "path": "layers/l2_brain/ast_indexer.py",
+        "resolved_status": "BOUND_ACTIVE_RUNTIME",
+        "effective_risk": "MEDIUM",
+        "effective_recommendation": "MAP_TO_SPEC",
+        "confidence": 0.9,
+        "valid_spec_refs": [
+          "doc/specs/L0_Overseer/03_polyglot_architecture.md",
+          "doc/specs/L2_Brain/12_6d_context_model.md"
+        ],
+        "valid_test_refs": [
+          "layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"
+        ],
+        "valid_runtime_refs": [],
+        "missing_spec_refs": [],
+        "missing_test_refs": [],
+        "missing_runtime_refs": [],
+        "direct_spec_hits": [],
+        "scoped_spec_hits": [
+          "doc/specs/L2_Brain/12_6d_context_model.md"
+        ],
+        "linked_test_hits": [
+          "layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"
+        ],
+        "issues": []
+      }
+    },
+    {
+      "binding": {
+        "path": "layers/l2_brain/auditor_port.py",
+        "layer": "L2",
+        "owner_domain": "Governance Audit",
+        "structural_class": "ACTIVE_RUNTIME",
+        "binding_status": "BOUND_ACTIVE_RUNTIME",
+        "spec_refs": [
+          "doc/specs/L0_Overseer/14_value_engineering_and_governance.md",
+          "doc/specs/L2_Brain/12_6d_context_model.md"
+        ],
+        "test_refs": [
+          "layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"
+        ],
+        "runtime_refs": [],
+        "evidence_refs": [
+          "FILE_EXISTS",
+          "IMPORTABLE"
+        ],
+        "action": "KEEP_AND_TEST",
+        "risk_before": "HIGH",
+        "risk_after": "MEDIUM",
+        "confidence": 0.9,
+        "notes": "Bound during Pack 2.3 batch triage."
+      },
+      "validation": {
+        "path": "layers/l2_brain/auditor_port.py",
+        "resolved_status": "BOUND_ACTIVE_RUNTIME",
+        "effective_risk": "MEDIUM",
+        "effective_recommendation": "MAP_TO_SPEC",
+        "confidence": 0.9,
+        "valid_spec_refs": [
+          "doc/specs/L0_Overseer/14_value_engineering_and_governance.md",
+          "doc/specs/L2_Brain/12_6d_context_model.md"
+        ],
+        "valid_test_refs": [
+          "layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"
+        ],
+        "valid_runtime_refs": [],
+        "missing_spec_refs": [],
+        "missing_test_refs": [],
+        "missing_runtime_refs": [],
+        "direct_spec_hits": [],
+        "scoped_spec_hits": [
+          "doc/specs/L2_Brain/12_6d_context_model.md"
+        ],
+        "linked_test_hits": [
+          "layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"
+        ],
+        "issues": []
+      }
+    },
+    {
+      "binding": {
+        "path": "layers/l2_brain/branch_memory.py",
+        "layer": "L2",
+        "owner_domain": "Branch Memory Storage",
+        "structural_class": "ACTIVE_RUNTIME",
+        "binding_status": "BOUND_ACTIVE_RUNTIME",
+        "spec_refs": [
+          "doc/specs/L2_Brain/12_6d_context_model.md"
+        ],
+        "test_refs": [
+          "layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"
+        ],
+        "runtime_refs": [],
+        "evidence_refs": [
+          "FILE_EXISTS",
+          "IMPORTABLE"
+        ],
+        "action": "KEEP_AND_TEST",
+        "risk_before": "HIGH",
+        "risk_after": "MEDIUM",
+        "confidence": 0.9,
+        "notes": "Bound during Pack 2.3 batch triage."
+      },
+      "validation": {
+        "path": "layers/l2_brain/branch_memory.py",
+        "resolved_status": "BOUND_ACTIVE_RUNTIME",
+        "effective_risk": "MEDIUM",
+        "effective_recommendation": "MAP_TO_SPEC",
+        "confidence": 0.9,
+        "valid_spec_refs": [
+          "doc/specs/L2_Brain/12_6d_context_model.md"
+        ],
+        "valid_test_refs": [
+          "layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"
+        ],
+        "valid_runtime_refs": [],
+        "missing_spec_refs": [],
+        "missing_test_refs": [],
+        "missing_runtime_refs": [],
+        "direct_spec_hits": [],
+        "scoped_spec_hits": [
+          "doc/specs/L2_Brain/12_6d_context_model.md"
+        ],
+        "linked_test_hits": [
+          "layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"
+        ],
+        "issues": []
+      }
+    },
+    {
+      "binding": {
+        "path": "layers/l2_brain/cognition/pattern_miner_v2.py",
+        "layer": "L2",
+        "owner_domain": "Pattern Mining",
+        "structural_class": "ACTIVE_RUNTIME",
+        "binding_status": "BOUND_ACTIVE_RUNTIME",
+        "spec_refs": [
+          "doc/specs/L2_Brain/12_6d_context_model.md"
+        ],
+        "test_refs": [
+          "layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"
+        ],
+        "runtime_refs": [],
+        "evidence_refs": [
+          "FILE_EXISTS",
+          "IMPORTABLE"
+        ],
+        "action": "KEEP_AND_TEST",
+        "risk_before": "HIGH",
+        "risk_after": "MEDIUM",
+        "confidence": 0.9,
+        "notes": "Bound during Pack 2.3 batch triage."
+      },
+      "validation": {
+        "path": "layers/l2_brain/cognition/pattern_miner_v2.py",
+        "resolved_status": "BOUND_ACTIVE_RUNTIME",
+        "effective_risk": "MEDIUM",
+        "effective_recommendation": "MAP_TO_SPEC",
+        "confidence": 0.9,
+        "valid_spec_refs": [
+          "doc/specs/L2_Brain/12_6d_context_model.md"
+        ],
+        "valid_test_refs": [
+          "layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"
+        ],
+        "valid_runtime_refs": [],
+        "missing_spec_refs": [],
+        "missing_test_refs": [],
+        "missing_runtime_refs": [],
+        "direct_spec_hits": [],
+        "scoped_spec_hits": [
+          "doc/specs/L2_Brain/12_6d_context_model.md"
+        ],
+        "linked_test_hits": [
+          "layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"
+        ],
+        "issues": []
+      }
+    },
+    {
+      "binding": {
+        "path": "layers/l2_brain/context_circulation_runtime.py",
+        "layer": "L2",
+        "owner_domain": "Context Circulation",
+        "structural_class": "ACTIVE_RUNTIME",
+        "binding_status": "BOUND_ACTIVE_RUNTIME",
+        "spec_refs": [
+          "doc/specs/L2_Brain/84_context_budget_manager.md",
+          "doc/specs/L2_Brain/12_6d_context_model.md"
+        ],
+        "test_refs": [
+          "layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"
+        ],
+        "runtime_refs": [],
+        "evidence_refs": [
+          "FILE_EXISTS",
+          "IMPORTABLE"
+        ],
+        "action": "KEEP_AND_TEST",
+        "risk_before": "HIGH",
+        "risk_after": "MEDIUM",
+        "confidence": 0.9,
+        "notes": "Bound during Pack 2.3 batch triage."
+      },
+      "validation": {
+        "path": "layers/l2_brain/context_circulation_runtime.py",
+        "resolved_status": "BOUND_ACTIVE_RUNTIME",
+        "effective_risk": "MEDIUM",
+        "effective_recommendation": "MAP_TO_SPEC",
+        "confidence": 0.9,
+        "valid_spec_refs": [
+          "doc/specs/L2_Brain/84_context_budget_manager.md",
+          "doc/specs/L2_Brain/12_6d_context_model.md"
+        ],
+        "valid_test_refs": [
+          "layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"
+        ],
+        "valid_runtime_refs": [],
+        "missing_spec_refs": [],
+        "missing_test_refs": [],
+        "missing_runtime_refs": [],
+        "direct_spec_hits": [],
+        "scoped_spec_hits": [
+          "doc/specs/L2_Brain/84_context_budget_manager.md",
+          "doc/specs/L2_Brain/12_6d_context_model.md"
+        ],
+        "linked_test_hits": [
+          "layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"
+        ],
+        "issues": []
+      }
+    },
+    {
+      "binding": {
+        "path": "layers/l2_brain/cypher_codec.py",
+        "layer": "L2",
+        "owner_domain": "Graph Query Serialization",
+        "structural_class": "ACTIVE_RUNTIME",
+        "binding_status": "BOUND_ACTIVE_RUNTIME",
+        "spec_refs": [
+          "doc/specs/L0_Overseer/26_langgraph_quantum_swarm.md",
+          "doc/specs/L2_Brain/12_6d_context_model.md"
+        ],
+        "test_refs": [
+          "layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"
+        ],
+        "runtime_refs": [],
+        "evidence_refs": [
+          "FILE_EXISTS",
+          "IMPORTABLE"
+        ],
+        "action": "KEEP_AND_TEST",
+        "risk_before": "HIGH",
+        "risk_after": "MEDIUM",
+        "confidence": 0.9,
+        "notes": "Bound during Pack 2.3 batch triage."
+      },
+      "validation": {
+        "path": "layers/l2_brain/cypher_codec.py",
+        "resolved_status": "BOUND_ACTIVE_RUNTIME",
+        "effective_risk": "MEDIUM",
+        "effective_recommendation": "MAP_TO_SPEC",
+        "confidence": 0.9,
+        "valid_spec_refs": [
+          "doc/specs/L0_Overseer/26_langgraph_quantum_swarm.md",
+          "doc/specs/L2_Brain/12_6d_context_model.md"
+        ],
+        "valid_test_refs": [
+          "layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"
+        ],
+        "valid_runtime_refs": [],
+        "missing_spec_refs": [],
+        "missing_test_refs": [],
+        "missing_runtime_refs": [],
+        "direct_spec_hits": [],
+        "scoped_spec_hits": [
+          "doc/specs/L2_Brain/12_6d_context_model.md"
+        ],
+        "linked_test_hits": [
+          "layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"
+        ],
+        "issues": []
+      }
+    },
+    {
+      "binding": {
+        "path": "layers/l2_brain/domain/dtos.py",
+        "layer": "L2",
+        "owner_domain": "Domain DTOs",
+        "structural_class": "ACTIVE_RUNTIME",
+        "binding_status": "BOUND_ACTIVE_RUNTIME",
+        "spec_refs": [
+          "doc/specs/L2_Brain/12_6d_context_model.md"
+        ],
+        "test_refs": [
+          "layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"
+        ],
+        "runtime_refs": [],
+        "evidence_refs": [
+          "FILE_EXISTS",
+          "IMPORTABLE"
+        ],
+        "action": "KEEP_AND_TEST",
+        "risk_before": "HIGH",
+        "risk_after": "MEDIUM",
+        "confidence": 0.9,
+        "notes": "Bound during Pack 2.3 batch triage."
+      },
+      "validation": {
+        "path": "layers/l2_brain/domain/dtos.py",
+        "resolved_status": "BOUND_ACTIVE_RUNTIME",
+        "effective_risk": "MEDIUM",
+        "effective_recommendation": "MAP_TO_SPEC",
+        "confidence": 0.9,
+        "valid_spec_refs": [
+          "doc/specs/L2_Brain/12_6d_context_model.md"
+        ],
+        "valid_test_refs": [
+          "layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"
+        ],
+        "valid_runtime_refs": [],
+        "missing_spec_refs": [],
+        "missing_test_refs": [],
+        "missing_runtime_refs": [],
+        "direct_spec_hits": [],
+        "scoped_spec_hits": [
+          "doc/specs/L2_Brain/12_6d_context_model.md"
+        ],
+        "linked_test_hits": [
+          "layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"
+        ],
+        "issues": []
+      }
+    },
+    {
+      "binding": {
+        "path": "layers/l2_brain/domain/hypothesis_service.py",
+        "layer": "L2",
+        "owner_domain": "Dialectical Reasoning",
+        "structural_class": "ACTIVE_RUNTIME",
+        "binding_status": "BOUND_ACTIVE_RUNTIME",
+        "spec_refs": [
+          "doc/specs/L2_Brain/12_6d_context_model.md"
+        ],
+        "test_refs": [
+          "layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"
+        ],
+        "runtime_refs": [],
+        "evidence_refs": [
+          "FILE_EXISTS",
+          "IMPORTABLE"
+        ],
+        "action": "KEEP_AND_TEST",
+        "risk_before": "HIGH",
+        "risk_after": "MEDIUM",
+        "confidence": 0.9,
+        "notes": "Bound during Pack 2.3 batch triage."
+      },
+      "validation": {
+        "path": "layers/l2_brain/domain/hypothesis_service.py",
+        "resolved_status": "BOUND_ACTIVE_RUNTIME",
+        "effective_risk": "MEDIUM",
+        "effective_recommendation": "MAP_TO_SPEC",
+        "confidence": 0.9,
+        "valid_spec_refs": [
+          "doc/specs/L2_Brain/12_6d_context_model.md"
+        ],
+        "valid_test_refs": [
+          "layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"
+        ],
+        "valid_runtime_refs": [],
+        "missing_spec_refs": [],
+        "missing_test_refs": [],
+        "missing_runtime_refs": [],
+        "direct_spec_hits": [],
+        "scoped_spec_hits": [
+          "doc/specs/L2_Brain/12_6d_context_model.md"
+        ],
+        "linked_test_hits": [
+          "layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"
+        ],
+        "issues": []
+      }
+    },
+    {
+      "binding": {
+        "path": "layers/l2_brain/domain/reasoning_logic.py",
+        "layer": "L2",
+        "owner_domain": "Reasoning Process",
+        "structural_class": "ACTIVE_RUNTIME",
+        "binding_status": "BOUND_ACTIVE_RUNTIME",
+        "spec_refs": [
+          "doc/specs/L2_Brain/12_6d_context_model.md"
+        ],
+        "test_refs": [
+          "layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"
+        ],
+        "runtime_refs": [],
+        "evidence_refs": [
+          "FILE_EXISTS",
+          "IMPORTABLE"
+        ],
+        "action": "KEEP_AND_TEST",
+        "risk_before": "HIGH",
+        "risk_after": "MEDIUM",
+        "confidence": 0.9,
+        "notes": "Bound during Pack 2.3 batch triage."
+      },
+      "validation": {
+        "path": "layers/l2_brain/domain/reasoning_logic.py",
+        "resolved_status": "BOUND_ACTIVE_RUNTIME",
+        "effective_risk": "MEDIUM",
+        "effective_recommendation": "MAP_TO_SPEC",
+        "confidence": 0.9,
+        "valid_spec_refs": [
+          "doc/specs/L2_Brain/12_6d_context_model.md"
+        ],
+        "valid_test_refs": [
+          "layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"
+        ],
+        "valid_runtime_refs": [],
+        "missing_spec_refs": [],
+        "missing_test_refs": [],
+        "missing_runtime_refs": [],
+        "direct_spec_hits": [],
+        "scoped_spec_hits": [
+          "doc/specs/L2_Brain/12_6d_context_model.md"
+        ],
+        "linked_test_hits": [
+          "layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"
+        ],
+        "issues": []
+      }
+    },
+    {
+      "binding": {
+        "path": "layers/l2_brain/domain/retrieval_service.py",
+        "layer": "L2",
+        "owner_domain": "Knowledge Retrieval",
+        "structural_class": "ACTIVE_RUNTIME",
+        "binding_status": "BOUND_ACTIVE_RUNTIME",
+        "spec_refs": [
+          "doc/specs/192_embedding_mesh_foundation.md",
+          "doc/specs/L2_Brain/12_6d_context_model.md"
+        ],
+        "test_refs": [
+          "layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"
+        ],
+        "runtime_refs": [],
+        "evidence_refs": [
+          "FILE_EXISTS",
+          "IMPORTABLE"
+        ],
+        "action": "KEEP_AND_TEST",
+        "risk_before": "HIGH",
+        "risk_after": "MEDIUM",
+        "confidence": 0.9,
+        "notes": "Bound during Pack 2.3 batch triage."
+      },
+      "validation": {
+        "path": "layers/l2_brain/domain/retrieval_service.py",
+        "resolved_status": "BOUND_ACTIVE_RUNTIME",
+        "effective_risk": "MEDIUM",
+        "effective_recommendation": "MAP_TO_SPEC",
+        "confidence": 0.9,
+        "valid_spec_refs": [
+          "doc/specs/192_embedding_mesh_foundation.md",
+          "doc/specs/L2_Brain/12_6d_context_model.md"
+        ],
+        "valid_test_refs": [
+          "layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"
+        ],
+        "valid_runtime_refs": [],
+        "missing_spec_refs": [],
+        "missing_test_refs": [],
+        "missing_runtime_refs": [],
+        "direct_spec_hits": [],
+        "scoped_spec_hits": [
+          "doc/specs/192_embedding_mesh_foundation.md",
+          "doc/specs/L2_Brain/12_6d_context_model.md"
+        ],
+        "linked_test_hits": [
+          "layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"
+        ],
+        "issues": []
+      }
+    },
+    {
+      "binding": {
+        "path": "layers/l2_brain/domain/semantic_ports.py",
+        "layer": "L2",
+        "owner_domain": "Semantic Interfaces",
+        "structural_class": "ACTIVE_RUNTIME",
+        "binding_status": "BOUND_ACTIVE_RUNTIME",
+        "spec_refs": [
+          "doc/specs/192_embedding_mesh_foundation.md",
+          "doc/specs/L2_Brain/12_6d_context_model.md"
+        ],
+        "test_refs": [
+          "layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"
+        ],
+        "runtime_refs": [],
+        "evidence_refs": [
+          "FILE_EXISTS",
+          "IMPORTABLE"
+        ],
+        "action": "KEEP_AND_TEST",
+        "risk_before": "HIGH",
+        "risk_after": "MEDIUM",
+        "confidence": 0.9,
+        "notes": "Bound during Pack 2.3 batch triage."
+      },
+      "validation": {
+        "path": "layers/l2_brain/domain/semantic_ports.py",
+        "resolved_status": "BOUND_ACTIVE_RUNTIME",
+        "effective_risk": "MEDIUM",
+        "effective_recommendation": "MAP_TO_SPEC",
+        "confidence": 0.9,
+        "valid_spec_refs": [
+          "doc/specs/192_embedding_mesh_foundation.md",
+          "doc/specs/L2_Brain/12_6d_context_model.md"
+        ],
+        "valid_test_refs": [
+          "layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"
+        ],
+        "valid_runtime_refs": [],
+        "missing_spec_refs": [],
+        "missing_test_refs": [],
+        "missing_runtime_refs": [],
+        "direct_spec_hits": [],
+        "scoped_spec_hits": [
+          "doc/specs/192_embedding_mesh_foundation.md",
+          "doc/specs/L2_Brain/12_6d_context_model.md"
+        ],
+        "linked_test_hits": [
+          "layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"
+        ],
+        "issues": []
+      }
+    },
+    {
+      "binding": {
+        "path": "layers/l2_brain/embedding_provider.py",
+        "layer": "L2",
+        "owner_domain": "Vector Embeddings",
+        "structural_class": "ACTIVE_RUNTIME",
+        "binding_status": "BOUND_ACTIVE_RUNTIME",
+        "spec_refs": [
+          "doc/specs/192_embedding_mesh_foundation.md",
+          "doc/specs/L2_Brain/12_6d_context_model.md"
+        ],
+        "test_refs": [
+          "layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"
+        ],
+        "runtime_refs": [],
+        "evidence_refs": [
+          "FILE_EXISTS",
+          "IMPORTABLE"
+        ],
+        "action": "KEEP_AND_TEST",
+        "risk_before": "HIGH",
+        "risk_after": "MEDIUM",
+        "confidence": 0.9,
+        "notes": "Bound during Pack 2.3 batch triage."
+      },
+      "validation": {
+        "path": "layers/l2_brain/embedding_provider.py",
+        "resolved_status": "BOUND_ACTIVE_RUNTIME",
+        "effective_risk": "MEDIUM",
+        "effective_recommendation": "MAP_TO_SPEC",
+        "confidence": 0.9,
+        "valid_spec_refs": [
+          "doc/specs/192_embedding_mesh_foundation.md",
+          "doc/specs/L2_Brain/12_6d_context_model.md"
+        ],
+        "valid_test_refs": [
+          "layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"
+        ],
+        "valid_runtime_refs": [],
+        "missing_spec_refs": [],
+        "missing_test_refs": [],
+        "missing_runtime_refs": [],
+        "direct_spec_hits": [],
+        "scoped_spec_hits": [
+          "doc/specs/192_embedding_mesh_foundation.md",
+          "doc/specs/L2_Brain/12_6d_context_model.md"
+        ],
+        "linked_test_hits": [
+          "layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"
+        ],
+        "issues": []
+      }
+    },
+    {
+      "binding": {
+        "path": "layers/l2_brain/entity_voice.py",
+        "layer": "L2",
+        "owner_domain": "Acoustic Identity",
+        "structural_class": "ACTIVE_RUNTIME",
+        "binding_status": "BOUND_ACTIVE_RUNTIME",
+        "spec_refs": [
+          "doc/specs/L0_Overseer/33_persistent_personality_mood.md",
+          "doc/specs/L2_Brain/12_6d_context_model.md"
+        ],
+        "test_refs": [
+          "layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"
+        ],
+        "runtime_refs": [],
+        "evidence_refs": [
+          "FILE_EXISTS",
+          "IMPORTABLE"
+        ],
+        "action": "KEEP_AND_TEST",
+        "risk_before": "HIGH",
+        "risk_after": "MEDIUM",
+        "confidence": 0.9,
+        "notes": "Bound during Pack 2.3 batch triage."
+      },
+      "validation": {
+        "path": "layers/l2_brain/entity_voice.py",
+        "resolved_status": "BOUND_ACTIVE_RUNTIME",
+        "effective_risk": "MEDIUM",
+        "effective_recommendation": "MAP_TO_SPEC",
+        "confidence": 0.9,
+        "valid_spec_refs": [
+          "doc/specs/L0_Overseer/33_persistent_personality_mood.md",
+          "doc/specs/L2_Brain/12_6d_context_model.md"
+        ],
+        "valid_test_refs": [
+          "layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"
+        ],
+        "valid_runtime_refs": [],
+        "missing_spec_refs": [],
+        "missing_test_refs": [],
+        "missing_runtime_refs": [],
+        "direct_spec_hits": [],
+        "scoped_spec_hits": [
+          "doc/specs/L2_Brain/12_6d_context_model.md"
+        ],
+        "linked_test_hits": [
+          "layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"
+        ],
+        "issues": []
+      }
+    },
+    {
+      "binding": {
+        "path": "layers/l2_brain/event_bus.py",
+        "layer": "L2",
+        "owner_domain": "Cognitive Signaling",
+        "structural_class": "ACTIVE_RUNTIME",
+        "binding_status": "BOUND_ACTIVE_RUNTIME",
+        "spec_refs": [
+          "doc/specs/L0_Overseer/05_orchestration_stack_and_glue.md",
+          "doc/specs/L2_Brain/12_6d_context_model.md"
+        ],
+        "test_refs": [
+          "layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"
+        ],
+        "runtime_refs": [],
+        "evidence_refs": [
+          "FILE_EXISTS",
+          "IMPORTABLE"
+        ],
+        "action": "KEEP_AND_TEST",
+        "risk_before": "HIGH",
+        "risk_after": "MEDIUM",
+        "confidence": 0.9,
+        "notes": "Bound during Pack 2.3 batch triage."
+      },
+      "validation": {
+        "path": "layers/l2_brain/event_bus.py",
+        "resolved_status": "BOUND_ACTIVE_RUNTIME",
+        "effective_risk": "MEDIUM",
+        "effective_recommendation": "MAP_TO_SPEC",
+        "confidence": 0.9,
+        "valid_spec_refs": [
+          "doc/specs/L0_Overseer/05_orchestration_stack_and_glue.md",
+          "doc/specs/L2_Brain/12_6d_context_model.md"
+        ],
+        "valid_test_refs": [
+          "layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"
+        ],
+        "valid_runtime_refs": [],
+        "missing_spec_refs": [],
+        "missing_test_refs": [],
+        "missing_runtime_refs": [],
+        "direct_spec_hits": [],
+        "scoped_spec_hits": [
+          "doc/specs/L2_Brain/12_6d_context_model.md"
+        ],
+        "linked_test_hits": [
+          "layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"
+        ],
+        "issues": []
+      }
+    },
+    {
+      "binding": {
+        "path": "layers/l2_brain/evolution_feedback_loop.py",
+        "layer": "L2",
+        "owner_domain": "Metacognitive Feedback",
+        "structural_class": "ACTIVE_RUNTIME",
+        "binding_status": "BOUND_ACTIVE_RUNTIME",
+        "spec_refs": [
+          "doc/specs/L0_Overseer/14_value_engineering_and_governance.md",
+          "doc/specs/L2_Brain/12_6d_context_model.md"
+        ],
+        "test_refs": [
+          "layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"
+        ],
+        "runtime_refs": [],
+        "evidence_refs": [
+          "FILE_EXISTS",
+          "IMPORTABLE"
+        ],
+        "action": "KEEP_AND_TEST",
+        "risk_before": "HIGH",
+        "risk_after": "MEDIUM",
+        "confidence": 0.9,
+        "notes": "Bound during Pack 2.3 batch triage."
+      },
+      "validation": {
+        "path": "layers/l2_brain/evolution_feedback_loop.py",
+        "resolved_status": "BOUND_ACTIVE_RUNTIME",
+        "effective_risk": "MEDIUM",
+        "effective_recommendation": "MAP_TO_SPEC",
+        "confidence": 0.9,
+        "valid_spec_refs": [
+          "doc/specs/L0_Overseer/14_value_engineering_and_governance.md",
+          "doc/specs/L2_Brain/12_6d_context_model.md"
+        ],
+        "valid_test_refs": [
+          "layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"
+        ],
+        "valid_runtime_refs": [],
+        "missing_spec_refs": [],
+        "missing_test_refs": [],
+        "missing_runtime_refs": [],
+        "direct_spec_hits": [],
+        "scoped_spec_hits": [
+          "doc/specs/L2_Brain/12_6d_context_model.md"
+        ],
+        "linked_test_hits": [
+          "layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"
+        ],
+        "issues": []
+      }
+    },
+    {
+      "binding": {
+        "path": "layers/l2_brain/expansion_policy.py",
+        "layer": "L2",
+        "owner_domain": "State Expansion",
+        "structural_class": "ACTIVE_RUNTIME",
+        "binding_status": "BOUND_ACTIVE_RUNTIME",
+        "spec_refs": [
+          "doc/specs/L2_Brain/12_6d_context_model.md"
+        ],
+        "test_refs": [
+          "layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"
+        ],
+        "runtime_refs": [],
+        "evidence_refs": [
+          "FILE_EXISTS",
+          "IMPORTABLE"
+        ],
+        "action": "KEEP_AND_TEST",
+        "risk_before": "HIGH",
+        "risk_after": "MEDIUM",
+        "confidence": 0.9,
+        "notes": "Bound during Pack 2.3 batch triage."
+      },
+      "validation": {
+        "path": "layers/l2_brain/expansion_policy.py",
+        "resolved_status": "BOUND_ACTIVE_RUNTIME",
+        "effective_risk": "MEDIUM",
+        "effective_recommendation": "MAP_TO_SPEC",
+        "confidence": 0.9,
+        "valid_spec_refs": [
+          "doc/specs/L2_Brain/12_6d_context_model.md"
+        ],
+        "valid_test_refs": [
+          "layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"
+        ],
+        "valid_runtime_refs": [],
+        "missing_spec_refs": [],
+        "missing_test_refs": [],
+        "missing_runtime_refs": [],
+        "direct_spec_hits": [],
+        "scoped_spec_hits": [
+          "doc/specs/L2_Brain/12_6d_context_model.md"
+        ],
+        "linked_test_hits": [
+          "layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"
+        ],
+        "issues": []
+      }
+    },
+    {
+      "binding": {
+        "path": "layers/l2_brain/formal_bridge.py",
+        "layer": "L2",
+        "owner_domain": "Formal Executable Specs",
+        "structural_class": "ACTIVE_RUNTIME",
+        "binding_status": "BOUND_ACTIVE_RUNTIME",
+        "spec_refs": [
+          "doc/specs/L3_Shield/22_sdd_executable_contracts.md",
+          "doc/specs/L2_Brain/12_6d_context_model.md"
+        ],
+        "test_refs": [
+          "layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"
+        ],
+        "runtime_refs": [],
+        "evidence_refs": [
+          "FILE_EXISTS",
+          "IMPORTABLE"
+        ],
+        "action": "KEEP_AND_TEST",
+        "risk_before": "HIGH",
+        "risk_after": "MEDIUM",
+        "confidence": 0.9,
+        "notes": "Bound during Pack 2.3 batch triage."
+      },
+      "validation": {
+        "path": "layers/l2_brain/formal_bridge.py",
+        "resolved_status": "BOUND_ACTIVE_RUNTIME",
+        "effective_risk": "MEDIUM",
+        "effective_recommendation": "MAP_TO_SPEC",
+        "confidence": 0.9,
+        "valid_spec_refs": [
+          "doc/specs/L3_Shield/22_sdd_executable_contracts.md",
+          "doc/specs/L2_Brain/12_6d_context_model.md"
+        ],
+        "valid_test_refs": [
+          "layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"
+        ],
+        "valid_runtime_refs": [],
+        "missing_spec_refs": [],
+        "missing_test_refs": [],
+        "missing_runtime_refs": [],
+        "direct_spec_hits": [],
+        "scoped_spec_hits": [
+          "doc/specs/L2_Brain/12_6d_context_model.md"
+        ],
+        "linked_test_hits": [
+          "layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"
+        ],
+        "issues": []
+      }
+    },
+    {
+      "binding": {
+        "path": "layers/l2_brain/gateway_contract.py",
+        "layer": "L2",
+        "owner_domain": "Gateway Protocols",
+        "structural_class": "ACTIVE_RUNTIME",
+        "binding_status": "BOUND_ACTIVE_RUNTIME",
+        "spec_refs": [
+          "doc/specs/L1_Nervous/16_mcp_dynamic_gateway.md",
+          "doc/specs/L2_Brain/12_6d_context_model.md"
+        ],
+        "test_refs": [
+          "layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"
+        ],
+        "runtime_refs": [],
+        "evidence_refs": [
+          "FILE_EXISTS",
+          "IMPORTABLE"
+        ],
+        "action": "KEEP_AND_TEST",
+        "risk_before": "HIGH",
+        "risk_after": "MEDIUM",
+        "confidence": 0.9,
+        "notes": "Bound during Pack 2.3 batch triage."
+      },
+      "validation": {
+        "path": "layers/l2_brain/gateway_contract.py",
+        "resolved_status": "BOUND_ACTIVE_RUNTIME",
+        "effective_risk": "MEDIUM",
+        "effective_recommendation": "MAP_TO_SPEC",
+        "confidence": 0.9,
+        "valid_spec_refs": [
+          "doc/specs/L1_Nervous/16_mcp_dynamic_gateway.md",
+          "doc/specs/L2_Brain/12_6d_context_model.md"
+        ],
+        "valid_test_refs": [
+          "layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"
+        ],
+        "valid_runtime_refs": [],
+        "missing_spec_refs": [],
+        "missing_test_refs": [],
+        "missing_runtime_refs": [],
+        "direct_spec_hits": [],
+        "scoped_spec_hits": [
+          "doc/specs/L2_Brain/12_6d_context_model.md"
+        ],
+        "linked_test_hits": [
+          "layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"
+        ],
+        "issues": []
+      }
     }
   ]
 }
