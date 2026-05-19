@@ -3,28 +3,28 @@
 ## Status
 - pack_status: PASS_WITH_WARNINGS
 - repo_health_status: FAIL
-- base_commit: 41aeb7d225349ba01f69ccfabf9b0abda0153376
-- analysis_base_commit: 41aeb7d225349ba01f69ccfabf9b0abda0153376
-- report_generated_at_commit: 41aeb7d225349ba01f69ccfabf9b0abda0153376
-- head_commit: 41aeb7d225349ba01f69ccfabf9b0abda0153376
+- base_commit: c39f2327485a14e2adfa02d659ceb4937aacaa1e
+- analysis_base_commit: c39f2327485a14e2adfa02d659ceb4937aacaa1e
+- report_generated_at_commit: c39f2327485a14e2adfa02d659ceb4937aacaa1e
+- head_commit: c39f2327485a14e2adfa02d659ceb4937aacaa1e
 - files_analyzed: 1340
 
 ## Explicit Metrics
 - CRITICAL: 0
-- HIGH: 64
-- SHADOW_CANDIDATE: 64
+- HIGH: 65
+- SHADOW_CANDIDATE: 65
 - ORPHAN_TEST_CANDIDATE: 3
 - bound_active_runtime: 11
 - deferred_no_safe_action: 0
-- toolchain_validated: 5
-- toolchain_missing: 0
+- toolchain_validated: 4
+- toolchain_missing: 1
 - smoke_passed: 0
 - smoke_failed: 0
 - contract_bound: 2
 - repo_health_status: FAIL
 
 ## Counts by Class
-- ACTIVE_RUNTIME: 254
+- ACTIVE_RUNTIME: 253
 - ACTIVE_SPEC: 559
 - ACTIVE_TEST: 235
 - CONFIG: 12
@@ -33,12 +33,12 @@
 - LEGACY: 30
 - ORPHAN_TEST_CANDIDATE: 3
 - REPORT: 0
-- SHADOW_CANDIDATE: 64
+- SHADOW_CANDIDATE: 65
 - UNKNOWN: 144
 
 ## Counts by Recommendation
-- FREEZE_UNTIL_REVIEW: 144
-- KEEP_AND_TEST: 255
+- FREEZE_UNTIL_REVIEW: 145
+- KEEP_AND_TEST: 254
 - MAP_TO_RUNTIME: 561
 - MAP_TO_SPEC: 255
 - MAP_TO_TEST: 20
@@ -51,17 +51,17 @@
 - bound_active_runtime: 11
 - needs_manual_owner: 0
 - deferred_no_safe_action: 0
-- toolchain_validated: 5
-- toolchain_missing: 0
+- toolchain_validated: 4
+- toolchain_missing: 1
 - smoke_passed: 0
 - smoke_failed: 0
 - contract_bound: 2
 
 ## Counts by Risk
 - CRITICAL: 0
-- HIGH: 64
+- HIGH: 65
 - LOW: 322
-- MEDIUM: 954
+- MEDIUM: 953
 
 ## Top 30 High-Risk Actions
 1. layers/l2_brain/action_graph.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
@@ -99,7 +99,7 @@
 - init_runtime_low_risk_corrections: 24
 
 ## Frozen / No-Touch Candidates
-- frozen_count: 145
+- frozen_count: 146
 - README.md | FREEZE_UNTIL_REVIEW | risk=MEDIUM
 - doc/ATLAS.md | FREEZE_UNTIL_REVIEW | risk=MEDIUM
 - doc/CORE_SPEC.md | FREEZE_UNTIL_REVIEW | risk=MEDIUM
@@ -127,7 +127,7 @@
 
 ## Orphan Test Candidates
 - orphan_test_candidates: 3
-- shadow_candidates: 64
+- shadow_candidates: 65
 
 ## Next Phase
 Structural Hardening Pack 2.3 - Compilation Sandbox and Orchestration Boundary Hardening

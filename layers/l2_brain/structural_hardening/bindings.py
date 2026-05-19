@@ -430,7 +430,8 @@ class ContractBindingRegistry:
                 import json
                 with open(ledger_path, "r", encoding="utf-8") as f:
                     ledger_data = json.load(f)
-                    for entry in ledger_data:
+                    entries = ledger_data if isinstance(ledger_data, list) else ledger_data.get("entries", [])
+                    for entry in entries:
                         if entry.get("path") == binding.path:
                             polyglot_entry = entry
                             break
@@ -443,13 +444,43 @@ class ContractBindingRegistry:
         issues: List[str] = []
 
         if polyglot_entry:
-            resolved_status = BindingStatus(polyglot_entry["binding_decision"])
-            effective_risk = RiskLevel(polyglot_entry["risk_after"])
-            if polyglot_entry["binding_decision"] == "TOOLCHAIN_MISSING":
+            decision = str(polyglot_entry.get("binding_decision", "REMAINS_DEFERRED"))
+            risk_after = str(polyglot_entry.get("risk_after", RiskLevel.HIGH.value))
+            observed_result = str(polyglot_entry.get("observed_result", "")).lower()
+            evidence_command = str(polyglot_entry.get("evidence_command", "")).strip()
+
+            decision_is_positive = decision in {
+                BindingStatus.TOOLCHAIN_VALIDATED.value,
+                BindingStatus.CONTRACT_BOUND.value,
+                BindingStatus.SMOKE_PASSED.value,
+            }
+            has_success_signal = any(token in observed_result for token in ("pass", "passed", "success", "succeeded", "ok"))
+
+            if decision_is_positive and (not evidence_command or not has_success_signal):
+                resolved_status = BindingStatus.REMAINS_DEFERRED
+                effective_risk = RiskLevel.HIGH
+                effective_recommendation = Recommendation.FREEZE_UNTIL_REVIEW
+                issues.append("polyglot_ledger_overclaim_without_executable_success")
+            else:
+                try:
+                    resolved_status = BindingStatus(decision)
+                except Exception:
+                    resolved_status = BindingStatus.NEEDS_MANUAL_REVIEW
+                    issues.append("invalid_binding_decision_in_ledger")
+                try:
+                    effective_risk = RiskLevel(risk_after)
+                except Exception:
+                    effective_risk = RiskLevel.HIGH
+                    issues.append("invalid_risk_after_in_ledger")
+
+            if decision == BindingStatus.TOOLCHAIN_MISSING.value:
                 issues.append(f"toolchain_missing:{polyglot_entry.get('required_toolchain')}")
+            if decision == BindingStatus.SMOKE_FAILED.value:
+                issues.append("smoke_failed")
+
             # Add dynamic evidence refs
             evidence_refs.add(f"POLYGLOT_TOOLCHAIN:{polyglot_entry.get('required_toolchain')}")
-            evidence_refs.add(f"PROBE:{polyglot_entry.get('binding_decision')}")
+            evidence_refs.add(f"PROBE:{decision}")
 
         if not _ref_exists(repo_root, binding.path):
             resolved_status = BindingStatus.NEEDS_MANUAL_OWNER
