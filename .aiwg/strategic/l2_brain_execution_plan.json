@@ -1,0 +1,165 @@
+{
+  "pack": "PACK R3",
+  "name": "L2 Brain Architecture Definition & Controlled Migration",
+  "created": "2026-05-19",
+  "author": "DUMMIE Engine",
+  "status": "DRAFT",
+
+  "execution_model": {
+    "type": "distributed_sessions",
+    "total_sessions": 6,
+    "estimated_wall_clock": "48-72 hours",
+    "estimated_active_work": "12-18 hours",
+    "session_pattern": "2-3 hours per session, 4-6 sessions over 2-3 days",
+    "continuity_mechanism": "file-based memory (.aiwg/strategic/, memory/YYYY-MM-DD.md)",
+    "daemon_role": "heartbeat checks, autonomous tasks between sessions, runtime maintenance"
+  },
+
+  "sessions": [
+    {
+      "session_id": "R3-S1",
+      "name": "Deep State Analysis",
+      "duration_hours": 2.5,
+      "objectives": [
+        "Map all existing L2 modules and their dependencies",
+        "Identify which flat_brain/ modules are canonical vs duplicated",
+        "Catalog all import paths (old and new)",
+        "Document coexistence of flat_brain/ and src/brain/"
+      ],
+      "deliverables": [
+        ".aiwg/strategic/l2_module_inventory.json",
+        ".aiwg/strategic/l2_dependency_graph.md"
+      ],
+      "session_type": "analysis"
+    },
+    {
+      "session_id": "R3-S2",
+      "name": "Architecture Contract Design",
+      "duration_hours": 3,
+      "objectives": [
+        "Define L2 Brain sovereign responsibility",
+        "Define boundaries with L0, L1, L3, L4, L5",
+        "Define data contracts between layers",
+        "Decide: flat_brain/ vs src/brain/ vs hybrid"
+      ],
+      "deliverables": [
+        ".aiwg/strategic/l2_canonical_manifest.yaml",
+        "doc/architecture/l2_brain_canonical.md",
+        ".aiwg/strategic/l2_layer_boundaries.yaml"
+      ],
+      "session_type": "design",
+      "requires_human_input": true
+    },
+    {
+      "session_id": "R3-S3",
+      "name": "Migration Plan & Rollback Strategy",
+      "duration_hours": 2.5,
+      "objectives": [
+        "Create detailed migration manifest",
+        "Define import compatibility shim strategy",
+        "Create rollback plan",
+        "Define validation criteria"
+      ],
+      "deliverables": [
+        ".aiwg/strategic/l2_migration_manifest.json",
+        ".aiwg/strategic/l2_rollback_plan.md"
+      ],
+      "session_type": "planning",
+      "requires_human_input": true
+    },
+    {
+      "session_id": "R3-S4",
+      "name": "Execution Phase 1 — Structure",
+      "duration_hours": 3,
+      "objectives": [
+        "Implement import compatibility shim",
+        "Update downstream imports",
+        "Migrate tests to new paths",
+        "Run full test suite"
+      ],
+      "deliverables": [
+        "layers/l2_brain/__init__.py (compatibility shim)",
+        "Updated test imports",
+        "Test results report"
+      ],
+      "session_type": "execution"
+    },
+    {
+      "session_id": "R3-S5",
+      "name": "Execution Phase 2 — Specs & Validation",
+      "duration_hours": 2.5,
+      "objectives": [
+        "Update all spec documents with new paths",
+        "Run spec validation",
+        "Run compileall",
+        "Run integration tests"
+      ],
+      "deliverables": [
+        "Updated spec docs",
+        ".aiwg/reports/pack_r3_validation.json"
+      ],
+      "session_type": "execution"
+    },
+    {
+      "session_id": "R3-S6",
+      "name": "Closure & Documentation",
+      "duration_hours": 2,
+      "objectives": [
+        "Final validation",
+        "Update MEMORY.md",
+        "Create closeout report",
+        "Plan PACK R4"
+      ],
+      "deliverables": [
+        ".aiwg/reports/pack_r3_closeout.json",
+        "Updated MEMORY.md"
+      ],
+      "session_type": "closure"
+    }
+  ],
+
+  "daemon_tasks_between_sessions": [
+    {
+      "task": "heartbeat_check",
+      "frequency": "every 30 minutes",
+      "action": "Check session state, update memory files, flag blockers"
+    },
+    {
+      "task": "memory_maintenance",
+      "frequency": "daily",
+      "action": "Review recent memory files, update MEMORY.md with distilled learnings"
+    },
+    {
+      "task": "git_status_monitor",
+      "frequency": "every 2 hours",
+      "action": "Monitor repo state, flag unexpected changes"
+    }
+  ],
+
+  "risk_assessment": {
+    "technical_risk": "MEDIUM",
+    "schedule_risk": "LOW (flexible session model)",
+    "scope_risk": "MEDIUM (architecture decisions may expand scope)",
+    "mitigation": [
+      "Session-based execution allows course correction between sessions",
+      "File-based continuity survives session boundaries",
+      "Human input gates prevent wrong architectural decisions",
+      "Rollback plan defined before execution begins"
+    ]
+  },
+
+  "dependencies": [
+    "PACK R2.1 completed (specs passing, files restored)",
+    "Human input for architecture decisions (Session 2-3)",
+    "Working daemon/heartbeat for continuity between sessions"
+  ],
+
+  "success_criteria": [
+    "L2 architecture contract defined and documented",
+    "Import compatibility shim working",
+    "All specs passing with correct paths",
+    "Test suite passing",
+    "No broken references",
+    "Migration manifest complete with rollback plan"
+  ]
+}
