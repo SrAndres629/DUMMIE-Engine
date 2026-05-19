@@ -18,7 +18,19 @@ def show_help():
     print("Usage: dummie-ctl <command> [args]")
     print("\nCommands:")
     print("  status                 Show system status and phase")
+    print("  whoami                 Identify DUMMIE operational identity")
+    print("  identity               Print creator profile and identity details")
     print("  chat <text>            Interact with DUMMIE Brain (records learning episode)")
+    print("  advise <text>          Get strategic advice for business growth or goals")
+    print("  strategy <text>        Shortcut for advise")
+    print("  business               Show the latest business intake structure")
+    print("  goals                  List goals in goal memory")
+    print("  goals add <text>       Add a goal to goal memory")
+    print("  memory                 Show memory status and details")
+    print("  providers              List provider configurations")
+    print("  providers check        Check live provider authorization status")
+    print("  agent-boot             Boot agent environment")
+    print("  guarded-run <text>     Run command under guarded validation policy")
     print("  calibrate              Run sovereign readiness calibration")
     print("  triage                 Show test debt triage report")
     print("  heartbeat              Execute manual observe-only heartbeat cycle")
@@ -41,6 +53,9 @@ def show_help():
     print("  degraded-capabilities  Consolidate central capability status mappings")
     print("  toolchain-probe        Query host multi-language command probes")
     print("  runtime-closure-plan   Generate human-approval gated closure action plans")
+    print("  model-bootstrap        Bootstrap OpenCode + local fallback model stack")
+    print("  token-snapshot         Generate current token+embedding realtime snapshot")
+    print("  token-live [seconds]   Continuously refresh token+embedding realtime snapshot")
     print("  help                   Show this help")
 
 def main():
@@ -51,13 +66,26 @@ def main():
     cmd = sys.argv[1].lower()
     args = sys.argv[2:]
 
+    # Route sovereign CLI commands
+    sovereign_cmds = ("whoami", "identity", "advise", "strategy", "business", "goals", "memory", "providers", "agent-boot", "guarded-run")
+    
     if cmd == "status":
-        run_python("layers/l2_brain/dummie_chat_cli.py", ["status"])
+        if "--l2" in args:
+            args.remove("--l2")
+            run_python("layers/l2_brain/dummie_chat_cli.py", ["status"])
+        else:
+            cmd_run = [sys.executable, "-m", "dummie", "status"] + args
+            subprocess.run(cmd_run)
+    elif cmd in sovereign_cmds:
+        cmd_run = [sys.executable, "-m", "dummie", cmd] + args
+        subprocess.run(cmd_run)
     elif cmd == "chat":
         if not args:
             print("Error: chat requires query text")
             return
-        run_python("layers/l2_brain/dummie_chat_cli.py", args)
+        # Route through sovereign advisor
+        cmd_run = [sys.executable, "-m", "dummie", "chat"] + args
+        subprocess.run(cmd_run)
     elif cmd == "calibrate":
         run_python("layers/l2_brain/cli_control_plane.py", ["readiness-calibration"])
     elif cmd == "triage":
@@ -106,6 +134,15 @@ def main():
         run_python("layers/l2_brain/cli_control_plane.py", ["toolchain-probe"])
     elif cmd == "runtime-closure-plan":
         run_python("layers/l2_brain/cli_control_plane.py", ["runtime-closure-plan"])
+    elif cmd == "model-bootstrap":
+        run_python("scripts/dummie_model_bootstrap.py", args)
+    elif cmd == "token-snapshot":
+        run_python("scripts/dummie_token_embedding_monitor.py", args)
+    elif cmd == "token-live":
+        interval = "10"
+        if args:
+            interval = args[0]
+        run_python("scripts/dummie_token_embedding_monitor.py", ["--watch", "--interval", interval])
     elif cmd == "help":
         show_help()
     else:

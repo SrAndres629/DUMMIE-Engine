@@ -1,0 +1,21 @@
+goals:
+- goal: quiero llegar a 10000 mrr
+  goal_type: revenue
+  status: active
+  timestamp: '2026-05-19T08:08:00.829168+00:00'
+- goal: quiero facturar 10000 USD mensuales
+  goal_type: revenue
+  status: active
+  timestamp: '2026-05-19T08:08:00.899330+00:00'
+- goal: quiero ganar 10000 USD al mes
+  goal_type: revenue
+  status: active
+  timestamp: '2026-05-19T08:08:00.912101+00:00'
+- goal: quiero que mi negocio facture 10000 USD mensuales
+  goal_type: revenue
+  status: active
+  timestamp: '2026-05-19T08:08:00.925042+00:00'
+- goal: quiero llegar a 10000 USD de MRR
+  goal_type: revenue
+  status: active
+  timestamp: '2026-05-19T08:08:16.104903+00:00'

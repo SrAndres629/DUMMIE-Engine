@@ -1,0 +1,40 @@
+{
+  "last_check": "2026-05-19T04:00:00Z",
+  "providers": {
+    "gemini_cli": {
+      "configured": true,
+      "cli_available": true,
+      "auth_status": "ready"
+    },
+    "codex_cli": {
+      "configured": true,
+      "cli_available": true,
+      "auth_status": "ready"
+    },
+    "antigravity": {
+      "configured": true,
+      "cli_available": false,
+      "auth_status": "ready"
+    },
+    "openrouter": {
+      "configured": false,
+      "cli_available": false,
+      "auth_status": "requires_auth"
+    },
+    "groq": {
+      "configured": false,
+      "cli_available": false,
+      "auth_status": "requires_auth"
+    },
+    "deepseek": {
+      "configured": false,
+      "cli_available": false,
+      "auth_status": "requires_auth"
+    },
+    "opencode": {
+      "configured": true,
+      "cli_available": true,
+      "auth_status": "ready"
+    }
+  }
+}

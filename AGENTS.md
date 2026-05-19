@@ -282,3 +282,12 @@ Para evitar la complacencia de operar solo en la capa más cómoda (L2/Python) y
 ## Make It Yours
 
 This is a starting point. Add your own conventions, style, and rules as you figure out what works.
+
+## DUMMIE Sovereign Runtime (Pack S1)
+
+DUMMIE now runs a sovereign CLI and SDK.
+- CLI executable: `dummie status`, `dummie advise "..."` or via `./scripts/dummie` / `./scripts/dummie-ctl`.
+- SDK Python: `from dummie import DummieEngine`.
+- Configs and Identity profiles are managed in `.aiwg/`.
+- Refer to [DUMMIE_AGENT_BOOTSTRAP.md](file:///home/jorand/Escritorio/DUMMIE%20Engine/DUMMIE_AGENT_BOOTSTRAP.md) for full details.
+

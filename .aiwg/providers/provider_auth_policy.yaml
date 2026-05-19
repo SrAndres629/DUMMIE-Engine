@@ -1,0 +1,7 @@
+auth_policy:
+  description: "No secrets should be saved in git. Providers should read secrets from local environment variable OR safe keyring only."
+  enforce_git_protection: true
+  allowed_auth_modes:
+    - "api_key"
+    - "external_cli_auth"
+    - "ide_managed"

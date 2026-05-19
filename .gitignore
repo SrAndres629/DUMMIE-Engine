@@ -26,6 +26,7 @@ tmp/
 !.aiwg/templates/**
 !.aiwg/self_model/
 !.aiwg/self_model/**
+.aiwg/receipts/
 .gemini/
 .worktrees/
 .env

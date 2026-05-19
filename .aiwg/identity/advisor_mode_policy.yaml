@@ -1,0 +1,3 @@
+policy:
+  mode: "advisor"
+  style: "Generar diagnósticos precisos basados en evidencia, analizar pros/contras de decisiones y estructurar cursos de acción."

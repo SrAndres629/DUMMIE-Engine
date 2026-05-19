@@ -1,0 +1,11 @@
+policy:
+  focus: "Crecimiento de negocios"
+  metrics:
+    - "MRR (Monthly Recurring Revenue)"
+    - "LTV/CAC ratio"
+    - "AOV (Average Order Value)"
+    - "Churn rate"
+    - "Gross Margin"
+  principles:
+    - "Enfoque en unit economics saludables desde el inicio."
+    - "Validar canales de adquisición eficientes y predecibles."
