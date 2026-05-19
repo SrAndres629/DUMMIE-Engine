@@ -62,10 +62,17 @@ class RuntimeEntrypointGuard(KernelOperatingBoundaryPort):
             f.write(json.dumps(data) + "\n")
 
     def run_postflight_audit(self, receipt: ExecutionReceipt) -> PostflightMetrics:
-        # Simplified post-flight validation
+        # Improved post-flight validation with dynamic telemetry estimation
         status = "PASSED" if receipt.exit_code == 0 else "FAILED"
+        
+        # Estimate tokens based on command length and execution success
+        # This will be replaced by a real Tokenizer in Pack 5.1
+        base_cost = 10
+        payload_cost = len(receipt.command_executed) // 10
+        total_estimate = base_cost + payload_cost if receipt.exit_code == 0 else 5
+        
         return PostflightMetrics(
-            tokens_consumed=0,  # Telemetry simulation: set to 0 to avoid false inflation
+            tokens_consumed=total_estimate,
             elapsed_ms=int(receipt.duration_seconds * 1000),
             validation_status=status,
             artifacts_generated=[self.receipts_file]
