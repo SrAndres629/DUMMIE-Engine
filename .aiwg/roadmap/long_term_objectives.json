@@ -1,0 +1,29 @@
+{
+  "long_term_target": "PACK_6.1",
+  "golden_path_description": "query -> retrieval -> rerank -> context package -> model route -> tool/action -> report -> memory",
+  "phases": {
+    "PACK_3.x": [
+      "semantic pipeline real parcial",
+      "embeddings separados",
+      "reranker honesto",
+      "code embeddings",
+      "direct spec linkage"
+    ],
+    "PACK_4.x": [
+      "ModelCapability Registry",
+      "ModelRouter v2",
+      "Guardrails",
+      "Function Calling contracts",
+      "Code LLM adapter"
+    ],
+    "PACK_5.x": [
+      "document intelligence",
+      "context compression policy",
+      "local inference backend registry"
+    ],
+    "PACK_6.x": [
+      "CI full gate",
+      "Golden Path E2E"
+    ]
+  }
+}

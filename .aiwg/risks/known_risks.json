@@ -1,0 +1,16 @@
+{
+  "known_risks": [
+    {
+      "risk_id": "RSK-001",
+      "category": "environment",
+      "description": "Lost local dependencies (numpy, fastembed) when compiling workspace indexes, triggering silent fallback.",
+      "mitigation": "Enforce strict execution using layers/l2_brain/.venv/bin/python, and keep regression gates inside test suites."
+    },
+    {
+      "risk_id": "RSK-002",
+      "category": "compilation",
+      "description": "Local models download large binaries, causing high latency or out of memory states.",
+      "mitigation": "Enforce lightweight bge-small-en-v1.5 and deterministically limit max candidate vectors to rerank."
+    }
+  ]
+}

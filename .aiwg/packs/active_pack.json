@@ -1,0 +1,42 @@
+{
+  "pack_id": "PACK_3.1_MERGE_GATE",
+  "pack_title": "Hybrid+ Reranker Main Closure & AIWG Kernel Integration",
+  "objective": "Cerrar definitivamente el Pack 3.1 en main y asegurar el gobierno via el Execution Kernel de .aiwg",
+  "long_term_objective_link": "long_term_objectives.json",
+  "short_term_goal": "Integrar el Execution Kernel de gobierno vial .aiwg y consolidar tests.",
+  "why_now": "Es imperativo evitar la fragmentación de sub-parches de desarrollo en ramas paralelas.",
+  "not_in_scope": [
+    "Iniciar Pack 3.2"
+  ],
+  "files_expected_to_change": [
+    "scripts/aiwg_pack_guard.py",
+    "layers/l2_brain/tests/test_aiwg_pack_guard.py"
+  ],
+  "files_forbidden_to_change": [
+    "layers/l2_brain/embedding_mesh/reranker.py",
+    "layers/l2_brain/embedding_mesh/contracts.py"
+  ],
+  "commands_required": [
+    "PYTHONPATH=. layers/l2_brain/.venv/bin/pytest -v layers/l2_brain/tests/test_aiwg_pack_guard.py"
+  ],
+  "tests_required": [
+    "layers/l2_brain/tests/test_aiwg_pack_guard.py"
+  ],
+  "metrics_before": {
+    "degraded_embeddings": 717
+  },
+  "expected_metrics_after": {
+    "degraded_embeddings": 717
+  },
+  "regression_risks": "Errores de sintaxis o import en los validadores del pack guard.",
+  "known_blindspots": "Carga de dependencias en pytest.",
+  "acceptance_criteria": [
+    "Tests de guardián de gobierno pasan con 100% de éxito.",
+    "No se permite drift ni evasión del roadmap."
+  ],
+  "rollback_plan": "Revertir cambios estructurales de los scripts de .aiwg.",
+  "auto_continue_allowed": false,
+  "stop_conditions": [
+    "No iniciar Pack 3.2 hasta haber completado el merge de Pack 3.1 e implementar el guard de gobierno."
+  ]
+}

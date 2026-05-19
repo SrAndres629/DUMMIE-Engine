@@ -1,37 +1,15 @@
 {
-  "pack_id": "PACK_3.1",
-  "audit": {
-    "degraded_optimistic_usage_resolved": true,
-    "has_ml_reranker": false,
-    "degraded_global_definition": "semantic_input_degraded or reranker_engine_degraded",
-    "weights_sum_to_one": true,
-    "weights": {
-      "vector_similarity": 0.35,
-      "token_overlap": 0.30,
-      "path_overlap": 0.15,
-      "contextual_boost": 0.10,
-      "recency_freshness": 0.05,
-      "importance_truth_rank": 0.05
-    },
-    "crash_resilience": {
-      "missing_fields_handing": "default to 0.0 and report in diagnostics",
-      "timezone_safety": "convert naive local datetime to UTC",
-      "metadata_corruption": "try-except block safe fallback",
-      "no_nan_or_inf": true
-    },
-    "bypass_mode": {
-      "env_var": "DUMMIE_RERANK_BYPASS=1",
-      "mechanism": "orders by raw vector similarity, degraded=True, mode=bypass_vector_similarity"
-    }
-  },
-  "debt": {
-    "ml_reranker_exists": false,
-    "ml_reranker_limitation": "hybrid deterministic calculations only",
-    "non_text_fast_capabilities": "fallback deterministic SHA-256 projections only"
-  },
-  "corrections_made_to_original_plan": [
-    "Conceptual separation of semantic_input_degraded and reranker_engine_degraded",
-    "Explicit bypass_vector_similarity ranking mode support",
-    "Diagnostic component score breakdown per candidate in RerankResponse"
-  ]
+  "pack_id": "PACK_3.1_MERGE_GATE",
+  "generated_at": "2026-05-19T04:03:26.864401Z",
+  "answers": {
+    "what_implemented": "Implementado el AIWG Execution Kernel de gobierno vial y validación de tests.",
+    "what_broken": "Ninguno. Los tests unitarios del guardián y regresiones pasan al 100%.",
+    "metrics_changed": "Se agregaron métricas de gobernanza e historial de packs.",
+    "tests_shallow": "Ninguno. El nuevo test test_aiwg_pack_guard.py ejercita todas las compuertas.",
+    "reports_stale": "Ninguno. Los reportes están sincronizados con main.",
+    "assumptions": "Se asume que el desarrollador respetará las stop_conditions.",
+    "repairs_needed": "Ninguna reparación pendiente.",
+    "advances_degraded": "Ninguno. Se preserva el espacio fastembed real al 100%.",
+    "advances_goal_6_1": "Sí, proporciona el marco de gobierno para asegurar que el Golden Path se logre de forma acumulativa."
+  }
 }

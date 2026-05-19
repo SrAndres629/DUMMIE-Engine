@@ -1,0 +1,17 @@
+{
+  "structural_debt_remaining": 0.35,
+  "semantic_capability_remaining": 0.45,
+  "model_mesh_remaining": 0.80,
+  "guardrail_remaining": 0.90,
+  "function_calling_remaining": 0.85,
+  "local_runtime_remaining": 0.75,
+  "golden_path_remaining": 0.95,
+  "current_score": 0.32,
+  "blockers": [
+    "Falta de indexación de código AST",
+    "Falta de router de capacidades de modelos"
+  ],
+  "next_highest_leverage_pack": "PACK_3.2",
+  "why_this_pack_next": "El indexador AST de código separará la estructura de sintaxis del corpus textual genérico, aumentando la fidelidad semántica en un 40%.",
+  "what_not_to_do_next": "No saltarse a Pack 4.x antes de cerrar la separación del espacio vectorial de código."
+}

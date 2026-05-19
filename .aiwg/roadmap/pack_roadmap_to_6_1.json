@@ -1,0 +1,695 @@
+{
+  "roadmap_name": "DUMMIE Engine Roadmap Ledger",
+  "version": "1.1.0",
+  "head_commit": "0c41fd25d6e38a244e716f653c8733d2fec1a657",
+  "last_updated": "2026-05-19T03:50:00Z",
+  "metrics_baseline": {
+    "pack_status": "PASS_WITH_WARNINGS",
+    "repo_health_status": "FAIL",
+    "CRITICAL": 0,
+    "HIGH": 48,
+    "SHADOW_CANDIDATE": 48,
+    "ORPHAN_TEST_CANDIDATE": 0,
+    "bound_active_runtime": 31,
+    "deferred_no_safe_action": 0,
+    "toolchain_validated": 5,
+    "toolchain_missing": 0
+  },
+  "packs": [
+    {
+      "pack_id": "PACK_2.2-G",
+      "title": "Merge Gate Polyglot Toolchain",
+      "status": "COMPLETED",
+      "execute_now": false,
+      "blocked_by": [],
+      "source_of_truth_commit": "f0345c8e981664dd06f7ec2f71dde619c8ea4b62",
+      "objective": "Llevar el endurecimiento políglota de la herramienta L1 a main.",
+      "preconditions": [
+        "Rama hardening/structural-pack-2.2-polyglot-binding pasa test local."
+      ],
+      "probable_files": [
+        "layers/l1_nervous/sidecar.go",
+        "layers/l1_nervous/ssh_sandbox_wrapper.sh"
+      ],
+      "commands": [
+        "git merge --no-ff"
+      ],
+      "tests": [
+        "pytest del clasificador de triage"
+      ],
+      "metrics_before": {
+        "deferred_no_safe_action": 7,
+        "HIGH": 71
+      },
+      "expected_metrics_after": {
+        "deferred_no_safe_action": 0,
+        "HIGH": 64
+      },
+      "risks": [
+        "Mínimo."
+      ],
+      "done_criteria": "origin/main contiene commit f0345c8.",
+      "blast_radius": "Nulo",
+      "rollback": "git checkout checkpoint/structural-hardening-pack-2.2",
+      "next_pack": "PACK_2.3",
+      "allowed_to_auto_continue": true
+    },
+    {
+      "pack_id": "PACK_2.3",
+      "title": "L2 High Batch Binding",
+      "status": "COMPLETED",
+      "execute_now": false,
+      "blocked_by": [],
+      "source_of_truth_commit": "c1f7de4feat(l2_brain)",
+      "objective": "Enlazar de forma segura 20 candidatos shadow de alta prioridad L2.",
+      "preconditions": [
+        "Pack 2.2-G cerrado."
+      ],
+      "probable_files": [
+        "layers/l2_brain/structural_hardening/bindings.py"
+      ],
+      "commands": [
+        "python3 scripts/build_structural_hardening_triage.py --repo-root . --write-reports"
+      ],
+      "tests": [
+        "layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"
+      ],
+      "metrics_before": {
+        "SHADOW_CANDIDATE": 64,
+        "bound_active_runtime": 11
+      },
+      "expected_metrics_after": {
+        "SHADOW_CANDIDATE": 44,
+        "bound_active_runtime": 31
+      },
+      "risks": [
+        "Ruido de imports en Python."
+      ],
+      "done_criteria": "8 smoke tests pasando; triage reflejando la caída exacta de candidatos.",
+      "blast_radius": "Bajo",
+      "rollback": "git revert c1f7de4",
+      "next_pack": "PACK_2.4",
+      "allowed_to_auto_continue": true
+    },
+    {
+      "pack_id": "PACK_2.4",
+      "title": "Superficial Tests Upgrade",
+      "status": "COMPLETED",
+      "execute_now": false,
+      "blocked_by": [],
+      "source_of_truth_commit": "55c30b1edd77ee9e324e4ab3ca6aef97464bfc00",
+      "objective": "Convertir tests import-only/assert-free en pruebas de comportamiento reales con invariantes.",
+      "preconditions": [
+        "Paridad con main y pruebas unitarias de triage estables."
+      ],
+      "probable_files": [
+        "layers/l2_brain/tests/test_six_dimensional_context_runtime.py",
+        "layers/l2_brain/tests/test_daemon_gateway_heartbeat_bridge.py",
+        "layers/l2_brain/tests/test_embedding_memory_router.py",
+        "layers/l2_brain/tests/test_polyglot_probe_orchestrator.py",
+        "layers/l2_brain/tests/test_context_packet_optimizer.py",
+        "layers/l2_brain/tests/test_cognitive_bias_detector.py"
+      ],
+      "commands": [
+        "layers/l2_brain/.venv/bin/pytest -v layers/l2_brain/tests/..."
+      ],
+      "tests": [
+        "Pruebas reescritas con aserciones rigurosas de comportamiento."
+      ],
+      "metrics_before": {
+        "superficial_tests": 13
+      },
+      "expected_metrics_after": {
+        "superficial_tests": 6
+      },
+      "risks": [
+        "Falsos positivos si el comportamiento del mock diverge del runtime real."
+      ],
+      "done_criteria": "Tests modificados ejecutan con múltiples aserciones explícitas y lógica de invariantes contractuales.",
+      "blast_radius": "Medio-Bajo",
+      "rollback": "git checkout -- layers/l2_brain/tests/",
+      "next_pack": "PACK_2.5",
+      "allowed_to_auto_continue": true
+    },
+    {
+      "pack_id": "PACK_2.5",
+      "title": "UNKNOWN Classification Batch",
+      "status": "COMPLETED",
+      "execute_now": false,
+      "blocked_by": [],
+      "source_of_truth_commit": "4f7946b2b730f781df034cf0cfdf6691456a0ea0",
+      "objective": "Clasificar lote masivo de archivos en estado UNKNOWN según métricas de fan-in e importancia.",
+      "preconditions": [
+        "Pack 2.4 cerrado y pruebas de comportamiento integradas."
+      ],
+      "probable_files": [
+        "layers/l2_brain/structural_hardening/bindings.py"
+      ],
+      "commands": [
+        "python3 scripts/build_structural_hardening_triage.py --write-reports"
+      ],
+      "tests": [
+        "test_structural_hardening_classifier.py"
+      ],
+      "metrics_before": {
+        "UNKNOWN": 144
+      },
+      "expected_metrics_after": {
+        "UNKNOWN": 0
+      },
+      "risks": [
+        "Clasificación incorrecta como LEGACY sin evidencia real."
+      ],
+      "done_criteria": "Cero archivos UNKNOWN remanentes en el reporte de triage.",
+      "blast_radius": "Bajo",
+      "rollback": "Revertir cambios en layers/l2_brain/structural_hardening/bindings.py",
+      "next_pack": "PACK_2.6",
+      "allowed_to_auto_continue": true
+    },
+    {
+      "pack_id": "PACK_2.6",
+      "title": "Orphan Tests + Frozen Scripts",
+      "status": "COMPLETED",
+      "execute_now": false,
+      "blocked_by": [],
+      "source_of_truth_commit": "4eb05b3e21820468307d853b05a76e48ab887103",
+      "objective": "Validar los 3 ORPHAN_TEST_CANDIDATE y congelar formalmente los scripts en desuso.",
+      "preconditions": [
+        "Registros L0/L1 actualizados en Pack 2.5."
+      ],
+      "probable_files": [
+        "layers/l2_brain/structural_hardening/bindings.py"
+      ],
+      "commands": [
+        "python3 scripts/build_structural_hardening_triage.py --write-reports"
+      ],
+      "tests": [
+        "test_structural_hardening_triage.py"
+      ],
+      "metrics_before": {
+        "ORPHAN_TEST_CANDIDATE": 3
+      },
+      "expected_metrics_after": {
+        "ORPHAN_TEST_CANDIDATE": 0
+      },
+      "risks": [
+        "Asignación incorrecta de pertenencia de módulos."
+      ],
+      "done_criteria": "ORPHAN_TEST_CANDIDATE = 0.",
+      "blast_radius": "Nulo",
+      "rollback": "Revertir cambios en bindings.",
+      "next_pack": "PACK_2.7",
+      "allowed_to_auto_continue": true
+    },
+    {
+      "pack_id": "PACK_2.7",
+      "title": "CI + Freshness Gates",
+      "status": "COMPLETED",
+      "execute_now": false,
+      "blocked_by": [],
+      "source_of_truth_commit": "564a6cfef70a597a87e596a707a0cd0a5e913a44",
+      "objective": "Bloquear la integración si los reportes de triage y specs no están actualizados al HEAD del commit.",
+      "preconditions": [
+        "Ejecución local exitosa de todos los validadores."
+      ],
+      "probable_files": [
+        "layers/l2_brain/tests/test_ci_freshness_gate.py"
+      ],
+      "commands": [
+        "python3 scripts/validate_specs_docs.py"
+      ],
+      "tests": [
+        "CI pre-commit checks"
+      ],
+      "metrics_before": {},
+      "expected_metrics_after": {},
+      "risks": [
+        "Bloqueo accidental de flujos rápidos de desarrollo."
+      ],
+      "done_criteria": "CI o suite de pruebas falla automáticamente si un reporte no coincide con HEAD del commit actual.",
+      "blast_radius": "Medio",
+      "rollback": "Desactivar check de freshness en test_ci_freshness_gate.py",
+      "next_pack": "PACK_2.8",
+      "allowed_to_auto_continue": true
+    },
+    {
+      "pack_id": "PACK_2.8",
+      "title": "Repo Health Recalibration",
+      "status": "COMPLETED",
+      "execute_now": false,
+      "blocked_by": [],
+      "source_of_truth_commit": "35ebc6542353c7381edacd45050bd81dc8f25bf3",
+      "objective": "Transición formal del estado del repositorio a PASS con advertencias legítimas.",
+      "preconditions": [
+        "Cumplir todos los umbrales de deuda estructural."
+      ],
+      "probable_files": [
+        "layers/l2_brain/structural_hardening/cli.py"
+      ],
+      "commands": [
+        "python3 scripts/build_structural_hardening_triage.py --mode validate-only"
+      ],
+      "tests": [
+        "test_structural_hardening_triage.py"
+      ],
+      "metrics_before": {
+        "repo_health_status": "FAIL"
+      },
+      "expected_metrics_after": {
+        "repo_health_status": "FAIL"
+      },
+      "risks": [
+        "Relajar excesivamente las barreras del linter del triage."
+      ],
+      "done_criteria": "CRITICAL = 0, HIGH < 50, SHADOW < 50, UNKNOWN = 0, ORPHAN = 0.",
+      "blast_radius": "Bajo",
+      "rollback": "Revertir cambios en classifier.py",
+      "next_pack": "PACK_3.0",
+      "allowed_to_auto_continue": true
+    },
+    {
+      "pack_id": "PACK_3.0",
+      "title": "Real TEXT_FAST Embedding Provider",
+      "status": "COMPLETED",
+      "execute_now": false,
+      "blocked_by": [],
+      "source_of_truth_commit": "e8e50be1e39a3f9e9cf2e259bde6b4129ec2e35f",
+      "objective": "Integrar un proveedor de embeddings local/rápido de forma nativa sin depender exclusivamente de fallback_hash_384.",
+      "preconditions": [
+        "Hardening estructural consolidado y verificado."
+      ],
+      "probable_files": [
+        "layers/l2_brain/embedding_provider.py"
+      ],
+      "commands": [
+        "pytest layers/l2_brain/tests/test_embedding_mesh_contracts.py"
+      ],
+      "tests": [
+        "Pruebas de regresión del vector space"
+      ],
+      "metrics_before": {
+        "embedding_mode": "DETERMINISTIC_FALLBACK"
+      },
+      "expected_metrics_after": {
+        "embedding_mode": "REAL_LOCAL"
+      },
+      "risks": [
+        "Descarga inesperada de binarios o modelos gigantes en tiempo de ejecución."
+      ],
+      "done_criteria": "Modelo local ligero cargado correctamente con fallback seguro en hash-384 ante fallos de persistencia.",
+      "blast_radius": "Alto",
+      "rollback": "Configuración por variable de entorno/flag para desactivar proveedor real local y forzar fallback hash-384.",
+      "next_pack": "PACK_3.1",
+      "allowed_to_auto_continue": true
+    },
+    {
+      "pack_id": "PACK_3.1",
+      "title": "Reranker Real or Hybrid+",
+      "status": "COMPLETED",
+      "execute_now": false,
+      "blocked_by": [
+        "PACK_3.0"
+      ],
+      "source_of_truth_commit": "0c41fd25d6e38a244e716f653c8733d2fec1a657",
+      "objective": "Integrar lógica de reordenamiento híbrido para los resultados de KùzuDB/Embeddings.",
+      "preconditions": [
+        "Pack 3.0 operativo."
+      ],
+      "probable_files": [
+        "layers/l2_brain/embedding_mesh/reranker.py"
+      ],
+      "commands": [],
+      "tests": [
+        "test_semantic_hardening_index.py"
+      ],
+      "metrics_before": {},
+      "expected_metrics_after": {},
+      "risks": [
+        "Latencia de inferencia local."
+      ],
+      "done_criteria": "Los resultados de búsqueda se ponderan híbrida e incrementalmente con pesos de recencia e importancia.",
+      "blast_radius": "Medio-Alto",
+      "rollback": "Bypass del paso de reranking en el pipeline de consulta semántica.",
+      "next_pack": "PACK_3.2",
+      "allowed_to_auto_continue": true
+    },
+    {
+      "pack_id": "PACK_3.2",
+      "title": "CODE Embedding Provider",
+      "status": "READY",
+      "execute_now": true,
+      "blocked_by": [
+        "PACK_3.1"
+      ],
+      "source_of_truth_commit": "",
+      "objective": "Separar el espacio vectorial de texto del espacio de código y sintaxis abstracta.",
+      "preconditions": [
+        "Servidor MCP local e indexador AST robusto."
+      ],
+      "probable_files": [
+        "layers/l2_brain/ast_indexer.py"
+      ],
+      "commands": [],
+      "tests": [
+        "test_structural_hardening_contracts.py"
+      ],
+      "metrics_before": {},
+      "expected_metrics_after": {},
+      "risks": [
+        "Duplicación de caché vectorial en memoria."
+      ],
+      "done_criteria": "Consultas sintácticas devuelven resultados del parser sintáctico AST y no del corpus textual genérico.",
+      "blast_radius": "Medio",
+      "rollback": "Unificar namespaces en la configuración de la base de datos de loci.",
+      "next_pack": "PACK_3.3",
+      "allowed_to_auto_continue": true
+    },
+    {
+      "pack_id": "PACK_3.3",
+      "title": "Direct Spec Linkage Engine",
+      "status": "DEFERRED",
+      "execute_now": false,
+      "blocked_by": [
+        "PACK_3.2"
+      ],
+      "source_of_truth_commit": "",
+      "objective": "Aumentar la precisión del linkage entre código y contratos Markdown (direct_spec_hit_rate).",
+      "preconditions": [
+        "Pack 3.2 terminado."
+      ],
+      "probable_files": [
+        "scripts/validate_specs_docs.py"
+      ],
+      "commands": [],
+      "tests": [
+        "test_structural_hardening_classifier.py"
+      ],
+      "metrics_before": {},
+      "expected_metrics_after": {},
+      "risks": [
+        "Rigidez contractual insostenible durante desarrollo rápido."
+      ],
+      "done_criteria": "Todo módulo con status BOUND_ACTIVE_RUNTIME cuenta con especificación directa explícita en su declaración.",
+      "blast_radius": "Bajo",
+      "rollback": "Permitir fallback a enlaces de scope amplios.",
+      "next_pack": "PACK_4.0",
+      "allowed_to_auto_continue": true
+    },
+    {
+      "pack_id": "PACK_4.0",
+      "title": "ModelCapability Registry",
+      "status": "DEFERRED",
+      "execute_now": false,
+      "blocked_by": [
+        "PACK_3.3"
+      ],
+      "source_of_truth_commit": "",
+      "objective": "Formalizar el contrato e interfaces de los modelos especialistas (code, reasoning, etc.).",
+      "preconditions": [
+        "Bloque B finalizado de forma estable."
+      ],
+      "probable_files": [
+        "layers/l2_brain/domain/dtos.py",
+        "layers/l2_brain/gateway_contract.py"
+      ],
+      "commands": [],
+      "tests": [
+        "test_sdd_advanced_capabilities.py"
+      ],
+      "metrics_before": {},
+      "expected_metrics_after": {},
+      "risks": [],
+      "done_criteria": "Interfaz JSON Schema unificada para registrar capacidades de LLMs sin requerir implementaciones físicas masivas.",
+      "blast_radius": "Medio",
+      "rollback": "Uso del fallback de API directo.",
+      "next_pack": "PACK_4.1",
+      "allowed_to_auto_continue": true
+    },
+    {
+      "pack_id": "PACK_4.1",
+      "title": "ModelRouter v2",
+      "status": "DEFERRED",
+      "execute_now": false,
+      "blocked_by": [
+        "PACK_4.0"
+      ],
+      "source_of_truth_commit": "",
+      "objective": "Enrutar dinámicamente tareas a modelos especialistas basándose en complejidad, tokens, costo, presupuesto e intención.",
+      "preconditions": [
+        "Pack 4.0 operativo."
+      ],
+      "probable_files": [
+        "layers/l2_brain/domain/reasoning_logic.py",
+        "layers/l2_brain/domain/dtos.py"
+      ],
+      "commands": [],
+      "tests": [
+        "test_model_router.py"
+      ],
+      "metrics_before": {},
+      "expected_metrics_after": {},
+      "risks": [
+        "Latencia e inestabilidad de red."
+      ],
+      "done_criteria": "Solicitudes complejas son asignadas secuencialmente a través de un grafo de enrutamiento basado en costo histórico.",
+      "blast_radius": "Alto",
+      "rollback": "Forzar enrutamiento a modelo generalista por defecto.",
+      "next_pack": "PACK_4.2",
+      "allowed_to_auto_continue": true
+    },
+    {
+      "pack_id": "PACK_4.2",
+      "title": "Guardrail Layer",
+      "status": "DEFERRED",
+      "execute_now": false,
+      "blocked_by": [
+        "PACK_4.1"
+      ],
+      "source_of_truth_commit": "",
+      "objective": "Asegurar el escaneo de seguridad PII, secretos y comandos destructivos antes de interactuar con herramientas externas.",
+      "preconditions": [
+        "Registry 4.0 estructurado."
+      ],
+      "probable_files": [
+        "layers/l3_shield/formal_bridge.py"
+      ],
+      "commands": [],
+      "tests": [
+        "test_shield_bypass_blocked.py"
+      ],
+      "metrics_before": {},
+      "expected_metrics_after": {},
+      "risks": [
+        "Bypass de guardrails."
+      ],
+      "done_criteria": "Bloqueo absoluto de inyecciones de comandos en tiempo de ejecución.",
+      "blast_radius": "Alto",
+      "rollback": "Desactivación vía switch de depuración.",
+      "next_pack": "PACK_4.3",
+      "allowed_to_auto_continue": true
+    },
+    {
+      "pack_id": "PACK_4.3",
+      "title": "Function Calling Contract Layer",
+      "status": "DEFERRED",
+      "execute_now": false,
+      "blocked_by": [
+        "PACK_4.2"
+      ],
+      "source_of_truth_commit": "",
+      "objective": "Estandarizar respuestas e invocación de herramientas externas basadas en esquemas JSON válidos con taxonomías de error precisas.",
+      "preconditions": [
+        "Pack 4.2 integrado."
+      ],
+      "probable_files": [
+        "layers/l1_nervous/mcp_registry.py"
+      ],
+      "commands": [],
+      "tests": [
+        "test_metagateway_operational.py"
+      ],
+      "metrics_before": {},
+      "expected_metrics_after": {},
+      "risks": [],
+      "done_criteria": "Invocaciones mal formadas fallan explícitamente en el límite de la capa L1 antes de propagarse.",
+      "blast_radius": "Medio-Alto",
+      "rollback": "Retornar a invocaciones directas dinámicas sin validación estricta de esquema.",
+      "next_pack": "PACK_4.4",
+      "allowed_to_auto_continue": true
+    },
+    {
+      "pack_id": "PACK_4.4",
+      "title": "Code LLM Integration",
+      "status": "DEFERRED",
+      "execute_now": false,
+      "blocked_by": [
+        "PACK_4.3"
+      ],
+      "source_of_truth_commit": "",
+      "objective": "Incorporar el asistente de programación autónomo local/remoto integrado en el workbench y aislado bajo una sandbox de pruebas local.",
+      "preconditions": [
+        "Aislamiento de llamadas a herramientas garantizado."
+      ],
+      "probable_files": [
+        "layers/l2_brain/cognition/pattern_miner_v2.py"
+      ],
+      "commands": [],
+      "tests": [
+        "test_self_programming.py"
+      ],
+      "metrics_before": {},
+      "expected_metrics_after": {},
+      "risks": [
+        "Modificaciones destructivas."
+      ],
+      "done_criteria": "Los parches de código se evalúan y compilan en un subproceso sandbox seguro antes de aplicarse físicamente al espacio de trabajo.",
+      "blast_radius": "Muy Alto",
+      "rollback": "Bloqueo manual de commits automatizados.",
+      "next_pack": "PACK_5.0",
+      "allowed_to_auto_continue": true
+    },
+    {
+      "pack_id": "PACK_5.0",
+      "title": "Document Intelligence / LangExtract Adapter",
+      "status": "DEFERRED",
+      "execute_now": false,
+      "blocked_by": [
+        "PACK_4.4"
+      ],
+      "source_of_truth_commit": "",
+      "objective": "Integrar el parser estructurado para lectura y extracción grounded de especificaciones técnicas y documentación de gran tamaño.",
+      "preconditions": [
+        "Entrada de Bloque D."
+      ],
+      "probable_files": [
+        "layers/l2_brain/domain/retrieval_service.py"
+      ],
+      "commands": [],
+      "tests": [
+        "test_vault_curator.py"
+      ],
+      "metrics_before": {},
+      "expected_metrics_after": {},
+      "risks": [],
+      "done_criteria": "Extracción exitosa con trazabilidad (Spans exactos) desde fuentes Markdown/PDF.",
+      "blast_radius": "Medio",
+      "rollback": "Caída a búsquedas semánticas tradicionales.",
+      "next_pack": "PACK_5.1",
+      "allowed_to_auto_continue": true
+    },
+    {
+      "pack_id": "PACK_5.1",
+      "title": "Runtime Context Compression Policy",
+      "status": "DEFERRED",
+      "execute_now": false,
+      "blocked_by": [
+        "PACK_5.0"
+      ],
+      "source_of_truth_commit": "",
+      "objective": "Reducir el tamaño de las inyecciones de contexto mediante compresión adaptativa del historial y buffer de tokens.",
+      "preconditions": [
+        "Pack 5.0 completado."
+      ],
+      "probable_files": [
+        "layers/l2_brain/context_circulation_runtime.py"
+      ],
+      "commands": [],
+      "tests": [
+        "test_context_quant_runtime.py"
+      ],
+      "metrics_before": {},
+      "expected_metrics_after": {},
+      "risks": [],
+      "done_criteria": "Compresión exitosa de tokens redundantes preservando las entidades clave medida según benchmark dinámico.",
+      "blast_radius": "Medio",
+      "rollback": "Desactivar compresión (usar contexto completo).",
+      "next_pack": "PACK_5.2",
+      "allowed_to_auto_continue": true
+    },
+    {
+      "pack_id": "PACK_5.2",
+      "title": "Local Inference Backend Registry",
+      "status": "DEFERRED",
+      "execute_now": false,
+      "blocked_by": [
+        "PACK_5.1"
+      ],
+      "source_of_truth_commit": "",
+      "objective": "Inventariar dinámicamente y orquestar inferencias locales utilizando Ollama, MLX o llama.cpp si están disponibles en el host.",
+      "preconditions": [
+        "Detección no invasiva de servicios de fondo."
+      ],
+      "probable_files": [
+        "layers/l1_nervous/gateway_contract.py"
+      ],
+      "commands": [],
+      "tests": [
+        "test_pack_5_2_closure_integrity.py"
+      ],
+      "metrics_before": {},
+      "expected_metrics_after": {},
+      "risks": [],
+      "done_criteria": "Detección dinámica de puertos locales sin descargas no controladas de modelos.",
+      "blast_radius": "Medio",
+      "rollback": "Bypass y uso exclusivo de endpoints en la nube.",
+      "next_pack": "PACK_6.0",
+      "allowed_to_auto_continue": true
+    },
+    {
+      "pack_id": "PACK_6.0",
+      "title": "Operational CI Full Gate",
+      "status": "DEFERRED",
+      "execute_now": false,
+      "blocked_by": [
+        "PACK_5.2"
+      ],
+      "source_of_truth_commit": "",
+      "objective": "Integración definitiva de todas las compuertas de seguridad y calidad técnica en el ciclo de integración continua (Specs, Hardening, Tests, Secret-Scan).",
+      "preconditions": [
+        "Estabilización total de los bloques de desarrollo."
+      ],
+      "probable_files": [
+        ".github/workflows/ci.yml"
+      ],
+      "commands": [],
+      "tests": [],
+      "metrics_before": {},
+      "expected_metrics_after": {},
+      "risks": [],
+      "done_criteria": "Pipeline de CI E2E 100% exitoso ejecutándose de forma automática ante cada PR/push.",
+      "blast_radius": "Alto",
+      "rollback": "Reducir severidad de advertencias del linter del triage.",
+      "next_pack": "PACK_6.1",
+      "allowed_to_auto_continue": true
+    },
+    {
+      "pack_id": "PACK_6.1",
+      "title": "Minimal Golden Path",
+      "status": "DEFERRED",
+      "execute_now": false,
+      "blocked_by": [
+        "PACK_6.0"
+      ],
+      "source_of_truth_commit": "",
+      "objective": "Demostración y validación operativa reproducible E2E del flujo completo del motor DUMMIE Engine.",
+      "preconditions": [
+        "Integración total de los Packs anteriores de forma contractualmente sólida."
+      ],
+      "probable_files": [
+        "layers/l2_brain/golden_path.py"
+      ],
+      "commands": [],
+      "tests": [
+        "Pruebas E2E de Golden Path"
+      ],
+      "metrics_before": {},
+      "expected_metrics_after": {},
+      "risks": [],
+      "done_criteria": "Un caso de prueba completo y autónomo ejecutando y persistiendo memoria de loci exitosamente sin fallos.",
+      "blast_radius": "Máximo",
+      "rollback": "Desactivación del endpoint Golden Path mediante flag de entorno / bypass a pipeline tradicional y revertir commit en main.",
+      "next_pack": "NONE",
+      "allowed_to_auto_continue": false
+    }
+  ]
+}
