@@ -5,9 +5,9 @@ import logging
 
 logging.basicConfig(level=logging.INFO)
 
-sys.path.append(os.path.abspath("layers/l1_nervous"))
-sys.path.append(os.path.abspath("layers/l2_brain"))
-
+sys.path.insert(0, os.path.abspath("layers/l2_brain/flat_brain"))
+sys.path.insert(0, os.path.abspath("layers/l2_brain"))
+sys.path.insert(0, os.path.abspath("layers/l1_nervous"))
 from bootstrap import bootstrap_orchestrator
 from application.use_cases import BrainToolUseCases
 from models import SixDimensionalContext, AuthorityLevel, IntentType
@@ -51,4 +51,5 @@ async def test():
     payload = next(res)[0] if not hasattr(res, "get_next") else res.get_next()[0]
     print(f"Persisted payload: {payload}")
 
-asyncio.run(test())
+if __name__ == "__main__":
+    asyncio.run(test())
