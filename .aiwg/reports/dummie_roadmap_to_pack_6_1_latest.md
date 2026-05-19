@@ -7,13 +7,13 @@
 - **Pack 2.2 Status**: MERGED (`f0345c8`)
 - **Pack 2.3 Status**: MERGED (`c1f7de4`)
 - **Batch 5 Status**: MERGED (`06478a1`)
-- **Current Target**: **Pack 2.4 - Superficial Tests Upgrade**
+- **Current Target**: **Pack 2.5 - UNKNOWN Classification Batch**
 
 ## Upcoming Packs
 
 ### Pack 2.4 - Superficial Tests Upgrade
 - **Objective**: Convert import-only/assert-free tests into behavioral tests.
-- **Status**: PENDING
+- **Status**: COMPLETED (db31398 pushed to branch)
 - **Batch Size**: 8-15 tests.
 - **Criteria**: `superficial_tests` drops; each test validates a contract/invariant.
 - **Preconditions**: Pack 2.3 merged. Main clean.
