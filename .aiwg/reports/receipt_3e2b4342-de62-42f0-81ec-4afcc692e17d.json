@@ -1,0 +1,7 @@
+{
+  "receipt_id": "3e2b4342-de62-42f0-81ec-4afcc692e17d",
+  "command": "ls -la .aiwg/reports",
+  "exit_code": 0,
+  "duration_seconds": 0.01225900650024414,
+  "timestamp": "2026-05-19T04:53:57.061141+00:00"
+}

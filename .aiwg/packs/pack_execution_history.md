@@ -46,3 +46,11 @@ This documents the history of closed development packs.
 * **Status**: `COMPLETED`
 * **Commit**: `bdb76320818c9fbd9f13f47ab5e18668aa08aff9`
 * **Lessons**: Consolidated final freeze consistency for stable L2 brain development.
+
+---
+
+## 7. HEARTBEAT-3.2: AIWG Native Operating Kernel & Context Capsule Engine
+* **Status**: `COMPLETED`
+* **Metrics After**: Native `.aiwg` kernel is fully mandatory for agent execution (`guarded-run`). Incremental token indexer prevents raw folder reading. Token Economy checks now natively block overclaim. 
+* **Repairs**: Implemented `aiwg_preflight`, `mutation_router`, `ContextCapsuleEngine`, `incremental_indexer`, and `ContextCapsuleCache`.
+* **Lessons**: Agentic workflow is now strictly bounded by token budgets and explicitly routed through receipt-based execution records.
