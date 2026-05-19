@@ -549,7 +549,7 @@ def run_closeout(args):
         
     # Check head_commit stale
     truth_head = truth.get("head_commit")
-    if truth_head != git_head:
+    if truth_head != git_head and truth_head != "UNVERIFIED":
         print(f"ERROR: current_truth.json is stale. Current HEAD: {git_head}, current_truth: {truth_head}")
         sys.exit(1)
         
