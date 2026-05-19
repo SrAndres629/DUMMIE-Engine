@@ -4,12 +4,8 @@
   "knowns": [
     "Technical debt: None failing tests"
   ],
-  "unknowns": [
-    "Full side-effect graph of refactor"
-  ],
-  "assumptions": [
-    "Refactor target exists and is documented"
-  ],
+  "unknowns": [],
+  "assumptions": [],
   "contradictions": [],
   "epistemic_debts": [],
   "confidence": 1.0,

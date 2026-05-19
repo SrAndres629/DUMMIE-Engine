@@ -25,21 +25,22 @@
       "sid:CURRENT/ep:ep-8093669b",
       "sid:CURRENT/ep:ep-3234eff5",
       "sid:CURRENT/ep:ep-e972424f",
-      "sid:CURRENT/ep:ep-9736881f"
+      "sid:CURRENT/ep:ep-9736881f",
+      "sid:CURRENT/ep:ep-43ee475d"
     ],
     "vault_refs": [],
     "graph_status": "READY",
     "used_before_chat_response": true,
     "warnings": [],
     "evidence_refs": [
-      ".aiwg/reports/memory_spine_sync_latest.json",
-      ".aiwg/sessions/CURRENT/learning_episodes.jsonl"
+      ".aiwg/sessions/CURRENT/learning_episodes.jsonl",
+      ".aiwg/reports/memory_spine_sync_latest.json"
     ],
-    "generated_at": "2026-05-17T01:49:52Z"
+    "generated_at": "2026-05-19T05:25:02Z"
   },
   "memory_spine_used": true,
   "mental_model": {
-    "model_id": "mm-c0b35caf",
+    "model_id": "mm-ab6dde8e",
     "intent": "status",
     "task_type": "unknown",
     "entities": [
@@ -64,7 +65,7 @@
     "next_actions": [],
     "context_strategy": "ALLOW_MANIFEST_ONLY",
     "memory_refs": [],
-    "created_at": "2026-05-17T01:49:52Z",
+    "created_at": "2026-05-19T05:25:02Z",
     "quality_score": 60,
     "quality_findings": [],
     "epistemic_state_ref": "epistemic_state_latest.json",
@@ -80,7 +81,7 @@
     "belief_revision": ""
   },
   "cognitive_frame": {
-    "frame_id": "frame-3e9b4dc0",
+    "frame_id": "frame-a1891693",
     "intent": "status",
     "operating_mode": "answer",
     "must_preserve": [
@@ -94,7 +95,7 @@
       "private_chain_of_thought"
     ],
     "mental_model_refs": [
-      "mm-c0b35caf"
+      "mm-ab6dde8e"
     ],
     "memory_refs": [],
     "ontology_refs": [
@@ -111,13 +112,13 @@
     "dispatch_recommendation": "local",
     "risks": [],
     "next_actions": [],
-    "created_at": "2026-05-17T01:49:52.336521+00:00"
+    "created_at": "2026-05-19T05:25:02.366482+00:00"
   },
   "metacognitive_loop": {
     "decision": "NEEDS_HUMAN_REVIEW",
     "intent": "status",
-    "mental_model_id": "mm-c0b35caf",
-    "frame_id": "frame-3e9b4dc0",
+    "mental_model_id": "mm-ab6dde8e",
+    "frame_id": "frame-a1891693",
     "quality_gate": {
       "decision": "NEEDS_HUMAN_REVIEW",
       "quality_score": 60.0,
@@ -229,8 +230,8 @@
     "next_self_improvement_action": "increase_test_coverage",
     "self_improvement_blocked_actions": [
       "quarantine_overconfident_models",
-      "repair_kuzu_persistence",
-      "autonomous_scaling"
+      "autonomous_scaling",
+      "repair_kuzu_persistence"
     ],
     "dispatch_recommendation": "local",
     "warnings": []
@@ -292,5 +293,5 @@
     "revision_type": "humility_calibration",
     "next_check_recommended": "repair_kuzu_persistence"
   },
-  "generated_at": "2026-05-17T01:49:52Z"
+  "generated_at": "2026-05-19T05:25:02Z"
 }

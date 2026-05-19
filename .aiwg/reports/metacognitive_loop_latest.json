@@ -1,21 +1,24 @@
 {
-  "decision": "PASS_WITH_WARNINGS",
-  "intent": "refactor memory",
-  "mental_model_id": "mm-f50e5f6d",
-  "frame_id": "frame-8020c7b4",
+  "decision": "NEEDS_HUMAN_REVIEW",
+  "intent": "status",
+  "mental_model_id": "mm-ab6dde8e",
+  "frame_id": "frame-a1891693",
   "quality_gate": {
-    "decision": "PASS_WITH_WARNINGS",
-    "quality_score": 80.0,
+    "decision": "NEEDS_HUMAN_REVIEW",
+    "quality_score": 60.0,
     "findings": [
+      {
+        "category": "MODEL",
+        "message": "No relations extracted",
+        "severity": "WARN"
+      },
       {
         "category": "ONTOLOGY",
         "message": "Ontology graph is empty or has zero edges",
         "severity": "WARN"
       }
     ],
-    "warnings": [
-      "Ontology graph is empty or has zero edges"
-    ],
+    "warnings": [],
     "epistemic_debt_count": 0,
     "bias_count": 0
   },
@@ -25,12 +28,8 @@
     "knowns": [
       "Technical debt: None failing tests"
     ],
-    "unknowns": [
-      "Full side-effect graph of refactor"
-    ],
-    "assumptions": [
-      "Refactor target exists and is documented"
-    ],
+    "unknowns": [],
+    "assumptions": [],
     "contradictions": [],
     "epistemic_debts": [],
     "confidence": 1.0,
@@ -61,7 +60,7 @@
       {
         "id": "INTENT",
         "type": "TELEOLOGY",
-        "goal": "refactor memory"
+        "goal": "status"
       }
     ],
     "edges": [
@@ -82,7 +81,7 @@
       "Agency"
     ],
     "teleology": {
-      "goal": "refactor memory",
+      "goal": "status",
       "impact": "evolution"
     },
     "authority_constraints": [
@@ -96,14 +95,14 @@
     ]
   },
   "dialectical_review": {
-    "thesis": "Proceed with refactor memory to improve the system.",
+    "thesis": "Proceed with status to improve the system.",
     "antithesis": "Propose delay until core regressions (Kuzu/Tests) are resolved.",
     "counterexamples": [
       "Previous failed refactor attempts",
       "Incomplete test coverage"
     ],
-    "synthesis": "Do not proceed with active refactoring until test debt is mitigated.",
-    "decision": "repair_first"
+    "synthesis": "Proceed with caution using local mock-fallback; prioritize test repair first.",
+    "decision": "proceed"
   },
   "evolution_delta": {
     "belief_changed": "From 'System is ready' to 'System has epistemic debt'",
@@ -111,15 +110,13 @@
     "revision_type": "humility_calibration",
     "next_check_recommended": "repair_kuzu_persistence"
   },
-  "recommended_next_action": "repair_first",
+  "recommended_next_action": "respond_via_frame",
   "next_self_improvement_action": "increase_test_coverage",
   "self_improvement_blocked_actions": [
     "quarantine_overconfident_models",
-    "repair_kuzu_persistence",
-    "autonomous_scaling"
+    "autonomous_scaling",
+    "repair_kuzu_persistence"
   ],
-  "dispatch_recommendation": "antigravity",
-  "warnings": [
-    "Ontology graph is empty or has zero edges"
-  ]
+  "dispatch_recommendation": "local",
+  "warnings": []
 }

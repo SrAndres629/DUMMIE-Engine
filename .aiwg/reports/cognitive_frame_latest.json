@@ -1,6 +1,6 @@
 {
-  "frame_id": "frame-8020c7b4",
-  "intent": "refactor memory",
+  "frame_id": "frame-a1891693",
+  "intent": "status",
   "operating_mode": "answer",
   "must_preserve": [
     "current_phase",
@@ -13,12 +13,11 @@
     "private_chain_of_thought"
   ],
   "mental_model_refs": [
-    "mm-f50e5f6d"
+    "mm-ab6dde8e"
   ],
   "memory_refs": [],
   "ontology_refs": [
-    "DEBT",
-    "MEMORY"
+    "REPORT"
   ],
   "evidence_refs": [
     ".aiwg/reports/test_debt_triage_latest.json",
@@ -28,8 +27,8 @@
   ],
   "token_budget_hint": "low",
   "context_strategy": "MANIFEST_ONLY",
-  "dispatch_recommendation": "antigravity",
+  "dispatch_recommendation": "local",
   "risks": [],
   "next_actions": [],
-  "created_at": "2026-05-19T03:22:38.804482+00:00"
+  "created_at": "2026-05-19T05:25:02.366482+00:00"
 }

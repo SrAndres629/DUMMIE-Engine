@@ -1248,5 +1248,14 @@
     "intent_hash": "",
     "superseded_by": "",
     "hygiene_findings": []
+  },
+  "mm-ab6dde8e": {
+    "path": ".aiwg/mental_models/runtime_models.jsonl",
+    "status": "valid",
+    "quality_score": 60,
+    "created_at": "2026-05-19T05:25:02Z",
+    "intent_hash": "",
+    "superseded_by": "",
+    "hygiene_findings": []
   }
 }

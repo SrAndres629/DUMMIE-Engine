@@ -1,16 +1,19 @@
 {
-  "decision": "PASS_WITH_WARNINGS",
-  "quality_score": 80.0,
+  "decision": "NEEDS_HUMAN_REVIEW",
+  "quality_score": 60.0,
   "findings": [
+    {
+      "category": "MODEL",
+      "message": "No relations extracted",
+      "severity": "WARN"
+    },
     {
       "category": "ONTOLOGY",
       "message": "Ontology graph is empty or has zero edges",
       "severity": "WARN"
     }
   ],
-  "warnings": [
-    "Ontology graph is empty or has zero edges"
-  ],
+  "warnings": [],
   "epistemic_debt_count": 0,
   "bias_count": 0
 }

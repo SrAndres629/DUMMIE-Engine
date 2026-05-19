@@ -1,44 +1,33 @@
 {
   "decision": "PASS",
   "concepts": [
-    "refactor memory"
+    "status"
   ],
   "classes": [
-    "DEBT",
-    "MEMORY"
+    "REPORT"
   ],
   "ontology_graph": {
     "nodes": [
       {
         "id": "INTENT",
-        "label": "refactor memory",
+        "label": "status",
         "type": "INTENT"
       },
       {
-        "id": "DEBT",
-        "label": "DEBT",
-        "type": "CLASS"
-      },
-      {
-        "id": "MEMORY",
-        "label": "MEMORY",
+        "id": "REPORT",
+        "label": "REPORT",
         "type": "CLASS"
       }
     ],
     "edges": [
       {
         "source": "INTENT",
-        "target": "DEBT",
-        "type": "IS_A"
-      },
-      {
-        "source": "INTENT",
-        "target": "MEMORY",
+        "target": "REPORT",
         "type": "IS_A"
       }
     ]
   },
-  "timestamp": "2026-05-19T03:22:38.804240+00:00",
+  "timestamp": "2026-05-19T05:25:02.366460+00:00",
   "warnings": [
     ""
   ]

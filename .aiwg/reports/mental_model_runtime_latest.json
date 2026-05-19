@@ -1,31 +1,14 @@
 {
-  "model_id": "mm-f50e5f6d",
-  "intent": "refactor memory",
+  "model_id": "mm-ab6dde8e",
+  "intent": "status",
   "task_type": "unknown",
   "entities": [
     "TechnicalDebt",
-    "RefactorTarget",
-    "MemoryContext",
     "ReadinessScore"
   ],
-  "relations": [
-    {
-      "source": "RefactorTarget",
-      "target": "TechnicalDebt",
-      "type": "mitigates"
-    },
-    {
-      "source": "MemoryContext",
-      "target": "MemorySpine",
-      "type": "consumes"
-    }
-  ],
-  "assumptions": [
-    "Target codebase is stable enough for modification"
-  ],
-  "decisions": [
-    "Audit technical debt report before execution"
-  ],
+  "relations": [],
+  "assumptions": [],
+  "decisions": [],
   "risks": [],
   "constraints": [],
   "semantic_tags": [],
@@ -37,24 +20,22 @@
     ".aiwg/reports/memory_spine_entrypoint_latest.json"
   ],
   "confidence": 0.9,
-  "contradictions": [
-    "Claim: PASS while 177 tests are missing"
-  ],
+  "contradictions": [],
   "next_actions": [],
   "context_strategy": "ALLOW_MANIFEST_ONLY",
   "memory_refs": [],
-  "created_at": "2026-05-19T03:22:38Z",
-  "quality_score": 90,
+  "created_at": "2026-05-19T05:25:02Z",
+  "quality_score": 60,
   "quality_findings": [],
   "epistemic_state_ref": "epistemic_state_latest.json",
   "dialectical_review_ref": "dialectical_review_latest.json",
   "bias_findings": [],
   "teleology": {
-    "goal": "refactor memory",
+    "goal": "status",
     "impact_type": "architectural_integrity"
   },
   "falsification_tests": [
-    "verify refactor memory with 0 new regressions"
+    "verify status with 0 new regressions"
   ],
   "belief_revision": ""
 }
