@@ -1,89 +1,63 @@
-# Spec Reference: 192_embedding_mesh_foundation
+from __future__ import annotations
+
 import argparse
-import sys
 from pathlib import Path
-from .matrix import StructuralTriageMatrix
-from .reporter import StructuralHardeningReporter
-from .contracts import RiskLevel
+from typing import Any, Dict, Tuple
+
+from .matrix import StructuralTriageMatrix, load_json_safe
+from .reporter import write_reports
 
 
-def main(args_list: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(
-        description="DUMMIE Engine - Structural Hardening Triage CLI"
-    )
-    parser.add_argument(
-        "--repo-root",
-        default=".",
-        help="Root path of the DUMMIE Engine repository"
-    )
-    parser.add_argument(
-        "--write-reports",
-        action="store_true",
-        help="Whether to write structural triage reports to the .aiwg/reports/ directory"
-    )
-    parser.add_argument(
-        "--max-actions",
-        type=int,
-        default=50,
-        help="Maximum action items to include in top actions list"
-    )
-    parser.add_argument(
-        "--include-low-risk",
-        action="store_true",
-        help="Includes low risk items in reporting output"
-    )
-    parser.add_argument(
-        "--fail-on-critical",
-        action="store_true",
-        help="Exit with non-zero status if any critical-risk items are found"
+def build_structural_hardening_triage(
+    repo_root: str,
+    write_reports_flag: bool,
+    max_actions: int,
+    include_low_risk: bool,
+    fail_on_critical: bool,
+) -> Tuple[Dict[str, Any], int]:
+    root = Path(repo_root).resolve()
+    reports_dir = root / ".aiwg" / "reports"
+
+    semantic_index = load_json_safe(reports_dir / "semantic_repo_index_latest.json", default={"files": []})
+    semantic_matrix = load_json_safe(reports_dir / "semantic_hardening_matrix_latest.json", default={"records": []})
+
+    matrix = StructuralTriageMatrix(root)
+    report = matrix.build(
+        semantic_index=semantic_index,
+        semantic_matrix=semantic_matrix,
+        max_actions=max_actions,
+        include_low_risk=include_low_risk,
     )
 
-    args = parser.parse_args(args_list)
-    repo_root = Path(args.repo_root).resolve()
+    if write_reports_flag:
+        write_reports(report, reports_dir, max_actions=max_actions)
 
-    print(f"=== Starting Structural Hardening Triage on {repo_root} ===")
-    
-    try:
-        matrix = StructuralTriageMatrix(str(repo_root))
-        report = matrix.analyze()
-        
-        print("\nTriage Analysis Complete.")
-        print(f"Base Commit: {report.base_commit}")
-        print(f"Files Analyzed: {report.files_analyzed}")
-        print(f"Repository Health Status: {report.repo_health_status}")
-        
-        print("\nSummary Counts by Structural Class:")
-        for cls_name, count in sorted(report.summary_counts.items()):
-            print(f"  - {cls_name}: {count}")
-            
-        high_risk_actions = len(report.top_actions)
-        print(f"\nTop Unresolved High-Risk Actions Count: {high_risk_actions}")
-        
-        if args.write_reports:
-            print("\nWriting structural reports to .aiwg/reports/...")
-            reporter = StructuralHardeningReporter(str(repo_root))
-            written = reporter.write_reports(report, max_actions=args.max_actions)
-            print("Successfully wrote reports:")
-            print(f"  - JSON: {written['triage_json']}")
-            print(f"  - Markdown: {written['triage_md']}")
-            print(f"  - Actions JSON: {written['actions_json']}")
-            print(f"  - Actions MD: {written['actions_md']}")
-            
-        if args.fail_on_critical:
-            # Check if there are any findings with risk high/critical
-            criticals = sum(1 for f in report.findings if f.risk in [RiskLevel.CRITICAL, RiskLevel.HIGH])
-            if criticals > 0:
-                print(f"\n[ERROR] Found {criticals} high/critical risk items. Failing as requested.")
-                return 1
-                
-        return 0
+    exit_code = 0
+    critical = report.summary_counts.get("by_risk", {}).get("CRITICAL", 0)
+    if fail_on_critical and critical > 0:
+        exit_code = 2
 
-    except Exception as e:
-        print(f"\n[CRITICAL ERROR] Triage failed: {e}", file=sys.stderr)
-        import traceback
-        traceback.print_exc()
-        return 1
+    return report.model_dump(mode="json"), exit_code
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description="Build Structural Hardening Pack 2 triage reports")
+    parser.add_argument("--repo-root", default=".")
+    parser.add_argument("--write-reports", action=argparse.BooleanOptionalAction, default=True)
+    parser.add_argument("--max-actions", type=int, default=50)
+    parser.add_argument("--include-low-risk", action="store_true")
+    parser.add_argument("--fail-on-critical", action="store_true")
+    args = parser.parse_args()
+
+    _, exit_code = build_structural_hardening_triage(
+        repo_root=args.repo_root,
+        write_reports_flag=args.write_reports,
+        max_actions=args.max_actions,
+        include_low_risk=args.include_low_risk,
+        fail_on_critical=args.fail_on_critical,
+    )
+    return exit_code
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    raise SystemExit(main())

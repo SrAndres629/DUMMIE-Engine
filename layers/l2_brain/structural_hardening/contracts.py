@@ -1,8 +1,8 @@
-# Spec Reference: 192_embedding_mesh_foundation
 from __future__ import annotations
 
 from enum import Enum
-from typing import Any, Dict, List, Optional
+from typing import Dict, List
+
 from pydantic import BaseModel, Field
 
 
@@ -63,30 +63,30 @@ class RiskLevel(str, Enum):
 
 
 class StructuralFinding(BaseModel):
-    path: str = Field(..., description="File path relative to repository root")
-    current_class: StructuralClass = Field(StructuralClass.UNKNOWN, description="Class assigned by semantic matrix")
-    proposed_class: StructuralClass = Field(..., description="Calibrated class proposing ownership status")
-    risk: RiskLevel = Field(RiskLevel.LOW, description="Safety risk of making structural refactors")
-    recommendation: Recommendation = Field(Recommendation.NO_ACTION, description="Specific triage action to perform next")
-    confidence: float = Field(1.0, description="Confidence of classification between 0.0 and 1.0")
-    evidence_refs: List[str] = Field(default_factory=list, description="Descriptive evidence references justifying categorization")
-    reasons: List[str] = Field(default_factory=list, description="Natural language reasoning steps")
-    related_specs: List[str] = Field(default_factory=list, description="Specs directly mapping to or referencing this module")
-    related_tests: List[str] = Field(default_factory=list, description="Tests validating or importing this module")
-    related_runtime: List[str] = Field(default_factory=list, description="Runtime modules associated with this artifact")
-    safe_to_change: bool = Field(True, description="True if safe to modify or clean up without regression risk")
-    requires_human_review: bool = Field(False, description="True if high-risk or ambiguous requiring human eyes")
+    path: str
+    current_class: StructuralClass
+    proposed_class: StructuralClass
+    risk: RiskLevel
+    recommendation: Recommendation
+    confidence: float = Field(..., ge=0.0, le=1.0)
+    evidence_refs: List[str] = Field(default_factory=list)
+    reasons: List[str] = Field(default_factory=list)
+    related_specs: List[str] = Field(default_factory=list)
+    related_tests: List[str] = Field(default_factory=list)
+    related_runtime: List[str] = Field(default_factory=list)
+    safe_to_change: bool = False
+    requires_human_review: bool = True
 
 
 class StructuralTriageReport(BaseModel):
-    generated_at: str = Field(..., description="ISO timestamp")
-    base_commit: str = Field(..., description="Base commit hash of the triage analysis")
-    pack_name: str = Field("Structural Hardening Pack 2", description="Verification phase name")
-    pack_status: str = Field(..., description="triage_completed / triage_failed")
-    repo_health_status: str = Field(..., description="PASS / FAIL based on critical shadow candidate counts")
-    files_analyzed: int = Field(..., description="Total count of files processed")
-    findings: List[StructuralFinding] = Field(..., description="Complete array of file findings")
-    summary_counts: Dict[str, int] = Field(..., description="Count of findings per structural class")
-    top_actions: List[Dict[str, Any]] = Field(..., description="Sorted highest risk/priority actions to perform")
-    limitations: List[str] = Field(default_factory=list, description="Limitations of current analysis run")
-    next_recommended_phase: str = Field("Structural Hardening Pack 2.1 — Physics Cleanup", description="Next evolutionary step")
+    generated_at: str
+    base_commit: str
+    pack_name: str
+    pack_status: str
+    repo_health_status: str
+    files_analyzed: int
+    findings: List[StructuralFinding]
+    summary_counts: Dict[str, Dict[str, int]]
+    top_actions: List[StructuralFinding]
+    limitations: List[str]
+    next_recommended_phase: str
