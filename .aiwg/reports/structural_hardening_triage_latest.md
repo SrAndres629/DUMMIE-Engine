@@ -3,10 +3,10 @@
 ## Status
 - pack_status: PASS_WITH_WARNINGS
 - repo_health_status: FAIL
-- base_commit: 2ac50f72a078ff11d7309e3fe1a1603a7d2be909
-- analysis_base_commit: 2ac50f72a078ff11d7309e3fe1a1603a7d2be909
-- report_generated_at_commit: 2ac50f72a078ff11d7309e3fe1a1603a7d2be909
-- head_commit: 2ac50f72a078ff11d7309e3fe1a1603a7d2be909
+- base_commit: 06478a1fa387c7bdbaab6b87ffc20d7ecb2e7702
+- analysis_base_commit: 06478a1fa387c7bdbaab6b87ffc20d7ecb2e7702
+- report_generated_at_commit: 06478a1fa387c7bdbaab6b87ffc20d7ecb2e7702
+- head_commit: 06478a1fa387c7bdbaab6b87ffc20d7ecb2e7702
 - files_analyzed: 1340
 
 ## Explicit Metrics

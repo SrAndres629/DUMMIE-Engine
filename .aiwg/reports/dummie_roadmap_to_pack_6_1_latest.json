@@ -1,0 +1,581 @@
+{
+  "roadmap_name": "DUMMIE Engine Roadmap Ledger",
+  "version": "1.0.0",
+  "head_commit": "06478a1fa387c7bdbaab6b87ffc20d7ecb2e7702",
+  "last_updated": "2026-05-19T02:56:00Z",
+  "metrics_baseline": {
+    "pack_status": "PASS_WITH_WARNINGS",
+    "repo_health_status": "FAIL",
+    "CRITICAL": 0,
+    "HIGH": 44,
+    "SHADOW_CANDIDATE": 44,
+    "ORPHAN_TEST_CANDIDATE": 3,
+    "bound_active_runtime": 31,
+    "deferred_no_safe_action": 0,
+    "toolchain_validated": 5,
+    "toolchain_missing": 0
+  },
+  "packs": [
+    {
+      "id": "PACK_2.2-G",
+      "name": "Merge Gate Polyglot Toolchain",
+      "status": "COMPLETED",
+      "objective": "Llevar el endurecimiento políglota de la herramienta L1 a main.",
+      "preconditions": [
+        "Rama hardening/structural-pack-2.2-polyglot-binding pasa test local."
+      ],
+      "probable_files": [
+        "layers/l1_nervous/sidecar.go",
+        "layers/l1_nervous/ssh_sandbox_wrapper.sh"
+      ],
+      "commands": [
+        "git merge --no-ff"
+      ],
+      "tests": [
+        "pytest del clasificador de triage"
+      ],
+      "metrics_before": {
+        "deferred_no_safe_action": 7,
+        "HIGH": 71
+      },
+      "metrics_after": {
+        "deferred_no_safe_action": 0,
+        "HIGH": 64
+      },
+      "risks": [
+        "Mínimo."
+      ],
+      "done_criteria": "origin/main contiene commit f0345c8.",
+      "blast_radius": "Nulo",
+      "rollback": "git checkout checkpoint/structural-hardening-pack-2.2",
+      "execution_timing": "COMPLETED"
+    },
+    {
+      "id": "PACK_2.3",
+      "name": "L2 High Batch Binding",
+      "status": "COMPLETED",
+      "objective": "Enlazar de forma segura 20 candidatos shadow de alta prioridad L2.",
+      "preconditions": [
+        "Pack 2.2-G cerrado."
+      ],
+      "probable_files": [
+        "layers/l2_brain/structural_hardening/bindings.py"
+      ],
+      "commands": [
+        "python3 scripts/build_structural_hardening_triage.py --repo-root . --write-reports"
+      ],
+      "tests": [
+        "layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"
+      ],
+      "metrics_before": {
+        "SHADOW_CANDIDATE": 64,
+        "bound_active_runtime": 11
+      },
+      "metrics_after": {
+        "SHADOW_CANDIDATE": 44,
+        "bound_active_runtime": 31
+      },
+      "risks": [
+        "Ruido de imports en Python."
+      ],
+      "done_criteria": "8 smoke tests pasando; triage reflejando la caída exacta de candidatos.",
+      "blast_radius": "Bajo",
+      "rollback": "git revert c1f7de4",
+      "execution_timing": "COMPLETED"
+    },
+    {
+      "id": "PACK_2.4",
+      "name": "Superficial Tests Upgrade",
+      "status": "ACTIVE_EXECUTION",
+      "objective": "Convertir tests import-only/assert-free en pruebas de comportamiento reales con invariantes.",
+      "preconditions": [
+        "Paridad con main y pruebas unitarias de triage estables."
+      ],
+      "probable_files": [
+        "layers/l2_brain/tests/test_six_dimensional_context_runtime.py",
+        "layers/l2_brain/tests/test_daemon_gateway_heartbeat_bridge.py",
+        "layers/l2_brain/tests/test_embedding_memory_router.py",
+        "layers/l2_brain/tests/test_polyglot_probe_orchestrator.py",
+        "layers/l2_brain/tests/test_context_packet_optimizer.py",
+        "layers/l2_brain/tests/test_cognitive_bias_detector.py"
+      ],
+      "commands": [
+        "layers/l2_brain/.venv/bin/pytest -v layers/l2_brain/tests/..."
+      ],
+      "tests": [
+        "Pruebas reescritas con aserciones rigurosas de comportamiento."
+      ],
+      "metrics_before": {
+        "superficial_tests": 13
+      },
+      "metrics_after": {
+        "superficial_tests": 6
+      },
+      "risks": [
+        "Falsos positivos si el comportamiento del mock diverge del runtime real."
+      ],
+      "done_criteria": "Tests modificados ejecutan con múltiples aserciones explícitas y lógica de invariantes contractuales.",
+      "blast_radius": "Medio-Bajo",
+      "rollback": "git checkout -- layers/l2_brain/tests/",
+      "execution_timing": "NOW"
+    },
+    {
+      "id": "PACK_2.5",
+      "name": "UNKNOWN Classification Batch",
+      "status": "DEFERRED",
+      "objective": "Clasificar lote masivo de archivos en estado UNKNOWN según métricas de fan-in e importancia.",
+      "preconditions": [
+        "Pack 2.4 cerrado y pruebas de comportamiento integradas."
+      ],
+      "probable_files": [
+        "144 archivos UNKNOWN en L0, L1 y L2"
+      ],
+      "commands": [
+        "python3 scripts/build_structural_hardening_triage.py --write-reports"
+      ],
+      "tests": [
+        "test_structural_hardening_classifier.py"
+      ],
+      "metrics_before": {
+        "UNKNOWN": 144
+      },
+      "metrics_after": {
+        "UNKNOWN": 80
+      },
+      "risks": [
+        "Clasificación incorrecta como LEGACY sin evidencia real."
+      ],
+      "done_criteria": "Menos de 80 archivos UNKNOWN remanentes.",
+      "blast_radius": "Bajo",
+      "rollback": "Revertir cambios en layers/l2_brain/structural_hardening/bindings.py",
+      "execution_timing": "AFTER"
+    },
+    {
+      "id": "PACK_2.6",
+      "name": "Orphan Tests + Frozen Scripts",
+      "status": "DEFERRED",
+      "objective": "Validar los 3 ORPHAN_TEST_CANDIDATE y congelar formalmente los scripts en desuso.",
+      "preconditions": [
+        "Registros L0/L1 actualizados en Pack 2.5."
+      ],
+      "probable_files": [
+        "layers/l2_brain/structural_hardening/bindings.py"
+      ],
+      "commands": [
+        "python3 scripts/build_structural_hardening_triage.py --write-reports"
+      ],
+      "tests": [
+        "test_structural_hardening_triage.py"
+      ],
+      "metrics_before": {
+        "ORPHAN_TEST_CANDIDATE": 3
+      },
+      "metrics_after": {
+        "ORPHAN_TEST_CANDIDATE": 0
+      },
+      "risks": [
+        "Asignación incorrecta de pertenencia de módulos."
+      ],
+      "done_criteria": "ORPHAN_TEST_CANDIDATE = 0.",
+      "blast_radius": "Nulo",
+      "rollback": "Revertir cambios en bindings.",
+      "execution_timing": "AFTER"
+    },
+    {
+      "id": "PACK_2.7",
+      "name": "CI + Freshness Gates",
+      "status": "DEFERRED",
+      "objective": "Bloquear la integración si los reportes de triage y specs no están actualizados al HEAD del commit.",
+      "preconditions": [
+        "Ejecución local exitosa de todos los validadores."
+      ],
+      "probable_files": [
+        ".github/workflows/ci.yml"
+      ],
+      "commands": [
+        "python3 scripts/validate_specs_docs.py"
+      ],
+      "tests": [
+        "CI pre-commit checks"
+      ],
+      "metrics_before": {},
+      "metrics_after": {},
+      "risks": [
+        "Bloqueo accidental de flujos rápidos de desarrollo."
+      ],
+      "done_criteria": "CI falla automáticamente si un reporte no coincide con HEAD del commit actual.",
+      "blast_radius": "Medio",
+      "rollback": "Desactivar Hooks de Git.",
+      "execution_timing": "AFTER"
+    },
+    {
+      "id": "PACK_2.8",
+      "name": "Repo Health Recalibration",
+      "status": "DEFERRED",
+      "objective": "Transición formal del estado del repositorio a PASS con advertencias legítimas.",
+      "preconditions": [
+        "Cumplir todos los umbrales de deuda estructural."
+      ],
+      "probable_files": [
+        "layers/l2_brain/structural_hardening/classifier.py"
+      ],
+      "commands": [
+        "python3 scripts/build_structural_hardening_triage.py"
+      ],
+      "tests": [
+        "test_structural_hardening_classifier.py"
+      ],
+      "metrics_before": {
+        "repo_health_status": "FAIL"
+      },
+      "metrics_after": {
+        "repo_health_status": "PASS_WITH_WARNINGS"
+      },
+      "risks": [
+        "Relajar excesivamente las barreras del linter del triage."
+      ],
+      "done_criteria": "CRITICAL = 0, HIGH < 20, SHADOW < 20, UNKNOWN < 30.",
+      "blast_radius": "Bajo",
+      "rollback": "Revertir límites en classifier.py",
+      "execution_timing": "AFTER"
+    },
+    {
+      "id": "PACK_3.0",
+      "name": "Real TEXT_FAST Embedding Provider",
+      "status": "DEFERRED",
+      "objective": "Integrar un proveedor de embeddings local/rápido de forma nativa sin depender exclusivamente de fallback_hash_384.",
+      "preconditions": [
+        "Hardening estructural consolidado en PASS_WITH_WARNINGS."
+      ],
+      "probable_files": [
+        "layers/l2_brain/embedding_provider.py"
+      ],
+      "commands": [
+        "pytest layers/l2_brain/tests/test_embedding_mesh_contracts.py"
+      ],
+      "tests": [
+        "Pruebas de regresión del vector space"
+      ],
+      "metrics_before": {},
+      "metrics_after": {},
+      "risks": [
+        "Descarga inesperada de binarios o modelos gigantes en tiempo de ejecución."
+      ],
+      "done_criteria": "Modelo local ligero cargado correctamente con fallback seguro en hash-384 ante fallos de persistencia.",
+      "blast_radius": "Alto",
+      "rollback": "Configuración por variable de entorno para desactivar proveedor.",
+      "execution_timing": "AFTER"
+    },
+    {
+      "id": "PACK_3.1",
+      "name": "Reranker Real or Hybrid+",
+      "status": "DEFERRED",
+      "objective": "Integrar lógica de reordenamiento híbrido para los resultados de KùzuDB/Embeddings.",
+      "preconditions": [
+        "Pack 3.0 operativo."
+      ],
+      "probable_files": [
+        "layers/l2_brain/domain/retrieval_service.py"
+      ],
+      "commands": [],
+      "tests": [
+        "test_vault_embedding_index.py"
+      ],
+      "metrics_before": {},
+      "metrics_after": {},
+      "risks": [
+        "Latencia de inferencia local."
+      ],
+      "done_criteria": "Los resultados de búsqueda se ponderan híbrida e incrementalmente con pesos de recencia e importancia.",
+      "blast_radius": "Medio-Alto",
+      "rollback": "Bypass del paso de reranking.",
+      "execution_timing": "AFTER"
+    },
+    {
+      "id": "PACK_3.2",
+      "name": "CODE Embedding Provider",
+      "status": "DEFERRED",
+      "objective": "Separar el espacio vectorial de texto del espacio de código y sintaxis abstracta.",
+      "preconditions": [
+        "Servidor MCP local e indexador AST robusto."
+      ],
+      "probable_files": [
+        "layers/l2_brain/ast_indexer.py"
+      ],
+      "commands": [],
+      "tests": [
+        "test_structural_hardening_contracts.py"
+      ],
+      "metrics_before": {},
+      "metrics_after": {},
+      "risks": [
+        "Duplicación de caché vectorial en memoria."
+      ],
+      "done_criteria": "Consultas sintácticas devuelven resultados del parser sintáctico AST y no del corpus textual genérico.",
+      "blast_radius": "Medio",
+      "rollback": "Unificar namespaces.",
+      "execution_timing": "AFTER"
+    },
+    {
+      "id": "PACK_3.3",
+      "name": "Direct Spec Linkage Engine",
+      "status": "DEFERRED",
+      "objective": "Aumentar la precisión del linkage entre código y contratos Markdown (direct_spec_hit_rate).",
+      "preconditions": [
+        "Pack 3.2 terminado."
+      ],
+      "probable_files": [
+        "scripts/validate_specs_docs.py"
+      ],
+      "commands": [],
+      "tests": [
+        "test_structural_hardening_classifier.py"
+      ],
+      "metrics_before": {},
+      "metrics_after": {},
+      "risks": [
+        "Rigidez contractual insostenible durante desarrollo rápido."
+      ],
+      "done_criteria": "Todo módulo con status BOUND_ACTIVE_RUNTIME cuenta con especificación directa explícita en su declaración.",
+      "blast_radius": "Bajo",
+      "rollback": "Permitir fallback a enlaces de scope amplios.",
+      "execution_timing": "AFTER"
+    },
+    {
+      "id": "PACK_4.0",
+      "name": "ModelCapability Registry",
+      "status": "DEFERRED",
+      "objective": "Formalizar el contrato contractual e interfaces de los modelos especialistas (code, reasoning, etc.).",
+      "preconditions": [
+        "Bloque B finalizado de forma estable."
+      ],
+      "probable_files": [
+        "layers/l2_brain/domain/dtos.py",
+        "layers/l2_brain/gateway_contract.py"
+      ],
+      "commands": [],
+      "tests": [
+        "test_sdd_advanced_capabilities.py"
+      ],
+      "metrics_before": {},
+      "metrics_after": {},
+      "risks": [],
+      "done_criteria": "Interfaz JSON Schema unificada para registrar capacidades de LLMs sin requerir implementaciones físicas masivas.",
+      "blast_radius": "Medio",
+      "rollback": "Uso del fallback de API directo.",
+      "execution_timing": "AFTER"
+    },
+    {
+      "id": "PACK_4.1",
+      "name": "ModelRouter v2",
+      "status": "DEFERRED",
+      "objective": "Enrutar dinámicamente tareas a modelos especialistas basándose en complejidad, tokens, costo, presupuesto e intención.",
+      "preconditions": [
+        "Pack 4.0 operativo."
+      ],
+      "probable_files": [
+        "layers/l2_brain/domain/reasoning_logic.py",
+        "layers/l2_brain/domain/dtos.py"
+      ],
+      "commands": [],
+      "tests": [
+        "test_model_router.py"
+      ],
+      "metrics_before": {},
+      "metrics_after": {},
+      "risks": [
+        "Latencia e inestabilidad de red."
+      ],
+      "done_criteria": "Solicitudes complejas son asignadas secuencialmente a través de un grafo de enrutamiento basado en costo histórico.",
+      "blast_radius": "Alto",
+      "rollback": "Forzar enrutamiento a modelo generalista por defecto.",
+      "execution_timing": "AFTER"
+    },
+    {
+      "id": "PACK_4.2",
+      "name": "Guardrail Layer",
+      "status": "DEFERRED",
+      "objective": "Asegurar el escaneo de seguridad PII, secretos y comandos destructivos antes de interactuar con herramientas externas.",
+      "preconditions": [
+        "Registry 4.0 estructurado."
+      ],
+      "probable_files": [
+        "layers/l3_shield/formal_bridge.py"
+      ],
+      "commands": [],
+      "tests": [
+        "test_shield_bypass_blocked.py"
+      ],
+      "metrics_before": {},
+      "metrics_after": {},
+      "risks": [
+        "Bypass de guardrails."
+      ],
+      "done_criteria": "Bloqueo absoluto de inyecciones de comandos en tiempo de ejecución.",
+      "blast_radius": "Alto",
+      "rollback": "Desactivación vía switch de depuración.",
+      "execution_timing": "AFTER"
+    },
+    {
+      "id": "PACK_4.3",
+      "name": "Function Calling Contract Layer",
+      "status": "DEFERRED",
+      "objective": "Estandarizar respuestas e invocación de herramientas externas basadas en esquemas JSON válidos con taxonomías de error precisas.",
+      "preconditions": [
+        "Pack 4.2 integrado."
+      ],
+      "probable_files": [
+        "layers/l1_nervous/mcp_registry.py"
+      ],
+      "commands": [],
+      "tests": [
+        "test_metagateway_operational.py"
+      ],
+      "metrics_before": {},
+      "metrics_after": {},
+      "risks": [],
+      "done_criteria": "Invocaciones mal formadas fallan explícitamente en el límite de la capa L1 antes de propagarse.",
+      "blast_radius": "Medio-Alto",
+      "rollback": "Retornar a invocaciones directas dinámicas sin validación estricta de esquema.",
+      "execution_timing": "AFTER"
+    },
+    {
+      "id": "PACK_4.4",
+      "name": "Code LLM Integration",
+      "status": "DEFERRED",
+      "objective": "Incorporar el asistente de programación autónomo local/remoto integrado en el workbench y aislado bajo una sandbox de pruebas local.",
+      "preconditions": [
+        "Aislamiento de llamadas a herramientas garantizado."
+      ],
+      "probable_files": [
+        "layers/l2_brain/cognition/pattern_miner_v2.py"
+      ],
+      "commands": [],
+      "tests": [
+        "test_self_programming.py"
+      ],
+      "metrics_before": {},
+      "metrics_after": {},
+      "risks": [
+        "Modificaciones destructivas."
+      ],
+      "done_criteria": "Los parches de código se evalúan y compilan en un subproceso sandbox seguro antes de aplicarse físicamente al espacio de trabajo.",
+      "blast_radius": "Muy Alto",
+      "rollback": "Bloqueo manual de commits.",
+      "execution_timing": "AFTER"
+    },
+    {
+      "id": "PACK_5.0",
+      "name": "Document Intelligence / LangExtract Adapter",
+      "status": "DEFERRED",
+      "objective": "Integrar el parser estructurado para lectura y extracción grounded de especificaciones técnicas y documentación de gran tamaño.",
+      "preconditions": [
+        "Entrada de Bloque D."
+      ],
+      "probable_files": [
+        "layers/l2_brain/domain/retrieval_service.py"
+      ],
+      "commands": [],
+      "tests": [
+        "test_vault_curator.py"
+      ],
+      "metrics_before": {},
+      "metrics_after": {},
+      "risks": [],
+      "done_criteria": "Extracción exitosa con trazabilidad (Spans exactos) desde fuentes Markdown/PDF.",
+      "blast_radius": "Medio",
+      "rollback": "Caída a búsquedas semánticas tradicionales.",
+      "execution_timing": "AFTER"
+    },
+    {
+      "id": "PACK_5.1",
+      "name": "Runtime Context Compression Policy",
+      "status": "DEFERRED",
+      "objective": "Reducir el tamaño de las inyecciones de contexto mediante compresión adaptativa del historial y buffer de tokens.",
+      "preconditions": [
+        "Pack 5.0 completado."
+      ],
+      "probable_files": [
+        "layers/l2_brain/context_circulation_runtime.py"
+      ],
+      "commands": [],
+      "tests": [
+        "test_context_quant_runtime.py"
+      ],
+      "metrics_before": {},
+      "metrics_after": {},
+      "risks": [],
+      "done_criteria": "Compresión exitosa de un 40% de tokens inútiles garantizando retención de entidades fundamentales.",
+      "blast_radius": "Medio",
+      "rollback": "Desactivar compresión.",
+      "execution_timing": "AFTER"
+    },
+    {
+      "id": "PACK_5.2",
+      "name": "Local Inference Backend Registry",
+      "status": "DEFERRED",
+      "objective": "Inventariar dinámicamente y orquestar inferencias locales utilizando Ollama, MLX o llama.cpp si están disponibles en el host.",
+      "preconditions": [
+        "Detección no invasiva de servicios de fondo."
+      ],
+      "probable_files": [
+        "layers/l1_nervous/gateway_contract.py"
+      ],
+      "commands": [],
+      "tests": [
+        "test_pack_5_2_closure_integrity.py"
+      ],
+      "metrics_before": {},
+      "metrics_after": {},
+      "risks": [],
+      "done_criteria": "Detección dinámica de puertos locales sin descargas no controladas de modelos.",
+      "blast_radius": "Medio",
+      "rollback": "Bypass y uso exclusivo de endpoints en la nube.",
+      "execution_timing": "AFTER"
+    },
+    {
+      "id": "PACK_6.0",
+      "name": "Operational CI Full Gate",
+      "status": "DEFERRED",
+      "objective": "Integración definitiva de todas las compuertas de seguridad y calidad técnica en el ciclo de integración continua (Specs, Hardening, Tests, Secret-Scan).",
+      "preconditions": [
+        "Estabilización total de los bloques de desarrollo."
+      ],
+      "probable_files": [
+        ".github/workflows/ci.yml"
+      ],
+      "commands": [],
+      "tests": [],
+      "metrics_before": {},
+      "metrics_after": {},
+      "risks": [],
+      "done_criteria": "Ningún commit sin firmas válidas y pruebas E2E 100% exitosas puede ser fusionado.",
+      "blast_radius": "Alto",
+      "rollback": "Reducir severidad de advertencias.",
+      "execution_timing": "AFTER"
+    },
+    {
+      "id": "PACK_6.1",
+      "name": "Minimal Golden Path",
+      "status": "DEFERRED",
+      "objective": "Demostración y validación operativa reproducible E2E del flujo completo del motor DUMMIE Engine.",
+      "preconditions": [
+        "Integración total de los Packs anteriores de forma contractualmente sólida."
+      ],
+      "probable_files": [
+        "layers/l2_brain/golden_path.py"
+      ],
+      "commands": [],
+      "tests": [
+        "Pruebas E2E de Golden Path"
+      ],
+      "metrics_before": {},
+      "metrics_after": {},
+      "risks": [],
+      "done_criteria": "Un caso de prueba completo y autónomo ejecutando y persistiendo memoria de loci exitosamente sin fallos.",
+      "blast_radius": "Máximo",
+      "rollback": "Nulo",
+      "execution_timing": "AFTER"
+    }
+  ]
+}
