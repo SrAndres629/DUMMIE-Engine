@@ -13,9 +13,15 @@ class KuzuGraphSyncAdapter:
     def __init__(self, db_path: str = ".aiwg/kuzu.db"):
         self.db_path = db_path
         self.kuzu = None
+        self.repo = None
         try:
             import kuzu
             self.kuzu = kuzu
+            try:
+                from layers.l2_brain.infrastructure.adapters.kuzu import KuzuRepository
+            except ImportError:
+                from infrastructure.adapters.kuzu import KuzuRepository
+            self.repo = KuzuRepository(db_path=self.db_path)
         except ImportError:
             logger.warning("Kuzu not installed. Graph sync will run in DEGRADED mode.")
 
@@ -72,17 +78,83 @@ class KuzuGraphSyncAdapter:
         if not validation["valid"]:
             return {"status": "FAILED", "errors": validation["errors"]}
             
-        if not self.kuzu:
-             return {"status": "DEGRADED", "error": "Kuzu not installed. Cannot apply writes.", "writes_performed": False}
+        if not self.kuzu or not self.repo:
+             return {"status": "DEGRADED", "error": "Kuzu or Repository not initialized. Cannot apply writes.", "writes_performed": False}
              
-        # Actual write logic would go here in future phases.
-        return {
-            "status": "SIMULATED",
-            "mode": "apply",
-            "nodes_planned": len(plan.get("nodes", [])),
-            "edges_planned": len(plan.get("edges", [])),
-            "writes_performed": False,
-            "simulation": True,
-            "db_status": validation["status"],
-            "note": "Actual Kuzu writes simulated in Phase 9.1"
-        }
+        try:
+            import json
+            import re
+            import hashlib
+            try:
+                from layers.l2_brain.models import MemoryNode4D, AuthorityLevel, IntentType
+            except ImportError:
+                from models import MemoryNode4D, AuthorityLevel, IntentType
+                
+            nodes_written = 0
+            id_to_hash = {}
+            
+            # Map graph nodes to MemoryNode4D
+            for gnode in plan.get("nodes", []):
+                node_id = gnode.get("node_id")
+                # Determine parents from edges
+                parents = []
+                for edge in plan.get("edges", []):
+                    if edge.get("target") == node_id:
+                        source_id = edge.get("source")
+                        # Use already computed causal hash of parent if available
+                        parent_hash = id_to_hash.get(source_id)
+                        if parent_hash:
+                            parents.append(parent_hash)
+                        else:
+                            source_node = next((n for n in plan.get("nodes", []) if n.get("node_id") == source_id), None)
+                            if source_node and source_node.get("content_hash") and re.match(r"^[a-f0-9]{64}$", source_node.get("content_hash")):
+                                parents.append(source_node.get("content_hash"))
+                            else:
+                                parents.append(source_id)
+                
+                if not parents:
+                    parents = ["GENESIS"]
+                    
+                payload_dict = {
+                    "node_id": node_id,
+                    "node_type": gnode.get("node_type"),
+                    "memory_ref_id": gnode.get("memory_ref_id"),
+                    "mission_id": gnode.get("mission_id"),
+                    "phase_id": gnode.get("phase_id"),
+                    "properties": gnode.get("properties", {})
+                }
+                payload = json.dumps(payload_dict)
+                
+                node = MemoryNode4D.from_intent_context(
+                    parent_hashes=parents,
+                    locus_x=gnode.get("mission_id") or "sw.strategy.discovery",
+                    locus_y=gnode.get("phase_id") or "L1_TRANSPORT",
+                    locus_z=gnode.get("node_type") or "GenericNode",
+                    lamport_t=0,
+                    authority_a=AuthorityLevel.AGENT,
+                    intent_i=IntentType.CRYSTALLIZATION,
+                    payload=payload
+                )
+                
+                self.repo.create_memory_node(node)
+                id_to_hash[node_id] = node.causal_hash
+                nodes_written += 1
+                
+            return {
+                "status": "SUCCESS",
+                "mode": "apply",
+                "nodes_planned": len(plan.get("nodes", [])),
+                "edges_planned": len(plan.get("edges", [])),
+                "writes_performed": True,
+                "simulation": False,
+                "db_status": "READY",
+                "nodes_written": nodes_written,
+                "id_to_hash": id_to_hash
+            }
+        except Exception as e:
+            logger.error(f"Error executing real write to Kuzu: {e}")
+            return {
+                "status": "FAILED",
+                "error": f"Kuzu write failed: {e}",
+                "writes_performed": False
+            }
