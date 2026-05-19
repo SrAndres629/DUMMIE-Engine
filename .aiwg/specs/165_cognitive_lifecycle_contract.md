@@ -1,3 +1,18 @@
+---
+spec_id: "165_cognitive_lifecycle_contract"
+title: "Cognitive Lifecycle Contract"
+status: "ACTIVE"
+canonicality: "canonical"
+artifact_type: "spec"
+plan: "PACK_R3"
+layer: "runtime_governance"
+created_by: "codex"
+created_on: "2026-05-19"
+last_verified_on: "2026-05-19"
+depends_on:
+  - "108_truth_hierarchy"
+---
+
 # Spec 165: Cognitive Lifecycle Contract
 
 ## Purpose
@@ -208,6 +223,36 @@ Esta spec define el órgano que falta para hacer ejecutable Spec 108. Su impleme
 - Integración segura de capabilities externas vía Meta-Gateway
 - Operación autónoma real con sesiones coordinadas y verdad compartida
 - Cumplimiento del Engineering Mandate: evolvability first mediante verdad verificable
+
+## Current State
+Spec 165 is the canonical design contract for the runtime governance organ. It is not yet a fully blocking runtime implementation; it currently defines the required interface, evidence receipt schema, entry points, and phased enforcement path.
+
+## Physical Evidence
+- `.aiwg/specs/165_cognitive_lifecycle_contract.md`
+- `.aiwg/specs/165_cognitive_lifecycle_contract.feature`
+- `.aiwg/specs/165_cognitive_lifecycle_contract.rules.json`
+- `.aiwg/schemas/cognitive_lifecycle_receipt.schema.json`
+
+## Contract Invariants
+- Architectural or code claims must be classified against the truth hierarchy before acceptance.
+- High-risk and critical actions must require evidence receipts.
+- Human notes and chat memory must never outrank code, tests, active specs, or machine schemas.
+- Multi-session agents must share a common lifecycle context before mutating canonical files.
+- Runtime implementation must start advisory and progress to blocking only with tests and receipts.
+
+## Verification
+```bash
+python3 scripts/validate_specs_docs.py --check .aiwg/specs/165_cognitive_lifecycle_contract.md
+python3 -m json.tool .aiwg/specs/165_cognitive_lifecycle_contract.rules.json
+python3 -m json.tool .aiwg/schemas/cognitive_lifecycle_receipt.schema.json
+```
+
+## Traceability
+| Relationship | Artifact | Role |
+| --- | --- | --- |
+| rules | `.aiwg/specs/165_cognitive_lifecycle_contract.rules.json` | Machine-readable lifecycle enforcement rules |
+| schema | `.aiwg/schemas/cognitive_lifecycle_receipt.schema.json` | EvidenceReceipt validation schema |
+| feature | `.aiwg/specs/165_cognitive_lifecycle_contract.feature` | BDD acceptance behavior |
 
 ---
 *Spec escrita en cumplimiento del rol de socio estratégico: propone estructura canónica, espera aprobación soberana antes de implementación.*
