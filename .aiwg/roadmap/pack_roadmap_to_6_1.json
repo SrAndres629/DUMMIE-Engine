@@ -60,7 +60,7 @@
       "status": "COMPLETED",
       "execute_now": false,
       "blocked_by": [],
-      "source_of_truth_commit": "c1f7de4feat(l2_brain)",
+      "source_of_truth_commit": "UNVERIFIED",
       "objective": "Enlazar de forma segura 20 candidatos shadow de alta prioridad L2.",
       "preconditions": [
         "Pack 2.2-G cerrado."
@@ -341,7 +341,7 @@
       "blocked_by": [
         "PACK_3.1"
       ],
-      "source_of_truth_commit": "",
+      "source_of_truth_commit": "UNVERIFIED",
       "objective": "Separar el espacio vectorial de texto del espacio de código y sintaxis abstracta.",
       "preconditions": [
         "Servidor MCP local e indexador AST robusto."
@@ -372,7 +372,7 @@
       "blocked_by": [
         "PACK_3.2"
       ],
-      "source_of_truth_commit": "",
+      "source_of_truth_commit": "UNVERIFIED",
       "objective": "Aumentar la precisión del linkage entre código y contratos Markdown (direct_spec_hit_rate).",
       "preconditions": [
         "Pack 3.2 terminado."
@@ -403,7 +403,7 @@
       "blocked_by": [
         "PACK_3.3"
       ],
-      "source_of_truth_commit": "",
+      "source_of_truth_commit": "UNVERIFIED",
       "objective": "Formalizar el contrato e interfaces de los modelos especialistas (code, reasoning, etc.).",
       "preconditions": [
         "Bloque B finalizado de forma estable."
@@ -433,7 +433,7 @@
       "blocked_by": [
         "PACK_4.0"
       ],
-      "source_of_truth_commit": "",
+      "source_of_truth_commit": "UNVERIFIED",
       "objective": "Enrutar dinámicamente tareas a modelos especialistas basándose en complejidad, tokens, costo, presupuesto e intención.",
       "preconditions": [
         "Pack 4.0 operativo."
@@ -465,7 +465,7 @@
       "blocked_by": [
         "PACK_4.1"
       ],
-      "source_of_truth_commit": "",
+      "source_of_truth_commit": "UNVERIFIED",
       "objective": "Asegurar el escaneo de seguridad PII, secretos y comandos destructivos antes de interactuar con herramientas externas.",
       "preconditions": [
         "Registry 4.0 estructurado."
@@ -496,7 +496,7 @@
       "blocked_by": [
         "PACK_4.2"
       ],
-      "source_of_truth_commit": "",
+      "source_of_truth_commit": "UNVERIFIED",
       "objective": "Estandarizar respuestas e invocación de herramientas externas basadas en esquemas JSON válidos con taxonomías de error precisas.",
       "preconditions": [
         "Pack 4.2 integrado."
@@ -525,7 +525,7 @@
       "blocked_by": [
         "PACK_4.3"
       ],
-      "source_of_truth_commit": "",
+      "source_of_truth_commit": "UNVERIFIED",
       "objective": "Incorporar el asistente de programación autónomo local/remoto integrado en el workbench y aislado bajo una sandbox de pruebas local.",
       "preconditions": [
         "Aislamiento de llamadas a herramientas garantizado."
@@ -556,7 +556,7 @@
       "blocked_by": [
         "PACK_4.4"
       ],
-      "source_of_truth_commit": "",
+      "source_of_truth_commit": "UNVERIFIED",
       "objective": "Integrar el parser estructurado para lectura y extracción grounded de especificaciones técnicas y documentación de gran tamaño.",
       "preconditions": [
         "Entrada de Bloque D."
@@ -585,7 +585,7 @@
       "blocked_by": [
         "PACK_5.0"
       ],
-      "source_of_truth_commit": "",
+      "source_of_truth_commit": "UNVERIFIED",
       "objective": "Reducir el tamaño de las inyecciones de contexto mediante compresión adaptativa del historial y buffer de tokens.",
       "preconditions": [
         "Pack 5.0 completado."
@@ -614,7 +614,7 @@
       "blocked_by": [
         "PACK_5.1"
       ],
-      "source_of_truth_commit": "",
+      "source_of_truth_commit": "UNVERIFIED",
       "objective": "Inventariar dinámicamente y orquestar inferencias locales utilizando Ollama, MLX o llama.cpp si están disponibles en el host.",
       "preconditions": [
         "Detección no invasiva de servicios de fondo."
@@ -643,7 +643,7 @@
       "blocked_by": [
         "PACK_5.2"
       ],
-      "source_of_truth_commit": "",
+      "source_of_truth_commit": "UNVERIFIED",
       "objective": "Integración definitiva de todas las compuertas de seguridad y calidad técnica en el ciclo de integración continua (Specs, Hardening, Tests, Secret-Scan).",
       "preconditions": [
         "Estabilización total de los bloques de desarrollo."
@@ -670,7 +670,7 @@
       "blocked_by": [
         "PACK_6.0"
       ],
-      "source_of_truth_commit": "",
+      "source_of_truth_commit": "UNVERIFIED",
       "objective": "Demostración y validación operativa reproducible E2E del flujo completo del motor DUMMIE Engine.",
       "preconditions": [
         "Integración total de los Packs anteriores de forma contractualmente sólida."

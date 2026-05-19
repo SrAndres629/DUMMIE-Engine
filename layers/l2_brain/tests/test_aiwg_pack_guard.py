@@ -13,6 +13,7 @@ HISTORY_JSONL = os.path.join(AIWG_DIR, "packs", "pack_execution_history.jsonl")
 DISTANCE_JSON = os.path.join(AIWG_DIR, "metrics", "project_distance_to_6_1.json")
 CRITIQUE_JSON = os.path.join(AIWG_DIR, "reports", "pack_self_critique_latest.json")
 DECISION_LOG = os.path.join(AIWG_DIR, "decisions", "decision_log.jsonl")
+EVIDENCE_JSON = os.path.join(AIWG_DIR, "reports", "pack_validation_evidence_latest.json")
 
 def test_current_truth_mandatory_fields():
     """Assert current_truth.json contains all mandatory metadata fields required by governance."""
@@ -55,17 +56,176 @@ def test_active_pack_rollback_and_tests():
     assert isinstance(tests, list) and len(tests) > 0, "tests_required must be a non-empty list"
     assert isinstance(stops, list) and len(stops) > 0, "stop_conditions must be a non-empty list"
 
+def test_self_critique_fails_if_unverified(tmp_path, monkeypatch):
+    """Assert that self-critique command fails if mandatory arguments are missing/UNVERIFIED."""
+    import scripts.aiwg_pack_guard as guard
+    
+    class DummyArgs:
+        what = None  # Missing
+        broken = "Ninguno"  # Optimistic pattern (rejected)
+        metrics = "Metrics updated"
+        shallow = "Shallow tests identified"
+        stale = "Stale reports identified"
+        assumptions = "Some assumptions"
+        repairs = "Repairs identified"
+        degraded = "Advances degraded details"
+        goal = "Moves towards Pack 6.1"
+        
+    temp_active = os.path.join(tmp_path, "active_pack.json")
+    with open(temp_active, "w", encoding="utf-8") as f:
+        json.dump({"pack_id": "TEST_PACK"}, f)
+        
+    monkeypatch.setattr(guard, "ACTIVE_PACK", temp_active)
+    monkeypatch.setattr(guard, "CRITIQUE_JSON", os.path.join(tmp_path, "critique.json"))
+    monkeypatch.setattr(guard, "CRITIQUE_MD", os.path.join(tmp_path, "critique.md"))
+    
+    with pytest.raises(SystemExit) as excinfo:
+        guard.run_self_critique(DummyArgs())
+    assert excinfo.value.code != 0, "self-critique must exit with non-zero code if any field is UNVERIFIED"
+
 def test_closeout_fails_if_missing_self_critique(tmp_path, monkeypatch):
     """Assert that closeout subcommand fails if self-critique JSON file is missing."""
     import scripts.aiwg_pack_guard as guard
     
-    # Mock critique path to a non-existent file
     non_existent = os.path.join(tmp_path, "missing_critique.json")
     monkeypatch.setattr(guard, "CRITIQUE_JSON", non_existent)
     
     with pytest.raises(SystemExit) as excinfo:
         guard.run_closeout(None)
     assert excinfo.value.code != 0, "closeout should fail when self-critique is missing"
+
+def test_closeout_fails_if_missing_evidence(tmp_path, monkeypatch):
+    """Assert that closeout fails if validation evidence is missing."""
+    import scripts.aiwg_pack_guard as guard
+    
+    temp_critique = os.path.join(tmp_path, "critique.json")
+    with open(temp_critique, "w", encoding="utf-8") as f:
+        json.dump({
+            "answers": {
+                "what_implemented": "Implemented tests",
+                "what_broken": "None verified",
+                "metrics_changed": "None",
+                "tests_shallow": "None",
+                "reports_stale": "None",
+                "assumptions": "None",
+                "repairs_needed": "None",
+                "advances_degraded": "None",
+                "advances_goal_6_1": "Yes"
+            }
+        }, f)
+        
+    monkeypatch.setattr(guard, "CRITIQUE_JSON", temp_critique)
+    monkeypatch.setattr(guard, "EVIDENCE_JSON", os.path.join(tmp_path, "missing_evidence.json"))
+    
+    with pytest.raises(SystemExit) as excinfo:
+        guard.run_closeout(None)
+    assert excinfo.value.code != 0, "closeout should fail when validation evidence is missing"
+
+def test_closeout_fails_if_stale_evidence_commit(tmp_path, monkeypatch):
+    """Assert that closeout fails if validation evidence commit hash is stale."""
+    import scripts.aiwg_pack_guard as guard
+    
+    temp_critique = os.path.join(tmp_path, "critique.json")
+    with open(temp_critique, "w", encoding="utf-8") as f:
+        json.dump({
+            "answers": {
+                "what_implemented": "Implemented tests",
+                "what_broken": "None verified",
+                "metrics_changed": "None",
+                "tests_shallow": "None",
+                "reports_stale": "None",
+                "assumptions": "None",
+                "repairs_needed": "None",
+                "advances_degraded": "None",
+                "advances_goal_6_1": "Yes"
+            }
+        }, f)
+        
+    temp_evidence = os.path.join(tmp_path, "evidence.json")
+    with open(temp_evidence, "w", encoding="utf-8") as f:
+        json.dump({
+            "exit_code": 0,
+            "commit": "stale_hash_value"
+        }, f)
+        
+    monkeypatch.setattr(guard, "CRITIQUE_JSON", temp_critique)
+    monkeypatch.setattr(guard, "EVIDENCE_JSON", temp_evidence)
+    monkeypatch.setattr(guard, "get_git_head", lambda: "actual_git_head_hash")
+    
+    with pytest.raises(SystemExit) as excinfo:
+        guard.run_closeout(None)
+    assert excinfo.value.code != 0, "closeout should fail when evidence commit is stale"
+
+def test_closeout_fails_if_invalid_roadmap_sha(tmp_path, monkeypatch):
+    """Assert that closeout fails if any source_of_truth_commit in roadmap is invalid."""
+    import scripts.aiwg_pack_guard as guard
+    
+    temp_critique = os.path.join(tmp_path, "critique.json")
+    with open(temp_critique, "w", encoding="utf-8") as f:
+        json.dump({
+            "answers": {
+                "what_implemented": "Implemented tests",
+                "what_broken": "None verified",
+                "metrics_changed": "None",
+                "tests_shallow": "None",
+                "reports_stale": "None",
+                "assumptions": "None",
+                "repairs_needed": "None",
+                "advances_degraded": "None",
+                "advances_goal_6_1": "Yes"
+            }
+        }, f)
+        
+    temp_evidence = os.path.join(tmp_path, "evidence.json")
+    with open(temp_evidence, "w", encoding="utf-8") as f:
+        json.dump({
+            "exit_code": 0,
+            "commit": "actual_hash"
+        }, f)
+        
+    temp_roadmap = os.path.join(tmp_path, "roadmap.json")
+    with open(temp_roadmap, "w", encoding="utf-8") as f:
+        json.dump({
+            "packs": [
+                {
+                    "pack_id": "PACK_2.3",
+                    "source_of_truth_commit": "invalid_commit_format(l2_brain)"  # Invalid!
+                }
+            ]
+        }, f)
+        
+    temp_active = os.path.join(tmp_path, "active.json")
+    with open(temp_active, "w", encoding="utf-8") as f:
+        json.dump({
+            "pack_id": "AIWG_KERNEL_0.1",
+            "rollback_plan": "Revert change",
+            "stop_conditions": ["Condition 1"],
+            "tests_required": ["test_aiwg_pack_guard.py"]
+        }, f)
+        
+    temp_truth = os.path.join(tmp_path, "truth.json")
+    with open(temp_truth, "w", encoding="utf-8") as f:
+        json.dump({
+            "current_pack": "AIWG_KERNEL_0.1",
+            "head_commit": "actual_hash"
+        }, f)
+        
+    monkeypatch.setattr(guard, "CRITIQUE_JSON", temp_critique)
+    monkeypatch.setattr(guard, "EVIDENCE_JSON", temp_evidence)
+    monkeypatch.setattr(guard, "ROADMAP_JSON", temp_roadmap)
+    monkeypatch.setattr(guard, "ACTIVE_PACK", temp_active)
+    monkeypatch.setattr(guard, "STATE_TRUTH", temp_truth)
+    monkeypatch.setattr(guard, "DISTANCE_JSON", os.path.join(tmp_path, "distance.json"))
+    monkeypatch.setattr(guard, "HISTORY_JSONL", os.path.join(tmp_path, "history.jsonl"))
+    monkeypatch.setattr(guard, "DECISION_LOG", os.path.join(tmp_path, "decision_log.jsonl"))
+    monkeypatch.setattr(guard, "get_git_head", lambda: "actual_hash")
+    
+    # Mock files exist
+    monkeypatch.setattr(os.path, "exists", lambda p: True)
+    
+    with pytest.raises(SystemExit) as excinfo:
+        guard.run_closeout(None)
+    assert excinfo.value.code != 0, "closeout should fail if roadmap contains invalid source of truth commit format"
 
 def test_distance_report_contains_pack_6_1():
     """Assert that project_distance_to_6_1 JSON and MD files reference the long-term Pack 6.1 objective."""

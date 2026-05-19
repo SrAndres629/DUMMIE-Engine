@@ -1,0 +1,11 @@
+{
+  "command": "PYTHONPATH=. layers/l2_brain/.venv/bin/pytest layers/l2_brain/tests/test_aiwg_pack_guard.py",
+  "exit_code": 0,
+  "started_at": "2026-05-19T04:12:16.457267Z",
+  "finished_at": "2026-05-19T04:12:16.457284Z",
+  "cwd": "/media/datasets/DUMMIE Engine",
+  "python_executable": "/usr/bin/python3",
+  "commit": "9f2756f97a295b289ab47ebddd567787c981e1fb",
+  "result": "PASSED",
+  "suite_name": "pytest"
+}

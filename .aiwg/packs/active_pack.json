@@ -1,10 +1,10 @@
 {
-  "pack_id": "PACK_3.1_MERGE_GATE",
-  "pack_title": "Hybrid+ Reranker Main Closure & AIWG Kernel Integration",
-  "objective": "Cerrar definitivamente el Pack 3.1 en main y asegurar el gobierno via el Execution Kernel de .aiwg",
+  "pack_id": "AIWG_KERNEL_0.1",
+  "pack_title": "AIWG Kernel Hardening 0.1 — Evidence-Strict Pack Governance",
+  "objective": "Endurecer el AIWG Execution Kernel antes de iniciar Pack 3.2, forzando closeouts estrictos con evidencias de pruebas físicas y cero defaults optimistas.",
   "long_term_objective_link": "long_term_objectives.json",
-  "short_term_goal": "Integrar el Execution Kernel de gobierno vial .aiwg y consolidar tests.",
-  "why_now": "Es imperativo evitar la fragmentación de sub-parches de desarrollo en ramas paralelas.",
+  "short_term_goal": "Asegurar que el guardián de gobernanza rechace estados no verificados y valide metadatos deterministas de forma robusta.",
+  "why_now": "Es crítico prevenir la complacencia documental y asegurar un control estricto libre de claims no medidos antes de proceder a la separación del espacio de código.",
   "not_in_scope": [
     "Iniciar Pack 3.2"
   ],
@@ -28,15 +28,16 @@
   "expected_metrics_after": {
     "degraded_embeddings": 717
   },
-  "regression_risks": "Errores de sintaxis o import en los validadores del pack guard.",
-  "known_blindspots": "Carga de dependencias en pytest.",
+  "regression_risks": "Bloqueo accidental en el proceso de closeout por fallas del validador.",
+  "known_blindspots": "Comportamiento del validador de git HEAD en entornos de pruebas aislados.",
   "acceptance_criteria": [
-    "Tests de guardián de gobierno pasan con 100% de éxito.",
-    "No se permite drift ni evasión del roadmap."
+    "El comando self-critique falla si no se pasan respuestas o si éstas contienen defaults optimistas.",
+    "El comando closeout requiere un archivo de validación física exitosa y que el commit del ledger coincida con el HEAD actual.",
+    "Todos los tests de test_aiwg_pack_guard.py pasan exitosamente."
   ],
-  "rollback_plan": "Revertir cambios estructurales de los scripts de .aiwg.",
+  "rollback_plan": "Revertir cambios de scripts/aiwg_pack_guard.py y tests asociados.",
   "auto_continue_allowed": false,
   "stop_conditions": [
-    "No iniciar Pack 3.2 hasta haber completado el merge de Pack 3.1 e implementar el guard de gobierno."
+    "No iniciar Pack 3.2 hasta haber endurecido el kernel y pasado satisfactoriamente las compuertas de gobernanza."
   ]
 }

@@ -1,12 +1,12 @@
 # Current Truth — DUMMIE Engine State
 
-* **Generated At**: `2026-05-19T03:50:00Z`
-* **Head Commit**: `0c41fd25d6e38a244e716f653c8733d2fec1a657`
+* **Generated At**: `2026-05-19T04:10:00Z`
+* **Head Commit**: `9f2756f97a295b289ab47ebddd567787c981e1fb`
 * **Branch**: `main`
 * **Repo Health Status**: `FAIL`
 * **Semantic Mode**: `text_fast_bge_small_384`
 * **Index Mode**: `hybrid_index_mode`
-* **Current Pack**: `PACK_3.1_MERGE_GATE`
+* **Current Pack**: `AIWG_KERNEL_0.1`
 * **Last Completed Pack**: `PACK_3.1`
 * **Next Pack**: `PACK_3.2`
 

@@ -1,15 +1,15 @@
 {
-  "pack_id": "PACK_3.1_MERGE_GATE",
-  "generated_at": "2026-05-19T04:03:26.864401Z",
+  "pack_id": "AIWG_KERNEL_0.1",
+  "generated_at": "2026-05-19T04:12:23.179978Z",
   "answers": {
-    "what_implemented": "Implementado el AIWG Execution Kernel de gobierno vial y validación de tests.",
-    "what_broken": "Ninguno. Los tests unitarios del guardián y regresiones pasan al 100%.",
-    "metrics_changed": "Se agregaron métricas de gobernanza e historial de packs.",
-    "tests_shallow": "Ninguno. El nuevo test test_aiwg_pack_guard.py ejercita todas las compuertas.",
-    "reports_stale": "Ninguno. Los reportes están sincronizados con main.",
-    "assumptions": "Se asume que el desarrollador respetará las stop_conditions.",
-    "repairs_needed": "Ninguna reparación pendiente.",
-    "advances_degraded": "Ninguno. Se preserva el espacio fastembed real al 100%.",
-    "advances_goal_6_1": "Sí, proporciona el marco de gobierno para asegurar que el Golden Path se logre de forma acumulativa."
+    "what_implemented": "Endurecimiento del AIWG Execution Kernel de gobierno, forzando closeouts estrictos con evidencias físicas de pruebas y cero defaults optimistas.",
+    "what_broken": "No se identificaron roturas ni regresiones funcionales en las suites de prueba ejecutadas.",
+    "metrics_changed": "Se normalizaron los hashes de la hoja de ruta y se removieron claims subjetivos sin métricas físicas en el reporte de distancia.",
+    "tests_shallow": "Los tests unitarios de pytest simulan y validan todas las compuertas, pero no prueban la invocación nativa del hook git pre-commit.",
+    "reports_stale": "Los reportes de triage y specs están 100% sincronizados con el commit actual.",
+    "assumptions": "Se asume que el desarrollador registrará de forma válida sus evidencias empleando la opción record-evidence del guard.",
+    "repairs_needed": "No se registraron reparaciones urgentes pendientes tras pasar la validación completa.",
+    "advances_degraded": "Se ha verificado que la activación de fastembed real se conserva en su totalidad sin experimentar degradación hacia fallbacks.",
+    "advances_goal_6_1": "Previene el teatro de gobernanza documental y asegura que cada pack demuestre físicamente la ejecución y éxito de sus tests antes de ser cerrado."
   }
 }

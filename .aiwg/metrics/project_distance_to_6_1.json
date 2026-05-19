@@ -1,17 +1,27 @@
 {
   "structural_debt_remaining": 0.35,
+  "structural_debt_state": "estimated",
   "semantic_capability_remaining": 0.45,
+  "semantic_capability_state": "estimated",
   "model_mesh_remaining": 0.80,
+  "model_mesh_state": "unverified",
   "guardrail_remaining": 0.90,
+  "guardrail_state": "unverified",
   "function_calling_remaining": 0.85,
+  "function_calling_state": "unverified",
   "local_runtime_remaining": 0.75,
+  "local_runtime_state": "unverified",
   "golden_path_remaining": 0.95,
+  "golden_path_state": "unverified",
   "current_score": 0.32,
+  "current_score_state": "estimated",
   "blockers": [
     "Falta de indexación de código AST",
-    "Falta de router de capacidades de modelos"
+    "Falta de router de capacidades de modelos",
+    "Falta de Golden Path E2E"
   ],
   "next_highest_leverage_pack": "PACK_3.2",
-  "why_this_pack_next": "El indexador AST de código separará la estructura de sintaxis del corpus textual genérico, aumentando la fidelidad semántica en un 40%.",
-  "what_not_to_do_next": "No saltarse a Pack 4.x antes de cerrar la separación del espacio vectorial de código."
+  "why_this_pack_next": "El indexador AST de código separará la estructura de sintaxis del corpus textual genérico, lo que se estima que mejorará la precisión de las consultas sintácticas una vez medido formalmente.",
+  "what_not_to_do_next": "No saltarse a Pack 4.x antes de cerrar la separación del espacio vectorial de código.",
+  "note": "El Pack 6.1 (Golden Path E2E) sigue lejos del alcance actual dado que la persistencia relacional e inferencia causal no han sido demostradas en un flujo integrado de extremo a extremo sin intervenciones."
 }
