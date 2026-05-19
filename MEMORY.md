@@ -98,3 +98,14 @@ Infrastructure created:
 - Crontab installed: hourly checks, 4h memory consolidation, 09:00 briefing, 23:00 wrap, 30min git monitoring
 
 Vision: DUMMIE operates 24/7, event-driven, with session chaining. Currently on laptop, moving to cloud server later.
+
+# 2026-05-19
+
+## ADR 2026-05-19-GOV-004: L2 Brain Canonical Architecture (PACK R4)
+
+- **Canonical Organ Structure:** 14 organs created under `layers/l2_brain/` replacing the flat `flat_brain/` staging layout.
+- **Migration:** 21 src/brain/ modules promoted, 150 flat_brain/ modules moved to canonical organs.
+- **Compatibility:** FlatBrainRedirector shim updated to prioritize canonical organs, fallback to flat_brain/.
+- **Validation:** Specs PASS (83), Compileall PASS, backward compatibility WORKING.
+- **Remaining:** 80 flat_brain/ modules in "other" category need classification; PACK R5 will deprecate flat_brain/.
+- **Branch:** `intento-de-registrar-todo-con-arquitectura-y-estructura-canon` (not yet merged to main).
