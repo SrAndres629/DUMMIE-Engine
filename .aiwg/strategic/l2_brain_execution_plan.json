@@ -1,158 +1,182 @@
 {
   "pack": "PACK R3",
-  "name": "L2 Brain Architecture Definition & Controlled Migration",
+  "name": "L2 Brain Architecture Definition & Autonomous Execution",
   "created": "2026-05-19",
   "author": "DUMMIE Engine",
-  "status": "DRAFT",
-
+  "status": "DRAFT — awaiting Jorge approval",
   "execution_model": {
-    "type": "distributed_sessions",
+    "type": "autonomous_session_chaining",
+    "operation_mode": "24/7 event-driven with session chaining",
     "total_sessions": 6,
-    "estimated_wall_clock": "48-72 hours",
+    "estimated_wall_clock": "24-48 hours (autonomous)",
     "estimated_active_work": "12-18 hours",
-    "session_pattern": "2-3 hours per session, 4-6 sessions over 2-3 days",
-    "continuity_mechanism": "file-based memory (.aiwg/strategic/, memory/YYYY-MM-DD.md)",
-    "daemon_role": "heartbeat checks, autonomous tasks between sessions, runtime maintenance"
+    "jorge_intervention_points": 2,
+    "continuity_mechanism": "file-based memory + session state + event log",
+    "daemon_role": "session chaining, event processing, task queue execution, heartbeat"
   },
 
-  "sessions": [
-    {
-      "session_id": "R3-S1",
+  "autonomous_flow": {
+    "session_1": {
       "name": "Deep State Analysis",
+      "trigger": "Jorge approves PACK R3",
       "duration_hours": 2.5,
+      "autonomous": true,
       "objectives": [
-        "Map all existing L2 modules and their dependencies",
-        "Identify which flat_brain/ modules are canonical vs duplicated",
-        "Catalog all import paths (old and new)",
-        "Document coexistence of flat_brain/ and src/brain/"
+        "Map all existing L2 modules and dependencies",
+        "Identify canonical vs duplicated modules",
+        "Catalog all import paths",
+        "Document flat_brain/ and src/brain/ coexistence"
       ],
-      "deliverables": [
-        ".aiwg/strategic/l2_module_inventory.json",
-        ".aiwg/strategic/l2_dependency_graph.md"
-      ],
-      "session_type": "analysis"
+      "next_session_auto_trigger": true,
+      "deliverables": [".aiwg/strategic/l2_module_inventory.json", ".aiwg/strategic/l2_dependency_graph.md"]
     },
-    {
-      "session_id": "R3-S2",
+
+    "session_2": {
       "name": "Architecture Contract Design",
+      "trigger": "auto from Session 1",
       "duration_hours": 3,
+      "autonomous": false,
+      "requires_jorge_input": true,
+      "jorge_decisions_needed": [
+        "flat_brain/ permanence (keep or reorganize?)",
+        "src/brain/ role (absorb or eliminate?)",
+        "Test location (inside flat_brain/ or separate?)",
+        "Import strategy (compatibility shim or full migration?)",
+        "Persistence policy (KùzuDB only or KùzuDB + Redb?)"
+      ],
       "objectives": [
         "Define L2 Brain sovereign responsibility",
-        "Define boundaries with L0, L1, L3, L4, L5",
+        "Define boundaries with L0-L5",
         "Define data contracts between layers",
-        "Decide: flat_brain/ vs src/brain/ vs hybrid"
+        "Decide architecture structure based on Jorge's input"
       ],
-      "deliverables": [
-        ".aiwg/strategic/l2_canonical_manifest.yaml",
-        "doc/architecture/l2_brain_canonical.md",
-        ".aiwg/strategic/l2_layer_boundaries.yaml"
-      ],
-      "session_type": "design",
-      "requires_human_input": true
+      "pause_for_jorge": true,
+      "deliverables": [".aiwg/strategic/l2_canonical_manifest.yaml", "doc/architecture/l2_brain_canonical.md"]
     },
-    {
-      "session_id": "R3-S3",
+
+    "session_3": {
       "name": "Migration Plan & Rollback Strategy",
+      "trigger": "auto after Jorge provides input",
       "duration_hours": 2.5,
+      "autonomous": true,
       "objectives": [
         "Create detailed migration manifest",
         "Define import compatibility shim strategy",
         "Create rollback plan",
         "Define validation criteria"
       ],
-      "deliverables": [
-        ".aiwg/strategic/l2_migration_manifest.json",
-        ".aiwg/strategic/l2_rollback_plan.md"
-      ],
-      "session_type": "planning",
-      "requires_human_input": true
+      "next_session_auto_trigger": true,
+      "deliverables": [".aiwg/strategic/l2_migration_manifest.json", ".aiwg/strategic/l2_rollback_plan.md"]
     },
-    {
-      "session_id": "R3-S4",
+
+    "session_4": {
       "name": "Execution Phase 1 — Structure",
+      "trigger": "auto from Session 3",
       "duration_hours": 3,
+      "autonomous": true,
       "objectives": [
         "Implement import compatibility shim",
         "Update downstream imports",
         "Migrate tests to new paths",
         "Run full test suite"
       ],
-      "deliverables": [
-        "layers/l2_brain/__init__.py (compatibility shim)",
-        "Updated test imports",
-        "Test results report"
-      ],
-      "session_type": "execution"
+      "next_session_auto_trigger": true,
+      "deliverables": ["layers/l2_brain/__init__.py (shim)", "Updated test imports", "Test results report"]
     },
-    {
-      "session_id": "R3-S5",
+
+    "session_5": {
       "name": "Execution Phase 2 — Specs & Validation",
+      "trigger": "auto from Session 4",
       "duration_hours": 2.5,
+      "autonomous": true,
       "objectives": [
         "Update all spec documents with new paths",
         "Run spec validation",
         "Run compileall",
         "Run integration tests"
       ],
-      "deliverables": [
-        "Updated spec docs",
-        ".aiwg/reports/pack_r3_validation.json"
-      ],
-      "session_type": "execution"
+      "next_session_auto_trigger": true,
+      "deliverables": ["Updated spec docs", ".aiwg/reports/pack_r3_validation.json"]
     },
-    {
-      "session_id": "R3-S6",
+
+    "session_6": {
       "name": "Closure & Documentation",
+      "trigger": "auto from Session 5",
       "duration_hours": 2,
+      "autonomous": true,
       "objectives": [
         "Final validation",
         "Update MEMORY.md",
         "Create closeout report",
         "Plan PACK R4"
       ],
-      "deliverables": [
-        ".aiwg/reports/pack_r3_closeout.json",
-        "Updated MEMORY.md"
-      ],
-      "session_type": "closure"
+      "next_session_auto_trigger": false,
+      "deliverables": [".aiwg/reports/pack_r3_closeout.json", "Updated MEMORY.md"]
+    }
+  },
+
+  "event_driven_tasks_between_sessions": [
+    {
+      "event": "git_commit_detected",
+      "action": "Analyze commit, update memory, check for spec breakage",
+      "priority": "high"
+    },
+    {
+      "event": "spec_validation_failure",
+      "action": "Attempt auto-repair, notify Jorge if cannot fix",
+      "priority": "high"
+    },
+    {
+      "event": "memory_file_changed",
+      "action": "Index change, update long-term memory if significant",
+      "priority": "medium"
+    },
+    {
+      "event": "hourly_check",
+      "action": "Review task queue, execute pending tasks, update status",
+      "priority": "low"
+    },
+    {
+      "event": "daily_09:00",
+      "action": "Generate daily briefing for Jorge",
+      "priority": "medium"
+    },
+    {
+      "event": "daily_23:00",
+      "action": "Evening consolidation, update MEMORY.md, plan next day",
+      "priority": "medium"
     }
   ],
 
-  "daemon_tasks_between_sessions": [
-    {
-      "task": "heartbeat_check",
-      "frequency": "every 30 minutes",
-      "action": "Check session state, update memory files, flag blockers"
+  "token_budget": {
+    "daily_total": 500000,
+    "allocation": {
+      "heartbeat": 50000,
+      "autonomous_tasks": 150000,
+      "jorge_interactions": 200000,
+      "emergency": 100000
     },
-    {
-      "task": "memory_maintenance",
-      "frequency": "daily",
-      "action": "Review recent memory files, update MEMORY.md with distilled learnings"
-    },
-    {
-      "task": "git_status_monitor",
-      "frequency": "every 2 hours",
-      "action": "Monitor repo state, flag unexpected changes"
+    "alerts": {
+      "80_percent": "Notify Jorge",
+      "90_percent": "Stop autonomous work",
+      "100_percent": "Emergency only"
     }
-  ],
+  },
 
   "risk_assessment": {
     "technical_risk": "MEDIUM",
-    "schedule_risk": "LOW (flexible session model)",
+    "schedule_risk": "LOW (autonomous execution)",
     "scope_risk": "MEDIUM (architecture decisions may expand scope)",
+    "autonomy_risk": "LOW (bounded decision engine)",
     "mitigation": [
-      "Session-based execution allows course correction between sessions",
-      "File-based continuity survives session boundaries",
-      "Human input gates prevent wrong architectural decisions",
-      "Rollback plan defined before execution begins"
+      "Session-based execution with state persistence",
+      "Jorge input gates at Session 2",
+      "Token budget management",
+      "Rollback plan defined before execution",
+      "Quiet hours enforcement",
+      "Decision bounds enforced"
     ]
   },
-
-  "dependencies": [
-    "PACK R2.1 completed (specs passing, files restored)",
-    "Human input for architecture decisions (Session 2-3)",
-    "Working daemon/heartbeat for continuity between sessions"
-  ],
 
   "success_criteria": [
     "L2 architecture contract defined and documented",
@@ -160,6 +184,8 @@
     "All specs passing with correct paths",
     "Test suite passing",
     "No broken references",
-    "Migration manifest complete with rollback plan"
+    "Migration manifest complete with rollback plan",
+    "Autonomous operation proven (sessions chained without manual intervention)",
+    "Jorge only intervened at Session 2 decision point"
   ]
 }
