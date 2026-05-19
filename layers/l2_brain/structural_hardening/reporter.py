@@ -106,6 +106,11 @@ def _build_triage_markdown(report: StructuralTriageReport, max_actions: int) -> 
             "ORPHAN_TEST_CANDIDATE",
             "bound_active_runtime",
             "deferred_no_safe_action",
+            "toolchain_validated",
+            "toolchain_missing",
+            "smoke_passed",
+            "smoke_failed",
+            "contract_bound",
         ]:
             if key in report.explicit_metrics:
                 lines.append(f"- {key}: {report.explicit_metrics[key]}")
@@ -127,6 +132,12 @@ def _build_triage_markdown(report: StructuralTriageReport, max_actions: int) -> 
     lines.append(f"- bound_active_runtime: {bindings_summary.get('bound_active_runtime', 0)}")
     lines.append(f"- needs_manual_owner: {bindings_summary.get('needs_manual_owner', 0)}")
     lines.append(f"- deferred_no_safe_action: {bindings_summary.get('deferred_no_safe_action', 0)}")
+    lines.append(f"- toolchain_validated: {bindings_summary.get('toolchain_validated', 0)}")
+    lines.append(f"- toolchain_missing: {bindings_summary.get('toolchain_missing', 0)}")
+    lines.append(f"- smoke_passed: {bindings_summary.get('smoke_passed', 0)}")
+    lines.append(f"- smoke_failed: {bindings_summary.get('smoke_failed', 0)}")
+    lines.append(f"- contract_bound: {bindings_summary.get('contract_bound', 0)}")
+
     lines.append("")
 
     lines.append("## Counts by Risk")

@@ -548,9 +548,9 @@
       },
       "validation": {
         "path": "layers/l1_nervous/tools_impl/nervous.py",
-        "resolved_status": "DEFERRED_NO_SAFE_ACTION",
-        "effective_risk": "HIGH",
-        "effective_recommendation": "FREEZE_UNTIL_REVIEW",
+        "resolved_status": "CONTRACT_BOUND",
+        "effective_risk": "MEDIUM",
+        "effective_recommendation": "KEEP_AND_TEST",
         "confidence": 0.76,
         "valid_spec_refs": [
           "doc/specs/L1_Nervous/16_mcp_dynamic_gateway.md",
@@ -788,9 +788,9 @@
       },
       "validation": {
         "path": "layers/l1_nervous/internal/skill/blueprint.go",
-        "resolved_status": "DEFERRED_NO_SAFE_ACTION",
-        "effective_risk": "HIGH",
-        "effective_recommendation": "FREEZE_UNTIL_REVIEW",
+        "resolved_status": "TOOLCHAIN_VALIDATED",
+        "effective_risk": "MEDIUM",
+        "effective_recommendation": "KEEP_AND_TEST",
         "confidence": 0.72,
         "valid_spec_refs": [
           "doc/specs/L1_Nervous/15_mcp_sidecar_isolation.md",
@@ -838,9 +838,9 @@
       },
       "validation": {
         "path": "layers/l1_nervous/internal/skill/mcp_client.go",
-        "resolved_status": "DEFERRED_NO_SAFE_ACTION",
-        "effective_risk": "HIGH",
-        "effective_recommendation": "FREEZE_UNTIL_REVIEW",
+        "resolved_status": "TOOLCHAIN_VALIDATED",
+        "effective_risk": "MEDIUM",
+        "effective_recommendation": "KEEP_AND_TEST",
         "confidence": 0.72,
         "valid_spec_refs": [
           "doc/specs/L1_Nervous/15_mcp_sidecar_isolation.md",
@@ -888,9 +888,9 @@
       },
       "validation": {
         "path": "layers/l1_nervous/internal/skill/types.go",
-        "resolved_status": "DEFERRED_NO_SAFE_ACTION",
-        "effective_risk": "HIGH",
-        "effective_recommendation": "FREEZE_UNTIL_REVIEW",
+        "resolved_status": "TOOLCHAIN_VALIDATED",
+        "effective_risk": "MEDIUM",
+        "effective_recommendation": "KEEP_AND_TEST",
         "confidence": 0.72,
         "valid_spec_refs": [
           "doc/specs/L1_Nervous/15_mcp_sidecar_isolation.md",
@@ -938,9 +938,9 @@
       },
       "validation": {
         "path": "layers/l1_nervous/sidecar.go",
-        "resolved_status": "DEFERRED_NO_SAFE_ACTION",
-        "effective_risk": "HIGH",
-        "effective_recommendation": "FREEZE_UNTIL_REVIEW",
+        "resolved_status": "TOOLCHAIN_VALIDATED",
+        "effective_risk": "MEDIUM",
+        "effective_recommendation": "KEEP_AND_TEST",
         "confidence": 0.72,
         "valid_spec_refs": [
           "doc/specs/L1_Nervous/15_mcp_sidecar_isolation.md",
@@ -988,7 +988,7 @@
       },
       "validation": {
         "path": "layers/l1_nervous/ssh_sandbox_wrapper.sh",
-        "resolved_status": "DEFERRED_NO_SAFE_ACTION",
+        "resolved_status": "TOOLCHAIN_MISSING",
         "effective_risk": "HIGH",
         "effective_recommendation": "FREEZE_UNTIL_REVIEW",
         "confidence": 0.72,
@@ -1009,7 +1009,9 @@
           "doc/specs/L1_Nervous/41_layer_handshake_protocol.md"
         ],
         "linked_test_hits": [],
-        "issues": []
+        "issues": [
+          "toolchain_missing:shellcheck"
+        ]
       }
     },
     {
@@ -1038,9 +1040,9 @@
       },
       "validation": {
         "path": "layers/l0_overseer/lib/overseer/application.ex",
-        "resolved_status": "DEFERRED_NO_SAFE_ACTION",
-        "effective_risk": "HIGH",
-        "effective_recommendation": "FREEZE_UNTIL_REVIEW",
+        "resolved_status": "CONTRACT_BOUND",
+        "effective_risk": "MEDIUM",
+        "effective_recommendation": "KEEP_AND_TEST",
         "confidence": 0.72,
         "valid_spec_refs": [
           "doc/specs/L0_Overseer/03_polyglot_architecture.md",
