@@ -76,8 +76,21 @@ class RerankRequest(BaseModel):
     content_type: Optional[ContentType] = Field(None, description="Expected content type")
 
 
+class RerankMode(str, Enum):
+    HYBRID_DETERMINISTIC_FALLBACK = "hybrid_deterministic_fallback"
+    HYBRID_REAL_EMBEDDINGS = "hybrid_real_embeddings"
+    ML_RERANKER_REAL = "ml_reranker_real"
+    BYPASS_VECTOR_SIMILARITY = "bypass_vector_similarity"
+
+
 class RerankResponse(BaseModel):
     ranked_candidates: List[Dict[str, Any]] = Field(..., description="Candidates with calculated similarity scores")
     model_used: str = Field(..., description="Verification model name")
     degraded: bool = Field(False, description="True if operating under fallback or reduced capacity")
     reason: str = Field("", description="Warning details or fallback explanation")
+    ranking_mode: str = Field("hybrid_deterministic_fallback", description="Active ranking mode used")
+    semantic_input_degraded: bool = Field(True, description="True if semantic query or candidates are degraded")
+    reranker_engine_degraded: bool = Field(True, description="True if motor is deterministic hybrid instead of ML model")
+    vector_space: Optional[str] = Field(None, description="Vector space active during comparison")
+    weights: Optional[Dict[str, float]] = Field(None, description="Weight distribution used")
+    diagnostics: Optional[Dict[str, Any]] = Field(None, description="Diagnostic data of the execution")

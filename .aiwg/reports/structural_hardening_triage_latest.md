@@ -3,16 +3,16 @@
 ## Status
 - pack_status: PASS_WITH_WARNINGS
 - repo_health_status: FAIL
-- base_commit: 35ebc6542353c7381edacd45050bd81dc8f25bf3
-- analysis_base_commit: 35ebc6542353c7381edacd45050bd81dc8f25bf3
-- report_generated_at_commit: 35ebc6542353c7381edacd45050bd81dc8f25bf3
-- head_commit: 35ebc6542353c7381edacd45050bd81dc8f25bf3
-- files_analyzed: 1340
+- base_commit: 81a8585ff124caf6ce1d62262a782b799cced205
+- analysis_base_commit: 81a8585ff124caf6ce1d62262a782b799cced205
+- report_generated_at_commit: 81a8585ff124caf6ce1d62262a782b799cced205
+- head_commit: 81a8585ff124caf6ce1d62262a782b799cced205
+- files_analyzed: 1362
 
 ## Explicit Metrics
 - CRITICAL: 0
-- HIGH: 48
-- SHADOW_CANDIDATE: 48
+- HIGH: 50
+- SHADOW_CANDIDATE: 50
 - ORPHAN_TEST_CANDIDATE: 0
 - bound_active_runtime: 31
 - deferred_no_safe_action: 0
@@ -24,27 +24,27 @@
 - repo_health_status: FAIL
 
 ## Counts by Class
-- ACTIVE_RUNTIME: 275
+- ACTIVE_RUNTIME: 281
 - ACTIVE_SPEC: 634
-- ACTIVE_TEST: 233
-- CONFIG: 68
+- ACTIVE_TEST: 243
+- CONFIG: 72
 - EXPERIMENTAL: 1
 - GENERATED: 42
 - LEGACY: 30
 - ORPHAN_TEST_CANDIDATE: 0
 - REPORT: 9
-- SHADOW_CANDIDATE: 48
+- SHADOW_CANDIDATE: 50
 - UNKNOWN: 0
 
 ## Counts by Recommendation
-- KEEP_AND_TEST: 261
+- KEEP_AND_TEST: 267
 - MAP_TO_RUNTIME: 629
-- MAP_TO_SPEC: 257
-- MAP_TO_TEST: 19
+- MAP_TO_SPEC: 269
+- MAP_TO_TEST: 18
 - MARK_EXPERIMENTAL: 1
 - MARK_GENERATED: 42
 - MARK_LEGACY: 20
-- NO_ACTION: 111
+- NO_ACTION: 116
 
 ## Bindings Summary
 - bound_active_runtime: 31
@@ -58,9 +58,9 @@
 
 ## Counts by Risk
 - CRITICAL: 0
-- HIGH: 48
-- LOW: 407
-- MEDIUM: 885
+- HIGH: 50
+- LOW: 418
+- MEDIUM: 894
 
 ## Top 30 High-Risk Actions
 1. layers/l2_brain/golden_path.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
@@ -95,7 +95,7 @@
 30. layers/l2_brain/src/brain/application/use_cases/lessons_use_case.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
 
 ## False-Positive Corrections
-- init_runtime_low_risk_corrections: 24
+- init_runtime_low_risk_corrections: 25
 
 ## Frozen / No-Touch Candidates
 - frozen_count: 1
@@ -107,7 +107,7 @@
 
 ## Orphan Test Candidates
 - orphan_test_candidates: 0
-- shadow_candidates: 48
+- shadow_candidates: 50
 
 ## Next Phase
 Structural Hardening Pack 2.3 - Compilation Sandbox and Orchestration Boundary Hardening

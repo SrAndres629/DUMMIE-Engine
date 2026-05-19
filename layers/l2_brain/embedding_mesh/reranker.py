@@ -25,41 +25,124 @@ class HybridReranker:
         request: RerankRequest,
         query_vector: List[float] | None = None,
         query_vector_space: str | None = None,
+        bypass: bool = False,
     ) -> RerankResponse:
+        import os
+        bypass_active = bypass or os.getenv("DUMMIE_RERANK_BYPASS", "0").strip() == "1"
+
         query_tokens = set(_tokens(request.query))
         ranked: List[Dict[str, Any]] = []
         has_real_candidate = False
 
+        weights = {
+            "vector_similarity": 0.35,
+            "token_overlap": 0.30,
+            "path_overlap": 0.15,
+            "contextual_boost": 0.10,
+            "recency_freshness": 0.05,
+            "importance_truth_rank": 0.05,
+        }
+
         for candidate in request.candidates:
-            text, path, cand_type, embedding, cand_space, metadata = _extract_candidate_fields(candidate)
+            cand_diagnostics = {}
+            try:
+                text, path, cand_type, embedding, cand_space, metadata = _extract_candidate_fields(candidate)
+            except Exception as e:
+                text, path, cand_type, embedding, cand_space, metadata = "", "", ContentType.UNKNOWN, [], None, {}
+                cand_diagnostics["extract_error"] = str(e)
+
             text_tokens = set(_tokens(text))
-            path_tokens = set(_tokens(path))
 
+            if path and isinstance(path, str):
+                path_tokens = set(_tokens(path))
+            else:
+                path_tokens = set()
+                cand_diagnostics["path_missing_or_invalid"] = True
+
+            # Component 1: token_overlap (normalized)
             overlap_score = _ratio(len(query_tokens.intersection(text_tokens)), len(query_tokens))
-            path_score = _ratio(len(query_tokens.intersection(path_tokens)), len(query_tokens))
-            vector_score = _vector_similarity_if_compatible(
-                query_vector=query_vector,
-                candidate_vector=embedding,
-                query_space=query_vector_space,
-                candidate_space=cand_space,
-            )
-            boost = _contextual_boost(request.query, cand_type, path, metadata)
-            penalty = _classification_penalty(path, metadata)
-            freshness = _freshness_score(metadata)
-            truth_rank = _truth_rank_score(metadata)
+            overlap_norm = max(0.0, min(1.0, overlap_score))
 
-            final_score = (
-                overlap_score * 0.30
-                + path_score * 0.15
-                + vector_score * 0.35
-                + boost * 0.10
-                + freshness * 0.05
-                + truth_rank * 0.05
-                - penalty
-            )
+            # Component 2: path_overlap (normalized)
+            path_score = _ratio(len(query_tokens.intersection(path_tokens)), len(query_tokens))
+            path_norm = max(0.0, min(1.0, path_score))
+
+            # Component 3: vector_similarity (normalized, compatible check)
+            vector_score = 0.0
+            vector_space_compat = False
+            if query_vector and embedding:
+                try:
+                    vector_space_compat = vector_spaces_compatible(query_vector_space, cand_space)
+                    if vector_space_compat:
+                        vector_score = _vector_similarity_if_compatible(
+                            query_vector=query_vector,
+                            candidate_vector=embedding,
+                            query_space=query_vector_space,
+                            candidate_space=cand_space,
+                        )
+                except Exception as e:
+                    cand_diagnostics["vector_error"] = str(e)
+
+            vector_norm = max(0.0, min(1.0, vector_score))
+
+            # Component 4: contextual_boost (normalized)
+            boost = 0.0
+            if isinstance(request.query, str):
+                try:
+                    boost = _contextual_boost(request.query, cand_type, path, metadata)
+                except Exception as e:
+                    cand_diagnostics["boost_error"] = str(e)
+            boost_norm = max(0.0, min(1.0, boost / 0.50))  # normalize to 1.0 based on 0.50 cap
+
+            # Component 5: recency_freshness (normalized)
+            freshness = 0.0
+            try:
+                freshness = _freshness_score(metadata)
+            except Exception as e:
+                cand_diagnostics["freshness_error"] = str(e)
+            freshness_norm = max(0.0, min(1.0, freshness / 0.20))  # normalize to 1.0 based on 0.20 max
+
+            # Component 6: importance_truth_rank (normalized)
+            truth_rank = 0.0
+            try:
+                truth_rank = _truth_rank_score(metadata)
+            except Exception as e:
+                cand_diagnostics["truth_rank_error"] = str(e)
+            truth_rank_norm = max(0.0, min(1.0, truth_rank / 0.20))  # normalize to 1.0 based on 0.20 max
+
+            # Penalty logic
+            penalty = 0.0
+            try:
+                penalty = _classification_penalty(path, metadata)
+            except Exception as e:
+                cand_diagnostics["penalty_error"] = str(e)
+
+            # Score logic
+            if bypass_active:
+                final_score = vector_norm
+            else:
+                final_score = (
+                    vector_norm * weights["vector_similarity"]
+                    + overlap_norm * weights["token_overlap"]
+                    + path_norm * weights["path_overlap"]
+                    + boost_norm * weights["contextual_boost"]
+                    + freshness_norm * weights["recency_freshness"]
+                    + truth_rank_norm * weights["importance_truth_rank"]
+                    - penalty
+                )
+
+            if math.isnan(final_score) or math.isinf(final_score):
+                final_score = 0.0
+                cand_diagnostics["math_error"] = "Score is NaN or inf"
+
             final_score = max(0.0, min(1.0, final_score))
 
-            is_candidate_degraded = metadata.get("embedding_degraded", False) if isinstance(metadata, dict) else getattr(metadata, "embedding_degraded", False)
+            is_candidate_degraded = False
+            if isinstance(metadata, dict):
+                is_candidate_degraded = metadata.get("embedding_degraded", False)
+            else:
+                is_candidate_degraded = getattr(metadata, "embedding_degraded", False)
+
             if cand_space == "text_fast_bge_small_384" and not is_candidate_degraded:
                 has_real_candidate = True
 
@@ -76,24 +159,58 @@ class HybridReranker:
                         "truth_rank": round(truth_rank, 4),
                         "penalty": round(penalty, 4),
                     },
-                    "vector_space_compatible": vector_spaces_compatible(query_vector_space, cand_space),
+                    "normalized_metrics": {
+                        "vector_similarity": round(vector_norm, 4),
+                        "token_overlap": round(overlap_norm, 4),
+                        "path_overlap": round(path_norm, 4),
+                        "contextual_boost": round(boost_norm, 4),
+                        "recency_freshness": round(freshness_norm, 4),
+                        "importance_truth_rank": round(truth_rank_norm, 4),
+                        "penalty": round(penalty, 4),
+                    },
+                    "vector_space_compatible": vector_space_compat,
+                    "diagnostics": cand_diagnostics,
                 }
             )
 
-        is_real_text_fast = (
+        is_query_space_real = (
             query_vector_space == "text_fast_bge_small_384"
             and query_vector is not None
-            and has_real_candidate
         )
-        degraded = not is_real_text_fast
-        reason = "" if not degraded else "ML cross-encoder not configured; hybrid deterministic rerank active"
+        semantic_input_degraded = not (is_query_space_real and has_real_candidate)
+        reranker_engine_degraded = True
+        degraded = semantic_input_degraded or reranker_engine_degraded
+
+        if bypass_active:
+            ranking_mode = "bypass_vector_similarity"
+            degraded = True
+            reason = "Rollback / bypass active: ordered purely by raw vector similarity."
+        elif not semantic_input_degraded:
+            ranking_mode = "hybrid_real_embeddings"
+            reason = "Offline deterministic hybrid+ rerank active using real local embeddings."
+        else:
+            ranking_mode = "hybrid_deterministic_fallback"
+            reason = "ML cross-encoder not configured; operating under offline deterministic hash projection fallback."
 
         ranked.sort(key=lambda row: row["score"], reverse=True)
+
+        response_diagnostics = {
+            "bypass_active": bypass_active,
+            "has_real_candidate": has_real_candidate,
+            "is_query_space_real": is_query_space_real,
+            "total_candidates": len(ranked),
+        }
         return RerankResponse(
             ranked_candidates=ranked[: request.top_k],
             model_used="deterministic-hybrid-reranker",
             degraded=degraded,
             reason=reason,
+            ranking_mode=ranking_mode,
+            semantic_input_degraded=semantic_input_degraded,
+            reranker_engine_degraded=reranker_engine_degraded,
+            vector_space=query_vector_space,
+            weights=weights,
+            diagnostics=response_diagnostics,
         )
 
 
