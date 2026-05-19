@@ -12,6 +12,12 @@ _CONFIG_EXT = {".toml", ".yaml", ".yml", ".ini", ".cfg", ".env"}
 
 
 class StructuralClassifier:
+    def __init__(self, repo_root: Path | None = None):
+        from .bindings import ContractBindingRegistry
+
+        self.repo_root = repo_root or Path.cwd()
+        self._bindings = ContractBindingRegistry()
+
     def classify(self, file_record: Dict[str, Any], evidence: Dict[str, Any]) -> StructuralFinding:
         path = file_record.get("path", "")
         path_lower = path.lower()
@@ -25,6 +31,49 @@ class StructuralClassifier:
         reasons = list(evidence.get("reasons", []))
 
         current_class = self._from_semantic_class(file_record.get("classification", "UNKNOWN"))
+
+        # Look up in ContractBindingRegistry and apply validation gate.
+        from .bindings import BindingStatus
+
+        binding, validation = self._bindings.evaluate(path, self.repo_root, evidence=evidence)
+        if binding and validation:
+            proposed_class = binding.structural_class
+            if validation.resolved_status in {BindingStatus.DEFERRED_NO_SAFE_ACTION, BindingStatus.NEEDS_MANUAL_OWNER}:
+                proposed_class = StructuralClass.SHADOW_CANDIDATE
+
+            if path.endswith((".go", ".ex", ".sh")) and not validation.linked_test_hits:
+                proposed_class = StructuralClass.SHADOW_CANDIDATE
+
+            reasons_combined = reasons + [
+                f"Bound to contract: {binding.notes}",
+                f"binding_status={binding.binding_status.value}",
+                f"resolved_status={validation.resolved_status.value}",
+            ]
+            if validation.issues:
+                reasons_combined.append(f"binding_issues={','.join(validation.issues)}")
+
+            evidence_combined = (
+                evidence_refs
+                + binding.evidence_refs
+                + [f"valid_specs={validation.valid_spec_refs}", f"valid_tests={validation.valid_test_refs}"]
+            )
+
+            return self._make(
+                path,
+                current_class,
+                proposed_class,
+                validation.effective_risk,
+                validation.effective_recommendation,
+                validation.confidence,
+                evidence_combined,
+                reasons_combined,
+                validation.valid_spec_refs,
+                validation.valid_test_refs,
+                binding.runtime_refs,
+                proposed_class != StructuralClass.SHADOW_CANDIDATE and validation.effective_risk in {RiskLevel.LOW, RiskLevel.MEDIUM},
+                proposed_class == StructuralClass.SHADOW_CANDIDATE or validation.effective_risk in {RiskLevel.HIGH, RiskLevel.CRITICAL},
+            )
+
 
         if path.startswith(".aiwg/reports/"):
             return self._make(

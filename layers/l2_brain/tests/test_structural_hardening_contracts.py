@@ -1,3 +1,5 @@
+from pathlib import Path
+
 from layers.l2_brain.structural_hardening.contracts import (
     EvidenceType,
     Recommendation,
@@ -6,6 +8,7 @@ from layers.l2_brain.structural_hardening.contracts import (
     StructuralFinding,
     StructuralTriageReport,
 )
+from layers.l2_brain.structural_hardening.bindings import BindingStatus, ContractBindingRegistry
 
 
 def test_structural_contract_enums_present():
@@ -50,3 +53,20 @@ def test_structural_finding_and_report_models():
     assert report.findings[0].confidence == 0.91
     assert report.pack_status == "PASS_WITH_WARNINGS"
     assert report.repo_health_status == "FAIL"
+
+
+def test_binding_validation_requires_real_evidence():
+    registry = ContractBindingRegistry()
+    binding, validation = registry.evaluate(
+        "layers/l1_nervous/bootstrap.py",
+        repo_root=Path.cwd(),
+        evidence={"evidence_refs": ["FILE_EXISTS", "IMPORTABLE"]},
+    )
+    assert binding is not None
+    assert validation is not None
+    assert validation.effective_risk in {RiskLevel.MEDIUM, RiskLevel.HIGH, RiskLevel.CRITICAL}
+    assert validation.resolved_status in {
+        BindingStatus.BOUND_ACTIVE_RUNTIME,
+        BindingStatus.NEEDS_MANUAL_OWNER,
+        BindingStatus.DEFERRED_NO_SAFE_ACTION,
+    }

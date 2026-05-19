@@ -18,6 +18,8 @@ def write_reports(
     triage_md = reports_dir / "structural_hardening_triage_latest.md"
     actions_json = reports_dir / "structural_hardening_actions_latest.json"
     actions_md = reports_dir / "structural_hardening_actions_latest.md"
+    bindings_json = reports_dir / "structural_contract_bindings_latest.json"
+    bindings_md = reports_dir / "structural_contract_bindings_latest.md"
 
     triage_json.write_text(report.model_dump_json(indent=2), encoding="utf-8")
     triage_md.write_text(_build_triage_markdown(report, max_actions=max_actions), encoding="utf-8")
@@ -26,12 +28,41 @@ def write_reports(
     actions_json.write_text(json.dumps({"actions": action_rows}, indent=2), encoding="utf-8")
     actions_md.write_text(_build_actions_markdown(report, max_actions=max_actions), encoding="utf-8")
 
+    # Generate contract bindings report (validated against current repo state).
+    from .bindings import ContractBindingRegistry
+    registry = ContractBindingRegistry()
+    all_bindings = registry.get_all_bindings()
+    repo_root = reports_dir.parent.parent
+    findings_by_path = {f.path: f for f in report.findings}
+    bindings_rows = []
+    for b in all_bindings:
+        ev = {}
+        finding = findings_by_path.get(b.path)
+        if finding:
+            ev = {
+                "evidence_refs": finding.evidence_refs,
+                "related_specs": finding.related_specs,
+                "related_tests": finding.related_tests,
+                "related_runtime": finding.related_runtime,
+            }
+        _, validation = registry.evaluate(b.path, repo_root, evidence=ev)
+        row = {"binding": b.model_dump(mode="json")}
+        if validation:
+            row["validation"] = validation.model_dump(mode="json")
+        bindings_rows.append(row)
+
+    bindings_json.write_text(json.dumps({"bindings": bindings_rows}, indent=2), encoding="utf-8")
+    bindings_md.write_text(_build_bindings_markdown(bindings_rows), encoding="utf-8")
+
     return {
         "triage_json": triage_json,
         "triage_md": triage_md,
         "actions_json": actions_json,
         "actions_md": actions_md,
+        "bindings_json": bindings_json,
+        "bindings_md": bindings_md,
     }
+
 
 
 def _build_triage_markdown(report: StructuralTriageReport, max_actions: int) -> str:
@@ -125,4 +156,42 @@ def _build_actions_markdown(report: StructuralTriageReport, max_actions: int) ->
         )
     if len(lines) == 3:
         lines.append("- none")
+    return "\n".join(lines) + "\n"
+
+
+def _build_bindings_markdown(bindings_rows: list[dict]) -> str:
+    by_status: Dict[str, int] = {}
+    for row in bindings_rows:
+        status = row.get("validation", {}).get("resolved_status") or row.get("binding", {}).get("binding_status", "UNKNOWN")
+        by_status[status] = by_status.get(status, 0) + 1
+
+    lines = [
+        "# Structural Contract Bindings",
+        "",
+        "## Summary",
+        f"- Total Bindings: {len(bindings_rows)}",
+    ]
+    for status, count in sorted(by_status.items()):
+        lines.append(f"- {status}: {count}")
+    lines.extend(
+        [
+        "",
+        "## Bindings List",
+        "",
+        "| Path | Layer | Status (declared->resolved) | Risk (declared->effective) | Spec Hits | Test Hits | Issues |",
+        "| :--- | :--- | :--- | :--- | :--- | :--- | :--- |",
+    ])
+    for row in sorted(bindings_rows, key=lambda x: x["binding"]["path"]):
+        b = row["binding"]
+        v = row.get("validation", {})
+        status_decl = b.get("binding_status", "UNKNOWN")
+        status_res = v.get("resolved_status", status_decl)
+        risk_decl = b.get("risk_after", "UNKNOWN")
+        risk_eff = v.get("effective_risk", risk_decl)
+        spec_hits = len(v.get("direct_spec_hits", [])) + len(v.get("scoped_spec_hits", []))
+        test_hits = len(v.get("linked_test_hits", []))
+        issues = ", ".join(v.get("issues", [])) if v.get("issues") else "none"
+        lines.append(
+            f"| `{b['path']}` | {b['layer']} | {status_decl}->{status_res} | {risk_decl}->{risk_eff} | {spec_hits} | {test_hits} | {issues} |"
+        )
     return "\n".join(lines) + "\n"

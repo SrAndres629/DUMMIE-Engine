@@ -59,11 +59,15 @@ def test_triage_cli_generates_reports_without_internet(tmp_path):
     triage_md = reports / "structural_hardening_triage_latest.md"
     actions_json = reports / "structural_hardening_actions_latest.json"
     actions_md = reports / "structural_hardening_actions_latest.md"
+    bindings_json = reports / "structural_contract_bindings_latest.json"
+    bindings_md = reports / "structural_contract_bindings_latest.md"
 
     assert triage_json.exists()
     assert triage_md.exists()
     assert actions_json.exists()
     assert actions_md.exists()
+    assert bindings_json.exists()
+    assert bindings_md.exists()
 
     report = json.loads(triage_json.read_text(encoding="utf-8"))
     assert "pack_status" in report
@@ -72,3 +76,6 @@ def test_triage_cli_generates_reports_without_internet(tmp_path):
 
     findings = {f["path"]: f for f in report["findings"]}
     assert findings["layers/l2_brain/__init__.py"]["proposed_class"] == "ACTIVE_RUNTIME"
+
+    bindings = json.loads(bindings_json.read_text(encoding="utf-8"))
+    assert "bindings" in bindings

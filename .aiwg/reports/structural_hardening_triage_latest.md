@@ -3,11 +3,11 @@
 ## Status
 - pack_status: PASS_WITH_WARNINGS
 - repo_health_status: FAIL
-- base_commit: 9c875e6d40d263ead6ba7cc655dd1b0d590c061a
+- base_commit: 3706c9f03aaa985c2a5fbcb254dac5f2d63009c2
 - files_analyzed: 1340
 
 ## Counts by Class
-- ACTIVE_RUNTIME: 236
+- ACTIVE_RUNTIME: 247
 - ACTIVE_SPEC: 559
 - ACTIVE_TEST: 235
 - CONFIG: 12
@@ -15,64 +15,62 @@
 - GENERATED: 38
 - LEGACY: 30
 - ORPHAN_TEST_CANDIDATE: 3
-- SHADOW_CANDIDATE: 82
+- SHADOW_CANDIDATE: 71
 - UNKNOWN: 144
 
 ## Counts by Recommendation
-- FREEZE_UNTIL_REVIEW: 144
+- FREEZE_UNTIL_REVIEW: 151
 - KEEP_AND_TEST: 248
 - MAP_TO_RUNTIME: 561
-- MAP_TO_SPEC: 244
+- MAP_TO_SPEC: 255
 - MAP_TO_TEST: 20
 - MARK_EXPERIMENTAL: 1
 - MARK_GENERATED: 38
 - MARK_LEGACY: 30
-- NEEDS_OWNER: 18
 - NO_ACTION: 36
 
 ## Counts by Risk
-- CRITICAL: 18
-- HIGH: 64
+- HIGH: 71
 - LOW: 322
-- MEDIUM: 936
+- MEDIUM: 947
 
 ## Top 30 High-Risk Actions
-1. layers/l0_overseer/lib/overseer/application.ex | proposed=SHADOW_CANDIDATE | risk=CRITICAL | rec=NEEDS_OWNER | confidence=0.84
-2. layers/l0_overseer/supervisor.py | proposed=SHADOW_CANDIDATE | risk=CRITICAL | rec=NEEDS_OWNER | confidence=0.84
-3. layers/l1_nervous/application/use_cases.py | proposed=SHADOW_CANDIDATE | risk=CRITICAL | rec=NEEDS_OWNER | confidence=0.84
-4. layers/l1_nervous/bootstrap.py | proposed=SHADOW_CANDIDATE | risk=CRITICAL | rec=NEEDS_OWNER | confidence=0.84
-5. layers/l1_nervous/domain/services.py | proposed=SHADOW_CANDIDATE | risk=CRITICAL | rec=NEEDS_OWNER | confidence=0.84
-6. layers/l1_nervous/internal/skill/blueprint.go | proposed=SHADOW_CANDIDATE | risk=CRITICAL | rec=NEEDS_OWNER | confidence=0.84
-7. layers/l1_nervous/internal/skill/mcp_client.go | proposed=SHADOW_CANDIDATE | risk=CRITICAL | rec=NEEDS_OWNER | confidence=0.84
-8. layers/l1_nervous/internal/skill/types.go | proposed=SHADOW_CANDIDATE | risk=CRITICAL | rec=NEEDS_OWNER | confidence=0.84
-9. layers/l1_nervous/knowledge_adapters.py | proposed=SHADOW_CANDIDATE | risk=CRITICAL | rec=NEEDS_OWNER | confidence=0.84
-10. layers/l1_nervous/mcp_registry.py | proposed=SHADOW_CANDIDATE | risk=CRITICAL | rec=NEEDS_OWNER | confidence=0.84
-11. layers/l1_nervous/mcp_transport.py | proposed=SHADOW_CANDIDATE | risk=CRITICAL | rec=NEEDS_OWNER | confidence=0.84
-12. layers/l1_nervous/repo_guard.py | proposed=SHADOW_CANDIDATE | risk=CRITICAL | rec=NEEDS_OWNER | confidence=0.84
-13. layers/l1_nervous/runtime_paths.py | proposed=SHADOW_CANDIDATE | risk=CRITICAL | rec=NEEDS_OWNER | confidence=0.84
-14. layers/l1_nervous/sidecar.go | proposed=SHADOW_CANDIDATE | risk=CRITICAL | rec=NEEDS_OWNER | confidence=0.84
-15. layers/l1_nervous/ssh_sandbox_wrapper.sh | proposed=SHADOW_CANDIDATE | risk=CRITICAL | rec=NEEDS_OWNER | confidence=0.84
-16. layers/l1_nervous/tools_impl/nervous.py | proposed=SHADOW_CANDIDATE | risk=CRITICAL | rec=NEEDS_OWNER | confidence=0.84
-17. layers/l1_nervous/tools_impl/patch_transactions.py | proposed=SHADOW_CANDIDATE | risk=CRITICAL | rec=NEEDS_OWNER | confidence=0.84
-18. layers/l1_nervous/utils.py | proposed=SHADOW_CANDIDATE | risk=CRITICAL | rec=NEEDS_OWNER | confidence=0.84
-19. layers/l2_brain/action_graph.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
-20. layers/l2_brain/application/cognitive/use_cases.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
-21. layers/l2_brain/ast_indexer.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
-22. layers/l2_brain/auditor_port.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
-23. layers/l2_brain/branch_memory.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
-24. layers/l2_brain/cognition/pattern_miner_v2.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
-25. layers/l2_brain/context_circulation_runtime.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
-26. layers/l2_brain/cypher_codec.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
-27. layers/l2_brain/domain/dtos.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
-28. layers/l2_brain/domain/hypothesis_service.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
-29. layers/l2_brain/domain/reasoning_logic.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
-30. layers/l2_brain/domain/retrieval_service.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
+1. layers/l2_brain/action_graph.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
+2. layers/l2_brain/application/cognitive/use_cases.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
+3. layers/l2_brain/ast_indexer.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
+4. layers/l2_brain/auditor_port.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
+5. layers/l2_brain/branch_memory.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
+6. layers/l2_brain/cognition/pattern_miner_v2.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
+7. layers/l2_brain/context_circulation_runtime.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
+8. layers/l2_brain/cypher_codec.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
+9. layers/l2_brain/domain/dtos.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
+10. layers/l2_brain/domain/hypothesis_service.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
+11. layers/l2_brain/domain/reasoning_logic.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
+12. layers/l2_brain/domain/retrieval_service.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
+13. layers/l2_brain/domain/semantic_ports.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
+14. layers/l2_brain/embedding_provider.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
+15. layers/l2_brain/entity_voice.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
+16. layers/l2_brain/event_bus.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
+17. layers/l2_brain/evolution_feedback_loop.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
+18. layers/l2_brain/expansion_policy.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
+19. layers/l2_brain/formal_bridge.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
+20. layers/l2_brain/gateway_contract.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
+21. layers/l2_brain/golden_path.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
+22. layers/l2_brain/human_intent.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
+23. layers/l2_brain/infrastructure/adapters/external.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
+24. layers/l2_brain/infrastructure/semantic_adapters.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
+25. layers/l2_brain/lifecycle_integration_mapper.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
+26. layers/l2_brain/metacognition/deliberation_hooks.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
+27. layers/l2_brain/metacognition/input_hooks.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
+28. layers/l2_brain/metacognition/output_hooks.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
+29. layers/l2_brain/metacognition/reasoning_hooks.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
+30. layers/l2_brain/metacognition/semantic_hooks.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
 
 ## False-Positive Corrections
 - init_runtime_low_risk_corrections: 24
 
 ## Frozen / No-Touch Candidates
-- frozen_count: 145
+- frozen_count: 152
 - README.md | FREEZE_UNTIL_REVIEW | risk=MEDIUM
 - doc/ATLAS.md | FREEZE_UNTIL_REVIEW | risk=MEDIUM
 - doc/CORE_SPEC.md | FREEZE_UNTIL_REVIEW | risk=MEDIUM
@@ -100,7 +98,7 @@
 
 ## Orphan Test Candidates
 - orphan_test_candidates: 3
-- shadow_candidates: 82
+- shadow_candidates: 71
 
 ## Next Phase
 Structural Hardening Pack 2.1 - targeted contract binding and safe physical changes
