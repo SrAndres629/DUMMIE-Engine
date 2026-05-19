@@ -1,0 +1,56 @@
+{
+  "spec_id": "166_l2_brain_organ_migration_contract",
+  "schema_version": "1.0.0",
+  "status": "ACTIVE",
+  "canonicality": "canonical",
+  "policy": {
+    "canonical_surface": "layers/l2_brain organ directories",
+    "legacy_surface": "layers/l2_brain/flat_brain",
+    "legacy_surface_policy": "compatibility_fallback_only",
+    "delete_flat_brain_allowed": false
+  },
+  "canonical_organs": [
+    "context",
+    "memory",
+    "model_mesh",
+    "cognition",
+    "metacognition",
+    "mission",
+    "strategic",
+    "daemon",
+    "heartbeat",
+    "governance",
+    "infrastructure",
+    "domain",
+    "sdk",
+    "proto",
+    "structural_hardening"
+  ],
+  "public_compatibility_modules": [
+    "action_graph",
+    "token_cost_ledger",
+    "neuron_ledger",
+    "model_router",
+    "model_discovery",
+    "model_executor",
+    "supervisor_protocol"
+  ],
+  "prohibited_in_canonical_organs": [
+    "layers.l2_brain.flat_brain"
+  ],
+  "allowed_flat_references": [
+    "layers/l2_brain/__init__.py",
+    "layers/l2_brain/flat_brain/**",
+    "layers/l2_brain/tests/**"
+  ],
+  "verification": [
+    "PYTHONPATH=. layers/l2_brain/.venv/bin/pytest -q layers/l2_brain/tests/test_pack_r4_flat_migration_contract.py"
+  ],
+  "invariants": [
+    "public_root_modules_resolve_outside_flat_brain",
+    "canonical_organs_do_not_import_flat_brain_directly",
+    "flat_brain_is_legacy_compatibility_only",
+    "flat_brain_deletion_requires_separate_verified_migration"
+  ]
+}
+
