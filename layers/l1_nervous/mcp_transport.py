@@ -15,21 +15,33 @@ class MCPTransport:
     async def spawn_process(self, server_name: str, config: Dict[str, Any]) -> asyncio.subprocess.Process:
         cmd = config["command"]
         args = config.get("args", [])
+        
+        # Expand env vars in args
+        final_args = []
+        for arg in args:
+            if isinstance(arg, str):
+                final_args.append(os.path.expandvars(arg))
+            else:
+                final_args.append(arg)
+        
         env = os.environ.copy()
         if "env" in config:
-            env.update(config["env"])
+            for k, v in config["env"].items():
+                if isinstance(v, str):
+                    env[k] = os.path.expandvars(v)
+                else:
+                    env[k] = str(v)
 
         # Sovereign Sandbox Logic (Simplified for modular use)
         sandbox_mode = os.environ.get("DUMMIE_SANDBOX_MODE", "OFF").upper()
         
         final_cmd = cmd
-        final_args = args
 
         if sandbox_mode == "ON":
             root_dir = os.environ.get("DUMMIE_ROOT", os.getcwd())
             bwrap_args = ["bwrap", "--unshare-all", "--share-net", "--loopback", "--dev", "/dev", "--proc", "/proc", "--tmpfs", "/tmp", "--ro-bind", "/usr", "/usr", "--ro-bind", "/lib", "/lib", "--ro-bind", "/lib64", "/lib64", "--ro-bind", "/bin", "/bin", "--ro-bind", "/sbin", "/sbin", "--ro-bind", "/etc/resolv.conf", "/etc/resolv.conf", "--bind", root_dir, root_dir, "--bind", os.path.expanduser("~"), os.path.expanduser("~"), "--", cmd]
             final_cmd = "bwrap"
-            final_args = bwrap_args[1:] + args
+            final_args = bwrap_args[1:] + final_args
 
         logger.debug(f"Spawning MCP Process: {server_name}")
         return await asyncio.create_subprocess_exec(

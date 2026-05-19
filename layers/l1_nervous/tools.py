@@ -94,7 +94,7 @@ def register_tools(mcp: FastMCP, get_orchestrator, get_proxy, root_dir: str):
         
         # 2. Herramientas Remotas
         try:
-            for s_name, s_cfg in proxy_manager.servers.items():
+            for s_name, s_cfg in proxy_manager.registry.servers.items():
                 if s_cfg.get("disabled", False):
                     continue
 
@@ -121,7 +121,7 @@ def register_tools(mcp: FastMCP, get_orchestrator, get_proxy, root_dir: str):
                         continue
 
                 try:
-                    r_tools = await proxy_manager.get_tools_for_server(s_name)
+                    r_tools = await proxy_manager.registry.get_tools(s_name)
                     for t in r_tools:
                         name = t.get('name', 'unknown')
                         desc = t.get('description', 'No description')

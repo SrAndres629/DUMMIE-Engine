@@ -1,14 +1,14 @@
 import asyncio
 import signal
-from brain.infrastructure.adapters.shield_adapter import NativeShieldAdapter
-from brain.application.use_cases.orchestrator import CognitiveOrchestrator
-from brain.infrastructure.adapters.nats_controller import NatsController
 
 async def main():
     pass # print("=== L2_BRAIN: Motor Cognitivo (Arquitectura Hexagonal) Iniciado ===")
     
-    # 1. Instanciar Adaptadores de Salida (Infrastructure)
+    # 1. Instanciar Adaptadores de Salida (Infrastructure) - Lazy Loading
+    from brain.infrastructure.adapters.shield_adapter import NativeShieldAdapter
     shield_adapter = NativeShieldAdapter()
+    
+    # Importaciones pesadas diferidas al interior de main
     from brain.infrastructure.adapters.kuzu_repository import KuzuRepository, KuzuSkillRepository
     from brain.infrastructure.adapters.ledger_adapter import DecisionLedgerAdapter
     from brain.infrastructure.adapters.session_ledger_adapter import SessionLedgerAdapter
@@ -19,7 +19,7 @@ async def main():
     session_ledger = SessionLedgerAdapter()
     
     # 2. Instanciar Casos de Uso (Application)
-    # Nota: El orquestador ahora inyecta el caso de uso de cristalización internamente
+    from brain.application.use_cases.orchestrator import CognitiveOrchestrator
     orchestrator = CognitiveOrchestrator(
         shield_port=shield_adapter,
         event_store=kuzu_repo,
@@ -29,6 +29,7 @@ async def main():
     )
     
     # 3. Instanciar Controladores de Entrada (Infrastructure)
+    from brain.infrastructure.adapters.nats_controller import NatsController
     nats_controller = NatsController(input_port=orchestrator)
     
     # Conectar y Escuchar

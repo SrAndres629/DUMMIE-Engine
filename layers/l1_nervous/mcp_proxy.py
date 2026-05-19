@@ -22,6 +22,7 @@ class MCPProxyManager:
     Delega el transporte a MCPTransport y el registro a MCPRegistry.
     """
     def __init__(self, config_path: str):
+        self.config_path = config_path
         self.registry = MCPRegistry(Path(config_path))
         self.transport = MCPTransport()
         self.active_processes: Dict[str, asyncio.subprocess.Process] = {}
@@ -29,6 +30,12 @@ class MCPProxyManager:
         self.last_accessed: Dict[str, float] = {}
         self.locks: Dict[str, asyncio.Lock] = {}
         self._gc_task: Optional[asyncio.Task] = None
+
+    async def get_tools_for_server(self, server_name: str) -> List[Dict[str, Any]]:
+        if server_name not in self.locks: self.locks[server_name] = asyncio.Lock()
+        async with self.locks[server_name]:
+            await self._ensure_ready(server_name)
+            return self.registry.get_tools(server_name)
 
     async def call_tool(self, server_name: str, tool_name: str, arguments: Dict[str, Any]) -> Any:
         cfg = self.registry.get_server_config(server_name)

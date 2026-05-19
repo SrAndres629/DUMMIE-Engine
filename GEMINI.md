@@ -11,6 +11,7 @@ Define practical collaboration roles for multi-agent development in this reposit
 5. `context-memory-manager`: keep decision trace and session continuity.
 
 ## Execution Rules
+- **Environment:** ALWAYS use the centralized virtual environment. Prefix commands with `source .venv/bin/activate &&` or use `uv run`. Never use the global Python interpreter.
 - Spec-first for high-impact changes.
 - Small diffs with explicit ownership.
 - Verification evidence required before completion claims.

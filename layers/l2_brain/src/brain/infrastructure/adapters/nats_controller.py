@@ -20,12 +20,22 @@ class NatsController:
         self.is_running = True
 
     async def connect(self):
-        nats_url = os.getenv("NATS_URL", "nats://127.0.0.1:4222")
+        # Priorizar Unix Domain Sockets para baja latencia si está disponible
+        default_url = "nats://127.0.0.1:4222"
+        # Soporte para formato unix:///path/to/socket
+        nats_url = os.getenv("NATS_URL", default_url)
+        
         try:
+            # El cliente nats-py soporte UDS pasando la ruta del socket si la URL empieza con unix://
             self.nc = await nats.connect(nats_url)
-            pass # print(f"[NatsController] Conectado a NATS en {nats_url}")
+            pass # print(f"[NatsController] Conectado a NATS vía {nats_url}")
         except Exception as e:
-            pass # print(f"[NatsController] Error al conectar a NATS: {e}")
+            # Fallback a TCP si UDS falla o no está configurado
+            if nats_url.startswith("unix://"):
+                pass # print(f"[NatsController] UDS Falló. Reintentando TCP...")
+                self.nc = await nats.connect(default_url)
+            else:
+                pass # print(f"[NatsController] Error al conectar a NATS: {e}")
 
     async def publish_event(self, subject: str, payload: bytes):
         """Publica un evento en NATS."""
@@ -75,6 +85,17 @@ class NatsController:
 
         await self.nc.subscribe("core.v2.orchestration.tasks", cb=message_handler)
         pass # print("[NatsController] Escuchando tareas en core.v2.orchestration.tasks")
+
+        # 3. Escuchar señales de CONTROL para Hot Reload (Fase 3)
+        async def control_handler(msg):
+            data = json.loads(msg.data.decode())
+            if data.get("type") == "SPEC_RELOAD":
+                pass # print(f"[NatsController] HOT RELOAD RECIBIDO: Recargando {data['file']}...")
+                # Aquí el orquestador invalidaría cachés si fuera necesario
+                # self.input_port.reload_specs() 
+        
+        await self.nc.subscribe("ao.v2.l2.brain.control.reload", cb=control_handler)
+        pass # print("[NatsController] Canal de CONTROL (Hot Reload) activo.")
 
     async def stop(self):
         self.is_running = False
