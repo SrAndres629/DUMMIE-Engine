@@ -15,7 +15,7 @@ try:
 except ImportError:
     pass
 
-from layers.l2_brain.aiwg_kernel.context_capsule_engine import ContextCapsuleEngine
+from .context_capsule_engine import ContextCapsuleEngine
 
 class AIWGKernel:
     """
