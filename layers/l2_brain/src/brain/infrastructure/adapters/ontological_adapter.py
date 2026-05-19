@@ -1,7 +1,7 @@
 import os
 import json
 from datetime import datetime
-from typing import List, Optional
+from typing import List, Optional, Any
 from brain.domain.governance.models import OntologicalMap, LayerCertainty
 
 class OntologicalMapAdapter:
@@ -45,3 +45,13 @@ class OntologicalMapAdapter:
             
         ont_map.updated_at = datetime.now()
         self.save_map(ont_map)
+
+class SocraticodeAdapter:
+    """
+    [DEPRECATED: LEGACY] Adaptador de análisis de código para compatibilidad.
+    """
+    def __init__(self, proxy_manager: Any = None):
+        self.proxy = proxy_manager
+
+    async def analyze_symbols(self, path: str) -> List[Any]:
+        return []
