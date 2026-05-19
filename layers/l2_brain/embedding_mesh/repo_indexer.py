@@ -38,6 +38,8 @@ class RepoIndexer:
         ".uv",
         "vendor",
         "deps",
+        "_build",
+        "ebin",
     }
 
     DEFAULT_EXCLUDE_PATH_PREFIXES = {

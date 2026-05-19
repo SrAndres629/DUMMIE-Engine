@@ -6,24 +6,24 @@
 - semantic_mode: degraded_semantic_mode
 
 ## Summary Metrics
-- generated_at: 2026-05-18T23:46:05.295321Z
-- files_scanned: 2267
-- files_indexed: 2245
-- excluded_files_count: 119479
-- excluded_dirs_count: 11781
-- indexed_first_party_files: 2193
+- generated_at: 2026-05-18T23:57:45.870941Z
+- files_scanned: 1357
+- files_indexed: 1340
+- excluded_files_count: 120416
+- excluded_dirs_count: 11939
+- indexed_first_party_files: 1294
 - indexed_legacy_files: 21
-- indexed_generated_files: 31
+- indexed_generated_files: 25
 - indexed_vendor_files: 0
 - max_file_bytes: 200000
-- degraded_embeddings: 2245
+- degraded_embeddings: 1340
 
 ### Excluded by Reason
-- binary: 5
-- exclude_dir: 95663
+- binary: 4
+- exclude_dir: 96603
 - exclude_prefix: 7361
-- not_included: 16433
-- too_large: 17
+- not_included: 16435
+- too_large: 13
 
 ## Indexed Files
 - [UNKNOWN] .gitignore | type=UNKNOWN | cap=FALLBACK | space=fallback_hash_384 | degraded=True
@@ -226,4 +226,4 @@
 - [SPEC] doc/specs/128_debate_review_runtime.md | type=SPEC | cap=TEXT_FAST | space=fallback_hash_384 | degraded=True
 - [SPEC] doc/specs/128_debate_review_runtime.rules.json | type=SPEC | cap=TEXT_FAST | space=fallback_hash_384 | degraded=True
 - [SPEC] doc/specs/129_mission_autonomy_contract.feature | type=SPEC | cap=TEXT_FAST | space=fallback_hash_384 | degraded=True
-- ... truncated (2045 files not shown)
+- ... truncated (1140 files not shown)
