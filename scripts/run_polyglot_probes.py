@@ -71,20 +71,37 @@ def main():
 
     # 3. Probe Shell
     shell_log_path = reports_dir / "shell_probe_pack_2_2_latest.log"
-    shell_outputs = ["shellcheck: missing, falling back to bash -n"]
-    p_shell = subprocess.run(
-        ["bash", "-n", "layers/l1_nervous/ssh_sandbox_wrapper.sh"],
-        cwd=str(repo_root),
-        capture_output=True,
-        text=True
-    )
-    shell_outputs.append("=== BASH -N layers/l1_nervous/ssh_sandbox_wrapper.sh ===")
-    shell_outputs.append(f"Exit code: {p_shell.returncode}")
-    shell_outputs.append(f"Stdout:\n{p_shell.stdout}")
-    shell_outputs.append(f"Stderr:\n{p_shell.stderr}\n")
-    shell_log_path.write_text("\n".join(shell_outputs), encoding="utf-8")
-    shell_status = "TOOLCHAIN_VALIDATED"
-    shell_result = f"Syntax OK via bash -n (exit code: {p_shell.returncode})"
+    shellcheck_bin = subprocess.run(["bash", "-lc", "command -v shellcheck || true"], capture_output=True, text=True).stdout.strip()
+    shell_outputs = []
+    if shellcheck_bin:
+        p_shell = subprocess.run(
+            [shellcheck_bin, "layers/l1_nervous/ssh_sandbox_wrapper.sh"],
+            cwd=str(repo_root),
+            capture_output=True,
+            text=True,
+        )
+        shell_outputs.append("=== SHELLCHECK layers/l1_nervous/ssh_sandbox_wrapper.sh ===")
+        shell_outputs.append(f"Exit code: {p_shell.returncode}")
+        shell_outputs.append(f"Stdout:\n{p_shell.stdout}")
+        shell_outputs.append(f"Stderr:\n{p_shell.stderr}\n")
+        shell_log_path.write_text("\n".join(shell_outputs), encoding="utf-8")
+        shell_status = "TOOLCHAIN_VALIDATED" if p_shell.returncode == 0 else "SMOKE_FAILED"
+        shell_result = f"shellcheck {'passed' if p_shell.returncode == 0 else 'failed'} (exit code: {p_shell.returncode})"
+    else:
+        shell_outputs.append("shellcheck: missing, falling back to bash -n")
+        p_shell = subprocess.run(
+            ["bash", "-n", "layers/l1_nervous/ssh_sandbox_wrapper.sh"],
+            cwd=str(repo_root),
+            capture_output=True,
+            text=True
+        )
+        shell_outputs.append("=== BASH -N layers/l1_nervous/ssh_sandbox_wrapper.sh ===")
+        shell_outputs.append(f"Exit code: {p_shell.returncode}")
+        shell_outputs.append(f"Stdout:\n{p_shell.stdout}")
+        shell_outputs.append(f"Stderr:\n{p_shell.stderr}\n")
+        shell_log_path.write_text("\n".join(shell_outputs), encoding="utf-8")
+        shell_status = "TOOLCHAIN_MISSING"
+        shell_result = f"Syntax OK via bash -n (exit code: {p_shell.returncode})"
 
     # 4. Probe Python
     python_log_path = reports_dir / "python_probe_pack_2_2_latest.log"
@@ -174,13 +191,13 @@ def main():
             "language": "Shell",
             "current_status": "DEFERRED_NO_SAFE_ACTION",
             "current_risk": "HIGH",
-            "required_toolchain": "/usr/bin/bash",
-            "evidence_command": "bash -n layers/l1_nervous/ssh_sandbox_wrapper.sh",
+            "required_toolchain": shellcheck_bin or "/usr/bin/bash",
+            "evidence_command": "shellcheck layers/l1_nervous/ssh_sandbox_wrapper.sh" if shellcheck_bin else "bash -n layers/l1_nervous/ssh_sandbox_wrapper.sh",
             "observed_result": shell_result,
             "binding_decision": shell_status,
             "risk_after": "MEDIUM" if shell_status == "TOOLCHAIN_VALIDATED" else "HIGH",
-            "next_action": "Verify via shellcheck when installed",
-            "done_criteria": "No syntax errors detected by bash -n"
+            "next_action": "Verify via shellcheck when installed" if not shellcheck_bin else "Maintain shellcheck coverage in future CI gates",
+            "done_criteria": "No syntax or lint errors detected by the selected shell toolchain"
         },
         {
             "path": "layers/l1_nervous/tools_impl/nervous.py",
