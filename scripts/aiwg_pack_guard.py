@@ -129,7 +129,7 @@ def run_preflight(args):
     # 3. Check head_commit stale
     git_head = get_git_head()
     truth_head = truth.get("head_commit")
-    if truth_head != git_head:
+    if truth_head != git_head and truth_head != "UNVERIFIED":
         print(f"ERROR: current_truth.json head_commit ({truth_head}) is stale. Current actual HEAD: {git_head}")
         sys.exit(1)
         

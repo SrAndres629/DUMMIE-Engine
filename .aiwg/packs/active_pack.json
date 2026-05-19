@@ -56,7 +56,7 @@
     "No degradación de TEXT_FAST.",
     "Infraestructura de cápsulas sigue arquitectura hexagonal estricta."
   ],
-  "rollback_plan": "git revert 7b5867026bc48cdf37bce675d08fc8966bca3056",
+  "rollback_plan": "git revert ce6de196915f5ace8d9f58f1576703b31b2212f4",
   "auto_continue_allowed": false,
   "stop_conditions": [
     "no sys.path hacks nuevos",
