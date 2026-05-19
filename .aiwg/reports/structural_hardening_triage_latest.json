@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-05-19T00:16:15.843189Z",
-  "base_commit": "05c11513ea9eb3ed3373e01029a54fa770e4106b",
+  "generated_at": "2026-05-19T00:23:17.212200Z",
+  "base_commit": "9c875e6d40d263ead6ba7cc655dd1b0d590c061a",
   "pack_name": "Structural Hardening Pack 2 - Contract-First Triage",
   "pack_status": "PASS_WITH_WARNINGS",
   "repo_health_status": "FAIL",
-  "files_analyzed": 1351,
+  "files_analyzed": 1340,
   "findings": [
     {
       "path": ".gitignore",
@@ -657,27 +657,6 @@
       "related_specs": [
         "doc/specs/192_embedding_mesh_foundation.md"
       ],
-      "related_tests": [],
-      "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
-    },
-    {
-      "path": "scripts/build_structural_hardening_triage.py",
-      "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
-      "evidence_refs": [
-        "CLI_ENTRYPOINT",
-        "FILE_EXISTS",
-        "IMPORTABLE"
-      ],
-      "reasons": [
-        "insufficient structural evidence"
-      ],
-      "related_specs": [],
       "related_tests": [],
       "related_runtime": [],
       "safe_to_change": false,
@@ -10181,8 +10160,7 @@
         "layers/l2_brain/embedding_mesh/cli.py",
         "layers/l2_brain/sdk/client.py",
         "layers/l2_brain/sdk/session.py",
-        "layers/l2_brain/src/brain/main.py",
-        "layers/l2_brain/structural_hardening/cli.py"
+        "layers/l2_brain/src/brain/main.py"
       ],
       "safe_to_change": false,
       "requires_human_review": false
@@ -10347,7 +10325,6 @@
         "layers/l2_brain/embedding_mesh/cli.py",
         "layers/l2_brain/sdk/client.py",
         "layers/l2_brain/src/brain/main.py",
-        "layers/l2_brain/structural_hardening/cli.py",
         "layers/l4_edge/protocol.zig"
       ],
       "safe_to_change": false,
@@ -10394,7 +10371,6 @@
         "layers/l2_brain/sdk/client.py",
         "layers/l2_brain/sdk/session.py",
         "layers/l2_brain/src/brain/main.py",
-        "layers/l2_brain/structural_hardening/cli.py",
         "layers/l3_shield/src/lib.rs"
       ],
       "safe_to_change": false,
@@ -27777,7 +27753,6 @@
         "layers/l2_brain/src/brain/domain/memory/__init__.py",
         "layers/l2_brain/src/brain/domain/memory/models.py",
         "layers/l2_brain/src/brain/infrastructure/adapters/__init__.py",
-        "layers/l2_brain/structural_hardening/__init__.py",
         "layers/l3_shield/__init__.py",
         "layers/l4_edge/__init__.py",
         "layers/l4_edge/build.zig",
@@ -27887,8 +27862,6 @@
         "layers/l2_brain/src/brain/domain/governance/__init__.py",
         "layers/l2_brain/src/brain/domain/memory/__init__.py",
         "layers/l2_brain/src/brain/infrastructure/adapters/__init__.py",
-        "layers/l2_brain/structural_hardening/__init__.py",
-        "layers/l2_brain/structural_hardening/contracts.py",
         "layers/l3_shield/README.md",
         "layers/l3_shield/__init__.py",
         "layers/l3_shield/src/lib.rs",
@@ -27952,7 +27925,6 @@
         "layers/l2_brain/src/brain/domain/memory/__init__.py",
         "layers/l2_brain/src/brain/domain/memory/ports.py",
         "layers/l2_brain/src/brain/infrastructure/adapters/__init__.py",
-        "layers/l2_brain/structural_hardening/__init__.py",
         "layers/l3_shield/__init__.py",
         "layers/l3_shield/src/lib.rs",
         "layers/l4_edge/__init__.py",
@@ -28029,7 +28001,6 @@
         "layers/l2_brain/src/brain/domain/governance/__init__.py",
         "layers/l2_brain/src/brain/domain/memory/__init__.py",
         "layers/l2_brain/src/brain/infrastructure/adapters/__init__.py",
-        "layers/l2_brain/structural_hardening/__init__.py",
         "layers/l3_shield/__init__.py",
         "layers/l3_shield/src/lib.rs",
         "layers/l4_edge/__init__.py",
@@ -28089,7 +28060,6 @@
         "layers/l2_brain/src/brain/domain/governance/__init__.py",
         "layers/l2_brain/src/brain/domain/memory/__init__.py",
         "layers/l2_brain/src/brain/infrastructure/adapters/__init__.py",
-        "layers/l2_brain/structural_hardening/__init__.py",
         "layers/l3_shield/__init__.py",
         "layers/l3_shield/src/lib.rs",
         "layers/l4_edge/__init__.py",
@@ -28266,7 +28236,6 @@
         "layers/l2_brain/src/brain/domain/governance/models.py",
         "layers/l2_brain/src/brain/domain/memory/models.py",
         "layers/l2_brain/src/brain/main.py",
-        "layers/l2_brain/structural_hardening/contracts.py",
         "layers/l3_shield/src/lib.rs"
       ],
       "safe_to_change": false,
@@ -28331,7 +28300,6 @@
         "layers/l2_brain/src/brain/domain/memory/__init__.py",
         "layers/l2_brain/src/brain/infrastructure/adapters/__init__.py",
         "layers/l2_brain/src/brain/main.py",
-        "layers/l2_brain/structural_hardening/__init__.py",
         "layers/l3_shield/__init__.py",
         "layers/l4_edge/__init__.py",
         "layers/l5_muscle/__init__.py",
@@ -28391,7 +28359,6 @@
         "layers/l2_brain/src/brain/domain/governance/__init__.py",
         "layers/l2_brain/src/brain/domain/memory/__init__.py",
         "layers/l2_brain/src/brain/infrastructure/adapters/__init__.py",
-        "layers/l2_brain/structural_hardening/__init__.py",
         "layers/l3_shield/__init__.py",
         "layers/l3_shield/src/lib.rs",
         "layers/l4_edge/__init__.py",
@@ -28452,7 +28419,6 @@
         "layers/l2_brain/src/brain/domain/governance/__init__.py",
         "layers/l2_brain/src/brain/domain/memory/__init__.py",
         "layers/l2_brain/src/brain/infrastructure/adapters/__init__.py",
-        "layers/l2_brain/structural_hardening/__init__.py",
         "layers/l3_shield/__init__.py",
         "layers/l3_shield/src/lib.rs",
         "layers/l4_edge/__init__.py",
@@ -28515,7 +28481,6 @@
         "layers/l2_brain/src/brain/domain/governance/__init__.py",
         "layers/l2_brain/src/brain/domain/memory/__init__.py",
         "layers/l2_brain/src/brain/infrastructure/adapters/__init__.py",
-        "layers/l2_brain/structural_hardening/__init__.py",
         "layers/l3_shield/__init__.py",
         "layers/l3_shield/src/lib.rs",
         "layers/l4_edge/__init__.py",
@@ -28573,7 +28538,6 @@
         "layers/l2_brain/src/brain/domain/governance/__init__.py",
         "layers/l2_brain/src/brain/domain/memory/__init__.py",
         "layers/l2_brain/src/brain/infrastructure/adapters/__init__.py",
-        "layers/l2_brain/structural_hardening/__init__.py",
         "layers/l3_shield/__init__.py",
         "layers/l3_shield/src/lib.rs",
         "layers/l4_edge/__init__.py",
@@ -28625,7 +28589,6 @@
         "layers/l2_brain/src/brain/domain/fabrication/models.py",
         "layers/l2_brain/src/brain/domain/governance/models.py",
         "layers/l2_brain/src/brain/domain/memory/models.py",
-        "layers/l2_brain/structural_hardening/contracts.py",
         "layers/l3_shield/README.md",
         "layers/l3_shield/src/lib.rs",
         "layers/l4_edge/README.md",
@@ -28673,7 +28636,6 @@
         "layers/l2_brain/src/brain/domain/fabrication/models.py",
         "layers/l2_brain/src/brain/domain/governance/models.py",
         "layers/l2_brain/src/brain/domain/memory/models.py",
-        "layers/l2_brain/structural_hardening/evidence.py",
         "layers/l3_shield/src/lib.rs"
       ],
       "safe_to_change": false,
@@ -29600,8 +29562,7 @@
       "related_tests": [
         "layers/l1_nervous/tests/test_runtime_contracts.py",
         "layers/l2_brain/tests/test_embedding_contracts.py",
-        "layers/l2_brain/tests/test_embedding_mesh_contracts.py",
-        "layers/l2_brain/tests/test_structural_hardening_contracts.py"
+        "layers/l2_brain/tests/test_embedding_mesh_contracts.py"
       ],
       "related_runtime": [],
       "safe_to_change": true,
@@ -29908,222 +29869,6 @@
     },
     {
       "path": "layers/l2_brain/sdk/__init__.py",
-      "current_class": "UNKNOWN",
-      "proposed_class": "ACTIVE_RUNTIME",
-      "risk": "LOW",
-      "recommendation": "NO_ACTION",
-      "confidence": 0.86,
-      "evidence_refs": [
-        "FILE_EXISTS",
-        "IMPORTABLE",
-        "REFERENCED_BY_SPEC"
-      ],
-      "reasons": [
-        "package glue __init__.py under active layer",
-        "spec links found"
-      ],
-      "related_specs": [
-        "doc/specs/192_embedding_mesh_foundation.md",
-        "doc/specs/L0_Overseer/00_topology_tracker.md",
-        "doc/specs/L0_Overseer/03_polyglot_architecture.md",
-        "doc/specs/L0_Overseer/05_orchestration_stack_and_glue.md",
-        "doc/specs/L0_Overseer/06_migration_and_implementation_strategy.md",
-        "doc/specs/L0_Overseer/07_unknown_unknowns_resolutions.md",
-        "doc/specs/L0_Overseer/08_devex_and_deployment_strategy.md",
-        "doc/specs/L0_Overseer/11_monorepo_structure.md",
-        "doc/specs/L0_Overseer/14_value_engineering_and_governance.md",
-        "doc/specs/L0_Overseer/28_shadow_worktrees.md",
-        "doc/specs/L0_Overseer/33_persistent_personality_mood.md",
-        "doc/specs/L0_Overseer/42_proactive_heartbeat_protocol.md",
-        "doc/specs/L0_Overseer/43_documentation_and_artifact_standards.md",
-        "doc/specs/L1_Nervous/10_protobuf_contracts.md",
-        "doc/specs/L1_Nervous/11_arrow_data_plane.md",
-        "doc/specs/L1_Nervous/15_mcp_sidecar_isolation.md",
-        "doc/specs/L1_Nervous/16_mcp_dynamic_gateway.md",
-        "doc/specs/L1_Nervous/23_atomic_modular_nodes.md",
-        "doc/specs/L1_Nervous/30_floating_sessions.md",
-        "doc/specs/L1_Nervous/41_layer_handshake_protocol.md",
-        "doc/specs/L1_Nervous/44_pervasive_channel_adapters.md",
-        "doc/specs/L3_Shield/04_anti_ignorance_shields.md",
-        "doc/specs/L3_Shield/22_sdd_executable_contracts.md",
-        "doc/specs/L3_Shield/24_legal_compliance_shield.md",
-        "doc/specs/L3_Shield/45_secure_node_pairing_protocol.md",
-        "doc/specs/L4_Edge/25_blueprint_registry.md",
-        "doc/specs/L4_Edge/40_self_healing_remediation_loop.md",
-        "doc/specs/L5_Muscle/01_environment_and_hardware.md",
-        "doc/specs/L5_Muscle/16_hardware_ipc_stability.md",
-        "doc/specs/L5_Muscle/20_simd_muscle_processing.md",
-        "doc/specs/L5_Muscle/32_multiverse_compression_necro_learning.md",
-        "doc/specs/L6_Skin/13_observability_opentelemetry.md",
-        "doc/specs/L6_Skin/17_optical_nerve_telemetry.md",
-        "doc/specs/L6_Skin/26_command_canvas_gui.md",
-        "doc/specs/L6_Skin/30_visualizer_microservice.md"
-      ],
-      "related_tests": [],
-      "related_runtime": [],
-      "safe_to_change": true,
-      "requires_human_review": false
-    },
-    {
-      "path": "layers/l2_brain/structural_hardening/classifier.py",
-      "current_class": "UNKNOWN",
-      "proposed_class": "ACTIVE_RUNTIME",
-      "risk": "LOW",
-      "recommendation": "KEEP_AND_TEST",
-      "confidence": 0.93,
-      "evidence_refs": [
-        "FILE_EXISTS",
-        "IMPORTABLE",
-        "REFERENCED_BY_SPEC",
-        "REFERENCED_BY_TEST"
-      ],
-      "reasons": [
-        "runtime candidate linked to specs and tests",
-        "spec links found",
-        "test links found"
-      ],
-      "related_specs": [
-        "doc/specs/171_shadow_runtime_classifier.md"
-      ],
-      "related_tests": [
-        "layers/l2_brain/tests/test_shadow_runtime_classifier.py",
-        "layers/l2_brain/tests/test_structural_hardening_classifier.py"
-      ],
-      "related_runtime": [],
-      "safe_to_change": true,
-      "requires_human_review": false
-    },
-    {
-      "path": "layers/l2_brain/structural_hardening/cli.py",
-      "current_class": "UNKNOWN",
-      "proposed_class": "ACTIVE_RUNTIME",
-      "risk": "LOW",
-      "recommendation": "KEEP_AND_TEST",
-      "confidence": 0.93,
-      "evidence_refs": [
-        "FILE_EXISTS",
-        "IMPORTABLE",
-        "REFERENCED_BY_SPEC",
-        "REFERENCED_BY_TEST"
-      ],
-      "reasons": [
-        "runtime candidate linked to specs and tests",
-        "spec links found",
-        "test links found"
-      ],
-      "related_specs": [
-        "doc/specs/147_memory_spine_entrypoint.md",
-        "doc/specs/168_whole_body_scanner.md"
-      ],
-      "related_tests": [
-        "layers/l2_brain/tests/test_cli_control_plane.py",
-        "layers/l2_brain/tests/test_dummie_chat_cli.py"
-      ],
-      "related_runtime": [],
-      "safe_to_change": true,
-      "requires_human_review": false
-    },
-    {
-      "path": "layers/l2_brain/structural_hardening/contracts.py",
-      "current_class": "UNKNOWN",
-      "proposed_class": "ACTIVE_RUNTIME",
-      "risk": "LOW",
-      "recommendation": "KEEP_AND_TEST",
-      "confidence": 0.93,
-      "evidence_refs": [
-        "FILE_EXISTS",
-        "IMPORTABLE",
-        "REFERENCED_BY_SPEC",
-        "REFERENCED_BY_TEST"
-      ],
-      "reasons": [
-        "runtime candidate linked to specs and tests",
-        "spec links found",
-        "test links found"
-      ],
-      "related_specs": [
-        "doc/specs/192_embedding_mesh_foundation.md"
-      ],
-      "related_tests": [
-        "layers/l1_nervous/tests/test_runtime_contracts.py",
-        "layers/l2_brain/tests/test_embedding_contracts.py",
-        "layers/l2_brain/tests/test_embedding_mesh_contracts.py",
-        "layers/l2_brain/tests/test_structural_hardening_contracts.py"
-      ],
-      "related_runtime": [],
-      "safe_to_change": true,
-      "requires_human_review": false
-    },
-    {
-      "path": "layers/l2_brain/structural_hardening/evidence.py",
-      "current_class": "UNKNOWN",
-      "proposed_class": "SHADOW_CANDIDATE",
-      "risk": "HIGH",
-      "recommendation": "MAP_TO_SPEC",
-      "confidence": 0.84,
-      "evidence_refs": [
-        "FILE_EXISTS",
-        "IMPORTABLE"
-      ],
-      "reasons": [
-        "runtime candidate missing spec/test linkage"
-      ],
-      "related_specs": [],
-      "related_tests": [],
-      "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
-    },
-    {
-      "path": "layers/l2_brain/structural_hardening/matrix.py",
-      "current_class": "UNKNOWN",
-      "proposed_class": "ACTIVE_RUNTIME",
-      "risk": "LOW",
-      "recommendation": "KEEP_AND_TEST",
-      "confidence": 0.93,
-      "evidence_refs": [
-        "FILE_EXISTS",
-        "IMPORTABLE",
-        "REFERENCED_BY_SPEC",
-        "REFERENCED_BY_TEST"
-      ],
-      "reasons": [
-        "runtime candidate linked to specs and tests",
-        "spec links found",
-        "test links found"
-      ],
-      "related_specs": [
-        "doc/specs/192_embedding_mesh_foundation.md"
-      ],
-      "related_tests": [
-        "layers/l2_brain/tests/test_wiring_matrix_builder.py"
-      ],
-      "related_runtime": [],
-      "safe_to_change": true,
-      "requires_human_review": false
-    },
-    {
-      "path": "layers/l2_brain/structural_hardening/reporter.py",
-      "current_class": "UNKNOWN",
-      "proposed_class": "SHADOW_CANDIDATE",
-      "risk": "HIGH",
-      "recommendation": "MAP_TO_SPEC",
-      "confidence": 0.84,
-      "evidence_refs": [
-        "FILE_EXISTS",
-        "IMPORTABLE"
-      ],
-      "reasons": [
-        "runtime candidate missing spec/test linkage"
-      ],
-      "related_specs": [],
-      "related_tests": [],
-      "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
-    },
-    {
-      "path": "layers/l2_brain/structural_hardening/__init__.py",
       "current_class": "UNKNOWN",
       "proposed_class": "ACTIVE_RUNTIME",
       "risk": "LOW",
@@ -30525,8 +30270,7 @@
       "related_tests": [
         "layers/l1_nervous/tests/test_runtime_contracts.py",
         "layers/l2_brain/tests/test_embedding_contracts.py",
-        "layers/l2_brain/tests/test_embedding_mesh_contracts.py",
-        "layers/l2_brain/tests/test_structural_hardening_contracts.py"
+        "layers/l2_brain/tests/test_embedding_mesh_contracts.py"
       ],
       "related_runtime": [],
       "safe_to_change": true,
@@ -30800,7 +30544,6 @@
         "layers/l2_brain/src/brain/domain/memory/ports.py",
         "layers/l2_brain/src/brain/infrastructure/adapters/__init__.py",
         "layers/l2_brain/src/brain/main.py",
-        "layers/l2_brain/structural_hardening/__init__.py",
         "layers/l3_shield/__init__.py",
         "layers/l4_edge/__init__.py",
         "layers/l5_muscle/__init__.py",
@@ -30849,7 +30592,6 @@
         "layers/l2_brain/src/brain/domain/fabrication/models.py",
         "layers/l2_brain/src/brain/domain/governance/models.py",
         "layers/l2_brain/src/brain/domain/memory/models.py",
-        "layers/l2_brain/structural_hardening/evidence.py",
         "layers/l5_muscle/mcp_driver.py",
         "layers/l6_skin/index.html"
       ],
@@ -31336,8 +31078,6 @@
         "layers/l2_brain/src/brain/domain/governance/models.py",
         "layers/l2_brain/src/brain/domain/memory/models.py",
         "layers/l2_brain/src/brain/domain/memory/ports.py",
-        "layers/l2_brain/structural_hardening/cli.py",
-        "layers/l2_brain/structural_hardening/matrix.py",
         "layers/l3_shield/src/lib.rs",
         "layers/l6_skin/index.html",
         "layers/l6_skin/package.json"
@@ -31479,7 +31219,6 @@
         "layers/l2_brain/src/brain/application/use_cases/orchestrator.py",
         "layers/l2_brain/src/brain/domain/memory/ports.py",
         "layers/l2_brain/src/brain/main.py",
-        "layers/l2_brain/structural_hardening/matrix.py",
         "layers/l3_shield/src/lib.rs",
         "layers/l4_edge/build.zig",
         "layers/l6_skin/index.html",
@@ -31619,7 +31358,6 @@
         "layers/l2_brain/model_router.py",
         "layers/l2_brain/prompt_preprocessor.py",
         "layers/l2_brain/sdk/session.py",
-        "layers/l2_brain/structural_hardening/evidence.py",
         "layers/l6_skin/package.json"
       ],
       "safe_to_change": false,
@@ -31698,7 +31436,6 @@
         "layers/l2_brain/mental_model_truth_hygiene.py",
         "layers/l2_brain/ports.py",
         "layers/l2_brain/src/brain/domain/memory/ports.py",
-        "layers/l2_brain/structural_hardening/evidence.py",
         "layers/l3_shield/src/lib.rs"
       ],
       "safe_to_change": false,
@@ -31880,8 +31617,7 @@
       ],
       "related_runtime": [
         "layers/l2_brain/four_dtes_persistence_preflight.py",
-        "layers/l2_brain/preflight.py",
-        "layers/l2_brain/structural_hardening/evidence.py"
+        "layers/l2_brain/preflight.py"
       ],
       "safe_to_change": false,
       "requires_human_review": false
@@ -31914,8 +31650,6 @@
         "layers/l2_brain/infrastructure/adapters/ledger.py",
         "layers/l2_brain/ports.py",
         "layers/l2_brain/src/brain/domain/memory/ports.py",
-        "layers/l2_brain/structural_hardening/evidence.py",
-        "layers/l2_brain/structural_hardening/matrix.py",
         "layers/l3_shield/src/lib.rs",
         "layers/l4_edge/build.zig"
       ],
@@ -32200,8 +31934,6 @@
         "layers/l2_brain/src/brain/domain/governance/models.py",
         "layers/l2_brain/src/brain/domain/memory/models.py",
         "layers/l2_brain/src/brain/domain/memory/ports.py",
-        "layers/l2_brain/structural_hardening/evidence.py",
-        "layers/l2_brain/structural_hardening/matrix.py",
         "layers/l3_shield/src/lib.rs"
       ],
       "safe_to_change": false,
@@ -32387,7 +32119,6 @@
         "layers/l2_brain/src/brain/infrastructure/adapters/__init__.py",
         "layers/l2_brain/src/brain/infrastructure/adapters/ledger_adapter.py",
         "layers/l2_brain/src/brain/infrastructure/adapters/shield_adapter.py",
-        "layers/l2_brain/structural_hardening/__init__.py",
         "layers/l3_shield/__init__.py",
         "layers/l3_shield/src/lib.rs",
         "layers/l4_edge/__init__.py",
@@ -32550,8 +32281,7 @@
         "layers/l2_brain/learning_episode.py",
         "layers/l2_brain/ports.py",
         "layers/l2_brain/sdk/session.py",
-        "layers/l2_brain/src/brain/domain/memory/ports.py",
-        "layers/l2_brain/structural_hardening/evidence.py"
+        "layers/l2_brain/src/brain/domain/memory/ports.py"
       ],
       "safe_to_change": false,
       "requires_human_review": false
@@ -32670,7 +32400,6 @@
         "layers/l2_brain/ports.py",
         "layers/l2_brain/prompt_frame_builder.py",
         "layers/l2_brain/src/brain/domain/memory/ports.py",
-        "layers/l2_brain/structural_hardening/matrix.py",
         "layers/l3_shield/src/lib.rs",
         "layers/l4_edge/build.zig"
       ],
@@ -32711,7 +32440,6 @@
         "layers/l2_brain/prompt_frame_builder.py",
         "layers/l2_brain/restart_integration_gate.py",
         "layers/l2_brain/src/brain/domain/memory/ports.py",
-        "layers/l2_brain/structural_hardening/matrix.py",
         "layers/l3_shield/src/lib.rs",
         "layers/l4_edge/build.zig"
       ],
@@ -32792,8 +32520,6 @@
         "layers/l2_brain/ports.py",
         "layers/l2_brain/readiness_score_calibrator.py",
         "layers/l2_brain/src/brain/domain/memory/ports.py",
-        "layers/l2_brain/structural_hardening/cli.py",
-        "layers/l2_brain/structural_hardening/evidence.py",
         "layers/l2_brain/token_economy_benchmark.py",
         "layers/l3_shield/src/lib.rs"
       ],
@@ -32874,7 +32600,6 @@
         "layers/l2_brain/src/brain/domain/fabrication/models.py",
         "layers/l2_brain/src/brain/domain/governance/models.py",
         "layers/l2_brain/src/brain/domain/memory/models.py",
-        "layers/l2_brain/structural_hardening/evidence.py",
         "layers/l3_shield/src/lib.rs"
       ],
       "safe_to_change": false,
@@ -33046,7 +32771,6 @@
         "layers/l2_brain/src/brain/application/use_cases/orchestrator.py",
         "layers/l2_brain/src/brain/domain/memory/ports.py",
         "layers/l2_brain/state_coherence_guard.py",
-        "layers/l2_brain/structural_hardening/cli.py",
         "layers/l3_shield/README.md",
         "layers/l3_shield/src/lib.rs",
         "layers/l4_edge/README.md",
@@ -33093,7 +32817,6 @@
         "layers/l2_brain/repo_probe_runner.py",
         "layers/l2_brain/src/brain/domain/memory/ports.py",
         "layers/l2_brain/state_coherence_guard.py",
-        "layers/l2_brain/structural_hardening/cli.py",
         "layers/l3_shield/src/lib.rs"
       ],
       "safe_to_change": false,
@@ -33335,8 +33058,6 @@
         "layers/l2_brain/self_optimization.py",
         "layers/l2_brain/semantic_graph_rag.py",
         "layers/l2_brain/src/brain/application/interfaces.py",
-        "layers/l2_brain/structural_hardening/classifier.py",
-        "layers/l2_brain/structural_hardening/evidence.py",
         "layers/l2_brain/witness.py",
         "layers/l3_shield/src/lib.rs",
         "layers/l4_edge/protocol.zig"
@@ -33387,8 +33108,6 @@
         "layers/l2_brain/src/brain/domain/governance/models.py",
         "layers/l2_brain/src/brain/domain/memory/models.py",
         "layers/l2_brain/src/brain/domain/memory/ports.py",
-        "layers/l2_brain/structural_hardening/contracts.py",
-        "layers/l2_brain/structural_hardening/evidence.py",
         "layers/l3_shield/src/lib.rs"
       ],
       "safe_to_change": false,
@@ -33423,8 +33142,7 @@
         "layers/l2_brain/sdk/client.py",
         "layers/l2_brain/sdk/sdk_core_api_pb2.py",
         "layers/l2_brain/sdk/sdk_core_api_pb2_grpc.py",
-        "layers/l2_brain/sdk/session.py",
-        "layers/l2_brain/structural_hardening/cli.py"
+        "layers/l2_brain/sdk/session.py"
       ],
       "safe_to_change": false,
       "requires_human_review": false
@@ -33512,7 +33230,6 @@
         "layers/l2_brain/src/brain/domain/governance/models.py",
         "layers/l2_brain/src/brain/domain/memory/models.py",
         "layers/l2_brain/src/brain/domain/memory/ports.py",
-        "layers/l2_brain/structural_hardening/evidence.py",
         "layers/l3_shield/src/lib.rs",
         "layers/l6_skin/index.html"
       ],
@@ -33693,9 +33410,6 @@
         "layers/l2_brain/model_router.py",
         "layers/l2_brain/ports.py",
         "layers/l2_brain/src/brain/domain/memory/ports.py",
-        "layers/l2_brain/structural_hardening/cli.py",
-        "layers/l2_brain/structural_hardening/contracts.py",
-        "layers/l2_brain/structural_hardening/matrix.py",
         "layers/l3_shield/README.md",
         "layers/l3_shield/src/lib.rs",
         "layers/l4_edge/README.md",
@@ -33843,7 +33557,6 @@
         "layers/l2_brain/consensus.py",
         "layers/l2_brain/ports.py",
         "layers/l2_brain/src/brain/domain/memory/ports.py",
-        "layers/l2_brain/structural_hardening/evidence.py",
         "layers/l3_shield/src/lib.rs",
         "layers/l4_edge/build.zig"
       ],
@@ -34034,8 +33747,6 @@
         "layers/l2_brain/context_package.py",
         "layers/l2_brain/ports.py",
         "layers/l2_brain/src/brain/domain/memory/ports.py",
-        "layers/l2_brain/structural_hardening/evidence.py",
-        "layers/l2_brain/structural_hardening/matrix.py",
         "layers/l3_shield/src/lib.rs",
         "layers/l4_edge/build.zig",
         "layers/l6_skin/package.json"
@@ -34073,8 +33784,7 @@
         "layers/l2_brain/tests/test_context_packet_optimizer.py"
       ],
       "related_runtime": [
-        "layers/l2_brain/context_packet_optimizer.py",
-        "layers/l2_brain/structural_hardening/evidence.py"
+        "layers/l2_brain/context_packet_optimizer.py"
       ],
       "safe_to_change": false,
       "requires_human_review": false
@@ -34106,7 +33816,6 @@
         "layers/l2_brain/context_quant_runtime.py",
         "layers/l2_brain/ports.py",
         "layers/l2_brain/src/brain/domain/memory/ports.py",
-        "layers/l2_brain/structural_hardening/matrix.py",
         "layers/l3_shield/src/lib.rs",
         "layers/l4_edge/build.zig"
       ],
@@ -34138,8 +33847,7 @@
       ],
       "related_runtime": [
         "layers/l1_nervous/tools_impl/core.py",
-        "layers/l2_brain/context_value_scorer.py",
-        "layers/l2_brain/structural_hardening/evidence.py"
+        "layers/l2_brain/context_value_scorer.py"
       ],
       "safe_to_change": false,
       "requires_human_review": false
@@ -34212,8 +33920,6 @@
         "layers/l2_brain/ports.py",
         "layers/l2_brain/restart_integration_gate.py",
         "layers/l2_brain/src/brain/domain/memory/ports.py",
-        "layers/l2_brain/structural_hardening/cli.py",
-        "layers/l2_brain/structural_hardening/matrix.py",
         "layers/l2_brain/tui_process_monitor.py",
         "layers/l3_shield/src/lib.rs",
         "layers/l4_edge/build.zig",
@@ -34324,7 +34030,6 @@
         "layers/l2_brain/src/brain/domain/governance/__init__.py",
         "layers/l2_brain/src/brain/domain/memory/__init__.py",
         "layers/l2_brain/src/brain/infrastructure/adapters/__init__.py",
-        "layers/l2_brain/structural_hardening/__init__.py",
         "layers/l3_shield/README.md",
         "layers/l3_shield/__init__.py",
         "layers/l3_shield/authority_gate.py",
@@ -34463,8 +34168,6 @@
         "layers/l2_brain/src/brain/domain/governance/__init__.py",
         "layers/l2_brain/src/brain/domain/memory/__init__.py",
         "layers/l2_brain/src/brain/infrastructure/adapters/__init__.py",
-        "layers/l2_brain/structural_hardening/__init__.py",
-        "layers/l2_brain/structural_hardening/evidence.py",
         "layers/l3_shield/README.md",
         "layers/l3_shield/__init__.py",
         "layers/l3_shield/src/lib.rs",
@@ -34513,8 +34216,7 @@
         "layers/l1_nervous/main.go",
         "layers/l1_nervous/tools_impl/core.py",
         "layers/l2_brain/domain/retrieval_service.py",
-        "layers/l2_brain/src/brain/main.py",
-        "layers/l2_brain/structural_hardening/evidence.py"
+        "layers/l2_brain/src/brain/main.py"
       ],
       "safe_to_change": false,
       "requires_human_review": false
@@ -34597,7 +34299,6 @@
         "layers/l1_nervous/go.mod",
         "layers/l1_nervous/go.sum",
         "layers/l2_brain/mission_workbench.py",
-        "layers/l2_brain/structural_hardening/evidence.py",
         "layers/l3_shield/src/lib.rs",
         "layers/l5_muscle/manager.py"
       ],
@@ -34813,7 +34514,6 @@
         "layers/l2_brain/readiness_score_calibrator.py",
         "layers/l2_brain/sdk/session.py",
         "layers/l2_brain/src/brain/domain/memory/ports.py",
-        "layers/l2_brain/structural_hardening/cli.py",
         "layers/l2_brain/token_economy_benchmark.py",
         "layers/l3_shield/src/lib.rs"
       ],
@@ -34908,8 +34608,6 @@
         "layers/l2_brain/operational_truth_collectors.py",
         "layers/l2_brain/ports.py",
         "layers/l2_brain/src/brain/domain/memory/ports.py",
-        "layers/l2_brain/structural_hardening/cli.py",
-        "layers/l2_brain/structural_hardening/evidence.py",
         "layers/l3_shield/src/lib.rs"
       ],
       "safe_to_change": false,
@@ -35088,8 +34786,7 @@
         "layers/l1_nervous/tools_impl/patch_transactions.py",
         "layers/l2_brain/patch_transaction.py",
         "layers/l2_brain/patch_transaction_manager.py",
-        "layers/l2_brain/src/brain/main.py",
-        "layers/l2_brain/structural_hardening/evidence.py"
+        "layers/l2_brain/src/brain/main.py"
       ],
       "safe_to_change": false,
       "requires_human_review": false
@@ -35151,8 +34848,6 @@
         "layers/l2_brain/src/brain/domain/memory/__init__.py",
         "layers/l2_brain/src/brain/infrastructure/adapters/__init__.py",
         "layers/l2_brain/src/brain/main.py",
-        "layers/l2_brain/structural_hardening/__init__.py",
-        "layers/l2_brain/structural_hardening/evidence.py",
         "layers/l3_shield/__init__.py",
         "layers/l4_edge/__init__.py",
         "layers/l5_muscle/__init__.py",
@@ -35192,8 +34887,7 @@
         "layers/l2_brain/cognition/pattern_miner_v2.py",
         "layers/l2_brain/daemon.py",
         "layers/l2_brain/ports.py",
-        "layers/l2_brain/src/brain/domain/memory/ports.py",
-        "layers/l2_brain/structural_hardening/evidence.py"
+        "layers/l2_brain/src/brain/domain/memory/ports.py"
       ],
       "safe_to_change": false,
       "requires_human_review": false
@@ -35231,8 +34925,7 @@
         "layers/l2_brain/cognition/persona_guardian.py",
         "layers/l2_brain/ports.py",
         "layers/l2_brain/prompt_to_mission.py",
-        "layers/l2_brain/src/brain/domain/memory/ports.py",
-        "layers/l2_brain/structural_hardening/evidence.py"
+        "layers/l2_brain/src/brain/domain/memory/ports.py"
       ],
       "safe_to_change": false,
       "requires_human_review": false
@@ -35287,8 +34980,6 @@
         "layers/l2_brain/src/brain/domain/governance/__init__.py",
         "layers/l2_brain/src/brain/domain/memory/__init__.py",
         "layers/l2_brain/src/brain/infrastructure/adapters/__init__.py",
-        "layers/l2_brain/structural_hardening/__init__.py",
-        "layers/l2_brain/structural_hardening/evidence.py",
         "layers/l3_shield/__init__.py",
         "layers/l4_edge/__init__.py",
         "layers/l5_muscle/__init__.py",
@@ -35370,8 +35061,7 @@
         "layers/l1_nervous/internal/skill/types.go",
         "layers/l2_brain/infrastructure/adapters/ledger.py",
         "layers/l2_brain/phase_ledger.py",
-        "layers/l2_brain/sdk/session.py",
-        "layers/l2_brain/structural_hardening/evidence.py"
+        "layers/l2_brain/sdk/session.py"
       ],
       "safe_to_change": false,
       "requires_human_review": false
@@ -35408,7 +35098,6 @@
       "related_runtime": [
         "layers/l2_brain/infrastructure/adapters/ledger.py",
         "layers/l2_brain/phase_ledger.py",
-        "layers/l2_brain/structural_hardening/evidence.py",
         "layers/l3_shield/src/lib.rs"
       ],
       "safe_to_change": false,
@@ -35555,8 +35244,7 @@
       "related_runtime": [
         "layers/l2_brain/orchestrator.py",
         "layers/l2_brain/polyglot_probe_orchestrator.py",
-        "layers/l2_brain/src/brain/application/use_cases/orchestrator.py",
-        "layers/l2_brain/structural_hardening/evidence.py"
+        "layers/l2_brain/src/brain/application/use_cases/orchestrator.py"
       ],
       "safe_to_change": false,
       "requires_human_review": false
@@ -35635,7 +35323,6 @@
         "layers/l2_brain/repo_intelligence_query.py",
         "layers/l2_brain/spec_frontmatter_repair.py",
         "layers/l2_brain/src/brain/domain/memory/ports.py",
-        "layers/l2_brain/structural_hardening/cli.py",
         "layers/l3_shield/src/lib.rs"
       ],
       "safe_to_change": false,
@@ -35703,7 +35390,6 @@
         "layers/l0_overseer/internal/orchestrator/store.go",
         "layers/l2_brain/sdk/session.py",
         "layers/l2_brain/session_store.py",
-        "layers/l2_brain/structural_hardening/evidence.py",
         "layers/l3_shield/src/lib.rs"
       ],
       "safe_to_change": false,
@@ -35743,8 +35429,6 @@
         "layers/l2_brain/ports.py",
         "layers/l2_brain/shadow_runtime_classifier.py",
         "layers/l2_brain/src/brain/domain/memory/ports.py",
-        "layers/l2_brain/structural_hardening/classifier.py",
-        "layers/l2_brain/structural_hardening/matrix.py",
         "layers/l3_shield/src/lib.rs"
       ],
       "safe_to_change": false,
@@ -35816,8 +35500,7 @@
         "layers/l2_brain/tests/test_six_dimensional_context_runtime.py"
       ],
       "related_runtime": [
-        "layers/l2_brain/six_dimensional_context_runtime.py",
-        "layers/l2_brain/structural_hardening/evidence.py"
+        "layers/l2_brain/six_dimensional_context_runtime.py"
       ],
       "safe_to_change": false,
       "requires_human_review": false
@@ -35890,7 +35573,6 @@
         "layers/l2_brain/ports.py",
         "layers/l2_brain/src/brain/domain/memory/ports.py",
         "layers/l2_brain/stale_memory_detector.py",
-        "layers/l2_brain/structural_hardening/matrix.py",
         "layers/l3_shield/src/lib.rs",
         "layers/l4_edge/build.zig"
       ],
@@ -35932,7 +35614,6 @@
         "layers/l2_brain/ports.py",
         "layers/l2_brain/restart_integration_gate.py",
         "layers/l2_brain/src/brain/domain/memory/ports.py",
-        "layers/l2_brain/structural_hardening/cli.py",
         "layers/l2_brain/tui_process_monitor.py",
         "layers/l3_shield/src/lib.rs",
         "layers/l6_skin/dashboard_renderer.py"
@@ -35978,7 +35659,6 @@
         "layers/l2_brain/ports.py",
         "layers/l2_brain/src/brain/domain/memory/ports.py",
         "layers/l2_brain/state_coherence_guard.py",
-        "layers/l2_brain/structural_hardening/cli.py",
         "layers/l3_shield/src/lib.rs"
       ],
       "safe_to_change": false,
@@ -36023,180 +35703,6 @@
         "layers/l2_brain/src/brain/domain/memory/ports.py",
         "layers/l2_brain/strategic_partner_swarm.py",
         "layers/l3_shield/src/lib.rs"
-      ],
-      "safe_to_change": false,
-      "requires_human_review": false
-    },
-    {
-      "path": "layers/l2_brain/tests/test_structural_hardening_classifier.py",
-      "current_class": "UNKNOWN",
-      "proposed_class": "ACTIVE_TEST",
-      "risk": "MEDIUM",
-      "recommendation": "MAP_TO_SPEC",
-      "confidence": 0.9,
-      "evidence_refs": [
-        "FILE_EXISTS",
-        "IMPORTABLE",
-        "REFERENCED_BY_TEST",
-        "REFERENCES_RUNTIME",
-        "RUNTIME_IMPORT"
-      ],
-      "reasons": [
-        "runtime references found",
-        "test links found",
-        "test naming/path pattern with runtime links"
-      ],
-      "related_specs": [],
-      "related_tests": [
-        "layers/l2_brain/tests/test_structural_hardening_classifier.py"
-      ],
-      "related_runtime": [
-        "layers/__init__.py",
-        "layers/l0_overseer/__init__.py",
-        "layers/l1_nervous/__init__.py",
-        "layers/l1_nervous/adapters/mcp/pyproject.toml",
-        "layers/l1_nervous/application/__init__.py",
-        "layers/l1_nervous/domain/__init__.py",
-        "layers/l1_nervous/tools_impl/__init__.py",
-        "layers/l2_brain/__init__.py",
-        "layers/l2_brain/domain/__init__.py",
-        "layers/l2_brain/embedding_mesh/__init__.py",
-        "layers/l2_brain/embedding_mesh/contracts.py",
-        "layers/l2_brain/embedding_mesh/router.py",
-        "layers/l2_brain/infrastructure/adapters/__init__.py",
-        "layers/l2_brain/metacognition/__init__.py",
-        "layers/l2_brain/metacognition/contracts.py",
-        "layers/l2_brain/model_router.py",
-        "layers/l2_brain/ports.py",
-        "layers/l2_brain/pyproject.toml",
-        "layers/l2_brain/sdk/__init__.py",
-        "layers/l2_brain/src/brain/__init__.py",
-        "layers/l2_brain/src/brain/application/use_cases/__init__.py",
-        "layers/l2_brain/src/brain/domain/context/__init__.py",
-        "layers/l2_brain/src/brain/domain/fabrication/__init__.py",
-        "layers/l2_brain/src/brain/domain/governance/__init__.py",
-        "layers/l2_brain/src/brain/domain/memory/__init__.py",
-        "layers/l2_brain/src/brain/domain/memory/ports.py",
-        "layers/l2_brain/src/brain/infrastructure/adapters/__init__.py",
-        "layers/l2_brain/structural_hardening/__init__.py",
-        "layers/l2_brain/structural_hardening/classifier.py",
-        "layers/l2_brain/structural_hardening/contracts.py",
-        "layers/l2_brain/structural_hardening/evidence.py",
-        "layers/l3_shield/__init__.py",
-        "layers/l4_edge/__init__.py",
-        "layers/l5_muscle/__init__.py",
-        "layers/l5_muscle/src/muscle/__init__.py",
-        "layers/l6_skin/__init__.py",
-        "layers/l6_skin/index.html"
-      ],
-      "safe_to_change": false,
-      "requires_human_review": false
-    },
-    {
-      "path": "layers/l2_brain/tests/test_structural_hardening_contracts.py",
-      "current_class": "UNKNOWN",
-      "proposed_class": "ACTIVE_TEST",
-      "risk": "MEDIUM",
-      "recommendation": "MAP_TO_SPEC",
-      "confidence": 0.9,
-      "evidence_refs": [
-        "FILE_EXISTS",
-        "IMPORTABLE",
-        "REFERENCED_BY_TEST",
-        "REFERENCES_RUNTIME",
-        "RUNTIME_IMPORT"
-      ],
-      "reasons": [
-        "runtime references found",
-        "test links found",
-        "test naming/path pattern with runtime links"
-      ],
-      "related_specs": [],
-      "related_tests": [
-        "layers/l2_brain/tests/test_structural_hardening_contracts.py"
-      ],
-      "related_runtime": [
-        "layers/l1_nervous/domain/models.py",
-        "layers/l2_brain/domain/cognitive/models.py",
-        "layers/l2_brain/embedding_mesh/contracts.py",
-        "layers/l2_brain/embedding_mesh/router.py",
-        "layers/l2_brain/metacognition/contracts.py",
-        "layers/l2_brain/model_router.py",
-        "layers/l2_brain/models.py",
-        "layers/l2_brain/src/brain/domain/context/models.py",
-        "layers/l2_brain/src/brain/domain/fabrication/models.py",
-        "layers/l2_brain/src/brain/domain/governance/models.py",
-        "layers/l2_brain/src/brain/domain/memory/models.py",
-        "layers/l2_brain/structural_hardening/contracts.py",
-        "layers/l2_brain/structural_hardening/evidence.py"
-      ],
-      "safe_to_change": false,
-      "requires_human_review": false
-    },
-    {
-      "path": "layers/l2_brain/tests/test_structural_hardening_triage.py",
-      "current_class": "UNKNOWN",
-      "proposed_class": "ACTIVE_TEST",
-      "risk": "MEDIUM",
-      "recommendation": "MAP_TO_SPEC",
-      "confidence": 0.9,
-      "evidence_refs": [
-        "FILE_EXISTS",
-        "IMPORTABLE",
-        "REFERENCED_BY_TEST",
-        "REFERENCES_RUNTIME",
-        "RUNTIME_IMPORT"
-      ],
-      "reasons": [
-        "runtime references found",
-        "test links found",
-        "test naming/path pattern with runtime links"
-      ],
-      "related_specs": [],
-      "related_tests": [
-        "layers/l2_brain/tests/test_structural_hardening_triage.py"
-      ],
-      "related_runtime": [
-        "layers/__init__.py",
-        "layers/l0_overseer/__init__.py",
-        "layers/l1_nervous/__init__.py",
-        "layers/l1_nervous/adapters/mcp/pyproject.toml",
-        "layers/l1_nervous/application/__init__.py",
-        "layers/l1_nervous/domain/__init__.py",
-        "layers/l1_nervous/tools_impl/__init__.py",
-        "layers/l2_brain/__init__.py",
-        "layers/l2_brain/domain/__init__.py",
-        "layers/l2_brain/embedding_mesh/__init__.py",
-        "layers/l2_brain/embedding_mesh/cli.py",
-        "layers/l2_brain/embedding_mesh/hardening_matrix.py",
-        "layers/l2_brain/embedding_mesh/router.py",
-        "layers/l2_brain/infrastructure/adapters/__init__.py",
-        "layers/l2_brain/metacognition/__init__.py",
-        "layers/l2_brain/model_router.py",
-        "layers/l2_brain/ports.py",
-        "layers/l2_brain/proto/proto/dummie/v2/memory_pb2.py",
-        "layers/l2_brain/pyproject.toml",
-        "layers/l2_brain/sdk/__init__.py",
-        "layers/l2_brain/src/brain/__init__.py",
-        "layers/l2_brain/src/brain/application/use_cases/__init__.py",
-        "layers/l2_brain/src/brain/domain/context/__init__.py",
-        "layers/l2_brain/src/brain/domain/fabrication/__init__.py",
-        "layers/l2_brain/src/brain/domain/governance/__init__.py",
-        "layers/l2_brain/src/brain/domain/memory/__init__.py",
-        "layers/l2_brain/src/brain/domain/memory/ports.py",
-        "layers/l2_brain/src/brain/infrastructure/adapters/__init__.py",
-        "layers/l2_brain/structural_hardening/__init__.py",
-        "layers/l2_brain/structural_hardening/cli.py",
-        "layers/l2_brain/structural_hardening/evidence.py",
-        "layers/l2_brain/structural_hardening/matrix.py",
-        "layers/l3_shield/__init__.py",
-        "layers/l3_shield/src/lib.rs",
-        "layers/l4_edge/__init__.py",
-        "layers/l4_edge/build.zig",
-        "layers/l5_muscle/__init__.py",
-        "layers/l5_muscle/src/muscle/__init__.py",
-        "layers/l6_skin/__init__.py",
-        "layers/l6_skin/index.html"
       ],
       "safe_to_change": false,
       "requires_human_review": false
@@ -36358,7 +35864,6 @@
       "related_runtime": [
         "layers/l2_brain/ports.py",
         "layers/l2_brain/src/brain/domain/memory/ports.py",
-        "layers/l2_brain/structural_hardening/evidence.py",
         "layers/l2_brain/token_economy_benchmark.py",
         "layers/l3_shield/src/lib.rs"
       ],
@@ -36437,7 +35942,6 @@
         "layers/l2_brain/src/brain/domain/memory/__init__.py",
         "layers/l2_brain/src/brain/domain/memory/models.py",
         "layers/l2_brain/src/brain/infrastructure/adapters/__init__.py",
-        "layers/l2_brain/structural_hardening/__init__.py",
         "layers/l2_brain/token_cost_ledger.py",
         "layers/l3_shield/__init__.py",
         "layers/l4_edge/__init__.py",
@@ -36490,7 +35994,6 @@
         "layers/l1_nervous/tools_impl/knowledge.py",
         "layers/l1_nervous/tools_impl/local_reasoning.py",
         "layers/l2_brain/local_reasoning.py",
-        "layers/l2_brain/structural_hardening/evidence.py",
         "layers/l3_shield/src/lib.rs"
       ],
       "safe_to_change": false,
@@ -36535,7 +36038,6 @@
         "layers/l2_brain/infrastructure/adapters/ledger.py",
         "layers/l2_brain/long_running_mission.py",
         "layers/l2_brain/phase_ledger.py",
-        "layers/l2_brain/structural_hardening/evidence.py",
         "layers/l4_edge/build.zig"
       ],
       "safe_to_change": false,
@@ -36592,7 +36094,6 @@
         "layers/l2_brain/src/brain/domain/governance/__init__.py",
         "layers/l2_brain/src/brain/domain/memory/__init__.py",
         "layers/l2_brain/src/brain/infrastructure/adapters/__init__.py",
-        "layers/l2_brain/structural_hardening/__init__.py",
         "layers/l2_brain/vault_curator.py",
         "layers/l2_brain/vault_embedding_index.py",
         "layers/l3_shield/__init__.py",
@@ -36868,7 +36369,6 @@
         "layers/l2_brain/src/brain/domain/governance/models.py",
         "layers/l2_brain/src/brain/domain/memory/models.py",
         "layers/l2_brain/src/brain/domain/memory/ports.py",
-        "layers/l2_brain/structural_hardening/evidence.py",
         "layers/l3_shield/src/lib.rs",
         "layers/l6_skin/index.html"
       ],
@@ -36901,8 +36401,7 @@
       "related_runtime": [
         "layers/l1_nervous/tools_impl/metacognition.py",
         "layers/l2_brain/dummie_chat_cli.py",
-        "layers/l2_brain/embedding_mesh/cli.py",
-        "layers/l2_brain/structural_hardening/cli.py"
+        "layers/l2_brain/embedding_mesh/cli.py"
       ],
       "safe_to_change": false,
       "requires_human_review": false
@@ -37026,7 +36525,6 @@
         "layers/l2_brain/src/brain/domain/fabrication/models.py",
         "layers/l2_brain/src/brain/domain/governance/models.py",
         "layers/l2_brain/src/brain/domain/memory/models.py",
-        "layers/l2_brain/structural_hardening/contracts.py",
         "layers/l3_shield/src/lib.rs"
       ],
       "safe_to_change": false,
@@ -37364,7 +36862,6 @@
         "layers/l2_brain/src/brain/domain/governance/__init__.py",
         "layers/l2_brain/src/brain/domain/memory/__init__.py",
         "layers/l2_brain/src/brain/infrastructure/adapters/__init__.py",
-        "layers/l2_brain/structural_hardening/__init__.py",
         "layers/l3_shield/__init__.py",
         "layers/l4_edge/__init__.py",
         "layers/l4_edge/build.zig",
@@ -37484,8 +36981,7 @@
         "layers/l2_brain/event_bus.py",
         "layers/l2_brain/infrastructure/adapters/ledger.py",
         "layers/l2_brain/safe_fallbacks.py",
-        "layers/l2_brain/sdk/session.py",
-        "layers/l2_brain/structural_hardening/reporter.py"
+        "layers/l2_brain/sdk/session.py"
       ],
       "safe_to_change": false,
       "requires_human_review": false
@@ -37523,8 +37019,7 @@
         "layers/l0_overseer/internal/orchestrator/daemon.go",
         "layers/l1_nervous/tools_impl/gateway.py",
         "layers/l2_brain/daemon.py",
-        "layers/l2_brain/daemon_gateway_heartbeat_bridge.py",
-        "layers/l2_brain/structural_hardening/evidence.py"
+        "layers/l2_brain/daemon_gateway_heartbeat_bridge.py"
       ],
       "safe_to_change": false,
       "requires_human_review": false
@@ -37588,7 +37083,6 @@
         "layers/l2_brain/src/brain/domain/governance/__init__.py",
         "layers/l2_brain/src/brain/domain/memory/__init__.py",
         "layers/l2_brain/src/brain/infrastructure/adapters/__init__.py",
-        "layers/l2_brain/structural_hardening/__init__.py",
         "layers/l3_shield/README.md",
         "layers/l3_shield/__init__.py",
         "layers/l3_shield/src/lib.rs",
@@ -37648,7 +37142,6 @@
         "layers/l2_brain/src/brain/domain/fabrication/models.py",
         "layers/l2_brain/src/brain/domain/governance/models.py",
         "layers/l2_brain/src/brain/domain/memory/models.py",
-        "layers/l2_brain/structural_hardening/evidence.py",
         "layers/l4_edge/build.zig"
       ],
       "safe_to_change": false,
@@ -37860,7 +37353,6 @@
         "layers/l2_brain/mental_model_truth_hygiene.py",
         "layers/l2_brain/ports.py",
         "layers/l2_brain/src/brain/domain/memory/ports.py",
-        "layers/l2_brain/structural_hardening/matrix.py",
         "layers/l3_shield/src/lib.rs"
       ],
       "safe_to_change": false,
@@ -38072,7 +37564,6 @@
         "layers/l2_brain/src/brain/domain/governance/models.py",
         "layers/l2_brain/src/brain/domain/memory/models.py",
         "layers/l2_brain/src/brain/domain/memory/ports.py",
-        "layers/l2_brain/structural_hardening/cli.py",
         "layers/l3_shield/src/lib.rs",
         "layers/l6_skin/index.html"
       ],
@@ -38250,8 +37741,7 @@
       ],
       "related_runtime": [
         "layers/l2_brain/embedding_memory_router.py",
-        "layers/l2_brain/embedding_mesh/router.py",
-        "layers/l2_brain/structural_hardening/evidence.py"
+        "layers/l2_brain/embedding_mesh/router.py"
       ],
       "safe_to_change": false,
       "requires_human_review": false
@@ -38289,8 +37779,7 @@
         "layers/l2_brain/embedding_mesh/contracts.py",
         "layers/l2_brain/embedding_mesh/providers.py",
         "layers/l2_brain/infrastructure/reasoning/providers.py",
-        "layers/l2_brain/metacognition/contracts.py",
-        "layers/l2_brain/structural_hardening/contracts.py"
+        "layers/l2_brain/metacognition/contracts.py"
       ],
       "safe_to_change": false,
       "requires_human_review": false
@@ -38347,8 +37836,7 @@
         "layers/l2_brain/metacognition/contracts.py",
         "layers/l2_brain/model_router.py",
         "layers/l2_brain/pyproject.toml",
-        "layers/l2_brain/src/brain/main.py",
-        "layers/l2_brain/structural_hardening/contracts.py"
+        "layers/l2_brain/src/brain/main.py"
       ],
       "safe_to_change": false,
       "requires_human_review": false
@@ -38432,7 +37920,6 @@
         "layers/l2_brain/mission_planner.py",
         "layers/l2_brain/ports.py",
         "layers/l2_brain/src/brain/domain/memory/ports.py",
-        "layers/l2_brain/structural_hardening/cli.py",
         "layers/l3_shield/src/lib.rs"
       ],
       "safe_to_change": false,
@@ -38518,8 +38005,7 @@
         "layers/l2_brain/daemon.py",
         "layers/l2_brain/ports.py",
         "layers/l2_brain/src/brain/domain/memory/ports.py",
-        "layers/l2_brain/src/brain/main.py",
-        "layers/l2_brain/structural_hardening/evidence.py"
+        "layers/l2_brain/src/brain/main.py"
       ],
       "safe_to_change": false,
       "requires_human_review": false
@@ -38627,7 +38113,6 @@
         "layers/l2_brain/tests/test_vault_context_resolver.py"
       ],
       "related_runtime": [
-        "layers/l2_brain/structural_hardening/evidence.py",
         "layers/l2_brain/vault_context_resolver.py",
         "layers/l3_shield/src/lib.rs",
         "layers/l4_edge/build.zig"
@@ -38670,7 +38155,6 @@
         "layers/l1_nervous/go.mod",
         "layers/l1_nervous/go.sum",
         "layers/l2_brain/golden_path.py",
-        "layers/l2_brain/structural_hardening/evidence.py",
         "layers/l2_brain/vault_curator.py",
         "layers/l3_shield/src/lib.rs",
         "layers/l4_edge/build.zig",
@@ -38757,7 +38241,6 @@
         "layers/l2_brain/mental_model_truth_hygiene.py",
         "layers/l2_brain/ports.py",
         "layers/l2_brain/src/brain/domain/memory/ports.py",
-        "layers/l2_brain/structural_hardening/matrix.py",
         "layers/l3_shield/src/lib.rs"
       ],
       "safe_to_change": false,
@@ -38849,7 +38332,6 @@
         "layers/l1_nervous/tools_impl/core.py",
         "layers/l2_brain/ports.py",
         "layers/l2_brain/src/brain/domain/memory/ports.py",
-        "layers/l2_brain/structural_hardening/matrix.py",
         "layers/l2_brain/whole_body_scanner.py",
         "layers/l3_shield/src/lib.rs"
       ],
@@ -38894,7 +38376,6 @@
         "layers/l1_nervous/tools_impl/core.py",
         "layers/l2_brain/ports.py",
         "layers/l2_brain/src/brain/domain/memory/ports.py",
-        "layers/l2_brain/structural_hardening/matrix.py",
         "layers/l2_brain/whole_body_scan_calibrator.py",
         "layers/l3_shield/src/lib.rs"
       ],
@@ -38934,7 +38415,6 @@
         "layers/l1_nervous/tools_impl/core.py",
         "layers/l2_brain/ports.py",
         "layers/l2_brain/src/brain/domain/memory/ports.py",
-        "layers/l2_brain/structural_hardening/matrix.py",
         "layers/l2_brain/wiring_matrix_builder.py",
         "layers/l3_shield/src/lib.rs",
         "layers/l4_edge/build.zig"
@@ -40750,7 +40230,6 @@
         "layers/l2_brain/embedding_mesh/contracts.py",
         "layers/l2_brain/metacognition/contracts.py",
         "layers/l2_brain/sdk/session.py",
-        "layers/l2_brain/structural_hardening/contracts.py",
         "layers/l3_shield/authority_gate.py"
       ],
       "safe_to_change": false,
@@ -40814,7 +40293,6 @@
         "layers/l0_overseer/internal/orchestrator/graph.go",
         "layers/l2_brain/auditor_port.py",
         "layers/l2_brain/embedding_mesh/cli.py",
-        "layers/l2_brain/structural_hardening/cli.py",
         "layers/l3_shield/src/lib.rs",
         "layers/l3_shield/topological_auditor.py"
       ],
@@ -41146,8 +40624,7 @@
         "layers/l2_brain/daemon.py",
         "layers/l2_brain/ports.py",
         "layers/l2_brain/prompt_to_mission.py",
-        "layers/l2_brain/src/brain/domain/memory/ports.py",
-        "layers/l2_brain/structural_hardening/evidence.py"
+        "layers/l2_brain/src/brain/domain/memory/ports.py"
       ],
       "safe_to_change": true,
       "requires_human_review": false
@@ -41235,34 +40712,34 @@
   ],
   "summary_counts": {
     "by_class": {
-      "ACTIVE_RUNTIME": 241,
+      "ACTIVE_RUNTIME": 236,
       "ACTIVE_SPEC": 559,
-      "ACTIVE_TEST": 238,
+      "ACTIVE_TEST": 235,
       "CONFIG": 12,
       "EXPERIMENTAL": 1,
       "GENERATED": 38,
       "LEGACY": 30,
       "ORPHAN_TEST_CANDIDATE": 3,
-      "SHADOW_CANDIDATE": 84,
-      "UNKNOWN": 145
+      "SHADOW_CANDIDATE": 82,
+      "UNKNOWN": 144
     },
     "by_risk": {
       "CRITICAL": 18,
-      "HIGH": 66,
-      "LOW": 327,
-      "MEDIUM": 940
+      "HIGH": 64,
+      "LOW": 322,
+      "MEDIUM": 936
     },
     "by_recommendation": {
-      "FREEZE_UNTIL_REVIEW": 145,
-      "KEEP_AND_TEST": 252,
+      "FREEZE_UNTIL_REVIEW": 144,
+      "KEEP_AND_TEST": 248,
       "MAP_TO_RUNTIME": 561,
-      "MAP_TO_SPEC": 249,
+      "MAP_TO_SPEC": 244,
       "MAP_TO_TEST": 20,
       "MARK_EXPERIMENTAL": 1,
       "MARK_GENERATED": 38,
       "MARK_LEGACY": 30,
       "NEEDS_OWNER": 18,
-      "NO_ACTION": 37
+      "NO_ACTION": 36
     }
   },
   "top_actions": [

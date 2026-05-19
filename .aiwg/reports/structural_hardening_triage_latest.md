@@ -3,38 +3,38 @@
 ## Status
 - pack_status: PASS_WITH_WARNINGS
 - repo_health_status: FAIL
-- base_commit: 05c11513ea9eb3ed3373e01029a54fa770e4106b
-- files_analyzed: 1351
+- base_commit: 9c875e6d40d263ead6ba7cc655dd1b0d590c061a
+- files_analyzed: 1340
 
 ## Counts by Class
-- ACTIVE_RUNTIME: 241
+- ACTIVE_RUNTIME: 236
 - ACTIVE_SPEC: 559
-- ACTIVE_TEST: 238
+- ACTIVE_TEST: 235
 - CONFIG: 12
 - EXPERIMENTAL: 1
 - GENERATED: 38
 - LEGACY: 30
 - ORPHAN_TEST_CANDIDATE: 3
-- SHADOW_CANDIDATE: 84
-- UNKNOWN: 145
+- SHADOW_CANDIDATE: 82
+- UNKNOWN: 144
 
 ## Counts by Recommendation
-- FREEZE_UNTIL_REVIEW: 145
-- KEEP_AND_TEST: 252
+- FREEZE_UNTIL_REVIEW: 144
+- KEEP_AND_TEST: 248
 - MAP_TO_RUNTIME: 561
-- MAP_TO_SPEC: 249
+- MAP_TO_SPEC: 244
 - MAP_TO_TEST: 20
 - MARK_EXPERIMENTAL: 1
 - MARK_GENERATED: 38
 - MARK_LEGACY: 30
 - NEEDS_OWNER: 18
-- NO_ACTION: 37
+- NO_ACTION: 36
 
 ## Counts by Risk
 - CRITICAL: 18
-- HIGH: 66
-- LOW: 327
-- MEDIUM: 940
+- HIGH: 64
+- LOW: 322
+- MEDIUM: 936
 
 ## Top 30 High-Risk Actions
 1. layers/l0_overseer/lib/overseer/application.ex | proposed=SHADOW_CANDIDATE | risk=CRITICAL | rec=NEEDS_OWNER | confidence=0.84
@@ -69,10 +69,10 @@
 30. layers/l2_brain/domain/retrieval_service.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
 
 ## False-Positive Corrections
-- init_runtime_low_risk_corrections: 25
+- init_runtime_low_risk_corrections: 24
 
 ## Frozen / No-Touch Candidates
-- frozen_count: 146
+- frozen_count: 145
 - README.md | FREEZE_UNTIL_REVIEW | risk=MEDIUM
 - doc/ATLAS.md | FREEZE_UNTIL_REVIEW | risk=MEDIUM
 - doc/CORE_SPEC.md | FREEZE_UNTIL_REVIEW | risk=MEDIUM
@@ -86,13 +86,13 @@
 - scripts/build_inventory.py | FREEZE_UNTIL_REVIEW | risk=MEDIUM
 - scripts/build_repo_maps.py | FREEZE_UNTIL_REVIEW | risk=MEDIUM
 - scripts/build_semantic_hardening_index.py | FREEZE_UNTIL_REVIEW | risk=MEDIUM
-- scripts/build_structural_hardening_triage.py | FREEZE_UNTIL_REVIEW | risk=MEDIUM
 - scripts/consciousness_audit.py | FREEZE_UNTIL_REVIEW | risk=MEDIUM
 - scripts/context_oracle.py | FREEZE_UNTIL_REVIEW | risk=MEDIUM
 - scripts/dummie-ctl | FREEZE_UNTIL_REVIEW | risk=MEDIUM
 - scripts/dummie-doctor-repair.sh | FREEZE_UNTIL_REVIEW | risk=MEDIUM
 - scripts/dummie-engine.service | FREEZE_UNTIL_REVIEW | risk=MEDIUM
 - scripts/dummie_mcp_doctor.py | FREEZE_UNTIL_REVIEW | risk=MEDIUM
+- scripts/dummie_orchestrator.py | FREEZE_UNTIL_REVIEW | risk=MEDIUM
 
 ## Generated / Legacy Summary
 - generated: 38
@@ -100,7 +100,7 @@
 
 ## Orphan Test Candidates
 - orphan_test_candidates: 3
-- shadow_candidates: 84
+- shadow_candidates: 82
 
 ## Next Phase
 Structural Hardening Pack 2.1 - targeted contract binding and safe physical changes
