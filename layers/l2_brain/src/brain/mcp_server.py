@@ -97,11 +97,13 @@ def _get_orchestrator():
     global _orchestrator
     if _orchestrator is None:
         from brain.infrastructure.adapters.shield_adapter import NativeShieldAdapter
+        from brain.infrastructure.adapters.session_ledger_adapter import SessionLedgerAdapter
         from brain.application.use_cases.orchestrator import CognitiveOrchestrator
         _orchestrator = CognitiveOrchestrator(
             shield_port=NativeShieldAdapter(),
             event_store=_get_kuzu_repo(),
             ledger_audit=_get_ledger_adapter(),
+            session_ledger=SessionLedgerAdapter(),
             skill_repo=_get_skill_repo()
         )
     return _orchestrator
@@ -264,7 +266,7 @@ def memory_get_chain(leaf_hash: str, depth: int = 30) -> str:
         return json.dumps({"error": f"No chain found from: {leaf_hash}", "nodes": []})
 
     nodes = []
-    for node in chain:
+    for node in sorted(chain, key=lambda item: item.context.lamport_t):
         nodes.append({
             "causal_hash": node.causal_hash,
             "parent_hash": node.parent_hash,
