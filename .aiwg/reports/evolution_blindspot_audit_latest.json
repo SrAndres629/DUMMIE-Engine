@@ -55,21 +55,6 @@
   ],
   "tests_still_superficial": [
     {
-      "path": "layers/l2_brain/tests/test_six_dimensional_context_runtime.py",
-      "assert_count": 0,
-      "skip_count": 0
-    },
-    {
-      "path": "layers/l2_brain/tests/test_daemon_gateway_heartbeat_bridge.py",
-      "assert_count": 0,
-      "skip_count": 0
-    },
-    {
-      "path": "layers/l2_brain/tests/test_embedding_memory_router.py",
-      "assert_count": 0,
-      "skip_count": 0
-    },
-    {
       "path": "layers/l2_brain/tests/test_semantic_hardening_index.py",
       "assert_count": 48,
       "skip_count": 0
@@ -85,38 +70,13 @@
       "skip_count": 0
     },
     {
-      "path": "layers/l1_nervous/tests/test_swarm_perf_run.py",
-      "assert_count": 0,
-      "skip_count": 0
-    },
-    {
       "path": "layers/l1_nervous/tests/conftest.py",
-      "assert_count": 0,
-      "skip_count": 0
-    },
-    {
-      "path": "layers/l1_nervous/tests/industrial/test_observe_swarm_perf.py",
-      "assert_count": 0,
-      "skip_count": 0
-    },
-    {
-      "path": "layers/l2_brain/tests/test_polyglot_probe_orchestrator.py",
-      "assert_count": 0,
-      "skip_count": 0
-    },
-    {
-      "path": "layers/l2_brain/tests/test_context_packet_optimizer.py",
       "assert_count": 0,
       "skip_count": 0
     },
     {
       "path": "layers/l2_brain/tests/test_cognitive_bias_detector.py",
       "assert_count": 1,
-      "skip_count": 0
-    },
-    {
-      "path": "layers/l2_brain/tests/test_four_dtes_persistence_preflight.py",
-      "assert_count": 0,
       "skip_count": 0
     }
   ],

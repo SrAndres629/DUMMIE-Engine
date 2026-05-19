@@ -1,0 +1,137 @@
+{
+  "roadmap_name": "DUMMIE Engine Roadmap Ledger to Pack 6.1",
+  "generated_at": "2026-05-18T22:30:00Z",
+  "truth_reconciliation": {
+    "head_main": "06478a1",
+    "pack_2_2_status": "MERGED (f0345c8)",
+    "pack_2_3_status": "MERGED (c1f7de4)",
+    "batch_5_status": "MERGED (06478a1)",
+    "current_target": "Pack 2.4 - Superficial Tests Upgrade"
+  },
+  "packs": [
+    {
+      "pack": "PACK 2.4 - Superficial Tests Upgrade",
+      "objective": "Convert import-only/assert-free tests into behavioral tests.",
+      "status": "PENDING",
+      "batch_size": "8-15 tests",
+      "criteria": "superficial_tests drops; each test validates a contract/invariant.",
+      "preconditions": "Pack 2.3 merged. Main clean.",
+      "expected_files": "layers/l2_brain/tests/*, layers/l1_nervous/tests/*",
+      "validation_commands": [
+        "layers/l2_brain/.venv/bin/pytest -q <modified_tests>",
+        "python3 scripts/build_structural_hardening_triage.py --repo-root . --write-reports --max-actions 50"
+      ],
+      "risks": "Breaking test coverage or uncovering broken invariants.",
+      "rollback_strategy": "git reset --hard HEAD~1"
+    },
+    {
+      "pack": "PACK 2.5 - UNKNOWN Classification Batch",
+      "objective": "Classify UNKNOWN by fan-in/importance.",
+      "status": "PENDING",
+      "batch_size": "40-80 files",
+      "criteria": "UNKNOWN count drops significantly; no hiding debt as legacy without evidence."
+    },
+    {
+      "pack": "PACK 2.6 - Orphan Tests + Frozen Scripts",
+      "objective": "Resolve 3 ORPHAN_TEST_CANDIDATE and critical frozen scripts.",
+      "status": "PENDING",
+      "criteria": "orphan tests = 0 or justified; scripts have owner/status."
+    },
+    {
+      "pack": "PACK 2.7 - CI + Freshness Gates",
+      "objective": "Automate validations (specs_docs, structural triage, mesh tests, freshness).",
+      "status": "PENDING",
+      "criteria": "Minimal CI active."
+    },
+    {
+      "pack": "PACK 2.8 - Repo Health Recalibration",
+      "objective": "Recalculate structural health.",
+      "status": "PENDING",
+      "criteria": "CRITICAL=0, HIGH<20, SHADOW<20, UNKNOWN<30, ORPHAN=0, repo_health_status=PASS_WITH_WARNINGS."
+    },
+    {
+      "pack": "PACK 3.0 - Real TEXT_FAST Embedding Provider",
+      "objective": "Partially exit fallback_hash_384.",
+      "status": "PENDING",
+      "criteria": "vector_space real active; fallback preserved; no unmanaged runtime downloads."
+    },
+    {
+      "pack": "PACK 3.1 - Reranker Real or Hybrid+",
+      "objective": "Improve evidence ranking.",
+      "status": "PENDING",
+      "criteria": "Real offline reranker or audited hybrid with metrics."
+    },
+    {
+      "pack": "PACK 3.2 - CODE Embedding Provider",
+      "objective": "Separate code search from text search.",
+      "status": "PENDING",
+      "criteria": "Code vector_space active; spaces not mixed."
+    },
+    {
+      "pack": "PACK 3.3 - Direct Spec Linkage Engine",
+      "objective": "Increase direct_spec_hit_rate and reduce scoped-only links.",
+      "status": "PENDING",
+      "criteria": "More precise module-spec linkages."
+    },
+    {
+      "pack": "PACK 4.0 - ModelCapability Registry",
+      "objective": "Formalize specialist model classes.",
+      "status": "PENDING",
+      "criteria": "Contractual registry, no massive implementation."
+    },
+    {
+      "pack": "PACK 4.1 - ModelRouter v2",
+      "objective": "Route by capability_chain.",
+      "status": "PENDING",
+      "criteria": "task + modality + risk + budget + context_quality -> capability_chain."
+    },
+    {
+      "pack": "PACK 4.2 - Guardrail Layer",
+      "objective": "Security before actions.",
+      "status": "PENDING",
+      "criteria": "secrets/PII/destructive-action checks active."
+    },
+    {
+      "pack": "PACK 4.3 - Function Calling Contract Layer",
+      "objective": "Tool calls with JSON schema and error taxonomy.",
+      "status": "PENDING",
+      "criteria": "Validated tool calls."
+    },
+    {
+      "pack": "PACK 4.4 - Code LLM Integration",
+      "objective": "Local/cloud code model adapter with sandbox/test gate.",
+      "status": "PENDING",
+      "criteria": "No patches accepted without a test gate."
+    },
+    {
+      "pack": "PACK 5.0 - Document Intelligence / LangExtract Adapter",
+      "objective": "Grounded extraction for long documents.",
+      "status": "PENDING",
+      "criteria": "JSON with source spans."
+    },
+    {
+      "pack": "PACK 5.1 - Runtime Context Compression Policy",
+      "objective": "Prepare KV cache/TurboQuant without overclaim.",
+      "status": "PENDING",
+      "criteria": "Policy detects real backend; no fake promises."
+    },
+    {
+      "pack": "PACK 5.2 - Local Inference Backend Registry",
+      "objective": "Register Ollama/llama.cpp/MLX if present.",
+      "status": "PENDING",
+      "criteria": "Health check and model inventory without automatic download."
+    },
+    {
+      "pack": "PACK 6.0 - Operational CI Full Gate",
+      "objective": "Complete quality pipeline.",
+      "status": "PENDING",
+      "criteria": "main protected by tests, specs, hardening, freshness, secret scan."
+    },
+    {
+      "pack": "PACK 6.1 - Minimal Golden Path",
+      "objective": "Demonstrate full operational flow.",
+      "status": "PENDING",
+      "criteria": "Reproducible end-to-end case (query -> retrieval -> ... -> memory)."
+    }
+  ]
+}

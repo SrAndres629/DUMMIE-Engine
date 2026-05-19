@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-05-19T02:10:14.027482Z",
-  "base_commit": "2ac50f72a078ff11d7309e3fe1a1603a7d2be909",
-  "analysis_base_commit": "2ac50f72a078ff11d7309e3fe1a1603a7d2be909",
-  "report_generated_at_commit": "2ac50f72a078ff11d7309e3fe1a1603a7d2be909",
-  "head_commit": "2ac50f72a078ff11d7309e3fe1a1603a7d2be909",
+  "generated_at": "2026-05-19T02:31:04.509218Z",
+  "base_commit": "06478a1fa387c7bdbaab6b87ffc20d7ecb2e7702",
+  "analysis_base_commit": "06478a1fa387c7bdbaab6b87ffc20d7ecb2e7702",
+  "report_generated_at_commit": "06478a1fa387c7bdbaab6b87ffc20d7ecb2e7702",
+  "head_commit": "06478a1fa387c7bdbaab6b87ffc20d7ecb2e7702",
   "pack_name": "Structural Hardening Pack 2 - Contract-First Triage",
   "pack_status": "PASS_WITH_WARNINGS",
   "repo_health_status": "FAIL",
@@ -29768,11 +29768,36 @@
         "layers/l1_nervous/tests/test_observe_swarm_perf.py"
       ],
       "related_runtime": [
+        "layers/__init__.py",
+        "layers/l0_overseer/__init__.py",
+        "layers/l1_nervous/__init__.py",
+        "layers/l1_nervous/application/__init__.py",
+        "layers/l1_nervous/domain/__init__.py",
         "layers/l1_nervous/tools.py",
+        "layers/l1_nervous/tools_impl/__init__.py",
         "layers/l1_nervous/tools_impl/nervous.py",
         "layers/l1_nervous/tools_impl/swarm.py",
+        "layers/l1_nervous/utils.py",
+        "layers/l2_brain/__init__.py",
+        "layers/l2_brain/domain/__init__.py",
+        "layers/l2_brain/embedding_mesh/__init__.py",
+        "layers/l2_brain/infrastructure/adapters/__init__.py",
+        "layers/l2_brain/metacognition/__init__.py",
         "layers/l2_brain/orchestrator.py",
-        "layers/l2_brain/src/brain/application/use_cases/orchestrator.py"
+        "layers/l2_brain/sdk/__init__.py",
+        "layers/l2_brain/src/brain/__init__.py",
+        "layers/l2_brain/src/brain/application/use_cases/__init__.py",
+        "layers/l2_brain/src/brain/application/use_cases/orchestrator.py",
+        "layers/l2_brain/src/brain/domain/context/__init__.py",
+        "layers/l2_brain/src/brain/domain/fabrication/__init__.py",
+        "layers/l2_brain/src/brain/domain/governance/__init__.py",
+        "layers/l2_brain/src/brain/domain/memory/__init__.py",
+        "layers/l2_brain/src/brain/infrastructure/adapters/__init__.py",
+        "layers/l3_shield/__init__.py",
+        "layers/l4_edge/__init__.py",
+        "layers/l5_muscle/__init__.py",
+        "layers/l5_muscle/src/muscle/__init__.py",
+        "layers/l6_skin/__init__.py"
       ],
       "safe_to_change": false,
       "requires_human_review": false
@@ -31998,6 +32023,7 @@
         "layers/l2_brain/tests/test_four_dtes_persistence_preflight.py"
       ],
       "related_runtime": [
+        "layers/l0_overseer/internal/orchestrator/graph.go",
         "layers/l2_brain/four_dtes_persistence_preflight.py",
         "layers/l2_brain/preflight.py"
       ],
@@ -34166,7 +34192,9 @@
         "layers/l2_brain/tests/test_context_packet_optimizer.py"
       ],
       "related_runtime": [
-        "layers/l2_brain/context_packet_optimizer.py"
+        "layers/l2_brain/context_packet_optimizer.py",
+        "layers/l2_brain/six_dimensional_context_runtime.py",
+        "layers/l4_edge/build.zig"
       ],
       "safe_to_change": false,
       "requires_human_review": false
@@ -35624,9 +35652,23 @@
         "layers/l2_brain/tests/test_polyglot_probe_orchestrator.py"
       ],
       "related_runtime": [
+        "layers/l0_overseer/cmd/dummied/main.go",
+        "layers/l0_overseer/cmd/monitor/main.go",
+        "layers/l0_overseer/cmd/overseer/main.go",
+        "layers/l0_overseer/cmd/swarm/main.go",
+        "layers/l0_overseer/go.mod",
+        "layers/l0_overseer/go.sum",
+        "layers/l1_nervous/cmd/diag_kuzu/main.go",
+        "layers/l1_nervous/cmd/ingester/main.go",
+        "layers/l1_nervous/cmd/memory/main.go",
+        "layers/l1_nervous/go.mod",
+        "layers/l1_nervous/go.sum",
+        "layers/l1_nervous/main.go",
         "layers/l2_brain/orchestrator.py",
         "layers/l2_brain/polyglot_probe_orchestrator.py",
-        "layers/l2_brain/src/brain/application/use_cases/orchestrator.py"
+        "layers/l2_brain/src/brain/application/use_cases/orchestrator.py",
+        "layers/l2_brain/src/brain/main.py",
+        "layers/l6_skin/package.json"
       ],
       "safe_to_change": false,
       "requires_human_review": false
@@ -35882,7 +35924,10 @@
         "layers/l2_brain/tests/test_six_dimensional_context_runtime.py"
       ],
       "related_runtime": [
-        "layers/l2_brain/six_dimensional_context_runtime.py"
+        "layers/l1_nervous/tools_impl/core.py",
+        "layers/l2_brain/infrastructure/adapters/kuzu.py",
+        "layers/l2_brain/six_dimensional_context_runtime.py",
+        "layers/l4_edge/build.zig"
       ],
       "safe_to_change": false,
       "requires_human_review": false
@@ -37399,6 +37444,7 @@
       ],
       "related_runtime": [
         "layers/l0_overseer/internal/orchestrator/daemon.go",
+        "layers/l1_nervous/tools_impl/core.py",
         "layers/l1_nervous/tools_impl/gateway.py",
         "layers/l2_brain/daemon.py",
         "layers/l2_brain/daemon_gateway_heartbeat_bridge.py"
@@ -38123,7 +38169,11 @@
       ],
       "related_runtime": [
         "layers/l2_brain/embedding_memory_router.py",
-        "layers/l2_brain/embedding_mesh/router.py"
+        "layers/l2_brain/embedding_mesh/router.py",
+        "layers/l2_brain/ports.py",
+        "layers/l2_brain/six_dimensional_context_runtime.py",
+        "layers/l2_brain/src/brain/domain/memory/ports.py",
+        "layers/l4_edge/build.zig"
       ],
       "safe_to_change": false,
       "requires_human_review": false

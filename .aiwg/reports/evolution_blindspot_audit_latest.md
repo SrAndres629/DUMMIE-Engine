@@ -27,17 +27,10 @@
 
 ## Tests Still Superficial (Heuristic)
 - count: 13
-- layers/l2_brain/tests/test_six_dimensional_context_runtime.py | asserts=0 | skips=0
-- layers/l2_brain/tests/test_daemon_gateway_heartbeat_bridge.py | asserts=0 | skips=0
-- layers/l2_brain/tests/test_embedding_memory_router.py | asserts=0 | skips=0
 - layers/l2_brain/tests/test_semantic_hardening_index.py | asserts=48 | skips=0
 - layers/l2_brain/tests/conftest.py | asserts=0 | skips=0
 - doc/.deprecated/scratchpad/test_kuzu.py | asserts=0 | skips=0
-- layers/l1_nervous/tests/test_swarm_perf_run.py | asserts=0 | skips=0
 - layers/l1_nervous/tests/conftest.py | asserts=0 | skips=0
-- layers/l1_nervous/tests/industrial/test_observe_swarm_perf.py | asserts=0 | skips=0
-- layers/l2_brain/tests/test_polyglot_probe_orchestrator.py | asserts=0 | skips=0
-- layers/l2_brain/tests/test_context_packet_optimizer.py | asserts=0 | skips=0
 - layers/l2_brain/tests/test_cognitive_bias_detector.py | asserts=1 | skips=0
 
 ## Files Not Fully Analyzed
