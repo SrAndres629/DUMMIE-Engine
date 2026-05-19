@@ -11,6 +11,8 @@ from brain.domain.memory.ports import IEventStorePort, ILedgerAuditPort, IShield
 from brain.domain.memory.models import MemoryNode4DTES, EgoState
 from brain.domain.governance.models import DecisionRecord
 
+from brain.domain.capability_registry import CapabilityRegistry, ModelExpertise
+
 class CognitiveOrchestrator(IBrainOrchestrator):
     """
     Orquestador Cognitivo (L2 Brain).
@@ -25,6 +27,7 @@ class CognitiveOrchestrator(IBrainOrchestrator):
         session_ledger: ISessionLedgerPort,
         skill_repo: ISkillRepositoryPort,
         embedding_port: Optional["IEmbeddingPort"] = None,
+        registry: Optional[CapabilityRegistry] = None,
         mode: str = "GREENFIELD"
     ):
         self.shield = shield_port
@@ -33,6 +36,7 @@ class CognitiveOrchestrator(IBrainOrchestrator):
         self.session_ledger = session_ledger
         self.skill_repo = skill_repo
         self.embedding_port = embedding_port
+        self.registry = registry or CapabilityRegistry()
         self.mode = mode
         # Recuperar el tick máximo del Event Store (Spec 02 - Causal Ordering)
         # Esto previene la destrucción del ordenamiento causal tras reinicios.
