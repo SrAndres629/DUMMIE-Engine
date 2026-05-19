@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-05-19T03:01:11.502740Z",
-  "base_commit": "06478a1fa387c7bdbaab6b87ffc20d7ecb2e7702",
-  "analysis_base_commit": "06478a1fa387c7bdbaab6b87ffc20d7ecb2e7702",
-  "report_generated_at_commit": "06478a1fa387c7bdbaab6b87ffc20d7ecb2e7702",
-  "head_commit": "06478a1fa387c7bdbaab6b87ffc20d7ecb2e7702",
+  "generated_at": "2026-05-19T03:09:48.854032Z",
+  "base_commit": "55c30b1edd77ee9e324e4ab3ca6aef97464bfc00",
+  "analysis_base_commit": "55c30b1edd77ee9e324e4ab3ca6aef97464bfc00",
+  "report_generated_at_commit": "55c30b1edd77ee9e324e4ab3ca6aef97464bfc00",
+  "head_commit": "55c30b1edd77ee9e324e4ab3ca6aef97464bfc00",
   "pack_name": "Structural Hardening Pack 2 - Contract-First Triage",
   "pack_status": "PASS_WITH_WARNINGS",
   "repo_health_status": "FAIL",
@@ -62,19 +62,19 @@
     {
       "path": "README.md",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "CORE_SPEC_REFERENCE",
         "FILE_EXISTS",
         "REFERENCED_BY_SPEC"
       ],
       "reasons": [
-        "insufficient structural evidence",
         "referenced in CORE_SPEC",
-        "spec links found"
+        "spec links found",
+        "spec location and format"
       ],
       "related_specs": [
         "doc/specs/112_folder_notes_noteplans.md",
@@ -183,15 +183,15 @@
     {
       "path": "doc/ATLAS.md",
       "current_class": "REPORT",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "FILE_EXISTS"
       ],
       "reasons": [
-        "insufficient structural evidence"
+        "spec location and format"
       ],
       "related_specs": [],
       "related_tests": [],
@@ -221,19 +221,19 @@
     {
       "path": "doc/CORE_SPEC.md",
       "current_class": "REPORT",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "FILE_EXISTS",
         "PHYSICAL_MAP_REFERENCE",
         "REFERENCED_BY_SPEC"
       ],
       "reasons": [
-        "insufficient structural evidence",
         "referenced in PHYSICAL_MAP",
-        "spec links found"
+        "spec links found",
+        "spec location and format"
       ],
       "related_specs": [
         "doc/specs/L0_Overseer/00_topology_tracker.md",
@@ -318,15 +318,15 @@
     {
       "path": "doc/ENGINEERING_PRINCIPLES.md",
       "current_class": "REPORT",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "FILE_EXISTS"
       ],
       "reasons": [
-        "insufficient structural evidence"
+        "spec location and format"
       ],
       "related_specs": [],
       "related_tests": [],
@@ -337,19 +337,19 @@
     {
       "path": "doc/PHYSICAL_MAP.md",
       "current_class": "REPORT",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "CORE_SPEC_REFERENCE",
         "FILE_EXISTS",
         "REFERENCED_BY_SPEC"
       ],
       "reasons": [
-        "insufficient structural evidence",
         "referenced in CORE_SPEC",
-        "spec links found"
+        "spec links found",
+        "spec location and format"
       ],
       "related_specs": [
         "doc/02_atlas/PHYSICAL_MAP.feature",
@@ -494,16 +494,16 @@
     {
       "path": "scripts/install_tools_user_space.sh",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "CONFIG",
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.95,
       "evidence_refs": [
         "FILE_EXISTS",
         "REFERENCED_BY_SPEC"
       ],
       "reasons": [
-        "insufficient structural evidence",
+        "config/manifest file",
         "spec links found"
       ],
       "related_specs": [
@@ -511,23 +511,23 @@
       ],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "scripts/benchmark_local_reasoning.py",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "CONFIG",
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.95,
       "evidence_refs": [
         "FILE_EXISTS",
         "IMPORTABLE",
         "REFERENCED_BY_SPEC"
       ],
       "reasons": [
-        "insufficient structural evidence",
+        "config/manifest file",
         "spec links found"
       ],
       "related_specs": [
@@ -537,116 +537,116 @@
       ],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "scripts/bootstrap.sh",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "CONFIG",
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.95,
       "evidence_refs": [
         "FILE_EXISTS"
       ],
       "reasons": [
-        "insufficient structural evidence"
+        "config/manifest file"
       ],
       "related_specs": [],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "scripts/bootstrap_memory_native.sh",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "CONFIG",
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.95,
       "evidence_refs": [
         "FILE_EXISTS"
       ],
       "reasons": [
-        "insufficient structural evidence"
+        "config/manifest file"
       ],
       "related_specs": [],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "scripts/build_factory.sh",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "CONFIG",
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.95,
       "evidence_refs": [
         "CLI_ENTRYPOINT",
         "FILE_EXISTS"
       ],
       "reasons": [
-        "insufficient structural evidence"
+        "config/manifest file"
       ],
       "related_specs": [],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "scripts/build_inventory.py",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "CONFIG",
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.95,
       "evidence_refs": [
         "CLI_ENTRYPOINT",
         "FILE_EXISTS",
         "IMPORTABLE"
       ],
       "reasons": [
-        "insufficient structural evidence"
+        "config/manifest file"
       ],
       "related_specs": [],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "scripts/build_repo_maps.py",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "CONFIG",
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.95,
       "evidence_refs": [
         "CLI_ENTRYPOINT",
         "FILE_EXISTS",
         "IMPORTABLE"
       ],
       "reasons": [
-        "insufficient structural evidence"
+        "config/manifest file"
       ],
       "related_specs": [],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "scripts/build_semantic_hardening_index.py",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "CONFIG",
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.95,
       "evidence_refs": [
         "CLI_ENTRYPOINT",
         "FILE_EXISTS",
@@ -654,7 +654,7 @@
         "REFERENCED_BY_SPEC"
       ],
       "reasons": [
-        "insufficient structural evidence",
+        "config/manifest file",
         "spec links found"
       ],
       "related_specs": [
@@ -662,62 +662,62 @@
       ],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "scripts/consciousness_audit.py",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "CONFIG",
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.95,
       "evidence_refs": [
         "FILE_EXISTS",
         "IMPORTABLE"
       ],
       "reasons": [
-        "insufficient structural evidence"
+        "config/manifest file"
       ],
       "related_specs": [],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "scripts/context_oracle.py",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "CONFIG",
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.95,
       "evidence_refs": [
         "FILE_EXISTS",
         "IMPORTABLE"
       ],
       "reasons": [
-        "insufficient structural evidence"
+        "config/manifest file"
       ],
       "related_specs": [],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "scripts/dummie-ctl",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "CONFIG",
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.95,
       "evidence_refs": [
         "FILE_EXISTS",
         "REFERENCED_BY_SPEC"
       ],
       "reasons": [
-        "insufficient structural evidence",
+        "config/manifest file",
         "spec links found"
       ],
       "related_specs": [
@@ -725,61 +725,61 @@
       ],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "scripts/dummie-doctor-repair.sh",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "CONFIG",
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.95,
       "evidence_refs": [
         "FILE_EXISTS"
       ],
       "reasons": [
-        "insufficient structural evidence"
+        "config/manifest file"
       ],
       "related_specs": [],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "scripts/dummie-engine.service",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "CONFIG",
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.95,
       "evidence_refs": [
         "FILE_EXISTS"
       ],
       "reasons": [
-        "insufficient structural evidence"
+        "config/manifest file"
       ],
       "related_specs": [],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "scripts/dummie_mcp_doctor.py",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "CONFIG",
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.95,
       "evidence_refs": [
         "FILE_EXISTS",
         "IMPORTABLE",
         "REFERENCED_BY_SPEC"
       ],
       "reasons": [
-        "insufficient structural evidence",
+        "config/manifest file",
         "spec links found"
       ],
       "related_specs": [
@@ -787,178 +787,178 @@
       ],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "scripts/dummie_orchestrator.py",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "CONFIG",
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.95,
       "evidence_refs": [
         "FILE_EXISTS",
         "IMPORTABLE"
       ],
       "reasons": [
-        "insufficient structural evidence"
+        "config/manifest file"
       ],
       "related_specs": [],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "scripts/dummie_repair.py",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "CONFIG",
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.95,
       "evidence_refs": [
         "FILE_EXISTS",
         "IMPORTABLE"
       ],
       "reasons": [
-        "insufficient structural evidence"
+        "config/manifest file"
       ],
       "related_specs": [],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "scripts/dummie_status.py",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "CONFIG",
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.95,
       "evidence_refs": [
         "FILE_EXISTS",
         "IMPORTABLE"
       ],
       "reasons": [
-        "insufficient structural evidence"
+        "config/manifest file"
       ],
       "related_specs": [],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "scripts/dummie_truth.py",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "CONFIG",
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.95,
       "evidence_refs": [
         "FILE_EXISTS",
         "IMPORTABLE"
       ],
       "reasons": [
-        "insufficient structural evidence"
+        "config/manifest file"
       ],
       "related_specs": [],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "scripts/elevate_runtime.sh",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "CONFIG",
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.95,
       "evidence_refs": [
         "FILE_EXISTS"
       ],
       "reasons": [
-        "insufficient structural evidence"
+        "config/manifest file"
       ],
       "related_specs": [],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "scripts/empower_agents.sh",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "CONFIG",
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.95,
       "evidence_refs": [
         "FILE_EXISTS"
       ],
       "reasons": [
-        "insufficient structural evidence"
+        "config/manifest file"
       ],
       "related_specs": [],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "scripts/factory_audit.sh",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "CONFIG",
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.95,
       "evidence_refs": [
         "FILE_EXISTS"
       ],
       "reasons": [
-        "insufficient structural evidence"
+        "config/manifest file"
       ],
       "related_specs": [],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "scripts/factory_up.sh",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "CONFIG",
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.95,
       "evidence_refs": [
         "FILE_EXISTS"
       ],
       "reasons": [
-        "insufficient structural evidence"
+        "config/manifest file"
       ],
       "related_specs": [],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "scripts/full_industrial_audit.sh",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "CONFIG",
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.95,
       "evidence_refs": [
         "FILE_EXISTS",
         "REFERENCED_BY_SPEC"
       ],
       "reasons": [
-        "insufficient structural evidence",
+        "config/manifest file",
         "spec links found"
       ],
       "related_specs": [
@@ -966,325 +966,325 @@
       ],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "scripts/gear_launcher.sh",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "CONFIG",
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.95,
       "evidence_refs": [
         "FILE_EXISTS"
       ],
       "reasons": [
-        "insufficient structural evidence"
+        "config/manifest file"
       ],
       "related_specs": [],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "scripts/harden_specs_docs.py",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "CONFIG",
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.95,
       "evidence_refs": [
         "FILE_EXISTS",
         "IMPORTABLE"
       ],
       "reasons": [
-        "insufficient structural evidence"
+        "config/manifest file"
       ],
       "related_specs": [],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "scripts/industrial_audit.py",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "CONFIG",
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.95,
       "evidence_refs": [
         "FILE_EXISTS",
         "IMPORTABLE"
       ],
       "reasons": [
-        "insufficient structural evidence"
+        "config/manifest file"
       ],
       "related_specs": [],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "scripts/inject_personality_links.py",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "CONFIG",
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.95,
       "evidence_refs": [
         "FILE_EXISTS",
         "IMPORTABLE"
       ],
       "reasons": [
-        "insufficient structural evidence"
+        "config/manifest file"
       ],
       "related_specs": [],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "scripts/install_phase1_systemd.sh",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "CONFIG",
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.95,
       "evidence_refs": [
         "FILE_EXISTS"
       ],
       "reasons": [
-        "insufficient structural evidence"
+        "config/manifest file"
       ],
       "related_specs": [],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "scripts/install_phase2_zram.sh",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "CONFIG",
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.95,
       "evidence_refs": [
         "FILE_EXISTS"
       ],
       "reasons": [
-        "insufficient structural evidence"
+        "config/manifest file"
       ],
       "related_specs": [],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "scripts/lab-off-safe.sh",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "CONFIG",
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.95,
       "evidence_refs": [
         "FILE_EXISTS"
       ],
       "reasons": [
-        "insufficient structural evidence"
+        "config/manifest file"
       ],
       "related_specs": [],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "scripts/lab-on-safe.sh",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "CONFIG",
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.95,
       "evidence_refs": [
         "FILE_EXISTS"
       ],
       "reasons": [
-        "insufficient structural evidence"
+        "config/manifest file"
       ],
       "related_specs": [],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "scripts/log_manager.sh",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "CONFIG",
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.95,
       "evidence_refs": [
         "FILE_EXISTS"
       ],
       "reasons": [
-        "insufficient structural evidence"
+        "config/manifest file"
       ],
       "related_specs": [],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "scripts/mcp_wrapper.sh",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "CONFIG",
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.95,
       "evidence_refs": [
         "FILE_EXISTS"
       ],
       "reasons": [
-        "insufficient structural evidence"
+        "config/manifest file"
       ],
       "related_specs": [],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "scripts/orbit_lite_runner.py",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "CONFIG",
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.95,
       "evidence_refs": [
         "FILE_EXISTS",
         "IMPORTABLE"
       ],
       "reasons": [
-        "insufficient structural evidence"
+        "config/manifest file"
       ],
       "related_specs": [],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "scripts/provision_hardware.sh",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "CONFIG",
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.95,
       "evidence_refs": [
         "FILE_EXISTS"
       ],
       "reasons": [
-        "insufficient structural evidence"
+        "config/manifest file"
       ],
       "related_specs": [],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "scripts/shutdown_factory.sh",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "CONFIG",
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.95,
       "evidence_refs": [
         "FILE_EXISTS"
       ],
       "reasons": [
-        "insufficient structural evidence"
+        "config/manifest file"
       ],
       "related_specs": [],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "scripts/sovereign_runtime.sh",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "CONFIG",
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.95,
       "evidence_refs": [
         "FILE_EXISTS"
       ],
       "reasons": [
-        "insufficient structural evidence"
+        "config/manifest file"
       ],
       "related_specs": [],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "scripts/start_memory_daemon.sh",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "CONFIG",
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.95,
       "evidence_refs": [
         "FILE_EXISTS"
       ],
       "reasons": [
-        "insufficient structural evidence"
+        "config/manifest file"
       ],
       "related_specs": [],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "scripts/sync_links.py",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "CONFIG",
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.95,
       "evidence_refs": [
         "FILE_EXISTS",
         "IMPORTABLE"
       ],
       "reasons": [
-        "insufficient structural evidence"
+        "config/manifest file"
       ],
       "related_specs": [],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "scripts/test_engine_integration.sh",
       "current_class": "UNKNOWN",
-      "proposed_class": "ACTIVE_TEST",
-      "risk": "MEDIUM",
-      "recommendation": "MAP_TO_SPEC",
-      "confidence": 0.9,
+      "proposed_class": "CONFIG",
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.95,
       "evidence_refs": [
         "FILE_EXISTS",
         "REFERENCED_BY_TEST",
@@ -1292,9 +1292,9 @@
         "RUNTIME_IMPORT"
       ],
       "reasons": [
+        "config/manifest file",
         "runtime references found",
-        "test links found",
-        "test naming/path pattern with runtime links"
+        "test links found"
       ],
       "related_specs": [],
       "related_tests": [
@@ -1304,16 +1304,16 @@
         "layers/l0_overseer/mix.exs",
         "layers/l1_nervous/tools_impl/nervous.py"
       ],
-      "safe_to_change": false,
+      "safe_to_change": true,
       "requires_human_review": false
     },
     {
       "path": "scripts/test_semantic_precision.py",
       "current_class": "UNKNOWN",
-      "proposed_class": "ACTIVE_TEST",
-      "risk": "MEDIUM",
-      "recommendation": "MAP_TO_SPEC",
-      "confidence": 0.9,
+      "proposed_class": "CONFIG",
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.95,
       "evidence_refs": [
         "FILE_EXISTS",
         "IMPORTABLE",
@@ -1322,9 +1322,9 @@
         "RUNTIME_IMPORT"
       ],
       "reasons": [
+        "config/manifest file",
         "runtime references found",
-        "test links found",
-        "test naming/path pattern with runtime links"
+        "test links found"
       ],
       "related_specs": [],
       "related_tests": [
@@ -1351,35 +1351,35 @@
         "layers/l2_brain/src/brain/main.py",
         "layers/l3_shield/src/lib.rs"
       ],
-      "safe_to_change": false,
+      "safe_to_change": true,
       "requires_human_review": false
     },
     {
       "path": "scripts/toggle_security.sh",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "CONFIG",
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.95,
       "evidence_refs": [
         "FILE_EXISTS"
       ],
       "reasons": [
-        "insufficient structural evidence"
+        "config/manifest file"
       ],
       "related_specs": [],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "scripts/validate_specs_docs.py",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "CONFIG",
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.95,
       "evidence_refs": [
         "CORE_SPEC_REFERENCE",
         "FILE_EXISTS",
@@ -1387,7 +1387,7 @@
         "REFERENCED_BY_SPEC"
       ],
       "reasons": [
-        "insufficient structural evidence",
+        "config/manifest file",
         "referenced in CORE_SPEC",
         "spec links found"
       ],
@@ -1480,82 +1480,82 @@
       ],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "scripts/vanguard_lock_resolver.sh",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "CONFIG",
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.95,
       "evidence_refs": [
         "FILE_EXISTS"
       ],
       "reasons": [
-        "insufficient structural evidence"
+        "config/manifest file"
       ],
       "related_specs": [],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "scripts/verify_compression.py",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "CONFIG",
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.95,
       "evidence_refs": [
         "FILE_EXISTS",
         "IMPORTABLE"
       ],
       "reasons": [
-        "insufficient structural evidence"
+        "config/manifest file"
       ],
       "related_specs": [],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "scripts/verify_swarm_intelligence.py",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "CONFIG",
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.95,
       "evidence_refs": [
         "FILE_EXISTS",
         "IMPORTABLE"
       ],
       "reasons": [
-        "insufficient structural evidence"
+        "config/manifest file"
       ],
       "related_specs": [],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "scripts/watch_repo_events.py",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "CONFIG",
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.95,
       "evidence_refs": [
         "FILE_EXISTS",
         "IMPORTABLE",
         "REFERENCED_BY_TEST"
       ],
       "reasons": [
-        "insufficient structural evidence",
+        "config/manifest file",
         "test links found"
       ],
       "related_specs": [],
@@ -1563,8 +1563,8 @@
         "tests/test_watch_repo_events.py"
       ],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "tests/test_watch_repo_events.py",
@@ -1602,17 +1602,17 @@
     {
       "path": "proto/dummie/skill.proto",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "FILE_EXISTS",
         "REFERENCED_BY_SPEC"
       ],
       "reasons": [
-        "insufficient structural evidence",
-        "spec links found"
+        "spec links found",
+        "spec location and format"
       ],
       "related_specs": [
         "doc/specs/L0_Overseer/29_skill_ingestion_engine.md"
@@ -1625,18 +1625,18 @@
     {
       "path": "proto/dummie/v2/core.proto",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "ACTIVE_SPEC",
+      "risk": "LOW",
+      "recommendation": "KEEP_AND_TEST",
+      "confidence": 0.92,
       "evidence_refs": [
         "FILE_EXISTS",
         "REFERENCED_BY_SPEC",
         "REFERENCED_BY_TEST"
       ],
       "reasons": [
-        "insufficient structural evidence",
         "spec links found",
+        "spec location and format",
         "test links found"
       ],
       "related_specs": [
@@ -1649,21 +1649,21 @@
       ],
       "related_runtime": [],
       "safe_to_change": false,
-      "requires_human_review": true
+      "requires_human_review": false
     },
     {
       "path": "proto/dummie/v2/memory.proto",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "ACTIVE_SPEC",
+      "risk": "LOW",
+      "recommendation": "KEEP_AND_TEST",
+      "confidence": 0.92,
       "evidence_refs": [
         "FILE_EXISTS",
         "REFERENCED_BY_TEST"
       ],
       "reasons": [
-        "insufficient structural evidence",
+        "spec location and format",
         "test links found"
       ],
       "related_specs": [],
@@ -1678,20 +1678,20 @@
       ],
       "related_runtime": [],
       "safe_to_change": false,
-      "requires_human_review": true
+      "requires_human_review": false
     },
     {
       "path": "proto/dummie/v2/orchestration.proto",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "FILE_EXISTS"
       ],
       "reasons": [
-        "insufficient structural evidence"
+        "spec location and format"
       ],
       "related_specs": [],
       "related_tests": [],
@@ -1751,17 +1751,17 @@
     {
       "path": "doc/00_foundation/COGNITIVE_PROTOCOL.md",
       "current_class": "REPORT",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "FILE_EXISTS",
         "REFERENCED_BY_SPEC"
       ],
       "reasons": [
-        "insufficient structural evidence",
-        "spec links found"
+        "spec links found",
+        "spec location and format"
       ],
       "related_specs": [
         "doc/00_foundation/COGNITIVE_PROTOCOL.feature",
@@ -1838,17 +1838,17 @@
     {
       "path": "doc/00_foundation/vision_manifesto.md",
       "current_class": "REPORT",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "FILE_EXISTS",
         "REFERENCED_BY_SPEC"
       ],
       "reasons": [
-        "insufficient structural evidence",
-        "spec links found"
+        "spec links found",
+        "spec location and format"
       ],
       "related_specs": [
         "doc/00_foundation/vision_manifesto.feature",
@@ -1917,17 +1917,17 @@
     {
       "path": "doc/02_atlas/headers.md",
       "current_class": "REPORT",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "FILE_EXISTS",
         "REFERENCED_BY_SPEC"
       ],
       "reasons": [
-        "insufficient structural evidence",
-        "spec links found"
+        "spec links found",
+        "spec location and format"
       ],
       "related_specs": [
         "doc/specs/L2_Brain/02_memory_engine_4d_tes.feature",
@@ -1994,17 +1994,17 @@
     {
       "path": "doc/02_atlas/PHYSICAL_MAP.md",
       "current_class": "REPORT",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "FILE_EXISTS",
         "REFERENCED_BY_SPEC"
       ],
       "reasons": [
-        "insufficient structural evidence",
-        "spec links found"
+        "spec links found",
+        "spec location and format"
       ],
       "related_specs": [
         "doc/02_atlas/PHYSICAL_MAP.feature",
@@ -2158,18 +2158,18 @@
     {
       "path": "doc/03_pulse/HEARTBEAT.md",
       "current_class": "REPORT",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "ACTIVE_SPEC",
+      "risk": "LOW",
+      "recommendation": "KEEP_AND_TEST",
+      "confidence": 0.92,
       "evidence_refs": [
         "FILE_EXISTS",
         "REFERENCED_BY_SPEC",
         "REFERENCED_BY_TEST"
       ],
       "reasons": [
-        "insufficient structural evidence",
         "spec links found",
+        "spec location and format",
         "test links found"
       ],
       "related_specs": [
@@ -2190,7 +2190,7 @@
       ],
       "related_runtime": [],
       "safe_to_change": false,
-      "requires_human_review": true
+      "requires_human_review": false
     },
     {
       "path": "doc/03_pulse/HEARTBEAT.rules.json",
@@ -2220,18 +2220,18 @@
     {
       "path": "doc/04_forge/sdd_validator.py",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "FILE_EXISTS",
         "IMPORTABLE",
         "REFERENCED_BY_SPEC"
       ],
       "reasons": [
-        "insufficient structural evidence",
-        "spec links found"
+        "spec links found",
+        "spec location and format"
       ],
       "related_specs": [
         "doc/specs/L3_Shield/04_anti_ignorance_shields.feature",
@@ -2246,17 +2246,17 @@
     {
       "path": "doc/05_archive/inventory_v1.md",
       "current_class": "REPORT",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "FILE_EXISTS",
         "REFERENCED_BY_SPEC"
       ],
       "reasons": [
-        "insufficient structural evidence",
-        "spec links found"
+        "spec links found",
+        "spec location and format"
       ],
       "related_specs": [
         "doc/05_archive/inventory_v1.rules.json",
@@ -2298,17 +2298,17 @@
     {
       "path": "doc/adr/001_architectural_bifurcation.md",
       "current_class": "REPORT",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "FILE_EXISTS",
         "REFERENCED_BY_SPEC"
       ],
       "reasons": [
-        "insufficient structural evidence",
-        "spec links found"
+        "spec links found",
+        "spec location and format"
       ],
       "related_specs": [
         "doc/specs/L0_Overseer/00_topology_tracker.feature",
@@ -2327,17 +2327,17 @@
     {
       "path": "doc/adr/ADR-001-SDK-Architecture.md",
       "current_class": "REPORT",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "FILE_EXISTS",
         "REFERENCED_BY_SPEC"
       ],
       "reasons": [
-        "insufficient structural evidence",
-        "spec links found"
+        "spec links found",
+        "spec location and format"
       ],
       "related_specs": [
         "doc/specs/L0_Overseer/00_topology_tracker.feature",
@@ -2355,17 +2355,17 @@
     {
       "path": "doc/adr/ADR-002-Transport-Protocol.md",
       "current_class": "REPORT",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "FILE_EXISTS",
         "REFERENCED_BY_SPEC"
       ],
       "reasons": [
-        "insufficient structural evidence",
-        "spec links found"
+        "spec links found",
+        "spec location and format"
       ],
       "related_specs": [
         "doc/specs/L0_Overseer/00_topology_tracker.feature",
@@ -2383,17 +2383,17 @@
     {
       "path": "doc/adr/ADR-003-Session-State.md",
       "current_class": "REPORT",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "FILE_EXISTS",
         "REFERENCED_BY_SPEC"
       ],
       "reasons": [
-        "insufficient structural evidence",
-        "spec links found"
+        "spec links found",
+        "spec location and format"
       ],
       "related_specs": [
         "doc/specs/L0_Overseer/00_topology_tracker.feature",
@@ -2413,17 +2413,17 @@
     {
       "path": "doc/agentic/AGENT_RELIABILITY_LEDGER.md",
       "current_class": "REPORT",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "CORE_SPEC_REFERENCE",
         "FILE_EXISTS"
       ],
       "reasons": [
-        "insufficient structural evidence",
-        "referenced in CORE_SPEC"
+        "referenced in CORE_SPEC",
+        "spec location and format"
       ],
       "related_specs": [],
       "related_tests": [],
@@ -2434,17 +2434,17 @@
     {
       "path": "doc/agentic/AGENT_TASK_CONTRACT.md",
       "current_class": "REPORT",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "CORE_SPEC_REFERENCE",
         "FILE_EXISTS"
       ],
       "reasons": [
-        "insufficient structural evidence",
-        "referenced in CORE_SPEC"
+        "referenced in CORE_SPEC",
+        "spec location and format"
       ],
       "related_specs": [],
       "related_tests": [],
@@ -2455,17 +2455,17 @@
     {
       "path": "doc/agentic/EXECUTION_PROTOCOL.md",
       "current_class": "REPORT",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "CORE_SPEC_REFERENCE",
         "FILE_EXISTS"
       ],
       "reasons": [
-        "insufficient structural evidence",
-        "referenced in CORE_SPEC"
+        "referenced in CORE_SPEC",
+        "spec location and format"
       ],
       "related_specs": [],
       "related_tests": [],
@@ -2476,17 +2476,17 @@
     {
       "path": "doc/agentic/HANDOFF_CONTRACT.md",
       "current_class": "REPORT",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "CORE_SPEC_REFERENCE",
         "FILE_EXISTS"
       ],
       "reasons": [
-        "insufficient structural evidence",
-        "referenced in CORE_SPEC"
+        "referenced in CORE_SPEC",
+        "spec location and format"
       ],
       "related_specs": [],
       "related_tests": [],
@@ -2497,17 +2497,17 @@
     {
       "path": "doc/agentic/SCOPE_GUARD_PROTOCOL.md",
       "current_class": "REPORT",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "CORE_SPEC_REFERENCE",
         "FILE_EXISTS"
       ],
       "reasons": [
-        "insufficient structural evidence",
-        "referenced in CORE_SPEC"
+        "referenced in CORE_SPEC",
+        "spec location and format"
       ],
       "related_specs": [],
       "related_tests": [],
@@ -2518,17 +2518,17 @@
     {
       "path": "doc/agentic/SWARM_WORKFLOW.md",
       "current_class": "REPORT",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "CORE_SPEC_REFERENCE",
         "FILE_EXISTS"
       ],
       "reasons": [
-        "insufficient structural evidence",
-        "referenced in CORE_SPEC"
+        "referenced in CORE_SPEC",
+        "spec location and format"
       ],
       "related_specs": [],
       "related_tests": [],
@@ -2539,17 +2539,17 @@
     {
       "path": "doc/agentic/SYSTEM_PROMPT_BASE.md",
       "current_class": "REPORT",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "CORE_SPEC_REFERENCE",
         "FILE_EXISTS"
       ],
       "reasons": [
-        "insufficient structural evidence",
-        "referenced in CORE_SPEC"
+        "referenced in CORE_SPEC",
+        "spec location and format"
       ],
       "related_specs": [],
       "related_tests": [],
@@ -2560,17 +2560,17 @@
     {
       "path": "doc/agentic/VALIDATION_EVIDENCE.md",
       "current_class": "REPORT",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "CORE_SPEC_REFERENCE",
         "FILE_EXISTS"
       ],
       "reasons": [
-        "insufficient structural evidence",
-        "referenced in CORE_SPEC"
+        "referenced in CORE_SPEC",
+        "spec location and format"
       ],
       "related_specs": [],
       "related_tests": [],
@@ -2581,19 +2581,19 @@
     {
       "path": "doc/guides/mcp_server_usage.md",
       "current_class": "REPORT",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "CORE_SPEC_REFERENCE",
         "FILE_EXISTS",
         "REFERENCED_BY_SPEC"
       ],
       "reasons": [
-        "insufficient structural evidence",
         "referenced in CORE_SPEC",
-        "spec links found"
+        "spec links found",
+        "spec location and format"
       ],
       "related_specs": [
         "doc/specs/L1_Nervous/dummie_brain_v1.spec.md",
@@ -2610,15 +2610,15 @@
     {
       "path": "doc/manifesto/COGNITIVE_PERSISTENCE.md",
       "current_class": "REPORT",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "FILE_EXISTS"
       ],
       "reasons": [
-        "insufficient structural evidence"
+        "spec location and format"
       ],
       "related_specs": [],
       "related_tests": [],
@@ -2629,17 +2629,17 @@
     {
       "path": "doc/plans/phase11_embeddings_plan.md",
       "current_class": "REPORT",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "FILE_EXISTS",
         "REFERENCED_BY_SPEC"
       ],
       "reasons": [
-        "insufficient structural evidence",
-        "spec links found"
+        "spec links found",
+        "spec location and format"
       ],
       "related_specs": [
         "doc/specs/L0_Overseer/11_monorepo_structure.feature",
@@ -2657,15 +2657,15 @@
     {
       "path": "doc/plans/phase1_cgroups_plan.md",
       "current_class": "REPORT",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "FILE_EXISTS"
       ],
       "reasons": [
-        "insufficient structural evidence"
+        "spec location and format"
       ],
       "related_specs": [],
       "related_tests": [],
@@ -2676,15 +2676,15 @@
     {
       "path": "doc/plans/phase2_zram_plan.md",
       "current_class": "REPORT",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "FILE_EXISTS"
       ],
       "reasons": [
-        "insufficient structural evidence"
+        "spec location and format"
       ],
       "related_specs": [],
       "related_tests": [],
@@ -2695,15 +2695,15 @@
     {
       "path": "doc/plans/phase3_governor_plan.md",
       "current_class": "REPORT",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "FILE_EXISTS"
       ],
       "reasons": [
-        "insufficient structural evidence"
+        "spec location and format"
       ],
       "related_specs": [],
       "related_tests": [],
@@ -2714,10 +2714,10 @@
     {
       "path": "doc/reports/test_debt_triage.md",
       "current_class": "UNKNOWN",
-      "proposed_class": "ACTIVE_TEST",
-      "risk": "MEDIUM",
-      "recommendation": "MAP_TO_SPEC",
-      "confidence": 0.9,
+      "proposed_class": "ACTIVE_SPEC",
+      "risk": "LOW",
+      "recommendation": "KEEP_AND_TEST",
+      "confidence": 0.92,
       "evidence_refs": [
         "FILE_EXISTS",
         "REFERENCED_BY_TEST",
@@ -2726,8 +2726,8 @@
       ],
       "reasons": [
         "runtime references found",
-        "test links found",
-        "test naming/path pattern with runtime links"
+        "spec location and format",
+        "test links found"
       ],
       "related_specs": [],
       "related_tests": [
@@ -10761,17 +10761,17 @@
     {
       "path": "doc/00_foundation/philosophy/agent_os_extracted.txt",
       "current_class": "REPORT",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "FILE_EXISTS",
         "REFERENCED_BY_SPEC"
       ],
       "reasons": [
-        "insufficient structural evidence",
-        "spec links found"
+        "spec links found",
+        "spec location and format"
       ],
       "related_specs": [
         "doc/specs/L0_Overseer/00_topology_tracker.feature",
@@ -10876,17 +10876,17 @@
     {
       "path": "doc/01_architecture/adr/0001-polyglot-architecture.md",
       "current_class": "REPORT",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "FILE_EXISTS",
         "REFERENCED_BY_SPEC"
       ],
       "reasons": [
-        "insufficient structural evidence",
-        "spec links found"
+        "spec links found",
+        "spec location and format"
       ],
       "related_specs": [
         "doc/01_architecture/adr/0001-polyglot-architecture.feature",
@@ -10966,17 +10966,17 @@
     {
       "path": "doc/01_architecture/adr/0002-ambiguity-resolutions.md",
       "current_class": "REPORT",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "FILE_EXISTS",
         "REFERENCED_BY_SPEC"
       ],
       "reasons": [
-        "insufficient structural evidence",
-        "spec links found"
+        "spec links found",
+        "spec location and format"
       ],
       "related_specs": [
         "doc/01_architecture/adr/0002-ambiguity-resolutions.feature",
@@ -11056,17 +11056,17 @@
     {
       "path": "doc/01_architecture/adr/0003-agentic-communication-fabrication.md",
       "current_class": "REPORT",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "FILE_EXISTS",
         "REFERENCED_BY_SPEC"
       ],
       "reasons": [
-        "insufficient structural evidence",
-        "spec links found"
+        "spec links found",
+        "spec location and format"
       ],
       "related_specs": [
         "doc/01_architecture/adr/0003-agentic-communication-fabrication.feature",
@@ -11146,17 +11146,17 @@
     {
       "path": "doc/01_architecture/adr/0004-project-personality.md",
       "current_class": "REPORT",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "FILE_EXISTS",
         "REFERENCED_BY_SPEC"
       ],
       "reasons": [
-        "insufficient structural evidence",
-        "spec links found"
+        "spec links found",
+        "spec location and format"
       ],
       "related_specs": [
         "doc/01_architecture/adr/0004-project-personality.feature",
@@ -11206,17 +11206,17 @@
     {
       "path": "doc/01_architecture/adr/0005-cognitive-fabrication-protocols.md",
       "current_class": "REPORT",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "FILE_EXISTS",
         "REFERENCED_BY_SPEC"
       ],
       "reasons": [
-        "insufficient structural evidence",
-        "spec links found"
+        "spec links found",
+        "spec location and format"
       ],
       "related_specs": [
         "doc/01_architecture/adr/0005-cognitive-fabrication-protocols.feature",
@@ -11296,17 +11296,17 @@
     {
       "path": "doc/01_architecture/adr/0006-sovereign-hybrid-documentation-protocol.md",
       "current_class": "REPORT",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "FILE_EXISTS",
         "REFERENCED_BY_SPEC"
       ],
       "reasons": [
-        "insufficient structural evidence",
-        "spec links found"
+        "spec links found",
+        "spec location and format"
       ],
       "related_specs": [
         "doc/01_architecture/adr/0006-sovereign-hybrid-documentation-protocol.feature",
@@ -11386,17 +11386,17 @@
     {
       "path": "doc/01_architecture/adr/0007-modular-spec-sibling-files.md",
       "current_class": "REPORT",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "FILE_EXISTS",
         "REFERENCED_BY_SPEC"
       ],
       "reasons": [
-        "insufficient structural evidence",
-        "spec links found"
+        "spec links found",
+        "spec location and format"
       ],
       "related_specs": [
         "doc/01_architecture/adr/0007-modular-spec-sibling-files.feature",
@@ -11476,17 +11476,17 @@
     {
       "path": "doc/01_architecture/adr/0008-hierarchical-domain-specific-documentation.md",
       "current_class": "REPORT",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "FILE_EXISTS",
         "REFERENCED_BY_SPEC"
       ],
       "reasons": [
-        "insufficient structural evidence",
-        "spec links found"
+        "spec links found",
+        "spec location and format"
       ],
       "related_specs": [
         "doc/01_architecture/adr/0008-hierarchical-domain-specific-documentation.feature",
@@ -11536,17 +11536,17 @@
     {
       "path": "doc/01_architecture/adr/0009-l2-brain-bounded-contexts.md",
       "current_class": "REPORT",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "FILE_EXISTS",
         "REFERENCED_BY_SPEC"
       ],
       "reasons": [
-        "insufficient structural evidence",
-        "spec links found"
+        "spec links found",
+        "spec location and format"
       ],
       "related_specs": [
         "doc/01_architecture/adr/0009-l2-brain-bounded-contexts.feature",
@@ -11626,17 +11626,17 @@
     {
       "path": "doc/01_architecture/adr/0010-hybrid-diagram-strategy.md",
       "current_class": "REPORT",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "FILE_EXISTS",
         "REFERENCED_BY_SPEC"
       ],
       "reasons": [
-        "insufficient structural evidence",
-        "spec links found"
+        "spec links found",
+        "spec location and format"
       ],
       "related_specs": [
         "doc/01_architecture/adr/0010-hybrid-diagram-strategy.feature",
@@ -11716,17 +11716,17 @@
     {
       "path": "doc/01_architecture/adr/0011-l2-infrastructure-bridge.md",
       "current_class": "REPORT",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "FILE_EXISTS",
         "REFERENCED_BY_SPEC"
       ],
       "reasons": [
-        "insufficient structural evidence",
-        "spec links found"
+        "spec links found",
+        "spec location and format"
       ],
       "related_specs": [
         "doc/01_architecture/adr/0011-l2-infrastructure-bridge.feature",
@@ -11806,17 +11806,17 @@
     {
       "path": "doc/01_architecture/adr/0012-autonomous-capability-expansion.md",
       "current_class": "REPORT",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "FILE_EXISTS",
         "REFERENCED_BY_SPEC"
       ],
       "reasons": [
-        "insufficient structural evidence",
-        "spec links found"
+        "spec links found",
+        "spec location and format"
       ],
       "related_specs": [
         "doc/01_architecture/adr/0012-autonomous-capability-expansion.feature",
@@ -11896,17 +11896,17 @@
     {
       "path": "doc/01_architecture/adr/0013-standardized-mcp-connectivity.md",
       "current_class": "REPORT",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "FILE_EXISTS",
         "REFERENCED_BY_SPEC"
       ],
       "reasons": [
-        "insufficient structural evidence",
-        "spec links found"
+        "spec links found",
+        "spec location and format"
       ],
       "related_specs": [
         "doc/01_architecture/adr/0013-standardized-mcp-connectivity.feature",
@@ -11956,17 +11956,17 @@
     {
       "path": "doc/01_architecture/adr/0014-zero-sudo-user-space-sovereignty.md",
       "current_class": "REPORT",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "FILE_EXISTS",
         "REFERENCED_BY_SPEC"
       ],
       "reasons": [
-        "insufficient structural evidence",
-        "spec links found"
+        "spec links found",
+        "spec location and format"
       ],
       "related_specs": [
         "doc/01_architecture/adr/0014-zero-sudo-user-space-sovereignty.rules.json",
@@ -12016,17 +12016,17 @@
     {
       "path": "doc/01_architecture/adr/0015-sovereign-agent-empowerment.md",
       "current_class": "REPORT",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "FILE_EXISTS",
         "REFERENCED_BY_SPEC"
       ],
       "reasons": [
-        "insufficient structural evidence",
-        "spec links found"
+        "spec links found",
+        "spec location and format"
       ],
       "related_specs": [
         "doc/specs/L0_Overseer/00_topology_tracker.feature",
@@ -12076,17 +12076,17 @@
     {
       "path": "doc/01_architecture/adr/0016-industrial-gear-integration.md",
       "current_class": "REPORT",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "FILE_EXISTS",
         "REFERENCED_BY_SPEC"
       ],
       "reasons": [
-        "insufficient structural evidence",
-        "spec links found"
+        "spec links found",
+        "spec location and format"
       ],
       "related_specs": [
         "doc/01_architecture/adr/0016-industrial-gear-integration.feature",
@@ -12136,17 +12136,17 @@
     {
       "path": "doc/01_architecture/adr/TEMPLATE.md",
       "current_class": "REPORT",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "FILE_EXISTS",
         "REFERENCED_BY_SPEC"
       ],
       "reasons": [
-        "insufficient structural evidence",
-        "spec links found"
+        "spec links found",
+        "spec location and format"
       ],
       "related_specs": [
         "doc/specs/L5_Muscle/01_environment_and_hardware.feature",
@@ -12188,17 +12188,17 @@
     {
       "path": "doc/01_architecture/diagrams/c4_model_graphs.md",
       "current_class": "REPORT",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "FILE_EXISTS",
         "REFERENCED_BY_SPEC"
       ],
       "reasons": [
-        "insufficient structural evidence",
-        "spec links found"
+        "spec links found",
+        "spec location and format"
       ],
       "related_specs": [
         "doc/01_architecture/diagrams/c4_model_graphs.feature",
@@ -19648,15 +19648,15 @@
     {
       "path": "docs/ops/obsidian-knowledge-bus.md",
       "current_class": "REPORT",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "FILE_EXISTS"
       ],
       "reasons": [
-        "insufficient structural evidence"
+        "spec location and format"
       ],
       "related_specs": [],
       "related_tests": [],
@@ -19667,17 +19667,17 @@
     {
       "path": "docs/superpowers/plans/2026-04-24-doc-spec-hardening.md",
       "current_class": "REPORT",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "FILE_EXISTS",
         "REFERENCED_BY_SPEC"
       ],
       "reasons": [
-        "insufficient structural evidence",
-        "spec links found"
+        "spec links found",
+        "spec location and format"
       ],
       "related_specs": [
         "doc/specs/L0_Overseer/26_langgraph_quantum_swarm.feature",
@@ -19697,17 +19697,17 @@
     {
       "path": "docs/superpowers/plans/2026-04-25-multi-repo-provider-agent-office.md",
       "current_class": "REPORT",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "FILE_EXISTS",
         "REFERENCED_BY_SPEC"
       ],
       "reasons": [
-        "insufficient structural evidence",
-        "spec links found"
+        "spec links found",
+        "spec location and format"
       ],
       "related_specs": [
         "doc/specs/L0_Overseer/26_langgraph_quantum_swarm.feature",
@@ -19727,17 +19727,17 @@
     {
       "path": "docs/superpowers/plans/2026-04-25-swarm-orchestration-hardening.md",
       "current_class": "REPORT",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "FILE_EXISTS",
         "REFERENCED_BY_SPEC"
       ],
       "reasons": [
-        "insufficient structural evidence",
-        "spec links found"
+        "spec links found",
+        "spec location and format"
       ],
       "related_specs": [
         "doc/specs/L0_Overseer/26_langgraph_quantum_swarm.feature",
@@ -19757,17 +19757,17 @@
     {
       "path": "docs/superpowers/plans/2026-04-26-sovereign-sdd-governance.md",
       "current_class": "REPORT",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "FILE_EXISTS",
         "REFERENCED_BY_SPEC"
       ],
       "reasons": [
-        "insufficient structural evidence",
-        "spec links found"
+        "spec links found",
+        "spec location and format"
       ],
       "related_specs": [
         "doc/specs/L0_Overseer/26_langgraph_quantum_swarm.feature",
@@ -19787,17 +19787,17 @@
     {
       "path": "docs/superpowers/plans/2026-04-26-universal-knowledge-bus.md",
       "current_class": "REPORT",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "FILE_EXISTS",
         "REFERENCED_BY_SPEC"
       ],
       "reasons": [
-        "insufficient structural evidence",
-        "spec links found"
+        "spec links found",
+        "spec location and format"
       ],
       "related_specs": [
         "doc/specs/L0_Overseer/26_langgraph_quantum_swarm.feature",
@@ -19817,17 +19817,17 @@
     {
       "path": "docs/superpowers/plans/2026-04-28-4d-tes-causal-hardening.md",
       "current_class": "REPORT",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "FILE_EXISTS",
         "REFERENCED_BY_SPEC"
       ],
       "reasons": [
-        "insufficient structural evidence",
-        "spec links found"
+        "spec links found",
+        "spec location and format"
       ],
       "related_specs": [
         "doc/specs/L0_Overseer/26_langgraph_quantum_swarm.feature",
@@ -19847,17 +19847,17 @@
     {
       "path": "docs/superpowers/plans/2026-05-09-operational-truth-layer.md",
       "current_class": "REPORT",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "FILE_EXISTS",
         "REFERENCED_BY_SPEC"
       ],
       "reasons": [
-        "insufficient structural evidence",
-        "spec links found"
+        "spec links found",
+        "spec location and format"
       ],
       "related_specs": [
         "doc/specs/L0_Overseer/05_orchestration_stack_and_glue.feature",
@@ -19877,17 +19877,17 @@
     {
       "path": "docs/superpowers/specs/2026-04-25-multi-repo-provider-agent-office-design.md",
       "current_class": "REPORT",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "FILE_EXISTS",
         "REFERENCED_BY_SPEC"
       ],
       "reasons": [
-        "insufficient structural evidence",
-        "spec links found"
+        "spec links found",
+        "spec location and format"
       ],
       "related_specs": [
         "doc/specs/L0_Overseer/26_langgraph_quantum_swarm.feature",
@@ -19907,17 +19907,17 @@
     {
       "path": "docs/superpowers/specs/2026-04-26-obsidian-4d-bridge-design.md",
       "current_class": "REPORT",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "FILE_EXISTS",
         "REFERENCED_BY_SPEC"
       ],
       "reasons": [
-        "insufficient structural evidence",
-        "spec links found"
+        "spec links found",
+        "spec location and format"
       ],
       "related_specs": [
         "doc/specs/L0_Overseer/26_langgraph_quantum_swarm.feature",
@@ -19937,17 +19937,17 @@
     {
       "path": "docs/superpowers/specs/2026-04-26-sovereign-sdd-governance-design.md",
       "current_class": "REPORT",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "FILE_EXISTS",
         "REFERENCED_BY_SPEC"
       ],
       "reasons": [
-        "insufficient structural evidence",
-        "spec links found"
+        "spec links found",
+        "spec location and format"
       ],
       "related_specs": [
         "doc/specs/L0_Overseer/26_langgraph_quantum_swarm.feature",
@@ -19967,17 +19967,17 @@
     {
       "path": "docs/superpowers/specs/2026-04-28-4d-tes-causal-hardening-design.md",
       "current_class": "REPORT",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "FILE_EXISTS",
         "REFERENCED_BY_SPEC"
       ],
       "reasons": [
-        "insufficient structural evidence",
-        "spec links found"
+        "spec links found",
+        "spec location and format"
       ],
       "related_specs": [
         "doc/specs/L0_Overseer/26_langgraph_quantum_swarm.feature",
@@ -19997,17 +19997,17 @@
     {
       "path": "docs/superpowers/specs/2026-05-09-operational-truth-layer-design.md",
       "current_class": "REPORT",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "FILE_EXISTS",
         "REFERENCED_BY_SPEC"
       ],
       "reasons": [
-        "insufficient structural evidence",
-        "spec links found"
+        "spec links found",
+        "spec location and format"
       ],
       "related_specs": [
         "doc/specs/L0_Overseer/05_orchestration_stack_and_glue.feature",
@@ -20110,21 +20110,21 @@
     {
       "path": "layers/l0_overseer/monitor_active.log",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "GENERATED",
+      "risk": "LOW",
+      "recommendation": "MARK_GENERATED",
+      "confidence": 0.96,
       "evidence_refs": [
         "FILE_EXISTS"
       ],
       "reasons": [
-        "insufficient structural evidence"
+        "generated marker/path"
       ],
       "related_specs": [],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "layers/l0_overseer/supervisor.py",
@@ -20219,21 +20219,21 @@
     {
       "path": "layers/l1_nervous/memory_server.log",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "GENERATED",
+      "risk": "LOW",
+      "recommendation": "MARK_GENERATED",
+      "confidence": 0.96,
       "evidence_refs": [
         "FILE_EXISTS"
       ],
       "reasons": [
-        "insufficient structural evidence"
+        "generated marker/path"
       ],
       "related_specs": [],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "layers/l1_nervous/bootstrap.py",
@@ -20640,40 +20640,40 @@
     {
       "path": "layers/l1_nervous/memory_server_go_run.log",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "GENERATED",
+      "risk": "LOW",
+      "recommendation": "MARK_GENERATED",
+      "confidence": 0.96,
       "evidence_refs": [
         "FILE_EXISTS"
       ],
       "reasons": [
-        "insufficient structural evidence"
+        "generated marker/path"
       ],
       "related_specs": [],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "layers/l1_nervous/memory_server_sovereign.log",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "GENERATED",
+      "risk": "LOW",
+      "recommendation": "MARK_GENERATED",
+      "confidence": 0.96,
       "evidence_refs": [
         "FILE_EXISTS"
       ],
       "reasons": [
-        "insufficient structural evidence"
+        "generated marker/path"
       ],
       "related_specs": [],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "layers/l1_nervous/repo_guard.py",
@@ -21035,21 +21035,21 @@
     {
       "path": "layers/l2_brain/.python-version",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "CONFIG",
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.95,
       "evidence_refs": [
         "FILE_EXISTS"
       ],
       "reasons": [
-        "insufficient structural evidence"
+        "config/manifest file"
       ],
       "related_specs": [],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "layers/l2_brain/action_graph.py",
@@ -25242,17 +25242,17 @@
     {
       "path": "layers/l2_brain/implementation_plan.md",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "FILE_EXISTS",
         "REFERENCED_BY_SPEC"
       ],
       "reasons": [
-        "insufficient structural evidence",
-        "spec links found"
+        "spec links found",
+        "spec location and format"
       ],
       "related_specs": [
         "doc/specs/L4_Edge/18_loci_ontology_mapping.md"
@@ -25570,17 +25570,17 @@
     {
       "path": "layers/l2_brain/README.md",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "FILE_EXISTS",
         "REFERENCED_BY_SPEC"
       ],
       "reasons": [
-        "insufficient structural evidence",
-        "spec links found"
+        "spec links found",
+        "spec location and format"
       ],
       "related_specs": [
         "doc/specs/112_folder_notes_noteplans.md",
@@ -25984,17 +25984,17 @@
     {
       "path": "layers/l3_shield/README.md",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "FILE_EXISTS",
         "REFERENCED_BY_SPEC"
       ],
       "reasons": [
-        "insufficient structural evidence",
-        "spec links found"
+        "spec links found",
+        "spec location and format"
       ],
       "related_specs": [
         "doc/specs/112_folder_notes_noteplans.md",
@@ -26090,16 +26090,16 @@
     {
       "path": "layers/l4_edge/build.zig",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_RUNTIME",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_SPEC",
+      "confidence": 0.9,
       "evidence_refs": [
         "FILE_EXISTS",
         "REFERENCED_BY_TEST"
       ],
       "reasons": [
-        "insufficient structural evidence",
+        "runtime candidate missing spec linkage",
         "test links found"
       ],
       "related_specs": [],
@@ -26135,15 +26135,15 @@
     {
       "path": "layers/l4_edge/lst_scanner.zig",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "SHADOW_CANDIDATE",
+      "risk": "HIGH",
+      "recommendation": "MAP_TO_SPEC",
+      "confidence": 0.84,
       "evidence_refs": [
         "FILE_EXISTS"
       ],
       "reasons": [
-        "insufficient structural evidence"
+        "runtime candidate missing spec/test linkage"
       ],
       "related_specs": [],
       "related_tests": [],
@@ -26154,15 +26154,15 @@
     {
       "path": "layers/l4_edge/protocol.zig",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "SHADOW_CANDIDATE",
+      "risk": "HIGH",
+      "recommendation": "MAP_TO_SPEC",
+      "confidence": 0.84,
       "evidence_refs": [
         "FILE_EXISTS"
       ],
       "reasons": [
-        "insufficient structural evidence"
+        "runtime candidate missing spec/test linkage"
       ],
       "related_specs": [],
       "related_tests": [],
@@ -26173,17 +26173,17 @@
     {
       "path": "layers/l4_edge/README.md",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "FILE_EXISTS",
         "REFERENCED_BY_SPEC"
       ],
       "reasons": [
-        "insufficient structural evidence",
-        "spec links found"
+        "spec links found",
+        "spec location and format"
       ],
       "related_specs": [
         "doc/specs/112_folder_notes_noteplans.md",
@@ -26349,15 +26349,15 @@
     {
       "path": "layers/l5_muscle/math_ops.mojo",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "SHADOW_CANDIDATE",
+      "risk": "HIGH",
+      "recommendation": "MAP_TO_SPEC",
+      "confidence": 0.84,
       "evidence_refs": [
         "FILE_EXISTS"
       ],
       "reasons": [
-        "insufficient structural evidence"
+        "runtime candidate missing spec/test linkage"
       ],
       "related_specs": [],
       "related_tests": [],
@@ -26388,17 +26388,17 @@
     {
       "path": "layers/l5_muscle/README.md",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "FILE_EXISTS",
         "REFERENCED_BY_SPEC"
       ],
       "reasons": [
-        "insufficient structural evidence",
-        "spec links found"
+        "spec links found",
+        "spec location and format"
       ],
       "related_specs": [
         "doc/specs/112_folder_notes_noteplans.md",
@@ -26523,16 +26523,16 @@
     {
       "path": "layers/l6_skin/index.html",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_RUNTIME",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_SPEC",
+      "confidence": 0.9,
       "evidence_refs": [
         "FILE_EXISTS",
         "REFERENCED_BY_TEST"
       ],
       "reasons": [
-        "insufficient structural evidence",
+        "runtime candidate missing spec linkage",
         "test links found"
       ],
       "related_specs": [],
@@ -26547,21 +26547,21 @@
     {
       "path": "layers/l6_skin/package-lock.json",
       "current_class": "CONFIG",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "CONFIG",
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.95,
       "evidence_refs": [
         "FILE_EXISTS"
       ],
       "reasons": [
-        "insufficient structural evidence"
+        "config/manifest file"
       ],
       "related_specs": [],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "layers/l6_skin/package.json",
@@ -26653,15 +26653,15 @@
     {
       "path": "layers/l0_overseer/api/manifest_spec.md",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "FILE_EXISTS"
       ],
       "reasons": [
-        "insufficient structural evidence"
+        "spec location and format"
       ],
       "related_specs": [],
       "related_tests": [],
@@ -27905,15 +27905,15 @@
     {
       "path": "layers/l1_nervous/proto/PROTO_REGEN.md",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "FILE_EXISTS"
       ],
       "reasons": [
-        "insufficient structural evidence"
+        "spec location and format"
       ],
       "related_specs": [],
       "related_tests": [],
@@ -27924,17 +27924,17 @@
     {
       "path": "layers/l1_nervous/proto/skill.proto",
       "current_class": "UNKNOWN",
-      "proposed_class": "ACTIVE_RUNTIME",
+      "proposed_class": "ACTIVE_SPEC",
       "risk": "MEDIUM",
-      "recommendation": "MAP_TO_TEST",
-      "confidence": 0.9,
+      "recommendation": "MAP_TO_RUNTIME",
+      "confidence": 0.92,
       "evidence_refs": [
         "FILE_EXISTS",
         "REFERENCED_BY_SPEC"
       ],
       "reasons": [
-        "runtime candidate missing test linkage",
-        "spec links found"
+        "spec links found",
+        "spec location and format"
       ],
       "related_specs": [
         "doc/specs/L0_Overseer/29_skill_ingestion_engine.md"
@@ -29359,21 +29359,21 @@
     {
       "path": "layers/l1_nervous/adapters/mcp/pyrightconfig.json",
       "current_class": "CONFIG",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "CONFIG",
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.95,
       "evidence_refs": [
         "FILE_EXISTS"
       ],
       "reasons": [
-        "insufficient structural evidence"
+        "config/manifest file"
       ],
       "related_specs": [],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "layers/l1_nervous/adapters/mcp/server.py",
@@ -29819,16 +29819,16 @@
     {
       "path": "layers/l2_brain/.aiwg/identity.json",
       "current_class": "CONFIG",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "REPORT",
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.98,
       "evidence_refs": [
         "FILE_EXISTS",
         "REFERENCED_BY_SPEC"
       ],
       "reasons": [
-        "insufficient structural evidence",
+        "report artifact",
         "spec links found"
       ],
       "related_specs": [
@@ -29837,8 +29837,8 @@
       ],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "layers/l2_brain/embedding_mesh/cli.py",
@@ -39035,154 +39035,154 @@
     {
       "path": "layers/l2_brain/.aiwg/reports/context_coverage_latest.json",
       "current_class": "REPORT",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "REPORT",
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.98,
       "evidence_refs": [
         "FILE_EXISTS"
       ],
       "reasons": [
-        "insufficient structural evidence"
+        "report artifact"
       ],
       "related_specs": [],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "layers/l2_brain/.aiwg/reports/lifecycle_integration_latest.json",
       "current_class": "REPORT",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "REPORT",
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.98,
       "evidence_refs": [
         "FILE_EXISTS"
       ],
       "reasons": [
-        "insufficient structural evidence"
+        "report artifact"
       ],
       "related_specs": [],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "layers/l2_brain/.aiwg/reports/operationalization_pack_2_summary.json",
       "current_class": "REPORT",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "REPORT",
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.98,
       "evidence_refs": [
         "FILE_EXISTS"
       ],
       "reasons": [
-        "insufficient structural evidence"
+        "report artifact"
       ],
       "related_specs": [],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "layers/l2_brain/.aiwg/reports/source_of_truth_conflicts_latest.json",
       "current_class": "REPORT",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "REPORT",
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.98,
       "evidence_refs": [
         "FILE_EXISTS"
       ],
       "reasons": [
-        "insufficient structural evidence"
+        "report artifact"
       ],
       "related_specs": [],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "layers/l2_brain/.aiwg/reports/sovereign_readiness_latest.json",
       "current_class": "REPORT",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "REPORT",
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.98,
       "evidence_refs": [
         "FILE_EXISTS"
       ],
       "reasons": [
-        "insufficient structural evidence"
+        "report artifact"
       ],
       "related_specs": [],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "layers/l2_brain/.aiwg/reports/total_truth_scan_latest.json",
       "current_class": "REPORT",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "REPORT",
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.98,
       "evidence_refs": [
         "FILE_EXISTS"
       ],
       "reasons": [
-        "insufficient structural evidence"
+        "report artifact"
       ],
       "related_specs": [],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "layers/l2_brain/.aiwg/repo_intelligence/total_truth_inventory.json",
       "current_class": "CONFIG",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "REPORT",
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.98,
       "evidence_refs": [
         "FILE_EXISTS"
       ],
       "reasons": [
-        "insufficient structural evidence"
+        "report artifact"
       ],
       "related_specs": [],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "layers/l2_brain/.aiwg/repo_intelligence/total_truth_scan_manifest.json",
       "current_class": "CONFIG",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "REPORT",
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.98,
       "evidence_refs": [
         "FILE_EXISTS"
       ],
       "reasons": [
-        "insufficient structural evidence"
+        "report artifact"
       ],
       "related_specs": [],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "layers/l2_brain/application/cognitive/use_cases.py",
@@ -40724,15 +40724,15 @@
     {
       "path": "layers/l4_edge/src/lst_scanner.zig",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "SHADOW_CANDIDATE",
+      "risk": "HIGH",
+      "recommendation": "MAP_TO_SPEC",
+      "confidence": 0.84,
       "evidence_refs": [
         "FILE_EXISTS"
       ],
       "reasons": [
-        "insufficient structural evidence"
+        "runtime candidate missing spec/test linkage"
       ],
       "related_specs": [],
       "related_tests": [],
@@ -40869,16 +40869,16 @@
     {
       "path": "scripts/systemd/agentic-agent@.service",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "CONFIG",
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.95,
       "evidence_refs": [
         "FILE_EXISTS",
         "REFERENCED_BY_SPEC"
       ],
       "reasons": [
-        "insufficient structural evidence",
+        "config/manifest file",
         "spec links found"
       ],
       "related_specs": [
@@ -40886,22 +40886,22 @@
       ],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "scripts/systemd/agentic.slice",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "CONFIG",
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.95,
       "evidence_refs": [
         "FILE_EXISTS",
         "REFERENCED_BY_SPEC"
       ],
       "reasons": [
-        "insufficient structural evidence",
+        "config/manifest file",
         "spec links found"
       ],
       "related_specs": [
@@ -40909,22 +40909,22 @@
       ],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "scripts/systemd/zz-agentic-memory.conf",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "CONFIG",
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.95,
       "evidence_refs": [
         "FILE_EXISTS",
         "REFERENCED_BY_SPEC"
       ],
       "reasons": [
-        "insufficient structural evidence",
+        "config/manifest file",
         "spec links found"
       ],
       "related_specs": [
@@ -40932,39 +40932,39 @@
       ],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "scripts/tests/test_cgroup_hierarchy.sh",
       "current_class": "UNKNOWN",
-      "proposed_class": "ORPHAN_TEST_CANDIDATE",
-      "risk": "MEDIUM",
-      "recommendation": "MAP_TO_RUNTIME",
-      "confidence": 0.88,
+      "proposed_class": "CONFIG",
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.95,
       "evidence_refs": [
         "FILE_EXISTS",
         "REFERENCED_BY_TEST"
       ],
       "reasons": [
-        "test links found",
-        "test without deterministic runtime linkage"
+        "config/manifest file",
+        "test links found"
       ],
       "related_specs": [],
       "related_tests": [
         "scripts/tests/test_cgroup_hierarchy.sh"
       ],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "scripts/tests/test_zram_hierarchy.sh",
       "current_class": "UNKNOWN",
-      "proposed_class": "ACTIVE_TEST",
-      "risk": "MEDIUM",
-      "recommendation": "MAP_TO_SPEC",
-      "confidence": 0.9,
+      "proposed_class": "CONFIG",
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.95,
       "evidence_refs": [
         "FILE_EXISTS",
         "REFERENCED_BY_TEST",
@@ -40972,9 +40972,9 @@
         "RUNTIME_IMPORT"
       ],
       "reasons": [
+        "config/manifest file",
         "runtime references found",
-        "test links found",
-        "test naming/path pattern with runtime links"
+        "test links found"
       ],
       "related_specs": [],
       "related_tests": [
@@ -40987,22 +40987,22 @@
         "layers/l1_nervous/go.sum",
         "layers/l3_shield/src/lib.rs"
       ],
-      "safe_to_change": false,
+      "safe_to_change": true,
       "requires_human_review": false
     },
     {
       "path": "scripts/systemd/ollama.service.d/99-agentic.conf",
       "current_class": "UNKNOWN",
-      "proposed_class": "UNKNOWN",
-      "risk": "MEDIUM",
-      "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.7,
+      "proposed_class": "CONFIG",
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.95,
       "evidence_refs": [
         "FILE_EXISTS",
         "REFERENCED_BY_SPEC"
       ],
       "reasons": [
-        "insufficient structural evidence",
+        "config/manifest file",
         "spec links found"
       ],
       "related_specs": [
@@ -41010,8 +41010,8 @@
       ],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "tests/benchmarks/orbit_lite_cases.yaml",
@@ -41134,34 +41134,33 @@
   ],
   "summary_counts": {
     "by_class": {
-      "ACTIVE_RUNTIME": 274,
-      "ACTIVE_TEST": 235,
-      "ACTIVE_SPEC": 559,
-      "GENERATED": 38,
+      "ACTIVE_RUNTIME": 275,
+      "ACTIVE_TEST": 231,
+      "ACTIVE_SPEC": 634,
+      "GENERATED": 42,
       "LEGACY": 30,
       "EXPERIMENTAL": 1,
-      "CONFIG": 12,
-      "REPORT": 0,
-      "SHADOW_CANDIDATE": 44,
-      "ORPHAN_TEST_CANDIDATE": 3,
-      "UNKNOWN": 144
+      "CONFIG": 68,
+      "REPORT": 9,
+      "SHADOW_CANDIDATE": 48,
+      "ORPHAN_TEST_CANDIDATE": 2,
+      "UNKNOWN": 0
     },
     "by_risk": {
-      "LOW": 322,
-      "MEDIUM": 974,
-      "HIGH": 44,
+      "LOW": 395,
+      "MEDIUM": 897,
+      "HIGH": 48,
       "CRITICAL": 0
     },
     "by_recommendation": {
-      "FREEZE_UNTIL_REVIEW": 144,
-      "KEEP_AND_TEST": 255,
-      "MAP_TO_RUNTIME": 561,
-      "MAP_TO_SPEC": 255,
-      "MAP_TO_TEST": 20,
+      "KEEP_AND_TEST": 259,
+      "MAP_TO_RUNTIME": 631,
+      "MAP_TO_SPEC": 257,
+      "MAP_TO_TEST": 19,
       "MARK_EXPERIMENTAL": 1,
-      "MARK_GENERATED": 38,
+      "MARK_GENERATED": 42,
       "MARK_LEGACY": 30,
-      "NO_ACTION": 36
+      "NO_ACTION": 101
     },
     "bindings_summary": {
       "bound_active_runtime": 31,
@@ -41176,9 +41175,9 @@
   },
   "explicit_metrics": {
     "CRITICAL": 0,
-    "HIGH": 44,
-    "SHADOW_CANDIDATE": 44,
-    "ORPHAN_TEST_CANDIDATE": 3,
+    "HIGH": 48,
+    "SHADOW_CANDIDATE": 48,
+    "ORPHAN_TEST_CANDIDATE": 2,
     "bound_active_runtime": 31,
     "deferred_no_safe_action": 0,
     "toolchain_validated": 5,
@@ -42029,6 +42028,63 @@
       "requires_human_review": true
     },
     {
+      "path": "layers/l4_edge/lst_scanner.zig",
+      "current_class": "UNKNOWN",
+      "proposed_class": "SHADOW_CANDIDATE",
+      "risk": "HIGH",
+      "recommendation": "MAP_TO_SPEC",
+      "confidence": 0.84,
+      "evidence_refs": [
+        "FILE_EXISTS"
+      ],
+      "reasons": [
+        "runtime candidate missing spec/test linkage"
+      ],
+      "related_specs": [],
+      "related_tests": [],
+      "related_runtime": [],
+      "safe_to_change": false,
+      "requires_human_review": true
+    },
+    {
+      "path": "layers/l4_edge/protocol.zig",
+      "current_class": "UNKNOWN",
+      "proposed_class": "SHADOW_CANDIDATE",
+      "risk": "HIGH",
+      "recommendation": "MAP_TO_SPEC",
+      "confidence": 0.84,
+      "evidence_refs": [
+        "FILE_EXISTS"
+      ],
+      "reasons": [
+        "runtime candidate missing spec/test linkage"
+      ],
+      "related_specs": [],
+      "related_tests": [],
+      "related_runtime": [],
+      "safe_to_change": false,
+      "requires_human_review": true
+    },
+    {
+      "path": "layers/l4_edge/src/lst_scanner.zig",
+      "current_class": "UNKNOWN",
+      "proposed_class": "SHADOW_CANDIDATE",
+      "risk": "HIGH",
+      "recommendation": "MAP_TO_SPEC",
+      "confidence": 0.84,
+      "evidence_refs": [
+        "FILE_EXISTS"
+      ],
+      "reasons": [
+        "runtime candidate missing spec/test linkage"
+      ],
+      "related_specs": [],
+      "related_tests": [],
+      "related_runtime": [],
+      "safe_to_change": false,
+      "requires_human_review": true
+    },
+    {
       "path": "layers/l4_edge/tool_discovery.py",
       "current_class": "UNKNOWN",
       "proposed_class": "SHADOW_CANDIDATE",
@@ -42038,6 +42094,25 @@
       "evidence_refs": [
         "FILE_EXISTS",
         "IMPORTABLE"
+      ],
+      "reasons": [
+        "runtime candidate missing spec/test linkage"
+      ],
+      "related_specs": [],
+      "related_tests": [],
+      "related_runtime": [],
+      "safe_to_change": false,
+      "requires_human_review": true
+    },
+    {
+      "path": "layers/l5_muscle/math_ops.mojo",
+      "current_class": "UNKNOWN",
+      "proposed_class": "SHADOW_CANDIDATE",
+      "risk": "HIGH",
+      "recommendation": "MAP_TO_SPEC",
+      "confidence": 0.84,
+      "evidence_refs": [
+        "FILE_EXISTS"
       ],
       "reasons": [
         "runtime candidate missing spec/test linkage"
@@ -42089,86 +42164,6 @@
     },
     {
       "path": "doc/.deprecated/scratchpad/batch_fix_specs.py",
-      "current_class": "LEGACY",
-      "proposed_class": "LEGACY",
-      "risk": "MEDIUM",
-      "recommendation": "MARK_LEGACY",
-      "confidence": 0.95,
-      "evidence_refs": [
-        "FILE_EXISTS",
-        "IMPORTABLE"
-      ],
-      "reasons": [
-        "legacy/deprecated path"
-      ],
-      "related_specs": [],
-      "related_tests": [],
-      "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": false
-    },
-    {
-      "path": "doc/.deprecated/scratchpad/check_mcp_dummie.py",
-      "current_class": "LEGACY",
-      "proposed_class": "LEGACY",
-      "risk": "MEDIUM",
-      "recommendation": "MARK_LEGACY",
-      "confidence": 0.95,
-      "evidence_refs": [
-        "FILE_EXISTS",
-        "IMPORTABLE"
-      ],
-      "reasons": [
-        "legacy/deprecated path"
-      ],
-      "related_specs": [],
-      "related_tests": [],
-      "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": false
-    },
-    {
-      "path": "doc/.deprecated/scratchpad/det_step.py",
-      "current_class": "LEGACY",
-      "proposed_class": "LEGACY",
-      "risk": "MEDIUM",
-      "recommendation": "MARK_LEGACY",
-      "confidence": 0.95,
-      "evidence_refs": [
-        "FILE_EXISTS",
-        "IMPORTABLE"
-      ],
-      "reasons": [
-        "legacy/deprecated path"
-      ],
-      "related_specs": [],
-      "related_tests": [],
-      "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": false
-    },
-    {
-      "path": "doc/.deprecated/scratchpad/deterministic_audit.py",
-      "current_class": "LEGACY",
-      "proposed_class": "LEGACY",
-      "risk": "MEDIUM",
-      "recommendation": "MARK_LEGACY",
-      "confidence": 0.95,
-      "evidence_refs": [
-        "FILE_EXISTS",
-        "IMPORTABLE"
-      ],
-      "reasons": [
-        "legacy/deprecated path"
-      ],
-      "related_specs": [],
-      "related_tests": [],
-      "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": false
-    },
-    {
-      "path": "doc/.deprecated/scratchpad/final_demo_sovereignty.py",
       "current_class": "LEGACY",
       "proposed_class": "LEGACY",
       "risk": "MEDIUM",

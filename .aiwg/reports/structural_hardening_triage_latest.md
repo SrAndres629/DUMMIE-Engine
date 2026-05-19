@@ -3,17 +3,17 @@
 ## Status
 - pack_status: PASS_WITH_WARNINGS
 - repo_health_status: FAIL
-- base_commit: 06478a1fa387c7bdbaab6b87ffc20d7ecb2e7702
-- analysis_base_commit: 06478a1fa387c7bdbaab6b87ffc20d7ecb2e7702
-- report_generated_at_commit: 06478a1fa387c7bdbaab6b87ffc20d7ecb2e7702
-- head_commit: 06478a1fa387c7bdbaab6b87ffc20d7ecb2e7702
+- base_commit: 55c30b1edd77ee9e324e4ab3ca6aef97464bfc00
+- analysis_base_commit: 55c30b1edd77ee9e324e4ab3ca6aef97464bfc00
+- report_generated_at_commit: 55c30b1edd77ee9e324e4ab3ca6aef97464bfc00
+- head_commit: 55c30b1edd77ee9e324e4ab3ca6aef97464bfc00
 - files_analyzed: 1340
 
 ## Explicit Metrics
 - CRITICAL: 0
-- HIGH: 44
-- SHADOW_CANDIDATE: 44
-- ORPHAN_TEST_CANDIDATE: 3
+- HIGH: 48
+- SHADOW_CANDIDATE: 48
+- ORPHAN_TEST_CANDIDATE: 2
 - bound_active_runtime: 31
 - deferred_no_safe_action: 0
 - toolchain_validated: 5
@@ -24,28 +24,27 @@
 - repo_health_status: FAIL
 
 ## Counts by Class
-- ACTIVE_RUNTIME: 274
-- ACTIVE_SPEC: 559
-- ACTIVE_TEST: 235
-- CONFIG: 12
+- ACTIVE_RUNTIME: 275
+- ACTIVE_SPEC: 634
+- ACTIVE_TEST: 231
+- CONFIG: 68
 - EXPERIMENTAL: 1
-- GENERATED: 38
+- GENERATED: 42
 - LEGACY: 30
-- ORPHAN_TEST_CANDIDATE: 3
-- REPORT: 0
-- SHADOW_CANDIDATE: 44
-- UNKNOWN: 144
+- ORPHAN_TEST_CANDIDATE: 2
+- REPORT: 9
+- SHADOW_CANDIDATE: 48
+- UNKNOWN: 0
 
 ## Counts by Recommendation
-- FREEZE_UNTIL_REVIEW: 144
-- KEEP_AND_TEST: 255
-- MAP_TO_RUNTIME: 561
-- MAP_TO_SPEC: 255
-- MAP_TO_TEST: 20
+- KEEP_AND_TEST: 259
+- MAP_TO_RUNTIME: 631
+- MAP_TO_SPEC: 257
+- MAP_TO_TEST: 19
 - MARK_EXPERIMENTAL: 1
-- MARK_GENERATED: 38
+- MARK_GENERATED: 42
 - MARK_LEGACY: 30
-- NO_ACTION: 36
+- NO_ACTION: 101
 
 ## Bindings Summary
 - bound_active_runtime: 31
@@ -59,9 +58,9 @@
 
 ## Counts by Risk
 - CRITICAL: 0
-- HIGH: 44
-- LOW: 322
-- MEDIUM: 974
+- HIGH: 48
+- LOW: 395
+- MEDIUM: 897
 
 ## Top 30 High-Risk Actions
 1. layers/l2_brain/golden_path.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
@@ -99,35 +98,16 @@
 - init_runtime_low_risk_corrections: 24
 
 ## Frozen / No-Touch Candidates
-- frozen_count: 145
-- README.md | FREEZE_UNTIL_REVIEW | risk=MEDIUM
-- doc/ATLAS.md | FREEZE_UNTIL_REVIEW | risk=MEDIUM
-- doc/CORE_SPEC.md | FREEZE_UNTIL_REVIEW | risk=MEDIUM
-- doc/ENGINEERING_PRINCIPLES.md | FREEZE_UNTIL_REVIEW | risk=MEDIUM
-- doc/PHYSICAL_MAP.md | FREEZE_UNTIL_REVIEW | risk=MEDIUM
-- scripts/install_tools_user_space.sh | FREEZE_UNTIL_REVIEW | risk=MEDIUM
-- scripts/benchmark_local_reasoning.py | FREEZE_UNTIL_REVIEW | risk=MEDIUM
-- scripts/bootstrap.sh | FREEZE_UNTIL_REVIEW | risk=MEDIUM
-- scripts/bootstrap_memory_native.sh | FREEZE_UNTIL_REVIEW | risk=MEDIUM
-- scripts/build_factory.sh | FREEZE_UNTIL_REVIEW | risk=MEDIUM
-- scripts/build_inventory.py | FREEZE_UNTIL_REVIEW | risk=MEDIUM
-- scripts/build_repo_maps.py | FREEZE_UNTIL_REVIEW | risk=MEDIUM
-- scripts/build_semantic_hardening_index.py | FREEZE_UNTIL_REVIEW | risk=MEDIUM
-- scripts/consciousness_audit.py | FREEZE_UNTIL_REVIEW | risk=MEDIUM
-- scripts/context_oracle.py | FREEZE_UNTIL_REVIEW | risk=MEDIUM
-- scripts/dummie-ctl | FREEZE_UNTIL_REVIEW | risk=MEDIUM
-- scripts/dummie-doctor-repair.sh | FREEZE_UNTIL_REVIEW | risk=MEDIUM
-- scripts/dummie-engine.service | FREEZE_UNTIL_REVIEW | risk=MEDIUM
-- scripts/dummie_mcp_doctor.py | FREEZE_UNTIL_REVIEW | risk=MEDIUM
-- scripts/dummie_orchestrator.py | FREEZE_UNTIL_REVIEW | risk=MEDIUM
+- frozen_count: 1
+- layers/l4_ext/shannon_entropy_mock.py | MARK_EXPERIMENTAL | risk=MEDIUM
 
 ## Generated / Legacy Summary
-- generated: 38
+- generated: 42
 - legacy: 30
 
 ## Orphan Test Candidates
-- orphan_test_candidates: 3
-- shadow_candidates: 44
+- orphan_test_candidates: 2
+- shadow_candidates: 48
 
 ## Next Phase
 Structural Hardening Pack 2.3 - Compilation Sandbox and Orchestration Boundary Hardening

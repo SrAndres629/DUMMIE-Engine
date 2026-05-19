@@ -6,8 +6,8 @@ from typing import Any, Dict
 from .contracts import Recommendation, RiskLevel, StructuralClass, StructuralFinding
 
 
-_CODE_EXT = {".py", ".go", ".rs", ".ex", ".exs", ".js", ".ts", ".tsx", ".sh", ".proto", ".c", ".cpp", ".h"}
-_CONFIG_NAMES = {"pyproject.toml", "package.json", "go.mod", "go.sum", "mix.exs", ".gitignore", "makefile"}
+_CODE_EXT = {".py", ".go", ".rs", ".ex", ".exs", ".js", ".ts", ".tsx", ".sh", ".proto", ".c", ".cpp", ".h", ".zig", ".mojo", ".html", ".css", ".zig.zon"}
+_CONFIG_NAMES = {"pyproject.toml", "package.json", "go.mod", "go.sum", "mix.exs", ".gitignore", "makefile", ".python-version", "package-lock.json", "pyrightconfig.json"}
 _CONFIG_EXT = {".toml", ".yaml", ".yml", ".ini", ".cfg", ".env"}
 
 
@@ -84,7 +84,7 @@ class StructuralClassifier:
             )
 
 
-        if path.startswith(".aiwg/reports/"):
+        if ".aiwg/" in path_lower or path_lower.startswith(".aiwg/"):
             return self._make(
                 path,
                 current_class,
@@ -343,14 +343,19 @@ class StructuralClassifier:
 
     @staticmethod
     def _is_config(path: str, name: str, suffix: str) -> bool:
-        return name.lower() in _CONFIG_NAMES or suffix in _CONFIG_EXT or path.startswith(".github/workflows/")
+        return (
+            name.lower() in _CONFIG_NAMES
+            or suffix in _CONFIG_EXT
+            or path.startswith(".github/workflows/")
+            or path.startswith("scripts/")
+        )
 
     @staticmethod
     def _is_generated(path_lower: str, name: str) -> bool:
         return (
             "generated" in path_lower
             or "proto/" in path_lower and name.endswith((".pb.go", ".pb.ex"))
-            or name.endswith(("_pb2.py", "_pb2_grpc.py", ".pb.go", ".pb.ex"))
+            or name.endswith(("_pb2.py", "_pb2_grpc.py", ".pb.go", ".pb.ex", ".log"))
         )
 
     @staticmethod
@@ -360,10 +365,9 @@ class StructuralClassifier:
     @staticmethod
     def _is_spec(path_lower: str, name: str) -> bool:
         return (
-            path_lower.startswith("doc/specs/")
-            or path_lower.startswith("docs/specs/")
-            or name.endswith(".feature")
-            or name.endswith(".rules.json")
+            path_lower.startswith("doc/")
+            or path_lower.startswith("docs/")
+            or name.endswith((".md", ".markdown", ".proto", ".feature", ".rules.json"))
         )
 
     @staticmethod

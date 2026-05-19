@@ -37,6 +37,10 @@ class EvidenceCollector:
 
         self.core_spec_text = self._safe_read_text(self.repo_root / "doc" / "CORE_SPEC.md")
         self.physical_map_text = self._safe_read_text(self.repo_root / "doc" / "PHYSICAL_MAP.md")
+        self.spec_contents: Dict[str, str] = {
+            spec: self._safe_read_text(self.repo_root / spec)
+            for spec in self.spec_paths
+        }
 
     def collect(self, path: str) -> Dict[str, Any]:
         evidence_refs: List[str] = []
@@ -107,7 +111,7 @@ class EvidenceCollector:
         path_name = Path(path).name
         stem_tokens = [t for t in _TOKEN_RE.findall(token_stem) if len(t) >= 4]
         for spec in self.spec_paths:
-            text = self._safe_read_text(self.repo_root / spec)
+            text = self.spec_contents.get(spec, "")
             if not text:
                 continue
             text_lower = text.lower()
