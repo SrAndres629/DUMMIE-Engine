@@ -65,7 +65,7 @@ class RuntimeEntrypointGuard(KernelOperatingBoundaryPort):
         # Simplified post-flight validation
         status = "PASSED" if receipt.exit_code == 0 else "FAILED"
         return PostflightMetrics(
-            tokens_consumed=150,  # Telemetry simulation or dynamic reading if required
+            tokens_consumed=0,  # Telemetry simulation: set to 0 to avoid false inflation
             elapsed_ms=int(receipt.duration_seconds * 1000),
             validation_status=status,
             artifacts_generated=[self.receipts_file]

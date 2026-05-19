@@ -1,18 +1,5 @@
 import os
 import sys
-from pathlib import Path
-
-# Add paths dynamically to support running PYTHONPATH=.
-_ROOT = Path(__file__).resolve().parent.parent.parent.parent
-_L2 = _ROOT / "layers" / "l2_brain"
-_SRC = _L2 / "src"
-if str(_ROOT) not in sys.path:
-    sys.path.insert(0, str(_ROOT))
-if str(_L2) not in sys.path:
-    sys.path.insert(0, str(_L2))
-if str(_SRC) not in sys.path:
-    sys.path.insert(0, str(_SRC))
-
 import pytest
 import shutil
 import tempfile
