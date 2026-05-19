@@ -4,6 +4,8 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"os"
+	"path/filepath"
 
 	"io.dummie.v2/overseer/internal/orchestrator"
 )
@@ -11,8 +13,26 @@ import (
 func main() {
 	fmt.Println("--- DUMMIE ENGINE OVERSEER (L0) STARTING ---")
 
+	rootDir := os.Getenv("DUMMIE_ROOT_DIR")
+	if rootDir == "" {
+		rootDir = os.Getenv("DUMMIE_ROOT")
+	}
+	if rootDir == "" {
+		wd, err := os.Getwd()
+		if err != nil {
+			log.Fatalf("No se pudo resolver root del repo: %v", err)
+		}
+		rootDir = filepath.Clean(filepath.Join(wd, "..", "..", ".."))
+	}
+
+	aiwgDir := os.Getenv("DUMMIE_AIWG_DIR")
+	if aiwgDir == "" {
+		aiwgDir = filepath.Join(rootDir, ".aiwg")
+	}
+	skillsPath := filepath.Join(aiwgDir, "memory", "skills_ingested.json")
+
 	// 1. Cargar Skills
-	sm, err := orchestrator.NewSkillManager("/home/jorand/Escritorio/DUMMIE Engine/.aiwg/memory/skills_ingested.json")
+	sm, err := orchestrator.NewSkillManager(skillsPath)
 	if err != nil {
 		log.Fatalf("Fallo al cargar skills: %v", err)
 	}
@@ -24,11 +44,11 @@ func main() {
 	// 3. Definir Nodo: Planner (Filtrado de Skills)
 	graph.AddNode("Planner", func(ctx context.Context, state *orchestrator.State) (*orchestrator.State, error) {
 		fmt.Printf("[PLANNER] Analizando objetivo: %s\n", state.Goal)
-		
+
 		// Filtrado semántico de habilidades relevantes
 		relevantSkills := graph.SkillMgr.FilterSkills("git") // Buscamos cosas de git para el ejemplo
 		state.Skills = relevantSkills
-		
+
 		state.History = append(state.History, "Planner: Identificadas "+fmt.Sprint(len(relevantSkills))+" habilidades de Git.")
 		return state, nil
 	})
@@ -58,6 +78,6 @@ func main() {
 		log.Fatalf("Error en la ejecución del grafo: %v", err)
 	}
 
-	fmt.Printf("\n--- RESULTADO FINAL ---\nID: %s\nResultado: %s\nHistorial: %v\n", 
+	fmt.Printf("\n--- RESULTADO FINAL ---\nID: %s\nResultado: %s\nHistorial: %v\n",
 		finalState.ID, finalState.Result, finalState.History)
 }

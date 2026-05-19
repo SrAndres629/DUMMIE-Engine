@@ -1,6 +1,6 @@
-import pytest
 from __future__ import annotations
 
+import pytest
 import importlib.util
 import socket
 import threading

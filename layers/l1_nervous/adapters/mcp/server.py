@@ -1,9 +1,13 @@
 import sys
 import builtins
 _original_print = builtins.print
-def _stderr_pass pass # print(*args, **kwargs):
+
+
+def _stderr_print(*args, **kwargs):
     kwargs.setdefault("file", sys.stderr)
-    _original_pass pass # print(*args, **kwargs)
+    _original_print(*args, **kwargs)
+
+
 builtins.print = _stderr_print
 
 import os
@@ -11,7 +15,6 @@ import json
 import hashlib
 import atexit
 import signal
-import sys
 import kuzu
 from mcp.server.fastmcp import FastMCP
 from brain.domain.context.models import SixDimensionalContext, AuthorityLevel, IntentType as ContextIntent
@@ -31,7 +34,9 @@ mcp = FastMCP("DUMMIE-Brain-Adapter",
 # 2. Infrastructure Setup (Bootstrap)
 # NOTA: En una arquitectura más madura, este setup se inyectaría desde un punto de entrada global.
 # Siguiendo la "Logic Zero Policy", este archivo solo actúa como el canal físico.
-ROOT_DIR = os.environ.get("DUMMIE_ROOT_DIR", "/home/jorand/Escritorio/DUMMIE Engine")
+_CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+_DEFAULT_ROOT = os.path.abspath(os.path.join(_CURRENT_DIR, "..", "..", ".."))
+ROOT_DIR = os.environ.get("DUMMIE_ROOT_DIR", os.environ.get("DUMMIE_ROOT", _DEFAULT_ROOT))
 AIWG_DIR = os.environ.get("DUMMIE_AIWG_DIR", os.path.join(ROOT_DIR, ".aiwg"))
 KUZU_DB_PATH = os.environ.get("DUMMIE_KUZU_DB_PATH", os.path.join(AIWG_DIR, "memory/loci.db"))
 

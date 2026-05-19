@@ -8,6 +8,7 @@ Computes a structural completeness score and identifies stale/orphaned assets.
 
 import ast
 import json
+import os
 import re
 from dataclasses import dataclass, field, asdict
 from datetime import datetime, timezone
@@ -35,7 +36,13 @@ class FileStats:
 
 
 class WholeBodyScanner:
-    def __init__(self, root: Path = Path("/home/jorand/Escritorio/DUMMIE Engine")):
+    def __init__(self, root: Path | None = None):
+        if root is None:
+            env_root = os.environ.get("DUMMIE_ROOT_DIR") or os.environ.get("DUMMIE_ROOT")
+            if env_root:
+                root = Path(env_root)
+            else:
+                root = Path(__file__).resolve().parents[2]
         self.root = root.resolve()
         self.aiwg = self.root / ".aiwg"
         self.reports_dir = self.aiwg / "reports"

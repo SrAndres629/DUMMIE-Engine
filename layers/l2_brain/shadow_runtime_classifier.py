@@ -6,6 +6,7 @@ Classifies all unimported (shadow) python modules into logical operational roles
 """
 
 import json
+import os
 from datetime import datetime, timezone
 import uuid
 from pathlib import Path
@@ -13,7 +14,13 @@ from typing import Any, Dict, List
 
 
 class ShadowRuntimeClassifier:
-    def __init__(self, root: Path = Path("/home/jorand/Escritorio/DUMMIE Engine")):
+    def __init__(self, root: Path | None = None):
+        if root is None:
+            env_root = os.environ.get("DUMMIE_ROOT_DIR") or os.environ.get("DUMMIE_ROOT")
+            if env_root:
+                root = Path(env_root)
+            else:
+                root = Path(__file__).resolve().parents[2]
         self.root = root.resolve()
         self.aiwg = self.root / ".aiwg"
         self.reports_dir = self.aiwg / "reports"

@@ -25,7 +25,7 @@ class MockFastMCP:
 
 async def run_benchmark():
     mcp = MockFastMCP()
-    root_dir = "/app"
+    root_dir = os.environ.get("DUMMIE_ROOT_DIR", os.environ.get("DUMMIE_ROOT", os.getcwd()))
     register_swarm_tools(mcp, MockUseCases(), root_dir)
 
     observe_swarm = mcp.tools['observe_swarm']
@@ -61,8 +61,8 @@ async def run_benchmark():
     avg_time = sum(results) / len(results)
     avg_block = sum(blocks) / len(blocks)
 
-    pass pass # print(f"Average observe_swarm execution time: {avg_time:.5f}s")
-    pass pass # print(f"Average event loop blockage for 10ms task: {avg_block:.5f}s")
+    # print(f"Average observe_swarm execution time: {avg_time:.5f}s")
+    # print(f"Average event loop blockage for 10ms task: {avg_block:.5f}s")
 
 if __name__ == '__main__':
     asyncio.run(run_benchmark())

@@ -21,7 +21,10 @@ func NewStateStore(dbPath string) (*StateStore, error) {
 		if aiwg == "" {
 			root := os.Getenv("DUMMIE_ROOT")
 			if root == "" {
-				root = "/home/jorand/Escritorio/DUMMIE Engine"
+				root = os.Getenv("DUMMIE_ROOT_DIR")
+			}
+			if root == "" {
+				root, _ = os.Getwd()
 			}
 			aiwg = filepath.Join(root, ".aiwg")
 		}
@@ -73,7 +76,7 @@ func (s *StateStore) SaveState(state *State) error {
 	ctxJSON, _ := json.Marshal(state.Context)
 	histJSON, _ := json.Marshal(state.History)
 	skillsJSON, _ := json.Marshal(state.Skills)
-	
+
 	errStrings := make([]string, len(state.Errors))
 	for i, err := range state.Errors {
 		if err != nil {
@@ -131,14 +134,14 @@ func (s *StateStore) LoadAll() ([]*State, error) {
 		json.Unmarshal([]byte(ctxStr), &st.Context)
 		json.Unmarshal([]byte(histStr), &st.History)
 		json.Unmarshal([]byte(skillsStr), &st.Skills)
-		
+
 		var errStrings []string
 		json.Unmarshal([]byte(errsStr), &errStrings)
 		st.Errors = make([]error, len(errStrings))
 		for i, s := range errStrings {
 			st.Errors[i] = fmt.Errorf("%s", s)
 		}
-		
+
 		states = append(states, &st)
 	}
 	return states, nil
