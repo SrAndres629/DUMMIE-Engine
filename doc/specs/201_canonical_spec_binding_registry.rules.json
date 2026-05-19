@@ -1,0 +1,20 @@
+{
+  "spec_id": "201_canonical_spec_binding_registry",
+  "rules": [
+    {
+      "id": "R1",
+      "statement": "El registro canonico debe consolidar cada spec en una entrada unica con spec_path, feature_path y rules_path.",
+      "severity": "CRITICAL"
+    },
+    {
+      "id": "R2",
+      "statement": "Todas las rutas en Physical Evidence deben validarse fisicamente; --strict debe fallar si faltan.",
+      "severity": "HIGH"
+    },
+    {
+      "id": "R3",
+      "statement": "La salida canonica debe persistirse en .aiwg/spec_registry/spec_bindings.yaml con schema_version estable.",
+      "severity": "HIGH"
+    }
+  ]
+}

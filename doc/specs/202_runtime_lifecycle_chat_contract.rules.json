@@ -1,0 +1,20 @@
+{
+  "spec_id": "202_runtime_lifecycle_chat_contract",
+  "rules": [
+    {
+      "id": "R1",
+      "statement": "dummie chat debe ejecutar preprocessing y routing antes de producir la salida de lifecycle.",
+      "severity": "CRITICAL"
+    },
+    {
+      "id": "R2",
+      "statement": "Cada ejecucion de chat debe registrar runtime_chat_latest.json, runtime_chat_trace_latest.json y un receipt.",
+      "severity": "HIGH"
+    },
+    {
+      "id": "R3",
+      "statement": "La configuracion del flujo de chat debe venir de un registro canonico unico en .aiwg/runtime/runtime_chat_registry.yaml.",
+      "severity": "HIGH"
+    }
+  ]
+}

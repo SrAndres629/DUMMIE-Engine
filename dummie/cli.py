@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import argparse
 import json
-from pathlib import Path
 
 from dummie.engine import DummieEngine
 from dummie.memory import DummieMemory
@@ -25,13 +24,17 @@ def build_parser() -> argparse.ArgumentParser:
     sub.add_parser("identity")
 
     p_chat = sub.add_parser("chat")
-    p_chat.add_argument("text", nargs="+")
+    p_chat.add_argument("text", nargs="*")
+    p_chat.add_argument("-i", "--interactive", action="store_true")
+    p_chat.add_argument("--low-cost", action="store_true")
 
     p_advise = sub.add_parser("advise")
     p_advise.add_argument("text", nargs="+")
+    p_advise.add_argument("--low-cost", action="store_true")
 
     p_strategy = sub.add_parser("strategy")
     p_strategy.add_argument("text", nargs="+")
+    p_strategy.add_argument("--low-cost", action="store_true")
 
     sub.add_parser("business")
 
@@ -72,9 +75,17 @@ def main() -> None:
         engine.aiwg.write_receipt("whoami", "PASS", {"message": "identity_statement"})
     elif args.command == "identity":
         _cmd_identity(engine)
-    elif args.command in {"chat", "advise", "strategy"}:
+    elif args.command == "chat":
+        text = " ".join(args.text).strip()
+        if args.interactive:
+            _cmd_chat_interactive(engine, low_cost=args.low_cost, seed_text=text)
+        else:
+            if not text:
+                raise SystemExit("chat requires text or --interactive")
+            _cmd_chat(engine, text, low_cost=args.low_cost)
+    elif args.command in {"advise", "strategy"}:
         text = " ".join(args.text)
-        _cmd_advise(engine, text)
+        _cmd_advise(engine, text, low_cost=args.low_cost)
     elif args.command == "business":
         _cmd_business(engine)
     elif args.command == "goals":
@@ -121,7 +132,9 @@ def _cmd_identity(engine: DummieEngine) -> None:
     engine.aiwg.write_receipt("identity", "PASS", {"identity_loaded": True})
 
 
-def _cmd_advise(engine: DummieEngine, text: str) -> None:
+def _cmd_advise(engine: DummieEngine, text: str, low_cost: bool = False) -> None:
+    if low_cost:
+        _apply_low_cost_profile(engine, source_command="advise")
     response = engine.advise(text)
     print(f"Objetivo detectado: {response.goal_type}")
     print("Información crítica faltante:")
@@ -133,6 +146,118 @@ def _cmd_advise(engine: DummieEngine, text: str) -> None:
     print("\nPlan inicial:")
     for step in response.roadmap:
         print(f"- {step.get('phase')} ({step.get('duration')})")
+
+
+def _cmd_chat_interactive(engine: DummieEngine, low_cost: bool = False, seed_text: str = "") -> None:
+    if low_cost:
+        _apply_low_cost_profile(engine, source_command="chat.interactive")
+
+    print("DUMMIE Chat interactive")
+    print("Comandos: /help /status /providers /goals /memory /exit")
+    if low_cost:
+        print("Modo: LOW_COST (local/free-first, contexto mínimo)")
+
+    if seed_text:
+        _chat_turn(engine, seed_text, low_cost=low_cost)
+
+    while True:
+        try:
+            user_text = input("jorge> ").strip()
+        except (EOFError, KeyboardInterrupt):
+            print("\nSaliendo de DUMMIE chat.")
+            break
+
+        if not user_text:
+            continue
+        if user_text.startswith("/"):
+            if _handle_chat_command(engine, user_text):
+                break
+            continue
+
+        _chat_turn(engine, user_text, low_cost=low_cost)
+
+
+def _handle_chat_command(engine: DummieEngine, raw_cmd: str) -> bool:
+    cmd = raw_cmd.strip().lower()
+    if cmd in {"/exit", "/quit"}:
+        print("Sesion finalizada.")
+        return True
+    if cmd == "/help":
+        print("Comandos: /help /status /providers /goals /memory /exit")
+        return False
+    if cmd == "/status":
+        _cmd_status(engine)
+        return False
+    if cmd == "/providers":
+        _cmd_providers(engine, argparse.Namespace(providers_cmd="check"))
+        return False
+    if cmd == "/goals":
+        _cmd_goals(engine, argparse.Namespace(goals_cmd=None, text=[]))
+        return False
+    if cmd == "/memory":
+        _cmd_memory(engine)
+        return False
+
+    print(f"Comando no reconocido: {raw_cmd}")
+    return False
+
+
+def _chat_turn(engine: DummieEngine, user_text: str, low_cost: bool = False) -> None:
+    response = engine.chat(user_text, low_cost=low_cost)
+    print(
+        "dummie> Pipeline: "
+        f"pre={response.preprocessing_provider} "
+        f"tier={response.routing_tier} "
+        f"model={response.routing_model_id} "
+        f"provider={response.selected_provider}"
+    )
+    print(f"dummie> Objetivo detectado: {response.goal_type}")
+    if response.strategic_questions:
+        print(f"dummie> Pregunta clave: {response.strategic_questions[0]}")
+    if response.tool_opportunities:
+        top_tool = response.tool_opportunities[0]
+        print(f"dummie> Herramienta sugerida: {top_tool.get('name')}")
+    if response.roadmap:
+        first_step = response.roadmap[0]
+        print(f"dummie> Siguiente paso: {first_step.get('phase')} ({first_step.get('duration')})")
+
+
+def _cmd_chat(engine: DummieEngine, text: str, low_cost: bool = False) -> None:
+    response = engine.chat(text, low_cost=low_cost)
+    print("=== DUMMIE Runtime Chat ===")
+    print(
+        f"Pipeline: pre={response.preprocessing_provider} "
+        f"tier={response.routing_tier} "
+        f"model={response.routing_model_id} "
+        f"provider={response.selected_provider}"
+    )
+    print(f"Objetivo detectado: {response.goal_type}")
+    print("Información crítica faltante:")
+    for question in response.strategic_questions:
+        print(f"- {question}")
+    print("\nPropuesta de herramientas:")
+    for tool in response.tool_opportunities:
+        print(f"- {tool.get('name')}: {tool.get('description')}")
+    print("\nPlan inicial:")
+    for step in response.roadmap:
+        print(f"- {step.get('phase')} ({step.get('duration')})")
+
+
+def _apply_low_cost_profile(engine: DummieEngine, source_command: str) -> None:
+    payload = {
+        "decision": "PASS",
+        "profile": "LOW_COST",
+        "source_command": source_command,
+        "policies": [
+            "free_or_local_first",
+            "minimize_context_expansion",
+            "avoid_cloud_provider_by_default",
+            "write_token_receipts",
+        ],
+        "notes": "This profile prioritizes zero-cost deterministic runtime and compact context handling.",
+    }
+    engine.aiwg.write_report("chat_low_cost_profile_latest.json", payload)
+    engine.aiwg.write_receipt("low-cost-profile", "PASS", payload)
 
 
 def _cmd_business(engine: DummieEngine) -> None:

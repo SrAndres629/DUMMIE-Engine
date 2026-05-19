@@ -8,6 +8,7 @@ from dummie.config import DummieConfig
 from dummie.guardrails import DummieRepoGuard, write_repo_guard_report
 from dummie.memory import DummieMemory
 from dummie.providers import DummieProviderRegistry
+from dummie.runtime_chat import DummieRuntimeChat
 from dummie.session import DummieSessionManager
 from dummie.strategic_partner import DummieStrategicPartner
 from layers.l2_brain.business_goal_model import create_goal_memory_entry
@@ -62,6 +63,40 @@ class DummieAdviceResponse:
         }
 
 
+@dataclass
+class DummieRuntimeChatResponse:
+    decision: str
+    goal_type: str
+    strategic_questions: list[str]
+    tool_opportunities: list[dict[str, Any]]
+    roadmap: list[dict[str, Any]]
+    preprocessing_provider: str
+    routing_tier: str
+    routing_model_id: str
+    routing_reason: str
+    selected_provider: str
+    selected_provider_reason: str
+    receipt: dict[str, Any]
+    raw_data: dict[str, Any]
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "decision": self.decision,
+            "goal_type": self.goal_type,
+            "strategic_questions": self.strategic_questions,
+            "tool_opportunities": self.tool_opportunities,
+            "roadmap": self.roadmap,
+            "preprocessing_provider": self.preprocessing_provider,
+            "routing_tier": self.routing_tier,
+            "routing_model_id": self.routing_model_id,
+            "routing_reason": self.routing_reason,
+            "selected_provider": self.selected_provider,
+            "selected_provider_reason": self.selected_provider_reason,
+            "receipt": self.receipt,
+            "raw_data": self.raw_data,
+        }
+
+
 class DummieEngine:
     def __init__(self):
         self.config = DummieConfig()
@@ -69,6 +104,7 @@ class DummieEngine:
         self.providers = DummieProviderRegistry()
         self.aiwg = DummieAiwgIntegration()
         self.partner = DummieStrategicPartner()
+        self.runtime_chat = DummieRuntimeChat(aiwg=self.aiwg, providers=self.providers, partner=self.partner)
         self.memory = DummieMemory()
         self.repo_guard = DummieRepoGuard()
 
@@ -159,6 +195,38 @@ class DummieEngine:
             business_intake=runtime_payload.get("business_intake", {}),
             receipt=runtime_payload.get("receipt", {}),
             raw_data=runtime_payload,
+        )
+
+    def chat(self, text: str, low_cost: bool = False) -> DummieRuntimeChatResponse:
+        result = self.runtime_chat.run(text, low_cost=low_cost, session_id=self.session.session_id)
+        self.session.record_episode(
+            query=text,
+            intent="runtime_chat",
+            answer=(
+                f"goal_type={result.goal_type} "
+                f"tier={result.routing_tier} "
+                f"provider={result.selected_provider}"
+            ),
+            decision=result.decision,
+            evidence_refs=[
+                ".aiwg/reports/runtime_chat_latest.json",
+                ".aiwg/reports/runtime_chat_trace_latest.json",
+            ],
+        )
+        return DummieRuntimeChatResponse(
+            decision=result.decision,
+            goal_type=result.goal_type,
+            strategic_questions=result.strategic_questions,
+            tool_opportunities=result.tool_opportunities,
+            roadmap=result.roadmap,
+            preprocessing_provider=result.preprocessing_provider,
+            routing_tier=result.routing_tier,
+            routing_model_id=result.routing_model_id,
+            routing_reason=result.routing_reason,
+            selected_provider=result.selected_provider,
+            selected_provider_reason=result.selected_provider_reason,
+            receipt=result.receipt,
+            raw_data=result.raw_data,
         )
 
 

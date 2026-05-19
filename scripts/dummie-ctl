@@ -20,7 +20,7 @@ def show_help():
     print("  status                 Show system status and phase")
     print("  whoami                 Identify DUMMIE operational identity")
     print("  identity               Print creator profile and identity details")
-    print("  chat <text>            Interact with DUMMIE Brain (records learning episode)")
+    print("  chat <text>            Runtime chat (preprocess + routing + lifecycle trace)")
     print("  advise <text>          Get strategic advice for business growth or goals")
     print("  strategy <text>        Shortcut for advise")
     print("  business               Show the latest business intake structure")
@@ -56,6 +56,7 @@ def show_help():
     print("  model-bootstrap        Bootstrap OpenCode + local fallback model stack")
     print("  token-snapshot         Generate current token+embedding realtime snapshot")
     print("  token-live [seconds]   Continuously refresh token+embedding realtime snapshot")
+    print("  spec-registry-sync     Rebuild canonical spec binding registry from doc/specs")
     print("  help                   Show this help")
 
 def main():
@@ -143,6 +144,8 @@ def main():
         if args:
             interval = args[0]
         run_python("scripts/dummie_token_embedding_monitor.py", ["--watch", "--interval", interval])
+    elif cmd == "spec-registry-sync":
+        run_python("scripts/spec_registry_sync.py", args)
     elif cmd == "help":
         show_help()
     else:

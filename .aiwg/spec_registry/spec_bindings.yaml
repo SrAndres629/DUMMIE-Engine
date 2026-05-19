@@ -1,0 +1,1840 @@
+schema_version: dummie.spec_binding_registry.v1
+generated_from: doc/specs
+spec_count: 83
+error_count: 59
+entries:
+- spec_id: 121_state_coherence_guard
+  title: 121 State Coherence Guard
+  status: ACTIVE
+  layer: l2_brain
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/121_state_coherence_guard.md
+  feature_path: doc/specs/121_state_coherence_guard.feature
+  rules_path: doc/specs/121_state_coherence_guard.rules.json
+  physical_evidence: []
+  runtime_files: []
+  test_files: []
+  docs_files: []
+  script_files: []
+  data_files: []
+- spec_id: 122_embedding_adapter
+  title: 122 Embedding Adapter
+  status: ACTIVE
+  layer: l2_brain
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/122_embedding_adapter.md
+  feature_path: doc/specs/122_embedding_adapter.feature
+  rules_path: doc/specs/122_embedding_adapter.rules.json
+  physical_evidence: []
+  runtime_files: []
+  test_files: []
+  docs_files: []
+  script_files: []
+  data_files: []
+- spec_id: 123_repo_probe_runner
+  title: 123 Repo Probe Runner
+  status: ACTIVE
+  layer: l2_brain
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/123_repo_probe_runner.md
+  feature_path: doc/specs/123_repo_probe_runner.feature
+  rules_path: doc/specs/123_repo_probe_runner.rules.json
+  physical_evidence: []
+  runtime_files: []
+  test_files: []
+  docs_files: []
+  script_files: []
+  data_files: []
+- spec_id: 124_sdd_tdd_mission_planner
+  title: 124 Sdd Tdd Mission Planner
+  status: ACTIVE
+  layer: l2_brain
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/124_sdd_tdd_mission_planner.md
+  feature_path: doc/specs/124_sdd_tdd_mission_planner.feature
+  rules_path: doc/specs/124_sdd_tdd_mission_planner.rules.json
+  physical_evidence: []
+  runtime_files: []
+  test_files: []
+  docs_files: []
+  script_files: []
+  data_files: []
+- spec_id: 125_mission_orchestrator_dag
+  title: 125 Mission Orchestrator Dag
+  status: ACTIVE
+  layer: l2_brain
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/125_mission_orchestrator_dag.md
+  feature_path: doc/specs/125_mission_orchestrator_dag.feature
+  rules_path: doc/specs/125_mission_orchestrator_dag.rules.json
+  physical_evidence: []
+  runtime_files: []
+  test_files: []
+  docs_files: []
+  script_files: []
+  data_files: []
+- spec_id: 126_mission_coherence_guard
+  title: 126 Mission Coherence Guard
+  status: ACTIVE
+  layer: l2_brain
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/126_mission_coherence_guard.md
+  feature_path: doc/specs/126_mission_coherence_guard.feature
+  rules_path: doc/specs/126_mission_coherence_guard.rules.json
+  physical_evidence: []
+  runtime_files: []
+  test_files: []
+  docs_files: []
+  script_files: []
+  data_files: []
+- spec_id: 127_strategic_partner_swarm
+  title: 127 Strategic Partner Swarm
+  status: ACTIVE
+  layer: l2_brain
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/127_strategic_partner_swarm.md
+  feature_path: doc/specs/127_strategic_partner_swarm.feature
+  rules_path: doc/specs/127_strategic_partner_swarm.rules.json
+  physical_evidence: []
+  runtime_files: []
+  test_files: []
+  docs_files: []
+  script_files: []
+  data_files: []
+- spec_id: 128_debate_review_runtime
+  title: 128 Debate Review Runtime
+  status: ACTIVE
+  layer: l2_brain
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/128_debate_review_runtime.md
+  feature_path: doc/specs/128_debate_review_runtime.feature
+  rules_path: doc/specs/128_debate_review_runtime.rules.json
+  physical_evidence: []
+  runtime_files: []
+  test_files: []
+  docs_files: []
+  script_files: []
+  data_files: []
+- spec_id: 129_mission_autonomy_contract
+  title: 129 Mission Autonomy Contract
+  status: ACTIVE
+  layer: l2_brain
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/129_mission_autonomy_contract.md
+  feature_path: doc/specs/129_mission_autonomy_contract.feature
+  rules_path: doc/specs/129_mission_autonomy_contract.rules.json
+  physical_evidence: []
+  runtime_files: []
+  test_files: []
+  docs_files: []
+  script_files: []
+  data_files: []
+- spec_id: 130_trusted_workstation_mode
+  title: 130 Trusted Workstation Mode
+  status: ACTIVE
+  layer: l2_brain
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/130_trusted_workstation_mode.md
+  feature_path: doc/specs/130_trusted_workstation_mode.feature
+  rules_path: doc/specs/130_trusted_workstation_mode.rules.json
+  physical_evidence: []
+  runtime_files: []
+  test_files: []
+  docs_files: []
+  script_files: []
+  data_files: []
+- spec_id: 131_chaos_regression_testing
+  title: 131 Chaos Regression Testing
+  status: ACTIVE
+  layer: l2_brain
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/131_chaos_regression_testing.md
+  feature_path: doc/specs/131_chaos_regression_testing.feature
+  rules_path: doc/specs/131_chaos_regression_testing.rules.json
+  physical_evidence: []
+  runtime_files: []
+  test_files: []
+  docs_files: []
+  script_files: []
+  data_files: []
+- spec_id: 132_autonomous_strategic_partner_runtime
+  title: 132 Autonomous Strategic Partner Runtime
+  status: ACTIVE
+  layer: l2_brain
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/132_autonomous_strategic_partner_runtime.md
+  feature_path: doc/specs/132_autonomous_strategic_partner_runtime.feature
+  rules_path: doc/specs/132_autonomous_strategic_partner_runtime.rules.json
+  physical_evidence: []
+  runtime_files: []
+  test_files: []
+  docs_files: []
+  script_files: []
+  data_files: []
+- spec_id: 133_repo_intelligence_runtime
+  title: 133 Repo Intelligence Runtime
+  status: ACTIVE
+  layer: l2_brain
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/133_repo_intelligence_runtime.md
+  feature_path: doc/specs/133_repo_intelligence_runtime.feature
+  rules_path: doc/specs/133_repo_intelligence_runtime.rules.json
+  physical_evidence: []
+  runtime_files: []
+  test_files: []
+  docs_files: []
+  script_files: []
+  data_files: []
+- spec_id: 134_folder_file_dossiers
+  title: 134 Folder File Dossiers
+  status: ACTIVE
+  layer: l2_brain
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/134_folder_file_dossiers.md
+  feature_path: doc/specs/134_folder_file_dossiers.feature
+  rules_path: doc/specs/134_folder_file_dossiers.rules.json
+  physical_evidence: []
+  runtime_files: []
+  test_files: []
+  docs_files: []
+  script_files: []
+  data_files: []
+- spec_id: 135_technical_debt_intelligence
+  title: 135 Technical Debt Intelligence
+  status: ACTIVE
+  layer: l2_brain
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/135_technical_debt_intelligence.md
+  feature_path: doc/specs/135_technical_debt_intelligence.feature
+  rules_path: doc/specs/135_technical_debt_intelligence.rules.json
+  physical_evidence: []
+  runtime_files: []
+  test_files: []
+  docs_files: []
+  script_files: []
+  data_files: []
+- spec_id: 136_plan_v1_completion_review
+  title: 136 Plan V1 Completion Review
+  status: ACTIVE
+  layer: l2_brain
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/136_plan_v1_completion_review.md
+  feature_path: doc/specs/136_plan_v1_completion_review.feature
+  rules_path: doc/specs/136_plan_v1_completion_review.rules.json
+  physical_evidence: []
+  runtime_files: []
+  test_files: []
+  docs_files: []
+  script_files: []
+  data_files: []
+- spec_id: 137_context_enforcement_gate
+  title: 137 Context Enforcement Gate
+  status: ACTIVE
+  layer: l2_brain
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/137_context_enforcement_gate.md
+  feature_path: doc/specs/137_context_enforcement_gate.feature
+  rules_path: doc/specs/137_context_enforcement_gate.rules.json
+  physical_evidence: []
+  runtime_files: []
+  test_files: []
+  docs_files: []
+  script_files: []
+  data_files: []
+- spec_id: 138_repo_intelligence_query
+  title: 138 Repo Intelligence Query
+  status: ACTIVE
+  layer: l2_brain
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/138_repo_intelligence_query.md
+  feature_path: doc/specs/138_repo_intelligence_query.feature
+  rules_path: doc/specs/138_repo_intelligence_query.rules.json
+  physical_evidence: []
+  runtime_files: []
+  test_files: []
+  docs_files: []
+  script_files: []
+  data_files: []
+- spec_id: 139_dummie_chat_cli
+  title: 139 Dummie Chat Cli
+  status: ACTIVE
+  layer: l2_brain
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/139_dummie_chat_cli.md
+  feature_path: doc/specs/139_dummie_chat_cli.feature
+  rules_path: doc/specs/139_dummie_chat_cli.rules.json
+  physical_evidence: []
+  runtime_files: []
+  test_files: []
+  docs_files: []
+  script_files: []
+  data_files: []
+- spec_id: 140_operationalization_review
+  title: 140 Operationalization Review
+  status: ACTIVE
+  layer: l2_brain
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/140_operationalization_review.md
+  feature_path: doc/specs/140_operationalization_review.feature
+  rules_path: doc/specs/140_operationalization_review.rules.json
+  physical_evidence: []
+  runtime_files: []
+  test_files: []
+  docs_files: []
+  script_files: []
+  data_files: []
+- spec_id: 146_readiness_score_calibrator
+  title: 146 Readiness Score Calibrator
+  status: ACTIVE
+  layer: l2_brain
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/146_readiness_score_calibrator.md
+  feature_path: doc/specs/146_readiness_score_calibrator.feature
+  rules_path: doc/specs/146_readiness_score_calibrator.rules.json
+  physical_evidence:
+  - layers/l2_brain/readiness_score_calibrator.py
+  - .aiwg/reports/readiness_score_calibration_latest.json
+  - .aiwg/schemas/readiness_score_calibration.schema.json
+  runtime_files:
+  - layers/l2_brain/readiness_score_calibrator.py
+  test_files: []
+  docs_files: []
+  script_files: []
+  data_files:
+  - .aiwg/reports/readiness_score_calibration_latest.json
+  - .aiwg/schemas/readiness_score_calibration.schema.json
+- spec_id: 147_memory_spine_entrypoint
+  title: 147 Memory Spine Entrypoint
+  status: ACTIVE
+  layer: l2_brain
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/147_memory_spine_entrypoint.md
+  feature_path: doc/specs/147_memory_spine_entrypoint.feature
+  rules_path: doc/specs/147_memory_spine_entrypoint.rules.json
+  physical_evidence:
+  - layers/l2_brain/memory_spine_entrypoint.py
+  - .aiwg/reports/memory_spine_entrypoint_latest.json
+  - .aiwg/schemas/memory_spine_entrypoint.schema.json
+  runtime_files:
+  - layers/l2_brain/memory_spine_entrypoint.py
+  test_files: []
+  docs_files: []
+  script_files: []
+  data_files:
+  - .aiwg/reports/memory_spine_entrypoint_latest.json
+  - .aiwg/schemas/memory_spine_entrypoint.schema.json
+- spec_id: 148_token_economy_benchmark
+  title: 148 Token Economy Benchmark
+  status: ACTIVE
+  layer: l2_brain
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/148_token_economy_benchmark.md
+  feature_path: doc/specs/148_token_economy_benchmark.feature
+  rules_path: doc/specs/148_token_economy_benchmark.rules.json
+  physical_evidence:
+  - layers/l2_brain/token_economy_benchmark.py
+  - .aiwg/reports/token_economy_benchmark_latest.json
+  - .aiwg/schemas/token_economy_benchmark.schema.json
+  runtime_files:
+  - layers/l2_brain/token_economy_benchmark.py
+  test_files: []
+  docs_files: []
+  script_files: []
+  data_files:
+  - .aiwg/reports/token_economy_benchmark_latest.json
+  - .aiwg/schemas/token_economy_benchmark.schema.json
+- spec_id: 149_entrypoint_enforcement_auditor
+  title: 149 Entrypoint Enforcement Auditor
+  status: ACTIVE
+  layer: l2_brain
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/149_entrypoint_enforcement_auditor.md
+  feature_path: doc/specs/149_entrypoint_enforcement_auditor.feature
+  rules_path: doc/specs/149_entrypoint_enforcement_auditor.rules.json
+  physical_evidence:
+  - layers/l2_brain/entrypoint_enforcement_auditor.py
+  - .aiwg/reports/entrypoint_enforcement_audit_latest.json
+  - .aiwg/schemas/entrypoint_enforcement_audit.schema.json
+  runtime_files:
+  - layers/l2_brain/entrypoint_enforcement_auditor.py
+  test_files: []
+  docs_files: []
+  script_files: []
+  data_files:
+  - .aiwg/reports/entrypoint_enforcement_audit_latest.json
+  - .aiwg/schemas/entrypoint_enforcement_audit.schema.json
+- spec_id: 150_mental_model_runtime
+  title: 150 Mental Model Runtime
+  status: ACTIVE
+  layer: l2_brain
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/150_mental_model_runtime.md
+  feature_path: doc/specs/150_mental_model_runtime.feature
+  rules_path: doc/specs/150_mental_model_runtime.rules.json
+  physical_evidence:
+  - layers/l2_brain/mental_model_runtime.py
+  - .aiwg/reports/mental_model_runtime_latest.json
+  - .aiwg/schemas/mental_model.schema.json
+  runtime_files:
+  - layers/l2_brain/mental_model_runtime.py
+  test_files: []
+  docs_files: []
+  script_files: []
+  data_files:
+  - .aiwg/reports/mental_model_runtime_latest.json
+  - .aiwg/schemas/mental_model.schema.json
+- spec_id: 151_semantic_ontology_mapper
+  title: 151 Semantic Ontology Mapper
+  status: ACTIVE
+  layer: l2_brain
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/151_semantic_ontology_mapper.md
+  feature_path: doc/specs/151_semantic_ontology_mapper.feature
+  rules_path: doc/specs/151_semantic_ontology_mapper.rules.json
+  physical_evidence:
+  - layers/l2_brain/semantic_ontology_mapper.py
+  - .aiwg/reports/semantic_ontology_map_latest.json
+  - .aiwg/schemas/semantic_ontology_map.schema.json
+  runtime_files:
+  - layers/l2_brain/semantic_ontology_mapper.py
+  test_files: []
+  docs_files: []
+  script_files: []
+  data_files:
+  - .aiwg/reports/semantic_ontology_map_latest.json
+  - .aiwg/schemas/semantic_ontology_map.schema.json
+- spec_id: 152_cognitive_frame_builder
+  title: 152 Cognitive Frame Builder
+  status: ACTIVE
+  layer: l2_brain
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/152_cognitive_frame_builder.md
+  feature_path: doc/specs/152_cognitive_frame_builder.feature
+  rules_path: doc/specs/152_cognitive_frame_builder.rules.json
+  physical_evidence:
+  - layers/l2_brain/cognitive_frame_builder.py
+  - .aiwg/reports/cognitive_frame_latest.json
+  - .aiwg/schemas/cognitive_frame.schema.json
+  runtime_files:
+  - layers/l2_brain/cognitive_frame_builder.py
+  test_files: []
+  docs_files: []
+  script_files: []
+  data_files:
+  - .aiwg/reports/cognitive_frame_latest.json
+  - .aiwg/schemas/cognitive_frame.schema.json
+- spec_id: 153_metacognitive_loop_runtime
+  title: 153 Metacognitive Loop Runtime
+  status: ACTIVE
+  layer: l2_brain
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/153_metacognitive_loop_runtime.md
+  feature_path: doc/specs/153_metacognitive_loop_runtime.feature
+  rules_path: doc/specs/153_metacognitive_loop_runtime.rules.json
+  physical_evidence:
+  - layers/l2_brain/metacognitive_loop_runtime.py
+  - .aiwg/reports/metacognitive_loop_latest.json
+  - .aiwg/schemas/metacognitive_loop.schema.json
+  runtime_files:
+  - layers/l2_brain/metacognitive_loop_runtime.py
+  test_files: []
+  docs_files: []
+  script_files: []
+  data_files:
+  - .aiwg/reports/metacognitive_loop_latest.json
+  - .aiwg/schemas/metacognitive_loop.schema.json
+- spec_id: 154_mental_model_store
+  title: 154 Mental Model Store
+  status: ACTIVE
+  layer: l2_brain
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/154_mental_model_store.md
+  feature_path: doc/specs/154_mental_model_store.feature
+  rules_path: doc/specs/154_mental_model_store.rules.json
+  physical_evidence:
+  - layers/l2_brain/mental_model_store.py
+  - .aiwg/schemas/mental_model_store.schema.json
+  runtime_files:
+  - layers/l2_brain/mental_model_store.py
+  test_files: []
+  docs_files: []
+  script_files: []
+  data_files:
+  - .aiwg/schemas/mental_model_store.schema.json
+- spec_id: 155_metacognitive_quality_gate
+  title: 155 Metacognitive Quality Gate
+  status: ACTIVE
+  layer: l2_brain
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/155_metacognitive_quality_gate.md
+  feature_path: doc/specs/155_metacognitive_quality_gate.feature
+  rules_path: doc/specs/155_metacognitive_quality_gate.rules.json
+  physical_evidence:
+  - layers/l2_brain/metacognitive_quality_gate.py
+  - .aiwg/reports/metacognitive_quality_gate_latest.json
+  - .aiwg/schemas/metacognitive_quality_gate.schema.json
+  runtime_files:
+  - layers/l2_brain/metacognitive_quality_gate.py
+  test_files: []
+  docs_files: []
+  script_files: []
+  data_files:
+  - .aiwg/reports/metacognitive_quality_gate_latest.json
+  - .aiwg/schemas/metacognitive_quality_gate.schema.json
+- spec_id: 156_epistemic_state_runtime
+  title: 156 Epistemic State Runtime
+  status: ACTIVE
+  layer: l2_brain
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/156_epistemic_state_runtime.md
+  feature_path: doc/specs/156_epistemic_state_runtime.feature
+  rules_path: doc/specs/156_epistemic_state_runtime.rules.json
+  physical_evidence:
+  - layers/l2_brain/epistemic_state_runtime.py
+  - .aiwg/reports/epistemic_state_latest.json
+  - .aiwg/schemas/epistemic_state.schema.json
+  runtime_files:
+  - layers/l2_brain/epistemic_state_runtime.py
+  test_files: []
+  docs_files: []
+  script_files: []
+  data_files:
+  - .aiwg/reports/epistemic_state_latest.json
+  - .aiwg/schemas/epistemic_state.schema.json
+- spec_id: 157_dialectical_reasoning_runtime
+  title: 157 Dialectical Reasoning Runtime
+  status: ACTIVE
+  layer: l2_brain
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/157_dialectical_reasoning_runtime.md
+  feature_path: doc/specs/157_dialectical_reasoning_runtime.feature
+  rules_path: doc/specs/157_dialectical_reasoning_runtime.rules.json
+  physical_evidence:
+  - layers/l2_brain/dialectical_reasoning_runtime.py
+  - .aiwg/reports/dialectical_review_latest.json
+  - .aiwg/schemas/dialectical_review.schema.json
+  runtime_files:
+  - layers/l2_brain/dialectical_reasoning_runtime.py
+  test_files: []
+  docs_files: []
+  script_files: []
+  data_files:
+  - .aiwg/reports/dialectical_review_latest.json
+  - .aiwg/schemas/dialectical_review.schema.json
+- spec_id: 158_philosophical_ontology_runtime
+  title: 158 Philosophical Ontology Runtime
+  status: ACTIVE
+  layer: l2_brain
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/158_philosophical_ontology_runtime.md
+  feature_path: doc/specs/158_philosophical_ontology_runtime.feature
+  rules_path: doc/specs/158_philosophical_ontology_runtime.rules.json
+  physical_evidence:
+  - layers/l2_brain/philosophical_ontology_runtime.py
+  - .aiwg/reports/philosophical_ontology_latest.json
+  - .aiwg/schemas/philosophical_ontology.schema.json
+  runtime_files:
+  - layers/l2_brain/philosophical_ontology_runtime.py
+  test_files: []
+  docs_files: []
+  script_files: []
+  data_files:
+  - .aiwg/reports/philosophical_ontology_latest.json
+  - .aiwg/schemas/philosophical_ontology.schema.json
+- spec_id: 159_cognitive_bias_detector
+  title: 159 Cognitive Bias Detector
+  status: ACTIVE
+  layer: l2_brain
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/159_cognitive_bias_detector.md
+  feature_path: doc/specs/159_cognitive_bias_detector.feature
+  rules_path: doc/specs/159_cognitive_bias_detector.rules.json
+  physical_evidence:
+  - layers/l2_brain/cognitive_bias_detector.py
+  - .aiwg/reports/cognitive_bias_report_latest.json
+  - .aiwg/schemas/cognitive_bias_report.schema.json
+  runtime_files:
+  - layers/l2_brain/cognitive_bias_detector.py
+  test_files: []
+  docs_files: []
+  script_files: []
+  data_files:
+  - .aiwg/reports/cognitive_bias_report_latest.json
+  - .aiwg/schemas/cognitive_bias_report.schema.json
+- spec_id: 160_metacognitive_evolution_flywheel
+  title: 160 Metacognitive Evolution Flywheel
+  status: ACTIVE
+  layer: l2_brain
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/160_metacognitive_evolution_flywheel.md
+  feature_path: doc/specs/160_metacognitive_evolution_flywheel.feature
+  rules_path: doc/specs/160_metacognitive_evolution_flywheel.rules.json
+  physical_evidence:
+  - layers/l2_brain/metacognitive_evolution_flywheel.py
+  - .aiwg/reports/metacognitive_evolution_flywheel_latest.json
+  - .aiwg/schemas/metacognitive_evolution_flywheel.schema.json
+  runtime_files:
+  - layers/l2_brain/metacognitive_evolution_flywheel.py
+  test_files: []
+  docs_files: []
+  script_files: []
+  data_files:
+  - .aiwg/reports/metacognitive_evolution_flywheel_latest.json
+  - .aiwg/schemas/metacognitive_evolution_flywheel.schema.json
+- spec_id: 161_mental_model_truth_hygiene
+  title: 161 Mental Model Truth Hygiene
+  status: ACTIVE
+  layer: l2_brain
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/161_mental_model_truth_hygiene.md
+  feature_path: doc/specs/161_mental_model_truth_hygiene.feature
+  rules_path: doc/specs/161_mental_model_truth_hygiene.rules.json
+  physical_evidence:
+  - layers/l2_brain/mental_model_truth_hygiene.py
+  - .aiwg/reports/mental_model_truth_hygiene_latest.json
+  - .aiwg/mental_models/runtime_model_quarantine.json
+  runtime_files:
+  - layers/l2_brain/mental_model_truth_hygiene.py
+  test_files: []
+  docs_files: []
+  script_files: []
+  data_files:
+  - .aiwg/mental_models/runtime_model_quarantine.json
+  - .aiwg/reports/mental_model_truth_hygiene_latest.json
+- spec_id: 162_evolution_delta_applier
+  title: 162 Evolution Delta Applier
+  status: ACTIVE
+  layer: l2_brain
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/162_evolution_delta_applier.md
+  feature_path: doc/specs/162_evolution_delta_applier.feature
+  rules_path: doc/specs/162_evolution_delta_applier.rules.json
+  physical_evidence:
+  - layers/l2_brain/evolution_delta_applier.py
+  - .aiwg/reports/evolution_delta_application_latest.json
+  runtime_files:
+  - layers/l2_brain/evolution_delta_applier.py
+  test_files: []
+  docs_files: []
+  script_files: []
+  data_files:
+  - .aiwg/reports/evolution_delta_application_latest.json
+- spec_id: 163_self_improvement_runtime
+  title: 163 Self Improvement Runtime
+  status: ACTIVE
+  layer: l2_brain
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/163_self_improvement_runtime.md
+  feature_path: doc/specs/163_self_improvement_runtime.feature
+  rules_path: doc/specs/163_self_improvement_runtime.rules.json
+  physical_evidence:
+  - layers/l2_brain/self_improvement_runtime.py
+  - .aiwg/reports/self_improvement_cycle_latest.json
+  - .aiwg/reports/self_improvement_action_queue.json
+  runtime_files:
+  - layers/l2_brain/self_improvement_runtime.py
+  test_files: []
+  docs_files: []
+  script_files: []
+  data_files:
+  - .aiwg/reports/self_improvement_action_queue.json
+  - .aiwg/reports/self_improvement_cycle_latest.json
+- spec_id: 164_heartbeat_lifecycle_runtime
+  title: 164 Heartbeat Lifecycle Runtime
+  status: ACTIVE
+  layer: l2_brain
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/164_heartbeat_lifecycle_runtime.md
+  feature_path: doc/specs/164_heartbeat_lifecycle_runtime.feature
+  rules_path: doc/specs/164_heartbeat_lifecycle_runtime.rules.json
+  physical_evidence:
+  - layers/l2_brain/heartbeat_lifecycle_runtime.py
+  - .aiwg/reports/heartbeat_latest.json
+  runtime_files:
+  - layers/l2_brain/heartbeat_lifecycle_runtime.py
+  test_files: []
+  docs_files: []
+  script_files: []
+  data_files:
+  - .aiwg/reports/heartbeat_latest.json
+- spec_id: 165_heartbeat_state_store
+  title: 165 Heartbeat State Store
+  status: ACTIVE
+  layer: l2_brain
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/165_heartbeat_state_store.md
+  feature_path: doc/specs/165_heartbeat_state_store.feature
+  rules_path: doc/specs/165_heartbeat_state_store.rules.json
+  physical_evidence:
+  - layers/l2_brain/heartbeat_state_store.py
+  - .aiwg/heartbeat/heartbeat_ledger.jsonl
+  runtime_files:
+  - layers/l2_brain/heartbeat_state_store.py
+  test_files: []
+  docs_files: []
+  script_files: []
+  data_files:
+  - .aiwg/heartbeat/heartbeat_ledger.jsonl
+- spec_id: 166_heartbeat_decision_policy
+  title: 166 Heartbeat Decision Policy
+  status: ACTIVE
+  layer: l2_brain
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/166_heartbeat_decision_policy.md
+  feature_path: doc/specs/166_heartbeat_decision_policy.feature
+  rules_path: doc/specs/166_heartbeat_decision_policy.rules.json
+  physical_evidence:
+  - layers/l2_brain/heartbeat_decision_policy.py
+  - .aiwg/reports/heartbeat_decision_policy_latest.json
+  runtime_files:
+  - layers/l2_brain/heartbeat_decision_policy.py
+  test_files: []
+  docs_files: []
+  script_files: []
+  data_files:
+  - .aiwg/reports/heartbeat_decision_policy_latest.json
+- spec_id: 167_heartbeat_scheduler
+  title: 167 Heartbeat Scheduler
+  status: ACTIVE
+  layer: l2_brain
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/167_heartbeat_scheduler.md
+  feature_path: doc/specs/167_heartbeat_scheduler.feature
+  rules_path: doc/specs/167_heartbeat_scheduler.rules.json
+  physical_evidence:
+  - layers/l2_brain/heartbeat_scheduler.py
+  - .aiwg/reports/heartbeat_scheduler_latest.json
+  runtime_files:
+  - layers/l2_brain/heartbeat_scheduler.py
+  test_files: []
+  docs_files: []
+  script_files: []
+  data_files:
+  - .aiwg/reports/heartbeat_scheduler_latest.json
+- spec_id: 168_whole_body_scanner
+  title: Whole-Body Scan, Wiring Matrix, and Shadow Detector Runtime
+  status: ACTIVE
+  layer: L2
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/168_whole_body_scanner.md
+  feature_path: doc/specs/168_whole_body_scanner.feature
+  rules_path: doc/specs/168_whole_body_scanner.rules.json
+  physical_evidence:
+  - layers/l2_brain/whole_body_scanner.py
+  - layers/l2_brain/tests/test_whole_body_scanner.py
+  - layers/l2_brain/cli_control_plane.py
+  - layers/l2_brain/dummie_chat_cli.py
+  - .aiwg/schemas/whole_body_scan.schema.json
+  - .aiwg/reports/whole_body_scan_latest.json
+  - .aiwg/reports/whole_body_scan_latest.md
+  runtime_files:
+  - layers/l2_brain/cli_control_plane.py
+  - layers/l2_brain/dummie_chat_cli.py
+  - layers/l2_brain/tests/test_whole_body_scanner.py
+  - layers/l2_brain/whole_body_scanner.py
+  test_files:
+  - layers/l2_brain/tests/test_whole_body_scanner.py
+  docs_files: []
+  script_files: []
+  data_files:
+  - .aiwg/reports/whole_body_scan_latest.json
+  - .aiwg/reports/whole_body_scan_latest.md
+  - .aiwg/schemas/whole_body_scan.schema.json
+- spec_id: 169_whole_body_scan_calibrator
+  title: Whole-Body Scan Calibrator
+  status: ACTIVE
+  layer: L2
+  last_verified_on: '2026-05-17'
+  spec_path: doc/specs/169_whole_body_scan_calibrator.md
+  feature_path: doc/specs/169_whole_body_scan_calibrator.feature
+  rules_path: doc/specs/169_whole_body_scan_calibrator.rules.json
+  physical_evidence:
+  - layers/l2_brain/whole_body_scan_calibrator.py
+  - layers/l2_brain/tests/test_whole_body_scan_calibrator.py
+  - .aiwg/reports/whole_body_scan_calibration_latest.json
+  - .aiwg/reports/whole_body_scan_calibration_latest.md
+  runtime_files:
+  - layers/l2_brain/tests/test_whole_body_scan_calibrator.py
+  - layers/l2_brain/whole_body_scan_calibrator.py
+  test_files:
+  - layers/l2_brain/tests/test_whole_body_scan_calibrator.py
+  docs_files: []
+  script_files: []
+  data_files:
+  - .aiwg/reports/whole_body_scan_calibration_latest.json
+  - .aiwg/reports/whole_body_scan_calibration_latest.md
+- spec_id: 170_wiring_matrix_builder
+  title: Wiring Matrix Builder
+  status: ACTIVE
+  layer: L2
+  last_verified_on: '2026-05-17'
+  spec_path: doc/specs/170_wiring_matrix_builder.md
+  feature_path: doc/specs/170_wiring_matrix_builder.feature
+  rules_path: doc/specs/170_wiring_matrix_builder.rules.json
+  physical_evidence:
+  - layers/l2_brain/wiring_matrix_builder.py
+  - layers/l2_brain/tests/test_wiring_matrix_builder.py
+  - .aiwg/reports/wiring_matrix_latest.json
+  - .aiwg/reports/wiring_matrix_latest.md
+  runtime_files:
+  - layers/l2_brain/tests/test_wiring_matrix_builder.py
+  - layers/l2_brain/wiring_matrix_builder.py
+  test_files:
+  - layers/l2_brain/tests/test_wiring_matrix_builder.py
+  docs_files: []
+  script_files: []
+  data_files:
+  - .aiwg/reports/wiring_matrix_latest.json
+  - .aiwg/reports/wiring_matrix_latest.md
+- spec_id: 171_shadow_runtime_classifier
+  title: Shadow Runtime Classifier
+  status: ACTIVE
+  layer: L2
+  last_verified_on: '2026-05-17'
+  spec_path: doc/specs/171_shadow_runtime_classifier.md
+  feature_path: doc/specs/171_shadow_runtime_classifier.feature
+  rules_path: doc/specs/171_shadow_runtime_classifier.rules.json
+  physical_evidence:
+  - layers/l2_brain/shadow_runtime_classifier.py
+  - layers/l2_brain/tests/test_shadow_runtime_classifier.py
+  - .aiwg/reports/shadow_runtime_classification_latest.json
+  - .aiwg/reports/shadow_runtime_classification_latest.md
+  runtime_files:
+  - layers/l2_brain/shadow_runtime_classifier.py
+  - layers/l2_brain/tests/test_shadow_runtime_classifier.py
+  test_files:
+  - layers/l2_brain/tests/test_shadow_runtime_classifier.py
+  docs_files: []
+  script_files: []
+  data_files:
+  - .aiwg/reports/shadow_runtime_classification_latest.json
+  - .aiwg/reports/shadow_runtime_classification_latest.md
+- spec_id: 172_six_dimensional_context_runtime
+  title: Six-Dimensional Context Runtime
+  status: ACTIVE
+  layer: L2
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/172_six_dimensional_context_runtime.md
+  feature_path: doc/specs/172_six_dimensional_context_runtime.feature
+  rules_path: doc/specs/172_six_dimensional_context_runtime.rules.json
+  physical_evidence:
+  - layers/l2_brain/six_dimensional_context_runtime.py
+  - layers/l2_brain/tests/test_six_dimensional_context_runtime.py
+  - .aiwg/schemas/6d_context_packet.schema.json
+  - .aiwg/reports/6d_context_packet_latest.json
+  - .aiwg/reports/6d_context_packet_latest.md
+  runtime_files:
+  - layers/l2_brain/six_dimensional_context_runtime.py
+  - layers/l2_brain/tests/test_six_dimensional_context_runtime.py
+  test_files:
+  - layers/l2_brain/tests/test_six_dimensional_context_runtime.py
+  docs_files: []
+  script_files: []
+  data_files:
+  - .aiwg/reports/6d_context_packet_latest.json
+  - .aiwg/reports/6d_context_packet_latest.md
+  - .aiwg/schemas/6d_context_packet.schema.json
+- spec_id: 173_context_packet_optimizer
+  title: Context Packet Optimizer
+  status: ACTIVE
+  layer: L2
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/173_context_packet_optimizer.md
+  feature_path: doc/specs/173_context_packet_optimizer.feature
+  rules_path: doc/specs/173_context_packet_optimizer.rules.json
+  physical_evidence:
+  - layers/l2_brain/context_packet_optimizer.py
+  - layers/l2_brain/tests/test_context_packet_optimizer.py
+  - .aiwg/schemas/context_packet_optimization.schema.json
+  - .aiwg/reports/context_packet_optimization_latest.json
+  - .aiwg/reports/context_packet_optimization_latest.md
+  runtime_files:
+  - layers/l2_brain/context_packet_optimizer.py
+  - layers/l2_brain/tests/test_context_packet_optimizer.py
+  test_files:
+  - layers/l2_brain/tests/test_context_packet_optimizer.py
+  docs_files: []
+  script_files: []
+  data_files:
+  - .aiwg/reports/context_packet_optimization_latest.json
+  - .aiwg/reports/context_packet_optimization_latest.md
+  - .aiwg/schemas/context_packet_optimization.schema.json
+- spec_id: 174_embedding_memory_router
+  title: Embedding Memory Router
+  status: ACTIVE
+  layer: L2
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/174_embedding_memory_router.md
+  feature_path: doc/specs/174_embedding_memory_router.feature
+  rules_path: doc/specs/174_embedding_memory_router.rules.json
+  physical_evidence:
+  - layers/l2_brain/embedding_memory_router.py
+  - layers/l2_brain/tests/test_embedding_memory_router.py
+  - .aiwg/schemas/embedding_memory_router.schema.json
+  - .aiwg/reports/embedding_memory_router_latest.json
+  - .aiwg/reports/embedding_memory_router_latest.md
+  runtime_files:
+  - layers/l2_brain/embedding_memory_router.py
+  - layers/l2_brain/tests/test_embedding_memory_router.py
+  test_files:
+  - layers/l2_brain/tests/test_embedding_memory_router.py
+  docs_files: []
+  script_files: []
+  data_files:
+  - .aiwg/reports/embedding_memory_router_latest.json
+  - .aiwg/reports/embedding_memory_router_latest.md
+  - .aiwg/schemas/embedding_memory_router.schema.json
+- spec_id: 175_4dtes_persistence_preflight
+  title: 4D-TES Persistence Preflight
+  status: ACTIVE
+  layer: L2
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/175_4dtes_persistence_preflight.md
+  feature_path: doc/specs/175_4dtes_persistence_preflight.feature
+  rules_path: doc/specs/175_4dtes_persistence_preflight.rules.json
+  physical_evidence:
+  - layers/l2_brain/four_dtes_persistence_preflight.py
+  - layers/l2_brain/tests/test_four_dtes_persistence_preflight.py
+  - .aiwg/schemas/4dtes_persistence_preflight.schema.json
+  - .aiwg/reports/4dtes_persistence_preflight_latest.json
+  - .aiwg/reports/4dtes_persistence_preflight_latest.md
+  runtime_files:
+  - layers/l2_brain/four_dtes_persistence_preflight.py
+  - layers/l2_brain/tests/test_four_dtes_persistence_preflight.py
+  test_files:
+  - layers/l2_brain/tests/test_four_dtes_persistence_preflight.py
+  docs_files: []
+  script_files: []
+  data_files:
+  - .aiwg/reports/4dtes_persistence_preflight_latest.json
+  - .aiwg/reports/4dtes_persistence_preflight_latest.md
+  - .aiwg/schemas/4dtes_persistence_preflight.schema.json
+- spec_id: 176_daemon_gateway_heartbeat_bridge
+  title: Daemon/Gateway Heartbeat Bridge
+  status: ACTIVE
+  layer: L2
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/176_daemon_gateway_heartbeat_bridge.md
+  feature_path: doc/specs/176_daemon_gateway_heartbeat_bridge.feature
+  rules_path: doc/specs/176_daemon_gateway_heartbeat_bridge.rules.json
+  physical_evidence:
+  - layers/l2_brain/daemon_gateway_heartbeat_bridge.py
+  - layers/l2_brain/tests/test_daemon_gateway_heartbeat_bridge.py
+  - .aiwg/schemas/daemon_gateway_heartbeat_bridge.schema.json
+  - .aiwg/reports/daemon_gateway_heartbeat_bridge_latest.json
+  - .aiwg/reports/daemon_gateway_heartbeat_bridge_latest.md
+  runtime_files:
+  - layers/l2_brain/daemon_gateway_heartbeat_bridge.py
+  - layers/l2_brain/tests/test_daemon_gateway_heartbeat_bridge.py
+  test_files:
+  - layers/l2_brain/tests/test_daemon_gateway_heartbeat_bridge.py
+  docs_files: []
+  script_files: []
+  data_files:
+  - .aiwg/reports/daemon_gateway_heartbeat_bridge_latest.json
+  - .aiwg/reports/daemon_gateway_heartbeat_bridge_latest.md
+  - .aiwg/schemas/daemon_gateway_heartbeat_bridge.schema.json
+- spec_id: 177_polyglot_probe_orchestrator
+  title: Polyglot Probe Orchestrator
+  status: ACTIVE
+  layer: L2
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/177_polyglot_probe_orchestrator.md
+  feature_path: doc/specs/177_polyglot_probe_orchestrator.feature
+  rules_path: doc/specs/177_polyglot_probe_orchestrator.rules.json
+  physical_evidence:
+  - layers/l2_brain/polyglot_probe_orchestrator.py
+  - layers/l2_brain/tests/test_polyglot_probe_orchestrator.py
+  - .aiwg/schemas/polyglot_probe.schema.json
+  - .aiwg/reports/polyglot_probe_latest.json
+  - .aiwg/reports/polyglot_probe_latest.md
+  runtime_files:
+  - layers/l2_brain/polyglot_probe_orchestrator.py
+  - layers/l2_brain/tests/test_polyglot_probe_orchestrator.py
+  test_files:
+  - layers/l2_brain/tests/test_polyglot_probe_orchestrator.py
+  docs_files: []
+  script_files: []
+  data_files:
+  - .aiwg/reports/polyglot_probe_latest.json
+  - .aiwg/reports/polyglot_probe_latest.md
+  - .aiwg/schemas/polyglot_probe.schema.json
+- spec_id: 178_runtime_dependency_auditor
+  title: Runtime Dependency Auditor
+  status: ACTIVE
+  layer: L2
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/178_runtime_dependency_auditor.md
+  feature_path: doc/specs/178_runtime_dependency_auditor.feature
+  rules_path: doc/specs/178_runtime_dependency_auditor.rules.json
+  physical_evidence:
+  - layers/l2_brain/runtime_dependency_auditor.py
+  - layers/l2_brain/tests/test_runtime_dependency_auditor.py
+  - .aiwg/schemas/runtime_dependency_audit.schema.json
+  - .aiwg/reports/runtime_dependency_audit_latest.json
+  - .aiwg/reports/runtime_dependency_audit_latest.md
+  runtime_files:
+  - layers/l2_brain/runtime_dependency_auditor.py
+  - layers/l2_brain/tests/test_runtime_dependency_auditor.py
+  test_files:
+  - layers/l2_brain/tests/test_runtime_dependency_auditor.py
+  docs_files: []
+  script_files: []
+  data_files:
+  - .aiwg/reports/runtime_dependency_audit_latest.json
+  - .aiwg/reports/runtime_dependency_audit_latest.md
+  - .aiwg/schemas/runtime_dependency_audit.schema.json
+- spec_id: 179_degraded_capability_registry
+  title: Degraded Capability Registry
+  status: ACTIVE
+  layer: L2
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/179_degraded_capability_registry.md
+  feature_path: doc/specs/179_degraded_capability_registry.feature
+  rules_path: doc/specs/179_degraded_capability_registry.rules.json
+  physical_evidence:
+  - layers/l2_brain/degraded_capability_registry.py
+  - layers/l2_brain/tests/test_degraded_capability_registry.py
+  - .aiwg/schemas/degraded_capability_registry.schema.json
+  - .aiwg/reports/degraded_capability_registry_latest.json
+  - .aiwg/reports/degraded_capability_registry_latest.md
+  runtime_files:
+  - layers/l2_brain/degraded_capability_registry.py
+  - layers/l2_brain/tests/test_degraded_capability_registry.py
+  test_files:
+  - layers/l2_brain/tests/test_degraded_capability_registry.py
+  docs_files: []
+  script_files: []
+  data_files:
+  - .aiwg/reports/degraded_capability_registry_latest.json
+  - .aiwg/reports/degraded_capability_registry_latest.md
+  - .aiwg/schemas/degraded_capability_registry.schema.json
+- spec_id: 180_environment_toolchain_probe
+  title: Environment Toolchain Probe
+  status: ACTIVE
+  layer: L2
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/180_environment_toolchain_probe.md
+  feature_path: doc/specs/180_environment_toolchain_probe.feature
+  rules_path: doc/specs/180_environment_toolchain_probe.rules.json
+  physical_evidence:
+  - layers/l2_brain/environment_toolchain_probe.py
+  - layers/l2_brain/tests/test_environment_toolchain_probe.py
+  - .aiwg/schemas/environment_toolchain_probe.schema.json
+  - .aiwg/reports/environment_toolchain_probe_latest.json
+  - .aiwg/reports/environment_toolchain_probe_latest.md
+  runtime_files:
+  - layers/l2_brain/environment_toolchain_probe.py
+  - layers/l2_brain/tests/test_environment_toolchain_probe.py
+  test_files:
+  - layers/l2_brain/tests/test_environment_toolchain_probe.py
+  docs_files: []
+  script_files: []
+  data_files:
+  - .aiwg/reports/environment_toolchain_probe_latest.json
+  - .aiwg/reports/environment_toolchain_probe_latest.md
+  - .aiwg/schemas/environment_toolchain_probe.schema.json
+- spec_id: 181_runtime_closure_planner
+  title: Runtime Closure Planner
+  status: ACTIVE
+  layer: L2
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/181_runtime_closure_planner.md
+  feature_path: doc/specs/181_runtime_closure_planner.feature
+  rules_path: doc/specs/181_runtime_closure_planner.rules.json
+  physical_evidence:
+  - layers/l2_brain/runtime_closure_planner.py
+  - layers/l2_brain/tests/test_runtime_closure_planner.py
+  - .aiwg/schemas/runtime_closure_plan.schema.json
+  - .aiwg/reports/runtime_closure_plan_latest.json
+  - .aiwg/reports/runtime_closure_plan_latest.md
+  runtime_files:
+  - layers/l2_brain/runtime_closure_planner.py
+  - layers/l2_brain/tests/test_runtime_closure_planner.py
+  test_files:
+  - layers/l2_brain/tests/test_runtime_closure_planner.py
+  docs_files: []
+  script_files: []
+  data_files:
+  - .aiwg/reports/runtime_closure_plan_latest.json
+  - .aiwg/reports/runtime_closure_plan_latest.md
+  - .aiwg/schemas/runtime_closure_plan.schema.json
+- spec_id: 186_dependency_reproducibility_verifier
+  title: Dependency Reproducibility Verifier
+  status: ACTIVE
+  layer: L2
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/186_dependency_reproducibility_verifier.md
+  feature_path: doc/specs/186_dependency_reproducibility_verifier.feature
+  rules_path: doc/specs/186_dependency_reproducibility_verifier.rules.json
+  physical_evidence:
+  - layers/l2_brain/dependency_reproducibility_verifier.py
+  - layers/l2_brain/tests/test_dependency_reproducibility_verifier.py
+  - .aiwg/schemas/dependency_reproducibility.schema.json
+  - .aiwg/reports/dependency_reproducibility_latest.json
+  - .aiwg/reports/dependency_reproducibility_latest.md
+  runtime_files:
+  - layers/l2_brain/dependency_reproducibility_verifier.py
+  - layers/l2_brain/tests/test_dependency_reproducibility_verifier.py
+  test_files:
+  - layers/l2_brain/tests/test_dependency_reproducibility_verifier.py
+  docs_files: []
+  script_files: []
+  data_files:
+  - .aiwg/reports/dependency_reproducibility_latest.json
+  - .aiwg/reports/dependency_reproducibility_latest.md
+  - .aiwg/schemas/dependency_reproducibility.schema.json
+- spec_id: 187_kuzu_graph_readback_verifier
+  title: Kuzu Graph Readback Verifier
+  status: ACTIVE
+  layer: L2
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/187_kuzu_graph_readback_verifier.md
+  feature_path: doc/specs/187_kuzu_graph_readback_verifier.feature
+  rules_path: doc/specs/187_kuzu_graph_readback_verifier.rules.json
+  physical_evidence:
+  - layers/l2_brain/kuzu_graph_readback_verifier.py
+  - layers/l2_brain/tests/test_kuzu_graph_readback_verifier.py
+  - .aiwg/schemas/kuzu_graph_readback_verification.schema.json
+  - .aiwg/reports/kuzu_graph_readback_verification_latest.json
+  - .aiwg/reports/kuzu_graph_readback_verification_latest.md
+  runtime_files:
+  - layers/l2_brain/kuzu_graph_readback_verifier.py
+  - layers/l2_brain/tests/test_kuzu_graph_readback_verifier.py
+  test_files:
+  - layers/l2_brain/tests/test_kuzu_graph_readback_verifier.py
+  docs_files: []
+  script_files: []
+  data_files:
+  - .aiwg/reports/kuzu_graph_readback_verification_latest.json
+  - .aiwg/reports/kuzu_graph_readback_verification_latest.md
+  - .aiwg/schemas/kuzu_graph_readback_verification.schema.json
+- spec_id: 188_embedding_activation_verifier
+  title: Embedding Activation Verifier
+  status: ACTIVE
+  layer: L2
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/188_embedding_activation_verifier.md
+  feature_path: doc/specs/188_embedding_activation_verifier.feature
+  rules_path: doc/specs/188_embedding_activation_verifier.rules.json
+  physical_evidence:
+  - layers/l2_brain/embedding_activation_verifier.py
+  - layers/l2_brain/tests/test_embedding_activation_verifier.py
+  - .aiwg/schemas/embedding_activation_verification.schema.json
+  - .aiwg/reports/embedding_activation_verification_latest.json
+  - .aiwg/reports/embedding_activation_verification_latest.md
+  runtime_files:
+  - layers/l2_brain/embedding_activation_verifier.py
+  - layers/l2_brain/tests/test_embedding_activation_verifier.py
+  test_files:
+  - layers/l2_brain/tests/test_embedding_activation_verifier.py
+  docs_files: []
+  script_files: []
+  data_files:
+  - .aiwg/reports/embedding_activation_verification_latest.json
+  - .aiwg/reports/embedding_activation_verification_latest.md
+  - .aiwg/schemas/embedding_activation_verification.schema.json
+- spec_id: 189_capability_promotion_governor
+  title: Capability Promotion Governor
+  status: ACTIVE
+  layer: L2
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/189_capability_promotion_governor.md
+  feature_path: doc/specs/189_capability_promotion_governor.feature
+  rules_path: doc/specs/189_capability_promotion_governor.rules.json
+  physical_evidence:
+  - layers/l2_brain/capability_promotion_governor.py
+  - layers/l2_brain/tests/test_capability_promotion_governor.py
+  - .aiwg/schemas/capability_promotion_governor.schema.json
+  - .aiwg/reports/capability_promotion_governor_latest.json
+  - .aiwg/reports/capability_promotion_governor_latest.md
+  runtime_files:
+  - layers/l2_brain/capability_promotion_governor.py
+  - layers/l2_brain/tests/test_capability_promotion_governor.py
+  test_files:
+  - layers/l2_brain/tests/test_capability_promotion_governor.py
+  docs_files: []
+  script_files: []
+  data_files:
+  - .aiwg/reports/capability_promotion_governor_latest.json
+  - .aiwg/reports/capability_promotion_governor_latest.md
+  - .aiwg/schemas/capability_promotion_governor.schema.json
+- spec_id: 190_full_body_operational_auditor
+  title: Full Body Operational Auditor
+  status: ACTIVE
+  layer: L2
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/190_full_body_operational_auditor.md
+  feature_path: doc/specs/190_full_body_operational_auditor.feature
+  rules_path: doc/specs/190_full_body_operational_auditor.rules.json
+  physical_evidence:
+  - layers/l2_brain/full_body_operational_auditor.py
+  - layers/l2_brain/tests/test_full_body_operational_auditor.py
+  - .aiwg/schemas/full_body_operational_audit.schema.json
+  - .aiwg/reports/full_body_operational_audit_latest.json
+  - .aiwg/reports/full_body_operational_audit_latest.md
+  runtime_files:
+  - layers/l2_brain/full_body_operational_auditor.py
+  - layers/l2_brain/tests/test_full_body_operational_auditor.py
+  test_files:
+  - layers/l2_brain/tests/test_full_body_operational_auditor.py
+  docs_files: []
+  script_files: []
+  data_files:
+  - .aiwg/reports/full_body_operational_audit_latest.json
+  - .aiwg/reports/full_body_operational_audit_latest.md
+  - .aiwg/schemas/full_body_operational_audit.schema.json
+- spec_id: 191_whole_body_repair_queue
+  title: Whole Body Repair Queue
+  status: ACTIVE
+  layer: L2
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/191_whole_body_repair_queue.md
+  feature_path: doc/specs/191_whole_body_repair_queue.feature
+  rules_path: doc/specs/191_whole_body_repair_queue.rules.json
+  physical_evidence:
+  - layers/l2_brain/whole_body_repair_queue.py
+  - layers/l2_brain/tests/test_whole_body_repair_queue.py
+  - .aiwg/schemas/whole_body_repair_queue.schema.json
+  - .aiwg/reports/whole_body_repair_queue_latest.json
+  - .aiwg/reports/whole_body_repair_queue_latest.md
+  runtime_files:
+  - layers/l2_brain/tests/test_whole_body_repair_queue.py
+  - layers/l2_brain/whole_body_repair_queue.py
+  test_files:
+  - layers/l2_brain/tests/test_whole_body_repair_queue.py
+  docs_files: []
+  script_files: []
+  data_files:
+  - .aiwg/reports/whole_body_repair_queue_latest.json
+  - .aiwg/reports/whole_body_repair_queue_latest.md
+  - .aiwg/schemas/whole_body_repair_queue.schema.json
+- spec_id: 192_embedding_mesh_foundation
+  title: EmbeddingMesh Foundation and Repo Self-Knowledge
+  status: ACTIVE
+  layer: L2
+  last_verified_on: '2026-05-18'
+  spec_path: doc/specs/192_embedding_mesh_foundation.md
+  feature_path: doc/specs/192_embedding_mesh_foundation.feature
+  rules_path: doc/specs/192_embedding_mesh_foundation.rules.json
+  physical_evidence:
+  - layers/l2_brain/embedding_mesh/__init__.py
+  - layers/l2_brain/embedding_mesh/registry.py
+  - layers/l2_brain/embedding_mesh/router.py
+  - layers/l2_brain/embedding_mesh/providers.py
+  - layers/l2_brain/embedding_mesh/reranker.py
+  - layers/l2_brain/embedding_mesh/repo_indexer.py
+  - layers/l2_brain/embedding_mesh/hardening_matrix.py
+  - scripts/build_semantic_hardening_index.py
+  - layers/l2_brain/tests/test_embedding_mesh_contracts.py
+  - layers/l2_brain/tests/test_embedding_mesh_router.py
+  - layers/l2_brain/tests/test_semantic_hardening_index.py
+  - .aiwg/reports/semantic_repo_index_latest.json
+  - .aiwg/reports/semantic_repo_index_latest.md
+  - .aiwg/reports/semantic_hardening_matrix_latest.json
+  - .aiwg/reports/semantic_hardening_matrix_latest.md
+  runtime_files:
+  - layers/l2_brain/embedding_mesh/__init__.py
+  - layers/l2_brain/embedding_mesh/hardening_matrix.py
+  - layers/l2_brain/embedding_mesh/providers.py
+  - layers/l2_brain/embedding_mesh/registry.py
+  - layers/l2_brain/embedding_mesh/repo_indexer.py
+  - layers/l2_brain/embedding_mesh/reranker.py
+  - layers/l2_brain/embedding_mesh/router.py
+  - layers/l2_brain/tests/test_embedding_mesh_contracts.py
+  - layers/l2_brain/tests/test_embedding_mesh_router.py
+  - layers/l2_brain/tests/test_semantic_hardening_index.py
+  test_files:
+  - layers/l2_brain/tests/test_embedding_mesh_contracts.py
+  - layers/l2_brain/tests/test_embedding_mesh_router.py
+  - layers/l2_brain/tests/test_semantic_hardening_index.py
+  docs_files: []
+  script_files:
+  - scripts/build_semantic_hardening_index.py
+  data_files:
+  - .aiwg/reports/semantic_hardening_matrix_latest.json
+  - .aiwg/reports/semantic_hardening_matrix_latest.md
+  - .aiwg/reports/semantic_repo_index_latest.json
+  - .aiwg/reports/semantic_repo_index_latest.md
+- spec_id: DE-V2-L2-104
+  title: Plan V1 Cognitive Evolution Operating Layer
+  status: ACTIVE
+  layer: L2
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/104_plan_v1_cognitive_evolution_operating_layer.md
+  feature_path: doc/specs/104_plan_v1_cognitive_evolution_operating_layer.feature
+  rules_path: doc/specs/104_plan_v1_cognitive_evolution_operating_layer.rules.json
+  physical_evidence:
+  - .aiwg/evolution/PLAN_V1_COGNITIVE_EVOLUTION_OPERATING_LAYER.md
+  - .aiwg/evolution/phases.yaml
+  - .aiwg/evolution/phase_dependencies.graph.json
+  - .aiwg/evolution/long_term_objectives.yaml
+  - .aiwg/evolution/short_term_objectives.yaml
+  - .aiwg/evolution/current_position.json
+  - .aiwg/evolution/next_phase_seed.json
+  - .aiwg/evolution/phase_acceptance_contract.yaml
+  - .aiwg/evolution/roadmap_update_policy.md
+  - .aiwg/evolution/snowball_metrics.schema.json
+  runtime_files: []
+  test_files: []
+  docs_files: []
+  script_files: []
+  data_files:
+  - .aiwg/evolution/PLAN_V1_COGNITIVE_EVOLUTION_OPERATING_LAYER.md
+  - .aiwg/evolution/current_position.json
+  - .aiwg/evolution/long_term_objectives.yaml
+  - .aiwg/evolution/next_phase_seed.json
+  - .aiwg/evolution/phase_acceptance_contract.yaml
+  - .aiwg/evolution/phase_dependencies.graph.json
+  - .aiwg/evolution/phases.yaml
+  - .aiwg/evolution/roadmap_update_policy.md
+  - .aiwg/evolution/short_term_objectives.yaml
+  - .aiwg/evolution/snowball_metrics.schema.json
+- spec_id: DE-V2-L2-105
+  title: Mental Model Abstraction Layer
+  status: ACTIVE
+  layer: L2
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/105_mental_model_abstraction_layer.md
+  feature_path: doc/specs/105_mental_model_abstraction_layer.feature
+  rules_path: doc/specs/105_mental_model_abstraction_layer.rules.json
+  physical_evidence:
+  - .aiwg/mental_models/mental_model_registry.yaml
+  - .aiwg/mental_models/context_laplace_transform.md
+  - .aiwg/mental_models/context_state_space.json
+  - .aiwg/mental_models/cognitive_operating_principles.md
+  - .aiwg/context_transform/context_transform_manifest.yaml
+  - .aiwg/context_transform/context_transform_receipt.schema.json
+  - .aiwg/context_transform/per_message_operating_contract.yaml
+  runtime_files: []
+  test_files: []
+  docs_files: []
+  script_files: []
+  data_files:
+  - .aiwg/context_transform/context_transform_manifest.yaml
+  - .aiwg/context_transform/context_transform_receipt.schema.json
+  - .aiwg/context_transform/per_message_operating_contract.yaml
+  - .aiwg/mental_models/cognitive_operating_principles.md
+  - .aiwg/mental_models/context_laplace_transform.md
+  - .aiwg/mental_models/context_state_space.json
+  - .aiwg/mental_models/mental_model_registry.yaml
+- spec_id: DE-V2-L2-106
+  title: Agent Session Operating Contracts
+  status: ACTIVE
+  layer: L2
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/106_agent_session_operating_contracts.md
+  feature_path: doc/specs/106_agent_session_operating_contracts.feature
+  rules_path: doc/specs/106_agent_session_operating_contracts.rules.json
+  physical_evidence:
+  - .aiwg/session_contracts/UNIVERSAL_AGENT_SESSION_CONTRACT.md
+  - .aiwg/session_contracts/GEMINI_CLI_SESSION_CONTRACT.md
+  - .aiwg/session_contracts/CODEX_CLI_SESSION_CONTRACT.md
+  - .aiwg/session_contracts/ANTIGRAVITY_IDE_SESSION_CONTRACT.md
+  - .aiwg/context_transform/per_message_operating_contract.yaml
+  - .aiwg/evolution/current_position.json
+  - .aiwg/evolution/next_phase_seed.json
+  runtime_files: []
+  test_files: []
+  docs_files: []
+  script_files: []
+  data_files:
+  - .aiwg/context_transform/per_message_operating_contract.yaml
+  - .aiwg/evolution/current_position.json
+  - .aiwg/evolution/next_phase_seed.json
+  - .aiwg/session_contracts/ANTIGRAVITY_IDE_SESSION_CONTRACT.md
+  - .aiwg/session_contracts/CODEX_CLI_SESSION_CONTRACT.md
+  - .aiwg/session_contracts/GEMINI_CLI_SESSION_CONTRACT.md
+  - .aiwg/session_contracts/UNIVERSAL_AGENT_SESSION_CONTRACT.md
+- spec_id: DE-V2-L2-107
+  title: Cognitive Artifact Protocol
+  status: ACTIVE
+  layer: L2
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/107_cognitive_artifact_protocol.md
+  feature_path: doc/specs/107_cognitive_artifact_protocol.feature
+  rules_path: doc/specs/107_cognitive_artifact_protocol.rules.json
+  physical_evidence:
+  - .aiwg/schemas/cognitive_artifact.schema.json
+  - .aiwg/reports/plan_v1_phase_4_cognitive_artifact_protocol.md
+  - .aiwg/reports/plan_v1_phase_4_cognitive_artifact_protocol.json
+  - doc/specs/107_cognitive_artifact_protocol.md
+  - doc/specs/107_cognitive_artifact_protocol.feature
+  - doc/specs/107_cognitive_artifact_protocol.rules.json
+  runtime_files: []
+  test_files: []
+  docs_files:
+  - doc/specs/107_cognitive_artifact_protocol.feature
+  - doc/specs/107_cognitive_artifact_protocol.md
+  - doc/specs/107_cognitive_artifact_protocol.rules.json
+  script_files: []
+  data_files:
+  - .aiwg/reports/plan_v1_phase_4_cognitive_artifact_protocol.json
+  - .aiwg/reports/plan_v1_phase_4_cognitive_artifact_protocol.md
+  - .aiwg/schemas/cognitive_artifact.schema.json
+- spec_id: DE-V2-L2-108
+  title: Truth Hierarchy & Canonicality Policy
+  status: ACTIVE
+  layer: L2
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/108_truth_hierarchy_canonicality_policy.md
+  feature_path: doc/specs/108_truth_hierarchy_canonicality_policy.feature
+  rules_path: doc/specs/108_truth_hierarchy_canonicality_policy.rules.json
+  physical_evidence:
+  - .aiwg/schemas/truth_hierarchy.schema.json
+  - .aiwg/reports/plan_v1_phase_5_truth_hierarchy_policy.md
+  - .aiwg/reports/plan_v1_phase_5_truth_hierarchy_policy.json
+  - doc/specs/108_truth_hierarchy_canonicality_policy.md
+  - doc/specs/108_truth_hierarchy_canonicality_policy.feature
+  - doc/specs/108_truth_hierarchy_canonicality_policy.rules.json
+  runtime_files: []
+  test_files: []
+  docs_files:
+  - doc/specs/108_truth_hierarchy_canonicality_policy.feature
+  - doc/specs/108_truth_hierarchy_canonicality_policy.md
+  - doc/specs/108_truth_hierarchy_canonicality_policy.rules.json
+  script_files: []
+  data_files:
+  - .aiwg/reports/plan_v1_phase_5_truth_hierarchy_policy.json
+  - .aiwg/reports/plan_v1_phase_5_truth_hierarchy_policy.md
+  - .aiwg/schemas/truth_hierarchy.schema.json
+- spec_id: DE-V2-L2-109
+  title: PolyglotArchitectureRegistry
+  status: ACTIVE
+  layer: L2
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/109_polyglot_architecture_registry.md
+  feature_path: doc/specs/109_polyglot_architecture_registry.feature
+  rules_path: doc/specs/109_polyglot_architecture_registry.rules.json
+  physical_evidence:
+  - .aiwg/architecture/polyglot_architecture_registry.yaml
+  - .aiwg/architecture/layer_language_map.json
+  - .aiwg/schemas/polyglot_architecture_registry.schema.json
+  - .aiwg/reports/plan_v1_phase_6_polyglot_architecture_registry.md
+  - .aiwg/reports/plan_v1_phase_6_polyglot_architecture_registry.json
+  - doc/specs/109_polyglot_architecture_registry.md
+  - doc/specs/109_polyglot_architecture_registry.feature
+  - doc/specs/109_polyglot_architecture_registry.rules.json
+  runtime_files: []
+  test_files: []
+  docs_files:
+  - doc/specs/109_polyglot_architecture_registry.feature
+  - doc/specs/109_polyglot_architecture_registry.md
+  - doc/specs/109_polyglot_architecture_registry.rules.json
+  script_files: []
+  data_files:
+  - .aiwg/architecture/layer_language_map.json
+  - .aiwg/architecture/polyglot_architecture_registry.yaml
+  - .aiwg/reports/plan_v1_phase_6_polyglot_architecture_registry.json
+  - .aiwg/reports/plan_v1_phase_6_polyglot_architecture_registry.md
+  - .aiwg/schemas/polyglot_architecture_registry.schema.json
+- spec_id: DE-V2-L2-110
+  title: ProjectWorldModel
+  status: ACTIVE
+  layer: L2
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/110_project_world_model.md
+  feature_path: doc/specs/110_project_world_model.feature
+  rules_path: doc/specs/110_project_world_model.rules.json
+  physical_evidence:
+  - .aiwg/world_model/project_world_model.json
+  - .aiwg/world_model/project_world_model.md
+  - .aiwg/schemas/project_world_model.schema.json
+  - .aiwg/reports/plan_v1_phase_7_project_world_model.md
+  - .aiwg/reports/plan_v1_phase_7_project_world_model.json
+  - doc/specs/110_project_world_model.md
+  - doc/specs/110_project_world_model.feature
+  - doc/specs/110_project_world_model.rules.json
+  runtime_files: []
+  test_files: []
+  docs_files:
+  - doc/specs/110_project_world_model.feature
+  - doc/specs/110_project_world_model.md
+  - doc/specs/110_project_world_model.rules.json
+  script_files: []
+  data_files:
+  - .aiwg/reports/plan_v1_phase_7_project_world_model.json
+  - .aiwg/reports/plan_v1_phase_7_project_world_model.md
+  - .aiwg/schemas/project_world_model.schema.json
+  - .aiwg/world_model/project_world_model.json
+  - .aiwg/world_model/project_world_model.md
+- spec_id: DE-V2-L2-111
+  title: SpecCoverageGate
+  status: ACTIVE
+  layer: L2
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/111_spec_coverage_gate.md
+  feature_path: doc/specs/111_spec_coverage_gate.feature
+  rules_path: doc/specs/111_spec_coverage_gate.rules.json
+  physical_evidence:
+  - .aiwg/reports/spec_coverage_matrix.json
+  - .aiwg/schemas/spec_coverage_gate.schema.json
+  - .aiwg/reports/plan_v1_phase_8_spec_coverage_gate.md
+  - .aiwg/reports/plan_v1_phase_8_spec_coverage_gate.json
+  - doc/specs/111_spec_coverage_gate.md
+  - doc/specs/111_spec_coverage_gate.feature
+  - doc/specs/111_spec_coverage_gate.rules.json
+  runtime_files: []
+  test_files: []
+  docs_files:
+  - doc/specs/111_spec_coverage_gate.feature
+  - doc/specs/111_spec_coverage_gate.md
+  - doc/specs/111_spec_coverage_gate.rules.json
+  script_files: []
+  data_files:
+  - .aiwg/reports/plan_v1_phase_8_spec_coverage_gate.json
+  - .aiwg/reports/plan_v1_phase_8_spec_coverage_gate.md
+  - .aiwg/reports/spec_coverage_matrix.json
+  - .aiwg/schemas/spec_coverage_gate.schema.json
+- spec_id: DE-V2-L2-112
+  title: FolderNotes + NotePlans
+  status: ACTIVE
+  layer: L2
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/112_folder_notes_noteplans.md
+  feature_path: doc/specs/112_folder_notes_noteplans.feature
+  rules_path: doc/specs/112_folder_notes_noteplans.rules.json
+  physical_evidence:
+  - .aiwg/notes/folder_notes_manifest.json
+  - .aiwg/notes/folders/README.md
+  - .aiwg/notes/folders/evolution/notes.md
+  - .aiwg/notes/folders/evolution/noteplan.md
+  - .aiwg/schemas/folder_note.schema.json
+  - .aiwg/schemas/noteplan.schema.json
+  - .aiwg/reports/plan_v1_phase_9_folder_notes_noteplans.md
+  - .aiwg/reports/plan_v1_phase_9_folder_notes_noteplans.json
+  - doc/specs/112_folder_notes_noteplans.md
+  - doc/specs/112_folder_notes_noteplans.feature
+  - doc/specs/112_folder_notes_noteplans.rules.json
+  runtime_files: []
+  test_files: []
+  docs_files:
+  - doc/specs/112_folder_notes_noteplans.feature
+  - doc/specs/112_folder_notes_noteplans.md
+  - doc/specs/112_folder_notes_noteplans.rules.json
+  script_files: []
+  data_files:
+  - .aiwg/notes/folder_notes_manifest.json
+  - .aiwg/notes/folders/README.md
+  - .aiwg/notes/folders/evolution/noteplan.md
+  - .aiwg/notes/folders/evolution/notes.md
+  - .aiwg/reports/plan_v1_phase_9_folder_notes_noteplans.json
+  - .aiwg/reports/plan_v1_phase_9_folder_notes_noteplans.md
+  - .aiwg/schemas/folder_note.schema.json
+  - .aiwg/schemas/noteplan.schema.json
+- spec_id: DE-V2-L2-113
+  title: PromptFrameBuilder
+  status: ACTIVE
+  layer: L2
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/113_prompt_frame_builder.md
+  feature_path: doc/specs/113_prompt_frame_builder.feature
+  rules_path: doc/specs/113_prompt_frame_builder.rules.json
+  physical_evidence:
+  - layers/l2_brain/prompt_frame_builder.py
+  - .aiwg/reports/prompt_frame_latest.json
+  - .aiwg/reports/context_quant_result_latest.json
+  - .aiwg/reports/context_receipt_latest.json
+  runtime_files:
+  - layers/l2_brain/prompt_frame_builder.py
+  test_files: []
+  docs_files: []
+  script_files: []
+  data_files:
+  - .aiwg/reports/context_quant_result_latest.json
+  - .aiwg/reports/context_receipt_latest.json
+  - .aiwg/reports/prompt_frame_latest.json
+- spec_id: DE-V2-L2-114
+  title: PromptCacheLedger
+  status: ACTIVE
+  layer: L2
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/114_prompt_cache_ledger.md
+  feature_path: doc/specs/114_prompt_cache_ledger.feature
+  rules_path: doc/specs/114_prompt_cache_ledger.rules.json
+  physical_evidence:
+  - layers/l2_brain/prompt_cache_ledger.py
+  - .aiwg/prompt_cache/prompt_cache_ledger.jsonl
+  - .aiwg/reports/prompt_cache_summary_latest.json
+  runtime_files:
+  - layers/l2_brain/prompt_cache_ledger.py
+  test_files: []
+  docs_files: []
+  script_files: []
+  data_files:
+  - .aiwg/prompt_cache/prompt_cache_ledger.jsonl
+  - .aiwg/reports/prompt_cache_summary_latest.json
+- spec_id: DE-V2-L2-115
+  title: RestartIntegrationGate + ContextEfficiencyBenchmark
+  status: ACTIVE
+  layer: L2
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/115_restart_context_efficiency_gate.md
+  feature_path: doc/specs/115_restart_context_efficiency_gate.feature
+  rules_path: doc/specs/115_restart_context_efficiency_gate.rules.json
+  physical_evidence:
+  - layers/l2_brain/restart_integration_gate.py
+  - layers/l2_brain/context_efficiency_benchmark.py
+  - .aiwg/reports/restart_integration_gate_latest.json
+  - .aiwg/reports/context_efficiency_benchmark_latest.json
+  runtime_files:
+  - layers/l2_brain/context_efficiency_benchmark.py
+  - layers/l2_brain/restart_integration_gate.py
+  test_files: []
+  docs_files: []
+  script_files: []
+  data_files:
+  - .aiwg/reports/context_efficiency_benchmark_latest.json
+  - .aiwg/reports/restart_integration_gate_latest.json
+- spec_id: DE-V2-L2-116
+  title: EvolutionFlywheelRuntime
+  status: ACTIVE
+  layer: L2
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/116_evolution_flywheel_runtime.md
+  feature_path: doc/specs/116_evolution_flywheel_runtime.feature
+  rules_path: doc/specs/116_evolution_flywheel_runtime.rules.json
+  physical_evidence:
+  - layers/l2_brain/evolution_flywheel_runtime.py
+  - .aiwg/reports/evolution_flywheel_latest.json
+  - .aiwg/reports/restart_integration_gate_latest.json
+  - .aiwg/reports/context_efficiency_benchmark_latest.json
+  runtime_files:
+  - layers/l2_brain/evolution_flywheel_runtime.py
+  test_files: []
+  docs_files: []
+  script_files: []
+  data_files:
+  - .aiwg/reports/context_efficiency_benchmark_latest.json
+  - .aiwg/reports/evolution_flywheel_latest.json
+  - .aiwg/reports/restart_integration_gate_latest.json
+- spec_id: DE-V2-L2-117
+  title: CLI Control Plane
+  status: ACTIVE
+  layer: L2
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/117_cli_control_plane.md
+  feature_path: doc/specs/117_cli_control_plane.feature
+  rules_path: doc/specs/117_cli_control_plane.rules.json
+  physical_evidence:
+  - layers/l2_brain/cli_control_plane.py
+  - .aiwg/reports/cli_control_plane_latest.json
+  - layers/l2_brain/tests/test_cli_control_plane.py
+  runtime_files:
+  - layers/l2_brain/cli_control_plane.py
+  - layers/l2_brain/tests/test_cli_control_plane.py
+  test_files:
+  - layers/l2_brain/tests/test_cli_control_plane.py
+  docs_files: []
+  script_files: []
+  data_files:
+  - .aiwg/reports/cli_control_plane_latest.json
+- spec_id: DE-V2-L2-118
+  title: TUI Process Monitor
+  status: ACTIVE
+  layer: L2
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/118_tui_process_monitor.md
+  feature_path: doc/specs/118_tui_process_monitor.feature
+  rules_path: doc/specs/118_tui_process_monitor.rules.json
+  physical_evidence:
+  - layers/l2_brain/tui_process_monitor.py
+  - .aiwg/reports/process_monitor_latest.json
+  - .aiwg/reports/process_monitor_latest.txt
+  runtime_files:
+  - layers/l2_brain/tui_process_monitor.py
+  test_files: []
+  docs_files: []
+  script_files: []
+  data_files:
+  - .aiwg/reports/process_monitor_latest.json
+  - .aiwg/reports/process_monitor_latest.txt
+- spec_id: DE-V2-L2-119
+  title: Dashboard L6
+  status: ACTIVE
+  layer: L6
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/119_dashboard_l6.md
+  feature_path: doc/specs/119_dashboard_l6.feature
+  rules_path: doc/specs/119_dashboard_l6.rules.json
+  physical_evidence:
+  - layers/l6_skin/dashboard_renderer.py
+  - .aiwg/reports/dashboard_l6_latest.json
+  - .aiwg/reports/dashboard_l6_latest.html
+  runtime_files:
+  - layers/l6_skin/dashboard_renderer.py
+  test_files: []
+  docs_files: []
+  script_files: []
+  data_files:
+  - .aiwg/reports/dashboard_l6_latest.html
+  - .aiwg/reports/dashboard_l6_latest.json
+- spec_id: DE-V2-L2-120
+  title: LocalContextCompressor
+  status: ACTIVE
+  layer: L2
+  last_verified_on: '2026-05-16'
+  spec_path: doc/specs/120_local_context_compressor.md
+  feature_path: doc/specs/120_local_context_compressor.feature
+  rules_path: doc/specs/120_local_context_compressor.rules.json
+  physical_evidence:
+  - layers/l2_brain/local_context_compressor.py
+  - .aiwg/reports/local_context_compression_latest.json
+  - layers/l2_brain/tests/test_local_context_compressor.py
+  runtime_files:
+  - layers/l2_brain/local_context_compressor.py
+  - layers/l2_brain/tests/test_local_context_compressor.py
+  test_files:
+  - layers/l2_brain/tests/test_local_context_compressor.py
+  docs_files: []
+  script_files: []
+  data_files:
+  - .aiwg/reports/local_context_compression_latest.json
+- spec_id: DE-V2-L2-200
+  title: Model Capability and Routing Engine
+  status: ACTIVE
+  layer: L2
+  last_verified_on: '2026-05-24'
+  spec_path: doc/specs/200_model_capability_and_routing.md
+  feature_path: doc/specs/200_model_capability_and_routing.feature
+  rules_path: doc/specs/200_model_capability_and_routing.rules.json
+  physical_evidence:
+  - layers/l2_brain/src/brain/domain/capability_registry.py
+  - layers/l2_brain/src/brain/application/services/model_router.py
+  - layers/l2_brain/src/brain/application/use_cases/orchestrator.py
+  - layers/l2_brain/tests/test_capability_registry.py
+  - layers/l2_brain/tests/test_model_router_v2.py
+  runtime_files:
+  - layers/l2_brain/src/brain/application/services/model_router.py
+  - layers/l2_brain/src/brain/application/use_cases/orchestrator.py
+  - layers/l2_brain/src/brain/domain/capability_registry.py
+  - layers/l2_brain/tests/test_capability_registry.py
+  - layers/l2_brain/tests/test_model_router_v2.py
+  test_files:
+  - layers/l2_brain/tests/test_capability_registry.py
+  - layers/l2_brain/tests/test_model_router_v2.py
+  docs_files: []
+  script_files: []
+  data_files: []
+- spec_id: DE-V2-L2-201
+  title: Canonical Spec Binding Registry
+  status: ACTIVE
+  layer: L2
+  last_verified_on: '2026-05-19'
+  spec_path: doc/specs/201_canonical_spec_binding_registry.md
+  feature_path: doc/specs/201_canonical_spec_binding_registry.feature
+  rules_path: doc/specs/201_canonical_spec_binding_registry.rules.json
+  physical_evidence:
+  - scripts/spec_registry_sync.py
+  - .aiwg/spec_registry/spec_bindings.yaml
+  - .aiwg/reports/spec_registry_sync_latest.json
+  - scripts/dummie-ctl
+  - tests/test_spec_registry_sync.py
+  - doc/specs/201_canonical_spec_binding_registry.md
+  - doc/specs/201_canonical_spec_binding_registry.feature
+  - doc/specs/201_canonical_spec_binding_registry.rules.json
+  runtime_files: []
+  test_files:
+  - tests/test_spec_registry_sync.py
+  docs_files:
+  - doc/specs/201_canonical_spec_binding_registry.feature
+  - doc/specs/201_canonical_spec_binding_registry.md
+  - doc/specs/201_canonical_spec_binding_registry.rules.json
+  script_files:
+  - scripts/dummie-ctl
+  - scripts/spec_registry_sync.py
+  data_files:
+  - .aiwg/reports/spec_registry_sync_latest.json
+  - .aiwg/spec_registry/spec_bindings.yaml
+- spec_id: DE-V2-L2-202
+  title: Runtime Lifecycle Chat Contract
+  status: ACTIVE
+  layer: L2
+  last_verified_on: '2026-05-19'
+  spec_path: doc/specs/202_runtime_lifecycle_chat_contract.md
+  feature_path: doc/specs/202_runtime_lifecycle_chat_contract.feature
+  rules_path: doc/specs/202_runtime_lifecycle_chat_contract.rules.json
+  physical_evidence:
+  - dummie/runtime_chat.py
+  - tests/test_dummie_engine.py
+  - tests/test_dummie_cli.py
+  - .aiwg/reports/runtime_chat_latest.json
+  - .aiwg/reports/runtime_chat_trace_latest.json
+  - .aiwg/runtime/runtime_chat_registry.yaml
+  - doc/specs/202_runtime_lifecycle_chat_contract.md
+  - doc/specs/202_runtime_lifecycle_chat_contract.feature
+  - doc/specs/202_runtime_lifecycle_chat_contract.rules.json
+  runtime_files:
+  - dummie/runtime_chat.py
+  test_files:
+  - tests/test_dummie_cli.py
+  - tests/test_dummie_engine.py
+  docs_files:
+  - doc/specs/202_runtime_lifecycle_chat_contract.feature
+  - doc/specs/202_runtime_lifecycle_chat_contract.md
+  - doc/specs/202_runtime_lifecycle_chat_contract.rules.json
+  script_files: []
+  data_files:
+  - .aiwg/reports/runtime_chat_latest.json
+  - .aiwg/reports/runtime_chat_trace_latest.json
+  - .aiwg/runtime/runtime_chat_registry.yaml
+errors:
+- 'doc/specs/113_prompt_frame_builder.md: missing evidence path `layers/l2_brain/prompt_frame_builder.py`'
+- 'doc/specs/114_prompt_cache_ledger.md: missing evidence path `layers/l2_brain/prompt_cache_ledger.py`'
+- 'doc/specs/115_restart_context_efficiency_gate.md: missing evidence path `layers/l2_brain/restart_integration_gate.py`'
+- 'doc/specs/115_restart_context_efficiency_gate.md: missing evidence path `layers/l2_brain/context_efficiency_benchmark.py`'
+- 'doc/specs/116_evolution_flywheel_runtime.md: missing evidence path `layers/l2_brain/evolution_flywheel_runtime.py`'
+- 'doc/specs/117_cli_control_plane.md: missing evidence path `layers/l2_brain/cli_control_plane.py`'
+- 'doc/specs/118_tui_process_monitor.md: missing evidence path `layers/l2_brain/tui_process_monitor.py`'
+- 'doc/specs/120_local_context_compressor.md: missing evidence path `layers/l2_brain/local_context_compressor.py`'
+- 'doc/specs/146_readiness_score_calibrator.md: missing evidence path `layers/l2_brain/readiness_score_calibrator.py`'
+- 'doc/specs/147_memory_spine_entrypoint.md: missing evidence path `layers/l2_brain/memory_spine_entrypoint.py`'
+- 'doc/specs/148_token_economy_benchmark.md: missing evidence path `layers/l2_brain/token_economy_benchmark.py`'
+- 'doc/specs/149_entrypoint_enforcement_auditor.md: missing evidence path `layers/l2_brain/entrypoint_enforcement_auditor.py`'
+- 'doc/specs/150_mental_model_runtime.md: missing evidence path `layers/l2_brain/mental_model_runtime.py`'
+- 'doc/specs/151_semantic_ontology_mapper.md: missing evidence path `layers/l2_brain/semantic_ontology_mapper.py`'
+- 'doc/specs/152_cognitive_frame_builder.md: missing evidence path `layers/l2_brain/cognitive_frame_builder.py`'
+- 'doc/specs/153_metacognitive_loop_runtime.md: missing evidence path `layers/l2_brain/metacognitive_loop_runtime.py`'
+- 'doc/specs/154_mental_model_store.md: missing evidence path `layers/l2_brain/mental_model_store.py`'
+- 'doc/specs/155_metacognitive_quality_gate.md: missing evidence path `layers/l2_brain/metacognitive_quality_gate.py`'
+- 'doc/specs/156_epistemic_state_runtime.md: missing evidence path `layers/l2_brain/epistemic_state_runtime.py`'
+- 'doc/specs/157_dialectical_reasoning_runtime.md: missing evidence path `layers/l2_brain/dialectical_reasoning_runtime.py`'
+- 'doc/specs/158_philosophical_ontology_runtime.md: missing evidence path `layers/l2_brain/philosophical_ontology_runtime.py`'
+- 'doc/specs/159_cognitive_bias_detector.md: missing evidence path `layers/l2_brain/cognitive_bias_detector.py`'
+- 'doc/specs/160_metacognitive_evolution_flywheel.md: missing evidence path `layers/l2_brain/metacognitive_evolution_flywheel.py`'
+- 'doc/specs/161_mental_model_truth_hygiene.md: missing evidence path `layers/l2_brain/mental_model_truth_hygiene.py`'
+- 'doc/specs/162_evolution_delta_applier.md: missing evidence path `layers/l2_brain/evolution_delta_applier.py`'
+- 'doc/specs/163_self_improvement_runtime.md: missing evidence path `layers/l2_brain/self_improvement_runtime.py`'
+- 'doc/specs/164_heartbeat_lifecycle_runtime.md: missing evidence path `layers/l2_brain/heartbeat_lifecycle_runtime.py`'
+- 'doc/specs/165_heartbeat_state_store.md: missing evidence path `layers/l2_brain/heartbeat_state_store.py`'
+- 'doc/specs/166_heartbeat_decision_policy.md: missing evidence path `layers/l2_brain/heartbeat_decision_policy.py`'
+- 'doc/specs/167_heartbeat_scheduler.md: missing evidence path `layers/l2_brain/heartbeat_scheduler.py`'
+- 'doc/specs/168_whole_body_scanner.md: missing evidence path `layers/l2_brain/whole_body_scanner.py`'
+- 'doc/specs/168_whole_body_scanner.md: missing evidence path `layers/l2_brain/cli_control_plane.py`'
+- 'doc/specs/168_whole_body_scanner.md: missing evidence path `layers/l2_brain/dummie_chat_cli.py`'
+- 'doc/specs/169_whole_body_scan_calibrator.md: missing evidence path `layers/l2_brain/whole_body_scan_calibrator.py`'
+- 'doc/specs/170_wiring_matrix_builder.md: missing evidence path `layers/l2_brain/wiring_matrix_builder.py`'
+- 'doc/specs/171_shadow_runtime_classifier.md: missing evidence path `layers/l2_brain/shadow_runtime_classifier.py`'
+- 'doc/specs/172_six_dimensional_context_runtime.md: missing evidence path `layers/l2_brain/six_dimensional_context_runtime.py`'
+- 'doc/specs/173_context_packet_optimizer.md: missing evidence path `layers/l2_brain/context_packet_optimizer.py`'
+- 'doc/specs/174_embedding_memory_router.md: missing evidence path `layers/l2_brain/embedding_memory_router.py`'
+- 'doc/specs/175_4dtes_persistence_preflight.md: missing evidence path `layers/l2_brain/four_dtes_persistence_preflight.py`'
+- 'doc/specs/176_daemon_gateway_heartbeat_bridge.md: missing evidence path `layers/l2_brain/daemon_gateway_heartbeat_bridge.py`'
+- 'doc/specs/177_polyglot_probe_orchestrator.md: missing evidence path `layers/l2_brain/polyglot_probe_orchestrator.py`'
+- 'doc/specs/178_runtime_dependency_auditor.md: missing evidence path `layers/l2_brain/runtime_dependency_auditor.py`'
+- 'doc/specs/179_degraded_capability_registry.md: missing evidence path `layers/l2_brain/degraded_capability_registry.py`'
+- 'doc/specs/180_environment_toolchain_probe.md: missing evidence path `layers/l2_brain/environment_toolchain_probe.py`'
+- 'doc/specs/181_runtime_closure_planner.md: missing evidence path `layers/l2_brain/runtime_closure_planner.py`'
+- 'doc/specs/186_dependency_reproducibility_verifier.md: missing evidence path `layers/l2_brain/dependency_reproducibility_verifier.py`'
+- 'doc/specs/187_kuzu_graph_readback_verifier.md: missing evidence path `layers/l2_brain/kuzu_graph_readback_verifier.py`'
+- 'doc/specs/188_embedding_activation_verifier.md: missing evidence path `layers/l2_brain/embedding_activation_verifier.py`'
+- 'doc/specs/189_capability_promotion_governor.md: missing evidence path `layers/l2_brain/capability_promotion_governor.py`'
+- 'doc/specs/190_full_body_operational_auditor.md: missing evidence path `layers/l2_brain/full_body_operational_auditor.py`'
+- 'doc/specs/191_whole_body_repair_queue.md: missing evidence path `layers/l2_brain/whole_body_repair_queue.py`'
+- 'doc/specs/192_embedding_mesh_foundation.md: missing evidence path `layers/l2_brain/embedding_mesh/__init__.py`'
+- 'doc/specs/192_embedding_mesh_foundation.md: missing evidence path `layers/l2_brain/embedding_mesh/registry.py`'
+- 'doc/specs/192_embedding_mesh_foundation.md: missing evidence path `layers/l2_brain/embedding_mesh/router.py`'
+- 'doc/specs/192_embedding_mesh_foundation.md: missing evidence path `layers/l2_brain/embedding_mesh/providers.py`'
+- 'doc/specs/192_embedding_mesh_foundation.md: missing evidence path `layers/l2_brain/embedding_mesh/reranker.py`'
+- 'doc/specs/192_embedding_mesh_foundation.md: missing evidence path `layers/l2_brain/embedding_mesh/repo_indexer.py`'
+- 'doc/specs/192_embedding_mesh_foundation.md: missing evidence path `layers/l2_brain/embedding_mesh/hardening_matrix.py`'

@@ -34,6 +34,8 @@
 - `doc/specs/51_model_contracts_alignment.md`
 - `doc/specs/81_phase_ledger.md`
 - `doc/specs/82_long_running_mission_runtime.md`
+- `doc/specs/201_canonical_spec_binding_registry.md`
+- `doc/specs/202_runtime_lifecycle_chat_contract.md`
 
 ## Especificaciones roadmap (PROPOSED)
 - `doc/specs/27_floating_session_state.md`
