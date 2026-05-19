@@ -1,41 +1,43 @@
-# Active Pack Contract — PACK_3.1_MERGE_GATE
+# Active Pack Contract — PACK_3.2
 
-* **Pack ID**: `PACK_3.1_MERGE_GATE`
-* **Title**: `Hybrid+ Reranker Main Closure & AIWG Kernel Integration`
-* **Objective**: Cerrar definitivamente el Pack 3.1 en main y asegurar el gobierno via el Execution Kernel de `.aiwg`.
+* **Pack ID**: `PACK_3.2`
+* **Title**: `CODE Embedding Provider`
+* **Objective**: Separar el espacio vectorial de texto del espacio de código y sintaxis abstracta.
 
 ---
 
 ## Plan and Boundaries
 
 ### Short-Term Goal
-Integrar el Execution Kernel de gobierno vial `.aiwg` y consolidar tests de resiliencia.
+Implementar el proveedor de embeddings de CODE para separar el espacio vectorial de texto.
 
 ### Why Now?
-Es imperativo evitar la fragmentación de sub-parches de desarrollo en ramas paralelas y tener métricas acumulativas.
+Para evitar la colisión semántica entre lenguaje natural y sintaxis de código.
 
 ### Out of Scope
-* Iniciar Pack 3.2.
+* Iniciar Pack 3.3.
 
 ---
 
 ## Constraints & Requirements
 
 ### Files Expected to Change
-* `scripts/aiwg_pack_guard.py`
-* `layers/l2_brain/tests/test_aiwg_pack_guard.py`
+* `layers/l2_brain/ast_indexer.py`
 
 ### Files Forbidden to Change
 * `layers/l2_brain/embedding_mesh/reranker.py`
 * `layers/l2_brain/embedding_mesh/contracts.py`
 
 ### Required Tests
-* `layers/l2_brain/tests/test_aiwg_pack_guard.py`
+* `layers/l2_brain/tests/test_structural_hardening_contracts.py`
 
 ---
 
 ## Risks & Fallbacks
 
-* **Regression Risks**: Errores de sintaxis o import en los validadores del pack guard.
-* **Rollback Plan**: Revertir cambios estructurales de los scripts de `.aiwg`.
-* **Stop Conditions**: No iniciar Pack 3.2 hasta haber completado el merge de Pack 3.1 e implementar el guard de gobierno.
+* **Regression Risks**: Duplicación de caché vectorial en memoria.
+* **Rollback Plan**: revertir cambios de Pack 3.2
+* **Stop Conditions**: 
+  - no iniciar si preflight falla
+  - si TEXT_FAST se degrada
+  - si CODE vector space mezcla con TEXT_FAST

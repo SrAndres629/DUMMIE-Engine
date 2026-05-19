@@ -21,7 +21,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install pytest pytest-mock kuzu pyarrow
+        pip install pytest pytest-mock kuzu pyarrow fastembed
         # If there are local setup needs or requirements, run them here
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
@@ -35,7 +35,7 @@ jobs:
 
     - name: Run Embedding Mesh Regression Suite
       run: |
-        PYTHONPATH=. pytest layers/l2_brain/tests/test_embedding_mesh_contracts.py
+        PYTHONPATH=. pytest layers/l2_brain/tests/test_embedding_mesh_contracts.py layers/l2_brain/tests/test_embedding_mesh_router.py layers/l2_brain/tests/test_semantic_hardening_index.py
 
     - name: Run Specs and Docs Validation
       run: |

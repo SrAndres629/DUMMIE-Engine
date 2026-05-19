@@ -1,16 +1,15 @@
 {
-  "pack_id": "AIWG_KERNEL_0.2",
-  "pack_title": "AIWG Kernel Hardening 0.2 — Execution Evidence Runner",
-  "objective": "Crear un runner automatizado que ejecute validaciones requeridas, capture evidencias reales y actualice el ledger de evidencias de forma determinista.",
+  "pack_id": "PACK_3.2",
+  "pack_title": "CODE Embedding Provider",
+  "objective": "Separar el espacio vectorial de texto del espacio de código y sintaxis abstracta.",
   "long_term_objective_link": "long_term_objectives.json",
-  "short_term_goal": "Eliminar la dependencia declarativa de los agentes permitiendo al kernel ejecutar los comandos de validación física por sí mismo y capturar stdout/stderr.",
-  "why_now": "Es imperativo contar con un registro físico de ejecución e inyección de variables de entorno seguras antes de proceder con packs que modifiquen el código de la aplicación.",
+  "short_term_goal": "Implementar el proveedor de embeddings de CODE para separar el espacio vectorial de texto.",
+  "why_now": "Para evitar la colisión semántica entre lenguaje natural y sintaxis de código.",
   "not_in_scope": [
-    "Iniciar Pack 3.2"
+    "Iniciar Pack 3.3"
   ],
   "files_expected_to_change": [
-    "scripts/aiwg_pack_guard.py",
-    "layers/l2_brain/tests/test_aiwg_pack_guard.py"
+    "layers/l2_brain/ast_indexer.py"
   ],
   "files_forbidden_to_change": [
     "layers/l2_brain/embedding_mesh/reranker.py",
@@ -21,7 +20,7 @@
     "python3 scripts/validate_specs_docs.py"
   ],
   "tests_required": [
-    "layers/l2_brain/tests/test_aiwg_pack_guard.py"
+    "layers/l2_brain/tests/test_structural_hardening_contracts.py"
   ],
   "metrics_before": {
     "degraded_embeddings": 717
@@ -29,16 +28,18 @@
   "expected_metrics_after": {
     "degraded_embeddings": 717
   },
-  "regression_risks": "Desviación o falla en la captura de flujos stderr y desincronizaciones de commit.",
-  "known_blindspots": "Comportamiento del subproceso runner en entornos no persistentes.",
+  "regression_risks": "Duplicación de caché vectorial en memoria.",
+  "known_blindspots": "Carga de memoria de múltiples modelos.",
   "acceptance_criteria": [
-    "El comando run-required ejecuta satisfactoriamente pytest y validate_specs_docs, guardando los logs correspondientes en validation_logs/.",
-    "El comando closeout rechaza evidencias que no provengan del runner o tengan un commit diferente a HEAD.",
-    "No se permite el uso de python3 directo para scripts críticos del índice semántico."
+    "Consultas sintácticas devuelven resultados del parser sintáctico AST y no del corpus textual genérico."
   ],
-  "rollback_plan": "Revertir cambios de scripts/aiwg_pack_guard.py y tests asociados.",
-  "auto_continue_allowed": false,
+  "rollback_plan": "revertir cambios de Pack 3.2",
+  "auto_continue_allowed": true,
+  "status": "NEXT_READY",
+  "execute_now": true,
   "stop_conditions": [
-    "No iniciar Pack 3.2 hasta haber endurecido el kernel y pasado satisfactoriamente las compuertas de gobernanza."
+    "no iniciar si preflight falla",
+    "si TEXT_FAST se degrada",
+    "si CODE vector space mezcla con TEXT_FAST"
   ]
 }

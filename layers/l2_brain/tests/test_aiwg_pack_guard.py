@@ -570,3 +570,41 @@ def test_pre_pack_check_skip_prevention(tmp_path, monkeypatch):
     with pytest.raises(SystemExit) as excinfo:
         guard.run_preflight(None)
     assert excinfo.value.code != 0
+
+def test_aiwg_kernel_freeze_consistency():
+    """Assert that AIWG Governance Kernel Freeze parameters are fully consistent."""
+    # 1. Assert file paths exist
+    assert os.path.exists(STATE_TRUTH), "current_truth.json must exist"
+    assert os.path.exists(ACTIVE_PACK), "active_pack.json must exist"
+    
+    # 2. Read state files
+    with open(STATE_TRUTH, "r", encoding="utf-8") as f:
+        truth = json.load(f)
+    with open(ACTIVE_PACK, "r", encoding="utf-8") as f:
+        active = json.load(f)
+        
+    # 3. Assert current_truth values
+    assert truth.get("last_completed_pack") == "AIWG_KERNEL_0.4", "last_completed_pack must be AIWG_KERNEL_0.4"
+    assert truth.get("next_pack") == "PACK_3.2", "next_pack must be PACK_3.2"
+    
+    # 4. Assert active_pack values
+    assert active.get("pack_id") == "PACK_3.2", "active_pack pack_id must be PACK_3.2"
+    
+    # 5. Assert freeze audit report values
+    audit_json = os.path.join(AIWG_DIR, "reports", "aiwg_kernel_freeze_audit_latest.json")
+    assert os.path.exists(audit_json), "aiwg_kernel_freeze_audit_latest.json must exist"
+    with open(audit_json, "r", encoding="utf-8") as f:
+        audit = json.load(f)
+    assert audit.get("decision") == "KERNEL_FROZEN", "freeze_audit decision must be KERNEL_FROZEN"
+    assert audit.get("head_commit") == truth.get("head_commit"), "freeze_audit head_commit must match current_truth head_commit"
+    
+    # 6. Assert validation evidence values
+    assert os.path.exists(EVIDENCE_JSON), "pack_validation_evidence_latest.json must exist"
+    with open(EVIDENCE_JSON, "r", encoding="utf-8") as f:
+        evidence = json.load(f)
+    assert evidence.get("commit") == truth.get("head_commit"), "evidence commit must match current_truth head_commit"
+    
+    # 7. Assert anti-overclaim lint passes on the repo
+    import scripts.aiwg_pack_guard as guard
+    assert guard.check_anti_overclaim_lint() is True, "anti-overclaim lint scanner must pass cleanly"
+
