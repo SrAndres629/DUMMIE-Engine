@@ -32,3 +32,11 @@ Implementation plan created at `docs/superpowers/plans/2026-04-26-universal-know
 - **Kernel Governance:** Implemented aggressive ZRAM (`zstd`, 75%) and heavy swapping (`swappiness=120`) to prevent LLM OOM crashes.
 - **Hexagonal Integrity (Phase 11.1):** Enforced strict separation between Domain (Interfaces `IEmbeddingAdapter`, `IContextCompressor`) and Infrastructure (`fastembed`, `tiktoken`). Injected `IContextCompressor` into `VaultContextResolver` via constructor (Dependency Inversion).
 - **Technical Debt Alert:** `VaultContextResolver` is still relying on flat JSON files (`.aiwg/vault/`). This needs to be migrated to 4D-TES / KùzuDB in upcoming phases.
+
+# 2026-05-19
+
+## ADR 2026-05-19-GOV-003: Core Hardening Roadmap & Pack 2.2 Closure
+
+- **Pack 2.2 Merged**: Successfully closed and merged branch `hardening/structural-pack-2.2-polyglot-binding` into `main` with robust toolchain verification probes (Go skill compile, Elixir Mix tests, Shell syntax).
+- **Core Hardening Roadmap**: Approved complete 22-pack roadmap to secure DUMMIE Engine from current structural debt to a defendable technical beta.
+- **Pack 2.3 Scoping**: Plan formulated to resolve the top 20 L2 shadow candidates via static metadata bindings, lowering risk and mapping modules to specifications/tests.
