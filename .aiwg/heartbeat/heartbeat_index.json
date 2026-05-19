@@ -100,5 +100,29 @@
     "decision": "PASS_WITH_WARNINGS",
     "selected_action": "activate_local_embedding_model_or_label_fallback",
     "created_at": "2026-05-19T09:01:07.673429+00:00"
+  },
+  "hb-9485594a": {
+    "mode": "observe_only",
+    "decision": "PASS_WITH_WARNINGS",
+    "selected_action": "activate_local_embedding_model_or_label_fallback",
+    "created_at": "2026-05-19T10:50:31.398684+00:00"
+  },
+  "hb-aa60cea2": {
+    "mode": "observe_only",
+    "decision": "PASS_WITH_WARNINGS",
+    "selected_action": "activate_local_embedding_model_or_label_fallback",
+    "created_at": "2026-05-19T10:51:49.547903+00:00"
+  },
+  "hb-2f03c395": {
+    "mode": "observe_only",
+    "decision": "PASS_WITH_WARNINGS",
+    "selected_action": "activate_local_embedding_model_or_label_fallback",
+    "created_at": "2026-05-19T10:53:02.004455+00:00"
+  },
+  "hb-0e6a714e": {
+    "mode": "observe_only",
+    "decision": "PASS_WITH_WARNINGS",
+    "selected_action": "activate_local_embedding_model_or_label_fallback",
+    "created_at": "2026-05-19T10:54:47.941101+00:00"
   }
 }

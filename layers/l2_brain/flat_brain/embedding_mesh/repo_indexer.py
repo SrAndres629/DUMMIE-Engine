@@ -5,9 +5,9 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Tuple
 
-from layers.l2_brain.embedding_mesh.contracts import ContentType, EmbeddingRequest
-from layers.l2_brain.embedding_mesh.registry import EmbeddingRegistry
-from layers.l2_brain.embedding_mesh.router import EmbeddingRouter
+from .contracts import ContentType, EmbeddingRequest
+from .registry import EmbeddingRegistry
+from .router import EmbeddingRouter
 
 logger = logging.getLogger("brain.embedding_mesh.repo_indexer")
 

@@ -1,5 +1,5 @@
 {
-  "previous_heartbeat_id": "hb-b551de09",
+  "previous_heartbeat_id": "hb-0e6a714e",
   "previous_decision": "PASS_WITH_WARNINGS",
   "next_action": "activate_local_embedding_model_or_label_fallback",
   "dispatch": "human_review",
@@ -12,5 +12,5 @@
   ],
   "kuzu_degraded": false,
   "quarantined_models": 4,
-  "created_at": "2026-05-19T09:01:07.673418+00:00"
+  "created_at": "2026-05-19T10:54:47.941089+00:00"
 }

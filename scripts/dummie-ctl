@@ -73,7 +73,7 @@ def main():
     if cmd == "status":
         if "--l2" in args:
             args.remove("--l2")
-            run_python("layers/l2_brain/dummie_chat_cli.py", ["status"])
+            run_python("layers/l2_brain/flat_brain/dummie_chat_cli.py", ["status"])
         else:
             cmd_run = [sys.executable, "-m", "dummie", "status"] + args
             subprocess.run(cmd_run)
@@ -88,7 +88,7 @@ def main():
         cmd_run = [sys.executable, "-m", "dummie", "chat"] + args
         subprocess.run(cmd_run)
     elif cmd == "calibrate":
-        run_python("layers/l2_brain/cli_control_plane.py", ["readiness-calibration"])
+        run_python("layers/l2_brain/flat_brain/cli_control_plane.py", ["readiness-calibration"])
     elif cmd == "triage":
         triage_md = ROOT / ".aiwg" / "reports" / "test_debt_triage_latest.md"
         if triage_md.exists():
@@ -96,45 +96,45 @@ def main():
         else:
             print("Triage report not found. Run tests first.")
     elif cmd == "heartbeat":
-        run_python("layers/l2_brain/cli_control_plane.py", ["heartbeat"])
+        run_python("layers/l2_brain/flat_brain/cli_control_plane.py", ["heartbeat"])
     elif cmd == "heartbeat-dry-run":
-        run_python("layers/l2_brain/cli_control_plane.py", ["heartbeat-dry-run"])
+        run_python("layers/l2_brain/flat_brain/cli_control_plane.py", ["heartbeat-dry-run"])
     elif cmd == "heartbeat-status":
-        run_python("layers/l2_brain/cli_control_plane.py", ["heartbeat-status"])
+        run_python("layers/l2_brain/flat_brain/cli_control_plane.py", ["heartbeat-status"])
     elif cmd == "next-heartbeat":
-        run_python("layers/l2_brain/cli_control_plane.py", ["heartbeat-seed"])
+        run_python("layers/l2_brain/flat_brain/cli_control_plane.py", ["heartbeat-seed"])
     elif cmd == "scan":
-        run_python("layers/l2_brain/cli_control_plane.py", ["whole-body-scan"])
+        run_python("layers/l2_brain/flat_brain/cli_control_plane.py", ["whole-body-scan"])
     elif cmd == "scan-calibration":
-        run_python("layers/l2_brain/cli_control_plane.py", ["scan-calibration"])
+        run_python("layers/l2_brain/flat_brain/cli_control_plane.py", ["scan-calibration"])
     elif cmd == "wiring-matrix":
-        run_python("layers/l2_brain/cli_control_plane.py", ["wiring-matrix"])
+        run_python("layers/l2_brain/flat_brain/cli_control_plane.py", ["wiring-matrix"])
     elif cmd == "shadow-runtime":
-        run_python("layers/l2_brain/cli_control_plane.py", ["shadow-runtime"])
+        run_python("layers/l2_brain/flat_brain/cli_control_plane.py", ["shadow-runtime"])
     elif cmd == "systemic-coherence":
-        run_python("layers/l2_brain/cli_control_plane.py", ["systemic-coherence"])
+        run_python("layers/l2_brain/flat_brain/cli_control_plane.py", ["systemic-coherence"])
     elif cmd == "circulation":
-        run_python("layers/l2_brain/cli_control_plane.py", ["context-circulation"])
+        run_python("layers/l2_brain/flat_brain/cli_control_plane.py", ["context-circulation"])
     elif cmd == "6d-context":
-        run_python("layers/l2_brain/cli_control_plane.py", ["6d-context"])
+        run_python("layers/l2_brain/flat_brain/cli_control_plane.py", ["6d-context"])
     elif cmd == "context-optimize":
-        run_python("layers/l2_brain/cli_control_plane.py", ["context-optimize"])
+        run_python("layers/l2_brain/flat_brain/cli_control_plane.py", ["context-optimize"])
     elif cmd == "embedding-router":
-        run_python("layers/l2_brain/cli_control_plane.py", ["embedding-router"])
+        run_python("layers/l2_brain/flat_brain/cli_control_plane.py", ["embedding-router"])
     elif cmd == "4dtes-preflight":
-        run_python("layers/l2_brain/cli_control_plane.py", ["4dtes-preflight"])
+        run_python("layers/l2_brain/flat_brain/cli_control_plane.py", ["4dtes-preflight"])
     elif cmd == "daemon-gateway-bridge":
-        run_python("layers/l2_brain/cli_control_plane.py", ["daemon-gateway-bridge"])
+        run_python("layers/l2_brain/flat_brain/cli_control_plane.py", ["daemon-gateway-bridge"])
     elif cmd == "polyglot-probe":
-        run_python("layers/l2_brain/cli_control_plane.py", ["polyglot-probe"])
+        run_python("layers/l2_brain/flat_brain/cli_control_plane.py", ["polyglot-probe"])
     elif cmd == "dependency-audit":
-        run_python("layers/l2_brain/cli_control_plane.py", ["dependency-audit"])
+        run_python("layers/l2_brain/flat_brain/cli_control_plane.py", ["dependency-audit"])
     elif cmd == "degraded-capabilities":
-        run_python("layers/l2_brain/cli_control_plane.py", ["degraded-capabilities"])
+        run_python("layers/l2_brain/flat_brain/cli_control_plane.py", ["degraded-capabilities"])
     elif cmd == "toolchain-probe":
-        run_python("layers/l2_brain/cli_control_plane.py", ["toolchain-probe"])
+        run_python("layers/l2_brain/flat_brain/cli_control_plane.py", ["toolchain-probe"])
     elif cmd == "runtime-closure-plan":
-        run_python("layers/l2_brain/cli_control_plane.py", ["runtime-closure-plan"])
+        run_python("layers/l2_brain/flat_brain/cli_control_plane.py", ["runtime-closure-plan"])
     elif cmd == "model-bootstrap":
         run_python("scripts/dummie_model_bootstrap.py", args)
     elif cmd == "token-snapshot":

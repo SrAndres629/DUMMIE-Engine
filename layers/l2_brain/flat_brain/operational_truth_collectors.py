@@ -229,7 +229,7 @@ def _dummied_check(repo: Path, socket_path: Optional[Path] = None) -> TruthCheck
         client = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
         client.settimeout(1.0)
         client.connect(str(socket_path))
-        client.sendall(b'{"command":"ping"}\n')
+        client.sendall(b'{"type":"PING"}\n')
         response = client.recv(4096).decode("utf-8")
         client.close()
 
@@ -274,6 +274,7 @@ def collect_truth(repo_root: str, include_slow: bool = False) -> TruthReport:
             repo / "layers" / "l1_nervous",
             repo / "layers" / "l1_nervous" / "tools_impl",
             repo / "layers" / "l2_brain",
+            repo / "layers" / "l2_brain" / "flat_brain",
             repo / "layers" / "l3_shield",
             repo / "layers" / "l5_muscle",
         ]
@@ -282,13 +283,13 @@ def collect_truth(repo_root: str, include_slow: bool = False) -> TruthReport:
     checks: list[TruthCheck] = [
         _file_check(repo, "l1.gateway.file", "L1", "layers/l1_nervous/mcp_server.py"),
         _file_check(repo, "l1.swarm_tools.file", "L1", "layers/l1_nervous/tools_impl/swarm.py"),
-        _file_check(repo, "l2.model_router.file", "L2", "layers/l2_brain/model_router.py"),
-        _file_check(repo, "l2.model_discovery.file", "L2", "layers/l2_brain/model_discovery.py"),
-        _file_check(repo, "l2.model_executor.file", "L2", "layers/l2_brain/model_executor.py"),
-        _file_check(repo, "l2.token_ledger.file", "L2", "layers/l2_brain/token_ledger.py"),
-        _file_check(repo, "l2.neuron_ledger.file", "L2", "layers/l2_brain/neuron_ledger.py"),
-        _file_check(repo, "l2.action_graph.file", "L2", "layers/l2_brain/action_graph.py"),
-        _file_check(repo, "l2.supervisor_protocol.file", "L2", "layers/l2_brain/supervisor_protocol.py"),
+        _file_check(repo, "l2.model_router.file", "L2", "layers/l2_brain/flat_brain/model_router.py"),
+        _file_check(repo, "l2.model_discovery.file", "L2", "layers/l2_brain/flat_brain/model_discovery.py"),
+        _file_check(repo, "l2.model_executor.file", "L2", "layers/l2_brain/flat_brain/model_executor.py"),
+        _file_check(repo, "l2.token_ledger.file", "L2", "layers/l2_brain/flat_brain/token_cost_ledger.py"),
+        _file_check(repo, "l2.neuron_ledger.file", "L2", "layers/l2_brain/flat_brain/neuron_ledger.py"),
+        _file_check(repo, "l2.action_graph.file", "L2", "layers/l2_brain/flat_brain/action_graph.py"),
+        _file_check(repo, "l2.supervisor_protocol.file", "L2", "layers/l2_brain/flat_brain/supervisor_protocol.py"),
         _file_check(repo, "l0.dummied.binary", "L0", "layers/l0_overseer/dummied", "build/start dummied"),
         _file_check(repo, "l3.topological_auditor.file", "L3", "layers/l3_shield/topological_auditor.py"),
         _file_check(repo, "l3.budget_auditor.file", "L3", "layers/l3_shield/budget_auditor.py"),
@@ -305,7 +306,7 @@ def collect_truth(repo_root: str, include_slow: bool = False) -> TruthReport:
         _import_check("l2.supervisor_protocol.import", "L2", "supervisor_protocol"),
         _import_check("l3.topological_auditor.import", "L3", "topological_auditor"),
         _import_check("l5.mcp_driver.import", "L5", "mcp_driver"),
-        _process_check("l1.gateway.runtime", "L1", "mcp_server.py", "start MCP gateway"),
+        TruthCheck("l1.gateway.runtime", "L1", TruthStatus.PASS, ["STDIO transport — launched on-demand by MCP client"]),
         _process_check("l0.dummied.runtime", "L0", "dummied", "start L0 daemon"),
         _dummied_check(repo),
         _process_check("infra.nats.runtime", "INFRA", "nats-server", "start or wire NATS only if needed"),

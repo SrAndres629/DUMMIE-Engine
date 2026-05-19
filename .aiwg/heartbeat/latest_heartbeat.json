@@ -1,5 +1,5 @@
 {
-  "heartbeat_id": "hb-b551de09",
+  "heartbeat_id": "hb-0e6a714e",
   "mode": "observe_only",
   "decision": "PASS_WITH_WARNINGS",
   "observation": {
@@ -47,10 +47,10 @@
   "truth_hygiene": {
     "decision": "PASS_WITH_WARNINGS",
     "summary": {
-      "models_scanned": 94,
-      "valid_count": 28,
+      "models_scanned": 113,
+      "valid_count": 33,
       "stale_count": 4,
-      "superseded_count": 49,
+      "superseded_count": 63,
       "quarantined_count": 4,
       "unsafe_rejected_count": 0,
       "needs_review_count": 9,
@@ -71,7 +71,7 @@
     "graph_status": "READY"
   },
   "mental_model": {
-    "model_id": "mm-de1aa3f2"
+    "model_id": "mm-6b7b3bbd"
   },
   "dialectic": {
     "thesis": "Proceed with heartbeat: what is the current system state and next safe action? to improve the system.",
@@ -109,9 +109,9 @@
   ],
   "dispatch_recommendation": "human_review",
   "outcome_ref": ".aiwg/reports/heartbeat_latest.json",
-  "learning_episode_ref": "sessions/CURRENT/learning_episodes (heartbeat hb-b551de09)",
+  "learning_episode_ref": "sessions/CURRENT/learning_episodes (heartbeat hb-0e6a714e)",
   "next_heartbeat_seed": {
-    "previous_heartbeat_id": "hb-b551de09",
+    "previous_heartbeat_id": "hb-0e6a714e",
     "previous_decision": "PASS_WITH_WARNINGS",
     "next_action": "activate_local_embedding_model_or_label_fallback",
     "dispatch": "human_review",
@@ -124,7 +124,7 @@
     ],
     "kuzu_degraded": false,
     "quarantined_models": 4,
-    "created_at": "2026-05-19T09:01:07.673418+00:00"
+    "created_at": "2026-05-19T10:54:47.941089+00:00"
   },
   "warnings": [
     "Systemic Coherence Score (51.33%) is under 60% \u2014 autonomous execution is strictly blocked.",
@@ -156,7 +156,7 @@
     ".aiwg/reports/self_improvement_action_queue.json",
     ".aiwg/reports/heartbeat_decision_policy_latest.json"
   ],
-  "created_at": "2026-05-19T09:01:07.673429+00:00",
+  "created_at": "2026-05-19T10:54:47.941101+00:00",
   "circulation_summary": {
     "intent": "heartbeat loop observation",
     "six_d_context": {
@@ -181,7 +181,7 @@
     },
     "daemon_gateway_bridge": {
       "decision": "PASS",
-      "dispatch_id": "4cec21ce-c6c1-4e08-bb32-1e578c8126df",
+      "dispatch_id": "093b5ba8-787d-43ca-a028-58efe7cc4f51",
       "target": "human_review"
     },
     "polyglot_probe": {

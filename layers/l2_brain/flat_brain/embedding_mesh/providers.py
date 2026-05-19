@@ -5,7 +5,7 @@ import logging
 import math
 from typing import Optional
 
-from layers.l2_brain.embedding_mesh.contracts import (
+from .contracts import (
     EmbeddingCapability,
     EmbeddingRequest,
     EmbeddingResponse,

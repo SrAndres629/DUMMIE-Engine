@@ -4,7 +4,7 @@ import re
 from datetime import datetime, timezone
 from typing import Any, Dict, Iterable, List, Tuple
 
-from layers.l2_brain.embedding_mesh.contracts import (
+from .contracts import (
     ContentType,
     RerankRequest,
     RerankResponse,

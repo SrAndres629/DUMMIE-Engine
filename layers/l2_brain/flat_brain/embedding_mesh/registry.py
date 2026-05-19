@@ -1,8 +1,8 @@
 # Spec Reference: 192_embedding_mesh_foundation
 import logging
 
-from layers.l2_brain.embedding_mesh.contracts import EmbeddingCapability
-from layers.l2_brain.embedding_mesh.providers import (
+from .contracts import EmbeddingCapability
+from .providers import (
     DeterministicFallbackProvider,
     FastEmbedTextProvider,
     IEmbeddingProvider,

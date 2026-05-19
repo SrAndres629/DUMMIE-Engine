@@ -3,7 +3,7 @@ import os
 from pathlib import Path
 from typing import Optional, Tuple
 
-from layers.l2_brain.embedding_mesh.contracts import ContentType, EmbeddingCapability
+from .contracts import ContentType, EmbeddingCapability
 
 
 _CODE_EXTENSIONS = {

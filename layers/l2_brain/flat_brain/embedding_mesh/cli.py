@@ -4,8 +4,8 @@ from collections import Counter
 from pathlib import Path
 from typing import Any, Dict, List
 
-from layers.l2_brain.embedding_mesh.hardening_matrix import HardeningMatrix
-from layers.l2_brain.embedding_mesh.repo_indexer import RepoIndexer
+from .hardening_matrix import HardeningMatrix
+from .repo_indexer import RepoIndexer
 
 
 def build_semantic_hardening_index(repo_root: str, max_file_bytes: int, write_reports: bool) -> Dict[str, Any]:

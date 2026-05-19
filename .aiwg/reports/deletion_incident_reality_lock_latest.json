@@ -1,0 +1,16 @@
+{
+  "incident": "deletion_and_flat_l2_refactor_audit",
+  "current_branch": "intento-de-registrar-todo-con-arquitectura-y-estructura-canon",
+  "head": "b78f3cd9bf4389b1bb23801fb1319e1f1065d62d",
+  "git_status_short": "M .aiwg/heartbeat/*, M .aiwg/mental_models/*, M .aiwg/providers/*, M layers/l2_brain/flat_brain/*, M layers/l2_brain/tests/*, M memory/2026-05-19.md, M scripts/dummie-ctl, ?? .opencode/agent/",
+  "diff_check": "PASS",
+  "backup_branch_created": "backup/before-deletion-audit-20260519-065706",
+  "warnings": [
+    "Current branch is 2 commits ahead of main with massive flat_brain reorganization (~180+ file renames)",
+    "No locally deleted files (git ls-files --deleted returns empty)",
+    "All local changes are modifications, not deletions",
+    "3371 deleted file entries found in last 30 commits (mostly from commit 12c5b53 deleting .aiwg/reports/)",
+    "Source code deletions found in commits f3485dc and 762eec1 (mcp_server.py, test_mcp_server.py, ports.py, schemas.py)",
+    "Memory file .aiwg/memory/lessons.jsonl deleted in commit f3485dc"
+  ]
+}
