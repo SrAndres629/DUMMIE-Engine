@@ -1,0 +1,1178 @@
+{
+  "pack": "PACK R3",
+  "name": "L2 Brain Migration Manifest",
+  "date": "2026-05-19",
+  "source": "flat_brain/",
+  "target": "canonical organs",
+  "total_modules": 230,
+  "organ_counts": {
+    "other": 80,
+    "infrastructure": 16,
+    "governance": 21,
+    "strategic": 11,
+    "cognition": 17,
+    "context": 11,
+    "daemon": 4,
+    "model_mesh": 11,
+    "memory": 16,
+    "mission": 10,
+    "heartbeat": 4,
+    "metacognition": 10,
+    "domain": 2,
+    "proto": 6,
+    "sdk": 4,
+    "structural_hardening": 7
+  },
+  "mapping": {
+    "action_graph.py": {
+      "module": "action_graph",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "adapters.py": {
+      "module": "adapters",
+      "organ": "infrastructure",
+      "status": "TEMP_COMPAT"
+    },
+    "ast_indexer.py": {
+      "module": "ast_indexer",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "auditor_port.py": {
+      "module": "auditor_port",
+      "organ": "governance",
+      "status": "TEMP_COMPAT"
+    },
+    "autonomous_strategic_partner_runtime.py": {
+      "module": "autonomous_strategic_partner_runtime",
+      "organ": "strategic",
+      "status": "TEMP_COMPAT"
+    },
+    "auto_evolution.py": {
+      "module": "auto_evolution",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "branch_memory.py": {
+      "module": "branch_memory",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "business_advisor_runtime.py": {
+      "module": "business_advisor_runtime",
+      "organ": "strategic",
+      "status": "TEMP_COMPAT"
+    },
+    "business_goal_model.py": {
+      "module": "business_goal_model",
+      "organ": "strategic",
+      "status": "TEMP_COMPAT"
+    },
+    "business_orchestrator.py": {
+      "module": "business_orchestrator",
+      "organ": "strategic",
+      "status": "TEMP_COMPAT"
+    },
+    "capability_promotion_governor.py": {
+      "module": "capability_promotion_governor",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "causal_replay.py": {
+      "module": "causal_replay",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "chaos_regression_testing.py": {
+      "module": "chaos_regression_testing",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "cli_control_plane.py": {
+      "module": "cli_control_plane",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "cognitive_bias_detector.py": {
+      "module": "cognitive_bias_detector",
+      "organ": "cognition",
+      "status": "TEMP_COMPAT"
+    },
+    "cognitive_hooks.py": {
+      "module": "cognitive_hooks",
+      "organ": "cognition",
+      "status": "TEMP_COMPAT"
+    },
+    "consensus.py": {
+      "module": "consensus",
+      "organ": "cognition",
+      "status": "TEMP_COMPAT"
+    },
+    "context_bloat_guard.py": {
+      "module": "context_bloat_guard",
+      "organ": "context",
+      "status": "TEMP_COMPAT"
+    },
+    "context_budget_manager.py": {
+      "module": "context_budget_manager",
+      "organ": "context",
+      "status": "TEMP_COMPAT"
+    },
+    "context_circulation_runtime.py": {
+      "module": "context_circulation_runtime",
+      "organ": "context",
+      "status": "TEMP_COMPAT"
+    },
+    "context_coverage_auditor.py": {
+      "module": "context_coverage_auditor",
+      "organ": "context",
+      "status": "TEMP_COMPAT"
+    },
+    "context_efficiency_benchmark.py": {
+      "module": "context_efficiency_benchmark",
+      "organ": "context",
+      "status": "TEMP_COMPAT"
+    },
+    "context_enforcement_gate.py": {
+      "module": "context_enforcement_gate",
+      "organ": "context",
+      "status": "TEMP_COMPAT"
+    },
+    "context_package.py": {
+      "module": "context_package",
+      "organ": "context",
+      "status": "TEMP_COMPAT"
+    },
+    "context_packet_optimizer.py": {
+      "module": "context_packet_optimizer",
+      "organ": "context",
+      "status": "TEMP_COMPAT"
+    },
+    "context_quant_runtime.py": {
+      "module": "context_quant_runtime",
+      "organ": "context",
+      "status": "TEMP_COMPAT"
+    },
+    "context_value_scorer.py": {
+      "module": "context_value_scorer",
+      "organ": "context",
+      "status": "TEMP_COMPAT"
+    },
+    "creator_context_runtime.py": {
+      "module": "creator_context_runtime",
+      "organ": "strategic",
+      "status": "TEMP_COMPAT"
+    },
+    "cypher_codec.py": {
+      "module": "cypher_codec",
+      "organ": "infrastructure",
+      "status": "TEMP_COMPAT"
+    },
+    "daemon.py": {
+      "module": "daemon",
+      "organ": "daemon",
+      "status": "TEMP_COMPAT"
+    },
+    "daemon_gateway_heartbeat_bridge.py": {
+      "module": "daemon_gateway_heartbeat_bridge",
+      "organ": "daemon",
+      "status": "TEMP_COMPAT"
+    },
+    "daemon_outcome.py": {
+      "module": "daemon_outcome",
+      "organ": "daemon",
+      "status": "TEMP_COMPAT"
+    },
+    "debate_review_runtime.py": {
+      "module": "debate_review_runtime",
+      "organ": "cognition",
+      "status": "TEMP_COMPAT"
+    },
+    "degraded_capability_registry.py": {
+      "module": "degraded_capability_registry",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "dependency_reproducibility_verifier.py": {
+      "module": "dependency_reproducibility_verifier",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "dialectical_reasoning_runtime.py": {
+      "module": "dialectical_reasoning_runtime",
+      "organ": "cognition",
+      "status": "TEMP_COMPAT"
+    },
+    "dummie_chat_cli.py": {
+      "module": "dummie_chat_cli",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "embedding_activation_verifier.py": {
+      "module": "embedding_activation_verifier",
+      "organ": "model_mesh",
+      "status": "TEMP_COMPAT"
+    },
+    "embedding_adapter.py": {
+      "module": "embedding_adapter",
+      "organ": "model_mesh",
+      "status": "TEMP_COMPAT"
+    },
+    "embedding_memory_router.py": {
+      "module": "embedding_memory_router",
+      "organ": "model_mesh",
+      "status": "TEMP_COMPAT"
+    },
+    "embedding_provider.py": {
+      "module": "embedding_provider",
+      "organ": "model_mesh",
+      "status": "TEMP_COMPAT"
+    },
+    "entity_voice.py": {
+      "module": "entity_voice",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "entropy_governor.py": {
+      "module": "entropy_governor",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "entrypoint_enforcement_auditor.py": {
+      "module": "entrypoint_enforcement_auditor",
+      "organ": "governance",
+      "status": "TEMP_COMPAT"
+    },
+    "epistemic_state_runtime.py": {
+      "module": "epistemic_state_runtime",
+      "organ": "cognition",
+      "status": "TEMP_COMPAT"
+    },
+    "event_bus.py": {
+      "module": "event_bus",
+      "organ": "infrastructure",
+      "status": "TEMP_COMPAT"
+    },
+    "evolution_delta_applier.py": {
+      "module": "evolution_delta_applier",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "evolution_feedback_loop.py": {
+      "module": "evolution_feedback_loop",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "evolution_flywheel_runtime.py": {
+      "module": "evolution_flywheel_runtime",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "expansion_policy.py": {
+      "module": "expansion_policy",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "file_dossier_generator.py": {
+      "module": "file_dossier_generator",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "folder_dossier_generator.py": {
+      "module": "folder_dossier_generator",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "formal_bridge.py": {
+      "module": "formal_bridge",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "four_dtes_persistence_preflight.py": {
+      "module": "four_dtes_persistence_preflight",
+      "organ": "memory",
+      "status": "TEMP_COMPAT"
+    },
+    "freshness_ledger.py": {
+      "module": "freshness_ledger",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "full_body_operational_auditor.py": {
+      "module": "full_body_operational_auditor",
+      "organ": "governance",
+      "status": "TEMP_COMPAT"
+    },
+    "gateway_contract.py": {
+      "module": "gateway_contract",
+      "organ": "infrastructure",
+      "status": "TEMP_COMPAT"
+    },
+    "goal_reasoning_runtime.py": {
+      "module": "goal_reasoning_runtime",
+      "organ": "strategic",
+      "status": "TEMP_COMPAT"
+    },
+    "golden_path.py": {
+      "module": "golden_path",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "cognitive_frame_builder.py": {
+      "module": "cognitive_frame_builder",
+      "organ": "cognition",
+      "status": "TEMP_COMPAT"
+    },
+    "daemon_diagnostic.py": {
+      "module": "daemon_diagnostic",
+      "organ": "daemon",
+      "status": "TEMP_COMPAT"
+    },
+    "environment_toolchain_probe.py": {
+      "module": "environment_toolchain_probe",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "graph_sync_ledger.py": {
+      "module": "graph_sync_ledger",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "memory_graph_runtime.py": {
+      "module": "memory_graph_runtime",
+      "organ": "memory",
+      "status": "TEMP_COMPAT"
+    },
+    "mission_orchestrator_dag.py": {
+      "module": "mission_orchestrator_dag",
+      "organ": "mission",
+      "status": "TEMP_COMPAT"
+    },
+    "outcome_evaluator.py": {
+      "module": "outcome_evaluator",
+      "organ": "mission",
+      "status": "TEMP_COMPAT"
+    },
+    "repo_intelligence_query.py": {
+      "module": "repo_intelligence_query",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "semantic_cache.py": {
+      "module": "semantic_cache",
+      "organ": "model_mesh",
+      "status": "TEMP_COMPAT"
+    },
+    "strategic_partner_runtime.py": {
+      "module": "strategic_partner_runtime",
+      "organ": "strategic",
+      "status": "TEMP_COMPAT"
+    },
+    "graph_sync_plan.py": {
+      "module": "graph_sync_plan",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "heartbeat_decision_policy.py": {
+      "module": "heartbeat_decision_policy",
+      "organ": "heartbeat",
+      "status": "TEMP_COMPAT"
+    },
+    "heartbeat_lifecycle_runtime.py": {
+      "module": "heartbeat_lifecycle_runtime",
+      "organ": "heartbeat",
+      "status": "TEMP_COMPAT"
+    },
+    "heartbeat_scheduler.py": {
+      "module": "heartbeat_scheduler",
+      "organ": "heartbeat",
+      "status": "TEMP_COMPAT"
+    },
+    "heartbeat_state_store.py": {
+      "module": "heartbeat_state_store",
+      "organ": "heartbeat",
+      "status": "TEMP_COMPAT"
+    },
+    "human_intent.py": {
+      "module": "human_intent",
+      "organ": "strategic",
+      "status": "TEMP_COMPAT"
+    },
+    "knowledge_ports.py": {
+      "module": "knowledge_ports",
+      "organ": "infrastructure",
+      "status": "TEMP_COMPAT"
+    },
+    "kuzu_4dtes_guard.py": {
+      "module": "kuzu_4dtes_guard",
+      "organ": "memory",
+      "status": "TEMP_COMPAT"
+    },
+    "kuzu_graph_readback_verifier.py": {
+      "module": "kuzu_graph_readback_verifier",
+      "organ": "memory",
+      "status": "TEMP_COMPAT"
+    },
+    "kuzu_graph_sync_adapter.py": {
+      "module": "kuzu_graph_sync_adapter",
+      "organ": "memory",
+      "status": "TEMP_COMPAT"
+    },
+    "learning_episode.py": {
+      "module": "learning_episode",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "lifecycle_integration_mapper.py": {
+      "module": "lifecycle_integration_mapper",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "local_context_compressor.py": {
+      "module": "local_context_compressor",
+      "organ": "context",
+      "status": "TEMP_COMPAT"
+    },
+    "local_reasoning.py": {
+      "module": "local_reasoning",
+      "organ": "cognition",
+      "status": "TEMP_COMPAT"
+    },
+    "long_running_mission.py": {
+      "module": "long_running_mission",
+      "organ": "mission",
+      "status": "TEMP_COMPAT"
+    },
+    "memory_refs.py": {
+      "module": "memory_refs",
+      "organ": "memory",
+      "status": "TEMP_COMPAT"
+    },
+    "memory_spine_bridge.py": {
+      "module": "memory_spine_bridge",
+      "organ": "memory",
+      "status": "TEMP_COMPAT"
+    },
+    "memory_spine_entrypoint.py": {
+      "module": "memory_spine_entrypoint",
+      "organ": "memory",
+      "status": "TEMP_COMPAT"
+    },
+    "mental_model_runtime.py": {
+      "module": "mental_model_runtime",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "mental_model_store.py": {
+      "module": "mental_model_store",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "mental_model_truth_hygiene.py": {
+      "module": "mental_model_truth_hygiene",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "metacognitive_evolution_flywheel.py": {
+      "module": "metacognitive_evolution_flywheel",
+      "organ": "metacognition",
+      "status": "TEMP_COMPAT"
+    },
+    "metacognitive_loop_runtime.py": {
+      "module": "metacognitive_loop_runtime",
+      "organ": "metacognition",
+      "status": "TEMP_COMPAT"
+    },
+    "metacognitive_quality_gate.py": {
+      "module": "metacognitive_quality_gate",
+      "organ": "metacognition",
+      "status": "TEMP_COMPAT"
+    },
+    "metagateway_adapter.py": {
+      "module": "metagateway_adapter",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "metagateway_benchmark.py": {
+      "module": "metagateway_benchmark",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "metagateway_policy.py": {
+      "module": "metagateway_policy",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "metagateway_runtime_meter.py": {
+      "module": "metagateway_runtime_meter",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "mission_autonomy_contract.py": {
+      "module": "mission_autonomy_contract",
+      "organ": "mission",
+      "status": "TEMP_COMPAT"
+    },
+    "mission_coherence_guard.py": {
+      "module": "mission_coherence_guard",
+      "organ": "mission",
+      "status": "TEMP_COMPAT"
+    },
+    "mission_planner.py": {
+      "module": "mission_planner",
+      "organ": "mission",
+      "status": "TEMP_COMPAT"
+    },
+    "mission_runtime_contract.py": {
+      "module": "mission_runtime_contract",
+      "organ": "mission",
+      "status": "TEMP_COMPAT"
+    },
+    "mission_workbench.py": {
+      "module": "mission_workbench",
+      "organ": "mission",
+      "status": "TEMP_COMPAT"
+    },
+    "models.py": {
+      "module": "models",
+      "organ": "memory",
+      "status": "TEMP_COMPAT"
+    },
+    "model_discovery.py": {
+      "module": "model_discovery",
+      "organ": "model_mesh",
+      "status": "TEMP_COMPAT"
+    },
+    "model_executor.py": {
+      "module": "model_executor",
+      "organ": "model_mesh",
+      "status": "TEMP_COMPAT"
+    },
+    "model_router.py": {
+      "module": "model_router",
+      "organ": "model_mesh",
+      "status": "TEMP_COMPAT"
+    },
+    "nervous_pulse.py": {
+      "module": "nervous_pulse",
+      "organ": "infrastructure",
+      "status": "TEMP_COMPAT"
+    },
+    "neuron_ledger.py": {
+      "module": "neuron_ledger",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "observability.py": {
+      "module": "observability",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "operationalization_pack_2_runner.py": {
+      "module": "operationalization_pack_2_runner",
+      "organ": "governance",
+      "status": "TEMP_COMPAT"
+    },
+    "operationalization_review.py": {
+      "module": "operationalization_review",
+      "organ": "governance",
+      "status": "TEMP_COMPAT"
+    },
+    "operational_truth.py": {
+      "module": "operational_truth",
+      "organ": "governance",
+      "status": "TEMP_COMPAT"
+    },
+    "operational_truth_collectors.py": {
+      "module": "operational_truth_collectors",
+      "organ": "governance",
+      "status": "TEMP_COMPAT"
+    },
+    "orchestrator.py": {
+      "module": "orchestrator",
+      "organ": "cognition",
+      "status": "TEMP_COMPAT"
+    },
+    "patch_transaction.py": {
+      "module": "patch_transaction",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "patch_transaction_manager.py": {
+      "module": "patch_transaction_manager",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "phase_ledger.py": {
+      "module": "phase_ledger",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "philosophical_ontology_runtime.py": {
+      "module": "philosophical_ontology_runtime",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "plan_v1_completion_review.py": {
+      "module": "plan_v1_completion_review",
+      "organ": "mission",
+      "status": "TEMP_COMPAT"
+    },
+    "polyglot_probe_orchestrator.py": {
+      "module": "polyglot_probe_orchestrator",
+      "organ": "cognition",
+      "status": "TEMP_COMPAT"
+    },
+    "ports.py": {
+      "module": "ports",
+      "organ": "infrastructure",
+      "status": "TEMP_COMPAT"
+    },
+    "post_mortem_agent.py": {
+      "module": "post_mortem_agent",
+      "organ": "governance",
+      "status": "TEMP_COMPAT"
+    },
+    "preflight.py": {
+      "module": "preflight",
+      "organ": "memory",
+      "status": "TEMP_COMPAT"
+    },
+    "prompt_cache_ledger.py": {
+      "module": "prompt_cache_ledger",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "prompt_frame_builder.py": {
+      "module": "prompt_frame_builder",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "prompt_preprocessor.py": {
+      "module": "prompt_preprocessor",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "prompt_to_mission.py": {
+      "module": "prompt_to_mission",
+      "organ": "mission",
+      "status": "TEMP_COMPAT"
+    },
+    "readiness_score_calibrator.py": {
+      "module": "readiness_score_calibrator",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "rehydration.py": {
+      "module": "rehydration",
+      "organ": "memory",
+      "status": "TEMP_COMPAT"
+    },
+    "repo_intelligence_runtime.py": {
+      "module": "repo_intelligence_runtime",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "repo_probe_runner.py": {
+      "module": "repo_probe_runner",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "resource_governor.py": {
+      "module": "resource_governor",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "restart_integration_gate.py": {
+      "module": "restart_integration_gate",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "revenue_goal_planner.py": {
+      "module": "revenue_goal_planner",
+      "organ": "strategic",
+      "status": "TEMP_COMPAT"
+    },
+    "runtime_closure_planner.py": {
+      "module": "runtime_closure_planner",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "runtime_dependency_auditor.py": {
+      "module": "runtime_dependency_auditor",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "runtime_guards.py": {
+      "module": "runtime_guards",
+      "organ": "infrastructure",
+      "status": "TEMP_COMPAT"
+    },
+    "safe_fallbacks.py": {
+      "module": "safe_fallbacks",
+      "organ": "infrastructure",
+      "status": "TEMP_COMPAT"
+    },
+    "sdd_governance.py": {
+      "module": "sdd_governance",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "self_healing_planner.py": {
+      "module": "self_healing_planner",
+      "organ": "governance",
+      "status": "TEMP_COMPAT"
+    },
+    "self_improvement_runtime.py": {
+      "module": "self_improvement_runtime",
+      "organ": "governance",
+      "status": "TEMP_COMPAT"
+    },
+    "self_optimization.py": {
+      "module": "self_optimization",
+      "organ": "governance",
+      "status": "TEMP_COMPAT"
+    },
+    "self_worktree_orchestrator.py": {
+      "module": "self_worktree_orchestrator",
+      "organ": "cognition",
+      "status": "TEMP_COMPAT"
+    },
+    "semantic_graph_rag.py": {
+      "module": "semantic_graph_rag",
+      "organ": "model_mesh",
+      "status": "TEMP_COMPAT"
+    },
+    "semantic_ontology_mapper.py": {
+      "module": "semantic_ontology_mapper",
+      "organ": "model_mesh",
+      "status": "TEMP_COMPAT"
+    },
+    "semantic_retrieval_runtime.py": {
+      "module": "semantic_retrieval_runtime",
+      "organ": "model_mesh",
+      "status": "TEMP_COMPAT"
+    },
+    "sensor_first_guard.py": {
+      "module": "sensor_first_guard",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "session_store.py": {
+      "module": "session_store",
+      "organ": "memory",
+      "status": "TEMP_COMPAT"
+    },
+    "shadow_runtime_classifier.py": {
+      "module": "shadow_runtime_classifier",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "six_dimensional_context_runtime.py": {
+      "module": "six_dimensional_context_runtime",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "skill_binder.py": {
+      "module": "skill_binder",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "socraticode_gateway_adapter.py": {
+      "module": "socraticode_gateway_adapter",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "source_of_truth_conflict_detector.py": {
+      "module": "source_of_truth_conflict_detector",
+      "organ": "governance",
+      "status": "TEMP_COMPAT"
+    },
+    "sovereign_runtime_readiness.py": {
+      "module": "sovereign_runtime_readiness",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "spec_frontmatter_repair.py": {
+      "module": "spec_frontmatter_repair",
+      "organ": "governance",
+      "status": "TEMP_COMPAT"
+    },
+    "stale_memory_detector.py": {
+      "module": "stale_memory_detector",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "state_coherence_guard.py": {
+      "module": "state_coherence_guard",
+      "organ": "governance",
+      "status": "TEMP_COMPAT"
+    },
+    "strategic_partner_swarm.py": {
+      "module": "strategic_partner_swarm",
+      "organ": "strategic",
+      "status": "TEMP_COMPAT"
+    },
+    "strategic_question_generator.py": {
+      "module": "strategic_question_generator",
+      "organ": "strategic",
+      "status": "TEMP_COMPAT"
+    },
+    "supervisor_protocol.py": {
+      "module": "supervisor_protocol",
+      "organ": "governance",
+      "status": "TEMP_COMPAT"
+    },
+    "technical_debt_intelligence.py": {
+      "module": "technical_debt_intelligence",
+      "organ": "governance",
+      "status": "TEMP_COMPAT"
+    },
+    "token_cost_ledger.py": {
+      "module": "token_cost_ledger",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "token_economy_benchmark.py": {
+      "module": "token_economy_benchmark",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "tool_opportunity_detector.py": {
+      "module": "tool_opportunity_detector",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "total_project_truth_scan.py": {
+      "module": "total_project_truth_scan",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "trusted_workstation_mode.py": {
+      "module": "trusted_workstation_mode",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "tui_process_monitor.py": {
+      "module": "tui_process_monitor",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "vault_context_resolver.py": {
+      "module": "vault_context_resolver",
+      "organ": "memory",
+      "status": "TEMP_COMPAT"
+    },
+    "vault_curator.py": {
+      "module": "vault_curator",
+      "organ": "memory",
+      "status": "TEMP_COMPAT"
+    },
+    "vault_embedding_index.py": {
+      "module": "vault_embedding_index",
+      "organ": "memory",
+      "status": "TEMP_COMPAT"
+    },
+    "whole_body_repair_queue.py": {
+      "module": "whole_body_repair_queue",
+      "organ": "governance",
+      "status": "TEMP_COMPAT"
+    },
+    "whole_body_scanner.py": {
+      "module": "whole_body_scanner",
+      "organ": "governance",
+      "status": "TEMP_COMPAT"
+    },
+    "whole_body_scan_calibrator.py": {
+      "module": "whole_body_scan_calibrator",
+      "organ": "governance",
+      "status": "TEMP_COMPAT"
+    },
+    "wiring_matrix_builder.py": {
+      "module": "wiring_matrix_builder",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "witness.py": {
+      "module": "witness",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "workbench_vault_runtime.py": {
+      "module": "workbench_vault_runtime",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "aiwg_kernel/context_capsule_engine.py": {
+      "module": "aiwg_kernel_context_capsule_engine",
+      "organ": "governance",
+      "status": "TEMP_COMPAT"
+    },
+    "aiwg_kernel/kernel.py": {
+      "module": "aiwg_kernel_kernel",
+      "organ": "governance",
+      "status": "TEMP_COMPAT"
+    },
+    "application/cognitive/use_cases.py": {
+      "module": "application_cognitive_use_cases",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "cognition/cold_planner.py": {
+      "module": "cognition_cold_planner",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "cognition/epistemic_judge.py": {
+      "module": "cognition_epistemic_judge",
+      "organ": "cognition",
+      "status": "TEMP_COMPAT"
+    },
+    "cognition/pattern_miner.py": {
+      "module": "cognition_pattern_miner",
+      "organ": "cognition",
+      "status": "TEMP_COMPAT"
+    },
+    "cognition/pattern_miner_v2.py": {
+      "module": "cognition_pattern_miner_v2",
+      "organ": "cognition",
+      "status": "TEMP_COMPAT"
+    },
+    "cognition/persona_guardian.py": {
+      "module": "cognition_persona_guardian",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "domain/counterfactual_service.py": {
+      "module": "domain_counterfactual_service",
+      "organ": "cognition",
+      "status": "TEMP_COMPAT"
+    },
+    "domain/dtos.py": {
+      "module": "domain_dtos",
+      "organ": "domain",
+      "status": "TEMP_COMPAT"
+    },
+    "domain/embedding_contract.py": {
+      "module": "domain_embedding_contract",
+      "organ": "domain",
+      "status": "TEMP_COMPAT"
+    },
+    "domain/hypothesis_service.py": {
+      "module": "domain_hypothesis_service",
+      "organ": "cognition",
+      "status": "TEMP_COMPAT"
+    },
+    "domain/reasoning_logic.py": {
+      "module": "domain_reasoning_logic",
+      "organ": "cognition",
+      "status": "TEMP_COMPAT"
+    },
+    "domain/retrieval_service.py": {
+      "module": "domain_retrieval_service",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "domain/semantic_ports.py": {
+      "module": "domain_semantic_ports",
+      "organ": "infrastructure",
+      "status": "TEMP_COMPAT"
+    },
+    "domain/cognitive/models.py": {
+      "module": "domain_cognitive_models",
+      "organ": "memory",
+      "status": "TEMP_COMPAT"
+    },
+    "embedding_mesh/cli.py": {
+      "module": "embedding_mesh_cli",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "embedding_mesh/contracts.py": {
+      "module": "embedding_mesh_contracts",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "embedding_mesh/hardening_matrix.py": {
+      "module": "embedding_mesh_hardening_matrix",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "embedding_mesh/providers.py": {
+      "module": "embedding_mesh_providers",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "embedding_mesh/registry.py": {
+      "module": "embedding_mesh_registry",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "embedding_mesh/repo_indexer.py": {
+      "module": "embedding_mesh_repo_indexer",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "embedding_mesh/reranker.py": {
+      "module": "embedding_mesh_reranker",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "embedding_mesh/router.py": {
+      "module": "embedding_mesh_router",
+      "organ": "other",
+      "status": "TEMP_COMPAT"
+    },
+    "infrastructure/semantic_adapters.py": {
+      "module": "infrastructure_semantic_adapters",
+      "organ": "infrastructure",
+      "status": "TEMP_COMPAT"
+    },
+    "infrastructure/adapters/external.py": {
+      "module": "infrastructure_adapters_external",
+      "organ": "infrastructure",
+      "status": "TEMP_COMPAT"
+    },
+    "infrastructure/adapters/kuzu.py": {
+      "module": "infrastructure_adapters_kuzu",
+      "organ": "infrastructure",
+      "status": "TEMP_COMPAT"
+    },
+    "infrastructure/adapters/ledger.py": {
+      "module": "infrastructure_adapters_ledger",
+      "organ": "infrastructure",
+      "status": "TEMP_COMPAT"
+    },
+    "infrastructure/cognitive/adapters.py": {
+      "module": "infrastructure_cognitive_adapters",
+      "organ": "infrastructure",
+      "status": "TEMP_COMPAT"
+    },
+    "infrastructure/reasoning/providers.py": {
+      "module": "infrastructure_reasoning_providers",
+      "organ": "infrastructure",
+      "status": "TEMP_COMPAT"
+    },
+    "metacognition/contracts.py": {
+      "module": "metacognition_contracts",
+      "organ": "metacognition",
+      "status": "TEMP_COMPAT"
+    },
+    "metacognition/deliberation_hooks.py": {
+      "module": "metacognition_deliberation_hooks",
+      "organ": "metacognition",
+      "status": "TEMP_COMPAT"
+    },
+    "metacognition/input_hooks.py": {
+      "module": "metacognition_input_hooks",
+      "organ": "metacognition",
+      "status": "TEMP_COMPAT"
+    },
+    "metacognition/output_hooks.py": {
+      "module": "metacognition_output_hooks",
+      "organ": "metacognition",
+      "status": "TEMP_COMPAT"
+    },
+    "metacognition/pipeline.py": {
+      "module": "metacognition_pipeline",
+      "organ": "metacognition",
+      "status": "TEMP_COMPAT"
+    },
+    "metacognition/reasoning_hooks.py": {
+      "module": "metacognition_reasoning_hooks",
+      "organ": "metacognition",
+      "status": "TEMP_COMPAT"
+    },
+    "metacognition/semantic_hooks.py": {
+      "module": "metacognition_semantic_hooks",
+      "organ": "metacognition",
+      "status": "TEMP_COMPAT"
+    },
+    "proto/proto/dummie/v2/core_pb2.py": {
+      "module": "proto_proto_dummie_v2_core_pb2",
+      "organ": "proto",
+      "status": "TEMP_COMPAT"
+    },
+    "proto/proto/dummie/v2/core_pb2_grpc.py": {
+      "module": "proto_proto_dummie_v2_core_pb2_grpc",
+      "organ": "proto",
+      "status": "TEMP_COMPAT"
+    },
+    "proto/proto/dummie/v2/memory_pb2.py": {
+      "module": "proto_proto_dummie_v2_memory_pb2",
+      "organ": "proto",
+      "status": "TEMP_COMPAT"
+    },
+    "proto/proto/dummie/v2/memory_pb2_grpc.py": {
+      "module": "proto_proto_dummie_v2_memory_pb2_grpc",
+      "organ": "proto",
+      "status": "TEMP_COMPAT"
+    },
+    "proto/proto/dummie/v2/orchestration_pb2.py": {
+      "module": "proto_proto_dummie_v2_orchestration_pb2",
+      "organ": "proto",
+      "status": "TEMP_COMPAT"
+    },
+    "proto/proto/dummie/v2/orchestration_pb2_grpc.py": {
+      "module": "proto_proto_dummie_v2_orchestration_pb2_grpc",
+      "organ": "proto",
+      "status": "TEMP_COMPAT"
+    },
+    "sdk/client.py": {
+      "module": "sdk_client",
+      "organ": "sdk",
+      "status": "TEMP_COMPAT"
+    },
+    "sdk/sdk_core_api_pb2.py": {
+      "module": "sdk_sdk_core_api_pb2",
+      "organ": "sdk",
+      "status": "TEMP_COMPAT"
+    },
+    "sdk/sdk_core_api_pb2_grpc.py": {
+      "module": "sdk_sdk_core_api_pb2_grpc",
+      "organ": "sdk",
+      "status": "TEMP_COMPAT"
+    },
+    "sdk/session.py": {
+      "module": "sdk_session",
+      "organ": "sdk",
+      "status": "TEMP_COMPAT"
+    },
+    "structural_hardening/bindings.py": {
+      "module": "structural_hardening_bindings",
+      "organ": "structural_hardening",
+      "status": "TEMP_COMPAT"
+    },
+    "structural_hardening/classifier.py": {
+      "module": "structural_hardening_classifier",
+      "organ": "structural_hardening",
+      "status": "TEMP_COMPAT"
+    },
+    "structural_hardening/cli.py": {
+      "module": "structural_hardening_cli",
+      "organ": "structural_hardening",
+      "status": "TEMP_COMPAT"
+    },
+    "structural_hardening/contracts.py": {
+      "module": "structural_hardening_contracts",
+      "organ": "structural_hardening",
+      "status": "TEMP_COMPAT"
+    },
+    "structural_hardening/evidence.py": {
+      "module": "structural_hardening_evidence",
+      "organ": "structural_hardening",
+      "status": "TEMP_COMPAT"
+    },
+    "structural_hardening/matrix.py": {
+      "module": "structural_hardening_matrix",
+      "organ": "structural_hardening",
+      "status": "TEMP_COMPAT"
+    },
+    "structural_hardening/reporter.py": {
+      "module": "structural_hardening_reporter",
+      "organ": "structural_hardening",
+      "status": "TEMP_COMPAT"
+    }
+  }
+}
