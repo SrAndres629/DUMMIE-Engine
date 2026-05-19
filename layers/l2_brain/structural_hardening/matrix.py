@@ -55,11 +55,25 @@ class StructuralTriageMatrix:
 
         top_actions = _select_top_actions(findings, max_actions=max_actions, include_low_risk=include_low_risk)
 
+        # Compile binding registry counts
+        from .bindings import ContractBindingRegistry, BindingStatus
+        registry = ContractBindingRegistry()
+        all_bindings = registry.get_all_bindings()
+        bound_runtime = sum(1 for b in all_bindings if b.binding_status == BindingStatus.BOUND_ACTIVE_RUNTIME)
+        needs_manual = sum(1 for b in all_bindings if b.binding_status == BindingStatus.NEEDS_MANUAL_OWNER)
+        deferred = sum(1 for b in all_bindings if b.binding_status == BindingStatus.DEFERRED_NO_SAFE_ACTION)
+
         summary_counts = {
             "by_class": dict(sorted(by_class.items())),
             "by_risk": dict(sorted(by_risk.items())),
             "by_recommendation": dict(sorted(by_recommendation.items())),
+            "bindings_summary": {
+                "bound_active_runtime": bound_runtime,
+                "needs_manual_owner": needs_manual,
+                "deferred_no_safe_action": deferred,
+            }
         }
+
 
         report = StructuralTriageReport(
             generated_at=datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),

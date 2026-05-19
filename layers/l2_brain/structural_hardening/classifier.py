@@ -26,6 +26,39 @@ class StructuralClassifier:
 
         current_class = self._from_semantic_class(file_record.get("classification", "UNKNOWN"))
 
+        # Look up in ContractBindingRegistry
+        from .bindings import ContractBindingRegistry, BindingStatus
+        registry = ContractBindingRegistry()
+        binding = registry.get_binding(path)
+        if binding:
+            # Map structural class and risk based on binding status
+            proposed_class = binding.structural_class
+            risk = binding.risk_after
+            recommendation = binding.action
+            reasons_combined = reasons + [f"Bound to contract: {binding.notes}"]
+            evidence_combined = evidence_refs + binding.evidence_refs + [f"Spec Refs: {binding.spec_refs}", f"Test Refs: {binding.test_refs}"]
+            
+            # If deferred, Proposed class is still SHADOW_CANDIDATE to preserve honest shadow cand counts
+            if binding.binding_status == BindingStatus.DEFERRED_NO_SAFE_ACTION:
+                proposed_class = StructuralClass.SHADOW_CANDIDATE
+                
+            return self._make(
+                path,
+                current_class,
+                proposed_class,
+                risk,
+                recommendation,
+                binding.confidence,
+                evidence_combined,
+                reasons_combined,
+                binding.spec_refs,
+                binding.test_refs,
+                binding.runtime_refs,
+                proposed_class != StructuralClass.SHADOW_CANDIDATE,
+                binding.binding_status == BindingStatus.DEFERRED_NO_SAFE_ACTION or proposed_class == StructuralClass.SHADOW_CANDIDATE,
+            )
+
+
         if path.startswith(".aiwg/reports/"):
             return self._make(
                 path,

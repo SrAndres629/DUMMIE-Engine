@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-05-19T00:23:17.212200Z",
-  "base_commit": "9c875e6d40d263ead6ba7cc655dd1b0d590c061a",
+  "generated_at": "2026-05-19T00:29:37.896192Z",
+  "base_commit": "cde0a16f80deeacd297e15bc924b330735af48e6",
   "pack_name": "Structural Hardening Pack 2 - Contract-First Triage",
   "pack_status": "PASS_WITH_WARNINGS",
   "repo_health_status": "FAIL",
@@ -20126,22 +20126,31 @@
     {
       "path": "layers/l0_overseer/supervisor.py",
       "current_class": "UNKNOWN",
-      "proposed_class": "SHADOW_CANDIDATE",
-      "risk": "CRITICAL",
-      "recommendation": "NEEDS_OWNER",
-      "confidence": 0.84,
+      "proposed_class": "ACTIVE_RUNTIME",
+      "risk": "LOW",
+      "recommendation": "KEEP_AND_TEST",
+      "confidence": 1.0,
       "evidence_refs": [
         "FILE_EXISTS",
-        "IMPORTABLE"
+        "IMPORTABLE",
+        "IMPORTABLE: verified by test_l0_contract_imports.py",
+        "Spec Refs: ['doc/specs/103_cognitive_orchestrator.md']",
+        "Test Refs: ['layers/l0_overseer/tests/test_l0_contract_imports.py']"
       ],
       "reasons": [
-        "runtime candidate missing spec/test linkage"
+        "Bound to contract: System supervisor managing daemon restarts, locking, and sockets."
       ],
-      "related_specs": [],
-      "related_tests": [],
-      "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "related_specs": [
+        "doc/specs/103_cognitive_orchestrator.md"
+      ],
+      "related_tests": [
+        "layers/l0_overseer/tests/test_l0_contract_imports.py"
+      ],
+      "related_runtime": [
+        "layers/l1_nervous/bootstrap.py"
+      ],
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "layers/l0_overseer/__init__.py",
@@ -20223,22 +20232,31 @@
     {
       "path": "layers/l1_nervous/bootstrap.py",
       "current_class": "UNKNOWN",
-      "proposed_class": "SHADOW_CANDIDATE",
-      "risk": "CRITICAL",
-      "recommendation": "NEEDS_OWNER",
-      "confidence": 0.84,
+      "proposed_class": "ACTIVE_RUNTIME",
+      "risk": "LOW",
+      "recommendation": "KEEP_AND_TEST",
+      "confidence": 1.0,
       "evidence_refs": [
         "FILE_EXISTS",
-        "IMPORTABLE"
+        "IMPORTABLE",
+        "IMPORTABLE: verified by test_l1_contract_imports.py",
+        "Spec Refs: ['doc/specs/103_cognitive_orchestrator.md']",
+        "Test Refs: ['layers/l1_nervous/tests/test_l1_contract_imports.py']"
       ],
       "reasons": [
-        "runtime candidate missing spec/test linkage"
+        "Bound to contract: Nervous system bootstrap initialization routine. Wired directly to cognitive orchestration."
       ],
-      "related_specs": [],
-      "related_tests": [],
-      "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "related_specs": [
+        "doc/specs/103_cognitive_orchestrator.md"
+      ],
+      "related_tests": [
+        "layers/l1_nervous/tests/test_l1_contract_imports.py"
+      ],
+      "related_runtime": [
+        "layers/l2_brain/application/cognitive/use_cases.py"
+      ],
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "layers/l1_nervous/broker.py",
@@ -20398,22 +20416,31 @@
     {
       "path": "layers/l1_nervous/knowledge_adapters.py",
       "current_class": "UNKNOWN",
-      "proposed_class": "SHADOW_CANDIDATE",
-      "risk": "CRITICAL",
-      "recommendation": "NEEDS_OWNER",
-      "confidence": 0.84,
+      "proposed_class": "ACTIVE_RUNTIME",
+      "risk": "LOW",
+      "recommendation": "KEEP_AND_TEST",
+      "confidence": 1.0,
       "evidence_refs": [
         "FILE_EXISTS",
-        "IMPORTABLE"
+        "IMPORTABLE",
+        "IMPORTABLE: verified by test_l1_contract_imports.py",
+        "Spec Refs: ['doc/specs/103_cognitive_orchestrator.md']",
+        "Test Refs: ['layers/l1_nervous/tests/test_l1_contract_imports.py']"
       ],
       "reasons": [
-        "runtime candidate missing spec/test linkage"
+        "Bound to contract: Adapters bridging L1 external inputs with L2 cognitive vector representations."
       ],
-      "related_specs": [],
-      "related_tests": [],
-      "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "related_specs": [
+        "doc/specs/103_cognitive_orchestrator.md"
+      ],
+      "related_tests": [
+        "layers/l1_nervous/tests/test_l1_contract_imports.py"
+      ],
+      "related_runtime": [
+        "layers/l2_brain/embedding_mesh/router.py"
+      ],
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "layers/l1_nervous/main.go",
@@ -20479,22 +20506,31 @@
     {
       "path": "layers/l1_nervous/mcp_registry.py",
       "current_class": "UNKNOWN",
-      "proposed_class": "SHADOW_CANDIDATE",
-      "risk": "CRITICAL",
-      "recommendation": "NEEDS_OWNER",
-      "confidence": 0.84,
+      "proposed_class": "ACTIVE_RUNTIME",
+      "risk": "LOW",
+      "recommendation": "KEEP_AND_TEST",
+      "confidence": 1.0,
       "evidence_refs": [
         "FILE_EXISTS",
-        "IMPORTABLE"
+        "IMPORTABLE",
+        "IMPORTABLE: verified by test_l1_contract_imports.py",
+        "Spec Refs: ['doc/specs/103_cognitive_orchestrator.md']",
+        "Test Refs: ['layers/l1_nervous/tests/test_l1_contract_imports.py']"
       ],
       "reasons": [
-        "runtime candidate missing spec/test linkage"
+        "Bound to contract: Local registry managing capabilities and MCP schema binding contracts."
       ],
-      "related_specs": [],
-      "related_tests": [],
-      "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "related_specs": [
+        "doc/specs/103_cognitive_orchestrator.md"
+      ],
+      "related_tests": [
+        "layers/l1_nervous/tests/test_l1_contract_imports.py"
+      ],
+      "related_runtime": [
+        "layers/l2_brain/embedding_mesh/router.py"
+      ],
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "layers/l1_nervous/mcp_server.py",
@@ -20528,22 +20564,31 @@
     {
       "path": "layers/l1_nervous/mcp_transport.py",
       "current_class": "UNKNOWN",
-      "proposed_class": "SHADOW_CANDIDATE",
-      "risk": "CRITICAL",
-      "recommendation": "NEEDS_OWNER",
-      "confidence": 0.84,
+      "proposed_class": "ACTIVE_RUNTIME",
+      "risk": "LOW",
+      "recommendation": "KEEP_AND_TEST",
+      "confidence": 1.0,
       "evidence_refs": [
         "FILE_EXISTS",
-        "IMPORTABLE"
+        "IMPORTABLE",
+        "IMPORTABLE: verified by test_l1_contract_imports.py",
+        "Spec Refs: ['doc/specs/103_cognitive_orchestrator.md']",
+        "Test Refs: ['layers/l1_nervous/tests/test_l1_contract_imports.py']"
       ],
       "reasons": [
-        "runtime candidate missing spec/test linkage"
+        "Bound to contract: Asynchronous MCP client json-rpc sockets transport layer."
       ],
-      "related_specs": [],
-      "related_tests": [],
-      "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "related_specs": [
+        "doc/specs/103_cognitive_orchestrator.md"
+      ],
+      "related_tests": [
+        "layers/l1_nervous/tests/test_l1_contract_imports.py"
+      ],
+      "related_runtime": [
+        "layers/l1_nervous/mcp_registry.py"
+      ],
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "layers/l1_nervous/memory_ipc.py",
@@ -20610,22 +20655,32 @@
     {
       "path": "layers/l1_nervous/repo_guard.py",
       "current_class": "UNKNOWN",
-      "proposed_class": "SHADOW_CANDIDATE",
-      "risk": "CRITICAL",
-      "recommendation": "NEEDS_OWNER",
-      "confidence": 0.84,
+      "proposed_class": "ACTIVE_RUNTIME",
+      "risk": "LOW",
+      "recommendation": "KEEP_AND_TEST",
+      "confidence": 1.0,
       "evidence_refs": [
         "FILE_EXISTS",
-        "IMPORTABLE"
+        "IMPORTABLE",
+        "IMPORTABLE: verified by test_l1_contract_imports.py",
+        "Spec Refs: ['doc/specs/103_cognitive_orchestrator.md', 'AGENTS.md']",
+        "Test Refs: ['layers/l1_nervous/tests/test_l1_contract_imports.py']"
       ],
       "reasons": [
-        "runtime candidate missing spec/test linkage"
+        "Bound to contract: Repository governance monitor enforcing commit hooks and rules."
       ],
-      "related_specs": [],
-      "related_tests": [],
-      "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "related_specs": [
+        "AGENTS.md",
+        "doc/specs/103_cognitive_orchestrator.md"
+      ],
+      "related_tests": [
+        "layers/l1_nervous/tests/test_l1_contract_imports.py"
+      ],
+      "related_runtime": [
+        "layers/l1_nervous/application/use_cases.py"
+      ],
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "layers/l1_nervous/resources.py",
@@ -20654,22 +20709,31 @@
     {
       "path": "layers/l1_nervous/runtime_paths.py",
       "current_class": "UNKNOWN",
-      "proposed_class": "SHADOW_CANDIDATE",
-      "risk": "CRITICAL",
-      "recommendation": "NEEDS_OWNER",
-      "confidence": 0.84,
+      "proposed_class": "ACTIVE_RUNTIME",
+      "risk": "LOW",
+      "recommendation": "KEEP_AND_TEST",
+      "confidence": 1.0,
       "evidence_refs": [
         "FILE_EXISTS",
-        "IMPORTABLE"
+        "IMPORTABLE",
+        "IMPORTABLE: verified by test_l1_contract_imports.py",
+        "Spec Refs: ['doc/specs/103_cognitive_orchestrator.md']",
+        "Test Refs: ['layers/l1_nervous/tests/test_l1_contract_imports.py']"
       ],
       "reasons": [
-        "runtime candidate missing spec/test linkage"
+        "Bound to contract: Dynamic configuration paths resolver to guarantee host OS portability."
       ],
-      "related_specs": [],
-      "related_tests": [],
-      "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "related_specs": [
+        "doc/specs/103_cognitive_orchestrator.md"
+      ],
+      "related_tests": [
+        "layers/l1_nervous/tests/test_l1_contract_imports.py"
+      ],
+      "related_runtime": [
+        "layers/l1_nervous/bootstrap.py"
+      ],
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "layers/l1_nervous/sdd_remote_guard.py",
@@ -20724,16 +20788,21 @@
       "path": "layers/l1_nervous/sidecar.go",
       "current_class": "UNKNOWN",
       "proposed_class": "SHADOW_CANDIDATE",
-      "risk": "CRITICAL",
-      "recommendation": "NEEDS_OWNER",
-      "confidence": 0.84,
+      "risk": "HIGH",
+      "recommendation": "FREEZE_UNTIL_REVIEW",
+      "confidence": 0.8,
       "evidence_refs": [
-        "FILE_EXISTS"
+        "FILE_EXISTS",
+        "PHYSICAL_EXISTS: sidecar.go module",
+        "Spec Refs: ['doc/specs/103_cognitive_orchestrator.md']",
+        "Test Refs: []"
       ],
       "reasons": [
-        "runtime candidate missing spec/test linkage"
+        "Bound to contract: Daemon sidecar orchestrator written in Go to communicate with L0-Overseer."
       ],
-      "related_specs": [],
+      "related_specs": [
+        "doc/specs/103_cognitive_orchestrator.md"
+      ],
       "related_tests": [],
       "related_runtime": [],
       "safe_to_change": false,
@@ -20743,16 +20812,21 @@
       "path": "layers/l1_nervous/ssh_sandbox_wrapper.sh",
       "current_class": "UNKNOWN",
       "proposed_class": "SHADOW_CANDIDATE",
-      "risk": "CRITICAL",
-      "recommendation": "NEEDS_OWNER",
-      "confidence": 0.84,
+      "risk": "HIGH",
+      "recommendation": "FREEZE_UNTIL_REVIEW",
+      "confidence": 0.8,
       "evidence_refs": [
-        "FILE_EXISTS"
+        "FILE_EXISTS",
+        "PHYSICAL_EXISTS: executable shell sandbox wrapper",
+        "Spec Refs: ['doc/specs/103_cognitive_orchestrator.md']",
+        "Test Refs: []"
       ],
       "reasons": [
-        "runtime candidate missing spec/test linkage"
+        "Bound to contract: Executable bash sandbox harness to execute ssh routines securely. Left deferred for security auditing."
       ],
-      "related_specs": [],
+      "related_specs": [
+        "doc/specs/103_cognitive_orchestrator.md"
+      ],
       "related_tests": [],
       "related_runtime": [],
       "safe_to_change": false,
@@ -20828,22 +20902,31 @@
     {
       "path": "layers/l1_nervous/utils.py",
       "current_class": "UNKNOWN",
-      "proposed_class": "SHADOW_CANDIDATE",
-      "risk": "CRITICAL",
-      "recommendation": "NEEDS_OWNER",
-      "confidence": 0.84,
+      "proposed_class": "ACTIVE_RUNTIME",
+      "risk": "LOW",
+      "recommendation": "KEEP_AND_TEST",
+      "confidence": 1.0,
       "evidence_refs": [
         "FILE_EXISTS",
-        "IMPORTABLE"
+        "IMPORTABLE",
+        "IMPORTABLE: verified by test_l1_contract_imports.py",
+        "Spec Refs: ['doc/specs/103_cognitive_orchestrator.md']",
+        "Test Refs: ['layers/l1_nervous/tests/test_l1_contract_imports.py']"
       ],
       "reasons": [
-        "runtime candidate missing spec/test linkage"
+        "Bound to contract: Generic helper functions for binary stream processing."
       ],
-      "related_specs": [],
-      "related_tests": [],
-      "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "related_specs": [
+        "doc/specs/103_cognitive_orchestrator.md"
+      ],
+      "related_tests": [
+        "layers/l1_nervous/tests/test_l1_contract_imports.py"
+      ],
+      "related_runtime": [
+        "layers/l1_nervous/bootstrap.py"
+      ],
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "layers/l1_nervous/__init__.py",
@@ -26910,16 +26993,21 @@
       "path": "layers/l0_overseer/lib/overseer/application.ex",
       "current_class": "UNKNOWN",
       "proposed_class": "SHADOW_CANDIDATE",
-      "risk": "CRITICAL",
-      "recommendation": "NEEDS_OWNER",
-      "confidence": 0.84,
+      "risk": "HIGH",
+      "recommendation": "FREEZE_UNTIL_REVIEW",
+      "confidence": 0.8,
       "evidence_refs": [
-        "FILE_EXISTS"
+        "FILE_EXISTS",
+        "PHYSICAL_EXISTS: Elixir OTP application configuration",
+        "Spec Refs: ['doc/specs/103_cognitive_orchestrator.md']",
+        "Test Refs: []"
       ],
       "reasons": [
-        "runtime candidate missing spec/test linkage"
+        "Bound to contract: Elixir app supervisor specification of the overseer gateway. OTP tree compilation deferred."
       ],
-      "related_specs": [],
+      "related_specs": [
+        "doc/specs/103_cognitive_orchestrator.md"
+      ],
       "related_tests": [],
       "related_runtime": [],
       "safe_to_change": false,
@@ -26985,22 +27073,31 @@
     {
       "path": "layers/l1_nervous/application/use_cases.py",
       "current_class": "UNKNOWN",
-      "proposed_class": "SHADOW_CANDIDATE",
-      "risk": "CRITICAL",
-      "recommendation": "NEEDS_OWNER",
-      "confidence": 0.84,
+      "proposed_class": "ACTIVE_RUNTIME",
+      "risk": "LOW",
+      "recommendation": "KEEP_AND_TEST",
+      "confidence": 1.0,
       "evidence_refs": [
         "FILE_EXISTS",
-        "IMPORTABLE"
+        "IMPORTABLE",
+        "IMPORTABLE: verified by test_l1_contract_imports.py",
+        "Spec Refs: ['doc/specs/103_cognitive_orchestrator.md']",
+        "Test Refs: ['layers/l1_nervous/tests/test_l1_contract_imports.py']"
       ],
       "reasons": [
-        "runtime candidate missing spec/test linkage"
+        "Bound to contract: Active usecases of the L1 nervous layer orchestrating daemon processes."
       ],
-      "related_specs": [],
-      "related_tests": [],
-      "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "related_specs": [
+        "doc/specs/103_cognitive_orchestrator.md"
+      ],
+      "related_tests": [
+        "layers/l1_nervous/tests/test_l1_contract_imports.py"
+      ],
+      "related_runtime": [
+        "layers/l1_nervous/bootstrap.py"
+      ],
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "layers/l1_nervous/application/__init__.py",
@@ -27096,22 +27193,31 @@
     {
       "path": "layers/l1_nervous/domain/services.py",
       "current_class": "UNKNOWN",
-      "proposed_class": "SHADOW_CANDIDATE",
-      "risk": "CRITICAL",
-      "recommendation": "NEEDS_OWNER",
-      "confidence": 0.84,
+      "proposed_class": "ACTIVE_RUNTIME",
+      "risk": "LOW",
+      "recommendation": "KEEP_AND_TEST",
+      "confidence": 1.0,
       "evidence_refs": [
         "FILE_EXISTS",
-        "IMPORTABLE"
+        "IMPORTABLE",
+        "IMPORTABLE: verified by test_l1_contract_imports.py",
+        "Spec Refs: ['doc/specs/103_cognitive_orchestrator.md']",
+        "Test Refs: ['layers/l1_nervous/tests/test_l1_contract_imports.py']"
       ],
       "reasons": [
-        "runtime candidate missing spec/test linkage"
+        "Bound to contract: Domain services layer containing active cognitive state schemas."
       ],
-      "related_specs": [],
-      "related_tests": [],
-      "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "related_specs": [
+        "doc/specs/103_cognitive_orchestrator.md"
+      ],
+      "related_tests": [
+        "layers/l1_nervous/tests/test_l1_contract_imports.py"
+      ],
+      "related_runtime": [
+        "layers/l1_nervous/application/use_cases.py"
+      ],
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "layers/l1_nervous/domain/__init__.py",
@@ -28848,42 +28954,60 @@
     {
       "path": "layers/l1_nervous/tools_impl/nervous.py",
       "current_class": "UNKNOWN",
-      "proposed_class": "SHADOW_CANDIDATE",
-      "risk": "CRITICAL",
-      "recommendation": "NEEDS_OWNER",
-      "confidence": 0.84,
+      "proposed_class": "ACTIVE_RUNTIME",
+      "risk": "LOW",
+      "recommendation": "KEEP_AND_TEST",
+      "confidence": 1.0,
       "evidence_refs": [
         "FILE_EXISTS",
-        "IMPORTABLE"
+        "IMPORTABLE",
+        "IMPORTABLE: verified by test_l1_contract_imports.py",
+        "Spec Refs: ['doc/specs/103_cognitive_orchestrator.md']",
+        "Test Refs: ['layers/l1_nervous/tests/test_l1_contract_imports.py']"
       ],
       "reasons": [
-        "runtime candidate missing spec/test linkage"
+        "Bound to contract: Skill tool executions matching L1 capabilities contracts."
       ],
-      "related_specs": [],
-      "related_tests": [],
-      "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "related_specs": [
+        "doc/specs/103_cognitive_orchestrator.md"
+      ],
+      "related_tests": [
+        "layers/l1_nervous/tests/test_l1_contract_imports.py"
+      ],
+      "related_runtime": [
+        "layers/l1_nervous/mcp_registry.py"
+      ],
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "layers/l1_nervous/tools_impl/patch_transactions.py",
       "current_class": "UNKNOWN",
-      "proposed_class": "SHADOW_CANDIDATE",
-      "risk": "CRITICAL",
-      "recommendation": "NEEDS_OWNER",
-      "confidence": 0.84,
+      "proposed_class": "ACTIVE_RUNTIME",
+      "risk": "LOW",
+      "recommendation": "KEEP_AND_TEST",
+      "confidence": 1.0,
       "evidence_refs": [
         "FILE_EXISTS",
-        "IMPORTABLE"
+        "IMPORTABLE",
+        "IMPORTABLE: verified by test_l1_contract_imports.py",
+        "Spec Refs: ['doc/specs/103_cognitive_orchestrator.md']",
+        "Test Refs: ['layers/l1_nervous/tests/test_l1_contract_imports.py']"
       ],
       "reasons": [
-        "runtime candidate missing spec/test linkage"
+        "Bound to contract: Atomic database and memory patch transactional isolation boundaries."
       ],
-      "related_specs": [],
-      "related_tests": [],
-      "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "related_specs": [
+        "doc/specs/103_cognitive_orchestrator.md"
+      ],
+      "related_tests": [
+        "layers/l1_nervous/tests/test_l1_contract_imports.py"
+      ],
+      "related_runtime": [
+        "layers/l1_nervous/tools_impl/nervous.py"
+      ],
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "layers/l1_nervous/tools_impl/sdd.py",
@@ -29241,16 +29365,21 @@
       "path": "layers/l1_nervous/internal/skill/blueprint.go",
       "current_class": "UNKNOWN",
       "proposed_class": "SHADOW_CANDIDATE",
-      "risk": "CRITICAL",
-      "recommendation": "NEEDS_OWNER",
-      "confidence": 0.84,
+      "risk": "HIGH",
+      "recommendation": "FREEZE_UNTIL_REVIEW",
+      "confidence": 0.8,
       "evidence_refs": [
-        "FILE_EXISTS"
+        "FILE_EXISTS",
+        "PHYSICAL_EXISTS: compiled skill definition",
+        "Spec Refs: ['doc/specs/103_cognitive_orchestrator.md']",
+        "Test Refs: []"
       ],
       "reasons": [
-        "runtime candidate missing spec/test linkage"
+        "Bound to contract: Go binary definitions of dynamic skill. Toolchain compilation deferred until next phase."
       ],
-      "related_specs": [],
+      "related_specs": [
+        "doc/specs/103_cognitive_orchestrator.md"
+      ],
       "related_tests": [],
       "related_runtime": [],
       "safe_to_change": false,
@@ -29260,16 +29389,21 @@
       "path": "layers/l1_nervous/internal/skill/mcp_client.go",
       "current_class": "UNKNOWN",
       "proposed_class": "SHADOW_CANDIDATE",
-      "risk": "CRITICAL",
-      "recommendation": "NEEDS_OWNER",
-      "confidence": 0.84,
+      "risk": "HIGH",
+      "recommendation": "FREEZE_UNTIL_REVIEW",
+      "confidence": 0.8,
       "evidence_refs": [
-        "FILE_EXISTS"
+        "FILE_EXISTS",
+        "PHYSICAL_EXISTS: MCP client definition in Go",
+        "Spec Refs: ['doc/specs/103_cognitive_orchestrator.md']",
+        "Test Refs: []"
       ],
       "reasons": [
-        "runtime candidate missing spec/test linkage"
+        "Bound to contract: Fast Go JSON-RPC implementation for local sidecar daemon. Deferred due to toolchain compilation limits."
       ],
-      "related_specs": [],
+      "related_specs": [
+        "doc/specs/103_cognitive_orchestrator.md"
+      ],
       "related_tests": [],
       "related_runtime": [],
       "safe_to_change": false,
@@ -29279,16 +29413,21 @@
       "path": "layers/l1_nervous/internal/skill/types.go",
       "current_class": "UNKNOWN",
       "proposed_class": "SHADOW_CANDIDATE",
-      "risk": "CRITICAL",
-      "recommendation": "NEEDS_OWNER",
-      "confidence": 0.84,
+      "risk": "HIGH",
+      "recommendation": "FREEZE_UNTIL_REVIEW",
+      "confidence": 0.8,
       "evidence_refs": [
-        "FILE_EXISTS"
+        "FILE_EXISTS",
+        "PHYSICAL_EXISTS: Go struct schema",
+        "Spec Refs: ['doc/specs/103_cognitive_orchestrator.md']",
+        "Test Refs: []"
       ],
       "reasons": [
-        "runtime candidate missing spec/test linkage"
+        "Bound to contract: Standard definitions of memory nodes used inside the Go gateway client."
       ],
-      "related_specs": [],
+      "related_specs": [
+        "doc/specs/103_cognitive_orchestrator.md"
+      ],
       "related_tests": [],
       "related_runtime": [],
       "safe_to_change": false,
@@ -40712,7 +40851,7 @@
   ],
   "summary_counts": {
     "by_class": {
-      "ACTIVE_RUNTIME": 236,
+      "ACTIVE_RUNTIME": 248,
       "ACTIVE_SPEC": 559,
       "ACTIVE_TEST": 235,
       "CONFIG": 12,
@@ -40720,383 +40859,32 @@
       "GENERATED": 38,
       "LEGACY": 30,
       "ORPHAN_TEST_CANDIDATE": 3,
-      "SHADOW_CANDIDATE": 82,
+      "SHADOW_CANDIDATE": 70,
       "UNKNOWN": 144
     },
     "by_risk": {
-      "CRITICAL": 18,
-      "HIGH": 64,
-      "LOW": 322,
+      "HIGH": 70,
+      "LOW": 334,
       "MEDIUM": 936
     },
     "by_recommendation": {
-      "FREEZE_UNTIL_REVIEW": 144,
-      "KEEP_AND_TEST": 248,
+      "FREEZE_UNTIL_REVIEW": 150,
+      "KEEP_AND_TEST": 260,
       "MAP_TO_RUNTIME": 561,
       "MAP_TO_SPEC": 244,
       "MAP_TO_TEST": 20,
       "MARK_EXPERIMENTAL": 1,
       "MARK_GENERATED": 38,
       "MARK_LEGACY": 30,
-      "NEEDS_OWNER": 18,
       "NO_ACTION": 36
+    },
+    "bindings_summary": {
+      "bound_active_runtime": 12,
+      "needs_manual_owner": 0,
+      "deferred_no_safe_action": 6
     }
   },
   "top_actions": [
-    {
-      "path": "layers/l0_overseer/lib/overseer/application.ex",
-      "current_class": "UNKNOWN",
-      "proposed_class": "SHADOW_CANDIDATE",
-      "risk": "CRITICAL",
-      "recommendation": "NEEDS_OWNER",
-      "confidence": 0.84,
-      "evidence_refs": [
-        "FILE_EXISTS"
-      ],
-      "reasons": [
-        "runtime candidate missing spec/test linkage"
-      ],
-      "related_specs": [],
-      "related_tests": [],
-      "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
-    },
-    {
-      "path": "layers/l0_overseer/supervisor.py",
-      "current_class": "UNKNOWN",
-      "proposed_class": "SHADOW_CANDIDATE",
-      "risk": "CRITICAL",
-      "recommendation": "NEEDS_OWNER",
-      "confidence": 0.84,
-      "evidence_refs": [
-        "FILE_EXISTS",
-        "IMPORTABLE"
-      ],
-      "reasons": [
-        "runtime candidate missing spec/test linkage"
-      ],
-      "related_specs": [],
-      "related_tests": [],
-      "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
-    },
-    {
-      "path": "layers/l1_nervous/application/use_cases.py",
-      "current_class": "UNKNOWN",
-      "proposed_class": "SHADOW_CANDIDATE",
-      "risk": "CRITICAL",
-      "recommendation": "NEEDS_OWNER",
-      "confidence": 0.84,
-      "evidence_refs": [
-        "FILE_EXISTS",
-        "IMPORTABLE"
-      ],
-      "reasons": [
-        "runtime candidate missing spec/test linkage"
-      ],
-      "related_specs": [],
-      "related_tests": [],
-      "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
-    },
-    {
-      "path": "layers/l1_nervous/bootstrap.py",
-      "current_class": "UNKNOWN",
-      "proposed_class": "SHADOW_CANDIDATE",
-      "risk": "CRITICAL",
-      "recommendation": "NEEDS_OWNER",
-      "confidence": 0.84,
-      "evidence_refs": [
-        "FILE_EXISTS",
-        "IMPORTABLE"
-      ],
-      "reasons": [
-        "runtime candidate missing spec/test linkage"
-      ],
-      "related_specs": [],
-      "related_tests": [],
-      "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
-    },
-    {
-      "path": "layers/l1_nervous/domain/services.py",
-      "current_class": "UNKNOWN",
-      "proposed_class": "SHADOW_CANDIDATE",
-      "risk": "CRITICAL",
-      "recommendation": "NEEDS_OWNER",
-      "confidence": 0.84,
-      "evidence_refs": [
-        "FILE_EXISTS",
-        "IMPORTABLE"
-      ],
-      "reasons": [
-        "runtime candidate missing spec/test linkage"
-      ],
-      "related_specs": [],
-      "related_tests": [],
-      "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
-    },
-    {
-      "path": "layers/l1_nervous/internal/skill/blueprint.go",
-      "current_class": "UNKNOWN",
-      "proposed_class": "SHADOW_CANDIDATE",
-      "risk": "CRITICAL",
-      "recommendation": "NEEDS_OWNER",
-      "confidence": 0.84,
-      "evidence_refs": [
-        "FILE_EXISTS"
-      ],
-      "reasons": [
-        "runtime candidate missing spec/test linkage"
-      ],
-      "related_specs": [],
-      "related_tests": [],
-      "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
-    },
-    {
-      "path": "layers/l1_nervous/internal/skill/mcp_client.go",
-      "current_class": "UNKNOWN",
-      "proposed_class": "SHADOW_CANDIDATE",
-      "risk": "CRITICAL",
-      "recommendation": "NEEDS_OWNER",
-      "confidence": 0.84,
-      "evidence_refs": [
-        "FILE_EXISTS"
-      ],
-      "reasons": [
-        "runtime candidate missing spec/test linkage"
-      ],
-      "related_specs": [],
-      "related_tests": [],
-      "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
-    },
-    {
-      "path": "layers/l1_nervous/internal/skill/types.go",
-      "current_class": "UNKNOWN",
-      "proposed_class": "SHADOW_CANDIDATE",
-      "risk": "CRITICAL",
-      "recommendation": "NEEDS_OWNER",
-      "confidence": 0.84,
-      "evidence_refs": [
-        "FILE_EXISTS"
-      ],
-      "reasons": [
-        "runtime candidate missing spec/test linkage"
-      ],
-      "related_specs": [],
-      "related_tests": [],
-      "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
-    },
-    {
-      "path": "layers/l1_nervous/knowledge_adapters.py",
-      "current_class": "UNKNOWN",
-      "proposed_class": "SHADOW_CANDIDATE",
-      "risk": "CRITICAL",
-      "recommendation": "NEEDS_OWNER",
-      "confidence": 0.84,
-      "evidence_refs": [
-        "FILE_EXISTS",
-        "IMPORTABLE"
-      ],
-      "reasons": [
-        "runtime candidate missing spec/test linkage"
-      ],
-      "related_specs": [],
-      "related_tests": [],
-      "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
-    },
-    {
-      "path": "layers/l1_nervous/mcp_registry.py",
-      "current_class": "UNKNOWN",
-      "proposed_class": "SHADOW_CANDIDATE",
-      "risk": "CRITICAL",
-      "recommendation": "NEEDS_OWNER",
-      "confidence": 0.84,
-      "evidence_refs": [
-        "FILE_EXISTS",
-        "IMPORTABLE"
-      ],
-      "reasons": [
-        "runtime candidate missing spec/test linkage"
-      ],
-      "related_specs": [],
-      "related_tests": [],
-      "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
-    },
-    {
-      "path": "layers/l1_nervous/mcp_transport.py",
-      "current_class": "UNKNOWN",
-      "proposed_class": "SHADOW_CANDIDATE",
-      "risk": "CRITICAL",
-      "recommendation": "NEEDS_OWNER",
-      "confidence": 0.84,
-      "evidence_refs": [
-        "FILE_EXISTS",
-        "IMPORTABLE"
-      ],
-      "reasons": [
-        "runtime candidate missing spec/test linkage"
-      ],
-      "related_specs": [],
-      "related_tests": [],
-      "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
-    },
-    {
-      "path": "layers/l1_nervous/repo_guard.py",
-      "current_class": "UNKNOWN",
-      "proposed_class": "SHADOW_CANDIDATE",
-      "risk": "CRITICAL",
-      "recommendation": "NEEDS_OWNER",
-      "confidence": 0.84,
-      "evidence_refs": [
-        "FILE_EXISTS",
-        "IMPORTABLE"
-      ],
-      "reasons": [
-        "runtime candidate missing spec/test linkage"
-      ],
-      "related_specs": [],
-      "related_tests": [],
-      "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
-    },
-    {
-      "path": "layers/l1_nervous/runtime_paths.py",
-      "current_class": "UNKNOWN",
-      "proposed_class": "SHADOW_CANDIDATE",
-      "risk": "CRITICAL",
-      "recommendation": "NEEDS_OWNER",
-      "confidence": 0.84,
-      "evidence_refs": [
-        "FILE_EXISTS",
-        "IMPORTABLE"
-      ],
-      "reasons": [
-        "runtime candidate missing spec/test linkage"
-      ],
-      "related_specs": [],
-      "related_tests": [],
-      "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
-    },
-    {
-      "path": "layers/l1_nervous/sidecar.go",
-      "current_class": "UNKNOWN",
-      "proposed_class": "SHADOW_CANDIDATE",
-      "risk": "CRITICAL",
-      "recommendation": "NEEDS_OWNER",
-      "confidence": 0.84,
-      "evidence_refs": [
-        "FILE_EXISTS"
-      ],
-      "reasons": [
-        "runtime candidate missing spec/test linkage"
-      ],
-      "related_specs": [],
-      "related_tests": [],
-      "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
-    },
-    {
-      "path": "layers/l1_nervous/ssh_sandbox_wrapper.sh",
-      "current_class": "UNKNOWN",
-      "proposed_class": "SHADOW_CANDIDATE",
-      "risk": "CRITICAL",
-      "recommendation": "NEEDS_OWNER",
-      "confidence": 0.84,
-      "evidence_refs": [
-        "FILE_EXISTS"
-      ],
-      "reasons": [
-        "runtime candidate missing spec/test linkage"
-      ],
-      "related_specs": [],
-      "related_tests": [],
-      "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
-    },
-    {
-      "path": "layers/l1_nervous/tools_impl/nervous.py",
-      "current_class": "UNKNOWN",
-      "proposed_class": "SHADOW_CANDIDATE",
-      "risk": "CRITICAL",
-      "recommendation": "NEEDS_OWNER",
-      "confidence": 0.84,
-      "evidence_refs": [
-        "FILE_EXISTS",
-        "IMPORTABLE"
-      ],
-      "reasons": [
-        "runtime candidate missing spec/test linkage"
-      ],
-      "related_specs": [],
-      "related_tests": [],
-      "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
-    },
-    {
-      "path": "layers/l1_nervous/tools_impl/patch_transactions.py",
-      "current_class": "UNKNOWN",
-      "proposed_class": "SHADOW_CANDIDATE",
-      "risk": "CRITICAL",
-      "recommendation": "NEEDS_OWNER",
-      "confidence": 0.84,
-      "evidence_refs": [
-        "FILE_EXISTS",
-        "IMPORTABLE"
-      ],
-      "reasons": [
-        "runtime candidate missing spec/test linkage"
-      ],
-      "related_specs": [],
-      "related_tests": [],
-      "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
-    },
-    {
-      "path": "layers/l1_nervous/utils.py",
-      "current_class": "UNKNOWN",
-      "proposed_class": "SHADOW_CANDIDATE",
-      "risk": "CRITICAL",
-      "recommendation": "NEEDS_OWNER",
-      "confidence": 0.84,
-      "evidence_refs": [
-        "FILE_EXISTS",
-        "IMPORTABLE"
-      ],
-      "reasons": [
-        "runtime candidate missing spec/test linkage"
-      ],
-      "related_specs": [],
-      "related_tests": [],
-      "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
-    },
     {
       "path": "layers/l2_brain/action_graph.py",
       "current_class": "UNKNOWN",
@@ -41719,6 +41507,366 @@
     },
     {
       "path": "layers/l2_brain/metagateway_benchmark.py",
+      "current_class": "UNKNOWN",
+      "proposed_class": "SHADOW_CANDIDATE",
+      "risk": "HIGH",
+      "recommendation": "MAP_TO_SPEC",
+      "confidence": 0.84,
+      "evidence_refs": [
+        "FILE_EXISTS",
+        "IMPORTABLE"
+      ],
+      "reasons": [
+        "runtime candidate missing spec/test linkage"
+      ],
+      "related_specs": [],
+      "related_tests": [],
+      "related_runtime": [],
+      "safe_to_change": false,
+      "requires_human_review": true
+    },
+    {
+      "path": "layers/l2_brain/model_discovery.py",
+      "current_class": "UNKNOWN",
+      "proposed_class": "SHADOW_CANDIDATE",
+      "risk": "HIGH",
+      "recommendation": "MAP_TO_SPEC",
+      "confidence": 0.84,
+      "evidence_refs": [
+        "FILE_EXISTS",
+        "IMPORTABLE"
+      ],
+      "reasons": [
+        "runtime candidate missing spec/test linkage"
+      ],
+      "related_specs": [],
+      "related_tests": [],
+      "related_runtime": [],
+      "safe_to_change": false,
+      "requires_human_review": true
+    },
+    {
+      "path": "layers/l2_brain/model_executor.py",
+      "current_class": "UNKNOWN",
+      "proposed_class": "SHADOW_CANDIDATE",
+      "risk": "HIGH",
+      "recommendation": "MAP_TO_SPEC",
+      "confidence": 0.84,
+      "evidence_refs": [
+        "FILE_EXISTS",
+        "IMPORTABLE"
+      ],
+      "reasons": [
+        "runtime candidate missing spec/test linkage"
+      ],
+      "related_specs": [],
+      "related_tests": [],
+      "related_runtime": [],
+      "safe_to_change": false,
+      "requires_human_review": true
+    },
+    {
+      "path": "layers/l2_brain/nervous_pulse.py",
+      "current_class": "UNKNOWN",
+      "proposed_class": "SHADOW_CANDIDATE",
+      "risk": "HIGH",
+      "recommendation": "MAP_TO_SPEC",
+      "confidence": 0.84,
+      "evidence_refs": [
+        "FILE_EXISTS",
+        "IMPORTABLE"
+      ],
+      "reasons": [
+        "runtime candidate missing spec/test linkage"
+      ],
+      "related_specs": [],
+      "related_tests": [],
+      "related_runtime": [],
+      "safe_to_change": false,
+      "requires_human_review": true
+    },
+    {
+      "path": "layers/l2_brain/neuron_ledger.py",
+      "current_class": "UNKNOWN",
+      "proposed_class": "SHADOW_CANDIDATE",
+      "risk": "HIGH",
+      "recommendation": "MAP_TO_SPEC",
+      "confidence": 0.84,
+      "evidence_refs": [
+        "FILE_EXISTS",
+        "IMPORTABLE"
+      ],
+      "reasons": [
+        "runtime candidate missing spec/test linkage"
+      ],
+      "related_specs": [],
+      "related_tests": [],
+      "related_runtime": [],
+      "safe_to_change": false,
+      "requires_human_review": true
+    },
+    {
+      "path": "layers/l2_brain/observability.py",
+      "current_class": "UNKNOWN",
+      "proposed_class": "SHADOW_CANDIDATE",
+      "risk": "HIGH",
+      "recommendation": "MAP_TO_SPEC",
+      "confidence": 0.84,
+      "evidence_refs": [
+        "FILE_EXISTS",
+        "IMPORTABLE"
+      ],
+      "reasons": [
+        "runtime candidate missing spec/test linkage"
+      ],
+      "related_specs": [],
+      "related_tests": [],
+      "related_runtime": [],
+      "safe_to_change": false,
+      "requires_human_review": true
+    },
+    {
+      "path": "layers/l2_brain/operational_truth_collectors.py",
+      "current_class": "UNKNOWN",
+      "proposed_class": "SHADOW_CANDIDATE",
+      "risk": "HIGH",
+      "recommendation": "MAP_TO_SPEC",
+      "confidence": 0.84,
+      "evidence_refs": [
+        "FILE_EXISTS",
+        "IMPORTABLE"
+      ],
+      "reasons": [
+        "runtime candidate missing spec/test linkage"
+      ],
+      "related_specs": [],
+      "related_tests": [],
+      "related_runtime": [],
+      "safe_to_change": false,
+      "requires_human_review": true
+    },
+    {
+      "path": "layers/l2_brain/operationalization_pack_2_runner.py",
+      "current_class": "UNKNOWN",
+      "proposed_class": "SHADOW_CANDIDATE",
+      "risk": "HIGH",
+      "recommendation": "MAP_TO_SPEC",
+      "confidence": 0.84,
+      "evidence_refs": [
+        "FILE_EXISTS",
+        "IMPORTABLE"
+      ],
+      "reasons": [
+        "runtime candidate missing spec/test linkage"
+      ],
+      "related_specs": [],
+      "related_tests": [],
+      "related_runtime": [],
+      "safe_to_change": false,
+      "requires_human_review": true
+    },
+    {
+      "path": "layers/l2_brain/prompt_preprocessor.py",
+      "current_class": "UNKNOWN",
+      "proposed_class": "SHADOW_CANDIDATE",
+      "risk": "HIGH",
+      "recommendation": "MAP_TO_SPEC",
+      "confidence": 0.84,
+      "evidence_refs": [
+        "FILE_EXISTS",
+        "IMPORTABLE"
+      ],
+      "reasons": [
+        "runtime candidate missing spec/test linkage"
+      ],
+      "related_specs": [],
+      "related_tests": [],
+      "related_runtime": [],
+      "safe_to_change": false,
+      "requires_human_review": true
+    },
+    {
+      "path": "layers/l2_brain/safe_fallbacks.py",
+      "current_class": "UNKNOWN",
+      "proposed_class": "SHADOW_CANDIDATE",
+      "risk": "HIGH",
+      "recommendation": "MAP_TO_SPEC",
+      "confidence": 0.84,
+      "evidence_refs": [
+        "FILE_EXISTS",
+        "IMPORTABLE"
+      ],
+      "reasons": [
+        "runtime candidate missing spec/test linkage"
+      ],
+      "related_specs": [],
+      "related_tests": [],
+      "related_runtime": [],
+      "safe_to_change": false,
+      "requires_human_review": true
+    },
+    {
+      "path": "layers/l2_brain/sdk/client.py",
+      "current_class": "UNKNOWN",
+      "proposed_class": "SHADOW_CANDIDATE",
+      "risk": "HIGH",
+      "recommendation": "MAP_TO_SPEC",
+      "confidence": 0.84,
+      "evidence_refs": [
+        "FILE_EXISTS",
+        "IMPORTABLE"
+      ],
+      "reasons": [
+        "runtime candidate missing spec/test linkage"
+      ],
+      "related_specs": [],
+      "related_tests": [],
+      "related_runtime": [],
+      "safe_to_change": false,
+      "requires_human_review": true
+    },
+    {
+      "path": "layers/l2_brain/semantic_cache.py",
+      "current_class": "UNKNOWN",
+      "proposed_class": "SHADOW_CANDIDATE",
+      "risk": "HIGH",
+      "recommendation": "MAP_TO_SPEC",
+      "confidence": 0.84,
+      "evidence_refs": [
+        "FILE_EXISTS",
+        "IMPORTABLE"
+      ],
+      "reasons": [
+        "runtime candidate missing spec/test linkage"
+      ],
+      "related_specs": [],
+      "related_tests": [],
+      "related_runtime": [],
+      "safe_to_change": false,
+      "requires_human_review": true
+    },
+    {
+      "path": "layers/l2_brain/semantic_graph_rag.py",
+      "current_class": "UNKNOWN",
+      "proposed_class": "SHADOW_CANDIDATE",
+      "risk": "HIGH",
+      "recommendation": "MAP_TO_SPEC",
+      "confidence": 0.84,
+      "evidence_refs": [
+        "FILE_EXISTS",
+        "IMPORTABLE"
+      ],
+      "reasons": [
+        "runtime candidate missing spec/test linkage"
+      ],
+      "related_specs": [],
+      "related_tests": [],
+      "related_runtime": [],
+      "safe_to_change": false,
+      "requires_human_review": true
+    },
+    {
+      "path": "layers/l2_brain/skill_binder.py",
+      "current_class": "UNKNOWN",
+      "proposed_class": "SHADOW_CANDIDATE",
+      "risk": "HIGH",
+      "recommendation": "MAP_TO_SPEC",
+      "confidence": 0.84,
+      "evidence_refs": [
+        "FILE_EXISTS",
+        "IMPORTABLE"
+      ],
+      "reasons": [
+        "runtime candidate missing spec/test linkage"
+      ],
+      "related_specs": [],
+      "related_tests": [],
+      "related_runtime": [],
+      "safe_to_change": false,
+      "requires_human_review": true
+    },
+    {
+      "path": "layers/l2_brain/source_of_truth_conflict_detector.py",
+      "current_class": "UNKNOWN",
+      "proposed_class": "SHADOW_CANDIDATE",
+      "risk": "HIGH",
+      "recommendation": "MAP_TO_SPEC",
+      "confidence": 0.84,
+      "evidence_refs": [
+        "FILE_EXISTS",
+        "IMPORTABLE"
+      ],
+      "reasons": [
+        "runtime candidate missing spec/test linkage"
+      ],
+      "related_specs": [],
+      "related_tests": [],
+      "related_runtime": [],
+      "safe_to_change": false,
+      "requires_human_review": true
+    },
+    {
+      "path": "layers/l2_brain/spec_frontmatter_repair.py",
+      "current_class": "UNKNOWN",
+      "proposed_class": "SHADOW_CANDIDATE",
+      "risk": "HIGH",
+      "recommendation": "MAP_TO_SPEC",
+      "confidence": 0.84,
+      "evidence_refs": [
+        "FILE_EXISTS",
+        "IMPORTABLE"
+      ],
+      "reasons": [
+        "runtime candidate missing spec/test linkage"
+      ],
+      "related_specs": [],
+      "related_tests": [],
+      "related_runtime": [],
+      "safe_to_change": false,
+      "requires_human_review": true
+    },
+    {
+      "path": "layers/l2_brain/src/brain/application/interfaces.py",
+      "current_class": "UNKNOWN",
+      "proposed_class": "SHADOW_CANDIDATE",
+      "risk": "HIGH",
+      "recommendation": "MAP_TO_SPEC",
+      "confidence": 0.84,
+      "evidence_refs": [
+        "FILE_EXISTS",
+        "IMPORTABLE"
+      ],
+      "reasons": [
+        "runtime candidate missing spec/test linkage"
+      ],
+      "related_specs": [],
+      "related_tests": [],
+      "related_runtime": [],
+      "safe_to_change": false,
+      "requires_human_review": true
+    },
+    {
+      "path": "layers/l2_brain/src/brain/application/use_cases/crystallization.py",
+      "current_class": "UNKNOWN",
+      "proposed_class": "SHADOW_CANDIDATE",
+      "risk": "HIGH",
+      "recommendation": "MAP_TO_SPEC",
+      "confidence": 0.84,
+      "evidence_refs": [
+        "FILE_EXISTS",
+        "IMPORTABLE"
+      ],
+      "reasons": [
+        "runtime candidate missing spec/test linkage"
+      ],
+      "related_specs": [],
+      "related_tests": [],
+      "related_runtime": [],
+      "safe_to_change": false,
+      "requires_human_review": true
+    },
+    {
+      "path": "layers/l2_brain/src/brain/application/use_cases/lessons_use_case.py",
       "current_class": "UNKNOWN",
       "proposed_class": "SHADOW_CANDIDATE",
       "risk": "HIGH",

@@ -18,6 +18,8 @@ def write_reports(
     triage_md = reports_dir / "structural_hardening_triage_latest.md"
     actions_json = reports_dir / "structural_hardening_actions_latest.json"
     actions_md = reports_dir / "structural_hardening_actions_latest.md"
+    bindings_json = reports_dir / "structural_contract_bindings_latest.json"
+    bindings_md = reports_dir / "structural_contract_bindings_latest.md"
 
     triage_json.write_text(report.model_dump_json(indent=2), encoding="utf-8")
     triage_md.write_text(_build_triage_markdown(report, max_actions=max_actions), encoding="utf-8")
@@ -26,12 +28,23 @@ def write_reports(
     actions_json.write_text(json.dumps({"actions": action_rows}, indent=2), encoding="utf-8")
     actions_md.write_text(_build_actions_markdown(report, max_actions=max_actions), encoding="utf-8")
 
+    # Generate contract bindings report
+    from .bindings import ContractBindingRegistry
+    registry = ContractBindingRegistry()
+    all_bindings = registry.get_all_bindings()
+    bindings_rows = [b.model_dump(mode="json") for b in all_bindings]
+    bindings_json.write_text(json.dumps({"bindings": bindings_rows}, indent=2), encoding="utf-8")
+    bindings_md.write_text(_build_bindings_markdown(all_bindings), encoding="utf-8")
+
     return {
         "triage_json": triage_json,
         "triage_md": triage_md,
         "actions_json": actions_json,
         "actions_md": actions_md,
+        "bindings_json": bindings_json,
+        "bindings_md": bindings_md,
     }
+
 
 
 def _build_triage_markdown(report: StructuralTriageReport, max_actions: int) -> str:
@@ -126,3 +139,25 @@ def _build_actions_markdown(report: StructuralTriageReport, max_actions: int) ->
     if len(lines) == 3:
         lines.append("- none")
     return "\n".join(lines) + "\n"
+
+
+def _build_bindings_markdown(bindings: list) -> str:
+    lines = [
+        "# Structural Contract Bindings",
+        "",
+        "## Summary",
+        f"- Total Bindings: {len(bindings)}",
+        "",
+        "## Bindings List",
+        "",
+        "| Path | Layer | Owner Domain | Status | Spec Refs | Test Refs | Risk After | Notes |",
+        "| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |",
+    ]
+    for b in sorted(bindings, key=lambda x: x.path):
+        specs_str = ", ".join(b.spec_refs) if b.spec_refs else "None"
+        tests_str = ", ".join(b.test_refs) if b.test_refs else "None"
+        lines.append(
+            f"| `{b.path}` | {b.layer} | {b.owner_domain} | **{b.binding_status.value}** | {specs_str} | {tests_str} | `{b.risk_after.value}` | {b.notes} |"
+        )
+    return "\n".join(lines) + "\n"
+
