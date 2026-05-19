@@ -1,6 +1,6 @@
 {
   "decision": "PASS",
-  "step_id": "flywheel-46978113",
+  "step_id": "flywheel-aa8b2379",
   "evolution_delta": {
     "belief_changed": "From 'System is ready' to 'System has epistemic debt'",
     "evidence_source": "readiness_score_calibration_latest.json",
@@ -10,10 +10,10 @@
   "belief_revision": "System believed it was fully ready; evidence shows epistemic debt remains. 4 models were quarantined due to overconfidence.",
   "action_revision": "Next recommended action: repair_kuzu_persistence",
   "model_hygiene_summary": {
-    "models_scanned": 59,
-    "valid_count": 16,
+    "models_scanned": 64,
+    "valid_count": 17,
     "stale_count": 4,
-    "superseded_count": 26,
+    "superseded_count": 30,
     "quarantined_count": 4,
     "unsafe_rejected_count": 0,
     "needs_review_count": 9,
@@ -26,5 +26,5 @@
     "repair_kuzu_persistence",
     "autonomous_scaling"
   ],
-  "timestamp": "2026-05-17T02:08:07.403167+00:00"
+  "timestamp": "2026-05-19T03:22:38.807630+00:00"
 }

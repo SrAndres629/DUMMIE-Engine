@@ -79,5 +79,5 @@ class RerankRequest(BaseModel):
 class RerankResponse(BaseModel):
     ranked_candidates: List[Dict[str, Any]] = Field(..., description="Candidates with calculated similarity scores")
     model_used: str = Field(..., description="Verification model name")
-    degraded: bool = Field(True, description="Always True unless an ML cross-encoder is configured")
+    degraded: bool = Field(False, description="True if operating under fallback or reduced capacity")
     reason: str = Field("", description="Warning details or fallback explanation")

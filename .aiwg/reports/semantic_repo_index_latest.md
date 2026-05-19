@@ -6,21 +6,21 @@
 - semantic_mode: degraded_semantic_mode
 
 ## Summary Metrics
-- generated_at: 2026-05-19T03:29:50.303388Z
-- files_scanned: 1377
-- files_indexed: 1360
-- excluded_files_count: 120894
+- generated_at: 2026-05-19T03:34:56.911513Z
+- files_scanned: 1379
+- files_indexed: 1362
+- excluded_files_count: 120908
 - excluded_dirs_count: 11943
-- indexed_first_party_files: 1314
+- indexed_first_party_files: 1316
 - indexed_legacy_files: 21
 - indexed_generated_files: 25
 - indexed_vendor_files: 0
 - max_file_bytes: 200000
-- degraded_embeddings: 715
+- degraded_embeddings: 717
 
 ### Excluded by Reason
 - binary: 4
-- exclude_dir: 97056
+- exclude_dir: 97070
 - exclude_prefix: 7364
 - not_included: 16457
 - too_large: 13
@@ -226,4 +226,4 @@
 - [SPEC] doc/specs/128_debate_review_runtime.md | type=SPEC | cap=TEXT_FAST | space=text_fast_bge_small_384 | degraded=False
 - [SPEC] doc/specs/128_debate_review_runtime.rules.json | type=SPEC | cap=TEXT_FAST | space=text_fast_bge_small_384 | degraded=False
 - [SPEC] doc/specs/129_mission_autonomy_contract.feature | type=SPEC | cap=TEXT_FAST | space=text_fast_bge_small_384 | degraded=False
-- ... truncated (1160 files not shown)
+- ... truncated (1162 files not shown)

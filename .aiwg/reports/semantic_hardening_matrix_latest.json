@@ -1,23 +1,23 @@
 {
-  "generated_at": "2026-05-19T03:29:56.182180Z",
-  "files_scanned": 1377,
-  "files_indexed": 1360,
-  "total_modules": 1360,
+  "generated_at": "2026-05-19T03:35:03.012995Z",
+  "files_scanned": 1379,
+  "files_indexed": 1362,
+  "total_modules": 1362,
   "classification_counts": {
-    "ACTIVE_RUNTIME": 202,
+    "ACTIVE_RUNTIME": 203,
     "ACTIVE_SPEC": 559,
-    "ACTIVE_TEST": 250,
+    "ACTIVE_TEST": 252,
     "CONFIG": 11,
     "GENERATED": 25,
     "LEGACY": 21,
     "REPORT": 67,
-    "SHADOW_CANDIDATE": 140,
+    "SHADOW_CANDIDATE": 139,
     "UNKNOWN": 85
   },
   "recommendation_counts": {
     "archive_or_delete_later": 21,
     "keep_and_test": 172,
-    "map_to_runtime": 242,
+    "map_to_runtime": 244,
     "map_to_spec": 249,
     "mark_generated": 25,
     "move_to_legacy": 85,
@@ -28,17 +28,17 @@
   "repo_health_status": "FAIL",
   "semantic_mode": "degraded_semantic_mode",
   "index_mode": "deterministic_index_mode",
-  "degraded_embeddings": 715,
-  "excluded_files_count": 120894,
+  "degraded_embeddings": 717,
+  "excluded_files_count": 120908,
   "excluded_dirs_count": 11943,
   "excluded_by_reason": {
-    "exclude_dir": 97056,
+    "exclude_dir": 97070,
     "exclude_prefix": 7364,
     "not_included": 16457,
     "too_large": 13,
     "binary": 4
   },
-  "indexed_first_party_files": 1314,
+  "indexed_first_party_files": 1316,
   "indexed_legacy_files": 21,
   "indexed_generated_files": 25,
   "indexed_vendor_files": 0,
@@ -35385,30 +35385,33 @@
     },
     {
       "module": "layers/l2_brain/embedding_mesh/reranker.py",
-      "classification": "SHADOW_CANDIDATE",
+      "classification": "ACTIVE_RUNTIME",
       "likely_specs": [],
-      "likely_tests": [],
+      "likely_tests": [
+        "layers/l2_brain/tests/test_pack3_1_hybrid_reranker.py"
+      ],
       "related_reports": [],
       "semantic_neighbors": [
         {
-          "path": "proto/dummie/skill.proto",
-          "similarity": 0.1672
-        },
-        {
-          "path": "layers/l2_brain/tui_process_monitor.py",
-          "similarity": 0.1669
+          "path": "layers/l2_brain/operationalization_review.py",
+          "similarity": 0.1557
         },
         {
           "path": "proto/orchestration.pb.go",
-          "similarity": 0.1637
+          "similarity": 0.1506
+        },
+        {
+          "path": "layers/l1_nervous/proto/orchestration.pb.go",
+          "similarity": 0.1506
         }
       ],
-      "risk": "high",
+      "risk": "medium",
       "recommendation": "map_to_spec",
       "evidence": [
         "file_exists",
         "language_detected",
-        "embedded_or_degraded"
+        "embedded_or_degraded",
+        "referenced_by_test"
       ]
     },
     {
@@ -40739,6 +40742,71 @@
         {
           "path": "layers/l1_nervous/proto/orchestration.pb.go",
           "similarity": 0.1575
+        }
+      ],
+      "risk": "medium",
+      "recommendation": "map_to_runtime",
+      "evidence": [
+        "file_exists",
+        "language_detected",
+        "embedded_or_degraded",
+        "referenced_by_report"
+      ]
+    },
+    {
+      "module": "layers/l2_brain/tests/test_pack3_0_real_embedding_activation.py",
+      "classification": "ACTIVE_TEST",
+      "likely_specs": [
+        "doc/specs/188_embedding_activation_verifier.feature",
+        "doc/specs/188_embedding_activation_verifier.md",
+        "doc/specs/188_embedding_activation_verifier.rules.json"
+      ],
+      "likely_tests": [],
+      "related_reports": [],
+      "semantic_neighbors": [
+        {
+          "path": "proto/dummie/skill.proto",
+          "similarity": 0.1807
+        },
+        {
+          "path": "layers/l1_nervous/memory_ipc.py",
+          "similarity": 0.1756
+        },
+        {
+          "path": "layers/l2_brain/operationalization_review.py",
+          "similarity": 0.1748
+        }
+      ],
+      "risk": "medium",
+      "recommendation": "map_to_runtime",
+      "evidence": [
+        "file_exists",
+        "language_detected",
+        "embedded_or_degraded",
+        "referenced_by_spec"
+      ]
+    },
+    {
+      "module": "layers/l2_brain/tests/test_pack3_1_hybrid_reranker.py",
+      "classification": "ACTIVE_TEST",
+      "likely_specs": [],
+      "likely_tests": [],
+      "related_reports": [
+        "doc/01_architecture/adr/0006-sovereign-hybrid-documentation-protocol.md",
+        "doc/01_architecture/adr/0010-hybrid-diagram-strategy.md"
+      ],
+      "semantic_neighbors": [
+        {
+          "path": "layers/l2_brain/operationalization_review.py",
+          "similarity": 0.1423
+        },
+        {
+          "path": "layers/l2_brain/entropy_governor.py",
+          "similarity": 0.1377
+        },
+        {
+          "path": "layers/l1_nervous/memory_ipc.py",
+          "similarity": 0.1363
         }
       ],
       "risk": "medium",

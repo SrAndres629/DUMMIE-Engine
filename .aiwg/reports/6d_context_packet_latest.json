@@ -1,12 +1,12 @@
 {
-  "packet_id": "e4c99096-6423-42a6-a650-00e6ce9ccfa1",
+  "packet_id": "5c1a118a-3049-45d6-9a09-d2a152093aca",
   "intent": "heartbeat loop observation",
-  "decision": "PASS",
+  "decision": "PASS_WITH_WARNINGS",
   "axes": {
     "temporal": {
-      "freshness_status": "fresh",
-      "timestamp": "2026-05-17T02:08:02.508948+00:00",
-      "chronology_id": "2dea4d7a"
+      "freshness_status": "stale",
+      "timestamp": "2026-05-19T03:21:47.730583+00:00",
+      "chronology_id": "c7281cb7"
     },
     "semantic": {
       "intent_keywords": [
@@ -27,7 +27,7 @@
     "authority_safety": {
       "daily_readiness": 10.0,
       "autonomy_authorized": false,
-      "warnings_count": 0
+      "warnings_count": 1
     },
     "resource": {
       "total_tokens_consumed": 0,
@@ -1812,7 +1812,9 @@
   "estimated_tokens": 1411,
   "compressed_tokens": 1411,
   "reduction_ratio": 1.0,
-  "freshness_status": "fresh",
-  "quality_score": 100.0,
-  "warnings": []
+  "freshness_status": "stale",
+  "quality_score": 90.0,
+  "warnings": [
+    "whole_body_scan_latest.json is stale (age: 50.5h)"
+  ]
 }

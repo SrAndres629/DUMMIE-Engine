@@ -1,7 +1,7 @@
 # Spec Reference: 192_embedding_mesh_foundation
 import math
 import re
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Any, Dict, Iterable, List, Tuple
 
 from layers.l2_brain.embedding_mesh.contracts import (
@@ -28,6 +28,7 @@ class HybridReranker:
     ) -> RerankResponse:
         query_tokens = set(_tokens(request.query))
         ranked: List[Dict[str, Any]] = []
+        has_real_candidate = False
 
         for candidate in request.candidates:
             text, path, cand_type, embedding, cand_space, metadata = _extract_candidate_fields(candidate)
@@ -58,6 +59,10 @@ class HybridReranker:
             )
             final_score = max(0.0, min(1.0, final_score))
 
+            is_candidate_degraded = metadata.get("embedding_degraded", False) if isinstance(metadata, dict) else getattr(metadata, "embedding_degraded", False)
+            if cand_space == "text_fast_bge_small_384" and not is_candidate_degraded:
+                has_real_candidate = True
+
             ranked.append(
                 {
                     "candidate": candidate,
@@ -75,12 +80,20 @@ class HybridReranker:
                 }
             )
 
+        is_real_text_fast = (
+            query_vector_space == "text_fast_bge_small_384"
+            and query_vector is not None
+            and has_real_candidate
+        )
+        degraded = not is_real_text_fast
+        reason = "" if not degraded else "ML cross-encoder not configured; hybrid deterministic rerank active"
+
         ranked.sort(key=lambda row: row["score"], reverse=True)
         return RerankResponse(
             ranked_candidates=ranked[: request.top_k],
             model_used="deterministic-hybrid-reranker",
-            degraded=True,
-            reason="ML cross-encoder not configured; hybrid deterministic rerank active",
+            degraded=degraded,
+            reason=reason,
         )
 
 
@@ -173,24 +186,35 @@ def _classification_penalty(path: str, metadata: Dict[str, Any]) -> float:
 
 
 def _freshness_score(metadata: Dict[str, Any]) -> float:
+    if not isinstance(metadata, dict):
+        return 0.0
     raw = metadata.get("freshness_ts")
-    if not raw:
+    if not raw or not isinstance(raw, str):
         return 0.0
 
     try:
-        freshness_dt = datetime.fromisoformat(raw.replace("Z", "+00:00"))
+        raw_norm = raw.replace("Z", "+00:00")
+        freshness_dt = datetime.fromisoformat(raw_norm)
+        
+        if freshness_dt.tzinfo is None:
+            freshness_dt = freshness_dt.replace(tzinfo=timezone.utc)
+            
+        tz = freshness_dt.tzinfo
+        now = datetime.now(tz=tz)
+        age_days = max(0.0, (now - freshness_dt).total_seconds() / 86400.0)
+        
+        if age_days <= 7:
+            return 0.20
+        if age_days <= 30:
+            return 0.10
     except Exception:
         return 0.0
-
-    age_days = max(0.0, (datetime.now(tz=freshness_dt.tzinfo) - freshness_dt).total_seconds() / 86400.0)
-    if age_days <= 7:
-        return 0.20
-    if age_days <= 30:
-        return 0.10
     return 0.0
 
 
 def _truth_rank_score(metadata: Dict[str, Any]) -> float:
+    if not isinstance(metadata, dict):
+        return 0.0
     score = metadata.get("truth_rank")
     if score is None:
         return 0.0

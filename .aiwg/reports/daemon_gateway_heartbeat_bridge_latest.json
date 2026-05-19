@@ -3,19 +3,19 @@
   "daemon_status": "INVOCATION_ONLY",
   "gateway_status": "MAPPED",
   "dispatch_envelope": {
-    "dispatch_id": "1f429a92-5de1-4de1-aa67-3b474aab5da1",
+    "dispatch_id": "5f47bdc8-9257-4fb9-9228-778a6d229e83",
     "selected_action": {
-      "action_id": "integrate_kuzu_graph_sync",
-      "action_type": "integrate_kuzu_graph_sync",
-      "priority": "high",
+      "action_id": "activate_local_embedding_model_or_label_fallback",
+      "action_type": "activate_local_embedding_model_or_label_fallback",
+      "priority": "medium",
       "status": "proposed",
       "evidence_refs": [
-        ".aiwg/reports/kuzu_graph_readback_verification_latest.json"
+        ".aiwg/reports/embedding_activation_verification_latest.json"
       ]
     },
     "target": "human_review",
     "mode": "repair_planning",
-    "context_packet_ref": "e4c99096-6423-42a6-a650-00e6ce9ccfa1",
+    "context_packet_ref": "5c1a118a-3049-45d6-9a09-d2a152093aca",
     "memory_refs": [
       ".aiwg/reports/memory_spine_entrypoint_latest.json"
     ],

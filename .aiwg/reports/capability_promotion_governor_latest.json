@@ -33,9 +33,9 @@
     {
       "capability_id": "daemon_persistent_runtime",
       "previous_status": "SIMULATED",
-      "verified_status": "READY_CANDIDATE",
+      "verified_status": "SIMULATED",
       "promotion_allowed": false,
-      "promotion_reason": "Heartbeat daemon active in background via systemd socket, but operates as invocation-only.",
+      "promotion_reason": "Advisory mode active, no background daemon.",
       "blocking_findings": [
         "Daemon runs under manual/invocation-only control loop."
       ],
@@ -49,7 +49,7 @@
     {
       "capability_id": "gateway_live_dispatch",
       "previous_status": "DRY_RUN_ONLY",
-      "verified_status": "READY_CANDIDATE",
+      "verified_status": "DRY_RUN_ONLY",
       "promotion_allowed": false,
       "promotion_reason": "Gateway fastapi server active but human reviews are locked to dry-run.",
       "blocking_findings": [

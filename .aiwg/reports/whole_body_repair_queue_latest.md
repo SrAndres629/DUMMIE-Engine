@@ -29,3 +29,12 @@
 - **Can Execute Now**: `False`
 - **Recommended Agent**: `gemini`
 - **Verification Commands**: `['pytest layers/l2_brain/tests/']`
+### 4. Activate Autonomous Background Heartbeat Supervisor (Priority: `LOW`)
+- **Action ID**: `activate_autonomous_background_heartbeat_loop`
+- **Body Part**: `hands`
+- **Capability ID**: `daemon_persistent_runtime`
+- **Action Type**: `wire`
+- **Requires Human Approval**: `True`
+- **Can Execute Now**: `False`
+- **Recommended Agent**: `human`
+- **Verification Commands**: `['systemctl --user status dummie-engine.service']`

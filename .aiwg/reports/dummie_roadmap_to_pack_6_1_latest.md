@@ -178,7 +178,7 @@ This ledger is a live, verifiable, and contract-governed roadmap from the curren
 ---
 
 ### **PACK 3.1 — Reranker Real or Hybrid+**
-*Status*: **DEFERRED**
+*Status*: **COMPLETED**
 - **Objetivo**: Integrar lógica de reordenamiento híbrido para los resultados de KùzuDB/Embeddings.
 - **Precondiciones**: Pack 3.0 operativo.
 - **Archivos Probables**: `layers/l2_brain/embedding_mesh/reranker.py`.
@@ -188,12 +188,12 @@ This ledger is a live, verifiable, and contract-governed roadmap from the curren
 - **Done Criteria**: Los resultados de búsqueda se ponderan híbrida e incrementalmente con pesos de recencia e importancia.
 - **Blast Radius**: Medio-Alto.
 - **Rollback**: Bypass del paso de reranking en el pipeline de consulta semántica.
-- **Plan**: Posterior a Pack 3.0.
+- **Plan**: Completado con éxito en origin main.
 
 ---
 
 ### **PACK 3.2 — CODE Embedding Provider**
-*Status*: **DEFERRED**
+*Status*: **READY**
 - **Objetivo**: Separar el espacio vectorial de texto del espacio de código y sintaxis abstracta.
 - **Precondiciones**: Servidor MCP local e indexador AST robusto.
 - **Archivos Probables**: `layers/l2_brain/ast_indexer.py`.

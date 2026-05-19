@@ -5,12 +5,14 @@
   "optimized_tokens": 1411,
   "reduction_ratio": 55.805811481218996,
   "evidence_preserved": true,
-  "freshness_score": 95.0,
+  "freshness_score": 40.0,
   "semantic_relevance_score": 100.0,
-  "authority_score": 100.0,
+  "authority_score": 90.0,
   "context_quality_score": 90.0,
   "token_efficiency_score": 100.0,
-  "warnings": [],
+  "warnings": [
+    "whole_body_scan_latest.json is stale (age: 50.5h)"
+  ],
   "evidence_refs": [
     ".aiwg/reports/whole_body_scan_latest.json",
     ".aiwg/reports/wiring_matrix_latest.json",

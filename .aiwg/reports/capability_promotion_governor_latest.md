@@ -16,14 +16,14 @@
 - **Next Verification Required**: ['local_cached_model_provisioning']
 ### daemon_persistent_runtime
 - **Previous Status**: `SIMULATED`
-- **Verified Status**: `READY_CANDIDATE`
+- **Verified Status**: `SIMULATED`
 - **Promotion Allowed**: `False`
-- **Reason**: Heartbeat daemon active in background via systemd socket, but operates as invocation-only.
+- **Reason**: Advisory mode active, no background daemon.
 - **Blocking Findings**: ['Daemon runs under manual/invocation-only control loop.']
 - **Next Verification Required**: ['unix_socket_handshake_verification']
 ### gateway_live_dispatch
 - **Previous Status**: `DRY_RUN_ONLY`
-- **Verified Status**: `READY_CANDIDATE`
+- **Verified Status**: `DRY_RUN_ONLY`
 - **Promotion Allowed**: `False`
 - **Reason**: Gateway fastapi server active but human reviews are locked to dry-run.
 - **Blocking Findings**: ['Live external gateway access is strictly blocked.']

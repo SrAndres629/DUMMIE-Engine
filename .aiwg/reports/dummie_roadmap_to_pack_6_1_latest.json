@@ -305,12 +305,12 @@
     {
       "pack_id": "PACK_3.1",
       "title": "Reranker Real or Hybrid+",
-      "status": "DEFERRED",
+      "status": "COMPLETED",
       "execute_now": false,
       "blocked_by": [
         "PACK_3.0"
       ],
-      "source_of_truth_commit": "",
+      "source_of_truth_commit": "pack-3.1-hybrid-activation",
       "objective": "Integrar lógica de reordenamiento híbrido para los resultados de KùzuDB/Embeddings.",
       "preconditions": [
         "Pack 3.0 operativo."
@@ -336,8 +336,8 @@
     {
       "pack_id": "PACK_3.2",
       "title": "CODE Embedding Provider",
-      "status": "DEFERRED",
-      "execute_now": false,
+      "status": "READY",
+      "execute_now": true,
       "blocked_by": [
         "PACK_3.1"
       ],

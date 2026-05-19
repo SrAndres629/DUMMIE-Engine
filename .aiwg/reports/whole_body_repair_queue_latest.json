@@ -51,6 +51,23 @@
       "verification_commands": [
         "pytest layers/l2_brain/tests/"
       ]
+    },
+    {
+      "action_id": "activate_autonomous_background_heartbeat_loop",
+      "body_part": "hands",
+      "capability_id": "daemon_persistent_runtime",
+      "title": "Activate Autonomous Background Heartbeat Supervisor",
+      "priority": "low",
+      "action_type": "wire",
+      "requires_human_approval": true,
+      "can_execute_now": false,
+      "recommended_agent": "human",
+      "evidence_refs": [
+        ".aiwg/reports/daemon_gateway_heartbeat_bridge_latest.json"
+      ],
+      "verification_commands": [
+        "systemctl --user status dummie-engine.service"
+      ]
     }
   ]
 }

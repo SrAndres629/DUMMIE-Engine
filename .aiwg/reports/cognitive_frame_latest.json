@@ -1,6 +1,6 @@
 {
-  "frame_id": "frame-728d2125",
-  "intent": "heartbeat: what is the current system state and next safe action?",
+  "frame_id": "frame-8020c7b4",
+  "intent": "refactor memory",
   "operating_mode": "answer",
   "must_preserve": [
     "current_phase",
@@ -13,11 +13,12 @@
     "private_chain_of_thought"
   ],
   "mental_model_refs": [
-    "mm-da09847a"
+    "mm-f50e5f6d"
   ],
   "memory_refs": [],
   "ontology_refs": [
-    "UNKNOWN"
+    "DEBT",
+    "MEMORY"
   ],
   "evidence_refs": [
     ".aiwg/reports/test_debt_triage_latest.json",
@@ -27,8 +28,8 @@
   ],
   "token_budget_hint": "low",
   "context_strategy": "MANIFEST_ONLY",
-  "dispatch_recommendation": "local",
+  "dispatch_recommendation": "antigravity",
   "risks": [],
   "next_actions": [],
-  "created_at": "2026-05-17T02:08:07.402843+00:00"
+  "created_at": "2026-05-19T03:22:38.804482+00:00"
 }

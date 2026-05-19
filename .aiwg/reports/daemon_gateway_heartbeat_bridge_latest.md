@@ -4,7 +4,7 @@
 - **Gateway Status**: `MAPPED`
 
 ## Dispatch Envelope Details
-- **Dispatch ID**: `1f429a92-5de1-4de1-aa67-3b474aab5da1`
+- **Dispatch ID**: `5f47bdc8-9257-4fb9-9228-778a6d229e83`
 - **Target**: `human_review`
 - **Mode**: `repair_planning`
 - **Requires Human Approval**: `True`

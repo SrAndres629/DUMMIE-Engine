@@ -16,3 +16,6 @@
 | `6d_context_packet` | 1411 | 1.8% |
 | `6d_context_plus_memory` | 1693 | 2.2% |
 | `6d_context_plus_embedding_refs` | 1834 | 2.3% |
+
+## Warnings
+- [WARNING] whole_body_scan_latest.json is stale (age: 50.5h)

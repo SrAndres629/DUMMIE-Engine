@@ -7,35 +7,35 @@
 - semantic_mode: degraded_semantic_mode
 
 ## Summary Counts
-- files_scanned: 1377
-- files_indexed: 1360
-- degraded_embeddings: 715
-- excluded_files_count: 120894
+- files_scanned: 1379
+- files_indexed: 1362
+- degraded_embeddings: 717
+- excluded_files_count: 120908
 - excluded_dirs_count: 11943
-- indexed_first_party_files: 1314
+- indexed_first_party_files: 1316
 - indexed_legacy_files: 21
 - indexed_generated_files: 25
 - indexed_vendor_files: 0
 - vector_spaces_used: fallback_hash_384, none, text_fast_bge_small_384
-- active_runtime_candidates: 202
-- shadow_candidates: 140
-- orphan_test_candidates: 242
+- active_runtime_candidates: 203
+- shadow_candidates: 139
+- orphan_test_candidates: 244
 - generated_candidates: 25
 - legacy_candidates: 21
 
 ## Exclusion Metrics
 - binary: 4
-- exclude_dir: 97056
+- exclude_dir: 97070
 - exclude_prefix: 7364
 - not_included: 16457
 - too_large: 13
 
 ## Top risks
 - medium: needs_test (565)
-- medium: map_to_runtime (242)
+- medium: map_to_runtime (244)
 - low: keep_and_test (172)
-- high: map_to_spec (140)
-- medium: map_to_spec (109)
+- high: map_to_spec (139)
+- medium: map_to_spec (110)
 - medium: move_to_legacy (85)
 - low: mark_generated (25)
 - medium: archive_or_delete_later (21)

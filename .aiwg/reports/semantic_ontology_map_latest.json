@@ -1,23 +1,45 @@
 {
-  "decision": "PASS_WITH_WARNINGS",
+  "decision": "PASS",
   "concepts": [
-    "heartbeat: what is the current system state and next safe action?"
+    "refactor memory"
   ],
   "classes": [
-    "UNKNOWN"
+    "DEBT",
+    "MEMORY"
   ],
   "ontology_graph": {
     "nodes": [
       {
         "id": "INTENT",
-        "label": "heartbeat: what is the current system state and next safe action?",
+        "label": "refactor memory",
         "type": "INTENT"
+      },
+      {
+        "id": "DEBT",
+        "label": "DEBT",
+        "type": "CLASS"
+      },
+      {
+        "id": "MEMORY",
+        "label": "MEMORY",
+        "type": "CLASS"
       }
     ],
-    "edges": []
+    "edges": [
+      {
+        "source": "INTENT",
+        "target": "DEBT",
+        "type": "IS_A"
+      },
+      {
+        "source": "INTENT",
+        "target": "MEMORY",
+        "type": "IS_A"
+      }
+    ]
   },
-  "timestamp": "2026-05-17T02:08:07.402817+00:00",
+  "timestamp": "2026-05-19T03:22:38.804240+00:00",
   "warnings": [
-    "No ontology classes matched"
+    ""
   ]
 }

@@ -1,9 +1,9 @@
 {
   "decision": "PASS_WITH_WARNINGS",
-  "models_scanned": 59,
-  "valid_count": 16,
+  "models_scanned": 64,
+  "valid_count": 17,
   "stale_count": 4,
-  "superseded_count": 26,
+  "superseded_count": 30,
   "quarantined_count": 4,
   "unsafe_rejected_count": 0,
   "needs_review_count": 9,
@@ -567,6 +567,55 @@
       "message": "Superseded by mm-1a9e488f with higher quality for same intent",
       "severity": "WARN",
       "recommended_status": "superseded"
+    },
+    {
+      "model_id": "mm-da09847a",
+      "finding_type": "empty_decisions_for_planning_intent",
+      "message": "No decisions for planning intent: heartbeat: what is the current system state and next safe ac",
+      "severity": "WARN",
+      "recommended_status": "needs_review"
+    },
+    {
+      "model_id": "mm-da09847a",
+      "finding_type": "duplicate_model",
+      "message": "Superseded by mm-1a9e488f with higher quality for same intent",
+      "severity": "WARN",
+      "recommended_status": "superseded"
+    },
+    {
+      "model_id": "mm-1de9e282",
+      "finding_type": "empty_decisions_for_planning_intent",
+      "message": "No decisions for planning intent: heartbeat: what is the current system state and next safe ac",
+      "severity": "WARN",
+      "recommended_status": "needs_review"
+    },
+    {
+      "model_id": "mm-1de9e282",
+      "finding_type": "duplicate_model",
+      "message": "Superseded by mm-1a9e488f with higher quality for same intent",
+      "severity": "WARN",
+      "recommended_status": "superseded"
+    },
+    {
+      "model_id": "mm-012dd3a5",
+      "finding_type": "empty_decisions_for_planning_intent",
+      "message": "No decisions for planning intent: what should i do next?",
+      "severity": "WARN",
+      "recommended_status": "needs_review"
+    },
+    {
+      "model_id": "mm-012dd3a5",
+      "finding_type": "duplicate_model",
+      "message": "Superseded by mm-b20aa346 with higher quality for same intent",
+      "severity": "WARN",
+      "recommended_status": "superseded"
+    },
+    {
+      "model_id": "mm-b3b855fa",
+      "finding_type": "duplicate_model",
+      "message": "Superseded by mm-dbabda26 with higher quality for same intent",
+      "severity": "WARN",
+      "recommended_status": "superseded"
     }
   ],
   "decisions": [
@@ -978,22 +1027,57 @@
     },
     {
       "model_id": "mm-aa00530c",
-      "previous_status": "valid",
+      "previous_status": "superseded",
       "new_status": "superseded",
       "reason": "No decisions for planning intent: heartbeat: what is the current system state and next safe ac; Superseded by mm-1a9e488f with higher quality for same intent",
       "superseded_by": "mm-1a9e488f"
+    },
+    {
+      "model_id": "mm-da09847a",
+      "previous_status": "superseded",
+      "new_status": "superseded",
+      "reason": "No decisions for planning intent: heartbeat: what is the current system state and next safe ac; Superseded by mm-1a9e488f with higher quality for same intent",
+      "superseded_by": "mm-1a9e488f"
+    },
+    {
+      "model_id": "mm-1de9e282",
+      "previous_status": "superseded",
+      "new_status": "superseded",
+      "reason": "No decisions for planning intent: heartbeat: what is the current system state and next safe ac; Superseded by mm-1a9e488f with higher quality for same intent",
+      "superseded_by": "mm-1a9e488f"
+    },
+    {
+      "model_id": "mm-012dd3a5",
+      "previous_status": "superseded",
+      "new_status": "superseded",
+      "reason": "No decisions for planning intent: what should i do next?; Superseded by mm-b20aa346 with higher quality for same intent",
+      "superseded_by": "mm-b20aa346"
+    },
+    {
+      "model_id": "mm-b3b855fa",
+      "previous_status": "superseded",
+      "new_status": "superseded",
+      "reason": "Superseded by mm-dbabda26 with higher quality for same intent",
+      "superseded_by": "mm-dbabda26"
+    },
+    {
+      "model_id": "mm-464c5e18",
+      "previous_status": "valid",
+      "new_status": "valid",
+      "reason": "No issues found",
+      "superseded_by": ""
     }
   ],
   "summary": {
-    "models_scanned": 59,
-    "valid_count": 16,
+    "models_scanned": 64,
+    "valid_count": 17,
     "stale_count": 4,
-    "superseded_count": 26,
+    "superseded_count": 30,
     "quarantined_count": 4,
     "unsafe_rejected_count": 0,
     "needs_review_count": 9,
     "overconfidence_count": 4,
     "kuzu_degraded": true
   },
-  "timestamp": "2026-05-17T02:08:07.382631+00:00"
+  "timestamp": "2026-05-19T03:22:36.846482+00:00"
 }

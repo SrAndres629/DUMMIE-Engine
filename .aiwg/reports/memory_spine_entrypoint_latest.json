@@ -1,13 +1,23 @@
 {
   "decision": "PASS",
-  "query": "heartbeat",
+  "query": "next",
   "status": "READY",
   "memory_refs": [],
-  "learning_episode_refs": [],
+  "learning_episode_refs": [
+    "sid:CURRENT/ep:ep-2592067a",
+    "sid:CURRENT/ep:ep-e12f9026",
+    "sid:CURRENT/ep:ep-75165438",
+    "sid:CURRENT/ep:ep-69b6765d",
+    "sid:CURRENT/ep:ep-5d233275",
+    "sid:CURRENT/ep:ep-f6a0c534",
+    "sid:CURRENT/ep:ep-343f2ef1"
+  ],
   "vault_refs": [],
   "graph_status": "READY",
   "used_before_chat_response": true,
   "warnings": [],
-  "evidence_refs": [],
-  "generated_at": "2026-05-17T02:08:07Z"
+  "evidence_refs": [
+    ".aiwg/sessions/CURRENT/learning_episodes.jsonl"
+  ],
+  "generated_at": "2026-05-19T03:22:36Z"
 }

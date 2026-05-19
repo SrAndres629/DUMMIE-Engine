@@ -1,14 +1,14 @@
 # Six-Dimensional Context Packet Report
-- **Packet ID**: `e4c99096-6423-42a6-a650-00e6ce9ccfa1`
+- **Packet ID**: `5c1a118a-3049-45d6-9a09-d2a152093aca`
 - **Intent**: "heartbeat loop observation"
-- **Decision**: **PASS**
+- **Decision**: **PASS_WITH_WARNINGS**
 - **Estimated Tokens**: 1411
 - **Compressed Tokens**: 1411
 - **Reduction Ratio**: 1.00
-- **Quality Score**: 100.0%
+- **Quality Score**: 90.0%
 
 ## Six Dimensions Analysis
-- **Temporal**: fresh (2026-05-17T02:08:02.508948+00:00)
+- **Temporal**: stale (2026-05-19T03:21:47.730583+00:00)
 - **Semantic**: matched 3 keywords
 - **Ontological**: 516 active modules analyzed
 - **Causal**: 873 wiring graph dependencies parsed
@@ -36,3 +36,6 @@
 - **[layers/l2_brain/tests/test_whole_body_integration_heartbeat.py](file://./layers/l2_brain/tests/test_whole_body_integration_heartbeat.py)** (Status: `orphaned`, Coherence: 40.0%)
 - **[layers/l2_brain/tests/validate_heartbeat_jsons.py](file://./layers/l2_brain/tests/validate_heartbeat_jsons.py)** (Status: `orphaned`, Coherence: 20.0%)
 - **[layers/l4_edge/__init__.py](file://./layers/l4_edge/__init__.py)** (Status: `stale`, Coherence: 70.0%)
+
+## Warnings
+- [WARNING] whole_body_scan_latest.json is stale (age: 50.5h)
