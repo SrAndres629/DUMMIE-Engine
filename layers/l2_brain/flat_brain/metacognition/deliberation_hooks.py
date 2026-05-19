@@ -10,6 +10,9 @@ class MissionDecomposerHook:
         self.daemon = daemon
 
     async def run(self, frame: MetacognitiveFrame) -> MetacognitiveFrame:
+        if frame.telemetry.get("skip_decomposition"):
+            return frame
+
         if frame.refined_intent == "OBJECTIVE_INQUIRY":
              frame.mission_plan = [{"step": 1, "agent": "ObserverAgent", "action": "Gather system intel"}]
              return frame

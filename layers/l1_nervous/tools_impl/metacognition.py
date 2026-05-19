@@ -31,6 +31,7 @@ class MetacognitionToolService:
             return json.dumps({"deliberation_summary": ""})
         frame = MetacognitiveFrame(session_id="test_session", raw_user_input="")
         frame.mission_plan = plan
+        frame.telemetry["skip_decomposition"] = True
         frame = await self.pipeline.deliberate(frame)
         return json.dumps({
             "deliberation_summary": frame.deliberation_summary

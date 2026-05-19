@@ -4,7 +4,7 @@ from unittest.mock import MagicMock
 from layers.l2_brain.daemon import DummieDaemon
 from layers.l2_brain.event_bus import AsyncEventBus
 
-async def test_metacognitive_analyze_tool():
+async def run_metacognitive_analyze_tool():
     event_bus = MagicMock(spec=AsyncEventBus)
     mcp_gateway = MagicMock()
     
@@ -24,4 +24,4 @@ async def test_metacognitive_analyze_tool():
     assert "status" in result or "raw" in result
 
 if __name__ == "__main__":
-    asyncio.run(test_metacognitive_analyze_tool())
+    asyncio.run(run_metacognitive_analyze_tool())

@@ -15,18 +15,15 @@ ROOT_DIR = os.environ.get("DUMMIE_ROOT", os.environ.get("DUMMIE_ROOT_DIR", _DEFA
 # RISK: Import collisions between layers with same-named modules.
 # TRACKED: autorefactor_state.yaml -> sys_path_hacks_removed = false
 
-# Ensure ROOT_DIR is in path for absolute 'layers.*' imports
-if ROOT_DIR not in sys.path:
-    sys.path.insert(0, ROOT_DIR)
-
+# Ensure necessary paths are in sys.path
+_paths_to_insert = [ROOT_DIR]
 for _layer in ["l1_nervous", "l2_brain", "l3_shield"]:
-    _layer_path = os.path.join(ROOT_DIR, "layers", _layer)
-    if os.path.exists(_layer_path) and _layer_path not in sys.path:
-        sys.path.insert(0, _layer_path)
+    _paths_to_insert.append(os.path.join(ROOT_DIR, "layers", _layer))
+_paths_to_insert.append(os.path.join(ROOT_DIR, "layers", "l2_brain", "src"))
 
-_hex_src = os.path.join(ROOT_DIR, "layers", "l2_brain", "src")
-if os.path.exists(_hex_src) and _hex_src not in sys.path:
-    sys.path.insert(0, _hex_src)
+for _path in _paths_to_insert:
+    if os.path.exists(_path) and _path not in sys.path:
+        sys.path.insert(0, _path)
 
 # [HARDENING] STDIO Purity Guard (Global Monkeypatch)
 # WHY: Any print() to stdout from any imported module will corrupt the MCP protocol.

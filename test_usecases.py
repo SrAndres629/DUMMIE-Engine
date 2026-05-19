@@ -18,7 +18,7 @@ aiwg_dir = os.path.abspath(".aiwg")
 orchestrator = bootstrap_orchestrator(db_path, aiwg_dir)
 use_cases = BrainToolUseCases(orchestrator, None)
 
-async def test():
+async def run_integration_test():
     print("--- Test Calibrate ---")
     results = []
     if getattr(orchestrator.event_store, "read_only", False) or getattr(orchestrator.event_store, "conn", None) is None:
@@ -52,4 +52,4 @@ async def test():
     print(f"Persisted payload: {payload}")
 
 if __name__ == "__main__":
-    asyncio.run(test())
+    asyncio.run(run_integration_test())
