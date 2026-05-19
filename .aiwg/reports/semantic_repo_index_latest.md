@@ -6,10 +6,10 @@
 - semantic_mode: degraded_semantic_mode
 
 ## Summary Metrics
-- generated_at: 2026-05-19T03:34:56.911513Z
+- generated_at: 2026-05-19T03:45:20.870235Z
 - files_scanned: 1379
 - files_indexed: 1362
-- excluded_files_count: 120908
+- excluded_files_count: 120956
 - excluded_dirs_count: 11943
 - indexed_first_party_files: 1316
 - indexed_legacy_files: 21
@@ -20,9 +20,9 @@
 
 ### Excluded by Reason
 - binary: 4
-- exclude_dir: 97070
+- exclude_dir: 97114
 - exclude_prefix: 7364
-- not_included: 16457
+- not_included: 16461
 - too_large: 13
 
 ## Indexed Files

@@ -10,7 +10,7 @@
 - files_scanned: 1379
 - files_indexed: 1362
 - degraded_embeddings: 717
-- excluded_files_count: 120908
+- excluded_files_count: 120956
 - excluded_dirs_count: 11943
 - indexed_first_party_files: 1316
 - indexed_legacy_files: 21
@@ -25,9 +25,9 @@
 
 ## Exclusion Metrics
 - binary: 4
-- exclude_dir: 97070
+- exclude_dir: 97114
 - exclude_prefix: 7364
-- not_included: 16457
+- not_included: 16461
 - too_large: 13
 
 ## Top risks

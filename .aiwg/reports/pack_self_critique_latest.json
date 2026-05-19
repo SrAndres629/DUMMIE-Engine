@@ -1,0 +1,37 @@
+{
+  "pack_id": "PACK_3.1",
+  "audit": {
+    "degraded_optimistic_usage_resolved": true,
+    "has_ml_reranker": false,
+    "degraded_global_definition": "semantic_input_degraded or reranker_engine_degraded",
+    "weights_sum_to_one": true,
+    "weights": {
+      "vector_similarity": 0.35,
+      "token_overlap": 0.30,
+      "path_overlap": 0.15,
+      "contextual_boost": 0.10,
+      "recency_freshness": 0.05,
+      "importance_truth_rank": 0.05
+    },
+    "crash_resilience": {
+      "missing_fields_handing": "default to 0.0 and report in diagnostics",
+      "timezone_safety": "convert naive local datetime to UTC",
+      "metadata_corruption": "try-except block safe fallback",
+      "no_nan_or_inf": true
+    },
+    "bypass_mode": {
+      "env_var": "DUMMIE_RERANK_BYPASS=1",
+      "mechanism": "orders by raw vector similarity, degraded=True, mode=bypass_vector_similarity"
+    }
+  },
+  "debt": {
+    "ml_reranker_exists": false,
+    "ml_reranker_limitation": "hybrid deterministic calculations only",
+    "non_text_fast_capabilities": "fallback deterministic SHA-256 projections only"
+  },
+  "corrections_made_to_original_plan": [
+    "Conceptual separation of semantic_input_degraded and reranker_engine_degraded",
+    "Explicit bypass_vector_similarity ranking mode support",
+    "Diagnostic component score breakdown per candidate in RerankResponse"
+  ]
+}

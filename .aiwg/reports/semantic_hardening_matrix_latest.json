@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-19T03:35:03.012995Z",
+  "generated_at": "2026-05-19T03:45:26.517328Z",
   "files_scanned": 1379,
   "files_indexed": 1362,
   "total_modules": 1362,
@@ -29,12 +29,12 @@
   "semantic_mode": "degraded_semantic_mode",
   "index_mode": "deterministic_index_mode",
   "degraded_embeddings": 717,
-  "excluded_files_count": 120908,
+  "excluded_files_count": 120956,
   "excluded_dirs_count": 11943,
   "excluded_by_reason": {
-    "exclude_dir": 97070,
+    "exclude_dir": 97114,
     "exclude_prefix": 7364,
-    "not_included": 16457,
+    "not_included": 16461,
     "too_large": 13,
     "binary": 4
   },
@@ -35393,16 +35393,16 @@
       "related_reports": [],
       "semantic_neighbors": [
         {
-          "path": "layers/l2_brain/operationalization_review.py",
-          "similarity": 0.1557
+          "path": "proto/dummie/skill.proto",
+          "similarity": 0.1712
         },
         {
           "path": "proto/orchestration.pb.go",
-          "similarity": 0.1506
+          "similarity": 0.1683
         },
         {
           "path": "layers/l1_nervous/proto/orchestration.pb.go",
-          "similarity": 0.1506
+          "similarity": 0.1683
         }
       ],
       "risk": "medium",
@@ -40797,16 +40797,16 @@
       ],
       "semantic_neighbors": [
         {
-          "path": "layers/l2_brain/operationalization_review.py",
-          "similarity": 0.1423
+          "path": "layers/__init__.py",
+          "similarity": 0.1532
         },
         {
-          "path": "layers/l2_brain/entropy_governor.py",
-          "similarity": 0.1377
+          "path": "proto/dummie/skill.proto",
+          "similarity": 0.1526
         },
         {
           "path": "layers/l1_nervous/memory_ipc.py",
-          "similarity": 0.1363
+          "similarity": 0.1512
         }
       ],
       "risk": "medium",

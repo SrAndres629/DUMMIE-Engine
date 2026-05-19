@@ -721,6 +721,46 @@
       "requires_human_review": true
     },
     {
+      "path": "layers/l2_brain/structural_hardening/evidence.py",
+      "current_class": "UNKNOWN",
+      "proposed_class": "SHADOW_CANDIDATE",
+      "risk": "HIGH",
+      "recommendation": "MAP_TO_SPEC",
+      "confidence": 0.84,
+      "evidence_refs": [
+        "FILE_EXISTS",
+        "IMPORTABLE"
+      ],
+      "reasons": [
+        "runtime candidate missing spec/test linkage"
+      ],
+      "related_specs": [],
+      "related_tests": [],
+      "related_runtime": [],
+      "safe_to_change": false,
+      "requires_human_review": true
+    },
+    {
+      "path": "layers/l2_brain/structural_hardening/reporter.py",
+      "current_class": "UNKNOWN",
+      "proposed_class": "SHADOW_CANDIDATE",
+      "risk": "HIGH",
+      "recommendation": "MAP_TO_SPEC",
+      "confidence": 0.84,
+      "evidence_refs": [
+        "FILE_EXISTS",
+        "IMPORTABLE"
+      ],
+      "reasons": [
+        "runtime candidate missing spec/test linkage"
+      ],
+      "related_specs": [],
+      "related_tests": [],
+      "related_runtime": [],
+      "safe_to_change": false,
+      "requires_human_review": true
+    },
+    {
       "path": "layers/l2_brain/supervisor_protocol.py",
       "current_class": "UNKNOWN",
       "proposed_class": "SHADOW_CANDIDATE",
@@ -955,45 +995,6 @@
       "related_runtime": [],
       "safe_to_change": false,
       "requires_human_review": true
-    },
-    {
-      "path": "doc/.deprecated/.gitkeep",
-      "current_class": "LEGACY",
-      "proposed_class": "LEGACY",
-      "risk": "MEDIUM",
-      "recommendation": "MARK_LEGACY",
-      "confidence": 0.95,
-      "evidence_refs": [
-        "FILE_EXISTS"
-      ],
-      "reasons": [
-        "legacy/deprecated path"
-      ],
-      "related_specs": [],
-      "related_tests": [],
-      "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": false
-    },
-    {
-      "path": "doc/.deprecated/scratchpad/batch_fix_specs.py",
-      "current_class": "LEGACY",
-      "proposed_class": "LEGACY",
-      "risk": "MEDIUM",
-      "recommendation": "MARK_LEGACY",
-      "confidence": 0.95,
-      "evidence_refs": [
-        "FILE_EXISTS",
-        "IMPORTABLE"
-      ],
-      "reasons": [
-        "legacy/deprecated path"
-      ],
-      "related_specs": [],
-      "related_tests": [],
-      "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": false
     }
   ]
 }
