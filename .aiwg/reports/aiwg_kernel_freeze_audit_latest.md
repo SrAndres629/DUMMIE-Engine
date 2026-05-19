@@ -1,7 +1,7 @@
 # AIWG Governance Kernel Freeze Audit (v0.4)
 
 Generated at: 2026-05-19T04:30:00Z  
-HEAD Commit: `7b5867026bc48cdf37bce675d08fc8966bca3056`  
+HEAD Commit: `UNVERIFIED` (Policy: `versioned_snapshot_self_reference`)  
 Decision: **KERNEL_FROZEN**  
 
 ---

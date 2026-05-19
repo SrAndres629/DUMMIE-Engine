@@ -1,6 +1,7 @@
 {
   "generated_at": "2026-05-24T08:00:00Z",
   "head_commit": "UNVERIFIED",
+  "head_commit_policy": "versioned_snapshot_self_reference",
   "branch": "main",
   "origin_synced": true,
   "repo_health_status": "FAIL",

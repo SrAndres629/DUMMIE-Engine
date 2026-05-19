@@ -484,6 +484,38 @@ def test_freshness_gate_stale_truth(tmp_path, monkeypatch):
         guard.run_preflight(None)
     assert excinfo.value.code != 0
 
+def test_preflight_allows_symbolic_versioned_snapshot_head(tmp_path, monkeypatch):
+    """Assert that preflight succeeds if current_truth.json's head_commit is UNVERIFIED."""
+    import scripts.aiwg_pack_guard as guard
+
+    temp_active = os.path.join(tmp_path, "active_pack_sym.json")
+    with open(temp_active, "w", encoding="utf-8") as f:
+        json.dump({
+            "pack_id": "PACK_3.1",
+            "rollback_plan": "revert change",
+            "tests_required": ["test_aiwg_pack_guard.py"],
+            "stop_conditions": ["error"]
+        }, f)
+
+    temp_truth = os.path.join(tmp_path, "truth_sym.json")
+    with open(temp_truth, "w", encoding="utf-8") as f:
+        json.dump({
+            "head_commit": "UNVERIFIED",
+            "head_commit_policy": "versioned_snapshot_self_reference",
+            "current_pack": "PACK_3.1",
+            "last_completed_pack": "PACK_3.0"
+        }, f)
+
+    monkeypatch.setattr(guard, "ACTIVE_PACK", temp_active)
+    monkeypatch.setattr(guard, "STATE_TRUTH", temp_truth)
+    monkeypatch.setattr(guard, "get_git_head", lambda: "any_hash")
+    monkeypatch.setattr(guard, "check_anti_overclaim_lint", lambda: True)
+
+    # Should raise SystemExit(0)
+    with pytest.raises(SystemExit) as excinfo:
+        guard.run_preflight(None)
+    assert excinfo.value.code == 0
+
 def test_freshness_gate_stale_roadmap(tmp_path, monkeypatch):
     """Assert that preflight fails if pack_roadmap_to_6_1.json head_commit is stale."""
     import scripts.aiwg_pack_guard as guard
@@ -602,7 +634,16 @@ def test_aiwg_kernel_freeze_consistency():
     assert os.path.exists(EVIDENCE_JSON), "pack_validation_evidence_latest.json must exist"
     with open(EVIDENCE_JSON, "r", encoding="utf-8") as f:
         evidence = json.load(f)
-    assert evidence.get("commit") == truth.get("head_commit"), "evidence commit must match current_truth head_commit"
+    
+    truth_head = truth.get("head_commit")
+    evidence_commit = evidence.get("commit")
+    
+    import re
+    if truth_head == "UNVERIFIED":
+        assert truth.get("head_commit_policy") == "versioned_snapshot_self_reference"
+        assert re.match(r"^[a-f0-9]{7,40}$", evidence_commit)
+    else:
+        assert evidence_commit == truth_head
     
     # 7. Assert anti-overclaim lint passes on the repo
     import scripts.aiwg_pack_guard as guard

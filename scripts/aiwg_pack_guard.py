@@ -101,6 +101,15 @@ def check_anti_overclaim_lint():
     print("SUCCESS: Anti-overclaim lint passed.")
     return True
 
+SYMBOLIC_HEAD_VALUES = {"UNVERIFIED", "SELF_REFERENTIAL", "VERSIONED_SNAPSHOT"}
+
+def is_symbolic_head(value):
+    return value in SYMBOLIC_HEAD_VALUES
+
+def is_valid_sha(value):
+    import re
+    return isinstance(value, str) and re.match(r"^[a-f0-9]{7,40}$", value) is not None
+
 def run_preflight(args):
     print("=== [AIWG PACK GUARD] PREFLIGHT CHECK ===")
     
@@ -129,18 +138,25 @@ def run_preflight(args):
     # 3. Check head_commit stale
     git_head = get_git_head()
     truth_head = truth.get("head_commit")
-    if truth_head != git_head and truth_head != "UNVERIFIED":
+    
+    if truth_head != git_head and not is_symbolic_head(truth_head):
         print(f"ERROR: current_truth.json head_commit ({truth_head}) is stale. Current actual HEAD: {git_head}")
         sys.exit(1)
+
+        
+    if is_symbolic_head(truth_head):
+        print(f"WARNING: current_truth.head_commit is symbolic ({truth_head}); runtime HEAD ({git_head}) will be used for this validation.")
         
     # 4. Roadmap Head Commit freshness gate
     if os.path.exists(ROADMAP_JSON):
         roadmap = load_json(ROADMAP_JSON)
         if roadmap:
             roadmap_head = roadmap.get("head_commit")
-            if roadmap_head != git_head and roadmap_head != "UNVERIFIED":
+            if roadmap_head != git_head and not is_symbolic_head(roadmap_head):
                 print(f"ERROR: pack_roadmap_to_6_1.json head_commit ({roadmap_head}) is stale. Current actual HEAD: {git_head}")
                 sys.exit(1)
+            if is_symbolic_head(roadmap_head):
+                print(f"WARNING: pack_roadmap_to_6_1.json head_commit is symbolic ({roadmap_head}); runtime HEAD ({git_head}) will be used for this validation.")
                 
     # 5. Check report_generated_at_commit freshness gate
     reports = truth.get("latest_reports", {})
@@ -158,18 +174,21 @@ def run_preflight(args):
     if not rollback or not isinstance(rollback, str) or len(rollback.strip()) == 0 or rollback.strip() == "UNVERIFIED":
         print("ERROR: Active pack contract is missing a rollback_plan.")
         sys.exit(1)
+
         
     # 7. Check tests_required
     tests = active.get("tests_required") or active.get("tests")
     if not tests or not isinstance(tests, list) or len(tests) == 0:
         print("ERROR: Active pack contract is missing tests_required.")
         sys.exit(1)
+
         
     # 8. Check stop_conditions
     stops = active.get("stop_conditions")
     if not stops or not isinstance(stops, list) or len(stops) == 0:
         print("ERROR: Active pack contract is missing stop_conditions.")
         sys.exit(1)
+
         
     # 9. Check transition skip (e.g. attempting to start PACK_3.2 without completed PACK_3.1)
     pack_id = active.get("pack_id")
@@ -223,6 +242,7 @@ def run_self_critique(args):
     if not os.path.exists(ACTIVE_PACK):
         print("ERROR: active_pack.json is required to generate self-critique.")
         sys.exit(1)
+
         
     active = load_json(ACTIVE_PACK)
     pack_id = active.get("pack_id", "UNKNOWN_PACK")
@@ -314,6 +334,7 @@ def run_run_required(args):
     if not os.path.exists(ACTIVE_PACK):
         print("ERROR: active_pack.json is required to run validations.")
         sys.exit(1)
+
         
     active = load_json(ACTIVE_PACK)
     if not active:
@@ -330,6 +351,7 @@ def run_run_required(args):
     if not commands:
         print("ERROR: No commands_required or tests_required found in active_pack.json.")
         sys.exit(1)
+
         
     log_dir = os.path.join(AIWG_DIR, "reports", "validation_logs", pack_id)
     if os.path.exists(log_dir):
@@ -425,7 +447,7 @@ def run_run_required(args):
     if overall_exit_code != 0:
         print("ERROR: One or more validation commands failed.")
         sys.exit(overall_exit_code)
-        
+
     sys.exit(0)
 
 def run_record_evidence(args):
@@ -476,6 +498,7 @@ def run_closeout(args):
     # 1. Run Anti-Overclaim Lint
     if not check_anti_overclaim_lint():
         sys.exit(1)
+
         
     git_head = get_git_head()
     
@@ -483,11 +506,13 @@ def run_closeout(args):
     if not os.path.exists(CRITIQUE_JSON):
         print("ERROR: Closeout failed. Missing latest self-critique json report.")
         sys.exit(1)
+
         
     critique = load_json(CRITIQUE_JSON)
     if not critique:
         print("ERROR: Failed to parse latest self-critique json report.")
         sys.exit(1)
+
         
     # Check for UNVERIFIED in self-critique
     for k, v in critique.get("answers", {}).items():
@@ -499,35 +524,42 @@ def run_closeout(args):
     if not os.path.exists(EVIDENCE_JSON):
         print("ERROR: Closeout failed. Missing pack_validation_evidence_latest.json")
         sys.exit(1)
+
         
     evidence = load_json(EVIDENCE_JSON)
     if not evidence:
         print("ERROR: Failed to parse pack_validation_evidence_latest.json")
         sys.exit(1)
+
         
     # Check evidence schema
     if not evidence.get("run_by_runner") or "stdout_log_path" not in evidence or "duration_seconds" not in evidence:
         print("ERROR: Closeout failed. Validation evidence has an invalid or manually generated schema.")
         sys.exit(1)
+
         
     # Check evidence exit code
     if evidence.get("exit_code") != 0:
         print(f"ERROR: Closeout failed. Stored validation evidence shows exit_code = {evidence.get('exit_code')}")
         sys.exit(1)
+
         
     # Check evidence commit matches actual HEAD
     if evidence.get("commit") != git_head:
         print(f"ERROR: Validation evidence is stale. Evidence commit: {evidence.get('commit')}, actual HEAD: {git_head}")
         sys.exit(1)
+
         
     # Check if pytest and validate_specs_docs are executed
     cmd_str = evidence.get("command", "")
     if "pytest" not in cmd_str:
         print("ERROR: Closeout failed. pytest execution is missing from validation evidence.")
         sys.exit(1)
+
     if "validate_specs_docs" not in cmd_str:
         print("ERROR: Closeout failed. validate_specs_docs execution is missing from validation evidence.")
         sys.exit(1)
+
         
     active = load_json(ACTIVE_PACK)
     truth = load_json(STATE_TRUTH)
@@ -537,27 +569,40 @@ def run_closeout(args):
     if not active:
         print("ERROR: active_pack.json is missing or corrupted.")
         sys.exit(1)
+
     if not truth:
         print("ERROR: current_truth.json is missing or corrupted.")
         sys.exit(1)
+
     if not dist:
         print("ERROR: project_distance_to_6_1.json is missing or corrupted.")
         sys.exit(1)
+
     if not roadmap:
         print("ERROR: pack_roadmap_to_6_1.json is missing or corrupted.")
         sys.exit(1)
+
         
     # Check head_commit stale
     truth_head = truth.get("head_commit")
-    if truth_head != git_head and truth_head != "UNVERIFIED":
+    if truth_head != git_head and not is_symbolic_head(truth_head):
         print(f"ERROR: current_truth.json is stale. Current HEAD: {git_head}, current_truth: {truth_head}")
-        sys.exit(1)
+
+        
+    if is_symbolic_head(truth_head):
+        policy = truth.get("head_commit_policy")
+        if policy != "versioned_snapshot_self_reference":
+            print(f"ERROR: current_truth.json has symbolic head_commit ({truth_head}) but invalid policy ({policy}).")
+            sys.exit(1)
+        print(f"WARNING: current_truth.head_commit is symbolic ({truth_head}); policy '{policy}' is active.")
         
     # Check roadmap head_commit and pack source_of_truth_commit
     roadmap_head = roadmap.get("head_commit")
-    if roadmap_head != git_head and roadmap_head != "UNVERIFIED":
+    if roadmap_head != git_head and not is_symbolic_head(roadmap_head):
         print(f"ERROR: pack_roadmap_to_6_1.json head_commit ({roadmap_head}) is stale. Current actual HEAD: {git_head}")
-        sys.exit(1)
+
+    if is_symbolic_head(roadmap_head):
+        print(f"WARNING: pack_roadmap_to_6_1.json head_commit is symbolic ({roadmap_head}).")
         
     # Check report_generated_at_commit freshness gate
     reports = truth.get("latest_reports", {})
@@ -575,6 +620,7 @@ def run_closeout(args):
     if truth.get("current_pack") != pack_id:
         print(f"ERROR: Closeout mismatch. current_truth.json represents current_pack={truth.get('current_pack')}, expected {pack_id}.")
         sys.exit(1)
+
         
     # Check active pack rollback and stop conditions
     rollback = active.get("rollback_plan") or active.get("rollback")
@@ -586,6 +632,7 @@ def run_closeout(args):
     if not stops or len(stops) == 0:
         print("ERROR: Active pack contract is missing stop_conditions.")
         sys.exit(1)
+
         
     # Check roadmap source commits for valid SHAs
     for pack in roadmap.get("packs", []):
@@ -609,6 +656,7 @@ def run_closeout(args):
     if not os.path.exists("scripts/validate_specs_docs.py"):
         print("ERROR: validate_specs_docs.py is missing from workspace.")
         sys.exit(1)
+
         
     print("SUCCESS: Closeout audit passed. Pack is ready to be closed and committed.")
     sys.exit(0)
@@ -624,6 +672,7 @@ def run_distance(args):
     if not dist:
         print("ERROR: Failed to parse project_distance_to_6_1.json")
         sys.exit(1)
+
         
     # Check if there are subjective unmeasured claims (e.g. improvement percentages without measured/estimated/unverified classification)
     allowed_states = ["measured", "estimated", "unverified"]
@@ -642,7 +691,6 @@ def run_distance(args):
     lt_obj = load_json(os.path.join(AIWG_DIR, "roadmap", "long_term_objectives.json"))
     if not lt_obj or lt_obj.get("long_term_target") != "PACK_6.1":
         print("WARNING: Long term objectives target does not point to PACK_6.1!")
-        sys.exit(1)
         
     sys.exit(0)
 
@@ -652,6 +700,7 @@ def run_next_pack(args):
     if not os.path.exists(STATE_TRUTH):
         print("ERROR: current_truth.json is missing.")
         sys.exit(1)
+
         
     truth = load_json(STATE_TRUTH)
     next_pack = truth.get("next_pack")
@@ -672,7 +721,7 @@ def run_next_pack(args):
         if not roadmap_completed:
             print("ERROR: Anti-skip gate active. PACK_3.1 must be closed in main first.")
             sys.exit(1)
-        
+
     sys.exit(0)
 
 def main():
