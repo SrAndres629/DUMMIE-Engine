@@ -29,6 +29,11 @@ tmp/
 .aiwg/receipts/
 .aiwg/reports/
 .aiwg/tools/
+.aiwg/heartbeat/
+.aiwg/mental_models/
+.aiwg/providers/
+.aiwg/state/git_status_latest.txt
+.aiwg/state/last_git_event
 .gemini/
 .worktrees/
 .env
