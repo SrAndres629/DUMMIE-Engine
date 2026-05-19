@@ -9,14 +9,14 @@
 ## Summary Counts
 - files_scanned: 1379
 - files_indexed: 1362
-- degraded_embeddings: 1362
-- excluded_files_count: 120931
+- degraded_embeddings: 717
+- excluded_files_count: 120956
 - excluded_dirs_count: 11943
 - indexed_first_party_files: 1316
 - indexed_legacy_files: 21
 - indexed_generated_files: 25
 - indexed_vendor_files: 0
-- vector_spaces_used: fallback_hash_384, none
+- vector_spaces_used: fallback_hash_384, none, text_fast_bge_small_384
 - active_runtime_candidates: 203
 - shadow_candidates: 139
 - orphan_test_candidates: 244
@@ -25,7 +25,7 @@
 
 ## Exclusion Metrics
 - binary: 4
-- exclude_dir: 97089
+- exclude_dir: 97114
 - exclude_prefix: 7364
 - not_included: 16461
 - too_large: 13

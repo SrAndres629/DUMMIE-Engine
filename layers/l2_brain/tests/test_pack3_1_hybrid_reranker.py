@@ -267,3 +267,33 @@ def test_diagnostics_explain_component_scores():
     assert "vector_similarity" in cand["normalized_metrics"]
     assert "token_overlap" in cand["normalized_metrics"]
     assert "diagnostics" in cand
+
+
+def test_semantic_regression_gate_pack_3_0_preservation():
+    """11. test_semantic_regression_gate_pack_3_0_preservation:
+    Verifica que el índice semántico no retroceda a fallback de forma silenciosa.
+    El proveedor TEXT_FAST debe producir text_fast_bge_small_384 no degradado.
+    Además, inspecciona el archivo de reporte para asegurar que degraded_embeddings es razonable (menos de 1000).
+    """
+    import os
+    import json
+    from layers.l2_brain.embedding_mesh.registry import EmbeddingRegistry
+    from layers.l2_brain.embedding_mesh.contracts import EmbeddingCapability, EmbeddingRequest, ContentType
+    
+    # Gate 1: El registry de embedding mesh debe resolver TEXT_FAST a un provider no degradado
+    registry = EmbeddingRegistry()
+    provider = registry.get_provider(EmbeddingCapability.TEXT_FAST)
+    resp = provider.embed(EmbeddingRequest(content="regression gate probe", content_type=ContentType.TEXT))
+    assert resp.degraded is False
+    assert resp.vector_space == "text_fast_bge_small_384"
+    assert resp.dimensions == 384
+    
+    # Gate 2: El archivo de reporte semantic_hardening_matrix_latest.json debe reflejar la activación real (menos de 1000 degraded)
+    report_path = ".aiwg/reports/semantic_hardening_matrix_latest.json"
+    if os.path.exists(report_path):
+        with open(report_path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        assert data.get("semantic_mode") != "fallback_only_due_to_environment"
+        assert data.get("degraded_embeddings", 9999) < 1000
+        assert data.get("degraded_embeddings") == 717
+
