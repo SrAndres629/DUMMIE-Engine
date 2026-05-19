@@ -1,0 +1,755 @@
+{
+  "moved": [
+    {
+      "src": "adapters.py",
+      "dst": "layers/l2_brain/infrastructure/adapters.py",
+      "organ": "infrastructure"
+    },
+    {
+      "src": "auditor_port.py",
+      "dst": "layers/l2_brain/governance/auditor_port.py",
+      "organ": "governance"
+    },
+    {
+      "src": "autonomous_strategic_partner_runtime.py",
+      "dst": "layers/l2_brain/strategic/autonomous_strategic_partner_runtime.py",
+      "organ": "strategic"
+    },
+    {
+      "src": "business_advisor_runtime.py",
+      "dst": "layers/l2_brain/strategic/business_advisor_runtime.py",
+      "organ": "strategic"
+    },
+    {
+      "src": "business_goal_model.py",
+      "dst": "layers/l2_brain/strategic/business_goal_model.py",
+      "organ": "strategic"
+    },
+    {
+      "src": "business_orchestrator.py",
+      "dst": "layers/l2_brain/strategic/business_orchestrator.py",
+      "organ": "strategic"
+    },
+    {
+      "src": "cognitive_bias_detector.py",
+      "dst": "layers/l2_brain/cognition/cognitive_bias_detector.py",
+      "organ": "cognition"
+    },
+    {
+      "src": "cognitive_hooks.py",
+      "dst": "layers/l2_brain/cognition/cognitive_hooks.py",
+      "organ": "cognition"
+    },
+    {
+      "src": "consensus.py",
+      "dst": "layers/l2_brain/cognition/consensus.py",
+      "organ": "cognition"
+    },
+    {
+      "src": "context_bloat_guard.py",
+      "dst": "layers/l2_brain/context/context_bloat_guard.py",
+      "organ": "context"
+    },
+    {
+      "src": "context_budget_manager.py",
+      "dst": "layers/l2_brain/context/context_budget_manager.py",
+      "organ": "context"
+    },
+    {
+      "src": "context_circulation_runtime.py",
+      "dst": "layers/l2_brain/context/context_circulation_runtime.py",
+      "organ": "context"
+    },
+    {
+      "src": "context_coverage_auditor.py",
+      "dst": "layers/l2_brain/context/context_coverage_auditor.py",
+      "organ": "context"
+    },
+    {
+      "src": "context_efficiency_benchmark.py",
+      "dst": "layers/l2_brain/context/context_efficiency_benchmark.py",
+      "organ": "context"
+    },
+    {
+      "src": "context_enforcement_gate.py",
+      "dst": "layers/l2_brain/context/context_enforcement_gate.py",
+      "organ": "context"
+    },
+    {
+      "src": "context_package.py",
+      "dst": "layers/l2_brain/context/context_package.py",
+      "organ": "context"
+    },
+    {
+      "src": "context_packet_optimizer.py",
+      "dst": "layers/l2_brain/context/context_packet_optimizer.py",
+      "organ": "context"
+    },
+    {
+      "src": "context_quant_runtime.py",
+      "dst": "layers/l2_brain/context/context_quant_runtime.py",
+      "organ": "context"
+    },
+    {
+      "src": "context_value_scorer.py",
+      "dst": "layers/l2_brain/context/context_value_scorer.py",
+      "organ": "context"
+    },
+    {
+      "src": "creator_context_runtime.py",
+      "dst": "layers/l2_brain/strategic/creator_context_runtime.py",
+      "organ": "strategic"
+    },
+    {
+      "src": "cypher_codec.py",
+      "dst": "layers/l2_brain/infrastructure/cypher_codec.py",
+      "organ": "infrastructure"
+    },
+    {
+      "src": "daemon.py",
+      "dst": "layers/l2_brain/daemon/daemon.py",
+      "organ": "daemon"
+    },
+    {
+      "src": "daemon_gateway_heartbeat_bridge.py",
+      "dst": "layers/l2_brain/daemon/daemon_gateway_heartbeat_bridge.py",
+      "organ": "daemon"
+    },
+    {
+      "src": "daemon_outcome.py",
+      "dst": "layers/l2_brain/daemon/daemon_outcome.py",
+      "organ": "daemon"
+    },
+    {
+      "src": "debate_review_runtime.py",
+      "dst": "layers/l2_brain/cognition/debate_review_runtime.py",
+      "organ": "cognition"
+    },
+    {
+      "src": "dialectical_reasoning_runtime.py",
+      "dst": "layers/l2_brain/cognition/dialectical_reasoning_runtime.py",
+      "organ": "cognition"
+    },
+    {
+      "src": "embedding_activation_verifier.py",
+      "dst": "layers/l2_brain/model_mesh/embedding_activation_verifier.py",
+      "organ": "model_mesh"
+    },
+    {
+      "src": "embedding_adapter.py",
+      "dst": "layers/l2_brain/model_mesh/embedding_adapter.py",
+      "organ": "model_mesh"
+    },
+    {
+      "src": "embedding_memory_router.py",
+      "dst": "layers/l2_brain/model_mesh/embedding_memory_router.py",
+      "organ": "model_mesh"
+    },
+    {
+      "src": "embedding_provider.py",
+      "dst": "layers/l2_brain/model_mesh/embedding_provider.py",
+      "organ": "model_mesh"
+    },
+    {
+      "src": "entrypoint_enforcement_auditor.py",
+      "dst": "layers/l2_brain/governance/entrypoint_enforcement_auditor.py",
+      "organ": "governance"
+    },
+    {
+      "src": "epistemic_state_runtime.py",
+      "dst": "layers/l2_brain/cognition/epistemic_state_runtime.py",
+      "organ": "cognition"
+    },
+    {
+      "src": "event_bus.py",
+      "dst": "layers/l2_brain/infrastructure/event_bus.py",
+      "organ": "infrastructure"
+    },
+    {
+      "src": "four_dtes_persistence_preflight.py",
+      "dst": "layers/l2_brain/memory/four_dtes_persistence_preflight.py",
+      "organ": "memory"
+    },
+    {
+      "src": "full_body_operational_auditor.py",
+      "dst": "layers/l2_brain/governance/full_body_operational_auditor.py",
+      "organ": "governance"
+    },
+    {
+      "src": "gateway_contract.py",
+      "dst": "layers/l2_brain/infrastructure/gateway_contract.py",
+      "organ": "infrastructure"
+    },
+    {
+      "src": "goal_reasoning_runtime.py",
+      "dst": "layers/l2_brain/strategic/goal_reasoning_runtime.py",
+      "organ": "strategic"
+    },
+    {
+      "src": "cognitive_frame_builder.py",
+      "dst": "layers/l2_brain/cognition/cognitive_frame_builder.py",
+      "organ": "cognition"
+    },
+    {
+      "src": "daemon_diagnostic.py",
+      "dst": "layers/l2_brain/daemon/daemon_diagnostic.py",
+      "organ": "daemon"
+    },
+    {
+      "src": "memory_graph_runtime.py",
+      "dst": "layers/l2_brain/memory/memory_graph_runtime.py",
+      "organ": "memory"
+    },
+    {
+      "src": "mission_orchestrator_dag.py",
+      "dst": "layers/l2_brain/mission/mission_orchestrator_dag.py",
+      "organ": "mission"
+    },
+    {
+      "src": "outcome_evaluator.py",
+      "dst": "layers/l2_brain/mission/outcome_evaluator.py",
+      "organ": "mission"
+    },
+    {
+      "src": "semantic_cache.py",
+      "dst": "layers/l2_brain/model_mesh/semantic_cache.py",
+      "organ": "model_mesh"
+    },
+    {
+      "src": "strategic_partner_runtime.py",
+      "dst": "layers/l2_brain/strategic/strategic_partner_runtime.py",
+      "organ": "strategic"
+    },
+    {
+      "src": "heartbeat_decision_policy.py",
+      "dst": "layers/l2_brain/heartbeat/heartbeat_decision_policy.py",
+      "organ": "heartbeat"
+    },
+    {
+      "src": "heartbeat_lifecycle_runtime.py",
+      "dst": "layers/l2_brain/heartbeat/heartbeat_lifecycle_runtime.py",
+      "organ": "heartbeat"
+    },
+    {
+      "src": "heartbeat_scheduler.py",
+      "dst": "layers/l2_brain/heartbeat/heartbeat_scheduler.py",
+      "organ": "heartbeat"
+    },
+    {
+      "src": "heartbeat_state_store.py",
+      "dst": "layers/l2_brain/heartbeat/heartbeat_state_store.py",
+      "organ": "heartbeat"
+    },
+    {
+      "src": "human_intent.py",
+      "dst": "layers/l2_brain/strategic/human_intent.py",
+      "organ": "strategic"
+    },
+    {
+      "src": "knowledge_ports.py",
+      "dst": "layers/l2_brain/infrastructure/knowledge_ports.py",
+      "organ": "infrastructure"
+    },
+    {
+      "src": "kuzu_4dtes_guard.py",
+      "dst": "layers/l2_brain/memory/kuzu_4dtes_guard.py",
+      "organ": "memory"
+    },
+    {
+      "src": "kuzu_graph_readback_verifier.py",
+      "dst": "layers/l2_brain/memory/kuzu_graph_readback_verifier.py",
+      "organ": "memory"
+    },
+    {
+      "src": "kuzu_graph_sync_adapter.py",
+      "dst": "layers/l2_brain/memory/kuzu_graph_sync_adapter.py",
+      "organ": "memory"
+    },
+    {
+      "src": "local_context_compressor.py",
+      "dst": "layers/l2_brain/context/local_context_compressor.py",
+      "organ": "context"
+    },
+    {
+      "src": "local_reasoning.py",
+      "dst": "layers/l2_brain/cognition/local_reasoning.py",
+      "organ": "cognition"
+    },
+    {
+      "src": "long_running_mission.py",
+      "dst": "layers/l2_brain/mission/long_running_mission.py",
+      "organ": "mission"
+    },
+    {
+      "src": "memory_refs.py",
+      "dst": "layers/l2_brain/memory/memory_refs.py",
+      "organ": "memory"
+    },
+    {
+      "src": "memory_spine_bridge.py",
+      "dst": "layers/l2_brain/memory/memory_spine_bridge.py",
+      "organ": "memory"
+    },
+    {
+      "src": "memory_spine_entrypoint.py",
+      "dst": "layers/l2_brain/memory/memory_spine_entrypoint.py",
+      "organ": "memory"
+    },
+    {
+      "src": "metacognitive_evolution_flywheel.py",
+      "dst": "layers/l2_brain/metacognition/metacognitive_evolution_flywheel.py",
+      "organ": "metacognition"
+    },
+    {
+      "src": "metacognitive_loop_runtime.py",
+      "dst": "layers/l2_brain/metacognition/metacognitive_loop_runtime.py",
+      "organ": "metacognition"
+    },
+    {
+      "src": "metacognitive_quality_gate.py",
+      "dst": "layers/l2_brain/metacognition/metacognitive_quality_gate.py",
+      "organ": "metacognition"
+    },
+    {
+      "src": "mission_autonomy_contract.py",
+      "dst": "layers/l2_brain/mission/mission_autonomy_contract.py",
+      "organ": "mission"
+    },
+    {
+      "src": "mission_coherence_guard.py",
+      "dst": "layers/l2_brain/mission/mission_coherence_guard.py",
+      "organ": "mission"
+    },
+    {
+      "src": "mission_planner.py",
+      "dst": "layers/l2_brain/mission/mission_planner.py",
+      "organ": "mission"
+    },
+    {
+      "src": "mission_runtime_contract.py",
+      "dst": "layers/l2_brain/mission/mission_runtime_contract.py",
+      "organ": "mission"
+    },
+    {
+      "src": "mission_workbench.py",
+      "dst": "layers/l2_brain/mission/mission_workbench.py",
+      "organ": "mission"
+    },
+    {
+      "src": "models.py",
+      "dst": "layers/l2_brain/memory/models.py",
+      "organ": "memory"
+    },
+    {
+      "src": "model_discovery.py",
+      "dst": "layers/l2_brain/model_mesh/model_discovery.py",
+      "organ": "model_mesh"
+    },
+    {
+      "src": "model_executor.py",
+      "dst": "layers/l2_brain/model_mesh/model_executor.py",
+      "organ": "model_mesh"
+    },
+    {
+      "src": "model_router.py",
+      "dst": "layers/l2_brain/model_mesh/model_router.py",
+      "organ": "model_mesh"
+    },
+    {
+      "src": "nervous_pulse.py",
+      "dst": "layers/l2_brain/infrastructure/nervous_pulse.py",
+      "organ": "infrastructure"
+    },
+    {
+      "src": "operationalization_pack_2_runner.py",
+      "dst": "layers/l2_brain/governance/operationalization_pack_2_runner.py",
+      "organ": "governance"
+    },
+    {
+      "src": "operationalization_review.py",
+      "dst": "layers/l2_brain/governance/operationalization_review.py",
+      "organ": "governance"
+    },
+    {
+      "src": "operational_truth.py",
+      "dst": "layers/l2_brain/governance/operational_truth.py",
+      "organ": "governance"
+    },
+    {
+      "src": "operational_truth_collectors.py",
+      "dst": "layers/l2_brain/governance/operational_truth_collectors.py",
+      "organ": "governance"
+    },
+    {
+      "src": "orchestrator.py",
+      "dst": "layers/l2_brain/cognition/orchestrator.py",
+      "organ": "cognition"
+    },
+    {
+      "src": "plan_v1_completion_review.py",
+      "dst": "layers/l2_brain/mission/plan_v1_completion_review.py",
+      "organ": "mission"
+    },
+    {
+      "src": "polyglot_probe_orchestrator.py",
+      "dst": "layers/l2_brain/cognition/polyglot_probe_orchestrator.py",
+      "organ": "cognition"
+    },
+    {
+      "src": "ports.py",
+      "dst": "layers/l2_brain/infrastructure/ports.py",
+      "organ": "infrastructure"
+    },
+    {
+      "src": "post_mortem_agent.py",
+      "dst": "layers/l2_brain/governance/post_mortem_agent.py",
+      "organ": "governance"
+    },
+    {
+      "src": "preflight.py",
+      "dst": "layers/l2_brain/memory/preflight.py",
+      "organ": "memory"
+    },
+    {
+      "src": "prompt_to_mission.py",
+      "dst": "layers/l2_brain/mission/prompt_to_mission.py",
+      "organ": "mission"
+    },
+    {
+      "src": "rehydration.py",
+      "dst": "layers/l2_brain/memory/rehydration.py",
+      "organ": "memory"
+    },
+    {
+      "src": "revenue_goal_planner.py",
+      "dst": "layers/l2_brain/strategic/revenue_goal_planner.py",
+      "organ": "strategic"
+    },
+    {
+      "src": "runtime_guards.py",
+      "dst": "layers/l2_brain/infrastructure/runtime_guards.py",
+      "organ": "infrastructure"
+    },
+    {
+      "src": "safe_fallbacks.py",
+      "dst": "layers/l2_brain/infrastructure/safe_fallbacks.py",
+      "organ": "infrastructure"
+    },
+    {
+      "src": "self_healing_planner.py",
+      "dst": "layers/l2_brain/governance/self_healing_planner.py",
+      "organ": "governance"
+    },
+    {
+      "src": "self_improvement_runtime.py",
+      "dst": "layers/l2_brain/governance/self_improvement_runtime.py",
+      "organ": "governance"
+    },
+    {
+      "src": "self_optimization.py",
+      "dst": "layers/l2_brain/governance/self_optimization.py",
+      "organ": "governance"
+    },
+    {
+      "src": "self_worktree_orchestrator.py",
+      "dst": "layers/l2_brain/cognition/self_worktree_orchestrator.py",
+      "organ": "cognition"
+    },
+    {
+      "src": "semantic_graph_rag.py",
+      "dst": "layers/l2_brain/model_mesh/semantic_graph_rag.py",
+      "organ": "model_mesh"
+    },
+    {
+      "src": "semantic_ontology_mapper.py",
+      "dst": "layers/l2_brain/model_mesh/semantic_ontology_mapper.py",
+      "organ": "model_mesh"
+    },
+    {
+      "src": "semantic_retrieval_runtime.py",
+      "dst": "layers/l2_brain/model_mesh/semantic_retrieval_runtime.py",
+      "organ": "model_mesh"
+    },
+    {
+      "src": "session_store.py",
+      "dst": "layers/l2_brain/memory/session_store.py",
+      "organ": "memory"
+    },
+    {
+      "src": "source_of_truth_conflict_detector.py",
+      "dst": "layers/l2_brain/governance/source_of_truth_conflict_detector.py",
+      "organ": "governance"
+    },
+    {
+      "src": "spec_frontmatter_repair.py",
+      "dst": "layers/l2_brain/governance/spec_frontmatter_repair.py",
+      "organ": "governance"
+    },
+    {
+      "src": "state_coherence_guard.py",
+      "dst": "layers/l2_brain/governance/state_coherence_guard.py",
+      "organ": "governance"
+    },
+    {
+      "src": "strategic_partner_swarm.py",
+      "dst": "layers/l2_brain/strategic/strategic_partner_swarm.py",
+      "organ": "strategic"
+    },
+    {
+      "src": "strategic_question_generator.py",
+      "dst": "layers/l2_brain/strategic/strategic_question_generator.py",
+      "organ": "strategic"
+    },
+    {
+      "src": "supervisor_protocol.py",
+      "dst": "layers/l2_brain/governance/supervisor_protocol.py",
+      "organ": "governance"
+    },
+    {
+      "src": "technical_debt_intelligence.py",
+      "dst": "layers/l2_brain/governance/technical_debt_intelligence.py",
+      "organ": "governance"
+    },
+    {
+      "src": "vault_context_resolver.py",
+      "dst": "layers/l2_brain/memory/vault_context_resolver.py",
+      "organ": "memory"
+    },
+    {
+      "src": "vault_curator.py",
+      "dst": "layers/l2_brain/memory/vault_curator.py",
+      "organ": "memory"
+    },
+    {
+      "src": "vault_embedding_index.py",
+      "dst": "layers/l2_brain/memory/vault_embedding_index.py",
+      "organ": "memory"
+    },
+    {
+      "src": "whole_body_repair_queue.py",
+      "dst": "layers/l2_brain/governance/whole_body_repair_queue.py",
+      "organ": "governance"
+    },
+    {
+      "src": "whole_body_scanner.py",
+      "dst": "layers/l2_brain/governance/whole_body_scanner.py",
+      "organ": "governance"
+    },
+    {
+      "src": "whole_body_scan_calibrator.py",
+      "dst": "layers/l2_brain/governance/whole_body_scan_calibrator.py",
+      "organ": "governance"
+    },
+    {
+      "src": "aiwg_kernel/context_capsule_engine.py",
+      "dst": "layers/l2_brain/governance/context_capsule_engine.py",
+      "organ": "governance"
+    },
+    {
+      "src": "aiwg_kernel/kernel.py",
+      "dst": "layers/l2_brain/governance/kernel.py",
+      "organ": "governance"
+    },
+    {
+      "src": "cognition/epistemic_judge.py",
+      "dst": "layers/l2_brain/cognition/epistemic_judge.py",
+      "organ": "cognition"
+    },
+    {
+      "src": "cognition/pattern_miner.py",
+      "dst": "layers/l2_brain/cognition/pattern_miner.py",
+      "organ": "cognition"
+    },
+    {
+      "src": "cognition/pattern_miner_v2.py",
+      "dst": "layers/l2_brain/cognition/pattern_miner_v2.py",
+      "organ": "cognition"
+    },
+    {
+      "src": "domain/counterfactual_service.py",
+      "dst": "layers/l2_brain/domain/counterfactual_service.py",
+      "organ": "cognition"
+    },
+    {
+      "src": "domain/dtos.py",
+      "dst": "layers/l2_brain/domain/dtos.py",
+      "organ": "domain"
+    },
+    {
+      "src": "domain/embedding_contract.py",
+      "dst": "layers/l2_brain/domain/embedding_contract.py",
+      "organ": "domain"
+    },
+    {
+      "src": "domain/hypothesis_service.py",
+      "dst": "layers/l2_brain/domain/hypothesis_service.py",
+      "organ": "cognition"
+    },
+    {
+      "src": "domain/reasoning_logic.py",
+      "dst": "layers/l2_brain/domain/reasoning_logic.py",
+      "organ": "cognition"
+    },
+    {
+      "src": "domain/semantic_ports.py",
+      "dst": "layers/l2_brain/domain/semantic_ports.py",
+      "organ": "infrastructure"
+    },
+    {
+      "src": "domain/cognitive/models.py",
+      "dst": "layers/l2_brain/domain/models.py",
+      "organ": "memory"
+    },
+    {
+      "src": "infrastructure/semantic_adapters.py",
+      "dst": "layers/l2_brain/infrastructure/semantic_adapters.py",
+      "organ": "infrastructure"
+    },
+    {
+      "src": "infrastructure/adapters/external.py",
+      "dst": "layers/l2_brain/infrastructure/external.py",
+      "organ": "infrastructure"
+    },
+    {
+      "src": "infrastructure/adapters/kuzu.py",
+      "dst": "layers/l2_brain/infrastructure/kuzu.py",
+      "organ": "infrastructure"
+    },
+    {
+      "src": "infrastructure/adapters/ledger.py",
+      "dst": "layers/l2_brain/infrastructure/ledger.py",
+      "organ": "infrastructure"
+    },
+    {
+      "src": "infrastructure/cognitive/adapters.py",
+      "dst": "layers/l2_brain/infrastructure/adapters.py",
+      "organ": "infrastructure"
+    },
+    {
+      "src": "infrastructure/reasoning/providers.py",
+      "dst": "layers/l2_brain/infrastructure/providers.py",
+      "organ": "infrastructure"
+    },
+    {
+      "src": "metacognition/contracts.py",
+      "dst": "layers/l2_brain/metacognition/contracts.py",
+      "organ": "metacognition"
+    },
+    {
+      "src": "metacognition/deliberation_hooks.py",
+      "dst": "layers/l2_brain/metacognition/deliberation_hooks.py",
+      "organ": "metacognition"
+    },
+    {
+      "src": "metacognition/input_hooks.py",
+      "dst": "layers/l2_brain/metacognition/input_hooks.py",
+      "organ": "metacognition"
+    },
+    {
+      "src": "metacognition/output_hooks.py",
+      "dst": "layers/l2_brain/metacognition/output_hooks.py",
+      "organ": "metacognition"
+    },
+    {
+      "src": "metacognition/pipeline.py",
+      "dst": "layers/l2_brain/metacognition/pipeline.py",
+      "organ": "metacognition"
+    },
+    {
+      "src": "metacognition/reasoning_hooks.py",
+      "dst": "layers/l2_brain/metacognition/reasoning_hooks.py",
+      "organ": "metacognition"
+    },
+    {
+      "src": "metacognition/semantic_hooks.py",
+      "dst": "layers/l2_brain/metacognition/semantic_hooks.py",
+      "organ": "metacognition"
+    },
+    {
+      "src": "proto/proto/dummie/v2/core_pb2.py",
+      "dst": "layers/l2_brain/proto/core_pb2.py",
+      "organ": "proto"
+    },
+    {
+      "src": "proto/proto/dummie/v2/core_pb2_grpc.py",
+      "dst": "layers/l2_brain/proto/core_pb2_grpc.py",
+      "organ": "proto"
+    },
+    {
+      "src": "proto/proto/dummie/v2/memory_pb2.py",
+      "dst": "layers/l2_brain/proto/memory_pb2.py",
+      "organ": "proto"
+    },
+    {
+      "src": "proto/proto/dummie/v2/memory_pb2_grpc.py",
+      "dst": "layers/l2_brain/proto/memory_pb2_grpc.py",
+      "organ": "proto"
+    },
+    {
+      "src": "proto/proto/dummie/v2/orchestration_pb2.py",
+      "dst": "layers/l2_brain/proto/orchestration_pb2.py",
+      "organ": "proto"
+    },
+    {
+      "src": "proto/proto/dummie/v2/orchestration_pb2_grpc.py",
+      "dst": "layers/l2_brain/proto/orchestration_pb2_grpc.py",
+      "organ": "proto"
+    },
+    {
+      "src": "sdk/client.py",
+      "dst": "layers/l2_brain/sdk/client.py",
+      "organ": "sdk"
+    },
+    {
+      "src": "sdk/sdk_core_api_pb2.py",
+      "dst": "layers/l2_brain/sdk/sdk_core_api_pb2.py",
+      "organ": "sdk"
+    },
+    {
+      "src": "sdk/sdk_core_api_pb2_grpc.py",
+      "dst": "layers/l2_brain/sdk/sdk_core_api_pb2_grpc.py",
+      "organ": "sdk"
+    },
+    {
+      "src": "sdk/session.py",
+      "dst": "layers/l2_brain/sdk/session.py",
+      "organ": "sdk"
+    },
+    {
+      "src": "structural_hardening/bindings.py",
+      "dst": "layers/l2_brain/structural_hardening/bindings.py",
+      "organ": "structural_hardening"
+    },
+    {
+      "src": "structural_hardening/classifier.py",
+      "dst": "layers/l2_brain/structural_hardening/classifier.py",
+      "organ": "structural_hardening"
+    },
+    {
+      "src": "structural_hardening/cli.py",
+      "dst": "layers/l2_brain/structural_hardening/cli.py",
+      "organ": "structural_hardening"
+    },
+    {
+      "src": "structural_hardening/contracts.py",
+      "dst": "layers/l2_brain/structural_hardening/contracts.py",
+      "organ": "structural_hardening"
+    },
+    {
+      "src": "structural_hardening/evidence.py",
+      "dst": "layers/l2_brain/structural_hardening/evidence.py",
+      "organ": "structural_hardening"
+    },
+    {
+      "src": "structural_hardening/matrix.py",
+      "dst": "layers/l2_brain/structural_hardening/matrix.py",
+      "organ": "structural_hardening"
+    },
+    {
+      "src": "structural_hardening/reporter.py",
+      "dst": "layers/l2_brain/structural_hardening/reporter.py",
+      "organ": "structural_hardening"
+    }
+  ],
+  "errors": []
+}

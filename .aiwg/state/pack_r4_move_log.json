@@ -1,0 +1,125 @@
+{
+  "moved": [
+    {
+      "src": "mcp_server.py",
+      "dst": "daemon/mcp_server.py",
+      "status": "moved"
+    },
+    {
+      "src": "application/interfaces.py",
+      "dst": "domain/interfaces.py",
+      "status": "moved"
+    },
+    {
+      "src": "domain/capability_registry.py",
+      "dst": "model_mesh/capability_registry.py",
+      "status": "moved"
+    },
+    {
+      "src": "domain/agent_office/models.py",
+      "dst": "strategic/agent_office_models.py",
+      "status": "moved"
+    },
+    {
+      "src": "domain/context/capsule_models.py",
+      "dst": "context/capsule_models.py",
+      "status": "moved"
+    },
+    {
+      "src": "domain/context/models.py",
+      "dst": "context/models.py",
+      "status": "moved"
+    },
+    {
+      "src": "domain/fabrication/models.py",
+      "dst": "cognition/fabrication_models.py",
+      "status": "moved"
+    },
+    {
+      "src": "domain/governance/kernel_contracts.py",
+      "dst": "governance/kernel_contracts.py",
+      "status": "moved"
+    },
+    {
+      "src": "domain/governance/models.py",
+      "dst": "governance/models.py",
+      "status": "moved"
+    },
+    {
+      "src": "domain/memory/models.py",
+      "dst": "memory/models.py",
+      "status": "moved"
+    },
+    {
+      "src": "domain/memory/ports.py",
+      "dst": "memory/ports.py",
+      "status": "moved"
+    },
+    {
+      "src": "domain/memory/schemas.py",
+      "dst": "memory/schemas.py",
+      "status": "moved"
+    },
+    {
+      "src": "infrastructure/adapters/kuzu_repository.py",
+      "dst": "memory/kuzu_adapter.py",
+      "status": "moved"
+    },
+    {
+      "src": "infrastructure/adapters/ledger_adapter.py",
+      "dst": "infrastructure/adapters/ledger.py",
+      "status": "moved"
+    },
+    {
+      "src": "infrastructure/adapters/nats_controller.py",
+      "dst": "infrastructure/adapters/nats.py",
+      "status": "moved"
+    },
+    {
+      "src": "infrastructure/adapters/ollama_adapter.py",
+      "dst": "infrastructure/adapters/ollama.py",
+      "status": "moved"
+    },
+    {
+      "src": "infrastructure/adapters/shield_adapter.py",
+      "dst": "infrastructure/adapters/shield.py",
+      "status": "moved"
+    },
+    {
+      "src": "infrastructure/adapters/skill_adapter.py",
+      "dst": "infrastructure/adapters/skill.py",
+      "status": "moved"
+    },
+    {
+      "src": "application/ports.py",
+      "dst": "domain/ports_src.py",
+      "status": "merged"
+    },
+    {
+      "src": "application/services/model_router.py",
+      "dst": "model_mesh/model_router.py",
+      "status": "merged"
+    },
+    {
+      "src": "application/use_cases/orchestrator.py",
+      "dst": "cognition/use_case_orchestrator.py",
+      "status": "merged"
+    },
+    {
+      "src": "infrastructure/adapters/capsule_adapters.py",
+      "dst": "context/capsule_adapters.py",
+      "status": "merged"
+    },
+    {
+      "src": "infrastructure/adapters/kernel_adapters.py",
+      "dst": "governance/kernel_adapters.py",
+      "status": "merged"
+    },
+    {
+      "src": "infrastructure/adapters/ontological_adapter.py",
+      "dst": "infrastructure/adapters/ontological.py",
+      "status": "review"
+    }
+  ],
+  "skipped": []
+}
