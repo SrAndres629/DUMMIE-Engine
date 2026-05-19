@@ -43,10 +43,13 @@ class DiagnosticReporter:
 
     async def _check_layers(self) -> Dict[str, Any]:
         try:
-            from layers.l2_brain.safe_fallbacks import FailClosedAuditor, FailClosedExecutor
+            from layers.l2_brain.flat_brain.safe_fallbacks import FailClosedAuditor, FailClosedExecutor
         except ImportError:
-            FailClosedAuditor = object
-            FailClosedExecutor = object
+            try:
+                from safe_fallbacks import FailClosedAuditor, FailClosedExecutor
+            except ImportError:
+                FailClosedAuditor = object
+                FailClosedExecutor = object
         
         layers = {}
         

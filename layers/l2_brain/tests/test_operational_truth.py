@@ -115,8 +115,9 @@ def test_dummied_probe_passes_when_control_socket_replies_pong(tmp_path: Path):
 
 
 def test_dummie_truth_cli_json_smoke():
+    import sys
     out = subprocess.check_output(
-        ["python3", "scripts/dummie_truth.py", "--json"],
+        [sys.executable, "scripts/dummie_truth.py", "--json"],
         text=True,
     )
     payload = json.loads(out)

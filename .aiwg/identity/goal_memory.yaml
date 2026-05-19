@@ -19,3 +19,47 @@ goals:
   goal_type: revenue
   status: active
   timestamp: '2026-05-19T08:08:16.104903+00:00'
+- goal: 'quiero definir un plan operativo
+
+
+
+    --- SYSTEM DIRECTIVES (auto-injected) ---
+
+    1. Respond in Spanish. Code comments in English.'
+  goal_type: strategy
+  timestamp: '2026-05-19T09:46:41Z'
+  status: active
+- goal: 'quiero optimizar el flujo de ventas
+
+
+
+    --- SYSTEM DIRECTIVES (auto-injected) ---
+
+    1. Respond in Spanish. Code comments in English.'
+  goal_type: revenue
+  timestamp: '2026-05-19T09:46:41Z'
+  status: active
+- goal: 'quiero lanzar una oferta para aumentar MRR en 90 dias
+
+
+
+    --- SYSTEM DIRECTIVES (auto-injected) ---
+
+    1. Respond in Spanish. Code comments in English.'
+  goal_type: revenue
+  timestamp: '2026-05-19T09:46:48Z'
+  status: active
+- goal: seed
+  goal_type: unknown
+  timestamp: '2026-05-19T09:47:12Z'
+  status: active
+- goal: 'quiero un plan de crecimiento
+
+
+
+    --- SYSTEM DIRECTIVES (auto-injected) ---
+
+    1. Respond in Spanish. Code comments in English.'
+  goal_type: technical
+  timestamp: '2026-05-19T09:47:57Z'
+  status: active

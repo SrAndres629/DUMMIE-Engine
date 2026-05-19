@@ -30,6 +30,7 @@ class ReasoningLogic:
             normalized = dict(candidate)
             normalized["score"] = round(max(0.0, min(1.0, score)), 4)
             normalized["risk"] = ReasoningLogic._risk_for_side_effect(side_effect)
+            normalized["why"] = f"Deterministic rank score {normalized['score']} with risk {normalized['risk']}."
             ranked.append(normalized)
         
         ranked.sort(key=lambda item: item.get("score", 0.0), reverse=True)
@@ -38,11 +39,23 @@ class ReasoningLogic:
     @staticmethod
     def shape_context_packet(goal: str, ranked: List[Dict[str, Any]], token_budget: int = 4000, cloud_agent: str = "generic") -> Dict[str, Any]:
         selected = [str(item.get("id") or item.get("target")) for item in ranked if item.get("id") or item.get("target")]
+        evidence_bundle = []
+        for item in ranked:
+            refs = item.get("evidence_refs") or item.get("evidence") or []
+            if isinstance(refs, list):
+                for r in refs:
+                    if r not in evidence_bundle:
+                        evidence_bundle.append(r)
+            elif isinstance(refs, str):
+                if refs not in evidence_bundle:
+                    evidence_bundle.append(refs)
+
         packet = {
             "task_brief": goal[:max(80, token_budget // 4)],
             "selected_tools": selected[:5],
             "execution_hint": f"Prepare {cloud_agent} with selected tools.",
             "estimated_tokens": len(goal) // 4,
+            "evidence_bundle": evidence_bundle,
         }
         return packet
 

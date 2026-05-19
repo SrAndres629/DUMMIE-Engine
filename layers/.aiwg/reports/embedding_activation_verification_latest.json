@@ -1,0 +1,18 @@
+{
+  "decision": "PASS_WITH_WARNINGS",
+  "sentence_transformers_importable": true,
+  "torch_importable": true,
+  "torch_cuda_available": true,
+  "local_model_available": false,
+  "model_load_ok": false,
+  "embedding_mode": "DETERMINISTIC_FALLBACK",
+  "vector_dimension": 384,
+  "router_uses_real_embeddings": false,
+  "warnings": [
+    "Local sentence-transformers model not loaded: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.",
+    "Using deterministic fallback SHA256 router projections."
+  ],
+  "evidence_refs": [
+    ".aiwg/reports/embedding_memory_router_latest.json"
+  ]
+}

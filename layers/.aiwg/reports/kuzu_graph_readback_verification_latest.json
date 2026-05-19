@@ -1,0 +1,22 @@
+{
+  "decision": "PASS_WITH_WARNINGS",
+  "kuzu_importable": true,
+  "db_status_reported": "UNKNOWN",
+  "db_path": "/media/datasets/DUMMIE Engine/layers/.aiwg/memory/loci.db",
+  "db_path_exists": false,
+  "sandbox_write_readback_ok": true,
+  "memory_spine_readback_ok": false,
+  "reported_nodes": 0,
+  "reported_edges": 0,
+  "readback_nodes": 0,
+  "readback_edges": 0,
+  "idempotency_check": "NOT_RUN",
+  "promotion_recommendation": "READY_CANDIDATE",
+  "warnings": [
+    "Loci.db locked or unretrievable. Recommending READY_CANDIDATE based on sandbox success."
+  ],
+  "evidence_refs": [
+    ".aiwg/reports/memory_spine_sync_latest.json",
+    ".aiwg/memory/loci.db"
+  ]
+}

@@ -1,9 +1,9 @@
 {
   "decision": "PASS_WITH_WARNINGS",
-  "models_scanned": 64,
-  "valid_count": 17,
+  "models_scanned": 98,
+  "valid_count": 29,
   "stale_count": 4,
-  "superseded_count": 30,
+  "superseded_count": 52,
   "quarantined_count": 4,
   "unsafe_rejected_count": 0,
   "needs_review_count": 9,
@@ -616,6 +616,244 @@
       "message": "Superseded by mm-dbabda26 with higher quality for same intent",
       "severity": "WARN",
       "recommended_status": "superseded"
+    },
+    {
+      "model_id": "mm-f50e5f6d",
+      "finding_type": "duplicate_model",
+      "message": "Superseded by mm-dbabda26 with higher quality for same intent",
+      "severity": "WARN",
+      "recommended_status": "superseded"
+    },
+    {
+      "model_id": "mm-77633c04",
+      "finding_type": "empty_decisions_for_planning_intent",
+      "message": "No decisions for planning intent: heartbeat: what is the current system state and next safe ac",
+      "severity": "WARN",
+      "recommended_status": "needs_review"
+    },
+    {
+      "model_id": "mm-77633c04",
+      "finding_type": "duplicate_model",
+      "message": "Superseded by mm-1a9e488f with higher quality for same intent",
+      "severity": "WARN",
+      "recommended_status": "superseded"
+    },
+    {
+      "model_id": "mm-b447dca0",
+      "finding_type": "empty_decisions_for_planning_intent",
+      "message": "No decisions for planning intent: what should i do next?",
+      "severity": "WARN",
+      "recommended_status": "needs_review"
+    },
+    {
+      "model_id": "mm-b447dca0",
+      "finding_type": "duplicate_model",
+      "message": "Superseded by mm-b20aa346 with higher quality for same intent",
+      "severity": "WARN",
+      "recommended_status": "superseded"
+    },
+    {
+      "model_id": "mm-d896634a",
+      "finding_type": "duplicate_model",
+      "message": "Superseded by mm-dbabda26 with higher quality for same intent",
+      "severity": "WARN",
+      "recommended_status": "superseded"
+    },
+    {
+      "model_id": "mm-5f73487c",
+      "finding_type": "duplicate_model",
+      "message": "Superseded by mm-dbabda26 with higher quality for same intent",
+      "severity": "WARN",
+      "recommended_status": "superseded"
+    },
+    {
+      "model_id": "mm-d81e4323",
+      "finding_type": "empty_decisions_for_planning_intent",
+      "message": "No decisions for planning intent: heartbeat: what is the current system state and next safe ac",
+      "severity": "WARN",
+      "recommended_status": "needs_review"
+    },
+    {
+      "model_id": "mm-d81e4323",
+      "finding_type": "duplicate_model",
+      "message": "Superseded by mm-1a9e488f with higher quality for same intent",
+      "severity": "WARN",
+      "recommended_status": "superseded"
+    },
+    {
+      "model_id": "mm-e0e0da88",
+      "finding_type": "empty_decisions_for_planning_intent",
+      "message": "No decisions for planning intent: what should i do next?",
+      "severity": "WARN",
+      "recommended_status": "needs_review"
+    },
+    {
+      "model_id": "mm-e0e0da88",
+      "finding_type": "duplicate_model",
+      "message": "Superseded by mm-b20aa346 with higher quality for same intent",
+      "severity": "WARN",
+      "recommended_status": "superseded"
+    },
+    {
+      "model_id": "mm-71faae56",
+      "finding_type": "duplicate_model",
+      "message": "Superseded by mm-dbabda26 with higher quality for same intent",
+      "severity": "WARN",
+      "recommended_status": "superseded"
+    },
+    {
+      "model_id": "mm-13c79640",
+      "finding_type": "duplicate_model",
+      "message": "Superseded by mm-dbabda26 with higher quality for same intent",
+      "severity": "WARN",
+      "recommended_status": "superseded"
+    },
+    {
+      "model_id": "mm-ba6f6b86",
+      "finding_type": "empty_decisions_for_planning_intent",
+      "message": "No decisions for planning intent: heartbeat: what is the current system state and next safe ac",
+      "severity": "WARN",
+      "recommended_status": "needs_review"
+    },
+    {
+      "model_id": "mm-ba6f6b86",
+      "finding_type": "duplicate_model",
+      "message": "Superseded by mm-1a9e488f with higher quality for same intent",
+      "severity": "WARN",
+      "recommended_status": "superseded"
+    },
+    {
+      "model_id": "mm-046dbf2c",
+      "finding_type": "empty_decisions_for_planning_intent",
+      "message": "No decisions for planning intent: what should i do next?",
+      "severity": "WARN",
+      "recommended_status": "needs_review"
+    },
+    {
+      "model_id": "mm-046dbf2c",
+      "finding_type": "duplicate_model",
+      "message": "Superseded by mm-b20aa346 with higher quality for same intent",
+      "severity": "WARN",
+      "recommended_status": "superseded"
+    },
+    {
+      "model_id": "mm-9534daff",
+      "finding_type": "duplicate_model",
+      "message": "Superseded by mm-dbabda26 with higher quality for same intent",
+      "severity": "WARN",
+      "recommended_status": "superseded"
+    },
+    {
+      "model_id": "mm-3a1acbc5",
+      "finding_type": "duplicate_model",
+      "message": "Superseded by mm-dbabda26 with higher quality for same intent",
+      "severity": "WARN",
+      "recommended_status": "superseded"
+    },
+    {
+      "model_id": "mm-7d7874e6",
+      "finding_type": "empty_decisions_for_planning_intent",
+      "message": "No decisions for planning intent: heartbeat: what is the current system state and next safe ac",
+      "severity": "WARN",
+      "recommended_status": "needs_review"
+    },
+    {
+      "model_id": "mm-7d7874e6",
+      "finding_type": "duplicate_model",
+      "message": "Superseded by mm-1a9e488f with higher quality for same intent",
+      "severity": "WARN",
+      "recommended_status": "superseded"
+    },
+    {
+      "model_id": "mm-18d42fd4",
+      "finding_type": "empty_decisions_for_planning_intent",
+      "message": "No decisions for planning intent: what should i do next?",
+      "severity": "WARN",
+      "recommended_status": "needs_review"
+    },
+    {
+      "model_id": "mm-18d42fd4",
+      "finding_type": "duplicate_model",
+      "message": "Superseded by mm-b20aa346 with higher quality for same intent",
+      "severity": "WARN",
+      "recommended_status": "superseded"
+    },
+    {
+      "model_id": "mm-52999492",
+      "finding_type": "duplicate_model",
+      "message": "Superseded by mm-dbabda26 with higher quality for same intent",
+      "severity": "WARN",
+      "recommended_status": "superseded"
+    },
+    {
+      "model_id": "mm-e579c7fa",
+      "finding_type": "duplicate_model",
+      "message": "Superseded by mm-dbabda26 with higher quality for same intent",
+      "severity": "WARN",
+      "recommended_status": "superseded"
+    },
+    {
+      "model_id": "mm-85acb508",
+      "finding_type": "empty_decisions_for_planning_intent",
+      "message": "No decisions for planning intent: what should i do next?",
+      "severity": "WARN",
+      "recommended_status": "needs_review"
+    },
+    {
+      "model_id": "mm-85acb508",
+      "finding_type": "duplicate_model",
+      "message": "Superseded by mm-b20aa346 with higher quality for same intent",
+      "severity": "WARN",
+      "recommended_status": "superseded"
+    },
+    {
+      "model_id": "mm-85ca0f34",
+      "finding_type": "empty_decisions_for_planning_intent",
+      "message": "No decisions for planning intent: what should i do next?",
+      "severity": "WARN",
+      "recommended_status": "needs_review"
+    },
+    {
+      "model_id": "mm-85ca0f34",
+      "finding_type": "duplicate_model",
+      "message": "Superseded by mm-b20aa346 with higher quality for same intent",
+      "severity": "WARN",
+      "recommended_status": "superseded"
+    },
+    {
+      "model_id": "mm-de1aa3f2",
+      "finding_type": "empty_decisions_for_planning_intent",
+      "message": "No decisions for planning intent: heartbeat: what is the current system state and next safe ac",
+      "severity": "WARN",
+      "recommended_status": "needs_review"
+    },
+    {
+      "model_id": "mm-de1aa3f2",
+      "finding_type": "duplicate_model",
+      "message": "Superseded by mm-1a9e488f with higher quality for same intent",
+      "severity": "WARN",
+      "recommended_status": "superseded"
+    },
+    {
+      "model_id": "mm-eda06364",
+      "finding_type": "empty_decisions_for_planning_intent",
+      "message": "No decisions for planning intent: what should i do next?",
+      "severity": "WARN",
+      "recommended_status": "needs_review"
+    },
+    {
+      "model_id": "mm-eda06364",
+      "finding_type": "duplicate_model",
+      "message": "Superseded by mm-b20aa346 with higher quality for same intent",
+      "severity": "WARN",
+      "recommended_status": "superseded"
+    },
+    {
+      "model_id": "mm-49ceee5e",
+      "finding_type": "duplicate_model",
+      "message": "Superseded by mm-dbabda26 with higher quality for same intent",
+      "severity": "WARN",
+      "recommended_status": "superseded"
     }
   ],
   "decisions": [
@@ -1066,18 +1304,256 @@
       "new_status": "valid",
       "reason": "No issues found",
       "superseded_by": ""
+    },
+    {
+      "model_id": "mm-d0938b3c",
+      "previous_status": "valid",
+      "new_status": "valid",
+      "reason": "No issues found",
+      "superseded_by": ""
+    },
+    {
+      "model_id": "mm-f50e5f6d",
+      "previous_status": "superseded",
+      "new_status": "superseded",
+      "reason": "Superseded by mm-dbabda26 with higher quality for same intent",
+      "superseded_by": "mm-dbabda26"
+    },
+    {
+      "model_id": "mm-ab6dde8e",
+      "previous_status": "valid",
+      "new_status": "valid",
+      "reason": "No issues found",
+      "superseded_by": ""
+    },
+    {
+      "model_id": "mm-0ac0f2df",
+      "previous_status": "valid",
+      "new_status": "valid",
+      "reason": "No issues found",
+      "superseded_by": ""
+    },
+    {
+      "model_id": "mm-77633c04",
+      "previous_status": "superseded",
+      "new_status": "superseded",
+      "reason": "No decisions for planning intent: heartbeat: what is the current system state and next safe ac; Superseded by mm-1a9e488f with higher quality for same intent",
+      "superseded_by": "mm-1a9e488f"
+    },
+    {
+      "model_id": "mm-b447dca0",
+      "previous_status": "superseded",
+      "new_status": "superseded",
+      "reason": "No decisions for planning intent: what should i do next?; Superseded by mm-b20aa346 with higher quality for same intent",
+      "superseded_by": "mm-b20aa346"
+    },
+    {
+      "model_id": "mm-d896634a",
+      "previous_status": "superseded",
+      "new_status": "superseded",
+      "reason": "Superseded by mm-dbabda26 with higher quality for same intent",
+      "superseded_by": "mm-dbabda26"
+    },
+    {
+      "model_id": "mm-18b426cd",
+      "previous_status": "valid",
+      "new_status": "valid",
+      "reason": "No issues found",
+      "superseded_by": ""
+    },
+    {
+      "model_id": "mm-3f3c1fbc",
+      "previous_status": "valid",
+      "new_status": "valid",
+      "reason": "No issues found",
+      "superseded_by": ""
+    },
+    {
+      "model_id": "mm-5f73487c",
+      "previous_status": "superseded",
+      "new_status": "superseded",
+      "reason": "Superseded by mm-dbabda26 with higher quality for same intent",
+      "superseded_by": "mm-dbabda26"
+    },
+    {
+      "model_id": "mm-d81e4323",
+      "previous_status": "superseded",
+      "new_status": "superseded",
+      "reason": "No decisions for planning intent: heartbeat: what is the current system state and next safe ac; Superseded by mm-1a9e488f with higher quality for same intent",
+      "superseded_by": "mm-1a9e488f"
+    },
+    {
+      "model_id": "mm-e0e0da88",
+      "previous_status": "superseded",
+      "new_status": "superseded",
+      "reason": "No decisions for planning intent: what should i do next?; Superseded by mm-b20aa346 with higher quality for same intent",
+      "superseded_by": "mm-b20aa346"
+    },
+    {
+      "model_id": "mm-71faae56",
+      "previous_status": "superseded",
+      "new_status": "superseded",
+      "reason": "Superseded by mm-dbabda26 with higher quality for same intent",
+      "superseded_by": "mm-dbabda26"
+    },
+    {
+      "model_id": "mm-b086a8f1",
+      "previous_status": "valid",
+      "new_status": "valid",
+      "reason": "No issues found",
+      "superseded_by": ""
+    },
+    {
+      "model_id": "mm-c07abe83",
+      "previous_status": "valid",
+      "new_status": "valid",
+      "reason": "No issues found",
+      "superseded_by": ""
+    },
+    {
+      "model_id": "mm-13c79640",
+      "previous_status": "superseded",
+      "new_status": "superseded",
+      "reason": "Superseded by mm-dbabda26 with higher quality for same intent",
+      "superseded_by": "mm-dbabda26"
+    },
+    {
+      "model_id": "mm-ba6f6b86",
+      "previous_status": "superseded",
+      "new_status": "superseded",
+      "reason": "No decisions for planning intent: heartbeat: what is the current system state and next safe ac; Superseded by mm-1a9e488f with higher quality for same intent",
+      "superseded_by": "mm-1a9e488f"
+    },
+    {
+      "model_id": "mm-046dbf2c",
+      "previous_status": "superseded",
+      "new_status": "superseded",
+      "reason": "No decisions for planning intent: what should i do next?; Superseded by mm-b20aa346 with higher quality for same intent",
+      "superseded_by": "mm-b20aa346"
+    },
+    {
+      "model_id": "mm-9534daff",
+      "previous_status": "superseded",
+      "new_status": "superseded",
+      "reason": "Superseded by mm-dbabda26 with higher quality for same intent",
+      "superseded_by": "mm-dbabda26"
+    },
+    {
+      "model_id": "mm-c9c60ac8",
+      "previous_status": "valid",
+      "new_status": "valid",
+      "reason": "No issues found",
+      "superseded_by": ""
+    },
+    {
+      "model_id": "mm-2fa3f305",
+      "previous_status": "valid",
+      "new_status": "valid",
+      "reason": "No issues found",
+      "superseded_by": ""
+    },
+    {
+      "model_id": "mm-3a1acbc5",
+      "previous_status": "superseded",
+      "new_status": "superseded",
+      "reason": "Superseded by mm-dbabda26 with higher quality for same intent",
+      "superseded_by": "mm-dbabda26"
+    },
+    {
+      "model_id": "mm-7d7874e6",
+      "previous_status": "superseded",
+      "new_status": "superseded",
+      "reason": "No decisions for planning intent: heartbeat: what is the current system state and next safe ac; Superseded by mm-1a9e488f with higher quality for same intent",
+      "superseded_by": "mm-1a9e488f"
+    },
+    {
+      "model_id": "mm-18d42fd4",
+      "previous_status": "superseded",
+      "new_status": "superseded",
+      "reason": "No decisions for planning intent: what should i do next?; Superseded by mm-b20aa346 with higher quality for same intent",
+      "superseded_by": "mm-b20aa346"
+    },
+    {
+      "model_id": "mm-52999492",
+      "previous_status": "superseded",
+      "new_status": "superseded",
+      "reason": "Superseded by mm-dbabda26 with higher quality for same intent",
+      "superseded_by": "mm-dbabda26"
+    },
+    {
+      "model_id": "mm-c3d01e14",
+      "previous_status": "valid",
+      "new_status": "valid",
+      "reason": "No issues found",
+      "superseded_by": ""
+    },
+    {
+      "model_id": "mm-d2755434",
+      "previous_status": "valid",
+      "new_status": "valid",
+      "reason": "No issues found",
+      "superseded_by": ""
+    },
+    {
+      "model_id": "mm-e579c7fa",
+      "previous_status": "superseded",
+      "new_status": "superseded",
+      "reason": "Superseded by mm-dbabda26 with higher quality for same intent",
+      "superseded_by": "mm-dbabda26"
+    },
+    {
+      "model_id": "mm-85acb508",
+      "previous_status": "superseded",
+      "new_status": "superseded",
+      "reason": "No decisions for planning intent: what should i do next?; Superseded by mm-b20aa346 with higher quality for same intent",
+      "superseded_by": "mm-b20aa346"
+    },
+    {
+      "model_id": "mm-85ca0f34",
+      "previous_status": "superseded",
+      "new_status": "superseded",
+      "reason": "No decisions for planning intent: what should i do next?; Superseded by mm-b20aa346 with higher quality for same intent",
+      "superseded_by": "mm-b20aa346"
+    },
+    {
+      "model_id": "mm-de1aa3f2",
+      "previous_status": "superseded",
+      "new_status": "superseded",
+      "reason": "No decisions for planning intent: heartbeat: what is the current system state and next safe ac; Superseded by mm-1a9e488f with higher quality for same intent",
+      "superseded_by": "mm-1a9e488f"
+    },
+    {
+      "model_id": "mm-eda06364",
+      "previous_status": "superseded",
+      "new_status": "superseded",
+      "reason": "No decisions for planning intent: what should i do next?; Superseded by mm-b20aa346 with higher quality for same intent",
+      "superseded_by": "mm-b20aa346"
+    },
+    {
+      "model_id": "mm-49ceee5e",
+      "previous_status": "superseded",
+      "new_status": "superseded",
+      "reason": "Superseded by mm-dbabda26 with higher quality for same intent",
+      "superseded_by": "mm-dbabda26"
+    },
+    {
+      "model_id": "mm-46b4cf47",
+      "previous_status": "valid",
+      "new_status": "valid",
+      "reason": "No issues found",
+      "superseded_by": ""
     }
   ],
   "summary": {
-    "models_scanned": 64,
-    "valid_count": 17,
+    "models_scanned": 98,
+    "valid_count": 29,
     "stale_count": 4,
-    "superseded_count": 30,
+    "superseded_count": 52,
     "quarantined_count": 4,
     "unsafe_rejected_count": 0,
     "needs_review_count": 9,
     "overconfidence_count": 4,
     "kuzu_degraded": true
   },
-  "timestamp": "2026-05-19T03:22:36.846482+00:00"
+  "timestamp": "2026-05-19T09:01:11.888930+00:00"
 }

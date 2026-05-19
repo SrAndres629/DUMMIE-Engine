@@ -113,7 +113,8 @@ def test_triage_mode_selector(tmp_path):
     assert not triage_json.exists()
 
     from unittest.mock import patch
-    with patch("layers.l2_brain.structural_hardening.bindings.ContractBindingRegistry.get_all_bindings", return_value=[]):
+    target_path = "layers.l2_brain.flat_brain.structural_hardening.bindings.ContractBindingRegistry.get_all_bindings"
+    with patch(target_path, return_value=[]):
         # test validate-only with clean repo
         payload, exit_code = build_structural_hardening_triage(
             repo_root=str(repo),

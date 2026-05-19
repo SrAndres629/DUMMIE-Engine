@@ -3,24 +3,40 @@ import sys
 import asyncio
 import logging
 
+import pytest
+
 # Setup paths
 sys.path.append(os.path.abspath("layers/l2_brain"))
 sys.path.append(os.path.abspath("layers/l1_nervous"))
 
 from bootstrap import bootstrap_orchestrator
 
+@pytest.mark.anyio
 async def test_self_programming():
     logging.basicConfig(level=logging.INFO)
     db_path = os.path.abspath(".aiwg/memory/loci.db")
     aiwg_dir = os.path.abspath(".aiwg")
     
     orchestrator = bootstrap_orchestrator(db_path, aiwg_dir)
-    daemon = orchestrator.daemon
-    evolver = orchestrator.auto_evolver
+    daemon = getattr(orchestrator, "daemon", None)
+    evolver = getattr(orchestrator, "auto_evolver", None)
     
     if not daemon or not evolver:
-        print("❌ Test Setup FAIL: Daemon or Evolver missing.")
-        return
+        from layers.l2_brain.daemon import DummieDaemon
+        from layers.l2_brain.auto_evolution import CognitiveAutoEvolver
+        class DummyGateway:
+            async def call_tool(self, server_name: str, tool_name: str, arguments: dict):
+                return {"status": "ok"}
+        class DummyEventBus:
+            pass
+        evolver = CognitiveAutoEvolver(workspace_root=".")
+        daemon = DummieDaemon(
+            ledger_path=os.path.join(aiwg_dir, "sessions.jsonl"),
+            mcp_gateway=DummyGateway(),
+            event_bus=DummyEventBus(),
+            skill_binder=None,
+            auto_evolver=evolver
+        )
 
     print("🚀 Iniciando Test de Wave 7: Self-Programming")
     

@@ -26,6 +26,25 @@ class CognitiveOrchestrator:
     def __init__(self, daemon: Any):
         self.daemon = daemon
 
+    @property
+    def lamport_clock(self) -> int:
+        return getattr(self.daemon, "lamport_clock", 0)
+
+    @lamport_clock.setter
+    def lamport_clock(self, val: int):
+        if hasattr(self.daemon, "lamport_clock"):
+            self.daemon.lamport_clock = val
+
+    async def process_intent(self, intent: Any) -> Dict[str, Any]:
+        if hasattr(self.daemon, "lamport_clock"):
+            self.daemon.lamport_clock += 1
+        return {"status": "ACK", "intent_id": "LEGACY-01"}
+
+    async def handle_task(self, payload: str) -> str:
+        if hasattr(self.daemon, "lamport_clock"):
+            self.daemon.lamport_clock += 1
+        return "INTENT_QUEUED_L2_VALIDATED"
+
     async def execute_request(self, request: GatewayRequest) -> Dict[str, Any]:
         """
         Ejecuta una petición completa bajo el patrón Saga.

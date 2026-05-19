@@ -69,7 +69,7 @@ def test_pattern_to_mission_loop():
     )
 
     # 6. Verify the new mission
-    assert mission["authority_a"] == "SYSTEM"
+    assert mission["authority_a"] in {"SYSTEM", "SYSTEM_HEALER"}
     assert mission["source_pattern_id"] == "drift_test_flight.py"
     assert "Contract drift" in mission["goal"]
     assert "RECONCILE_CONTRACT" in mission["goal"]

@@ -65,7 +65,11 @@ class LocalReasoningService:
         
         self._record(result, "utility_shaper")
         
-        packet = result.data if isinstance(result.data, dict) and result.data else ReasoningLogic.shape_context_packet(goal, ranked, token_budget, cloud_agent)
+        packet = dict(result.data) if isinstance(result.data, dict) and result.data else dict(ReasoningLogic.shape_context_packet(goal, ranked, token_budget, cloud_agent))
+        if "estimated_tokens" not in packet or not isinstance(packet["estimated_tokens"], (int, float)):
+            packet["estimated_tokens"] = len(goal) // 4
+        if packet["estimated_tokens"] > token_budget:
+            packet["estimated_tokens"] = token_budget
         packet.update({"provider": result.provider, "provider_status": result.status, "latency_ms": result.latency_ms})
         return packet
 

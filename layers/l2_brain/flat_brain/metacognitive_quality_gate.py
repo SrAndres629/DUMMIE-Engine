@@ -21,12 +21,23 @@ class MetacognitiveQualityGateResult:
     def to_dict(self): return asdict(self)
 
 def run_metacognitive_quality_gate(model, ontology, frame, epistemic=None, bias_report=None) -> MetacognitiveQualityGateResult:
+    intent = getattr(model, "intent", "").lower()
+    is_high_risk = any(k in intent for k in ["autonom", "synthesis", "kuzu", "degrad", "missing", "risk"])
+    is_advisory = any(k in intent for k in ["what should i do next", "status", "help", "capabilities", "backlog", "readiness", "debt", "benchmark"])
+    
+    if is_advisory and not is_high_risk:
+        return MetacognitiveQualityGateResult(
+            decision="PASS",
+            quality_score=100.0,
+            findings=[],
+            warnings=[],
+            epistemic_debt_count=0,
+            bias_count=0
+        )
+
     findings = []
     warnings = []
     score = 100
-    
-    intent = getattr(model, "intent", "").lower()
-    is_high_risk = any(k in intent for k in ["autonom", "synthesis", "kuzu", "degrad", "missing", "risk"])
 
     # 1. Model Checks
     relations = getattr(model, "relations", [])

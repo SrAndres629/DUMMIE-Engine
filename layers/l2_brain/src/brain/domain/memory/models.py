@@ -1,33 +1,95 @@
 import hashlib
+import json
 from pydantic import BaseModel, Field
 from typing import List, Dict, Optional
 from datetime import datetime
-from brain.domain.context.models import SixDimensionalContext, AuthorityLevel
+from brain.domain.context.models import SixDimensionalContext, AuthorityLevel, IntentType
 
 class MemoryNode4DTES(BaseModel):
     """
-    Nodo de Memoria Inmutable (4D-TES) - Spec 02
+    Nodo de Memoria Inmutable (4D-TES) - Spec 02 & Spec 36
+    Alineado con el modelo físico de producción MemoryNode4D.
     """
-    causal_hash: str = Field(..., description="SHA-256(parent_hash + payload_hash + 6d_context)")
-    parent_hash: str = Field(..., description="Puntero criptográfico al nodo anterior")
-    context: SixDimensionalContext
-    payload: bytes = Field(..., description="Excitación inmutable (Zstd compressed JSON o AST)")
-    payload_hash: str = Field(..., description="Hash del payload aislado")
-    embedding: Optional[List[float]] = Field(None, description="Vector semántico local (Ollama/Gemma)")
+    causal_hash: str = Field(..., description="Causal signature SHA-256")
+    parent_hashes: List[str] = Field(default_factory=lambda: ["GENESIS"])
+    locus_x: str
+    locus_y: str
+    locus_z: str
+    lamport_t: int
+    authority_a: str
+    intent_i: str
+    payload: str
+    payload_hash: str
+    embedding: Optional[List[float]] = Field(default_factory=lambda: [0.0])
+
+    @property
+    def parent_hash(self) -> str:
+        if self.parent_hashes:
+            return self.parent_hashes[0]
+        return "GENESIS"
+
+    @property
+    def context(self) -> SixDimensionalContext:
+        try:
+            auth = AuthorityLevel(self.authority_a)
+        except ValueError:
+            auth = AuthorityLevel.AUTHORITY_UNSPECIFIED
+        try:
+            intent = IntentType(self.intent_i)
+        except ValueError:
+            intent = IntentType.INTENT_UNSPECIFIED
+        return SixDimensionalContext(
+            locus_x=self.locus_x,
+            locus_y=self.locus_y,
+            locus_z=self.locus_z,
+            lamport_t=self.lamport_t,
+            authority_a=auth,
+            intent_i=intent
+        )
 
     @classmethod
-    def generate(cls, parent_hash: str, context: SixDimensionalContext, payload: bytes) -> "MemoryNode4DTES":
-        """Factory para generar un nodo con hashes calculados."""
-        payload_hash = hashlib.sha256(payload).hexdigest()
-        context_hash = context.compute_context_hash()
+    def generate(
+        cls,
+        parent_hashes: List[str],
+        locus_x: str,
+        locus_y: str,
+        locus_z: str,
+        lamport_t: int,
+        authority_a: str,
+        intent_i: str,
+        payload: str
+    ) -> "MemoryNode4DTES":
+        """Factory para generar un nodo con hashes calculados determinísticamente."""
+        payload_hash = f"sha256:{hashlib.sha256(payload.encode('utf-8')).hexdigest()}"
         
-        causal_seed = f"{parent_hash}{payload_hash}{context_hash}"
-        causal_hash = hashlib.sha256(causal_seed.encode('utf-8')).hexdigest()
-        
+        sorted_parents = sorted(parent_hashes) if parent_hashes else ["GENESIS"]
+        node_material = {
+            "parent_hashes": sorted_parents,
+            "payload_hash": payload_hash,
+            "locus_x": locus_x,
+            "locus_y": locus_y,
+            "locus_z": locus_z,
+            "lamport_t": lamport_t,
+            "authority_a": authority_a,
+            "intent_i": intent_i,
+        }
+        canonical = json.dumps(
+            node_material,
+            sort_keys=True,
+            separators=(",", ":"),
+            ensure_ascii=False,
+        )
+        causal_hash = hashlib.sha256(canonical.encode("utf-8")).hexdigest()
+
         return cls(
             causal_hash=causal_hash,
-            parent_hash=parent_hash,
-            context=context,
+            parent_hashes=sorted_parents,
+            locus_x=locus_x,
+            locus_y=locus_y,
+            locus_z=locus_z,
+            lamport_t=lamport_t,
+            authority_a=authority_a,
+            intent_i=intent_i,
             payload=payload,
             payload_hash=payload_hash
         )

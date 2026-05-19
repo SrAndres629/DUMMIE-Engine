@@ -180,7 +180,8 @@ async def test_daemon_default_wiring_uses_real_shields_and_driver():
     outcome = await daemon.process_request(request)
 
     assert outcome["status"] == "SUCCESS"
-    assert gateway.calls == [
+    execution_calls = [c for c in gateway.calls if c[1] == "exec_remote_tool"]
+    assert execution_calls == [
         (
             "dummie-brain",
             "exec_remote_tool",

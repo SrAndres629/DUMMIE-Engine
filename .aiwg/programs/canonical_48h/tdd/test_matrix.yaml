@@ -1,0 +1,58 @@
+metadata:
+  program_id: canonical_48h
+  mode: tdd
+  date: "2026-05-19"
+
+red_green_refactor_cycles:
+  - cycle_id: C1
+    target: "Path contract mismatch detection"
+    red:
+      command: "uv run python scripts/validate_specs_docs.py"
+      expected: "fails with missing physical evidence paths"
+    green:
+      command: "uv run python scripts/canonical_48h_runner.py --phase ws1"
+      expected: "emits contract map + bridge plan + reduced unresolved set"
+    refactor:
+      command: "uv run python scripts/canonical_48h_runner.py --phase ws1 --apply-safe-bridge"
+      expected: "compatibility strategy documented without destructive moves"
+
+  - cycle_id: C2
+    target: "Repo/context killer guard"
+    red:
+      command: "uv run python scripts/canonical_48h_runner.py --phase ws3 --strict"
+      expected: "fails if blocked paths are detected in operational scope"
+    green:
+      command: "uv run python scripts/canonical_48h_runner.py --phase ws3"
+      expected: "blocked list and remediation queue generated"
+    refactor:
+      command: "uv run python scripts/aiwg_pack_guard.py preflight"
+      expected: "preflight passes with explicit warnings only"
+
+  - cycle_id: C3
+    target: "CLI/SDK operational smoke"
+    red:
+      command: "uv run python -m dummie status"
+      expected: "fails if identity/aiwg/provider load breaks"
+    green:
+      command: "uv run python -m dummie advise \"quiero que mi negocio facture 10000 USD mensuales\""
+      expected: "goal type + strategic questions + tool opportunities"
+    refactor:
+      command: "uv run pytest -q tests/test_dummie_cli.py tests/test_dummie_engine.py tests/test_provider_registry.py"
+      expected: "all pass"
+
+  - cycle_id: C4
+    target: "Memory safety"
+    red:
+      command: "git status --short"
+      expected: "detect staged .aiwg/memory/*.db as failure"
+    green:
+      command: "uv run python scripts/canonical_48h_runner.py --phase ws2"
+      expected: "db safety report PASS and non-staged verification"
+    refactor:
+      command: "uv run python scripts/aiwg_pack_guard.py closeout --allow-uncommitted"
+      expected: "closeout summary with evidence links"
+
+test_policy:
+  - "No claim without command evidence"
+  - "Every failed gate opens repair queue item"
+  - "Use targeted tests before broad suites"

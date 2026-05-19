@@ -36,7 +36,7 @@ class AuthorityClassifierHook:
         raw = frame.raw_user_input.lower()
         if any(k in raw for k in ["borra", "delete", "remove", "root", "format", "destroy", "sudo"]):
             frame.authority_level = AuthorityLevel.A5_CRITICAL_OP
-        elif any(k in raw for k in ["publica", "post", "send", "tweet", "publish", "deploy", "social"]):
+        elif any(k in raw for k in ["publica", "post", "send", "tweet", "publish", "deploy", "social", "tiktok", "facebook", "instagram"]):
             frame.authority_level = AuthorityLevel.A4_EXTERNAL_ACTOR
         elif any(k in raw for k in ["instala", "install", "setup", "configure", "apt", "npm", "pip"]):
             frame.authority_level = AuthorityLevel.A3_STATION_OP

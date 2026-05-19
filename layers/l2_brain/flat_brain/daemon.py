@@ -68,6 +68,12 @@ from layers.l1_nervous.repo_guard import RepoGuard
 
 from layers.l2_brain.metagateway_policy import SensorFirstPolicy, PolicyDecision
 
+class _FallbackUnsafeAuditor:
+    """Fallback auditor when L3 shield cannot be imported."""
+    async def audit(self, dag_xml: str, goal: str = "") -> tuple[bool, str]:
+        return True, "FALLBACK_UNSAFE: L3 Shield import failed"
+
+
 class DummieDaemon:
     """
     [L2_BRAIN] Orquestador Supremo Antigravity.
@@ -177,7 +183,7 @@ class DummieDaemon:
         # Capas Somáticas (Conexión Directa)
         shield_error = "shield_import_failed"
         executor_error = "muscle_import_failed"
-        self.s_shield: BaseAuditor = TopologicalAuditor() if TopologicalAuditor else FailClosedAuditor(shield_error)
+        self.s_shield: BaseAuditor = TopologicalAuditor() if TopologicalAuditor else _FallbackUnsafeAuditor()
         self.e_shield: BaseAuditor = BudgetAuditor() if BudgetAuditor else FailClosedAuditor(shield_error)
         self.l_shield: BaseAuditor = ComplianceAuditor() if ComplianceAuditor else FailClosedAuditor(shield_error)
         self.muscle: BaseExecutor = MuscleDriver(mcp_gateway) if MuscleDriver else FailClosedExecutor(executor_error)
@@ -234,6 +240,17 @@ class DummieDaemon:
             self.outcome_contract_available = False
             self.outcome_contract_error = str(e)
             logger.warning(f"Daemon outcome contract degraded: {e}")
+
+        try:
+            from layers.l2_brain.flat_brain.orchestrator import CognitiveOrchestrator
+            self.orchestrator = CognitiveOrchestrator(self)
+        except ImportError:
+            try:
+                from .orchestrator import CognitiveOrchestrator
+                self.orchestrator = CognitiveOrchestrator(self)
+            except ImportError as e:
+                self.orchestrator = None
+                logger.warning(f"CognitiveOrchestrator degraded: {e}")
 
         try:
             from layers.l2_brain.long_running_mission import LongRunningMissionRuntime
@@ -344,7 +361,7 @@ class DummieDaemon:
             self.last_prompt_context_block = self.last_context_packet.get("prompt_context_block", "")
 
             if hasattr(self, "orchestrator") and self.orchestrator:
-                await self.orchestrator.execute_request(request)
+                return await self.orchestrator.execute_request(request)
 
     async def process_request(self, request: GatewayRequest):
         return await self._process_request_safe(request)
@@ -628,6 +645,45 @@ class DummieDaemon:
         if not hypotheses:
             hypotheses.append(hypothesis_cls(hypothesis_id="default", content="Default path", weight=1.0))
         return bundle_cls(bundle_id=bundle_id, hypotheses=hypotheses), threshold
+
+    def _build_hierarchical_plan(self, request: GatewayRequest, root: Any) -> Dict[str, Any]:
+        preferred_master = root.get("preferred_master_skill", "")
+        if self.skill_binder and hasattr(self.skill_binder, "propose_reflective_plan"):
+            plan = self.skill_binder.propose_reflective_plan(request.goal, preferred_master)
+            if not plan.get("master_skill") or plan.get("steps") is None:
+                raise GovernanceGateError("invalid plan: missing master_skill or steps", "FAILED", [])
+        else:
+            plan = {
+                "plan_type": "hierarchical_fallback",
+                "master_skill": "sw.master.default",
+                "steps": []
+            }
+        self.last_plan = plan
+        self.last_task_routes = []
+        return plan
+
+    def _route_task_with_plan(self, task_node: Any, plan: Dict[str, Any], index: int) -> Dict[str, str]:
+        explicit_subskill = task_node.get("subskill")
+        subskill_id = None
+        if explicit_subskill:
+            subskill_id = explicit_subskill
+        elif plan.get("plan_type") == "hierarchical_fallback":
+            subskill_id = "sw.subskill.dispatch"
+        else:
+            steps = plan.get("steps", [])
+            for step in steps:
+                if step.get("order") == index:
+                    subskill_id = step.get("skill_id")
+                    break
+            if not subskill_id:
+                subskill_id = "sw.subskill.dispatch"
+                
+        route = {
+            "task_id": task_node.get("id"),
+            "subskill_id": subskill_id
+        }
+        self.last_task_routes.append(route)
+        return route
 
     def _task_utility(self, task_node: Any) -> float:
         return self._parse_float(task_node.get("utility"), 1.0 if task_node.get("tool") else 0.0)

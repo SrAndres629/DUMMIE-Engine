@@ -1,0 +1,98 @@
+program:
+  id: canonical_48h
+  owner: Jorge Andres Aguirre Cordero
+  runtime: DUMMIE Engine
+  start_date: "2026-05-19"
+  duration_hours: 48
+  methodology: ["SDD", "TDD", "evidence-first"]
+  package_manager: uv
+
+architecture_principles:
+  - single_source_of_truth_for_paths
+  - adapter_first_backward_compatibility
+  - non_destructive_hardening
+  - explicit_failure_over_silent_fallback
+  - receipts_before_claims
+
+observed_root_causes:
+  - id: RC01
+    name: l2_path_contract_drift
+    detail: "Physical spec evidence points to layers/l2_brain/*.py while implementation moved to layers/l2_brain/flat_brain/*.py"
+    impact: ["spec validation failures", "trust decay", "runtime confusion"]
+  - id: RC02
+    name: mixed_runtime_artifacts
+    detail: "Large mutable AIWG and runtime files coexist with canonical artifacts"
+    impact: ["context pollution", "false evidence", "token waste"]
+  - id: RC03
+    name: context_killer_risk
+    detail: "Potential inclusion of .venv/node_modules/runtime db/logs in scans and context"
+    impact: ["token bloat", "slower audits", "noise in reasoning"]
+
+workstreams:
+  - id: WS1
+    name: Truth and Path Contract Recovery
+    design_pattern: anti_corruption_layer
+    strategy:
+      - "Generate compatibility map old_path -> flat_brain_path"
+      - "Introduce controlled bridge policy (wrappers or spec path rewrite queue)"
+      - "Validate with scripts/validate_specs_docs.py"
+    artifacts:
+      - .aiwg/reports/canonical_48h_ws1_contract_map.json
+      - .aiwg/reports/canonical_48h_ws1_validation.json
+
+  - id: WS2
+    name: Runtime Safety and Memory Integrity
+    design_pattern: preflight_guard
+    strategy:
+      - "Enforce .aiwg/memory/*.db non-staged policy"
+      - "Run 4D-TES/Kuzu preflight readback only"
+      - "Emit receipts for guard decisions"
+    artifacts:
+      - .aiwg/reports/canonical_48h_ws2_memory_guard.json
+      - .aiwg/reports/canonical_48h_ws2_kuzu_readback.json
+
+  - id: WS3
+    name: Token Economy and Context Hygiene
+    design_pattern: budgeted_context_capsule
+    strategy:
+      - "Block known context killers from capsule"
+      - "Track provider/token usage via existing monitor"
+      - "Store ROI metrics in JSON"
+    artifacts:
+      - .aiwg/reports/canonical_48h_ws3_context_hygiene.json
+      - .aiwg/reports/canonical_48h_ws3_token_snapshot.json
+
+  - id: WS4
+    name: CLI/SDK Operability Under UV
+    design_pattern: hexagonal_entrypoint
+    strategy:
+      - "Ensure dummie CLI commands run with uv"
+      - "Smoke test SDK and strategic advise flow"
+      - "Receipt and report per command"
+    artifacts:
+      - .aiwg/reports/canonical_48h_ws4_cli_sdk.json
+
+algorithms_and_accelerators:
+  - name: path_contract_diff
+    kind: static_analysis
+    input: ["doc/specs/*.md", "doc/specs/*.rules.json", "layers/l2_brain"]
+    output: ".aiwg/reports/canonical_48h_path_diff.json"
+  - name: compatibility_bridge_planner
+    kind: graph_matching
+    input: ["missing_paths", "flat_brain_inventory"]
+    output: ".aiwg/reports/canonical_48h_bridge_plan.json"
+  - name: context_killer_scanner
+    kind: policy_filter
+    rules: [".venv", "node_modules", "target", ".aiwg/workspaces", "*.db", "*.log"]
+    output: ".aiwg/reports/canonical_48h_context_killers.json"
+
+non_goals_48h:
+  - mass_refactor_of_all_layers
+  - full_l2_hexagonal_rearchitecture
+  - destructive_cleanup_or_folder_deletions
+
+acceptance:
+  - "All executed phases emit JSON receipts"
+  - "Preflight PASS or explicit FAIL with repair queue"
+  - "No secrets committed"
+  - "No sovereign DB mutation from tests"

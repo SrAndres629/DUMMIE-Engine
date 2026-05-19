@@ -163,8 +163,13 @@ class DummieProviderRegistry:
             data = json.loads(base.read_text(encoding="utf-8"))
         except Exception:
             return False
-        creds = data.get("credentials", []) if isinstance(data, dict) else []
-        return bool(creds)
+        if isinstance(data, dict):
+            # OpenCode auth.json can be {"openai": {...}} (provider-keyed)
+            # or {"credentials": [...]} (legacy list format)
+            if "credentials" in data:
+                return bool(data["credentials"])
+            return any(k for k in data if k not in ("_meta", "_comment"))
+        return bool(data)
 
     def _load_registry(self) -> dict[str, Any]:
         if not self.registry_path.exists():

@@ -24,8 +24,29 @@ class LocalReasoningProvider(Protocol):
 
 class DeterministicReasoningProvider:
     name = "deterministic"
-    def __init__(self, fallback_logic: Any):
+    def __init__(self, fallback_logic: Any = None):
+        if fallback_logic is None:
+            from layers.l2_brain.domain.reasoning_logic import ReasoningLogic
+            fallback_logic = ReasoningLogic
         self.fallback_logic = fallback_logic
+
+    def parse_json_response(self, text: str) -> dict[str, Any]:
+        import re
+        cleaned = text.strip()
+        if "```json" in cleaned:
+            match = re.search(r"```json\s*(.*?)\s*```", cleaned, re.DOTALL)
+            if match:
+                cleaned = match.group(1)
+        elif "```" in cleaned:
+            match = re.search(r"```\s*(.*?)\s*```", cleaned, re.DOTALL)
+            if match:
+                cleaned = match.group(1)
+        cleaned = re.sub(r"^[^{]*", "", cleaned.strip())
+        cleaned = re.sub(r"[^}]*$", "", cleaned.strip())
+        try:
+            return json.loads(cleaned)
+        except Exception:
+            return {}
 
     def complete_json(self, task: str, payload: dict[str, Any]) -> ReasoningResult:
         started = time.perf_counter()

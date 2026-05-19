@@ -27,8 +27,7 @@ class KuzuRepository:
             
             # [HARDENING] Verificación de integridad de ruta
             if os.path.isdir(db_path):
-                if not os.listdir(db_path):
-                    pass # It's an empty dir, Kuzu will populate it
+                raise ValueError("Kuzu database path cannot be a directory")
             elif os.path.isfile(db_path):
                 # The user created loci.db as a file by mistake (e.g. touch or open)
                 logger.warning(f"Kuzu target {db_path} is a file. Kuzu expects a directory. Removing file to let Kuzu create a directory.")
@@ -189,11 +188,13 @@ class KuzuRepository:
                     from layers.l2_brain.cypher_codec import cypher_literal
                 
                 import re
-                bound_cypher = cypher
-                for key, val in parameters.items():
-                    # Word boundaries evitan colisiones entre $id e $id_long
-                    pattern = r'\$' + re.escape(key) + r'\b'
-                    bound_cypher = re.sub(pattern, lambda m, v=val: cypher_literal(v), bound_cypher)
+                pattern = r'\$([A-Za-z0-9_]+)\b'
+                def replace_placeholder(m):
+                    k = m.group(1)
+                    if k in parameters:
+                        return cypher_literal(parameters[k])
+                    return m.group(0)
+                bound_cypher = re.sub(pattern, replace_placeholder, cypher)
                 return self.conn.execute(bound_cypher)
                 
             return self.conn.execute(cypher)

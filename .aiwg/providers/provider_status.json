@@ -1,5 +1,5 @@
 {
-  "last_check": "2026-05-19T08:21:02Z",
+  "last_check": "2026-05-19T10:20:25Z",
   "providers": {
     "gemini_cli": {
       "type": "local_cli",
@@ -35,9 +35,9 @@
     },
     "openrouter": {
       "type": "api",
-      "configured": false,
+      "configured": true,
       "cli_available": false,
-      "auth_status": "requires_auth",
+      "auth_status": "ready",
       "secret_storage": "local_env_or_keyring_only",
       "capabilities": [
         "api_text",
@@ -46,9 +46,9 @@
     },
     "groq": {
       "type": "api",
-      "configured": false,
+      "configured": true,
       "cli_available": false,
-      "auth_status": "requires_auth",
+      "auth_status": "ready",
       "secret_storage": "local_env_or_keyring_only",
       "capabilities": [
         "api_text",
@@ -68,9 +68,9 @@
     },
     "opencode": {
       "type": "local_cli",
-      "configured": false,
+      "configured": true,
       "cli_available": true,
-      "auth_status": "requires_login",
+      "auth_status": "ready",
       "secret_storage": "external",
       "capabilities": [
         "local_cli",

@@ -9,9 +9,12 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-PREFERRED_PYTHON = ROOT / "layers" / "l2_brain" / ".venv" / "bin" / "python"
+PREFERRED_PYTHON = ROOT / ".venv" / "bin" / "python"
+if not PREFERRED_PYTHON.exists():
+    PREFERRED_PYTHON = ROOT / "layers" / "l2_brain" / ".venv" / "bin" / "python"
 if (
-    PREFERRED_PYTHON.exists()
+    sys.prefix == sys.base_prefix
+    and PREFERRED_PYTHON.exists()
     and Path(sys.executable).resolve() != PREFERRED_PYTHON.resolve()
     and os.environ.get("DUMMIE_TRUTH_NO_REEXEC") != "1"
 ):
@@ -19,11 +22,14 @@ if (
     env["DUMMIE_TRUTH_NO_REEXEC"] = "1"
     os.execve(str(PREFERRED_PYTHON), [str(PREFERRED_PYTHON), __file__, *sys.argv[1:]], env)
 
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
 L2_ROOT = ROOT / "layers" / "l2_brain"
 if str(L2_ROOT) not in sys.path:
     sys.path.insert(0, str(L2_ROOT))
 
-from operational_truth_collectors import collect_truth
+from layers.l2_brain.operational_truth_collectors import collect_truth
 
 
 def format_text(report) -> str:
@@ -52,9 +58,11 @@ def main() -> int:
     report_path.write_text(json.dumps(report.to_dict(), indent=2) + "\n")
 
     if args.json:
-        print(json.dumps(report.to_dict()))
+        sys.stdout.write(json.dumps(report.to_dict()) + "\n")
+        sys.stdout.flush()
     else:
-        print(format_text(report))
+        sys.stdout.write(format_text(report) + "\n")
+        sys.stdout.flush()
     return 0
 
 

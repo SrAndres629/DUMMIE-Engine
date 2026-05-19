@@ -13,11 +13,19 @@ class ResourceGovernor:
     def __init__(self, threshold_warning: float = 0.8, threshold_critical: float = 0.95):
         self.threshold_warning = threshold_warning
         self.threshold_critical = threshold_critical
-        self.last_active_time = asyncio.get_event_loop().time()
+        try:
+            self.last_active_time = asyncio.get_running_loop().time()
+        except RuntimeError:
+            import time
+            self.last_active_time = time.time()
         self.idle_timeout_seconds = 600  # 10 minutes
 
     def record_activity(self):
-        self.last_active_time = asyncio.get_event_loop().time()
+        try:
+            self.last_active_time = asyncio.get_running_loop().time()
+        except RuntimeError:
+            import time
+            self.last_active_time = time.time()
 
     async def _read_cgroup_memory_ratio(self) -> float:
         # En producción esto lee /sys/fs/cgroup/.../memory.current y memory.max
@@ -50,8 +58,13 @@ class ResourceGovernor:
             return {"status": "HEALTHY", "recommended_concurrency": 5, "action": "NONE"}
 
     async def evaluate_idle_timeout(self):
-        elapsed = asyncio.get_event_loop().time() - self.last_active_time
+        try:
+            loop_time = asyncio.get_running_loop().time()
+        except RuntimeError:
+            import time
+            loop_time = time.time()
+        elapsed = loop_time - self.last_active_time
         if elapsed > self.idle_timeout_seconds:
             await self._unload_ollama()
             # Reset timer so we don't spam the stop command
-            self.last_active_time = asyncio.get_event_loop().time()
+            self.last_active_time = loop_time

@@ -3,7 +3,11 @@ from __future__ import annotations
 from datetime import datetime, timezone
 
 from dummie.paths import ROOT
-from layers.l2_brain.session_store import SessionStore
+
+try:
+    from layers.l2_brain.session_store import SessionStore  # legacy path
+except ModuleNotFoundError:
+    from layers.l2_brain.flat_brain.session_store import SessionStore
 
 
 class DummieSessionManager:

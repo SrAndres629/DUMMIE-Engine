@@ -208,7 +208,58 @@ def _kuzu_check(repo: Path, include_slow: bool) -> TruthCheck:
         )
 
 
+def _dummied_check(repo: Path, socket_path: Optional[Path] = None) -> TruthCheck:
+    import socket
+    import json
+    from typing import Optional
+
+    if socket_path is None:
+        socket_path = repo / ".aiwg" / "sockets" / "dummied.sock"
+
+    if not socket_path.exists():
+        return TruthCheck(
+            "l0.dummied.control_socket",
+            "L0",
+            TruthStatus.DEGRADED,
+            [f"socket {socket_path} does not exist"],
+            next_repair="start dummied daemon",
+        )
+
+    try:
+        client = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+        client.settimeout(1.0)
+        client.connect(str(socket_path))
+        client.sendall(b'{"command":"ping"}\n')
+        response = client.recv(4096).decode("utf-8")
+        client.close()
+
+        payload = json.loads(response)
+        if "PONG" in response or payload.get("message") == "PONG":
+            return TruthCheck(
+                "l0.dummied.control_socket",
+                "L0",
+                TruthStatus.PASS,
+                [f"control ping ok: {response.strip()}"],
+            )
+        return TruthCheck(
+            "l0.dummied.control_socket",
+            "L0",
+            TruthStatus.DEGRADED,
+            [f"unexpected response: {response.strip()}"],
+            next_repair="check daemon control handler",
+        )
+    except Exception as exc:
+        return TruthCheck(
+            "l0.dummied.control_socket",
+            "L0",
+            TruthStatus.BLOCKED,
+            error=str(exc),
+            next_repair="restart daemon or check permissions",
+        )
+
+
 def _add_paths(paths: Iterable[Path]) -> None:
+
     for path in paths:
         value = str(path)
         if path.exists() and value not in sys.path:
@@ -256,6 +307,7 @@ def collect_truth(repo_root: str, include_slow: bool = False) -> TruthReport:
         _import_check("l5.mcp_driver.import", "L5", "mcp_driver"),
         _process_check("l1.gateway.runtime", "L1", "mcp_server.py", "start MCP gateway"),
         _process_check("l0.dummied.runtime", "L0", "dummied", "start L0 daemon"),
+        _dummied_check(repo),
         _process_check("infra.nats.runtime", "INFRA", "nats-server", "start or wire NATS only if needed"),
         _process_check("infra.ollama.runtime", "INFRA", "ollama serve", "start Ollama for local neurons"),
         _router_check(),

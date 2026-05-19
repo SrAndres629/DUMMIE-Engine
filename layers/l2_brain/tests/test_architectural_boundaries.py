@@ -65,7 +65,7 @@ def test_fallback_unsafe_auditor_exists():
     assert hasattr(daemon_module, "_FallbackUnsafeAuditor")
 
 
-@pytest.mark.asyncio
+@pytest.mark.anyio
 async def test_fallback_unsafe_auditor_message():
     """_FallbackUnsafeAuditor should return a message indicating L3 failure."""
     from daemon import _FallbackUnsafeAuditor

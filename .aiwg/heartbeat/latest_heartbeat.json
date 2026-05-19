@@ -1,5 +1,5 @@
 {
-  "heartbeat_id": "hb-9182b011",
+  "heartbeat_id": "hb-b551de09",
   "mode": "observe_only",
   "decision": "PASS_WITH_WARNINGS",
   "observation": {
@@ -47,10 +47,10 @@
   "truth_hygiene": {
     "decision": "PASS_WITH_WARNINGS",
     "summary": {
-      "models_scanned": 60,
-      "valid_count": 16,
+      "models_scanned": 94,
+      "valid_count": 28,
       "stale_count": 4,
-      "superseded_count": 27,
+      "superseded_count": 49,
       "quarantined_count": 4,
       "unsafe_rejected_count": 0,
       "needs_review_count": 9,
@@ -71,7 +71,7 @@
     "graph_status": "READY"
   },
   "mental_model": {
-    "model_id": "mm-1de9e282"
+    "model_id": "mm-de1aa3f2"
   },
   "dialectic": {
     "thesis": "Proceed with heartbeat: what is the current system state and next safe action? to improve the system.",
@@ -109,9 +109,9 @@
   ],
   "dispatch_recommendation": "human_review",
   "outcome_ref": ".aiwg/reports/heartbeat_latest.json",
-  "learning_episode_ref": "sessions/CURRENT/learning_episodes (heartbeat hb-9182b011)",
+  "learning_episode_ref": "sessions/CURRENT/learning_episodes (heartbeat hb-b551de09)",
   "next_heartbeat_seed": {
-    "previous_heartbeat_id": "hb-9182b011",
+    "previous_heartbeat_id": "hb-b551de09",
     "previous_decision": "PASS_WITH_WARNINGS",
     "next_action": "activate_local_embedding_model_or_label_fallback",
     "dispatch": "human_review",
@@ -124,12 +124,11 @@
     ],
     "kuzu_degraded": false,
     "quarantined_models": 4,
-    "created_at": "2026-05-19T03:22:12.924683+00:00"
+    "created_at": "2026-05-19T09:01:07.673418+00:00"
   },
   "warnings": [
     "Systemic Coherence Score (51.33%) is under 60% \u2014 autonomous execution is strictly blocked.",
     "Systemic Body Score (82.0%) is under 90% \u2014 autonomous scaling and execution are strictly blocked.",
-    "Real semantic retrieval is not ready; memory router operates under deterministic mock projection.",
     "Daemon background runtime is simulated \u2014 autonomous runtime claim is blocked."
   ],
   "evidence_refs": [
@@ -157,7 +156,7 @@
     ".aiwg/reports/self_improvement_action_queue.json",
     ".aiwg/reports/heartbeat_decision_policy_latest.json"
   ],
-  "created_at": "2026-05-19T03:22:12.924764+00:00",
+  "created_at": "2026-05-19T09:01:07.673429+00:00",
   "circulation_summary": {
     "intent": "heartbeat loop observation",
     "six_d_context": {
@@ -182,7 +181,7 @@
     },
     "daemon_gateway_bridge": {
       "decision": "PASS",
-      "dispatch_id": "5f47bdc8-9257-4fb9-9228-778a6d229e83",
+      "dispatch_id": "4cec21ce-c6c1-4e08-bb32-1e578c8126df",
       "target": "human_review"
     },
     "polyglot_probe": {
@@ -222,12 +221,12 @@
       {
         "name": "numpy",
         "status": "READY",
-        "version": "2.4.4"
+        "version": "2.4.6"
       },
       {
         "name": "pydantic",
         "status": "READY",
-        "version": "2.13.2"
+        "version": "2.13.4"
       },
       {
         "name": "fastapi",
@@ -237,7 +236,7 @@
       {
         "name": "typer",
         "status": "READY",
-        "version": "0.24.1"
+        "version": "0.25.1"
       },
       {
         "name": "rich",
@@ -247,7 +246,7 @@
       {
         "name": "click",
         "status": "READY",
-        "version": "8.3.2"
+        "version": "8.4.0"
       }
     ],
     "missing_dependencies": [],
@@ -311,10 +310,11 @@
         "capability_id": "real_semantic_embeddings",
         "name": "Real Semantic Vector Embeddings",
         "claimed_status": "READY",
-        "actual_status": "FALLBACK",
-        "reason": "External upstream embedding APIs are disabled. Local SHA256 deterministic mock routing is active.",
+        "actual_status": "READY",
+        "reason": "Local FastEmbed BAAI/bge-small-en-v1.5 engine is active and producing real vectors.",
         "required_dependencies": [
-          "numpy"
+          "numpy",
+          "fastembed"
         ],
         "required_config": [
           "embedding_provider_api_key",
@@ -323,10 +323,7 @@
         "required_verification": [
           "vector_indexing_quality_gate"
         ],
-        "blocks": [
-          "semantic_similarity_search",
-          "high_dimensional_clustering"
-        ],
+        "blocks": [],
         "safe_repair_possible_now": false,
         "risk_level": "low",
         "evidence_refs": [
@@ -528,7 +525,7 @@
     "decision": "PASS",
     "python": {
       "installed": true,
-      "version": "Python 3.12.3",
+      "version": "Python 3.14.3",
       "command": "python3 --version"
     },
     "go": {
@@ -582,31 +579,6 @@
   "runtime_closure_plan": {
     "decision": "PASS_WITH_WARNINGS",
     "actions": [
-      {
-        "action_id": "configure_local_sentence_transformers",
-        "capability_id": "real_semantic_embeddings",
-        "title": "Configure Offline Sentence Transformers Embedding Adapter",
-        "action_type": "enable_adapter",
-        "priority": "medium",
-        "can_execute_now": false,
-        "requires_human_approval": true,
-        "commands_to_run": [
-          ".venv/bin/pip install sentence-transformers"
-        ],
-        "files_to_modify": [
-          "layers/l2_brain/embedding_memory_router.py"
-        ],
-        "verification_commands": [
-          ".venv/bin/python -c 'import sentence_transformers'"
-        ],
-        "rollback_plan": [
-          ".venv/bin/pip uninstall -y sentence-transformers"
-        ],
-        "risk_level": "medium",
-        "evidence_refs": [
-          "/media/datasets/DUMMIE Engine/.aiwg/reports/degraded_capability_registry_latest.json"
-        ]
-      },
       {
         "action_id": "run_regression_testing",
         "capability_id": "full_regression_suite",

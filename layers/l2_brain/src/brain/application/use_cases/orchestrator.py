@@ -104,17 +104,15 @@ class CognitiveOrchestrator(IBrainOrchestrator):
             
             node = MemoryNode4DTES(
                 causal_hash=self._compute_hash(intent, parent_hash),
-                parent_hash=parent_hash,
+                parent_hashes=[parent_hash] if parent_hash else ["GENESIS"],
+                locus_x=intent.locus_x,
+                locus_y=intent.target,
+                locus_z="L2_BRAIN",
+                lamport_t=self.lamport_clock,
+                authority_a=str(intent.authority_a.value) if hasattr(intent.authority_a, "value") else str(intent.authority_a),
+                intent_i=str(intent.intent_i.value) if hasattr(intent.intent_i, "value") else str(intent.intent_i),
                 payload=intent.rationale,
                 payload_hash=hashlib.sha256(intent.rationale.encode()).hexdigest(),
-                context=SixDimensionalContext(
-                    locus_x=intent.locus_x,
-                    locus_y=intent.target,
-                    locus_z="L2_BRAIN",
-                    lamport_t=self.lamport_clock,
-                    authority_a=intent.authority_a,
-                    intent_i=intent.intent_i
-                )
             )
             
             # 5b. Generar Embedding Semántico (Local-RAG)
@@ -181,3 +179,28 @@ class CognitiveOrchestrator(IBrainOrchestrator):
         """Computa el hash causal incluyendo rationale para unicidad (Spec 02)."""
         content = f"{intent.intent_type}{intent.target}{parent_hash}{self.lamport_clock}{intent.rationale}"
         return hashlib.sha256(content.encode()).hexdigest()
+
+    async def process_intent(self, intent: Any) -> dict:
+        """Bridge compatibility method for legacy caller contract (Spec 42)."""
+        from brain.domain.fabrication.models import AgentIntent, IntentType
+        from brain.domain.context.models import AuthorityLevel
+        
+        goal = getattr(intent, "goal", "")
+        agent_intent = AgentIntent(
+            intent_type=IntentType.READ_FILE,
+            target="/",
+            rationale=goal,
+            risk_score=0.1,
+            authority_a=AuthorityLevel.AGENT
+        )
+        status = await self.handle_task(agent_intent)
+        
+        try:
+            last_hash = self.event_store.get_last_leaf_hash(agent_intent.locus_x)
+        except Exception:
+            last_hash = "LEGACY-01"
+            
+        return {
+            "status": "ACK" if status == "INTENT_QUEUED_L2_VALIDATED" else "REJECTED",
+            "intent_id": last_hash
+        }

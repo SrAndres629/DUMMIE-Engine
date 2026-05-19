@@ -32,3 +32,22 @@ def test_dummie_cli_advise() -> None:
     res = _run("advise", "quiero", "llegar", "a", "10000", "mrr")
     assert res.returncode == 0
     assert "Objetivo detectado: revenue" in res.stdout
+
+
+def test_dummie_cli_advise_low_cost() -> None:
+    res = _run("advise", "--low-cost", "quiero", "llegar", "a", "10000", "mrr")
+    assert res.returncode == 0
+    assert "Objetivo detectado: revenue" in res.stdout
+
+
+def test_dummie_cli_chat_interactive_exit() -> None:
+    res = subprocess.run(
+        [sys.executable, "-m", "dummie", "chat", "--interactive"],
+        input="/exit\n",
+        capture_output=True,
+        text=True,
+        cwd=ROOT,
+        check=False,
+    )
+    assert res.returncode == 0
+    assert "DUMMIE Chat interactive" in res.stdout
