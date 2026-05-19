@@ -1,0 +1,133 @@
+{
+  "task_queue": {
+    "created": "2026-05-19T08:00:00Z",
+    "version": "1.0",
+    "description": "Autonomous task queue for DUMMIE Engine",
+    "tasks": [
+      {
+        "task_id": "task_001",
+        "name": "PACK R3 Session 1: Deep State Analysis",
+        "priority": "high",
+        "status": "pending",
+        "created": "2026-05-19T08:00:00Z",
+        "trigger": "jorge_approval",
+        "trigger_condition": "Jorge approves PACK R3 autonomous execution",
+        "estimated_duration_hours": 2.5,
+        "autonomous": true,
+        "description": "Map all existing L2 modules and their dependencies, identify canonical vs duplicated modules, catalog all import paths, document flat_brain/ and src/brain/ coexistence",
+        "deliverables": [".aiwg/strategic/l2_module_inventory.json", ".aiwg/strategic/l2_dependency_graph.md"],
+        "next_task": "task_002"
+      },
+      {
+        "task_id": "task_002",
+        "name": "PACK R3 Session 2: Architecture Contract Design",
+        "priority": "high",
+        "status": "pending",
+        "created": "2026-05-19T08:00:00Z",
+        "trigger": "task_001_complete",
+        "estimated_duration_hours": 3,
+        "autonomous": false,
+        "requires_jorge_input": true,
+        "jorge_decisions": [
+          "flat_brain/ permanence",
+          "src/brain/ role",
+          "Test location",
+          "Import strategy",
+          "Persistence policy"
+        ],
+        "description": "Define L2 Brain sovereign responsibility, boundaries with L0-L5, data contracts between layers, decide architecture structure",
+        "deliverables": [".aiwg/strategic/l2_canonical_manifest.yaml", "doc/architecture/l2_brain_canonical.md"],
+        "next_task": "task_003"
+      },
+      {
+        "task_id": "task_003",
+        "name": "PACK R3 Session 3: Migration Plan & Rollback",
+        "priority": "high",
+        "status": "pending",
+        "created": "2026-05-19T08:00:00Z",
+        "trigger": "task_002_complete",
+        "estimated_duration_hours": 2.5,
+        "autonomous": true,
+        "description": "Create detailed migration manifest, define import compatibility shim strategy, create rollback plan, define validation criteria",
+        "deliverables": [".aiwg/strategic/l2_migration_manifest.json", ".aiwg/strategic/l2_rollback_plan.md"],
+        "next_task": "task_004"
+      },
+      {
+        "task_id": "task_004",
+        "name": "PACK R3 Session 4: Execution Phase 1",
+        "priority": "high",
+        "status": "pending",
+        "created": "2026-05-19T08:00:00Z",
+        "trigger": "task_003_complete",
+        "estimated_duration_hours": 3,
+        "autonomous": true,
+        "description": "Implement import compatibility shim, update downstream imports, migrate tests to new paths, run full test suite",
+        "deliverables": ["layers/l2_brain/__init__.py (shim)", "Updated test imports", "Test results report"],
+        "next_task": "task_005"
+      },
+      {
+        "task_id": "task_005",
+        "name": "PACK R3 Session 5: Execution Phase 2",
+        "priority": "high",
+        "status": "pending",
+        "created": "2026-05-19T08:00:00Z",
+        "trigger": "task_004_complete",
+        "estimated_duration_hours": 2.5,
+        "autonomous": true,
+        "description": "Update all spec documents with new paths, run spec validation, run compileall, run integration tests",
+        "deliverables": ["Updated spec docs", ".aiwg/reports/pack_r3_validation.json"],
+        "next_task": "task_006"
+      },
+      {
+        "task_id": "task_006",
+        "name": "PACK R3 Session 6: Closure",
+        "priority": "high",
+        "status": "pending",
+        "created": "2026-05-19T08:00:00Z",
+        "trigger": "task_005_complete",
+        "estimated_duration_hours": 2,
+        "autonomous": true,
+        "description": "Final validation, update MEMORY.md, create closeout report, plan PACK R4",
+        "deliverables": [".aiwg/reports/pack_r3_closeout.json", "Updated MEMORY.md"],
+        "next_task": null
+      }
+    ],
+    "background_tasks": [
+      {
+        "task_id": "bg_001",
+        "name": "Memory Consolidation",
+        "priority": "low",
+        "status": "pending",
+        "schedule": "every_4_hours",
+        "autonomous": true,
+        "description": "Review recent memory files, update MEMORY.md with distilled learnings"
+      },
+      {
+        "task_id": "bg_002",
+        "name": "Git Status Monitoring",
+        "priority": "low",
+        "status": "pending",
+        "schedule": "every_30_minutes",
+        "autonomous": true,
+        "description": "Monitor repo state, flag unexpected changes"
+      },
+      {
+        "task_id": "bg_003",
+        "name": "Token Budget Monitoring",
+        "priority": "medium",
+        "status": "pending",
+        "schedule": "every_hour",
+        "autonomous": true,
+        "description": "Track token usage, alert at 80%, stop autonomous work at 90%"
+      }
+    ],
+    "queue_policy": {
+      "max_concurrent_tasks": 1,
+      "priority_order": ["critical", "high", "medium", "low", "background"],
+      "autonomous_execution": true,
+      "jorge_approval_required_for": ["task_002"],
+      "token_budget_per_task": 100000,
+      "daily_token_budget": 500000
+    }
+  }
+}

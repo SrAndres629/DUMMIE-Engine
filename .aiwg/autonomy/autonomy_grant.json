@@ -1,0 +1,32 @@
+{
+  "autonomy_granted": "2026-05-19T08:00:00Z",
+  "granted_by": "Jorge Andres Aguirre Cordero",
+  "level": 5,
+  "description": "Full autonomy — DUMMIE can decide absolutely everything",
+  "permissions": {
+    "install_cron_jobs": true,
+    "install_git_hooks": true,
+    "install_skills_mcps_agents": true,
+    "install_dependencies": true,
+    "make_changes": true,
+    "delete_files": true,
+    "create_branches": true,
+    "create_worktrees": true,
+    "setup_telegram": true,
+    "optimize_tokens": true,
+    "switch_models": true,
+    "integrate_cli_tools": true,
+    "configure_api_keys": true,
+    "find_free_alternatives": true,
+    "develop_optimization_methods": true,
+    "decide_everything": true
+  },
+  "constraints": {
+    "never_delete_sovereign_memory": true,
+    "never_push_secrets": true,
+    "never_modify_production_without_validation": true,
+    "respect_quiet_hours": true,
+    "token_budget_daily": 500000
+  },
+  "quote": "si te equivocas nos equivocamos juntos"
+}
