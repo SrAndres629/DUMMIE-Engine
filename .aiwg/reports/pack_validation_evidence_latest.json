@@ -1,11 +1,15 @@
 {
-  "command": "PYTHONPATH=. layers/l2_brain/.venv/bin/pytest layers/l2_brain/tests/test_aiwg_pack_guard.py",
+  "command": "PYTHONPATH=. layers/l2_brain/.venv/bin/pytest -v layers/l2_brain/tests/test_aiwg_pack_guard.py && python3 scripts/validate_specs_docs.py",
   "exit_code": 0,
-  "started_at": "2026-05-19T04:12:16.457267Z",
-  "finished_at": "2026-05-19T04:12:16.457284Z",
+  "stdout_log_path": ".aiwg/reports/validation_logs/AIWG_KERNEL_0.2/stdout.log",
+  "stderr_log_path": ".aiwg/reports/validation_logs/AIWG_KERNEL_0.2/stderr.log",
+  "started_at": "2026-05-19T04:17:11.913482Z",
+  "finished_at": "2026-05-19T04:17:12.608692Z",
+  "duration_seconds": 0.693992,
   "cwd": "/media/datasets/DUMMIE Engine",
   "python_executable": "/usr/bin/python3",
-  "commit": "9f2756f97a295b289ab47ebddd567787c981e1fb",
+  "commit": "e7de2dd5cd402e369d885ad84c67bc7a226d510d",
   "result": "PASSED",
-  "suite_name": "pytest"
+  "suite_name": "aiwg_evidence_runner",
+  "run_by_runner": true
 }

@@ -1,15 +1,15 @@
 {
-  "pack_id": "AIWG_KERNEL_0.1",
-  "generated_at": "2026-05-19T04:12:23.179978Z",
+  "pack_id": "AIWG_KERNEL_0.2",
+  "generated_at": "2026-05-19T04:16:55.226344Z",
   "answers": {
-    "what_implemented": "Endurecimiento del AIWG Execution Kernel de gobierno, forzando closeouts estrictos con evidencias físicas de pruebas y cero defaults optimistas.",
-    "what_broken": "No se identificaron roturas ni regresiones funcionales en las suites de prueba ejecutadas.",
-    "metrics_changed": "Se normalizaron los hashes de la hoja de ruta y se removieron claims subjetivos sin métricas físicas en el reporte de distancia.",
-    "tests_shallow": "Los tests unitarios de pytest simulan y validan todas las compuertas, pero no prueban la invocación nativa del hook git pre-commit.",
-    "reports_stale": "Los reportes de triage y specs están 100% sincronizados con el commit actual.",
-    "assumptions": "Se asume que el desarrollador registrará de forma válida sus evidencias empleando la opción record-evidence del guard.",
-    "repairs_needed": "No se registraron reparaciones urgentes pendientes tras pasar la validación completa.",
-    "advances_degraded": "Se ha verificado que la activación de fastembed real se conserva en su totalidad sin experimentar degradación hacia fallbacks.",
-    "advances_goal_6_1": "Previene el teatro de gobernanza documental y asegura que cada pack demuestre físicamente la ejecución y éxito de sus tests antes de ser cerrado."
+    "what_implemented": "Implementado Execution Evidence Runner para validación física de packs y protección de python3 directo.",
+    "what_broken": "Ninguna regresión encontrada en las llamadas de pytest ni de especificaciones.",
+    "metrics_changed": "Sin impacto directo en métricas de embeddings degradados, manteniéndose en 717.",
+    "tests_shallow": "Se cubren la mayoría de ramificaciones del runner y closeout, aunque faltarían más tests de concurrencia.",
+    "reports_stale": "Los reportes del índice semántico están estables.",
+    "assumptions": "Asumiendo que el comando subprocess.run funciona correctamente en plataformas compatibles con bash.",
+    "repairs_needed": "Ninguna pendiente tras pasar la suite completa de 16 tests unitarios.",
+    "advances_degraded": "Avances de Pack 3.1 como HybridReranker se mantienen estables.",
+    "advances_goal_6_1": "Facilita la transición rigurosa hacia Pack 3.2 (CODE embedding provider) asegurando que no haya skips ni claims falsos."
   }
 }

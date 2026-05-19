@@ -145,7 +145,11 @@ def test_closeout_fails_if_stale_evidence_commit(tmp_path, monkeypatch):
     with open(temp_evidence, "w", encoding="utf-8") as f:
         json.dump({
             "exit_code": 0,
-            "commit": "stale_hash_value"
+            "commit": "stale_hash_value",
+            "run_by_runner": True,
+            "stdout_log_path": "manual",
+            "duration_seconds": 0.0,
+            "command": "pytest && validate_specs_docs"
         }, f)
         
     monkeypatch.setattr(guard, "CRITIQUE_JSON", temp_critique)
@@ -180,7 +184,11 @@ def test_closeout_fails_if_invalid_roadmap_sha(tmp_path, monkeypatch):
     with open(temp_evidence, "w", encoding="utf-8") as f:
         json.dump({
             "exit_code": 0,
-            "commit": "actual_hash"
+            "commit": "actual_hash",
+            "run_by_runner": True,
+            "stdout_log_path": "manual",
+            "duration_seconds": 0.0,
+            "command": "pytest && validate_specs_docs"
         }, f)
         
     temp_roadmap = os.path.join(tmp_path, "roadmap.json")
@@ -289,3 +297,158 @@ def test_decision_log_valid_entries():
             assert "decision" in record
             assert "context" in record
             assert "consequences" in record
+
+def test_run_required_success(tmp_path, monkeypatch):
+    """Assert run-required runs dummy echo command successfully, creating logs and evidence."""
+    import scripts.aiwg_pack_guard as guard
+    
+    temp_active = os.path.join(tmp_path, "active_pack.json")
+    with open(temp_active, "w", encoding="utf-8") as f:
+        json.dump({
+            "pack_id": "TEST_RUNNER_PACK",
+            "commands_required": ["echo 'Successful Validation'"]
+        }, f)
+        
+    temp_evidence = os.path.join(tmp_path, "evidence.json")
+    temp_evidence_md = os.path.join(tmp_path, "evidence.md")
+    
+    monkeypatch.setattr(guard, "ACTIVE_PACK", temp_active)
+    monkeypatch.setattr(guard, "EVIDENCE_JSON", temp_evidence)
+    monkeypatch.setattr(guard, "EVIDENCE_MD", temp_evidence_md)
+    monkeypatch.setattr(guard, "AIWG_DIR", str(tmp_path))
+    
+    with pytest.raises(SystemExit) as excinfo:
+        guard.run_run_required(None)
+    assert excinfo.value.code == 0
+    
+    log_dir = os.path.join(tmp_path, "reports", "validation_logs", "TEST_RUNNER_PACK")
+    assert os.path.exists(log_dir)
+    assert os.path.exists(os.path.join(log_dir, "stdout.log"))
+    assert os.path.exists(os.path.join(log_dir, "stderr.log"))
+    
+    with open(temp_evidence, "r", encoding="utf-8") as f:
+        ev = json.load(f)
+    assert ev["exit_code"] == 0
+    assert ev["run_by_runner"] is True
+    assert "stdout.log" in ev["stdout_log_path"]
+    assert ev["duration_seconds"] >= 0.0
+
+def test_run_required_failure(tmp_path, monkeypatch):
+    """Assert run-required records non-zero exit code if command fails."""
+    import scripts.aiwg_pack_guard as guard
+    
+    temp_active = os.path.join(tmp_path, "active_pack.json")
+    with open(temp_active, "w", encoding="utf-8") as f:
+        json.dump({
+            "pack_id": "TEST_RUNNER_PACK",
+            "commands_required": ["false"]
+        }, f)
+        
+    temp_evidence = os.path.join(tmp_path, "evidence.json")
+    temp_evidence_md = os.path.join(tmp_path, "evidence.md")
+    
+    monkeypatch.setattr(guard, "ACTIVE_PACK", temp_active)
+    monkeypatch.setattr(guard, "EVIDENCE_JSON", temp_evidence)
+    monkeypatch.setattr(guard, "EVIDENCE_MD", temp_evidence_md)
+    monkeypatch.setattr(guard, "AIWG_DIR", str(tmp_path))
+    
+    with pytest.raises(SystemExit) as excinfo:
+        guard.run_run_required(None)
+    assert excinfo.value.code != 0
+    
+    with open(temp_evidence, "r", encoding="utf-8") as f:
+        ev = json.load(f)
+    assert ev["exit_code"] != 0
+    assert ev["result"] == "FAILED"
+
+def test_run_required_protection(tmp_path, monkeypatch):
+    """Assert run-required raises error/exit if python3 is used directly for semantic index scripts."""
+    import scripts.aiwg_pack_guard as guard
+    
+    temp_active = os.path.join(tmp_path, "active_pack.json")
+    with open(temp_active, "w", encoding="utf-8") as f:
+        json.dump({
+            "pack_id": "TEST_RUNNER_PACK",
+            "commands_required": ["python3 scripts/semantic_index_updater.py"]
+        }, f)
+        
+    monkeypatch.setattr(guard, "ACTIVE_PACK", temp_active)
+    monkeypatch.setattr(guard, "AIWG_DIR", str(tmp_path))
+    
+    with pytest.raises(SystemExit) as excinfo:
+        guard.run_run_required(None)
+    assert excinfo.value.code != 0
+
+def test_closeout_fails_if_non_runner_evidence(tmp_path, monkeypatch):
+    """Assert that closeout fails if evidence ledger was manual or has invalid schema."""
+    import scripts.aiwg_pack_guard as guard
+    
+    temp_critique = os.path.join(tmp_path, "critique.json")
+    with open(temp_critique, "w", encoding="utf-8") as f:
+        json.dump({
+            "answers": {
+                "what_implemented": "Implemented tests",
+                "what_broken": "None verified",
+                "metrics_changed": "None",
+                "tests_shallow": "None",
+                "reports_stale": "None",
+                "assumptions": "None",
+                "repairs_needed": "None",
+                "advances_degraded": "None",
+                "advances_goal_6_1": "Yes"
+            }
+        }, f)
+        
+    temp_evidence = os.path.join(tmp_path, "evidence.json")
+    with open(temp_evidence, "w", encoding="utf-8") as f:
+        json.dump({
+            "exit_code": 0,
+            "commit": "actual_hash"
+        }, f)
+        
+    monkeypatch.setattr(guard, "CRITIQUE_JSON", temp_critique)
+    monkeypatch.setattr(guard, "EVIDENCE_JSON", temp_evidence)
+    monkeypatch.setattr(guard, "get_git_head", lambda: "actual_hash")
+    
+    with pytest.raises(SystemExit) as excinfo:
+        guard.run_closeout(None)
+    assert excinfo.value.code != 0
+
+def test_closeout_fails_if_missing_pytest_or_validate_specs_docs(tmp_path, monkeypatch):
+    """Assert closeout fails if pytest or validate_specs_docs were not part of execution evidence."""
+    import scripts.aiwg_pack_guard as guard
+    
+    temp_critique = os.path.join(tmp_path, "critique.json")
+    with open(temp_critique, "w", encoding="utf-8") as f:
+        json.dump({
+            "answers": {
+                "what_implemented": "Implemented tests",
+                "what_broken": "None verified",
+                "metrics_changed": "None",
+                "tests_shallow": "None",
+                "reports_stale": "None",
+                "assumptions": "None",
+                "repairs_needed": "None",
+                "advances_degraded": "None",
+                "advances_goal_6_1": "Yes"
+            }
+        }, f)
+        
+    temp_evidence = os.path.join(tmp_path, "evidence.json")
+    with open(temp_evidence, "w", encoding="utf-8") as f:
+        json.dump({
+            "exit_code": 0,
+            "commit": "actual_hash",
+            "run_by_runner": True,
+            "stdout_log_path": "manual",
+            "duration_seconds": 0.0,
+            "command": "echo hello"
+        }, f)
+        
+    monkeypatch.setattr(guard, "CRITIQUE_JSON", temp_critique)
+    monkeypatch.setattr(guard, "EVIDENCE_JSON", temp_evidence)
+    monkeypatch.setattr(guard, "get_git_head", lambda: "actual_hash")
+    
+    with pytest.raises(SystemExit) as excinfo:
+        guard.run_closeout(None)
+    assert excinfo.value.code != 0

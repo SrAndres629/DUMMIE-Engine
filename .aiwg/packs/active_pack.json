@@ -1,10 +1,10 @@
 {
-  "pack_id": "AIWG_KERNEL_0.1",
-  "pack_title": "AIWG Kernel Hardening 0.1 — Evidence-Strict Pack Governance",
-  "objective": "Endurecer el AIWG Execution Kernel antes de iniciar Pack 3.2, forzando closeouts estrictos con evidencias de pruebas físicas y cero defaults optimistas.",
+  "pack_id": "AIWG_KERNEL_0.2",
+  "pack_title": "AIWG Kernel Hardening 0.2 — Execution Evidence Runner",
+  "objective": "Crear un runner automatizado que ejecute validaciones requeridas, capture evidencias reales y actualice el ledger de evidencias de forma determinista.",
   "long_term_objective_link": "long_term_objectives.json",
-  "short_term_goal": "Asegurar que el guardián de gobernanza rechace estados no verificados y valide metadatos deterministas de forma robusta.",
-  "why_now": "Es crítico prevenir la complacencia documental y asegurar un control estricto libre de claims no medidos antes de proceder a la separación del espacio de código.",
+  "short_term_goal": "Eliminar la dependencia declarativa de los agentes permitiendo al kernel ejecutar los comandos de validación física por sí mismo y capturar stdout/stderr.",
+  "why_now": "Es imperativo contar con un registro físico de ejecución e inyección de variables de entorno seguras antes de proceder con packs que modifiquen el código de la aplicación.",
   "not_in_scope": [
     "Iniciar Pack 3.2"
   ],
@@ -17,7 +17,8 @@
     "layers/l2_brain/embedding_mesh/contracts.py"
   ],
   "commands_required": [
-    "PYTHONPATH=. layers/l2_brain/.venv/bin/pytest -v layers/l2_brain/tests/test_aiwg_pack_guard.py"
+    "PYTHONPATH=. layers/l2_brain/.venv/bin/pytest -v layers/l2_brain/tests/test_aiwg_pack_guard.py",
+    "python3 scripts/validate_specs_docs.py"
   ],
   "tests_required": [
     "layers/l2_brain/tests/test_aiwg_pack_guard.py"
@@ -28,12 +29,12 @@
   "expected_metrics_after": {
     "degraded_embeddings": 717
   },
-  "regression_risks": "Bloqueo accidental en el proceso de closeout por fallas del validador.",
-  "known_blindspots": "Comportamiento del validador de git HEAD en entornos de pruebas aislados.",
+  "regression_risks": "Desviación o falla en la captura de flujos stderr y desincronizaciones de commit.",
+  "known_blindspots": "Comportamiento del subproceso runner en entornos no persistentes.",
   "acceptance_criteria": [
-    "El comando self-critique falla si no se pasan respuestas o si éstas contienen defaults optimistas.",
-    "El comando closeout requiere un archivo de validación física exitosa y que el commit del ledger coincida con el HEAD actual.",
-    "Todos los tests de test_aiwg_pack_guard.py pasan exitosamente."
+    "El comando run-required ejecuta satisfactoriamente pytest y validate_specs_docs, guardando los logs correspondientes en validation_logs/.",
+    "El comando closeout rechaza evidencias que no provengan del runner o tengan un commit diferente a HEAD.",
+    "No se permite el uso de python3 directo para scripts críticos del índice semántico."
   ],
   "rollback_plan": "Revertir cambios de scripts/aiwg_pack_guard.py y tests asociados.",
   "auto_continue_allowed": false,
