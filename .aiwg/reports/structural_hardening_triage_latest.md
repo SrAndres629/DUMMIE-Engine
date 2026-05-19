@@ -3,11 +3,11 @@
 ## Status
 - pack_status: PASS_WITH_WARNINGS
 - repo_health_status: FAIL
-- base_commit: cde0a16f80deeacd297e15bc924b330735af48e6
+- base_commit: 3706c9f03aaa985c2a5fbcb254dac5f2d63009c2
 - files_analyzed: 1340
 
 ## Counts by Class
-- ACTIVE_RUNTIME: 248
+- ACTIVE_RUNTIME: 247
 - ACTIVE_SPEC: 559
 - ACTIVE_TEST: 235
 - CONFIG: 12
@@ -15,14 +15,14 @@
 - GENERATED: 38
 - LEGACY: 30
 - ORPHAN_TEST_CANDIDATE: 3
-- SHADOW_CANDIDATE: 70
+- SHADOW_CANDIDATE: 71
 - UNKNOWN: 144
 
 ## Counts by Recommendation
-- FREEZE_UNTIL_REVIEW: 150
-- KEEP_AND_TEST: 260
+- FREEZE_UNTIL_REVIEW: 151
+- KEEP_AND_TEST: 248
 - MAP_TO_RUNTIME: 561
-- MAP_TO_SPEC: 244
+- MAP_TO_SPEC: 255
 - MAP_TO_TEST: 20
 - MARK_EXPERIMENTAL: 1
 - MARK_GENERATED: 38
@@ -30,9 +30,9 @@
 - NO_ACTION: 36
 
 ## Counts by Risk
-- HIGH: 70
-- LOW: 334
-- MEDIUM: 936
+- HIGH: 71
+- LOW: 322
+- MEDIUM: 947
 
 ## Top 30 High-Risk Actions
 1. layers/l2_brain/action_graph.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
@@ -70,7 +70,7 @@
 - init_runtime_low_risk_corrections: 24
 
 ## Frozen / No-Touch Candidates
-- frozen_count: 151
+- frozen_count: 152
 - README.md | FREEZE_UNTIL_REVIEW | risk=MEDIUM
 - doc/ATLAS.md | FREEZE_UNTIL_REVIEW | risk=MEDIUM
 - doc/CORE_SPEC.md | FREEZE_UNTIL_REVIEW | risk=MEDIUM
@@ -98,7 +98,7 @@
 
 ## Orphan Test Candidates
 - orphan_test_candidates: 3
-- shadow_candidates: 70
+- shadow_candidates: 71
 
 ## Next Phase
 Structural Hardening Pack 2.1 - targeted contract binding and safe physical changes

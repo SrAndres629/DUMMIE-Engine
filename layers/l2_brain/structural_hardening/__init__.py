@@ -9,7 +9,7 @@ from .contracts import (
 )
 from .evidence import EvidenceCollector
 from .matrix import StructuralTriageMatrix
-from .bindings import ContractBindingRegistry, ContractBinding, BindingStatus
+from .bindings import ContractBindingRegistry, ContractBinding, BindingStatus, BindingValidation
 
 __all__ = [
     "StructuralClassifier",
@@ -24,5 +24,5 @@ __all__ = [
     "ContractBindingRegistry",
     "ContractBinding",
     "BindingStatus",
+    "BindingValidation",
 ]
-

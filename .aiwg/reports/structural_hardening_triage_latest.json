@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-05-19T00:29:37.896192Z",
-  "base_commit": "cde0a16f80deeacd297e15bc924b330735af48e6",
+  "generated_at": "2026-05-19T00:47:03.341067Z",
+  "base_commit": "3706c9f03aaa985c2a5fbcb254dac5f2d63009c2",
   "pack_name": "Structural Hardening Pack 2 - Contract-First Triage",
   "pack_status": "PASS_WITH_WARNINGS",
   "repo_health_status": "FAIL",
@@ -20127,21 +20127,24 @@
       "path": "layers/l0_overseer/supervisor.py",
       "current_class": "UNKNOWN",
       "proposed_class": "ACTIVE_RUNTIME",
-      "risk": "LOW",
-      "recommendation": "KEEP_AND_TEST",
-      "confidence": 1.0,
+      "risk": "MEDIUM",
+      "recommendation": "MAP_TO_SPEC",
+      "confidence": 0.87,
       "evidence_refs": [
         "FILE_EXISTS",
         "IMPORTABLE",
-        "IMPORTABLE: verified by test_l0_contract_imports.py",
-        "Spec Refs: ['doc/specs/103_cognitive_orchestrator.md']",
-        "Test Refs: ['layers/l0_overseer/tests/test_l0_contract_imports.py']"
+        "valid_specs=['doc/specs/L0_Overseer/03_polyglot_architecture.md', 'doc/specs/L0_Overseer/05_orchestration_stack_and_glue.md', 'doc/specs/L0_Overseer/11_monorepo_structure.md']",
+        "valid_tests=['layers/l0_overseer/tests/test_l0_contract_imports.py']"
       ],
       "reasons": [
-        "Bound to contract: System supervisor managing daemon restarts, locking, and sockets."
+        "Bound to contract: Python supervisor process contract at L0 boundary.",
+        "binding_status=BOUND_ACTIVE_RUNTIME",
+        "resolved_status=BOUND_ACTIVE_RUNTIME"
       ],
       "related_specs": [
-        "doc/specs/103_cognitive_orchestrator.md"
+        "doc/specs/L0_Overseer/03_polyglot_architecture.md",
+        "doc/specs/L0_Overseer/05_orchestration_stack_and_glue.md",
+        "doc/specs/L0_Overseer/11_monorepo_structure.md"
       ],
       "related_tests": [
         "layers/l0_overseer/tests/test_l0_contract_imports.py"
@@ -20233,27 +20236,31 @@
       "path": "layers/l1_nervous/bootstrap.py",
       "current_class": "UNKNOWN",
       "proposed_class": "ACTIVE_RUNTIME",
-      "risk": "LOW",
-      "recommendation": "KEEP_AND_TEST",
-      "confidence": 1.0,
+      "risk": "MEDIUM",
+      "recommendation": "MAP_TO_SPEC",
+      "confidence": 0.88,
       "evidence_refs": [
         "FILE_EXISTS",
         "IMPORTABLE",
-        "IMPORTABLE: verified by test_l1_contract_imports.py",
-        "Spec Refs: ['doc/specs/103_cognitive_orchestrator.md']",
-        "Test Refs: ['layers/l1_nervous/tests/test_l1_contract_imports.py']"
+        "valid_specs=['doc/specs/L1_Nervous/15_mcp_sidecar_isolation.md', 'doc/specs/L1_Nervous/16_mcp_dynamic_gateway.md', 'doc/specs/L1_Nervous/41_layer_handshake_protocol.md', 'doc/specs/L1_Nervous/44_pervasive_channel_adapters.md']",
+        "valid_tests=['layers/l1_nervous/tests/test_l1_contract_imports.py']"
       ],
       "reasons": [
-        "Bound to contract: Nervous system bootstrap initialization routine. Wired directly to cognitive orchestration."
+        "Bound to contract: L1 bootstrap runtime boundary with optional path fallback logic.",
+        "binding_status=BOUND_ACTIVE_RUNTIME",
+        "resolved_status=BOUND_ACTIVE_RUNTIME"
       ],
       "related_specs": [
-        "doc/specs/103_cognitive_orchestrator.md"
+        "doc/specs/L1_Nervous/15_mcp_sidecar_isolation.md",
+        "doc/specs/L1_Nervous/16_mcp_dynamic_gateway.md",
+        "doc/specs/L1_Nervous/41_layer_handshake_protocol.md",
+        "doc/specs/L1_Nervous/44_pervasive_channel_adapters.md"
       ],
       "related_tests": [
         "layers/l1_nervous/tests/test_l1_contract_imports.py"
       ],
       "related_runtime": [
-        "layers/l2_brain/application/cognitive/use_cases.py"
+        "layers/l1_nervous/application/use_cases.py"
       ],
       "safe_to_change": true,
       "requires_human_review": false
@@ -20417,27 +20424,32 @@
       "path": "layers/l1_nervous/knowledge_adapters.py",
       "current_class": "UNKNOWN",
       "proposed_class": "ACTIVE_RUNTIME",
-      "risk": "LOW",
-      "recommendation": "KEEP_AND_TEST",
-      "confidence": 1.0,
+      "risk": "MEDIUM",
+      "recommendation": "MAP_TO_SPEC",
+      "confidence": 0.84,
       "evidence_refs": [
         "FILE_EXISTS",
         "IMPORTABLE",
-        "IMPORTABLE: verified by test_l1_contract_imports.py",
-        "Spec Refs: ['doc/specs/103_cognitive_orchestrator.md']",
-        "Test Refs: ['layers/l1_nervous/tests/test_l1_contract_imports.py']"
+        "valid_specs=['doc/specs/L1_Nervous/15_mcp_sidecar_isolation.md', 'doc/specs/L1_Nervous/16_mcp_dynamic_gateway.md', 'doc/specs/L1_Nervous/41_layer_handshake_protocol.md', 'doc/specs/L1_Nervous/44_pervasive_channel_adapters.md']",
+        "valid_tests=['layers/l1_nervous/tests/test_l1_contract_imports.py', 'layers/l1_nervous/tests/test_obsidian_knowledge_adapter.py']"
       ],
       "reasons": [
-        "Bound to contract: Adapters bridging L1 external inputs with L2 cognitive vector representations."
+        "Bound to contract: Knowledge adapter path remains active but has import-shape debt (top-level models import).",
+        "binding_status=BOUND_ACTIVE_RUNTIME",
+        "resolved_status=BOUND_ACTIVE_RUNTIME"
       ],
       "related_specs": [
-        "doc/specs/103_cognitive_orchestrator.md"
+        "doc/specs/L1_Nervous/15_mcp_sidecar_isolation.md",
+        "doc/specs/L1_Nervous/16_mcp_dynamic_gateway.md",
+        "doc/specs/L1_Nervous/41_layer_handshake_protocol.md",
+        "doc/specs/L1_Nervous/44_pervasive_channel_adapters.md"
       ],
       "related_tests": [
-        "layers/l1_nervous/tests/test_l1_contract_imports.py"
+        "layers/l1_nervous/tests/test_l1_contract_imports.py",
+        "layers/l1_nervous/tests/test_obsidian_knowledge_adapter.py"
       ],
       "related_runtime": [
-        "layers/l2_brain/embedding_mesh/router.py"
+        "layers/l1_nervous/application/use_cases.py"
       ],
       "safe_to_change": true,
       "requires_human_review": false
@@ -20507,27 +20519,31 @@
       "path": "layers/l1_nervous/mcp_registry.py",
       "current_class": "UNKNOWN",
       "proposed_class": "ACTIVE_RUNTIME",
-      "risk": "LOW",
-      "recommendation": "KEEP_AND_TEST",
-      "confidence": 1.0,
+      "risk": "MEDIUM",
+      "recommendation": "MAP_TO_SPEC",
+      "confidence": 0.88,
       "evidence_refs": [
         "FILE_EXISTS",
         "IMPORTABLE",
-        "IMPORTABLE: verified by test_l1_contract_imports.py",
-        "Spec Refs: ['doc/specs/103_cognitive_orchestrator.md']",
-        "Test Refs: ['layers/l1_nervous/tests/test_l1_contract_imports.py']"
+        "valid_specs=['doc/specs/L1_Nervous/15_mcp_sidecar_isolation.md', 'doc/specs/L1_Nervous/16_mcp_dynamic_gateway.md', 'doc/specs/L1_Nervous/41_layer_handshake_protocol.md', 'doc/specs/L1_Nervous/44_pervasive_channel_adapters.md']",
+        "valid_tests=['layers/l1_nervous/tests/test_l1_contract_imports.py']"
       ],
       "reasons": [
-        "Bound to contract: Local registry managing capabilities and MCP schema binding contracts."
+        "Bound to contract: Registry runtime component for MCP server catalog.",
+        "binding_status=BOUND_ACTIVE_RUNTIME",
+        "resolved_status=BOUND_ACTIVE_RUNTIME"
       ],
       "related_specs": [
-        "doc/specs/103_cognitive_orchestrator.md"
+        "doc/specs/L1_Nervous/15_mcp_sidecar_isolation.md",
+        "doc/specs/L1_Nervous/16_mcp_dynamic_gateway.md",
+        "doc/specs/L1_Nervous/41_layer_handshake_protocol.md",
+        "doc/specs/L1_Nervous/44_pervasive_channel_adapters.md"
       ],
       "related_tests": [
         "layers/l1_nervous/tests/test_l1_contract_imports.py"
       ],
       "related_runtime": [
-        "layers/l2_brain/embedding_mesh/router.py"
+        "layers/l1_nervous/mcp_transport.py"
       ],
       "safe_to_change": true,
       "requires_human_review": false
@@ -20565,21 +20581,25 @@
       "path": "layers/l1_nervous/mcp_transport.py",
       "current_class": "UNKNOWN",
       "proposed_class": "ACTIVE_RUNTIME",
-      "risk": "LOW",
-      "recommendation": "KEEP_AND_TEST",
-      "confidence": 1.0,
+      "risk": "MEDIUM",
+      "recommendation": "MAP_TO_SPEC",
+      "confidence": 0.88,
       "evidence_refs": [
         "FILE_EXISTS",
         "IMPORTABLE",
-        "IMPORTABLE: verified by test_l1_contract_imports.py",
-        "Spec Refs: ['doc/specs/103_cognitive_orchestrator.md']",
-        "Test Refs: ['layers/l1_nervous/tests/test_l1_contract_imports.py']"
+        "valid_specs=['doc/specs/L1_Nervous/15_mcp_sidecar_isolation.md', 'doc/specs/L1_Nervous/16_mcp_dynamic_gateway.md', 'doc/specs/L1_Nervous/41_layer_handshake_protocol.md', 'doc/specs/L1_Nervous/44_pervasive_channel_adapters.md']",
+        "valid_tests=['layers/l1_nervous/tests/test_l1_contract_imports.py']"
       ],
       "reasons": [
-        "Bound to contract: Asynchronous MCP client json-rpc sockets transport layer."
+        "Bound to contract: Transport implementation for stdio-based MCP communication.",
+        "binding_status=BOUND_ACTIVE_RUNTIME",
+        "resolved_status=BOUND_ACTIVE_RUNTIME"
       ],
       "related_specs": [
-        "doc/specs/103_cognitive_orchestrator.md"
+        "doc/specs/L1_Nervous/15_mcp_sidecar_isolation.md",
+        "doc/specs/L1_Nervous/16_mcp_dynamic_gateway.md",
+        "doc/specs/L1_Nervous/41_layer_handshake_protocol.md",
+        "doc/specs/L1_Nervous/44_pervasive_channel_adapters.md"
       ],
       "related_tests": [
         "layers/l1_nervous/tests/test_l1_contract_imports.py"
@@ -20656,22 +20676,27 @@
       "path": "layers/l1_nervous/repo_guard.py",
       "current_class": "UNKNOWN",
       "proposed_class": "ACTIVE_RUNTIME",
-      "risk": "LOW",
-      "recommendation": "KEEP_AND_TEST",
-      "confidence": 1.0,
+      "risk": "MEDIUM",
+      "recommendation": "MAP_TO_SPEC",
+      "confidence": 0.83,
       "evidence_refs": [
         "FILE_EXISTS",
         "IMPORTABLE",
-        "IMPORTABLE: verified by test_l1_contract_imports.py",
-        "Spec Refs: ['doc/specs/103_cognitive_orchestrator.md', 'AGENTS.md']",
-        "Test Refs: ['layers/l1_nervous/tests/test_l1_contract_imports.py']"
+        "valid_specs=['doc/specs/130_trusted_workstation_mode.md', 'doc/specs/111_spec_coverage_gate.md', 'doc/specs/L1_Nervous/15_mcp_sidecar_isolation.md', 'doc/specs/L1_Nervous/16_mcp_dynamic_gateway.md', 'doc/specs/L1_Nervous/41_layer_handshake_protocol.md', 'doc/specs/L1_Nervous/44_pervasive_channel_adapters.md']",
+        "valid_tests=['layers/l1_nervous/tests/test_l1_contract_imports.py']"
       ],
       "reasons": [
-        "Bound to contract: Repository governance monitor enforcing commit hooks and rules."
+        "Bound to contract: Repo governance helper; requires stronger direct spec anchoring.",
+        "binding_status=BOUND_ACTIVE_RUNTIME",
+        "resolved_status=BOUND_ACTIVE_RUNTIME"
       ],
       "related_specs": [
-        "AGENTS.md",
-        "doc/specs/103_cognitive_orchestrator.md"
+        "doc/specs/111_spec_coverage_gate.md",
+        "doc/specs/130_trusted_workstation_mode.md",
+        "doc/specs/L1_Nervous/15_mcp_sidecar_isolation.md",
+        "doc/specs/L1_Nervous/16_mcp_dynamic_gateway.md",
+        "doc/specs/L1_Nervous/41_layer_handshake_protocol.md",
+        "doc/specs/L1_Nervous/44_pervasive_channel_adapters.md"
       ],
       "related_tests": [
         "layers/l1_nervous/tests/test_l1_contract_imports.py"
@@ -20710,24 +20735,30 @@
       "path": "layers/l1_nervous/runtime_paths.py",
       "current_class": "UNKNOWN",
       "proposed_class": "ACTIVE_RUNTIME",
-      "risk": "LOW",
-      "recommendation": "KEEP_AND_TEST",
-      "confidence": 1.0,
+      "risk": "MEDIUM",
+      "recommendation": "MAP_TO_SPEC",
+      "confidence": 0.9,
       "evidence_refs": [
         "FILE_EXISTS",
         "IMPORTABLE",
-        "IMPORTABLE: verified by test_l1_contract_imports.py",
-        "Spec Refs: ['doc/specs/103_cognitive_orchestrator.md']",
-        "Test Refs: ['layers/l1_nervous/tests/test_l1_contract_imports.py']"
+        "valid_specs=['doc/specs/L0_Overseer/47_path_normalization.md', 'doc/specs/L1_Nervous/15_mcp_sidecar_isolation.md', 'doc/specs/L1_Nervous/16_mcp_dynamic_gateway.md', 'doc/specs/L1_Nervous/41_layer_handshake_protocol.md', 'doc/specs/L1_Nervous/44_pervasive_channel_adapters.md']",
+        "valid_tests=['layers/l1_nervous/tests/test_l1_contract_imports.py', 'layers/l1_nervous/tests/test_runtime_contracts.py']"
       ],
       "reasons": [
-        "Bound to contract: Dynamic configuration paths resolver to guarantee host OS portability."
+        "Bound to contract: Deterministic runtime path resolver with dedicated tests.",
+        "binding_status=BOUND_ACTIVE_RUNTIME",
+        "resolved_status=BOUND_ACTIVE_RUNTIME"
       ],
       "related_specs": [
-        "doc/specs/103_cognitive_orchestrator.md"
+        "doc/specs/L0_Overseer/47_path_normalization.md",
+        "doc/specs/L1_Nervous/15_mcp_sidecar_isolation.md",
+        "doc/specs/L1_Nervous/16_mcp_dynamic_gateway.md",
+        "doc/specs/L1_Nervous/41_layer_handshake_protocol.md",
+        "doc/specs/L1_Nervous/44_pervasive_channel_adapters.md"
       ],
       "related_tests": [
-        "layers/l1_nervous/tests/test_l1_contract_imports.py"
+        "layers/l1_nervous/tests/test_l1_contract_imports.py",
+        "layers/l1_nervous/tests/test_runtime_contracts.py"
       ],
       "related_runtime": [
         "layers/l1_nervous/bootstrap.py"
@@ -20790,18 +20821,22 @@
       "proposed_class": "SHADOW_CANDIDATE",
       "risk": "HIGH",
       "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.8,
+      "confidence": 0.72,
       "evidence_refs": [
         "FILE_EXISTS",
-        "PHYSICAL_EXISTS: sidecar.go module",
-        "Spec Refs: ['doc/specs/103_cognitive_orchestrator.md']",
-        "Test Refs: []"
+        "POLYGLOT_TOOLCHAIN_NOT_VERIFIED",
+        "valid_specs=['doc/specs/L1_Nervous/15_mcp_sidecar_isolation.md', 'doc/specs/L1_Nervous/16_mcp_dynamic_gateway.md', 'doc/specs/L1_Nervous/41_layer_handshake_protocol.md']",
+        "valid_tests=[]"
       ],
       "reasons": [
-        "Bound to contract: Daemon sidecar orchestrator written in Go to communicate with L0-Overseer."
+        "Bound to contract: Polyglot runtime without deterministic compile/test evidence in this phase.",
+        "binding_status=DEFERRED_NO_SAFE_ACTION",
+        "resolved_status=DEFERRED_NO_SAFE_ACTION"
       ],
       "related_specs": [
-        "doc/specs/103_cognitive_orchestrator.md"
+        "doc/specs/L1_Nervous/15_mcp_sidecar_isolation.md",
+        "doc/specs/L1_Nervous/16_mcp_dynamic_gateway.md",
+        "doc/specs/L1_Nervous/41_layer_handshake_protocol.md"
       ],
       "related_tests": [],
       "related_runtime": [],
@@ -20814,18 +20849,22 @@
       "proposed_class": "SHADOW_CANDIDATE",
       "risk": "HIGH",
       "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.8,
+      "confidence": 0.72,
       "evidence_refs": [
         "FILE_EXISTS",
-        "PHYSICAL_EXISTS: executable shell sandbox wrapper",
-        "Spec Refs: ['doc/specs/103_cognitive_orchestrator.md']",
-        "Test Refs: []"
+        "POLYGLOT_TOOLCHAIN_NOT_VERIFIED",
+        "valid_specs=['doc/specs/L1_Nervous/15_mcp_sidecar_isolation.md', 'doc/specs/L1_Nervous/16_mcp_dynamic_gateway.md', 'doc/specs/L1_Nervous/41_layer_handshake_protocol.md']",
+        "valid_tests=[]"
       ],
       "reasons": [
-        "Bound to contract: Executable bash sandbox harness to execute ssh routines securely. Left deferred for security auditing."
+        "Bound to contract: Polyglot runtime without deterministic compile/test evidence in this phase.",
+        "binding_status=DEFERRED_NO_SAFE_ACTION",
+        "resolved_status=DEFERRED_NO_SAFE_ACTION"
       ],
       "related_specs": [
-        "doc/specs/103_cognitive_orchestrator.md"
+        "doc/specs/L1_Nervous/15_mcp_sidecar_isolation.md",
+        "doc/specs/L1_Nervous/16_mcp_dynamic_gateway.md",
+        "doc/specs/L1_Nervous/41_layer_handshake_protocol.md"
       ],
       "related_tests": [],
       "related_runtime": [],
@@ -20903,21 +20942,25 @@
       "path": "layers/l1_nervous/utils.py",
       "current_class": "UNKNOWN",
       "proposed_class": "ACTIVE_RUNTIME",
-      "risk": "LOW",
-      "recommendation": "KEEP_AND_TEST",
-      "confidence": 1.0,
+      "risk": "MEDIUM",
+      "recommendation": "MAP_TO_SPEC",
+      "confidence": 0.86,
       "evidence_refs": [
         "FILE_EXISTS",
         "IMPORTABLE",
-        "IMPORTABLE: verified by test_l1_contract_imports.py",
-        "Spec Refs: ['doc/specs/103_cognitive_orchestrator.md']",
-        "Test Refs: ['layers/l1_nervous/tests/test_l1_contract_imports.py']"
+        "valid_specs=['doc/specs/L1_Nervous/15_mcp_sidecar_isolation.md', 'doc/specs/L1_Nervous/16_mcp_dynamic_gateway.md', 'doc/specs/L1_Nervous/41_layer_handshake_protocol.md', 'doc/specs/L1_Nervous/44_pervasive_channel_adapters.md']",
+        "valid_tests=['layers/l1_nervous/tests/test_l1_contract_imports.py']"
       ],
       "reasons": [
-        "Bound to contract: Generic helper functions for binary stream processing."
+        "Bound to contract: Utility module for atomic file operations.",
+        "binding_status=BOUND_ACTIVE_RUNTIME",
+        "resolved_status=BOUND_ACTIVE_RUNTIME"
       ],
       "related_specs": [
-        "doc/specs/103_cognitive_orchestrator.md"
+        "doc/specs/L1_Nervous/15_mcp_sidecar_isolation.md",
+        "doc/specs/L1_Nervous/16_mcp_dynamic_gateway.md",
+        "doc/specs/L1_Nervous/41_layer_handshake_protocol.md",
+        "doc/specs/L1_Nervous/44_pervasive_channel_adapters.md"
       ],
       "related_tests": [
         "layers/l1_nervous/tests/test_l1_contract_imports.py"
@@ -26995,18 +27038,22 @@
       "proposed_class": "SHADOW_CANDIDATE",
       "risk": "HIGH",
       "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.8,
+      "confidence": 0.72,
       "evidence_refs": [
         "FILE_EXISTS",
-        "PHYSICAL_EXISTS: Elixir OTP application configuration",
-        "Spec Refs: ['doc/specs/103_cognitive_orchestrator.md']",
-        "Test Refs: []"
+        "POLYGLOT_TOOLCHAIN_NOT_VERIFIED",
+        "valid_specs=['doc/specs/L0_Overseer/03_polyglot_architecture.md', 'doc/specs/L0_Overseer/05_orchestration_stack_and_glue.md', 'doc/specs/L0_Overseer/11_monorepo_structure.md']",
+        "valid_tests=[]"
       ],
       "reasons": [
-        "Bound to contract: Elixir app supervisor specification of the overseer gateway. OTP tree compilation deferred."
+        "Bound to contract: Polyglot runtime without deterministic compile/test evidence in this phase.",
+        "binding_status=DEFERRED_NO_SAFE_ACTION",
+        "resolved_status=DEFERRED_NO_SAFE_ACTION"
       ],
       "related_specs": [
-        "doc/specs/103_cognitive_orchestrator.md"
+        "doc/specs/L0_Overseer/03_polyglot_architecture.md",
+        "doc/specs/L0_Overseer/05_orchestration_stack_and_glue.md",
+        "doc/specs/L0_Overseer/11_monorepo_structure.md"
       ],
       "related_tests": [],
       "related_runtime": [],
@@ -27074,27 +27121,32 @@
       "path": "layers/l1_nervous/application/use_cases.py",
       "current_class": "UNKNOWN",
       "proposed_class": "ACTIVE_RUNTIME",
-      "risk": "LOW",
-      "recommendation": "KEEP_AND_TEST",
-      "confidence": 1.0,
+      "risk": "MEDIUM",
+      "recommendation": "MAP_TO_SPEC",
+      "confidence": 0.88,
       "evidence_refs": [
         "FILE_EXISTS",
         "IMPORTABLE",
-        "IMPORTABLE: verified by test_l1_contract_imports.py",
-        "Spec Refs: ['doc/specs/103_cognitive_orchestrator.md']",
-        "Test Refs: ['layers/l1_nervous/tests/test_l1_contract_imports.py']"
+        "valid_specs=['doc/specs/L1_Nervous/15_mcp_sidecar_isolation.md', 'doc/specs/L1_Nervous/16_mcp_dynamic_gateway.md', 'doc/specs/L1_Nervous/41_layer_handshake_protocol.md', 'doc/specs/L1_Nervous/44_pervasive_channel_adapters.md']",
+        "valid_tests=['layers/l1_nervous/tests/test_l1_contract_imports.py']"
       ],
       "reasons": [
-        "Bound to contract: Active usecases of the L1 nervous layer orchestrating daemon processes."
+        "Bound to contract: Use case orchestration glue for L1 tool operations.",
+        "binding_status=BOUND_ACTIVE_RUNTIME",
+        "resolved_status=BOUND_ACTIVE_RUNTIME"
       ],
       "related_specs": [
-        "doc/specs/103_cognitive_orchestrator.md"
+        "doc/specs/L1_Nervous/15_mcp_sidecar_isolation.md",
+        "doc/specs/L1_Nervous/16_mcp_dynamic_gateway.md",
+        "doc/specs/L1_Nervous/41_layer_handshake_protocol.md",
+        "doc/specs/L1_Nervous/44_pervasive_channel_adapters.md"
       ],
       "related_tests": [
         "layers/l1_nervous/tests/test_l1_contract_imports.py"
       ],
       "related_runtime": [
-        "layers/l1_nervous/bootstrap.py"
+        "layers/l1_nervous/bootstrap.py",
+        "layers/l1_nervous/domain/services.py"
       ],
       "safe_to_change": true,
       "requires_human_review": false
@@ -27194,21 +27246,25 @@
       "path": "layers/l1_nervous/domain/services.py",
       "current_class": "UNKNOWN",
       "proposed_class": "ACTIVE_RUNTIME",
-      "risk": "LOW",
-      "recommendation": "KEEP_AND_TEST",
-      "confidence": 1.0,
+      "risk": "MEDIUM",
+      "recommendation": "MAP_TO_SPEC",
+      "confidence": 0.86,
       "evidence_refs": [
         "FILE_EXISTS",
         "IMPORTABLE",
-        "IMPORTABLE: verified by test_l1_contract_imports.py",
-        "Spec Refs: ['doc/specs/103_cognitive_orchestrator.md']",
-        "Test Refs: ['layers/l1_nervous/tests/test_l1_contract_imports.py']"
+        "valid_specs=['doc/specs/L1_Nervous/15_mcp_sidecar_isolation.md', 'doc/specs/L1_Nervous/16_mcp_dynamic_gateway.md', 'doc/specs/L1_Nervous/41_layer_handshake_protocol.md', 'doc/specs/L1_Nervous/44_pervasive_channel_adapters.md']",
+        "valid_tests=['layers/l1_nervous/tests/test_l1_contract_imports.py']"
       ],
       "reasons": [
-        "Bound to contract: Domain services layer containing active cognitive state schemas."
+        "Bound to contract: Domain service contract used by L1 use-cases.",
+        "binding_status=BOUND_ACTIVE_RUNTIME",
+        "resolved_status=BOUND_ACTIVE_RUNTIME"
       ],
       "related_specs": [
-        "doc/specs/103_cognitive_orchestrator.md"
+        "doc/specs/L1_Nervous/15_mcp_sidecar_isolation.md",
+        "doc/specs/L1_Nervous/16_mcp_dynamic_gateway.md",
+        "doc/specs/L1_Nervous/41_layer_handshake_protocol.md",
+        "doc/specs/L1_Nervous/44_pervasive_channel_adapters.md"
       ],
       "related_tests": [
         "layers/l1_nervous/tests/test_l1_contract_imports.py"
@@ -28954,22 +29010,25 @@
     {
       "path": "layers/l1_nervous/tools_impl/nervous.py",
       "current_class": "UNKNOWN",
-      "proposed_class": "ACTIVE_RUNTIME",
-      "risk": "LOW",
-      "recommendation": "KEEP_AND_TEST",
-      "confidence": 1.0,
+      "proposed_class": "SHADOW_CANDIDATE",
+      "risk": "HIGH",
+      "recommendation": "FREEZE_UNTIL_REVIEW",
+      "confidence": 0.76,
       "evidence_refs": [
         "FILE_EXISTS",
         "IMPORTABLE",
-        "IMPORTABLE: verified by test_l1_contract_imports.py",
-        "Spec Refs: ['doc/specs/103_cognitive_orchestrator.md']",
-        "Test Refs: ['layers/l1_nervous/tests/test_l1_contract_imports.py']"
+        "OPTIONAL_DEPENDENCY_REQUIRED:mcp",
+        "valid_specs=['doc/specs/L1_Nervous/16_mcp_dynamic_gateway.md', 'doc/specs/L1_Nervous/44_local_reasoning_gateway.md']",
+        "valid_tests=['layers/l1_nervous/tests/test_l1_contract_imports.py']"
       ],
       "reasons": [
-        "Bound to contract: Skill tool executions matching L1 capabilities contracts."
+        "Bound to contract: Depends on optional 'mcp' package; import contract must remain deferred.",
+        "binding_status=DEFERRED_NO_SAFE_ACTION",
+        "resolved_status=DEFERRED_NO_SAFE_ACTION"
       ],
       "related_specs": [
-        "doc/specs/103_cognitive_orchestrator.md"
+        "doc/specs/L1_Nervous/16_mcp_dynamic_gateway.md",
+        "doc/specs/L1_Nervous/44_local_reasoning_gateway.md"
       ],
       "related_tests": [
         "layers/l1_nervous/tests/test_l1_contract_imports.py"
@@ -28977,28 +29036,32 @@
       "related_runtime": [
         "layers/l1_nervous/mcp_registry.py"
       ],
-      "safe_to_change": true,
-      "requires_human_review": false
+      "safe_to_change": false,
+      "requires_human_review": true
     },
     {
       "path": "layers/l1_nervous/tools_impl/patch_transactions.py",
       "current_class": "UNKNOWN",
       "proposed_class": "ACTIVE_RUNTIME",
-      "risk": "LOW",
-      "recommendation": "KEEP_AND_TEST",
-      "confidence": 1.0,
+      "risk": "MEDIUM",
+      "recommendation": "MAP_TO_SPEC",
+      "confidence": 0.82,
       "evidence_refs": [
         "FILE_EXISTS",
         "IMPORTABLE",
-        "IMPORTABLE: verified by test_l1_contract_imports.py",
-        "Spec Refs: ['doc/specs/103_cognitive_orchestrator.md']",
-        "Test Refs: ['layers/l1_nervous/tests/test_l1_contract_imports.py']"
+        "valid_specs=['doc/specs/L1_Nervous/15_mcp_sidecar_isolation.md', 'doc/specs/L1_Nervous/16_mcp_dynamic_gateway.md', 'doc/specs/L1_Nervous/41_layer_handshake_protocol.md', 'doc/specs/L1_Nervous/44_pervasive_channel_adapters.md']",
+        "valid_tests=['layers/l1_nervous/tests/test_l1_contract_imports.py']"
       ],
       "reasons": [
-        "Bound to contract: Atomic database and memory patch transactional isolation boundaries."
+        "Bound to contract: Patch transaction helper with import-only coverage.",
+        "binding_status=BOUND_ACTIVE_RUNTIME",
+        "resolved_status=BOUND_ACTIVE_RUNTIME"
       ],
       "related_specs": [
-        "doc/specs/103_cognitive_orchestrator.md"
+        "doc/specs/L1_Nervous/15_mcp_sidecar_isolation.md",
+        "doc/specs/L1_Nervous/16_mcp_dynamic_gateway.md",
+        "doc/specs/L1_Nervous/41_layer_handshake_protocol.md",
+        "doc/specs/L1_Nervous/44_pervasive_channel_adapters.md"
       ],
       "related_tests": [
         "layers/l1_nervous/tests/test_l1_contract_imports.py"
@@ -29367,18 +29430,22 @@
       "proposed_class": "SHADOW_CANDIDATE",
       "risk": "HIGH",
       "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.8,
+      "confidence": 0.72,
       "evidence_refs": [
         "FILE_EXISTS",
-        "PHYSICAL_EXISTS: compiled skill definition",
-        "Spec Refs: ['doc/specs/103_cognitive_orchestrator.md']",
-        "Test Refs: []"
+        "POLYGLOT_TOOLCHAIN_NOT_VERIFIED",
+        "valid_specs=['doc/specs/L1_Nervous/15_mcp_sidecar_isolation.md', 'doc/specs/L1_Nervous/16_mcp_dynamic_gateway.md', 'doc/specs/L1_Nervous/41_layer_handshake_protocol.md']",
+        "valid_tests=[]"
       ],
       "reasons": [
-        "Bound to contract: Go binary definitions of dynamic skill. Toolchain compilation deferred until next phase."
+        "Bound to contract: Polyglot runtime without deterministic compile/test evidence in this phase.",
+        "binding_status=DEFERRED_NO_SAFE_ACTION",
+        "resolved_status=DEFERRED_NO_SAFE_ACTION"
       ],
       "related_specs": [
-        "doc/specs/103_cognitive_orchestrator.md"
+        "doc/specs/L1_Nervous/15_mcp_sidecar_isolation.md",
+        "doc/specs/L1_Nervous/16_mcp_dynamic_gateway.md",
+        "doc/specs/L1_Nervous/41_layer_handshake_protocol.md"
       ],
       "related_tests": [],
       "related_runtime": [],
@@ -29391,18 +29458,22 @@
       "proposed_class": "SHADOW_CANDIDATE",
       "risk": "HIGH",
       "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.8,
+      "confidence": 0.72,
       "evidence_refs": [
         "FILE_EXISTS",
-        "PHYSICAL_EXISTS: MCP client definition in Go",
-        "Spec Refs: ['doc/specs/103_cognitive_orchestrator.md']",
-        "Test Refs: []"
+        "POLYGLOT_TOOLCHAIN_NOT_VERIFIED",
+        "valid_specs=['doc/specs/L1_Nervous/15_mcp_sidecar_isolation.md', 'doc/specs/L1_Nervous/16_mcp_dynamic_gateway.md', 'doc/specs/L1_Nervous/41_layer_handshake_protocol.md']",
+        "valid_tests=[]"
       ],
       "reasons": [
-        "Bound to contract: Fast Go JSON-RPC implementation for local sidecar daemon. Deferred due to toolchain compilation limits."
+        "Bound to contract: Polyglot runtime without deterministic compile/test evidence in this phase.",
+        "binding_status=DEFERRED_NO_SAFE_ACTION",
+        "resolved_status=DEFERRED_NO_SAFE_ACTION"
       ],
       "related_specs": [
-        "doc/specs/103_cognitive_orchestrator.md"
+        "doc/specs/L1_Nervous/15_mcp_sidecar_isolation.md",
+        "doc/specs/L1_Nervous/16_mcp_dynamic_gateway.md",
+        "doc/specs/L1_Nervous/41_layer_handshake_protocol.md"
       ],
       "related_tests": [],
       "related_runtime": [],
@@ -29415,18 +29486,22 @@
       "proposed_class": "SHADOW_CANDIDATE",
       "risk": "HIGH",
       "recommendation": "FREEZE_UNTIL_REVIEW",
-      "confidence": 0.8,
+      "confidence": 0.72,
       "evidence_refs": [
         "FILE_EXISTS",
-        "PHYSICAL_EXISTS: Go struct schema",
-        "Spec Refs: ['doc/specs/103_cognitive_orchestrator.md']",
-        "Test Refs: []"
+        "POLYGLOT_TOOLCHAIN_NOT_VERIFIED",
+        "valid_specs=['doc/specs/L1_Nervous/15_mcp_sidecar_isolation.md', 'doc/specs/L1_Nervous/16_mcp_dynamic_gateway.md', 'doc/specs/L1_Nervous/41_layer_handshake_protocol.md']",
+        "valid_tests=[]"
       ],
       "reasons": [
-        "Bound to contract: Standard definitions of memory nodes used inside the Go gateway client."
+        "Bound to contract: Polyglot runtime without deterministic compile/test evidence in this phase.",
+        "binding_status=DEFERRED_NO_SAFE_ACTION",
+        "resolved_status=DEFERRED_NO_SAFE_ACTION"
       ],
       "related_specs": [
-        "doc/specs/103_cognitive_orchestrator.md"
+        "doc/specs/L1_Nervous/15_mcp_sidecar_isolation.md",
+        "doc/specs/L1_Nervous/16_mcp_dynamic_gateway.md",
+        "doc/specs/L1_Nervous/41_layer_handshake_protocol.md"
       ],
       "related_tests": [],
       "related_runtime": [],
@@ -40851,7 +40926,7 @@
   ],
   "summary_counts": {
     "by_class": {
-      "ACTIVE_RUNTIME": 248,
+      "ACTIVE_RUNTIME": 247,
       "ACTIVE_SPEC": 559,
       "ACTIVE_TEST": 235,
       "CONFIG": 12,
@@ -40859,19 +40934,19 @@
       "GENERATED": 38,
       "LEGACY": 30,
       "ORPHAN_TEST_CANDIDATE": 3,
-      "SHADOW_CANDIDATE": 70,
+      "SHADOW_CANDIDATE": 71,
       "UNKNOWN": 144
     },
     "by_risk": {
-      "HIGH": 70,
-      "LOW": 334,
-      "MEDIUM": 936
+      "HIGH": 71,
+      "LOW": 322,
+      "MEDIUM": 947
     },
     "by_recommendation": {
-      "FREEZE_UNTIL_REVIEW": 150,
-      "KEEP_AND_TEST": 260,
+      "FREEZE_UNTIL_REVIEW": 151,
+      "KEEP_AND_TEST": 248,
       "MAP_TO_RUNTIME": 561,
-      "MAP_TO_SPEC": 244,
+      "MAP_TO_SPEC": 255,
       "MAP_TO_TEST": 20,
       "MARK_EXPERIMENTAL": 1,
       "MARK_GENERATED": 38,
@@ -40879,9 +40954,9 @@
       "NO_ACTION": 36
     },
     "bindings_summary": {
-      "bound_active_runtime": 12,
+      "bound_active_runtime": 11,
       "needs_manual_owner": 0,
-      "deferred_no_safe_action": 6
+      "deferred_no_safe_action": 7
     }
   },
   "top_actions": [

@@ -1,31 +1,38 @@
-# Spec Reference: 103_cognitive_orchestrator
+# Spec Reference: 41_layer_handshake_protocol
+from __future__ import annotations
+
+import importlib
+from dataclasses import dataclass
+
 import pytest
-import sys
-from pathlib import Path
-
-# Add project root to sys.path
-repo_root = Path(__file__).resolve().parent.parent.parent.parent
-if str(repo_root) not in sys.path:
-    sys.path.insert(0, str(repo_root))
 
 
-def test_l1_nervous_modules_are_importable():
-    # Verify that python modules in L1 nervous can be successfully imported
+@dataclass(frozen=True)
+class ModuleContract:
+    module: str
+    optional_dependency: str | None = None
+
+
+MODULE_CONTRACTS = [
+    ModuleContract("layers.l1_nervous.bootstrap"),
+    ModuleContract("layers.l1_nervous.application.use_cases"),
+    ModuleContract("layers.l1_nervous.domain.services"),
+    ModuleContract("layers.l1_nervous.knowledge_adapters"),
+    ModuleContract("layers.l1_nervous.mcp_registry"),
+    ModuleContract("layers.l1_nervous.mcp_transport"),
+    ModuleContract("layers.l1_nervous.repo_guard"),
+    ModuleContract("layers.l1_nervous.runtime_paths"),
+    ModuleContract("layers.l1_nervous.tools_impl.nervous", optional_dependency="mcp"),
+    ModuleContract("layers.l1_nervous.tools_impl.patch_transactions"),
+    ModuleContract("layers.l1_nervous.utils"),
+]
+
+
+@pytest.mark.parametrize("contract", MODULE_CONTRACTS, ids=lambda c: c.module)
+def test_l1_nervous_module_import_contract(contract: ModuleContract) -> None:
     try:
-        import layers.l1_nervous.bootstrap
-        import layers.l1_nervous.application.use_cases
-        import layers.l1_nervous.domain.services
-        import layers.l1_nervous.knowledge_adapters
-        import layers.l1_nervous.mcp_registry
-        import layers.l1_nervous.mcp_transport
-        import layers.l1_nervous.repo_guard
-        import layers.l1_nervous.runtime_paths
-        import layers.l1_nervous.tools_impl.nervous
-        import layers.l1_nervous.tools_impl.patch_transactions
-        import layers.l1_nervous.utils
-    except ImportError as e:
-        # If dynamic external libraries are missing, allow safe skip or catch rather than failing baseline
-        # (Although locally all L1 requirements should be present!)
-        pytest.skip(f"L1 dependency missing but contract structure exists: {e}")
-        
-    assert True
+        importlib.import_module(contract.module)
+    except ModuleNotFoundError as exc:
+        if contract.optional_dependency and exc.name == contract.optional_dependency:
+            pytest.skip(f"optional dependency required for {contract.module}: {exc.name}")
+        raise

@@ -15,7 +15,7 @@ from .evidence import EvidenceCollector
 class StructuralTriageMatrix:
     def __init__(self, repo_root: Path):
         self.repo_root = repo_root
-        self.classifier = StructuralClassifier()
+        self.classifier = StructuralClassifier(repo_root=repo_root)
 
     def build(
         self,
@@ -55,13 +55,29 @@ class StructuralTriageMatrix:
 
         top_actions = _select_top_actions(findings, max_actions=max_actions, include_low_risk=include_low_risk)
 
-        # Compile binding registry counts
+        # Compile binding registry counts with validation gating.
         from .bindings import ContractBindingRegistry, BindingStatus
         registry = ContractBindingRegistry()
         all_bindings = registry.get_all_bindings()
-        bound_runtime = sum(1 for b in all_bindings if b.binding_status == BindingStatus.BOUND_ACTIVE_RUNTIME)
-        needs_manual = sum(1 for b in all_bindings if b.binding_status == BindingStatus.NEEDS_MANUAL_OWNER)
-        deferred = sum(1 for b in all_bindings if b.binding_status == BindingStatus.DEFERRED_NO_SAFE_ACTION)
+        finding_by_path = {f.path: f for f in findings}
+        validated = []
+        for b in all_bindings:
+            ev = {}
+            if b.path in finding_by_path:
+                f = finding_by_path[b.path]
+                ev = {
+                    "evidence_refs": f.evidence_refs,
+                    "related_specs": f.related_specs,
+                    "related_tests": f.related_tests,
+                    "related_runtime": f.related_runtime,
+                }
+            _, validation = registry.evaluate(b.path, self.repo_root, evidence=ev)
+            if validation:
+                validated.append(validation)
+
+        bound_runtime = sum(1 for v in validated if v.resolved_status == BindingStatus.BOUND_ACTIVE_RUNTIME)
+        needs_manual = sum(1 for v in validated if v.resolved_status == BindingStatus.NEEDS_MANUAL_OWNER)
+        deferred = sum(1 for v in validated if v.resolved_status == BindingStatus.DEFERRED_NO_SAFE_ACTION)
 
         summary_counts = {
             "by_class": dict(sorted(by_class.items())),

@@ -28,13 +28,31 @@ def write_reports(
     actions_json.write_text(json.dumps({"actions": action_rows}, indent=2), encoding="utf-8")
     actions_md.write_text(_build_actions_markdown(report, max_actions=max_actions), encoding="utf-8")
 
-    # Generate contract bindings report
+    # Generate contract bindings report (validated against current repo state).
     from .bindings import ContractBindingRegistry
     registry = ContractBindingRegistry()
     all_bindings = registry.get_all_bindings()
-    bindings_rows = [b.model_dump(mode="json") for b in all_bindings]
+    repo_root = reports_dir.parent.parent
+    findings_by_path = {f.path: f for f in report.findings}
+    bindings_rows = []
+    for b in all_bindings:
+        ev = {}
+        finding = findings_by_path.get(b.path)
+        if finding:
+            ev = {
+                "evidence_refs": finding.evidence_refs,
+                "related_specs": finding.related_specs,
+                "related_tests": finding.related_tests,
+                "related_runtime": finding.related_runtime,
+            }
+        _, validation = registry.evaluate(b.path, repo_root, evidence=ev)
+        row = {"binding": b.model_dump(mode="json")}
+        if validation:
+            row["validation"] = validation.model_dump(mode="json")
+        bindings_rows.append(row)
+
     bindings_json.write_text(json.dumps({"bindings": bindings_rows}, indent=2), encoding="utf-8")
-    bindings_md.write_text(_build_bindings_markdown(all_bindings), encoding="utf-8")
+    bindings_md.write_text(_build_bindings_markdown(bindings_rows), encoding="utf-8")
 
     return {
         "triage_json": triage_json,
@@ -141,23 +159,39 @@ def _build_actions_markdown(report: StructuralTriageReport, max_actions: int) ->
     return "\n".join(lines) + "\n"
 
 
-def _build_bindings_markdown(bindings: list) -> str:
+def _build_bindings_markdown(bindings_rows: list[dict]) -> str:
+    by_status: Dict[str, int] = {}
+    for row in bindings_rows:
+        status = row.get("validation", {}).get("resolved_status") or row.get("binding", {}).get("binding_status", "UNKNOWN")
+        by_status[status] = by_status.get(status, 0) + 1
+
     lines = [
         "# Structural Contract Bindings",
         "",
         "## Summary",
-        f"- Total Bindings: {len(bindings)}",
+        f"- Total Bindings: {len(bindings_rows)}",
+    ]
+    for status, count in sorted(by_status.items()):
+        lines.append(f"- {status}: {count}")
+    lines.extend(
+        [
         "",
         "## Bindings List",
         "",
-        "| Path | Layer | Owner Domain | Status | Spec Refs | Test Refs | Risk After | Notes |",
-        "| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |",
-    ]
-    for b in sorted(bindings, key=lambda x: x.path):
-        specs_str = ", ".join(b.spec_refs) if b.spec_refs else "None"
-        tests_str = ", ".join(b.test_refs) if b.test_refs else "None"
+        "| Path | Layer | Status (declared->resolved) | Risk (declared->effective) | Spec Hits | Test Hits | Issues |",
+        "| :--- | :--- | :--- | :--- | :--- | :--- | :--- |",
+    ])
+    for row in sorted(bindings_rows, key=lambda x: x["binding"]["path"]):
+        b = row["binding"]
+        v = row.get("validation", {})
+        status_decl = b.get("binding_status", "UNKNOWN")
+        status_res = v.get("resolved_status", status_decl)
+        risk_decl = b.get("risk_after", "UNKNOWN")
+        risk_eff = v.get("effective_risk", risk_decl)
+        spec_hits = len(v.get("direct_spec_hits", [])) + len(v.get("scoped_spec_hits", []))
+        test_hits = len(v.get("linked_test_hits", []))
+        issues = ", ".join(v.get("issues", [])) if v.get("issues") else "none"
         lines.append(
-            f"| `{b.path}` | {b.layer} | {b.owner_domain} | **{b.binding_status.value}** | {specs_str} | {tests_str} | `{b.risk_after.value}` | {b.notes} |"
+            f"| `{b['path']}` | {b['layer']} | {status_decl}->{status_res} | {risk_decl}->{risk_eff} | {spec_hits} | {test_hits} | {issues} |"
         )
     return "\n".join(lines) + "\n"
-
