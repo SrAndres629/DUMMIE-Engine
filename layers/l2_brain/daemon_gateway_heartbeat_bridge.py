@@ -1,3 +1,5 @@
+# Spec: 176_daemon_gateway_heartbeat_bridge
+# Spec: DE-V2-L2-176
 """Daemon/Gateway Heartbeat Bridge Module for safe, human-gated operation dispatch envelopes."""
 
 import json

@@ -23,5 +23,9 @@ class UnsafeBypassShieldAdapter:
         return True, "BYPASS_AUTHORIZED"
 
 class NativeShieldAdapter(IShieldOutputPort):
+    """
+    Adaptador nativo para el Shield (Spec 04).
+    Spec: DE-V2-L2-111
+    """
     def audit_intent(self, intent_json: str) -> Dict[str, Any]:
         return {"authorized": True, "shield_note": "MOCK_BYPASS_NO_L3"}

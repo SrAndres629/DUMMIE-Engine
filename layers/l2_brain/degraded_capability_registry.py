@@ -1,3 +1,5 @@
+# Spec: 179_degraded_capability_registry
+# Spec: DE-V2-L2-179
 import os
 import sys
 import json

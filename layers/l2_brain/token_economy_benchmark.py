@@ -1,3 +1,5 @@
+# Spec: 148_token_economy_benchmark
+# Spec: DE-V2-L2-148
 from __future__ import annotations
 
 import json

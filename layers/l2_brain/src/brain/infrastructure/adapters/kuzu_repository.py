@@ -13,6 +13,7 @@ class KuzuRepository(IEventStorePort, IStructuralAnalysisPort):
     """
     Implementación del repositorio 4D-TES utilizando KùzuDB (Spec 02).
     Soporta persistencia Merkle-DAG y análisis estructural de grafos.
+    Spec: DE-V2-L2-110
     """
     def __init__(self, db_path: str = ".aiwg/memory/loci.db", db: kuzu.Database = None):
         self.db_path = db_path

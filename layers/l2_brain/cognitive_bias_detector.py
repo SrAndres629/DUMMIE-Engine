@@ -1,3 +1,5 @@
+# Spec: 159_cognitive_bias_detector
+# Spec: DE-V2-L2-159
 import json
 from pathlib import Path
 from dataclasses import dataclass, field, asdict

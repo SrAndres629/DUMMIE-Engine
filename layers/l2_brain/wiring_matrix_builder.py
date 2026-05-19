@@ -1,3 +1,5 @@
+# Spec: 170_wiring_matrix_builder
+# Spec: DE-V2-L2-170
 """Wiring Matrix Builder — Spec 170
 
 Constructs the full bidirectional graph of first-party code, tests, specs, schemas, and reports.

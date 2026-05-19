@@ -1,3 +1,5 @@
+# Spec: 149_entrypoint_enforcement_auditor
+# Spec: DE-V2-L2-149
 from __future__ import annotations
 
 import json

@@ -1,3 +1,6 @@
+# Spec: 168_whole_body_scanner
+# Spec: DE-V2-L2-168
+# Spec: DE-V2-L2-117
 from __future__ import annotations
 
 import json

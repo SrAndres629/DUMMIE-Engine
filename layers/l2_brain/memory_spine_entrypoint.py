@@ -1,3 +1,5 @@
+# Spec: 147_memory_spine_entrypoint
+# Spec: DE-V2-L2-147
 from __future__ import annotations
 
 import json

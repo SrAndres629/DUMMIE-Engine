@@ -1,69 +1,45 @@
 {
-  "pack_id": "PACK_3.2",
-  "pack_title": "CODE Embedding Provider / Context Capsule AST Foundation",
+  "pack_id": "PACK_3.3",
+  "pack_title": "Direct Spec Linkage Engine",
   "status": "ACTIVE",
   "execute_now": true,
-  "objective": "separar espacio semántico textual de señales sintácticas de código mediante AST/capsule indexing sin mezclar vector spaces.",
+  "objective": "Aumentar la precisión del linkage entre código y contratos Markdown (direct_spec_hit_rate).",
   "long_term_objective_link": "long_term_objectives.json",
-  "short_term_goal": "Implementar infraestructura base para cápsulas de contexto y puertos de frontera de kernel para indexación AST.",
-  "why_now": "Para evitar la colisión semántica entre lenguaje natural y sintaxis de código mediante una frontera de ejecución guardada.",
+  "short_term_goal": "Implementar el motor de vinculación directa que asigne cada módulo físico a su especificación exacta.",
+  "why_now": "Para garantizar que el 100% del código activo tenga una base teórica verificable.",
   "not_in_scope": [
-    "Iniciar Pack 3.3"
+    "Iniciar Pack 4.0"
   ],
   "files_expected_to_change": [
-    "layers/l2_brain/src/brain/application/ports/capsule_ports.py",
-    "layers/l2_brain/src/brain/application/ports/kernel_ports.py",
-    "layers/l2_brain/src/brain/application/use_cases/capsule_orchestration.py",
-    "layers/l2_brain/src/brain/application/use_cases/guarded_execution.py",
-    "layers/l2_brain/src/brain/domain/context/capsule_models.py",
-    "layers/l2_brain/src/brain/domain/governance/kernel_contracts.py",
-    "layers/l2_brain/src/brain/infrastructure/adapters/capsule_adapters.py",
-    "layers/l2_brain/src/brain/infrastructure/adapters/kernel_adapters.py",
-    "layers/l2_brain/src/brain/infrastructure/adapters/ontological_adapter.py",
-    "layers/l2_brain/src/brain/infrastructure/adapters/shield_adapter.py"
+    "scripts/validate_specs_docs.py",
+    "layers/l2_brain/structural_hardening/bindings.py"
   ],
   "files_forbidden_to_change": [
-    "layers/l2_brain/embedding_mesh/reranker.py",
     "layers/l2_brain/embedding_mesh/contracts.py"
   ],
   "commands_required": [
-    "PYTHONPATH=. layers/l2_brain/.venv/bin/pytest -v layers/l2_brain/tests/test_aiwg_pack_guard.py",
     "python3 scripts/validate_specs_docs.py",
-    "PYTHONPATH=. layers/l2_brain/.venv/bin/pytest -v layers/l2_brain/tests/test_pack3_1_hybrid_reranker.py",
-    "PYTHONPATH=. layers/l2_brain/.venv/bin/pytest -v layers/l2_brain/tests/test_embedding_mesh_contracts.py",
-    "PYTHONPATH=. layers/l2_brain/.venv/bin/pytest -v layers/l2_brain/tests/test_embedding_mesh_router.py",
-    "PYTHONPATH=. layers/l2_brain/.venv/bin/pytest -v layers/l2_brain/tests/test_semantic_hardening_index.py"
+    "PYTHONPATH=layers/l2_brain/src python3 -m pytest layers/l2_brain/tests/test_aiwg_pack_guard.py"
   ],
   "tests_required": [
-    "layers/l2_brain/tests/test_pack3_1_hybrid_reranker.py",
-    "layers/l2_brain/tests/test_embedding_mesh_contracts.py",
-    "layers/l2_brain/tests/test_embedding_mesh_router.py",
-    "layers/l2_brain/tests/test_semantic_hardening_index.py",
-    "layers/l2_brain/tests/test_aiwg_native_reflexes.py"
+    "layers/l2_brain/tests/test_aiwg_pack_guard.py"
   ],
   "metrics_before": {
-    "degraded_embeddings": 717,
-    "real_text_fast_embeddings": 645
+    "direct_spec_hit_rate": 0.32
   },
   "expected_metrics_after": {
-    "degraded_embeddings": 717,
-    "real_text_fast_embeddings": 645
+    "direct_spec_hit_rate": 0.85
   },
-  "regression_risks": "Mezcla de espacios vectoriales CODE y TEXT_FAST; sys.path hacks en infraestructura nueva.",
-  "known_blindspots": "Bypass inseguro en ShieldAdapter sin flag explícito.",
+  "regression_risks": "Falsos negativos en validación de specs.",
+  "known_blindspots": "Módulos autogenerados sin MD.",
   "acceptance_criteria": [
-    "Preflight exitoso con HEAD real.",
-    "No degradación de TEXT_FAST.",
-    "Infraestructura de cápsulas sigue arquitectura hexagonal estricta."
+    "Todo módulo BOUND_ACTIVE_RUNTIME tiene un enlace explícito a su spec.",
+    "validate_specs_docs.py reporta 0 huérfanos."
   ],
-  "rollback_plan": "git revert ce6de196915f5ace8d9f58f1576703b31b2212f4",
-  "auto_continue_allowed": false,
+  "rollback_plan": "git revert HEAD",
+  "auto_continue_allowed": true,
   "stop_conditions": [
-    "no sys.path hacks nuevos",
-    "no bypass inseguro sin flag explícito",
-    "no current_truth stale",
-    "no evidence stale",
-    "no degradar TEXT_FAST",
-    "no mezclar CODE vector space con TEXT_FAST"
+    "si el hit rate no aumenta",
+    "si preflight falla"
   ]
 }

@@ -1,3 +1,5 @@
+# Spec: 162_evolution_delta_applier
+# Spec: DE-V2-L2-162
 """Evolution Delta Applier — Pack 5.2.2
 
 Transforms philosophical evolution deltas into prioritised, actionable

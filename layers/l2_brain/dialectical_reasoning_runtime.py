@@ -1,3 +1,5 @@
+# Spec: 157_dialectical_reasoning_runtime
+# Spec: DE-V2-L2-157
 from dataclasses import dataclass, field, asdict
 from typing import List
 

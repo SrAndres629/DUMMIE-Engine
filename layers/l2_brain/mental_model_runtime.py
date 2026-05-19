@@ -1,3 +1,5 @@
+# Spec: 150_mental_model_runtime
+# Spec: DE-V2-L2-150
 import uuid
 import json
 from dataclasses import dataclass, field, asdict

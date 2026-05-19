@@ -1,3 +1,5 @@
+# Spec: 177_polyglot_probe_orchestrator
+# Spec: DE-V2-L2-177
 """Polyglot Probe Orchestrator Module for safe, multi-language asset auditing and directory exclusions."""
 
 import json

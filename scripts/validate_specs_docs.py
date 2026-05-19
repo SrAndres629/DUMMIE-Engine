@@ -111,10 +111,9 @@ def validate_spec_file(path: Path) -> list[str]:
             try:
                 content = target.read_text(encoding="utf-8")
                 has_spec_ref = spec_id in content if spec_id else False
-                has_test_file = any(target.parent.rglob("test_*.py")) or any(target.parent.rglob("*_test.go"))
                 
-                if not has_spec_ref and not has_test_file:
-                    errors.append(f"{path}: Physical Evidence `{rel}` lacks behavioral linkage (no `{spec_id}` reference and no local tests found).")
+                if not has_spec_ref:
+                    errors.append(f"{path}: Physical Evidence `{rel}` lacks direct behavioral linkage. Reference to `{spec_id}` must be present in the source file.")
             except Exception:
                 pass
 

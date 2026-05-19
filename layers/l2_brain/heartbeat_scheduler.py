@@ -1,3 +1,5 @@
+# Spec: 167_heartbeat_scheduler
+# Spec: DE-V2-L2-167
 """Heartbeat Scheduler — HEARTBEAT-0
 
 Manual scheduler for heartbeat execution.  No background daemon.

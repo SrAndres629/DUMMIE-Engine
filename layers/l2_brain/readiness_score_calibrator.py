@@ -1,3 +1,5 @@
+# Spec: 146_readiness_score_calibrator
+# Spec: DE-V2-L2-146
 from __future__ import annotations
 
 import json

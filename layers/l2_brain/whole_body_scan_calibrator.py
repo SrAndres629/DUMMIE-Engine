@@ -1,3 +1,5 @@
+# Spec: 169_whole_body_scan_calibrator
+# Spec: DE-V2-L2-169
 """Whole-Body Scan Calibrator — Spec 169
 
 Validates execution timing, schema conformance, metrics consistency, and reconciles test counts.

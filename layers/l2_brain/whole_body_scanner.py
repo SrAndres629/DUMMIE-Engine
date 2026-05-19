@@ -1,3 +1,5 @@
+# Spec: 168_whole_body_scanner
+# Spec: DE-V2-L2-168
 """Whole-Body Scanner, Wiring Matrix, and Shadow Runtime Detector — HEARTBEAT-1
 
 Audits all files in the workspace using local path parsing and import parsing.

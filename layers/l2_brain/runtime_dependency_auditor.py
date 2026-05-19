@@ -1,3 +1,5 @@
+# Spec: 178_runtime_dependency_auditor
+# Spec: DE-V2-L2-178
 import os
 import sys
 import json

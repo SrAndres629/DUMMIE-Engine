@@ -1,3 +1,5 @@
+# Spec: 174_embedding_memory_router
+# Spec: DE-V2-L2-174
 """Embedding Memory Router Module for offline indexing and routing context items."""
 
 # Spec Reference: 188_embedding_activation_verifier

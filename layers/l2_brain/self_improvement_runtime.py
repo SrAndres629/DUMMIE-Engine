@@ -1,3 +1,5 @@
+# Spec: 163_self_improvement_runtime
+# Spec: DE-V2-L2-163
 """Self-Improvement Runtime — Pack 5.2.2
 
 Orchestrates the full self-observation → hygiene → evolution → action queue

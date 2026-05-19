@@ -1,3 +1,5 @@
+# Spec: 154_mental_model_store
+# Spec: DE-V2-L2-154
 
 import json
 from pathlib import Path

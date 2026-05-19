@@ -1,3 +1,5 @@
+# Spec: 164_heartbeat_lifecycle_runtime
+# Spec: DE-V2-L2-164
 """Heartbeat Lifecycle Runtime — HEARTBEAT-0
 
 Orchestrates a full observe → reason → queue → learn cycle.

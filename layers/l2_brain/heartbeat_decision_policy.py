@@ -1,3 +1,5 @@
+# Spec: 166_heartbeat_decision_policy
+# Spec: DE-V2-L2-166
 """Heartbeat Decision Policy — HEARTBEAT-2.1
 
 Selects the next action from the self-improvement and whole-body repair queues,

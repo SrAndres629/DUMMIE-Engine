@@ -1,3 +1,5 @@
+# Spec: 165_heartbeat_state_store
+# Spec: DE-V2-L2-165
 """Heartbeat State Store — HEARTBEAT-0
 
 Append-only JSONL ledger for heartbeat history.  Provides idempotent

@@ -1,3 +1,5 @@
+# Spec: 175_4dtes_persistence_preflight
+# Spec: DE-V2-L2-175
 """4D-TES Persistence Preflight Module for non-destructive persistence checks and repair planning."""
 
 # Spec Reference: 187_kuzu_graph_readback_verifier

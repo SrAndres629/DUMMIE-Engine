@@ -1,3 +1,5 @@
+# Spec: 172_six_dimensional_context_runtime
+# Spec: DE-V2-L2-172
 """Six-Dimensional Context Runtime Module for compiling workspace metadata into surgical context packets."""
 
 import json

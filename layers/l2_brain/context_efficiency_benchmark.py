@@ -1,3 +1,5 @@
+# Spec: 115_restart_context_efficiency_gate
+# Spec: DE-V2-L2-115
 from __future__ import annotations
 
 import json

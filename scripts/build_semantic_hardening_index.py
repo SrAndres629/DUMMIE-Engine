@@ -1,3 +1,5 @@
+# Spec: 192_embedding_mesh_foundation
+# Spec: DE-V2-L2-192
 #!/usr/bin/env python3
 """
 Entrypoint wrapper for Semantic Hardening Pack 1.

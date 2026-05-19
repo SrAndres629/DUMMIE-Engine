@@ -1,3 +1,5 @@
+# Spec: 155_metacognitive_quality_gate
+# Spec: DE-V2-L2-155
 from dataclasses import dataclass, field, asdict
 from typing import List, Dict, Any
 

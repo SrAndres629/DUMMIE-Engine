@@ -14,6 +14,11 @@ except ImportError:
     MemoryNode4DTES = None
 
 class NatsController:
+    """
+    Controlador de comunicación vía NATS (Spec 03).
+    Soporta Unix Domain Sockets y sincronía causal.
+    Spec: DE-V2-L2-117
+    """
     def __init__(self, input_port: IBrainOrchestrator):
         self.input_port = input_port
         self.nc = None

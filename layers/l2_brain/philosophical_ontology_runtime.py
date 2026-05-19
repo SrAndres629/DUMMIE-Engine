@@ -1,3 +1,5 @@
+# Spec: 158_philosophical_ontology_runtime
+# Spec: DE-V2-L2-158
 from dataclasses import dataclass, field, asdict
 from typing import List, Dict, Any
 

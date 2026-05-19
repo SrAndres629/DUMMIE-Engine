@@ -1,3 +1,5 @@
+# Spec: 171_shadow_runtime_classifier
+# Spec: DE-V2-L2-171
 """Shadow Runtime Classifier — Spec 171
 
 Classifies all unimported (shadow) python modules into logical operational roles and outputs non-destructive recommended actions.

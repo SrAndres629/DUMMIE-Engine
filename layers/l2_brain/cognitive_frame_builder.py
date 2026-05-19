@@ -1,3 +1,5 @@
+# Spec: 152_cognitive_frame_builder
+# Spec: DE-V2-L2-152
 
 import uuid
 from dataclasses import dataclass, field, asdict

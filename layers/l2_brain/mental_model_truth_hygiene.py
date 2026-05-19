@@ -1,3 +1,5 @@
+# Spec: 161_mental_model_truth_hygiene
+# Spec: DE-V2-L2-161
 """Mental Model Truth Hygiene — Pack 5.2.2
 
 Scans all stored mental models, classifies their health status, and

@@ -1,3 +1,5 @@
+# Spec: 160_metacognitive_evolution_flywheel
+# Spec: DE-V2-L2-160
 """Metacognitive Evolution Flywheel — Hardened for Pack 5.2.2
 
 Now consumes truth hygiene and evolution delta to produce action revisions,

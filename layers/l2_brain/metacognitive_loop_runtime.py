@@ -1,3 +1,5 @@
+# Spec: 153_metacognitive_loop_runtime
+# Spec: DE-V2-L2-153
 """Metacognitive Loop Runtime — Hardened for Pack 5.2.2
 
 Before recommending next action, consults mental model truth hygiene,

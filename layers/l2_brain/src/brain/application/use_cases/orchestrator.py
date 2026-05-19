@@ -15,6 +15,7 @@ class CognitiveOrchestrator(IBrainOrchestrator):
     """
     Orquestador Cognitivo (L2 Brain).
     Implementa el flujo determinista de la Spec 21 y Spec 42.
+    Spec: DE-V2-L2-106
     """
     def __init__(
         self, 

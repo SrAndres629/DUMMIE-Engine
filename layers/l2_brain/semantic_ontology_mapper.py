@@ -1,3 +1,5 @@
+# Spec: 151_semantic_ontology_mapper
+# Spec: DE-V2-L2-151
 from datetime import datetime, timezone
 from typing import Dict, Any, List
 

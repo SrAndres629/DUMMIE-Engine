@@ -1,3 +1,5 @@
+# Spec: 173_context_packet_optimizer
+# Spec: DE-V2-L2-173
 """Context Packet Optimizer Module for compacting and selecting the most efficient context strategies."""
 
 import json
