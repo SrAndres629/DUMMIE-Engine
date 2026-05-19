@@ -1,15 +1,15 @@
 {
-  "pack_id": "AIWG_KERNEL_0.2",
-  "generated_at": "2026-05-19T04:16:55.226344Z",
+  "pack_id": "PACK_3.2",
+  "generated_at": "2026-05-19T04:50:23.328983Z",
   "answers": {
-    "what_implemented": "Implementado Execution Evidence Runner para validación física de packs y protección de python3 directo.",
-    "what_broken": "Ninguna regresión encontrada en las llamadas de pytest ni de especificaciones.",
-    "metrics_changed": "Sin impacto directo en métricas de embeddings degradados, manteniéndose en 717.",
-    "tests_shallow": "Se cubren la mayoría de ramificaciones del runner y closeout, aunque faltarían más tests de concurrencia.",
-    "reports_stale": "Los reportes del índice semántico están estables.",
-    "assumptions": "Asumiendo que el comando subprocess.run funciona correctamente en plataformas compatibles con bash.",
-    "repairs_needed": "Ninguna pendiente tras pasar la suite completa de 16 tests unitarios.",
-    "advances_degraded": "Avances de Pack 3.1 como HybridReranker se mantienen estables.",
-    "advances_goal_6_1": "Facilita la transición rigurosa hacia Pack 3.2 (CODE embedding provider) asegurando que no haya skips ni claims falsos."
+    "what_implemented": "Se detectó que el commit 7b58670 inició infraestructura de Pack 3.2 antes de alinear current_truth y active_pack. Se corrigió la metadata de gobierno para que HEAD, active_pack y evidence reflejen el estado real.",
+    "what_broken": "El CI falló correctamente porque current_truth.head_commit apuntaba a un commit antiguo. También se detecta riesgo de sys.path hacks, bypass shield y telemetría hardcodeada en la nueva infraestructura.",
+    "metrics_changed": "No se deben cambiar métricas semánticas de Pack 3.1; degraded_embeddings debe permanecer alrededor de 717 y TEXT_FAST debe seguir activo.",
+    "tests_shallow": "Los tests nuevos de capsule/kernel deben revisarse porque podrían validar solo importabilidad o mocks, no comportamiento productivo.",
+    "reports_stale": "current_truth, active_pack y evidence estaban stale antes de esta reparación.",
+    "assumptions": "Se asume que 7b58670 pertenece a PACK_3.2 y no a un roadmap paralelo HEARTBEAT sin registrar.",
+    "repairs_needed": "Alinear .aiwg a HEAD real, registrar PACK_3.2 como active, regenerar evidence y ejecutar preflight/closeout.",
+    "advances_degraded": "No se acepta degradación de TEXT_FAST ni retorno a fallback-only.",
+    "advances_goal_6_1": "Este ajuste acerca el sistema a Pack 6.1 solo si Pack 3.2 queda gobernado por AIWG y no como commit funcional aislado."
   }
 }

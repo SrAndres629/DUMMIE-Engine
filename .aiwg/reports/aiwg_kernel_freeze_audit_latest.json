@@ -1,7 +1,7 @@
 {
   "audit_name": "AIWG Governance Kernel Freeze Audit",
   "generated_at": "2026-05-19T04:30:00Z",
-  "head_commit": "bdb76320818c9fbd9f13f47ab5e18668aa08aff9",
+  "head_commit": "7b5867026bc48cdf37bce675d08fc8966bca3056",
   "decision": "KERNEL_FROZEN",
   "version": "0.4.0",
   "next_permitted_pack": "PACK_3.2",

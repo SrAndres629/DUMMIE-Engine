@@ -1,15 +1,26 @@
 {
   "pack_id": "PACK_3.2",
-  "pack_title": "CODE Embedding Provider",
-  "objective": "Separar el espacio vectorial de texto del espacio de código y sintaxis abstracta.",
+  "pack_title": "CODE Embedding Provider / Context Capsule AST Foundation",
+  "status": "ACTIVE",
+  "execute_now": true,
+  "objective": "separar espacio semántico textual de señales sintácticas de código mediante AST/capsule indexing sin mezclar vector spaces.",
   "long_term_objective_link": "long_term_objectives.json",
-  "short_term_goal": "Implementar el proveedor de embeddings de CODE para separar el espacio vectorial de texto.",
-  "why_now": "Para evitar la colisión semántica entre lenguaje natural y sintaxis de código.",
+  "short_term_goal": "Implementar infraestructura base para cápsulas de contexto y puertos de frontera de kernel para indexación AST.",
+  "why_now": "Para evitar la colisión semántica entre lenguaje natural y sintaxis de código mediante una frontera de ejecución guardada.",
   "not_in_scope": [
     "Iniciar Pack 3.3"
   ],
   "files_expected_to_change": [
-    "layers/l2_brain/ast_indexer.py"
+    "layers/l2_brain/src/brain/application/ports/capsule_ports.py",
+    "layers/l2_brain/src/brain/application/ports/kernel_ports.py",
+    "layers/l2_brain/src/brain/application/use_cases/capsule_orchestration.py",
+    "layers/l2_brain/src/brain/application/use_cases/guarded_execution.py",
+    "layers/l2_brain/src/brain/domain/context/capsule_models.py",
+    "layers/l2_brain/src/brain/domain/governance/kernel_contracts.py",
+    "layers/l2_brain/src/brain/infrastructure/adapters/capsule_adapters.py",
+    "layers/l2_brain/src/brain/infrastructure/adapters/kernel_adapters.py",
+    "layers/l2_brain/src/brain/infrastructure/adapters/ontological_adapter.py",
+    "layers/l2_brain/src/brain/infrastructure/adapters/shield_adapter.py"
   ],
   "files_forbidden_to_change": [
     "layers/l2_brain/embedding_mesh/reranker.py",
@@ -17,29 +28,42 @@
   ],
   "commands_required": [
     "PYTHONPATH=. layers/l2_brain/.venv/bin/pytest -v layers/l2_brain/tests/test_aiwg_pack_guard.py",
-    "python3 scripts/validate_specs_docs.py"
+    "python3 scripts/validate_specs_docs.py",
+    "PYTHONPATH=. layers/l2_brain/.venv/bin/pytest -v layers/l2_brain/tests/test_pack3_1_hybrid_reranker.py",
+    "PYTHONPATH=. layers/l2_brain/.venv/bin/pytest -v layers/l2_brain/tests/test_embedding_mesh_contracts.py",
+    "PYTHONPATH=. layers/l2_brain/.venv/bin/pytest -v layers/l2_brain/tests/test_embedding_mesh_router.py",
+    "PYTHONPATH=. layers/l2_brain/.venv/bin/pytest -v layers/l2_brain/tests/test_semantic_hardening_index.py"
   ],
   "tests_required": [
-    "layers/l2_brain/tests/test_structural_hardening_contracts.py"
+    "layers/l2_brain/tests/test_pack3_1_hybrid_reranker.py",
+    "layers/l2_brain/tests/test_embedding_mesh_contracts.py",
+    "layers/l2_brain/tests/test_embedding_mesh_router.py",
+    "layers/l2_brain/tests/test_semantic_hardening_index.py",
+    "layers/l2_brain/tests/test_aiwg_native_reflexes.py"
   ],
   "metrics_before": {
-    "degraded_embeddings": 717
+    "degraded_embeddings": 717,
+    "real_text_fast_embeddings": 645
   },
   "expected_metrics_after": {
-    "degraded_embeddings": 717
+    "degraded_embeddings": 717,
+    "real_text_fast_embeddings": 645
   },
-  "regression_risks": "Duplicación de caché vectorial en memoria.",
-  "known_blindspots": "Carga de memoria de múltiples modelos.",
+  "regression_risks": "Mezcla de espacios vectoriales CODE y TEXT_FAST; sys.path hacks en infraestructura nueva.",
+  "known_blindspots": "Bypass inseguro en ShieldAdapter sin flag explícito.",
   "acceptance_criteria": [
-    "Consultas sintácticas devuelven resultados del parser sintáctico AST y no del corpus textual genérico."
+    "Preflight exitoso con HEAD real.",
+    "No degradación de TEXT_FAST.",
+    "Infraestructura de cápsulas sigue arquitectura hexagonal estricta."
   ],
-  "rollback_plan": "revertir cambios de Pack 3.2",
-  "auto_continue_allowed": true,
-  "status": "NEXT_READY",
-  "execute_now": true,
+  "rollback_plan": "git revert 7b5867026bc48cdf37bce675d08fc8966bca3056",
+  "auto_continue_allowed": false,
   "stop_conditions": [
-    "no iniciar si preflight falla",
-    "si TEXT_FAST se degrada",
-    "si CODE vector space mezcla con TEXT_FAST"
+    "no sys.path hacks nuevos",
+    "no bypass inseguro sin flag explícito",
+    "no current_truth stale",
+    "no evidence stale",
+    "no degradar TEXT_FAST",
+    "no mezclar CODE vector space con TEXT_FAST"
   ]
 }

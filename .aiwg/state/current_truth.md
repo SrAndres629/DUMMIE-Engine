@@ -1,7 +1,7 @@
 # Current Truth — DUMMIE Engine State
 
 * **Generated At**: `2026-05-19T04:30:00Z`
-* **Head Commit**: `bdb76320818c9fbd9f13f47ab5e18668aa08aff9`
+* **Head Commit**: `7b5867026bc48cdf37bce675d08fc8966bca3056`
 * **Branch**: `main`
 * **Repo Health Status**: `FAIL`
 * **Semantic Mode**: `text_fast_bge_small_384`
