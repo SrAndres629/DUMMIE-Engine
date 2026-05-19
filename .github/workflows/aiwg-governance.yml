@@ -1,0 +1,46 @@
+name: AIWG Governance Check
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  governance-validation:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pytest pytest-mock kuzu pyarrow
+        # If there are local setup needs or requirements, run them here
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+    - name: Run AIWG Guard Unit Tests
+      run: |
+        PYTHONPATH=. pytest layers/l2_brain/tests/test_aiwg_pack_guard.py
+
+    - name: Run Pack 3.1 Hybrid Reranker Tests
+      run: |
+        PYTHONPATH=. pytest layers/l2_brain/tests/test_pack3_1_hybrid_reranker.py
+
+    - name: Run Embedding Mesh Regression Suite
+      run: |
+        PYTHONPATH=. pytest layers/l2_brain/tests/test_embedding_mesh_contracts.py
+
+    - name: Run Specs and Docs Validation
+      run: |
+        python3 scripts/validate_specs_docs.py
+
+    - name: Run Pre-Pack Governance Check
+      run: |
+        python3 scripts/aiwg_pre_pack_check.py

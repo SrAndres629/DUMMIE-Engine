@@ -2,7 +2,7 @@
   "generated_at": "2026-05-19T03:45:37.664233Z",
   "base_commit": "f5029ba306f5e89ffc1ce64819effeffa254d7ae",
   "analysis_base_commit": "f5029ba306f5e89ffc1ce64819effeffa254d7ae",
-  "report_generated_at_commit": "f5029ba306f5e89ffc1ce64819effeffa254d7ae",
+  "report_generated_at_commit": "UNVERIFIED",
   "head_commit": "f5029ba306f5e89ffc1ce64819effeffa254d7ae",
   "pack_name": "Structural Hardening Pack 2 - Contract-First Triage",
   "pack_status": "PASS_WITH_WARNINGS",

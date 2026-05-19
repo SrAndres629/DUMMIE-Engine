@@ -1,0 +1,30 @@
+{
+  "audit_name": "AIWG Governance Kernel Freeze Audit",
+  "generated_at": "2026-05-19T04:25:00Z",
+  "head_commit": "679d57d10702714019745f2775152cba70f142f8",
+  "decision": "KERNEL_FROZEN",
+  "version": "0.4.0",
+  "next_permitted_pack": "PACK_3.2",
+  "commands_available": [
+    "preflight",
+    "self-critique",
+    "run-required",
+    "closeout",
+    "distance",
+    "next-pack"
+  ],
+  "schema_stable": {
+    "current_truth": "Mandatory 23 fields for state tracking, including head_commit, branch, capabilities and latest_reports.",
+    "active_pack": "pack_id, rollback_plan, stop_conditions, tests_required and optionally commands_required.",
+    "roadmap": "roadmap_name, version, head_commit, last_updated, metrics_baseline, and packs array with status, preconditions, objective.",
+    "evidence": "command, exit_code, stdout_log_path, stderr_log_path, started_at, finished_at, duration_seconds, cwd, python_executable, git_head, result, and run_by_runner."
+  },
+  "scope_exclusion": [
+    "Automatic git tagging on closeout (deferred to avoid credential/environment desyncs)",
+    "Real-time token cost enforcement during guard commands (relies on L2 ContextBudgetManager)"
+  ],
+  "version_0_5_triggers": [
+    "Adding support for multi-branch concurrent pack developments",
+    "Integration with external centralized dashboard APIs"
+  ]
+}

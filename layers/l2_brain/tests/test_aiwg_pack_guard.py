@@ -263,6 +263,7 @@ def test_next_pack_skip_prevention(tmp_path, monkeypatch):
         }, f)
         
     monkeypatch.setattr(guard, "STATE_TRUTH", temp_truth)
+    monkeypatch.setattr(guard, "ROADMAP_JSON", os.path.join(tmp_path, "missing_roadmap.json"))
     
     with pytest.raises(SystemExit) as excinfo:
         guard.run_next_pack(None)
@@ -451,4 +452,121 @@ def test_closeout_fails_if_missing_pytest_or_validate_specs_docs(tmp_path, monke
     
     with pytest.raises(SystemExit) as excinfo:
         guard.run_closeout(None)
+    assert excinfo.value.code != 0
+
+def test_freshness_gate_stale_truth(tmp_path, monkeypatch):
+    """Assert that preflight fails if current_truth.json's head_commit does not match actual Git HEAD."""
+    import scripts.aiwg_pack_guard as guard
+    
+    temp_active = os.path.join(tmp_path, "active_pack.json")
+    with open(temp_active, "w", encoding="utf-8") as f:
+        json.dump({
+            "pack_id": "PACK_3.1",
+            "rollback_plan": "revert change",
+            "tests_required": ["test_aiwg_pack_guard.py"],
+            "stop_conditions": ["error"]
+        }, f)
+        
+    temp_truth = os.path.join(tmp_path, "truth.json")
+    with open(temp_truth, "w", encoding="utf-8") as f:
+        json.dump({
+            "head_commit": "stale_hash",
+            "current_pack": "PACK_3.1",
+            "last_completed_pack": "PACK_3.0"
+        }, f)
+        
+    monkeypatch.setattr(guard, "ACTIVE_PACK", temp_active)
+    monkeypatch.setattr(guard, "STATE_TRUTH", temp_truth)
+    monkeypatch.setattr(guard, "get_git_head", lambda: "actual_git_head_hash")
+    monkeypatch.setattr(guard, "check_anti_overclaim_lint", lambda: True)
+    
+    with pytest.raises(SystemExit) as excinfo:
+        guard.run_preflight(None)
+    assert excinfo.value.code != 0
+
+def test_freshness_gate_stale_roadmap(tmp_path, monkeypatch):
+    """Assert that preflight fails if pack_roadmap_to_6_1.json head_commit is stale."""
+    import scripts.aiwg_pack_guard as guard
+    
+    temp_active = os.path.join(tmp_path, "active_pack.json")
+    with open(temp_active, "w", encoding="utf-8") as f:
+        json.dump({
+            "pack_id": "PACK_3.1",
+            "rollback_plan": "revert change",
+            "tests_required": ["test_aiwg_pack_guard.py"],
+            "stop_conditions": ["error"]
+        }, f)
+        
+    temp_truth = os.path.join(tmp_path, "truth.json")
+    with open(temp_truth, "w", encoding="utf-8") as f:
+        json.dump({
+            "head_commit": "actual_hash",
+            "current_pack": "PACK_3.1",
+            "last_completed_pack": "PACK_3.0"
+        }, f)
+        
+    temp_roadmap = os.path.join(tmp_path, "roadmap.json")
+    with open(temp_roadmap, "w", encoding="utf-8") as f:
+        json.dump({
+            "head_commit": "stale_roadmap_hash",
+            "packs": []
+        }, f)
+        
+    monkeypatch.setattr(guard, "ACTIVE_PACK", temp_active)
+    monkeypatch.setattr(guard, "STATE_TRUTH", temp_truth)
+    monkeypatch.setattr(guard, "ROADMAP_JSON", temp_roadmap)
+    monkeypatch.setattr(guard, "get_git_head", lambda: "actual_hash")
+    monkeypatch.setattr(guard, "check_anti_overclaim_lint", lambda: True)
+    
+    with pytest.raises(SystemExit) as excinfo:
+        guard.run_preflight(None)
+    assert excinfo.value.code != 0
+
+def test_anti_overclaim_lint_rejection(tmp_path, monkeypatch):
+    """Assert that anti-overclaim lint fails if any unallowlisted forbidden term is present."""
+    import scripts.aiwg_pack_guard as guard
+    
+    # Create target subdir structure in temporary path
+    packs_dir = os.path.join(tmp_path, "packs")
+    os.makedirs(packs_dir, exist_ok=True)
+    
+    # Write a file with unallowlisted overclaim
+    bad_pack = os.path.join(packs_dir, "bad_pack.json")
+    with open(bad_pack, "w", encoding="utf-8") as f:
+        f.write('{"claim": "This engine has 100% coverage and is perfecto with sin deuda"}')
+        
+    monkeypatch.setattr(guard, "AIWG_DIR", str(tmp_path))
+    
+    result = guard.check_anti_overclaim_lint()
+    assert result is False
+
+def test_pre_pack_check_skip_prevention(tmp_path, monkeypatch):
+    """Assert that starting Pack 3.2 is blocked if Pack 3.1 is not the last completed pack."""
+    import scripts.aiwg_pack_guard as guard
+    
+    temp_active = os.path.join(tmp_path, "active_pack.json")
+    with open(temp_active, "w", encoding="utf-8") as f:
+        json.dump({
+            "pack_id": "PACK_3.2",
+            "rollback_plan": "revert change",
+            "tests_required": ["test_aiwg_pack_guard.py"],
+            "stop_conditions": ["error"]
+        }, f)
+        
+    temp_truth = os.path.join(tmp_path, "truth.json")
+    with open(temp_truth, "w", encoding="utf-8") as f:
+        json.dump({
+            "head_commit": "actual_hash",
+            "current_pack": "PACK_3.2",
+            "last_completed_pack": "PACK_3.0" # Skip PACK_3.1!
+        }, f)
+        
+    monkeypatch.setattr(guard, "ACTIVE_PACK", temp_active)
+    monkeypatch.setattr(guard, "STATE_TRUTH", temp_truth)
+    monkeypatch.setattr(guard, "ROADMAP_JSON", os.path.join(tmp_path, "missing_roadmap.json"))
+    monkeypatch.setattr(guard, "get_git_head", lambda: "actual_hash")
+    monkeypatch.setattr(guard, "check_anti_overclaim_lint", lambda: True)
+    
+    with pytest.raises(SystemExit) as excinfo:
+        guard.run_preflight(None)
     assert excinfo.value.code != 0

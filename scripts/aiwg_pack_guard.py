@@ -41,10 +41,74 @@ def get_git_head():
     except Exception:
         return "UNKNOWN_COMMIT"
 
+def check_anti_overclaim_lint():
+    print("=== [AIWG PACK GUARD] ANTI-OVERCLAIM LINT ===")
+    forbidden_terms = ["100%", "impecable", "perfecto", "garantizado", "sin deuda"]
+    allowlist = [
+        "aislamiento de llamadas a herramientas garantizado",
+        "pipeline de ci e2e 100% exitoso",
+        "100% success rate",
+        "100% test pass rate",
+        "100% sincronizados",
+        "100% branch coverage",
+        "verify 100% test coverage",
+        "confianza de 100",
+        "readiness score claim of 100"
+    ]
+    
+    # Structured directories inside .aiwg/ to scan
+    target_subdirs = ["packs", "state", "reports", "roadmap", "decisions", "metrics", "history", "mental_models"]
+    
+    found_violations = []
+    
+    for subdir in target_subdirs:
+        dir_path = os.path.join(AIWG_DIR, subdir)
+        if not os.path.exists(dir_path):
+            continue
+        for root, _, files in os.walk(dir_path):
+            for file in files:
+                if not file.endswith((".json", ".md", ".jsonl", ".txt")):
+                    continue
+                file_path = os.path.join(root, file)
+                try:
+                    with open(file_path, "r", encoding="utf-8", errors="ignore") as f:
+                        for line_num, line in enumerate(f, 1):
+                            line_lower = line.lower()
+                            for term in forbidden_terms:
+                                if term in line_lower:
+                                    # Check if this match is allowed by allowlist
+                                    allowed = False
+                                    for allowed_phrase in allowlist:
+                                        if allowed_phrase in line_lower:
+                                            allowed = True
+                                            break
+                                    if not allowed:
+                                        found_violations.append({
+                                            "file": file_path,
+                                            "line": line_num,
+                                            "term": term,
+                                            "content": line.strip()
+                                        })
+                except Exception:
+                    pass
+                    
+    if found_violations:
+        print("ERROR: Anti-overclaim lint failed. The following unallowlisted overclaims were detected in .aiwg/:")
+        for v in found_violations:
+            print(f"  - File: {v['file']}:{v['line']} (found term '{v['term']}'): '{v['content']}'")
+        return False
+        
+    print("SUCCESS: Anti-overclaim lint passed.")
+    return True
+
 def run_preflight(args):
     print("=== [AIWG PACK GUARD] PREFLIGHT CHECK ===")
     
-    # 1. Verify files exist
+    # 1. Run Anti-Overclaim Lint
+    if not check_anti_overclaim_lint():
+        sys.exit(1)
+        
+    # 2. Verify files exist
     if not os.path.exists(ACTIVE_PACK):
         print("ERROR: active_pack.json does not exist under .aiwg/packs/")
         sys.exit(1)
@@ -62,41 +126,68 @@ def run_preflight(args):
         print("ERROR: Failed to parse current_truth.json")
         sys.exit(1)
         
-    # 2. Check head_commit stale
+    # 3. Check head_commit stale
     git_head = get_git_head()
     truth_head = truth.get("head_commit")
     if truth_head != git_head:
         print(f"ERROR: current_truth.json head_commit ({truth_head}) is stale. Current actual HEAD: {git_head}")
         sys.exit(1)
         
-    # 3. Check rollback
+    # 4. Roadmap Head Commit freshness gate
+    if os.path.exists(ROADMAP_JSON):
+        roadmap = load_json(ROADMAP_JSON)
+        if roadmap:
+            roadmap_head = roadmap.get("head_commit")
+            if roadmap_head != git_head and roadmap_head != "UNVERIFIED":
+                print(f"ERROR: pack_roadmap_to_6_1.json head_commit ({roadmap_head}) is stale. Current actual HEAD: {git_head}")
+                sys.exit(1)
+                
+    # 5. Check report_generated_at_commit freshness gate
+    reports = truth.get("latest_reports", {})
+    for name, path in reports.items():
+        if os.path.exists(path) and path.endswith(".json"):
+            rep_data = load_json(path)
+            if rep_data and isinstance(rep_data, dict):
+                rgc = rep_data.get("report_generated_at_commit")
+                if rgc and rgc != git_head and rgc != "UNVERIFIED":
+                    print(f"ERROR: Report '{name}' generated commit ({rgc}) is stale. Current actual HEAD: {git_head}")
+                    sys.exit(1)
+                    
+    # 6. Check rollback
     rollback = active.get("rollback_plan") or active.get("rollback")
     if not rollback or not isinstance(rollback, str) or len(rollback.strip()) == 0 or rollback.strip() == "UNVERIFIED":
         print("ERROR: Active pack contract is missing a rollback_plan.")
         sys.exit(1)
         
-    # 4. Check tests_required
+    # 7. Check tests_required
     tests = active.get("tests_required") or active.get("tests")
     if not tests or not isinstance(tests, list) or len(tests) == 0:
         print("ERROR: Active pack contract is missing tests_required.")
         sys.exit(1)
         
-    # 5. Check stop_conditions
+    # 8. Check stop_conditions
     stops = active.get("stop_conditions")
     if not stops or not isinstance(stops, list) or len(stops) == 0:
         print("ERROR: Active pack contract is missing stop_conditions.")
         sys.exit(1)
         
-    # 6. Check transition skip (e.g. attempting to start PACK_3.2 without completed PACK_3.1)
+    # 9. Check transition skip (e.g. attempting to start PACK_3.2 without completed PACK_3.1)
     pack_id = active.get("pack_id")
     last_completed = truth.get("last_completed_pack")
     
     if pack_id == "PACK_3.2" and last_completed != "PACK_3.1":
-        print(f"ERROR: Cannot start {pack_id} while last_completed_pack is {last_completed} (expected PACK_3.1).")
-        sys.exit(1)
+        roadmap_completed = False
+        if os.path.exists(ROADMAP_JSON):
+            roadmap = load_json(ROADMAP_JSON)
+            for p in roadmap.get("packs", []):
+                if p.get("pack_id") == "PACK_3.1" and p.get("status") == "COMPLETED":
+                    roadmap_completed = True
+                    break
+        if not roadmap_completed:
+            print(f"ERROR: Cannot start {pack_id} while last_completed_pack is {last_completed} (expected PACK_3.1).")
+            sys.exit(1)
         
-    # 7. Check report drift (if files exist on disk)
-    reports = truth.get("latest_reports", {})
+    # 10. Check report drift (if files exist on disk)
     for name, path in reports.items():
         if not os.path.exists(path):
             print(f"ERROR: Report drift detected. Registered report '{name}' is missing at: {path}")
@@ -382,7 +473,13 @@ def run_record_evidence(args):
 def run_closeout(args):
     print("=== [AIWG PACK GUARD] CLOSEOUT AUDIT ===")
     
-    # 1. Check self-critique exists
+    # 1. Run Anti-Overclaim Lint
+    if not check_anti_overclaim_lint():
+        sys.exit(1)
+        
+    git_head = get_git_head()
+    
+    # 2. Check self-critique exists
     if not os.path.exists(CRITIQUE_JSON):
         print("ERROR: Closeout failed. Missing latest self-critique json report.")
         sys.exit(1)
@@ -398,7 +495,7 @@ def run_closeout(args):
             print(f"ERROR: Self-critique answer for '{k}' is UNVERIFIED. Cannot close out.")
             sys.exit(1)
             
-    # 2. Check if validation evidence exists
+    # 3. Check if validation evidence exists
     if not os.path.exists(EVIDENCE_JSON):
         print("ERROR: Closeout failed. Missing pack_validation_evidence_latest.json")
         sys.exit(1)
@@ -419,7 +516,6 @@ def run_closeout(args):
         sys.exit(1)
         
     # Check evidence commit matches actual HEAD
-    git_head = get_git_head()
     if evidence.get("commit") != git_head:
         print(f"ERROR: Validation evidence is stale. Evidence commit: {evidence.get('commit')}, actual HEAD: {git_head}")
         sys.exit(1)
@@ -457,6 +553,23 @@ def run_closeout(args):
         print(f"ERROR: current_truth.json is stale. Current HEAD: {git_head}, current_truth: {truth_head}")
         sys.exit(1)
         
+    # Check roadmap head_commit and pack source_of_truth_commit
+    roadmap_head = roadmap.get("head_commit")
+    if roadmap_head != git_head and roadmap_head != "UNVERIFIED":
+        print(f"ERROR: pack_roadmap_to_6_1.json head_commit ({roadmap_head}) is stale. Current actual HEAD: {git_head}")
+        sys.exit(1)
+        
+    # Check report_generated_at_commit freshness gate
+    reports = truth.get("latest_reports", {})
+    for name, path in reports.items():
+        if os.path.exists(path) and path.endswith(".json"):
+            rep_data = load_json(path)
+            if rep_data and isinstance(rep_data, dict):
+                rgc = rep_data.get("report_generated_at_commit")
+                if rgc and rgc != git_head and rgc != "UNVERIFIED":
+                    print(f"ERROR: Report '{name}' generated commit ({rgc}) is stale. Current actual HEAD: {git_head}")
+                    sys.exit(1)
+                    
     # Check if current_truth last completed matches or if current_pack matches
     pack_id = active.get("pack_id")
     if truth.get("current_pack") != pack_id:
@@ -549,8 +662,16 @@ def run_next_pack(args):
     
     # Enforce anti-skip rule
     if next_pack == "PACK_3.2" and last_completed != "PACK_3.1":
-        print("ERROR: Anti-skip gate active. PACK_3.1 must be closed in main first.")
-        sys.exit(1)
+        roadmap_completed = False
+        if os.path.exists(ROADMAP_JSON):
+            roadmap = load_json(ROADMAP_JSON)
+            for p in roadmap.get("packs", []):
+                if p.get("pack_id") == "PACK_3.1" and p.get("status") == "COMPLETED":
+                    roadmap_completed = True
+                    break
+        if not roadmap_completed:
+            print("ERROR: Anti-skip gate active. PACK_3.1 must be closed in main first.")
+            sys.exit(1)
         
     sys.exit(0)
 
