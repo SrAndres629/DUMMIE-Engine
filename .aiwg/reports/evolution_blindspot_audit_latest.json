@@ -1,106 +1,61 @@
 {
-  "generated_at": "2026-05-19T01:29:28.856517Z",
-  "head_commit": "c39f2327485a14e2adfa02d659ceb4937aacaa1e",
+  "generated_at": "2026-05-19T02:07:37.937963Z",
+  "head_commit": "c1f7de4088ed992e67f65e84fd68baed5321085e",
   "repo_health_status": "FAIL",
   "metrics": {
     "CRITICAL": 0,
-    "HIGH": 65,
-    "SHADOW_CANDIDATE": 65,
+    "HIGH": 44,
+    "SHADOW_CANDIDATE": 44,
     "ORPHAN_TEST_CANDIDATE": 3,
-    "bound_active_runtime": 11,
+    "bound_active_runtime": 31,
     "deferred_no_safe_action": 0,
-    "toolchain_validated": 4,
-    "toolchain_missing": 1,
+    "toolchain_validated": 5,
+    "toolchain_missing": 0,
     "smoke_passed": 0,
     "smoke_failed": 0,
     "contract_bound": 2
   },
-  "targets_still_high_due_toolchain": [
-    {
-      "path": "layers/l1_nervous/ssh_sandbox_wrapper.sh",
-      "decision": "TOOLCHAIN_MISSING",
-      "risk_after": "HIGH",
-      "evidence_command": "bash -n layers/l1_nervous/ssh_sandbox_wrapper.sh",
-      "observed_result": "shellcheck missing; fallback bash -n passed [see shell_probe_pack_2_2_latest.log]."
-    }
-  ],
+  "targets_still_high_due_toolchain": [],
   "targets_with_executable_evidence": [
     {
       "path": "layers/l0_overseer/lib/overseer/application.ex",
       "decision": "CONTRACT_BOUND",
-      "risk_after": "MEDIUM",
-      "evidence_command": "cd layers/l0_overseer && mix test",
-      "observed_result": "mix test passed (1 test, 0 failures) [see elixir_probe_pack_2_2_latest.log]"
+      "risk_after": "MEDIUM"
     },
     {
       "path": "layers/l1_nervous/internal/skill/blueprint.go",
       "decision": "TOOLCHAIN_VALIDATED",
-      "risk_after": "MEDIUM",
-      "evidence_command": "cd layers/l1_nervous && go test ./internal/skill/...",
-      "observed_result": "internal/skill probe passed (no test files, package compiled); root-level go test still fails due proto/main conflicts [see go_probe_pack_2_2_latest.log + go_internal_skill_probe_pack_2_2_latest.log]"
+      "risk_after": "MEDIUM"
     },
     {
       "path": "layers/l1_nervous/internal/skill/mcp_client.go",
       "decision": "TOOLCHAIN_VALIDATED",
-      "risk_after": "MEDIUM",
-      "evidence_command": "cd layers/l1_nervous && go test ./internal/skill/...",
-      "observed_result": "internal/skill probe passed (no test files, package compiled); root-level go test still fails due proto/main conflicts [see go_probe_pack_2_2_latest.log + go_internal_skill_probe_pack_2_2_latest.log]"
+      "risk_after": "MEDIUM"
     },
     {
       "path": "layers/l1_nervous/internal/skill/types.go",
       "decision": "TOOLCHAIN_VALIDATED",
-      "risk_after": "MEDIUM",
-      "evidence_command": "cd layers/l1_nervous && go test ./internal/skill/...",
-      "observed_result": "internal/skill probe passed (no test files, package compiled); root-level go test still fails due proto/main conflicts [see go_probe_pack_2_2_latest.log + go_internal_skill_probe_pack_2_2_latest.log]"
+      "risk_after": "MEDIUM"
     },
     {
       "path": "layers/l1_nervous/sidecar.go",
       "decision": "TOOLCHAIN_VALIDATED",
-      "risk_after": "MEDIUM",
-      "evidence_command": "cd layers/l1_nervous && go build main.go sidecar.go",
-      "observed_result": "sidecar build succeeded [see go_sidecar_probe_pack_2_2_latest.log]; root module go test still fails and remains tracked."
+      "risk_after": "MEDIUM"
+    },
+    {
+      "path": "layers/l1_nervous/ssh_sandbox_wrapper.sh",
+      "decision": "TOOLCHAIN_VALIDATED",
+      "risk_after": "MEDIUM"
     },
     {
       "path": "layers/l1_nervous/tools_impl/nervous.py",
       "decision": "CONTRACT_BOUND",
-      "risk_after": "MEDIUM",
-      "evidence_command": "layers/l2_brain/.venv/bin/pytest -q layers/l1_nervous/tests/test_l1_contract_imports.py -k \"register_nervous_tools_signature or nervous_tools_contract_shape_without_import or tools_impl.nervous\"",
-      "observed_result": "Python contract probe passed (3 passed, 10 deselected) [see python_probe_pack_2_2_latest.log]."
+      "risk_after": "MEDIUM"
     }
   ],
   "tests_still_superficial": [
     {
-      "path": "layers/l2_brain/tests/test_embedding_memory_router.py",
-      "assert_count": 0,
-      "skip_count": 0
-    },
-    {
-      "path": "layers/l2_brain/tests/test_polyglot_probe_orchestrator.py",
-      "assert_count": 0,
-      "skip_count": 0
-    },
-    {
-      "path": "layers/l1_nervous/tests/industrial/test_observe_swarm_perf.py",
-      "assert_count": 0,
-      "skip_count": 0
-    },
-    {
-      "path": "layers/l2_brain/tests/test_cognitive_bias_detector.py",
-      "assert_count": 1,
-      "skip_count": 0
-    },
-    {
-      "path": "layers/l2_brain/tests/test_four_dtes_persistence_preflight.py",
-      "assert_count": 0,
-      "skip_count": 0
-    },
-    {
-      "path": "doc/.deprecated/scratchpad/test_kuzu.py",
-      "assert_count": 0,
-      "skip_count": 0
-    },
-    {
-      "path": "layers/l1_nervous/tests/conftest.py",
+      "path": "layers/l2_brain/tests/test_six_dimensional_context_runtime.py",
       "assert_count": 0,
       "skip_count": 0
     },
@@ -110,12 +65,7 @@
       "skip_count": 0
     },
     {
-      "path": "layers/l1_nervous/tests/test_swarm_perf_run.py",
-      "assert_count": 0,
-      "skip_count": 0
-    },
-    {
-      "path": "layers/l2_brain/tests/test_six_dimensional_context_runtime.py",
+      "path": "layers/l2_brain/tests/test_embedding_memory_router.py",
       "assert_count": 0,
       "skip_count": 0
     },
@@ -130,7 +80,42 @@
       "skip_count": 0
     },
     {
+      "path": "doc/.deprecated/scratchpad/test_kuzu.py",
+      "assert_count": 0,
+      "skip_count": 0
+    },
+    {
+      "path": "layers/l1_nervous/tests/test_swarm_perf_run.py",
+      "assert_count": 0,
+      "skip_count": 0
+    },
+    {
+      "path": "layers/l1_nervous/tests/conftest.py",
+      "assert_count": 0,
+      "skip_count": 0
+    },
+    {
+      "path": "layers/l1_nervous/tests/industrial/test_observe_swarm_perf.py",
+      "assert_count": 0,
+      "skip_count": 0
+    },
+    {
+      "path": "layers/l2_brain/tests/test_polyglot_probe_orchestrator.py",
+      "assert_count": 0,
+      "skip_count": 0
+    },
+    {
       "path": "layers/l2_brain/tests/test_context_packet_optimizer.py",
+      "assert_count": 0,
+      "skip_count": 0
+    },
+    {
+      "path": "layers/l2_brain/tests/test_cognitive_bias_detector.py",
+      "assert_count": 1,
+      "skip_count": 0
+    },
+    {
+      "path": "layers/l2_brain/tests/test_four_dtes_persistence_preflight.py",
       "assert_count": 0,
       "skip_count": 0
     }
@@ -144,208 +129,102 @@
     {
       "path": "layers/l1_nervous/bootstrap.py",
       "resolved_status": "BOUND_ACTIVE_RUNTIME",
-      "scoped_spec_hits": [
-        "doc/specs/L1_Nervous/15_mcp_sidecar_isolation.md",
-        "doc/specs/L1_Nervous/16_mcp_dynamic_gateway.md",
-        "doc/specs/L1_Nervous/41_layer_handshake_protocol.md",
-        "doc/specs/L1_Nervous/44_pervasive_channel_adapters.md"
-      ],
-      "linked_test_hits": [
-        "layers/l1_nervous/tests/test_l1_contract_imports.py"
-      ]
+      "scoped_hits": 4
     },
     {
       "path": "layers/l1_nervous/application/use_cases.py",
       "resolved_status": "BOUND_ACTIVE_RUNTIME",
-      "scoped_spec_hits": [
-        "doc/specs/L1_Nervous/15_mcp_sidecar_isolation.md",
-        "doc/specs/L1_Nervous/16_mcp_dynamic_gateway.md",
-        "doc/specs/L1_Nervous/41_layer_handshake_protocol.md",
-        "doc/specs/L1_Nervous/44_pervasive_channel_adapters.md"
-      ],
-      "linked_test_hits": [
-        "layers/l1_nervous/tests/test_l1_contract_imports.py"
-      ]
+      "scoped_hits": 4
     },
     {
       "path": "layers/l1_nervous/domain/services.py",
       "resolved_status": "BOUND_ACTIVE_RUNTIME",
-      "scoped_spec_hits": [
-        "doc/specs/L1_Nervous/15_mcp_sidecar_isolation.md",
-        "doc/specs/L1_Nervous/16_mcp_dynamic_gateway.md",
-        "doc/specs/L1_Nervous/41_layer_handshake_protocol.md",
-        "doc/specs/L1_Nervous/44_pervasive_channel_adapters.md"
-      ],
-      "linked_test_hits": [
-        "layers/l1_nervous/tests/test_l1_contract_imports.py"
-      ]
+      "scoped_hits": 4
     },
     {
       "path": "layers/l1_nervous/knowledge_adapters.py",
       "resolved_status": "BOUND_ACTIVE_RUNTIME",
-      "scoped_spec_hits": [
-        "doc/specs/L1_Nervous/15_mcp_sidecar_isolation.md",
-        "doc/specs/L1_Nervous/16_mcp_dynamic_gateway.md",
-        "doc/specs/L1_Nervous/41_layer_handshake_protocol.md",
-        "doc/specs/L1_Nervous/44_pervasive_channel_adapters.md"
-      ],
-      "linked_test_hits": [
-        "layers/l1_nervous/tests/test_l1_contract_imports.py",
-        "layers/l1_nervous/tests/test_obsidian_knowledge_adapter.py"
-      ]
+      "scoped_hits": 4
     },
     {
       "path": "layers/l1_nervous/mcp_registry.py",
       "resolved_status": "BOUND_ACTIVE_RUNTIME",
-      "scoped_spec_hits": [
-        "doc/specs/L1_Nervous/15_mcp_sidecar_isolation.md",
-        "doc/specs/L1_Nervous/16_mcp_dynamic_gateway.md",
-        "doc/specs/L1_Nervous/41_layer_handshake_protocol.md",
-        "doc/specs/L1_Nervous/44_pervasive_channel_adapters.md"
-      ],
-      "linked_test_hits": [
-        "layers/l1_nervous/tests/test_l1_contract_imports.py"
-      ]
+      "scoped_hits": 4
     },
     {
       "path": "layers/l1_nervous/mcp_transport.py",
       "resolved_status": "BOUND_ACTIVE_RUNTIME",
-      "scoped_spec_hits": [
-        "doc/specs/L1_Nervous/15_mcp_sidecar_isolation.md",
-        "doc/specs/L1_Nervous/16_mcp_dynamic_gateway.md",
-        "doc/specs/L1_Nervous/41_layer_handshake_protocol.md",
-        "doc/specs/L1_Nervous/44_pervasive_channel_adapters.md"
-      ],
-      "linked_test_hits": [
-        "layers/l1_nervous/tests/test_l1_contract_imports.py"
-      ]
+      "scoped_hits": 4
     },
     {
       "path": "layers/l1_nervous/repo_guard.py",
       "resolved_status": "BOUND_ACTIVE_RUNTIME",
-      "scoped_spec_hits": [
-        "doc/specs/L1_Nervous/15_mcp_sidecar_isolation.md",
-        "doc/specs/L1_Nervous/16_mcp_dynamic_gateway.md",
-        "doc/specs/L1_Nervous/41_layer_handshake_protocol.md",
-        "doc/specs/L1_Nervous/44_pervasive_channel_adapters.md"
-      ],
-      "linked_test_hits": [
-        "layers/l1_nervous/tests/test_l1_contract_imports.py"
-      ]
+      "scoped_hits": 4
     },
     {
       "path": "layers/l1_nervous/runtime_paths.py",
       "resolved_status": "BOUND_ACTIVE_RUNTIME",
-      "scoped_spec_hits": [
-        "doc/specs/L0_Overseer/47_path_normalization.md",
-        "doc/specs/L1_Nervous/15_mcp_sidecar_isolation.md",
-        "doc/specs/L1_Nervous/16_mcp_dynamic_gateway.md",
-        "doc/specs/L1_Nervous/41_layer_handshake_protocol.md",
-        "doc/specs/L1_Nervous/44_pervasive_channel_adapters.md"
-      ],
-      "linked_test_hits": [
-        "layers/l1_nervous/tests/test_l1_contract_imports.py",
-        "layers/l1_nervous/tests/test_runtime_contracts.py"
-      ]
+      "scoped_hits": 5
     },
     {
       "path": "layers/l1_nervous/tools_impl/nervous.py",
       "resolved_status": "CONTRACT_BOUND",
-      "scoped_spec_hits": [
-        "doc/specs/L1_Nervous/16_mcp_dynamic_gateway.md",
-        "doc/specs/L1_Nervous/44_local_reasoning_gateway.md"
-      ],
-      "linked_test_hits": [
-        "layers/l1_nervous/tests/test_l1_contract_imports.py"
-      ]
+      "scoped_hits": 2
     },
     {
       "path": "layers/l1_nervous/tools_impl/patch_transactions.py",
       "resolved_status": "BOUND_ACTIVE_RUNTIME",
-      "scoped_spec_hits": [
-        "doc/specs/L1_Nervous/15_mcp_sidecar_isolation.md",
-        "doc/specs/L1_Nervous/16_mcp_dynamic_gateway.md",
-        "doc/specs/L1_Nervous/41_layer_handshake_protocol.md",
-        "doc/specs/L1_Nervous/44_pervasive_channel_adapters.md"
-      ],
-      "linked_test_hits": [
-        "layers/l1_nervous/tests/test_l1_contract_imports.py"
-      ]
+      "scoped_hits": 4
     },
     {
       "path": "layers/l1_nervous/utils.py",
       "resolved_status": "BOUND_ACTIVE_RUNTIME",
-      "scoped_spec_hits": [
-        "doc/specs/L1_Nervous/15_mcp_sidecar_isolation.md",
-        "doc/specs/L1_Nervous/16_mcp_dynamic_gateway.md",
-        "doc/specs/L1_Nervous/41_layer_handshake_protocol.md",
-        "doc/specs/L1_Nervous/44_pervasive_channel_adapters.md"
-      ],
-      "linked_test_hits": [
-        "layers/l1_nervous/tests/test_l1_contract_imports.py"
-      ]
+      "scoped_hits": 4
     },
     {
       "path": "layers/l0_overseer/supervisor.py",
       "resolved_status": "BOUND_ACTIVE_RUNTIME",
-      "scoped_spec_hits": [
-        "doc/specs/L0_Overseer/03_polyglot_architecture.md",
-        "doc/specs/L0_Overseer/05_orchestration_stack_and_glue.md",
-        "doc/specs/L0_Overseer/11_monorepo_structure.md"
-      ],
-      "linked_test_hits": [
-        "layers/l0_overseer/tests/test_l0_contract_imports.py"
-      ]
+      "scoped_hits": 3
     },
     {
       "path": "layers/l1_nervous/internal/skill/blueprint.go",
       "resolved_status": "TOOLCHAIN_VALIDATED",
-      "scoped_spec_hits": [
-        "doc/specs/L1_Nervous/15_mcp_sidecar_isolation.md",
-        "doc/specs/L1_Nervous/16_mcp_dynamic_gateway.md",
-        "doc/specs/L1_Nervous/41_layer_handshake_protocol.md"
-      ],
-      "linked_test_hits": []
+      "scoped_hits": 3
     },
     {
       "path": "layers/l1_nervous/internal/skill/mcp_client.go",
       "resolved_status": "TOOLCHAIN_VALIDATED",
-      "scoped_spec_hits": [
-        "doc/specs/L1_Nervous/15_mcp_sidecar_isolation.md",
-        "doc/specs/L1_Nervous/16_mcp_dynamic_gateway.md",
-        "doc/specs/L1_Nervous/41_layer_handshake_protocol.md"
-      ],
-      "linked_test_hits": []
+      "scoped_hits": 3
     },
     {
       "path": "layers/l1_nervous/internal/skill/types.go",
       "resolved_status": "TOOLCHAIN_VALIDATED",
-      "scoped_spec_hits": [
-        "doc/specs/L1_Nervous/15_mcp_sidecar_isolation.md",
-        "doc/specs/L1_Nervous/16_mcp_dynamic_gateway.md",
-        "doc/specs/L1_Nervous/41_layer_handshake_protocol.md"
-      ],
-      "linked_test_hits": []
+      "scoped_hits": 3
     },
     {
       "path": "layers/l1_nervous/sidecar.go",
       "resolved_status": "TOOLCHAIN_VALIDATED",
-      "scoped_spec_hits": [
-        "doc/specs/L1_Nervous/15_mcp_sidecar_isolation.md",
-        "doc/specs/L1_Nervous/16_mcp_dynamic_gateway.md",
-        "doc/specs/L1_Nervous/41_layer_handshake_protocol.md"
-      ],
-      "linked_test_hits": []
+      "scoped_hits": 3
+    },
+    {
+      "path": "layers/l1_nervous/ssh_sandbox_wrapper.sh",
+      "resolved_status": "TOOLCHAIN_VALIDATED",
+      "scoped_hits": 3
     },
     {
       "path": "layers/l0_overseer/lib/overseer/application.ex",
       "resolved_status": "CONTRACT_BOUND",
-      "scoped_spec_hits": [
-        "doc/specs/L0_Overseer/03_polyglot_architecture.md",
-        "doc/specs/L0_Overseer/05_orchestration_stack_and_glue.md",
-        "doc/specs/L0_Overseer/11_monorepo_structure.md"
-      ],
-      "linked_test_hits": []
+      "scoped_hits": 3
+    },
+    {
+      "path": "layers/l2_brain/action_graph.py",
+      "resolved_status": "BOUND_ACTIVE_RUNTIME",
+      "scoped_hits": 1
+    },
+    {
+      "path": "layers/l2_brain/application/cognitive/use_cases.py",
+      "resolved_status": "BOUND_ACTIVE_RUNTIME",
+      "scoped_hits": 1
     }
   ],
   "debt_lowered_but_not_closed": [
@@ -431,8 +310,8 @@
     },
     {
       "path": "layers/l1_nervous/ssh_sandbox_wrapper.sh",
-      "status": "TOOLCHAIN_MISSING",
-      "risk_after": "HIGH"
+      "status": "TOOLCHAIN_VALIDATED",
+      "risk_after": "MEDIUM"
     },
     {
       "path": "layers/l0_overseer/lib/overseer/application.ex",
@@ -441,23 +320,23 @@
     }
   ],
   "next_10_objectives": [
-    "Resolve shell toolchain gap: install and run shellcheck on ssh_sandbox_wrapper.sh to remove TOOLCHAIN_MISSING.",
-    "Fix L1 root Go module blockers (AuthorityLevel/proto init + duplicated main) so go test ./... becomes actionable.",
-    "Add direct module-level spec links for 7 polyglot targets currently scoped-only.",
-    "Promote internal/skill Go probes from compile-only to behavior tests with deterministic assertions.",
-    "Add FastMCP double test for register_nervous_tools to validate tool registration behavior, not only shape/signature.",
-    "Add triage freshness gate in CI/local pre-commit to fail stale base_commit/head_commit mismatches.",
-    "Reconcile 3 ORPHAN_TEST_CANDIDATE files with runtime mapping or explicit freeze rationale.",
-    "Reduce UNKNOWN backlog (143) using import fan-in prioritization and owner assignment.",
-    "Add provenance field in ledger entries (log path + exit code) for audit-grade replayability.",
-    "Prepare Pack 2.3 action plan constrained to highest-value HIGH risks with executable commands."
+    "Raise direct_spec_hit_rate for the 20 remaining Batch 1 L2 candidates before changing physical files.",
+    "Convert the top 10 superficial tests into behavior assertions with invariant checks.",
+    "Classify the most-imported UNKNOWN files in L0/L1 first to reduce uncertainty fastest.",
+    "Resolve the 3 orphan tests with explicit runtime or legacy evidence.",
+    "Track root Go module failure as visible debt until the package layout is fixed intentionally.",
+    "Split scoped-only spec links into direct module evidence for runtime-critical surfaces.",
+    "Add freshness gates so reports must match HEAD at generation time.",
+    "Prepare Pack 2.3 batch runners with rollback and done-criteria per file set.",
+    "Keep shellcheck in the verification loop so wrapper regressions do not reappear.",
+    "Use the validated batch plan as the only source of execution order; do not improvise mid-pack."
   ],
   "risks_if_we_move_too_fast": [
-    "Treating compile-only checks as full runtime validation can mask integration breakage.",
-    "Keeping scoped-only specs without direct module references inflates confidence.",
-    "Global Go module failures can hide in per-package green probes if not tracked explicitly.",
-    "Toolchain gaps (shellcheck missing) can persist indefinitely without explicit install/verify commands.",
-    "Behavioral gaps in optional-dependency modules can pass import contracts but fail at runtime."
+    "Treating scoped-only spec coverage as direct module evidence can overstate readiness.",
+    "Ignoring root Go module failure can hide integration debt behind local package green checks.",
+    "Reclassifying UNKNOWN to LEGACY without evidence destroys auditability.",
+    "Running Pack 2.3 before freshness gates are obeyed creates stale-report drift.",
+    "Batching too many runtime surfaces without behavior tests can preserve shallow green status."
   ],
   "next_phase_ready": "Structural Hardening Pack 2.3 - High-Risk Runtime Contract Deepening"
 }

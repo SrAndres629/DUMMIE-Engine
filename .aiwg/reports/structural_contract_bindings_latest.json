@@ -988,9 +988,9 @@
       },
       "validation": {
         "path": "layers/l1_nervous/ssh_sandbox_wrapper.sh",
-        "resolved_status": "TOOLCHAIN_MISSING",
-        "effective_risk": "HIGH",
-        "effective_recommendation": "FREEZE_UNTIL_REVIEW",
+        "resolved_status": "TOOLCHAIN_VALIDATED",
+        "effective_risk": "MEDIUM",
+        "effective_recommendation": "KEEP_AND_TEST",
         "confidence": 0.72,
         "valid_spec_refs": [
           "doc/specs/L1_Nervous/15_mcp_sidecar_isolation.md",
@@ -1009,9 +1009,7 @@
           "doc/specs/L1_Nervous/41_layer_handshake_protocol.md"
         ],
         "linked_test_hits": [],
-        "issues": [
-          "toolchain_missing:shellcheck"
-        ]
+        "issues": []
       }
     },
     {

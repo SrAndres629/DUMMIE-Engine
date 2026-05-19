@@ -45,9 +45,9 @@
 42. layers/l4_edge/file_watcher.py | rec=MAP_TO_SPEC | risk=HIGH | current=UNKNOWN | proposed=SHADOW_CANDIDATE
 43. layers/l4_edge/tool_discovery.py | rec=MAP_TO_SPEC | risk=HIGH | current=UNKNOWN | proposed=SHADOW_CANDIDATE
 44. layers/l5_muscle/mcp_driver.py | rec=MAP_TO_SPEC | risk=HIGH | current=UNKNOWN | proposed=SHADOW_CANDIDATE
-45. layers/l1_nervous/ssh_sandbox_wrapper.sh | rec=FREEZE_UNTIL_REVIEW | risk=HIGH | current=UNKNOWN | proposed=SHADOW_CANDIDATE
-46. doc/.deprecated/.gitkeep | rec=MARK_LEGACY | risk=MEDIUM | current=LEGACY | proposed=LEGACY
-47. doc/.deprecated/scratchpad/batch_fix_specs.py | rec=MARK_LEGACY | risk=MEDIUM | current=LEGACY | proposed=LEGACY
-48. doc/.deprecated/scratchpad/check_mcp_dummie.py | rec=MARK_LEGACY | risk=MEDIUM | current=LEGACY | proposed=LEGACY
-49. doc/.deprecated/scratchpad/det_step.py | rec=MARK_LEGACY | risk=MEDIUM | current=LEGACY | proposed=LEGACY
-50. doc/.deprecated/scratchpad/deterministic_audit.py | rec=MARK_LEGACY | risk=MEDIUM | current=LEGACY | proposed=LEGACY
+45. doc/.deprecated/.gitkeep | rec=MARK_LEGACY | risk=MEDIUM | current=LEGACY | proposed=LEGACY
+46. doc/.deprecated/scratchpad/batch_fix_specs.py | rec=MARK_LEGACY | risk=MEDIUM | current=LEGACY | proposed=LEGACY
+47. doc/.deprecated/scratchpad/check_mcp_dummie.py | rec=MARK_LEGACY | risk=MEDIUM | current=LEGACY | proposed=LEGACY
+48. doc/.deprecated/scratchpad/det_step.py | rec=MARK_LEGACY | risk=MEDIUM | current=LEGACY | proposed=LEGACY
+49. doc/.deprecated/scratchpad/deterministic_audit.py | rec=MARK_LEGACY | risk=MEDIUM | current=LEGACY | proposed=LEGACY
+50. doc/.deprecated/scratchpad/final_demo_sovereignty.py | rec=MARK_LEGACY | risk=MEDIUM | current=LEGACY | proposed=LEGACY
