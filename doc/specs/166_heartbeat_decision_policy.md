@@ -22,7 +22,7 @@ Selects next safe actions from the self-improvement queue and classifies dispatc
 - Active. Created by Heartbeat-0.
 
 ## Physical Evidence
-- `layers/l2_brain/heartbeat_decision_policy.py`
+- `layers/l2_brain/flat_brain/heartbeat_decision_policy.py`
 - `.aiwg/reports/heartbeat_decision_policy_latest.json`
 
 ## Contract Invariants

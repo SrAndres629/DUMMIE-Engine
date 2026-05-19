@@ -13,7 +13,7 @@ Audit and verify the physical readback capability of the Kùzu Graph database to
 Under implementation.
 
 ## Physical Evidence
-- Core module: `layers/l2_brain/kuzu_graph_readback_verifier.py`
+- Core module: `layers/l2_brain/flat_brain/kuzu_graph_readback_verifier.py`
 - Test suite: `layers/l2_brain/tests/test_kuzu_graph_readback_verifier.py`
 - JSON Schema: `.aiwg/schemas/kuzu_graph_readback_verification.schema.json`
 - Output reports: `.aiwg/reports/kuzu_graph_readback_verification_latest.json` and `.aiwg/reports/kuzu_graph_readback_verification_latest.md`

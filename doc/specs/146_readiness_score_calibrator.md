@@ -35,7 +35,7 @@ Ensure that system maturity metrics are honest and reflect real physical constra
 - Operational. Detects 6 degradation patterns including advisory/dry-run modes.
 
 ## Physical Evidence
-- `layers/l2_brain/readiness_score_calibrator.py`
+- `layers/l2_brain/flat_brain/readiness_score_calibrator.py`
 - `.aiwg/reports/readiness_score_calibration_latest.json`
 - `.aiwg/schemas/readiness_score_calibration.schema.json`
 
@@ -47,7 +47,7 @@ Ensure that system maturity metrics are honest and reflect real physical constra
 
 ## Verification
 ```bash
-python3 layers/l2_brain/readiness_score_calibrator.py
+python3 layers/l2_brain/flat_brain/readiness_score_calibrator.py
 python3 -m pytest layers/l2_brain/tests/test_readiness_score_calibrator.py -q
 ```
 

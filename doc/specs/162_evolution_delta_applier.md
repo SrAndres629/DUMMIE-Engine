@@ -22,7 +22,7 @@ Transform philosophical evolution deltas into prioritised operational actions.
 - Operational. Created by Pack 5.2.2.
 
 ## Physical Evidence
-- `layers/l2_brain/evolution_delta_applier.py`
+- `layers/l2_brain/flat_brain/evolution_delta_applier.py`
 - `.aiwg/reports/evolution_delta_application_latest.json`
 
 ## Contract Invariants

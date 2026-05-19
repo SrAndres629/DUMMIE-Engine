@@ -1,0 +1,2370 @@
+{
+  "pack": "PACK R2.1",
+  "name": "Flat Brain Migration Manifest (Retroactive)",
+  "migration_commits": [
+    "3539c7e",
+    "b78f3cd"
+  ],
+  "total_files_migrated": 235,
+  "migration_status_summary": {
+    "TEMP_COMPAT": 235,
+    "RESTORED": 0,
+    "REQUIRES_REVIEW": 0,
+    "BROKEN_REFERENCE": 0,
+    "UNKNOWN": 0
+  },
+  "spec_references_updated": true,
+  "imports_updated": false,
+  "files": [
+    {
+      "original_path": "layers/l2_brain/action_graph.py",
+      "current_path": "layers/l2_brain/flat_brain/action_graph.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/adapters.py",
+      "current_path": "layers/l2_brain/flat_brain/adapters.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/aiwg_kernel/__init__.py",
+      "current_path": "layers/l2_brain/flat_brain/aiwg_kernel/__init__.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/aiwg_kernel/context_capsule_engine.py",
+      "current_path": "layers/l2_brain/flat_brain/aiwg_kernel/context_capsule_engine.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/aiwg_kernel/kernel.py",
+      "current_path": "layers/l2_brain/flat_brain/aiwg_kernel/kernel.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/application/cognitive/use_cases.py",
+      "current_path": "layers/l2_brain/flat_brain/application/cognitive/use_cases.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/ast_indexer.py",
+      "current_path": "layers/l2_brain/flat_brain/ast_indexer.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/auditor_port.py",
+      "current_path": "layers/l2_brain/flat_brain/auditor_port.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/auto_evolution.py",
+      "current_path": "layers/l2_brain/flat_brain/auto_evolution.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/autonomous_strategic_partner_runtime.py",
+      "current_path": "layers/l2_brain/flat_brain/autonomous_strategic_partner_runtime.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/branch_memory.py",
+      "current_path": "layers/l2_brain/flat_brain/branch_memory.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/business_advisor_runtime.py",
+      "current_path": "layers/l2_brain/flat_brain/business_advisor_runtime.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/business_goal_model.py",
+      "current_path": "layers/l2_brain/flat_brain/business_goal_model.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/business_orchestrator.py",
+      "current_path": "layers/l2_brain/flat_brain/business_orchestrator.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/capability_promotion_governor.py",
+      "current_path": "layers/l2_brain/flat_brain/capability_promotion_governor.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/causal_replay.py",
+      "current_path": "layers/l2_brain/flat_brain/causal_replay.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/chaos_regression_testing.py",
+      "current_path": "layers/l2_brain/flat_brain/chaos_regression_testing.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/cli_control_plane.py",
+      "current_path": "layers/l2_brain/flat_brain/cli_control_plane.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/cognition/cold_planner.py",
+      "current_path": "layers/l2_brain/flat_brain/cognition/cold_planner.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/cognition/epistemic_judge.py",
+      "current_path": "layers/l2_brain/flat_brain/cognition/epistemic_judge.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/cognition/pattern_miner_v2.py",
+      "current_path": "layers/l2_brain/flat_brain/cognition/pattern_miner_v2.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/cognition/persona_guardian.py",
+      "current_path": "layers/l2_brain/flat_brain/cognition/persona_guardian.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/cognitive_bias_detector.py",
+      "current_path": "layers/l2_brain/flat_brain/cognitive_bias_detector.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/cognitive_frame_builder.py",
+      "current_path": "layers/l2_brain/flat_brain/cognitive_frame_builder.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/cognitive_hooks.py",
+      "current_path": "layers/l2_brain/flat_brain/cognitive_hooks.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/consensus.py",
+      "current_path": "layers/l2_brain/flat_brain/consensus.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/context_bloat_guard.py",
+      "current_path": "layers/l2_brain/flat_brain/context_bloat_guard.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/context_budget_manager.py",
+      "current_path": "layers/l2_brain/flat_brain/context_budget_manager.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/context_circulation_runtime.py",
+      "current_path": "layers/l2_brain/flat_brain/context_circulation_runtime.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/context_coverage_auditor.py",
+      "current_path": "layers/l2_brain/flat_brain/context_coverage_auditor.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/context_efficiency_benchmark.py",
+      "current_path": "layers/l2_brain/flat_brain/context_efficiency_benchmark.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/context_enforcement_gate.py",
+      "current_path": "layers/l2_brain/flat_brain/context_enforcement_gate.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/context_package.py",
+      "current_path": "layers/l2_brain/flat_brain/context_package.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/context_packet_optimizer.py",
+      "current_path": "layers/l2_brain/flat_brain/context_packet_optimizer.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/context_quant_runtime.py",
+      "current_path": "layers/l2_brain/flat_brain/context_quant_runtime.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/context_value_scorer.py",
+      "current_path": "layers/l2_brain/flat_brain/context_value_scorer.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/creator_context_runtime.py",
+      "current_path": "layers/l2_brain/flat_brain/creator_context_runtime.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/cypher_codec.py",
+      "current_path": "layers/l2_brain/flat_brain/cypher_codec.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/daemon.py",
+      "current_path": "layers/l2_brain/flat_brain/daemon.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/daemon_diagnostic.py",
+      "current_path": "layers/l2_brain/flat_brain/daemon_diagnostic.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/daemon_gateway_heartbeat_bridge.py",
+      "current_path": "layers/l2_brain/flat_brain/daemon_gateway_heartbeat_bridge.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/daemon_outcome.py",
+      "current_path": "layers/l2_brain/flat_brain/daemon_outcome.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/debate_review_runtime.py",
+      "current_path": "layers/l2_brain/flat_brain/debate_review_runtime.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/degraded_capability_registry.py",
+      "current_path": "layers/l2_brain/flat_brain/degraded_capability_registry.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/dependency_reproducibility_verifier.py",
+      "current_path": "layers/l2_brain/flat_brain/dependency_reproducibility_verifier.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/dialectical_reasoning_runtime.py",
+      "current_path": "layers/l2_brain/flat_brain/dialectical_reasoning_runtime.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/domain/__init__.py",
+      "current_path": "layers/l2_brain/flat_brain/domain/__init__.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/domain/cognitive/models.py",
+      "current_path": "layers/l2_brain/flat_brain/domain/cognitive/models.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/domain/counterfactual_service.py",
+      "current_path": "layers/l2_brain/flat_brain/domain/counterfactual_service.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/domain/dtos.py",
+      "current_path": "layers/l2_brain/flat_brain/domain/dtos.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/domain/embedding_contract.py",
+      "current_path": "layers/l2_brain/flat_brain/domain/embedding_contract.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/domain/hypothesis_service.py",
+      "current_path": "layers/l2_brain/flat_brain/domain/hypothesis_service.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/domain/reasoning_logic.py",
+      "current_path": "layers/l2_brain/flat_brain/domain/reasoning_logic.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/domain/retrieval_service.py",
+      "current_path": "layers/l2_brain/flat_brain/domain/retrieval_service.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/domain/semantic_ports.py",
+      "current_path": "layers/l2_brain/flat_brain/domain/semantic_ports.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/dummie_chat_cli.py",
+      "current_path": "layers/l2_brain/flat_brain/dummie_chat_cli.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/embedding_activation_verifier.py",
+      "current_path": "layers/l2_brain/flat_brain/embedding_activation_verifier.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/embedding_adapter.py",
+      "current_path": "layers/l2_brain/flat_brain/embedding_adapter.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/embedding_memory_router.py",
+      "current_path": "layers/l2_brain/flat_brain/embedding_memory_router.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/embedding_mesh/__init__.py",
+      "current_path": "layers/l2_brain/flat_brain/embedding_mesh/__init__.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/embedding_mesh/cli.py",
+      "current_path": "layers/l2_brain/flat_brain/embedding_mesh/cli.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/embedding_mesh/contracts.py",
+      "current_path": "layers/l2_brain/flat_brain/embedding_mesh/contracts.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/embedding_mesh/hardening_matrix.py",
+      "current_path": "layers/l2_brain/flat_brain/embedding_mesh/hardening_matrix.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/embedding_mesh/providers.py",
+      "current_path": "layers/l2_brain/flat_brain/embedding_mesh/providers.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/embedding_mesh/registry.py",
+      "current_path": "layers/l2_brain/flat_brain/embedding_mesh/registry.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/embedding_mesh/repo_indexer.py",
+      "current_path": "layers/l2_brain/flat_brain/embedding_mesh/repo_indexer.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/embedding_mesh/reranker.py",
+      "current_path": "layers/l2_brain/flat_brain/embedding_mesh/reranker.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/embedding_provider.py",
+      "current_path": "layers/l2_brain/flat_brain/embedding_provider.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/entity_voice.py",
+      "current_path": "layers/l2_brain/flat_brain/entity_voice.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/entropy_governor.py",
+      "current_path": "layers/l2_brain/flat_brain/entropy_governor.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/entrypoint_enforcement_auditor.py",
+      "current_path": "layers/l2_brain/flat_brain/entrypoint_enforcement_auditor.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/environment_toolchain_probe.py",
+      "current_path": "layers/l2_brain/flat_brain/environment_toolchain_probe.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/epistemic_state_runtime.py",
+      "current_path": "layers/l2_brain/flat_brain/epistemic_state_runtime.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/event_bus.py",
+      "current_path": "layers/l2_brain/flat_brain/event_bus.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/evolution_delta_applier.py",
+      "current_path": "layers/l2_brain/flat_brain/evolution_delta_applier.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/evolution_feedback_loop.py",
+      "current_path": "layers/l2_brain/flat_brain/evolution_feedback_loop.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/evolution_flywheel_runtime.py",
+      "current_path": "layers/l2_brain/flat_brain/evolution_flywheel_runtime.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/expansion_policy.py",
+      "current_path": "layers/l2_brain/flat_brain/expansion_policy.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/file_dossier_generator.py",
+      "current_path": "layers/l2_brain/flat_brain/file_dossier_generator.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/folder_dossier_generator.py",
+      "current_path": "layers/l2_brain/flat_brain/folder_dossier_generator.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/formal_bridge.py",
+      "current_path": "layers/l2_brain/flat_brain/formal_bridge.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/four_dtes_persistence_preflight.py",
+      "current_path": "layers/l2_brain/flat_brain/four_dtes_persistence_preflight.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/freshness_ledger.py",
+      "current_path": "layers/l2_brain/flat_brain/freshness_ledger.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/full_body_operational_auditor.py",
+      "current_path": "layers/l2_brain/flat_brain/full_body_operational_auditor.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/gateway_contract.py",
+      "current_path": "layers/l2_brain/flat_brain/gateway_contract.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/goal_reasoning_runtime.py",
+      "current_path": "layers/l2_brain/flat_brain/goal_reasoning_runtime.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/golden_path.py",
+      "current_path": "layers/l2_brain/flat_brain/golden_path.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/graph_sync_ledger.py",
+      "current_path": "layers/l2_brain/flat_brain/graph_sync_ledger.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/graph_sync_plan.py",
+      "current_path": "layers/l2_brain/flat_brain/graph_sync_plan.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/heartbeat_decision_policy.py",
+      "current_path": "layers/l2_brain/flat_brain/heartbeat_decision_policy.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/heartbeat_lifecycle_runtime.py",
+      "current_path": "layers/l2_brain/flat_brain/heartbeat_lifecycle_runtime.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/heartbeat_scheduler.py",
+      "current_path": "layers/l2_brain/flat_brain/heartbeat_scheduler.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/heartbeat_state_store.py",
+      "current_path": "layers/l2_brain/flat_brain/heartbeat_state_store.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/human_intent.py",
+      "current_path": "layers/l2_brain/flat_brain/human_intent.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/infrastructure/adapters/__init__.py",
+      "current_path": "layers/l2_brain/flat_brain/infrastructure/adapters/__init__.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/infrastructure/adapters/external.py",
+      "current_path": "layers/l2_brain/flat_brain/infrastructure/adapters/external.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/infrastructure/adapters/kuzu.py",
+      "current_path": "layers/l2_brain/flat_brain/infrastructure/adapters/kuzu.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/infrastructure/adapters/ledger.py",
+      "current_path": "layers/l2_brain/flat_brain/infrastructure/adapters/ledger.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/infrastructure/cognitive/adapters.py",
+      "current_path": "layers/l2_brain/flat_brain/infrastructure/cognitive/adapters.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/infrastructure/reasoning/providers.py",
+      "current_path": "layers/l2_brain/flat_brain/infrastructure/reasoning/providers.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/infrastructure/semantic_adapters.py",
+      "current_path": "layers/l2_brain/flat_brain/infrastructure/semantic_adapters.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/knowledge_ports.py",
+      "current_path": "layers/l2_brain/flat_brain/knowledge_ports.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/kuzu_4dtes_guard.py",
+      "current_path": "layers/l2_brain/flat_brain/kuzu_4dtes_guard.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/kuzu_graph_readback_verifier.py",
+      "current_path": "layers/l2_brain/flat_brain/kuzu_graph_readback_verifier.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/kuzu_graph_sync_adapter.py",
+      "current_path": "layers/l2_brain/flat_brain/kuzu_graph_sync_adapter.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/learning_episode.py",
+      "current_path": "layers/l2_brain/flat_brain/learning_episode.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/lifecycle_integration_mapper.py",
+      "current_path": "layers/l2_brain/flat_brain/lifecycle_integration_mapper.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/local_context_compressor.py",
+      "current_path": "layers/l2_brain/flat_brain/local_context_compressor.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/local_reasoning.py",
+      "current_path": "layers/l2_brain/flat_brain/local_reasoning.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/long_running_mission.py",
+      "current_path": "layers/l2_brain/flat_brain/long_running_mission.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/memory_graph_runtime.py",
+      "current_path": "layers/l2_brain/flat_brain/memory_graph_runtime.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/memory_refs.py",
+      "current_path": "layers/l2_brain/flat_brain/memory_refs.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/memory_spine_bridge.py",
+      "current_path": "layers/l2_brain/flat_brain/memory_spine_bridge.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/memory_spine_entrypoint.py",
+      "current_path": "layers/l2_brain/flat_brain/memory_spine_entrypoint.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/mental_model_runtime.py",
+      "current_path": "layers/l2_brain/flat_brain/mental_model_runtime.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/mental_model_store.py",
+      "current_path": "layers/l2_brain/flat_brain/mental_model_store.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/mental_model_truth_hygiene.py",
+      "current_path": "layers/l2_brain/flat_brain/mental_model_truth_hygiene.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/metacognition/__init__.py",
+      "current_path": "layers/l2_brain/flat_brain/metacognition/__init__.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/metacognition/contracts.py",
+      "current_path": "layers/l2_brain/flat_brain/metacognition/contracts.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/metacognition/deliberation_hooks.py",
+      "current_path": "layers/l2_brain/flat_brain/metacognition/deliberation_hooks.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/metacognition/input_hooks.py",
+      "current_path": "layers/l2_brain/flat_brain/metacognition/input_hooks.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/metacognition/output_hooks.py",
+      "current_path": "layers/l2_brain/flat_brain/metacognition/output_hooks.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/metacognition/pipeline.py",
+      "current_path": "layers/l2_brain/flat_brain/metacognition/pipeline.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/metacognition/reasoning_hooks.py",
+      "current_path": "layers/l2_brain/flat_brain/metacognition/reasoning_hooks.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/metacognition/semantic_hooks.py",
+      "current_path": "layers/l2_brain/flat_brain/metacognition/semantic_hooks.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/metacognitive_evolution_flywheel.py",
+      "current_path": "layers/l2_brain/flat_brain/metacognitive_evolution_flywheel.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/metacognitive_loop_runtime.py",
+      "current_path": "layers/l2_brain/flat_brain/metacognitive_loop_runtime.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/metacognitive_quality_gate.py",
+      "current_path": "layers/l2_brain/flat_brain/metacognitive_quality_gate.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/metagateway_adapter.py",
+      "current_path": "layers/l2_brain/flat_brain/metagateway_adapter.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/metagateway_benchmark.py",
+      "current_path": "layers/l2_brain/flat_brain/metagateway_benchmark.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/metagateway_policy.py",
+      "current_path": "layers/l2_brain/flat_brain/metagateway_policy.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/metagateway_runtime_meter.py",
+      "current_path": "layers/l2_brain/flat_brain/metagateway_runtime_meter.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/mission_autonomy_contract.py",
+      "current_path": "layers/l2_brain/flat_brain/mission_autonomy_contract.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/mission_coherence_guard.py",
+      "current_path": "layers/l2_brain/flat_brain/mission_coherence_guard.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/mission_orchestrator_dag.py",
+      "current_path": "layers/l2_brain/flat_brain/mission_orchestrator_dag.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/mission_planner.py",
+      "current_path": "layers/l2_brain/flat_brain/mission_planner.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/mission_runtime_contract.py",
+      "current_path": "layers/l2_brain/flat_brain/mission_runtime_contract.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/mission_workbench.py",
+      "current_path": "layers/l2_brain/flat_brain/mission_workbench.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/model_discovery.py",
+      "current_path": "layers/l2_brain/flat_brain/model_discovery.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/model_executor.py",
+      "current_path": "layers/l2_brain/flat_brain/model_executor.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/model_router.py",
+      "current_path": "layers/l2_brain/flat_brain/model_router.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/models.py",
+      "current_path": "layers/l2_brain/flat_brain/models.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/nervous_pulse.py",
+      "current_path": "layers/l2_brain/flat_brain/nervous_pulse.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/neuron_ledger.py",
+      "current_path": "layers/l2_brain/flat_brain/neuron_ledger.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/observability.py",
+      "current_path": "layers/l2_brain/flat_brain/observability.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/operational_truth.py",
+      "current_path": "layers/l2_brain/flat_brain/operational_truth.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/operational_truth_collectors.py",
+      "current_path": "layers/l2_brain/flat_brain/operational_truth_collectors.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/operationalization_pack_2_runner.py",
+      "current_path": "layers/l2_brain/flat_brain/operationalization_pack_2_runner.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/operationalization_review.py",
+      "current_path": "layers/l2_brain/flat_brain/operationalization_review.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/orchestrator.py",
+      "current_path": "layers/l2_brain/flat_brain/orchestrator.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/outcome_evaluator.py",
+      "current_path": "layers/l2_brain/flat_brain/outcome_evaluator.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/patch_transaction.py",
+      "current_path": "layers/l2_brain/flat_brain/patch_transaction.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/patch_transaction_manager.py",
+      "current_path": "layers/l2_brain/flat_brain/patch_transaction_manager.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/phase_ledger.py",
+      "current_path": "layers/l2_brain/flat_brain/phase_ledger.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/philosophical_ontology_runtime.py",
+      "current_path": "layers/l2_brain/flat_brain/philosophical_ontology_runtime.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/plan_v1_completion_review.py",
+      "current_path": "layers/l2_brain/flat_brain/plan_v1_completion_review.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/polyglot_probe_orchestrator.py",
+      "current_path": "layers/l2_brain/flat_brain/polyglot_probe_orchestrator.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/ports.py",
+      "current_path": "layers/l2_brain/flat_brain/ports.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/post_mortem_agent.py",
+      "current_path": "layers/l2_brain/flat_brain/post_mortem_agent.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/preflight.py",
+      "current_path": "layers/l2_brain/flat_brain/preflight.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/prompt_cache_ledger.py",
+      "current_path": "layers/l2_brain/flat_brain/prompt_cache_ledger.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/prompt_frame_builder.py",
+      "current_path": "layers/l2_brain/flat_brain/prompt_frame_builder.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/prompt_preprocessor.py",
+      "current_path": "layers/l2_brain/flat_brain/prompt_preprocessor.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/prompt_to_mission.py",
+      "current_path": "layers/l2_brain/flat_brain/prompt_to_mission.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/proto/proto/dummie/v2/core_pb2.py",
+      "current_path": "layers/l2_brain/flat_brain/proto/proto/dummie/v2/core_pb2.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "LOW",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/proto/proto/dummie/v2/core_pb2_grpc.py",
+      "current_path": "layers/l2_brain/flat_brain/proto/proto/dummie/v2/core_pb2_grpc.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "LOW",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/proto/proto/dummie/v2/memory_pb2.py",
+      "current_path": "layers/l2_brain/flat_brain/proto/proto/dummie/v2/memory_pb2.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "LOW",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/proto/proto/dummie/v2/memory_pb2_grpc.py",
+      "current_path": "layers/l2_brain/flat_brain/proto/proto/dummie/v2/memory_pb2_grpc.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "LOW",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/proto/proto/dummie/v2/orchestration_pb2.py",
+      "current_path": "layers/l2_brain/flat_brain/proto/proto/dummie/v2/orchestration_pb2.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "LOW",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/proto/proto/dummie/v2/orchestration_pb2_grpc.py",
+      "current_path": "layers/l2_brain/flat_brain/proto/proto/dummie/v2/orchestration_pb2_grpc.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "LOW",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/readiness_score_calibrator.py",
+      "current_path": "layers/l2_brain/flat_brain/readiness_score_calibrator.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/rehydration.py",
+      "current_path": "layers/l2_brain/flat_brain/rehydration.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/repo_intelligence_query.py",
+      "current_path": "layers/l2_brain/flat_brain/repo_intelligence_query.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/repo_intelligence_runtime.py",
+      "current_path": "layers/l2_brain/flat_brain/repo_intelligence_runtime.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/repo_probe_runner.py",
+      "current_path": "layers/l2_brain/flat_brain/repo_probe_runner.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/resource_governor.py",
+      "current_path": "layers/l2_brain/flat_brain/resource_governor.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/restart_integration_gate.py",
+      "current_path": "layers/l2_brain/flat_brain/restart_integration_gate.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/revenue_goal_planner.py",
+      "current_path": "layers/l2_brain/flat_brain/revenue_goal_planner.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/runtime_closure_planner.py",
+      "current_path": "layers/l2_brain/flat_brain/runtime_closure_planner.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/runtime_dependency_auditor.py",
+      "current_path": "layers/l2_brain/flat_brain/runtime_dependency_auditor.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/runtime_guards.py",
+      "current_path": "layers/l2_brain/flat_brain/runtime_guards.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/safe_fallbacks.py",
+      "current_path": "layers/l2_brain/flat_brain/safe_fallbacks.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/sdd_governance.py",
+      "current_path": "layers/l2_brain/flat_brain/sdd_governance.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/sdk/__init__.py",
+      "current_path": "layers/l2_brain/flat_brain/sdk/__init__.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/sdk/client.py",
+      "current_path": "layers/l2_brain/flat_brain/sdk/client.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/sdk/sdk_core_api_pb2.py",
+      "current_path": "layers/l2_brain/flat_brain/sdk/sdk_core_api_pb2.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/sdk/sdk_core_api_pb2_grpc.py",
+      "current_path": "layers/l2_brain/flat_brain/sdk/sdk_core_api_pb2_grpc.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/sdk/session.py",
+      "current_path": "layers/l2_brain/flat_brain/sdk/session.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/self_healing_planner.py",
+      "current_path": "layers/l2_brain/flat_brain/self_healing_planner.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/self_improvement_runtime.py",
+      "current_path": "layers/l2_brain/flat_brain/self_improvement_runtime.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/self_optimization.py",
+      "current_path": "layers/l2_brain/flat_brain/self_optimization.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/self_worktree_orchestrator.py",
+      "current_path": "layers/l2_brain/flat_brain/self_worktree_orchestrator.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/semantic_cache.py",
+      "current_path": "layers/l2_brain/flat_brain/semantic_cache.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/semantic_graph_rag.py",
+      "current_path": "layers/l2_brain/flat_brain/semantic_graph_rag.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/semantic_ontology_mapper.py",
+      "current_path": "layers/l2_brain/flat_brain/semantic_ontology_mapper.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/semantic_retrieval_runtime.py",
+      "current_path": "layers/l2_brain/flat_brain/semantic_retrieval_runtime.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/sensor_first_guard.py",
+      "current_path": "layers/l2_brain/flat_brain/sensor_first_guard.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/session_store.py",
+      "current_path": "layers/l2_brain/flat_brain/session_store.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/shadow_runtime_classifier.py",
+      "current_path": "layers/l2_brain/flat_brain/shadow_runtime_classifier.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/six_dimensional_context_runtime.py",
+      "current_path": "layers/l2_brain/flat_brain/six_dimensional_context_runtime.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/skill_binder.py",
+      "current_path": "layers/l2_brain/flat_brain/skill_binder.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/socraticode_gateway_adapter.py",
+      "current_path": "layers/l2_brain/flat_brain/socraticode_gateway_adapter.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/source_of_truth_conflict_detector.py",
+      "current_path": "layers/l2_brain/flat_brain/source_of_truth_conflict_detector.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/sovereign_runtime_readiness.py",
+      "current_path": "layers/l2_brain/flat_brain/sovereign_runtime_readiness.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/spec_frontmatter_repair.py",
+      "current_path": "layers/l2_brain/flat_brain/spec_frontmatter_repair.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/stale_memory_detector.py",
+      "current_path": "layers/l2_brain/flat_brain/stale_memory_detector.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/state_coherence_guard.py",
+      "current_path": "layers/l2_brain/flat_brain/state_coherence_guard.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/strategic_partner_runtime.py",
+      "current_path": "layers/l2_brain/flat_brain/strategic_partner_runtime.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/strategic_partner_swarm.py",
+      "current_path": "layers/l2_brain/flat_brain/strategic_partner_swarm.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/strategic_question_generator.py",
+      "current_path": "layers/l2_brain/flat_brain/strategic_question_generator.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/structural_hardening/__init__.py",
+      "current_path": "layers/l2_brain/flat_brain/structural_hardening/__init__.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/structural_hardening/bindings.py",
+      "current_path": "layers/l2_brain/flat_brain/structural_hardening/bindings.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/structural_hardening/classifier.py",
+      "current_path": "layers/l2_brain/flat_brain/structural_hardening/classifier.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/structural_hardening/cli.py",
+      "current_path": "layers/l2_brain/flat_brain/structural_hardening/cli.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/structural_hardening/contracts.py",
+      "current_path": "layers/l2_brain/flat_brain/structural_hardening/contracts.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/structural_hardening/evidence.py",
+      "current_path": "layers/l2_brain/flat_brain/structural_hardening/evidence.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/structural_hardening/matrix.py",
+      "current_path": "layers/l2_brain/flat_brain/structural_hardening/matrix.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/structural_hardening/reporter.py",
+      "current_path": "layers/l2_brain/flat_brain/structural_hardening/reporter.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/supervisor_protocol.py",
+      "current_path": "layers/l2_brain/flat_brain/supervisor_protocol.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/technical_debt_intelligence.py",
+      "current_path": "layers/l2_brain/flat_brain/technical_debt_intelligence.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/token_cost_ledger.py",
+      "current_path": "layers/l2_brain/flat_brain/token_cost_ledger.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/token_economy_benchmark.py",
+      "current_path": "layers/l2_brain/flat_brain/token_economy_benchmark.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/tool_opportunity_detector.py",
+      "current_path": "layers/l2_brain/flat_brain/tool_opportunity_detector.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/total_project_truth_scan.py",
+      "current_path": "layers/l2_brain/flat_brain/total_project_truth_scan.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/trusted_workstation_mode.py",
+      "current_path": "layers/l2_brain/flat_brain/trusted_workstation_mode.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/tui_process_monitor.py",
+      "current_path": "layers/l2_brain/flat_brain/tui_process_monitor.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/vault_context_resolver.py",
+      "current_path": "layers/l2_brain/flat_brain/vault_context_resolver.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/vault_curator.py",
+      "current_path": "layers/l2_brain/flat_brain/vault_curator.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/vault_embedding_index.py",
+      "current_path": "layers/l2_brain/flat_brain/vault_embedding_index.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/whole_body_repair_queue.py",
+      "current_path": "layers/l2_brain/flat_brain/whole_body_repair_queue.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/whole_body_scan_calibrator.py",
+      "current_path": "layers/l2_brain/flat_brain/whole_body_scan_calibrator.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/whole_body_scanner.py",
+      "current_path": "layers/l2_brain/flat_brain/whole_body_scanner.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/wiring_matrix_builder.py",
+      "current_path": "layers/l2_brain/flat_brain/wiring_matrix_builder.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/witness.py",
+      "current_path": "layers/l2_brain/flat_brain/witness.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    },
+    {
+      "original_path": "layers/l2_brain/workbench_vault_runtime.py",
+      "current_path": "layers/l2_brain/flat_brain/workbench_vault_runtime.py",
+      "migration_status": "TEMP_COMPAT",
+      "imports_updated": false,
+      "specs_updated": true,
+      "tests_updated": false,
+      "risk": "MEDIUM",
+      "recommended_next_action": "Update all imports from old path to new path in PACK R3"
+    }
+  ]
+}

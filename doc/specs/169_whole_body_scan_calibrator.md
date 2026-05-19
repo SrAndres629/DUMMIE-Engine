@@ -13,7 +13,7 @@ This specification establishes the structural validation, timing audit, and repr
 Fully implemented in L2 Brain layer. Automatically executed during the observe phase of the recurring metacognitive heartbeat. Emits structured calibration reports.
 
 ## Physical Evidence
-- Core module: `layers/l2_brain/whole_body_scan_calibrator.py`
+- Core module: `layers/l2_brain/flat_brain/whole_body_scan_calibrator.py`
 - Test suite: `layers/l2_brain/tests/test_whole_body_scan_calibrator.py`
 - Output report JSON: `.aiwg/reports/whole_body_scan_calibration_latest.json`
 - Output report Markdown: `.aiwg/reports/whole_body_scan_calibration_latest.md`

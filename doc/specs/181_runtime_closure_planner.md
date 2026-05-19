@@ -13,7 +13,7 @@ This spec establishes the runtime closure planner (HEARTBEAT-2.1) to translate d
 Under implementation. Will process degraded capability registry reports and output validated closure plans conforming to `runtime_closure_plan.schema.json`.
 
 ## Physical Evidence
-- Core module: `layers/l2_brain/runtime_closure_planner.py`
+- Core module: `layers/l2_brain/flat_brain/runtime_closure_planner.py`
 - Test suite: `layers/l2_brain/tests/test_runtime_closure_planner.py`
 - JSON Schema: `.aiwg/schemas/runtime_closure_plan.schema.json`
 - Output reports: `.aiwg/reports/runtime_closure_plan_latest.json` and `.aiwg/reports/runtime_closure_plan_latest.md`

@@ -22,7 +22,7 @@ Constructs safe execution context frames.
 - Operational. Reconciled with Pack 5.2.1 closure requirements.
 
 ## Physical Evidence
-- `layers/l2_brain/cognitive_frame_builder.py`
+- `layers/l2_brain/flat_brain/cognitive_frame_builder.py`
 - `.aiwg/reports/cognitive_frame_latest.json`
 - `.aiwg/schemas/cognitive_frame.schema.json`
 

@@ -13,7 +13,7 @@ This spec establishes the polyglot probe orchestrator (HEARTBEAT-2) to detect an
 Under implementation. Will parse workspace configurations and write outputs conforming to `polyglot_probe.schema.json`.
 
 ## Physical Evidence
-- Core module: `layers/l2_brain/polyglot_probe_orchestrator.py`
+- Core module: `layers/l2_brain/flat_brain/polyglot_probe_orchestrator.py`
 - Test suite: `layers/l2_brain/tests/test_polyglot_probe_orchestrator.py`
 - JSON Schema: `.aiwg/schemas/polyglot_probe.schema.json`
 - Output reports: `.aiwg/reports/polyglot_probe_latest.json` and `.aiwg/reports/polyglot_probe_latest.md`

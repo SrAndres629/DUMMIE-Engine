@@ -19,10 +19,10 @@ Covers frame assembly fields, context reference filtering, staleness warning pro
 P10-P13 delivered quantized context. P14 turns that output into model-ready frame inputs without raw repository dumping.
 
 ## Current State
-Implemented as `layers/l2_brain/prompt_frame_builder.py` with runtime output `.aiwg/reports/prompt_frame_latest.json`.
+Implemented as `layers/l2_brain/flat_brain/prompt_frame_builder.py` with runtime output `.aiwg/reports/prompt_frame_latest.json`.
 
 ## Physical Evidence
-- `layers/l2_brain/prompt_frame_builder.py`
+- `layers/l2_brain/flat_brain/prompt_frame_builder.py`
 - `.aiwg/reports/prompt_frame_latest.json`
 - `.aiwg/reports/context_quant_result_latest.json`
 - `.aiwg/reports/context_receipt_latest.json`

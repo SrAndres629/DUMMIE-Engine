@@ -1,0 +1,31 @@
+{
+  "pack": "PACK R2.1",
+  "input_summary": {
+    "source_reports": [
+      ".aiwg/reports/deletion_incident_report_latest.json",
+      ".aiwg/reports/deletion_restore_plan_latest.json",
+      ".aiwg/reports/flat_l2_incident_analysis_latest.json",
+      ".aiwg/reports/deletion_incident_validation_latest.json",
+      ".aiwg/reports/deleted_files_recent_commits_latest.json"
+    ],
+    "files_recommended_for_restore": [
+      ".aiwg/memory/lessons.jsonl",
+      "layers/l2_brain/src/brain/mcp_server.py",
+      "layers/l2_brain/tests/test_mcp_server.py",
+      "layers/l2_brain/src/brain/application/ports.py",
+      "layers/l2_brain/src/brain/domain/memory/schemas.py"
+    ],
+    "broken_specs_count": 58,
+    "broken_specs_list": ["113_prompt_frame_builder.md", "114_prompt_cache_ledger.md", "115_restart_context_efficiency_gate.md", "116_evolution_flywheel_runtime.md", "117_cli_control_plane.md", "118_tui_process_monitor.md", "120_local_context_compressor.md", "146_readiness_score_calibrator.md", "147_memory_spine_entrypoint.md", "148_token_economy_benchmark.md", "149_entrypoint_enforcement_auditor.md", "150_mental_model_runtime.md", "151_semantic_ontology_mapper.md", "152_cognitive_frame_builder.md", "153_metacognitive_loop_runtime.md", "154_mental_model_store.md", "155_metacognitive_quality_gate.md", "156_epistemic_state_runtime.md", "157_dialectical_reasoning_runtime.md", "158_philosophical_ontology_runtime.md", "159_cognitive_bias_detector.md", "160_metacognitive_evolution_flywheel.md", "161_mental_model_truth_hygiene.md", "162_evolution_delta_applier.md", "163_self_improvement_runtime.md", "164_heartbeat_lifecycle_runtime.md", "165_heartbeat_state_store.md", "166_heartbeat_decision_policy.md", "167_heartbeat_scheduler.md", "168_whole_body_scanner.md", "169_whole_body_scan_calibrator.md", "170_wiring_matrix_builder.md", "171_shadow_runtime_classifier.md", "172_six_dimensional_context_runtime.md", "173_context_packet_optimizer.md", "174_embedding_memory_router.md", "175_4dtes_persistence_preflight.md", "176_daemon_gateway_heatbeat_bridge.md", "177_polyglot_probe_orchestrator.md", "178_runtime_dependency_auditor.md", "179_degraded_capability_registry.md", "180_environment_toolchain_probe.md", "181_runtime_closure_planner.md", "186_dependency_reproducibility_verifier.md", "187_kuzu_graph_readback_verifier.md", "188_embedding_activation_verifier.md", "189_capability_promotion_governor.md", "190_full_body_operational_auditor.md", "191_whole_body_repair_queue.md", "192_embedding_mesh_foundation.md"],
+    "flat_brain_moved_files_count": 235,
+    "last_known_good_commit": "41e093f (main HEAD)",
+    "validation_failures": ["spec validation FAIL (58 broken paths)"],
+    "restore_sources": {
+      ".aiwg/memory/lessons.jsonl": "f3485dc^",
+      "layers/l2_brain/src/brain/mcp_server.py": "f3485dc^",
+      "layers/l2_brain/tests/test_mcp_server.py": "f3485dc^",
+      "layers/l2_brain/src/brain/application/ports.py": "762eec1^",
+      "layers/l2_brain/src/brain/domain/memory/schemas.py": "762eec1^"
+    }
+  }
+}

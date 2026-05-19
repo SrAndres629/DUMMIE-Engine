@@ -35,7 +35,7 @@ Empirically measure and document the token consumption reduction achieved throug
 - Operational. Uses deterministic_estimate measurement type.
 
 ## Physical Evidence
-- `layers/l2_brain/token_economy_benchmark.py`
+- `layers/l2_brain/flat_brain/token_economy_benchmark.py`
 - `.aiwg/reports/token_economy_benchmark_latest.json`
 - `.aiwg/schemas/token_economy_benchmark.schema.json`
 
@@ -47,7 +47,7 @@ Empirically measure and document the token consumption reduction achieved throug
 
 ## Verification
 ```bash
-python3 layers/l2_brain/token_economy_benchmark.py
+python3 layers/l2_brain/flat_brain/token_economy_benchmark.py
 python3 -m pytest layers/l2_brain/tests/test_token_economy_benchmark.py -q
 ```
 

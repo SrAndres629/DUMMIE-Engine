@@ -22,7 +22,7 @@ Flags overconfidence and report optimism.
 - Operational. Reconciled with Pack 5.2.1 closure requirements.
 
 ## Physical Evidence
-- `layers/l2_brain/cognitive_bias_detector.py`
+- `layers/l2_brain/flat_brain/cognitive_bias_detector.py`
 - `.aiwg/reports/cognitive_bias_report_latest.json`
 - `.aiwg/schemas/cognitive_bias_report.schema.json`
 
@@ -32,7 +32,7 @@ Flags overconfidence and report optimism.
 
 ## Verification
 ```bash
-python3 layers/l2_brain/cognitive_bias_detector.py
+python3 layers/l2_brain/flat_brain/cognitive_bias_detector.py
 pytest layers/l2_brain/tests/test_cognitive_bias_detector.py
 ```
 

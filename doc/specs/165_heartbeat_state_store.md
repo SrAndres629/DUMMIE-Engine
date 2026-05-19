@@ -22,7 +22,7 @@ Manages append-only JSONL ledger for heartbeat history.
 - Active. Created by Heartbeat-0.
 
 ## Physical Evidence
-- `layers/l2_brain/heartbeat_state_store.py`
+- `layers/l2_brain/flat_brain/heartbeat_state_store.py`
 - `.aiwg/heartbeat/heartbeat_ledger.jsonl`
 
 ## Contract Invariants

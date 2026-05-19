@@ -13,7 +13,7 @@ This spec establishes the context packet optimizer (HEARTBEAT-2) to analyze diff
 Under implementation. Will process raw context packages and compare compaction options to output structured logs conforming to `context_packet_optimization.schema.json`.
 
 ## Physical Evidence
-- Core module: `layers/l2_brain/context_packet_optimizer.py`
+- Core module: `layers/l2_brain/flat_brain/context_packet_optimizer.py`
 - Test suite: `layers/l2_brain/tests/test_context_packet_optimizer.py`
 - JSON Schema: `.aiwg/schemas/context_packet_optimization.schema.json`
 - Output reports: `.aiwg/reports/context_packet_optimization_latest.json` and `.aiwg/reports/context_packet_optimization_latest.md`

@@ -13,10 +13,10 @@ This spec establishes the whole-body scan, wiring matrix mapping, and shadow run
 Fully implemented in Python ast-parsing runtime, integrated with the CLI control plane, DUMMIE chat engine, and the `dummie-ctl` script. Outputs scan indices, wiring completeness metrics, and anomaly logs.
 
 ## Physical Evidence
-- Core module: `layers/l2_brain/whole_body_scanner.py`
+- Core module: `layers/l2_brain/flat_brain/whole_body_scanner.py`
 - Test suite: `layers/l2_brain/tests/test_whole_body_scanner.py`
-- CLI command: `layers/l2_brain/cli_control_plane.py` (handler method _cmd_whole_body_scan)
-- Chat intent: `layers/l2_brain/dummie_chat_cli.py` (handler method _cmd_whole_body_scan)
+- CLI command: `layers/l2_brain/flat_brain/cli_control_plane.py` (handler method _cmd_whole_body_scan)
+- Chat intent: `layers/l2_brain/flat_brain/dummie_chat_cli.py` (handler method _cmd_whole_body_scan)
 - JSON Schema: `.aiwg/schemas/whole_body_scan.schema.json`
 - Output reports: `.aiwg/reports/whole_body_scan_latest.json` and `.aiwg/reports/whole_body_scan_latest.md`
 
