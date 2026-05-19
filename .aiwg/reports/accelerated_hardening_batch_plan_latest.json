@@ -1,0 +1,155 @@
+{
+  "batches": [
+    {
+      "batch_id": 1,
+      "name": "Batch 1 — HIGH L2 scoped-only spec bindings",
+      "target_count": 20,
+      "risk_before": "HIGH",
+      "expected_risk_after": "MEDIUM",
+      "files": [
+        "layers/l2_brain/action_graph.py",
+        "layers/l2_brain/application/cognitive/use_cases.py",
+        "layers/l2_brain/ast_indexer.py",
+        "layers/l2_brain/auditor_port.py",
+        "layers/l2_brain/branch_memory.py",
+        "layers/l2_brain/cognition/pattern_miner_v2.py",
+        "layers/l2_brain/context_circulation_runtime.py",
+        "layers/l2_brain/cypher_codec.py",
+        "layers/l2_brain/domain/dtos.py",
+        "layers/l2_brain/domain/hypothesis_service.py",
+        "layers/l2_brain/domain/reasoning_logic.py",
+        "layers/l2_brain/domain/retrieval_service.py",
+        "layers/l2_brain/domain/semantic_ports.py",
+        "layers/l2_brain/embedding_provider.py",
+        "layers/l2_brain/entity_voice.py",
+        "layers/l2_brain/event_bus.py",
+        "layers/l2_brain/evolution_feedback_loop.py",
+        "layers/l2_brain/expansion_policy.py",
+        "layers/l2_brain/formal_bridge.py",
+        "layers/l2_brain/gateway_contract.py"
+      ],
+      "commands": [
+        "python3 scripts/build_structural_hardening_triage.py --write-reports"
+      ],
+      "rollback": "git checkout layers/l2_brain/structural_hardening/bindings.py",
+      "tests": [
+        "pytest layers/l2_brain/tests/test_structural_hardening_triage.py"
+      ],
+      "done_criteria": "Each module has a direct spec binding, direct test link, or is classified as NEEDS_OWNER.",
+      "estimated_blast_radius": "LOW (metadata and binding registry updates only)",
+      "should_execute_now": false
+    },
+    {
+      "batch_id": 2,
+      "name": "Batch 2 — Superficial tests",
+      "target_count": 10,
+      "risk_before": "MEDIUM",
+      "expected_risk_after": "LOW",
+      "files": [
+        "layers/l2_brain/tests/test_philosophical_ontology_runtime.py",
+        "layers/l2_brain/tests/test_dialectical_reasoning_runtime.py",
+        "layers/l2_brain/tests/test_entropy_governor.py",
+        "layers/l2_brain/tests/test_consensus.py",
+        "layers/l2_brain/tests/test_cognitive_bias_detector.py",
+        "layers/l2_brain/tests/test_cognitive_frame_builder.py",
+        "layers/l2_brain/tests/test_epistemic_state_runtime.py",
+        "layers/l2_brain/tests/test_metacognitive_loop_runtime.py",
+        "layers/l2_brain/tests/test_metacognitive_quality_gate.py",
+        "layers/l2_brain/tests/test_polyglot_probe_orchestrator.py"
+      ],
+      "commands": [
+        "pytest layers/l2_brain/tests/test_philosophical_ontology_runtime.py",
+        "pytest layers/l2_brain/tests/test_dialectical_reasoning_runtime.py"
+      ],
+      "rollback": "git checkout layers/l2_brain/tests/",
+      "tests": [
+        "pytest -v layers/l2_brain/tests/"
+      ],
+      "done_criteria": "Each focal test contains at least one behavior assertion or functional invariant test, instead of empty/import-only logic.",
+      "estimated_blast_radius": "LOW (test-only coverage)",
+      "should_execute_now": false
+    },
+    {
+      "batch_id": 3,
+      "name": "Batch 3 — UNKNOWN fan-in",
+      "target_count": 20,
+      "risk_before": "MEDIUM",
+      "expected_risk_after": "LOW",
+      "files": [
+        "layers/l5_muscle/math_ops.mojo",
+        "layers/l5_muscle/README.md",
+        "layers/l6_skin/index.html",
+        "layers/l6_skin/package-lock.json",
+        "layers/l0_overseer/api/manifest_spec.md",
+        "layers/l0_overseer/test/overseer_ipc_test.exs",
+        "layers/l0_overseer/test/test_helper.exs",
+        "layers/l0_overseer/mix.exs",
+        "layers/l0_overseer/README.md",
+        "layers/l1_nervous/go.mod",
+        "layers/l1_nervous/go.sum",
+        "layers/l1_nervous/proto/skill.proto",
+        "layers/l1_nervous/README.md",
+        "layers/l1_nervous/internal/skill/types.go",
+        "layers/l2_brain/README.md",
+        "layers/l2_brain/pyproject.toml",
+        "layers/l2_brain/uv.lock",
+        "layers/l2_brain/.python-version",
+        "layers/l3_shield/README.md",
+        "layers/l4_edge/README.md"
+      ],
+      "commands": [
+        "python3 scripts/build_structural_hardening_triage.py --write-reports"
+      ],
+      "rollback": "git checkout layers/l2_brain/structural_hardening/bindings.py",
+      "tests": [
+        "pytest layers/l2_brain/tests/test_structural_hardening_triage.py"
+      ],
+      "done_criteria": "Each file is formally classified under an explicit StructuralClass (ACTIVE_RUNTIME, CONFIG, REPORT, LEGACY, EXPERIMENTAL) with documented reasons, leaving zero unclassified UNKNOWN files.",
+      "estimated_blast_radius": "LOW (mapping updates only)",
+      "should_execute_now": false
+    },
+    {
+      "batch_id": 4,
+      "name": "Batch 4 — ORPHAN_TEST_CANDIDATE",
+      "target_count": 3,
+      "risk_before": "MEDIUM",
+      "expected_risk_after": "LOW",
+      "files": [
+        "layers/l0_overseer/test/overseer_ipc_test.exs",
+        "layers/l0_overseer/test/test_helper.exs",
+        "scripts/tests/test_cgroup_hierarchy.sh"
+      ],
+      "commands": [
+        "python3 scripts/build_structural_hardening_triage.py --write-reports"
+      ],
+      "rollback": "git checkout layers/l2_brain/structural_hardening/bindings.py",
+      "tests": [
+        "pytest layers/l2_brain/tests/test_structural_hardening_triage.py"
+      ],
+      "done_criteria": "All 3 orphan tests are successfully bound to their respective runtimes (Elixir application.ex, supervisor.ex, or cgroup runtime modules) or marked legacy with evidence, resulting in 0 orphan tests.",
+      "estimated_blast_radius": "LOW (contract mapping only)",
+      "should_execute_now": false
+    },
+    {
+      "batch_id": 5,
+      "name": "Batch 5 — Shellcheck/toolchain closure",
+      "target_count": 1,
+      "risk_before": "HIGH",
+      "expected_risk_after": "MEDIUM",
+      "files": [
+        "layers/l1_nervous/ssh_sandbox_wrapper.sh"
+      ],
+      "commands": [
+        "sudo apt update && sudo apt install -y shellcheck",
+        "shellcheck layers/l1_nervous/ssh_sandbox_wrapper.sh"
+      ],
+      "rollback": "git checkout layers/l2_brain/structural_hardening/bindings.py",
+      "tests": [
+        "pytest layers/l2_brain/tests/test_structural_hardening_triage.py"
+      ],
+      "done_criteria": "Shellcheck is successfully installed, run against the wrapper, the result logged in ledger, and risk downgraded from HIGH to MEDIUM.",
+      "estimated_blast_radius": "LOW (installing tools in sandboxed workstation)",
+      "should_execute_now": false
+    }
+  ]
+}
