@@ -1,17 +1,17 @@
 {
-  "pack_id": "PACK_4.0",
-  "pack_title": "ModelCapability Registry",
+  "pack_id": "PACK_4.1",
+  "pack_title": "ModelRouter v2",
   "status": "ACTIVE",
   "execute_now": true,
-  "objective": "Formalizar el contrato e interfaces de los modelos especialistas (code, reasoning, etc.).",
+  "objective": "Enrutar dinámicamente tareas a modelos especialistas basándose en complejidad, tokens, costo e intención.",
   "long_term_objective_link": "long_term_objectives.json",
-  "short_term_goal": "Implementar el registro de capacidades para que el motor pueda seleccionar modelos basados en su expertise.",
-  "why_now": "Para permitir que DUMMIE Engine use el modelo correcto para cada tarea (ej. codificación vs análisis de mercado).",
+  "short_term_goal": "Implementar la lógica de enrutamiento en el orquestador usando el registro de capacidades.",
+  "why_now": "Para optimizar el uso de recursos y asegurar que cada tarea sea procesada por el modelo más apto.",
   "not_in_scope": [
-    "Iniciar Pack 4.1"
+    "Iniciar Pack 4.2"
   ],
   "files_expected_to_change": [
-    "layers/l2_brain/src/brain/domain/governance/models.py",
+    "layers/l2_brain/src/brain/application/use_cases/orchestrator.py",
     "layers/l2_brain/src/brain/domain/capability_registry.py"
   ],
   "files_forbidden_to_change": [
@@ -22,24 +22,24 @@
     "PYTHONPATH=layers/l2_brain/src python3 -m pytest layers/l2_brain/tests/test_aiwg_pack_guard.py"
   ],
   "tests_required": [
-    "layers/l2_brain/tests/test_capability_registry.py"
+    "layers/l2_brain/tests/test_model_router_v2.py"
   ],
   "metrics_before": {
-    "model_selection_mode": "HARDCODED"
+    "routing_efficiency": 0.0
   },
   "expected_metrics_after": {
-    "model_selection_mode": "REGISTRY_BASED"
+    "routing_efficiency": 0.8
   },
-  "regression_risks": "Selección de modelos incompatibles.",
-  "known_blindspots": "Modelos locales (Ollama) sin especificación de tokens.",
+  "regression_risks": "Errores de enrutamiento que causen fallos de ejecución.",
+  "known_blindspots": "Latencia de red en modelos externos.",
   "acceptance_criteria": [
-    "Interfaz JSON Schema para registro de capacidades implementada.",
-    "El orquestador puede consultar el registro antes de despachar una tarea."
+    "El orquestador selecciona dinámicamente el modelo según el tipo de tarea (CODE/REASONING).",
+    "Pruebas de enrutamiento exitosas con mocks de modelos."
   ],
   "rollback_plan": "git revert HEAD",
   "auto_continue_allowed": true,
   "stop_conditions": [
-    "si el registro falla al validar esquemas",
+    "si el enrutamiento falla sistemáticamente",
     "si preflight falla"
   ]
 }

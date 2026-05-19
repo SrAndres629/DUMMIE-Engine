@@ -1,4 +1,4 @@
-# Spec: DE-V2-L2-106
+# Spec: DE-V2-L2-200
 from enum import Enum
 from typing import List, Dict, Optional
 from pydantic import BaseModel, Field

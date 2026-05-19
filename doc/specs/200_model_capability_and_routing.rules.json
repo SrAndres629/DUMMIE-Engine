@@ -1,0 +1,20 @@
+{
+  "spec_id": "200_model_capability_and_routing",
+  "rules": [
+    {
+      "id": "R1",
+      "statement": "Todo modelo registrado debe tener al menos una ModelExpertise asignada.",
+      "severity": "CRITICAL"
+    },
+    {
+      "id": "R2",
+      "statement": "El enrutamiento debe ser determinista para el mismo conjunto de modelos y la misma intención.",
+      "severity": "HIGH"
+    },
+    {
+      "id": "R3",
+      "statement": "Se debe registrar siempre un default_model para evitar fallos de enrutamiento.",
+      "severity": "HIGH"
+    }
+  ]
+}

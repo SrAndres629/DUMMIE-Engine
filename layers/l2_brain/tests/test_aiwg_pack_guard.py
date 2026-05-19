@@ -616,12 +616,12 @@ def test_aiwg_kernel_freeze_consistency():
         active = json.load(f)
         
     # 3. Assert current_truth values
-    valid_completions = ["AIWG_KERNEL_0.4", "PACK_3.3"]
+    valid_completions = ["AIWG_KERNEL_0.4", "PACK_3.3", "PACK_4.0"]
     assert truth.get("last_completed_pack") in valid_completions, f"last_completed_pack must be one of {valid_completions}"
-    assert truth.get("next_pack") == "PACK_4.1", "next_pack must be PACK_4.1"
+    assert truth.get("next_pack") == "PACK_4.2", "next_pack must be PACK_4.2"
     
     # 4. Assert active_pack values
-    assert active.get("pack_id") == "PACK_4.0", "active_pack pack_id must be PACK_4.0"
+    assert active.get("pack_id") == "PACK_4.1", "active_pack pack_id must be PACK_4.1"
     
     # 5. Assert freeze audit report values
     audit_json = os.path.join(AIWG_DIR, "reports", "aiwg_kernel_freeze_audit_latest.json")

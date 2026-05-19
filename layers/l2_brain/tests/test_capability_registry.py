@@ -1,4 +1,4 @@
-# Spec: DE-V2-L2-106
+# Spec: DE-V2-L2-200
 import pytest
 from brain.domain.capability_registry import CapabilityRegistry, ModelCapability, ModelExpertise
 

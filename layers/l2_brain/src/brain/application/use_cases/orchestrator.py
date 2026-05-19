@@ -12,12 +12,13 @@ from brain.domain.memory.models import MemoryNode4DTES, EgoState
 from brain.domain.governance.models import DecisionRecord
 
 from brain.domain.capability_registry import CapabilityRegistry, ModelExpertise
+from brain.application.services.model_router import ModelRouterV2
 
 class CognitiveOrchestrator(IBrainOrchestrator):
     """
     Orquestador Cognitivo (L2 Brain).
     Implementa el flujo determinista de la Spec 21 y Spec 42.
-    Spec: DE-V2-L2-106
+    Spec: DE-V2-L2-106, DE-V2-L2-200
     """
     def __init__(
         self, 
@@ -37,6 +38,7 @@ class CognitiveOrchestrator(IBrainOrchestrator):
         self.skill_repo = skill_repo
         self.embedding_port = embedding_port
         self.registry = registry or CapabilityRegistry()
+        self.router = ModelRouterV2(self.registry)
         self.mode = mode
         # Recuperar el tick máximo del Event Store (Spec 02 - Causal Ordering)
         # Esto previene la destrucción del ordenamiento causal tras reinicios.
@@ -72,13 +74,15 @@ class CognitiveOrchestrator(IBrainOrchestrator):
         Coordina el flujo de memoria, gobernanza y ejecución.
         """
         try:
+            # 1. Parsing de Intención (Spec 21)
             if isinstance(payload, AgentIntent):
                 intent = payload
-                pass # print(f"[L2-Brain Orchestrator] Procesando intención directa: {intent.intent_type}")
             else:
-                pass # print(f"[L2-Brain Orchestrator] Procesando tarea en modo {self.mode}: {payload}")
-                # 1. Parsing de Intención (Spec 21)
                 intent = self._parse_intent(payload)
+
+            # 1b. Model Routing (Spec 106 - Pack 4.1)
+            selected_model = self.router.route_intent(intent.intent_type)
+            pass # print(f"[L2-Brain Orchestrator] Model selected for {intent.intent_type}: {selected_model.model_id if selected_model else 'DEFAULT'}")
             
             # 2. Auditoría Metacognitiva de Certeza (Spec 42)
             # Bloquear mutaciones si la certeza del locus es baja (< 0.5)
