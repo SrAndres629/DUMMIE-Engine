@@ -3,17 +3,17 @@
 ## Status
 - pack_status: PASS_WITH_WARNINGS
 - repo_health_status: FAIL
-- base_commit: 55c30b1edd77ee9e324e4ab3ca6aef97464bfc00
-- analysis_base_commit: 55c30b1edd77ee9e324e4ab3ca6aef97464bfc00
-- report_generated_at_commit: 55c30b1edd77ee9e324e4ab3ca6aef97464bfc00
-- head_commit: 55c30b1edd77ee9e324e4ab3ca6aef97464bfc00
+- base_commit: 4f7946b559490d60361209215a77a87266bb30f5
+- analysis_base_commit: 4f7946b559490d60361209215a77a87266bb30f5
+- report_generated_at_commit: 4f7946b559490d60361209215a77a87266bb30f5
+- head_commit: 4f7946b559490d60361209215a77a87266bb30f5
 - files_analyzed: 1340
 
 ## Explicit Metrics
 - CRITICAL: 0
 - HIGH: 48
 - SHADOW_CANDIDATE: 48
-- ORPHAN_TEST_CANDIDATE: 2
+- ORPHAN_TEST_CANDIDATE: 0
 - bound_active_runtime: 31
 - deferred_no_safe_action: 0
 - toolchain_validated: 5
@@ -26,25 +26,25 @@
 ## Counts by Class
 - ACTIVE_RUNTIME: 275
 - ACTIVE_SPEC: 634
-- ACTIVE_TEST: 231
+- ACTIVE_TEST: 233
 - CONFIG: 68
 - EXPERIMENTAL: 1
 - GENERATED: 42
 - LEGACY: 30
-- ORPHAN_TEST_CANDIDATE: 2
+- ORPHAN_TEST_CANDIDATE: 0
 - REPORT: 9
 - SHADOW_CANDIDATE: 48
 - UNKNOWN: 0
 
 ## Counts by Recommendation
-- KEEP_AND_TEST: 259
-- MAP_TO_RUNTIME: 631
+- KEEP_AND_TEST: 261
+- MAP_TO_RUNTIME: 629
 - MAP_TO_SPEC: 257
 - MAP_TO_TEST: 19
 - MARK_EXPERIMENTAL: 1
 - MARK_GENERATED: 42
-- MARK_LEGACY: 30
-- NO_ACTION: 101
+- MARK_LEGACY: 20
+- NO_ACTION: 111
 
 ## Bindings Summary
 - bound_active_runtime: 31
@@ -59,8 +59,8 @@
 ## Counts by Risk
 - CRITICAL: 0
 - HIGH: 48
-- LOW: 395
-- MEDIUM: 897
+- LOW: 407
+- MEDIUM: 885
 
 ## Top 30 High-Risk Actions
 1. layers/l2_brain/golden_path.py | proposed=SHADOW_CANDIDATE | risk=HIGH | rec=MAP_TO_SPEC | confidence=0.84
@@ -106,7 +106,7 @@
 - legacy: 30
 
 ## Orphan Test Candidates
-- orphan_test_candidates: 2
+- orphan_test_candidates: 0
 - shadow_candidates: 48
 
 ## Next Phase

@@ -1,17 +1,31 @@
 # Structural Contract Bindings
 
 ## Summary
-- Total Bindings: 38
+- Total Bindings: 50
 - BOUND_ACTIVE_RUNTIME: 31
+- BOUND_ACTIVE_TEST: 2
 - CONTRACT_BOUND: 2
+- MARKED_LEGACY_WITH_EVIDENCE: 10
 - TOOLCHAIN_VALIDATED: 5
 
 ## Bindings List
 
 | Path | Layer | Status (declared->resolved) | Risk (declared->effective) | Spec Hits | Test Hits | Issues |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| `doc/.deprecated/scratchpad/test_kuzu.py` | L2 | MARKED_LEGACY_WITH_EVIDENCE->MARKED_LEGACY_WITH_EVIDENCE | LOW->LOW | 0 | 0 | none |
+| `doc/.deprecated/scratchpad/verify_4d_sovereignty.py` | L2 | MARKED_LEGACY_WITH_EVIDENCE->MARKED_LEGACY_WITH_EVIDENCE | LOW->LOW | 0 | 0 | none |
+| `doc/.deprecated/scratchpad/verify_mcp.py` | L2 | MARKED_LEGACY_WITH_EVIDENCE->MARKED_LEGACY_WITH_EVIDENCE | LOW->LOW | 0 | 0 | none |
+| `doc/.deprecated/scratchpad/verify_mcp_init.py` | L2 | MARKED_LEGACY_WITH_EVIDENCE->MARKED_LEGACY_WITH_EVIDENCE | LOW->LOW | 0 | 0 | none |
+| `doc/.deprecated/scratchpad/verify_mcp_stability.py` | L2 | MARKED_LEGACY_WITH_EVIDENCE->MARKED_LEGACY_WITH_EVIDENCE | LOW->LOW | 0 | 0 | none |
+| `doc/.deprecated/scratchpad/verify_optimization.py` | L2 | MARKED_LEGACY_WITH_EVIDENCE->MARKED_LEGACY_WITH_EVIDENCE | LOW->LOW | 0 | 0 | none |
+| `doc/.deprecated/scratchpad/verify_sensors.py` | L2 | MARKED_LEGACY_WITH_EVIDENCE->MARKED_LEGACY_WITH_EVIDENCE | LOW->LOW | 0 | 0 | none |
+| `doc/.deprecated/scratchpad/verify_spec30_fix.py` | L2 | MARKED_LEGACY_WITH_EVIDENCE->MARKED_LEGACY_WITH_EVIDENCE | LOW->LOW | 0 | 0 | none |
+| `doc/.deprecated/scratchpad/verify_status_final.py` | L2 | MARKED_LEGACY_WITH_EVIDENCE->MARKED_LEGACY_WITH_EVIDENCE | LOW->LOW | 0 | 0 | none |
+| `doc/.deprecated/scratchpad/verify_tools.py` | L2 | MARKED_LEGACY_WITH_EVIDENCE->MARKED_LEGACY_WITH_EVIDENCE | LOW->LOW | 0 | 0 | none |
 | `layers/l0_overseer/lib/overseer/application.ex` | L0 | DEFERRED_NO_SAFE_ACTION->CONTRACT_BOUND | HIGH->MEDIUM | 3 | 0 | none |
 | `layers/l0_overseer/supervisor.py` | L0 | BOUND_ACTIVE_RUNTIME->BOUND_ACTIVE_RUNTIME | MEDIUM->MEDIUM | 3 | 1 | none |
+| `layers/l0_overseer/test/overseer_ipc_test.exs` | L0 | BOUND_ACTIVE_TEST->BOUND_ACTIVE_TEST | LOW->LOW | 3 | 0 | none |
+| `layers/l0_overseer/test/test_helper.exs` | L0 | BOUND_ACTIVE_TEST->BOUND_ACTIVE_TEST | LOW->LOW | 3 | 0 | none |
 | `layers/l1_nervous/application/use_cases.py` | L1 | BOUND_ACTIVE_RUNTIME->BOUND_ACTIVE_RUNTIME | MEDIUM->MEDIUM | 4 | 1 | none |
 | `layers/l1_nervous/bootstrap.py` | L1 | BOUND_ACTIVE_RUNTIME->BOUND_ACTIVE_RUNTIME | MEDIUM->MEDIUM | 4 | 1 | none |
 | `layers/l1_nervous/domain/services.py` | L1 | BOUND_ACTIVE_RUNTIME->BOUND_ACTIVE_RUNTIME | MEDIUM->MEDIUM | 4 | 1 | none |

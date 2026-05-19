@@ -2091,6 +2091,482 @@
         ],
         "issues": []
       }
+    },
+    {
+      "binding": {
+        "path": "layers/l0_overseer/test/overseer_ipc_test.exs",
+        "layer": "L0",
+        "owner_domain": "Overseer OTP Runtime",
+        "structural_class": "ACTIVE_TEST",
+        "binding_status": "BOUND_ACTIVE_TEST",
+        "spec_refs": [
+          "doc/specs/L0_Overseer/03_polyglot_architecture.md",
+          "doc/specs/L0_Overseer/05_orchestration_stack_and_glue.md",
+          "doc/specs/L0_Overseer/11_monorepo_structure.md"
+        ],
+        "test_refs": [],
+        "runtime_refs": [
+          "layers/l0_overseer/lib/overseer/application.ex"
+        ],
+        "evidence_refs": [
+          "FILE_EXISTS"
+        ],
+        "action": "KEEP_AND_TEST",
+        "risk_before": "HIGH",
+        "risk_after": "LOW",
+        "confidence": 1.0,
+        "notes": "Verified active test for Overseer IPC."
+      },
+      "validation": {
+        "path": "layers/l0_overseer/test/overseer_ipc_test.exs",
+        "resolved_status": "BOUND_ACTIVE_TEST",
+        "effective_risk": "LOW",
+        "effective_recommendation": "KEEP_AND_TEST",
+        "confidence": 1.0,
+        "valid_spec_refs": [
+          "doc/specs/L0_Overseer/03_polyglot_architecture.md",
+          "doc/specs/L0_Overseer/05_orchestration_stack_and_glue.md",
+          "doc/specs/L0_Overseer/11_monorepo_structure.md"
+        ],
+        "valid_test_refs": [],
+        "valid_runtime_refs": [
+          "layers/l0_overseer/lib/overseer/application.ex"
+        ],
+        "missing_spec_refs": [],
+        "missing_test_refs": [],
+        "missing_runtime_refs": [],
+        "direct_spec_hits": [],
+        "scoped_spec_hits": [
+          "doc/specs/L0_Overseer/03_polyglot_architecture.md",
+          "doc/specs/L0_Overseer/05_orchestration_stack_and_glue.md",
+          "doc/specs/L0_Overseer/11_monorepo_structure.md"
+        ],
+        "linked_test_hits": [],
+        "issues": []
+      }
+    },
+    {
+      "binding": {
+        "path": "layers/l0_overseer/test/test_helper.exs",
+        "layer": "L0",
+        "owner_domain": "Overseer OTP Runtime",
+        "structural_class": "ACTIVE_TEST",
+        "binding_status": "BOUND_ACTIVE_TEST",
+        "spec_refs": [
+          "doc/specs/L0_Overseer/03_polyglot_architecture.md",
+          "doc/specs/L0_Overseer/05_orchestration_stack_and_glue.md",
+          "doc/specs/L0_Overseer/11_monorepo_structure.md"
+        ],
+        "test_refs": [],
+        "runtime_refs": [
+          "layers/l0_overseer/lib/overseer/application.ex"
+        ],
+        "evidence_refs": [
+          "FILE_EXISTS"
+        ],
+        "action": "KEEP_AND_TEST",
+        "risk_before": "HIGH",
+        "risk_after": "LOW",
+        "confidence": 1.0,
+        "notes": "Standard Elixir test helper script."
+      },
+      "validation": {
+        "path": "layers/l0_overseer/test/test_helper.exs",
+        "resolved_status": "BOUND_ACTIVE_TEST",
+        "effective_risk": "LOW",
+        "effective_recommendation": "KEEP_AND_TEST",
+        "confidence": 1.0,
+        "valid_spec_refs": [
+          "doc/specs/L0_Overseer/03_polyglot_architecture.md",
+          "doc/specs/L0_Overseer/05_orchestration_stack_and_glue.md",
+          "doc/specs/L0_Overseer/11_monorepo_structure.md"
+        ],
+        "valid_test_refs": [],
+        "valid_runtime_refs": [
+          "layers/l0_overseer/lib/overseer/application.ex"
+        ],
+        "missing_spec_refs": [],
+        "missing_test_refs": [],
+        "missing_runtime_refs": [],
+        "direct_spec_hits": [],
+        "scoped_spec_hits": [
+          "doc/specs/L0_Overseer/03_polyglot_architecture.md",
+          "doc/specs/L0_Overseer/05_orchestration_stack_and_glue.md",
+          "doc/specs/L0_Overseer/11_monorepo_structure.md"
+        ],
+        "linked_test_hits": [],
+        "issues": []
+      }
+    },
+    {
+      "binding": {
+        "path": "doc/.deprecated/scratchpad/test_kuzu.py",
+        "layer": "L2",
+        "owner_domain": "Legacy Scratchpad",
+        "structural_class": "LEGACY",
+        "binding_status": "MARKED_LEGACY_WITH_EVIDENCE",
+        "spec_refs": [],
+        "test_refs": [],
+        "runtime_refs": [],
+        "evidence_refs": [
+          "FILE_EXISTS"
+        ],
+        "action": "NO_ACTION",
+        "risk_before": "MEDIUM",
+        "risk_after": "LOW",
+        "confidence": 1.0,
+        "notes": "Frozen legacy scratchpad script."
+      },
+      "validation": {
+        "path": "doc/.deprecated/scratchpad/test_kuzu.py",
+        "resolved_status": "MARKED_LEGACY_WITH_EVIDENCE",
+        "effective_risk": "LOW",
+        "effective_recommendation": "NO_ACTION",
+        "confidence": 0.9,
+        "valid_spec_refs": [],
+        "valid_test_refs": [],
+        "valid_runtime_refs": [],
+        "missing_spec_refs": [],
+        "missing_test_refs": [],
+        "missing_runtime_refs": [],
+        "direct_spec_hits": [],
+        "scoped_spec_hits": [],
+        "linked_test_hits": [],
+        "issues": []
+      }
+    },
+    {
+      "binding": {
+        "path": "doc/.deprecated/scratchpad/verify_4d_sovereignty.py",
+        "layer": "L2",
+        "owner_domain": "Legacy Scratchpad",
+        "structural_class": "LEGACY",
+        "binding_status": "MARKED_LEGACY_WITH_EVIDENCE",
+        "spec_refs": [],
+        "test_refs": [],
+        "runtime_refs": [],
+        "evidence_refs": [
+          "FILE_EXISTS"
+        ],
+        "action": "NO_ACTION",
+        "risk_before": "MEDIUM",
+        "risk_after": "LOW",
+        "confidence": 1.0,
+        "notes": "Frozen legacy scratchpad script."
+      },
+      "validation": {
+        "path": "doc/.deprecated/scratchpad/verify_4d_sovereignty.py",
+        "resolved_status": "MARKED_LEGACY_WITH_EVIDENCE",
+        "effective_risk": "LOW",
+        "effective_recommendation": "NO_ACTION",
+        "confidence": 0.9,
+        "valid_spec_refs": [],
+        "valid_test_refs": [],
+        "valid_runtime_refs": [],
+        "missing_spec_refs": [],
+        "missing_test_refs": [],
+        "missing_runtime_refs": [],
+        "direct_spec_hits": [],
+        "scoped_spec_hits": [],
+        "linked_test_hits": [],
+        "issues": []
+      }
+    },
+    {
+      "binding": {
+        "path": "doc/.deprecated/scratchpad/verify_mcp.py",
+        "layer": "L2",
+        "owner_domain": "Legacy Scratchpad",
+        "structural_class": "LEGACY",
+        "binding_status": "MARKED_LEGACY_WITH_EVIDENCE",
+        "spec_refs": [],
+        "test_refs": [],
+        "runtime_refs": [],
+        "evidence_refs": [
+          "FILE_EXISTS"
+        ],
+        "action": "NO_ACTION",
+        "risk_before": "MEDIUM",
+        "risk_after": "LOW",
+        "confidence": 1.0,
+        "notes": "Frozen legacy scratchpad script."
+      },
+      "validation": {
+        "path": "doc/.deprecated/scratchpad/verify_mcp.py",
+        "resolved_status": "MARKED_LEGACY_WITH_EVIDENCE",
+        "effective_risk": "LOW",
+        "effective_recommendation": "NO_ACTION",
+        "confidence": 0.9,
+        "valid_spec_refs": [],
+        "valid_test_refs": [],
+        "valid_runtime_refs": [],
+        "missing_spec_refs": [],
+        "missing_test_refs": [],
+        "missing_runtime_refs": [],
+        "direct_spec_hits": [],
+        "scoped_spec_hits": [],
+        "linked_test_hits": [],
+        "issues": []
+      }
+    },
+    {
+      "binding": {
+        "path": "doc/.deprecated/scratchpad/verify_mcp_init.py",
+        "layer": "L2",
+        "owner_domain": "Legacy Scratchpad",
+        "structural_class": "LEGACY",
+        "binding_status": "MARKED_LEGACY_WITH_EVIDENCE",
+        "spec_refs": [],
+        "test_refs": [],
+        "runtime_refs": [],
+        "evidence_refs": [
+          "FILE_EXISTS"
+        ],
+        "action": "NO_ACTION",
+        "risk_before": "MEDIUM",
+        "risk_after": "LOW",
+        "confidence": 1.0,
+        "notes": "Frozen legacy scratchpad script."
+      },
+      "validation": {
+        "path": "doc/.deprecated/scratchpad/verify_mcp_init.py",
+        "resolved_status": "MARKED_LEGACY_WITH_EVIDENCE",
+        "effective_risk": "LOW",
+        "effective_recommendation": "NO_ACTION",
+        "confidence": 0.9,
+        "valid_spec_refs": [],
+        "valid_test_refs": [],
+        "valid_runtime_refs": [],
+        "missing_spec_refs": [],
+        "missing_test_refs": [],
+        "missing_runtime_refs": [],
+        "direct_spec_hits": [],
+        "scoped_spec_hits": [],
+        "linked_test_hits": [],
+        "issues": []
+      }
+    },
+    {
+      "binding": {
+        "path": "doc/.deprecated/scratchpad/verify_mcp_stability.py",
+        "layer": "L2",
+        "owner_domain": "Legacy Scratchpad",
+        "structural_class": "LEGACY",
+        "binding_status": "MARKED_LEGACY_WITH_EVIDENCE",
+        "spec_refs": [],
+        "test_refs": [],
+        "runtime_refs": [],
+        "evidence_refs": [
+          "FILE_EXISTS"
+        ],
+        "action": "NO_ACTION",
+        "risk_before": "MEDIUM",
+        "risk_after": "LOW",
+        "confidence": 1.0,
+        "notes": "Frozen legacy scratchpad script."
+      },
+      "validation": {
+        "path": "doc/.deprecated/scratchpad/verify_mcp_stability.py",
+        "resolved_status": "MARKED_LEGACY_WITH_EVIDENCE",
+        "effective_risk": "LOW",
+        "effective_recommendation": "NO_ACTION",
+        "confidence": 0.9,
+        "valid_spec_refs": [],
+        "valid_test_refs": [],
+        "valid_runtime_refs": [],
+        "missing_spec_refs": [],
+        "missing_test_refs": [],
+        "missing_runtime_refs": [],
+        "direct_spec_hits": [],
+        "scoped_spec_hits": [],
+        "linked_test_hits": [],
+        "issues": []
+      }
+    },
+    {
+      "binding": {
+        "path": "doc/.deprecated/scratchpad/verify_optimization.py",
+        "layer": "L2",
+        "owner_domain": "Legacy Scratchpad",
+        "structural_class": "LEGACY",
+        "binding_status": "MARKED_LEGACY_WITH_EVIDENCE",
+        "spec_refs": [],
+        "test_refs": [],
+        "runtime_refs": [],
+        "evidence_refs": [
+          "FILE_EXISTS"
+        ],
+        "action": "NO_ACTION",
+        "risk_before": "MEDIUM",
+        "risk_after": "LOW",
+        "confidence": 1.0,
+        "notes": "Frozen legacy scratchpad script."
+      },
+      "validation": {
+        "path": "doc/.deprecated/scratchpad/verify_optimization.py",
+        "resolved_status": "MARKED_LEGACY_WITH_EVIDENCE",
+        "effective_risk": "LOW",
+        "effective_recommendation": "NO_ACTION",
+        "confidence": 0.9,
+        "valid_spec_refs": [],
+        "valid_test_refs": [],
+        "valid_runtime_refs": [],
+        "missing_spec_refs": [],
+        "missing_test_refs": [],
+        "missing_runtime_refs": [],
+        "direct_spec_hits": [],
+        "scoped_spec_hits": [],
+        "linked_test_hits": [],
+        "issues": []
+      }
+    },
+    {
+      "binding": {
+        "path": "doc/.deprecated/scratchpad/verify_sensors.py",
+        "layer": "L2",
+        "owner_domain": "Legacy Scratchpad",
+        "structural_class": "LEGACY",
+        "binding_status": "MARKED_LEGACY_WITH_EVIDENCE",
+        "spec_refs": [],
+        "test_refs": [],
+        "runtime_refs": [],
+        "evidence_refs": [
+          "FILE_EXISTS"
+        ],
+        "action": "NO_ACTION",
+        "risk_before": "MEDIUM",
+        "risk_after": "LOW",
+        "confidence": 1.0,
+        "notes": "Frozen legacy scratchpad script."
+      },
+      "validation": {
+        "path": "doc/.deprecated/scratchpad/verify_sensors.py",
+        "resolved_status": "MARKED_LEGACY_WITH_EVIDENCE",
+        "effective_risk": "LOW",
+        "effective_recommendation": "NO_ACTION",
+        "confidence": 0.9,
+        "valid_spec_refs": [],
+        "valid_test_refs": [],
+        "valid_runtime_refs": [],
+        "missing_spec_refs": [],
+        "missing_test_refs": [],
+        "missing_runtime_refs": [],
+        "direct_spec_hits": [],
+        "scoped_spec_hits": [],
+        "linked_test_hits": [],
+        "issues": []
+      }
+    },
+    {
+      "binding": {
+        "path": "doc/.deprecated/scratchpad/verify_spec30_fix.py",
+        "layer": "L2",
+        "owner_domain": "Legacy Scratchpad",
+        "structural_class": "LEGACY",
+        "binding_status": "MARKED_LEGACY_WITH_EVIDENCE",
+        "spec_refs": [],
+        "test_refs": [],
+        "runtime_refs": [],
+        "evidence_refs": [
+          "FILE_EXISTS"
+        ],
+        "action": "NO_ACTION",
+        "risk_before": "MEDIUM",
+        "risk_after": "LOW",
+        "confidence": 1.0,
+        "notes": "Frozen legacy scratchpad script."
+      },
+      "validation": {
+        "path": "doc/.deprecated/scratchpad/verify_spec30_fix.py",
+        "resolved_status": "MARKED_LEGACY_WITH_EVIDENCE",
+        "effective_risk": "LOW",
+        "effective_recommendation": "NO_ACTION",
+        "confidence": 0.9,
+        "valid_spec_refs": [],
+        "valid_test_refs": [],
+        "valid_runtime_refs": [],
+        "missing_spec_refs": [],
+        "missing_test_refs": [],
+        "missing_runtime_refs": [],
+        "direct_spec_hits": [],
+        "scoped_spec_hits": [],
+        "linked_test_hits": [],
+        "issues": []
+      }
+    },
+    {
+      "binding": {
+        "path": "doc/.deprecated/scratchpad/verify_status_final.py",
+        "layer": "L2",
+        "owner_domain": "Legacy Scratchpad",
+        "structural_class": "LEGACY",
+        "binding_status": "MARKED_LEGACY_WITH_EVIDENCE",
+        "spec_refs": [],
+        "test_refs": [],
+        "runtime_refs": [],
+        "evidence_refs": [
+          "FILE_EXISTS"
+        ],
+        "action": "NO_ACTION",
+        "risk_before": "MEDIUM",
+        "risk_after": "LOW",
+        "confidence": 1.0,
+        "notes": "Frozen legacy scratchpad script."
+      },
+      "validation": {
+        "path": "doc/.deprecated/scratchpad/verify_status_final.py",
+        "resolved_status": "MARKED_LEGACY_WITH_EVIDENCE",
+        "effective_risk": "LOW",
+        "effective_recommendation": "NO_ACTION",
+        "confidence": 0.9,
+        "valid_spec_refs": [],
+        "valid_test_refs": [],
+        "valid_runtime_refs": [],
+        "missing_spec_refs": [],
+        "missing_test_refs": [],
+        "missing_runtime_refs": [],
+        "direct_spec_hits": [],
+        "scoped_spec_hits": [],
+        "linked_test_hits": [],
+        "issues": []
+      }
+    },
+    {
+      "binding": {
+        "path": "doc/.deprecated/scratchpad/verify_tools.py",
+        "layer": "L2",
+        "owner_domain": "Legacy Scratchpad",
+        "structural_class": "LEGACY",
+        "binding_status": "MARKED_LEGACY_WITH_EVIDENCE",
+        "spec_refs": [],
+        "test_refs": [],
+        "runtime_refs": [],
+        "evidence_refs": [
+          "FILE_EXISTS"
+        ],
+        "action": "NO_ACTION",
+        "risk_before": "MEDIUM",
+        "risk_after": "LOW",
+        "confidence": 1.0,
+        "notes": "Frozen legacy scratchpad script."
+      },
+      "validation": {
+        "path": "doc/.deprecated/scratchpad/verify_tools.py",
+        "resolved_status": "MARKED_LEGACY_WITH_EVIDENCE",
+        "effective_risk": "LOW",
+        "effective_recommendation": "NO_ACTION",
+        "confidence": 0.9,
+        "valid_spec_refs": [],
+        "valid_test_refs": [],
+        "valid_runtime_refs": [],
+        "missing_spec_refs": [],
+        "missing_test_refs": [],
+        "missing_runtime_refs": [],
+        "direct_spec_hits": [],
+        "scoped_spec_hits": [],
+        "linked_test_hits": [],
+        "issues": []
+      }
     }
   ]
 }

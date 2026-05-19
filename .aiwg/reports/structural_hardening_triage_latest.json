@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-05-19T03:09:48.854032Z",
-  "base_commit": "55c30b1edd77ee9e324e4ab3ca6aef97464bfc00",
-  "analysis_base_commit": "55c30b1edd77ee9e324e4ab3ca6aef97464bfc00",
-  "report_generated_at_commit": "55c30b1edd77ee9e324e4ab3ca6aef97464bfc00",
-  "head_commit": "55c30b1edd77ee9e324e4ab3ca6aef97464bfc00",
+  "generated_at": "2026-05-19T03:12:14.638262Z",
+  "base_commit": "4f7946b559490d60361209215a77a87266bb30f5",
+  "analysis_base_commit": "4f7946b559490d60361209215a77a87266bb30f5",
+  "report_generated_at_commit": "4f7946b559490d60361209215a77a87266bb30f5",
+  "head_commit": "4f7946b559490d60361209215a77a87266bb30f5",
   "pack_name": "Structural Hardening Pack 2 - Contract-First Triage",
   "pack_status": "PASS_WITH_WARNINGS",
   "repo_health_status": "FAIL",
@@ -10256,37 +10256,29 @@
       "path": "doc/.deprecated/scratchpad/test_kuzu.py",
       "current_class": "UNKNOWN",
       "proposed_class": "LEGACY",
-      "risk": "MEDIUM",
-      "recommendation": "MARK_LEGACY",
-      "confidence": 0.95,
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.9,
       "evidence_refs": [
         "FILE_EXISTS",
         "IMPORTABLE",
         "REFERENCED_BY_TEST",
         "REFERENCES_RUNTIME",
-        "RUNTIME_IMPORT"
+        "RUNTIME_IMPORT",
+        "valid_specs=[]",
+        "valid_tests=[]"
       ],
       "reasons": [
-        "legacy/deprecated path",
+        "Bound to contract: Frozen legacy scratchpad script.",
+        "binding_status=MARKED_LEGACY_WITH_EVIDENCE",
+        "resolved_status=MARKED_LEGACY_WITH_EVIDENCE",
         "runtime references found",
         "test links found"
       ],
       "related_specs": [],
-      "related_tests": [
-        "doc/.deprecated/scratchpad/test_kuzu.py",
-        "layers/l2_brain/tests/infrastructure/test_kuzu_path_hardening.py",
-        "layers/l2_brain/tests/infrastructure/test_kuzu_repository.py",
-        "layers/l2_brain/tests/test_kuzu_graph_readback_verifier.py",
-        "layers/l2_brain/tests/test_kuzu_graph_sync_adapter.py"
-      ],
-      "related_runtime": [
-        "layers/l1_nervous/diag_kuzu.go",
-        "layers/l2_brain/infrastructure/adapters/kuzu.py",
-        "layers/l2_brain/kuzu_graph_readback_verifier.py",
-        "layers/l2_brain/kuzu_graph_sync_adapter.py",
-        "layers/l2_brain/src/brain/infrastructure/adapters/kuzu_repository.py"
-      ],
-      "safe_to_change": false,
+      "related_tests": [],
+      "related_runtime": [],
+      "safe_to_change": true,
       "requires_human_review": false
     },
     {
@@ -10573,189 +10565,218 @@
       "path": "doc/.deprecated/scratchpad/verify_4d_sovereignty.py",
       "current_class": "LEGACY",
       "proposed_class": "LEGACY",
-      "risk": "MEDIUM",
-      "recommendation": "MARK_LEGACY",
-      "confidence": 0.95,
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.9,
       "evidence_refs": [
         "FILE_EXISTS",
-        "IMPORTABLE"
+        "IMPORTABLE",
+        "valid_specs=[]",
+        "valid_tests=[]"
       ],
       "reasons": [
-        "legacy/deprecated path"
+        "Bound to contract: Frozen legacy scratchpad script.",
+        "binding_status=MARKED_LEGACY_WITH_EVIDENCE",
+        "resolved_status=MARKED_LEGACY_WITH_EVIDENCE"
       ],
       "related_specs": [],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
+      "safe_to_change": true,
       "requires_human_review": false
     },
     {
       "path": "doc/.deprecated/scratchpad/verify_mcp.py",
       "current_class": "LEGACY",
       "proposed_class": "LEGACY",
-      "risk": "MEDIUM",
-      "recommendation": "MARK_LEGACY",
-      "confidence": 0.95,
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.9,
       "evidence_refs": [
         "FILE_EXISTS",
-        "IMPORTABLE"
+        "IMPORTABLE",
+        "valid_specs=[]",
+        "valid_tests=[]"
       ],
       "reasons": [
-        "legacy/deprecated path"
+        "Bound to contract: Frozen legacy scratchpad script.",
+        "binding_status=MARKED_LEGACY_WITH_EVIDENCE",
+        "resolved_status=MARKED_LEGACY_WITH_EVIDENCE"
       ],
       "related_specs": [],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
+      "safe_to_change": true,
       "requires_human_review": false
     },
     {
       "path": "doc/.deprecated/scratchpad/verify_mcp_init.py",
       "current_class": "LEGACY",
       "proposed_class": "LEGACY",
-      "risk": "MEDIUM",
-      "recommendation": "MARK_LEGACY",
-      "confidence": 0.95,
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.9,
       "evidence_refs": [
         "FILE_EXISTS",
-        "IMPORTABLE"
+        "IMPORTABLE",
+        "valid_specs=[]",
+        "valid_tests=[]"
       ],
       "reasons": [
-        "legacy/deprecated path"
+        "Bound to contract: Frozen legacy scratchpad script.",
+        "binding_status=MARKED_LEGACY_WITH_EVIDENCE",
+        "resolved_status=MARKED_LEGACY_WITH_EVIDENCE"
       ],
       "related_specs": [],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
+      "safe_to_change": true,
       "requires_human_review": false
     },
     {
       "path": "doc/.deprecated/scratchpad/verify_mcp_stability.py",
       "current_class": "LEGACY",
       "proposed_class": "LEGACY",
-      "risk": "MEDIUM",
-      "recommendation": "MARK_LEGACY",
-      "confidence": 0.95,
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.9,
       "evidence_refs": [
         "FILE_EXISTS",
-        "IMPORTABLE"
+        "IMPORTABLE",
+        "valid_specs=[]",
+        "valid_tests=[]"
       ],
       "reasons": [
-        "legacy/deprecated path"
+        "Bound to contract: Frozen legacy scratchpad script.",
+        "binding_status=MARKED_LEGACY_WITH_EVIDENCE",
+        "resolved_status=MARKED_LEGACY_WITH_EVIDENCE"
       ],
       "related_specs": [],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
+      "safe_to_change": true,
       "requires_human_review": false
     },
     {
       "path": "doc/.deprecated/scratchpad/verify_optimization.py",
       "current_class": "LEGACY",
       "proposed_class": "LEGACY",
-      "risk": "MEDIUM",
-      "recommendation": "MARK_LEGACY",
-      "confidence": 0.95,
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.9,
       "evidence_refs": [
         "FILE_EXISTS",
-        "IMPORTABLE"
+        "IMPORTABLE",
+        "valid_specs=[]",
+        "valid_tests=[]"
       ],
       "reasons": [
-        "legacy/deprecated path"
+        "Bound to contract: Frozen legacy scratchpad script.",
+        "binding_status=MARKED_LEGACY_WITH_EVIDENCE",
+        "resolved_status=MARKED_LEGACY_WITH_EVIDENCE"
       ],
       "related_specs": [],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
+      "safe_to_change": true,
       "requires_human_review": false
     },
     {
       "path": "doc/.deprecated/scratchpad/verify_sensors.py",
       "current_class": "LEGACY",
       "proposed_class": "LEGACY",
-      "risk": "MEDIUM",
-      "recommendation": "MARK_LEGACY",
-      "confidence": 0.95,
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.9,
       "evidence_refs": [
         "FILE_EXISTS",
-        "IMPORTABLE"
+        "IMPORTABLE",
+        "valid_specs=[]",
+        "valid_tests=[]"
       ],
       "reasons": [
-        "legacy/deprecated path"
+        "Bound to contract: Frozen legacy scratchpad script.",
+        "binding_status=MARKED_LEGACY_WITH_EVIDENCE",
+        "resolved_status=MARKED_LEGACY_WITH_EVIDENCE"
       ],
       "related_specs": [],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
+      "safe_to_change": true,
       "requires_human_review": false
     },
     {
       "path": "doc/.deprecated/scratchpad/verify_spec30_fix.py",
       "current_class": "LEGACY",
       "proposed_class": "LEGACY",
-      "risk": "MEDIUM",
-      "recommendation": "MARK_LEGACY",
-      "confidence": 0.95,
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.9,
       "evidence_refs": [
         "FILE_EXISTS",
         "IMPORTABLE",
-        "REFERENCED_BY_SPEC"
+        "REFERENCED_BY_SPEC",
+        "valid_specs=[]",
+        "valid_tests=[]"
       ],
       "reasons": [
-        "legacy/deprecated path",
+        "Bound to contract: Frozen legacy scratchpad script.",
+        "binding_status=MARKED_LEGACY_WITH_EVIDENCE",
+        "resolved_status=MARKED_LEGACY_WITH_EVIDENCE",
         "spec links found"
       ],
-      "related_specs": [
-        "doc/specs/L1_Nervous/30_floating_sessions.feature",
-        "doc/specs/L1_Nervous/30_floating_sessions.md",
-        "doc/specs/L1_Nervous/30_floating_sessions.rules.json",
-        "doc/specs/L6_Skin/30_visualizer_microservice.feature",
-        "doc/specs/L6_Skin/30_visualizer_microservice.md",
-        "doc/specs/L6_Skin/30_visualizer_microservice.rules.json"
-      ],
+      "related_specs": [],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
+      "safe_to_change": true,
       "requires_human_review": false
     },
     {
       "path": "doc/.deprecated/scratchpad/verify_status_final.py",
       "current_class": "LEGACY",
       "proposed_class": "LEGACY",
-      "risk": "MEDIUM",
-      "recommendation": "MARK_LEGACY",
-      "confidence": 0.95,
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.9,
       "evidence_refs": [
         "FILE_EXISTS",
-        "IMPORTABLE"
+        "IMPORTABLE",
+        "valid_specs=[]",
+        "valid_tests=[]"
       ],
       "reasons": [
-        "legacy/deprecated path"
+        "Bound to contract: Frozen legacy scratchpad script.",
+        "binding_status=MARKED_LEGACY_WITH_EVIDENCE",
+        "resolved_status=MARKED_LEGACY_WITH_EVIDENCE"
       ],
       "related_specs": [],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
+      "safe_to_change": true,
       "requires_human_review": false
     },
     {
       "path": "doc/.deprecated/scratchpad/verify_tools.py",
       "current_class": "LEGACY",
       "proposed_class": "LEGACY",
-      "risk": "MEDIUM",
-      "recommendation": "MARK_LEGACY",
-      "confidence": 0.95,
+      "risk": "LOW",
+      "recommendation": "NO_ACTION",
+      "confidence": 0.9,
       "evidence_refs": [
         "FILE_EXISTS",
-        "IMPORTABLE"
+        "IMPORTABLE",
+        "valid_specs=[]",
+        "valid_tests=[]"
       ],
       "reasons": [
-        "legacy/deprecated path"
+        "Bound to contract: Frozen legacy scratchpad script.",
+        "binding_status=MARKED_LEGACY_WITH_EVIDENCE",
+        "resolved_status=MARKED_LEGACY_WITH_EVIDENCE"
       ],
       "related_specs": [],
       "related_tests": [],
       "related_runtime": [],
-      "safe_to_change": false,
+      "safe_to_change": true,
       "requires_human_review": false
     },
     {
@@ -26672,48 +26693,64 @@
     {
       "path": "layers/l0_overseer/test/overseer_ipc_test.exs",
       "current_class": "UNKNOWN",
-      "proposed_class": "ORPHAN_TEST_CANDIDATE",
-      "risk": "MEDIUM",
-      "recommendation": "MAP_TO_RUNTIME",
-      "confidence": 0.88,
+      "proposed_class": "ACTIVE_TEST",
+      "risk": "LOW",
+      "recommendation": "KEEP_AND_TEST",
+      "confidence": 1.0,
       "evidence_refs": [
         "FILE_EXISTS",
-        "REFERENCED_BY_TEST"
+        "REFERENCED_BY_TEST",
+        "valid_specs=['doc/specs/L0_Overseer/03_polyglot_architecture.md', 'doc/specs/L0_Overseer/05_orchestration_stack_and_glue.md', 'doc/specs/L0_Overseer/11_monorepo_structure.md']",
+        "valid_tests=[]"
       ],
       "reasons": [
-        "test links found",
-        "test without deterministic runtime linkage"
+        "Bound to contract: Verified active test for Overseer IPC.",
+        "binding_status=BOUND_ACTIVE_TEST",
+        "resolved_status=BOUND_ACTIVE_TEST",
+        "test links found"
       ],
-      "related_specs": [],
-      "related_tests": [
-        "layers/l0_overseer/test/overseer_ipc_test.exs"
+      "related_specs": [
+        "doc/specs/L0_Overseer/03_polyglot_architecture.md",
+        "doc/specs/L0_Overseer/05_orchestration_stack_and_glue.md",
+        "doc/specs/L0_Overseer/11_monorepo_structure.md"
       ],
-      "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "related_tests": [],
+      "related_runtime": [
+        "layers/l0_overseer/lib/overseer/application.ex"
+      ],
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "layers/l0_overseer/test/test_helper.exs",
       "current_class": "UNKNOWN",
-      "proposed_class": "ORPHAN_TEST_CANDIDATE",
-      "risk": "MEDIUM",
-      "recommendation": "MAP_TO_RUNTIME",
-      "confidence": 0.88,
+      "proposed_class": "ACTIVE_TEST",
+      "risk": "LOW",
+      "recommendation": "KEEP_AND_TEST",
+      "confidence": 1.0,
       "evidence_refs": [
         "FILE_EXISTS",
-        "REFERENCED_BY_TEST"
+        "REFERENCED_BY_TEST",
+        "valid_specs=['doc/specs/L0_Overseer/03_polyglot_architecture.md', 'doc/specs/L0_Overseer/05_orchestration_stack_and_glue.md', 'doc/specs/L0_Overseer/11_monorepo_structure.md']",
+        "valid_tests=[]"
       ],
       "reasons": [
-        "test links found",
-        "test without deterministic runtime linkage"
+        "Bound to contract: Standard Elixir test helper script.",
+        "binding_status=BOUND_ACTIVE_TEST",
+        "resolved_status=BOUND_ACTIVE_TEST",
+        "test links found"
       ],
-      "related_specs": [],
-      "related_tests": [
-        "layers/l0_overseer/test/test_helper.exs"
+      "related_specs": [
+        "doc/specs/L0_Overseer/03_polyglot_architecture.md",
+        "doc/specs/L0_Overseer/05_orchestration_stack_and_glue.md",
+        "doc/specs/L0_Overseer/11_monorepo_structure.md"
       ],
-      "related_runtime": [],
-      "safe_to_change": false,
-      "requires_human_review": true
+      "related_tests": [],
+      "related_runtime": [
+        "layers/l0_overseer/lib/overseer/application.ex"
+      ],
+      "safe_to_change": true,
+      "requires_human_review": false
     },
     {
       "path": "layers/l0_overseer/cmd/dummied/main.go",
@@ -41135,7 +41172,7 @@
   "summary_counts": {
     "by_class": {
       "ACTIVE_RUNTIME": 275,
-      "ACTIVE_TEST": 231,
+      "ACTIVE_TEST": 233,
       "ACTIVE_SPEC": 634,
       "GENERATED": 42,
       "LEGACY": 30,
@@ -41143,24 +41180,24 @@
       "CONFIG": 68,
       "REPORT": 9,
       "SHADOW_CANDIDATE": 48,
-      "ORPHAN_TEST_CANDIDATE": 2,
+      "ORPHAN_TEST_CANDIDATE": 0,
       "UNKNOWN": 0
     },
     "by_risk": {
-      "LOW": 395,
-      "MEDIUM": 897,
+      "LOW": 407,
+      "MEDIUM": 885,
       "HIGH": 48,
       "CRITICAL": 0
     },
     "by_recommendation": {
-      "KEEP_AND_TEST": 259,
-      "MAP_TO_RUNTIME": 631,
+      "KEEP_AND_TEST": 261,
+      "MAP_TO_RUNTIME": 629,
       "MAP_TO_SPEC": 257,
       "MAP_TO_TEST": 19,
       "MARK_EXPERIMENTAL": 1,
       "MARK_GENERATED": 42,
-      "MARK_LEGACY": 30,
-      "NO_ACTION": 101
+      "MARK_LEGACY": 20,
+      "NO_ACTION": 111
     },
     "bindings_summary": {
       "bound_active_runtime": 31,
@@ -41177,7 +41214,7 @@
     "CRITICAL": 0,
     "HIGH": 48,
     "SHADOW_CANDIDATE": 48,
-    "ORPHAN_TEST_CANDIDATE": 2,
+    "ORPHAN_TEST_CANDIDATE": 0,
     "bound_active_runtime": 31,
     "deferred_no_safe_action": 0,
     "toolchain_validated": 5,
