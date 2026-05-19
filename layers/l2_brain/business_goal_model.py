@@ -1,9 +1,13 @@
+from __future__ import annotations
+
 from dataclasses import dataclass, field
-from typing import List, Optional
+from datetime import datetime, timezone
+from typing import Optional
+
 
 @dataclass
 class GoalClassification:
-    goal_type: str  # revenue, technical, operations, strategy, unknown
+    goal_type: str
     confidence: float
     description: str
 
@@ -11,8 +15,9 @@ class GoalClassification:
         return {
             "goal_type": self.goal_type,
             "confidence": self.confidence,
-            "description": self.description
+            "description": self.description,
         }
+
 
 @dataclass
 class BusinessIntake:
@@ -26,7 +31,7 @@ class BusinessIntake:
     offer: Optional[str] = None
     operational_capacity: Optional[str] = None
     target_market: Optional[str] = None
-    existing_assets: List[str] = field(default_factory=list)
+    existing_assets: list[str] = field(default_factory=list)
 
     def to_dict(self) -> dict:
         return {
@@ -40,28 +45,30 @@ class BusinessIntake:
             "offer": self.offer,
             "operational_capacity": self.operational_capacity,
             "target_market": self.target_market,
-            "existing_assets": self.existing_assets
+            "existing_assets": self.existing_assets,
         }
+
 
 @dataclass
 class ToolOpportunity:
     name: str
     description: str
-    opportunity_type: str  # calculator, tracker, template, etc.
+    opportunity_type: str
 
     def to_dict(self) -> dict:
         return {
             "name": self.name,
             "description": self.description,
-            "opportunity_type": self.opportunity_type
+            "opportunity_type": self.opportunity_type,
         }
+
 
 @dataclass
 class GoalMemoryEntry:
     goal: str
     goal_type: str
     timestamp: str
-    status: str  # active, completed, discarded
+    status: str
     metadata: dict = field(default_factory=dict)
 
     def to_dict(self) -> dict:
@@ -70,5 +77,45 @@ class GoalMemoryEntry:
             "goal_type": self.goal_type,
             "timestamp": self.timestamp,
             "status": self.status,
-            "metadata": self.metadata
+            "metadata": self.metadata,
         }
+
+
+def detect_goal_type(text: str) -> GoalClassification:
+    from layers.l2_brain.goal_reasoning_runtime import GoalReasoningRuntime
+
+    runtime = GoalReasoningRuntime()
+    return runtime.classify_goal(text)
+
+
+def build_business_intake(goal: str) -> BusinessIntake:
+    from layers.l2_brain.goal_reasoning_runtime import GoalReasoningRuntime
+
+    runtime = GoalReasoningRuntime()
+    target = runtime.extract_target_mrr(goal)
+    return BusinessIntake(goal=goal, target_mrr=target)
+
+
+def generate_strategic_questions(goal: str) -> list[str]:
+    from layers.l2_brain.strategic_question_generator import StrategicQuestionGenerator
+
+    goal_type = detect_goal_type(goal).goal_type
+    return StrategicQuestionGenerator().generate_questions(goal, goal_type)
+
+
+def detect_tool_opportunities(goal: str) -> list[ToolOpportunity]:
+    from layers.l2_brain.tool_opportunity_detector import ToolOpportunityDetector
+
+    goal_type = detect_goal_type(goal).goal_type
+    return ToolOpportunityDetector().detect_opportunities(goal, goal_type)
+
+
+def create_goal_memory_entry(goal: str) -> GoalMemoryEntry:
+    classification = detect_goal_type(goal)
+    return GoalMemoryEntry(
+        goal=goal,
+        goal_type=classification.goal_type,
+        timestamp=datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z"),
+        status="active",
+        metadata={"confidence": classification.confidence},
+    )

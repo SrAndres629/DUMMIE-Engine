@@ -1,50 +1,18 @@
+from __future__ import annotations
+
 import os
-import json
+from dataclasses import dataclass
 from pathlib import Path
-from dummie.paths import ROOT, AIWG
 
+from dummie.paths import AIWG, ROOT
+
+
+@dataclass(frozen=True)
 class DummieConfig:
-    def __init__(self):
-        self.root_dir = ROOT
-        self.aiwg_dir = AIWG
-        self.env = self._load_env()
-        self.identity = self._load_identity()
-        self.truth = self._load_truth()
+    root_dir: Path = ROOT
+    aiwg_dir: Path = AIWG
 
-    def _load_env(self) -> dict:
-        env_file = ROOT / ".env"
-        data = {}
-        if env_file.exists():
-            try:
-                with open(env_file, "r") as f:
-                    for line in f:
-                        line = line.strip()
-                        if line and not line.startswith("#") and "=" in line:
-                            k, v = line.split("=", 1)
-                            data[k.strip()] = v.strip().strip('"').strip("'")
-            except Exception:
-                pass
-        return data
-
-    def _load_identity(self) -> dict:
-        identity_file = AIWG / "identity.json"
-        if identity_file.exists():
-            try:
-                with open(identity_file, "r") as f:
-                    return json.load(f)
-            except Exception:
-                pass
-        return {}
-
-    def _load_truth(self) -> dict:
-        truth_file = AIWG / "state" / "current_truth.json"
-        if truth_file.exists():
-            try:
-                with open(truth_file, "r") as f:
-                    return json.load(f)
-            except Exception:
-                pass
-        return {}
-
-    def get(self, key: str, default=None):
-        return self.env.get(key, os.environ.get(key, default))
+    @staticmethod
+    def get_env(name: str, default: str | None = None) -> str | None:
+        """Read from process env only. Never parse .env files from repo."""
+        return os.environ.get(name, default)

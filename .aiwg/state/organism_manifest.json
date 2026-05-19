@@ -1,0 +1,20 @@
+{
+  "decision": "PROPOSED",
+  "canonical_body": [
+    "dummie/",
+    "layers/l2_brain/",
+    "scripts/dummie",
+    "scripts/dummie-ctl",
+    ".aiwg/state",
+    ".aiwg/identity",
+    ".aiwg/providers"
+  ],
+  "excluded_paths": [
+    ".venv",
+    "node_modules",
+    "target",
+    ".aiwg/workspaces",
+    ".aiwg/memory"
+  ],
+  "notes": "Non-destructive manifest for sovereign runtime context economy."
+}

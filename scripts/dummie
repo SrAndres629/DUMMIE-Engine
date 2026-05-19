@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
-# Execute dummie CLI using the local venv Python
+set -euo pipefail
+
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-export PYTHONPATH="$ROOT_DIR:$PYTHONPATH"
-exec "$ROOT_DIR/.venv/bin/python3" -m dummie "$@"
+export PYTHONPATH="$ROOT_DIR:${PYTHONPATH:-}"
+
+if [[ -x "$ROOT_DIR/.venv/bin/python3" ]]; then
+  exec "$ROOT_DIR/.venv/bin/python3" -m dummie "$@"
+fi
+
+exec python3 -m dummie "$@"

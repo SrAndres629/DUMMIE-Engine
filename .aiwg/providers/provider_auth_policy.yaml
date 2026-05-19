@@ -1,7 +1,14 @@
 auth_policy:
-  description: "No secrets should be saved in git. Providers should read secrets from local environment variable OR safe keyring only."
+  description: "Provider secrets are external-only and never committed to git."
   enforce_git_protection: true
+  allow_env_lookup: true
+  allow_keyring_lookup: true
   allowed_auth_modes:
     - "api_key"
+    - "api_key_or_manual"
     - "external_cli_auth"
     - "ide_managed"
+  prohibited:
+    - "commit_api_keys"
+    - "print_env_values"
+    - "store_secrets_in_reports"

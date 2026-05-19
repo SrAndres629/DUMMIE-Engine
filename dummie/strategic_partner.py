@@ -1,5 +1,8 @@
+from __future__ import annotations
+
 from dummie.paths import AIWG
 from layers.l2_brain.strategic_partner_runtime import StrategicPartnerRuntime
+
 
 class DummieStrategicPartner:
     def __init__(self):

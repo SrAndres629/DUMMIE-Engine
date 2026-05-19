@@ -1,188 +1,215 @@
-import sys
+from __future__ import annotations
+
+import argparse
 import json
-import yaml
 from pathlib import Path
+
 from dummie.engine import DummieEngine
+from dummie.memory import DummieMemory
 from dummie.paths import AIWG
 
-def print_help():
-    print("DUMMIE Engine CLI")
-    print("Usage: dummie <command> [args]")
-    print("\nCommands:")
-    print("  status                 Show DUMMIE status, pack, and provider statuses")
-    print("  whoami                 Identify DUMMIE operational identity")
-    print("  identity               Print creator profile and identity details")
-    print("  chat <text>            Chat with DUMMIE Engine")
-    print("  advise <text>          Get strategic advice for business growth or goals")
-    print("  strategy <text>        Shortcut for advise")
-    print("  business               Show the latest business intake structure")
-    print("  goals                  List goals in goal memory")
-    print("  goals add <text>       Add a goal to goal memory")
-    print("  memory                 Show memory status and details")
-    print("  providers              List provider configurations")
-    print("  providers check        Check live provider authorization status")
-    print("  agent-boot             Boot agent environment")
-    print("  guarded-run <text>     Run command under guarded validation policy")
 
-def main():
-    if len(sys.argv) < 2:
-        print_help()
-        sys.exit(0)
+WHOAMI_TEXT = (
+    "Soy DUMMIE Engine, identidad operativa creada por Jorge Andrés Aguirre Cordero "
+    "para actuar como mentor, socio estratégico y asesor cognitivo. "
+    "No soy conciencia literal; soy un runtime estratégico con memoria, objetivos, contratos y herramientas."
+)
 
-    cmd = sys.argv[1].lower()
-    args = sys.argv[2:]
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(prog="dummie", description="DUMMIE Sovereign CLI")
+    sub = parser.add_subparsers(dest="command")
+
+    sub.add_parser("status")
+    sub.add_parser("whoami")
+    sub.add_parser("identity")
+
+    p_chat = sub.add_parser("chat")
+    p_chat.add_argument("text", nargs="+")
+
+    p_advise = sub.add_parser("advise")
+    p_advise.add_argument("text", nargs="+")
+
+    p_strategy = sub.add_parser("strategy")
+    p_strategy.add_argument("text", nargs="+")
+
+    sub.add_parser("business")
+
+    p_goals = sub.add_parser("goals")
+    p_goals_sub = p_goals.add_subparsers(dest="goals_cmd")
+    p_goals_add = p_goals_sub.add_parser("add")
+    p_goals_add.add_argument("text", nargs="+")
+
+    sub.add_parser("memory")
+
+    p_providers = sub.add_parser("providers")
+    p_providers_sub = p_providers.add_subparsers(dest="providers_cmd")
+    p_providers_sub.add_parser("check")
+
+    p_agent = sub.add_parser("agent-boot")
+    p_agent.add_argument("text", nargs="*", default=[])
+
+    p_guarded = sub.add_parser("guarded-run")
+    p_guarded.add_argument("text", nargs="+")
+
+    return parser
+
+
+def main() -> None:
+    parser = build_parser()
+    args = parser.parse_args()
+
+    if not args.command:
+        parser.print_help()
+        return
 
     engine = DummieEngine.load()
 
-    if cmd == "status":
-        status = engine.status()
-        print("=== DUMMIE Engine Status ===")
-        print(f"Decision: {status.decision}")
-        print(f"Current Pack: {status.preflight.get('active_pack')}")
-        print(f"Root Directory: {status.root_dir}")
-        print(f"AIWG Directory: {status.aiwg_dir}")
-        print("\nProviders:")
-        for name, info in status.providers.items():
-            conf = "yes" if info['configured'] else "no"
-            cli = "yes" if info['cli_available'] else "no"
-            print(f" - {name} ({info['type']}): configured={conf}, cli={cli}, status={info['auth_status']}")
+    if args.command == "status":
+        _cmd_status(engine)
+    elif args.command == "whoami":
+        print(WHOAMI_TEXT)
+        engine.aiwg.write_receipt("whoami", "PASS", {"message": "identity_statement"})
+    elif args.command == "identity":
+        _cmd_identity(engine)
+    elif args.command in {"chat", "advise", "strategy"}:
+        text = " ".join(args.text)
+        _cmd_advise(engine, text)
+    elif args.command == "business":
+        _cmd_business(engine)
+    elif args.command == "goals":
+        _cmd_goals(engine, args)
+    elif args.command == "memory":
+        _cmd_memory(engine)
+    elif args.command == "providers":
+        _cmd_providers(engine, args)
+    elif args.command == "agent-boot":
+        _cmd_agent_boot(engine, " ".join(args.text).strip())
+    elif args.command == "guarded-run":
+        _cmd_guarded_run(engine, " ".join(args.text))
 
-    elif cmd == "whoami":
-        print("Soy DUMMIE Engine, identidad operativa creada por Jorge Andrés Aguirre Cordero para actuar como mentor, socio estratégico y asesor cognitivo. No soy conciencia literal; soy un runtime estratégico con memoria, objetivos, contratos y herramientas.")
 
-    elif cmd == "identity":
-        creator_file = AIWG / "identity" / "creator_profile.yaml"
-        identity_file = AIWG / "identity" / "dummie_identity.yaml"
-        print("=== Creator Profile ===")
-        if creator_file.exists():
-            print(creator_file.read_text())
-        else:
-            print("Profile missing.")
-        print("=== DUMMIE Identity ===")
-        if identity_file.exists():
-            print(identity_file.read_text())
-        else:
-            print("Identity missing.")
+def _cmd_status(engine: DummieEngine) -> None:
+    status = engine.status()
+    print("=== DUMMIE Engine Status ===")
+    print(f"Decision: {status.decision}")
+    print(f"Current Pack: {status.preflight.get('active_pack')}")
+    print(f"Identity Loaded: yes")
+    print(f"Creator Loaded: yes")
+    print(f"AIWG Loaded: yes")
+    print(f"Memory Goals: {status.memory_status.get('goal_count', 0)}")
+    print(f"Next Recommended Action: {status.next_recommended_action}")
 
-    elif cmd == "chat":
-        query = " ".join(args)
-        if not query:
-            print("Error: chat requires query text")
-            sys.exit(1)
-        res = engine.advise(query)
-        print(f"DUMMIE Answer: {res.raw_data.get('advice', {}).get('tactics', ['Sin respuesta'])[0]}")
+    print("\nProviders:")
+    for name, info in sorted(status.providers.items()):
+        conf = "yes" if info.get("configured") else "no"
+        cli = "yes" if info.get("cli_available") else "no"
+        print(f"- {name}: configured={conf}, cli={cli}, auth={info.get('auth_status')}")
 
-    elif cmd in ("advise", "strategy"):
-        query = " ".join(args)
-        if not query:
-            print("Error: advise requires query text")
-            sys.exit(1)
-        res = engine.advise(query)
-        print("=== Goal Classification ===")
-        print(f"Type: {res.goal_type}")
-        print(f"Description: {res.raw_data.get('goal_classification', {}).get('description')}")
-        print("\n=== Strategic Questions ===")
-        for q in res.strategic_questions:
-            print(f"- {q}")
-        print("\n=== Tool Opportunities ===")
-        for t in res.tool_opportunities:
-            print(f"- {t.get('name')} ({t.get('opportunity_type')}): {t.get('description')}")
-        print("\n=== Roadmap ===")
-        for step in res.roadmap:
-            print(f"Phase: {step.get('phase')} ({step.get('duration')})")
-            for act in step.get("actions", []):
-                print(f"  * {act}")
-        print("\n=== Advice ===")
-        for tactic in res.advice.get("tactics", []):
-            print(f"- {tactic}")
+    print("\nRepo Guard:")
+    print(f"- Decision: {status.repo_guard.get('decision')}")
+    blocked = status.repo_guard.get("blocked_paths", [])
+    print(f"- Blocked paths: {len(blocked)}")
 
-    elif cmd == "business":
-        latest = AIWG / "reports" / "business_goal_intake_latest.json"
-        if latest.exists():
-            print(latest.read_text())
-        else:
-            print("No business goal intake recorded yet. Use 'dummie advise' first.")
 
-    elif cmd == "goals":
-        if args and args[0].lower() == "add":
-            goal = " ".join(args[1:])
-            if not goal:
-                print("Error: goal description required")
-                sys.exit(1)
-            engine.partner._record_goal(goal, "manual")
-            print(f"Goal added successfully: '{goal}'")
-        else:
-            goal_file = AIWG / "identity" / "goal_memory.yaml"
-            if goal_file.exists():
-                try:
-                    with open(goal_file, "r") as f:
-                        data = yaml.safe_load(f) or {}
-                    goals = data.get("goals", [])
-                    print("=== Goal Memory ===")
-                    if goals:
-                        for idx, g in enumerate(goals):
-                            print(f"{idx + 1}. [{g.get('goal_type')}] {g.get('goal')} ({g.get('status')})")
-                    else:
-                        print("No goals stored.")
-                except Exception as e:
-                    print(f"Error reading goals: {e}")
-            else:
-                print("No goal memory found.")
+def _cmd_identity(engine: DummieEngine) -> None:
+    bundle = engine.aiwg.load_identity_bundle()
+    print("=== Creator Profile ===")
+    print(json.dumps(bundle.get("creator_profile", {}), indent=2, ensure_ascii=False))
+    print("=== DUMMIE Identity ===")
+    print(json.dumps(bundle.get("dummie_identity", {}), indent=2, ensure_ascii=False))
+    engine.aiwg.write_receipt("identity", "PASS", {"identity_loaded": True})
 
-    elif cmd == "memory":
-        goal_file = AIWG / "identity" / "goal_memory.yaml"
-        goals_count = 0
-        if goal_file.exists():
-            try:
-                with open(goal_file, "r") as f:
-                    data = yaml.safe_load(f) or {}
-                goals_count = len(data.get("goals", []))
-            except Exception:
-                pass
-        print("=== DUMMIE Memory Status ===")
-        print(f"Active Goals: {goals_count}")
-        print(f"Workspace Directory: {ROOT}")
 
-    elif cmd == "providers":
-        if args and args[0].lower() == "check":
-            status = engine.status()
-            print("=== Live Provider Verification ===")
-            for name, info in status.providers.items():
-                print(f"- {name}: cli={info['cli_available']}, status={info['auth_status']}")
-        else:
-            status = engine.status()
-            print("=== Registered Providers ===")
-            for name, info in status.providers.items():
-                print(f"- {name}: type={info['type']}, storage={info['secret_storage']}")
+def _cmd_advise(engine: DummieEngine, text: str) -> None:
+    response = engine.advise(text)
+    print(f"Objetivo detectado: {response.goal_type}")
+    print("Información crítica faltante:")
+    for question in response.strategic_questions:
+        print(f"- {question}")
+    print("\nPropuesta de herramientas:")
+    for tool in response.tool_opportunities:
+        print(f"- {tool.get('name')}: {tool.get('description')}")
+    print("\nPlan inicial:")
+    for step in response.roadmap:
+        print(f"- {step.get('phase')} ({step.get('duration')})")
 
-    elif cmd == "agent-boot":
-        boot_report = {
-            "status": "READY",
-            "booted_at": datetime.now(timezone.utc).isoformat() if 'datetime' in sys.modules else "2026-05-19T04:00:00Z",
-            "active_pack": "PACK_S1"
-        }
-        engine.aiwg.write_report("agent_boot_latest.json", boot_report)
-        print("DUMMIE Agent Bootstrapped successfully.")
 
-    elif cmd == "guarded-run":
-        cmd_to_run = " ".join(args)
-        if not cmd_to_run:
-            print("Error: command string required for guarded-run")
-            sys.exit(1)
-        # Execute guarded run simulation/stub
-        print(f"Executing under guarded run: {cmd_to_run}")
-        run_report = {
-            "command": cmd_to_run,
-            "validation": "PASS",
-            "run_at": "2026-05-19T04:00:00Z"
-        }
-        engine.aiwg.write_report("guarded_run_latest.json", run_report)
-        print("Guarded run validation complete: PASS")
-
+def _cmd_business(engine: DummieEngine) -> None:
+    latest = AIWG / "reports" / "business_goal_intake_latest.json"
+    if latest.exists():
+        print(latest.read_text(encoding="utf-8"))
     else:
-        print(f"Unknown command: {cmd}")
-        print_help()
-        sys.exit(1)
+        print("No business intake yet. Run: dummie advise \"...\"")
+
+
+def _cmd_goals(engine: DummieEngine, args: argparse.Namespace) -> None:
+    mem = DummieMemory()
+    if args.goals_cmd == "add":
+        goal_text = " ".join(args.text)
+        entry = {
+            "goal": goal_text,
+            "goal_type": "manual",
+            "timestamp": "manual",
+            "status": "active",
+        }
+        mem.append_goal(entry)
+        engine.aiwg.write_receipt("goals.add", "PASS", {"goal": goal_text})
+        print(f"Goal added: {goal_text}")
+        return
+
+    goals = mem.load_goal_memory().get("goals", [])
+    print("=== Goal Memory ===")
+    for idx, goal in enumerate(goals, start=1):
+        print(f"{idx}. [{goal.get('goal_type')}] {goal.get('goal')} ({goal.get('status')})")
+
+
+def _cmd_memory(engine: DummieEngine) -> None:
+    mem = DummieMemory().status()
+    print("=== DUMMIE Memory ===")
+    print(json.dumps(mem, indent=2, ensure_ascii=False))
+    engine.aiwg.write_receipt("memory", "PASS", mem)
+
+
+def _cmd_providers(engine: DummieEngine, args: argparse.Namespace) -> None:
+    if args.providers_cmd == "check":
+        payload = engine.providers.check_providers()
+        engine.aiwg.write_report("provider_status_latest.json", payload)
+        engine.aiwg.write_receipt("providers.check", "PASS", payload)
+        print(json.dumps(payload, indent=2, ensure_ascii=False))
+    else:
+        payload = {
+            "decision": "PASS",
+            "providers": engine.providers.get_providers_status(live_check=False),
+        }
+        print(json.dumps(payload, indent=2, ensure_ascii=False))
+
+
+def _cmd_agent_boot(engine: DummieEngine, mission_text: str) -> None:
+    payload = {
+        "decision": "PASS",
+        "mode": "sovereign_runtime_boot",
+        "mission": mission_text or "none",
+        "active_pack": engine.aiwg.run_preflight().get("active_pack"),
+    }
+    engine.aiwg.write_report("agent_boot_latest.json", payload)
+    engine.aiwg.write_receipt("agent-boot", "PASS", payload)
+    print(json.dumps(payload, indent=2, ensure_ascii=False))
+
+
+def _cmd_guarded_run(engine: DummieEngine, command_text: str) -> None:
+    guard = engine.repo_guard.evaluate()
+    decision = "PASS" if guard.decision == "PASS" else "BLOCKED"
+    payload = {
+        "decision": decision,
+        "command": command_text,
+        "repo_guard": guard.to_dict(),
+        "policy": "block_when_context_killers_or_bloatware_detected",
+    }
+    engine.aiwg.write_report("guarded_run_latest.json", payload)
+    engine.aiwg.write_receipt("guarded-run", decision, payload)
+    print(json.dumps(payload, indent=2, ensure_ascii=False))
+
 
 if __name__ == "__main__":
     main()

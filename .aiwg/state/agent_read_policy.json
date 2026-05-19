@@ -1,0 +1,30 @@
+{
+  "decision": "PASS",
+  "policy": "no_raw_repo_loading",
+  "excluded_paths": [
+    ".venv",
+    "venv",
+    "node_modules",
+    "target",
+    "dist",
+    "build",
+    "__pycache__",
+    ".pytest_cache",
+    ".aiwg/workspaces",
+    ".aiwg/memory",
+    ".aiwg/tools/opencode-data"
+  ],
+  "forbidden_artifact_patterns": [
+    "*.db",
+    "*.sqlite",
+    "*.sqlite3",
+    "*.bin",
+    "*.beam",
+    "*.log",
+    "*.tmp",
+    "*.cache",
+    "*.zip",
+    "*.tar",
+    "*.tar.gz"
+  ]
+}
