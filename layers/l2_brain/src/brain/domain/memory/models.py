@@ -1,7 +1,7 @@
 import hashlib
 import json
 from pydantic import BaseModel, Field
-from typing import List, Dict, Optional
+from typing import Any, List, Dict, Optional
 from datetime import datetime
 from brain.domain.context.models import SixDimensionalContext, AuthorityLevel, IntentType
 
@@ -50,16 +50,31 @@ class MemoryNode4DTES(BaseModel):
     @classmethod
     def generate(
         cls,
-        parent_hashes: List[str],
-        locus_x: str,
-        locus_y: str,
-        locus_z: str,
-        lamport_t: int,
-        authority_a: str,
-        intent_i: str,
-        payload: str
+        parent_hashes: Optional[List[str]] = None,
+        locus_x: str = "",
+        locus_y: str = "",
+        locus_z: str = "",
+        lamport_t: int = 0,
+        authority_a: Any = "",
+        intent_i: Any = "",
+        payload: Any = "",
+        parent_hash: Optional[str] = None,
+        context: Optional[SixDimensionalContext] = None,
     ) -> "MemoryNode4DTES":
         """Factory para generar un nodo con hashes calculados determinísticamente."""
+        if context is not None:
+            locus_x = context.locus_x
+            locus_y = context.locus_y
+            locus_z = context.locus_z
+            lamport_t = context.lamport_t
+            authority_a = context.authority_a
+            intent_i = context.intent_i
+        if parent_hashes is None:
+            parent_hashes = [parent_hash] if parent_hash else ["GENESIS"]
+        if isinstance(payload, bytes):
+            payload = payload.decode("utf-8")
+        authority_value = authority_a.value if hasattr(authority_a, "value") else str(authority_a)
+        intent_value = intent_i.value if hasattr(intent_i, "value") else str(intent_i)
         payload_hash = f"sha256:{hashlib.sha256(payload.encode('utf-8')).hexdigest()}"
         
         sorted_parents = sorted(parent_hashes) if parent_hashes else ["GENESIS"]
@@ -70,8 +85,8 @@ class MemoryNode4DTES(BaseModel):
             "locus_y": locus_y,
             "locus_z": locus_z,
             "lamport_t": lamport_t,
-            "authority_a": authority_a,
-            "intent_i": intent_i,
+            "authority_a": authority_value,
+            "intent_i": intent_value,
         }
         canonical = json.dumps(
             node_material,
@@ -88,8 +103,8 @@ class MemoryNode4DTES(BaseModel):
             locus_y=locus_y,
             locus_z=locus_z,
             lamport_t=lamport_t,
-            authority_a=authority_a,
-            intent_i=intent_i,
+            authority_a=authority_value,
+            intent_i=intent_value,
             payload=payload,
             payload_hash=payload_hash
         )

@@ -222,7 +222,7 @@ def memory_get_node(causal_hash: str) -> str:
     if not node:
         return json.dumps({"error": f"Node not found: {causal_hash}", "found": False})
 
-    payload_str = node.payload.decode("utf-8", errors="replace")
+    payload_str = node.payload.decode("utf-8", errors="replace") if isinstance(node.payload, bytes) else str(node.payload)
 
     return json.dumps({
         "found": True,
@@ -408,6 +408,7 @@ def ledger_record(
 
     record = DecisionRecord(
         decision_id=decision_id,
+        tick=context.lamport_t,
         rationale=rationale,
         impact_blast_radius=impact_blast_radius,
         context=context,
