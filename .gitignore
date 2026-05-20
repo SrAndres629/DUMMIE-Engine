@@ -27,7 +27,11 @@ tmp/
 !.aiwg/self_model/
 !.aiwg/self_model/**
 .aiwg/receipts/
-.aiwg/reports/
+.aiwg/reports/*
+!.aiwg/reports/aiwg_kernel_freeze_audit_latest.json
+!.aiwg/reports/aiwg_kernel_freeze_audit_latest.md
+!.aiwg/reports/pack_validation_evidence_latest.json
+!.aiwg/reports/pack_validation_evidence_latest.md
 .aiwg/tools/
 .aiwg/heartbeat/
 .aiwg/mental_models/

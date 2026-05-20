@@ -650,3 +650,25 @@ def test_aiwg_kernel_freeze_consistency():
     import scripts.aiwg_pack_guard as guard
     assert guard.check_anti_overclaim_lint() is True, "anti-overclaim lint scanner must pass cleanly"
 
+def test_aiwg_kernel_freeze_required_artifacts_are_versioned():
+    """Prevent local-only governance evidence from passing locally and failing in CI."""
+    if not os.path.isdir(".git"):
+        pytest.skip("git metadata unavailable")
+
+    required_paths = [
+        STATE_TRUTH,
+        ACTIVE_PACK,
+        EVIDENCE_JSON,
+        os.path.join(AIWG_DIR, "reports", "aiwg_kernel_freeze_audit_latest.json"),
+    ]
+
+    result = subprocess.run(
+        ["git", "ls-files", "--error-unmatch", *required_paths],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    assert result.returncode == 0, (
+        "AIWG kernel freeze artifacts must be versioned, not local-only. "
+        f"git ls-files stderr: {result.stderr.strip()}"
+    )
