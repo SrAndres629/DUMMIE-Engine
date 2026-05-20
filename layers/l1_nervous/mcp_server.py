@@ -48,7 +48,7 @@ AIWG_DIR = os.environ.get("DUMMIE_AIWG", os.environ.get("DUMMIE_AIWG_DIR", os.pa
 KUZU_DB_PATH = os.environ.get("DUMMIE_KUZU_DB_PATH", os.path.join(AIWG_DIR, "memory/loci.db"))
 
 _EXPLICIT_MCP_CONFIG_PATH = os.environ.get("DUMMIE_MCP_CONFIG_PATH")
-_DEFAULT_REGISTRY_PATH = os.path.expanduser("~/.gemini/antigravity/mcp_config.registry.json")
+_DEFAULT_REGISTRY_PATH = os.path.expanduser("~/.antigravity/mcp_config.registry.json")
 
 if _EXPLICIT_MCP_CONFIG_PATH:
     MCP_CONFIG_PATH = _EXPLICIT_MCP_CONFIG_PATH

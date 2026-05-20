@@ -6,7 +6,7 @@
         "/home/jorand/temp_servers/src/memory/dist/index.js"
       ],
       "env": {
-        "MEMORY_FILE_PATH": "/home/jorand/.gemini/antigravity/knowledge/memory.jsonl"
+        "MEMORY_FILE_PATH": "/home/jorand/.antigravity/knowledge/memory.jsonl"
       },
       "disabled": true,
       "disabled_reason": "legacy no conecta con el motor 4d "
@@ -70,7 +70,7 @@
       "args": [
         "mcp-server-sqlite",
         "--db-path",
-        "/home/jorand/.gemini/antigravity/knowledge/dummie_sqlite.db"
+        "/home/jorand/.antigravity/knowledge/dummie_sqlite.db"
       ],
       "disabled": false,
       "profile": "knowledge",

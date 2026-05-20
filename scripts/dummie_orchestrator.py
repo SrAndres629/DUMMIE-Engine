@@ -59,7 +59,7 @@ class DummieOrchestrator:
                     "env": {
                         "DUMMIE_SESSION_ID": session_id,
                         "DUMMIE_WORKSPACE": str(workspace),
-                        "DUMMIE_MCP_CONFIG_PATH": os.environ.get("DUMMIE_MCP_CONFIG_PATH", os.path.expanduser("~/.gemini/antigravity/mcp_config.registry.json")),
+                        "DUMMIE_MCP_CONFIG_PATH": os.environ.get("DUMMIE_MCP_CONFIG_PATH", os.path.expanduser("~/.antigravity/mcp_config.registry.json")),
                         "PYTHONPATH": f"{self.root_dir}/layers/l2_brain/src:{self.root_dir}/layers/l1_nervous"
                     }
                 }

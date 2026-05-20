@@ -50,6 +50,7 @@ class DummieProviderRegistry:
         "gemini_cli": ["gemini", "gemini-cli"],
         "codex_cli": ["codex"],
         "opencode": ["opencode"],
+        "antigravity": ["antigravity"],
     }
 
     CAPABILITY_MAP = {

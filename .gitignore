@@ -77,3 +77,4 @@ scratch/venv/
 *.so
 *.dll
 *.dylib
+.gemini.bak/

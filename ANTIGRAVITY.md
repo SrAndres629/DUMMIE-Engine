@@ -1,7 +1,7 @@
-# Agent Collaboration Model
+# Antigravity 2.0 Agent Collaboration Model
 
 ## Purpose
-Define practical collaboration roles for multi-agent development in this repository.
+Define practical collaboration roles for multi-agent development under the Antigravity 2.0 runtime in this repository.
 
 ## Roles
 1. `contract-architect`: define/validate interfaces and constraints.
@@ -16,3 +16,6 @@ Define practical collaboration roles for multi-agent development in this reposit
 - Small diffs with explicit ownership.
 - Verification evidence required before completion claims.
 - Update docs when assumptions or architecture claims change.
+- **Antigravity standard:** All workspace configuration and metadata are stored in the `.agents/` folder.
+- **Engineering Manifest:** Adhere to the standards defined in `.agents/manifests/ANTIGRAVITY_2_0_ENGINEERING_MANIFEST.md`.
+

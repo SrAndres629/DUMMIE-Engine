@@ -236,7 +236,10 @@ func RegisterDefaultFactories() {
 
 func (g *StateGraph) LoadPrefix() {
 	identity, _ := readRepoControlFile("IDENTITY.md")
-	rules, _ := readRepoControlFile("GEMINI.md")
+	rules, err := readRepoControlFile("ANTIGRAVITY.md")
+	if err != nil || len(rules) == 0 {
+		rules, _ = readRepoControlFile("GEMINI.md")
+	}
 
 	g.PrefixBlock = fmt.Sprintf("=== SOVEREIGN IDENTITY ===\n%s\n\n=== ARCHITECTURAL RULES ===\n%s\n",
 		string(identity), string(rules))

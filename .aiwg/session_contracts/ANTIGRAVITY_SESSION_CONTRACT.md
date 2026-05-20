@@ -1,6 +1,6 @@
-# Gemini CLI Session Contract
+# Antigravity 2.0 Session Contract
 
-Gemini CLI is suited for:
+Antigravity 2.0 is suited for:
 
 - large context synthesis;
 - semantic audit;
@@ -8,7 +8,7 @@ Gemini CLI is suited for:
 - multi-file reasoning;
 - context governance review.
 
-Gemini CLI must obey:
+Antigravity 2.0 must obey:
 
 - ContextReceipt discipline;
 - current phase scope;
@@ -17,5 +17,5 @@ Gemini CLI must obey:
 - no roadmap rewrite from chat memory;
 - no private chain-of-thought or secret storage.
 
-Before major reasoning, Gemini CLI should explain which canonical files and reports were loaded, which were skipped, and why.
+Before major reasoning, Antigravity 2.0 should explain which canonical files and reports were loaded, which were skipped, and why.
 
