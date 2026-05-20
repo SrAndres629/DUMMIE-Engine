@@ -62,6 +62,12 @@ class _FlatBrainFallbackFinder(importlib.abc.MetaPathFinder):
         if not subname:
             return None
         if '.' in subname:
+            organ, rest = subname.split('.', 1)
+            if organ in _canonical_organs:
+                canonical_path = os.path.join(_base_dir, organ, f"{rest}.py")
+                canonical_dir = os.path.join(_base_dir, organ, rest)
+                if os.path.isfile(canonical_path) or os.path.isdir(canonical_dir):
+                    return None
             if subname in _flat_dotted_modules:
                 return importlib.util.spec_from_file_location(fullname, _flat_dotted_modules[subname])
             return None

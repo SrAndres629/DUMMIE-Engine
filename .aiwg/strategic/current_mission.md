@@ -1,19 +1,26 @@
-# Misión Actual: Consolidación Post-Redirector
+# Misión Actual: Consolidación Post-Redirector + Identity Embeddings
 
 ## Objetivo
-Migrar los ~85 módulos restantes de `flat_brain/` a sus órganos canónicos y eliminar la dependencia del `_FlatBrainFallbackFinder`.
+Migrar los ~120 módulos restantes de `flat_brain/` a órganos canónicos y reemplazar metadatos planos (YAML identity, goal_memory) con embeddings semánticos reales y modelos especializados.
 
 ## Estado
-- **683/684 tests pasando** (1 fallo: KuzuDB no disponible)
-- SSoT de AuthorityLevel: COMPLETO (única definición en `domain/authority.py`)
-- Redirector eliminado: SÍ
-- Imports flat_brain en órganos canónicos: 0 (cero)
+- **153 tests core pasando** (0 fallos en daemon, causal gates, metacognition, authority)
+- **Bug crítico reparado**: FlatBrainFallbackFinder resolvía módulos anidados (p.ej. `metacognition.contracts`) desde flat_brain aunque existiera versión canónica. Ahora verifica canónico primero.
+- **Blocking real implementado**: ToolNeedDetectorHook ya no solo etiqueta tools — bloquea acciones externas segun authority level y lanza GovernanceGateError
+- Cron de auto_health instalado (cada hora)
+- Go dummie-health tool construyendo y funcionando
 
 ## Próximo Obstáculo
-`flat_brain/` contiene ~85 módulos que el fallback finder sigue resolviendo. Cada uno debe migrarse a su órgano canónico o eliminarse si es código muerto.
+Los 120 módulos flat_brain pendientes NO son bloqueantes (FallbackFinder los resuelve), pero son deuda técnica que impide eliminar flat_brain/. Cada módulo necesita migración + verificación de imports.
 
-## Lo que aprendí hoy
-La causa raíz de la mayoría de regresiones no fue el redirector per se, sino un bug de indentación en `daemon.py`: las importaciones de `GatewayRequest`, `ModelTier`, `BaseAuditor`, `FailClosedAuditor` estaban indentadas dentro del bloque `if __package__ in {None, ""}:`, por lo que no se ejecutaban durante la importación normal del módulo. Esto estuvo oculto durante meses porque el redirector compensaba. Adicionalmente, había un split-class de `DiagnosticReporter` porque el daemon importaba `daemon_diagnostic` (resolvía a `flat_brain/daemon_diagnostic.py`) mientras la versión canónica estaba en `daemon/daemon_diagnostic.py`.
+## Identity & Metacognition
+La identidad de DUMMIE ahora está explicitada en `.aiwg/identity/dummie_identity.yaml`:
+- Personalidad, voz, relacion con creador
+- Modelo de metacognicion (fortalezas, blindspots, mitigaciones)
+- Roadmap de evolucion: embeddings reales → modelos especializados → 24/7
 
 ## Próxima Misión
-Migración masiva de flat_brain a órganos canónicos. Priorizar módulos más importados (según grep de tests). Crear test de escaneo que falle si flat_brain/ contiene módulos que ya existen en destino canónico.
+1. Migracion masiva flat_brain con CLI (120 modulos)
+2. Reemplazar heuristicas YAML de identidad con embeddings semanticos (4D-TES)
+3. Implementar modelos locales agenticos de razonamiento para deliberacion offline
+4. Modelos especializados por clase de accion (social, code, business, admin)

@@ -155,4 +155,37 @@ The redirector was not a bridge — it was a mask. It hid import indentation bug
 split-class identity issues, and missing module resolutions for months. The correct
 approach is explicit scoped fallback (the `_FlatBrainFallbackFinder`) combined with
 systematic migration of flat_brain modules to canonical organs. Never use opaque
-redirectors that resolve imports silently.- [2026-05-20: Escritura Soberana y Arnés Multi-Agente (Agent Mesh)](memory/2026-05-20.md)
+redirectors that resolve imports silently.
+
+## ADR 2026-05-20-GOV-006: ToolNeedDetectorHook Blocking + Identity Expansion
+
+### Decision
+The `ToolNeedDetectorHook` was upgraded from passive tool-tagger to active action-blocker:
+- External/social/destructive actions are classified and matched against authority level
+- AGENT cannot do social_media or destructive actions
+- ENGINEER cannot do social_media
+- Violations set `risk_level="critical"` + `blocked_reason`, which the orchestrator catches as `GovernanceGateError`
+
+### Identity
+DUMMIE identity expanded in `.aiwg/identity/dummie_identity.yaml` with:
+- Personality archetype, traits, voice style
+- Metacognition self-model (session-based file continuity)
+- Cognitive blindspots and mitigation strategies
+- Evolution roadmap (embeddings → specialized models → 24/7 autonomy)
+
+### Additional Bug Fix
+The `_FlatBrainFallbackFinder` had a priority bug: dotted submodules (e.g. `metacognition.contracts`)
+were always resolved from flat_brain, even when canonical versions existed. Fixed by checking
+canonical existence before falling back to flat_brain. This was actively masking edits to
+`metacognition/contracts.py` and `metacognition/input_hooks.py`.
+
+### Pending
+- 120 flat_brain modules with transparent FallbackFinder resolution
+- `goal_memory.yaml` cleaned (removed corrupted entries with injected system directives)
+- Health cron installed: `auto_health.py` runs hourly
+
+## Known Wounds
+- Deletion incident (PACK R2.1): ~5 files permanently lost, 58 specs broken, branch as forensic audit
+- KuzuDB infra dependency: 1 test always blocked without running database
+- FlatBrainFallbackFinder still needed for 120 modules — cannot yet delete flat_brain/
+- No real embeddings yet — identity and memory are flat YAML, not semantic vectors

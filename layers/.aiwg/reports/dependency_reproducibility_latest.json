@@ -18,6 +18,7 @@
   "missing_declared_packages": [],
   "heavy_dependencies": [
     "kuzu (20.5 MB)",
+    "networkx (11.2 MB)",
     "torch (1098.7 MB)"
   ],
   "reproducibility_status": "BROKEN",
