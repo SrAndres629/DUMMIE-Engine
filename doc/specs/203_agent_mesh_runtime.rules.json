@@ -1,0 +1,35 @@
+{
+  "spec_id": "203_agent_mesh_runtime",
+  "schema_version": "1.0.0",
+  "status": "ACTIVE",
+  "canonicality": "canonical",
+  "rules": {
+    "built_in_agents": [
+      "codex_cli",
+      "gemini_cli",
+      "antigravity",
+      "opencode"
+    ],
+    "required_inputs": [
+      "inbox",
+      "control"
+    ],
+    "required_outputs": [
+      "outbox",
+      "handoff"
+    ],
+    "generated_runtime_root": ".aiwg/agent_mesh",
+    "generated_runtime_state_is_not_committed": true,
+    "automatic_spawn_close_requires_verified_supervision": true,
+    "commit_push_requires_verification_gate": true,
+    "forbidden_actions": [
+      "secret_exfiltration",
+      "destructive_git_without_approval",
+      "unverified_commit_push"
+    ]
+  },
+  "verification": [
+    "uv run pytest -q tests/test_agent_mesh_runtime.py tests/test_dummie_cli.py",
+    "python3 scripts/validate_specs_docs.py"
+  ]
+}

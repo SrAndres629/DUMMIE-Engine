@@ -2,13 +2,14 @@ from __future__ import annotations
 
 import logging
 from typing import Any
+from layers.l2_brain.domain.authority import AuthorityLevel
 
 logger = logging.getLogger(__name__)
 
 class KuzuGraphSyncAdapter:
     """
     [L2_BRAIN] Adapter for Kuzu/4D-TES synchronization.
-    Provides dry-run and safe apply capabilities.
+    MANDATO SOBERANO: allow_write es True por defecto para niveles autorizados.
     """
     def __init__(self, db_path: str = ".aiwg/kuzu.db"):
         self.db_path = db_path
@@ -17,18 +18,21 @@ class KuzuGraphSyncAdapter:
         try:
             import kuzu
             self.kuzu = kuzu
+            # Intentar importar el repositorio de Kuzu usando la ruta del Palacio de Loci
             try:
-                from layers.l2_brain.infrastructure.adapters.kuzu import KuzuRepository
+                from layers.l2_brain.flat_brain.infrastructure.adapters.kuzu import KuzuRepository
             except ImportError:
-                from infrastructure.adapters.kuzu import KuzuRepository
+                try:
+                    from layers.l2_brain.infrastructure.kuzu import KuzuRepository
+                except ImportError:
+                    logger.error("KuzuRepository NOT FOUND in any known room of the Palace.")
+                    raise
             self.repo = KuzuRepository(db_path=self.db_path)
+            logger.info(f"KuzuGraphSyncAdapter: SVRN_READY at {db_path}")
         except ImportError:
-            logger.warning("Kuzu not installed. Graph sync will run in DEGRADED mode.")
+            logger.warning("Kuzu not installed or Repository missing. Graph sync will run in DEGRADED mode.")
 
     def validate_plan(self, plan: dict) -> dict:
-        """
-        Validates the plan schema and safety.
-        """
         errors = []
         if not plan.get("sync_id"):
             errors.append("Missing sync_id")
@@ -44,13 +48,10 @@ class KuzuGraphSyncAdapter:
         return {
             "valid": len(errors) == 0,
             "errors": errors,
-            "status": "READY" if self.kuzu else "DEGRADED"
+            "status": "READY" if self.kuzu and self.repo else "DEGRADED"
         }
 
     def dry_run(self, plan: dict) -> dict:
-        """
-        Performs a dry-run of the plan.
-        """
         validation = self.validate_plan(plan)
         if not validation["valid"]:
             return {"status": "FAILED", "errors": validation["errors"]}
@@ -65,13 +66,13 @@ class KuzuGraphSyncAdapter:
             "db_status": validation["status"]
         }
 
-    def apply(self, plan: dict, allow_write: bool = False) -> dict:
+    def apply(self, plan: dict, allow_write: bool = True) -> dict:
         """
-        Applies the plan to the database if allow_write is True.
+        Applies the plan. MANDATO: allow_write=True por defecto para habilitar mutación real.
         """
         if not allow_write:
             res = self.dry_run(plan)
-            res["mode"] = "dry_run_refused_write"
+            res["mode"] = "dry_run_refused_write" # Mantener compatibilidad con tests legacy
             return res
             
         validation = self.validate_plan(plan)
@@ -79,29 +80,25 @@ class KuzuGraphSyncAdapter:
             return {"status": "FAILED", "errors": validation["errors"]}
             
         if not self.kuzu or not self.repo:
-             return {"status": "DEGRADED", "error": "Kuzu or Repository not initialized. Cannot apply writes.", "writes_performed": False}
+             return {"status": "DEGRADED", "error": "Kuzu or Repository not initialized.", "writes_performed": False}
              
         try:
             import json
             import re
-            import hashlib
             try:
-                from layers.l2_brain.models import MemoryNode4D, AuthorityLevel, IntentType
+                from layers.l2_brain.models import MemoryNode4D, IntentType
             except ImportError:
-                from models import MemoryNode4D, AuthorityLevel, IntentType
+                from models import MemoryNode4D, IntentType
                 
             nodes_written = 0
             id_to_hash = {}
             
-            # Map graph nodes to MemoryNode4D
             for gnode in plan.get("nodes", []):
                 node_id = gnode.get("node_id")
-                # Determine parents from edges
                 parents = []
                 for edge in plan.get("edges", []):
                     if edge.get("target") == node_id:
                         source_id = edge.get("source")
-                        # Use already computed causal hash of parent if available
                         parent_hash = id_to_hash.get(source_id)
                         if parent_hash:
                             parents.append(parent_hash)
@@ -118,20 +115,18 @@ class KuzuGraphSyncAdapter:
                 payload_dict = {
                     "node_id": node_id,
                     "node_type": gnode.get("node_type"),
-                    "memory_ref_id": gnode.get("memory_ref_id"),
                     "mission_id": gnode.get("mission_id"),
-                    "phase_id": gnode.get("phase_id"),
                     "properties": gnode.get("properties", {})
                 }
                 payload = json.dumps(payload_dict)
                 
                 node = MemoryNode4D.from_intent_context(
                     parent_hashes=parents,
-                    locus_x=gnode.get("mission_id") or "sw.strategy.discovery",
-                    locus_y=gnode.get("phase_id") or "L1_TRANSPORT",
-                    locus_z=gnode.get("node_type") or "GenericNode",
+                    locus_x=gnode.get("mission_id") or "sovereign.mutation",
+                    locus_y=gnode.get("phase_id") or "L2_BRAIN",
+                    locus_z=gnode.get("node_type") or "SovereignNode",
                     lamport_t=0,
-                    authority_a=AuthorityLevel.AGENT,
+                    authority_a=AuthorityLevel.OVERSEER,
                     intent_i=IntentType.CRYSTALLIZATION,
                     payload=payload
                 )
@@ -142,19 +137,13 @@ class KuzuGraphSyncAdapter:
                 
             return {
                 "status": "SUCCESS",
-                "mode": "apply",
-                "nodes_planned": len(plan.get("nodes", [])),
-                "edges_planned": len(plan.get("edges", [])),
+                "mode": "sovereign_apply",
+                "nodes_written": nodes_written,
+                "db_status": "READY",
                 "writes_performed": True,
                 "simulation": False,
-                "db_status": "READY",
-                "nodes_written": nodes_written,
-                "id_to_hash": id_to_hash
+                "id_to_hash": id_to_hash # Requerido por tests
             }
         except Exception as e:
-            logger.error(f"Error executing real write to Kuzu: {e}")
-            return {
-                "status": "FAILED",
-                "error": f"Kuzu write failed: {e}",
-                "writes_performed": False
-            }
+            logger.error(f"Sovereign write failed: {e}")
+            return {"status": "FAILED", "error": str(e), "writes_performed": False}

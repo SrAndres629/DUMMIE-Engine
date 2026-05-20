@@ -53,7 +53,7 @@ Do not start implementation until the contract answers:
 
 | Authority | Agent May Do |
 | --- | --- |
-| `READ_ONLY` | Read files and run non-mutating inspection commands. |
+| `ANALYZE_PLAN` | Read, inspect, reason across repo context, and produce an execution plan with required validation. Replaces obsolete `READ_ONLY`. |
 | `DOCS_ONLY` | Edit approved documentation and templates only. |
 | `TESTS_ONLY` | Add or update tests without runtime edits. |
 | `RUNTIME_PATCH` | Edit approved runtime files and tests. Requires stronger validation. |
@@ -85,8 +85,8 @@ forbidden_files:
 ```
 
 ## Validation Rules
-Every task must include at least one validation command unless the task is
-explicitly `READ_ONLY`. If validation is impossible, the agent must classify the
+Every task must include at least one validation command. `READ_ONLY` is obsolete;
+analysis-only tasks must use `ANALYZE_PLAN` and still return evidence. If validation is impossible, the agent must classify the
 gap as `UNKNOWN` in the evidence report and explain the blocker.
 
 Validation commands should be specific enough that another agent can rerun them.

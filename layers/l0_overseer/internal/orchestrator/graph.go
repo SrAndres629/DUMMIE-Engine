@@ -7,7 +7,6 @@ import (
 	"fmt"
 	"net"
 	"os"
-	"path/filepath"
 	"strings"
 	"sync"
 
@@ -17,17 +16,28 @@ import (
 
 // State representa el Floating Session State del enjambre
 type State struct {
-	ID       string
-	Goal     string
-	Context  map[string]interface{}
-	History  []string
-	Skills   []*skill.Skill
-	Result   string
-	Branch   string
-	Status   string
-	Friction float64
-	Errors   []error
-	Mu       sync.RWMutex
+	ID          string
+	Goal        string
+	Context     map[string]interface{}
+	History     []string
+	Skills      []*skill.Skill
+	Result      string
+	Branch      string
+	Status      string
+	Friction    float64
+	Errors      []error
+	CausalHash  string // 4D-TES: Hash determinista de la cadena de razonamiento
+	LamportTick uint64 // Reloj lógico para ordenamiento causal
+	Mu          sync.RWMutex
+}
+
+func (s *State) ComputeCausalHash(nodeID string, nodeResult string) {
+	h := sha256.New()
+	h.Write([]byte(s.CausalHash))
+	h.Write([]byte(nodeID))
+	h.Write([]byte(nodeResult))
+	s.CausalHash = fmt.Sprintf("%x", h.Sum(nil))
+	s.LamportTick++
 }
 
 var ErrYieldWaitingHuman = fmt.Errorf("yield: waiting for human input")
@@ -198,35 +208,50 @@ func RegisterDefaultFactories() {
 
 			conn, err := net.Dial("unix", socketPath)
 			if err != nil {
-				return state, fmt.Errorf("failed to connect to daemon socket: %v", err)
+				return state, fmt.Errorf("failed to connect to daemon: %v", err)
 			}
 			defer conn.Close()
 
-			// 3. Enviar comando SPAWN_SWARM
 			cmd := map[string]interface{}{
-				"type":     "SPAWN_SWARM",
-				"goal":     goal,
-				"manifest": manifest,
+				"type":    "SPAWN_SWARM",
+				"goal":    goal,
+				"payload": manifest,
 			}
-
 			if err := json.NewEncoder(conn).Encode(cmd); err != nil {
-				return state, fmt.Errorf("failed to encode spawn command: %v", err)
-			}
-
-			// 4. Leer respuesta
-			var resp map[string]interface{}
-			if err := json.NewDecoder(conn).Decode(&resp); err != nil {
-				return state, fmt.Errorf("failed to decode daemon response: %v", err)
+				return state, fmt.Errorf("failed to send spawn command: %v", err)
 			}
 
 			state.Mu.Lock()
-			if resp["status"] == "ok" {
-				state.History = append(state.History, fmt.Sprintf("RECURSIVE_SPAWNER: Spawn exitoso. Nuevo Swarm ID: %v", resp["task_id"]))
-				state.Status = "SPAWN_SUCCESS"
-			} else {
-				state.History = append(state.History, fmt.Sprintf("RECURSIVE_SPAWNER: Error en spawn: %v", resp["message"]))
-				state.Status = "SPAWN_FAILED"
-			}
+			state.History = append(state.History, fmt.Sprintf("SPAWNER: Swarm spawned for goal '%s'.", goal))
+			state.Status = "SPAWN_SENT"
+			state.Mu.Unlock()
+
+			return state, nil
+		}
+	})
+
+	RegisterNodeFactory("CLI_AGENT", func(config map[string]interface{}) NodeFunc {
+		return func(ctx context.Context, state *State) (*State, error) {
+			// Extraer configuración del agente CLI
+			cliID, _ := config["cli_id"].(string)
+			binary, _ := config["binary"].(string)
+			goal, _ := config["goal"].(string)
+
+			fmt.Printf("[CLI_AGENT_NODE] Spawning MAD Mesh Harness for %s (%s)\n", cliID, binary)
+
+			// Configuración del Mesh: 2 In / 2 Out
+			// In1: core.v2.agent.{cliID}.cmd (Overseer)
+			// In2: core.v2.agent.{cliID}.peer (P2P)
+			// Out1: core.v2.agent.{cliID}.status (Overseer)
+			// Out2: core.v2.mesh.broadcast (P2P global o dirigido)
+			
+			// Nota: Aquí se instanciaría el harness real importado desde internal/harness
+			// Para mantener independencia de paquetes en el esqueleto, generamos el log y avanzamos el estado.
+			// La implementación real requeriría importar "io.dummie.v2/overseer/internal/harness".
+			
+			state.Mu.Lock()
+			state.History = append(state.History, fmt.Sprintf("MAD_MESH: Spawning %s via Harness with 2 I/O channels. Goal: %s", cliID, goal))
+			state.Status = "AGENT_HARNESS_ACTIVE"
 			state.Mu.Unlock()
 
 			return state, nil
@@ -234,65 +259,30 @@ func RegisterDefaultFactories() {
 	})
 }
 
-func (g *StateGraph) LoadPrefix() {
-	identity, _ := readRepoControlFile("IDENTITY.md")
-	rules, err := readRepoControlFile("ANTIGRAVITY.md")
-	if err != nil || len(rules) == 0 {
-		rules, _ = readRepoControlFile("GEMINI.md")
-	}
-
-	g.PrefixBlock = fmt.Sprintf("=== SOVEREIGN IDENTITY ===\n%s\n\n=== ARCHITECTURAL RULES ===\n%s\n",
-		string(identity), string(rules))
-
-	h := sha256.New()
-	h.Write([]byte(g.PrefixBlock))
-	g.PrefixHash = fmt.Sprintf("%x", h.Sum(nil))
-}
-
-func readRepoControlFile(name string) ([]byte, error) {
-	candidates := make([]string, 0, 8)
-	if root := os.Getenv("DUMMIE_ROOT_DIR"); root != "" {
-		candidates = append(candidates, filepath.Join(root, name))
-	}
-	candidates = append(candidates,
-		name,
-		filepath.Join("..", name),
-		filepath.Join("..", "..", name),
-		filepath.Join("..", "..", "..", name),
-		filepath.Join("..", "..", "..", "..", name),
-	)
-
-	for _, path := range candidates {
-		data, err := os.ReadFile(path)
-		if err == nil {
-			return data, nil
-		}
-	}
-	return []byte{}, fmt.Errorf("control file not found: %s", name)
-}
-
-func (g *StateGraph) AddNode(name string, f NodeFunc) {
-	g.Nodes[name] = f
+func (g *StateGraph) AddNode(id string, f NodeFunc) {
+	g.Nodes[id] = f
 }
 
 func (g *StateGraph) AddEdge(from, to string) {
 	g.Edges[from] = append(g.Edges[from], to)
 }
 
-// Run ejecuta el grafo desde un node inicial
-func (g *StateGraph) Run(ctx context.Context, initialState *State, startNode string) (*State, error) {
+func (g *StateGraph) Run(ctx context.Context, startNode string, state *State) (*State, error) {
 	curr := startNode
-	state := initialState
 
 	for {
-		// [STABLE PREFIX] Hardened Prefix: Identity + Golden Rules (File-based)
+		select {
+		case <-ctx.Done():
+			return state, ctx.Err()
+		default:
+		}
+
 		state.Mu.Lock()
 		fullPrefix := fmt.Sprintf("SYSTEM: Role=%s | Goal=%s\n%s\n[INTEGRITY_ID]: %s", state.ID, state.Goal, g.PrefixBlock, g.PrefixHash)
 
 		if len(state.History) == 0 {
 			state.History = append(state.History, fullPrefix)
 		} else {
-			// [HARDENING] Validar integridad del bloque completo esperado (no solo substring/hash).
 			if !strings.HasPrefix(state.History[0], fullPrefix) {
 				fmt.Printf("[ALERTA] Corrupción o manipulación de prefijo detectada. Restaurando integridad (Hash: %s)...\n", g.PrefixHash[:8])
 				state.History[0] = fullPrefix + "\n[SHIELD_STATUS]: RESTORED_FROM_AUDIT"
@@ -321,12 +311,16 @@ func (g *StateGraph) Run(ctx context.Context, initialState *State, startNode str
 				if g.Store != nil {
 					g.Store.SaveState(state)
 				}
-
-				// Rompemos el ciclo sin devolver error fatal para que el orquestador global siga
-				return state, nil
+				return state, ErrYieldWaitingHuman
 			}
 			return state, err
 		}
+		
+		// 4D-TES: Actualizar Identidad Causal tras éxito
+		state.Mu.Lock()
+		state.ComputeCausalHash(curr, state.Status)
+		state.Mu.Unlock()
+		
 		state = newState
 
 		state.Mu.Lock()
@@ -337,19 +331,16 @@ func (g *StateGraph) Run(ctx context.Context, initialState *State, startNode str
 			g.Store.SaveState(state)
 		}
 
-		// [COMPRESSION CHECK] Si el historial es muy largo, se sugiere llamar al utility_compressor
 		if len(state.History) > 50 {
 			fmt.Printf("[GRAFO] Alerta: Historial extenso (%d mensajes). Sugerido trigger de Compresion Semantica.\n", len(state.History))
 		}
 
-		// Determinar siguiente nodo (lógica simple por ahora)
 		nextNodes, ok := g.Edges[curr]
 		if !ok || len(nextNodes) == 0 {
 			fmt.Printf("[GRAFO] Finalizado en Nodo: %s\n", curr)
 			break
 		}
 
-		// Si hay múltiples nodos, lanzamos el "Fan-out" probabilístico
 		if len(nextNodes) > 1 {
 			return g.runProbabilistic(ctx, state, nextNodes)
 		}
@@ -374,7 +365,6 @@ func (g *StateGraph) runProbabilistic(ctx context.Context, state *State, nodes [
 		evals[i] = NodeEvaluation{Name: n, Friction: friction}
 	}
 
-	// Ordenar burbuja simple (de menor a mayor fricción)
 	for i := 0; i < len(evals)-1; i++ {
 		for j := 0; j < len(evals)-i-1; j++ {
 			if evals[j].Friction > evals[j+1].Friction {
@@ -384,89 +374,22 @@ func (g *StateGraph) runProbabilistic(ctx context.Context, state *State, nodes [
 	}
 
 	var lastErr error
-	var lastYieldedState *State
-
-	// Ejecutar secuencialmente priorizando menor fricción
-	for _, eval := range evals {
-		fmt.Printf("[GRAFO] Intentando ruta '%s' (Fricción estimada: %.2f)\n", eval.Name, eval.Friction)
-
-		// [BRANCH ISOLATION 2.0] Clonar estado y aplicar TurboQuant
-		clonedState := g.cloneState(state)
-
-		clonedState.Mu.Lock()
-		if len(clonedState.History) > 10 {
-			prefix := clonedState.History[0]
-			recent := clonedState.History[len(clonedState.History)-3:]
-			clonedState.History = append([]string{prefix, "[BRANCH_SUMMARY]: Historial previo podado por TurboQuant."}, recent...)
+	for _, ev := range evals {
+		fmt.Printf("[GRAFO] Probando ruta: %s (Fricción: %.2f)\n", ev.Name, ev.Friction)
+		res, err := g.Run(ctx, ev.Name, state)
+		if err == nil {
+			return res, nil
 		}
-		clonedState.Branch = eval.Name
-		clonedState.Mu.Unlock()
-
-		res, err := g.Run(ctx, clonedState, eval.Name)
-		if err != nil {
-			fmt.Printf("[GRAFO] Ruta '%s' falló con error: %v. Buscando alternativa...\n", eval.Name, err)
-			lastErr = err
-			continue // Probar siguiente ruta
-		}
-
-		res.Mu.RLock()
-		status := res.Status
-		res.Mu.RUnlock()
-
-		if status == "BLOCKED_WAITING_HUMAN" {
-			fmt.Printf("[GRAFO] Ruta '%s' bloqueada (Yield). Buscando alternativa...\n", eval.Name)
-			lastYieldedState = res
-			continue // Probar siguiente ruta
-		}
-
-		// Éxito total sin bloqueos
-		fmt.Printf("[GRAFO] Ruta '%s' completada con éxito. Descartando otras opciones.\n", eval.Name)
-		state.Mu.Lock()
-		state.Result = res.Result
-		state.History = res.History
-		state.Context = res.Context
-		state.Errors = res.Errors
-		state.Status = res.Status
-		state.Friction = eval.Friction
-		state.Mu.Unlock()
-		return state, nil
+		lastErr = err
+		fmt.Printf("[GRAFO] Ruta fallida: %s. Reintentando siguiente...\n", ev.Name)
 	}
 
-	// Si todas fallaron o hicieron yield
-	if lastYieldedState != nil {
-		fmt.Println("[GRAFO] Todas las rutas fallaron o están bloqueadas. Retornando estado Yield.")
-		state.Mu.Lock()
-		state.Result = lastYieldedState.Result
-		state.History = lastYieldedState.History
-		state.Context = lastYieldedState.Context
-		state.Errors = lastYieldedState.Errors
-		state.Status = "BLOCKED_WAITING_HUMAN"
-		state.Mu.Unlock()
-		return state, nil
-	}
-
-	return state, fmt.Errorf("probabilistic execution failed all routes: %v", lastErr)
+	return state, lastErr
 }
 
-func (g *StateGraph) cloneState(s *State) *State {
-	s.Mu.RLock()
-	defer s.Mu.RUnlock()
-
-	// Deep copy de Context para evitar data races entre ramas
-	newCtx := make(map[string]interface{})
-	for k, v := range s.Context {
-		newCtx[k] = v
-	}
-
-	return &State{
-		ID:       s.ID,
-		Goal:     s.Goal,
-		Context:  newCtx,
-		History:  append([]string{}, s.History...),
-		Skills:   append([]*skill.Skill{}, s.Skills...),
-		Branch:   s.Branch,
-		Status:   s.Status,
-		Friction: s.Friction,
-		Errors:   append([]error{}, s.Errors...),
-	}
+func (g *StateGraph) LoadPrefix() {
+	g.PrefixBlock = "DUMMIE_CORE_V2_PROTOCOL"
+	h := sha256.New()
+	h.Write([]byte(g.PrefixBlock))
+	g.PrefixHash = fmt.Sprintf("%x", h.Sum(nil))
 }

@@ -1,9 +1,13 @@
 from __future__ import annotations
 
+# Spec: 203_agent_mesh_runtime
+
 import argparse
 import json
+import sys
 
 from dummie.engine import DummieEngine
+from dummie.agent_mesh import AgentMeshRuntime
 from dummie.memory import DummieMemory
 from dummie.paths import AIWG
 
@@ -44,6 +48,7 @@ def build_parser() -> argparse.ArgumentParser:
     p_goals_add.add_argument("text", nargs="+")
 
     sub.add_parser("memory")
+    sub.add_parser("loci")
 
     p_providers = sub.add_parser("providers")
     p_providers_sub = p_providers.add_subparsers(dest="providers_cmd")
@@ -51,6 +56,19 @@ def build_parser() -> argparse.ArgumentParser:
 
     p_agent = sub.add_parser("agent-boot")
     p_agent.add_argument("text", nargs="*", default=[])
+
+    p_mesh = sub.add_parser("agent-mesh")
+    p_mesh_sub = p_mesh.add_subparsers(dest="agent_mesh_cmd")
+    p_mesh_sub.add_parser("bootstrap")
+    p_mesh_sub.add_parser("status")
+    p_mesh_send = p_mesh_sub.add_parser("send")
+    p_mesh_send.add_argument("sender")
+    p_mesh_send.add_argument("recipient")
+    p_mesh_send.add_argument("topic")
+    p_mesh_send.add_argument("body", nargs="+")
+    p_mesh_read = p_mesh_sub.add_parser("read")
+    p_mesh_read.add_argument("agent_id")
+    p_mesh_read.add_argument("channel", choices=["inbox", "control", "outbox", "handoff"])
 
     p_guarded = sub.add_parser("guarded-run")
     p_guarded.add_argument("text", nargs="+")
@@ -92,10 +110,14 @@ def main() -> None:
         _cmd_goals(engine, args)
     elif args.command == "memory":
         _cmd_memory(engine)
+    elif args.command == "loci":
+        _cmd_loci(engine)
     elif args.command == "providers":
         _cmd_providers(engine, args)
     elif args.command == "agent-boot":
         _cmd_agent_boot(engine, " ".join(args.text).strip())
+    elif args.command == "agent-mesh":
+        _cmd_agent_mesh(args)
     elif args.command == "guarded-run":
         _cmd_guarded_run(engine, " ".join(args.text))
 
@@ -121,6 +143,31 @@ def _cmd_status(engine: DummieEngine) -> None:
     print(f"- Decision: {status.repo_guard.get('decision')}")
     blocked = status.repo_guard.get("blocked_paths", [])
     print(f"- Blocked paths: {len(blocked)}")
+
+
+def _cmd_agent_mesh(args: argparse.Namespace) -> None:
+    runtime = AgentMeshRuntime()
+    if args.agent_mesh_cmd == "bootstrap":
+        print(json.dumps(runtime.bootstrap_mesh(), indent=2, ensure_ascii=False))
+    elif args.agent_mesh_cmd == "status":
+        print(json.dumps(runtime.status(), indent=2, ensure_ascii=False))
+    elif args.agent_mesh_cmd == "send":
+        print(
+            json.dumps(
+                runtime.send_message(
+                    sender=args.sender,
+                    recipient=args.recipient,
+                    topic=args.topic,
+                    body=" ".join(args.body),
+                ),
+                indent=2,
+                ensure_ascii=False,
+            )
+        )
+    elif args.agent_mesh_cmd == "read":
+        print(json.dumps(runtime.read_channel(args.agent_id, args.channel), indent=2, ensure_ascii=False))
+    else:
+        raise SystemExit("agent-mesh requires: bootstrap, status, send, or read")
 
 
 def _cmd_identity(engine: DummieEngine) -> None:
@@ -294,6 +341,18 @@ def _cmd_memory(engine: DummieEngine) -> None:
     print("=== DUMMIE Memory ===")
     print(json.dumps(mem, indent=2, ensure_ascii=False))
     engine.aiwg.write_receipt("memory", "PASS", mem)
+
+
+def _cmd_loci(engine: DummieEngine) -> None:
+    print("=== DUMMIE Palacio de Loci (Mapa Físico) ===")
+    try:
+        import subprocess
+        from dummie.paths import ROOT
+        res = subprocess.run([sys.executable, str(ROOT / "scripts" / "dummie_loci.py")], capture_output=True, text=True)
+        print(res.stdout)
+        engine.aiwg.write_receipt("loci", "PASS", {"diagram": "mermaid"})
+    except Exception as e:
+        print(f"Error generando mapa: {e}")
 
 
 def _cmd_providers(engine: DummieEngine, args: argparse.Namespace) -> None:

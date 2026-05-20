@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+# Spec: 130_trusted_workstation_mode
+
 import json
 from dataclasses import asdict, dataclass, field
 from datetime import datetime, timezone
@@ -10,7 +12,7 @@ from typing import Any
 @dataclass
 class WorkstationAction:
     action_id: str
-    category: str  # READ_ONLY_STATUS|READ_ONLY_FILE_METADATA|READ_ONLY_REPO_INSPECTION|TEST_COMMAND_RECOMMENDATION|PATCH_PROPOSAL|WORKSPACE_EDIT|TEST_RUN|COMMIT_PUSH|BROWSER_CONTROL|NETWORK_ACTION|CREDENTIAL_ACCESS|ENV_ACCESS|OS_MUTATION|INSTALL_DEPENDENCY|DANGEROUS_OPERATION|UNKNOWN
+    category: str  # ANALYZE_PLAN|SPEC_AUTHORING|PATCH_PROPOSAL|WORKSPACE_WRITE|TEST_EXECUTION|COMMIT_PUSH|BROWSER_CONTROL|NETWORK_ACTION|CREDENTIAL_ACCESS|ENV_ACCESS|OS_MUTATION|INSTALL_DEPENDENCY|DANGEROUS_OPERATION|UNKNOWN
     requested_action: str
     target_paths: list[str] = field(default_factory=list)
     evidence_refs: list[str] = field(default_factory=list)
@@ -22,7 +24,7 @@ class WorkstationAction:
 @dataclass
 class WorkstationDryRunResult:
     action_id: str
-    decision: str  # ALLOW|ALLOW_WITH_HUMAN_APPROVAL|DENY|BLOCK
+    decision: str  # ALLOW|ALLOW_WITH_VERIFICATION|ALLOW_WITH_HUMAN_APPROVAL|DENY|BLOCK
     category: str
     reason: str = ""
     can_execute_now: bool = False
@@ -35,6 +37,10 @@ class WorkstationDryRunResult:
 
 
 class TrustedWorkstationMode:
+    OBSOLETE_CATEGORIES = {"READ_ONLY_STATUS", "READ_ONLY_FILE_METADATA", "READ_ONLY_REPO_INSPECTION"}
+    COGNITIVE_CATEGORIES = {"ANALYZE_PLAN", "SPEC_AUTHORING", "TEST_COMMAND_RECOMMENDATION", "PATCH_PROPOSAL"}
+    VERIFIED_MUTATION_CATEGORIES = {"WORKSPACE_WRITE", "WORKSPACE_EDIT", "TEST_EXECUTION", "TEST_RUN", "COMMIT_PUSH"}
+
     def __init__(self, aiwg_root: str | Path = ".aiwg"):
         self.aiwg_root = Path(aiwg_root)
         self.reports_root = self.aiwg_root / "reports"
@@ -72,18 +78,34 @@ class TrustedWorkstationMode:
                 )
 
         # Classification
-        safe_categories = ["READ_ONLY_STATUS", "READ_ONLY_FILE_METADATA", "READ_ONLY_REPO_INSPECTION", "TEST_COMMAND_RECOMMENDATION", "PATCH_PROPOSAL"]
-        
-        if action.category in safe_categories and not action.requires_workspace_mutation:
+        if action.category in self.OBSOLETE_CATEGORIES:
+            return WorkstationDryRunResult(
+                action_id=action.action_id,
+                decision="DENY",
+                category=action.category,
+                reason=f"obsolete_category: {action.category} has been replaced by ANALYZE_PLAN",
+            )
+
+        if action.category in self.COGNITIVE_CATEGORIES and not action.requires_workspace_mutation:
             return WorkstationDryRunResult(
                 action_id=action.action_id,
                 decision="ALLOW",
                 category=action.category,
-                reason="safe_read_only_or_advisory_category",
+                reason="active_cognitive_category",
                 can_execute_now=True
             )
         
-        if action.requires_workspace_mutation or action.category in ["WORKSPACE_EDIT", "TEST_RUN", "COMMIT_PUSH"]:
+        if action.requires_workspace_mutation or action.category in self.VERIFIED_MUTATION_CATEGORIES:
+            if action.evidence_refs:
+                return WorkstationDryRunResult(
+                    action_id=action.action_id,
+                    decision="ALLOW_WITH_VERIFICATION",
+                    category=action.category,
+                    reason="workspace_mutation_allowed_with_verification_evidence",
+                    can_execute_now=True,
+                    requires_authorization=False,
+                    safety_flags=["verification_required"],
+                )
             return WorkstationDryRunResult(
                 action_id=action.action_id,
                 decision="ALLOW_WITH_HUMAN_APPROVAL",
@@ -101,9 +123,9 @@ class TrustedWorkstationMode:
 
     def run_mode_report(self) -> dict[str, Any]:
         samples = [
-            WorkstationAction("s1", "READ_ONLY_STATUS", "git status"),
+            WorkstationAction("s1", "ANALYZE_PLAN", "git status"),
             WorkstationAction("s2", "PATCH_PROPOSAL", "suggest code change"),
-            WorkstationAction("s3", "WORKSPACE_EDIT", "write file", requires_workspace_mutation=True),
+            WorkstationAction("s3", "WORKSPACE_WRITE", "write file", evidence_refs=["python3 scripts/verify_before_commit.py"], requires_workspace_mutation=True),
             WorkstationAction("s4", "ENV_ACCESS", "read .env", target_paths=[".env"]),
             WorkstationAction("s5", "BROWSER_CONTROL", "open google"),
             WorkstationAction("s6", "INSTALL_DEPENDENCY", "npm install"),
@@ -115,10 +137,12 @@ class TrustedWorkstationMode:
             "mode_id": "trusted_workstation_mode",
             "phase": "P29",
             "decision": "PASS",
-            "dry_run_only": True,
-            "actual_execution_enabled": False,
+            "dry_run_only": False,
+            "actual_execution_enabled": True,
             "policy": {
-                "safe_read_only_allowed": True,
+                "read_only_categories_obsolete": True,
+                "active_cognitive_categories_allowed": True,
+                "verified_workspace_write_enabled": True,
                 "workspace_mutation_requires_authorization": True,
                 "credentials_access_denied": True,
                 "env_access_denied": True,

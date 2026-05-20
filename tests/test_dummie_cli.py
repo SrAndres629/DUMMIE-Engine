@@ -51,3 +51,10 @@ def test_dummie_cli_chat_interactive_exit() -> None:
     )
     assert res.returncode == 0
     assert "DUMMIE Chat interactive" in res.stdout
+
+
+def test_dummie_cli_agent_mesh_status() -> None:
+    res = _run("agent-mesh", "status")
+    assert res.returncode == 0
+    assert "dummie_agent_mesh" in res.stdout
+    assert "codex_cli" in res.stdout

@@ -8,7 +8,7 @@ import sys
 from pathlib import Path
 from typing import Iterable
 
-from operational_truth import TruthCheck, TruthReport, TruthStatus
+from layers.l2_brain.flat_brain.operational_truth import TruthCheck, TruthReport, TruthStatus
 
 
 def _file_check(

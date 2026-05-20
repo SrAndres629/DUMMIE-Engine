@@ -21,7 +21,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// === Nivel de Autoridad (Spec 10/12/18) ===
+// === Nivel de Autoridad (Spec 12/18) ===
 type AuthorityLevel int32
 
 const (

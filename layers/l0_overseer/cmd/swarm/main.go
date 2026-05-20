@@ -56,7 +56,7 @@ func main() {
 		Goal: "Implementar Skill Ingestion Engine V3",
 	}
 
-	finalState, err := graph.Run(context.Background(), state, "Planner")
+	finalState, err := graph.Run(context.Background(), "Planner", state)
 	if err != nil {
 		fmt.Printf("Error ejecutando el enjambre: %v\n", err)
 		return

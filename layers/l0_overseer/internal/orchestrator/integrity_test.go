@@ -34,8 +34,8 @@ func TestBranchIsolationConcurrency(t *testing.T) {
 				Goal:   "Stress Test",
 				Branch: fmt.Sprintf("B%d", id),
 			}
-			final, err := g.Run(context.Background(), branchState, "Work")
-			if err != nil {
+			final, err := g.Run(context.Background(), "Work", branchState)
+			if err != nil && err != ErrYieldWaitingHuman {
 				t.Errorf("Error en rama %d: %v", id, err)
 			}
 			
@@ -103,7 +103,7 @@ func TestProbabilisticRouting(t *testing.T) {
 		Branch: "Start",
 	}
 
-	final, err := g.Run(context.Background(), initialState, "Start")
+	final, err := g.Run(context.Background(), "Start", initialState)
 	if err != nil {
 		t.Fatalf("Ejecución falló: %v", err)
 	}
@@ -138,7 +138,7 @@ func TestPrefixIntegrityHardening(t *testing.T) {
 		return s, nil
 	})
 
-	state, _ = g.Run(ctx, state, "Start")
+	state, _ = g.Run(ctx, "Start", state)
 
 	originalPrefix := state.History[0]
 	if !strings.Contains(originalPrefix, g.PrefixHash) {
@@ -157,7 +157,7 @@ func TestPrefixIntegrityHardening(t *testing.T) {
 	})
 	g.AddEdge("Start", "Next")
 
-	state, _ = g.Run(ctx, state, "Next")
+	state, _ = g.Run(ctx, "Next", state)
 
 	if strings.Contains(state.History[0], "Malicious injection") {
 		t.Errorf("FALLO DE SEGURIDAD: El prefijo malicioso persistió")
@@ -192,7 +192,7 @@ func TestStatePersistence(t *testing.T) {
 	}
 
 	// Ejecutar un paso
-	_, err = g.Run(context.Background(), state, "Step1")
+	_, err = g.Run(context.Background(), "Step1", state)
 	if err != nil {
 		t.Fatalf("Error en ejecución: %v", err)
 	}

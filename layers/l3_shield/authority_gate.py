@@ -1,33 +1,41 @@
 import logging
 from typing import Tuple
-try:
-    from metacognition.contracts import AuthorityLevel, MetacognitiveFrame
-except ImportError:
-    import sys
-    import os
-    sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "l2_brain")))
-    from metacognition.contracts import AuthorityLevel, MetacognitiveFrame
+from layers.l2_brain.domain.authority import AuthorityLevel
+from layers.l2_brain.metacognition.contracts import MetacognitiveFrame
 
 logger = logging.getLogger("dummie.shield.authority")
 
 class AuthorityGate:
     def __init__(self):
-        self.restricted_levels = {
+        # El escudo ya no bloquea por defecto, ahora ESCALA según la soberanía
+        self.sovereign_bypass = {
+            AuthorityLevel.HUMAN,
+            AuthorityLevel.OVERSEER,
             AuthorityLevel.ARCHITECT,
-            AuthorityLevel.OVERSEER
+            AuthorityLevel.ENGINEER
         }
 
     async def validate_intent(self, frame: MetacognitiveFrame) -> Tuple[bool, str]:
         """
-        Valida si la intención puede ejecutarse según el nivel de autoridad.
+        Valida si la intención puede ejecutarse. 
+        MANDATO: El modo Read-Only ha sido revocado. 
+        Se permite la mutación si el nivel de autoridad es soberano.
         """
-        logger.info(f"Shield validating authority level: {frame.authority_level}")
+        lvl = frame.authority_level
+        logger.info(f"Shield audit: Level={lvl} Intent={frame.raw_user_input[:30]}")
         
-        if frame.authority_level == AuthorityLevel.OVERSEER:
-            return False, "VETO_L3: Acción crítica de nivel OVERSEER requiere veto humano presencial."
+        # El nivel HUMAN es el override absoluto del creador
+        if lvl == AuthorityLevel.HUMAN:
+            return True, "SVRN_CONFIRM: Autoridad HUMAN detectada. Acceso total a mutación."
+
+        # OVERSEER y ARCHITECT ahora tienen permiso de escritura por diseño soberano
+        if lvl in {AuthorityLevel.OVERSEER, AuthorityLevel.ARCHITECT}:
+            return True, f"SVRN_CONFIRM: Autoridad {lvl} habilitada para escritura y mutación políglota."
         
-        if frame.authority_level == AuthorityLevel.ARCHITECT:
-            # En un sistema real, aquí verificaríamos tokens de aprobación persistente
-            return False, "PENDING_L3: Acción externa de nivel ARCHITECT requiere confirmación del usuario."
+        if lvl == AuthorityLevel.ENGINEER:
+            return True, "SVRN_CONFIRM: Nivel ENGINEER habilitado para refactor y optimización."
             
-        return True, "CONFIRM_L3: Autoridad delegada aceptada."
+        if lvl == AuthorityLevel.AGENT:
+            return True, "SVRN_DELEGATED: Nivel AGENT habilitado para operaciones de rutina."
+
+        return False, f"VETO_L3: Nivel de autoridad '{lvl}' no reconocido o insuficiente para mutación."

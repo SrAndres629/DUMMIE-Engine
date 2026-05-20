@@ -178,7 +178,7 @@ class MemoryNode4D(BaseModel):
         try:
             from layers.l2_brain.model_mesh.embedding_provider import EmbeddingProvider
         except ImportError:
-            from layers.l2_brain.flat_brain.embedding_provider import EmbeddingProvider
+            from layers.l2_brain.model_mesh.embedding_provider import EmbeddingProvider
         
         embedding_vec = EmbeddingProvider.generate_vector(payload)
 
@@ -203,7 +203,7 @@ class MemoryNode4D(BaseModel):
         try:
             from layers.l2_brain.infrastructure.cypher_codec import node_to_create_cypher
         except ImportError:
-            from layers.l2_brain.flat_brain.cypher_codec import node_to_create_cypher
+            from layers.l2_brain.infrastructure.cypher_codec import node_to_create_cypher
             
         return node_to_create_cypher(self)
 

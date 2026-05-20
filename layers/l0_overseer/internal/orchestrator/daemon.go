@@ -95,7 +95,7 @@ func (d *Daemon) schedulerLoop(ctx context.Context) {
 					d.InFlightMu.Unlock()
 				}()
 
-				_, err := d.Graph.Run(ctx, s, s.Branch)
+				_, err := d.Graph.Run(ctx, s.Branch, s)
 				if err != nil {
 					fmt.Printf("[DAEMON] Error en tarea %s: %v\n", s.ID, err)
 				}
