@@ -1,69 +1,35 @@
 goals:
-- goal: quiero llegar a 10000 mrr
+- goal: Llegar a 10,000 USD MRR con negocio sostenible
   goal_type: revenue
   status: active
-  timestamp: '2026-05-19T08:08:00.829168+00:00'
-- goal: quiero facturar 10000 USD mensuales
-  goal_type: revenue
-  status: active
-  timestamp: '2026-05-19T08:08:00.899330+00:00'
-- goal: quiero ganar 10000 USD al mes
-  goal_type: revenue
-  status: active
-  timestamp: '2026-05-19T08:08:00.912101+00:00'
-- goal: quiero que mi negocio facture 10000 USD mensuales
-  goal_type: revenue
-  status: active
-  timestamp: '2026-05-19T08:08:00.925042+00:00'
-- goal: quiero llegar a 10000 USD de MRR
-  goal_type: revenue
-  status: active
-  timestamp: '2026-05-19T08:08:16.104903+00:00'
-- goal: 'quiero definir un plan operativo
+  priority: critical
+  timestamp: '2026-05-19T08:08:00+00:00'
+  notes: "Objetivo fundacional. Todo lo que construyo debe converger a esto."
 
-
-
-    --- SYSTEM DIRECTIVES (auto-injected) ---
-
-    1. Respond in Spanish. Code comments in English.'
-  goal_type: strategy
-  timestamp: '2026-05-19T09:46:41Z'
-  status: active
-- goal: 'quiero optimizar el flujo de ventas
-
-
-
-    --- SYSTEM DIRECTIVES (auto-injected) ---
-
-    1. Respond in Spanish. Code comments in English.'
-  goal_type: revenue
-  timestamp: '2026-05-19T09:46:41Z'
-  status: active
-- goal: 'quiero lanzar una oferta para aumentar MRR en 90 dias
-
-
-
-    --- SYSTEM DIRECTIVES (auto-injected) ---
-
-    1. Respond in Spanish. Code comments in English.'
-  goal_type: revenue
-  timestamp: '2026-05-19T09:46:48Z'
-  status: active
-- goal: seed
-  goal_type: unknown
-  timestamp: '2026-05-19T09:47:12Z'
-  status: active
-- goal: 'quiero un plan de crecimiento
-
-
-
-    --- SYSTEM DIRECTIVES (auto-injected) ---
-
-    1. Respond in Spanish. Code comments in English.'
+- goal: Habilitar Escritura Soberana en todas las capas
   goal_type: technical
-  timestamp: '2026-05-19T09:47:57Z'
   status: active
-- goal: Habilitar la Escritura Soberana en todas las capas
-  goal_type: manual
-  timestamp: manual
+  priority: high
+  timestamp: '2026-05-19T00:00:00+00:00'
+  notes: "Read-only is dead. Toda capa debe poder leer y escribir."
+
+- goal: DUMMIE como mentor y socio estratégico 24/7
+  goal_type: evolution
   status: active
+  priority: high
+  timestamp: '2026-05-24T00:00:00+00:00'
+  notes: "De herramienta a entidad autonoma con personalidad, memoria y juicio."
+
+- goal: Eliminar flat_brain/ por completo
+  goal_type: technical
+  status: active
+  priority: medium
+  timestamp: '2026-05-20T00:00:00+00:00'
+  notes: "120 modulos pendientes. FallbackFinder activo. Migrar con CLI."
+
+- goal: Embeddings reales + modelos especializados por clase de accion
+  goal_type: evolution
+  status: active
+  priority: medium
+  timestamp: '2026-05-20T00:00:00+00:00'
+  notes: "Reemplazar heuristicas YAML con embeddings semanticos. Modelos locales agenticos para deliberacion sin depender de API externa."

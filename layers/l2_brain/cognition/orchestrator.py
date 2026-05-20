@@ -93,6 +93,8 @@ class CognitiveOrchestrator:
             frame = None
             if self.daemon.metacognition:
                 frame = await self.daemon.metacognition.preprocess(request.session_id, request.goal)
+                if frame.blocked_reason:
+                    raise GovernanceGateError(frame.blocked_reason, "BLOCK", [frame.blocked_reason])
                 if self.daemon.authority_gate:
                     authorized, authority_msg = await self.daemon.authority_gate.validate_intent(frame)
                     if not authorized:

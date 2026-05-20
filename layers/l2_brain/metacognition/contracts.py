@@ -12,6 +12,7 @@ class MetacognitiveFrame:
     authority_level: AuthorityLevel = AuthorityLevel.AGENT
     risk_level: str = "low"
     required_tools: List[str] = field(default_factory=list)
+    blocked_reason: str = ""
     missing_context: List[str] = field(default_factory=list)
     mission_plan: List[Dict[str, Any]] = field(default_factory=list)
     deliberation_summary: str = ""

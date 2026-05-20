@@ -53,21 +53,51 @@ class ContextEnricherHook:
         frame.telemetry["context_scan"] = "COMPLETED"
         return frame
 
+EXTERNAL_ACTIONS = {
+    "social_media": {"browser_driver", "social_media_api", "scheduler"},
+    "destructive": {"backup_tool", "system_operator"},
+    "installer": {"tool_installer", "backup_tool"},
+    "automation": {"mission_planner", "workstation_operator", "verification_runner"},
+}
+
+EXTERNAL_KEYWORDS = {
+    "social_media": ["facebook", "instagram", "tiktok", "social", "publica", "post", "tweet", "publicar", "twittear"],
+    "destructive": ["borra", "delete", "remove", "root", "format", "destroy", "sudo", "wipe", "rm"],
+    "installer": ["instala", "install", "setup", "driver", "apt", "npm", "pip", "configure"],
+    "automation": ["automat", "script", "workflow", "deploy"],
+}
+
+BLOCKED_AUTHORITY_ACTIONS = {
+    AuthorityLevel.AGENT: {"social_media", "destructive", "installer"},
+    AuthorityLevel.ENGINEER: {"social_media", "destructive"},
+    AuthorityLevel.ARCHITECT: set(),
+    AuthorityLevel.OVERSEER: set(),
+    AuthorityLevel.HUMAN: set(),
+}
+
 class ToolNeedDetectorHook:
     async def run(self, frame: MetacognitiveFrame) -> MetacognitiveFrame:
         raw = frame.raw_user_input.lower()
         tools = set(frame.required_tools)
+        matched_categories = set()
 
-        if any(k in raw for k in ["facebook", "instagram", "tiktok", "social", "publica", "post"]):
-            tools.update({"browser_driver", "social_media_api", "scheduler", "authority_gate"})
-        if any(k in raw for k in ["automat", "script", "workflow"]):
-            tools.update({"mission_planner", "workstation_operator", "verification_runner"})
-        if any(k in raw for k in ["instala", "install", "setup", "driver"]):
-            tools.update({"tool_installer", "backup_tool"})
-        if any(k in raw for k in ["borra", "delete", "remove", "root"]):
-            tools.update({"backup_tool", "authority_gate"})
+        for category, keywords in EXTERNAL_KEYWORDS.items():
+            if any(k in raw for k in keywords):
+                tools.update(EXTERNAL_ACTIONS[category])
+                matched_categories.add(category)
 
         frame.required_tools = sorted(tools)
+
+        blocked = BLOCKED_AUTHORITY_ACTIONS.get(frame.authority_level, set())
+        critical = matched_categories & blocked
+        if critical:
+            frame.risk_level = "critical"
+            frame.blocked_reason = (
+                f"Action blocked: {', '.join(sorted(critical))} "
+                f"requires authority >= ARCHITECT (current: {frame.authority_level.name})"
+            )
+            logger.warning(frame.blocked_reason)
+
         if not frame.required_tools:
             frame.missing_context.append("required_tools")
         return frame

@@ -83,3 +83,4 @@ scratch/venv/
 *.dll
 *.dylib
 .gemini.bak/
+.antigravitycli/

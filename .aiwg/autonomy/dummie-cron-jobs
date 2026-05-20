@@ -23,3 +23,6 @@ HOME=/home/jorand
 
 # Every 30 minutes: Git status monitoring
 */30 * * * * cd "/media/datasets/DUMMIE Engine" && /usr/bin/git status --short > .aiwg/state/git_status_latest.txt 2>&1
+
+# Every hour: Health check (auto_health.py)
+0 * * * * cd "/media/datasets/DUMMIE Engine" && uv run scripts/auto_health.py > .aiwg/state/health_cron_latest.txt 2>&1
