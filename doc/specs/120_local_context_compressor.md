@@ -37,10 +37,10 @@ Missing source artifacts produce warnings or empty-safe behavior; no hard crash 
 Builds on context package and prompt frame outputs from prior bundles.
 
 ## Current State
-Implemented in `layers/l2_brain/local_context_compressor.py` and invoked by CLI command `compress-context`.
+Implemented in `layers/l2_brain/flat_brain/local_context_compressor.py` and invoked by CLI command `compress-context`.
 
 ## Physical Evidence
-- `layers/l2_brain/local_context_compressor.py`
+- `layers/l2_brain/flat_brain/local_context_compressor.py`
 - `.aiwg/reports/local_context_compression_latest.json`
 - `layers/l2_brain/tests/test_local_context_compressor.py`
 

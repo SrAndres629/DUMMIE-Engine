@@ -12,17 +12,15 @@ def test_mine_patterns_reports_repeated_failure_hotspot_with_rule():
 
     patterns = miner.mine_patterns(events)
 
-    assert patterns == [
-        {
-            "pattern_id": "hotspot_layers_l2_brain_cognition_judge.py",
-            "name": "Repeated event hotspot",
-            "confidence": 0.75,
-            "evidence_refs": ["e1", "e2", "e3"],
-            "hypothesis": "layers/l2_brain/cognition/judge.py has repeated test_failure events.",
-            "proposed_rule": "Require focused regression coverage before changing this path.",
-            "recommended_action": "STRENGTHEN_TESTS",
-        }
-    ]
+    assert len(patterns) == 1
+    p = patterns[0]
+    assert p["pattern_id"] == "hotspot_layers_l2_brain_cognition_judge.py"
+    assert p["name"] == "Repeated event hotspot"
+    assert p["confidence"] == 0.75
+    assert p["evidence_refs"] == ["e1", "e2", "e3"]
+    assert p["hypothesis"] == "layers/l2_brain/cognition/judge.py has repeated test_failure events."
+    assert p["proposed_rule"] == "Require focused regression coverage before changing this path."
+    assert p["recommended_action"] == "STRENGTHEN_TESTS"
 
 
 def test_mine_patterns_returns_empty_list_without_repetition():

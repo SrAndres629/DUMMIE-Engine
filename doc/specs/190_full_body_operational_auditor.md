@@ -13,7 +13,7 @@ Map and audit the physical existence, connection, and readiness score of every D
 Under implementation.
 
 ## Physical Evidence
-- Core module: `layers/l2_brain/full_body_operational_auditor.py`
+- Core module: `layers/l2_brain/flat_brain/full_body_operational_auditor.py`
 - Test suite: `layers/l2_brain/tests/test_full_body_operational_auditor.py`
 - JSON Schema: `.aiwg/schemas/full_body_operational_audit.schema.json`
 - Output reports: `.aiwg/reports/full_body_operational_audit_latest.json` and `.aiwg/reports/full_body_operational_audit_latest.md`

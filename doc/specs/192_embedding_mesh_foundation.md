@@ -15,13 +15,13 @@ Establish a sovereign, typed, multi-capability, and offline-resilient embedding 
 Fully implemented and verified under green unit tests and indexer smoke checks.
 
 ## Physical Evidence
-- Core Module: `layers/l2_brain/embedding_mesh/__init__.py`
-- Registry Module: `layers/l2_brain/embedding_mesh/registry.py`
-- Router Module: `layers/l2_brain/embedding_mesh/router.py`
-- Providers Module: `layers/l2_brain/embedding_mesh/providers.py`
-- Reranker Module: `layers/l2_brain/embedding_mesh/reranker.py`
-- Indexer Module: `layers/l2_brain/embedding_mesh/repo_indexer.py`
-- Matrix Module: `layers/l2_brain/embedding_mesh/hardening_matrix.py`
+- Core Module: `layers/l2_brain/flat_brain/embedding_mesh/__init__.py`
+- Registry Module: `layers/l2_brain/flat_brain/embedding_mesh/registry.py`
+- Router Module: `layers/l2_brain/flat_brain/embedding_mesh/router.py`
+- Providers Module: `layers/l2_brain/flat_brain/embedding_mesh/providers.py`
+- Reranker Module: `layers/l2_brain/flat_brain/embedding_mesh/reranker.py`
+- Indexer Module: `layers/l2_brain/flat_brain/embedding_mesh/repo_indexer.py`
+- Matrix Module: `layers/l2_brain/flat_brain/embedding_mesh/hardening_matrix.py`
 - Indexer Script: `scripts/build_semantic_hardening_index.py`
 - Test suite: `layers/l2_brain/tests/test_embedding_mesh_contracts.py`
 - Test suite: `layers/l2_brain/tests/test_embedding_mesh_router.py`

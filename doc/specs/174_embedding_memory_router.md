@@ -13,7 +13,7 @@ This spec establishes the embedding memory router (HEARTBEAT-2) to safely index 
 Under implementation. Will process context items and rank search queries using a deterministic fallback vector scheme conforming to `embedding_memory_router.schema.json`.
 
 ## Physical Evidence
-- Core module: `layers/l2_brain/embedding_memory_router.py`
+- Core module: `layers/l2_brain/flat_brain/embedding_memory_router.py`
 - Test suite: `layers/l2_brain/tests/test_embedding_memory_router.py`
 - JSON Schema: `.aiwg/schemas/embedding_memory_router.schema.json`
 - Output reports: `.aiwg/reports/embedding_memory_router_latest.json` and `.aiwg/reports/embedding_memory_router_latest.md`

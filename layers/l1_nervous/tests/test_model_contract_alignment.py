@@ -24,13 +24,13 @@ def test_l1_agent_intent_serializes_l2_enum_values():
     intent = l1_models.AgentIntent(
         goal="align model contracts",
         agent_id="phase3-test",
-        authority_a=l1_models.AuthorityLevel.A0_OBSERVER,
+        authority_a=l1_models.AuthorityLevel.ARCHITECT,
         intent_i=l1_models.IntentType.MUTATION,
     )
 
     payload = _wire_dict(intent)
 
-    assert payload["authority_a"] == "A0_OBSERVER"
+    assert payload["authority_a"] == "ARCHITECT"
     assert payload["intent_i"] == "MUTATION"
     assert payload["goal"] == "align model contracts"
 

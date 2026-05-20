@@ -1,0 +1,25 @@
+{
+  "flat_l2_problem_confirmed": true,
+  "l2_top_level_file_count": 7,
+  "l2_top_level_files": ["layers/l2_brain/implementation_plan.md", "layers/l2_brain/__init__.py", "layers/l2_brain/pyproject.toml", "layers/l2_brain/pytest.ini", "layers/l2_brain/.python-version", "layers/l2_brain/README.md", "layers/l2_brain/uv.lock"],
+  "l2_flat_brain_file_count": 582,
+  "l2_tracked_files_outside_flat_brain": 30,
+  "l2_deleted_files_in_current_branch_commits": ["layers/l2_brain/cognition/pattern_miner.py", "layers/l2_brain/embedding_mesh/router.py"],
+  "l2_moved_files_in_current_branch_commits": "~180+ files renamed from layers/l2_brain/X to layers/l2_brain/flat_brain/X",
+  "unsafe_refactor_signals": [
+    "Massive reorganization (~180+ files) executed in only 2 commits",
+    "No evidence of migration manifest, dry-run, or rollback plan",
+    "pattern_miner.py shows D+A (delete+add) instead of R (rename), meaning it was modified during move — risk of lost changes",
+    "No import path updates verified — all downstream imports to old paths will break",
+    "No test suite run evidence in commit messages to verify migration correctness",
+    "The reorganization was executed on a branch ahead of main without prior review"
+  ],
+  "recommendation": "RESTORE_FIRST",
+  "warnings": [
+    "The flat_brain migration is a structural change that affects ALL imports referencing layers/l2_brain/* modules",
+    "Any external code importing from old paths will fail at runtime",
+    "The migration should have been done with a deprecation layer or import compatibility shim",
+    "Before any further refactor, verify that all imports are updated",
+    "Consider reverting the flat_brain migration and re-planning with proper migration strategy"
+  ]
+}

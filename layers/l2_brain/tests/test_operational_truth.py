@@ -45,12 +45,13 @@ def test_truth_report_serializes_status_values():
 
 def test_collect_truth_reports_existing_router_swarm_and_reward_assets(tmp_path: Path):
     repo = tmp_path
-    (repo / "layers/l2_brain").mkdir(parents=True)
+    (repo / "layers/l2_brain/flat_brain").mkdir(parents=True)
     (repo / "layers/l1_nervous/tools_impl").mkdir(parents=True)
     (repo / ".aiwg/memory").mkdir(parents=True)
-    (repo / "layers/l2_brain/model_router.py").write_text("class ModelRouter: pass\n")
-    (repo / "layers/l2_brain/neuron_ledger.py").write_text("class NeuronLedger: pass\n")
-    (repo / "layers/l2_brain/action_graph.py").write_text("class ActionGraph: pass\n")
+    (repo / "layers/l2_brain/flat_brain/model_router.py").write_text("class ModelRouter: pass\n")
+    (repo / "layers/l2_brain/flat_brain/neuron_ledger.py").write_text("class NeuronLedger: pass\n")
+    (repo / "layers/l2_brain/flat_brain/action_graph.py").write_text("class ActionGraph: pass\n")
+    (repo / "layers/l2_brain/flat_brain/token_cost_ledger.py").write_text("class TokenCostLedger: pass\n")
     (repo / "layers/l1_nervous/tools_impl/swarm.py").write_text("def register_swarm_tools(): pass\n")
 
     report = collect_truth(str(repo), include_slow=False)
@@ -115,8 +116,9 @@ def test_dummied_probe_passes_when_control_socket_replies_pong(tmp_path: Path):
 
 
 def test_dummie_truth_cli_json_smoke():
+    import sys
     out = subprocess.check_output(
-        ["python3", "scripts/dummie_truth.py", "--json"],
+        [sys.executable, "scripts/dummie_truth.py", "--json"],
         text=True,
     )
     payload = json.loads(out)

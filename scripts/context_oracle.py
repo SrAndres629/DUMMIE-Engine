@@ -30,7 +30,11 @@ def get_tree(depth=2):
     return "\n".join(tree_str)
 
 def get_architecture():
-    """Lee las reglas arquitectónicas más recientes (GEMINI.md)."""
+    """Lee las reglas arquitectónicas más recientes (ANTIGRAVITY.md)."""
+    antigravity_md = ROOT_DIR / "ANTIGRAVITY.md"
+    if antigravity_md.exists():
+        return antigravity_md.read_text()
+    # Fallback to legacy GEMINI.md if present
     gemini_md = ROOT_DIR / "GEMINI.md"
     if gemini_md.exists():
         return gemini_md.read_text()

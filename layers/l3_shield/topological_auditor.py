@@ -52,6 +52,14 @@ class TopologicalAuditor(BaseAuditor):
                         adj[u].append(v)
                         all_nodes.add(v)
 
+            for edge in root.findall(".//edge"):
+                u = edge.get("source")
+                v = edge.get("target")
+                if u and v:
+                    adj[u].append(v)
+                    all_nodes.add(u)
+                    all_nodes.add(v)
+
             edge_count = sum(len(targets) for targets in adj.values())
             logger.info(
                 f"S-SHIELD: Parsed DAG with {len(all_nodes)} nodes, "

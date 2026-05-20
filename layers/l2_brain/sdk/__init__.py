@@ -1,8 +1,6 @@
+# Spec: 166_l2_brain_organ_migration_contract
 import sys
-import os
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
-from .client import Client
-from .session import Session
+from . import sdk_core_api_pb2
 
-__all__ = ["Client", "Session"]
+sys.modules.setdefault("sdk_core_api_pb2", sdk_core_api_pb2)

@@ -1,10 +1,12 @@
 import os
 import sys
 import asyncio
+import pytest
 sys.path.append(os.path.abspath("layers/l2_brain"))
 from auto_evolution import CognitiveAutoEvolver
 from orchestrator import CognitiveOrchestrator
 
+@pytest.mark.anyio
 async def test_auto_evolution_logic():
     # Setup
     evolver = CognitiveAutoEvolver(workspace_root=".")

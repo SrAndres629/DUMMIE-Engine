@@ -13,7 +13,7 @@ This spec establishes the six-dimensional context axis runtime (HEARTBEAT-2) to 
 Under implementation. Will process scanner outputs and build structured context packet outputs conforming to `6d_context_packet.schema.json`.
 
 ## Physical Evidence
-- Core module: `layers/l2_brain/six_dimensional_context_runtime.py`
+- Core module: `layers/l2_brain/flat_brain/six_dimensional_context_runtime.py`
 - Test suite: `layers/l2_brain/tests/test_six_dimensional_context_runtime.py`
 - JSON Schema: `.aiwg/schemas/6d_context_packet.schema.json`
 - Output reports: `.aiwg/reports/6d_context_packet_latest.json` and `.aiwg/reports/6d_context_packet_latest.md`

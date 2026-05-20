@@ -22,7 +22,7 @@ Scan, classify, quarantine and audit all stored mental models.
 - Operational. Created by Pack 5.2.2.
 
 ## Physical Evidence
-- `layers/l2_brain/mental_model_truth_hygiene.py`
+- `layers/l2_brain/flat_brain/mental_model_truth_hygiene.py`
 - `.aiwg/reports/mental_model_truth_hygiene_latest.json`
 - `.aiwg/mental_models/runtime_model_quarantine.json`
 

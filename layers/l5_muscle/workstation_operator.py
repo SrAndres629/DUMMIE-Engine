@@ -15,10 +15,19 @@ class WorkstationOperator:
         """
         logger.info(f"L5 Workstation execution: {action_type}")
         
+        authority_level = params.get("authority_level")
+        if authority_level == "A4_EXTERNAL_ACTOR":
+            return {"status": "BLOCKED", "requires_approval": True}
+
         if action_type == "shell_command":
             return await self._run_shell(params.get("command", ""))
         elif action_type == "file_snapshot":
-            return await self._create_snapshot(params.get("path", ""))
+            path = params.get("path", "")
+            abs_workspace = os.path.abspath(self.workspace_root)
+            abs_target = os.path.abspath(os.path.join(abs_workspace, path))
+            if not abs_target.startswith(abs_workspace):
+                return {"status": "ERROR", "message": "Path traversal outside safe zone detected."}
+            return await self._create_snapshot(path)
         else:
             return {"status": "ERROR", "message": f"Action type {action_type} not implemented."}
 
@@ -33,4 +42,23 @@ class WorkstationOperator:
 
     async def _create_snapshot(self, path: str) -> Dict[str, Any]:
         logger.info(f"Creating snapshot for {path}")
-        return {"status": "SUCCESS", "snapshot_id": "snap_12345"}
+        import uuid
+        import shutil
+        
+        abs_workspace = os.path.abspath(self.workspace_root)
+        abs_target = os.path.abspath(os.path.join(abs_workspace, path))
+        
+        snapshot_id = f"snap_{uuid.uuid4().hex[:8]}"
+        checkpoint_dir = os.path.join(abs_workspace, ".aiwg", "checkpoints", snapshot_id)
+        
+        try:
+            if os.path.exists(abs_target):
+                dest_path = os.path.join(checkpoint_dir, path)
+                os.makedirs(os.path.dirname(dest_path), exist_ok=True)
+                if os.path.isdir(abs_target):
+                    shutil.copytree(abs_target, dest_path)
+                else:
+                    shutil.copy2(abs_target, dest_path)
+            return {"status": "SUCCESS", "snapshot_id": snapshot_id}
+        except Exception as e:
+            return {"status": "ERROR", "message": f"Snapshot failed: {e}"}

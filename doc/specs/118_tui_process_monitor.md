@@ -35,10 +35,10 @@ Missing optional artifact -> warning; critical state mismatch can degrade decisi
 Reads P10-P17 artifacts and exposes operational status for human/agent control loops.
 
 ## Current State
-Implemented in `layers/l2_brain/tui_process_monitor.py`.
+Implemented in `layers/l2_brain/flat_brain/tui_process_monitor.py`.
 
 ## Physical Evidence
-- `layers/l2_brain/tui_process_monitor.py`
+- `layers/l2_brain/flat_brain/tui_process_monitor.py`
 - `.aiwg/reports/process_monitor_latest.json`
 - `.aiwg/reports/process_monitor_latest.txt`
 

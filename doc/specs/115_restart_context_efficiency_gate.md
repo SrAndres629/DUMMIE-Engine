@@ -22,8 +22,8 @@ P15/P16 must prove runtime can recover after restart and that context optimizati
 Implemented as `restart_integration_gate.py` and `context_efficiency_benchmark.py` with `latest` reports.
 
 ## Physical Evidence
-- `layers/l2_brain/restart_integration_gate.py`
-- `layers/l2_brain/context_efficiency_benchmark.py`
+- `layers/l2_brain/flat_brain/restart_integration_gate.py`
+- `layers/l2_brain/flat_brain/context_efficiency_benchmark.py`
 - `.aiwg/reports/restart_integration_gate_latest.json`
 - `.aiwg/reports/context_efficiency_benchmark_latest.json`
 

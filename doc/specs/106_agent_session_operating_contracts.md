@@ -20,7 +20,7 @@ Implemented as Phase 1 session contracts under `.aiwg/session_contracts/`. The c
 ## Physical Evidence
 
 - `.aiwg/session_contracts/UNIVERSAL_AGENT_SESSION_CONTRACT.md`
-- `.aiwg/session_contracts/GEMINI_CLI_SESSION_CONTRACT.md`
+- `.aiwg/session_contracts/ANTIGRAVITY_SESSION_CONTRACT.md`
 - `.aiwg/session_contracts/CODEX_CLI_SESSION_CONTRACT.md`
 - `.aiwg/session_contracts/ANTIGRAVITY_IDE_SESSION_CONTRACT.md`
 - `.aiwg/context_transform/per_message_operating_contract.yaml`
@@ -30,7 +30,7 @@ Implemented as Phase 1 session contracts under `.aiwg/session_contracts/`. The c
 ## Requirements
 
 - Universal session contract exists at `.aiwg/session_contracts/UNIVERSAL_AGENT_SESSION_CONTRACT.md`.
-- Gemini CLI session contract exists at `.aiwg/session_contracts/GEMINI_CLI_SESSION_CONTRACT.md`.
+- Antigravity CLI session contract exists at `.aiwg/session_contracts/ANTIGRAVITY_SESSION_CONTRACT.md`.
 - Codex CLI session contract exists at `.aiwg/session_contracts/CODEX_CLI_SESSION_CONTRACT.md`.
 - Antigravity IDE session contract exists at `.aiwg/session_contracts/ANTIGRAVITY_IDE_SESSION_CONTRACT.md`.
 - Every session must load `current_position.json` and `next_phase_seed.json`.
@@ -41,7 +41,7 @@ Implemented as Phase 1 session contracts under `.aiwg/session_contracts/`. The c
 
 - Every local agent session loads canonical current position and next phase seed.
 - Every local agent session checks forbidden skips.
-- Gemini CLI, Codex CLI, and Antigravity IDE share the same roadmap source.
+- Antigravity CLI, Codex CLI, and Antigravity IDE share the same roadmap source.
 - Agent sessions must not redefine the roadmap from chat memory.
 - PASS claims require evidence or documented absence.
 
@@ -53,7 +53,7 @@ python3 - <<'PY'
 from pathlib import Path
 contracts = [
     '.aiwg/session_contracts/UNIVERSAL_AGENT_SESSION_CONTRACT.md',
-    '.aiwg/session_contracts/GEMINI_CLI_SESSION_CONTRACT.md',
+    '.aiwg/session_contracts/ANTIGRAVITY_SESSION_CONTRACT.md',
     '.aiwg/session_contracts/CODEX_CLI_SESSION_CONTRACT.md',
     '.aiwg/session_contracts/ANTIGRAVITY_IDE_SESSION_CONTRACT.md',
 ]
@@ -67,7 +67,7 @@ PY
 | Invariant | Evidence | Verification |
 | --- | --- | --- |
 | Universal contract | `.aiwg/session_contracts/UNIVERSAL_AGENT_SESSION_CONTRACT.md` | File exists |
-| Gemini contract | `.aiwg/session_contracts/GEMINI_CLI_SESSION_CONTRACT.md` | File exists |
+| Antigravity contract | `.aiwg/session_contracts/ANTIGRAVITY_SESSION_CONTRACT.md` | File exists |
 | Codex contract | `.aiwg/session_contracts/CODEX_CLI_SESSION_CONTRACT.md` | File exists |
 | Antigravity contract | `.aiwg/session_contracts/ANTIGRAVITY_IDE_SESSION_CONTRACT.md` | File exists |
 | Canonical state | `.aiwg/evolution/current_position.json` | Cold-read validation |

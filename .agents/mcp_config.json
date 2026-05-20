@@ -1,0 +1,22 @@
+{
+  "mcpServers": {
+    "dummie-brain": {
+      "command": "/bin/bash",
+      "args": [
+        "/home/jorand/Escritorio/DUMMIE Engine/scripts/mcp_wrapper.sh",
+        "/home/jorand/Escritorio/DUMMIE Engine/layers/l1_nervous/.venv/bin/python",
+        "/home/jorand/Escritorio/DUMMIE Engine/layers/l1_nervous/mcp_server.py"
+      ],
+      "env": {
+        "DUMMIE_ROOT_DIR": "/home/jorand/Escritorio/DUMMIE Engine",
+        "DUMMIE_AIWG_DIR": "/home/jorand/Escritorio/DUMMIE Engine/.aiwg",
+        "DUMMIE_KUZU_DB_PATH": "/home/jorand/Escritorio/DUMMIE Engine/.aiwg/memory/loci.db",
+        "DUMMIE_MCP_CONFIG_PATH": "/home/jorand/.antigravity/mcp_config.registry.json",
+        "PYTHONPATH": "/home/jorand/Escritorio/DUMMIE Engine/layers/l2_brain/src:/home/jorand/Escritorio/DUMMIE Engine/layers/l1_nervous",
+        "PATH": "/home/jorand/.local/bin:/usr/local/bin:/usr/bin:/bin",
+        "MEMORY_SOCKET_PATH": "/tmp/dummie_flight.sock",
+        "LOG_LEVEL": "INFO"
+      }
+    }
+  }
+}

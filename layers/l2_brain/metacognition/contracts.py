@@ -1,10 +1,7 @@
 from dataclasses import dataclass, field
 from typing import Dict, Any, List, Optional
 
-try:
-    from models import AuthorityLevel
-except ImportError:  # pragma: no cover - package import fallback
-    from layers.l2_brain.models import AuthorityLevel
+from layers.l2_brain.domain.authority import AuthorityLevel
 
 @dataclass
 class MetacognitiveFrame:
@@ -12,7 +9,7 @@ class MetacognitiveFrame:
     raw_user_input: str
     refined_intent: str = ""
     strategic_objective: str = ""
-    authority_level: AuthorityLevel = AuthorityLevel.A0_OBSERVER
+    authority_level: AuthorityLevel = AuthorityLevel.AGENT
     risk_level: str = "low"
     required_tools: List[str] = field(default_factory=list)
     missing_context: List[str] = field(default_factory=list)

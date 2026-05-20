@@ -1,0 +1,32 @@
+{
+  "pack": "PACK R2.1",
+  "files_recommended_for_restore": [
+    ".aiwg/memory/lessons.jsonl",
+    "layers/l2_brain/src/brain/mcp_server.py",
+    "layers/l2_brain/tests/test_mcp_server.py",
+    "layers/l2_brain/src/brain/application/ports.py",
+    "layers/l2_brain/src/brain/domain/memory/schemas.py"
+  ],
+  "files_restored": [
+    ".aiwg/memory/lessons.jsonl",
+    "layers/l2_brain/src/brain/mcp_server.py",
+    "layers/l2_brain/tests/test_mcp_server.py",
+    "layers/l2_brain/src/brain/application/ports.py",
+    "layers/l2_brain/src/brain/domain/memory/schemas.py"
+  ],
+  "files_not_restored_reason": [],
+  "commands_run": [
+    "git restore --source=f3485dc^ -- .aiwg/memory/lessons.jsonl",
+    "git restore --source=f3485dc^ -- layers/l2_brain/src/brain/mcp_server.py",
+    "git restore --source=f3485dc^ -- layers/l2_brain/tests/test_mcp_server.py",
+    "git restore --source=762eec1^ -- layers/l2_brain/src/brain/application/ports.py",
+    "git restore --source=762eec1^ -- layers/l2_brain/src/brain/domain/memory/schemas.py",
+    "git add -f .aiwg/memory/lessons.jsonl layers/l2_brain/src/brain/mcp_server.py layers/l2_brain/tests/test_mcp_server.py layers/l2_brain/src/brain/application/ports.py layers/l2_brain/src/brain/domain/memory/schemas.py"
+  ],
+  "warnings": [
+    ".aiwg/memory/lessons.jsonl was force-added because .aiwg/memory/ is in .gitignore. Sovereign memory files should ideally be tracked.",
+    "flat_brain/ports.py is a DIFFERENT file from application/ports.py. Both now coexist with different port definitions.",
+    "flat_brain/models.py is a DIFFERENT file from domain/memory/schemas.py. Both now coexist with different model definitions.",
+    "mcp_server.py restored to original path. A different mcp_server.py exists in layers/l1_nervous/."
+  ]
+}

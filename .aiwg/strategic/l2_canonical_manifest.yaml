@@ -1,0 +1,342 @@
+# L2 Brain Canonical Architecture Manifest
+
+**Date:** 2026-05-19
+**Status:** DRAFT — Requires Jorge's Approval
+**Author:** DUMMIE Engine
+
+---
+
+## Sovereign Responsibility
+
+```yaml
+layer: L2_BRAIN
+sovereign_responsibility: "Cognitive organ — thinking, remembering, reasoning, deciding, evolving"
+not_responsible_for:
+  - "Transport/nervous system (L1)"
+  - "Security/shield (L3)"
+  - "Edge execution/scanning (L4)"
+  - "Observability/visualization (L5)"
+  - "Human interface (L6)"
+```
+
+## Canonical Structure (Proposed)
+
+```yaml
+canonical_root: "layers/l2_brain/"
+structure:
+  memory_system:
+    description: "4D-TES + 3D-Loci + 6D Context"
+    modules:
+      - "flat_brain/models.py"
+      - "flat_brain/memory_graph_runtime.py"
+      - "flat_brain/memory_spine_bridge.py"
+      - "flat_brain/memory_spine_entrypoint.py"
+      - "flat_brain/memory_refs.py"
+      - "src/brain/domain/memory/models.py"
+      - "src/brain/domain/memory/schemas.py"  # RESTORED
+    persistence:
+      primary: "KùzuDB (.aiwg/memory/loci.db)"
+      secondary: "Redb (event store)"
+      policy: "4D-TES Stability Contract"
+
+  reasoning_engine:
+    description: "Pattern mining, causal analysis, counterfactual thinking"
+    modules:
+      - "flat_brain/cognition/pattern_miner.py"
+      - "flat_brain/cognition/pattern_miner_v2.py"
+      - "flat_brain/cognition/epistemic_judge.py"
+      - "flat_brain/cognition/cold_planner.py"
+      - "flat_brain/cognition/persona_guardian.py"
+      - "flat_brain/domain/counterfactual_service.py"
+      - "flat_brain/domain/reasoning_logic.py"
+      - "flat_brain/domain/hypothesis_service.py"
+
+  metacognition:
+    description: "Self-audit, quality gates, evolution"
+    modules:
+      - "flat_brain/metacognition/pipeline.py"
+      - "flat_brain/metacognition/contracts.py"
+      - "flat_brain/metacognition/input_hooks.py"
+      - "flat_brain/metacognition/output_hooks.py"
+      - "flat_brain/metacognition/deliberation_hooks.py"
+      - "flat_brain/metacognition/reasoning_hooks.py"
+      - "flat_brain/metacognition/semantic_hooks.py"
+      - "flat_brain/metacognitive_evolution_flywheel.py"
+      - "flat_brain/metacognitive_loop_runtime.py"
+      - "flat_brain/metacognitive_quality_gate.py"
+
+  embedding_mesh:
+    description: "Semantic indexing, retrieval, reranking"
+    modules:
+      - "flat_brain/embedding_mesh/__init__.py"
+      - "flat_brain/embedding_mesh/registry.py"
+      - "flat_brain/embedding_mesh/router.py"
+      - "flat_brain/embedding_mesh/providers.py"
+      - "flat_brain/embedding_mesh/reranker.py"
+      - "flat_brain/embedding_mesh/repo_indexer.py"
+      - "flat_brain/embedding_mesh/hardening_matrix.py"
+      - "flat_brain/embedding_mesh/cli.py"
+      - "flat_brain/embedding_mesh/contracts.py"
+      - "flat_brain/embedding_adapter.py"
+      - "flat_brain/embedding_memory_router.py"
+      - "flat_brain/embedding_provider.py"
+      - "flat_brain/embedding_activation_verifier.py"
+
+  mission_orchestration:
+    description: "Planning, execution, outcome evaluation"
+    modules:
+      - "flat_brain/mission_planner.py"
+      - "flat_brain/mission_orchestrator_dag.py"
+      - "flat_brain/mission_autonomy_contract.py"
+      - "flat_brain/mission_coherence_guard.py"
+      - "flat_brain/mission_runtime_contract.py"
+      - "flat_brain/mission_workbench.py"
+      - "flat_brain/orchestrator.py"
+      - "flat_brain/outcome_evaluator.py"
+      - "flat_brain/long_running_mission.py"
+      - "flat_brain/prompt_to_mission.py"
+
+  strategic_partner:
+    description: "Business advisory, mentor mode, creator context"
+    modules:
+      - "flat_brain/strategic_partner_swarm.py"
+      - "flat_brain/autonomous_strategic_partner_runtime.py"
+      - "flat_brain/business_advisor_runtime.py"
+      - "flat_brain/business_goal_model.py"
+      - "flat_brain/business_orchestrator.py"
+      - "flat_brain/creator_context_runtime.py"
+      - "flat_brain/goal_reasoning_runtime.py"
+      - "flat_brain/revenue_goal_planner.py"
+
+  infrastructure:
+    description: "Adapters, ports, contracts"
+    modules:
+      - "flat_brain/ports.py"
+      - "flat_brain/adapters.py"
+      - "flat_brain/knowledge_ports.py"
+      - "flat_brain/domain/semantic_ports.py"
+      - "flat_brain/infrastructure/adapters/kuzu.py"
+      - "flat_brain/infrastructure/adapters/ledger.py"
+      - "flat_brain/infrastructure/adapters/external.py"
+      - "flat_brain/infrastructure/cognitive/adapters.py"
+      - "flat_brain/infrastructure/semantic_adapters.py"
+      - "flat_brain/infrastructure/reasoning/providers.py"
+      - "src/brain/application/ports.py"  # RESTORED
+      - "src/brain/application/interfaces.py"
+
+  daemon_and_runtime:
+    description: "Daemon, heartbeat, lifecycle"
+    modules:
+      - "flat_brain/daemon.py"
+      - "flat_brain/daemon_diagnostic.py"
+      - "flat_brain/daemon_gateway_heartbeat_bridge.py"
+      - "flat_brain/daemon_outcome.py"
+      - "flat_brain/heartbeat_decision_policy.py"
+      - "flat_brain/heartbeat_lifecycle_runtime.py"
+      - "flat_brain/heartbeat_scheduler.py"
+      - "flat_brain/heartbeat_state_store.py"
+
+  governance_and_audit:
+    description: "Self-healing, repair, auditing"
+    modules:
+      - "flat_brain/full_body_operational_auditor.py"
+      - "flat_brain/whole_body_scanner.py"
+      - "flat_brain/whole_body_scan_calibrator.py"
+      - "flat_brain/whole_body_repair_queue.py"
+      - "flat_brain/self_healing_planner.py"
+      - "flat_brain/self_improvement_runtime.py"
+      - "flat_brain/self_optimization.py"
+      - "flat_brain/auditor_port.py"
+      - "flat_brain/post_mortem_agent.py"
+
+  context_management:
+    description: "Context compression, budgeting, optimization"
+    modules:
+      - "flat_brain/local_context_compressor.py"
+      - "flat_brain/context_bloat_guard.py"
+      - "flat_brain/context_budget_manager.py"
+      - "flat_brain/context_circulation_runtime.py"
+      - "flat_brain/context_coverage_auditor.py"
+      - "flat_brain/context_efficiency_benchmark.py"
+      - "flat_brain/context_enforcement_gate.py"
+      - "flat_brain/context_package.py"
+      - "flat_brain/context_packet_optimizer.py"
+      - "flat_brain/context_quant_runtime.py"
+      - "flat_brain/context_value_scorer.py"
+      - "flat_brain/six_dimensional_context_runtime.py"
+
+  other:
+    description: "Modules that need categorization review"
+    modules:
+      - "flat_brain/action_graph.py"
+      - "flat_brain/ast_indexer.py"
+      - "flat_brain/auto_evolution.py"
+      - "flat_brain/branch_memory.py"
+      - "flat_brain/causal_replay.py"
+      - "flat_brain/chaos_regression_testing.py"
+      - "flat_brain/cli_control_plane.py"
+      - "flat_brain/consensus.py"
+      - "flat_brain/cypher_codec.py"
+      - "flat_brain/debate_review_runtime.py"
+      - "flat_brain/degraded_capability_registry.py"
+      - "flat_brain/dependency_reproducibility_verifier.py"
+      - "flat_brain/dialectical_reasoning_runtime.py"
+      - "flat_brain/dummie_chat_cli.py"
+      - "flat_brain/entity_voice.py"
+      - "flat_brain/entropy_governor.py"
+      - "flat_brain/entrypoint_enforcement_auditor.py"
+      - "flat_brain/environment_toolchain_probe.py"
+      - "flat_brain/epistemic_state_runtime.py"
+      - "flat_brain/event_bus.py"
+      - "flat_brain/evolution_delta_applier.py"
+      - "flat_brain/evolution_feedback_loop.py"
+      - "flat_brain/evolution_flywheel_runtime.py"
+      - "flat_brain/expansion_policy.py"
+      - "flat_brain/file_dossier_generator.py"
+      - "flat_brain/folder_dossier_generator.py"
+      - "flat_brain/formal_bridge.py"
+      - "flat_brain/four_dtes_persistence_preflight.py"
+      - "flat_brain/freshness_ledger.py"
+      - "flat_brain/gateway_contract.py"
+      - "flat_brain/golden_path.py"
+      - "flat_brain/graph_sync_ledger.py"
+      - "flat_brain/graph_sync_plan.py"
+      - "flat_brain/human_intent.py"
+      - "flat_brain/kuzu_4dtes_guard.py"
+      - "flat_brain/kuzu_graph_readback_verifier.py"
+      - "flat_brain/kuzu_graph_sync_adapter.py"
+      - "flat_brain/learning_episode.py"
+      - "flat_brain/lifecycle_integration_mapper.py"
+      - "flat_brain/local_reasoning.py"
+      - "flat_brain/metagateway_adapter.py"
+      - "flat_brain/metagateway_benchmark.py"
+      - "flat_brain/metagateway_policy.py"
+      - "flat_brain/metagateway_runtime_meter.py"
+      - "flat_brain/model_discovery.py"
+      - "flat_brain/model_executor.py"
+      - "flat_brain/model_router.py"
+      - "flat_brain/nervous_pulse.py"
+      - "flat_brain/neuron_ledger.py"
+      - "flat_brain/observability.py"
+      - "flat_brain/operational_truth.py"
+      - "flat_brain/operational_truth_collectors.py"
+      - "flat_brain/operationalization_pack_2_runner.py"
+      - "flat_brain/operationalization_review.py"
+      - "flat_brain/patch_transaction.py"
+      - "flat_brain/patch_transaction_manager.py"
+      - "flat_brain/phase_ledger.py"
+      - "flat_brain/philosophical_ontology_runtime.py"
+      - "flat_brain/plan_v1_completion_review.py"
+      - "flat_brain/polyglot_probe_orchestrator.py"
+      - "flat_brain/post_mortem_agent.py"
+      - "flat_brain/preflight.py"
+      - "flat_brain/prompt_cache_ledger.py"
+      - "flat_brain/prompt_frame_builder.py"
+      - "flat_brain/prompt_preprocessor.py"
+      - "flat_brain/readiness_score_calibrator.py"
+      - "flat_brain/rehydration.py"
+      - "flat_brain/repo_intelligence_query.py"
+      - "flat_brain/repo_intelligence_runtime.py"
+      - "flat_brain/repo_probe_runner.py"
+      - "flat_brain/resource_governor.py"
+      - "flat_brain/restart_integration_gate.py"
+      - "flat_brain/runtime_closure_planner.py"
+      - "flat_brain/runtime_dependency_auditor.py"
+      - "flat_brain/runtime_guards.py"
+      - "flat_brain/safe_fallbacks.py"
+      - "flat_brain/sdd_governance.py"
+      - "flat_brain/sdk/"
+      - "flat_brain/self_worktree_orchestrator.py"
+      - "flat_brain/semantic_cache.py"
+      - "flat_brain/semantic_graph_rag.py"
+      - "flat_brain/semantic_ontology_mapper.py"
+      - "flat_brain/semantic_retrieval_runtime.py"
+      - "flat_brain/sensor_first_guard.py"
+      - "flat_brain/session_store.py"
+      - "flat_brain/shadow_runtime_classifier.py"
+      - "flat_brain/skill_binder.py"
+      - "flat_brain/socraticode_gateway_adapter.py"
+      - "flat_brain/source_of_truth_conflict_detector.py"
+      - "flat_brain/sovereign_runtime_readiness.py"
+      - "flat_brain/spec_frontmatter_repair.py"
+      - "flat_brain/stale_memory_detector.py"
+      - "flat_brain/state_coherence_guard.py"
+      - "flat_brain/strategic_question_generator.py"
+      - "flat_brain/structural_hardening/"
+      - "flat_brain/supervisor_protocol.py"
+      - "flat_brain/technical_debt_intelligence.py"
+      - "flat_brain/token_cost_ledger.py"
+      - "flat_brain/token_economy_benchmark.py"
+      - "flat_brain/tool_opportunity_detector.py"
+      - "flat_brain/total_project_truth_scan.py"
+      - "flat_brain/trusted_workstation_mode.py"
+      - "flat_brain/tui_process_monitor.py"
+      - "flat_brain/vault_context_resolver.py"
+      - "flat_brain/vault_curator.py"
+      - "flat_brain/vault_embedding_index.py"
+      - "flat_brain/wiring_matrix_builder.py"
+      - "flat_brain/witness.py"
+      - "flat_brain/workbench_vault_runtime.py"
+```
+
+## Coexistence Policy
+
+```yaml
+flat_brain:
+  status: "TEMP_COMPAT — current implementation location"
+  future: "To be evaluated against canonical manifest"
+  action: "Do not move until R3 plan approved"
+
+src_brain:
+  status: "PARTIAL — hexagonal attempt, incomplete"
+  future: "Evaluate: absorb into canonical or eliminate"
+  restored_files:
+    - "src/brain/application/ports.py"
+    - "src/brain/domain/memory/schemas.py"
+  action: "Keep restored files, evaluate role in R3"
+
+tests:
+  status: "In layers/l2_brain/tests/ (not migrated)"
+  future: "May need path updates if module structure changes"
+  action: "Keep current location, update imports as needed"
+```
+
+## Layer Boundaries
+
+```yaml
+boundaries:
+  L0_OVERSEER:
+    language: "Elixir"
+    responsibility: "Supervision tree, fault tolerance"
+    interface_to_L1: "Protobuf over NATS"
+
+  L1_NERVOUS:
+    language: "Go"
+    responsibility: "Transport, causal hashing, NATS messaging"
+    interface_to_L2: "gRPC + NATS events"
+    interface_from_L2: "Orchestration commands, memory operations"
+
+  L2_BRAIN:
+    language: "Python"
+    responsibility: "Cognition, memory, reasoning, strategy"
+    interface_to_L1: "gRPC client, NATS subscriber"
+    interface_to_L3: "Shield audit port, intent validation"
+
+  L3_SHIELD:
+    language: "Rust (planned)"
+    responsibility: "Security, zero-trust, guardrails"
+    interface_from_L2: "Intent audit requests"
+
+  L4_EDGE:
+    language: "Zig (planned)"
+    responsibility: "Edge scanning, LST indexing"
+    interface_from_L2: "Scan commands, index queries"
+```
+
+## Decisions Pending (Jorge's Input Required)
+
+1. **flat_brain/ permanence**: Keep as final structure or reorganize?
+2. **src/brain/ role**: Absorb into canonical or eliminate?
+3. **Test location**: Inside flat_brain/ or separate tests/?
+4. **Import strategy**: Compatibility shim or full migration?
+5. **Persistence policy**: KùzuDB only or KùzuDB + Redb coexistence?

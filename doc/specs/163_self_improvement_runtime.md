@@ -22,7 +22,7 @@ Orchestrate truth hygiene, epistemic state, bias, evolution delta into a self-im
 - Operational. Created by Pack 5.2.2.
 
 ## Physical Evidence
-- `layers/l2_brain/self_improvement_runtime.py`
+- `layers/l2_brain/flat_brain/self_improvement_runtime.py`
 - `.aiwg/reports/self_improvement_cycle_latest.json`
 - `.aiwg/reports/self_improvement_action_queue.json`
 

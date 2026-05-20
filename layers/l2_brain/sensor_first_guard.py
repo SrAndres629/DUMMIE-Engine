@@ -29,6 +29,19 @@ class SensorFirstGuard:
     def __init__(self, retrieval_runtime: Any = None):
         self.retrieval_runtime = retrieval_runtime
 
+    def evaluate_direct_read(
+        self,
+        purpose: str,
+        prior_semantic_work: bool,
+        gateway_available: bool,
+    ) -> dict:
+        if purpose == "concept_discovery" and not prior_semantic_work and not gateway_available:
+            return {
+                "decision": "BLOCK",
+                "reason": "Violation: concept discovery requires semantic gateway evidence before direct reads",
+            }
+        return {"decision": "ALLOW", "reason": "sensor_first_satisfied_or_exempt"}
+
     def evaluate_request(self, request: dict, context_packet: dict | None = None) -> dict:
         """
         Evaluates a request against the SensorFirst policy.

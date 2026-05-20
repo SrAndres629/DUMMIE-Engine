@@ -36,7 +36,7 @@ Provide causal memory retrieval before every sovereign interaction, falling back
 - Operational with file-backed fallback. Kuzu is DEGRADED.
 
 ## Physical Evidence
-- `layers/l2_brain/memory_spine_entrypoint.py`
+- `layers/l2_brain/flat_brain/memory_spine_entrypoint.py`
 - `.aiwg/reports/memory_spine_entrypoint_latest.json`
 - `.aiwg/schemas/memory_spine_entrypoint.schema.json`
 
@@ -47,7 +47,7 @@ Provide causal memory retrieval before every sovereign interaction, falling back
 
 ## Verification
 ```bash
-python3 layers/l2_brain/memory_spine_entrypoint.py "what should I do next?"
+python3 layers/l2_brain/flat_brain/memory_spine_entrypoint.py "what should I do next?"
 python3 -m pytest layers/l2_brain/tests/test_memory_spine_entrypoint.py -q
 ```
 

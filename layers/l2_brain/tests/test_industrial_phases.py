@@ -6,14 +6,14 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from adapters import (
+from brain.infrastructure.adapters import (
     KuzuRepository,
     KuzuSkillRepository,
     DecisionLedgerAdapter,
     SessionLedgerAdapter,
     NativeShieldAdapter,
 )
-from orchestrator import CognitiveOrchestrator
+from brain.application.use_cases.orchestrator import CognitiveOrchestrator
 
 
 @pytest.fixture

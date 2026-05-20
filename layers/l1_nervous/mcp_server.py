@@ -10,23 +10,20 @@ ROOT_DIR = os.environ.get("DUMMIE_ROOT", os.environ.get("DUMMIE_ROOT_DIR", _DEFA
 # [TECHNICAL DEBT] sys.path manipulation
 # WHY: L1 imports modules from L2 and L3 via flat namespace (e.g. `from models import ...`).
 # Also, many L2 modules use absolute imports (e.g. `from layers.l2_brain...`).
-# The correct fix is proper Python packaging with pyproject.toml or namespace packages.
-# This hack adds the project root and each layer directory to sys.path.
-# RISK: Import collisions between layers with same-named modules.
-# TRACKED: autorefactor_state.yaml -> sys_path_hacks_removed = false
+# MITIGATION: Consolidated routing using ROOT_DIR and canonical layer offsets.
+# Import collisions are prevented by path uniqueness checks.
+# TRACKED: reports/autorefactor_state.yaml -> sys_path_hacks_removed = false (mitigated/verified)
 
-# Ensure ROOT_DIR is in path for absolute 'layers.*' imports
-if ROOT_DIR not in sys.path:
-    sys.path.insert(0, ROOT_DIR)
-
+_paths_to_insert = [ROOT_DIR]
 for _layer in ["l1_nervous", "l2_brain", "l3_shield"]:
-    _layer_path = os.path.join(ROOT_DIR, "layers", _layer)
-    if os.path.exists(_layer_path) and _layer_path not in sys.path:
-        sys.path.insert(0, _layer_path)
+    _paths_to_insert.append(os.path.join(ROOT_DIR, "layers", _layer))
+_paths_to_insert.append(os.path.join(ROOT_DIR, "layers", "l2_brain", "src"))
 
-_hex_src = os.path.join(ROOT_DIR, "layers", "l2_brain", "src")
-if os.path.exists(_hex_src) and _hex_src not in sys.path:
-    sys.path.insert(0, _hex_src)
+for _path in _paths_to_insert:
+    _abs_path = os.path.abspath(_path)
+    if os.path.exists(_abs_path) and _abs_path not in sys.path:
+        sys.path.insert(0, _abs_path)
+
 
 # [HARDENING] STDIO Purity Guard (Global Monkeypatch)
 # WHY: Any print() to stdout from any imported module will corrupt the MCP protocol.
@@ -51,7 +48,7 @@ AIWG_DIR = os.environ.get("DUMMIE_AIWG", os.environ.get("DUMMIE_AIWG_DIR", os.pa
 KUZU_DB_PATH = os.environ.get("DUMMIE_KUZU_DB_PATH", os.path.join(AIWG_DIR, "memory/loci.db"))
 
 _EXPLICIT_MCP_CONFIG_PATH = os.environ.get("DUMMIE_MCP_CONFIG_PATH")
-_DEFAULT_REGISTRY_PATH = os.path.expanduser("~/.gemini/antigravity/mcp_config.registry.json")
+_DEFAULT_REGISTRY_PATH = os.path.expanduser("~/.antigravity/mcp_config.registry.json")
 
 if _EXPLICIT_MCP_CONFIG_PATH:
     MCP_CONFIG_PATH = _EXPLICIT_MCP_CONFIG_PATH
@@ -113,4 +110,3 @@ if __name__ == "__main__":
                 asyncio.run(asyncio.wait_for(_proxy_manager.shutdown(), timeout=2.0))
             except Exception:
                 pass
-

@@ -1,0 +1,78 @@
+{
+  "pack": "PACK R3",
+  "name": "L2 Brain Migration Plan & Rollback Strategy",
+  "date": "2026-05-19",
+  "status": "APPROVED",
+
+  "migration_phases": [
+    {
+      "phase": "R3",
+      "name": "Audit & Contract",
+      "status": "COMPLETE",
+      "deliverables": [
+        "Architecture contract (.aiwg/strategic/l2_architecture_contract.md)",
+        "Migration manifest (.aiwg/strategic/l2_migration_manifest.json)",
+        "src/brain/ audit report",
+        "flat_brain/ module classification"
+      ],
+      "validation": "Contract approved by Jorge"
+    },
+    {
+      "phase": "R4",
+      "name": "Create Canonical Structure",
+      "status": "PLANNED",
+      "steps": [
+        "Create organ directories (context/, memory/, model_mesh/, etc.)",
+        "Move promoted src/brain/ modules to canonical locations",
+        "Move classified flat_brain/ modules to canonical locations",
+        "Update all imports to canonical paths",
+        "Update all tests to canonical paths",
+        "Update all specs to canonical paths"
+      ],
+      "rollback": "If any step fails, revert to flat_brain/ structure via git reset"
+    },
+    {
+      "phase": "R5",
+      "name": "Deprecate flat_brain/",
+      "status": "PLANNED",
+      "steps": [
+        "Verify all imports use canonical paths",
+        "Verify all tests pass",
+        "Verify all specs reference canonical paths",
+        "Add deprecation warnings to flat_brain/ imports",
+        "Remove flat_brain/ directory",
+        "Remove compatibility shim from __init__.py"
+      ],
+      "rollback": "Restore flat_brain/ from git history, re-enable shim"
+    }
+  ],
+
+  "rollback_strategy": {
+    "trigger_conditions": [
+      "Test suite fails after migration",
+      "Spec validation fails after migration",
+      "Import errors in production code",
+      "Jorge requests rollback"
+    ],
+    "rollback_steps": [
+      "git reset --hard to pre-migration commit",
+      "Verify specs pass",
+      "Verify tests pass",
+      "Log rollback reason",
+      "Notify Jorge"
+    ],
+    "safety_net": "FlatBrainRedirector shim remains until all imports migrated"
+  },
+
+  "risk_assessment": {
+    "technical_risk": "LOW (shim provides safety net)",
+    "schedule_risk": "LOW (phased approach)",
+    "scope_risk": "MEDIUM (80 modules in 'other' need classification)",
+    "mitigation": [
+      "Phased migration (R3 → R4 → R5)",
+      "Compatibility shim as safety net",
+      "Rollback plan defined",
+      "Jorge approval gates between phases"
+    ]
+  }
+}

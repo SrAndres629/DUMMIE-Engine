@@ -22,7 +22,7 @@ Append-only persistent storage for mental models.
 - Operational. Reconciled with Pack 5.2.1 closure requirements.
 
 ## Physical Evidence
-- `layers/l2_brain/mental_model_store.py`
+- `layers/l2_brain/flat_brain/mental_model_store.py`
 - `.aiwg/schemas/mental_model_store.schema.json`
 
 ## Contract Invariants

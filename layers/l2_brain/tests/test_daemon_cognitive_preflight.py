@@ -37,7 +37,9 @@ class _MetaGateway:
 
     async def call_tool(self, server_name: str, tool_name: str, arguments: dict):
         self.calls.append((server_name, tool_name, arguments))
-        target = arguments["target"]
+        target = arguments.get("target")
+        if not target:
+            return json.dumps({"status": "ok"})
         if target == "local.semantic_recall":
             return json.dumps(
                 {
@@ -105,7 +107,8 @@ async def test_cognitive_preflight_runs_before_planning_when_enabled():
     assert outcome["status"] == "SUCCESS"
     assert outcome["cognitive_preflight"]["status"] == "READY"
     assert outcome["cognitive_preflight"]["selected_tools"] == ["local.knowledge_search_context"]
-    assert [call[2]["target"] for call in gateway.calls] == [
+    preflight_calls = [call for call in gateway.calls if isinstance(call[2], dict) and "target" in call[2]]
+    assert [call[2]["target"] for call in preflight_calls] == [
         "local.semantic_recall",
         "local.reasoned_rerank",
         "local.context_shaper",

@@ -1,6 +1,58 @@
 import json
-from typing import Any, Dict
+from typing import Any, Dict, List
 from mcp.server.fastmcp import FastMCP
+from layers.l2_brain.metacognition.contracts import MetacognitiveFrame
+
+class MetacognitionToolService:
+    def __init__(self, orchestrator: Any):
+        self.orchestrator = orchestrator
+        self.pipeline = getattr(orchestrator, "metacognition", None)
+
+    async def refine_prompt(self, prompt: str) -> str:
+        if not self.pipeline:
+            return json.dumps({"refined_intent": "", "refined_prompt": ""})
+        frame = await self.pipeline.preprocess("test_session", prompt)
+        return json.dumps({
+            "refined_intent": frame.refined_intent,
+            "refined_prompt": frame.telemetry.get("refined_prompt", "")
+        })
+
+    async def plan_mission(self, prompt: str) -> str:
+        if not self.pipeline:
+            return json.dumps({"mission_plan": []})
+        frame = await self.pipeline.preprocess("test_session", prompt)
+        frame = await self.pipeline.deliberate(frame)
+        return json.dumps({
+            "mission_plan": frame.mission_plan
+        })
+
+    async def criticize_plan(self, plan: List[Dict[str, Any]]) -> str:
+        if not self.pipeline:
+            return json.dumps({"deliberation_summary": ""})
+        frame = MetacognitiveFrame(session_id="test_session", raw_user_input="")
+        frame.mission_plan = plan
+        frame.telemetry["skip_decomposition"] = True
+        frame = await self.pipeline.deliberate(frame)
+        return json.dumps({
+            "deliberation_summary": frame.deliberation_summary
+        })
+
+    async def verify_answer(self, prompt: str, answer: str) -> str:
+        if not self.pipeline:
+            return json.dumps({"verification_findings": []})
+        frame = MetacognitiveFrame(session_id="test_session", raw_user_input=prompt)
+        frame = await self.pipeline.postprocess(frame, answer)
+        return json.dumps({
+            "verification_findings": frame.verification_findings
+        })
+
+    async def recommend_tools(self, prompt: str) -> str:
+        if not self.pipeline:
+            return json.dumps({"required_tools": []})
+        frame = await self.pipeline.preprocess("test_session", prompt)
+        return json.dumps({
+            "required_tools": frame.required_tools
+        })
 
 def register_metacognitive_tools(mcp: FastMCP, orchestrator: Any):
     @mcp.tool()

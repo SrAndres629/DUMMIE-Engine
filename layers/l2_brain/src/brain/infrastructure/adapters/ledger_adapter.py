@@ -125,3 +125,76 @@ class DecisionLedgerAdapter(ILedgerAuditPort):
         )
         self.ont_map_adapter.update_layer(certainty)
 
+    def log_resolution(self, entry: dict) -> bool:
+        """Bridge compatibility method for legacy callers."""
+        from brain.domain.governance.models import DecisionRecord
+        from brain.domain.context.models import SixDimensionalContext, AuthorityLevel, IntentType
+        
+        ctx_data = entry.get("context", {})
+        context = SixDimensionalContext(
+            locus_x=ctx_data.get("locus_x", "unknown"),
+            locus_y=ctx_data.get("locus_y", "unknown"),
+            locus_z=ctx_data.get("locus_z", "unknown"),
+            lamport_t=entry.get("tick", 0),
+            authority_a=ctx_data.get("authority_a", AuthorityLevel.AGENT),
+            intent_i=ctx_data.get("intent_i", IntentType.RESOLUTION),
+        )
+        record = DecisionRecord(
+            decision_id=entry.get("decision_id", f"DEC-{entry.get('tick', 0)}"),
+            tick=entry.get("tick", 0),
+            context=context,
+            rationale=entry.get("goal", ""),
+            impact_blast_radius=entry.get("impact", "LOW"),
+            target_causal_hash=entry.get("target_causal_hash", ""),
+            witness_hash=entry.get("witness_hash", ""),
+            metadata=entry.get("metadata", {})
+        )
+        return self.record_decision(record)
+
+    def log_lesson(self, entry: dict) -> None:
+        """Bridge compatibility method for legacy callers."""
+        from brain.domain.governance.models import LessonRecord
+        from brain.domain.context.models import SixDimensionalContext, AuthorityLevel, IntentType
+        
+        ctx_data = entry.get("context", {})
+        context = SixDimensionalContext(
+            locus_x=ctx_data.get("locus_x", "unknown"),
+            locus_y=ctx_data.get("locus_y", "unknown"),
+            locus_z=ctx_data.get("locus_z", "unknown"),
+            lamport_t=entry.get("tick", 0),
+            authority_a=ctx_data.get("authority_a", AuthorityLevel.AGENT),
+            intent_i=ctx_data.get("intent_i", IntentType.OBSERVATION),
+        )
+        lesson = LessonRecord(
+            lesson_id=entry.get("lesson_id", "LES-01"),
+            tick=entry.get("tick", 0),
+            issue=entry.get("issue", ""),
+            correction=entry.get("correction", ""),
+            prevention=entry.get("prevention", ""),
+            context=context
+        )
+        self.record_lesson(lesson)
+
+    def log_ambiguity(self, entry: dict) -> None:
+        """Bridge compatibility method for legacy callers."""
+        from brain.domain.governance.models import AmbiguityRecord
+        from brain.domain.context.models import SixDimensionalContext, AuthorityLevel, IntentType
+        
+        ctx_data = entry.get("context", {})
+        context = SixDimensionalContext(
+            locus_x=ctx_data.get("locus_x", "unknown"),
+            locus_y=ctx_data.get("locus_y", "unknown"),
+            locus_z=ctx_data.get("locus_z", "unknown"),
+            lamport_t=entry.get("tick", 0),
+            authority_a=ctx_data.get("authority_a", AuthorityLevel.AGENT),
+            intent_i=ctx_data.get("intent_i", IntentType.OBSERVATION),
+        )
+        ambiguity = AmbiguityRecord(
+            ambiguity_id=entry.get("ambiguity_id", "AMB-01"),
+            tick=entry.get("tick", 0),
+            issue=entry.get("issue", ""),
+            resolution=entry.get("resolution", ""),
+            context=context
+        )
+        self.record_ambiguity(ambiguity)
+

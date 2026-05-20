@@ -22,7 +22,7 @@ Audits the quality of the thinking process.
 - Operational. Reconciled with Pack 5.2.1 closure requirements.
 
 ## Physical Evidence
-- `layers/l2_brain/metacognitive_quality_gate.py`
+- `layers/l2_brain/flat_brain/metacognitive_quality_gate.py`
 - `.aiwg/reports/metacognitive_quality_gate_latest.json`
 - `.aiwg/schemas/metacognitive_quality_gate.schema.json`
 

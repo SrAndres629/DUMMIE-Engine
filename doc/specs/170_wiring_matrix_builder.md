@@ -13,7 +13,7 @@ This specification establishes the systemic wiring matrix mapping tool (HEARTBEA
 Fully implemented in the L2 Brain layer. Consumed by the metacognitive heartbeat to identify unwired code elements, spec gaps, and test debt.
 
 ## Physical Evidence
-- Core module: `layers/l2_brain/wiring_matrix_builder.py`
+- Core module: `layers/l2_brain/flat_brain/wiring_matrix_builder.py`
 - Test suite: `layers/l2_brain/tests/test_wiring_matrix_builder.py`
 - Output report JSON: `.aiwg/reports/wiring_matrix_latest.json`
 - Output report Markdown: `.aiwg/reports/wiring_matrix_latest.md`

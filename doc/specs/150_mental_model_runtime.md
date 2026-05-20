@@ -22,7 +22,7 @@ Evidence-backed structured abstraction of intent context.
 - Operational. Reconciled with Pack 5.2.1 closure requirements.
 
 ## Physical Evidence
-- `layers/l2_brain/mental_model_runtime.py`
+- `layers/l2_brain/flat_brain/mental_model_runtime.py`
 - `.aiwg/reports/mental_model_runtime_latest.json`
 - `.aiwg/schemas/mental_model.schema.json`
 
@@ -32,7 +32,7 @@ Evidence-backed structured abstraction of intent context.
 
 ## Verification
 ```bash
-python3 layers/l2_brain/mental_model_runtime.py
+python3 layers/l2_brain/flat_brain/mental_model_runtime.py
 pytest layers/l2_brain/tests/test_mental_model_runtime.py
 ```
 

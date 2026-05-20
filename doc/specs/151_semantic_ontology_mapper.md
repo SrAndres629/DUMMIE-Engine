@@ -22,7 +22,7 @@ Graph-based classification of intent concepts.
 - Operational. Reconciled with Pack 5.2.1 closure requirements.
 
 ## Physical Evidence
-- `layers/l2_brain/semantic_ontology_mapper.py`
+- `layers/l2_brain/flat_brain/semantic_ontology_mapper.py`
 - `.aiwg/reports/semantic_ontology_map_latest.json`
 - `.aiwg/schemas/semantic_ontology_map.schema.json`
 
@@ -32,7 +32,7 @@ Graph-based classification of intent concepts.
 
 ## Verification
 ```bash
-python3 layers/l2_brain/semantic_ontology_mapper.py
+python3 layers/l2_brain/flat_brain/semantic_ontology_mapper.py
 pytest layers/l2_brain/tests/test_semantic_ontology_mapper.py
 ```
 

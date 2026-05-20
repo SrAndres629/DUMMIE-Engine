@@ -1,0 +1,168 @@
+{
+  "promote": [
+    {
+      "path": "mcp_server.py",
+      "target": "daemon/mcp_server.py",
+      "note": "RESTORED file, promote to daemon organ"
+    },
+    {
+      "path": "application/interfaces.py",
+      "target": "domain/interfaces.py"
+    },
+    {
+      "path": "application/ports/capsule_ports.py",
+      "target": "domain/ports"
+    },
+    {
+      "path": "application/ports/kernel_ports.py",
+      "target": "domain/ports"
+    },
+    {
+      "path": "domain/capability_registry.py",
+      "target": "model_mesh/"
+    },
+    {
+      "path": "domain/agent_office/models.py",
+      "target": "strategic/"
+    },
+    {
+      "path": "domain/context/capsule_models.py",
+      "target": "context/"
+    },
+    {
+      "path": "domain/context/models.py",
+      "target": "context/"
+    },
+    {
+      "path": "domain/fabrication/models.py",
+      "target": "cognition/"
+    },
+    {
+      "path": "domain/governance/kernel_contracts.py",
+      "target": "governance/"
+    },
+    {
+      "path": "domain/governance/models.py",
+      "target": "governance/"
+    },
+    {
+      "path": "domain/memory/models.py",
+      "target": "memory/"
+    },
+    {
+      "path": "domain/memory/ports.py",
+      "target": "memory/"
+    },
+    {
+      "path": "domain/memory/schemas.py",
+      "target": "memory/"
+    },
+    {
+      "path": "infrastructure/adapters/kuzu_repository.py",
+      "target": "memory/kuzu_adapter.py"
+    },
+    {
+      "path": "infrastructure/adapters/ledger_adapter.py",
+      "target": "infrastructure/adapters/ledger.py"
+    },
+    {
+      "path": "infrastructure/adapters/nats_controller.py",
+      "target": "infrastructure/adapters/nats.py"
+    },
+    {
+      "path": "infrastructure/adapters/ollama_adapter.py",
+      "target": "infrastructure/adapters/ollama.py"
+    },
+    {
+      "path": "infrastructure/adapters/session_ledger_adapter.py",
+      "target": "infrastructure/adapters/ledger.py"
+    },
+    {
+      "path": "infrastructure/adapters/shield_adapter.py",
+      "target": "infrastructure/adapters/shield.py"
+    },
+    {
+      "path": "infrastructure/adapters/skill_adapter.py",
+      "target": "infrastructure/adapters/skill.py"
+    }
+  ],
+  "archive": [
+    {
+      "path": "main.py",
+      "note": "Entry point - superseded by flat_brain/daemon.py"
+    }
+  ],
+  "merge": [
+    {
+      "path": "application/ports.py",
+      "target": "domain/ports.py",
+      "note": "Merge with flat_brain/ports.py"
+    },
+    {
+      "path": "application/services/model_router.py",
+      "target": "respective organs",
+      "note": "Services merge into organ implementations"
+    },
+    {
+      "path": "application/use_cases/capsule_orchestration.py",
+      "target": "respective organs",
+      "note": "Use cases merge into organ implementations"
+    },
+    {
+      "path": "application/use_cases/crystallization.py",
+      "target": "respective organs",
+      "note": "Use cases merge into organ implementations"
+    },
+    {
+      "path": "application/use_cases/guarded_execution.py",
+      "target": "respective organs",
+      "note": "Use cases merge into organ implementations"
+    },
+    {
+      "path": "application/use_cases/kaizen_loop.py",
+      "target": "respective organs",
+      "note": "Use cases merge into organ implementations"
+    },
+    {
+      "path": "application/use_cases/lessons_use_case.py",
+      "target": "respective organs",
+      "note": "Use cases merge into organ implementations"
+    },
+    {
+      "path": "application/use_cases/metacognitive_audit.py",
+      "target": "respective organs",
+      "note": "Use cases merge into organ implementations"
+    },
+    {
+      "path": "application/use_cases/orchestrator.py",
+      "target": "respective organs",
+      "note": "Use cases merge into organ implementations"
+    },
+    {
+      "path": "application/use_cases/semantic_consistency.py",
+      "target": "respective organs",
+      "note": "Use cases merge into organ implementations"
+    },
+    {
+      "path": "application/use_cases/semantic_indexer.py",
+      "target": "respective organs",
+      "note": "Use cases merge into organ implementations"
+    },
+    {
+      "path": "infrastructure/adapters/capsule_adapters.py",
+      "target": "context/adapters",
+      "note": "Merge into context organ"
+    },
+    {
+      "path": "infrastructure/adapters/kernel_adapters.py",
+      "target": "governance/adapters",
+      "note": "Merge into governance organ"
+    }
+  ],
+  "review": [
+    {
+      "path": "infrastructure/adapters/ontological_adapter.py",
+      "note": "Review: may be superseded by semantic adapters"
+    }
+  ]
+}

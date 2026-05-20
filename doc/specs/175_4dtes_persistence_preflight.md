@@ -13,7 +13,7 @@ This spec establishes the 4D-TES persistence preflight check (HEARTBEAT-2) to sa
 Under implementation. Will diagnose the persistence layer and create action plans conforming to `4dtes_persistence_preflight.schema.json`.
 
 ## Physical Evidence
-- Core module: `layers/l2_brain/four_dtes_persistence_preflight.py`
+- Core module: `layers/l2_brain/flat_brain/four_dtes_persistence_preflight.py`
 - Test suite: `layers/l2_brain/tests/test_four_dtes_persistence_preflight.py`
 - JSON Schema: `.aiwg/schemas/4dtes_persistence_preflight.schema.json`
 - Output reports: `.aiwg/reports/4dtes_persistence_preflight_latest.json` and `.aiwg/reports/4dtes_persistence_preflight_latest.md`

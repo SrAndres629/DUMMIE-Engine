@@ -56,7 +56,7 @@ def main():
         sys.exit(1)
 
     # 3. Context & Economy (Simulated usage before execution)
-    payload = {"target_files": ["GEMINI.md"]} # In a real scenario, infer from command
+    payload = {"target_files": ["ANTIGRAVITY.md"]} # In a real scenario, infer from command
     context = kernel.aiwg_context_loader(payload)
     capsule = kernel.aiwg_context_capsule_builder(context)
     if not kernel.aiwg_token_budgeter(capsule):

@@ -1,0 +1,22 @@
+{
+  "pack": "PACK R2.1",
+  "validation": {
+    "git_diff_check": "PASS",
+    "spec_validation": "PASS",
+    "spec_validation_detail": "DOC/SPEC VALIDATION OK (83 specs)",
+    "compileall": "PASS_WITH_WARNINGS",
+    "compileall_detail": "All project source files compile cleanly. Syntax errors found only in .venv/ third-party dependencies (pre-existing, not caused by this pack)."
+  },
+  "files_restored": 5,
+  "specs_repaired": 50,
+  "path_replacements": 59,
+  "broken_specs_before": 58,
+  "broken_specs_after": 0,
+  "flat_brain_files_mapped": 235,
+  "warnings": [
+    "Python imports in downstream code still reference old l2_brain/ paths, not flat_brain/",
+    "No import compatibility shim exists yet",
+    "Syntax errors in .venv/ are pre-existing third-party issues, not caused by this pack",
+    "lessons.jsonl was force-added because .aiwg/memory/ is in .gitignore"
+  ]
+}

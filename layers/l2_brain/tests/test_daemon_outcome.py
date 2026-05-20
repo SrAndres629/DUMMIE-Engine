@@ -2,7 +2,7 @@ import json
 from dataclasses import asdict
 from unittest.mock import MagicMock
 
-from layers.l2_brain.daemon import DummieDaemon
+from layers.l2_brain.daemon.daemon import DummieDaemon
 from layers.l2_brain.daemon_outcome import (
     DaemonOutcome,
     EfficiencyMetrics,
@@ -13,8 +13,8 @@ from layers.l2_brain.daemon_outcome import (
     SensorFirstStatus,
     TestExecutionSummary,
 )
-from layers.l2_brain.event_bus import AsyncEventBus
-from layers.l2_brain.gateway_contract import SagaTransaction
+from layers.l2_brain.infrastructure.event_bus import AsyncEventBus
+from layers.l2_brain.infrastructure.gateway_contract import SagaTransaction
 from layers.l2_brain.models import AuthorityLevel, IntentType
 
 
@@ -27,13 +27,13 @@ def test_daemon_outcome_serializes_required_contract_fields():
         phase_id="phase-1",
         transaction_id="txn-1",
         context_token="ctx-1",
-        authority_level="A0_OBSERVER",
+        authority_level="OVERSEER",
         intent_type="MUTATION",
         model_route=ModelRouteMetadata(
             tier="local_fast",
             provider="ollama",
-            reason="hook_authority=A0",
-            hook_metadata={"authority_level": "A0"},
+            reason="hook_authority=OVERSEER",
+            hook_metadata={"authority_level": "OVERSEER"},
         ),
         metacognition=MetacognitionStatus(
             status="READY",
@@ -126,13 +126,13 @@ def test_daemon_exposes_outcome_builder_with_mission_phase():
         saga=saga,
         mission_id="mission-1",
         phase_id="phase-1",
-        authority_level=AuthorityLevel.A0_OBSERVER,
+        authority_level=AuthorityLevel.AGENT,
         intent_type=IntentType.MUTATION,
     )
 
     assert daemon.outcome_contract_available is True
     assert outcome["mission_id"] == "mission-1"
     assert outcome["phase_id"] == "phase-1"
-    assert outcome["authority_level"] == "A0_OBSERVER"
+    assert outcome["authority_level"] == "AGENT"
     assert outcome["intent_type"] == "MUTATION"
     assert outcome["next_action"]["recommended"] == "continue"

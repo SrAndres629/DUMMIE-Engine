@@ -1,0 +1,25 @@
+# DUMMIE Engine — Cron Jobs
+# Install with: crontab .aiwg/autonomy/dummie-cron-jobs
+
+# Environment
+SHELL=/bin/bash
+PATH=/usr/local/bin:/usr/bin:/bin:/home/jorand/.local/bin
+HOME=/home/jorand
+
+# DUMMIE Engine cron jobs
+# Format: minute hour * * * command
+
+# Hourly: Status check
+0 * * * * /media/datasets/DUMMIE\ Engine/.aiwg/autonomy/dummie-cron-event.sh cron_trigger hourly_check
+
+# Every 4 hours: Memory consolidation
+0 */4 * * * /media/datasets/DUMMIE\ Engine/.aiwg/autonomy/dummie-cron-event.sh cron_trigger memory_consolidation
+
+# Daily 09:00: Morning prep
+0 9 * * * /media/datasets/DUMMIE\ Engine/.aiwg/autonomy/dummie-cron-event.sh cron_trigger morning_prep
+
+# Daily 23:00: Evening consolidation
+0 23 * * * /media/datasets/DUMMIE\ Engine/.aiwg/autonomy/dummie-cron-event.sh cron_trigger evening_consolidation
+
+# Every 30 minutes: Git status monitoring
+*/30 * * * * cd "/media/datasets/DUMMIE Engine" && /usr/bin/git status --short > .aiwg/state/git_status_latest.txt 2>&1

@@ -2,10 +2,10 @@
   "layers": {
     "sw.plant.orchestrator": {
       "layer_name": "sw.plant.orchestrator",
-      "certainty_score": 0.6363636363636364,
+      "certainty_score": 0.0,
       "is_terra_incognita": false,
-      "tests_passing": 7,
-      "unverified_mutations": 4
+      "tests_passing": 0,
+      "unverified_mutations": 0
     },
     "sw.strategy.discovery": {
       "layer_name": "sw.strategy.discovery",
@@ -27,7 +27,14 @@
       "is_terra_incognita": false,
       "tests_passing": 0,
       "unverified_mutations": 12
+    },
+    "test.ledger": {
+      "layer_name": "test.ledger",
+      "certainty_score": 1.0,
+      "is_terra_incognita": false,
+      "tests_passing": 1,
+      "unverified_mutations": 0
     }
   },
-  "updated_at": "2026-04-24T06:03:09.554674"
+  "updated_at": "2026-05-19T23:55:17.356276"
 }

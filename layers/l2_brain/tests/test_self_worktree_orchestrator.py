@@ -66,7 +66,7 @@ def test_self_orchestrator_uses_memory_derived_risk_scores(tmp_path):
     
     import json
     with events_path.open("w", encoding="utf-8") as f:
-        for i in range(3):
+        for i in range(4):
             f.write(json.dumps({"path": "target.py", "kind": "test_failure"}) + "\n")
 
     # The orchestrator should detect the hotspot and penalize 'target.py'

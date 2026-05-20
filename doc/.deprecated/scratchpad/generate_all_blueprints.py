@@ -18,7 +18,7 @@ def generate_blueprints():
     print(f"[*] Running ingester: {INGESTER_BIN}")
     subprocess.run([
         INGESTER_BIN, 
-        "--registry", "/home/jorand/.gemini/antigravity/mcp_config.registry.json", 
+        "--registry", "/home/jorand/.antigravity/mcp_config.registry.json", 
         "--blueprints", BLUEPRINT_DIR,
         "--output", OUTPUT_JSON
     ], check=True, cwd=ROOT_DIR)

@@ -1,0 +1,184 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dummie.aiwg/schemas/cognitive_lifecycle_receipt.schema.json",
+  "title": "DUMMIE Cognitive Lifecycle Evidence Receipt",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "receipt_id",
+    "schema_version",
+    "created_at",
+    "request_id",
+    "session_id",
+    "actor",
+    "entrypoint",
+    "risk_level",
+    "operation_class",
+    "preflight_decision",
+    "confidence",
+    "truth_resolution",
+    "verification",
+    "files_changed",
+    "reports_written",
+    "memory_write",
+    "next_action",
+    "residual_risks"
+  ],
+  "properties": {
+    "receipt_id": {"type": "string", "minLength": 1},
+    "schema_version": {"type": "string", "const": "1.0.0"},
+    "created_at": {"type": "string", "format": "date-time"},
+    "request_id": {"type": "string", "minLength": 1},
+    "session_id": {"type": "string", "minLength": 1},
+    "actor": {"type": "string", "minLength": 1},
+    "entrypoint": {
+      "type": "string",
+      "enum": [
+        "agent_session_startup",
+        "codex_task_execution",
+        "opencode_task_execution",
+        "gemini_task_execution",
+        "dummie_status",
+        "dummie_advise",
+        "l2_daemon_process_request",
+        "heartbeat_lifecycle_runtime",
+        "self_improvement_runtime",
+        "mission_orchestrator_dag",
+        "meta_gateway_discover",
+        "meta_gateway_analyze",
+        "meta_gateway_execute",
+        "mcp_memory_tools",
+        "mcp_spec_tools",
+        "mcp_code_tools",
+        "external_integration_filter"
+      ]
+    },
+    "risk_level": {
+      "type": "string",
+      "enum": [
+        "R0_OBSERVE",
+        "R1_ANSWER",
+        "R2_SPEC",
+        "R3_CODE",
+        "R4_MEMORY",
+        "R5_EXTERNAL",
+        "R6_PACK"
+      ]
+    },
+    "operation_class": {
+      "type": "string",
+      "enum": [
+        "answer",
+        "spec_write",
+        "code_mutation",
+        "memory_write",
+        "external_integration",
+        "pack_promotion",
+        "autonomous_repair"
+      ]
+    },
+    "preflight_decision": {
+      "type": "string",
+      "enum": [
+        "ALLOW",
+        "ALLOW_WITH_RECEIPT",
+        "ADVISORY_ONLY",
+        "BLOCK",
+        "REQUIRES_HUMAN_REVIEW"
+      ]
+    },
+    "confidence": {
+      "type": "string",
+      "enum": [
+        "VERIFIED",
+        "PROBABLE",
+        "STALE",
+        "CONFLICTED",
+        "UNKNOWN",
+        "REQUIRES_HUMAN"
+      ]
+    },
+    "truth_resolution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "claims",
+        "winning_sources",
+        "demoted_sources",
+        "rejected_sources",
+        "effective_truth_rank",
+        "resolution_reason"
+      ],
+      "properties": {
+        "claims": {"type": "array", "items": {"type": "string"}},
+        "winning_sources": {"type": "array", "items": {"$ref": "#/$defs/evidence_ref"}},
+        "demoted_sources": {"type": "array", "items": {"$ref": "#/$defs/demoted_source"}},
+        "rejected_sources": {"type": "array", "items": {"$ref": "#/$defs/rejected_source"}},
+        "effective_truth_rank": {"type": "integer", "minimum": 0, "maximum": 108},
+        "resolution_reason": {"type": "string"}
+      }
+    },
+    "verification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["required", "commands", "result"],
+      "properties": {
+        "required": {"type": "boolean"},
+        "commands": {"type": "array", "items": {"type": "string"}},
+        "result": {
+          "type": "string",
+          "enum": ["PASS", "FAIL", "BLOCKED", "NOT_RUN", "NOT_REQUIRED"]
+        }
+      }
+    },
+    "files_changed": {"type": "array", "items": {"type": "string"}},
+    "reports_written": {"type": "array", "items": {"type": "string"}},
+    "memory_write": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["attempted", "result"],
+      "properties": {
+        "attempted": {"type": "boolean"},
+        "result": {
+          "type": "string",
+          "enum": ["SUCCESS", "FAILED", "BLOCKED", "NOT_ATTEMPTED"]
+        },
+        "causal_hash": {"type": ["string", "null"]}
+      }
+    },
+    "next_action": {"type": "string"},
+    "residual_risks": {"type": "array", "items": {"type": "string"}}
+  },
+  "$defs": {
+    "evidence_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "source_class", "truth_rank"],
+      "properties": {
+        "path": {"type": "string"},
+        "source_class": {"type": "string"},
+        "truth_rank": {"type": "integer", "minimum": 0, "maximum": 100},
+        "hash": {"type": ["string", "null"]}
+      }
+    },
+    "demoted_source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "reason"],
+      "properties": {
+        "path": {"type": "string"},
+        "reason": {"type": "string"}
+      }
+    },
+    "rejected_source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "reason"],
+      "properties": {
+        "path": {"type": "string"},
+        "reason": {"type": "string"}
+      }
+    }
+  }
+}
+

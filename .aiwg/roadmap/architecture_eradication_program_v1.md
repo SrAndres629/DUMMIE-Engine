@@ -16,9 +16,9 @@ Conectar estabilidad técnica con evolución estratégica de largo plazo.
 ## KPI Targets
 - `kpi.layer_inversion`: 0 dependencias L2->L1.
 - `kpi.hardcoded_abs_runtime`: 0 rutas absolutas críticas nuevas.
-- `kpi.syntax_integrity_py`: 100% first-party `.py` compilables.
+- `kpi.syntax_integrity_py`: all first-party `.py` compilables.
 - `kpi.audit_gate_pass_rate`: >= 95% en 4 semanas.
-- `kpi.regression_test_on_bugfix`: 100% de bugfixes con test nuevo/actualizado.
+- `kpi.regression_test_on_bugfix`: full de bugfixes con test nuevo/actualizado.
 
 ## Governance Cadence
 - Semanal: checkpoint operativo (bloqueos, riesgos, entregables).

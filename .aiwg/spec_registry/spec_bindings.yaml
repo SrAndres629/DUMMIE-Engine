@@ -1,7 +1,7 @@
 schema_version: dummie.spec_binding_registry.v1
 generated_from: doc/specs
 spec_count: 83
-error_count: 59
+error_count: 0
 entries:
 - spec_id: 121_state_coherence_guard
   title: 121 State Coherence Guard
@@ -292,11 +292,11 @@ entries:
   feature_path: doc/specs/146_readiness_score_calibrator.feature
   rules_path: doc/specs/146_readiness_score_calibrator.rules.json
   physical_evidence:
-  - layers/l2_brain/readiness_score_calibrator.py
+  - layers/l2_brain/flat_brain/readiness_score_calibrator.py
   - .aiwg/reports/readiness_score_calibration_latest.json
   - .aiwg/schemas/readiness_score_calibration.schema.json
   runtime_files:
-  - layers/l2_brain/readiness_score_calibrator.py
+  - layers/l2_brain/flat_brain/readiness_score_calibrator.py
   test_files: []
   docs_files: []
   script_files: []
@@ -312,11 +312,11 @@ entries:
   feature_path: doc/specs/147_memory_spine_entrypoint.feature
   rules_path: doc/specs/147_memory_spine_entrypoint.rules.json
   physical_evidence:
-  - layers/l2_brain/memory_spine_entrypoint.py
+  - layers/l2_brain/flat_brain/memory_spine_entrypoint.py
   - .aiwg/reports/memory_spine_entrypoint_latest.json
   - .aiwg/schemas/memory_spine_entrypoint.schema.json
   runtime_files:
-  - layers/l2_brain/memory_spine_entrypoint.py
+  - layers/l2_brain/flat_brain/memory_spine_entrypoint.py
   test_files: []
   docs_files: []
   script_files: []
@@ -332,11 +332,11 @@ entries:
   feature_path: doc/specs/148_token_economy_benchmark.feature
   rules_path: doc/specs/148_token_economy_benchmark.rules.json
   physical_evidence:
-  - layers/l2_brain/token_economy_benchmark.py
+  - layers/l2_brain/flat_brain/token_economy_benchmark.py
   - .aiwg/reports/token_economy_benchmark_latest.json
   - .aiwg/schemas/token_economy_benchmark.schema.json
   runtime_files:
-  - layers/l2_brain/token_economy_benchmark.py
+  - layers/l2_brain/flat_brain/token_economy_benchmark.py
   test_files: []
   docs_files: []
   script_files: []
@@ -352,11 +352,11 @@ entries:
   feature_path: doc/specs/149_entrypoint_enforcement_auditor.feature
   rules_path: doc/specs/149_entrypoint_enforcement_auditor.rules.json
   physical_evidence:
-  - layers/l2_brain/entrypoint_enforcement_auditor.py
+  - layers/l2_brain/flat_brain/entrypoint_enforcement_auditor.py
   - .aiwg/reports/entrypoint_enforcement_audit_latest.json
   - .aiwg/schemas/entrypoint_enforcement_audit.schema.json
   runtime_files:
-  - layers/l2_brain/entrypoint_enforcement_auditor.py
+  - layers/l2_brain/flat_brain/entrypoint_enforcement_auditor.py
   test_files: []
   docs_files: []
   script_files: []
@@ -372,11 +372,11 @@ entries:
   feature_path: doc/specs/150_mental_model_runtime.feature
   rules_path: doc/specs/150_mental_model_runtime.rules.json
   physical_evidence:
-  - layers/l2_brain/mental_model_runtime.py
+  - layers/l2_brain/flat_brain/mental_model_runtime.py
   - .aiwg/reports/mental_model_runtime_latest.json
   - .aiwg/schemas/mental_model.schema.json
   runtime_files:
-  - layers/l2_brain/mental_model_runtime.py
+  - layers/l2_brain/flat_brain/mental_model_runtime.py
   test_files: []
   docs_files: []
   script_files: []
@@ -392,11 +392,11 @@ entries:
   feature_path: doc/specs/151_semantic_ontology_mapper.feature
   rules_path: doc/specs/151_semantic_ontology_mapper.rules.json
   physical_evidence:
-  - layers/l2_brain/semantic_ontology_mapper.py
+  - layers/l2_brain/flat_brain/semantic_ontology_mapper.py
   - .aiwg/reports/semantic_ontology_map_latest.json
   - .aiwg/schemas/semantic_ontology_map.schema.json
   runtime_files:
-  - layers/l2_brain/semantic_ontology_mapper.py
+  - layers/l2_brain/flat_brain/semantic_ontology_mapper.py
   test_files: []
   docs_files: []
   script_files: []
@@ -412,11 +412,11 @@ entries:
   feature_path: doc/specs/152_cognitive_frame_builder.feature
   rules_path: doc/specs/152_cognitive_frame_builder.rules.json
   physical_evidence:
-  - layers/l2_brain/cognitive_frame_builder.py
+  - layers/l2_brain/flat_brain/cognitive_frame_builder.py
   - .aiwg/reports/cognitive_frame_latest.json
   - .aiwg/schemas/cognitive_frame.schema.json
   runtime_files:
-  - layers/l2_brain/cognitive_frame_builder.py
+  - layers/l2_brain/flat_brain/cognitive_frame_builder.py
   test_files: []
   docs_files: []
   script_files: []
@@ -432,11 +432,11 @@ entries:
   feature_path: doc/specs/153_metacognitive_loop_runtime.feature
   rules_path: doc/specs/153_metacognitive_loop_runtime.rules.json
   physical_evidence:
-  - layers/l2_brain/metacognitive_loop_runtime.py
+  - layers/l2_brain/flat_brain/metacognitive_loop_runtime.py
   - .aiwg/reports/metacognitive_loop_latest.json
   - .aiwg/schemas/metacognitive_loop.schema.json
   runtime_files:
-  - layers/l2_brain/metacognitive_loop_runtime.py
+  - layers/l2_brain/flat_brain/metacognitive_loop_runtime.py
   test_files: []
   docs_files: []
   script_files: []
@@ -452,10 +452,10 @@ entries:
   feature_path: doc/specs/154_mental_model_store.feature
   rules_path: doc/specs/154_mental_model_store.rules.json
   physical_evidence:
-  - layers/l2_brain/mental_model_store.py
+  - layers/l2_brain/flat_brain/mental_model_store.py
   - .aiwg/schemas/mental_model_store.schema.json
   runtime_files:
-  - layers/l2_brain/mental_model_store.py
+  - layers/l2_brain/flat_brain/mental_model_store.py
   test_files: []
   docs_files: []
   script_files: []
@@ -470,11 +470,11 @@ entries:
   feature_path: doc/specs/155_metacognitive_quality_gate.feature
   rules_path: doc/specs/155_metacognitive_quality_gate.rules.json
   physical_evidence:
-  - layers/l2_brain/metacognitive_quality_gate.py
+  - layers/l2_brain/flat_brain/metacognitive_quality_gate.py
   - .aiwg/reports/metacognitive_quality_gate_latest.json
   - .aiwg/schemas/metacognitive_quality_gate.schema.json
   runtime_files:
-  - layers/l2_brain/metacognitive_quality_gate.py
+  - layers/l2_brain/flat_brain/metacognitive_quality_gate.py
   test_files: []
   docs_files: []
   script_files: []
@@ -490,11 +490,11 @@ entries:
   feature_path: doc/specs/156_epistemic_state_runtime.feature
   rules_path: doc/specs/156_epistemic_state_runtime.rules.json
   physical_evidence:
-  - layers/l2_brain/epistemic_state_runtime.py
+  - layers/l2_brain/flat_brain/epistemic_state_runtime.py
   - .aiwg/reports/epistemic_state_latest.json
   - .aiwg/schemas/epistemic_state.schema.json
   runtime_files:
-  - layers/l2_brain/epistemic_state_runtime.py
+  - layers/l2_brain/flat_brain/epistemic_state_runtime.py
   test_files: []
   docs_files: []
   script_files: []
@@ -510,11 +510,11 @@ entries:
   feature_path: doc/specs/157_dialectical_reasoning_runtime.feature
   rules_path: doc/specs/157_dialectical_reasoning_runtime.rules.json
   physical_evidence:
-  - layers/l2_brain/dialectical_reasoning_runtime.py
+  - layers/l2_brain/flat_brain/dialectical_reasoning_runtime.py
   - .aiwg/reports/dialectical_review_latest.json
   - .aiwg/schemas/dialectical_review.schema.json
   runtime_files:
-  - layers/l2_brain/dialectical_reasoning_runtime.py
+  - layers/l2_brain/flat_brain/dialectical_reasoning_runtime.py
   test_files: []
   docs_files: []
   script_files: []
@@ -530,11 +530,11 @@ entries:
   feature_path: doc/specs/158_philosophical_ontology_runtime.feature
   rules_path: doc/specs/158_philosophical_ontology_runtime.rules.json
   physical_evidence:
-  - layers/l2_brain/philosophical_ontology_runtime.py
+  - layers/l2_brain/flat_brain/philosophical_ontology_runtime.py
   - .aiwg/reports/philosophical_ontology_latest.json
   - .aiwg/schemas/philosophical_ontology.schema.json
   runtime_files:
-  - layers/l2_brain/philosophical_ontology_runtime.py
+  - layers/l2_brain/flat_brain/philosophical_ontology_runtime.py
   test_files: []
   docs_files: []
   script_files: []
@@ -550,11 +550,11 @@ entries:
   feature_path: doc/specs/159_cognitive_bias_detector.feature
   rules_path: doc/specs/159_cognitive_bias_detector.rules.json
   physical_evidence:
-  - layers/l2_brain/cognitive_bias_detector.py
+  - layers/l2_brain/flat_brain/cognitive_bias_detector.py
   - .aiwg/reports/cognitive_bias_report_latest.json
   - .aiwg/schemas/cognitive_bias_report.schema.json
   runtime_files:
-  - layers/l2_brain/cognitive_bias_detector.py
+  - layers/l2_brain/flat_brain/cognitive_bias_detector.py
   test_files: []
   docs_files: []
   script_files: []
@@ -570,11 +570,11 @@ entries:
   feature_path: doc/specs/160_metacognitive_evolution_flywheel.feature
   rules_path: doc/specs/160_metacognitive_evolution_flywheel.rules.json
   physical_evidence:
-  - layers/l2_brain/metacognitive_evolution_flywheel.py
+  - layers/l2_brain/flat_brain/metacognitive_evolution_flywheel.py
   - .aiwg/reports/metacognitive_evolution_flywheel_latest.json
   - .aiwg/schemas/metacognitive_evolution_flywheel.schema.json
   runtime_files:
-  - layers/l2_brain/metacognitive_evolution_flywheel.py
+  - layers/l2_brain/flat_brain/metacognitive_evolution_flywheel.py
   test_files: []
   docs_files: []
   script_files: []
@@ -590,11 +590,11 @@ entries:
   feature_path: doc/specs/161_mental_model_truth_hygiene.feature
   rules_path: doc/specs/161_mental_model_truth_hygiene.rules.json
   physical_evidence:
-  - layers/l2_brain/mental_model_truth_hygiene.py
+  - layers/l2_brain/flat_brain/mental_model_truth_hygiene.py
   - .aiwg/reports/mental_model_truth_hygiene_latest.json
   - .aiwg/mental_models/runtime_model_quarantine.json
   runtime_files:
-  - layers/l2_brain/mental_model_truth_hygiene.py
+  - layers/l2_brain/flat_brain/mental_model_truth_hygiene.py
   test_files: []
   docs_files: []
   script_files: []
@@ -610,10 +610,10 @@ entries:
   feature_path: doc/specs/162_evolution_delta_applier.feature
   rules_path: doc/specs/162_evolution_delta_applier.rules.json
   physical_evidence:
-  - layers/l2_brain/evolution_delta_applier.py
+  - layers/l2_brain/flat_brain/evolution_delta_applier.py
   - .aiwg/reports/evolution_delta_application_latest.json
   runtime_files:
-  - layers/l2_brain/evolution_delta_applier.py
+  - layers/l2_brain/flat_brain/evolution_delta_applier.py
   test_files: []
   docs_files: []
   script_files: []
@@ -628,11 +628,11 @@ entries:
   feature_path: doc/specs/163_self_improvement_runtime.feature
   rules_path: doc/specs/163_self_improvement_runtime.rules.json
   physical_evidence:
-  - layers/l2_brain/self_improvement_runtime.py
+  - layers/l2_brain/flat_brain/self_improvement_runtime.py
   - .aiwg/reports/self_improvement_cycle_latest.json
   - .aiwg/reports/self_improvement_action_queue.json
   runtime_files:
-  - layers/l2_brain/self_improvement_runtime.py
+  - layers/l2_brain/flat_brain/self_improvement_runtime.py
   test_files: []
   docs_files: []
   script_files: []
@@ -648,10 +648,10 @@ entries:
   feature_path: doc/specs/164_heartbeat_lifecycle_runtime.feature
   rules_path: doc/specs/164_heartbeat_lifecycle_runtime.rules.json
   physical_evidence:
-  - layers/l2_brain/heartbeat_lifecycle_runtime.py
+  - layers/l2_brain/flat_brain/heartbeat_lifecycle_runtime.py
   - .aiwg/reports/heartbeat_latest.json
   runtime_files:
-  - layers/l2_brain/heartbeat_lifecycle_runtime.py
+  - layers/l2_brain/flat_brain/heartbeat_lifecycle_runtime.py
   test_files: []
   docs_files: []
   script_files: []
@@ -666,10 +666,10 @@ entries:
   feature_path: doc/specs/165_heartbeat_state_store.feature
   rules_path: doc/specs/165_heartbeat_state_store.rules.json
   physical_evidence:
-  - layers/l2_brain/heartbeat_state_store.py
+  - layers/l2_brain/flat_brain/heartbeat_state_store.py
   - .aiwg/heartbeat/heartbeat_ledger.jsonl
   runtime_files:
-  - layers/l2_brain/heartbeat_state_store.py
+  - layers/l2_brain/flat_brain/heartbeat_state_store.py
   test_files: []
   docs_files: []
   script_files: []
@@ -684,10 +684,10 @@ entries:
   feature_path: doc/specs/166_heartbeat_decision_policy.feature
   rules_path: doc/specs/166_heartbeat_decision_policy.rules.json
   physical_evidence:
-  - layers/l2_brain/heartbeat_decision_policy.py
+  - layers/l2_brain/flat_brain/heartbeat_decision_policy.py
   - .aiwg/reports/heartbeat_decision_policy_latest.json
   runtime_files:
-  - layers/l2_brain/heartbeat_decision_policy.py
+  - layers/l2_brain/flat_brain/heartbeat_decision_policy.py
   test_files: []
   docs_files: []
   script_files: []
@@ -702,10 +702,10 @@ entries:
   feature_path: doc/specs/167_heartbeat_scheduler.feature
   rules_path: doc/specs/167_heartbeat_scheduler.rules.json
   physical_evidence:
-  - layers/l2_brain/heartbeat_scheduler.py
+  - layers/l2_brain/flat_brain/heartbeat_scheduler.py
   - .aiwg/reports/heartbeat_scheduler_latest.json
   runtime_files:
-  - layers/l2_brain/heartbeat_scheduler.py
+  - layers/l2_brain/flat_brain/heartbeat_scheduler.py
   test_files: []
   docs_files: []
   script_files: []
@@ -720,18 +720,18 @@ entries:
   feature_path: doc/specs/168_whole_body_scanner.feature
   rules_path: doc/specs/168_whole_body_scanner.rules.json
   physical_evidence:
-  - layers/l2_brain/whole_body_scanner.py
+  - layers/l2_brain/flat_brain/whole_body_scanner.py
   - layers/l2_brain/tests/test_whole_body_scanner.py
-  - layers/l2_brain/cli_control_plane.py
-  - layers/l2_brain/dummie_chat_cli.py
+  - layers/l2_brain/flat_brain/cli_control_plane.py
+  - layers/l2_brain/flat_brain/dummie_chat_cli.py
   - .aiwg/schemas/whole_body_scan.schema.json
   - .aiwg/reports/whole_body_scan_latest.json
   - .aiwg/reports/whole_body_scan_latest.md
   runtime_files:
-  - layers/l2_brain/cli_control_plane.py
-  - layers/l2_brain/dummie_chat_cli.py
+  - layers/l2_brain/flat_brain/cli_control_plane.py
+  - layers/l2_brain/flat_brain/dummie_chat_cli.py
+  - layers/l2_brain/flat_brain/whole_body_scanner.py
   - layers/l2_brain/tests/test_whole_body_scanner.py
-  - layers/l2_brain/whole_body_scanner.py
   test_files:
   - layers/l2_brain/tests/test_whole_body_scanner.py
   docs_files: []
@@ -749,13 +749,13 @@ entries:
   feature_path: doc/specs/169_whole_body_scan_calibrator.feature
   rules_path: doc/specs/169_whole_body_scan_calibrator.rules.json
   physical_evidence:
-  - layers/l2_brain/whole_body_scan_calibrator.py
+  - layers/l2_brain/flat_brain/whole_body_scan_calibrator.py
   - layers/l2_brain/tests/test_whole_body_scan_calibrator.py
   - .aiwg/reports/whole_body_scan_calibration_latest.json
   - .aiwg/reports/whole_body_scan_calibration_latest.md
   runtime_files:
+  - layers/l2_brain/flat_brain/whole_body_scan_calibrator.py
   - layers/l2_brain/tests/test_whole_body_scan_calibrator.py
-  - layers/l2_brain/whole_body_scan_calibrator.py
   test_files:
   - layers/l2_brain/tests/test_whole_body_scan_calibrator.py
   docs_files: []
@@ -772,13 +772,13 @@ entries:
   feature_path: doc/specs/170_wiring_matrix_builder.feature
   rules_path: doc/specs/170_wiring_matrix_builder.rules.json
   physical_evidence:
-  - layers/l2_brain/wiring_matrix_builder.py
+  - layers/l2_brain/flat_brain/wiring_matrix_builder.py
   - layers/l2_brain/tests/test_wiring_matrix_builder.py
   - .aiwg/reports/wiring_matrix_latest.json
   - .aiwg/reports/wiring_matrix_latest.md
   runtime_files:
+  - layers/l2_brain/flat_brain/wiring_matrix_builder.py
   - layers/l2_brain/tests/test_wiring_matrix_builder.py
-  - layers/l2_brain/wiring_matrix_builder.py
   test_files:
   - layers/l2_brain/tests/test_wiring_matrix_builder.py
   docs_files: []
@@ -795,12 +795,12 @@ entries:
   feature_path: doc/specs/171_shadow_runtime_classifier.feature
   rules_path: doc/specs/171_shadow_runtime_classifier.rules.json
   physical_evidence:
-  - layers/l2_brain/shadow_runtime_classifier.py
+  - layers/l2_brain/flat_brain/shadow_runtime_classifier.py
   - layers/l2_brain/tests/test_shadow_runtime_classifier.py
   - .aiwg/reports/shadow_runtime_classification_latest.json
   - .aiwg/reports/shadow_runtime_classification_latest.md
   runtime_files:
-  - layers/l2_brain/shadow_runtime_classifier.py
+  - layers/l2_brain/flat_brain/shadow_runtime_classifier.py
   - layers/l2_brain/tests/test_shadow_runtime_classifier.py
   test_files:
   - layers/l2_brain/tests/test_shadow_runtime_classifier.py
@@ -818,13 +818,13 @@ entries:
   feature_path: doc/specs/172_six_dimensional_context_runtime.feature
   rules_path: doc/specs/172_six_dimensional_context_runtime.rules.json
   physical_evidence:
-  - layers/l2_brain/six_dimensional_context_runtime.py
+  - layers/l2_brain/flat_brain/six_dimensional_context_runtime.py
   - layers/l2_brain/tests/test_six_dimensional_context_runtime.py
   - .aiwg/schemas/6d_context_packet.schema.json
   - .aiwg/reports/6d_context_packet_latest.json
   - .aiwg/reports/6d_context_packet_latest.md
   runtime_files:
-  - layers/l2_brain/six_dimensional_context_runtime.py
+  - layers/l2_brain/flat_brain/six_dimensional_context_runtime.py
   - layers/l2_brain/tests/test_six_dimensional_context_runtime.py
   test_files:
   - layers/l2_brain/tests/test_six_dimensional_context_runtime.py
@@ -843,13 +843,13 @@ entries:
   feature_path: doc/specs/173_context_packet_optimizer.feature
   rules_path: doc/specs/173_context_packet_optimizer.rules.json
   physical_evidence:
-  - layers/l2_brain/context_packet_optimizer.py
+  - layers/l2_brain/flat_brain/context_packet_optimizer.py
   - layers/l2_brain/tests/test_context_packet_optimizer.py
   - .aiwg/schemas/context_packet_optimization.schema.json
   - .aiwg/reports/context_packet_optimization_latest.json
   - .aiwg/reports/context_packet_optimization_latest.md
   runtime_files:
-  - layers/l2_brain/context_packet_optimizer.py
+  - layers/l2_brain/flat_brain/context_packet_optimizer.py
   - layers/l2_brain/tests/test_context_packet_optimizer.py
   test_files:
   - layers/l2_brain/tests/test_context_packet_optimizer.py
@@ -868,13 +868,13 @@ entries:
   feature_path: doc/specs/174_embedding_memory_router.feature
   rules_path: doc/specs/174_embedding_memory_router.rules.json
   physical_evidence:
-  - layers/l2_brain/embedding_memory_router.py
+  - layers/l2_brain/flat_brain/embedding_memory_router.py
   - layers/l2_brain/tests/test_embedding_memory_router.py
   - .aiwg/schemas/embedding_memory_router.schema.json
   - .aiwg/reports/embedding_memory_router_latest.json
   - .aiwg/reports/embedding_memory_router_latest.md
   runtime_files:
-  - layers/l2_brain/embedding_memory_router.py
+  - layers/l2_brain/flat_brain/embedding_memory_router.py
   - layers/l2_brain/tests/test_embedding_memory_router.py
   test_files:
   - layers/l2_brain/tests/test_embedding_memory_router.py
@@ -893,13 +893,13 @@ entries:
   feature_path: doc/specs/175_4dtes_persistence_preflight.feature
   rules_path: doc/specs/175_4dtes_persistence_preflight.rules.json
   physical_evidence:
-  - layers/l2_brain/four_dtes_persistence_preflight.py
+  - layers/l2_brain/flat_brain/four_dtes_persistence_preflight.py
   - layers/l2_brain/tests/test_four_dtes_persistence_preflight.py
   - .aiwg/schemas/4dtes_persistence_preflight.schema.json
   - .aiwg/reports/4dtes_persistence_preflight_latest.json
   - .aiwg/reports/4dtes_persistence_preflight_latest.md
   runtime_files:
-  - layers/l2_brain/four_dtes_persistence_preflight.py
+  - layers/l2_brain/flat_brain/four_dtes_persistence_preflight.py
   - layers/l2_brain/tests/test_four_dtes_persistence_preflight.py
   test_files:
   - layers/l2_brain/tests/test_four_dtes_persistence_preflight.py
@@ -918,13 +918,13 @@ entries:
   feature_path: doc/specs/176_daemon_gateway_heartbeat_bridge.feature
   rules_path: doc/specs/176_daemon_gateway_heartbeat_bridge.rules.json
   physical_evidence:
-  - layers/l2_brain/daemon_gateway_heartbeat_bridge.py
+  - layers/l2_brain/flat_brain/daemon_gateway_heartbeat_bridge.py
   - layers/l2_brain/tests/test_daemon_gateway_heartbeat_bridge.py
   - .aiwg/schemas/daemon_gateway_heartbeat_bridge.schema.json
   - .aiwg/reports/daemon_gateway_heartbeat_bridge_latest.json
   - .aiwg/reports/daemon_gateway_heartbeat_bridge_latest.md
   runtime_files:
-  - layers/l2_brain/daemon_gateway_heartbeat_bridge.py
+  - layers/l2_brain/flat_brain/daemon_gateway_heartbeat_bridge.py
   - layers/l2_brain/tests/test_daemon_gateway_heartbeat_bridge.py
   test_files:
   - layers/l2_brain/tests/test_daemon_gateway_heartbeat_bridge.py
@@ -943,13 +943,13 @@ entries:
   feature_path: doc/specs/177_polyglot_probe_orchestrator.feature
   rules_path: doc/specs/177_polyglot_probe_orchestrator.rules.json
   physical_evidence:
-  - layers/l2_brain/polyglot_probe_orchestrator.py
+  - layers/l2_brain/flat_brain/polyglot_probe_orchestrator.py
   - layers/l2_brain/tests/test_polyglot_probe_orchestrator.py
   - .aiwg/schemas/polyglot_probe.schema.json
   - .aiwg/reports/polyglot_probe_latest.json
   - .aiwg/reports/polyglot_probe_latest.md
   runtime_files:
-  - layers/l2_brain/polyglot_probe_orchestrator.py
+  - layers/l2_brain/flat_brain/polyglot_probe_orchestrator.py
   - layers/l2_brain/tests/test_polyglot_probe_orchestrator.py
   test_files:
   - layers/l2_brain/tests/test_polyglot_probe_orchestrator.py
@@ -968,13 +968,13 @@ entries:
   feature_path: doc/specs/178_runtime_dependency_auditor.feature
   rules_path: doc/specs/178_runtime_dependency_auditor.rules.json
   physical_evidence:
-  - layers/l2_brain/runtime_dependency_auditor.py
+  - layers/l2_brain/flat_brain/runtime_dependency_auditor.py
   - layers/l2_brain/tests/test_runtime_dependency_auditor.py
   - .aiwg/schemas/runtime_dependency_audit.schema.json
   - .aiwg/reports/runtime_dependency_audit_latest.json
   - .aiwg/reports/runtime_dependency_audit_latest.md
   runtime_files:
-  - layers/l2_brain/runtime_dependency_auditor.py
+  - layers/l2_brain/flat_brain/runtime_dependency_auditor.py
   - layers/l2_brain/tests/test_runtime_dependency_auditor.py
   test_files:
   - layers/l2_brain/tests/test_runtime_dependency_auditor.py
@@ -993,13 +993,13 @@ entries:
   feature_path: doc/specs/179_degraded_capability_registry.feature
   rules_path: doc/specs/179_degraded_capability_registry.rules.json
   physical_evidence:
-  - layers/l2_brain/degraded_capability_registry.py
+  - layers/l2_brain/flat_brain/degraded_capability_registry.py
   - layers/l2_brain/tests/test_degraded_capability_registry.py
   - .aiwg/schemas/degraded_capability_registry.schema.json
   - .aiwg/reports/degraded_capability_registry_latest.json
   - .aiwg/reports/degraded_capability_registry_latest.md
   runtime_files:
-  - layers/l2_brain/degraded_capability_registry.py
+  - layers/l2_brain/flat_brain/degraded_capability_registry.py
   - layers/l2_brain/tests/test_degraded_capability_registry.py
   test_files:
   - layers/l2_brain/tests/test_degraded_capability_registry.py
@@ -1018,13 +1018,13 @@ entries:
   feature_path: doc/specs/180_environment_toolchain_probe.feature
   rules_path: doc/specs/180_environment_toolchain_probe.rules.json
   physical_evidence:
-  - layers/l2_brain/environment_toolchain_probe.py
+  - layers/l2_brain/flat_brain/environment_toolchain_probe.py
   - layers/l2_brain/tests/test_environment_toolchain_probe.py
   - .aiwg/schemas/environment_toolchain_probe.schema.json
   - .aiwg/reports/environment_toolchain_probe_latest.json
   - .aiwg/reports/environment_toolchain_probe_latest.md
   runtime_files:
-  - layers/l2_brain/environment_toolchain_probe.py
+  - layers/l2_brain/flat_brain/environment_toolchain_probe.py
   - layers/l2_brain/tests/test_environment_toolchain_probe.py
   test_files:
   - layers/l2_brain/tests/test_environment_toolchain_probe.py
@@ -1043,13 +1043,13 @@ entries:
   feature_path: doc/specs/181_runtime_closure_planner.feature
   rules_path: doc/specs/181_runtime_closure_planner.rules.json
   physical_evidence:
-  - layers/l2_brain/runtime_closure_planner.py
+  - layers/l2_brain/flat_brain/runtime_closure_planner.py
   - layers/l2_brain/tests/test_runtime_closure_planner.py
   - .aiwg/schemas/runtime_closure_plan.schema.json
   - .aiwg/reports/runtime_closure_plan_latest.json
   - .aiwg/reports/runtime_closure_plan_latest.md
   runtime_files:
-  - layers/l2_brain/runtime_closure_planner.py
+  - layers/l2_brain/flat_brain/runtime_closure_planner.py
   - layers/l2_brain/tests/test_runtime_closure_planner.py
   test_files:
   - layers/l2_brain/tests/test_runtime_closure_planner.py
@@ -1068,13 +1068,13 @@ entries:
   feature_path: doc/specs/186_dependency_reproducibility_verifier.feature
   rules_path: doc/specs/186_dependency_reproducibility_verifier.rules.json
   physical_evidence:
-  - layers/l2_brain/dependency_reproducibility_verifier.py
+  - layers/l2_brain/flat_brain/dependency_reproducibility_verifier.py
   - layers/l2_brain/tests/test_dependency_reproducibility_verifier.py
   - .aiwg/schemas/dependency_reproducibility.schema.json
   - .aiwg/reports/dependency_reproducibility_latest.json
   - .aiwg/reports/dependency_reproducibility_latest.md
   runtime_files:
-  - layers/l2_brain/dependency_reproducibility_verifier.py
+  - layers/l2_brain/flat_brain/dependency_reproducibility_verifier.py
   - layers/l2_brain/tests/test_dependency_reproducibility_verifier.py
   test_files:
   - layers/l2_brain/tests/test_dependency_reproducibility_verifier.py
@@ -1093,13 +1093,13 @@ entries:
   feature_path: doc/specs/187_kuzu_graph_readback_verifier.feature
   rules_path: doc/specs/187_kuzu_graph_readback_verifier.rules.json
   physical_evidence:
-  - layers/l2_brain/kuzu_graph_readback_verifier.py
+  - layers/l2_brain/flat_brain/kuzu_graph_readback_verifier.py
   - layers/l2_brain/tests/test_kuzu_graph_readback_verifier.py
   - .aiwg/schemas/kuzu_graph_readback_verification.schema.json
   - .aiwg/reports/kuzu_graph_readback_verification_latest.json
   - .aiwg/reports/kuzu_graph_readback_verification_latest.md
   runtime_files:
-  - layers/l2_brain/kuzu_graph_readback_verifier.py
+  - layers/l2_brain/flat_brain/kuzu_graph_readback_verifier.py
   - layers/l2_brain/tests/test_kuzu_graph_readback_verifier.py
   test_files:
   - layers/l2_brain/tests/test_kuzu_graph_readback_verifier.py
@@ -1118,13 +1118,13 @@ entries:
   feature_path: doc/specs/188_embedding_activation_verifier.feature
   rules_path: doc/specs/188_embedding_activation_verifier.rules.json
   physical_evidence:
-  - layers/l2_brain/embedding_activation_verifier.py
+  - layers/l2_brain/flat_brain/embedding_activation_verifier.py
   - layers/l2_brain/tests/test_embedding_activation_verifier.py
   - .aiwg/schemas/embedding_activation_verification.schema.json
   - .aiwg/reports/embedding_activation_verification_latest.json
   - .aiwg/reports/embedding_activation_verification_latest.md
   runtime_files:
-  - layers/l2_brain/embedding_activation_verifier.py
+  - layers/l2_brain/flat_brain/embedding_activation_verifier.py
   - layers/l2_brain/tests/test_embedding_activation_verifier.py
   test_files:
   - layers/l2_brain/tests/test_embedding_activation_verifier.py
@@ -1143,13 +1143,13 @@ entries:
   feature_path: doc/specs/189_capability_promotion_governor.feature
   rules_path: doc/specs/189_capability_promotion_governor.rules.json
   physical_evidence:
-  - layers/l2_brain/capability_promotion_governor.py
+  - layers/l2_brain/flat_brain/capability_promotion_governor.py
   - layers/l2_brain/tests/test_capability_promotion_governor.py
   - .aiwg/schemas/capability_promotion_governor.schema.json
   - .aiwg/reports/capability_promotion_governor_latest.json
   - .aiwg/reports/capability_promotion_governor_latest.md
   runtime_files:
-  - layers/l2_brain/capability_promotion_governor.py
+  - layers/l2_brain/flat_brain/capability_promotion_governor.py
   - layers/l2_brain/tests/test_capability_promotion_governor.py
   test_files:
   - layers/l2_brain/tests/test_capability_promotion_governor.py
@@ -1168,13 +1168,13 @@ entries:
   feature_path: doc/specs/190_full_body_operational_auditor.feature
   rules_path: doc/specs/190_full_body_operational_auditor.rules.json
   physical_evidence:
-  - layers/l2_brain/full_body_operational_auditor.py
+  - layers/l2_brain/flat_brain/full_body_operational_auditor.py
   - layers/l2_brain/tests/test_full_body_operational_auditor.py
   - .aiwg/schemas/full_body_operational_audit.schema.json
   - .aiwg/reports/full_body_operational_audit_latest.json
   - .aiwg/reports/full_body_operational_audit_latest.md
   runtime_files:
-  - layers/l2_brain/full_body_operational_auditor.py
+  - layers/l2_brain/flat_brain/full_body_operational_auditor.py
   - layers/l2_brain/tests/test_full_body_operational_auditor.py
   test_files:
   - layers/l2_brain/tests/test_full_body_operational_auditor.py
@@ -1193,14 +1193,14 @@ entries:
   feature_path: doc/specs/191_whole_body_repair_queue.feature
   rules_path: doc/specs/191_whole_body_repair_queue.rules.json
   physical_evidence:
-  - layers/l2_brain/whole_body_repair_queue.py
+  - layers/l2_brain/flat_brain/whole_body_repair_queue.py
   - layers/l2_brain/tests/test_whole_body_repair_queue.py
   - .aiwg/schemas/whole_body_repair_queue.schema.json
   - .aiwg/reports/whole_body_repair_queue_latest.json
   - .aiwg/reports/whole_body_repair_queue_latest.md
   runtime_files:
+  - layers/l2_brain/flat_brain/whole_body_repair_queue.py
   - layers/l2_brain/tests/test_whole_body_repair_queue.py
-  - layers/l2_brain/whole_body_repair_queue.py
   test_files:
   - layers/l2_brain/tests/test_whole_body_repair_queue.py
   docs_files: []
@@ -1218,13 +1218,13 @@ entries:
   feature_path: doc/specs/192_embedding_mesh_foundation.feature
   rules_path: doc/specs/192_embedding_mesh_foundation.rules.json
   physical_evidence:
-  - layers/l2_brain/embedding_mesh/__init__.py
-  - layers/l2_brain/embedding_mesh/registry.py
-  - layers/l2_brain/embedding_mesh/router.py
-  - layers/l2_brain/embedding_mesh/providers.py
-  - layers/l2_brain/embedding_mesh/reranker.py
-  - layers/l2_brain/embedding_mesh/repo_indexer.py
-  - layers/l2_brain/embedding_mesh/hardening_matrix.py
+  - layers/l2_brain/flat_brain/embedding_mesh/__init__.py
+  - layers/l2_brain/flat_brain/embedding_mesh/registry.py
+  - layers/l2_brain/flat_brain/embedding_mesh/router.py
+  - layers/l2_brain/flat_brain/embedding_mesh/providers.py
+  - layers/l2_brain/flat_brain/embedding_mesh/reranker.py
+  - layers/l2_brain/flat_brain/embedding_mesh/repo_indexer.py
+  - layers/l2_brain/flat_brain/embedding_mesh/hardening_matrix.py
   - scripts/build_semantic_hardening_index.py
   - layers/l2_brain/tests/test_embedding_mesh_contracts.py
   - layers/l2_brain/tests/test_embedding_mesh_router.py
@@ -1234,13 +1234,13 @@ entries:
   - .aiwg/reports/semantic_hardening_matrix_latest.json
   - .aiwg/reports/semantic_hardening_matrix_latest.md
   runtime_files:
-  - layers/l2_brain/embedding_mesh/__init__.py
-  - layers/l2_brain/embedding_mesh/hardening_matrix.py
-  - layers/l2_brain/embedding_mesh/providers.py
-  - layers/l2_brain/embedding_mesh/registry.py
-  - layers/l2_brain/embedding_mesh/repo_indexer.py
-  - layers/l2_brain/embedding_mesh/reranker.py
-  - layers/l2_brain/embedding_mesh/router.py
+  - layers/l2_brain/flat_brain/embedding_mesh/__init__.py
+  - layers/l2_brain/flat_brain/embedding_mesh/hardening_matrix.py
+  - layers/l2_brain/flat_brain/embedding_mesh/providers.py
+  - layers/l2_brain/flat_brain/embedding_mesh/registry.py
+  - layers/l2_brain/flat_brain/embedding_mesh/repo_indexer.py
+  - layers/l2_brain/flat_brain/embedding_mesh/reranker.py
+  - layers/l2_brain/flat_brain/embedding_mesh/router.py
   - layers/l2_brain/tests/test_embedding_mesh_contracts.py
   - layers/l2_brain/tests/test_embedding_mesh_router.py
   - layers/l2_brain/tests/test_semantic_hardening_index.py
@@ -1328,7 +1328,7 @@ entries:
   rules_path: doc/specs/106_agent_session_operating_contracts.rules.json
   physical_evidence:
   - .aiwg/session_contracts/UNIVERSAL_AGENT_SESSION_CONTRACT.md
-  - .aiwg/session_contracts/GEMINI_CLI_SESSION_CONTRACT.md
+  - .aiwg/session_contracts/ANTIGRAVITY_SESSION_CONTRACT.md
   - .aiwg/session_contracts/CODEX_CLI_SESSION_CONTRACT.md
   - .aiwg/session_contracts/ANTIGRAVITY_IDE_SESSION_CONTRACT.md
   - .aiwg/context_transform/per_message_operating_contract.yaml
@@ -1343,8 +1343,8 @@ entries:
   - .aiwg/evolution/current_position.json
   - .aiwg/evolution/next_phase_seed.json
   - .aiwg/session_contracts/ANTIGRAVITY_IDE_SESSION_CONTRACT.md
+  - .aiwg/session_contracts/ANTIGRAVITY_SESSION_CONTRACT.md
   - .aiwg/session_contracts/CODEX_CLI_SESSION_CONTRACT.md
-  - .aiwg/session_contracts/GEMINI_CLI_SESSION_CONTRACT.md
   - .aiwg/session_contracts/UNIVERSAL_AGENT_SESSION_CONTRACT.md
 - spec_id: DE-V2-L2-107
   title: Cognitive Artifact Protocol
@@ -1531,12 +1531,12 @@ entries:
   feature_path: doc/specs/113_prompt_frame_builder.feature
   rules_path: doc/specs/113_prompt_frame_builder.rules.json
   physical_evidence:
-  - layers/l2_brain/prompt_frame_builder.py
+  - layers/l2_brain/flat_brain/prompt_frame_builder.py
   - .aiwg/reports/prompt_frame_latest.json
   - .aiwg/reports/context_quant_result_latest.json
   - .aiwg/reports/context_receipt_latest.json
   runtime_files:
-  - layers/l2_brain/prompt_frame_builder.py
+  - layers/l2_brain/flat_brain/prompt_frame_builder.py
   test_files: []
   docs_files: []
   script_files: []
@@ -1553,11 +1553,11 @@ entries:
   feature_path: doc/specs/114_prompt_cache_ledger.feature
   rules_path: doc/specs/114_prompt_cache_ledger.rules.json
   physical_evidence:
-  - layers/l2_brain/prompt_cache_ledger.py
+  - layers/l2_brain/flat_brain/prompt_cache_ledger.py
   - .aiwg/prompt_cache/prompt_cache_ledger.jsonl
   - .aiwg/reports/prompt_cache_summary_latest.json
   runtime_files:
-  - layers/l2_brain/prompt_cache_ledger.py
+  - layers/l2_brain/flat_brain/prompt_cache_ledger.py
   test_files: []
   docs_files: []
   script_files: []
@@ -1573,13 +1573,13 @@ entries:
   feature_path: doc/specs/115_restart_context_efficiency_gate.feature
   rules_path: doc/specs/115_restart_context_efficiency_gate.rules.json
   physical_evidence:
-  - layers/l2_brain/restart_integration_gate.py
-  - layers/l2_brain/context_efficiency_benchmark.py
+  - layers/l2_brain/flat_brain/restart_integration_gate.py
+  - layers/l2_brain/flat_brain/context_efficiency_benchmark.py
   - .aiwg/reports/restart_integration_gate_latest.json
   - .aiwg/reports/context_efficiency_benchmark_latest.json
   runtime_files:
-  - layers/l2_brain/context_efficiency_benchmark.py
-  - layers/l2_brain/restart_integration_gate.py
+  - layers/l2_brain/flat_brain/context_efficiency_benchmark.py
+  - layers/l2_brain/flat_brain/restart_integration_gate.py
   test_files: []
   docs_files: []
   script_files: []
@@ -1595,12 +1595,12 @@ entries:
   feature_path: doc/specs/116_evolution_flywheel_runtime.feature
   rules_path: doc/specs/116_evolution_flywheel_runtime.rules.json
   physical_evidence:
-  - layers/l2_brain/evolution_flywheel_runtime.py
+  - layers/l2_brain/flat_brain/evolution_flywheel_runtime.py
   - .aiwg/reports/evolution_flywheel_latest.json
   - .aiwg/reports/restart_integration_gate_latest.json
   - .aiwg/reports/context_efficiency_benchmark_latest.json
   runtime_files:
-  - layers/l2_brain/evolution_flywheel_runtime.py
+  - layers/l2_brain/flat_brain/evolution_flywheel_runtime.py
   test_files: []
   docs_files: []
   script_files: []
@@ -1617,11 +1617,11 @@ entries:
   feature_path: doc/specs/117_cli_control_plane.feature
   rules_path: doc/specs/117_cli_control_plane.rules.json
   physical_evidence:
-  - layers/l2_brain/cli_control_plane.py
+  - layers/l2_brain/flat_brain/cli_control_plane.py
   - .aiwg/reports/cli_control_plane_latest.json
   - layers/l2_brain/tests/test_cli_control_plane.py
   runtime_files:
-  - layers/l2_brain/cli_control_plane.py
+  - layers/l2_brain/flat_brain/cli_control_plane.py
   - layers/l2_brain/tests/test_cli_control_plane.py
   test_files:
   - layers/l2_brain/tests/test_cli_control_plane.py
@@ -1638,11 +1638,11 @@ entries:
   feature_path: doc/specs/118_tui_process_monitor.feature
   rules_path: doc/specs/118_tui_process_monitor.rules.json
   physical_evidence:
-  - layers/l2_brain/tui_process_monitor.py
+  - layers/l2_brain/flat_brain/tui_process_monitor.py
   - .aiwg/reports/process_monitor_latest.json
   - .aiwg/reports/process_monitor_latest.txt
   runtime_files:
-  - layers/l2_brain/tui_process_monitor.py
+  - layers/l2_brain/flat_brain/tui_process_monitor.py
   test_files: []
   docs_files: []
   script_files: []
@@ -1678,11 +1678,11 @@ entries:
   feature_path: doc/specs/120_local_context_compressor.feature
   rules_path: doc/specs/120_local_context_compressor.rules.json
   physical_evidence:
-  - layers/l2_brain/local_context_compressor.py
+  - layers/l2_brain/flat_brain/local_context_compressor.py
   - .aiwg/reports/local_context_compression_latest.json
   - layers/l2_brain/tests/test_local_context_compressor.py
   runtime_files:
-  - layers/l2_brain/local_context_compressor.py
+  - layers/l2_brain/flat_brain/local_context_compressor.py
   - layers/l2_brain/tests/test_local_context_compressor.py
   test_files:
   - layers/l2_brain/tests/test_local_context_compressor.py
@@ -1778,63 +1778,4 @@ entries:
   - .aiwg/reports/runtime_chat_latest.json
   - .aiwg/reports/runtime_chat_trace_latest.json
   - .aiwg/runtime/runtime_chat_registry.yaml
-errors:
-- 'doc/specs/113_prompt_frame_builder.md: missing evidence path `layers/l2_brain/prompt_frame_builder.py`'
-- 'doc/specs/114_prompt_cache_ledger.md: missing evidence path `layers/l2_brain/prompt_cache_ledger.py`'
-- 'doc/specs/115_restart_context_efficiency_gate.md: missing evidence path `layers/l2_brain/restart_integration_gate.py`'
-- 'doc/specs/115_restart_context_efficiency_gate.md: missing evidence path `layers/l2_brain/context_efficiency_benchmark.py`'
-- 'doc/specs/116_evolution_flywheel_runtime.md: missing evidence path `layers/l2_brain/evolution_flywheel_runtime.py`'
-- 'doc/specs/117_cli_control_plane.md: missing evidence path `layers/l2_brain/cli_control_plane.py`'
-- 'doc/specs/118_tui_process_monitor.md: missing evidence path `layers/l2_brain/tui_process_monitor.py`'
-- 'doc/specs/120_local_context_compressor.md: missing evidence path `layers/l2_brain/local_context_compressor.py`'
-- 'doc/specs/146_readiness_score_calibrator.md: missing evidence path `layers/l2_brain/readiness_score_calibrator.py`'
-- 'doc/specs/147_memory_spine_entrypoint.md: missing evidence path `layers/l2_brain/memory_spine_entrypoint.py`'
-- 'doc/specs/148_token_economy_benchmark.md: missing evidence path `layers/l2_brain/token_economy_benchmark.py`'
-- 'doc/specs/149_entrypoint_enforcement_auditor.md: missing evidence path `layers/l2_brain/entrypoint_enforcement_auditor.py`'
-- 'doc/specs/150_mental_model_runtime.md: missing evidence path `layers/l2_brain/mental_model_runtime.py`'
-- 'doc/specs/151_semantic_ontology_mapper.md: missing evidence path `layers/l2_brain/semantic_ontology_mapper.py`'
-- 'doc/specs/152_cognitive_frame_builder.md: missing evidence path `layers/l2_brain/cognitive_frame_builder.py`'
-- 'doc/specs/153_metacognitive_loop_runtime.md: missing evidence path `layers/l2_brain/metacognitive_loop_runtime.py`'
-- 'doc/specs/154_mental_model_store.md: missing evidence path `layers/l2_brain/mental_model_store.py`'
-- 'doc/specs/155_metacognitive_quality_gate.md: missing evidence path `layers/l2_brain/metacognitive_quality_gate.py`'
-- 'doc/specs/156_epistemic_state_runtime.md: missing evidence path `layers/l2_brain/epistemic_state_runtime.py`'
-- 'doc/specs/157_dialectical_reasoning_runtime.md: missing evidence path `layers/l2_brain/dialectical_reasoning_runtime.py`'
-- 'doc/specs/158_philosophical_ontology_runtime.md: missing evidence path `layers/l2_brain/philosophical_ontology_runtime.py`'
-- 'doc/specs/159_cognitive_bias_detector.md: missing evidence path `layers/l2_brain/cognitive_bias_detector.py`'
-- 'doc/specs/160_metacognitive_evolution_flywheel.md: missing evidence path `layers/l2_brain/metacognitive_evolution_flywheel.py`'
-- 'doc/specs/161_mental_model_truth_hygiene.md: missing evidence path `layers/l2_brain/mental_model_truth_hygiene.py`'
-- 'doc/specs/162_evolution_delta_applier.md: missing evidence path `layers/l2_brain/evolution_delta_applier.py`'
-- 'doc/specs/163_self_improvement_runtime.md: missing evidence path `layers/l2_brain/self_improvement_runtime.py`'
-- 'doc/specs/164_heartbeat_lifecycle_runtime.md: missing evidence path `layers/l2_brain/heartbeat_lifecycle_runtime.py`'
-- 'doc/specs/165_heartbeat_state_store.md: missing evidence path `layers/l2_brain/heartbeat_state_store.py`'
-- 'doc/specs/166_heartbeat_decision_policy.md: missing evidence path `layers/l2_brain/heartbeat_decision_policy.py`'
-- 'doc/specs/167_heartbeat_scheduler.md: missing evidence path `layers/l2_brain/heartbeat_scheduler.py`'
-- 'doc/specs/168_whole_body_scanner.md: missing evidence path `layers/l2_brain/whole_body_scanner.py`'
-- 'doc/specs/168_whole_body_scanner.md: missing evidence path `layers/l2_brain/cli_control_plane.py`'
-- 'doc/specs/168_whole_body_scanner.md: missing evidence path `layers/l2_brain/dummie_chat_cli.py`'
-- 'doc/specs/169_whole_body_scan_calibrator.md: missing evidence path `layers/l2_brain/whole_body_scan_calibrator.py`'
-- 'doc/specs/170_wiring_matrix_builder.md: missing evidence path `layers/l2_brain/wiring_matrix_builder.py`'
-- 'doc/specs/171_shadow_runtime_classifier.md: missing evidence path `layers/l2_brain/shadow_runtime_classifier.py`'
-- 'doc/specs/172_six_dimensional_context_runtime.md: missing evidence path `layers/l2_brain/six_dimensional_context_runtime.py`'
-- 'doc/specs/173_context_packet_optimizer.md: missing evidence path `layers/l2_brain/context_packet_optimizer.py`'
-- 'doc/specs/174_embedding_memory_router.md: missing evidence path `layers/l2_brain/embedding_memory_router.py`'
-- 'doc/specs/175_4dtes_persistence_preflight.md: missing evidence path `layers/l2_brain/four_dtes_persistence_preflight.py`'
-- 'doc/specs/176_daemon_gateway_heartbeat_bridge.md: missing evidence path `layers/l2_brain/daemon_gateway_heartbeat_bridge.py`'
-- 'doc/specs/177_polyglot_probe_orchestrator.md: missing evidence path `layers/l2_brain/polyglot_probe_orchestrator.py`'
-- 'doc/specs/178_runtime_dependency_auditor.md: missing evidence path `layers/l2_brain/runtime_dependency_auditor.py`'
-- 'doc/specs/179_degraded_capability_registry.md: missing evidence path `layers/l2_brain/degraded_capability_registry.py`'
-- 'doc/specs/180_environment_toolchain_probe.md: missing evidence path `layers/l2_brain/environment_toolchain_probe.py`'
-- 'doc/specs/181_runtime_closure_planner.md: missing evidence path `layers/l2_brain/runtime_closure_planner.py`'
-- 'doc/specs/186_dependency_reproducibility_verifier.md: missing evidence path `layers/l2_brain/dependency_reproducibility_verifier.py`'
-- 'doc/specs/187_kuzu_graph_readback_verifier.md: missing evidence path `layers/l2_brain/kuzu_graph_readback_verifier.py`'
-- 'doc/specs/188_embedding_activation_verifier.md: missing evidence path `layers/l2_brain/embedding_activation_verifier.py`'
-- 'doc/specs/189_capability_promotion_governor.md: missing evidence path `layers/l2_brain/capability_promotion_governor.py`'
-- 'doc/specs/190_full_body_operational_auditor.md: missing evidence path `layers/l2_brain/full_body_operational_auditor.py`'
-- 'doc/specs/191_whole_body_repair_queue.md: missing evidence path `layers/l2_brain/whole_body_repair_queue.py`'
-- 'doc/specs/192_embedding_mesh_foundation.md: missing evidence path `layers/l2_brain/embedding_mesh/__init__.py`'
-- 'doc/specs/192_embedding_mesh_foundation.md: missing evidence path `layers/l2_brain/embedding_mesh/registry.py`'
-- 'doc/specs/192_embedding_mesh_foundation.md: missing evidence path `layers/l2_brain/embedding_mesh/router.py`'
-- 'doc/specs/192_embedding_mesh_foundation.md: missing evidence path `layers/l2_brain/embedding_mesh/providers.py`'
-- 'doc/specs/192_embedding_mesh_foundation.md: missing evidence path `layers/l2_brain/embedding_mesh/reranker.py`'
-- 'doc/specs/192_embedding_mesh_foundation.md: missing evidence path `layers/l2_brain/embedding_mesh/repo_indexer.py`'
-- 'doc/specs/192_embedding_mesh_foundation.md: missing evidence path `layers/l2_brain/embedding_mesh/hardening_matrix.py`'
+errors: []

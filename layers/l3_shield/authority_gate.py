@@ -13,8 +13,8 @@ logger = logging.getLogger("dummie.shield.authority")
 class AuthorityGate:
     def __init__(self):
         self.restricted_levels = {
-            AuthorityLevel.A4_EXTERNAL_ACTOR,
-            AuthorityLevel.A5_CRITICAL_OP
+            AuthorityLevel.ARCHITECT,
+            AuthorityLevel.OVERSEER
         }
 
     async def validate_intent(self, frame: MetacognitiveFrame) -> Tuple[bool, str]:
@@ -23,11 +23,11 @@ class AuthorityGate:
         """
         logger.info(f"Shield validating authority level: {frame.authority_level}")
         
-        if frame.authority_level == AuthorityLevel.A5_CRITICAL_OP:
-            return False, "VETO_L3: Acción crítica de nivel A5 requiere veto humano presencial."
+        if frame.authority_level == AuthorityLevel.OVERSEER:
+            return False, "VETO_L3: Acción crítica de nivel OVERSEER requiere veto humano presencial."
         
-        if frame.authority_level == AuthorityLevel.A4_EXTERNAL_ACTOR:
+        if frame.authority_level == AuthorityLevel.ARCHITECT:
             # En un sistema real, aquí verificaríamos tokens de aprobación persistente
-            return False, "PENDING_L3: Acción externa de nivel A4 requiere confirmación del usuario."
+            return False, "PENDING_L3: Acción externa de nivel ARCHITECT requiere confirmación del usuario."
             
         return True, "CONFIRM_L3: Autoridad delegada aceptada."

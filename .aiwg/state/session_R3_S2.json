@@ -1,0 +1,61 @@
+{
+  "session_id": "R3-S2",
+  "name": "Architecture Contract Design",
+  "start_time": "2026-05-19T08:30:00Z",
+  "end_time": "2026-05-19T08:45:00Z",
+  "trigger": "jorge_5_decisions",
+  "objectives": [
+    "Define L2 Brain sovereign responsibility",
+    "Define boundaries with L0-L5",
+    "Define data contracts between layers",
+    "Decide architecture structure based on Jorge's input"
+  ],
+  "jorge_decisions_received": {
+    "flat_brain_status": "TEMP_COMPAT / MIGRATION_STAGING (not final)",
+    "src_brain_status": "seed architecture / DRAFT / partial target (audit first, don't blindly absorb or delete)",
+    "test_location": "separate in layers/l2_brain/tests/ (never inside flat_brain/)",
+    "persistence": "KùzuDB = canonical graph / 4D-TES memory; Redb only if specifically justified",
+    "import_strategy": "compatibility shim stays, imports gradually migrate"
+  },
+  "results": {
+    "completed": [
+      "Architecture contract created (.aiwg/strategic/l2_architecture_contract.md)",
+      "Canonical L2 structure defined with 14 organs",
+      "Migration manifest created (230 modules mapped to organs)",
+      "3-phase migration strategy defined (PACK R3-R5)",
+      "6 invariants established",
+      "Layer boundaries documented"
+    ],
+    "deliverables": [
+      ".aiwg/strategic/l2_architecture_contract.md",
+      ".aiwg/strategic/l2_migration_manifest.json"
+    ]
+  },
+  "canonical_organs": {
+    "context": 11,
+    "memory": 16,
+    "model_mesh": 11,
+    "cognition": 17,
+    "metacognition": 10,
+    "mission": 10,
+    "strategic": 11,
+    "daemon": 4,
+    "heartbeat": 4,
+    "governance": 21,
+    "infrastructure": 16,
+    "domain": 2,
+    "sdk": 4,
+    "proto": 6,
+    "structural_hardening": 7,
+    "other": 80,
+    "total": 230
+  },
+  "next_session": {
+    "required": true,
+    "session_id": "R3-S3",
+    "name": "Migration Plan & Rollback Strategy",
+    "autonomous": true
+  },
+  "token_usage": 80000,
+  "errors": []
+}

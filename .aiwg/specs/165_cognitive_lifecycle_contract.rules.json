@@ -1,0 +1,132 @@
+{
+  "spec_id": "165_cognitive_lifecycle_contract",
+  "schema_version": "1.0.0",
+  "status": "ACTIVE",
+  "canonicality": "canonical",
+  "policy": {
+    "imports": [
+      "108_truth_hierarchy_canonicality_policy",
+      "123_repo_probe_runner",
+      "163_self_improvement_runtime",
+      "164_heartbeat_lifecycle_runtime"
+    ],
+    "required_interface": [
+      "load",
+      "preflight",
+      "postflight"
+    ],
+    "required_modes": [
+      "ADVISORY_ONLY",
+      "ENFORCE_CRITICAL",
+      "ENFORCE_ALL"
+    ],
+    "initial_mode": "ADVISORY_ONLY",
+    "advisory_is_real": true
+  },
+  "decisions": [
+    "ALLOW",
+    "ALLOW_WITH_RECEIPT",
+    "ADVISORY_ONLY",
+    "BLOCK",
+    "REQUIRES_HUMAN_REVIEW"
+  ],
+  "confidence_levels": [
+    "VERIFIED",
+    "PROBABLE",
+    "STALE",
+    "CONFLICTED",
+    "UNKNOWN",
+    "REQUIRES_HUMAN"
+  ],
+  "risk_levels": {
+    "R0_OBSERVE": {
+      "requires_receipt": false,
+      "requires_human": false
+    },
+    "R1_ANSWER": {
+      "requires_receipt": true,
+      "requires_human": false,
+      "applies_when": "architecture_or_runtime_claim"
+    },
+    "R2_SPEC": {
+      "requires_receipt": true,
+      "requires_schema_or_triplet": true
+    },
+    "R3_CODE": {
+      "requires_receipt": true,
+      "requires_socraticode": true,
+      "requires_tests": true
+    },
+    "R4_MEMORY": {
+      "requires_receipt": true,
+      "requires_persistence_verification": true,
+      "requires_backup_or_migration_plan": true
+    },
+    "R5_EXTERNAL": {
+      "requires_receipt": true,
+      "requires_human": true
+    },
+    "R6_PACK": {
+      "requires_receipt": true,
+      "requires_human": true,
+      "requires_full_evidence_bundle": true
+    }
+  },
+  "truth_source_ranks": [
+    {"rank": 100, "class": "physical_source_code_with_passing_tests"},
+    {"rank": 95, "class": "passing_tests_and_validation_results"},
+    {"rank": 90, "class": "active_specs_rules_features"},
+    {"rank": 85, "class": "schemas_and_machine_contracts"},
+    {"rank": 80, "class": "phase_ledger_and_mission_runtime_state"},
+    {"rank": 75, "class": "daemon_outcome_and_validation_result"},
+    {"rank": 70, "class": "learning_episode_with_evidence"},
+    {"rank": 65, "class": "vault_entry_with_evidence"},
+    {"rank": 60, "class": "active_cognitive_artifact"},
+    {"rank": 50, "class": "report_with_evidence"},
+    {"rank": 40, "class": "fresh_note_or_folder_note"},
+    {"rank": 30, "class": "human_mirror_or_obsidian_export"},
+    {"rank": 20, "class": "chat_transcript_or_agent_memory"},
+    {"rank": 10, "class": "unknown_legacy_doc"},
+    {"rank": 0, "class": "rejected_deprecated_unsafe_or_secret_bearing_artifact"}
+  ],
+  "mandatory_entrypoints": [
+    "agent_session_startup",
+    "codex_task_execution",
+    "opencode_task_execution",
+    "gemini_task_execution",
+    "dummie_status",
+    "dummie_advise",
+    "l2_daemon_process_request",
+    "heartbeat_lifecycle_runtime",
+    "self_improvement_runtime",
+    "mission_orchestrator_dag",
+    "meta_gateway_discover",
+    "meta_gateway_analyze",
+    "meta_gateway_execute",
+    "mcp_memory_tools",
+    "mcp_spec_tools",
+    "mcp_code_tools",
+    "external_integration_filter"
+  ],
+  "prohibited_success_states": [
+    "dry_run",
+    "simulated",
+    "mock",
+    "stub_success",
+    "degraded_success",
+    "best_effort_pass"
+  ],
+  "receipt_schema": ".aiwg/schemas/cognitive_lifecycle_receipt.schema.json",
+  "report_path": ".aiwg/reports/cognitive_lifecycle_latest.json",
+  "invariants": [
+    "agent_claims_are_noncanonical_until_backed_by_accepted_evidence",
+    "architecture_answers_require_evidence_or_uncertainty_label",
+    "code_mutation_requires_semantic_discovery_and_blast_radius_when_available",
+    "persistent_memory_mutation_requires_persistence_verification",
+    "pack_r3_requires_l2_runtime_integration",
+    "advisory_mode_writes_real_receipts",
+    "degraded_or_simulated_state_cannot_report_pass",
+    "all_entrypoints_share_one_contract"
+  ]
+}
+

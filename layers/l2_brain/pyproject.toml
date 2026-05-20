@@ -44,3 +44,10 @@ dev = [
 
 [tool.uv]
 package = false
+
+[tool.pyright]
+extraPaths = [
+    ".",
+    "../.."
+]
+

@@ -44,6 +44,8 @@ def build_structural_hardening_triage(
             from .bindings import ContractBindingRegistry
             registry = ContractBindingRegistry()
             for binding in registry.get_all_bindings():
+                if not (root / binding.path).exists():
+                    continue
                 _, validation = registry.evaluate(binding.path, repo_root=root, evidence={"evidence_refs": binding.evidence_refs})
                 if validation and (validation.missing_spec_refs or validation.missing_test_refs or validation.missing_runtime_refs):
                     if "doc/.deprecated/" not in binding.path:

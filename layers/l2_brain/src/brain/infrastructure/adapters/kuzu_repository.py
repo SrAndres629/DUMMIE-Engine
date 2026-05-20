@@ -118,8 +118,8 @@ class KuzuRepository(IEventStorePort, IStructuralAnalysisPort):
                 "ly": node.context.locus_y,
                 "lz": node.context.locus_z,
                 "lt": node.context.lamport_t,
-                "aa": node.context.authority_a,
-                "ii": node.context.intent_i,
+                "aa": node.context.authority_a.value if hasattr(node.context.authority_a, "value") else str(node.context.authority_a),
+                "ii": node.context.intent_i.value if hasattr(node.context.intent_i, "value") else str(node.context.intent_i),
                 "emb": node.embedding
             },
         )
@@ -146,19 +146,19 @@ class KuzuRepository(IEventStorePort, IStructuralAnalysisPort):
             compressed = base64.b64decode(b64_payload)
             payload = zstd.decompress(compressed)
             
+            payload = payload.decode("utf-8")
+
             return MemoryNode4DTES(
                 causal_hash=row[0],
-                parent_hash=row[1],
+                parent_hashes=[row[1]] if row[1] else ["GENESIS"],
+                locus_x=row[2],
+                locus_y=row[3],
+                locus_z=row[4],
+                lamport_t=row[5],
+                authority_a=row[6],
+                intent_i=row[7],
                 payload=payload,
                 payload_hash=row[9],
-                context=SixDimensionalContext(
-                    locus_x=row[2],
-                    locus_y=row[3],
-                    locus_z=row[4],
-                    lamport_t=row[5],
-                    authority_a=row[6],
-                    intent_i=row[7]
-                ),
                 embedding=row[10]
             )
         return None
@@ -189,11 +189,11 @@ class KuzuRepository(IEventStorePort, IStructuralAnalysisPort):
             pass
         return 0
 
-    def get_causal_chain(self, leaf_hash: str) -> List[MemoryNode4DTES]:
+    def get_causal_chain(self, leaf_hash: str, depth: int = 30) -> List[MemoryNode4DTES]:
         """Reconstruye la cadena de causalidad desde una hoja hasta la raíz."""
         chain = []
         current_hash = leaf_hash
-        while current_hash != "GENESIS":
+        while current_hash != "GENESIS" and len(chain) < depth:
             node = self.get_by_hash(current_hash)
             if not node: break
             chain.append(node)
@@ -251,3 +251,61 @@ class KuzuRepository(IEventStorePort, IStructuralAnalysisPort):
             "impacted_loci": impacted_loci,
             "total_impacted_nodes": total_nodes
         }
+
+
+class KuzuSkillRepository(ISkillRepositoryPort):
+    """Repositorio de skills cristalizadas respaldado por Kùzu."""
+
+    def __init__(self, repo: KuzuRepository):
+        self.repo = repo
+        if not self.repo.read_only:
+            try:
+                self.repo.conn.execute(
+                    """
+                    CREATE NODE TABLE Skill(
+                        skill_id STRING,
+                        yaml_payload STRING,
+                        source_causal_hashes STRING,
+                        skill_hash STRING,
+                        PRIMARY KEY (skill_id)
+                    )
+                    """
+                )
+            except Exception:
+                pass
+
+    def save_skill(self, skill) -> None:
+        if self.repo.read_only:
+            raise RuntimeError("KùzuDB está en modo read-only; no se puede guardar skill")
+        payload = json.dumps(skill.source_causal_hashes)
+        self.repo.conn.execute(
+            """
+            MERGE (s:Skill {skill_id: $sid})
+            SET s.yaml_payload = $yaml,
+                s.source_causal_hashes = $sources,
+                s.skill_hash = $hash
+            """,
+            {
+                "sid": skill.skill_id,
+                "yaml": skill.yaml_payload,
+                "sources": payload,
+                "hash": skill.skill_hash,
+            },
+        )
+
+    def get_skill_by_id(self, skill_id: str):
+        from brain.domain.memory.models import CrystallizedSkill
+
+        result = self.repo.conn.execute(
+            "MATCH (s:Skill {skill_id: $sid}) RETURN s.yaml_payload, s.source_causal_hashes, s.skill_hash",
+            {"sid": skill_id},
+        )
+        if not result.has_next():
+            return None
+        row = result.get_next()
+        return CrystallizedSkill(
+            skill_id=skill_id,
+            yaml_payload=row[0],
+            source_causal_hashes=json.loads(row[1] or "[]"),
+            skill_hash=row[2],
+        )

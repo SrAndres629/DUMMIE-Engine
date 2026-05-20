@@ -1,0 +1,9 @@
+{
+  "daily_budget": 500000,
+  "used_today": 0,
+  "date": "2026-05-19",
+  "alerts": {"80": false, "90": false, "100": false},
+  "usage_by_task": {},
+  "usage_by_model": {},
+  "last_reset": "2026-05-19T08:00:00Z"
+}

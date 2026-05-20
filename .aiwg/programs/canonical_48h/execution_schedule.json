@@ -1,0 +1,70 @@
+{
+  "program_id": "canonical_48h",
+  "start_date": "2026-05-19",
+  "timezone": "America/La_Paz",
+  "days": [
+    {
+      "day": 1,
+      "blocks": [
+        {
+          "slot": "D1-B1",
+          "hours": 4,
+          "focus": "WS1 contract recovery baseline",
+          "outputs": [
+            ".aiwg/reports/canonical_48h_path_diff.json",
+            ".aiwg/reports/canonical_48h_ws1_contract_map.json"
+          ]
+        },
+        {
+          "slot": "D1-B2",
+          "hours": 4,
+          "focus": "WS1 bridge planning + spec validation delta",
+          "outputs": [
+            ".aiwg/reports/canonical_48h_bridge_plan.json",
+            ".aiwg/reports/canonical_48h_ws1_validation.json"
+          ]
+        },
+        {
+          "slot": "D1-B3",
+          "hours": 4,
+          "focus": "WS2 memory and kuzu read-only safety",
+          "outputs": [
+            ".aiwg/reports/canonical_48h_ws2_memory_guard.json",
+            ".aiwg/reports/canonical_48h_ws2_kuzu_readback.json"
+          ]
+        }
+      ]
+    },
+    {
+      "day": 2,
+      "blocks": [
+        {
+          "slot": "D2-B1",
+          "hours": 4,
+          "focus": "WS3 context killer + token hygiene",
+          "outputs": [
+            ".aiwg/reports/canonical_48h_context_killers.json",
+            ".aiwg/reports/canonical_48h_ws3_token_snapshot.json"
+          ]
+        },
+        {
+          "slot": "D2-B2",
+          "hours": 4,
+          "focus": "WS4 CLI/SDK smoke and receipts",
+          "outputs": [
+            ".aiwg/reports/canonical_48h_ws4_cli_sdk.json"
+          ]
+        },
+        {
+          "slot": "D2-B3",
+          "hours": 4,
+          "focus": "Closeout gates + canonical report",
+          "outputs": [
+            ".aiwg/reports/canonical_48h_closeout.json",
+            ".aiwg/reports/canonical_48h_closeout.md"
+          ]
+        }
+      ]
+    }
+  ]
+}
