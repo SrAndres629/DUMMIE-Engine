@@ -1328,7 +1328,7 @@ entries:
   rules_path: doc/specs/106_agent_session_operating_contracts.rules.json
   physical_evidence:
   - .aiwg/session_contracts/UNIVERSAL_AGENT_SESSION_CONTRACT.md
-  - .aiwg/session_contracts/GEMINI_CLI_SESSION_CONTRACT.md
+  - .aiwg/session_contracts/ANTIGRAVITY_SESSION_CONTRACT.md
   - .aiwg/session_contracts/CODEX_CLI_SESSION_CONTRACT.md
   - .aiwg/session_contracts/ANTIGRAVITY_IDE_SESSION_CONTRACT.md
   - .aiwg/context_transform/per_message_operating_contract.yaml
@@ -1343,8 +1343,8 @@ entries:
   - .aiwg/evolution/current_position.json
   - .aiwg/evolution/next_phase_seed.json
   - .aiwg/session_contracts/ANTIGRAVITY_IDE_SESSION_CONTRACT.md
+  - .aiwg/session_contracts/ANTIGRAVITY_SESSION_CONTRACT.md
   - .aiwg/session_contracts/CODEX_CLI_SESSION_CONTRACT.md
-  - .aiwg/session_contracts/GEMINI_CLI_SESSION_CONTRACT.md
   - .aiwg/session_contracts/UNIVERSAL_AGENT_SESSION_CONTRACT.md
 - spec_id: DE-V2-L2-107
   title: Cognitive Artifact Protocol

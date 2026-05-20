@@ -1,3 +1,9 @@
+---
+name: "MCP-LLM Efficiency & High-Signal Protocol"
+description: "Optimiza la interacción entre agentes programadores y herramientas MCP con protocolos de alto valor técnico y bajo ruido."
+version: "1.0.0"
+---
+
 # MCP-LLM Efficiency & High-Signal Protocol
 
 Este skill optimiza la interacción entre Gemini CLI y las herramientas MCP para agentes programadores.

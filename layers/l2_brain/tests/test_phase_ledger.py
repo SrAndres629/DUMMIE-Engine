@@ -12,8 +12,8 @@ def test_phase_ledger_creates_mission_registers_phases_and_reconstructs_state(tm
         mission_id="mission_1",
         user_goal="Build resumable missions",
         phases=[
-            {"phase_id": "phase_1", "authority_level": "A0_OBSERVER"},
-            {"phase_id": "phase_2", "authority_level": "A1_WORKSPACE_OP", "depends_on": ["phase_1"]},
+            {"phase_id": "phase_1", "authority_level": "ENGINEER"},
+            {"phase_id": "phase_2", "authority_level": "ENGINEER", "depends_on": ["phase_1"]},
         ],
     )
 
@@ -29,7 +29,7 @@ def test_phase_ledger_creates_mission_registers_phases_and_reconstructs_state(tm
 
     reconstructed = ledger.current_state("mission_1")
     assert reconstructed["user_goal"] == "Build resumable missions"
-    assert reconstructed["phases"]["phase_1"]["authority_level"] == "A0_OBSERVER"
+    assert reconstructed["phases"]["phase_1"]["authority_level"] == "ENGINEER"
 
 
 def test_phase_ledger_lifecycle_checkpoint_recovery_and_next_action(tmp_path):
@@ -38,8 +38,8 @@ def test_phase_ledger_lifecycle_checkpoint_recovery_and_next_action(tmp_path):
         "mission_2",
         "Keep a mission alive across sessions",
         [
-            {"phase_id": "phase_1", "authority_level": "A0_OBSERVER"},
-            {"phase_id": "phase_2", "authority_level": "A1_WORKSPACE_OP", "depends_on": ["phase_1"]},
+            {"phase_id": "phase_1", "authority_level": "ENGINEER"},
+            {"phase_id": "phase_2", "authority_level": "ENGINEER", "depends_on": ["phase_1"]},
         ],
     )
 
@@ -82,8 +82,8 @@ def test_phase_ledger_next_action_continues_running_phase(tmp_path):
         "mission_running",
         "Keep working",
         [
-            {"phase_id": "phase_1", "authority_level": "A0_OBSERVER"},
-            {"phase_id": "phase_2", "authority_level": "A1_WORKSPACE_OP", "depends_on": ["phase_1"]},
+            {"phase_id": "phase_1", "authority_level": "ENGINEER"},
+            {"phase_id": "phase_2", "authority_level": "ENGINEER", "depends_on": ["phase_1"]},
         ],
     )
     ledger.append_event("mission_running", {"event_type": "PHASE_STARTED", "phase_id": "phase_1"})

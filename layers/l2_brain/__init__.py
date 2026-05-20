@@ -2,7 +2,6 @@
 import os
 import sys
 import importlib
-from importlib.machinery import PathFinder
 
 # Add paths to sys.path to guarantee backward-compatibility for flat file resolution
 _base_dir = os.path.dirname(os.path.abspath(__file__))
@@ -31,79 +30,47 @@ _canonical_root_modules = {
     "sensor_first_guard"
 }
 
-# Redirect module imports from layers.l2_brain.xxx to canonical organs first,
-# then fall back to layers.l2_brain.flat_brain.xxx
-class L2BrainRedirector:
-    def find_spec(self, fullname, path, target=None):
-        if fullname.startswith("layers.l2_brain."):
-            parts = fullname.split(".")
-            if len(parts) > 2 and parts[2] not in {"src", "flat_brain", "tests", "__pycache__"}:
-                organ = parts[2]
-                if organ in _canonical_root_modules:
-                    return None
-                
-                # If we are importing a canonical organ, check if the module physically exists there.
-                if organ in _canonical_organs:
-                    subpath_parts = parts[3:]
-                    if not subpath_parts:
-                        return None
-                    target_path = os.path.join(_base_dir, organ, *subpath_parts)
-                    if os.path.isfile(target_path + ".py") or os.path.isdir(target_path):
-                        return None
-
-
-                # Otherwise, this is a top-level import like `layers.l2_brain.some_flat_module`.
-                # We need to find if it was migrated to one of the canonical organs,
-                # or if it's still in flat_brain.
-                target_fullname = None
-                module_name = parts[2]
-                
-                for canonical_organ in _canonical_organs:
-                    organ_dir = os.path.join(_base_dir, canonical_organ)
-                    if os.path.isfile(os.path.join(organ_dir, f"{module_name}.py")) or os.path.isdir(os.path.join(organ_dir, module_name)):
-                        target_fullname = f"layers.l2_brain.{canonical_organ}." + ".".join(parts[2:])
-                        break
-                
-                if not target_fullname:
-                    target_fullname = "layers.l2_brain.flat_brain." + ".".join(parts[2:])
-                
-                try:
-                    mod = importlib.import_module(target_fullname)
-                    sys.modules[fullname] = mod
-                    parent_name = ".".join(parts[:-1])
-                    if parent_name in sys.modules:
-                        setattr(sys.modules[parent_name], parts[-1], mod)
-                    return mod.__spec__
-                except Exception:
-                    pass
-        return None
-
-sys.meta_path.insert(0, L2BrainRedirector())
-
-__all__ = ["DummieDaemon", "GatewayRequest", "SkillBinder"]
+__all__ = ["DummieDaemon", "GatewayRequest", "SkillBinder", "AuthorityLevel", "MemoryNode4D"]
 
 def __getattr__(name):
+    """
+    [CANONICAL] Resolución estática de atributos para L2 Brain.
+    Elimina el redirector dinámico sys.meta_path en favor de una resolución explícita.
+    """
     # Handle explicit class backward-compatibility imports
     if name == "DummieDaemon":
         try:
-            mod = importlib.import_module("layers.l2_brain.daemon.daemon")
-            return getattr(mod, "DummieDaemon")
-        except (ModuleNotFoundError, AttributeError):
-            mod = importlib.import_module("layers.l2_brain.flat_brain.daemon")
-            return getattr(mod, "DummieDaemon")
+            from layers.l2_brain.daemon.daemon import DummieDaemon
+            return DummieDaemon
+        except (ModuleNotFoundError, ImportError):
+            from layers.l2_brain.flat_brain.daemon import DummieDaemon
+            return DummieDaemon
+
     if name == "GatewayRequest":
         try:
-            mod = importlib.import_module("layers.l2_brain.infrastructure.gateway_contract")
-            return getattr(mod, "GatewayRequest")
-        except (ModuleNotFoundError, AttributeError):
-            mod = importlib.import_module("layers.l2_brain.flat_brain.gateway_contract")
-            return getattr(mod, "GatewayRequest")
+            from layers.l2_brain.infrastructure.gateway_contract import GatewayRequest
+            return GatewayRequest
+        except (ModuleNotFoundError, ImportError):
+            from layers.l2_brain.flat_brain.gateway_contract import GatewayRequest
+            return GatewayRequest
+
     if name == "SkillBinder":
+        # SkillBinder is currently in layers/l2_brain/skill_binder.py (root of L2)
+        # or in flat_brain
         try:
-            mod = importlib.import_module("layers.l2_brain.flat_brain.skill_binder")
-            return getattr(mod, "SkillBinder")
-        except (ModuleNotFoundError, AttributeError):
-            pass
+            from layers.l2_brain.skill_binder import SkillBinder
+            return SkillBinder
+        except (ModuleNotFoundError, ImportError):
+            from layers.l2_brain.flat_brain.skill_binder import SkillBinder
+            return SkillBinder
+
+    if name == "AuthorityLevel":
+        from layers.l2_brain.domain.authority import AuthorityLevel
+        return AuthorityLevel
+
+    if name == "MemoryNode4D":
+        from layers.l2_brain.memory.models import MemoryNode4D
+        return MemoryNode4D
 
     # First try canonical organ
     if name in _canonical_organs:
@@ -127,4 +94,5 @@ def __getattr__(name):
         return importlib.import_module(f"layers.l2_brain.flat_brain.{name}")
     except ModuleNotFoundError:
         pass
+
     raise AttributeError(f"module {__name__} has no attribute {name}")

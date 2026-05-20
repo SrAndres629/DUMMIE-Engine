@@ -1,14 +1,7 @@
 from enum import Enum
+from layers.l2_brain.domain.authority import AuthorityLevel
 from pydantic import BaseModel, Field
 from typing import Tuple, List
-
-class AuthorityLevel(str, Enum):
-    AUTHORITY_UNSPECIFIED = "AUTHORITY_UNSPECIFIED"
-    AGENT = "AGENT"
-    ENGINEER = "ENGINEER"
-    ARCHITECT = "ARCHITECT"
-    OVERSEER = "OVERSEER"
-    HUMAN = "HUMAN"
 
 class IntentType(str, Enum):
     INTENT_UNSPECIFIED = "INTENT_UNSPECIFIED"

@@ -2,20 +2,7 @@ from dataclasses import dataclass, field
 from pydantic import BaseModel, Field
 from enum import Enum
 from typing import Dict, Any, List, Optional
-
-class AuthorityLevel(str, Enum):
-    UNSPECIFIED = "AUTHORITY_UNSPECIFIED"
-    AGENT = "AGENT"
-    ENGINEER = "ENGINEER"
-    ARCHITECT = "ARCHITECT"
-    OVERSEER = "OVERSEER"
-    HUMAN = "HUMAN"
-    A0_OBSERVER = "A0_OBSERVER"
-    A1_WORKSPACE_OP = "A1_WORKSPACE_OP"
-    A2_BUILDER = "A2_BUILDER"
-    A3_STATION_OP = "A3_STATION_OP"
-    A4_EXTERNAL_ACTOR = "A4_EXTERNAL_ACTOR"
-    A5_CRITICAL_OP = "A5_CRITICAL_OP"
+from layers.l2_brain.domain.authority import AuthorityLevel
 
 class IntentType(str, Enum):
     UNSPECIFIED = "INTENT_UNSPECIFIED"
@@ -189,9 +176,9 @@ class MemoryNode4D(BaseModel):
         )
 
         try:
-            from .embedding_provider import EmbeddingProvider
+            from layers.l2_brain.model_mesh.embedding_provider import EmbeddingProvider
         except ImportError:
-            from layers.l2_brain.embedding_provider import EmbeddingProvider
+            from layers.l2_brain.flat_brain.embedding_provider import EmbeddingProvider
         
         embedding_vec = EmbeddingProvider.generate_vector(payload)
 
@@ -214,9 +201,9 @@ class MemoryNode4D(BaseModel):
         [LEGACY BRIDGE] Serializa el nodo de memoria a Cypher delegando en cypher_codec.
         """
         try:
-            from .cypher_codec import node_to_create_cypher
+            from layers.l2_brain.infrastructure.cypher_codec import node_to_create_cypher
         except ImportError:
-            from layers.l2_brain.cypher_codec import node_to_create_cypher
+            from layers.l2_brain.flat_brain.cypher_codec import node_to_create_cypher
             
         return node_to_create_cypher(self)
 

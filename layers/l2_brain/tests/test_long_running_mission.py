@@ -2,9 +2,9 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from layers.l2_brain.daemon import DummieDaemon
-from layers.l2_brain.event_bus import AsyncEventBus
-from layers.l2_brain.gateway_contract import SagaTransaction
+from layers.l2_brain.daemon.daemon import DummieDaemon
+from layers.l2_brain.infrastructure.event_bus import AsyncEventBus
+from layers.l2_brain.infrastructure.gateway_contract import SagaTransaction
 from layers.l2_brain.long_running_mission import LongRunningMissionRuntime
 from layers.l2_brain.phase_ledger import PhaseLedger
 
@@ -20,8 +20,8 @@ def test_long_running_runtime_full_lifecycle_uses_phase_ledger(tmp_path):
         "mission_a",
         "Do durable multi-phase work",
         [
-            {"phase_id": "phase_1", "authority_level": "A0_OBSERVER"},
-            {"phase_id": "phase_2", "authority_level": "A1_WORKSPACE_OP", "depends_on": ["phase_1"]},
+            {"phase_id": "phase_1", "authority_level": "ENGINEER"},
+            {"phase_id": "phase_2", "authority_level": "ENGINEER", "depends_on": ["phase_1"]},
         ],
     )
     blocked = runtime.start_phase("mission_a", "phase_2")

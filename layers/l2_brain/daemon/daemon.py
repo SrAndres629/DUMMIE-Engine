@@ -36,17 +36,18 @@ if __package__ in {None, ""}:
         sys.path.append(str(_L2))
 
 
-# Importaciones Isomórficas (Flat Structure)
+# Importaciones Canónicas (Organ Structure)
 try:
-    from .gateway_contract import GatewayRequest, SagaTransaction, SagaStep
-    from .auditor_port import BaseAuditor, BaseExecutor
-    from .model_router import ModelTier
-    from .safe_fallbacks import FailClosedAuditor, FailClosedExecutor
+    from layers.l2_brain.infrastructure.gateway_contract import GatewayRequest, SagaTransaction, SagaStep
+    from layers.l2_brain.governance.auditor_port import BaseAuditor, BaseExecutor
+    from layers.l2_brain.model_mesh.model_router import ModelTier
+    from layers.l2_brain.infrastructure.safe_fallbacks import FailClosedAuditor, FailClosedExecutor
 except ImportError:
-    from layers.l2_brain.gateway_contract import GatewayRequest, SagaTransaction, SagaStep
-    from layers.l2_brain.auditor_port import BaseAuditor, BaseExecutor
-    from layers.l2_brain.model_router import ModelTier
-    from layers.l2_brain.safe_fallbacks import FailClosedAuditor, FailClosedExecutor
+    # Fallback a flat_brain si no han sido migrados o para tests aislados
+    from layers.l2_brain.flat_brain.gateway_contract import GatewayRequest, SagaTransaction, SagaStep
+    from layers.l2_brain.flat_brain.auditor_port import BaseAuditor, BaseExecutor
+    from layers.l2_brain.flat_brain.model_router import ModelTier
+    from layers.l2_brain.flat_brain.safe_fallbacks import FailClosedAuditor, FailClosedExecutor
 
 
 try:
@@ -63,11 +64,14 @@ except ImportError as e:
 
 logger = logging.getLogger("dummie-daemon")
 
-from layers.l2_brain.event_bus import AsyncEventBus
+try:
+    from layers.l2_brain.infrastructure.event_bus import AsyncEventBus
+    from layers.l2_brain.infrastructure.metagateway_policy import SensorFirstPolicy, PolicyDecision
+except ImportError:
+    from layers.l2_brain.flat_brain.event_bus import AsyncEventBus
+    from layers.l2_brain.flat_brain.metagateway_policy import SensorFirstPolicy, PolicyDecision
 
 from layers.l1_nervous.repo_guard import RepoGuard
-
-from layers.l2_brain.metagateway_policy import SensorFirstPolicy, PolicyDecision
 
 class _FallbackUnsafeAuditor:
     """Fallback auditor when L3 shield cannot be imported."""
@@ -122,7 +126,10 @@ class DummieDaemon:
         self.last_cognitive_preflight: Dict[str, Any] = {"status": "SKIPPED"}
         
         # Integración Gobernador de Recursos (Spec 52)
-        from layers.l2_brain.resource_governor import ResourceGovernor
+        try:
+            from layers.l2_brain.structural_hardening.resource_governor import ResourceGovernor
+        except ImportError:
+            from layers.l2_brain.flat_brain.resource_governor import ResourceGovernor
         self.governor = ResourceGovernor()
 
         # Metacognitive Pipeline Integration

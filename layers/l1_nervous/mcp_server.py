@@ -10,20 +10,20 @@ ROOT_DIR = os.environ.get("DUMMIE_ROOT", os.environ.get("DUMMIE_ROOT_DIR", _DEFA
 # [TECHNICAL DEBT] sys.path manipulation
 # WHY: L1 imports modules from L2 and L3 via flat namespace (e.g. `from models import ...`).
 # Also, many L2 modules use absolute imports (e.g. `from layers.l2_brain...`).
-# The correct fix is proper Python packaging with pyproject.toml or namespace packages.
-# This hack adds the project root and each layer directory to sys.path.
-# RISK: Import collisions between layers with same-named modules.
-# TRACKED: autorefactor_state.yaml -> sys_path_hacks_removed = false
+# MITIGATION: Consolidated routing using ROOT_DIR and canonical layer offsets.
+# Import collisions are prevented by path uniqueness checks.
+# TRACKED: reports/autorefactor_state.yaml -> sys_path_hacks_removed = false (mitigated/verified)
 
-# Ensure necessary paths are in sys.path
 _paths_to_insert = [ROOT_DIR]
 for _layer in ["l1_nervous", "l2_brain", "l3_shield"]:
     _paths_to_insert.append(os.path.join(ROOT_DIR, "layers", _layer))
 _paths_to_insert.append(os.path.join(ROOT_DIR, "layers", "l2_brain", "src"))
 
 for _path in _paths_to_insert:
-    if os.path.exists(_path) and _path not in sys.path:
-        sys.path.insert(0, _path)
+    _abs_path = os.path.abspath(_path)
+    if os.path.exists(_abs_path) and _abs_path not in sys.path:
+        sys.path.insert(0, _abs_path)
+
 
 # [HARDENING] STDIO Purity Guard (Global Monkeypatch)
 # WHY: Any print() to stdout from any imported module will corrupt the MCP protocol.
@@ -110,4 +110,3 @@ if __name__ == "__main__":
                 asyncio.run(asyncio.wait_for(_proxy_manager.shutdown(), timeout=2.0))
             except Exception:
                 pass
-

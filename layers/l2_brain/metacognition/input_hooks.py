@@ -35,19 +35,18 @@ class AuthorityClassifierHook:
     async def run(self, frame: MetacognitiveFrame) -> MetacognitiveFrame:
         raw = frame.raw_user_input.lower()
         if any(k in raw for k in ["borra", "delete", "remove", "root", "format", "destroy", "sudo"]):
-            frame.authority_level = AuthorityLevel.A5_CRITICAL_OP
+            frame.authority_level = AuthorityLevel.OVERSEER
         elif any(k in raw for k in ["publica", "post", "send", "tweet", "publish", "deploy", "social", "tiktok", "facebook", "instagram"]):
-            frame.authority_level = AuthorityLevel.A4_EXTERNAL_ACTOR
+            frame.authority_level = AuthorityLevel.ARCHITECT
         elif any(k in raw for k in ["instala", "install", "setup", "configure", "apt", "npm", "pip"]):
-            frame.authority_level = AuthorityLevel.A3_STATION_OP
+            frame.authority_level = AuthorityLevel.ENGINEER
         elif any(k in raw for k in ["crea", "edit", "write", "modify", "refactor", "fix", "patch", "update"]):
-            frame.authority_level = AuthorityLevel.A1_WORKSPACE_OP
+            frame.authority_level = AuthorityLevel.ENGINEER
         else:
-            frame.authority_level = AuthorityLevel.A0_OBSERVER
-        
+            frame.authority_level = AuthorityLevel.AGENT
+
         logger.info(f"Authority classified: {frame.authority_level}")
         return frame
-
 class ContextEnricherHook:
     async def run(self, frame: MetacognitiveFrame) -> MetacognitiveFrame:
         # Placeholder for real context search (memory, filesystem)

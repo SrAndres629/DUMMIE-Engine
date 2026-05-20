@@ -32,8 +32,8 @@ shield_real: true
 
 sys_path_hacks_removed: false
 # sys.path manipulation still exists in mcp_server.py.
-# DOCUMENTED as TECHNICAL DEBT with regression tests.
-# Proper fix requires Python packaging refactor (pyproject.toml).
+# It is mitigated with absolute paths and deduplication, not removed.
+
 
 bridge_native_6d: false
 # SixDimensionalContext is canonical but not yet bridged to native L0.
