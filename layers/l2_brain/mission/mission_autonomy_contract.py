@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+# Spec: 129_mission_autonomy_contract
+
 import json
 from dataclasses import asdict, dataclass, field
 from datetime import datetime, timezone
@@ -11,7 +13,7 @@ from typing import Any
 class AutonomyRequest:
     request_id: str
     mission_id: str
-    requested_scope: str  # ADVISORY_ONLY|READ_ONLY_ANALYSIS|PLAN_GENERATION|TEST_COMMAND_RECOMMENDATION|PATCH_PROPOSAL_ONLY|HUMAN_APPROVED_WORKSPACE_EDIT|HUMAN_APPROVED_TEST_RUN|HUMAN_APPROVED_COMMIT_PUSH|TRUSTED_WORKSTATION_REQUIRED|DENIED
+    requested_scope: str  # ADVISORY_ONLY|ANALYZE_PLAN|SPEC_AUTHORING|PATCH_PROPOSAL|WORKSPACE_WRITE|TEST_EXECUTION|COMMIT_PUSH|TRUSTED_WORKSTATION_REQUIRED|DENIED
     requested_action: str
     target_paths: list[str] = field(default_factory=list)
     evidence_refs: list[str] = field(default_factory=list)
@@ -25,7 +27,7 @@ class AutonomyRequest:
 @dataclass
 class AutonomyDecision:
     request_id: str
-    decision: str  # ALLOW|ALLOW_WITH_HUMAN_APPROVAL|DENY|BLOCK|DEFER_TO_P29
+    decision: str  # ALLOW|ALLOW_WITH_VERIFICATION|ALLOW_WITH_HUMAN_APPROVAL|DENY|BLOCK|DEFER_TO_P29
     granted_scope: str
     reason: str = ""
     required_authorizations: list[str] = field(default_factory=list)
@@ -40,6 +42,10 @@ class AutonomyDecision:
 
 
 class MissionAutonomyContract:
+    OBSOLETE_SCOPES = {"READ_ONLY_ANALYSIS"}
+    COGNITIVE_SCOPES = {"ADVISORY_ONLY", "ANALYZE_PLAN", "SPEC_AUTHORING", "TEST_COMMAND_RECOMMENDATION", "PATCH_PROPOSAL"}
+    VERIFIED_MUTATION_SCOPES = {"WORKSPACE_WRITE", "TEST_EXECUTION", "COMMIT_PUSH"}
+
     def __init__(self, aiwg_root: str | Path = ".aiwg"):
         self.aiwg_root = Path(aiwg_root)
         self.reports_root = self.aiwg_root / "reports"
@@ -87,13 +93,28 @@ class MissionAutonomyContract:
             )
 
         # Scope Evaluation
-        safe_scopes = {"ADVISORY_ONLY", "READ_ONLY_ANALYSIS", "PLAN_GENERATION", "TEST_COMMAND_RECOMMENDATION"}
-        if request.requested_scope in safe_scopes and not request.requires_workspace_mutation:
+        if request.requested_scope in self.OBSOLETE_SCOPES:
+            decision = "DENY"
+            granted_scope = "DENIED"
+            reason = f"obsolete_scope: {request.requested_scope} has been replaced by ANALYZE_PLAN"
+        elif request.requested_scope in self.COGNITIVE_SCOPES and not request.requires_workspace_mutation:
             decision = "ALLOW"
             granted_scope = request.requested_scope
             can_exec = True
-            reason = "safe_advisory_scope"
-        elif request.requires_workspace_mutation or "HUMAN_APPROVED" in request.requested_scope:
+            reason = "active_cognitive_scope"
+        elif request.requested_scope in self.VERIFIED_MUTATION_SCOPES or request.requires_workspace_mutation:
+            if request.evidence_refs:
+                decision = "ALLOW_WITH_VERIFICATION"
+                granted_scope = request.requested_scope
+                auths.append("verification_required")
+                can_exec = True
+                reason = "workspace_mutation_allowed_with_verification_evidence"
+            else:
+                decision = "ALLOW_WITH_HUMAN_APPROVAL"
+                granted_scope = request.requested_scope
+                auths.append("human_approval")
+                reason = "workspace_mutation_requires_evidence_or_manual_authorization"
+        elif "HUMAN_APPROVED" in request.requested_scope:
             decision = "ALLOW_WITH_HUMAN_APPROVAL"
             granted_scope = request.requested_scope
             auths.append("human_approval")
@@ -136,8 +157,10 @@ class MissionAutonomyRuntime:
         contract = MissionAutonomyContract(aiwg_root=self.aiwg_root)
         
         policy = {
-            "advisory_only_default": True,
+            "read_only_default_obsolete": True,
+            "active_cognitive_default": "ANALYZE_PLAN",
             "workspace_mutation_requires_authorization": True,
+            "workspace_mutation_with_evidence_enabled": True,
             "trusted_workstation_deferred_to_p29": True,
             "credentials_access_denied": True,
             "external_actions_denied_by_default": True
@@ -147,7 +170,7 @@ class MissionAutonomyRuntime:
         sample = contract.evaluate_request(AutonomyRequest(
             request_id="p28-init-check",
             mission_id=f"MISSION_{next_seed.get('next_phase')}",
-            requested_scope="ADVISORY_ONLY",
+            requested_scope="ANALYZE_PLAN",
             requested_action="validate_contract_boot",
             risk_level="low"
         ))
@@ -157,8 +180,10 @@ class MissionAutonomyRuntime:
             "phase": "P28",
             "mission_id": f"MISSION_{next_seed.get('next_phase')}",
             "decision": "PASS",
-            "default_allowed_scopes": ["ADVISORY_ONLY", "READ_ONLY_ANALYSIS", "PLAN_GENERATION"],
-            "restricted_scopes": ["HUMAN_APPROVED_WORKSPACE_EDIT", "TRUSTED_WORKSTATION_REQUIRED"],
+            "default_allowed_scopes": ["ANALYZE_PLAN", "SPEC_AUTHORING", "PATCH_PROPOSAL"],
+            "verified_mutation_scopes": ["WORKSPACE_WRITE", "TEST_EXECUTION", "COMMIT_PUSH"],
+            "obsolete_scopes": ["READ_ONLY_ANALYSIS"],
+            "restricted_scopes": ["TRUSTED_WORKSTATION_REQUIRED"],
             "sample_decisions": [sample.to_dict()],
             "policy": policy,
             "evidence_refs": [".aiwg/reports/debate_review_latest.json"],

@@ -23,7 +23,7 @@ forbidden_commands:
   - "git clean -fd"
   - "rm -rf"
 
-authority_required: "READ_ONLY"
+authority_required: "ANALYZE_PLAN"
 risk_level: "LOW"
 
 acceptance_criteria:

@@ -9,9 +9,11 @@ defmodule Io.Dummie.V2.Memory.IntentType do
 
   field :INTENT_UNSPECIFIED, 0
   field :OBSERVATION, 1
-  field :MUTATION, 2
-  field :RESOLUTION, 3
-  field :CRYSTALLIZATION, 4
+  field :FABRICATION, 2
+  field :MUTATION, 3
+  field :RESOLUTION, 4
+  field :AUDIT, 5
+  field :CRYSTALLIZATION, 6
 end
 
 defmodule Io.Dummie.V2.Memory.DecisionRecord do
@@ -99,7 +101,7 @@ defmodule Io.Dummie.V2.Memory.MemoryNode4DTES do
     syntax: :proto3
 
   field :causal_hash, 1, type: :string, json_name: "causalHash"
-  field :parent_hash, 2, type: :string, json_name: "parentHash"
+  field :parent_hashes, 2, repeated: true, type: :string, json_name: "parentHashes"
   field :context, 3, type: Io.Dummie.V2.Memory.SixDimensionalContext
   field :payload, 4, type: :bytes
   field :payload_hash, 5, type: :string, json_name: "payloadHash"

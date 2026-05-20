@@ -36,19 +36,10 @@ if __package__ in {None, ""}:
         sys.path.append(str(_L2))
 
 
-# Importaciones Canónicas (Organ Structure)
-try:
-    from layers.l2_brain.infrastructure.gateway_contract import GatewayRequest, SagaTransaction, SagaStep
-    from layers.l2_brain.governance.auditor_port import BaseAuditor, BaseExecutor
-    from layers.l2_brain.model_mesh.model_router import ModelTier
-    from layers.l2_brain.infrastructure.safe_fallbacks import FailClosedAuditor, FailClosedExecutor
-except ImportError:
-    # Fallback a flat_brain si no han sido migrados o para tests aislados
-    from layers.l2_brain.flat_brain.gateway_contract import GatewayRequest, SagaTransaction, SagaStep
-    from layers.l2_brain.flat_brain.auditor_port import BaseAuditor, BaseExecutor
-    from layers.l2_brain.flat_brain.model_router import ModelTier
-    from layers.l2_brain.flat_brain.safe_fallbacks import FailClosedAuditor, FailClosedExecutor
-
+from layers.l2_brain.infrastructure.gateway_contract import GatewayRequest, SagaTransaction, SagaStep
+from layers.l2_brain.governance.auditor_port import BaseAuditor, BaseExecutor
+from layers.l2_brain.model_mesh.model_router import ModelTier
+from layers.l2_brain.infrastructure.safe_fallbacks import FailClosedAuditor, FailClosedExecutor
 
 try:
     from layers.l3_shield.topological_auditor import TopologicalAuditor
@@ -64,12 +55,8 @@ except ImportError as e:
 
 logger = logging.getLogger("dummie-daemon")
 
-try:
-    from layers.l2_brain.infrastructure.event_bus import AsyncEventBus
-    from layers.l2_brain.infrastructure.metagateway_policy import SensorFirstPolicy, PolicyDecision
-except ImportError:
-    from layers.l2_brain.flat_brain.event_bus import AsyncEventBus
-    from layers.l2_brain.flat_brain.metagateway_policy import SensorFirstPolicy, PolicyDecision
+from layers.l2_brain.infrastructure.event_bus import AsyncEventBus
+from layers.l2_brain.infrastructure.metagateway_policy import SensorFirstPolicy, PolicyDecision
 
 from layers.l1_nervous.repo_guard import RepoGuard
 
@@ -125,11 +112,7 @@ class DummieDaemon:
         self._current_counterfactual_threshold: float = 0.0
         self.last_cognitive_preflight: Dict[str, Any] = {"status": "SKIPPED"}
         
-        # Integración Gobernador de Recursos (Spec 52)
-        try:
-            from layers.l2_brain.structural_hardening.resource_governor import ResourceGovernor
-        except ImportError:
-            from layers.l2_brain.flat_brain.resource_governor import ResourceGovernor
+        from layers.l2_brain.structural_hardening.resource_governor import ResourceGovernor
         self.governor = ResourceGovernor()
 
         # Metacognitive Pipeline Integration
@@ -269,7 +252,7 @@ class DummieDaemon:
 
         if self.diagnostic_mode:
             try:
-                from layers.l2_brain.daemon_diagnostic import DiagnosticReporter
+                from layers.l2_brain.daemon.daemon_diagnostic import DiagnosticReporter
                 self.diagnostic_reporter = DiagnosticReporter(self)
             except ImportError:
                 self.diagnostic_reporter = None

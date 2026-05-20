@@ -45,7 +45,6 @@ func NewDummieMemoryServer(dbPath string, nc *nats.Conn) (*DummieMemoryServer, e
 		}
 	}
 	
-	// Intento de apertura con aislamiento
 	db, err := kuzu.OpenDatabase(dbPath, config)
 	if err != nil {
 		log.Printf("[L1-MEMORY] CRITICAL: Kuzu OpenDatabase failed: %v", err)
@@ -83,7 +82,11 @@ func (s *DummieMemoryServer) DoGet(tkt *flight.Ticket, stream flight.FlightServi
 	defer result.Close()
 
 	columnNames := result.GetColumnNames()
+	numCols := len(columnNames)
 	rows := make([][]any, 0)
+	
+	// Optimizamos: Inferimos tipos en una sola pasada de recolección
+	columnKinds := make([]inferredKind, numCols)
 
 	for result.HasNext() {
 		row, err := result.Next()
@@ -92,20 +95,36 @@ func (s *DummieMemoryServer) DoGet(tkt *flight.Ticket, stream flight.FlightServi
 			break
 		}
 
-		values := make([]any, len(columnNames))
-		for i := range columnNames {
+		values := make([]any, numCols)
+		for i := 0; i < numCols; i++ {
 			v, vErr := row.GetValue(uint64(i))
 			if vErr != nil {
 				v = nil
 			}
 			values[i] = v
+			
+			// Actualizamos inferencia de tipo para esta columna
+			if v != nil {
+				columnKinds[i] = mergeKind(columnKinds[i], kindOf(v))
+			}
 		}
 		rows = append(rows, values)
 		row.Close()
 	}
 
 	pool := memory.NewGoAllocator()
-	schema := buildArrowSchema(columnNames, rows)
+	
+	// Construimos Schema a partir de tipos inferidos
+	fields := make([]arrow.Field, numCols)
+	for i, name := range columnNames {
+		fields[i] = arrow.Field{
+			Name:     name,
+			Type:     kindToArrowType(columnKinds[i]),
+			Nullable: true,
+		}
+	}
+	schema := arrow.NewSchema(fields, nil)
+	
 	arrays, err := buildArrowArrays(pool, schema, rows)
 	if err != nil {
 		return err
@@ -120,35 +139,8 @@ func (s *DummieMemoryServer) DoGet(tkt *flight.Ticket, stream flight.FlightServi
 	return writer.Write(record)
 }
 
-func buildArrowSchema(columnNames []string, rows [][]any) *arrow.Schema {
-	fields := make([]arrow.Field, 0, len(columnNames))
-	for idx, name := range columnNames {
-		fields = append(fields, arrow.Field{
-			Name:     name,
-			Type:     inferArrowType(rows, idx),
-			Nullable: true,
-		})
-	}
-	return arrow.NewSchema(fields, nil)
-}
-
-func inferArrowType(rows [][]any, colIdx int) arrow.DataType {
-	kind := kindUnknown
-	for _, row := range rows {
-		if colIdx >= len(row) {
-			continue
-		}
-		v := row[colIdx]
-		if v == nil {
-			continue
-		}
-		kind = mergeKind(kind, kindOf(v))
-		if kind == kindString {
-			break
-		}
-	}
-
-	switch kind {
+func kindToArrowType(k inferredKind) arrow.DataType {
+	switch k {
 	case kindBool:
 		return arrow.FixedWidthTypes.Boolean
 	case kindInt64:
@@ -177,9 +169,10 @@ func mergeKind(current, next inferredKind) inferredKind {
 	if current == kindUnknown {
 		return next
 	}
-	if current == next {
+	if current == next || next == kindUnknown {
 		return current
 	}
+	// Promoción de tipos
 	if (current == kindInt64 && next == kindFloat64) || (current == kindFloat64 && next == kindInt64) {
 		return kindFloat64
 	}
@@ -191,7 +184,9 @@ func buildArrowArrays(pool memory.Allocator, schema *arrow.Schema, rows [][]any)
 	for i, field := range schema.Fields() {
 		builders[i] = newBuilder(pool, field.Type)
 	}
-	defer releaseBuilders(builders)
+	// No usamos defer releaseBuilders aquí porque b.NewArray() no invalida el builder
+	// pero queremos ser cuidadosos con la memoria. 
+	// Lo correcto es liberar los builders después de crear los arrays.
 
 	for _, row := range rows {
 		for colIdx, builder := range builders {
@@ -206,14 +201,9 @@ func buildArrowArrays(pool memory.Allocator, schema *arrow.Schema, rows [][]any)
 	out := make([]arrow.Array, len(builders))
 	for i, b := range builders {
 		out[i] = b.NewArray()
+		b.Release() // Liberamos builder inmediatamente tras crear array
 	}
 	return out, nil
-}
-
-func releaseBuilders(builders []array.Builder) {
-	for _, b := range builders {
-		b.Release()
-	}
 }
 
 func releaseArrays(arrays []arrow.Array) {
@@ -307,10 +297,13 @@ func StartFlightServerWithInstance(server *DummieMemoryServer, socketPath string
 		os.Remove(socketPath)
 	}
 
-	// Reconectar NATS si fue pasado como nil durante la pre-inicialización
+	// Si NATS no fue conectado en main, intentamos aquí pero sin fallar
 	if server.nc == nil {
-		nc, _ := nats.Connect(natsURL)
-		server.nc = nc
+		nc, err := nats.Connect(natsURL)
+		if err == nil {
+			server.nc = nc
+			log.Printf("[L1-MEMORY] NATS Connected (Late bind).")
+		}
 	}
 
 	lis, err := net.Listen("unix", socketPath)
@@ -321,7 +314,7 @@ func StartFlightServerWithInstance(server *DummieMemoryServer, socketPath string
 	fs := flight.NewFlightServer()
 	fs.RegisterFlightService(server)
 
-	fmt.Printf("[L1-MEMORY] Memory Plane Data Plane (TYPED) activo en unix://%s\n", socketPath)
+	log.Printf("[L1-MEMORY] Data Plane Operativo (Optimizado) en unix://%s\n", socketPath)
 	fs.InitListener(lis)
 	return fs.Serve()
 }

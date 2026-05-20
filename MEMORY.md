@@ -109,3 +109,50 @@ Vision: DUMMIE operates 24/7, event-driven, with session chaining. Currently on 
 - **Validation:** Specs PASS (83), Compileall PASS, backward compatibility WORKING.
 - **Remaining:** 80 flat_brain/ modules in "other" category need classification; PACK R5 will deprecate flat_brain/.
 - **Branch:** `intento-de-registrar-todo-con-arquitectura-y-estructura-canon` (not yet merged to main).
+
+# 2026-05-20
+
+## ADR 2026-05-20-GOV-005: Redirector Removal & Post-Surgery Stabilization
+
+### Decision
+The `L2BrainRedirector` (sys.meta_path hook) was removed and replaced with a scoped
+`_FlatBrainFallbackFinder` that only activates for flat_brain modules that have no
+canonical equivalent. The `__getattr__` approach alone was insufficient because Python's
+import machinery for submodule imports (`from layers.l2_brain.X import Y`) does NOT
+trigger `__getattr__` — only attribute access (`from layers.l2_brain import X`) does.
+
+### Critical Bugs Discovered (masked by redirector for ~2 months)
+1. **daemon.py indentation bug:** 4 critical imports (`GatewayRequest`, `ModelTier`,
+   `BaseAuditor`, `FailClosedAuditor`) were indented inside `if __package__ in {None, ""}:`
+   block, NEVER executing during normal module import. The redirector masked this by
+   resolving symbols from flat_brain at runtime.
+
+2. **Split-class DiagnosticReporter:** daemon imported `from layers.l2_brain.daemon_diagnostic`
+   (→ `flat_brain/daemon_diagnostic.py`) while canonical version lived in
+   `daemon/daemon_diagnostic.py`. Two different classes, `isinstance()` returned False.
+   Diagnostic reports always showed "OK" even with injected fallbacks.
+
+3. **Authority Gate sovereign bypass:** The gate was redesigned to ALLOW all recognized
+   authority levels (HUMAN, OVERSEER, ARCHITECT, ENGINEER, AGENT). It never blocks.
+   External action blocking responsibility moved to `ToolNeedDetectorHook` in metacognition.
+
+### Tools Created
+- `scripts/migrate_flat_to_canonical.py`: CLI for systematic flat_brain→canonical migration
+- `scripts/auto_health.py`: In-process pytest health monitor writing to .aiwg/state/
+- `scripts/dummie-health/main.go`: Go polyglot health CLI (standalone binary)
+- `infrastructure/knowledge_ports.py`: `KnowledgeWriteBridge` for Obsidian + .aiwg/ writes
+
+### State
+- 31/31 daemon tests passing
+- AuthorityLevel SSOT: 1 file, 0 duplicates, 0 legacy refs
+- 0 flat_brain imports in canonical organs
+- 120 flat_brain modules pending migration (transparent fallback active)
+- Go tool building and running
+- Browser bridge (knowledge_ports) with tiered write strategy
+
+### Key Lesson
+The redirector was not a bridge — it was a mask. It hid import indentation bugs,
+split-class identity issues, and missing module resolutions for months. The correct
+approach is explicit scoped fallback (the `_FlatBrainFallbackFinder`) combined with
+systematic migration of flat_brain modules to canonical organs. Never use opaque
+redirectors that resolve imports silently.- [2026-05-20: Escritura Soberana y Arnés Multi-Agente (Agent Mesh)](memory/2026-05-20.md)

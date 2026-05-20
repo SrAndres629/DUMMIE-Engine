@@ -63,3 +63,7 @@ goals:
   goal_type: technical
   timestamp: '2026-05-19T09:47:57Z'
   status: active
+- goal: Habilitar la Escritura Soberana en todas las capas
+  goal_type: manual
+  timestamp: manual
+  status: active

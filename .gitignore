@@ -9,6 +9,7 @@ tmp/
 .aiwg/events/
 .aiwg/sessions/
 .aiwg/cache/
+.aiwg/agent_mesh/
 .aiwg/runtime/
 .aiwg/memory/
 .aiwg/ledger/

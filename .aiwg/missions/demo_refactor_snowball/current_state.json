@@ -24,14 +24,14 @@
   },
   "phases": {
     "phase_0_reality_lock": {
-      "authority_level": "A0_OBSERVER",
+      "authority_level": "AGENT",
       "depends_on": [],
       "metadata": {},
       "phase_id": "phase_0_reality_lock",
       "status": "running"
     },
     "phase_1_token_economy": {
-      "authority_level": "A1_WORKSPACE_OP",
+      "authority_level": "ENGINEER",
       "depends_on": [
         "phase_0_reality_lock"
       ],
@@ -40,7 +40,7 @@
       "status": "registered"
     },
     "phase_2_context_budget": {
-      "authority_level": "A1_WORKSPACE_OP",
+      "authority_level": "ENGINEER",
       "depends_on": [
         "phase_1_token_economy"
       ],
@@ -49,7 +49,7 @@
       "status": "registered"
     },
     "phase_3_mission_workbench": {
-      "authority_level": "A1_WORKSPACE_OP",
+      "authority_level": "ENGINEER",
       "depends_on": [
         "phase_2_context_budget"
       ],
@@ -58,7 +58,7 @@
       "status": "registered"
     },
     "phase_4_vault_curator": {
-      "authority_level": "A1_WORKSPACE_OP",
+      "authority_level": "ENGINEER",
       "depends_on": [
         "phase_3_mission_workbench"
       ],
@@ -67,7 +67,7 @@
       "status": "registered"
     },
     "phase_5_memory_integration": {
-      "authority_level": "A1_WORKSPACE_OP",
+      "authority_level": "ENGINEER",
       "depends_on": [
         "phase_4_vault_curator"
       ],

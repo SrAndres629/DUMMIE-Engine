@@ -73,7 +73,7 @@ func main() {
 		Goal: "Hacer un commit de los cambios actuales",
 	}
 
-	finalState, err := graph.Run(context.Background(), initialState, "Planner")
+	finalState, err := graph.Run(context.Background(), "Planner", initialState)
 	if err != nil {
 		log.Fatalf("Error en la ejecución del grafo: %v", err)
 	}

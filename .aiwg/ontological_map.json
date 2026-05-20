@@ -1,40 +1,19 @@
 {
   "layers": {
-    "sw.plant.orchestrator": {
-      "layer_name": "sw.plant.orchestrator",
-      "certainty_score": 0.0,
-      "is_terra_incognita": false,
-      "tests_passing": 0,
-      "unverified_mutations": 0
-    },
-    "sw.strategy.discovery": {
-      "layer_name": "sw.strategy.discovery",
-      "certainty_score": 0.2833333333333333,
-      "is_terra_incognita": false,
-      "tests_passing": 4,
-      "unverified_mutations": 9
-    },
-    "sw.qa.auditor": {
-      "layer_name": "sw.qa.auditor",
-      "certainty_score": 0.0,
-      "is_terra_incognita": false,
-      "tests_passing": 0,
-      "unverified_mutations": 7
-    },
-    "sw.arch.validator": {
-      "layer_name": "sw.arch.validator",
-      "certainty_score": 0.0,
-      "is_terra_incognita": false,
-      "tests_passing": 0,
-      "unverified_mutations": 12
-    },
     "test.ledger": {
       "layer_name": "test.ledger",
       "certainty_score": 1.0,
       "is_terra_incognita": false,
       "tests_passing": 1,
       "unverified_mutations": 0
+    },
+    "sw.plant.orchestrator": {
+      "layer_name": "sw.plant.orchestrator",
+      "certainty_score": 0.0,
+      "is_terra_incognita": false,
+      "tests_passing": 0,
+      "unverified_mutations": 0
     }
   },
-  "updated_at": "2026-05-19T23:55:17.356276"
+  "updated_at": "2026-05-20T02:32:53.728008"
 }

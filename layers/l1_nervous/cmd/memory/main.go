@@ -10,54 +10,57 @@ import (
 )
 
 func main() {
+	// 0. DETERMINISMO DE RUTAS
+	execPath, _ := os.Executable()
+	baseDir := filepath.Dir(filepath.Dir(filepath.Dir(execPath))) // layers/l1_nervous/cmd/memory -> layers/l1_nervous
+	
+	aiwgDir := os.Getenv("DUMMIE_AIWG_DIR")
+	if aiwgDir == "" {
+		aiwgDir = filepath.Join(baseDir, "..", "..", ".aiwg")
+	}
+	absAiwg, _ := filepath.Abs(aiwgDir)
+
 	dbPath := os.Getenv("DUMMIE_KUZU_DB_PATH")
 	if dbPath == "" {
-		dbPath = os.Getenv("KUZU_DB_PATH")
+		dbPath = filepath.Join(absAiwg, "memory", "loci.db")
 	}
-	if dbPath == "" {
-		aiwg := os.Getenv("DUMMIE_AIWG_DIR")
-		if aiwg == "" {
-			aiwg = os.Getenv("DUMMIE_AIWG")
-		}
-		if aiwg == "" {
-			aiwg = "../../.aiwg"
-		}
-		dbPath = filepath.Join(aiwg, "memory", "loci.db")
-	}
+
 	socketPath := os.Getenv("MEMORY_SOCKET_PATH")
 	if socketPath == "" {
-		aiwg := os.Getenv("DUMMIE_AIWG_DIR")
-		if aiwg == "" {
-			aiwg = os.Getenv("DUMMIE_AIWG")
-		}
-		if aiwg == "" {
-			aiwg = "../../.aiwg"
-		}
-		socketPath = filepath.Join(aiwg, "sockets", "flight.sock")
+		socketPath = filepath.Join(absAiwg, "sockets", "flight.sock")
 	}
+
 	natsURL := os.Getenv("NATS_URL")
 	if natsURL == "" {
 		natsURL = nats.DefaultURL
 	}
 
-	log.Printf("[L1-MEMORY] Iniciando Memory Plane (Data Plane)...")
-	log.Printf("[L1-MEMORY] DB: %s", dbPath)
-	log.Printf("[L1-MEMORY] Socket: %s", socketPath)
+	log.Printf("[L1-MEMORY] Palacio de Loci - Iniciando Data Plane...")
+	log.Printf("[L1-MEMORY] SSoT AIWG: %s", absAiwg)
+	log.Printf("[L1-MEMORY] DB (Kuzu): %s", dbPath)
+	log.Printf("[L1-MEMORY] Flight Socket: %s", socketPath)
 
-	// 1. ABRIR KUZU PRIMERO (Antes de cualquier otra librería pesada)
+	// 1. ABRIR KUZU PRIMERO (Aislamiento de Lock)
 	if err := memory.ResolveStaleLocks(dbPath); err != nil {
-		log.Printf("[L1-MEMORY] Fencing Error: %v", err)
+		log.Printf("[L1-MEMORY] WARNING: Stale lock recovery attempted: %v", err)
 	}
 
-	// Usamos nil para NATS temporalmente hasta que el servidor esté listo
-	// para evitar que la conexión NATS interfiera con la inicialización de Kuzu mmap
-	server, err := memory.NewDummieMemoryServer(dbPath, nil)
+	// 2. CONECTAR NATS (Control Plane)
+	nc, err := nats.Connect(natsURL)
 	if err != nil {
-		log.Fatalf("[L1-MEMORY] FATAL ERROR: failed to open kuzu at %s: %v", dbPath, err)
+		log.Printf("[L1-MEMORY] WARNING: NATS unavailable at %s. Operating in DEGRADED mode (no telemetry).", natsURL)
+	} else {
+		defer nc.Close()
+		log.Printf("[L1-MEMORY] NATS Connected.")
 	}
 
-	// 2. AHORA INICIAR RESTO DE INFRAESTRUCTURA
+	server, err := memory.NewDummieMemoryServer(dbPath, nc)
+	if err != nil {
+		log.Fatalf("[L1-MEMORY] CRITICAL: Failed to open KuzuDB: %v", err)
+	}
+
+	// 3. INICIAR SERVIDOR FLIGHT (Arrow IPC)
 	if err := memory.StartFlightServerWithInstance(server, socketPath, natsURL); err != nil {
-		log.Fatalf("[L1-MEMORY] Server Failure: %v", err)
+		log.Fatalf("[L1-MEMORY] SERVER SHUTDOWN: %v", err)
 	}
 }
