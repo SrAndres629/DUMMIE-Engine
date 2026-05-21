@@ -1,0 +1,11 @@
+# MCP Healthchecks
+checks:
+  sequentialthinking:
+    command: "npx -y @modelcontextprotocol/server-sequential-thinking --help"
+    expected_exit_code: 0
+  github:
+    command: "npx -y @modelcontextprotocol/server-github --help"
+    expected_exit_code: 0
+  sqlite:
+    command: "uvx mcp-server-sqlite --help"
+    expected_exit_code: 0

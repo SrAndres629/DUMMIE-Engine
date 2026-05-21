@@ -1,8 +1,8 @@
 import json
 import pytest
 from pathlib import Path
-from layers.l2_brain.debate_review_runtime import run_debate_review
-from layers.l2_brain.mission_autonomy_contract import run_mission_autonomy_contract, evaluate_autonomy_request, AutonomyRequest
+from layers.l2_brain.mission.debate_review_runtime import run_debate_review
+from layers.l2_brain.mission.mission_autonomy_contract import run_mission_autonomy_contract, evaluate_autonomy_request, AutonomyRequest
 
 def test_debate_autonomy_integration(tmp_path):
     aiwg = tmp_path / ".aiwg"

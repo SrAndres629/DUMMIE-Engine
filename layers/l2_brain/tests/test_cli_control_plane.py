@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 
-from layers.l2_brain.cli_control_plane import CliControlPlane
+from layers.l2_brain.mission.cli_control_plane import CliControlPlane
 
 
 def _write_json(path: Path, payload: dict) -> None:

@@ -1,7 +1,7 @@
 import json
 import pytest
 from pathlib import Path
-from layers.l2_brain.autonomous_strategic_partner_runtime import AutonomousStrategicPartnerRuntime
+from layers.l2_brain.strategic.autonomous_strategic_partner_runtime import AutonomousStrategicPartnerRuntime
 
 @pytest.fixture
 def auto_env(tmp_path):

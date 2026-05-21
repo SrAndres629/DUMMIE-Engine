@@ -1,0 +1,10 @@
+policies:
+  shell_execution:
+    level: "restricted"
+    allow_list: ["git status", "ls", "grep", "find", "cat"]
+    block_list: ["rm -rf", "chmod", "chown"]
+  web_automation:
+    enabled: false
+    reason: "Requires explicit user mission for cost control"
+  data_persistence:
+    preferred: "sqlite"

@@ -1,12 +1,21 @@
+# Spec Reference: 84_context_budget_manager
 """Context Circulation Runtime Orchestrator Module connecting scanners, 6D packets, optimization, and gateway bridges."""
 
 from pathlib import Path
-from six_dimensional_context_runtime import build_6d_context_packet
-from context_packet_optimizer import optimize_context_packet
-from embedding_memory_router import run_embedding_memory_router_demo
-from four_dtes_persistence_preflight import run_4dtes_preflight
-from daemon_gateway_heartbeat_bridge import run_daemon_gateway_bridge_demo
-from polyglot_probe_orchestrator import run_polyglot_probe
+
+from layers.l2_brain.context.context_packet_optimizer import optimize_context_packet
+from layers.l2_brain.context.six_dimensional_context_runtime import (
+    build_6d_context_packet,
+)
+from layers.l2_brain.cognition.polyglot_probe_orchestrator import run_polyglot_probe
+from layers.l2_brain.daemon.daemon_gateway_heartbeat_bridge import (
+    run_daemon_gateway_bridge_demo,
+)
+from layers.l2_brain.embedding_mesh.embedding_memory_router import (
+    run_embedding_memory_router_demo,
+)
+from layers.l2_brain.memory.four_dtes_persistence_preflight import run_4dtes_preflight
+
 
 def run_cognitive_circulation(intent: str, aiwg_root: Path = None) -> dict:
     if aiwg_root is None:
@@ -36,32 +45,32 @@ def run_cognitive_circulation(intent: str, aiwg_root: Path = None) -> dict:
         "six_d_context": {
             "decision": packet.get("decision"),
             "items_count": len(packet.get("items", [])),
-            "estimated_tokens": packet.get("estimated_tokens")
+            "estimated_tokens": packet.get("estimated_tokens"),
         },
         "context_optimization": {
             "decision": opt.get("decision"),
             "strategy": opt.get("selected_strategy"),
-            "reduction_ratio": opt.get("reduction_ratio")
+            "reduction_ratio": opt.get("reduction_ratio"),
         },
         "embedding_memory": {
             "decision": emb.get("decision"),
             "mode": emb.get("embedding_mode"),
-            "indexed_items": emb.get("indexed_items")
+            "indexed_items": emb.get("indexed_items"),
         },
         "four_dtes_preflight": {
             "decision": pre.get("decision"),
             "write_mode": pre.get("graph_write_mode"),
-            "spine_status": pre.get("memory_spine_status")
+            "spine_status": pre.get("memory_spine_status"),
         },
         "daemon_gateway_bridge": {
             "decision": bridge.get("decision"),
             "dispatch_id": bridge.get("dispatch_envelope", {}).get("dispatch_id"),
-            "target": bridge.get("dispatch_envelope", {}).get("target")
+            "target": bridge.get("dispatch_envelope", {}).get("target"),
         },
         "polyglot_probe": {
             "decision": poly.get("decision"),
-            "languages": list(poly.get("languages", {}).keys())
-        }
+            "languages": list(poly.get("languages", {}).keys()),
+        },
     }
 
     return circulation_summary

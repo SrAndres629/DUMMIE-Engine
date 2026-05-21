@@ -3,7 +3,7 @@ import json
 from unittest.mock import AsyncMock, MagicMock
 from layers.l2_brain.semantic_retrieval_runtime import SemanticRetrievalRuntime
 from layers.l2_brain.socraticode_gateway_adapter import SocraticodeGatewayAdapter
-from layers.l2_brain.vault_context_resolver import VaultContextResolver
+from layers.l2_brain.memory.vault_context_resolver import VaultContextResolver
 
 @pytest.mark.asyncio
 async def test_srr_context_injection(tmp_path):

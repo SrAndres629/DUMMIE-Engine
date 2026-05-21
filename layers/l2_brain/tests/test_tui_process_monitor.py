@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 
-from layers.l2_brain.tui_process_monitor import TuiProcessMonitor
+from layers.l2_brain.governance.tui_process_monitor import TuiProcessMonitor
 
 
 def _write_json(path: Path, payload: dict) -> None:

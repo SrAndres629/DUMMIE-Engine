@@ -2,13 +2,13 @@
 import os
 import json
 from pathlib import Path
-from layers.l2_brain.whole_body_repair_queue import run_whole_body_repair_queue
+from layers.l2_brain.governance.whole_body_repair_queue import run_whole_body_repair_queue
 
 # Spec Reference: 191_whole_body_repair_queue
 
 def test_whole_body_repair_queue():
     # Make sure governor has run
-    from layers.l2_brain.capability_promotion_governor import run_capability_promotion_governor
+    from layers.l2_brain.governance.capability_promotion_governor import run_capability_promotion_governor
     run_capability_promotion_governor()
 
     report = run_whole_body_repair_queue()

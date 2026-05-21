@@ -42,7 +42,7 @@ This ledger documents the state of all execution packs.
 
 ### 10. CODE Embedding Provider (PACK_3.2)
 * **Status**: `COMPLETED`
-* **Commit**: `pending`
+* **Commit**: `c618aa6`
 * **Metrics**: FastEmbedCodeProvider with shared model cache, CODE_LOCAL_768 vector space, AST symbol embedding.
 
 ### 11. flat_brain Orphan Elimination (PACK_5.1)
@@ -100,8 +100,14 @@ This ledger documents the state of all execution packs.
 * **Commit**: `fe91a2f`
 
 ### 24. Direct Spec Linkage Engine (PACK_3.3)
-* **Status**: `DEFERRED`
+* **Status**: `COMPLETED`
+* **Metrics**: `direct_spec_hit_rate=1.0`, `bound_active_runtime_count=31`, `direct_spec_linked_count=31`
+* **Evidence**: `scripts/validate_specs_docs.py --direct-linkage-only --strict-direct-linkage`
 
-*(All subsequent packs PACK_4.0 to PACK_6.1 remain DEFERRED until previous stages are successfully closed and validated)*
+### 25. ModelCapability Registry (PACK_4.0)
+* **Status**: `READY`
+* **Next Active Pack**: Canonical model capability contracts.
 
-> **Note**: PACK_5-9, PACK_LEGACY, and INMEDIATO were executed with a parallel numbering scheme that diverged from the original PACK_3.x→6.x plan. The roadmap is now reconciled to reflect actual execution. PACK_3.2 remains the formal next active pack.
+*(All subsequent packs PACK_4.1 to PACK_6.1 remain DEFERRED until previous stages are successfully closed and validated)*
+
+> **Note**: PACK_5-9, PACK_LEGACY, and INMEDIATO were executed with a parallel numbering scheme that diverged from the original PACK_3.x→6.x plan. The roadmap is now reconciled to reflect actual execution. PACK_3.2 and PACK_3.3 are complete; PACK_4.0 is the formal next active pack.

@@ -1,5 +1,5 @@
 import pytest
-from layers.l2_brain.mission_orchestrator_dag import MissionOrchestratorDAG, DAGNode
+from layers.l2_brain.mission.mission_orchestrator_dag import MissionOrchestratorDAG, DAGNode
 
 @pytest.fixture
 def mock_plan():

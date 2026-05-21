@@ -1,7 +1,7 @@
 import json
 import pytest
 from pathlib import Path
-from layers.l2_brain.repo_intelligence_query import RepoIntelligenceQueryRuntime
+from layers.l2_brain.mission.repo_intelligence_query import RepoIntelligenceQueryRuntime
 
 @pytest.fixture
 def query_env(tmp_path):

@@ -2,11 +2,11 @@ import json
 import pytest
 import subprocess
 from pathlib import Path
-from layers.l2_brain.repo_intelligence_runtime import run_repo_intelligence_scan
+from layers.l2_brain.mission.repo_intelligence_runtime import run_repo_intelligence_scan
 from layers.l2_brain.folder_dossier_generator import generate_folder_dossiers
 from layers.l2_brain.file_dossier_generator import generate_file_dossiers
-from layers.l2_brain.technical_debt_intelligence import run_technical_debt_intelligence
-from layers.l2_brain.plan_v1_completion_review import run_plan_v1_completion_review
+from layers.l2_brain.governance.technical_debt_intelligence import run_technical_debt_intelligence
+from layers.l2_brain.mission.plan_v1_completion_review import run_plan_v1_completion_review
 
 def test_repo_intelligence_integration(tmp_path):
     repo = tmp_path

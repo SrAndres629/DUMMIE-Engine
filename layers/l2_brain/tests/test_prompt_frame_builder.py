@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pytest
 
-from layers.l2_brain.prompt_frame_builder import PromptFrameBuilder
+from layers.l2_brain.context.prompt_frame_builder import PromptFrameBuilder
 
 
 def _write_json(path: Path, payload: dict) -> None:

@@ -1,7 +1,7 @@
 import json
 import pytest
 from pathlib import Path
-from layers.l2_brain.plan_v1_completion_review import PlanV1CompletionReview
+from layers.l2_brain.mission.plan_v1_completion_review import PlanV1CompletionReview
 
 @pytest.fixture
 def review_env(tmp_path):

@@ -18,7 +18,7 @@ def test_l2_pack2_3_bindings_smoke():
     from layers.l2_brain.domain.semantic_ports import IEmbeddingAdapter, IContextCompressor
     from layers.l2_brain.embedding_provider import EmbeddingProvider
     from layers.l2_brain.entity_voice import EntityVoice
-    from layers.l2_brain.event_bus import AsyncEventBus
+    from layers.l2_brain.infrastructure.event_bus import AsyncEventBus
     from layers.l2_brain.evolution_feedback_loop import EvolutionFeedbackLoop, PerformanceSnapshot, OptimizationAdvisor
     from layers.l2_brain.expansion_policy import ExpansionPolicy, ComponentType
     from layers.l2_brain.formal_bridge import FormalModel, FormalVerificationResult

@@ -155,12 +155,23 @@ This documents the history of closed development packs.
 
 ## 21. PACK_3.2: CODE Embedding Provider
 * **Status**: `COMPLETED`
-* **Commit**: `pending`
+* **Commit**: `c618aa6`
 * **Metrics After**: FastEmbedCodeProvider uses shared model cache with TEXT_FAST (zero additional memory). CODE vectors stored under `CODE_LOCAL_768` space, isolated from `TEXT_FAST_BGE_SMALL_384`. ASTBlastRadiusIndexer generates CODE embeddings for parsed symbols.
 * **Tests**: 6 new tests PASS. Embedding mesh: 11/11 PASS. Import chain: PASS.
 * **Lessons**: Same model, separate vector space achieves semantic isolation without extra compute. Module-level `_MODEL_CACHE` prevents double model loading.
 
-## 22. INMEDIATO: Branch cleanup + merge
+---
+
+## 22. PACK_3.3: Direct Spec Linkage Engine
+* **Status**: `COMPLETED`
+* **Commit**: `pending`
+* **Metrics After**: `direct_spec_hit_rate=1.0`, `bound_active_runtime_count=31`, `direct_spec_linked_count=31`.
+* **Tests**: `tests/test_validate_specs_docs_direct_linkage.py` PASS (5/5). Targeted structural/spec tests PASS (8/8). Import chain PASS.
+* **Lessons**: Direct linkage gate must be independently runnable (`--direct-linkage-only`) because broader docs/spec hygiene still has known unrelated debt. Bound runtime paths must point to canonical organs, not root shims or `flat_brain/`.
+
+---
+
+## 23. INMEDIATO: Branch cleanup + merge
 * **Status**: `COMPLETED`
 * **Commit**: `fe91a2f`
 * **Metrics After**: Fast-forward merge to main, 6 stale branches removed, backup branches preserved.

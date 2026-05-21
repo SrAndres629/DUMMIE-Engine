@@ -2,13 +2,13 @@
 import os
 import json
 from pathlib import Path
-from layers.l2_brain.full_body_operational_auditor import run_full_body_operational_audit
+from layers.l2_brain.governance.full_body_operational_auditor import run_full_body_operational_audit
 
 # Spec Reference: 190_full_body_operational_auditor
 
 def test_full_body_operational_auditor():
     # Make sure governor has run
-    from layers.l2_brain.capability_promotion_governor import run_capability_promotion_governor
+    from layers.l2_brain.governance.capability_promotion_governor import run_capability_promotion_governor
     run_capability_promotion_governor()
 
     report = run_full_body_operational_audit()

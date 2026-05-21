@@ -1,7 +1,7 @@
 import json
 import pytest
 from pathlib import Path
-from layers.l2_brain.context_enforcement_gate import ContextEnforcementGate
+from layers.l2_brain.context.context_enforcement_gate import ContextEnforcementGate
 
 @pytest.fixture
 def gate_env(tmp_path):

@@ -2,7 +2,7 @@ import pytest
 import asyncio
 from unittest.mock import patch, MagicMock
 
-from layers.l2_brain.resource_governor import ResourceGovernor
+from layers.l2_brain.structural_hardening.resource_governor import ResourceGovernor
 
 @pytest.fixture
 def governor():

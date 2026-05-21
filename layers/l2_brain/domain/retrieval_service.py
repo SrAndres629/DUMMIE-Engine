@@ -1,8 +1,10 @@
+# Spec Reference: 192_embedding_mesh_foundation
 import time
 import math
 import json
 from typing import List, Dict, Any, Optional
 from pydantic import BaseModel
+
 
 class EpistemicNode(BaseModel):
     causal_hash: str
@@ -14,11 +16,12 @@ class EpistemicNode(BaseModel):
     intent_i: str
     similarity_score: float = 0.0
 
+
 class RetrievalService:
     """
     Servicio de Dominio encargado del filtrado y ordenamiento epistémico de recuerdos.
     """
-    
+
     @staticmethod
     def calculate_epistemic_score(
         node: EpistemicNode,
@@ -28,7 +31,7 @@ class RetrievalService:
         gamma: float = 0.2,
         eta: float = 0.2,
         zeta: float = 0.3,
-        current_lamport_t: Optional[int] = None
+        current_lamport_t: Optional[int] = None,
     ) -> float:
         """
         Implementa la ecuación de ranking epistémico:
@@ -37,12 +40,12 @@ class RetrievalService:
         import json
         import math
         import time
-        
+
         # 1. Extracción de campos epistémicos
         pi_confidence = 1.0
         rho_risk = 0.0
         evidence_count = 0
-        
+
         try:
             payload_data = json.loads(node.payload)
             if isinstance(payload_data, dict):
@@ -67,7 +70,7 @@ class RetrievalService:
             "OVERSEER": 0.7,
             "ENGINEER": 0.6,
             "AGENT": 0.4,
-            "AUTHORITY_UNSPECIFIED": 0.2
+            "AUTHORITY_UNSPECIFIED": 0.2,
         }
         auth_score = authority_weights.get(str(node.authority_a).upper(), 0.2)
 
@@ -91,20 +94,17 @@ class RetrievalService:
 
         # Cálculo final
         total_score = (
-            alpha * query_sim +
-            beta * auth_score +
-            gamma * freshness +
-            eta * proof_score -
-            zeta * conflict_score
+            alpha * query_sim
+            + beta * auth_score
+            + gamma * freshness
+            + eta * proof_score
+            - zeta * conflict_score
         )
         return total_score
 
     @classmethod
     def rank_nodes(
-        cls, 
-        nodes: List[Any], 
-        query_similarities: List[float],
-        alpha: float = 0.4
+        cls, nodes: List[Any], query_similarities: List[float], alpha: float = 0.4
     ) -> List[Any]:
         """
         Ordena los nodos devolviendo los subgrafos con mayor valor de información epistémica.
@@ -119,7 +119,7 @@ class RetrievalService:
         scored_nodes = []
         for i, node in enumerate(nodes):
             sim = query_similarities[i] if i < len(query_similarities) else 0.0
-            
+
             # Envoltorio para tipado
             enode = EpistemicNode(
                 causal_hash=getattr(node, "causal_hash", ""),
@@ -129,14 +129,14 @@ class RetrievalService:
                 lamport_t=getattr(node, "lamport_t", int(time.time())),
                 authority_a=str(getattr(node, "authority_a", "AGENT")),
                 intent_i=str(getattr(node, "intent_i", "FABRICATION")),
-                similarity_score=sim
+                similarity_score=sim,
             )
-            
+
             score = cls.calculate_epistemic_score(
                 enode, sim, alpha=alpha, current_lamport_t=max_lamport
             )
             scored_nodes.append((score, node))
-            
+
         # Ordenar descendentemente por score epistémico
         scored_nodes.sort(key=lambda x: x[0], reverse=True)
         return [item[1] for item in scored_nodes]
@@ -148,7 +148,7 @@ class RetrievalService:
         get_node_by_hash: Any,  # Callable[[str], Any]
         query_sim: float,
         tau_threshold: float = 0.8,
-        max_depth: int = 5
+        max_depth: int = 5,
     ) -> List[Any]:
         """
         Extrae el certificado causal mínimo (S*) que justifica una acción.
@@ -157,21 +157,21 @@ class RetrievalService:
         """
         subgraph = []
         visited = set()
-        queue = [(start_node, 0)] # (nodo, profundidad)
-        
+        queue = [(start_node, 0)]  # (nodo, profundidad)
+
         # Probabilidad residual de incertidumbre
         residual_uncertainty = 1.0
-        
+
         while queue:
             current_node, depth = queue.pop(0)
-            
+
             c_hash = getattr(current_node, "causal_hash", "")
             if not c_hash or c_hash in visited:
                 continue
-                
+
             visited.add(c_hash)
             subgraph.append(current_node)
-            
+
             # Envoltorio para cálculo
             enode = EpistemicNode(
                 causal_hash=c_hash,
@@ -181,21 +181,26 @@ class RetrievalService:
                 lamport_t=getattr(current_node, "lamport_t", int(time.time())),
                 authority_a=str(getattr(current_node, "authority_a", "AGENT")),
                 intent_i=str(getattr(current_node, "intent_i", "FABRICATION")),
-                similarity_score=query_sim if depth == 0 else (query_sim * math.exp(-depth))
+                similarity_score=query_sim
+                if depth == 0
+                else (query_sim * math.exp(-depth)),
             )
-            
+
             # Epistemic Score como confianza [0, 1]
-            score = min(1.0, max(0.0, cls.calculate_epistemic_score(enode, enode.similarity_score)))
-            
+            score = min(
+                1.0,
+                max(0.0, cls.calculate_epistemic_score(enode, enode.similarity_score)),
+            )
+
             # Disminuir la incertidumbre
-            residual_uncertainty *= (1.0 - score)
-            
+            residual_uncertainty *= 1.0 - score
+
             # Información Mutua Condicional aproximada
             info_gain = 1.0 - residual_uncertainty
-            
+
             if info_gain >= tau_threshold:
                 break
-                
+
             if depth < max_depth:
                 parent_hashes = enode.parent_hashes
                 for phash in parent_hashes:
@@ -206,5 +211,5 @@ class RetrievalService:
                                 queue.append((parent_node, depth + 1))
                         except Exception:
                             pass
-                            
+
         return subgraph

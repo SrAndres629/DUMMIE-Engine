@@ -1,0 +1,272 @@
+En la rama main
+Tu rama está adelantada a 'origin/main' por 49 commits.
+  (usa "git push" para publicar tus commits locales)
+
+Cambios no rastreados para el commit:
+  (usa "git add/rm <archivo>..." para actualizar a lo que se le va a hacer commit)
+  (usa "git restore <archivo>..." para descartar los cambios en el directorio de trabajo)
+	modificados:     .aiwg/agent_mesh/debate/backlog.json
+	modificados:     .aiwg/agent_mesh/debate/outbox/reviewer_inbox.jsonl
+	modificados:     .aiwg/agent_mesh/debate/outbox/worker_inbox.jsonl
+	modificados:     .aiwg/ontological_map.json
+	modificados:     .aiwg/packs/active_pack.json
+	modificados:     .aiwg/packs/active_pack.md
+	modificados:     .aiwg/packs/pack_execution_history.md
+	modificados:     .aiwg/roadmap/pack_roadmap_to_6_1.md
+	modificados:     .aiwg/state/current_truth.json
+	modificados:     .aiwg/state/current_truth.md
+	modificados:     .aiwg/state/health.json
+	modificados:     MEMORY.md
+	modificados:     dummie_gateway_config.json
+	modificados:     layers/.aiwg/reports/embedding_activation_verification_latest.json
+	modificados:     layers/.aiwg/reports/embedding_activation_verification_latest.md
+	modificados:     layers/l0_overseer/supervisor.py
+	modificados:     layers/l1_nervous/application/use_cases.py
+	modificados:     layers/l1_nervous/bootstrap.py
+	modificados:     layers/l1_nervous/domain/services.py
+	modificados:     layers/l1_nervous/knowledge_adapters.py
+	modificados:     layers/l1_nervous/mcp_registry.py
+	modificados:     layers/l1_nervous/mcp_transport.py
+	modificados:     layers/l1_nervous/repo_guard.py
+	modificados:     layers/l1_nervous/runtime_paths.py
+	modificados:     layers/l1_nervous/tools_impl/patch_transactions.py
+	modificados:     layers/l1_nervous/utils.py
+	modificados:     layers/l2_brain/action_graph.py
+	modificados:     layers/l2_brain/application/cognitive/use_cases.py
+	modificados:     layers/l2_brain/ast_indexer.py
+	modificados:     layers/l2_brain/branch_memory.py
+	modificados:     layers/l2_brain/cognition/pattern_miner_v2.py
+	modificados:     layers/l2_brain/context/context_circulation_runtime.py
+	modificados:     layers/l2_brain/domain/dtos.py
+	modificados:     layers/l2_brain/domain/hypothesis_service.py
+	modificados:     layers/l2_brain/domain/reasoning_logic.py
+	modificados:     layers/l2_brain/domain/retrieval_service.py
+	modificados:     layers/l2_brain/domain/semantic_ports.py
+	modificados:     layers/l2_brain/entity_voice.py
+	modificados:     layers/l2_brain/evolution_feedback_loop.py
+	modificados:     layers/l2_brain/expansion_policy.py
+	borrados:        layers/l2_brain/flat_brain/capability_promotion_governor.py
+	borrados:        layers/l2_brain/flat_brain/chaos_regression_testing.py
+	borrados:        layers/l2_brain/flat_brain/cli_control_plane.py
+	borrados:        layers/l2_brain/flat_brain/context_circulation_runtime.py
+	borrados:        layers/l2_brain/flat_brain/debate_review_runtime.py
+	borrados:        layers/l2_brain/flat_brain/degraded_capability_registry.py
+	borrados:        layers/l2_brain/flat_brain/dependency_reproducibility_verifier.py
+	borrados:        layers/l2_brain/flat_brain/dummie_chat_cli.py
+	borrados:        layers/l2_brain/flat_brain/embedding_activation_verifier.py
+	borrados:        layers/l2_brain/flat_brain/embedding_adapter.py
+	borrados:        layers/l2_brain/flat_brain/embedding_memory_router.py
+	borrados:        layers/l2_brain/flat_brain/environment_toolchain_probe.py
+	borrados:        layers/l2_brain/flat_brain/evolution_flywheel_runtime.py
+	borrados:        layers/l2_brain/flat_brain/mental_model_runtime.py
+	borrados:        layers/l2_brain/flat_brain/mental_model_store.py
+	borrados:        layers/l2_brain/flat_brain/mental_model_truth_hygiene.py
+	borrados:        layers/l2_brain/flat_brain/philosophical_ontology_runtime.py
+	borrados:        layers/l2_brain/flat_brain/prompt_cache_ledger.py
+	borrados:        layers/l2_brain/flat_brain/prompt_frame_builder.py
+	borrados:        layers/l2_brain/flat_brain/readiness_score_calibrator.py
+	borrados:        layers/l2_brain/flat_brain/repo_intelligence_query.py
+	borrados:        layers/l2_brain/flat_brain/repo_intelligence_runtime.py
+	borrados:        layers/l2_brain/flat_brain/repo_probe_runner.py
+	borrados:        layers/l2_brain/flat_brain/runtime_closure_planner.py
+	borrados:        layers/l2_brain/flat_brain/runtime_dependency_auditor.py
+	borrados:        layers/l2_brain/flat_brain/six_dimensional_context_runtime.py
+	borrados:        layers/l2_brain/flat_brain/token_economy_benchmark.py
+	borrados:        layers/l2_brain/flat_brain/trusted_workstation_mode.py
+	borrados:        layers/l2_brain/flat_brain/tui_process_monitor.py
+	modificados:     layers/l2_brain/formal_bridge.py
+	modificados:     layers/l2_brain/gateway_contract.py
+	modificados:     layers/l2_brain/governance/operational_truth_collectors.py
+	modificados:     layers/l2_brain/governance/self_improvement_runtime.py
+	modificados:     layers/l2_brain/heartbeat/heartbeat_lifecycle_runtime.py
+	modificados:     layers/l2_brain/infrastructure/auditor_port.py
+	modificados:     layers/l2_brain/infrastructure/cypher_codec.py
+	modificados:     layers/l2_brain/infrastructure/event_bus.py
+	modificados:     layers/l2_brain/kuzu_graph_sync_adapter.py
+	modificados:     layers/l2_brain/metacognition/metacognitive_loop_runtime.py
+	modificados:     layers/l2_brain/model_mesh/embedding_provider.py
+	modificados:     layers/l2_brain/structural_hardening/bindings.py
+	modificados:     layers/l2_brain/tests/test_aiwg_pack_guard.py
+	modificados:     layers/l2_brain/tests/test_authority_classification.py
+	modificados:     layers/l2_brain/tests/test_autonomous_strategic_partner_runtime.py
+	modificados:     layers/l2_brain/tests/test_capability_promotion_governor.py
+	modificados:     layers/l2_brain/tests/test_chaos_regression_testing.py
+	modificados:     layers/l2_brain/tests/test_cli_control_plane.py
+	modificados:     layers/l2_brain/tests/test_cognitive_circulation_kernel.py
+	modificados:     layers/l2_brain/tests/test_context_budget_manager.py
+	modificados:     layers/l2_brain/tests/test_context_efficiency_benchmark.py
+	modificados:     layers/l2_brain/tests/test_context_enforcement_gate.py
+	modificados:     layers/l2_brain/tests/test_context_package.py
+	modificados:     layers/l2_brain/tests/test_context_packet_optimizer.py
+	modificados:     layers/l2_brain/tests/test_context_quant_runtime.py
+	modificados:     layers/l2_brain/tests/test_context_value_scorer.py
+	modificados:     layers/l2_brain/tests/test_control_surface_integration.py
+	modificados:     layers/l2_brain/tests/test_daemon_gateway_heartbeat_bridge.py
+	modificados:     layers/l2_brain/tests/test_debate_autonomy_integration.py
+	modificados:     layers/l2_brain/tests/test_debate_review_runtime.py
+	modificados:     layers/l2_brain/tests/test_degraded_capability_registry.py
+	modificados:     layers/l2_brain/tests/test_dependency_reality_heartbeat_integration.py
+	modificados:     layers/l2_brain/tests/test_dependency_reproducibility_verifier.py
+	modificados:     layers/l2_brain/tests/test_dummie_chat_cli.py
+	modificados:     layers/l2_brain/tests/test_embedding_activation_verifier.py
+	modificados:     layers/l2_brain/tests/test_embedding_adapter.py
+	modificados:     layers/l2_brain/tests/test_embedding_memory_router.py
+	modificados:     layers/l2_brain/tests/test_entrypoint_enforcement_auditor.py
+	modificados:     layers/l2_brain/tests/test_environment_toolchain_probe.py
+	modificados:     layers/l2_brain/tests/test_evolution_flywheel_runtime.py
+	modificados:     layers/l2_brain/tests/test_final_runtime_integration.py
+	modificados:     layers/l2_brain/tests/test_full_body_operational_auditor.py
+	modificados:     layers/l2_brain/tests/test_kuzu_graph_readback_verifier.py
+	modificados:     layers/l2_brain/tests/test_local_context_compressor.py
+	modificados:     layers/l2_brain/tests/test_memory_graph_runtime.py
+	modificados:     layers/l2_brain/tests/test_memory_spine_entrypoint.py
+	modificados:     layers/l2_brain/tests/test_metacognitive_chat_integration.py
+	modificados:     layers/l2_brain/tests/test_metagateway_operational.py
+	modificados:     layers/l2_brain/tests/test_mission_autonomy_contract.py
+	modificados:     layers/l2_brain/tests/test_mission_coherence_guard.py
+	modificados:     layers/l2_brain/tests/test_mission_orchestrator_dag.py
+	modificados:     layers/l2_brain/tests/test_mission_planner.py
+	modificados:     layers/l2_brain/tests/test_operational_truth.py
+	modificados:     layers/l2_brain/tests/test_operationalization_pack_3_integration.py
+	modificados:     layers/l2_brain/tests/test_operationalization_review.py
+	modificados:     layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py
+	modificados:     layers/l2_brain/tests/test_plan_v1_completion_review.py
+	modificados:     layers/l2_brain/tests/test_polyglot_probe_orchestrator.py
+	modificados:     layers/l2_brain/tests/test_post_mortem_agent.py
+	modificados:     layers/l2_brain/tests/test_post_plan_v1_operationalization_integration.py
+	modificados:     layers/l2_brain/tests/test_prompt_cache_ledger.py
+	modificados:     layers/l2_brain/tests/test_prompt_frame_builder.py
+	modificados:     layers/l2_brain/tests/test_prompt_runtime_integration.py
+	modificados:     layers/l2_brain/tests/test_readiness_score_calibrator.py
+	modificados:     layers/l2_brain/tests/test_repo_intelligence_integration.py
+	modificados:     layers/l2_brain/tests/test_repo_intelligence_query.py
+	modificados:     layers/l2_brain/tests/test_repo_intelligence_runtime.py
+	modificados:     layers/l2_brain/tests/test_repo_probe_mission_integration.py
+	modificados:     layers/l2_brain/tests/test_repo_probe_runner.py
+	modificados:     layers/l2_brain/tests/test_resource_governor.py
+	modificados:     layers/l2_brain/tests/test_runtime_closure_planner.py
+	modificados:     layers/l2_brain/tests/test_runtime_dependency_auditor.py
+	modificados:     layers/l2_brain/tests/test_runtime_repairs.py
+	modificados:     layers/l2_brain/tests/test_semantic_retrieval_runtime.py
+	modificados:     layers/l2_brain/tests/test_six_dimensional_context_runtime.py
+	modificados:     layers/l2_brain/tests/test_state_coherence_control_surface_integration.py
+	modificados:     layers/l2_brain/tests/test_state_coherence_guard.py
+	modificados:     layers/l2_brain/tests/test_strategic_partner_swarm.py
+	modificados:     layers/l2_brain/tests/test_swarm_mission_coherence_integration.py
+	modificados:     layers/l2_brain/tests/test_technical_debt_intelligence.py
+	modificados:     layers/l2_brain/tests/test_token_economy_benchmark.py
+	modificados:     layers/l2_brain/tests/test_token_economy_integration.py
+	modificados:     layers/l2_brain/tests/test_trusted_workstation_mode.py
+	modificados:     layers/l2_brain/tests/test_tui_process_monitor.py
+	modificados:     layers/l2_brain/tests/test_vault_context_resolver.py
+	modificados:     layers/l2_brain/tests/test_vault_embedding_index.py
+	modificados:     layers/l2_brain/tests/test_whole_body_repair_queue.py
+	modificados:     layers/l2_brain/tests/test_workbench_vault_integration.py
+	modificados:     scripts/aiwg_pack_guard.py
+	modificados:     scripts/spec_registry_sync.py
+	modificados:     scripts/swarm_ack.py
+	modificados:     scripts/validate_specs_docs.py
+
+Archivos sin seguimiento:
+  (usa "git add <archivo>..." para incluirlo a lo que será confirmado)
+	.aiwg/state/health_cron_latest.txt
+	.aiwg/workbench/MCP-CANONICAL-AUTONOMY-UPGRADE-001/
+	dummie/daemon.py
+	dummie_gateway_config.json.bak
+	layers/l2_brain/auditor_port.py
+	layers/l2_brain/autonomous_strategic_partner_runtime.py
+	layers/l2_brain/capability_promotion_governor.py
+	layers/l2_brain/chaos_regression_testing.py
+	layers/l2_brain/cognitive_bias_detector.py
+	layers/l2_brain/cognitive_frame_builder.py
+	layers/l2_brain/context/prompt_cache_ledger.py
+	layers/l2_brain/context/prompt_frame_builder.py
+	layers/l2_brain/context/six_dimensional_context_runtime.py
+	layers/l2_brain/context/token_economy_benchmark.py
+	layers/l2_brain/context_budget_manager.py
+	layers/l2_brain/context_circulation_runtime.py
+	layers/l2_brain/context_efficiency_benchmark.py
+	layers/l2_brain/context_enforcement_gate.py
+	layers/l2_brain/context_package.py
+	layers/l2_brain/context_packet_optimizer.py
+	layers/l2_brain/context_quant_runtime.py
+	layers/l2_brain/context_value_scorer.py
+	layers/l2_brain/cypher_codec.py
+	layers/l2_brain/daemon/neuron_registry.py
+	layers/l2_brain/debate_review_runtime.py
+	layers/l2_brain/degraded_capability_registry.py
+	layers/l2_brain/dependency_reproducibility_verifier.py
+	layers/l2_brain/dialectical_reasoning_runtime.py
+	layers/l2_brain/domain/human_intent.py
+	layers/l2_brain/dummie_chat_cli.py
+	layers/l2_brain/embedding_memory_router.py
+	layers/l2_brain/embedding_mesh/embedding_activation_verifier.py
+	layers/l2_brain/embedding_mesh/embedding_adapter.py
+	layers/l2_brain/embedding_mesh/embedding_memory_router.py
+	layers/l2_brain/embedding_provider.py
+	layers/l2_brain/entrypoint_enforcement_auditor.py
+	layers/l2_brain/environment_toolchain_probe.py
+	layers/l2_brain/epistemic_state_runtime.py
+	layers/l2_brain/evolution_flywheel_runtime.py
+	layers/l2_brain/four_dtes_persistence_preflight.py
+	layers/l2_brain/governance/capability_promotion_governor.py
+	layers/l2_brain/governance/chaos_regression_testing.py
+	layers/l2_brain/governance/degraded_capability_registry.py
+	layers/l2_brain/governance/dependency_reproducibility_verifier.py
+	layers/l2_brain/governance/environment_toolchain_probe.py
+	layers/l2_brain/governance/evolution_flywheel_runtime.py
+	layers/l2_brain/governance/readiness_score_calibrator.py
+	layers/l2_brain/governance/runtime_closure_planner.py
+	layers/l2_brain/governance/runtime_dependency_auditor.py
+	layers/l2_brain/governance/trusted_workstation_mode.py
+	layers/l2_brain/governance/tui_process_monitor.py
+	layers/l2_brain/heartbeat_lifecycle_runtime.py
+	layers/l2_brain/heartbeat_scheduler.py
+	layers/l2_brain/local_context_compressor.py
+	layers/l2_brain/memory_spine_entrypoint.py
+	layers/l2_brain/mental_model_runtime.py
+	layers/l2_brain/mental_model_store.py
+	layers/l2_brain/mental_model_truth_hygiene.py
+	layers/l2_brain/metacognitive_evolution_flywheel.py
+	layers/l2_brain/metacognitive_loop_runtime.py
+	layers/l2_brain/metacognitive_quality_gate.py
+	layers/l2_brain/mission/cli_control_plane.py
+	layers/l2_brain/mission/debate_review_runtime.py
+	layers/l2_brain/mission/dummie_chat_cli.py
+	layers/l2_brain/mission/repo_intelligence_query.py
+	layers/l2_brain/mission/repo_intelligence_runtime.py
+	layers/l2_brain/mission/repo_probe_runner.py
+	layers/l2_brain/mission_autonomy_contract.py
+	layers/l2_brain/mission_coherence_guard.py
+	layers/l2_brain/mission_orchestrator_dag.py
+	layers/l2_brain/mission_planner.py
+	layers/l2_brain/operational_truth.py
+	layers/l2_brain/operational_truth_collectors.py
+	layers/l2_brain/operationalization_review.py
+	layers/l2_brain/philosophical_ontology_runtime.py
+	layers/l2_brain/plan_v1_completion_review.py
+	layers/l2_brain/prompt_cache_ledger.py
+	layers/l2_brain/prompt_frame_builder.py
+	layers/l2_brain/readiness_score_calibrator.py
+	layers/l2_brain/repo_intelligence_query.py
+	layers/l2_brain/repo_intelligence_runtime.py
+	layers/l2_brain/repo_probe_runner.py
+	layers/l2_brain/runtime_closure_planner.py
+	layers/l2_brain/runtime_dependency_auditor.py
+	layers/l2_brain/runtime_guards.py
+	layers/l2_brain/semantic_ontology_mapper.py
+	layers/l2_brain/six_dimensional_context_runtime.py
+	layers/l2_brain/spec_frontmatter_repair.py
+	layers/l2_brain/state_coherence_guard.py
+	layers/l2_brain/strategic_partner_swarm.py
+	layers/l2_brain/technical_debt_intelligence.py
+	layers/l2_brain/tests/test_aiwg_runtime_truth_coherence.py
+	layers/l2_brain/tests/test_swarm_consensus_scripts.py
+	layers/l2_brain/token_economy_benchmark.py
+	layers/l2_brain/trusted_workstation_mode.py
+	layers/l2_brain/tui_process_monitor.py
+	layers/l2_brain/vault_embedding_index.py
+	tests/test_validate_specs_docs_direct_linkage.py
+	verify_mcp_integration.py
+
+sin cambios agregados al commit (usa "git add" y/o "git commit -a")

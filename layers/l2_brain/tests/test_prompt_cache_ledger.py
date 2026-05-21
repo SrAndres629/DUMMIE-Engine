@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 
-from layers.l2_brain.prompt_cache_ledger import PromptCacheLedger
+from layers.l2_brain.context.prompt_cache_ledger import PromptCacheLedger
 
 
 def _write_json(path: Path, payload: dict) -> None:

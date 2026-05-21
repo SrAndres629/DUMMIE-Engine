@@ -5,7 +5,7 @@ import os
 # Ensure the project root is in sys.path for module resolution
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..')))
 
-from layers.l2_brain.cognitive_hooks import classify_authority_level
+from layers.l2_brain.cognition.cognitive_hooks import classify_authority_level
 
 class TestAuthorityClassification(unittest.TestCase):
     def test_a0_basic_query_and_explanations(self):

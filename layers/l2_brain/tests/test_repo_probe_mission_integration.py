@@ -1,9 +1,9 @@
 import json
 import pytest
 from pathlib import Path
-from layers.l2_brain.repo_probe_runner import run_repo_probe
-from layers.l2_brain.mission_planner import create_mission_plan
-from layers.l2_brain.mission_orchestrator_dag import build_dag_from_mission_plan
+from layers.l2_brain.mission.repo_probe_runner import run_repo_probe
+from layers.l2_brain.mission.mission_planner import create_mission_plan
+from layers.l2_brain.mission.mission_orchestrator_dag import build_dag_from_mission_plan
 
 def test_repo_to_dag_integration(tmp_path):
     root = tmp_path

@@ -1,7 +1,7 @@
 import json
 import pytest
 from pathlib import Path
-from layers.l2_brain.repo_intelligence_runtime import RepoIntelligenceRuntime
+from layers.l2_brain.mission.repo_intelligence_runtime import RepoIntelligenceRuntime
 
 @pytest.fixture
 def repo_env(tmp_path):

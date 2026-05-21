@@ -1,3 +1,4 @@
+# Spec Reference: 12_6d_context_model
 from __future__ import annotations
 
 from dataclasses import dataclass, asdict
@@ -56,10 +57,15 @@ class PatternMinerV2:
         patterns: list[DetectedPattern] = []
         patterns.extend(self.detect_hotspots(events))
         patterns.extend(self.detect_contract_drift(events))
-        patterns.extend(self.detect_semantic_decay(events, file_cards or [], graph_edges or []))
+        patterns.extend(
+            self.detect_semantic_decay(events, file_cards or [], graph_edges or [])
+        )
         patterns.extend(self.detect_temporal_anomalies(events, session_artifacts or []))
 
-        return [p.to_dict() for p in sorted(patterns, key=lambda p: p.severity, reverse=True)]
+        return [
+            p.to_dict()
+            for p in sorted(patterns, key=lambda p: p.severity, reverse=True)
+        ]
 
     def detect_hotspots(self, events: list[dict[str, Any]]) -> list[DetectedPattern]:
         by_path: dict[str, list[dict[str, Any]]] = defaultdict(list)
@@ -119,10 +125,14 @@ class PatternMinerV2:
 
         return out
 
-    def detect_contract_drift(self, events: list[dict[str, Any]]) -> list[DetectedPattern]:
+    def detect_contract_drift(
+        self, events: list[dict[str, Any]]
+    ) -> list[DetectedPattern]:
         by_path: dict[str, list[dict[str, Any]]] = defaultdict(list)
         for ev in events:
-            if ev.get("path") and (ev.get("supports") is not None or ev.get("contradicts") is not None):
+            if ev.get("path") and (
+                ev.get("supports") is not None or ev.get("contradicts") is not None
+            ):
                 by_path[ev["path"]].append(ev)
 
         out: list[DetectedPattern] = []
@@ -200,17 +210,32 @@ class PatternMinerV2:
 
         for path, card in cards_by_path.items():
             risks = " ".join(map(str, card.get("risks", []))).lower()
-            summary = str(card.get("summary") or card.get("retrieval_summary") or "").lower()
+            summary = str(
+                card.get("summary") or card.get("retrieval_summary") or ""
+            ).lower()
 
-            workaround_frequency = sum(
-                token in risks or token in summary
-                for token in ["fallback", "bypass", "legacy", "compatibility", "sys.path", "todo", "fixme"]
-            ) / 7
+            workaround_frequency = (
+                sum(
+                    token in risks or token in summary
+                    for token in [
+                        "fallback",
+                        "bypass",
+                        "legacy",
+                        "compatibility",
+                        "sys.path",
+                        "todo",
+                        "fixme",
+                    ]
+                )
+                / 7
+            )
 
             missing_test_ratio = 1.0 if not card.get("tests") else 0.0
             boundary_violation = clamp01(boundary_violations[path] / 3)
             stale_spec_ratio = 1.0 if "stale" in risks or "deprecated" in risks else 0.0
-            spec_distance = 1.0 if "contract drift" in risks or "contradict" in risks else 0.0
+            spec_distance = (
+                1.0 if "contract drift" in risks or "contradict" in risks else 0.0
+            )
 
             score = clamp01(
                 0.30 * spec_distance
@@ -333,7 +358,9 @@ class PatternMinerV2:
             )
         ]
 
-    def _repeated_action_rate(self, events: list[dict[str, Any]], window: int = 8) -> float:
+    def _repeated_action_rate(
+        self, events: list[dict[str, Any]], window: int = 8
+    ) -> float:
         recent = events[-window:]
         actions = [
             ev.get("data", {}).get("recommended_action")
@@ -346,9 +373,12 @@ class PatternMinerV2:
             return 0.0
         return max(actions.count(a) for a in set(actions)) / len(actions)
 
-    def _validation_oscillation(self, events: list[dict[str, Any]], window: int = 12) -> float:
+    def _validation_oscillation(
+        self, events: list[dict[str, Any]], window: int = 12
+    ) -> float:
         recent = [
-            ev for ev in events[-window:]
+            ev
+            for ev in events[-window:]
             if ev.get("event_type") in {"VALIDATION", "VALIDATION_RECORDED"}
         ]
         statuses = [
@@ -361,7 +391,9 @@ class PatternMinerV2:
         flips = sum(1 for a, b in zip(statuses, statuses[1:]) if a != b)
         return flips / (len(statuses) - 1)
 
-    def _no_progress_ratio(self, events: list[dict[str, Any]], window: int = 10) -> float:
+    def _no_progress_ratio(
+        self, events: list[dict[str, Any]], window: int = 10
+    ) -> float:
         recent = events[-window:]
         if not recent:
             return 0.0
@@ -375,11 +407,12 @@ class PatternMinerV2:
         progress = sum(1 for ev in recent if ev.get("event_type") in progress_events)
         return 1.0 - progress / len(recent)
 
-    def _blocker_recurrence(self, events: list[dict[str, Any]], window: int = 12) -> float:
+    def _blocker_recurrence(
+        self, events: list[dict[str, Any]], window: int = 12
+    ) -> float:
         recent = events[-window:]
         blockers = [
-            ev.get("data", {}).get("blocker")
-            or ev.get("data", {}).get("reason")
+            ev.get("data", {}).get("blocker") or ev.get("data", {}).get("reason")
             for ev in recent
             if ev.get("event_type") in {"BLOCKED", "VALIDATION", "NEXT_LOOP"}
         ]

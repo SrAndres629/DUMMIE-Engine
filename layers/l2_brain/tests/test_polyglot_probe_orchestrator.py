@@ -1,6 +1,6 @@
 import json
 import pytest
-from layers.l2_brain.polyglot_probe_orchestrator import run_polyglot_probe
+from layers.l2_brain.cognition.polyglot_probe_orchestrator import run_polyglot_probe
 from layers.l2_brain.tests.test_cognitive_circulation_kernel import tmp_aiwg_root
 
 def test_polyglot_probe_orchestrator_direct(tmp_aiwg_root):

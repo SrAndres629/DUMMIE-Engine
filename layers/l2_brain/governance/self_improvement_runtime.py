@@ -16,7 +16,7 @@ from typing import Any, Dict, List
 
 @dataclass
 class SelfImprovementCycle:
-    decision: str       # PASS | PASS_WITH_WARNINGS | NEEDS_HUMAN_REVIEW | FAIL
+    decision: str  # PASS | PASS_WITH_WARNINGS | NEEDS_HUMAN_REVIEW | FAIL
     cycle_id: str
     hygiene_summary: Dict[str, Any]
     epistemic_summary: Dict[str, Any]
@@ -27,7 +27,9 @@ class SelfImprovementCycle:
     next_self_improvement_action: str
     autonomous_scaling_blocked: bool
     warnings: List[str] = field(default_factory=list)
-    timestamp: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
+    timestamp: str = field(
+        default_factory=lambda: datetime.now(timezone.utc).isoformat()
+    )
 
     def to_dict(self) -> Dict[str, Any]:
         return asdict(self)
@@ -49,7 +51,10 @@ def run_self_improvement_cycle(aiwg_root: Path = Path(".aiwg")) -> Dict[str, Any
     cycle_id = f"sic-{uuid.uuid4().hex[:8]}"
 
     # --- 1. Mental Model Truth Hygiene --------------------------------
-    from mental_model_truth_hygiene import run_mental_model_truth_hygiene
+    from layers.l2_brain.mental_model_truth_hygiene import (
+        run_mental_model_truth_hygiene,
+    )
+
     hygiene = run_mental_model_truth_hygiene(aiwg_root=aiwg_root)
 
     # --- 2. Epistemic State -------------------------------------------
@@ -57,10 +62,12 @@ def run_self_improvement_cycle(aiwg_root: Path = Path(".aiwg")) -> Dict[str, Any
     if not epistemic:
         try:
             from epistemic_state_runtime import build_epistemic_state
+
             ep = build_epistemic_state("self improvement cycle", aiwg_root=aiwg_root)
             epistemic = ep.to_dict()
             (reports / "epistemic_state_latest.json").write_text(
-                json.dumps(epistemic, indent=2), encoding="utf-8")
+                json.dumps(epistemic, indent=2), encoding="utf-8"
+            )
         except Exception:
             epistemic = {"decision": "DEGRADED", "confidence": 0.0}
 
@@ -69,15 +76,18 @@ def run_self_improvement_cycle(aiwg_root: Path = Path(".aiwg")) -> Dict[str, Any
     if not bias:
         try:
             from cognitive_bias_detector import detect_cognitive_biases
+
             b = detect_cognitive_biases("self improvement cycle", aiwg_root=aiwg_root)
             bias = b.to_dict() if hasattr(b, "to_dict") else b
             (reports / "cognitive_bias_report_latest.json").write_text(
-                json.dumps(bias, indent=2), encoding="utf-8")
+                json.dumps(bias, indent=2), encoding="utf-8"
+            )
         except Exception:
             bias = {"decision": "DEGRADED", "findings": []}
 
     # --- 4. Evolution Delta Application --------------------------------
     from evolution_delta_applier import apply_evolution_delta
+
     delta = apply_evolution_delta(aiwg_root=aiwg_root)
 
     # --- 5. Dialectical Review of proposed next action -----------------
@@ -88,7 +98,9 @@ def run_self_improvement_cycle(aiwg_root: Path = Path(".aiwg")) -> Dict[str, Any
 
     # Sort by priority: critical > high > medium > low
     priority_order = {"critical": 0, "high": 1, "medium": 2, "low": 3}
-    sorted_actions = sorted(raw_actions, key=lambda a: priority_order.get(a.get("priority", "low"), 9))
+    sorted_actions = sorted(
+        raw_actions, key=lambda a: priority_order.get(a.get("priority", "low"), 9)
+    )
 
     blocked = delta.get("blocked_actions", [])
 
@@ -116,7 +128,9 @@ def run_self_improvement_cycle(aiwg_root: Path = Path(".aiwg")) -> Dict[str, Any
     decision = "PASS"
 
     if autonomous_blocked:
-        warnings.append("Autonomous scaling is BLOCKED until Kuzu repair and model hygiene cleanup")
+        warnings.append(
+            "Autonomous scaling is BLOCKED until Kuzu repair and model hygiene cleanup"
+        )
         decision = "PASS_WITH_WARNINGS"
 
     if hygiene.get("decision") == "FAIL":
@@ -163,18 +177,28 @@ def run_self_improvement_cycle(aiwg_root: Path = Path(".aiwg")) -> Dict[str, Any
 
     # --- 10. Write outputs ---------------------------------------------
     (reports / "self_improvement_cycle_latest.json").write_text(
-        json.dumps(result, indent=2), encoding="utf-8")
+        json.dumps(result, indent=2), encoding="utf-8"
+    )
     (reports / "self_improvement_cycle_latest.md").write_text(
         f"# Self-Improvement Cycle\n\nDecision: {decision}\n"
         f"Next action: {next_action}\n"
         f"Autonomous scaling blocked: {autonomous_blocked}\n"
         f"Actions queued: {len(sorted_actions)}\n"
         f"Warnings: {len(warnings)}\n",
-        encoding="utf-8")
+        encoding="utf-8",
+    )
     (reports / "self_improvement_action_queue.json").write_text(
-        json.dumps({"actions": sorted_actions, "blocked": list(set(blocked)),
-                     "next": next_action, "timestamp": cycle.timestamp}, indent=2),
-        encoding="utf-8")
+        json.dumps(
+            {
+                "actions": sorted_actions,
+                "blocked": list(set(blocked)),
+                "next": next_action,
+                "timestamp": cycle.timestamp,
+            },
+            indent=2,
+        ),
+        encoding="utf-8",
+    )
 
     return result
 

@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Spec Reference: 201_canonical_spec_binding_registry
 """Spec: DE-V2-L2-201 Canonical Spec Binding Registry.
 
 Synchronize canonical spec bindings from `doc/specs/*.md` into one YAML registry.

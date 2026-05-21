@@ -1,3 +1,4 @@
+# Spec Reference: 12_6d_context_model
 import math
 from typing import Optional
 
@@ -6,12 +7,13 @@ try:
 except ModuleNotFoundError:
     from domain.dtos import HypothesisBundle, Hypothesis
 
+
 class HypothesisService:
     """
     Servicio de Dominio encargado de gestionar los Haces de Hipótesis (H_t)
     y calcular la entropía de Shannon para decidir cuándo colapsar la rama.
     """
-    
+
     @staticmethod
     def calculate_entropy(bundle: HypothesisBundle) -> float:
         """
@@ -27,7 +29,9 @@ class HypothesisService:
         return entropy
 
     @staticmethod
-    def should_collapse(bundle: HypothesisBundle, entropy_threshold: float = 0.5) -> bool:
+    def should_collapse(
+        bundle: HypothesisBundle, entropy_threshold: float = 0.5
+    ) -> bool:
         """
         Determina si el haz tiene la certidumbre suficiente para colapsar en una decisión.
         """

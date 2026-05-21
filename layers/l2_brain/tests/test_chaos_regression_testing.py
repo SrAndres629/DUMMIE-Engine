@@ -1,7 +1,7 @@
 import json
 import pytest
 from pathlib import Path
-from layers.l2_brain.chaos_regression_testing import ChaosRegressionTester
+from layers.l2_brain.governance.chaos_regression_testing import ChaosRegressionTester
 
 @pytest.fixture
 def chaos_env(tmp_path):

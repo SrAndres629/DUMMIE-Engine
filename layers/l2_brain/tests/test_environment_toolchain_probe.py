@@ -1,7 +1,7 @@
 import os
 import json
 from pathlib import Path
-from layers.l2_brain.environment_toolchain_probe import run_environment_toolchain_probe
+from layers.l2_brain.governance.environment_toolchain_probe import run_environment_toolchain_probe
 
 def test_environment_toolchain_probe_execution(tmp_path):
     # Execute the probe

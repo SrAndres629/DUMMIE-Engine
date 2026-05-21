@@ -1,3 +1,4 @@
+# Spec Reference: 47_path_normalization
 from __future__ import annotations
 
 import os
@@ -31,7 +32,9 @@ def resolve_dummied_socket_path(root_dir: str | os.PathLike[str] | None = None) 
     return resolve_aiwg_dir(root_dir) / "sockets" / "dummied.sock"
 
 
-def iter_dummied_socket_candidates(root_dir: str | os.PathLike[str] | None = None) -> tuple[Path, ...]:
+def iter_dummied_socket_candidates(
+    root_dir: str | os.PathLike[str] | None = None,
+) -> tuple[Path, ...]:
     aiwg_dir = resolve_aiwg_dir(root_dir)
     candidates = (
         resolve_dummied_socket_path(root_dir),

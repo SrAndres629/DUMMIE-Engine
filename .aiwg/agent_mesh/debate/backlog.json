@@ -13,6 +13,7 @@
     {"pack": "PACK_8", "name": "End-to-end production verification", "status": "completed", "prerequisites": ["PACK_7"]},
     {"pack": "PACK_9", "name": "Performance optimization - memory, process consolidation", "status": "completed", "prerequisites": []},
     {"pack": "PACK_LEGACY", "name": "Eliminar flat_brain_LEGACY", "status": "completed", "prerequisites": []},
-    {"pack": "INMEDIATO", "name": "Branch cleanup + merge to main", "status": "completed", "prerequisites": ["PACK_5.6"]}
+    {"pack": "INMEDIATO", "name": "Branch cleanup + merge to main", "status": "completed", "prerequisites": ["PACK_5.6"]},
+    {"pack": "PACK_10", "name": "Runtime truth reconciliation + daemon coordination", "status": "pending", "priority": "high", "prerequisites": ["PACK_9"], "rationale": "Swarm backlog/consensus show PACK_5.x-PACK_9 complete while .aiwg/state/current_truth.json still advertises PACK_4.1/PACK_4.2 and gateway/MCP readiness has only process-level evidence. Coordinate terminal 1 and terminal 2 through the daemon to reconcile state with lightweight verification."}
   ]
 }

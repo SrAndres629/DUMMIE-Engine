@@ -1,0 +1,36 @@
+sequentialthinking:
+  strategic_value: 5
+  autonomy_gain: 4
+  programming_gain: 5
+  context_quality_gain: 4
+  canonical_fit: 5
+  security_risk_inverse: 5
+  token_efficiency: 3
+  evidence: "Essential for complex reasoning steps in agentic workflows to avoid hallucinations."
+
+mcp-bash:
+  strategic_value: 4
+  autonomy_gain: 5
+  programming_gain: 4
+  canonical_fit: 3
+  security_risk_inverse: 2
+  token_efficiency: 4
+  evidence: "High autonomy but risks on /media/datasets permissions and dubious ownership."
+
+browser-use:
+  strategic_value: 3
+  autonomy_gain: 4
+  programming_gain: 2
+  canonical_fit: 2
+  security_risk_inverse: 3
+  token_efficiency: 2
+  evidence: "Useful for web-based research but high cost and low canonical fit with core engine."
+
+github:
+  strategic_value: 4
+  autonomy_gain: 4
+  programming_gain: 5
+  canonical_fit: 4
+  security_risk_inverse: 4
+  token_efficiency: 4
+  evidence: "Standard for agentic programming and PR management."

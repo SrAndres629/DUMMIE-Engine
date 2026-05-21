@@ -24,14 +24,92 @@
       "rationale": "Shared bounded filesystem access for CLI/IDE clients that do not have Codex-level file tools."
     },
     "sequentialthinking": {
-      "command": "node",
+      "command": "npx",
       "args": [
-        "/home/jorand/temp_servers/src/sequentialthinking/dist/index.js"
+        "-y",
+        "@modelcontextprotocol/server-sequential-thinking"
       ],
       "disabled": false,
       "profile": "core",
       "capability_class": "reasoning_support",
-      "rationale": "Optional structured decomposition surface for clients with weaker native planning."
+      "rationale": "Structured decomposition surface to force hypothesis revision before execution."
+    },
+    "mcp-bash": {
+      "command": "uvx",
+      "args": [
+        "--from",
+        "git+https://github.com/patrickomatik/mcp-bash.git",
+        "mcp-bash"
+      ],
+      "disabled": false,
+      "profile": "core",
+      "capability_class": "shell_execution",
+      "rationale": "Advanced bash execution via MCP."
+    },
+    "computer-use": {
+      "command": "uvx",
+      "args": [
+        "computer-control-mcp@latest"
+      ],
+      "disabled": false,
+      "profile": "utility",
+      "capability_class": "os_automation",
+      "rationale": "Native computer use (screen, keyboard, mouse) for the agent."
+    },
+    "browser-use": {
+      "command": "uvx",
+      "args": [
+        "--from",
+        "browser-use[cli]",
+        "browser-use",
+        "--mcp"
+      ],
+      "env": {
+        "OPENAI_API_KEY": "${OPENAI_API_KEY}",
+        "ANTHROPIC_API_KEY": "${ANTHROPIC_API_KEY}"
+      },
+      "disabled": false,
+      "profile": "utility",
+      "capability_class": "web_automation",
+      "rationale": "High-level web automation via Browser Use."
+    },
+    "browser-mcp": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@smithereen/browser-mcp"
+      ],
+      "disabled": false,
+      "profile": "utility",
+      "capability_class": "web_browsing",
+      "rationale": "Direct Chrome extension integration for session persistence."
+    },
+    "chrome-devtools": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-chrome-devtools"
+      ],
+      "disabled": false,
+      "profile": "utility",
+      "capability_class": "web_debugging",
+      "rationale": "Chrome DevTools inspection."
+    },
+    "postgresql": {
+      "command": "uvx",
+      "args": [
+        "mcp-server-postgresql"
+      ],
+      "env": {
+        "PGHOST": "localhost",
+        "PGPORT": "5432",
+        "PGUSER": "postgres",
+        "PGPASSWORD": "${PGPASSWORD}",
+        "PGDATABASE": "postgres"
+      },
+      "disabled": false,
+      "profile": "knowledge",
+      "capability_class": "structured_local_store"
     },
     "time": {
       "command": "uvx",

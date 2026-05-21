@@ -1,0 +1,227 @@
+{
+  "mcpServers": {
+    "memory": {
+      "command": "node",
+      "args": [
+        "/home/jorand/temp_servers/src/memory/dist/index.js"
+      ],
+      "env": {
+        "MEMORY_FILE_PATH": "/home/jorand/.antigravity/knowledge/memory.jsonl"
+      },
+      "disabled": true,
+      "disabled_reason": "legacy no conecta con el motor 4d "
+    },
+    "filesystem": {
+      "command": "node",
+      "args": [
+        "/home/jorand/temp_servers/src/filesystem/dist/index.js",
+        "/home/jorand/Escritorio/DUMMIE Engine",
+        "/tmp"
+      ],
+      "disabled": false,
+      "profile": "core",
+      "capability_class": "workspace_io",
+      "rationale": "Shared bounded filesystem access for CLI/IDE clients that do not have Codex-level file tools."
+    },
+    "sequentialthinking": {
+      "command": "node",
+      "args": [
+        "/home/jorand/temp_servers/src/sequentialthinking/dist/index.js"
+      ],
+      "disabled": false,
+      "profile": "core",
+      "capability_class": "reasoning_support",
+      "rationale": "Optional structured decomposition surface for clients with weaker native planning."
+    },
+    "time": {
+      "command": "uvx",
+      "args": [
+        "mcp-server-time"
+      ],
+      "disabled": false,
+      "profile": "utility",
+      "capability_class": "temporal_context",
+      "rationale": "Low-risk shared time capability for clients without native time tooling."
+    },
+    "fetch": {
+      "command": "uvx",
+      "args": [
+        "mcp-server-fetch"
+      ],
+      "disabled": false,
+      "profile": "utility",
+      "capability_class": "network_retrieval",
+      "rationale": "Shared explicit fetch capability for agents/IDEs without web tooling; invoked only through gateway."
+    },
+    "obsidian": {
+      "command": "uvx",
+      "args": [
+        "mcp-obsidian"
+      ],
+      "env": {
+        "OBSIDIAN_API_KEY": "${OBSIDIAN_API_KEY}",
+        "OBSIDIAN_HOST": "127.0.0.1",
+        "OBSIDIAN_PORT": "27124"
+      },
+      "disabled": false
+    },
+    "sqlite": {
+      "command": "uvx",
+      "args": [
+        "mcp-server-sqlite",
+        "--db-path",
+        "/home/jorand/.antigravity/knowledge/dummie_sqlite.db"
+      ],
+      "disabled": false,
+      "profile": "knowledge",
+      "capability_class": "structured_local_store",
+      "rationale": "Shared local structured store for non-4D artifacts and cross-client knowledge bus experiments."
+    },
+    "git": {
+      "command": "uvx",
+      "args": [
+        "mcp-server-git",
+        "--repository",
+        "/home/jorand/Escritorio/DUMMIE Engine"
+      ],
+      "disabled": false,
+      "profile": "core",
+      "capability_class": "vcs",
+      "rationale": "Shared repository state access for clients without reliable shell/git integration."
+    },
+    "ripgrep": {
+      "command": "node",
+      "args": [
+        "/media/datasets/sw_tools/mcp_servers/node_modules/mcp-ripgrep/dist/index.js"
+      ],
+      "env": {
+        "PATH": "/media/datasets/sw_tools/bin:/usr/local/bin:/usr/bin:/bin"
+      },
+      "disabled": false,
+      "profile": "core",
+      "capability_class": "code_search",
+      "rationale": "High-value semantic gateway primitive: fast source search available to every CLI/IDE client."
+    },
+    "ctags": {
+      "command": "node",
+      "args": [
+        "/media/datasets/sw_tools/mcp_servers/node_modules/mcp-ctags/index.js"
+      ],
+      "env": {
+        "PATH": "/media/datasets/sw_tools/bin:/usr/local/bin:/usr/bin:/bin"
+      },
+      "disabled": false,
+      "profile": "core",
+      "capability_class": "code_index",
+      "rationale": "Complements ripgrep with symbol navigation for IDE-like clients and cross-language code analysis."
+    },
+    "genkit-mcp-server": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "genkit-cli@latest",
+        "mcp",
+        "--explicitProjectRoot",
+        "--no-update-notification",
+        "--non-interactive"
+      ],
+      "disabled": false,
+      "disabled_reason": "Project-specific external tool; enable only inside a Genkit-owned workflow with tests."
+    },
+    "everything": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-everything"
+      ],
+      "disabled": true,
+      "disabled_reason": "Broad demo server; exposes noisy tools and weakens tool selection."
+    },
+    "arize-tracing-assistant": {
+      "command": "uvx",
+      "args": [
+        "arize-tracing-assistant"
+      ],
+      "disabled": false,
+      "active_reason": "Forman parte de los mcp que descargamos oficiales de antigravity"
+    },
+    "puppeteer": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-puppeteer"
+      ],
+      "disabled": false,
+      "disabled_reason": "Browser automation is useful only for explicit UI tasks; keep off the default cognitive path."
+    },
+    "local-ssh-context": {
+      "command": "/home/jorand/Escritorio/DUMMIE Engine/.aiwg/venv_ssh/bin/python",
+      "args": [
+        "-m",
+        "mcp_server_ssh",
+        "127.0.0.1",
+        "--user",
+        "jorand",
+        "--identity",
+        "/home/jorand/.ssh/dummie_agent_key"
+      ],
+      "disabled": true,
+      "disabled_reason": "Sensitive SSH surface; enable only for an explicit remote-context task with human approval."
+    },
+    "socraticode": {
+      "command": "npx",
+      "args": [
+        "socraticode"
+      ],
+      "env": {
+        "SOCRATICODE_BRANCH_AWARE": "true",
+        "SOCRATICODE_LOG_LEVEL": "info"
+      },
+      "disabled": false
+    },
+    "phoenix": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@arizeai/phoenix-mcp"
+      ],
+      "disabled": false
+    },
+    "github": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-github"
+      ],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_PERSONAL_ACCESS_TOKEN}"
+      },
+      "disabled": false
+    },
+    "vercel": {
+      "command": "node",
+      "args": [
+        "/media/datasets/proyectos/Biblioteca MCP/Vercel/my-vercel-mcp/dist/index.js"
+      ],
+      "env": {
+        "VERCEL_TOKEN": "${VERCEL_TOKEN}"
+      },
+      "disabled": false
+    },
+    "comfyui": {
+      "command": "node",
+      "args": [
+        "/media/datasets/proyectos/Biblioteca MCP/Mcp_Comfyui/build/index.js"
+      ],
+      "disabled": false
+    },
+    "feat-sniper": {
+      "command": "/media/datasets/proyectos/Biblioteca MCP/feat_sniper_mcp/.venv/bin/python",
+      "args": [
+        "/media/datasets/proyectos/Biblioteca MCP/feat_sniper_mcp/mcp_server.py"
+      ],
+      "disabled": true,
+      "rationale": "High-frequency knowledge ingestion. Requires local MT5/DB setup."
+    }
+  }
+}

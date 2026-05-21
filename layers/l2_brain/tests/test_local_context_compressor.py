@@ -3,7 +3,7 @@ from pathlib import Path
 
 import pytest
 
-from layers.l2_brain.local_context_compressor import CompressionInput, LocalContextCompressor
+from layers.l2_brain.context.local_context_compressor import CompressionInput, LocalContextCompressor
 
 
 def test_local_context_compressor_preserves_required_items(tmp_path: Path):

@@ -14,7 +14,7 @@ if str(ROOT) not in sys.path:
 if str(L2) not in sys.path:
     sys.path.insert(0, str(L2))
 
-from layers.l2_brain.token_economy_benchmark import (
+from layers.l2_brain.context.token_economy_benchmark import (
     TokenEconomyBenchmark,
     TokenEconomyBenchmarkCase,
     TokenEconomyBenchmarkReport,

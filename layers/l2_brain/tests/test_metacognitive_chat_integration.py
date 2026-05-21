@@ -1,4 +1,6 @@
-from dummie_chat_cli import DummieChatCli
+from layers.l2_brain.mission.dummie_chat_cli import DummieChatCli
+
+
 def test_chat_metacognition():
     cli = DummieChatCli()
     resp = cli.handle_query("what should I do next?")

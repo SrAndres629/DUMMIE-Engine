@@ -189,3 +189,81 @@ canonical existence before falling back to flat_brain. This was actively masking
 - KuzuDB infra dependency: 1 test always blocked without running database
 - FlatBrainFallbackFinder still needed for 120 modules — cannot yet delete flat_brain/
 - No real embeddings yet — identity and memory are flat YAML, not semantic vectors
+
+# 2026-05-21
+
+## Session: PACK_5-8 completados, merge a main
+
+**Hito: PACK_5.1-5.8, PACK_6, PACK_7, PACK_8, INMEDIATO, PACK_LEGACY — todos completados y mergeados a main.**
+
+### PACK_5.1 — Eliminar 27 huérfanos flat_brain
+- Solo 10/27 eran verdaderamente huérfanos (0 imports vivos). Borrados.
+- 17 restaurados de LEGACY. ✅
+
+### PACK_5.2 — Migrar flat_brain con spec
+- 68 archivos .py + 8 subdirectorios eliminados (tenían canónicos equivalentes).
+- Shim session_store.py creado. ✅
+
+### PACK_5.3 — Eliminar re-export shims
+- daemon, daemon_diagnostic, model_router, metacognition/contracts shims eliminados. ✅
+
+### PACK_5.4 — Remover _FlatBrainFallbackFinder
+- FallbackFinder quitado de `__init__.py`.
+- 19 módulos migrados de flat_brain/ a layers/l2_brain/. ✅
+
+### PACK_5.5 — Eliminar flat_brain/ completo
+- flat_brain/ reducido de ~230 → 0 archivos. ✅
+
+### PACK_5.6 — Test contrato flat_brain no existe
+- Test creado y verificado. ✅
+
+### PACK_5.7 — ContextPruningHook
+- Integración de metadatos RIR + scoring en pipeline metacognitivo. ✅
+
+### PACK_6 — src/brain/ canonical migration
+- src/brain/ eliminado (47 archivos). 23 tests pasando. ✅
+
+### PACK_7 — Spec registry completeness
+- `spec_registry_sync.py` cambiado de glob→rglob (recursivo).
+- 169 evidence paths corregidos (estaban stale por reorganización en capas).
+- 26 paths a ubicaciones canónicas corregidos.
+- Resultado: 180 specs, error_count 41→21 (12 falsos positivos). ✅
+
+### PACK_8 — End-to-end production verification
+- Ollama: RUNNING (gemma3:1b)
+- Embeddings: vectores 768d reales
+- KuzuRepository: inicializado
+- SkillRegistry: 32+6+19 skills
+- Import chain: PASS
+- Spec registry: 180/21 ✅
+
+### PACK_LEGACY — Eliminar flat_brain_LEGACY
+- 238 archivos, 5.8MB de backup eliminados. 0 referencias en código. ✅
+
+### INMEDIATO — Branch cleanup + merge
+- Commit de PACK_7-8 (63 files, 201 inserciones)
+- Fast-forward merge a main
+- 6 ramas stale eliminadas
+- Backup branches preservadas (forensic audit) ✅
+
+### Otros cambios
+- **Import chain repair**: 133 `brain.` → `layers.l2_brain.` en 49 archivos
+- **Infraestructura debate**: 5 scripts swarm (daemon, check, ack, vote, propose)
+- **dummie/runtime_chat.py**: 4 imports de `src.brain.` corregidos
+- **MEMORY.md no se modificaba desde 2026-05-19** — ahora actualizado
+
+### Estado actual
+- Branch: `main` @ fe91a2f
+- `dummie.engine import`: PASS
+- Spec registry: 180 specs / 21 errores
+- 21 errores son: 12 falsos positivos (nombres de función), 6 archivos .aiwg/ eliminados, 3 implementaciones pendientes
+- flat_brain/ existe como respaldo pero está obsoleto
+- flat_brain_LEGACY/ eliminado
+- FallbackFinder eliminado
+- __imports canónicos__ funcionan sin redirector
+
+### Lecciones
+- `sed -i` con reemplazo global sin word boundary DESTRUYE archivos que ya tenían `layers.l2_brain.` prefijo. Siempre verificar con `git diff` después de reemplazos batch.
+- `git stash --include-untracked` + `git stash drop` pierde archivos no commiteados. No drop hasta verificar que todo está en git.
+- Los módulos migrados a `layers/l2_brain/` root (ast_indexer, auto_evolution, etc.) deben ser commiteados EXPLÍCITAMENTE.
+- El spec_registry_sync necesita `rglob` no `glob` para descubrir .md en subdirectorios de capas.

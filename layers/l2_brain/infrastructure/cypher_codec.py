@@ -1,6 +1,8 @@
+# Spec Reference: 26_langgraph_quantum_swarm
 import json
 from enum import Enum
 from typing import Any
+
 
 def cypher_literal(value: Any) -> str:
     """
@@ -18,13 +20,9 @@ def cypher_literal(value: Any) -> str:
     if isinstance(value, Enum):
         value = value.value
     if isinstance(value, str):
-        escaped = (
-            str(value)
-            .replace("\\", "\\\\")
-            .replace("'", "\\'")
-        )
+        escaped = str(value).replace("\\", "\\\\").replace("'", "\\'")
         return f"'{escaped}'"
-    
+
     # Fallback para otros objetos (serialización JSON)
     try:
         serialized = json.dumps(value, ensure_ascii=False)
@@ -32,6 +30,7 @@ def cypher_literal(value: Any) -> str:
         return f"'{escaped}'"
     except Exception:
         raise TypeError(f"Unsupported Cypher literal type: {type(value)!r}")
+
 
 def node_to_create_cypher(node: Any) -> str:
     """

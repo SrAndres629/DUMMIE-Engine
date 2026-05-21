@@ -1,7 +1,7 @@
 import json
 import pytest
 from pathlib import Path
-from layers.l2_brain.mission_coherence_guard import MissionCoherenceGuard
+from layers.l2_brain.mission.mission_coherence_guard import MissionCoherenceGuard
 
 @pytest.fixture
 def mission_env(tmp_path):

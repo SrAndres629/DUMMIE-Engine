@@ -1,14 +1,17 @@
+# Spec Reference: 192_embedding_mesh_foundation
 import logging
 import numpy as np
 from typing import List, Optional
 
 logger = logging.getLogger("brain.embeddings")
 
+
 class EmbeddingProvider:
     """
     Proveedor de Embeddings basado en FastEmbed (Spec 2026).
     Implementa Lazy Loading para optimizar el uso de memoria.
     """
+
     _model = None
 
     @classmethod
@@ -16,6 +19,7 @@ class EmbeddingProvider:
         if cls._model is None:
             try:
                 from fastembed import TextEmbedding
+
                 logger.info("Initializing FastEmbed model (BAAI/bge-small-en-v1.5)...")
                 # bge-small-en-v1.5 es ligero (384 dim, ~100MB) y potente.
                 cls._model = TextEmbedding()
@@ -29,7 +33,7 @@ class EmbeddingProvider:
         """Genera un vector denso para un texto dado."""
         if not text:
             return [0.0] * 384
-        
+
         try:
             model = cls._get_model()
             # fastembed genera un iterador de embeddings

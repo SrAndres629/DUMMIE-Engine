@@ -27,21 +27,42 @@ class BindingStatus(str, Enum):
     NEEDS_MANUAL_REVIEW = "NEEDS_MANUAL_REVIEW"
 
 
-
 class ContractBinding(BaseModel):
     path: str = Field(..., description="File path relative to repository root")
-    layer: str = Field(..., description="Repository architectural layer e.g. L0, L1, L2")
+    layer: str = Field(
+        ..., description="Repository architectural layer e.g. L0, L1, L2"
+    )
     owner_domain: str = Field(..., description="Sovereign domain of logic ownership")
-    structural_class: StructuralClass = Field(..., description="Class assigned after contract verification")
-    binding_status: BindingStatus = Field(..., description="State of the contract binding")
-    spec_refs: List[str] = Field(default_factory=list, description="Associated specifications")
-    test_refs: List[str] = Field(default_factory=list, description="Associated unit/integration tests")
-    runtime_refs: List[str] = Field(default_factory=list, description="Associated runtime module pathways")
-    evidence_refs: List[str] = Field(default_factory=list, description="Traceable physical evidence")
-    action: Recommendation = Field(Recommendation.NO_ACTION, description="Action recommendation after binding")
-    risk_before: RiskLevel = Field(RiskLevel.CRITICAL, description="Initial triage risk level")
-    risk_after: RiskLevel = Field(..., description="Target risk after contract verification")
-    confidence: float = Field(1.0, ge=0.0, le=1.0, description="Verification confidence factor")
+    structural_class: StructuralClass = Field(
+        ..., description="Class assigned after contract verification"
+    )
+    binding_status: BindingStatus = Field(
+        ..., description="State of the contract binding"
+    )
+    spec_refs: List[str] = Field(
+        default_factory=list, description="Associated specifications"
+    )
+    test_refs: List[str] = Field(
+        default_factory=list, description="Associated unit/integration tests"
+    )
+    runtime_refs: List[str] = Field(
+        default_factory=list, description="Associated runtime module pathways"
+    )
+    evidence_refs: List[str] = Field(
+        default_factory=list, description="Traceable physical evidence"
+    )
+    action: Recommendation = Field(
+        Recommendation.NO_ACTION, description="Action recommendation after binding"
+    )
+    risk_before: RiskLevel = Field(
+        RiskLevel.CRITICAL, description="Initial triage risk level"
+    )
+    risk_after: RiskLevel = Field(
+        ..., description="Target risk after contract verification"
+    )
+    confidence: float = Field(
+        1.0, ge=0.0, le=1.0, description="Verification confidence factor"
+    )
     notes: str = Field("", description="Detailed engineering reasoning notes")
 
 
@@ -137,7 +158,10 @@ class ContractBindingRegistry:
             binding_status=BindingStatus.BOUND_ACTIVE_RUNTIME,
             spec_refs=l1_specs,
             test_refs=runtime_py_tests,
-            runtime_refs=["layers/l1_nervous/domain/services.py", "layers/l1_nervous/bootstrap.py"],
+            runtime_refs=[
+                "layers/l1_nervous/domain/services.py",
+                "layers/l1_nervous/bootstrap.py",
+            ],
             evidence_refs=["FILE_EXISTS", "IMPORTABLE"],
             action=Recommendation.KEEP_AND_TEST,
             risk_before=RiskLevel.CRITICAL,
@@ -281,21 +305,23 @@ class ContractBindingRegistry:
             notes="Depends on optional 'mcp' package; import contract must remain deferred.",
         )
 
-        self._bindings["layers/l1_nervous/tools_impl/patch_transactions.py"] = ContractBinding(
-            path="layers/l1_nervous/tools_impl/patch_transactions.py",
-            layer="L1",
-            owner_domain="Dynamic Patching Transactions",
-            structural_class=StructuralClass.ACTIVE_RUNTIME,
-            binding_status=BindingStatus.BOUND_ACTIVE_RUNTIME,
-            spec_refs=l1_specs,
-            test_refs=runtime_py_tests,
-            runtime_refs=["layers/l1_nervous/tools_impl/nervous.py"],
-            evidence_refs=["FILE_EXISTS", "IMPORTABLE"],
-            action=Recommendation.KEEP_AND_TEST,
-            risk_before=RiskLevel.CRITICAL,
-            risk_after=RiskLevel.MEDIUM,
-            confidence=0.82,
-            notes="Patch transaction helper with import-only coverage.",
+        self._bindings["layers/l1_nervous/tools_impl/patch_transactions.py"] = (
+            ContractBinding(
+                path="layers/l1_nervous/tools_impl/patch_transactions.py",
+                layer="L1",
+                owner_domain="Dynamic Patching Transactions",
+                structural_class=StructuralClass.ACTIVE_RUNTIME,
+                binding_status=BindingStatus.BOUND_ACTIVE_RUNTIME,
+                spec_refs=l1_specs,
+                test_refs=runtime_py_tests,
+                runtime_refs=["layers/l1_nervous/tools_impl/nervous.py"],
+                evidence_refs=["FILE_EXISTS", "IMPORTABLE"],
+                action=Recommendation.KEEP_AND_TEST,
+                risk_before=RiskLevel.CRITICAL,
+                risk_after=RiskLevel.MEDIUM,
+                confidence=0.82,
+                notes="Patch transaction helper with import-only coverage.",
+            )
         )
 
         self._bindings["layers/l1_nervous/utils.py"] = ContractBinding(
@@ -342,12 +368,18 @@ class ContractBindingRegistry:
         ]
         for path in deferred_runtime:
             layer = "L0" if path.startswith("layers/l0_") else "L1"
-            owner = "Polyglot Runtime Surface" if layer == "L1" else "Overseer OTP Runtime"
-            specs = l0_specs if layer == "L0" else [
-                "doc/specs/L1_Nervous/15_mcp_sidecar_isolation.md",
-                "doc/specs/L1_Nervous/16_mcp_dynamic_gateway.md",
-                "doc/specs/L1_Nervous/41_layer_handshake_protocol.md",
-            ]
+            owner = (
+                "Polyglot Runtime Surface" if layer == "L1" else "Overseer OTP Runtime"
+            )
+            specs = (
+                l0_specs
+                if layer == "L0"
+                else [
+                    "doc/specs/L1_Nervous/15_mcp_sidecar_isolation.md",
+                    "doc/specs/L1_Nervous/16_mcp_dynamic_gateway.md",
+                    "doc/specs/L1_Nervous/41_layer_handshake_protocol.md",
+                ]
+            )
             self._bindings[path] = ContractBinding(
                 path=path,
                 layer=layer,
@@ -373,7 +405,10 @@ class ContractBindingRegistry:
                 owner_domain="Action Orchestration",
                 structural_class=StructuralClass.ACTIVE_RUNTIME,
                 binding_status=BindingStatus.BOUND_ACTIVE_RUNTIME,
-                spec_refs=["doc/specs/L0_Overseer/26_langgraph_quantum_swarm.md", "doc/specs/L2_Brain/12_6d_context_model.md"],
+                spec_refs=[
+                    "doc/specs/L0_Overseer/26_langgraph_quantum_swarm.md",
+                    "doc/specs/L2_Brain/12_6d_context_model.md",
+                ],
                 test_refs=["layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"],
                 runtime_refs=[],
                 evidence_refs=["FILE_EXISTS", "IMPORTABLE"],
@@ -405,7 +440,10 @@ class ContractBindingRegistry:
                 owner_domain="Code Indexing",
                 structural_class=StructuralClass.ACTIVE_RUNTIME,
                 binding_status=BindingStatus.BOUND_ACTIVE_RUNTIME,
-                spec_refs=["doc/specs/L0_Overseer/03_polyglot_architecture.md", "doc/specs/L2_Brain/12_6d_context_model.md"],
+                spec_refs=[
+                    "doc/specs/L0_Overseer/03_polyglot_architecture.md",
+                    "doc/specs/L2_Brain/12_6d_context_model.md",
+                ],
                 test_refs=["layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"],
                 runtime_refs=[],
                 evidence_refs=["FILE_EXISTS", "IMPORTABLE"],
@@ -416,12 +454,15 @@ class ContractBindingRegistry:
                 notes="Bound during Pack 2.3 batch triage.",
             ),
             ContractBinding(
-                path="layers/l2_brain/auditor_port.py",
+                path="layers/l2_brain/infrastructure/auditor_port.py",
                 layer="L2",
                 owner_domain="Governance Audit",
                 structural_class=StructuralClass.ACTIVE_RUNTIME,
                 binding_status=BindingStatus.BOUND_ACTIVE_RUNTIME,
-                spec_refs=["doc/specs/L0_Overseer/14_value_engineering_and_governance.md", "doc/specs/L2_Brain/12_6d_context_model.md"],
+                spec_refs=[
+                    "doc/specs/L0_Overseer/14_value_engineering_and_governance.md",
+                    "doc/specs/L2_Brain/12_6d_context_model.md",
+                ],
                 test_refs=["layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"],
                 runtime_refs=[],
                 evidence_refs=["FILE_EXISTS", "IMPORTABLE"],
@@ -464,12 +505,15 @@ class ContractBindingRegistry:
                 notes="Bound during Pack 2.3 batch triage.",
             ),
             ContractBinding(
-                path="layers/l2_brain/context_circulation_runtime.py",
+                path="layers/l2_brain/context/context_circulation_runtime.py",
                 layer="L2",
                 owner_domain="Context Circulation",
                 structural_class=StructuralClass.ACTIVE_RUNTIME,
                 binding_status=BindingStatus.BOUND_ACTIVE_RUNTIME,
-                spec_refs=["doc/specs/L2_Brain/84_context_budget_manager.md", "doc/specs/L2_Brain/12_6d_context_model.md"],
+                spec_refs=[
+                    "doc/specs/L2_Brain/84_context_budget_manager.md",
+                    "doc/specs/L2_Brain/12_6d_context_model.md",
+                ],
                 test_refs=["layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"],
                 runtime_refs=[],
                 evidence_refs=["FILE_EXISTS", "IMPORTABLE"],
@@ -480,12 +524,15 @@ class ContractBindingRegistry:
                 notes="Bound during Pack 2.3 batch triage.",
             ),
             ContractBinding(
-                path="layers/l2_brain/cypher_codec.py",
+                path="layers/l2_brain/infrastructure/cypher_codec.py",
                 layer="L2",
                 owner_domain="Graph Query Serialization",
                 structural_class=StructuralClass.ACTIVE_RUNTIME,
                 binding_status=BindingStatus.BOUND_ACTIVE_RUNTIME,
-                spec_refs=["doc/specs/L0_Overseer/26_langgraph_quantum_swarm.md", "doc/specs/L2_Brain/12_6d_context_model.md"],
+                spec_refs=[
+                    "doc/specs/L0_Overseer/26_langgraph_quantum_swarm.md",
+                    "doc/specs/L2_Brain/12_6d_context_model.md",
+                ],
                 test_refs=["layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"],
                 runtime_refs=[],
                 evidence_refs=["FILE_EXISTS", "IMPORTABLE"],
@@ -549,7 +596,10 @@ class ContractBindingRegistry:
                 owner_domain="Knowledge Retrieval",
                 structural_class=StructuralClass.ACTIVE_RUNTIME,
                 binding_status=BindingStatus.BOUND_ACTIVE_RUNTIME,
-                spec_refs=["doc/specs/192_embedding_mesh_foundation.md", "doc/specs/L2_Brain/12_6d_context_model.md"],
+                spec_refs=[
+                    "doc/specs/192_embedding_mesh_foundation.md",
+                    "doc/specs/L2_Brain/12_6d_context_model.md",
+                ],
                 test_refs=["layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"],
                 runtime_refs=[],
                 evidence_refs=["FILE_EXISTS", "IMPORTABLE"],
@@ -565,7 +615,10 @@ class ContractBindingRegistry:
                 owner_domain="Semantic Interfaces",
                 structural_class=StructuralClass.ACTIVE_RUNTIME,
                 binding_status=BindingStatus.BOUND_ACTIVE_RUNTIME,
-                spec_refs=["doc/specs/192_embedding_mesh_foundation.md", "doc/specs/L2_Brain/12_6d_context_model.md"],
+                spec_refs=[
+                    "doc/specs/192_embedding_mesh_foundation.md",
+                    "doc/specs/L2_Brain/12_6d_context_model.md",
+                ],
                 test_refs=["layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"],
                 runtime_refs=[],
                 evidence_refs=["FILE_EXISTS", "IMPORTABLE"],
@@ -576,12 +629,15 @@ class ContractBindingRegistry:
                 notes="Bound during Pack 2.3 batch triage.",
             ),
             ContractBinding(
-                path="layers/l2_brain/embedding_provider.py",
+                path="layers/l2_brain/model_mesh/embedding_provider.py",
                 layer="L2",
                 owner_domain="Vector Embeddings",
                 structural_class=StructuralClass.ACTIVE_RUNTIME,
                 binding_status=BindingStatus.BOUND_ACTIVE_RUNTIME,
-                spec_refs=["doc/specs/192_embedding_mesh_foundation.md", "doc/specs/L2_Brain/12_6d_context_model.md"],
+                spec_refs=[
+                    "doc/specs/192_embedding_mesh_foundation.md",
+                    "doc/specs/L2_Brain/12_6d_context_model.md",
+                ],
                 test_refs=["layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"],
                 runtime_refs=[],
                 evidence_refs=["FILE_EXISTS", "IMPORTABLE"],
@@ -597,7 +653,10 @@ class ContractBindingRegistry:
                 owner_domain="Acoustic Identity",
                 structural_class=StructuralClass.ACTIVE_RUNTIME,
                 binding_status=BindingStatus.BOUND_ACTIVE_RUNTIME,
-                spec_refs=["doc/specs/L0_Overseer/33_persistent_personality_mood.md", "doc/specs/L2_Brain/12_6d_context_model.md"],
+                spec_refs=[
+                    "doc/specs/L0_Overseer/33_persistent_personality_mood.md",
+                    "doc/specs/L2_Brain/12_6d_context_model.md",
+                ],
                 test_refs=["layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"],
                 runtime_refs=[],
                 evidence_refs=["FILE_EXISTS", "IMPORTABLE"],
@@ -608,12 +667,15 @@ class ContractBindingRegistry:
                 notes="Bound during Pack 2.3 batch triage.",
             ),
             ContractBinding(
-                path="layers/l2_brain/event_bus.py",
+                path="layers/l2_brain/infrastructure/event_bus.py",
                 layer="L2",
                 owner_domain="Cognitive Signaling",
                 structural_class=StructuralClass.ACTIVE_RUNTIME,
                 binding_status=BindingStatus.BOUND_ACTIVE_RUNTIME,
-                spec_refs=["doc/specs/L0_Overseer/05_orchestration_stack_and_glue.md", "doc/specs/L2_Brain/12_6d_context_model.md"],
+                spec_refs=[
+                    "doc/specs/L0_Overseer/05_orchestration_stack_and_glue.md",
+                    "doc/specs/L2_Brain/12_6d_context_model.md",
+                ],
                 test_refs=["layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"],
                 runtime_refs=[],
                 evidence_refs=["FILE_EXISTS", "IMPORTABLE"],
@@ -629,7 +691,10 @@ class ContractBindingRegistry:
                 owner_domain="Metacognitive Feedback",
                 structural_class=StructuralClass.ACTIVE_RUNTIME,
                 binding_status=BindingStatus.BOUND_ACTIVE_RUNTIME,
-                spec_refs=["doc/specs/L0_Overseer/14_value_engineering_and_governance.md", "doc/specs/L2_Brain/12_6d_context_model.md"],
+                spec_refs=[
+                    "doc/specs/L0_Overseer/14_value_engineering_and_governance.md",
+                    "doc/specs/L2_Brain/12_6d_context_model.md",
+                ],
                 test_refs=["layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"],
                 runtime_refs=[],
                 evidence_refs=["FILE_EXISTS", "IMPORTABLE"],
@@ -661,7 +726,10 @@ class ContractBindingRegistry:
                 owner_domain="Formal Executable Specs",
                 structural_class=StructuralClass.ACTIVE_RUNTIME,
                 binding_status=BindingStatus.BOUND_ACTIVE_RUNTIME,
-                spec_refs=["doc/specs/L3_Shield/22_sdd_executable_contracts.md", "doc/specs/L2_Brain/12_6d_context_model.md"],
+                spec_refs=[
+                    "doc/specs/L3_Shield/22_sdd_executable_contracts.md",
+                    "doc/specs/L2_Brain/12_6d_context_model.md",
+                ],
                 test_refs=["layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"],
                 runtime_refs=[],
                 evidence_refs=["FILE_EXISTS", "IMPORTABLE"],
@@ -677,7 +745,10 @@ class ContractBindingRegistry:
                 owner_domain="Gateway Protocols",
                 structural_class=StructuralClass.ACTIVE_RUNTIME,
                 binding_status=BindingStatus.BOUND_ACTIVE_RUNTIME,
-                spec_refs=["doc/specs/L1_Nervous/16_mcp_dynamic_gateway.md", "doc/specs/L2_Brain/12_6d_context_model.md"],
+                spec_refs=[
+                    "doc/specs/L1_Nervous/16_mcp_dynamic_gateway.md",
+                    "doc/specs/L2_Brain/12_6d_context_model.md",
+                ],
                 test_refs=["layers/l2_brain/tests/test_pack2_3_l2_bindings_smoke.py"],
                 runtime_refs=[],
                 evidence_refs=["FILE_EXISTS", "IMPORTABLE"],
@@ -902,10 +973,14 @@ class ContractBindingRegistry:
             return None, None
         return binding, self._validate(binding, repo_root, evidence or {})
 
-    def _validate(self, binding: ContractBinding, repo_root: Path, evidence: Dict[str, object]) -> BindingValidation:
+    def _validate(
+        self, binding: ContractBinding, repo_root: Path, evidence: Dict[str, object]
+    ) -> BindingValidation:
         valid_specs = [ref for ref in binding.spec_refs if _ref_exists(repo_root, ref)]
         valid_tests = [ref for ref in binding.test_refs if _ref_exists(repo_root, ref)]
-        valid_runtime = [ref for ref in binding.runtime_refs if _ref_exists(repo_root, ref)]
+        valid_runtime = [
+            ref for ref in binding.runtime_refs if _ref_exists(repo_root, ref)
+        ]
 
         missing_specs = sorted(set(binding.spec_refs) - set(valid_specs))
         missing_tests = sorted(set(binding.test_refs) - set(valid_tests))
@@ -937,19 +1012,31 @@ class ContractBindingRegistry:
             if module_name in text or filename in text or stem.lower() in lowered:
                 linked_test_hits.append(test)
 
-        evidence_refs = set(str(v) for v in evidence.get("evidence_refs", []) if isinstance(v, str))
+        evidence_refs = set(
+            str(v) for v in evidence.get("evidence_refs", []) if isinstance(v, str)
+        )
         has_importable_evidence = "IMPORTABLE" in evidence_refs
         py_file = binding.path.endswith(".py")
 
         # Check polyglot ledger first for risk & status calibration
-        ledger_path = repo_root / ".aiwg" / "reports" / "structural_polyglot_toolchain_ledger_latest.json"
+        ledger_path = (
+            repo_root
+            / ".aiwg"
+            / "reports"
+            / "structural_polyglot_toolchain_ledger_latest.json"
+        )
         polyglot_entry = None
         if ledger_path.exists():
             try:
                 import json
+
                 with open(ledger_path, "r", encoding="utf-8") as f:
                     ledger_data = json.load(f)
-                    entries = ledger_data if isinstance(ledger_data, list) else ledger_data.get("entries", [])
+                    entries = (
+                        ledger_data
+                        if isinstance(ledger_data, list)
+                        else ledger_data.get("entries", [])
+                    )
                     for entry in entries:
                         if entry.get("path") == binding.path:
                             polyglot_entry = entry
@@ -973,9 +1060,14 @@ class ContractBindingRegistry:
                 BindingStatus.CONTRACT_BOUND.value,
                 BindingStatus.SMOKE_PASSED.value,
             }
-            has_success_signal = any(token in observed_result for token in ("pass", "passed", "success", "succeeded", "ok"))
+            has_success_signal = any(
+                token in observed_result
+                for token in ("pass", "passed", "success", "succeeded", "ok")
+            )
 
-            if decision_is_positive and (not evidence_command or not has_success_signal):
+            if decision_is_positive and (
+                not evidence_command or not has_success_signal
+            ):
                 resolved_status = BindingStatus.REMAINS_DEFERRED
                 effective_risk = RiskLevel.HIGH
                 effective_recommendation = Recommendation.FREEZE_UNTIL_REVIEW
@@ -993,12 +1085,16 @@ class ContractBindingRegistry:
                     issues.append("invalid_risk_after_in_ledger")
 
             if decision == BindingStatus.TOOLCHAIN_MISSING.value:
-                issues.append(f"toolchain_missing:{polyglot_entry.get('required_toolchain')}")
+                issues.append(
+                    f"toolchain_missing:{polyglot_entry.get('required_toolchain')}"
+                )
             if decision == BindingStatus.SMOKE_FAILED.value:
                 issues.append("smoke_failed")
 
             # Add dynamic evidence refs
-            evidence_refs.add(f"POLYGLOT_TOOLCHAIN:{polyglot_entry.get('required_toolchain')}")
+            evidence_refs.add(
+                f"POLYGLOT_TOOLCHAIN:{polyglot_entry.get('required_toolchain')}"
+            )
             evidence_refs.add(f"PROBE:{decision}")
 
         if not _ref_exists(repo_root, binding.path):
@@ -1022,12 +1118,20 @@ class ContractBindingRegistry:
             issues.append("missing_importable_evidence")
 
         if binding.binding_status == BindingStatus.BOUND_ACTIVE_RUNTIME:
-            if has_strong_spec and has_linked_tests and (has_importable_evidence or not py_file):
+            if (
+                has_strong_spec
+                and has_linked_tests
+                and (has_importable_evidence or not py_file)
+            ):
                 effective_risk = _max_risk(binding.risk_after, RiskLevel.MEDIUM)
                 effective_recommendation = Recommendation.KEEP_AND_TEST
             elif (has_scoped_spec or has_strong_spec) and has_linked_tests:
                 effective_risk = _max_risk(binding.risk_after, RiskLevel.MEDIUM)
-                effective_recommendation = Recommendation.MAP_TO_SPEC if not has_strong_spec else Recommendation.KEEP_AND_TEST
+                effective_recommendation = (
+                    Recommendation.MAP_TO_SPEC
+                    if not has_strong_spec
+                    else Recommendation.KEEP_AND_TEST
+                )
             elif has_linked_tests and not (has_scoped_spec or has_strong_spec):
                 effective_risk = _max_risk(binding.risk_after, RiskLevel.HIGH)
                 effective_recommendation = Recommendation.MAP_TO_SPEC
@@ -1044,7 +1148,11 @@ class ContractBindingRegistry:
 
         if binding.binding_status == BindingStatus.DEFERRED_NO_SAFE_ACTION:
             if polyglot_entry:
-                if resolved_status in {BindingStatus.TOOLCHAIN_VALIDATED, BindingStatus.CONTRACT_BOUND, BindingStatus.SMOKE_PASSED}:
+                if resolved_status in {
+                    BindingStatus.TOOLCHAIN_VALIDATED,
+                    BindingStatus.CONTRACT_BOUND,
+                    BindingStatus.SMOKE_PASSED,
+                }:
                     effective_recommendation = Recommendation.KEEP_AND_TEST
                 else:
                     effective_recommendation = Recommendation.FREEZE_UNTIL_REVIEW
@@ -1057,15 +1165,20 @@ class ContractBindingRegistry:
                     resolved_status = BindingStatus.NEEDS_MANUAL_OWNER
                     issues.append("deferred binding lacks spec ownership")
 
-
         confidence = binding.confidence
         if missing_specs:
             confidence -= 0.10
-        if missing_tests and binding.binding_status == BindingStatus.BOUND_ACTIVE_RUNTIME:
+        if (
+            missing_tests
+            and binding.binding_status == BindingStatus.BOUND_ACTIVE_RUNTIME
+        ):
             confidence -= 0.10
         if py_file and not has_importable_evidence:
             confidence -= 0.15
-        if not has_linked_tests and binding.binding_status == BindingStatus.BOUND_ACTIVE_RUNTIME:
+        if (
+            not has_linked_tests
+            and binding.binding_status == BindingStatus.BOUND_ACTIVE_RUNTIME
+        ):
             confidence -= 0.10
         if not (has_scoped_spec or has_strong_spec):
             confidence -= 0.10

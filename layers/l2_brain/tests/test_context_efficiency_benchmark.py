@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 
-from layers.l2_brain.context_efficiency_benchmark import ContextEfficiencyBenchmark
+from layers.l2_brain.context.context_efficiency_benchmark import ContextEfficiencyBenchmark
 
 
 def _write_json(path: Path, payload: dict) -> None:

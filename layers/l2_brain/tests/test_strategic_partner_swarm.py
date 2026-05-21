@@ -1,7 +1,7 @@
 import json
 import pytest
 from pathlib import Path
-from layers.l2_brain.strategic_partner_swarm import StrategicPartnerSwarm
+from layers.l2_brain.strategic.strategic_partner_swarm import StrategicPartnerSwarm
 
 @pytest.fixture
 def swarm_env(tmp_path):

@@ -1,7 +1,7 @@
 import json
 import pytest
 from pathlib import Path
-from layers.l2_brain.state_coherence_guard import StateCoherenceGuard, run_state_coherence_guard
+from layers.l2_brain.governance.state_coherence_guard import StateCoherenceGuard, run_state_coherence_guard
 
 @pytest.fixture
 def temp_aiwg(tmp_path):

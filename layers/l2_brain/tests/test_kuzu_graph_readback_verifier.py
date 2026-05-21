@@ -2,7 +2,7 @@
 import os
 import json
 from pathlib import Path
-from layers.l2_brain.kuzu_graph_readback_verifier import run_kuzu_graph_readback_verification
+from layers.l2_brain.memory.kuzu_graph_readback_verifier import run_kuzu_graph_readback_verification
 
 # Spec Reference: 187_kuzu_graph_readback_verifier
 

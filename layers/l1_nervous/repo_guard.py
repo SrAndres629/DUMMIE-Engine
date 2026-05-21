@@ -1,3 +1,4 @@
+# Spec Reference: 130_trusted_workstation_mode
 import os
 import subprocess
 import logging
@@ -6,16 +7,20 @@ from datetime import datetime
 
 logger = logging.getLogger("nervous.repo_guard")
 
+
 class RepoGuard:
     """
     [L1_NERVOUS] Atomic Evolution & Conflict Guard.
     Garantiza que las operaciones de Git sean atómicas, seguras y libres de conflictos.
     """
+
     def __init__(self, workspace_root: str, agent_id: str = "DUMMIE_CORE"):
         self.workspace_root = workspace_root
         self.agent_id = agent_id
 
-    def _run_git(self, args: List[str], check: bool = True) -> subprocess.CompletedProcess:
+    def _run_git(
+        self, args: List[str], check: bool = True
+    ) -> subprocess.CompletedProcess:
         try:
             result = subprocess.run(
                 ["git"] + args,
@@ -23,11 +28,13 @@ class RepoGuard:
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
                 text=True,
-                check=check
+                check=check,
             )
             return result
         except subprocess.CalledProcessError as e:
-            logger.error(f"Git command failed: {' '.join(e.cmd)} | Error: {e.stderr.strip()}")
+            logger.error(
+                f"Git command failed: {' '.join(e.cmd)} | Error: {e.stderr.strip()}"
+            )
             raise
 
     def sync_before_action(self):
@@ -51,19 +58,24 @@ class RepoGuard:
         """
         for f in files:
             path = os.path.join(self.workspace_root, f)
-            if not os.path.exists(path): continue
-            
-            with open(path, 'r', errors='ignore') as file:
+            if not os.path.exists(path):
+                continue
+
+            with open(path, "r", errors="ignore") as file:
                 content = file.read()
-                
+
                 # 1. Detectar Secretos
                 if "ghp_" in content or "github_pat_" in content:
-                    logger.critical(f"[RepoGuard] SECURITY BLOCK: Hardcoded token detected in {f}")
+                    logger.critical(
+                        f"[RepoGuard] SECURITY BLOCK: Hardcoded token detected in {f}"
+                    )
                     raise RuntimeError(f"Security Violation: Hardcoded token in {f}")
-                
+
                 # 2. Detectar Marcadores de Conflicto
                 if "<<<<<<<" in content or "=======" in content or ">>>>>>>" in content:
-                    logger.critical(f"[RepoGuard] INTEGRITY BLOCK: Unresolved conflict markers in {f}")
+                    logger.critical(
+                        f"[RepoGuard] INTEGRITY BLOCK: Unresolved conflict markers in {f}"
+                    )
                     raise RuntimeError(f"Integrity Violation: Conflict markers in {f}")
 
         logger.debug("[RepoGuard] Validation passed.")
@@ -83,18 +95,18 @@ class RepoGuard:
         try:
             # 1. Stage files
             self._run_git(["add"] + files)
-            
+
             # 2. Commit con metadatos de evolución
             full_message = f"🧠 [EVOLUTION] {message}\n\nAgent-ID: {self.agent_id}\nTimestamp: {datetime.utcnow().isoformat()}"
             self._run_git(["commit", "-m", full_message])
-            
+
             # 3. Sincronización Final (Evitar Out-of-Sync)
             logger.debug("[RepoGuard] Final sync before push...")
             self._run_git(["pull", "--rebase", "origin", "main"])
-            
+
             # 4. Push Seguro
             self._run_git(["push", "origin", "main"])
-            
+
             logger.debug("[RepoGuard] Atomic push successful.")
         except Exception as e:
             logger.error(f"[RepoGuard] Atomic push failed: {e}")
@@ -108,7 +120,7 @@ class RepoGuard:
         # 1. Eliminar ramas locales huérfanas
         self._run_git(["remote", "prune", "origin"])
         # 2. Limpiar archivos no rastreados (excepto configuraciones críticas)
-        # self._run_git(["clean", "-fd", "-e", "*.json"]) 
+        # self._run_git(["clean", "-fd", "-e", "*.json"])
         logger.debug("[RepoGuard] Self-healing completed.")
 
     def reserve_locus(self, files: List[str]):
@@ -127,4 +139,3 @@ class RepoGuard:
         """
         for f in files:
             logger.debug(f"[RepoGuard] RELEASING LOCUS for: {f}")
-

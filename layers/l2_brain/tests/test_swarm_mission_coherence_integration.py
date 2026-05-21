@@ -1,10 +1,10 @@
 import json
 import pytest
 from pathlib import Path
-from layers.l2_brain.mission_planner import create_mission_plan
-from layers.l2_brain.mission_orchestrator_dag import build_dag_from_mission_plan
-from layers.l2_brain.mission_coherence_guard import run_mission_coherence_guard
-from layers.l2_brain.strategic_partner_swarm import run_strategic_partner_swarm
+from layers.l2_brain.mission.mission_planner import create_mission_plan
+from layers.l2_brain.mission.mission_orchestrator_dag import build_dag_from_mission_plan
+from layers.l2_brain.mission.mission_coherence_guard import run_mission_coherence_guard
+from layers.l2_brain.strategic.strategic_partner_swarm import run_strategic_partner_swarm
 
 def test_mission_to_swarm_integration(tmp_path):
     root = tmp_path

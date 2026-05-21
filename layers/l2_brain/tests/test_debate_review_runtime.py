@@ -1,7 +1,7 @@
 import json
 import pytest
 from pathlib import Path
-from layers.l2_brain.debate_review_runtime import DebateReviewRuntime
+from layers.l2_brain.mission.debate_review_runtime import DebateReviewRuntime
 
 @pytest.fixture
 def debate_env(tmp_path):

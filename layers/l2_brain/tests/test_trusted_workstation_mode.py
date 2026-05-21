@@ -1,7 +1,7 @@
 import json
 import pytest
 from pathlib import Path
-from layers.l2_brain.trusted_workstation_mode import TrustedWorkstationMode, WorkstationAction
+from layers.l2_brain.governance.trusted_workstation_mode import TrustedWorkstationMode, WorkstationAction
 
 @pytest.fixture
 def tw_env(tmp_path):

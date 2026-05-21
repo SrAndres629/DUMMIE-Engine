@@ -1,7 +1,7 @@
 import json
 import pytest
 from pathlib import Path
-from layers.l2_brain.mission_autonomy_contract import MissionAutonomyContract, AutonomyRequest
+from layers.l2_brain.mission.mission_autonomy_contract import MissionAutonomyContract, AutonomyRequest
 
 @pytest.fixture
 def autonomy_env(tmp_path):

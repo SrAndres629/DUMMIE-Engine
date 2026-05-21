@@ -2,7 +2,7 @@ import json
 import pytest
 import subprocess
 from pathlib import Path
-from layers.l2_brain.repo_probe_runner import RepoProbeRunner
+from layers.l2_brain.mission.repo_probe_runner import RepoProbeRunner
 
 @pytest.fixture
 def temp_repo(tmp_path):

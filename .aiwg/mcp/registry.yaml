@@ -1,0 +1,20 @@
+mcpServers:
+  sequentialthinking:
+    command: "npx"
+    args: ["-y", "@modelcontextprotocol/server-sequential-thinking"]
+    profile: "core"
+    capability: "reasoning"
+  github:
+    command: "npx"
+    args: ["-y", "@modelcontextprotocol/server-github"]
+    profile: "core"
+    capability: "vcs"
+  sqlite:
+    command: "uvx"
+    args: ["mcp-server-sqlite", "--db-path", "/home/jorand/.antigravity/knowledge/dummie_sqlite.db"]
+    profile: "knowledge"
+  mcp-bash-experimental:
+    command: "uvx"
+    args: ["--from", "git+https://github.com/patrickomatik/mcp-bash.git", "mcp-bash"]
+    disabled: true
+    reason: "Requires manual git safe.directory fix for /media/datasets"

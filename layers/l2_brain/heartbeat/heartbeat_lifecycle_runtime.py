@@ -21,6 +21,7 @@ from typing import Any, Dict, List, Optional
 # Data contracts
 # ---------------------------------------------------------------------------
 
+
 @dataclass
 class HeartbeatObservation:
     git_clean: bool
@@ -73,6 +74,7 @@ class HeartbeatOutcome:
 # Helpers
 # ---------------------------------------------------------------------------
 
+
 def _load(path: Path) -> Dict[str, Any]:
     if path.exists():
         try:
@@ -88,11 +90,14 @@ def _is_kuzu_degraded(aiwg_root: Path) -> bool:
     for cap in governor.get("capabilities", []):
         if cap.get("capability_id") == "kuzu_4dtes_persistence":
             return cap.get("verified_status") in ("DEGRADED", "SIMULATED", "MISSING")
-    
+
     # fallback to old logic
     readiness = _load(reports / "readiness_score_calibration_latest.json")
     for f in readiness.get("findings", []):
-        if "degraded" in f.get("id", "").lower() or "degraded" in f.get("description", "").lower():
+        if (
+            "degraded" in f.get("id", "").lower()
+            or "degraded" in f.get("description", "").lower()
+        ):
             return True
     return True  # conservative default
 
@@ -101,7 +106,10 @@ def _is_kuzu_degraded(aiwg_root: Path) -> bool:
 # Core heartbeat
 # ---------------------------------------------------------------------------
 
-def run_heartbeat(mode: str = "observe_only", aiwg_root: Path = Path(".aiwg")) -> Dict[str, Any]:
+
+def run_heartbeat(
+    mode: str = "observe_only", aiwg_root: Path = Path(".aiwg")
+) -> Dict[str, Any]:
     """Execute one full heartbeat cycle."""
     l2 = Path("layers/l2_brain").resolve()
     if str(l2) not in sys.path:
@@ -115,7 +123,9 @@ def run_heartbeat(mode: str = "observe_only", aiwg_root: Path = Path(".aiwg")) -
 
     # ---- STEP 0: WHOLE-BODY OPERATIONAL VERIFICATION AUDITS ----
     try:
-        from dependency_reproducibility_verifier import run_dependency_reproducibility_verification
+        from dependency_reproducibility_verifier import (
+            run_dependency_reproducibility_verification,
+        )
         from kuzu_graph_readback_verifier import run_kuzu_graph_readback_verification
         from embedding_activation_verifier import run_embedding_activation_verification
         from capability_promotion_governor import run_capability_promotion_governor
@@ -128,15 +138,17 @@ def run_heartbeat(mode: str = "observe_only", aiwg_root: Path = Path(".aiwg")) -
         run_capability_promotion_governor()
         run_full_body_operational_audit()
         run_whole_body_repair_queue()
-        
-        evidence.extend([
-            ".aiwg/reports/dependency_reproducibility_latest.json",
-            ".aiwg/reports/kuzu_graph_readback_verification_latest.json",
-            ".aiwg/reports/embedding_activation_verification_latest.json",
-            ".aiwg/reports/capability_promotion_governor_latest.json",
-            ".aiwg/reports/full_body_operational_audit_latest.json",
-            ".aiwg/reports/whole_body_repair_queue_latest.json"
-        ])
+
+        evidence.extend(
+            [
+                ".aiwg/reports/dependency_reproducibility_latest.json",
+                ".aiwg/reports/kuzu_graph_readback_verification_latest.json",
+                ".aiwg/reports/embedding_activation_verification_latest.json",
+                ".aiwg/reports/capability_promotion_governor_latest.json",
+                ".aiwg/reports/full_body_operational_audit_latest.json",
+                ".aiwg/reports/whole_body_repair_queue_latest.json",
+            ]
+        )
     except Exception as e:
         warnings.append(f"whole_body_verification_audits_failed: {e}")
 
@@ -159,7 +171,7 @@ def run_heartbeat(mode: str = "observe_only", aiwg_root: Path = Path(".aiwg")) -
         "embedding_activation_verification_latest.json",
         "capability_promotion_governor_latest.json",
         "full_body_operational_audit_latest.json",
-        "whole_body_repair_queue_latest.json"
+        "whole_body_repair_queue_latest.json",
     ]
     found = [c for c in canonical if (reports / c).exists()]
     missing = [c for c in canonical if c not in found]
@@ -180,7 +192,9 @@ def run_heartbeat(mode: str = "observe_only", aiwg_root: Path = Path(".aiwg")) -
 
     # Count test debt
     test_triage = _load(reports / "test_debt_triage_latest.json")
-    test_debt = test_triage.get("missing_tests_count", 0) + test_triage.get("failing_tests_count", 0)
+    test_debt = test_triage.get("missing_tests_count", 0) + test_triage.get(
+        "failing_tests_count", 0
+    )
 
     active_blockers = []
     if kuzu_degraded:
@@ -204,7 +218,7 @@ def run_heartbeat(mode: str = "observe_only", aiwg_root: Path = Path(".aiwg")) -
         quarantined_models=quarantined_count,
         test_debt_count=test_debt,
     )
-    
+
     observation_dict = observation.to_dict()
     observation_dict["whole_body_scan"] = {
         "overall_coherence_score": coherence_score,
@@ -215,7 +229,9 @@ def run_heartbeat(mode: str = "observe_only", aiwg_root: Path = Path(".aiwg")) -
         "shadow_modules": calibration.get("scan_metrics", {}).get("shadow_modules", 0),
         "orphaned_tests": calibration.get("scan_metrics", {}).get("orphaned_tests", 0),
         "stale_reports": calibration.get("scan_metrics", {}).get("stale_reports", 0),
-        "unvalidated_specs": calibration.get("scan_metrics", {}).get("unvalidated_specs", 0),
+        "unvalidated_specs": calibration.get("scan_metrics", {}).get(
+            "unvalidated_specs", 0
+        ),
     }
 
     if missing:
@@ -225,15 +241,20 @@ def run_heartbeat(mode: str = "observe_only", aiwg_root: Path = Path(".aiwg")) -
     circulation_summary = {}
     try:
         from context_circulation_runtime import run_cognitive_circulation
-        circulation_summary = run_cognitive_circulation("heartbeat loop observation", aiwg_root=aiwg_root.parent)
-        evidence.extend([
-            ".aiwg/reports/6d_context_packet_latest.json",
-            ".aiwg/reports/context_packet_optimization_latest.json",
-            ".aiwg/reports/embedding_memory_router_latest.json",
-            ".aiwg/reports/4dtes_persistence_preflight_latest.json",
-            ".aiwg/reports/daemon_gateway_heartbeat_bridge_latest.json",
-            ".aiwg/reports/polyglot_probe_latest.json"
-        ])
+
+        circulation_summary = run_cognitive_circulation(
+            "heartbeat loop observation", aiwg_root=aiwg_root.parent
+        )
+        evidence.extend(
+            [
+                ".aiwg/reports/6d_context_packet_latest.json",
+                ".aiwg/reports/context_packet_optimization_latest.json",
+                ".aiwg/reports/embedding_memory_router_latest.json",
+                ".aiwg/reports/4dtes_persistence_preflight_latest.json",
+                ".aiwg/reports/daemon_gateway_heartbeat_bridge_latest.json",
+                ".aiwg/reports/polyglot_probe_latest.json",
+            ]
+        )
     except Exception as e:
         warnings.append(f"context_circulation_degraded: {e}")
 
@@ -249,22 +270,29 @@ def run_heartbeat(mode: str = "observe_only", aiwg_root: Path = Path(".aiwg")) -
         from runtime_closure_planner import run_runtime_closure_plan
 
         dependency_reality = run_runtime_dependency_audit(aiwg_root=aiwg_root.parent)
-        degraded_capabilities = run_degraded_capability_registry(aiwg_root=aiwg_root.parent)
+        degraded_capabilities = run_degraded_capability_registry(
+            aiwg_root=aiwg_root.parent
+        )
         toolchain_probe = run_environment_toolchain_probe(aiwg_root=aiwg_root.parent)
         runtime_closure_plan = run_runtime_closure_plan(aiwg_root=aiwg_root.parent)
 
-        evidence.extend([
-            ".aiwg/reports/runtime_dependency_audit_latest.json",
-            ".aiwg/reports/degraded_capability_registry_latest.json",
-            ".aiwg/reports/environment_toolchain_probe_latest.json",
-            ".aiwg/reports/runtime_closure_plan_latest.json"
-        ])
+        evidence.extend(
+            [
+                ".aiwg/reports/runtime_dependency_audit_latest.json",
+                ".aiwg/reports/degraded_capability_registry_latest.json",
+                ".aiwg/reports/environment_toolchain_probe_latest.json",
+                ".aiwg/reports/runtime_closure_plan_latest.json",
+            ]
+        )
     except Exception as e:
         warnings.append(f"dependency_reality_audit_failed: {e}")
 
     # ---- STEP 2: TRUTH HYGIENE ----
     try:
-        from mental_model_truth_hygiene import run_mental_model_truth_hygiene
+        from layers.l2_brain.mental_model_truth_hygiene import (
+            run_mental_model_truth_hygiene,
+        )
+
         truth_hygiene = run_mental_model_truth_hygiene(aiwg_root=aiwg_root)
         evidence.append(".aiwg/reports/mental_model_truth_hygiene_latest.json")
     except Exception as e:
@@ -274,39 +302,57 @@ def run_heartbeat(mode: str = "observe_only", aiwg_root: Path = Path(".aiwg")) -
     # ---- STEP 3: EPISTEMIC STATE ----
     try:
         from epistemic_state_runtime import build_epistemic_state
+
         ep = build_epistemic_state("heartbeat observation", aiwg_root=aiwg_root)
         epistemic = ep.to_dict()
-        (reports / "epistemic_state_latest.json").write_text(json.dumps(epistemic, indent=2), encoding="utf-8")
+        (reports / "epistemic_state_latest.json").write_text(
+            json.dumps(epistemic, indent=2), encoding="utf-8"
+        )
         evidence.append(".aiwg/reports/epistemic_state_latest.json")
     except Exception as e:
-        epistemic = _load(reports / "epistemic_state_latest.json") or {"decision": "DEGRADED", "error": str(e)}
+        epistemic = _load(reports / "epistemic_state_latest.json") or {
+            "decision": "DEGRADED",
+            "error": str(e),
+        }
         warnings.append(f"epistemic_degraded: {e}")
 
     # ---- STEP 4: BIAS SCAN ----
     try:
         from cognitive_bias_detector import detect_cognitive_biases
+
         b = detect_cognitive_biases("heartbeat cycle", aiwg_root=aiwg_root)
         bias = b.to_dict() if hasattr(b, "to_dict") else b
-        (reports / "cognitive_bias_report_latest.json").write_text(json.dumps(bias, indent=2), encoding="utf-8")
+        (reports / "cognitive_bias_report_latest.json").write_text(
+            json.dumps(bias, indent=2), encoding="utf-8"
+        )
         evidence.append(".aiwg/reports/cognitive_bias_report_latest.json")
     except Exception as e:
-        bias = _load(reports / "cognitive_bias_report_latest.json") or {"decision": "DEGRADED"}
+        bias = _load(reports / "cognitive_bias_report_latest.json") or {
+            "decision": "DEGRADED"
+        }
         warnings.append(f"bias_degraded: {e}")
 
     # ---- STEP 5: MEMORY SPINE ----
     try:
         from memory_spine_entrypoint import retrieve_memory_for_intent
+
         mem = retrieve_memory_for_intent("heartbeat", aiwg_root=aiwg_root)
         memory_spine = mem.to_dict()
         evidence.append(".aiwg/reports/memory_spine_entrypoint_latest.json")
     except Exception as e:
-        memory_spine = _load(reports / "memory_spine_entrypoint_latest.json") or {"status": "DEGRADED"}
+        memory_spine = _load(reports / "memory_spine_entrypoint_latest.json") or {
+            "status": "DEGRADED"
+        }
         warnings.append(f"memory_spine_degraded: {e}")
 
     # ---- STEP 6: MENTAL MODEL LOOP (includes dialectic, quality gate) ----
     try:
         from metacognitive_loop_runtime import run_metacognitive_loop
-        loop = run_metacognitive_loop("heartbeat: what is the current system state and next safe action?", aiwg_root=aiwg_root)
+
+        loop = run_metacognitive_loop(
+            "heartbeat: what is the current system state and next safe action?",
+            aiwg_root=aiwg_root,
+        )
         mental_model = loop.get("mental_model_id", "")
         dialectic = loop.get("dialectical_review", {})
         quality_gate = loop.get("quality_gate", {})
@@ -325,6 +371,7 @@ def run_heartbeat(mode: str = "observe_only", aiwg_root: Path = Path(".aiwg")) -
     # ---- STEP 8: DECISION POLICY ----
     try:
         from heartbeat_decision_policy import select_next_action
+
         policy = select_next_action(aiwg_root=aiwg_root)
         selected_action = policy.selected_action
         dispatch = policy.dispatch_recommendation
@@ -332,7 +379,11 @@ def run_heartbeat(mode: str = "observe_only", aiwg_root: Path = Path(".aiwg")) -
         warnings.extend(policy.warnings)
         evidence.append(".aiwg/reports/heartbeat_decision_policy_latest.json")
     except Exception as e:
-        selected_action = {"action_type": "review_system_state", "priority": "medium", "status": "proposed"}
+        selected_action = {
+            "action_type": "review_system_state",
+            "priority": "medium",
+            "status": "proposed",
+        }
         dispatch = "human_review"
         blocked = ["autonomous_scaling"]
         warnings.append(f"decision_policy_degraded: {e}")
@@ -345,13 +396,17 @@ def run_heartbeat(mode: str = "observe_only", aiwg_root: Path = Path(".aiwg")) -
     if kuzu_degraded:
         if hb_decision == "PASS":
             hb_decision = "PASS_WITH_WARNINGS"
-    if selected_action.get("action_type") in ("repair_kuzu_persistence", "repair_kuzu_ready_truth") and dispatch in ("antigravity", "human_review"):
+    if selected_action.get("action_type") in (
+        "repair_kuzu_persistence",
+        "repair_kuzu_ready_truth",
+    ) and dispatch in ("antigravity", "human_review"):
         hb_decision = "NEEDS_HUMAN_REVIEW"
 
     # ---- STEP 10: LEARNING EPISODE ----
     learning_ref = "DEGRADED_NOT_RECORDED"
     try:
         from session_store import SessionStore
+
         store = SessionStore(aiwg_root.resolve().parent)
         try:
             store.load_session("CURRENT")
@@ -379,7 +434,9 @@ def run_heartbeat(mode: str = "observe_only", aiwg_root: Path = Path(".aiwg")) -
         "dispatch": dispatch,
         "blocked_actions": blocked,
         "kuzu_degraded": kuzu_degraded,
-        "quarantined_models": truth_hygiene.get("summary", {}).get("quarantined_count", 0),
+        "quarantined_models": truth_hygiene.get("summary", {}).get(
+            "quarantined_count", 0
+        ),
         "created_at": datetime.now(timezone.utc).isoformat(),
     }
 
@@ -389,14 +446,34 @@ def run_heartbeat(mode: str = "observe_only", aiwg_root: Path = Path(".aiwg")) -
         mode=mode,
         decision=hb_decision,
         observation=observation_dict,
-        truth_hygiene={"decision": truth_hygiene.get("decision", ""), "summary": truth_hygiene.get("summary", {})},
-        epistemic_state={"decision": epistemic.get("decision", ""), "confidence": epistemic.get("confidence", 0)},
-        bias_report={"decision": bias.get("decision", ""), "findings_count": len(bias.get("findings", []))},
-        memory_spine={"status": memory_spine.get("status", ""), "graph_status": memory_spine.get("graph_status", "")},
-        mental_model={"model_id": mental_model} if isinstance(mental_model, str) else mental_model,
+        truth_hygiene={
+            "decision": truth_hygiene.get("decision", ""),
+            "summary": truth_hygiene.get("summary", {}),
+        },
+        epistemic_state={
+            "decision": epistemic.get("decision", ""),
+            "confidence": epistemic.get("confidence", 0),
+        },
+        bias_report={
+            "decision": bias.get("decision", ""),
+            "findings_count": len(bias.get("findings", [])),
+        },
+        memory_spine={
+            "status": memory_spine.get("status", ""),
+            "graph_status": memory_spine.get("graph_status", ""),
+        },
+        mental_model={"model_id": mental_model}
+        if isinstance(mental_model, str)
+        else mental_model,
         dialectic=dialectic,
-        quality_gate={"decision": quality_gate.get("decision", ""), "quality_score": quality_gate.get("quality_score", 0)},
-        self_improvement_queue={"actions_count": len(si_queue.get("actions", [])), "next": si_queue.get("next", "")},
+        quality_gate={
+            "decision": quality_gate.get("decision", ""),
+            "quality_score": quality_gate.get("quality_score", 0),
+        },
+        self_improvement_queue={
+            "actions_count": len(si_queue.get("actions", [])),
+            "next": si_queue.get("next", ""),
+        },
         selected_action=selected_action,
         blocked_actions=blocked,
         dispatch_recommendation=dispatch,
@@ -416,7 +493,9 @@ def run_heartbeat(mode: str = "observe_only", aiwg_root: Path = Path(".aiwg")) -
     result = outcome.to_dict()
 
     # ---- WRITE OUTPUTS ----
-    (reports / "heartbeat_latest.json").write_text(json.dumps(result, indent=2), encoding="utf-8")
+    (reports / "heartbeat_latest.json").write_text(
+        json.dumps(result, indent=2), encoding="utf-8"
+    )
     (reports / "heartbeat_latest.md").write_text(
         f"# Heartbeat {hb_id}\n\n"
         f"Mode: {mode}\n"
@@ -425,10 +504,12 @@ def run_heartbeat(mode: str = "observe_only", aiwg_root: Path = Path(".aiwg")) -
         f"Dispatch: {dispatch}\n"
         f"Kuzu: {'DEGRADED' if kuzu_degraded else 'OK'}\n"
         f"Warnings: {len(warnings)}\n",
-        encoding="utf-8")
+        encoding="utf-8",
+    )
 
     # Store in heartbeat state
     from heartbeat_state_store import HeartbeatStateStore
+
     state_store = HeartbeatStateStore(aiwg_root=aiwg_root)
     state_store.append_heartbeat(result)
     state_store.write_next_seed(next_seed)

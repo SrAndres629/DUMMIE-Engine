@@ -14,10 +14,10 @@ if str(ROOT) not in sys.path:
 if str(L2) not in sys.path:
     sys.path.insert(0, str(L2))
 
-from layers.l2_brain.readiness_score_calibrator import run_readiness_score_calibration
-from layers.l2_brain.memory_spine_entrypoint import run_memory_spine_entrypoint_demo
-from layers.l2_brain.token_economy_benchmark import run_token_economy_benchmark
-from layers.l2_brain.entrypoint_enforcement_auditor import run_entrypoint_enforcement_audit
+from layers.l2_brain.governance.readiness_score_calibrator import run_readiness_score_calibration
+from layers.l2_brain.memory.memory_spine_entrypoint import run_memory_spine_entrypoint_demo
+from layers.l2_brain.context.token_economy_benchmark import run_token_economy_benchmark
+from layers.l2_brain.governance.entrypoint_enforcement_auditor import run_entrypoint_enforcement_audit
 
 
 @pytest.fixture

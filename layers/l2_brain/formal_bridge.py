@@ -1,3 +1,4 @@
+# Spec Reference: 22_sdd_executable_contracts
 from dataclasses import dataclass
 
 
@@ -17,7 +18,11 @@ class FormalVerificationResult:
 
 def verify_formal_model(model: FormalModel) -> FormalVerificationResult:
     if model.forbidden_states:
-        return FormalVerificationResult("FAILED", model.model_id, "forbidden_states_present")
+        return FormalVerificationResult(
+            "FAILED", model.model_id, "forbidden_states_present"
+        )
     if not model.invariants:
-        return FormalVerificationResult("INCONCLUSIVE", model.model_id, "missing_invariants")
+        return FormalVerificationResult(
+            "INCONCLUSIVE", model.model_id, "missing_invariants"
+        )
     return FormalVerificationResult("PROVEN", model.model_id, "invariants_hold")

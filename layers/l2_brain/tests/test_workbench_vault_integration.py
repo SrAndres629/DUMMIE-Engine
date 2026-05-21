@@ -3,7 +3,7 @@ from pathlib import Path
 from layers.l2_brain.mission_workbench import MissionWorkbenchManager
 from layers.l2_brain.vault_curator import VaultCurator
 from layers.l2_brain.token_cost_ledger import TokenCostLedger
-from layers.l2_brain.context_budget_manager import ContextBudgetManager
+from layers.l2_brain.context.context_budget_manager import ContextBudgetManager
 
 def test_workbench_vault_integration_flow(tmp_path):
     wb_root = tmp_path / "workbench"

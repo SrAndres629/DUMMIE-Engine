@@ -1,7 +1,7 @@
 import pytest
-from layers.l2_brain.memory_graph_runtime import MemoryGraphRuntime
+from layers.l2_brain.memory.memory_graph_runtime import MemoryGraphRuntime
 from layers.l2_brain.graph_sync_ledger import GraphSyncLedger
-from layers.l2_brain.vault_embedding_index import VaultEmbeddingIndex
+from layers.l2_brain.memory.vault_embedding_index import VaultEmbeddingIndex
 from layers.l2_brain.kuzu_graph_sync_adapter import KuzuGraphSyncAdapter
 
 def test_memory_graph_runtime_causal_edges(tmp_path):

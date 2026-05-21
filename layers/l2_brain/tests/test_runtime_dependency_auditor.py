@@ -1,7 +1,7 @@
 import os
 import json
 from pathlib import Path
-from layers.l2_brain.runtime_dependency_auditor import run_runtime_dependency_audit
+from layers.l2_brain.governance.runtime_dependency_auditor import run_runtime_dependency_audit
 
 def test_runtime_dependency_audit_execution(tmp_path):
     # Execute the audit in dry-run/read-only mode using a temporary aiwg root

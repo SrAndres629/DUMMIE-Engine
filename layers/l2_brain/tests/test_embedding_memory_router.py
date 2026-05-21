@@ -1,7 +1,7 @@
 import json
 import pytest
-from layers.l2_brain.embedding_memory_router import run_embedding_memory_router_demo, seed_embedding_router_indices
-from layers.l2_brain.six_dimensional_context_runtime import build_6d_context_packet
+from layers.l2_brain.embedding_mesh.embedding_memory_router import run_embedding_memory_router_demo, seed_embedding_router_indices
+from layers.l2_brain.context.six_dimensional_context_runtime import build_6d_context_packet
 from layers.l2_brain.tests.test_cognitive_circulation_kernel import tmp_aiwg_root
 
 def test_embedding_memory_router_direct(tmp_aiwg_root):

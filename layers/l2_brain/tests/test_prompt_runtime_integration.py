@@ -2,10 +2,10 @@ import hashlib
 import json
 from pathlib import Path
 
-from layers.l2_brain.context_efficiency_benchmark import ContextEfficiencyBenchmark
-from layers.l2_brain.evolution_flywheel_runtime import EvolutionFlywheelRuntime
-from layers.l2_brain.prompt_cache_ledger import PromptCacheLedger
-from layers.l2_brain.prompt_frame_builder import PromptFrameBuilder
+from layers.l2_brain.context.context_efficiency_benchmark import ContextEfficiencyBenchmark
+from layers.l2_brain.governance.evolution_flywheel_runtime import EvolutionFlywheelRuntime
+from layers.l2_brain.context.prompt_cache_ledger import PromptCacheLedger
+from layers.l2_brain.context.prompt_frame_builder import PromptFrameBuilder
 from layers.l2_brain.restart_integration_gate import RestartIntegrationGate
 
 

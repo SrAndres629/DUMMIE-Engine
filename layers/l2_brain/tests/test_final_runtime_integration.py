@@ -1,9 +1,9 @@
 import json
 import pytest
 from pathlib import Path
-from layers.l2_brain.trusted_workstation_mode import run_trusted_workstation_mode
-from layers.l2_brain.chaos_regression_testing import run_chaos_regression_tests
-from layers.l2_brain.autonomous_strategic_partner_runtime import run_autonomous_strategic_partner_runtime
+from layers.l2_brain.governance.trusted_workstation_mode import run_trusted_workstation_mode
+from layers.l2_brain.governance.chaos_regression_testing import run_chaos_regression_tests
+from layers.l2_brain.strategic.autonomous_strategic_partner_runtime import run_autonomous_strategic_partner_runtime
 
 def test_final_runtime_integration(tmp_path):
     aiwg = tmp_path / ".aiwg"

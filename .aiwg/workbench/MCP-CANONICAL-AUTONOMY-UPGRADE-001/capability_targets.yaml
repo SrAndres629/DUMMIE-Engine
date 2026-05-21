@@ -1,0 +1,13 @@
+capability_targets:
+  autonomous_execution:
+    goal: "ejecutar misiones largas con estado, checkpoints y rollback."
+    status: "partial (MissionWorkbench detected but fragmented)"
+  programming_partner:
+    goal: "leer, modificar, testear y refactorizar repos con evidencia."
+    status: "active (via gemini-cli/opencode but needs MCP-bash stabilization)"
+  source_of_truth_alignment:
+    goal: "mantener specs, registries y vault sincronizados."
+    status: "critical (fragmentation in l2_brain refactor)"
+  mcp_gateway:
+    goal: "registrar herramientas, permisos y healthchecks."
+    status: "active (dummie-brain gateway exists)"

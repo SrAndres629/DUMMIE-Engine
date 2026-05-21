@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pytest
 
-from layers.l2_brain.context_package import ContextPackageBuilder
+from layers.l2_brain.context.context_package import ContextPackageBuilder
 
 
 def _write_json(path: Path, payload: dict) -> None:

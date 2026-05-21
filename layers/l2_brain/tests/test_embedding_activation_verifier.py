@@ -2,7 +2,7 @@
 import os
 import json
 from pathlib import Path
-from layers.l2_brain.embedding_activation_verifier import run_embedding_activation_verification
+from layers.l2_brain.embedding_mesh.embedding_activation_verifier import run_embedding_activation_verification
 
 # Spec Reference: 188_embedding_activation_verifier
 

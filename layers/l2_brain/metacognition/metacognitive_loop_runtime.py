@@ -9,17 +9,20 @@ blockers are respected.
 
 import json
 from pathlib import Path
-from mental_model_runtime import build_mental_model_for_intent
-from semantic_ontology_mapper import map_semantic_ontology
-from cognitive_frame_builder import build_cognitive_frame
-from metacognitive_quality_gate import run_metacognitive_quality_gate
-from mental_model_store import MentalModelStore
+from layers.l2_brain.mental_model_runtime import build_mental_model_for_intent
+from layers.l2_brain.semantic_ontology_mapper import map_semantic_ontology
+from layers.l2_brain.cognitive_frame_builder import build_cognitive_frame
+from layers.l2_brain.metacognitive_quality_gate import run_metacognitive_quality_gate
+from layers.l2_brain.mental_model_store import MentalModelStore
+
 # Pack 5.2 imports
-from epistemic_state_runtime import build_epistemic_state
-from dialectical_reasoning_runtime import run_dialectical_review
-from philosophical_ontology_runtime import build_philosophical_ontology
-from cognitive_bias_detector import detect_cognitive_biases
-from metacognitive_evolution_flywheel import run_metacognitive_evolution_flywheel
+from layers.l2_brain.epistemic_state_runtime import build_epistemic_state
+from layers.l2_brain.dialectical_reasoning_runtime import run_dialectical_review
+from layers.l2_brain.philosophical_ontology_runtime import build_philosophical_ontology
+from layers.l2_brain.cognitive_bias_detector import detect_cognitive_biases
+from layers.l2_brain.metacognitive_evolution_flywheel import (
+    run_metacognitive_evolution_flywheel,
+)
 
 
 def _load(path: Path) -> dict:
@@ -38,19 +41,27 @@ def run_metacognitive_loop(intent: str, aiwg_root: Path = Path(".aiwg")):
 
     # 1. Epistemic State
     epistemic = build_epistemic_state(intent, aiwg_root=aiwg_root)
-    (reports / "epistemic_state_latest.json").write_text(json.dumps(epistemic.to_dict(), indent=2))
+    (reports / "epistemic_state_latest.json").write_text(
+        json.dumps(epistemic.to_dict(), indent=2)
+    )
 
     # 2. Bias Detection
     bias_report = detect_cognitive_biases(intent, aiwg_root=aiwg_root)
-    (reports / "cognitive_bias_report_latest.json").write_text(json.dumps(bias_report.to_dict(), indent=2))
+    (reports / "cognitive_bias_report_latest.json").write_text(
+        json.dumps(bias_report.to_dict(), indent=2)
+    )
 
     # 3. Philosophical Ontology
     philosophical_onto = build_philosophical_ontology(intent)
-    (reports / "philosophical_ontology_latest.json").write_text(json.dumps(philosophical_onto.to_dict(), indent=2))
+    (reports / "philosophical_ontology_latest.json").write_text(
+        json.dumps(philosophical_onto.to_dict(), indent=2)
+    )
 
     # 4. Dialectical Review
     dialectical = run_dialectical_review(intent)
-    (reports / "dialectical_review_latest.json").write_text(json.dumps(dialectical.to_dict(), indent=2))
+    (reports / "dialectical_review_latest.json").write_text(
+        json.dumps(dialectical.to_dict(), indent=2)
+    )
 
     # 5. Build Model
     model = build_mental_model_for_intent(intent, aiwg_root=aiwg_root)
@@ -66,12 +77,18 @@ def run_metacognitive_loop(intent: str, aiwg_root: Path = Path(".aiwg")):
     frame = build_cognitive_frame(intent, model, taxonomy_onto)
 
     # 8. Quality Gate (Harden 5.2.1)
-    quality = run_metacognitive_quality_gate(model, philosophical_onto, frame, epistemic=epistemic, bias_report=bias_report)
+    quality = run_metacognitive_quality_gate(
+        model, philosophical_onto, frame, epistemic=epistemic, bias_report=bias_report
+    )
 
     # 9. Evolution Flywheel
     flywheel = run_metacognitive_evolution_flywheel(intent, aiwg_root=aiwg_root)
-    (reports / "metacognitive_evolution_flywheel_latest.json").write_text(json.dumps(flywheel.to_dict(), indent=2))
-    (reports / "metacognitive_evolution_delta_latest.json").write_text(json.dumps(flywheel.evolution_delta, indent=2))
+    (reports / "metacognitive_evolution_flywheel_latest.json").write_text(
+        json.dumps(flywheel.to_dict(), indent=2)
+    )
+    (reports / "metacognitive_evolution_delta_latest.json").write_text(
+        json.dumps(flywheel.evolution_delta, indent=2)
+    )
 
     # 10. Pack 5.2.2: Consult self-improvement blockers before recommending action
     hygiene_report = _load(reports / "mental_model_truth_hygiene_latest.json")
@@ -92,7 +109,9 @@ def run_metacognitive_loop(intent: str, aiwg_root: Path = Path(".aiwg")):
     recommended_action = "respond_via_frame"
 
     # Check if intent is autonomy/scaling and blockers exist
-    is_autonomy_intent = any(k in intent.lower() for k in ["autonom", "synthesis", "scale", "scaling"])
+    is_autonomy_intent = any(
+        k in intent.lower() for k in ["autonom", "synthesis", "scale", "scaling"]
+    )
 
     if dialectical.decision == "repair_first":
         recommended_action = "repair_first"
@@ -107,10 +126,18 @@ def run_metacognitive_loop(intent: str, aiwg_root: Path = Path(".aiwg")):
     next_si_action = si_queue.get("next", flywheel.next_self_improvement_action)
 
     # Save reports
-    (reports / "mental_model_runtime_latest.json").write_text(json.dumps(model.to_dict(), indent=2))
-    (reports / "semantic_ontology_map_latest.json").write_text(json.dumps(taxonomy_onto, indent=2))
-    (reports / "cognitive_frame_latest.json").write_text(json.dumps(frame.to_dict(), indent=2))
-    (reports / "metacognitive_quality_gate_latest.json").write_text(json.dumps(quality.to_dict(), indent=2))
+    (reports / "mental_model_runtime_latest.json").write_text(
+        json.dumps(model.to_dict(), indent=2)
+    )
+    (reports / "semantic_ontology_map_latest.json").write_text(
+        json.dumps(taxonomy_onto, indent=2)
+    )
+    (reports / "cognitive_frame_latest.json").write_text(
+        json.dumps(frame.to_dict(), indent=2)
+    )
+    (reports / "metacognitive_quality_gate_latest.json").write_text(
+        json.dumps(quality.to_dict(), indent=2)
+    )
 
     result = {
         "decision": loop_decision,
@@ -127,13 +154,21 @@ def run_metacognitive_loop(intent: str, aiwg_root: Path = Path(".aiwg")):
         "next_self_improvement_action": next_si_action,
         "self_improvement_blocked_actions": list(si_blocked),
         "dispatch_recommendation": frame.dispatch_recommendation,
-        "warnings": quality.warnings
+        "warnings": quality.warnings,
     }
 
-    (reports / "metacognitive_loop_latest.json").write_text(json.dumps(result, indent=2))
+    (reports / "metacognitive_loop_latest.json").write_text(
+        json.dumps(result, indent=2)
+    )
     return result
+
 
 if __name__ == "__main__":
     import sys
-    intent = sys.argv[1] if len(sys.argv) > 1 else "what should DUMMIE improve next before autonomous scaling?"
+
+    intent = (
+        sys.argv[1]
+        if len(sys.argv) > 1
+        else "what should DUMMIE improve next before autonomous scaling?"
+    )
     print(json.dumps(run_metacognitive_loop(intent), indent=2))

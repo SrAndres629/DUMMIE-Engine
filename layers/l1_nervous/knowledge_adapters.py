@@ -1,3 +1,4 @@
+# Spec Reference: 15_mcp_sidecar_isolation
 import hashlib
 import json
 from datetime import datetime, timezone
@@ -41,7 +42,9 @@ class ObsidianKnowledgeAdapter:
         )
         return self._artifact(filepath, self._extract_text(response), {})
 
-    def _artifact(self, path: str, content: str, metadata: dict[str, Any]) -> SourceArtifact:
+    def _artifact(
+        self, path: str, content: str, metadata: dict[str, Any]
+    ) -> SourceArtifact:
         payload_hash = hashlib.sha256(content.encode("utf-8")).hexdigest()
         return SourceArtifact(
             provider="obsidian",
@@ -55,7 +58,9 @@ class ObsidianKnowledgeAdapter:
 
     def _extract_text(self, response: dict[str, Any]) -> str:
         content = response.get("result", {}).get("content", [])
-        return "\n".join(item.get("text", "") for item in content if item.get("type") == "text")
+        return "\n".join(
+            item.get("text", "") for item in content if item.get("type") == "text"
+        )
 
     def _source_uri_to_path(self, source_uri: str) -> str:
         return source_uri.removeprefix("obsidian://")

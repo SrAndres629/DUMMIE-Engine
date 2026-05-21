@@ -1,0 +1,47 @@
+{
+  "skills": [
+    {
+      "id": "socraticode_workflow",
+      "type": "skill",
+      "path": ".agents/skills/socraticode_workflow",
+      "status": "active",
+      "evidence": "Found in .agents/skills and listed in available skills",
+      "confidence": 1.0
+    },
+    {
+      "id": "mcp_gateway",
+      "type": "skill",
+      "path": ".agents/skills/mcp_gateway",
+      "status": "active",
+      "confidence": 1.0
+    },
+    {
+      "id": "mcp_optimizer",
+      "type": "skill",
+      "path": ".agents/skills/mcp_optimizer",
+      "status": "active",
+      "confidence": 1.0
+    },
+    {
+      "id": "diagram_generator",
+      "type": "skill",
+      "path": ".agents/skills/diagram_generator",
+      "status": "active",
+      "confidence": 1.0
+    }
+  ],
+  "routers": [
+    {
+      "id": "ModelRouterV2",
+      "path": "layers/l2_brain/application/services/model_router.py",
+      "type": "router",
+      "status": "active"
+    },
+    {
+      "id": "SemanticCapabilityRouter",
+      "path": "layers/l2_brain/application/cognitive/use_cases.py",
+      "type": "router",
+      "status": "active"
+    }
+  ]
+}

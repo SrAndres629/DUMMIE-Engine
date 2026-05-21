@@ -1,8 +1,10 @@
+# Spec Reference: 05_orchestration_stack_and_glue
 import asyncio
 import logging
 from typing import Callable, Dict, List, Any
 
 logger = logging.getLogger("dummie.l2.event_bus")
+
 
 class AsyncEventBus:
     """
@@ -10,6 +12,7 @@ class AsyncEventBus:
     Permite la comunicación desacoplada entre los componentes del Daemon (Sagas, Auditores, etc).
     Reemplaza la dependencia en NATS externo para la fase de Gateway.
     """
+
     def __init__(self):
         self._subscribers: Dict[str, List[Callable[[Any], Any]]] = {}
         self._queue = asyncio.Queue()
@@ -53,7 +56,7 @@ class AsyncEventBus:
                 event = await self._queue.get()
                 event_type = event["type"]
                 payload = event["payload"]
-                
+
                 if event_type in self._subscribers:
                     for callback in self._subscribers[event_type]:
                         try:
@@ -63,7 +66,9 @@ class AsyncEventBus:
                             else:
                                 callback(payload)
                         except Exception as e:
-                            logger.error(f"Error procesando evento '{event_type}' en {callback.__name__}: {e}")
+                            logger.error(
+                                f"Error procesando evento '{event_type}' en {callback.__name__}: {e}"
+                            )
                 self._queue.task_done()
             except asyncio.CancelledError:
                 break

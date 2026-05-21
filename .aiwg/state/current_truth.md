@@ -1,14 +1,25 @@
 # Current Truth — DUMMIE Engine State
 
-* **Generated At**: `2026-05-24T08:00:00Z`
+* **Generated At**: `2026-05-21T07:26:28Z`
 * **Head Commit**: `UNVERIFIED` (Policy: `versioned_snapshot_self_reference`)
 * **Branch**: `main`
 * **Repo Health Status**: `FAIL`
 * **Semantic Mode**: `text_fast_bge_small_384`
 * **Index Mode**: `hybrid_index_mode`
-* **Current Pack**: `NONE`
-* **Last Completed Pack**: `AIWG_KERNEL_0.4`
-* **Next Pack**: `PACK_3.2`
+* **Current Pack**: `PACK_S1`
+* **Last Completed Pack**: `INMEDIATO`
+* **Next Pack**: `PACK_10`
+
+---
+
+## Swarm Coordination State
+
+* **Backlog Schema**: `dummie.swarm.backlog.v1`
+* **Completed Packs**: `13`
+* **Pending Packs**: `1`
+* **Total Packs**: `14`
+* **Pending Pack**: `PACK_10`
+* **Latest Completed Pack**: `INMEDIATO`
 
 ---
 

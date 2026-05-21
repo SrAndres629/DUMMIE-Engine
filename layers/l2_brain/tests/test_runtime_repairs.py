@@ -2,8 +2,8 @@ import pytest
 import json
 from unittest.mock import MagicMock
 from layers.l2_brain.action_graph import ActionNode, ActionGraph
-from layers.l2_brain.human_intent import classify_human_artifact, HumanIntentClassification
-from layers.l2_brain.event_bus import AsyncEventBus
+from layers.l2_brain.domain.human_intent import classify_human_artifact, HumanIntentClassification
+from layers.l2_brain.infrastructure.event_bus import AsyncEventBus
 from layers.l2_brain.safe_fallbacks import FailClosedAuditor, FailClosedExecutor
 from layers.l2_brain.runtime_guards import GuardInput, GuardDecision, evaluate_runtime_guards
 

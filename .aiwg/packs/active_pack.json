@@ -1,45 +1,53 @@
 {
-  "pack_id": "PACK_4.1",
-  "pack_title": "ModelRouter v2",
+  "pack_id": "PACK_S1",
+  "pack_title": "Sovereign CLI + SDK + Strategic Partner Runtime",
   "status": "ACTIVE",
   "execute_now": true,
-  "objective": "Enrutar dinámicamente tareas a modelos especialistas basándose en complejidad, tokens, costo e intención.",
-  "long_term_objective_link": "long_term_objectives.json",
-  "short_term_goal": "Implementar la lógica de enrutamiento en el orquestador usando el registro de capacidades.",
-  "why_now": "Para optimizar el uso de recursos y asegurar que cada tarea sea procesada por el modelo más apto.",
+  "objective": "Mantener el runtime soberano, la CLI/SDK y la coordinacion del swarm alineados con la verdad fisica verificada.",
+  "long_term_objective_link": ".aiwg/evolution/current_position.json",
+  "short_term_goal": "Resolver PACK_10 reconciliando current_truth, active_pack y backlog sin sobrecargar la laptop.",
+  "why_now": "Los agentes estaban leyendo planos de estado divergentes: current_truth PACK_4.1, runtime PACK_S1 y swarm PACK_10.",
   "not_in_scope": [
-    "Iniciar Pack 4.2"
+    "Declarar listo un daemon L2 sin entrypoint vigente verificado",
+    "Ejecutar suites pesadas por defecto",
+    "Operaciones destructivas de git"
   ],
   "files_expected_to_change": [
-    "layers/l2_brain/src/brain/application/use_cases/orchestrator.py",
-    "layers/l2_brain/src/brain/domain/capability_registry.py"
+    ".aiwg/state/current_truth.json",
+    ".aiwg/state/current_truth.md",
+    ".aiwg/packs/active_pack.json",
+    ".aiwg/agent_mesh/debate/evidence/PACK_10/",
+    "layers/l2_brain/tests/test_aiwg_runtime_truth_coherence.py"
   ],
-  "files_forbidden_to_change": [
-    "layers/l2_brain/embedding_mesh/contracts.py"
-  ],
+  "files_forbidden_to_change": [],
   "commands_required": [
-    "python3 scripts/validate_specs_docs.py",
-    "PYTHONPATH=layers/l2_brain/src python3 -m pytest layers/l2_brain/tests/test_aiwg_pack_guard.py"
+    "PYTHONDONTWRITEBYTECODE=1 uv run pytest -q layers/l2_brain/tests/test_aiwg_runtime_truth_coherence.py",
+    "PYTHONDONTWRITEBYTECODE=1 uv run pytest -q layers/l2_brain/tests/test_aiwg_pack_guard.py",
+    "PYTHONDONTWRITEBYTECODE=1 uv run python -c \"import dummie.engine; import layers.l2_brain; print('IMPORT_OK')\"",
+    "./scripts/dummie status"
   ],
   "tests_required": [
-    "layers/l2_brain/tests/test_model_router_v2.py"
+    "layers/l2_brain/tests/test_aiwg_runtime_truth_coherence.py",
+    "layers/l2_brain/tests/test_aiwg_pack_guard.py"
   ],
   "metrics_before": {
-    "routing_efficiency": 0.0
+    "state_planes_reconciled": false
   },
   "expected_metrics_after": {
-    "routing_efficiency": 0.8
+    "state_planes_reconciled": true
   },
-  "regression_risks": "Errores de enrutamiento que causen fallos de ejecución.",
-  "known_blindspots": "Latencia de red en modelos externos.",
+  "regression_risks": "Un agente puede volver a tratar un archivo de estado legado como fuente unica de verdad.",
+  "known_blindspots": "La readiness del daemon L2 requiere contrato de entrypoint vigente; daemon_service.py ya no existe.",
   "acceptance_criteria": [
-    "El orquestador selecciona dinámicamente el modelo según el tipo de tarea (CODE/REASONING).",
-    "Pruebas de enrutamiento exitosas con mocks de modelos."
+    "current_truth.json, current_truth.md y active_pack.json apuntan al mismo pack runtime.",
+    "PACK_10 queda representado como estado de coordinacion del swarm.",
+    "Terminal 1 y terminal 2 reciben evidencia suficiente para corregir drift antes de seguir."
   ],
-  "rollback_plan": "git revert HEAD",
+  "rollback_plan": "Restaurar los archivos AIWG tocados y retirar PACK_10 del backlog si la revision rechaza la reconciliacion.",
   "auto_continue_allowed": true,
   "stop_conditions": [
-    "si el enrutamiento falla sistemáticamente",
-    "si preflight falla"
+    "si los tests de coherencia de estado fallan",
+    "si la laptop muestra presion sostenida de CPU o memoria",
+    "si el reviewer encuentra una fuente fisica que contradice PACK_S1"
   ]
 }

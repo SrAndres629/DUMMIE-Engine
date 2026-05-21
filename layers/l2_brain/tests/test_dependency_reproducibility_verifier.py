@@ -2,7 +2,7 @@
 import os
 import json
 from pathlib import Path
-from layers.l2_brain.dependency_reproducibility_verifier import run_dependency_reproducibility_verification
+from layers.l2_brain.governance.dependency_reproducibility_verifier import run_dependency_reproducibility_verification
 
 # Spec Reference: 186_dependency_reproducibility_verifier
 

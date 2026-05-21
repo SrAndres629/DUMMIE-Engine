@@ -1,7 +1,7 @@
 import json
 import pytest
 from pathlib import Path
-from layers.l2_brain.mission_planner import MissionPlanner
+from layers.l2_brain.mission.mission_planner import MissionPlanner
 
 @pytest.fixture
 def plan_env(tmp_path):

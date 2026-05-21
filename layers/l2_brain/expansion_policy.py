@@ -1,6 +1,8 @@
+# Spec Reference: 12_6d_context_model
 import os
 from enum import Enum
 from typing import Optional
+
 
 class ComponentType(Enum):
     INFRASTRUCTURE = "L0"
@@ -12,22 +14,24 @@ class ComponentType(Enum):
     SOUL = "L6"
     SCRIPT = "SCRIPT"
 
+
 class ExpansionPolicy:
     """
     [L2_BRAIN] Define la política soberana de organización de archivos.
     Asegura que DUMMIE no ensucie el repositorio al auto-programarse.
     """
+
     def __init__(self, root_dir: str):
         self.root_dir = root_dir
         self.mapping = {
-            ComponentType.INFRASTRUCTURE: "infra", # Or l0_overseer
+            ComponentType.INFRASTRUCTURE: "infra",  # Or l0_overseer
             ComponentType.ADAPTER: "layers/l1_nervous/tools_impl",
             ComponentType.CORE: "layers/l2_brain",
             ComponentType.SHIELD: "layers/l3_shield",
             ComponentType.EXTENSION: "layers/l4_ext",
             ComponentType.MUSCLE: "layers/l5_muscle",
             ComponentType.SOUL: "layers/l6_soul",
-            ComponentType.SCRIPT: "scripts"
+            ComponentType.SCRIPT: "scripts",
         }
 
     def resolve_path(self, component_type: ComponentType, filename: str) -> str:
@@ -48,5 +52,5 @@ class ExpansionPolicy:
             return ComponentType.SCRIPT
         if any(word in mission for word in ["personality", "alignment", "voice"]):
             return ComponentType.SOUL
-        
+
         return ComponentType.EXTENSION

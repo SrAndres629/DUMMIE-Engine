@@ -1,5 +1,5 @@
 import pytest
-from layers.l2_brain.embedding_adapter import (
+from layers.l2_brain.embedding_mesh.embedding_adapter import (
     embed_text, 
     EmbeddingAdapterRegistry, 
     DeterministicHashEmbeddingAdapter,

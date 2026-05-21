@@ -2,7 +2,7 @@ import hashlib
 import json
 from pathlib import Path
 
-from layers.l2_brain.context_quant_runtime import ContextQuantRuntime
+from layers.l2_brain.context.context_quant_runtime import ContextQuantRuntime
 
 
 def _write_json(path: Path, payload: dict) -> None:

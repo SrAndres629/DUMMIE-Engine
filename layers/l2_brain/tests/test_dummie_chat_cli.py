@@ -1,7 +1,7 @@
 import json
 import pytest
 from pathlib import Path
-from layers.l2_brain.dummie_chat_cli import DummieChatCli
+from layers.l2_brain.mission.dummie_chat_cli import DummieChatCli
 
 @pytest.fixture
 def chat_env(tmp_path):

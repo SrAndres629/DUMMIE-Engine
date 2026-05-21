@@ -1,6 +1,6 @@
 import json
 import pytest
-from layers.l2_brain.daemon_gateway_heartbeat_bridge import run_daemon_gateway_bridge_demo, compile_daemon_gateway_envelope
+from layers.l2_brain.daemon.daemon_gateway_heartbeat_bridge import run_daemon_gateway_bridge_demo, compile_daemon_gateway_envelope
 from layers.l2_brain.tests.test_cognitive_circulation_kernel import tmp_aiwg_root
 
 def test_daemon_gateway_heartbeat_bridge_direct(tmp_aiwg_root):

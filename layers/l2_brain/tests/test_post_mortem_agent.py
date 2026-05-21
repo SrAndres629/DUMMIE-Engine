@@ -4,7 +4,7 @@ import json
 import os
 import tempfile
 from pathlib import Path
-from layers.l2_brain.post_mortem_agent import PostMortemAnalyst
+from layers.l2_brain.governance.post_mortem_agent import PostMortemAnalyst
 
 @pytest.mark.asyncio
 async def test_post_mortem_agent_analyze_failures():

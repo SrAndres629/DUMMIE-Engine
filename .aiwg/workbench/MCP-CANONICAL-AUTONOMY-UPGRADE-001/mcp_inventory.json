@@ -1,0 +1,44 @@
+{
+  "mcpServers": {
+    "dummie-brain": {
+      "id": "dummie-brain",
+      "type": "gateway",
+      "path": "layers/l1_nervous/mcp_server.py",
+      "status": "active",
+      "evidence": "Configured in .agents/mcp_config.json and running FastMCP",
+      "confidence": 1.0
+    },
+    "sequentialthinking": {
+      "id": "sequentialthinking",
+      "type": "mcp",
+      "runtime_entrypoint": "npx -y @modelcontextprotocol/server-sequential-thinking",
+      "status": "active",
+      "evidence": "Configured in dummie_gateway_config.json",
+      "confidence": 0.9
+    },
+    "mcp-bash": {
+      "id": "mcp-bash",
+      "type": "mcp",
+      "runtime_entrypoint": "uvx --from git+https://github.com/patrickomatik/mcp-bash.git mcp-bash",
+      "status": "partial",
+      "evidence": "Configuration exists but failed manual verify due to dubious ownership in git",
+      "confidence": 0.6,
+      "risks": "Git permission issues on /media/datasets"
+    },
+    "github": {
+      "id": "github",
+      "type": "mcp",
+      "runtime_entrypoint": "npx -y @modelcontextprotocol/server-github",
+      "status": "active",
+      "confidence": 0.8
+    },
+    "browser-use": {
+      "id": "browser-use",
+      "type": "mcp",
+      "runtime_entrypoint": "uvx --from browser-use[cli] browser-use --mcp",
+      "status": "active",
+      "confidence": 0.7,
+      "risks": "Requires external API keys (OpenAI/Anthropic)"
+    }
+  }
+}

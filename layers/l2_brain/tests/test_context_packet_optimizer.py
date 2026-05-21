@@ -1,7 +1,7 @@
 import json
 import pytest
-from layers.l2_brain.context_packet_optimizer import optimize_context_packet
-from layers.l2_brain.six_dimensional_context_runtime import build_6d_context_packet
+from layers.l2_brain.context.context_packet_optimizer import optimize_context_packet
+from layers.l2_brain.context.six_dimensional_context_runtime import build_6d_context_packet
 from layers.l2_brain.tests.test_cognitive_circulation_kernel import tmp_aiwg_root
 
 def test_context_packet_optimizer_direct(tmp_aiwg_root):

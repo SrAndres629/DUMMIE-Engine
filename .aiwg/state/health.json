@@ -1,7 +1,7 @@
 {
-  "timestamp": "2026-05-20T07:23:06.927437+00:00",
-  "version": "5f9046e",
-  "branch": "intento-de-registrar-todo-con-arquitectura-y-estructura-canon",
+  "timestamp": "2026-05-21T21:00:24.397658+00:00",
+  "version": "6c289ff",
+  "branch": "main",
   "bootstrap": {
     "exists": false
   },
@@ -11,25 +11,23 @@
   "tests_trend": "stable",
   "failed_tests": [],
   "git": {
-    "modified_count": 8,
-    "sha": "5f9046e",
-    "branch": "intento-de-registrar-todo-con-arquitectura-y-estructura-canon"
+    "modified_count": 258,
+    "sha": "6c289ff",
+    "branch": "main"
   },
   "redirector": {
     "old_redirector": false,
-    "fallback_finder": true
+    "fallback_finder": false
   },
   "split_brain": {
-    "authority_files": [
-      "layers/l2_brain/domain/authority.py"
-    ],
-    "count": 1
+    "authority_files": [],
+    "count": 0
   },
   "processes": {
-    "dummied_running": true,
-    "nats_running": true,
-    "ollama_running": true,
+    "dummied_running": false,
+    "nats_running": false,
+    "ollama_running": false,
     "daemon_running": false
   },
-  "previous_health": "2026-05-20T07:22:40.976890+00:00"
+  "previous_health": "2026-05-21T08:00:04.956006+00:00"
 }

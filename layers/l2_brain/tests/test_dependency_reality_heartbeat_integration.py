@@ -2,7 +2,7 @@ import os
 import json
 import pytest
 from pathlib import Path
-from layers.l2_brain.heartbeat_lifecycle_runtime import run_heartbeat
+from layers.l2_brain.heartbeat.heartbeat_lifecycle_runtime import run_heartbeat
 
 def test_heartbeat_dependency_integration(tmp_path):
     # Set up mock reports for all required heartbeat inputs in the mock reports directory

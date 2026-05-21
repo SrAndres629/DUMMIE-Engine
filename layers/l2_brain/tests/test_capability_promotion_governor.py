@@ -2,15 +2,15 @@
 import os
 import json
 from pathlib import Path
-from layers.l2_brain.capability_promotion_governor import run_capability_promotion_governor
+from layers.l2_brain.governance.capability_promotion_governor import run_capability_promotion_governor
 
 # Spec Reference: 189_capability_promotion_governor
 
 def test_capability_promotion_governor():
     # Make sure dependency verifiers have run and generated reports first
-    from layers.l2_brain.dependency_reproducibility_verifier import run_dependency_reproducibility_verification
-    from layers.l2_brain.kuzu_graph_readback_verifier import run_kuzu_graph_readback_verification
-    from layers.l2_brain.embedding_activation_verifier import run_embedding_activation_verification
+    from layers.l2_brain.governance.dependency_reproducibility_verifier import run_dependency_reproducibility_verification
+    from layers.l2_brain.memory.kuzu_graph_readback_verifier import run_kuzu_graph_readback_verification
+    from layers.l2_brain.embedding_mesh.embedding_activation_verifier import run_embedding_activation_verification
     
     run_dependency_reproducibility_verification()
     run_kuzu_graph_readback_verification()

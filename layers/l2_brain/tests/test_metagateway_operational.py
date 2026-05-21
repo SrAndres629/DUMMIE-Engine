@@ -7,7 +7,7 @@ from unittest.mock import MagicMock
 sys.path.append(os.getcwd())
 
 from layers.l2_brain.daemon import DummieDaemon
-from layers.l2_brain.event_bus import AsyncEventBus
+from layers.l2_brain.infrastructure.event_bus import AsyncEventBus
 
 @pytest.mark.asyncio
 async def test_daemon_initializes_metacognition():

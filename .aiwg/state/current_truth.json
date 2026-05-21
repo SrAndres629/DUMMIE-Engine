@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-24T08:00:00Z",
+  "generated_at": "2026-05-21T07:26:28Z",
   "head_commit": "UNVERIFIED",
   "head_commit_policy": "versioned_snapshot_self_reference",
   "branch": "main",
@@ -7,9 +7,17 @@
   "repo_health_status": "FAIL",
   "semantic_mode": "text_fast_bge_small_384",
   "index_mode": "hybrid_index_mode",
-  "current_pack": "PACK_4.1",
-  "last_completed_pack": "PACK_4.0",
-  "next_pack": "PACK_4.2",
+  "current_pack": "PACK_S1",
+  "last_completed_pack": "INMEDIATO",
+  "next_pack": "PACK_10",
+  "swarm_state": {
+    "schema": "dummie.swarm.backlog.v1",
+    "completed_count": 13,
+    "pending_count": 1,
+    "total_count": 14,
+    "pending_pack": "PACK_10",
+    "latest_completed_pack": "INMEDIATO"
+  },
   "critical_count": 0,
   "high_count": 48,
   "shadow_candidate_count": 48,

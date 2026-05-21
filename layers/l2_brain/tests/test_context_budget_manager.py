@@ -1,5 +1,5 @@
 import pytest
-from layers.l2_brain.context_budget_manager import ContextBudgetManager
+from layers.l2_brain.context.context_budget_manager import ContextBudgetManager
 
 def test_context_budget_manager_allocate_budget():
     cbm = ContextBudgetManager()

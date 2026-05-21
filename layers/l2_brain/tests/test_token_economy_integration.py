@@ -34,7 +34,7 @@ def test_integration_outcome_evaluator_includes_token_economy(tmp_path):
     ledger = TokenCostLedger(root=tmp_path)
     ledger.record_usage({"mission_id": "m1", "input_tokens": 100, "output_tokens": 50})
     
-    from layers.l2_brain.context_budget_manager import ContextBudgetManager
+    from layers.l2_brain.context.context_budget_manager import ContextBudgetManager
     budget_manager = ContextBudgetManager()
     
     daemon = MockDaemon(ledger, budget_manager)

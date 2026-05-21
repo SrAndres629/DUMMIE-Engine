@@ -1,3 +1,4 @@
+# Spec Reference: 15_mcp_sidecar_isolation
 import json
 import logging
 from pathlib import Path
@@ -5,10 +6,12 @@ from typing import Dict, Any, List, Optional
 
 logger = logging.getLogger("mcp-registry")
 
+
 class MCPRegistry:
     """
     [L1_NERVOUS] Registro persistente de servidores MCP y caché de herramientas.
     """
+
     def __init__(self, config_path: Path):
         self.config_path = config_path
         self.servers: Dict[str, Dict[str, Any]] = {}

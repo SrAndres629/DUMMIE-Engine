@@ -1,7 +1,7 @@
 import json
 import pytest
 from pathlib import Path
-from layers.l2_brain.operationalization_review import OperationalizationReview
+from layers.l2_brain.governance.operationalization_review import OperationalizationReview
 
 @pytest.fixture
 def op_env(tmp_path):

@@ -1,7 +1,7 @@
 import json
 import pytest
 from pathlib import Path
-from layers.l2_brain.technical_debt_intelligence import TechnicalDebtIntelligence
+from layers.l2_brain.governance.technical_debt_intelligence import TechnicalDebtIntelligence
 
 @pytest.fixture
 def debt_env(tmp_path):

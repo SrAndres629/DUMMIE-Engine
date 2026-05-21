@@ -1,6 +1,6 @@
 from dataclasses import dataclass, field
 
-from layers.l2_brain.context_value_scorer import ContextValueScorer
+from layers.l2_brain.context.context_value_scorer import ContextValueScorer
 
 
 @dataclass

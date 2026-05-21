@@ -14,7 +14,7 @@ if str(ROOT) not in sys.path:
 if str(L2) not in sys.path:
     sys.path.insert(0, str(L2))
 
-from layers.l2_brain.memory_spine_entrypoint import (
+from layers.l2_brain.memory.memory_spine_entrypoint import (
     MemorySpineEntrypoint,
     MemorySpineRetrievalResult,
     MemorySpineQuery,

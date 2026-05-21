@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 
-from layers.l2_brain.evolution_flywheel_runtime import EvolutionFlywheelRuntime
+from layers.l2_brain.governance.evolution_flywheel_runtime import EvolutionFlywheelRuntime
 
 
 def _write_json(path: Path, payload: dict) -> None:

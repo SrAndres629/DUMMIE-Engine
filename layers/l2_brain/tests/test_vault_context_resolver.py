@@ -1,7 +1,7 @@
 import pytest
 import json
 from pathlib import Path
-from layers.l2_brain.vault_context_resolver import VaultContextResolver
+from layers.l2_brain.memory.vault_context_resolver import VaultContextResolver
 
 def test_vcr_resolve_refs(tmp_path):
     vault_path = tmp_path / "vault"

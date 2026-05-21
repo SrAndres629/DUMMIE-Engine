@@ -1,10 +1,10 @@
 import json
 import pytest
 from pathlib import Path
-from layers.l2_brain.repo_intelligence_query import query_repo_intelligence
-from layers.l2_brain.context_enforcement_gate import run_context_enforcement_gate
-from layers.l2_brain.dummie_chat_cli import DummieChatCli
-from layers.l2_brain.operationalization_review import run_operationalization_review
+from layers.l2_brain.mission.repo_intelligence_query import query_repo_intelligence
+from layers.l2_brain.context.context_enforcement_gate import run_context_enforcement_gate
+from layers.l2_brain.mission.dummie_chat_cli import DummieChatCli
+from layers.l2_brain.governance.operationalization_review import run_operationalization_review
 
 def test_operationalization_integration(tmp_path):
     aiwg = tmp_path / ".aiwg"

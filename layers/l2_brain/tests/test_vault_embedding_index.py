@@ -1,5 +1,5 @@
 import pytest
-from layers.l2_brain.vault_embedding_index import VaultEmbeddingIndex
+from layers.l2_brain.memory.vault_embedding_index import VaultEmbeddingIndex
 
 def test_vault_embedding_index_entry(tmp_path):
     idx = VaultEmbeddingIndex(root=tmp_path)

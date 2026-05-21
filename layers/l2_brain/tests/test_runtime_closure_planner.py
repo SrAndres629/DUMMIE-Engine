@@ -1,8 +1,8 @@
 import os
 import json
 from pathlib import Path
-from layers.l2_brain.runtime_dependency_auditor import run_runtime_dependency_audit
-from layers.l2_brain.degraded_capability_registry import run_degraded_capability_registry
+from layers.l2_brain.governance.runtime_dependency_auditor import run_runtime_dependency_audit
+from layers.l2_brain.governance.degraded_capability_registry import run_degraded_capability_registry
 from layers.l2_brain.runtime_closure_planner import run_runtime_closure_plan
 
 def test_runtime_closure_planner_execution(tmp_path):

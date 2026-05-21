@@ -9,7 +9,7 @@ if str(ROOT) not in sys.path:
 import types
 from pathlib import Path
 
-from layers.l2_brain.operational_truth import TruthCheck, TruthReport, TruthStatus
+from layers.l2_brain.governance.operational_truth import TruthCheck, TruthReport, TruthStatus
 from layers.l2_brain.operational_truth_collectors import _dummied_check, _kuzu_check, collect_truth
 
 
