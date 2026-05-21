@@ -3,15 +3,17 @@ from typing import Optional
 from brain.domain.memory.models import CrystallizedSkill
 from brain.domain.memory.ports import ISkillRepositoryPort
 
+
 class KuzuSkillRepository(ISkillRepositoryPort):
     """
     Repositorio de Habilidades Cristalizadas (Spec 38).
     Almacena contratos YAML en una tabla específica del grafo.
     """
-    def __init__(self, db_path: str = ".aiwg/memory/loci.db", db: kuzu.Database = None):
+
+    def __init__(self, db_path: str = ".aiwg/memory/kuzu_4d", db: kuzu.Database = None):
         self.db_path = db_path
         self.read_only = False
-        
+
         if db is not None:
             self.db = db
         else:
@@ -29,9 +31,11 @@ class KuzuSkillRepository(ISkillRepositoryPort):
 
     def _init_schema(self):
         try:
-            self.conn.execute("CREATE NODE TABLE Skill(skill_id STRING, yaml_payload STRING, skill_hash STRING, PRIMARY KEY (skill_id))")
+            self.conn.execute(
+                "CREATE NODE TABLE Skill(skill_id STRING, yaml_payload STRING, skill_hash STRING, PRIMARY KEY (skill_id))"
+            )
         except Exception:
-            pass # Ya existe
+            pass  # Ya existe
 
     def save_skill(self, skill: CrystallizedSkill) -> None:
         if self.read_only:
@@ -40,7 +44,11 @@ class KuzuSkillRepository(ISkillRepositoryPort):
             )
         self.conn.execute(
             "CREATE (s:Skill {skill_id: $id, yaml_payload: $payload, skill_hash: $hash})",
-            {"id": skill.skill_id, "payload": skill.yaml_payload, "hash": skill.skill_hash},
+            {
+                "id": skill.skill_id,
+                "payload": skill.yaml_payload,
+                "hash": skill.skill_hash,
+            },
         )
 
     def get_skill_by_id(self, skill_id: str) -> Optional[CrystallizedSkill]:
@@ -49,8 +57,6 @@ class KuzuSkillRepository(ISkillRepositoryPort):
         if result.has_next():
             row = result.get_next()
             return CrystallizedSkill(
-                skill_id=row[0],
-                yaml_payload=row[1],
-                skill_hash=row[2]
+                skill_id=row[0], yaml_payload=row[1], skill_hash=row[2]
             )
         return None

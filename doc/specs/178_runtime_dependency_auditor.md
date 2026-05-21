@@ -1,7 +1,7 @@
 ---
 spec_id: "178_runtime_dependency_auditor"
 title: "Runtime Dependency Auditor"
-status: "ACTIVE"
+status: "DEPRECATED"
 layer: "L2"
 last_verified_on: "2026-05-16"
 ---
@@ -13,7 +13,6 @@ This spec establishes the runtime dependency auditor (HEARTBEAT-2.1) to diagnose
 Under implementation. Will process python imports, read project manifest structures, and compile validated results conforming to `runtime_dependency_audit.schema.json`.
 
 ## Physical Evidence
-- Core module: `layers/l2_brain/flat_brain/runtime_dependency_auditor.py`
 - Test suite: `layers/l2_brain/tests/test_runtime_dependency_auditor.py`
 - JSON Schema: `.aiwg/schemas/runtime_dependency_audit.schema.json`
 - Output reports: `.aiwg/reports/runtime_dependency_audit_latest.json` and `.aiwg/reports/runtime_dependency_audit_latest.md`

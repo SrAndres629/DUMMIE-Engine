@@ -13,7 +13,7 @@ Verify that semantic vector embedding models are safely and locally available in
 Under implementation.
 
 ## Physical Evidence
-- Core module: `layers/l2_brain/flat_brain/embedding_activation_verifier.py`
+- Core module: `layers/l2_brain/model_mesh/embedding_activation_verifier.py`
 - Test suite: `layers/l2_brain/tests/test_embedding_activation_verifier.py`
 - JSON Schema: `.aiwg/schemas/embedding_activation_verification.schema.json`
 - Output reports: `.aiwg/reports/embedding_activation_verification_latest.json` and `.aiwg/reports/embedding_activation_verification_latest.md`

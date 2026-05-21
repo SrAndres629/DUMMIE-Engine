@@ -1,7 +1,7 @@
 ---
 spec_id: "DE-V2-L2-115"
 title: "RestartIntegrationGate + ContextEfficiencyBenchmark"
-status: "ACTIVE"
+status: "DEPRECATED"
 layer: "L2"
 last_verified_on: "2026-05-16"
 version: "1.0.0"
@@ -22,8 +22,6 @@ P15/P16 must prove runtime can recover after restart and that context optimizati
 Implemented as `restart_integration_gate.py` and `context_efficiency_benchmark.py` with `latest` reports.
 
 ## Physical Evidence
-- `layers/l2_brain/flat_brain/restart_integration_gate.py`
-- `layers/l2_brain/flat_brain/context_efficiency_benchmark.py`
 - `.aiwg/reports/restart_integration_gate_latest.json`
 - `.aiwg/reports/context_efficiency_benchmark_latest.json`
 

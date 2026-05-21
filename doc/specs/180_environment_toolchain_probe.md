@@ -1,7 +1,7 @@
 ---
 spec_id: "180_environment_toolchain_probe"
 title: "Environment Toolchain Probe"
-status: "ACTIVE"
+status: "DEPRECATED"
 layer: "L2"
 last_verified_on: "2026-05-16"
 ---
@@ -13,7 +13,6 @@ This spec establishes the environment toolchain probe (HEARTBEAT-2.1) to audit t
 Under implementation. Will safely run subprocess version queries and compile structured results conforming to `environment_toolchain_probe.schema.json`.
 
 ## Physical Evidence
-- Core module: `layers/l2_brain/flat_brain/environment_toolchain_probe.py`
 - Test suite: `layers/l2_brain/tests/test_environment_toolchain_probe.py`
 - JSON Schema: `.aiwg/schemas/environment_toolchain_probe.schema.json`
 - Output reports: `.aiwg/reports/environment_toolchain_probe_latest.json` and `.aiwg/reports/environment_toolchain_probe_latest.md`

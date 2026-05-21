@@ -43,7 +43,7 @@ This contract is the prerequisite gate for `TrustedWorkstationMode`.
 
 ## Physical Evidence
 - `layers/l2_brain/mission/mission_autonomy_contract.py`
-- `layers/l2_brain/flat_brain/mission_autonomy_contract.py`
+- `layers/l2_brain/mission/mission_autonomy_contract.py`
 - `layers/l2_brain/tests/test_mission_autonomy_contract.py`
 
 ## Contract Invariants

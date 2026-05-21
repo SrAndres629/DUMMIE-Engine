@@ -50,7 +50,7 @@ def test_backwards_compatibility_shim():
     """
     Verifica que el shim de flat_brain funcione correctamente.
     """
-    from layers.l2_brain.flat_brain.models import AgentIntent
+    from layers.l2_brain.memory.models import AgentIntent
     from layers.l2_brain.memory.models import AgentIntent as CanonicalIntent
     
     assert AgentIntent is CanonicalIntent

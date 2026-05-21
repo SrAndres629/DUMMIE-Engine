@@ -1,21 +1,5 @@
 # Spec: 166_l2_brain_organ_migration_contract
 __spec_id__ = "DE-V2-L2-42B"
-__spec_id__ = "DE-V2-L2-34"
-__spec_id__ = "DE-V2-L2-27B"
-__spec_id__ = "DE-V2-L2-27"
-__spec_id__ = "DE-V2-L2-40B"
-__spec_id__ = "DE-V2-L2-28"
-__spec_id__ = "DE-V2-L2-37"
-__spec_id__ = "DE-V2-L2-40"
-__spec_id__ = "DE-V2-L2-31"
-__spec_id__ = "DE-V2-L2-09"
-__spec_id__ = "DE-V2-L2-41B"
-__spec_id__ = "DE-V2-L2-39"
-__spec_id__ = "DE-V2-L2-42"
-__spec_id__ = "DE-V2-L2-21"
-__spec_id__ = "DE-V2-L2-29"
-__spec_id__ = "DE-V2-L2-36"
-__spec_id__ = "DE-V2-L2-38"
 import asyncio
 import json
 import logging
@@ -36,10 +20,17 @@ if __package__ in {None, ""}:
         sys.path.append(str(_L2))
 
 
-from layers.l2_brain.infrastructure.gateway_contract import GatewayRequest, SagaTransaction, SagaStep
+from layers.l2_brain.infrastructure.gateway_contract import (
+    GatewayRequest,
+    SagaTransaction,
+    SagaStep,
+)
 from layers.l2_brain.governance.auditor_port import BaseAuditor, BaseExecutor
 from layers.l2_brain.model_mesh.model_router import ModelTier
-from layers.l2_brain.infrastructure.safe_fallbacks import FailClosedAuditor, FailClosedExecutor
+from layers.l2_brain.infrastructure.safe_fallbacks import (
+    FailClosedAuditor,
+    FailClosedExecutor,
+)
 
 try:
     from layers.l3_shield.topological_auditor import TopologicalAuditor
@@ -56,12 +47,17 @@ except ImportError as e:
 logger = logging.getLogger("dummie-daemon")
 
 from layers.l2_brain.infrastructure.event_bus import AsyncEventBus
-from layers.l2_brain.infrastructure.metagateway_policy import SensorFirstPolicy, PolicyDecision
+from layers.l2_brain.infrastructure.metagateway_policy import (
+    SensorFirstPolicy,
+    PolicyDecision,
+)
 
 from layers.l1_nervous.repo_guard import RepoGuard
 
+
 class _FallbackUnsafeAuditor:
     """Fallback auditor when L3 shield cannot be imported."""
+
     async def audit(self, dag_xml: str, goal: str = "") -> tuple[bool, str]:
         return True, "FALLBACK_UNSAFE: L3 Shield import failed"
 
@@ -71,6 +67,7 @@ class DummieDaemon:
     [L2_BRAIN] Orquestador Supremo Antigravity.
     Estructura Tabula Rasa: Flat, Determinista e Industrial.
     """
+
     def __init__(
         self,
         ledger_path: str,
@@ -111,8 +108,11 @@ class DummieDaemon:
         self.last_counterfactual_scores: List[float] = []
         self._current_counterfactual_threshold: float = 0.0
         self.last_cognitive_preflight: Dict[str, Any] = {"status": "SKIPPED"}
-        
-        from layers.l2_brain.structural_hardening.resource_governor import ResourceGovernor
+
+        from layers.l2_brain.structural_hardening.resource_governor import (
+            ResourceGovernor,
+        )
+
         self.governor = ResourceGovernor()
 
         # Metacognitive Pipeline Integration
@@ -128,10 +128,32 @@ class DummieDaemon:
                 PromptRefinerHook,
                 ToolNeedDetectorHook,
             )
-            from layers.l2_brain.metacognition.semantic_hooks import SemanticToolSelectorHook
-            from layers.l2_brain.metacognition.reasoning_hooks import ReasoningExpansionHook
-            from layers.l2_brain.metacognition.deliberation_hooks import MissionDecomposerHook, PlanCriticHook
-            from layers.l2_brain.metacognition.output_hooks import AnswerVerifierHook, MemoryUpdateHook
+            from layers.l2_brain.metacognition.context_pruning import (
+                ContextPruningHook,
+            )
+            from layers.l2_brain.metacognition.semantic_hooks import (
+                SemanticToolSelectorHook,
+            )
+            from layers.l2_brain.metacognition.reasoning_hooks import (
+                ReasoningExpansionHook,
+            )
+            from layers.l2_brain.metacognition.deliberation_hooks import (
+                MissionDecomposerHook,
+                PlanCriticHook,
+            )
+            from layers.l2_brain.metacognition.output_hooks import (
+                AnswerVerifierHook,
+                MemoryUpdateHook,
+            )
+            from layers.l2_brain.metacognition.tool_selector import ToolSelector
+            from layers.l2_brain.metacognition.production_verification import (
+                ProductionVerificationHook,
+            )
+
+            self.tool_selector = ToolSelector(mcp_gateway=mcp_gateway)
+            self.production_verifier = ProductionVerificationHook()
+
+            self.context_pruner = ContextPruningHook()
 
             self.metacognition = MetacognitivePipeline(
                 input_hooks=[
@@ -140,26 +162,45 @@ class DummieDaemon:
                     AuthorityClassifierHook(),
                     ToolNeedDetectorHook(),
                     ContextEnricherHook(),
-                    SemanticToolSelectorHook(self.mcp_gateway)
+                    self.context_pruner,
+                    SemanticToolSelectorHook(self.mcp_gateway),
+                    self.production_verifier,
                 ],
                 deliberation_hooks=[
                     ReasoningExpansionHook(self),
                     MissionDecomposerHook(self),
-                    PlanCriticHook()
+                    PlanCriticHook(),
                 ],
-                output_hooks=[AnswerVerifierHook(), MemoryUpdateHook()]
+                output_hooks=[AnswerVerifierHook(), MemoryUpdateHook()],
             )
             self.metacognition_status = "READY"
         except ImportError as e:
             self.metacognition = None
+            self.tool_selector = None
             self.metacognition_status = "DEGRADED"
             self.metacognition_error = str(e)
             logger.warning(f"Metacognitive Pipeline degraded: {e}")
         except Exception as e:
             self.metacognition = None
+            self.tool_selector = None
             self.metacognition_status = "ERROR"
             self.metacognition_error = str(e)
             logger.error(f"Metacognitive Pipeline critical failure: {e}")
+
+        # Canonical SkillBinder: auto-load skills at startup
+        self.skill_binder_status = "MISSING"
+        if self.skill_binder:
+            try:
+                skills_dir = os.getenv("DUMMIE_SKILLS_DIR", ".agents/skills")
+                self.skill_binder.load_all_skills()
+                skill_count = len(self.skill_binder.skills_by_id)
+                self.skill_binder_status = f"READY ({skill_count} skills loaded)"
+                logger.info(
+                    f"SkillBinder: {skill_count} skills loaded from {skills_dir}"
+                )
+            except Exception as e:
+                self.skill_binder_status = f"ERROR: {e}"
+                logger.warning(f"SkillBinder auto-load failed: {e}")
 
         try:
             from layers.l3_shield.authority_gate import AuthorityGate
@@ -174,25 +215,43 @@ class DummieDaemon:
         # Capas Somáticas (Conexión Directa)
         shield_error = "shield_import_failed"
         executor_error = "muscle_import_failed"
-        self.s_shield: BaseAuditor = TopologicalAuditor() if TopologicalAuditor else _FallbackUnsafeAuditor()
-        self.e_shield: BaseAuditor = BudgetAuditor() if BudgetAuditor else FailClosedAuditor(shield_error)
-        self.l_shield: BaseAuditor = ComplianceAuditor() if ComplianceAuditor else FailClosedAuditor(shield_error)
-        self.muscle: BaseExecutor = MuscleDriver(mcp_gateway) if MuscleDriver else FailClosedExecutor(executor_error)
+        self.s_shield: BaseAuditor = (
+            TopologicalAuditor() if TopologicalAuditor else _FallbackUnsafeAuditor()
+        )
+        self.e_shield: BaseAuditor = (
+            BudgetAuditor() if BudgetAuditor else FailClosedAuditor(shield_error)
+        )
+        self.l_shield: BaseAuditor = (
+            ComplianceAuditor()
+            if ComplianceAuditor
+            else FailClosedAuditor(shield_error)
+        )
+        self.muscle: BaseExecutor = (
+            MuscleDriver(mcp_gateway)
+            if MuscleDriver
+            else FailClosedExecutor(executor_error)
+        )
 
         self.gateway_policy = SensorFirstPolicy(mode=PolicyDecision.WARN)
 
         # Phase 10: Semantic Retrieval Wiring
         try:
-            from layers.l2_brain.socraticode_gateway_adapter import SocraticodeGatewayAdapter
-            from layers.l2_brain.semantic_retrieval_runtime import SemanticRetrievalRuntime
+            from layers.l2_brain.socraticode_gateway_adapter import (
+                SocraticodeGatewayAdapter,
+            )
+            from layers.l2_brain.semantic_retrieval_runtime import (
+                SemanticRetrievalRuntime,
+            )
 
             # Use mcp_gateway for socraticode adapter
             # We don't have direct access to the VaultEmbeddingIndex instance here typically,
             # but in a real setup it would be passed or constructed. For now we use the adapter.
-            self.socraticode_adapter = SocraticodeGatewayAdapter(mcp_gateway=mcp_gateway)
+            self.socraticode_adapter = SocraticodeGatewayAdapter(
+                mcp_gateway=mcp_gateway
+            )
             self.semantic_retrieval_runtime = SemanticRetrievalRuntime(
                 socraticode_adapter=self.socraticode_adapter,
-                context_budget_manager=getattr(self, "budget_manager", None)
+                context_budget_manager=getattr(self, "budget_manager", None),
             )
             self.semantic_retrieval_status = "READY"
         except ImportError as e:
@@ -201,28 +260,36 @@ class DummieDaemon:
             logger.warning(f"Semantic Retrieval degraded: {e}")
 
         try:
-            from layers.l2_brain.metagateway_runtime_meter import MetaGatewayRuntimeMeter
+            from layers.l2_brain.metagateway_runtime_meter import (
+                MetaGatewayRuntimeMeter,
+            )
             from layers.l2_brain.token_cost_ledger import TokenCostLedger
             from layers.l2_brain.context_budget_manager import ContextBudgetManager
+
             self.runtime_meter = MetaGatewayRuntimeMeter()
-            self.token_ledger = TokenCostLedger(root=ledger_path if ledger_path else ".aiwg")
+            self.token_ledger = TokenCostLedger(
+                root=ledger_path if ledger_path else ".aiwg"
+            )
             self.budget_manager = ContextBudgetManager()
 
             # [WAVE 6] Link ledger to router and executor
             if self.model_router:
                 self.model_router.ledger = self.token_ledger
-            
+
             if self.model_executor:
                 self.model_executor.token_ledger = self.token_ledger
-                
+
         except ImportError:
             self.runtime_meter = None
             self.token_ledger = None
             self.budget_manager = None
-            logger.warning("Metabolic components (Meter/Ledger/Budget) not fully available")
+            logger.warning(
+                "Metabolic components (Meter/Ledger/Budget) not fully available"
+            )
 
         try:
             from layers.l2_brain.outcome_evaluator import OutcomeEvaluator
+
             self.evaluator = OutcomeEvaluator(self)
             self.outcome_contract_available = True
             self.outcome_contract_error = ""
@@ -234,6 +301,7 @@ class DummieDaemon:
 
         try:
             from layers.l2_brain.cognition.orchestrator import CognitiveOrchestrator
+
             self.orchestrator = CognitiveOrchestrator(self)
         except ImportError as e:
             self.orchestrator = None
@@ -241,6 +309,7 @@ class DummieDaemon:
 
         try:
             from layers.l2_brain.long_running_mission import LongRunningMissionRuntime
+
             self.mission_runtime = LongRunningMissionRuntime()
             self.mission_runtime_available = True
             self.mission_runtime_error = ""
@@ -253,6 +322,7 @@ class DummieDaemon:
         if self.diagnostic_mode:
             try:
                 from layers.l2_brain.daemon.daemon_diagnostic import DiagnosticReporter
+
                 self.diagnostic_reporter = DiagnosticReporter(self)
             except ImportError:
                 self.diagnostic_reporter = None
@@ -317,25 +387,44 @@ class DummieDaemon:
             retrieval_context = None
             sensor_first_decision = {"decision": "ALLOW", "reason": "not_applicable"}
 
-            if hasattr(self, "semantic_retrieval_runtime") and self.semantic_retrieval_runtime:
+            if (
+                hasattr(self, "semantic_retrieval_runtime")
+                and self.semantic_retrieval_runtime
+            ):
                 try:
                     # Attempt semantic retrieval for the request intent
-                    retrieval_context = await self.semantic_retrieval_runtime.retrieve_for_prompt(
-                        prompt=request.goal,
-                        hook_packet=None
+                    retrieval_context = (
+                        await self.semantic_retrieval_runtime.retrieve_for_prompt(
+                            prompt=request.goal, hook_packet=None
+                        )
                     )
                 except Exception as e:
-                    logger.warning(f"Semantic retrieval failed during request processing: {e}")
-                    retrieval_context = {"status": "FAILED", "results": [], "fallback_used": False}
+                    logger.warning(
+                        f"Semantic retrieval failed during request processing: {e}"
+                    )
+                    retrieval_context = {
+                        "status": "FAILED",
+                        "results": [],
+                        "fallback_used": False,
+                    }
 
             # Enforce SensorFirst policy
             try:
                 from layers.l2_brain.sensor_first_guard import SensorFirstGuard
-                guard = SensorFirstGuard(retrieval_runtime=getattr(self, "semantic_retrieval_runtime", None))
+
+                guard = SensorFirstGuard(
+                    retrieval_runtime=getattr(self, "semantic_retrieval_runtime", None)
+                )
                 # Build a pseudo-request dict for the guard
                 # GatewayRequest doesn't have .context, use a default mission context
-                req_dict = {"purpose": "mission_execution", "action": "direct_read", "goal": request.goal}
-                sensor_first_decision = guard.evaluate_request(req_dict, retrieval_context)
+                req_dict = {
+                    "purpose": "mission_execution",
+                    "action": "direct_read",
+                    "goal": request.goal,
+                }
+                sensor_first_decision = guard.evaluate_request(
+                    req_dict, retrieval_context
+                )
             except Exception as e:
                 logger.warning(f"SensorFirst evaluation failed: {e}")
 
@@ -345,7 +434,9 @@ class DummieDaemon:
             self.last_gate_reasons = [sensor_first_decision.get("reason", "unknown")]
 
             # Phase 10.1: Expose prompt_context_block for subsequent use
-            self.last_prompt_context_block = self.last_context_packet.get("prompt_context_block", "")
+            self.last_prompt_context_block = self.last_context_packet.get(
+                "prompt_context_block", ""
+            )
 
             if hasattr(self, "orchestrator") and self.orchestrator:
                 return await self.orchestrator.execute_request(request)
@@ -371,7 +462,10 @@ class DummieDaemon:
         saga = kwargs.get("saga", args[2] if len(args) > 2 else None)
         gate_reasons = kwargs.get("gate_reasons") or ["outcome_contract_unavailable"]
         steps = [
-            {"task_id": getattr(step, "task_id", ""), "status": getattr(step, "status", "")}
+            {
+                "task_id": getattr(step, "task_id", ""),
+                "status": getattr(step, "status", ""),
+            }
             for step in getattr(saga, "steps", [])
         ]
 
@@ -384,7 +478,9 @@ class DummieDaemon:
             "phase_id": kwargs.get("phase_id", getattr(self, "phase_id", "")),
             "metacognition_status": getattr(self, "metacognition_status", "MISSING"),
             "sensor_first": {
-                "mode": getattr(getattr(self.gateway_policy, "mode", None), "value", "WARN"),
+                "mode": getattr(
+                    getattr(self.gateway_policy, "mode", None), "value", "WARN"
+                ),
                 "decision": "WARN",
                 "reason": "; ".join(gate_reasons),
             },
@@ -408,17 +504,24 @@ class DummieDaemon:
         for step in reversed(saga.steps):
             step.status = "COMPENSATED"
 
-
     def _cognitive_preflight_enabled(self, dag_root: Any) -> bool:
         return self.orchestrator.is_preflight_enabled(dag_root)
 
     async def _run_cognitive_preflight(self, request: GatewayRequest) -> Dict[str, Any]:
         return await self.orchestrator.run_preflight(request)
 
-    async def _call_local_reasoning_capability(self, target: str, arguments: Dict[str, Any]) -> Dict[str, Any]:
+    async def _call_local_reasoning_capability(
+        self, target: str, arguments: Dict[str, Any]
+    ) -> Dict[str, Any]:
         return await self.orchestrator.call_local_reasoning(target, arguments)
 
-    async def reason_with_tiers(self, prompt: str, system_prompt: str = "", concept: str = "general", saga_id: str = "unknown") -> str:
+    async def reason_with_tiers(
+        self,
+        prompt: str,
+        system_prompt: str = "",
+        concept: str = "general",
+        saga_id: str = "unknown",
+    ) -> str:
         """
         [L2_BRAIN] Razonamiento agéntico multinivel con ahorro de tokens.
         """
@@ -440,7 +543,9 @@ class DummieDaemon:
                 system_prompt = f"{system_prompt}\n\n{context_block}"
             else:
                 system_prompt = context_block
-            logger.info(f"Context injection active: {len(context_block)} chars added to system prompt.")
+            logger.info(
+                f"Context injection active: {len(context_block)} chars added to system prompt."
+            )
 
         # 1. Routing & Tiers
         # Pass hook_metadata if available for context-aware routing
@@ -449,8 +554,10 @@ class DummieDaemon:
             packet = self.last_context_packet
             hook_metadata = {
                 "retrieved_context_count": len(packet.get("retrieved_context", [])),
-                "prompt_context_block_ref": "present" if packet.get("prompt_context_block") else "",
-                "retrieval_refs": packet.get("context_refs", [])
+                "prompt_context_block_ref": "present"
+                if packet.get("prompt_context_block")
+                else "",
+                "retrieval_refs": packet.get("context_refs", []),
             }
 
         decision = self.model_router.route(prompt, hook_metadata=hook_metadata)
@@ -465,17 +572,25 @@ class DummieDaemon:
             configs = self.model_router.registry.models.get(tier, [])
             for config in configs:
                 try:
-                    logger.info(f"Reasoning: Trying {config.model_id} ({tier.value})...")
+                    logger.info(
+                        f"Reasoning: Trying {config.model_id} ({tier.value})..."
+                    )
 
                     # 2. Execution
-                    response = await self.model_executor.execute_config(config, prompt, system_prompt, concept)
+                    response = await self.model_executor.execute_config(
+                        config, prompt, system_prompt, concept
+                    )
 
                     # 3. Stats & Reputation (Wave 4)
                     if self.neuron_ledger:
                         if response.success:
-                            self.neuron_ledger.record_success(config.model_id, response.latency_ms)
+                            self.neuron_ledger.record_success(
+                                config.model_id, response.latency_ms
+                            )
                         else:
-                            self.neuron_ledger.record_failure(config.model_id, response.error or "unknown")
+                            self.neuron_ledger.record_failure(
+                                config.model_id, response.error or "unknown"
+                            )
 
                     if response.success:
                         # 4. Action Graph (Wave 4)
@@ -492,31 +607,44 @@ class DummieDaemon:
 
                             import uuid
                             from action_graph import ActionNode
-                            await self.action_graph.record_action(ActionNode(
-                                action_id=uuid.uuid4().hex[:8],
-                                saga_id=saga_id,
-                                model_id=config.model_id,
-                                action_type="REASON",
-                                target="llm_inference",
-                                description=f"Razonamiento tier {tier.value} para: {prompt[:50]}..."
-                            ))
+
+                            await self.action_graph.record_action(
+                                ActionNode(
+                                    action_id=uuid.uuid4().hex[:8],
+                                    saga_id=saga_id,
+                                    model_id=config.model_id,
+                                    action_type="REASON",
+                                    target="llm_inference",
+                                    description=f"Razonamiento tier {tier.value} para: {prompt[:50]}...",
+                                )
+                            )
 
                         # 5. Supervision (Wave 4)
                         if self.supervisor_protocol and tier != ModelTier.LOCAL_FAST:
-                            review = await self.supervisor_protocol.review_task(prompt, response.text, config.model_id)
+                            review = await self.supervisor_protocol.review_task(
+                                prompt, response.text, config.model_id
+                            )
                             if self.neuron_ledger:
                                 if review.approved:
-                                    self.neuron_ledger.reward(config.model_id, amount=review.score * 10)
+                                    self.neuron_ledger.reward(
+                                        config.model_id, amount=review.score * 10
+                                    )
                                 else:
-                                    self.neuron_ledger.penalize(config.model_id, amount=20.0)
+                                    self.neuron_ledger.penalize(
+                                        config.model_id, amount=20.0
+                                    )
 
                         # 6. Save to Cache
                         final_text = response.text
                         if self.entity_voice:
-                            final_text = self.entity_voice.format_output(final_text, config.model_id)
+                            final_text = self.entity_voice.format_output(
+                                final_text, config.model_id
+                            )
 
                         if self.semantic_cache:
-                            await self.semantic_cache.set(prompt, final_text, system_prompt)
+                            await self.semantic_cache.set(
+                                prompt, final_text, system_prompt
+                            )
 
                         return final_text
                     else:
@@ -528,18 +656,23 @@ class DummieDaemon:
 
         # [WAVE 6] Self-Healing Trigger
         if self.auto_evolver:
-            logger.warning("Critical Reasoning Failure: Triggering Auto-Evolution Analysis...")
-            analysis = await self.auto_evolver.analyze_failure({
-                "message": last_error,
-                "stack_trace": f"Reasoning loop failed for prompt: {prompt[:100]}"
-            })
+            logger.warning(
+                "Critical Reasoning Failure: Triggering Auto-Evolution Analysis..."
+            )
+            analysis = await self.auto_evolver.analyze_failure(
+                {
+                    "message": last_error,
+                    "stack_trace": f"Reasoning loop failed for prompt: {prompt[:100]}",
+                }
+            )
             # Log for the user to see DUMMIE's internal thought
             logger.info(f"DUMMIE Self-Healing Analysis: {analysis['root_cause']}")
 
-
         return f"ERROR_EXECUTION: {last_error}"
 
-    async def _execute_local_reasoning(self, target: str, arguments: Dict[str, Any]) -> Dict[str, Any]:
+    async def _execute_local_reasoning(
+        self, target: str, arguments: Dict[str, Any]
+    ) -> Dict[str, Any]:
         """
         [BRIDGE] Ejecuta razonamiento local.
         Si es una capacidad nativa (mcp), la llama.
@@ -559,10 +692,16 @@ class DummieDaemon:
             )
             return self._parse_gateway_payload(response)
         except Exception as e:
-            logger.info(f"Local capability {target} failed or unavailable ({e}). Falling back to Tiered Reasoning.")
+            logger.info(
+                f"Local capability {target} failed or unavailable ({e}). Falling back to Tiered Reasoning."
+            )
             # Fallback a razonamiento generativo si la herramienta falla
             prompt = f"Analiza esta tarea y devuelve un JSON válido: {target} con argumentos {arguments}"
-            result_text = await self.reason_with_tiers(prompt, "Eres el cerebro de DUMMIE Engine. Devuelve solo JSON.", concept=f"fallback_{target}")
+            result_text = await self.reason_with_tiers(
+                prompt,
+                "Eres el cerebro de DUMMIE Engine. Devuelve solo JSON.",
+                concept=f"fallback_{target}",
+            )
             return self._parse_gateway_payload(result_text)
 
     def _parse_gateway_payload(self, value: Any) -> Dict[str, Any]:
@@ -570,7 +709,11 @@ class DummieDaemon:
             if "result" in value:
                 return self._parse_gateway_payload(value["result"])
             if "content" in value and isinstance(value["content"], list):
-                texts = [item.get("text", "") for item in value["content"] if item.get("type") == "text"]
+                texts = [
+                    item.get("text", "")
+                    for item in value["content"]
+                    if item.get("type") == "text"
+                ]
                 return self._parse_gateway_payload("\n".join(texts))
             return value
         if isinstance(value, str):
@@ -585,9 +728,17 @@ class DummieDaemon:
     def _evaluate_runtime_guards(self, dag_root: Any):
         try:
             try:
-                from runtime_guards import GuardInput, evaluate_runtime_guards, InputGuard
+                from runtime_guards import (
+                    GuardInput,
+                    evaluate_runtime_guards,
+                    InputGuard,
+                )
             except ImportError:
-                from .runtime_guards import GuardInput, evaluate_runtime_guards, InputGuard
+                from .runtime_guards import (
+                    GuardInput,
+                    evaluate_runtime_guards,
+                    InputGuard,
+                )
 
             guard = InputGuard()
         except ImportError:
@@ -597,12 +748,16 @@ class DummieDaemon:
             GuardInput(
                 provider_ready=self._parse_bool(dag_root.get("provider_ready"), True),
                 memory_locked=self._parse_bool(dag_root.get("memory_locked"), False),
-                parent_spec_approved=self._parse_bool(dag_root.get("parent_spec_approved"), True),
+                parent_spec_approved=self._parse_bool(
+                    dag_root.get("parent_spec_approved"), True
+                ),
                 l3_policy=str(dag_root.get("l3_policy") or "ALLOWED"),
             )
         )
 
-    def _build_hypothesis_bundle(self, dag_root: Any, bundle_id: str, bundle_cls: Any, hypothesis_cls: Any):
+    def _build_hypothesis_bundle(
+        self, dag_root: Any, bundle_id: str, bundle_cls: Any, hypothesis_cls: Any
+    ):
         bundle_node = dag_root.find("hypothesis_bundle")
         threshold = 1.5
         if bundle_node is None:
@@ -610,9 +765,21 @@ class DummieDaemon:
                 bundle_cls(
                     bundle_id=bundle_id,
                     hypotheses=[
-                        hypothesis_cls(hypothesis_id="optimal_path", content="Ejecución óptima directa", weight=0.7),
-                        hypothesis_cls(hypothesis_id="fallback_path", content="Reintento o compensación parcial", weight=0.2),
-                        hypothesis_cls(hypothesis_id="abort_path", content="Fallo irrecuperable", weight=0.1),
+                        hypothesis_cls(
+                            hypothesis_id="optimal_path",
+                            content="Ejecución óptima directa",
+                            weight=0.7,
+                        ),
+                        hypothesis_cls(
+                            hypothesis_id="fallback_path",
+                            content="Reintento o compensación parcial",
+                            weight=0.2,
+                        ),
+                        hypothesis_cls(
+                            hypothesis_id="abort_path",
+                            content="Fallo irrecuperable",
+                            weight=0.1,
+                        ),
                     ],
                 ),
                 threshold,
@@ -630,26 +797,38 @@ class DummieDaemon:
             )
 
         if not hypotheses:
-            hypotheses.append(hypothesis_cls(hypothesis_id="default", content="Default path", weight=1.0))
+            hypotheses.append(
+                hypothesis_cls(
+                    hypothesis_id="default", content="Default path", weight=1.0
+                )
+            )
         return bundle_cls(bundle_id=bundle_id, hypotheses=hypotheses), threshold
 
-    def _build_hierarchical_plan(self, request: GatewayRequest, root: Any) -> Dict[str, Any]:
+    def _build_hierarchical_plan(
+        self, request: GatewayRequest, root: Any
+    ) -> Dict[str, Any]:
         preferred_master = root.get("preferred_master_skill", "")
         if self.skill_binder and hasattr(self.skill_binder, "propose_reflective_plan"):
-            plan = self.skill_binder.propose_reflective_plan(request.goal, preferred_master)
+            plan = self.skill_binder.propose_reflective_plan(
+                request.goal, preferred_master
+            )
             if not plan.get("master_skill") or plan.get("steps") is None:
-                raise GovernanceGateError("invalid plan: missing master_skill or steps", "FAILED", [])
+                raise GovernanceGateError(
+                    "invalid plan: missing master_skill or steps", "FAILED", []
+                )
         else:
             plan = {
                 "plan_type": "hierarchical_fallback",
                 "master_skill": "sw.master.default",
-                "steps": []
+                "steps": [],
             }
         self.last_plan = plan
         self.last_task_routes = []
         return plan
 
-    def _route_task_with_plan(self, task_node: Any, plan: Dict[str, Any], index: int) -> Dict[str, str]:
+    def _route_task_with_plan(
+        self, task_node: Any, plan: Dict[str, Any], index: int
+    ) -> Dict[str, str]:
         explicit_subskill = task_node.get("subskill")
         subskill_id = None
         if explicit_subskill:
@@ -664,16 +843,15 @@ class DummieDaemon:
                     break
             if not subskill_id:
                 subskill_id = "sw.subskill.dispatch"
-                
-        route = {
-            "task_id": task_node.get("id"),
-            "subskill_id": subskill_id
-        }
+
+        route = {"task_id": task_node.get("id"), "subskill_id": subskill_id}
         self.last_task_routes.append(route)
         return route
 
     def _task_utility(self, task_node: Any) -> float:
-        return self._parse_float(task_node.get("utility"), 1.0 if task_node.get("tool") else 0.0)
+        return self._parse_float(
+            task_node.get("utility"), 1.0 if task_node.get("tool") else 0.0
+        )
 
     def _task_cost(self, task_node: Any) -> float:
         explicit = task_node.get("cost")
@@ -720,8 +898,11 @@ if __name__ == "__main__":
 
     # Minimal stubs for standalone execution
     class MockEventBus(AsyncEventBus):
-        async def start(self): pass
-        def subscribe(self, topic, handler): pass
+        async def start(self):
+            pass
+
+        def subscribe(self, topic, handler):
+            pass
 
     class MockGateway:
         async def call_tool(self, server, tool, args):
@@ -735,32 +916,28 @@ if __name__ == "__main__":
 
         event_bus = MockEventBus()
         daemon = DummieDaemon(
-            ledger_path=".aiwg",
-            mcp_gateway=MockGateway(),
-            event_bus=event_bus
+            ledger_path=".aiwg", mcp_gateway=MockGateway(), event_bus=event_bus
         )
 
-        request = GatewayRequest(
-            session_id="S-MAIN",
-            goal=goal,
-            dag_xml=dag_xml
-        )
+        request = GatewayRequest(session_id="S-MAIN", goal=goal, dag_xml=dag_xml)
 
         print(f"--- DUMMIE DAEMON INVOCATION: {goal} ---")
         await daemon.process_request(request)
         # OutcomeEvaluator needs status, transaction_id, saga
         from layers.l2_brain.gateway_contract import SagaTransaction
-        dummy_saga = SagaTransaction(transaction_id="T-INVOKE", context_token="CTX-MOCK")
-        outcome = daemon.build_daemon_outcome("SUCCESS", "T-INVOKE", dummy_saga, session_id="S-MAIN")
+
+        dummy_saga = SagaTransaction(
+            transaction_id="T-INVOKE", context_token="CTX-MOCK"
+        )
+        outcome = daemon.build_daemon_outcome(
+            "SUCCESS", "T-INVOKE", dummy_saga, session_id="S-MAIN"
+        )
         print(json.dumps(outcome.to_dict(), indent=2))
-
-
-
 
     parser = argparse.ArgumentParser(description="DUMMIE Daemon Invocation Mode")
     parser.add_argument("goal", help="The mission goal")
     parser.add_argument("--xml", help="Path to DAG XML file", default=None)
-    
+
     args = parser.parse_args()
     try:
         asyncio.run(run_mission(args.goal, args.xml))

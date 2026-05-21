@@ -22,7 +22,7 @@ Orchestrates the thinking-before-answering cycle.
 - Operational. Reconciled with Pack 5.2.1 closure requirements.
 
 ## Physical Evidence
-- `layers/l2_brain/flat_brain/metacognitive_loop_runtime.py`
+- `layers/l2_brain/metacognition/metacognitive_loop_runtime.py`
 - `.aiwg/reports/metacognitive_loop_latest.json`
 - `.aiwg/schemas/metacognitive_loop.schema.json`
 
@@ -32,7 +32,7 @@ Orchestrates the thinking-before-answering cycle.
 
 ## Verification
 ```bash
-python3 layers/l2_brain/flat_brain/metacognitive_loop_runtime.py
+python3 layers/l2_brain/metacognition/metacognitive_loop_runtime.py
 pytest layers/l2_brain/tests/test_metacognitive_loop_runtime.py
 ```
 

@@ -1,7 +1,7 @@
 ---
 spec_id: "161_mental_model_truth_hygiene"
 title: "161 Mental Model Truth Hygiene"
-status: "ACTIVE"
+status: "DEPRECATED"
 canonicality: "canonical"
 artifact_type: "spec"
 plan: "DUMMIE PLAN V1"
@@ -22,7 +22,6 @@ Scan, classify, quarantine and audit all stored mental models.
 - Operational. Created by Pack 5.2.2.
 
 ## Physical Evidence
-- `layers/l2_brain/flat_brain/mental_model_truth_hygiene.py`
 - `.aiwg/reports/mental_model_truth_hygiene_latest.json`
 - `.aiwg/mental_models/runtime_model_quarantine.json`
 

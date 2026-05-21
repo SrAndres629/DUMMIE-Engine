@@ -7,7 +7,7 @@ from dummie.paths import ROOT
 try:
     from layers.l2_brain.session_store import SessionStore  # legacy path
 except ModuleNotFoundError:
-    from layers.l2_brain.flat_brain.session_store import SessionStore
+    from layers.l2_brain.memory.session_store import SessionStore
 
 
 class DummieSessionManager:

@@ -1,7 +1,7 @@
 ---
 spec_id: "130_trusted_workstation_mode"
 title: "130 Trusted Workstation Mode"
-status: "ACTIVE"
+status: "DEPRECATED"
 canonicality: "canonical"
 artifact_type: "spec"
 plan: "DUMMIE PLAN V1"
@@ -43,7 +43,6 @@ Consumes the MissionAutonomyContract policies to authorize or deny specific loca
 - Runtime migrated from read-only workstation actions to active cognitive and verified mutation categories.
 
 ## Physical Evidence
-- `layers/l2_brain/flat_brain/trusted_workstation_mode.py`
 - `layers/l2_brain/tests/test_trusted_workstation_mode.py`
 
 ## Contract Invariants

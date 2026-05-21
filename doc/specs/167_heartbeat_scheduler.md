@@ -22,7 +22,7 @@ Orchestrates manual scheduler execution without background processes or timers.
 - Active. Created by Heartbeat-0.
 
 ## Physical Evidence
-- `layers/l2_brain/flat_brain/heartbeat_scheduler.py`
+- `layers/l2_brain/heartbeat/heartbeat_scheduler.py`
 - `.aiwg/reports/heartbeat_scheduler_latest.json`
 
 ## Contract Invariants

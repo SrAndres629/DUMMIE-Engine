@@ -1,7 +1,7 @@
 ---
 spec_id: "DE-V2-L2-116"
 title: "EvolutionFlywheelRuntime"
-status: "ACTIVE"
+status: "DEPRECATED"
 layer: "L2"
 last_verified_on: "2026-05-16"
 version: "1.0.0"
@@ -19,10 +19,8 @@ Covers signal ingestion from restart gate, benchmark, cache summary, stale memor
 P17 introduces flywheel control so phase progression depends on runtime evidence instead of narrative optimism.
 
 ## Current State
-Implemented as `layers/l2_brain/flat_brain/evolution_flywheel_runtime.py` with `.aiwg/reports/evolution_flywheel_latest.json`.
 
 ## Physical Evidence
-- `layers/l2_brain/flat_brain/evolution_flywheel_runtime.py`
 - `.aiwg/reports/evolution_flywheel_latest.json`
 - `.aiwg/reports/restart_integration_gate_latest.json`
 - `.aiwg/reports/context_efficiency_benchmark_latest.json`

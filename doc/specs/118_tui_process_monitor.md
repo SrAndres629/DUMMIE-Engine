@@ -1,7 +1,7 @@
 ---
 spec_id: "DE-V2-L2-118"
 title: "TUI Process Monitor"
-status: "ACTIVE"
+status: "DEPRECATED"
 layer: "L2"
 last_verified_on: "2026-05-16"
 version: "1.0.0"
@@ -35,10 +35,8 @@ Missing optional artifact -> warning; critical state mismatch can degrade decisi
 Reads P10-P17 artifacts and exposes operational status for human/agent control loops.
 
 ## Current State
-Implemented in `layers/l2_brain/flat_brain/tui_process_monitor.py`.
 
 ## Physical Evidence
-- `layers/l2_brain/flat_brain/tui_process_monitor.py`
 - `.aiwg/reports/process_monitor_latest.json`
 - `.aiwg/reports/process_monitor_latest.txt`
 

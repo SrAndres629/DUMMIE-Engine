@@ -22,7 +22,7 @@ Classifies statements and evidence strength.
 - Operational. Reconciled with Pack 5.2.1 closure requirements.
 
 ## Physical Evidence
-- `layers/l2_brain/flat_brain/epistemic_state_runtime.py`
+- `layers/l2_brain/cognition/epistemic_state_runtime.py`
 - `.aiwg/reports/epistemic_state_latest.json`
 - `.aiwg/schemas/epistemic_state.schema.json`
 
@@ -32,7 +32,7 @@ Classifies statements and evidence strength.
 
 ## Verification
 ```bash
-python3 layers/l2_brain/flat_brain/epistemic_state_runtime.py
+python3 layers/l2_brain/cognition/epistemic_state_runtime.py
 pytest layers/l2_brain/tests/test_epistemic_state_runtime.py
 ```
 

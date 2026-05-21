@@ -1,7 +1,7 @@
 ---
 spec_id: "171_shadow_runtime_classifier"
 title: "Shadow Runtime Classifier"
-status: "ACTIVE"
+status: "DEPRECATED"
 layer: "L2"
 last_verified_on: "2026-05-17"
 ---
@@ -13,7 +13,6 @@ This specification establishes the non-destructive auditor of shadow modules (HE
 Fully implemented in the L2 Brain layer. Consumed by the metacognitive heartbeat to verify shadow module debt and output recommended actions.
 
 ## Physical Evidence
-- Core module: `layers/l2_brain/flat_brain/shadow_runtime_classifier.py`
 - Test suite: `layers/l2_brain/tests/test_shadow_runtime_classifier.py`
 - Output report JSON: `.aiwg/reports/shadow_runtime_classification_latest.json`
 - Output report Markdown: `.aiwg/reports/shadow_runtime_classification_latest.md`

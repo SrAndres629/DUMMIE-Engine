@@ -1,7 +1,7 @@
 ---
 spec_id: "DE-V2-L2-114"
 title: "PromptCacheLedger"
-status: "ACTIVE"
+status: "DEPRECATED"
 layer: "L2"
 last_verified_on: "2026-05-16"
 version: "1.0.0"
@@ -19,10 +19,8 @@ Covers JSONL persistence, idempotent writes, invalidation triggers, and reusable
 Prompt frames should not be rebuilt unnecessarily. P14 cache ledger reduces repeated context assembly cost.
 
 ## Current State
-Implemented as `layers/l2_brain/flat_brain/prompt_cache_ledger.py` with summary output `.aiwg/reports/prompt_cache_summary_latest.json`.
 
 ## Physical Evidence
-- `layers/l2_brain/flat_brain/prompt_cache_ledger.py`
 - `.aiwg/prompt_cache/prompt_cache_ledger.jsonl`
 - `.aiwg/reports/prompt_cache_summary_latest.json`
 

@@ -22,7 +22,7 @@ Performs belief revision and learning delta tracking.
 - Operational. Reconciled with Pack 5.2.1 closure requirements.
 
 ## Physical Evidence
-- `layers/l2_brain/flat_brain/metacognitive_evolution_flywheel.py`
+- `layers/l2_brain/metacognition/metacognitive_evolution_flywheel.py`
 - `.aiwg/reports/metacognitive_evolution_flywheel_latest.json`
 - `.aiwg/schemas/metacognitive_evolution_flywheel.schema.json`
 
@@ -32,7 +32,7 @@ Performs belief revision and learning delta tracking.
 
 ## Verification
 ```bash
-python3 layers/l2_brain/flat_brain/metacognitive_evolution_flywheel.py
+python3 layers/l2_brain/metacognition/metacognitive_evolution_flywheel.py
 pytest layers/l2_brain/tests/test_metacognitive_evolution_flywheel.py
 ```
 

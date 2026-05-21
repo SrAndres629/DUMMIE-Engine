@@ -1,7 +1,7 @@
 ---
 spec_id: "150_mental_model_runtime"
 title: "150 Mental Model Runtime"
-status: "ACTIVE"
+status: "DEPRECATED"
 canonicality: "canonical"
 artifact_type: "spec"
 plan: "DUMMIE PLAN V1"
@@ -22,7 +22,6 @@ Evidence-backed structured abstraction of intent context.
 - Operational. Reconciled with Pack 5.2.1 closure requirements.
 
 ## Physical Evidence
-- `layers/l2_brain/flat_brain/mental_model_runtime.py`
 - `.aiwg/reports/mental_model_runtime_latest.json`
 - `.aiwg/schemas/mental_model.schema.json`
 
@@ -32,7 +31,6 @@ Evidence-backed structured abstraction of intent context.
 
 ## Verification
 ```bash
-python3 layers/l2_brain/flat_brain/mental_model_runtime.py
 pytest layers/l2_brain/tests/test_mental_model_runtime.py
 ```
 

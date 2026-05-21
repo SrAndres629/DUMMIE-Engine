@@ -1,7 +1,7 @@
 ---
 spec_id: "DE-V2-L2-117"
 title: "CLI Control Plane"
-status: "ACTIVE"
+status: "DEPRECATED"
 layer: "L2"
 last_verified_on: "2026-05-16"
 version: "1.0.0"
@@ -23,7 +23,6 @@ Latest artifacts under `.aiwg/reports/` plus canonical phase state files.
 
 ## Outputs
 - `.aiwg/reports/cli_control_plane_latest.json`
-- stdout JSON via `python3 layers/l2_brain/flat_brain/cli_control_plane.py <command>`
 
 ## Safety Rules
 No raw repo dump operations; no secrets/private reasoning acceptance; missing optional artifacts must warn, not crash.
@@ -35,10 +34,8 @@ Missing latest files return `PASS_WITH_WARNINGS` with explicit warning entries.
 Consumes context quant, prompt frame, cache summary, restart gate, benchmark, and flywheel outputs.
 
 ## Current State
-Implemented in `layers/l2_brain/flat_brain/cli_control_plane.py` with bundle tests.
 
 ## Physical Evidence
-- `layers/l2_brain/flat_brain/cli_control_plane.py`
 - `.aiwg/reports/cli_control_plane_latest.json`
 - `layers/l2_brain/tests/test_cli_control_plane.py`
 
@@ -52,7 +49,6 @@ Implemented in `layers/l2_brain/flat_brain/cli_control_plane.py` with bundle tes
 
 ## Verification
 ```bash
-python3 layers/l2_brain/flat_brain/cli_control_plane.py status
 git diff --check
 pytest -q layers/l2_brain/tests/test_cli_control_plane.py
 ```

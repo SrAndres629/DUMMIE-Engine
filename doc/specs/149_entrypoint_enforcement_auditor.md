@@ -34,7 +34,7 @@ Audit all sovereign entrypoints to detect which ones bypass context gate, skip m
 - Operational. Detects missing integrations across 8 entrypoints.
 
 ## Physical Evidence
-- `layers/l2_brain/flat_brain/entrypoint_enforcement_auditor.py`
+- `layers/l2_brain/governance/entrypoint_enforcement_auditor.py`
 - `.aiwg/reports/entrypoint_enforcement_audit_latest.json`
 - `.aiwg/schemas/entrypoint_enforcement_audit.schema.json`
 
@@ -45,7 +45,7 @@ Audit all sovereign entrypoints to detect which ones bypass context gate, skip m
 
 ## Verification
 ```bash
-python3 layers/l2_brain/flat_brain/entrypoint_enforcement_auditor.py
+python3 layers/l2_brain/governance/entrypoint_enforcement_auditor.py
 python3 -m pytest layers/l2_brain/tests/test_entrypoint_enforcement_auditor.py -q
 ```
 

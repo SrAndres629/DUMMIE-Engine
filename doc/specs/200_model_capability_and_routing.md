@@ -13,9 +13,9 @@ To provide a canonical registry of AI model capabilities and a deterministic rou
 Implemented during Pack 4.0 and 4.1. Includes a central registry and a routing service integrated into the Cognitive Orchestrator.
 
 ## Physical Evidence
-- Core Registry: `layers/l2_brain/src/brain/domain/capability_registry.py`
-- Routing Service: `layers/l2_brain/src/brain/application/services/model_router.py`
-- Integration: `layers/l2_brain/src/brain/application/use_cases/orchestrator.py`
+- Core Registry: `layers/l2_brain/domain/capability_registry.py`
+- Routing Service: `layers/l2_brain/model_mesh/model_router.py`
+- Integration: `layers/l2_brain/application/use_cases/orchestrator.py`
 - Test Suite: `layers/l2_brain/tests/test_capability_registry.py`, `layers/l2_brain/tests/test_model_router_v2.py`
 
 ## Contract Invariants

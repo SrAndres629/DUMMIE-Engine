@@ -1,7 +1,7 @@
 ---
 spec_id: "179_degraded_capability_registry"
 title: "Degraded Capability Registry"
-status: "ACTIVE"
+status: "DEPRECATED"
 layer: "L2"
 last_verified_on: "2026-05-16"
 ---
@@ -13,7 +13,6 @@ This spec establishes the degraded capability registry (HEARTBEAT-2.1) to serve 
 Under implementation. Will ingest dependency, preflight, and calibration reports, mapping capabilities conforming to `degraded_capability_registry.schema.json`.
 
 ## Physical Evidence
-- Core module: `layers/l2_brain/flat_brain/degraded_capability_registry.py`
 - Test suite: `layers/l2_brain/tests/test_degraded_capability_registry.py`
 - JSON Schema: `.aiwg/schemas/degraded_capability_registry.schema.json`
 - Output reports: `.aiwg/reports/degraded_capability_registry_latest.json` and `.aiwg/reports/degraded_capability_registry_latest.md`

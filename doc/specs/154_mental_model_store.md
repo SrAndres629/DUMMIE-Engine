@@ -1,7 +1,7 @@
 ---
 spec_id: "154_mental_model_store"
 title: "154 Mental Model Store"
-status: "ACTIVE"
+status: "DEPRECATED"
 canonicality: "canonical"
 artifact_type: "spec"
 plan: "DUMMIE PLAN V1"
@@ -22,7 +22,6 @@ Append-only persistent storage for mental models.
 - Operational. Reconciled with Pack 5.2.1 closure requirements.
 
 ## Physical Evidence
-- `layers/l2_brain/flat_brain/mental_model_store.py`
 - `.aiwg/schemas/mental_model_store.schema.json`
 
 ## Contract Invariants

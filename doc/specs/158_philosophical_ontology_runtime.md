@@ -1,7 +1,7 @@
 ---
 spec_id: "158_philosophical_ontology_runtime"
 title: "158 Philosophical Ontology Runtime"
-status: "ACTIVE"
+status: "DEPRECATED"
 canonicality: "canonical"
 artifact_type: "spec"
 plan: "DUMMIE PLAN V1"
@@ -22,7 +22,6 @@ Deep ontology mappings beyond simple taxonomy.
 - Operational. Reconciled with Pack 5.2.1 closure requirements.
 
 ## Physical Evidence
-- `layers/l2_brain/flat_brain/philosophical_ontology_runtime.py`
 - `.aiwg/reports/philosophical_ontology_latest.json`
 - `.aiwg/schemas/philosophical_ontology.schema.json`
 
@@ -32,7 +31,6 @@ Deep ontology mappings beyond simple taxonomy.
 
 ## Verification
 ```bash
-python3 layers/l2_brain/flat_brain/philosophical_ontology_runtime.py
 pytest layers/l2_brain/tests/test_philosophical_ontology_runtime.py
 ```
 

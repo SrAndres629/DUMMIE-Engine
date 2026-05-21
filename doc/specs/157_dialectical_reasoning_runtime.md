@@ -22,7 +22,7 @@ Challenges proposed actions with antithesis.
 - Operational. Reconciled with Pack 5.2.1 closure requirements.
 
 ## Physical Evidence
-- `layers/l2_brain/flat_brain/dialectical_reasoning_runtime.py`
+- `layers/l2_brain/cognition/dialectical_reasoning_runtime.py`
 - `.aiwg/reports/dialectical_review_latest.json`
 - `.aiwg/schemas/dialectical_review.schema.json`
 
@@ -32,7 +32,7 @@ Challenges proposed actions with antithesis.
 
 ## Verification
 ```bash
-python3 layers/l2_brain/flat_brain/dialectical_reasoning_runtime.py
+python3 layers/l2_brain/cognition/dialectical_reasoning_runtime.py
 pytest layers/l2_brain/tests/test_dialectical_reasoning_runtime.py
 ```
 

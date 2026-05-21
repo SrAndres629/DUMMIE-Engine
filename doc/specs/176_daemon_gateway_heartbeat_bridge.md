@@ -13,7 +13,7 @@ This spec establishes the daemon/gateway heartbeat bridge (HEARTBEAT-2) to safel
 Under implementation. Will compile dispatch envelopes conforming to `daemon_gateway_heartbeat_bridge.schema.json`.
 
 ## Physical Evidence
-- Core module: `layers/l2_brain/flat_brain/daemon_gateway_heartbeat_bridge.py`
+- Core module: `layers/l2_brain/daemon/daemon_gateway_heartbeat_bridge.py`
 - Test suite: `layers/l2_brain/tests/test_daemon_gateway_heartbeat_bridge.py`
 - JSON Schema: `.aiwg/schemas/daemon_gateway_heartbeat_bridge.schema.json`
 - Output reports: `.aiwg/reports/daemon_gateway_heartbeat_bridge_latest.json` and `.aiwg/reports/daemon_gateway_heartbeat_bridge_latest.md`

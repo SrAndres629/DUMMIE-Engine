@@ -13,7 +13,7 @@ Convert full-body audits and capability promotion reports into a prioritized, ev
 Under implementation.
 
 ## Physical Evidence
-- Core module: `layers/l2_brain/flat_brain/whole_body_repair_queue.py`
+- Core module: `layers/l2_brain/governance/whole_body_repair_queue.py`
 - Test suite: `layers/l2_brain/tests/test_whole_body_repair_queue.py`
 - JSON Schema: `.aiwg/schemas/whole_body_repair_queue.schema.json`
 - Output reports: `.aiwg/reports/whole_body_repair_queue_latest.json` and `.aiwg/reports/whole_body_repair_queue_latest.md`

@@ -1,7 +1,7 @@
 ---
 spec_id: "186_dependency_reproducibility_verifier"
 title: "Dependency Reproducibility Verifier"
-status: "ACTIVE"
+status: "DEPRECATED"
 layer: "L2"
 last_verified_on: "2026-05-16"
 ---
@@ -13,7 +13,6 @@ Ensure all physically installed python packages in the active virtual environmen
 Under implementation.
 
 ## Physical Evidence
-- Core module: `layers/l2_brain/flat_brain/dependency_reproducibility_verifier.py`
 - Test suite: `layers/l2_brain/tests/test_dependency_reproducibility_verifier.py`
 - JSON Schema: `.aiwg/schemas/dependency_reproducibility.schema.json`
 - Output reports: `.aiwg/reports/dependency_reproducibility_latest.json` and `.aiwg/reports/dependency_reproducibility_latest.md`

@@ -3,7 +3,8 @@
   "title": "Agentic systemd Runtime and Resource Governance",
   "status": "ACTIVE",
   "layer": "CROSS",
-  "last_verified_on": "2026-05-15",
+  "last_verified_on": "2026-05-20",
+  "version": "2.0.0",
   "required_frontmatter": [
     "spec_id",
     "title",
@@ -62,6 +63,14 @@
       "lab_on": "/usr/local/bin/dummie-lab-on",
       "lab_off": "/usr/local/bin/dummie-lab-off",
       "mcp_launcher": "/usr/local/bin/dummie-mcp"
+    },
+    "cognitive_bridge": {
+      "go_daemon": "layers/l0_overseer/cmd/dummied/main.go",
+      "python_daemon": "layers/l2_brain/daemon/daemon_service.py",
+      "bridge": "layers/l0_overseer/internal/orchestrator/cognitive_bridge.go",
+      "mcp_server": "layers/l1_nervous/mcp_server.py",
+      "protocol": "JSON-RPC 2.0 via MCP STDIO",
+      "latency_ms": 660
     }
   },
   "physical_evidence": [
@@ -77,7 +86,12 @@
     "/usr/local/bin/dummie-lab-on",
     "/usr/local/bin/dummie-lab-off",
     "/usr/local/bin/dummie-mcp",
-    "dummie_agent_config.json"
+    "dummie_agent_config.json",
+    "layers/l0_overseer/internal/orchestrator/cognitive_bridge.go",
+    "layers/l0_overseer/internal/orchestrator/daemon.go",
+    "layers/l2_brain/daemon/daemon_service.py",
+    "layers/l1_nervous/mcp_server.py",
+    ".aiwg/state/cognitive_bridge.json"
   ],
   "contract_invariants": [
     {
@@ -107,6 +121,14 @@
     {
       "name": "Monitoring precedes optimization",
       "rule": "Any autonomous resource optimizer must expose process, cgroup, RAM, swap, GPU, token, and idle-time signals before killing, unloading, or restarting workloads."
+    },
+    {
+      "name": "Cognitive Bridge is on-demand",
+      "rule": "Go daemon delegates cognition to Python via MCP STDIO subprocess. Each COGNITION command spawns a new MCP server process. Latency ~660ms. No persistent Python daemon required for bridge operation."
+    },
+    {
+      "name": "Python daemon startup optimized",
+      "rule": "HF_HUB_OFFLINE=1 must be set when embedding models are cached locally to prevent 60s+ startup delays from HuggingFace network verification. Target startup: <10s."
     }
   ],
   "operational_modes": {
@@ -183,6 +205,12 @@
       "Verify systemctl is-active ollama returns inactive.",
       "Verify pgrep -f 'DUMMIE Engine/layers/l1_nervous/mcp_server.py' returns no processes.",
       "Verify Chrome and normal desktop work are not competing with Ollama or DUMMIE MCP."
+    ],
+    "cognitive_bridge_acceptance": [
+      "Go daemon responds to PING: echo '{\"type\": \"PING\"}' | nc -U .aiwg/sockets/dummied.sock",
+      "Go daemon delegates cognition: echo '{\"type\": \"COGNITION\", \"target\": \"local.brain_ping\", \"args\": {}}' | nc -U .aiwg/sockets/dummied.sock",
+      "Python daemon starts in <10s: DUMMIE_ROOT=... DUMMIE_AIWG_DIR=... timeout 10 uv run python layers/l2_brain/daemon/daemon_service.py",
+      "Python daemon verifies components: Embedding providers, ToolSelector, SkillRegistry, ProductionVerificationHook"
     ]
   },
   "traceability": {
@@ -190,13 +218,17 @@
       "doc/specs/44_local_reasoning_gateway.rules.json",
       "doc/specs/46_sovereign_daemon_dummied.rules.json",
       "doc/specs/50_daemon_telemetry_contracts.rules.json",
-      "doc/specs/51_model_contracts_alignment.rules.json"
+      "doc/specs/51_model_contracts_alignment.rules.json",
+      "doc/specs/100_l0_l2_cognitive_bridge.md"
     ],
     "related_runtime_files": [
       "layers/l1_nervous/mcp_server.py",
       "layers/l2_brain/local_reasoning.py",
       "layers/l2_brain/self_optimization.py",
       "layers/l2_brain/daemon.py",
+      "layers/l2_brain/daemon/daemon_service.py",
+      "layers/l0_overseer/internal/orchestrator/cognitive_bridge.go",
+      "layers/l0_overseer/internal/orchestrator/daemon.go",
       "dummie_agent_config.json"
     ],
     "next_spec_candidate": "ResourceGovernor: event-driven Ollama lifecycle, token accounting, and cgroup-aware process optimization."

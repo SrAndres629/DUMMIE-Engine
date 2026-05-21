@@ -22,7 +22,7 @@ Orchestrates a full observe -> reason -> queue -> learn cycle.
 - Active. Created by Heartbeat-0.
 
 ## Physical Evidence
-- `layers/l2_brain/flat_brain/heartbeat_lifecycle_runtime.py`
+- `layers/l2_brain/heartbeat/heartbeat_lifecycle_runtime.py`
 - `.aiwg/reports/heartbeat_latest.json`
 
 ## Contract Invariants

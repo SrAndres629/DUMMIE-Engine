@@ -1,7 +1,7 @@
 ---
 spec_id: "189_capability_promotion_governor"
 title: "Capability Promotion Governor"
-status: "ACTIVE"
+status: "DEPRECATED"
 layer: "L2"
 last_verified_on: "2026-05-16"
 ---
@@ -13,7 +13,6 @@ Enforce rigorous, evidence-backed gates for promoting any DUMMIE capability stat
 Under implementation.
 
 ## Physical Evidence
-- Core module: `layers/l2_brain/flat_brain/capability_promotion_governor.py`
 - Test suite: `layers/l2_brain/tests/test_capability_promotion_governor.py`
 - JSON Schema: `.aiwg/schemas/capability_promotion_governor.schema.json`
 - Output reports: `.aiwg/reports/capability_promotion_governor_latest.json` and `.aiwg/reports/capability_promotion_governor_latest.md`
