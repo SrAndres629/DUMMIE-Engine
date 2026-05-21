@@ -16,9 +16,9 @@ Definir el contrato operativo de esta capacidad y su relación con el estado fí
 Capacidad en transición; requiere consolidación progresiva de contratos y pruebas.
 
 ## Physical Evidence
-- `doc/specs/45_secure_node_pairing_protocol.md`
-- `doc/specs/45_secure_node_pairing_protocol.feature`
-- `doc/specs/45_secure_node_pairing_protocol.rules.json`
+- `doc/specs/L3_Shield/45_secure_node_pairing_protocol.md`
+- `doc/specs/L3_Shield/45_secure_node_pairing_protocol.feature`
+- `doc/specs/L3_Shield/45_secure_node_pairing_protocol.rules.json`
 - `layers/l3_shield/__init__.py`
 - `doc/CORE_SPEC.md`
 - `doc/PHYSICAL_MAP.md`

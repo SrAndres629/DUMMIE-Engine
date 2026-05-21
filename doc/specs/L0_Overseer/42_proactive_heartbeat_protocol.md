@@ -16,9 +16,9 @@ Definir el contrato operativo de esta capacidad y su relación con el estado fí
 Capacidad en transición; requiere consolidación progresiva de contratos y pruebas.
 
 ## Physical Evidence
-- `doc/specs/42_proactive_heartbeat_protocol.md`
-- `doc/specs/42_proactive_heartbeat_protocol.feature`
-- `doc/specs/42_proactive_heartbeat_protocol.rules.json`
+- `doc/specs/L0_Overseer/42_proactive_heartbeat_protocol.md`
+- `doc/specs/L0_Overseer/42_proactive_heartbeat_protocol.feature`
+- `doc/specs/L0_Overseer/42_proactive_heartbeat_protocol.rules.json`
 - `layers/l0_overseer/__init__.py`
 - `doc/CORE_SPEC.md`
 - `doc/PHYSICAL_MAP.md`

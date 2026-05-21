@@ -17,7 +17,7 @@ Estandarización de contratos de salida para la generación de código.
 
 ## Physical Evidence
 - `doc/adr/001_architectural_bifurcation.md`
-- `doc/specs/48_business_vs_ai_architecture.md`
+- `doc/specs/L0_Overseer/48_business_vs_ai_architecture.md`
 
 ## Contract Invariants
 - Todo generador de Use Case debe emitir código alineado con Arquitectura Hexagonal pura.

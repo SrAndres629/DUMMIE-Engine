@@ -17,10 +17,10 @@ Define the systemic organization of DUMMIE as a multi-model organism, establishi
 Wired but partially operational. The `CognitiveHookPipeline`, `SensorFirstPolicy`, and `LearningEpisode` are implemented. Meta-Gateway runtime metering is integrated. Authority classification is hardened.
 
 ## Physical Evidence
-- `layers/l2_brain/cognitive_hooks.py`
+- `layers/l2_brain/cognition/cognitive_hooks.py`
 - `layers/l2_brain/metagateway_policy.py`
 - `layers/l2_brain/learning_episode.py`
-- `layers/l2_brain/daemon.py`
+- `layers/l2_brain/daemon/daemon.py`
 - `layers/l2_brain/metagateway_runtime_meter.py`
 - `layers/l2_brain/outcome_evaluator.py`
 

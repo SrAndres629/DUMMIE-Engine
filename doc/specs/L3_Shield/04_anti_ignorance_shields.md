@@ -16,9 +16,9 @@ Definir el contrato operativo de esta capacidad y su relación con el estado fí
 Capacidad en transición; requiere consolidación progresiva de contratos y pruebas.
 
 ## Physical Evidence
-- `doc/specs/04_anti_ignorance_shields.md`
-- `doc/specs/04_anti_ignorance_shields.feature`
-- `doc/specs/04_anti_ignorance_shields.rules.json`
+- `doc/specs/L3_Shield/04_anti_ignorance_shields.md`
+- `doc/specs/L3_Shield/04_anti_ignorance_shields.feature`
+- `doc/specs/L3_Shield/04_anti_ignorance_shields.rules.json`
 - `layers/l3_shield/__init__.py`
 - `doc/CORE_SPEC.md`
 - `doc/PHYSICAL_MAP.md`

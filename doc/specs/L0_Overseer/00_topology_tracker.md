@@ -16,9 +16,9 @@ Definir el contrato operativo de esta capacidad y su relación con el estado fí
 Capacidad activa con evidencia verificable en el repositorio.
 
 ## Physical Evidence
-- `doc/specs/00_topology_tracker.md`
-- `doc/specs/00_topology_tracker.feature`
-- `doc/specs/00_topology_tracker.rules.json`
+- `doc/specs/L0_Overseer/00_topology_tracker.md`
+- `doc/specs/L0_Overseer/00_topology_tracker.feature`
+- `doc/specs/L0_Overseer/00_topology_tracker.rules.json`
 - `layers/l0_overseer/__init__.py`
 - `doc/CORE_SPEC.md`
 - `doc/PHYSICAL_MAP.md`

@@ -16,9 +16,9 @@ Definir el contrato operativo de esta capacidad y su relación con el estado fí
 Capacidad en transición; requiere consolidación progresiva de contratos y pruebas.
 
 ## Physical Evidence
-- `doc/specs/30_floating_sessions.md`
-- `doc/specs/30_floating_sessions.feature`
-- `doc/specs/30_floating_sessions.rules.json`
+- `doc/specs/L1_Nervous/30_floating_sessions.md`
+- `doc/specs/L1_Nervous/30_floating_sessions.feature`
+- `doc/specs/L1_Nervous/30_floating_sessions.rules.json`
 - `layers/l1_nervous/__init__.py`
 - `doc/CORE_SPEC.md`
 - `doc/PHYSICAL_MAP.md`

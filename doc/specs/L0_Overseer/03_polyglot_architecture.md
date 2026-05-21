@@ -16,9 +16,9 @@ Definir el contrato operativo de esta capacidad y su relación con el estado fí
 Capacidad en transición; requiere consolidación progresiva de contratos y pruebas.
 
 ## Physical Evidence
-- `doc/specs/03_polyglot_architecture.md`
-- `doc/specs/03_polyglot_architecture.feature`
-- `doc/specs/03_polyglot_architecture.rules.json`
+- `doc/specs/L0_Overseer/03_polyglot_architecture.md`
+- `doc/specs/L0_Overseer/03_polyglot_architecture.feature`
+- `doc/specs/L0_Overseer/03_polyglot_architecture.rules.json`
 - `layers/l0_overseer/__init__.py`
 - `doc/CORE_SPEC.md`
 - `doc/PHYSICAL_MAP.md`

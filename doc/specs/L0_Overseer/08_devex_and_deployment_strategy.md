@@ -16,9 +16,9 @@ Definir el contrato operativo de esta capacidad y su relación con el estado fí
 Capacidad en transición; requiere consolidación progresiva de contratos y pruebas.
 
 ## Physical Evidence
-- `doc/specs/08_devex_and_deployment_strategy.md`
-- `doc/specs/08_devex_and_deployment_strategy.feature`
-- `doc/specs/08_devex_and_deployment_strategy.rules.json`
+- `doc/specs/L0_Overseer/08_devex_and_deployment_strategy.md`
+- `doc/specs/L0_Overseer/08_devex_and_deployment_strategy.feature`
+- `doc/specs/L0_Overseer/08_devex_and_deployment_strategy.rules.json`
 - `layers/l0_overseer/__init__.py`
 - `doc/CORE_SPEC.md`
 - `doc/PHYSICAL_MAP.md`

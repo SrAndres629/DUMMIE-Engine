@@ -20,7 +20,7 @@ The canonical outcome DTO is implemented in `layers/l2_brain/daemon_outcome.py` 
 ## Physical Evidence
 - `layers/l2_brain/daemon_outcome.py`
 - `layers/l2_brain/outcome_evaluator.py`
-- `layers/l2_brain/daemon.py`
+- `layers/l2_brain/daemon/daemon.py`
 - `layers/l2_brain/mission_runtime_contract.py`
 - `layers/l0_overseer/internal/orchestrator/cognitive_bridge.go`
 - `layers/l0_overseer/internal/orchestrator/daemon.go`

@@ -16,9 +16,9 @@ Definir el contrato operativo de esta capacidad y su relación con el estado fí
 Capacidad en transición; requiere consolidación progresiva de contratos y pruebas.
 
 ## Physical Evidence
-- `doc/specs/32_multiverse_compression_necro_learning.md`
-- `doc/specs/32_multiverse_compression_necro_learning.feature`
-- `doc/specs/32_multiverse_compression_necro_learning.rules.json`
+- `doc/specs/L5_Muscle/32_multiverse_compression_necro_learning.md`
+- `doc/specs/L5_Muscle/32_multiverse_compression_necro_learning.feature`
+- `doc/specs/L5_Muscle/32_multiverse_compression_necro_learning.rules.json`
 - `layers/l5_muscle/__init__.py`
 - `doc/CORE_SPEC.md`
 - `doc/PHYSICAL_MAP.md`

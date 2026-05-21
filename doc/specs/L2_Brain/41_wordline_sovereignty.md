@@ -16,10 +16,10 @@ Definir el contrato operativo de esta capacidad y su relación con el estado fí
 Diseño de roadmap; implementación parcial o no integrada al flujo principal.
 
 ## Physical Evidence
-- `doc/specs/41_wordline_sovereignty.md`
-- `doc/specs/41_wordline_sovereignty.feature`
-- `doc/specs/41_wordline_sovereignty.rules.json`
-- `layers/l2_brain/daemon.py`
+- `doc/specs/L2_Brain/41_wordline_sovereignty.md`
+- `doc/specs/L2_Brain/41_wordline_sovereignty.feature`
+- `doc/specs/L2_Brain/41_wordline_sovereignty.rules.json`
+- `layers/l2_brain/daemon/daemon.py`
 - `doc/CORE_SPEC.md`
 - `doc/PHYSICAL_MAP.md`
 

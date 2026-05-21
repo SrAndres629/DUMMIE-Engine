@@ -16,9 +16,9 @@ Definir el contrato operativo de esta capacidad y su relación con el estado fí
 Diseño de roadmap; implementación parcial o no integrada al flujo principal.
 
 ## Physical Evidence
-- `doc/specs/28_shadow_worktrees.md`
-- `doc/specs/28_shadow_worktrees.feature`
-- `doc/specs/28_shadow_worktrees.rules.json`
+- `doc/specs/L0_Overseer/28_shadow_worktrees.md`
+- `doc/specs/L0_Overseer/28_shadow_worktrees.feature`
+- `doc/specs/L0_Overseer/28_shadow_worktrees.rules.json`
 - `layers/l0_overseer/__init__.py`
 - `doc/CORE_SPEC.md`
 - `doc/PHYSICAL_MAP.md`

@@ -16,9 +16,9 @@ Definir el contrato operativo de esta capacidad y su relación con el estado fí
 Capacidad activa con evidencia verificable en el repositorio.
 
 ## Physical Evidence
-- `doc/specs/16_mcp_dynamic_gateway.md`
-- `doc/specs/16_mcp_dynamic_gateway.feature`
-- `doc/specs/16_mcp_dynamic_gateway.rules.json`
+- `doc/specs/L1_Nervous/16_mcp_dynamic_gateway.md`
+- `doc/specs/L1_Nervous/16_mcp_dynamic_gateway.feature`
+- `doc/specs/L1_Nervous/16_mcp_dynamic_gateway.rules.json`
 - `layers/l1_nervous/__init__.py`
 - `doc/CORE_SPEC.md`
 - `doc/PHYSICAL_MAP.md`

@@ -16,9 +16,9 @@ Definir el contrato operativo de esta capacidad y su relación con el estado fí
 Capacidad en transición; requiere consolidación progresiva de contratos y pruebas.
 
 ## Physical Evidence
-- `doc/specs/07_unknown_unknowns_resolutions.md`
-- `doc/specs/07_unknown_unknowns_resolutions.feature`
-- `doc/specs/07_unknown_unknowns_resolutions.rules.json`
+- `doc/specs/L0_Overseer/07_unknown_unknowns_resolutions.md`
+- `doc/specs/L0_Overseer/07_unknown_unknowns_resolutions.feature`
+- `doc/specs/L0_Overseer/07_unknown_unknowns_resolutions.rules.json`
 - `layers/l0_overseer/__init__.py`
 - `doc/CORE_SPEC.md`
 - `doc/PHYSICAL_MAP.md`

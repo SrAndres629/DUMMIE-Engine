@@ -16,9 +16,9 @@ Definir el contrato operativo de esta capacidad y su relación con el estado fí
 Capacidad activa con evidencia verificable en el repositorio.
 
 ## Physical Evidence
-- `doc/specs/43_documentation_and_artifact_standards.md`
-- `doc/specs/43_documentation_and_artifact_standards.feature`
-- `doc/specs/43_documentation_and_artifact_standards.rules.json`
+- `doc/specs/L0_Overseer/43_documentation_and_artifact_standards.md`
+- `doc/specs/L0_Overseer/43_documentation_and_artifact_standards.feature`
+- `doc/specs/L0_Overseer/43_documentation_and_artifact_standards.rules.json`
 - `layers/l0_overseer/__init__.py`
 - `doc/CORE_SPEC.md`
 - `doc/PHYSICAL_MAP.md`

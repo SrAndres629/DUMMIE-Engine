@@ -14,10 +14,10 @@ namespace: dummie.engine.l2
 Manage the cognitive context window by allocating budgets, detecting pressure, and enforcing limits through selective discarding of low-priority information.
 
 ## Current State
-Implemented in `layers/l2_brain/context_budget_manager.py`. Supports tiered budgets, pressure detection, and budget enforcement.
+Implemented in `layers/l2_brain/context/context_budget_manager.py`. Supports tiered budgets, pressure detection, and budget enforcement.
 
 ## Physical Evidence
-- `layers/l2_brain/context_budget_manager.py`
+- `layers/l2_brain/context/context_budget_manager.py`
 - `layers/l2_brain/tests/test_context_budget_manager.py`
 - `.aiwg/schemas/context_budget.schema.json`
 
@@ -35,6 +35,6 @@ layers/l2_brain/.venv/bin/python -m pytest -q layers/l2_brain/tests/test_context
 ## Traceability
 | Invariant | Evidence | Verification |
 | --- | --- | --- |
-| Preserve Critical | `layers/l2_brain/context_budget_manager.py` | `layers/l2_brain/tests/test_context_budget_manager.py` |
-| Tiered Budget | `layers/l2_brain/context_budget_manager.py` | `layers/l2_brain/tests/test_context_budget_manager.py` |
-| Sequential Discard | `layers/l2_brain/context_budget_manager.py` | `layers/l2_brain/tests/test_context_budget_manager.py` |
+| Preserve Critical | `layers/l2_brain/context/context_budget_manager.py` | `layers/l2_brain/tests/test_context_budget_manager.py` |
+| Tiered Budget | `layers/l2_brain/context/context_budget_manager.py` | `layers/l2_brain/tests/test_context_budget_manager.py` |
+| Sequential Discard | `layers/l2_brain/context/context_budget_manager.py` | `layers/l2_brain/tests/test_context_budget_manager.py` |

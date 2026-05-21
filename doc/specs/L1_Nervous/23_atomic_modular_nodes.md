@@ -16,9 +16,9 @@ Definir el contrato operativo de esta capacidad y su relación con el estado fí
 Capacidad activa con evidencia verificable en el repositorio.
 
 ## Physical Evidence
-- `doc/specs/23_atomic_modular_nodes.md`
-- `doc/specs/23_atomic_modular_nodes.feature`
-- `doc/specs/23_atomic_modular_nodes.rules.json`
+- `doc/specs/L1_Nervous/23_atomic_modular_nodes.md`
+- `doc/specs/L1_Nervous/23_atomic_modular_nodes.feature`
+- `doc/specs/L1_Nervous/23_atomic_modular_nodes.rules.json`
 - `layers/l1_nervous/__init__.py`
 - `doc/CORE_SPEC.md`
 - `doc/PHYSICAL_MAP.md`

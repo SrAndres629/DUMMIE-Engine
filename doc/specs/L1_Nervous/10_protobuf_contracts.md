@@ -16,9 +16,9 @@ Definir el contrato operativo de esta capacidad y su relación con el estado fí
 Capacidad activa con evidencia verificable en el repositorio.
 
 ## Physical Evidence
-- `doc/specs/10_protobuf_contracts.md`
-- `doc/specs/10_protobuf_contracts.feature`
-- `doc/specs/10_protobuf_contracts.rules.json`
+- `doc/specs/L1_Nervous/10_protobuf_contracts.md`
+- `doc/specs/L1_Nervous/10_protobuf_contracts.feature`
+- `doc/specs/L1_Nervous/10_protobuf_contracts.rules.json`
 - `layers/l1_nervous/__init__.py`
 - `doc/CORE_SPEC.md`
 - `doc/PHYSICAL_MAP.md`

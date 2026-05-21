@@ -16,9 +16,9 @@ Definir el contrato operativo de esta capacidad y su relación con el estado fí
 Capacidad en transición; requiere consolidación progresiva de contratos y pruebas.
 
 ## Physical Evidence
-- `doc/specs/11_arrow_data_plane.md`
-- `doc/specs/11_arrow_data_plane.feature`
-- `doc/specs/11_arrow_data_plane.rules.json`
+- `doc/specs/L1_Nervous/11_arrow_data_plane.md`
+- `doc/specs/L1_Nervous/11_arrow_data_plane.feature`
+- `doc/specs/L1_Nervous/11_arrow_data_plane.rules.json`
 - `layers/l1_nervous/__init__.py`
 - `doc/CORE_SPEC.md`
 - `doc/PHYSICAL_MAP.md`

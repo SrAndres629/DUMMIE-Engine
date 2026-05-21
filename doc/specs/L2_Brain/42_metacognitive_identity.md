@@ -16,10 +16,10 @@ Definir el contrato operativo de esta capacidad y su relación con el estado fí
 Diseño de roadmap; implementación parcial o no integrada al flujo principal.
 
 ## Physical Evidence
-- `doc/specs/42_metacognitive_identity.md`
-- `doc/specs/42_metacognitive_identity.feature`
-- `doc/specs/42_metacognitive_identity.rules.json`
-- `layers/l2_brain/daemon.py`
+- `doc/specs/L2_Brain/42_metacognitive_identity.md`
+- `doc/specs/L2_Brain/42_metacognitive_identity.feature`
+- `doc/specs/L2_Brain/42_metacognitive_identity.rules.json`
+- `layers/l2_brain/daemon/daemon.py`
 - `doc/CORE_SPEC.md`
 - `doc/PHYSICAL_MAP.md`
 

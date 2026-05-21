@@ -18,7 +18,7 @@ Implemented in `layers/l2_brain/long_running_mission.py`. The runtime delegates 
 ## Physical Evidence
 - `layers/l2_brain/long_running_mission.py`
 - `layers/l2_brain/phase_ledger.py`
-- `layers/l2_brain/daemon.py`
+- `layers/l2_brain/daemon/daemon.py`
 - `layers/l2_brain/tests/test_long_running_mission.py`
 - `.aiwg/schemas/long_running_mission.schema.json`
 - `.aiwg/missions/demo_refactor_snowball/phase_ledger.jsonl`
@@ -47,5 +47,5 @@ layers/l2_brain/.venv/bin/python -m pytest -q layers/l2_brain/tests/test_long_ru
 | Dependency Detection | `layers/l2_brain/long_running_mission.py` | `layers/l2_brain/tests/test_long_running_mission.py` |
 | Checkpoint Before Completion | `layers/l2_brain/long_running_mission.py` | `layers/l2_brain/tests/test_long_running_mission.py` |
 | Recovery Packet | `layers/l2_brain/phase_ledger.py` | `layers/l2_brain/tests/test_long_running_mission.py` |
-| Daemon Compatibility | `layers/l2_brain/daemon.py` | `layers/l2_brain/tests/test_long_running_mission.py` |
+| Daemon Compatibility | `layers/l2_brain/daemon/daemon.py` | `layers/l2_brain/tests/test_long_running_mission.py` |
 | Scope Boundary | `doc/specs/82_long_running_mission_runtime.md` | `python3 scripts/validate_specs_docs.py` |

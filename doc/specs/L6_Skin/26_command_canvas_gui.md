@@ -16,9 +16,9 @@ Definir el contrato operativo de esta capacidad y su relación con el estado fí
 Capacidad en transición; requiere consolidación progresiva de contratos y pruebas.
 
 ## Physical Evidence
-- `doc/specs/26_command_canvas_gui.md`
-- `doc/specs/26_command_canvas_gui.feature`
-- `doc/specs/26_command_canvas_gui.rules.json`
+- `doc/specs/L6_Skin/26_command_canvas_gui.md`
+- `doc/specs/L6_Skin/26_command_canvas_gui.feature`
+- `doc/specs/L6_Skin/26_command_canvas_gui.rules.json`
 - `layers/l6_skin/__init__.py`
 - `doc/CORE_SPEC.md`
 - `doc/PHYSICAL_MAP.md`

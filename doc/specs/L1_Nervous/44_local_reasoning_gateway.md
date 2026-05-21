@@ -16,9 +16,9 @@ Definir el contrato para usar un modelo local tipo Gemma como segunda etapa medi
 La capacidad se implementa en modo sombra. El modelo local puede reescribir, rankear, seleccionar y compactar contexto, pero la ejecucion sigue gobernada por daemon, SDD guards, L3 policy y contratos MCP existentes.
 
 ## Physical Evidence
-- `doc/specs/44_local_reasoning_gateway.md`
-- `doc/specs/44_local_reasoning_gateway.feature`
-- `doc/specs/44_local_reasoning_gateway.rules.json`
+- `doc/specs/L1_Nervous/44_local_reasoning_gateway.md`
+- `doc/specs/L1_Nervous/44_local_reasoning_gateway.feature`
+- `doc/specs/L1_Nervous/44_local_reasoning_gateway.rules.json`
 - `layers/l2_brain/local_reasoning.py`
 - `layers/l1_nervous/tools_impl/local_reasoning.py`
 - `scripts/benchmark_local_reasoning.py`
@@ -44,5 +44,5 @@ python3 scripts/benchmark_local_reasoning.py --mode offline
 | --- | --- | --- |
 | Gateway MCP | `layers/l1_nervous/tools_impl/local_reasoning.py` | `dummie_discover_capabilities` + tool tests |
 | Reasoning local | `layers/l2_brain/local_reasoning.py` | `test_local_reasoning.py` |
-| Daemon preflight | `layers/l2_brain/daemon.py` | `test_daemon_cognitive_preflight.py` |
+| Daemon preflight | `layers/l2_brain/daemon/daemon.py` | `test_daemon_cognitive_preflight.py` |
 | Medicion | `scripts/benchmark_local_reasoning.py` | benchmark offline |

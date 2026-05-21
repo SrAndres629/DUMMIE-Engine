@@ -16,10 +16,10 @@ Definir el contrato operativo de esta capacidad y su relación con el estado fí
 Capacidad en transición; requiere consolidación progresiva de contratos y pruebas.
 
 ## Physical Evidence
-- `doc/specs/36_cognitive_memory_session_ledger.md`
-- `doc/specs/36_cognitive_memory_session_ledger.feature`
-- `doc/specs/36_cognitive_memory_session_ledger.rules.json`
-- `layers/l2_brain/daemon.py`
+- `doc/specs/L2_Brain/36_cognitive_memory_session_ledger.md`
+- `doc/specs/L2_Brain/36_cognitive_memory_session_ledger.feature`
+- `doc/specs/L2_Brain/36_cognitive_memory_session_ledger.rules.json`
+- `layers/l2_brain/daemon/daemon.py`
 - `doc/CORE_SPEC.md`
 - `doc/PHYSICAL_MAP.md`
 

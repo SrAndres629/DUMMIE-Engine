@@ -16,9 +16,9 @@ Sustituir la orquestación lineal por ejecución paralela basada en StateGraph p
 Implementado como motor de ejecución principal en L0 mediante Go StateGraph, permitiendo fan-out/fan-in y selección de línea de ejecución eficiente.
 
 ## Physical Evidence
-- `doc/specs/26_langgraph_quantum_swarm.md`
-- `doc/specs/26_langgraph_quantum_swarm.feature`
-- `doc/specs/26_langgraph_quantum_swarm.rules.json`
+- `doc/specs/L0_Overseer/26_langgraph_quantum_swarm.md`
+- `doc/specs/L0_Overseer/26_langgraph_quantum_swarm.feature`
+- `doc/specs/L0_Overseer/26_langgraph_quantum_swarm.rules.json`
 - `layers/l0_overseer/internal/orchestrator/graph.go`
 - `layers/l0_overseer/cmd/swarm/main.go`
 - `doc/CORE_SPEC.md`

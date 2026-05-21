@@ -16,9 +16,9 @@ Definir el contrato operativo de esta capacidad y su relación con el estado fí
 Capacidad activa con evidencia verificable en el repositorio.
 
 ## Physical Evidence
-- `doc/specs/15_mcp_sidecar_isolation.md`
-- `doc/specs/15_mcp_sidecar_isolation.feature`
-- `doc/specs/15_mcp_sidecar_isolation.rules.json`
+- `doc/specs/L1_Nervous/15_mcp_sidecar_isolation.md`
+- `doc/specs/L1_Nervous/15_mcp_sidecar_isolation.feature`
+- `doc/specs/L1_Nervous/15_mcp_sidecar_isolation.rules.json`
 - `layers/l1_nervous/__init__.py`
 - `doc/CORE_SPEC.md`
 - `doc/PHYSICAL_MAP.md`

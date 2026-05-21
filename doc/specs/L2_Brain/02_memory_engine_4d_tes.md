@@ -68,7 +68,7 @@ graph TB
 ## Physical Evidence
 - `layers/l1_nervous/compressive_memory.py`: Lógica de cristalización.
 - `layers/l1_nervous/resources.py`: Exposición de recursos de memoria.
-- `layers/l2_brain/orchestrator.py`: Implementación de persistencia causal.
+- `layers/l2_brain/cognition/orchestrator.py`: Implementación de persistencia causal.
 - `layers/l2_brain/adapters.py`: Repositorio Kùzu con soporte causal.
 - `.aiwg/memory/kuzu/state.db`: Base local runtime de Kùzu cuando existe en el entorno de desarrollo.
 
@@ -80,6 +80,6 @@ python3 scripts/validate_specs_docs.py --check doc/specs/02_memory_engine_4d_tes
 ## Traceability
 | Invariant | Evidence | Verification |
 | --- | --- | --- |
-| Inmutabilidad Causal | `layers/l2_brain/orchestrator.py` | SHA-256 Validation in tests |
+| Inmutabilidad Causal | `layers/l2_brain/cognition/orchestrator.py` | SHA-256 Validation in tests |
 | Poda Semántica | `layers/l1_nervous/context_quantizer.py` | TurboQuant Benchmarks |
 | Persistencia Loci | `layers/l2_brain/adapters.py` | Kùzu repository tests |

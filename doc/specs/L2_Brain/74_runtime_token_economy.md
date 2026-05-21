@@ -18,7 +18,7 @@ Partially implemented. Character-based estimation exists in `MetaGatewayRuntimeM
 
 ## Physical Evidence
 - `layers/l2_brain/token_cost_ledger.py`
-- `layers/l2_brain/context_budget_manager.py`
+- `layers/l2_brain/context/context_budget_manager.py`
 - `.aiwg/schemas/token_cost_ledger.schema.json`
 - `.aiwg/schemas/context_budget.schema.json`
 

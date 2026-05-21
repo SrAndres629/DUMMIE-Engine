@@ -16,9 +16,9 @@ Definir el contrato operativo de esta capacidad y su relación con el estado fí
 Capacidad en transición; requiere consolidación progresiva de contratos y pruebas.
 
 ## Physical Evidence
-- `doc/specs/44_pervasive_channel_adapters.md`
-- `doc/specs/44_pervasive_channel_adapters.feature`
-- `doc/specs/44_pervasive_channel_adapters.rules.json`
+- `doc/specs/L1_Nervous/44_pervasive_channel_adapters.md`
+- `doc/specs/L1_Nervous/44_pervasive_channel_adapters.feature`
+- `doc/specs/L1_Nervous/44_pervasive_channel_adapters.rules.json`
 - `layers/l1_nervous/__init__.py`
 - `doc/CORE_SPEC.md`
 - `doc/PHYSICAL_MAP.md`

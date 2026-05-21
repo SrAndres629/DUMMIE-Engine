@@ -16,9 +16,9 @@ Definir el contrato operativo de esta capacidad y su relación con el estado fí
 Implementado como pipeline de ingesta automatizado que mapea herramientas MCP a Blueprints cognitivos y genera el archivo maestro de capacidades.
 
 ## Physical Evidence
-- `doc/specs/29_skill_ingestion_engine.md`
-- `doc/specs/29_skill_ingestion_engine.feature`
-- `doc/specs/29_skill_ingestion_engine.rules.json`
+- `doc/specs/L0_Overseer/29_skill_ingestion_engine.md`
+- `doc/specs/L0_Overseer/29_skill_ingestion_engine.feature`
+- `doc/specs/L0_Overseer/29_skill_ingestion_engine.rules.json`
 - `layers/l1_nervous/proto/skill.proto`
 - `layers/l1_nervous/tools.py`
 - `layers/l0_overseer/internal/orchestrator/skills.go`

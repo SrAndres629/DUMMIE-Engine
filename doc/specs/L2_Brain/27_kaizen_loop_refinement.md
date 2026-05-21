@@ -16,10 +16,10 @@ Definir el contrato operativo de esta capacidad y su relación con el estado fí
 Capacidad en transición; requiere consolidación progresiva de contratos y pruebas.
 
 ## Physical Evidence
-- `doc/specs/27_kaizen_loop_refinement.md`
-- `doc/specs/27_kaizen_loop_refinement.feature`
-- `doc/specs/27_kaizen_loop_refinement.rules.json`
-- `layers/l2_brain/daemon.py`
+- `doc/specs/L2_Brain/27_kaizen_loop_refinement.md`
+- `doc/specs/L2_Brain/27_kaizen_loop_refinement.feature`
+- `doc/specs/L2_Brain/27_kaizen_loop_refinement.rules.json`
+- `layers/l2_brain/daemon/daemon.py`
 - `doc/CORE_SPEC.md`
 - `doc/PHYSICAL_MAP.md`
 

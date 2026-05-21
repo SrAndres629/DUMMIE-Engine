@@ -16,9 +16,9 @@ Definir el contrato operativo de esta capacidad y su relación con el estado fí
 Capacidad en transición; requiere consolidación progresiva de contratos y pruebas.
 
 ## Physical Evidence
-- `doc/specs/14_value_engineering_and_governance.md`
-- `doc/specs/14_value_engineering_and_governance.feature`
-- `doc/specs/14_value_engineering_and_governance.rules.json`
+- `doc/specs/L0_Overseer/14_value_engineering_and_governance.md`
+- `doc/specs/L0_Overseer/14_value_engineering_and_governance.feature`
+- `doc/specs/L0_Overseer/14_value_engineering_and_governance.rules.json`
 - `layers/l0_overseer/__init__.py`
 - `doc/CORE_SPEC.md`
 - `doc/PHYSICAL_MAP.md`

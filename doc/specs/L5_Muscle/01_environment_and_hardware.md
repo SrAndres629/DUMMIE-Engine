@@ -16,9 +16,9 @@ Definir el contrato operativo de esta capacidad y su relación con el estado fí
 Capacidad en transición; requiere consolidación progresiva de contratos y pruebas.
 
 ## Physical Evidence
-- `doc/specs/01_environment_and_hardware.md`
-- `doc/specs/01_environment_and_hardware.feature`
-- `doc/specs/01_environment_and_hardware.rules.json`
+- `doc/specs/L5_Muscle/01_environment_and_hardware.md`
+- `doc/specs/L5_Muscle/01_environment_and_hardware.feature`
+- `doc/specs/L5_Muscle/01_environment_and_hardware.rules.json`
 - `layers/l5_muscle/__init__.py`
 - `doc/CORE_SPEC.md`
 - `doc/PHYSICAL_MAP.md`
