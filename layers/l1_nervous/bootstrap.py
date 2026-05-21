@@ -6,48 +6,23 @@ import atexit
 import signal
 from pathlib import Path
 
-# [TABULA RASA v2] Redirección Nerviosa a L2 Plana
-try:
-    from layers.l2_brain.models import (
-        SixDimensionalContext,
-        AuthorityLevel,
-        IntentType as ContextIntent,
-    )
-    from layers.l2_brain.models import AgentIntent, IntentType as FabricationIntent
-    from layers.l2_brain.src.brain.application.use_cases.orchestrator import (
-        CognitiveOrchestrator,
-    )
-    from layers.l2_brain.adapters import (
-        KuzuRepository,
-        DecisionLedgerAdapter,
-        SessionLedgerAdapter,
-        NativeShieldAdapter,
-        KuzuSkillRepository,
-    )
-except ImportError:
-    # Intento de redundancia si no está en PYTHONPATH directo
-    ROOT_DIR = os.environ.get("DUMMIE_ROOT", os.environ.get("DUMMIE_ROOT_DIR", ""))
-    if ROOT_DIR:
-        if ROOT_DIR not in sys.path:
-            sys.path.append(ROOT_DIR)
-        l2_path = os.path.join(ROOT_DIR, "layers/l2_brain")
-        if l2_path not in sys.path:
-            sys.path.append(l2_path)
-
-    from models import (
-        SixDimensionalContext,
-        AuthorityLevel,
-        IntentType as ContextIntent,
-    )
-    from models import AgentIntent, IntentType as FabricationIntent
-    from src.brain.application.use_cases.orchestrator import CognitiveOrchestrator
-    from adapters import (
-        KuzuRepository,
-        DecisionLedgerAdapter,
-        SessionLedgerAdapter,
-        NativeShieldAdapter,
-        KuzuSkillRepository,
-    )
+# [TABULA RASA v2] Redirección Nerviosa a L2
+from layers.l2_brain.models import (
+    SixDimensionalContext,
+    AuthorityLevel,
+    IntentType as ContextIntent,
+)
+from layers.l2_brain.models import AgentIntent, IntentType as FabricationIntent
+from layers.l2_brain.src.brain.application.use_cases.orchestrator import (
+    CognitiveOrchestrator,
+)
+from layers.l2_brain.adapters import (
+    KuzuRepository,
+    DecisionLedgerAdapter,
+    SessionLedgerAdapter,
+    NativeShieldAdapter,
+    KuzuSkillRepository,
+)
 
 logger = logging.getLogger("dummie-mcp.infra")
 

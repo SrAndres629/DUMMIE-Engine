@@ -1,0 +1,38 @@
+mission_id: MCP-CANONICAL-REAL-INTEGRATION-002
+status: success
+claims_verified:
+  registry_exists: true
+  policies_exist: true
+  healthchecks_exist: true
+  gateway_portability: true
+  l1_l2_bridge_verified: true
+root_causes_fixed:
+  - Eliminación de rutas absolutas locales en dummie_gateway_config.json.
+  - Saneamiento de imports en layers/l1_nervous/bootstrap.py y tools_impl/sdd.py.
+  - Corrección de imports circulares y erróneos en layers/l2_brain/infrastructure/external.py.
+  - Implementación de mcp-shell como alternativa segura y testeada a mcp-bash.
+  - Subordinación explícita de SQLite a 4D-TES con esquema documentado.
+files_changed:
+  - dummie_gateway_config.json
+  - layers/l1_nervous/bootstrap.py
+  - layers/l1_nervous/tools_impl/sdd.py
+  - layers/l2_brain/infrastructure/external.py
+  - .aiwg/mcp/registry.yaml
+  - .aiwg/mcp/policies.yaml
+  - .aiwg/mcp/sqlite/schema.sql
+tests_added:
+  - tests/test_production_integration.py
+  - tests/test_mcp_real_integration.py
+tests_passing:
+  - portability_check
+  - sqlite_contract_check
+  - tool_discovery_flow
+  - bootstrap_orchestrator_initialization
+mcp_enabled_by_default: [sequentialthinking, github, shell, sqlite, git, filesystem]
+security_exceptions: 
+  - Git safe.directory aplicado para permitir operación en volúmenes /media/datasets.
+rollback_plan: 
+  - git restore dummie_gateway_config.json layers/
+  - git clean -fd .aiwg/mcp
+next_mission: MISSION-L2-ORGAN-MIGRATION-COMPLETION (Mover componentes de flat_brain a estructura canónica)
+confidence: 1.0

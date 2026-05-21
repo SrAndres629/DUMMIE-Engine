@@ -1,8 +1,8 @@
 from typing import Any
 
-from golden_path import generate_golden_path as build_golden_path
-from runtime_guards import GuardInput, evaluate_runtime_guards
-from sdd_governance import (
+from layers.l2_brain.flat_brain.golden_path import generate_golden_path as build_golden_path
+from layers.l2_brain.runtime_guards import GuardInput, evaluate_runtime_guards
+from layers.l2_brain.flat_brain.sdd_governance import (
     ChangeRequest,
     EvidencePacket,
     admit_change,

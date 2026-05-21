@@ -1,10 +1,22 @@
 policies:
   shell_execution:
     level: "restricted"
-    allow_list: ["git status", "ls", "grep", "find", "cat"]
-    block_list: ["rm -rf", "chmod", "chown"]
-  web_automation:
-    enabled: false
-    reason: "Requires explicit user mission for cost control"
-  data_persistence:
-    preferred: "sqlite"
+    allow_list: ["git status", "git diff", "git log", "python -m pytest", "rg", "find", "cat", "sed", "jq"]
+    denied_patterns: ["rm -rf", "sudo", "chmod -R", "chown -R", "curl", "wget"]
+    require_workdir_under: ["${DUMMIE_ROOT}", "${DUMMIE_WORKBENCH}"]
+
+  github_mcp:
+    read_only:
+      enabled_by_default: true
+      allowed: ["list_repositories", "fetch_file", "search", "get_pr", "get_issue"]
+    write:
+      enabled_by_default: false
+      requires_human_approval: true
+      allowed: ["create_branch", "create_pull_request", "create_issue", "add_comment"]
+    dangerous:
+      enabled_by_default: false
+      blocked_by_default: ["merge_pull_request", "update_ref", "delete_file"]
+
+  sequentialthinking:
+    role: "auxiliary_planning_surface"
+    must_not_replace: ["mission_orchestrator_dag", "4d_tes_memory"]

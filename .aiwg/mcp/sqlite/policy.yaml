@@ -1,0 +1,13 @@
+id: sqlite
+role: ephemeral_structured_store
+not_source_of_truth: true
+canonical_promotion_target:
+  - .aiwg/vault
+  - .aiwg/spec_registry
+  - .aiwg/mission_control
+forbidden:
+  - replace_4d_tes
+  - replace_vault
+  - store_secrets
+  - store_unreviewed_decisions_as_truth
+schema_ref: .aiwg/mcp/sqlite/schema.sql

@@ -1,28 +1,5 @@
 {
   "mcpServers": {
-    "memory": {
-      "command": "node",
-      "args": [
-        "/home/jorand/temp_servers/src/memory/dist/index.js"
-      ],
-      "env": {
-        "MEMORY_FILE_PATH": "/home/jorand/.antigravity/knowledge/memory.jsonl"
-      },
-      "disabled": true,
-      "disabled_reason": "legacy no conecta con el motor 4d "
-    },
-    "filesystem": {
-      "command": "node",
-      "args": [
-        "/home/jorand/temp_servers/src/filesystem/dist/index.js",
-        "/home/jorand/Escritorio/DUMMIE Engine",
-        "/tmp"
-      ],
-      "disabled": false,
-      "profile": "core",
-      "capability_class": "workspace_io",
-      "rationale": "Shared bounded filesystem access for CLI/IDE clients that do not have Codex-level file tools."
-    },
     "sequentialthinking": {
       "command": "npx",
       "args": [
@@ -30,240 +7,9 @@
         "@modelcontextprotocol/server-sequential-thinking"
       ],
       "disabled": false,
-      "profile": "core",
+      "profile": "auxiliary",
       "capability_class": "reasoning_support",
-      "rationale": "Structured decomposition surface to force hypothesis revision before execution."
-    },
-    "mcp-bash": {
-      "command": "uvx",
-      "args": [
-        "--from",
-        "git+https://github.com/patrickomatik/mcp-bash.git",
-        "mcp-bash"
-      ],
-      "disabled": false,
-      "profile": "core",
-      "capability_class": "shell_execution",
-      "rationale": "Advanced bash execution via MCP."
-    },
-    "computer-use": {
-      "command": "uvx",
-      "args": [
-        "computer-control-mcp@latest"
-      ],
-      "disabled": false,
-      "profile": "utility",
-      "capability_class": "os_automation",
-      "rationale": "Native computer use (screen, keyboard, mouse) for the agent."
-    },
-    "browser-use": {
-      "command": "uvx",
-      "args": [
-        "--from",
-        "browser-use[cli]",
-        "browser-use",
-        "--mcp"
-      ],
-      "env": {
-        "OPENAI_API_KEY": "${OPENAI_API_KEY}",
-        "ANTHROPIC_API_KEY": "${ANTHROPIC_API_KEY}"
-      },
-      "disabled": false,
-      "profile": "utility",
-      "capability_class": "web_automation",
-      "rationale": "High-level web automation via Browser Use."
-    },
-    "browser-mcp": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@smithereen/browser-mcp"
-      ],
-      "disabled": false,
-      "profile": "utility",
-      "capability_class": "web_browsing",
-      "rationale": "Direct Chrome extension integration for session persistence."
-    },
-    "chrome-devtools": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-chrome-devtools"
-      ],
-      "disabled": false,
-      "profile": "utility",
-      "capability_class": "web_debugging",
-      "rationale": "Chrome DevTools inspection."
-    },
-    "postgresql": {
-      "command": "uvx",
-      "args": [
-        "mcp-server-postgresql"
-      ],
-      "env": {
-        "PGHOST": "localhost",
-        "PGPORT": "5432",
-        "PGUSER": "postgres",
-        "PGPASSWORD": "${PGPASSWORD}",
-        "PGDATABASE": "postgres"
-      },
-      "disabled": false,
-      "profile": "knowledge",
-      "capability_class": "structured_local_store"
-    },
-    "time": {
-      "command": "uvx",
-      "args": [
-        "mcp-server-time"
-      ],
-      "disabled": false,
-      "profile": "utility",
-      "capability_class": "temporal_context",
-      "rationale": "Low-risk shared time capability for clients without native time tooling."
-    },
-    "fetch": {
-      "command": "uvx",
-      "args": [
-        "mcp-server-fetch"
-      ],
-      "disabled": false,
-      "profile": "utility",
-      "capability_class": "network_retrieval",
-      "rationale": "Shared explicit fetch capability for agents/IDEs without web tooling; invoked only through gateway."
-    },
-    "obsidian": {
-      "command": "uvx",
-      "args": [
-        "mcp-obsidian"
-      ],
-      "env": {
-        "OBSIDIAN_API_KEY": "${OBSIDIAN_API_KEY}",
-        "OBSIDIAN_HOST": "127.0.0.1",
-        "OBSIDIAN_PORT": "27124"
-      },
-      "disabled": false
-    },
-    "sqlite": {
-      "command": "uvx",
-      "args": [
-        "mcp-server-sqlite",
-        "--db-path",
-        "/home/jorand/.antigravity/knowledge/dummie_sqlite.db"
-      ],
-      "disabled": false,
-      "profile": "knowledge",
-      "capability_class": "structured_local_store",
-      "rationale": "Shared local structured store for non-4D artifacts and cross-client knowledge bus experiments."
-    },
-    "git": {
-      "command": "uvx",
-      "args": [
-        "mcp-server-git",
-        "--repository",
-        "/home/jorand/Escritorio/DUMMIE Engine"
-      ],
-      "disabled": false,
-      "profile": "core",
-      "capability_class": "vcs",
-      "rationale": "Shared repository state access for clients without reliable shell/git integration."
-    },
-    "ripgrep": {
-      "command": "node",
-      "args": [
-        "/media/datasets/sw_tools/mcp_servers/node_modules/mcp-ripgrep/dist/index.js"
-      ],
-      "env": {
-        "PATH": "/media/datasets/sw_tools/bin:/usr/local/bin:/usr/bin:/bin"
-      },
-      "disabled": false,
-      "profile": "core",
-      "capability_class": "code_search",
-      "rationale": "High-value semantic gateway primitive: fast source search available to every CLI/IDE client."
-    },
-    "ctags": {
-      "command": "node",
-      "args": [
-        "/media/datasets/sw_tools/mcp_servers/node_modules/mcp-ctags/index.js"
-      ],
-      "env": {
-        "PATH": "/media/datasets/sw_tools/bin:/usr/local/bin:/usr/bin:/bin"
-      },
-      "disabled": false,
-      "profile": "core",
-      "capability_class": "code_index",
-      "rationale": "Complements ripgrep with symbol navigation for IDE-like clients and cross-language code analysis."
-    },
-    "genkit-mcp-server": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "genkit-cli@latest",
-        "mcp",
-        "--explicitProjectRoot",
-        "--no-update-notification",
-        "--non-interactive"
-      ],
-      "disabled": false,
-      "disabled_reason": "Project-specific external tool; enable only inside a Genkit-owned workflow with tests."
-    },
-    "everything": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-everything"
-      ],
-      "disabled": true,
-      "disabled_reason": "Broad demo server; exposes noisy tools and weakens tool selection."
-    },
-    "arize-tracing-assistant": {
-      "command": "uvx",
-      "args": [
-        "arize-tracing-assistant"
-      ],
-      "disabled": false,
-      "active_reason": "Forman parte de los mcp que descargamos oficiales de antigravity"
-    },
-    "puppeteer": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-puppeteer"
-      ],
-      "disabled": false,
-      "disabled_reason": "Browser automation is useful only for explicit UI tasks; keep off the default cognitive path."
-    },
-    "local-ssh-context": {
-      "command": "/home/jorand/Escritorio/DUMMIE Engine/.aiwg/venv_ssh/bin/python",
-      "args": [
-        "-m",
-        "mcp_server_ssh",
-        "127.0.0.1",
-        "--user",
-        "jorand",
-        "--identity",
-        "/home/jorand/.ssh/dummie_agent_key"
-      ],
-      "disabled": true,
-      "disabled_reason": "Sensitive SSH surface; enable only for an explicit remote-context task with human approval."
-    },
-    "socraticode": {
-      "command": "npx",
-      "args": [
-        "socraticode"
-      ],
-      "env": {
-        "SOCRATICODE_BRANCH_AWARE": "true",
-        "SOCRATICODE_LOG_LEVEL": "info"
-      },
-      "disabled": false
-    },
-    "phoenix": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@arizeai/phoenix-mcp"
-      ],
-      "disabled": false
+      "rationale": "Auxiliary planning surface. Not required for core engine reasoning."
     },
     "github": {
       "command": "npx",
@@ -274,32 +20,58 @@
       "env": {
         "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_PERSONAL_ACCESS_TOKEN}"
       },
-      "disabled": false
+      "disabled": false,
+      "profile": "core",
+      "capability_class": "vcs",
+      "rationale": "Controlled repository state access with policy-based write protection."
     },
-    "vercel": {
-      "command": "node",
+    "shell": {
+      "command": "npx",
       "args": [
-        "/media/datasets/proyectos/Biblioteca MCP/Vercel/my-vercel-mcp/dist/index.js"
+        "-y",
+        "mcp-shell"
       ],
-      "env": {
-        "VERCEL_TOKEN": "${VERCEL_TOKEN}"
-      },
-      "disabled": false
+      "disabled": false,
+      "profile": "core",
+      "capability_class": "shell_execution",
+      "rationale": "Secure, allowlisted shell executor via npx. Replaces problematic mcp-bash."
     },
-    "comfyui": {
-      "command": "node",
+    "sqlite": {
+      "command": "uvx",
       "args": [
-        "/media/datasets/proyectos/Biblioteca MCP/Mcp_Comfyui/build/index.js"
+        "mcp-server-sqlite",
+        "--db-path",
+        "${DUMMIE_AIWG}/memory/dummie_sqlite.db"
       ],
-      "disabled": false
+      "disabled": false,
+      "profile": "knowledge",
+      "capability_class": "structured_local_store",
+      "rationale": "Ephemeral store subordinated to 4D-TES. Policy-enforced schema."
     },
-    "feat-sniper": {
-      "command": "/media/datasets/proyectos/Biblioteca MCP/feat_sniper_mcp/.venv/bin/python",
+    "filesystem": {
+      "command": "npx",
       "args": [
-        "/media/datasets/proyectos/Biblioteca MCP/feat_sniper_mcp/mcp_server.py"
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "${DUMMIE_ROOT}",
+        "/tmp"
       ],
-      "disabled": true,
-      "rationale": "High-frequency knowledge ingestion. Requires local MT5/DB setup."
+      "disabled": false,
+      "profile": "core",
+      "capability_class": "workspace_io",
+      "rationale": "Standard filesystem MCP with root constraints."
+    },
+    "git": {
+      "command": "uvx",
+      "args": [
+        "mcp-server-git",
+        "--repository",
+        "${DUMMIE_ROOT}"
+      ],
+      "disabled": false,
+      "profile": "core",
+      "capability_class": "vcs",
+      "rationale": "Canonical git repository state tools."
     }
   }
 }

@@ -4,9 +4,9 @@ from typing import List, Dict, Any
 logger = logging.getLogger("brain.adapters.external")
 
 try:
-    from ports import CodeAnalysisPort, ObservabilityPort
+    from layers.l2_brain.infrastructure.ports import CodeAnalysisPort, ObservabilityPort
 except ImportError:
-    from layers.l2_brain.ports import CodeAnalysisPort, ObservabilityPort
+    from ports import CodeAnalysisPort, ObservabilityPort
 
 class UnsafeBypassShieldAdapter:
     """
