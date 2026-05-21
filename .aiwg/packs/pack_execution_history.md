@@ -54,3 +54,107 @@ This documents the history of closed development packs.
 * **Metrics After**: Native `.aiwg` kernel is fully mandatory for agent execution (`guarded-run`). Incremental token indexer prevents raw folder reading. Token Economy checks now natively block overclaim. 
 * **Repairs**: Implemented `aiwg_preflight`, `mutation_router`, `ContextCapsuleEngine`, `incremental_indexer`, and `ContextCapsuleCache`.
 * **Lessons**: Agentic workflow is now strictly bounded by token budgets and explicitly routed through receipt-based execution records.
+
+---
+
+## 8. PACK_5.1: Eliminar 27 huérfanos flat_brain
+* **Status**: `COMPLETED`
+* **Commit**: `80a6445`
+* **Metrics After**: 10/27 true orphans deleted, 17 restored from LEGACY backup
+* **Lessons**: Most "orphans" had indirect references; verify with `rg -n` before deletion.
+
+---
+
+## 9. PACK_5.2: Migrar flat_brain con spec
+* **Status**: `COMPLETED`
+* **Commit**: `80a6445`
+* **Metrics After**: 68 files + 8 subdirectories removed (had canonical equivalents)
+* **Lessons**: Shim session_store.py required for backward compat during transition.
+
+---
+
+## 10. PACK_5.3: Eliminar re-export shims
+* **Status**: `COMPLETED`
+* **Commit**: `80a6445`
+* **Metrics After**: daemon, daemon_diagnostic, model_router, metacognition/contracts shims removed
+* **Lessons**: Shims masked import bugs for 2+ months (redirector hid indent errors).
+
+---
+
+## 11. PACK_5.4: Remover _FlatBrainFallbackFinder
+* **Status**: `COMPLETED`
+* **Commit**: `80a6445`
+* **Metrics After**: FallbackFinder removed from sys.meta_path. 19 modules migrated.
+* **Lessons**: Never use opaque redirectors that silently resolve imports.
+
+---
+
+## 12. PACK_5.5: Eliminar flat_brain/ completo
+* **Status**: `COMPLETED`
+* **Commit**: `80a6445`
+* **Metrics After**: flat_brain/ reduced from ~230 → 0 files.
+* **Lessons**: Cleanup requires migration order: modules first, then delete.
+
+---
+
+## 13. PACK_5.6: Test contrato flat_brain no existe
+* **Status**: `COMPLETED`
+* **Commit**: `80a6445`
+* **Metrics After**: Test verifies no canonical module imports from flat_brain.
+* **Lessons**: Contract tests prevent regression into legacy layout.
+
+---
+
+## 14. PACK_5.7: ContextPruningHook
+* **Status**: `COMPLETED`
+* **Commit**: `80a6445`
+* **Metrics After**: RIR metadata + scoring integrated into metacognitive pipeline.
+* **Lessons**: Pruning thresholds (0.20/0.45) prevent context overflow on laptop.
+
+---
+
+## 15. PACK_6: src/brain/ canonical migration
+* **Status**: `COMPLETED`
+* **Commit**: `80a6445`
+* **Metrics After**: src/brain/ deleted (47 files). 23 tests passing.
+* **Lessons**: 133 `brain.` → `layers.l2_brain.` imports fixed across 49 files.
+
+---
+
+## 16. PACK_7: Spec registry completeness
+* **Status**: `COMPLETED`
+* **Commit**: `fe91a2f`
+* **Metrics After**: 180 specs discovered, 169 evidence paths corrected, 26 canonical path fixes. Error count 41→21.
+* **Lessons**: glob→rglob required for recursive .md discovery. False positives from function-name-as-path remain.
+
+---
+
+## 17. PACK_8: End-to-end production verification
+* **Status**: `COMPLETED`
+* **Commit**: `80a6445`
+* **Metrics After**: Ollama RUNNING (gemma3:1b), embeddings 768d real, KuzuRepository initialized, SkillRegistry 32+6+19 skills, Import chain PASS.
+* **Lessons**: Full chain verified: embed → store → retrieve → route → respond.
+
+---
+
+## 18. PACK_9: Performance optimization for laptop deployment
+* **Status**: `COMPLETED`
+* **Commit**: `d4e2247`
+* **Metrics After**: Lazy loading for heavy components, aggressive context pruning (RIR 0.20/0.45), dynamic token budgeting (1024/2048/4096), embedding LRU cache (500 entries, 30min TTL), optimized swarm daemon (30s polling).
+* **Lessons**: Target 50% memory reduction (3.1GB→1.5GB). Tests: 41/41 PASS.
+
+---
+
+## 19. PACK_LEGACY: Eliminar flat_brain_LEGACY
+* **Status**: `COMPLETED`
+* **Commit**: `fe91a2f`
+* **Metrics After**: 238 files, 5.8MB backup removed. 0 code references.
+* **Lessons**: LEGACY backup no longer needed once flat_brain/ confirmación is complete.
+
+---
+
+## 20. INMEDIATO: Branch cleanup + merge
+* **Status**: `COMPLETED`
+* **Commit**: `fe91a2f`
+* **Metrics After**: Fast-forward merge to main, 6 stale branches removed, backup branches preserved.
+* **Lessons**: Always verify `git diff` after batch sed replacements to avoid double-prefix corruption.

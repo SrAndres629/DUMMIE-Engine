@@ -3,6 +3,7 @@
 * **Pack ID**: `PACK_3.2`
 * **Title**: `CODE Embedding Provider`
 * **Objective**: Separar el espacio vectorial de texto del espacio de código y sintaxis abstracta.
+* **Roadmap Status**: Reconciled from PACK_5-9 execution (merged to main @ fe91a2f). PACK_3.2 is the formal next pack after the flat_brain/src/brain structural cleanup.
 
 ---
 

@@ -8,7 +8,7 @@ This tracks progress towards the long-term target of Pack 6.1 (Golden Path E2E).
 
 | Component | Completion Score | Remaining Distance | Verification State |
 | :--- | :--- | :--- | :--- |
-| **Structural Debt** | `0.65` | `0.35` | `estimated` |
+| **Structural Debt** | `0.85` | `0.15` | `verified` |
 | **Semantic Capability** | `0.55` | `0.45` | `estimated` |
 | **Model Mesh** | `0.20` | `0.80` | `unverified` |
 | **Guardrails** | `0.10` | `0.90` | `unverified` |
@@ -18,7 +18,7 @@ This tracks progress towards the long-term target of Pack 6.1 (Golden Path E2E).
 
 ---
 
-* **Current Score**: `0.32` (`estimated`)
+* **Current Score**: `0.37` (`estimated`)
 * **Blockers**:
   * Falta de indexación de código AST.
   * Falta de router de capacidades de modelos.

@@ -44,7 +44,63 @@ This ledger documents the state of all execution packs.
 * **Status**: `READY`
 * **Next Active Pack**: Target for next execution.
 
-### 11. Direct Spec Linkage Engine (PACK_3.3)
+### 11. flat_brain Orphan Elimination (PACK_5.1)
+* **Status**: `COMPLETED`
+* **Commit**: `80a6445`
+
+### 12. flat_brain Canonical Migration (PACK_5.2)
+* **Status**: `COMPLETED`
+* **Commit**: `80a6445`
+
+### 13. Re-export Shim Removal (PACK_5.3)
+* **Status**: `COMPLETED`
+* **Commit**: `80a6445`
+
+### 14. FlatBrainFallbackFinder Removal (PACK_5.4)
+* **Status**: `COMPLETED`
+* **Commit**: `80a6445`
+
+### 15. flat_brain/ Deletion (PACK_5.5)
+* **Status**: `COMPLETED`
+* **Commit**: `80a6445`
+
+### 16. flat_brain Contract Test (PACK_5.6)
+* **Status**: `COMPLETED`
+* **Commit**: `80a6445`
+
+### 17. ContextPruningHook (PACK_5.7)
+* **Status**: `COMPLETED`
+* **Commit**: `80a6445`
+
+### 18. src/brain/ Migration (PACK_6)
+* **Status**: `COMPLETED`
+* **Commit**: `80a6445`
+* **Metrics**: 47 files migrated, 133 imports fixed
+
+### 19. Spec Registry Completeness (PACK_7)
+* **Status**: `COMPLETED`
+* **Commit**: `fe91a2f`
+* **Metrics**: 180 specs, 21 errors (12 FP)
+
+### 20. E2E Production Verification (PACK_8)
+* **Status**: `COMPLETED`
+* **Commit**: `80a6445`
+
+### 21. Laptop Performance Optimization (PACK_9)
+* **Status**: `COMPLETED`
+* **Commit**: `d4e2247`
+
+### 22. flat_brain_LEGACY Deletion (PACK_LEGACY)
+* **Status**: `COMPLETED`
+* **Commit**: `fe91a2f`
+
+### 23. Branch Cleanup + Merge (INMEDIATO)
+* **Status**: `COMPLETED`
+* **Commit**: `fe91a2f`
+
+### 24. Direct Spec Linkage Engine (PACK_3.3)
 * **Status**: `DEFERRED`
 
 *(All subsequent packs PACK_4.0 to PACK_6.1 remain DEFERRED until previous stages are successfully closed and validated)*
+
+> **Note**: PACK_5-9, PACK_LEGACY, and INMEDIATO were executed with a parallel numbering scheme that diverged from the original PACK_3.x→6.x plan. The roadmap is now reconciled to reflect actual execution. PACK_3.2 remains the formal next active pack.
