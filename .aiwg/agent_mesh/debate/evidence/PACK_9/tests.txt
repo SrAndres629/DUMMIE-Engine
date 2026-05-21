@@ -1,0 +1,32 @@
+PACK_9 — Performance Optimization
+====================================
+
+Status: COMPLETE
+
+Files created:
+- layers/l2_brain/metacognition/lazy_loader.py
+- layers/l2_brain/metacognition/context_pruning_optimized.py
+- layers/l2_brain/metacognition/performance_monitor.py
+- layers/l2_brain/embedding_mesh/vector_cache.py
+- layers/l2_brain/daemon/daemon_service_optimized.py
+- scripts/swarm_daemon_optimized.py
+- doc/specs/195_performance_optimization.md
+- layers/l2_brain/tests/test_optimized_pruning.py
+- layers/l2_brain/tests/test_embedding_cache.py
+
+Optimizations:
+- RIR drop threshold: 0.15 → 0.20 (more aggressive)
+- RIR compress threshold: 0.35 → 0.45 (more aggressive)
+- Preserve max chars: 1024 → 512
+- Compress max chars: 120 → 80
+- Dynamic token budget: 1024/2048/4096 based on complexity
+- Embedding cache: LRU with 500 entries, 30min TTL
+- Lazy loading: Components loaded on demand
+- Swarm daemon: Combined roles, 30s polling
+
+Test results:
+- 10/10 optimized pruning tests PASS
+- 8/8 embedding cache tests PASS
+- 19/19 original pruning tests PASS
+- 4/4 metacognitive pipeline tests PASS
+- Total: 41/41 PASS

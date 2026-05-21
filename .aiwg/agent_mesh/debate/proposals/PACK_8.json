@@ -1,0 +1,15 @@
+{
+  "pack": "PACK_8",
+  "name": "End-to-end production verification",
+  "rationale": "Verificar que ollama_runtime, model_executor, embeddings, import chain, y daemon funcionan en producci\u00f3n real. Reportar critical_failures.",
+  "priority": "high",
+  "proposed_by": "supervisor",
+  "proposed_at": "2026-05-21T06:30:56.973682+00:00",
+  "votes": {
+    "worker": true,
+    "reviewer": null,
+    "supervisor": null
+  },
+  "status": "pending_votes",
+  "updated_at": "2026-05-21T06:42:46.132798+00:00"
+}

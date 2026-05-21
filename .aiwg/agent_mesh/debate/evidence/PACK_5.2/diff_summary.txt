@@ -1,0 +1,16 @@
+PACK_5.2 — Migrar o DEPRECATED los 30 módulos flat_brain con spec
+=====================================================================
+
+Status: COMPLETE
+
+69 targets in PACK_5.2_targets.txt:
+- 68 already deleted by PACK_5.1
+- 1 remaining (session_store.py) — deleted now
+
+Verification:
+- Canonical import works: layers.l2_brain.session_store → memory.session_store ✅
+- flat_brain/session_store.py deleted ✅
+- 97 flat_brain modules remain (need PACK_5.3+)
+
+Remaining flat_brain modules: 97
+Next packs: PACK_5.3 (re-export shims), PACK_5.4 (remove FallbackFinder), PACK_5.5 (delete dir)

@@ -1,0 +1,30 @@
+PACK_5.7 - ContextPruningHook Evidence
+========================================
+
+Files created:
+- doc/specs/194_memory_context_pruning.md (spec)
+- layers/l2_brain/metacognition/context_pruning.py (implementation)
+- layers/l2_brain/tests/test_context_pruning_hook.py (19 tests)
+
+Files modified:
+- layers/l2_brain/daemon/daemon.py (wired hook into pipeline)
+
+RIR Scoring:
+- Relevance: cosine_similarity(query, item_embedding) × 0.5
+- Importance: authority + intent_i + proof_evidence × 0.3
+- Freshness: lamport_t decay × 0.2
+
+Token Budget:
+- Configurable via DUMMIE_MAX_CONTEXT_TOKENS (default 4096)
+- Drop threshold: < 0.15
+- Compress threshold: 0.15-0.35 (120 chars)
+- Preserve threshold: > 0.35 (1024 chars)
+
+Test Results:
+- 19/19 ContextPruningHook tests PASS
+- 4/4 MetacognitivePipeline tests PASS
+- Import verification PASS
+
+Pipeline Position:
+- After ContextEnricherHook, before SemanticToolSelectorHook
+- Graceful degradation if Kuzu unavailable

@@ -1,0 +1,6 @@
+{
+  "pack": "INMEDIATO",
+  "worker_vote": true,
+  "reviewer_vote": true,
+  "deadlock": false
+}

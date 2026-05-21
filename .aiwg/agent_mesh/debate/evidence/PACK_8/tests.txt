@@ -1,0 +1,19 @@
+=== PACK_8 — End-to-end production verification ===
+
+--- Import chain ---
+PASS: ContextPruningHook
+PASS: generate_vector
+
+--- Tests ---
+.......................                                                  [100%]
+23 passed in 1.54s
+
+--- Spec Registry ---
+spec_count=88 error_count=0
+
+--- No flat_brain ---
+PASS: flat_brain removed
+PASS: src/brain removed
+
+--- Final import check ---
+PASS: all main imports

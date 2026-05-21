@@ -1,0 +1,17 @@
+{
+  "verified": {
+    "ollama_runtime": false,
+    "embedding_providers": true,
+    "model_executor": false,
+    "tool_selector": true,
+    "skill_registry": true,
+    "import_chain": true,
+    "spec_registry": true
+  },
+  "critical_failures": [
+    "ollama_runtime",
+    "model_executor"
+  ],
+  "pre_existing": true,
+  "timestamp": 1779341269
+}

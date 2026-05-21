@@ -1,0 +1,15 @@
+{
+  "pack": "PACK_LEGACY",
+  "name": "Eliminar flat_brain_LEGACY",
+  "rationale": "flat_brain/ vac\u00edo y eliminado, FallbackFinder removido. LEGACY backup ya no es necesario.",
+  "priority": "medium",
+  "proposed_by": "supervisor",
+  "proposed_at": "2026-05-21T06:30:57.132337+00:00",
+  "votes": {
+    "worker": true,
+    "reviewer": null,
+    "supervisor": null
+  },
+  "status": "pending_votes",
+  "updated_at": "2026-05-21T06:42:46.216076+00:00"
+}

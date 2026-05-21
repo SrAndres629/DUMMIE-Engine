@@ -1,0 +1,6 @@
+{
+  "pack": "PACK_7",
+  "worker_vote": true,
+  "reviewer_vote": true,
+  "deadlock": false
+}

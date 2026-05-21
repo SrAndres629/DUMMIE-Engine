@@ -1,0 +1,28 @@
+PACK_6 — src/brain/ canonical migration
+=========================================
+
+Status: COMPLETE
+
+Deleted duplicates (5):
+- ledger_adapter.py == ledger.py
+- nats_controller.py == nats.py
+- ollama_adapter.py == ollama.py
+- ontological_adapter.py == ontological.py
+- skill_adapter.py == skill.py
+
+Moved to canonical (22+ files):
+- application/: interfaces.py, ports.py, prompt_preprocessor.py
+- application/ports/: capsule_ports.py, kernel_ports.py
+- application/services/: model_router.py
+- application/use_cases/: 10 use case files
+- domain/: capability_registry.py + 5 subdirectories
+- infrastructure/adapters/: 7 unique adapters
+- l2_brain/: main.py, mcp_server.py
+
+Deleted: src/brain/ directory
+
+Verification:
+- application.interfaces import ✅
+- domain.capability_registry import ✅
+- 23/23 tests PASS ✅
+- src/brain removed ✅

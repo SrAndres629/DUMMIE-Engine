@@ -1,0 +1,6 @@
+=== PACK_6 Verification ===
+PASS: application.interfaces
+PASS: domain.capability_registry
+.......................                                                  [100%]
+23 passed in 1.35s
+PASS: src/brain removed

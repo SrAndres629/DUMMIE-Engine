@@ -1,0 +1,45 @@
+doc/specs/L2_Brain/90_vault_embedding_index.md:46: trailing whitespace.
++    
+doc/specs/L2_Brain/90_vault_embedding_index.md:53: trailing whitespace.
++    
+doc/specs/L2_Brain/90_vault_embedding_index.md:58: trailing whitespace.
++    
+doc/specs/L2_Brain/90_vault_embedding_index.md:64: trailing whitespace.
++    
+dummie/runtime_chat.py:85: trailing whitespace.
++            
+dummie/runtime_chat.py:88: trailing whitespace.
++            
+dummie/runtime_chat.py:90: trailing whitespace.
++            
+layers/.aiwg/reports/embedding_activation_verification_latest.md:2: trailing whitespace.
++**Decision**: `PASS`  
+layers/l2_brain/src/brain/infrastructure/adapters/kuzu_repository.py:89: trailing whitespace.
++            
+layers/l2_brain/src/brain/infrastructure/adapters/kuzu_repository.py:222: trailing whitespace.
++        
+layers/l2_brain/src/brain/infrastructure/adapters/kuzu_repository.py:234: trailing whitespace.
++            
+layers/l2_brain/src/brain/infrastructure/adapters/kuzu_repository.py:290: trailing whitespace.
++        
+layers/l2_brain/src/brain/infrastructure/adapters/kuzu_repository.py:293: trailing whitespace.
++        
+layers/l2_brain/src/brain/infrastructure/adapters/kuzu_repository.py:297: trailing whitespace.
++        
+layers/l2_brain/src/brain/infrastructure/adapters/kuzu_repository.py:304: trailing whitespace.
++            
+layers/l2_brain/src/brain/infrastructure/adapters/kuzu_repository.py:315: trailing whitespace.
++            
+layers/l2_brain/src/brain/infrastructure/adapters/kuzu_repository.py:319: trailing whitespace.
++            
+layers/l2_brain/src/brain/infrastructure/adapters/kuzu_repository.py:321: trailing whitespace.
++            
+layers/l2_brain/src/brain/infrastructure/adapters/kuzu_repository.py:328: trailing whitespace.
++        
+layers/l2_brain/src/brain/infrastructure/adapters/kuzu_repository.py:331: trailing whitespace.
++        
+layers/l2_brain/src/brain/infrastructure/adapters/kuzu_repository.py:341: trailing whitespace.
++        
+memory/2026-05-20.md:312: trailing whitespace.
++- **Verification:** 
+0 violations

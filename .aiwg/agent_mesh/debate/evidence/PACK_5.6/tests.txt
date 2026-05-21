@@ -1,0 +1,7 @@
+=== PACK_5.6 Verification ===
+PASS: flat_brain removed
+PASS: FallbackFinder removed
+PASS: GatewayRequest import
+PASS: MemoryNode4D import
+.......................                                                  [100%]
+23 passed in 1.42s

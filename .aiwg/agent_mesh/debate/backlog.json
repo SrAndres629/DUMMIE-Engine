@@ -1,0 +1,18 @@
+{
+  "schema": "dummie.swarm.backlog.v1",
+  "backlog": [
+    {"pack": "PACK_5.1", "name": "Eliminar 27 modulos flat_brain sin spec", "status": "completed", "prerequisites": []},
+    {"pack": "PACK_5.2", "name": "Migrar o DEPRECATED los 30 modulos flat_brain con spec", "status": "completed", "prerequisites": ["PACK_5.1"]},
+    {"pack": "PACK_5.3", "name": "Eliminar 4 re-export shims de flat_brain", "status": "completed", "prerequisites": ["PACK_5.2"]},
+    {"pack": "PACK_5.4", "name": "Remover _FlatBrainFallbackFinder del __init__.py", "status": "completed", "prerequisites": ["PACK_5.3"]},
+    {"pack": "PACK_5.5", "name": "Eliminar directorio flat_brain/ completo", "status": "completed", "prerequisites": ["PACK_5.4"]},
+    {"pack": "PACK_5.6", "name": "Test contrato: flat_brain no existe y no reaparece", "status": "completed", "prerequisites": ["PACK_5.5"]},
+    {"pack": "PACK_5.7", "name": "ContextPruningHook - RIR scoring + token budget", "status": "completed", "prerequisites": ["PACK_5.1"]},
+    {"pack": "PACK_6", "name": "src/brain/ canonical migration", "status": "completed", "prerequisites": ["PACK_5.6"]},
+    {"pack": "PACK_7", "name": "Spec registry completeness + traceability", "status": "completed", "prerequisites": ["PACK_6"]},
+    {"pack": "PACK_8", "name": "End-to-end production verification", "status": "completed", "prerequisites": ["PACK_7"]},
+    {"pack": "PACK_9", "name": "Performance optimization - memory, process consolidation", "status": "completed", "prerequisites": []},
+    {"pack": "PACK_LEGACY", "name": "Eliminar flat_brain_LEGACY", "status": "completed", "prerequisites": []},
+    {"pack": "INMEDIATO", "name": "Branch cleanup + merge to main", "status": "completed", "prerequisites": ["PACK_5.6"]}
+  ]
+}

@@ -1,0 +1,6 @@
+Audit/Muscle layers degraded: No module named 'topological_auditor'
+DAEMON OK
+Audit/Muscle layers degraded: No module named 'topological_auditor'
+DIAGNOSTIC OK
+MODEL_ROUTER OK
+CONTRACTS OK

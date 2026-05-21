@@ -1,0 +1,30 @@
+{"timestamp": "2026-05-21T05:27:54.335223+00:00", "pack": "PACK_5.1", "status": "ready_for_review", "evidence_dir": "evidence/PACK_5.1", "worker_vote": true}
+{"timestamp": "2026-05-21T05:59:12.443375+00:00", "pack": "PACK_5.2", "status": "ready_for_review", "evidence_dir": "evidence/PACK_5.2", "worker_vote": true}
+{"timestamp": "2026-05-21T05:59:32.254849+00:00", "pack": "PACK_5.2", "status": "ready_for_review", "evidence_dir": "evidence/PACK_5.2", "worker_vote": true}
+{"timestamp": "2026-05-21T06:06:32.822453+00:00", "pack": "PACK_5.7", "status": "ready_for_review", "evidence_dir": ".aiwg/agent_mesh/debate/evidence/PACK_5.7", "worker_vote": true}
+{"timestamp": "2026-05-21T06:11:07.565328+00:00", "pack": "PACK_5.2", "status": "ready_for_review", "evidence_dir": ".aiwg/agent_mesh/debate/evidence/PACK_5.2", "worker_vote": true}
+{"timestamp": "2026-05-21T06:16:32.140265+00:00", "type": "new_proposal", "pack": "PACK_TEST", "name": "Test proposal", "rationale": "Testing the proposal system", "priority": "low", "proposed_by": "worker"}
+{"timestamp": "2026-05-21T06:17:29.889917+00:00", "pack": "PACK_5.3", "status": "ready_for_review", "evidence_dir": ".aiwg/agent_mesh/debate/evidence/PACK_5.3", "worker_vote": true}
+{"timestamp": "2026-05-21T06:17:30.884745+00:00", "pack": "PACK_5.3", "status": "ready_for_review", "evidence_dir": "evidence/PACK_5.3", "worker_vote": true}
+{"timestamp": "2026-05-21T06:17:53.168974+00:00", "pack": "PACK_5.4", "status": "ready_for_review", "evidence_dir": "evidence/PACK_5.4", "worker_vote": true}
+{"timestamp": "2026-05-21T06:22:36.411439+00:00", "pack": "PACK_5.4", "status": "ready_for_review", "evidence_dir": "evidence/PACK_5.4", "worker_vote": true}
+{"timestamp": "2026-05-21T06:22:36.580483+00:00", "pack": "PACK_5.5", "status": "ready_for_review", "evidence_dir": "evidence/PACK_5.5", "worker_vote": true}
+{"timestamp": "2026-05-21T06:22:50.705906+00:00", "pack": "PACK_5.4", "status": "ready_for_review", "evidence_dir": ".aiwg/agent_mesh/debate/evidence/PACK_5.4", "worker_vote": true}
+{"timestamp": "2026-05-21T06:22:50.881186+00:00", "pack": "PACK_5.5", "status": "ready_for_review", "evidence_dir": ".aiwg/agent_mesh/debate/evidence/PACK_5.5", "worker_vote": true}
+{"timestamp": "2026-05-21T06:22:51.052446+00:00", "pack": "PACK_5.6", "status": "ready_for_review", "evidence_dir": ".aiwg/agent_mesh/debate/evidence/PACK_5.6", "worker_vote": true}
+{"timestamp": "2026-05-21T06:25:32.099119+00:00", "pack": "PACK_6", "status": "ready_for_review", "evidence_dir": ".aiwg/agent_mesh/debate/evidence/PACK_6", "worker_vote": true}
+{"timestamp": "2026-05-21T06:29:47.410017+00:00", "pack": "PACK_5.7", "status": "ready_for_review", "evidence_dir": ".aiwg/agent_mesh/debate/evidence/PACK_5.7", "worker_vote": true}
+{"timestamp": "2026-05-21T06:30:56.973682+00:00", "type": "new_proposal", "pack": "PACK_8", "name": "End-to-end production verification", "rationale": "Verificar que ollama_runtime, model_executor, embeddings, import chain, y daemon funcionan en producci\u00f3n real. Reportar critical_failures.", "priority": "high", "proposed_by": "supervisor"}
+{"timestamp": "2026-05-21T06:30:57.053106+00:00", "type": "new_proposal", "pack": "INMEDIATO", "name": "Branch cleanup + merge to main", "rationale": "22 branches totales, 5 locales mergeados a main, 4 remote orphans. Hacer git branch -d de mergeados, confirmar fast-forward merge, limpiar.", "priority": "high", "proposed_by": "supervisor"}
+{"timestamp": "2026-05-21T06:30:57.132337+00:00", "type": "new_proposal", "pack": "PACK_LEGACY", "name": "Eliminar flat_brain_LEGACY", "rationale": "flat_brain/ vac\u00edo y eliminado, FallbackFinder removido. LEGACY backup ya no es necesario.", "priority": "medium", "proposed_by": "supervisor"}
+{"timestamp": "2026-05-21T06:32:46.976961+00:00", "pack": "PACK_7", "status": "ready_for_review", "evidence_dir": ".aiwg/agent_mesh/debate/evidence/PACK_7", "worker_vote": true}
+{"timestamp": "2026-05-21T06:32:47.131100+00:00", "pack": "PACK_8", "status": "ready_for_review", "evidence_dir": ".aiwg/agent_mesh/debate/evidence/PACK_8", "worker_vote": true}
+{"timestamp": "2026-05-21T06:33:32.239200+00:00", "pack": "INMEDIATO", "status": "ready_for_review", "evidence_dir": ".aiwg/agent_mesh/debate/evidence/INMEDIATO", "worker_vote": true}
+{"timestamp": "2026-05-21T06:34:38.367720+00:00", "pack": "PACK_7", "status": "ready_for_review", "evidence_dir": "Spec registry: 88\u2192179 specs, errors 41\u219210. recursive scan + 195 path fixes.", "worker_vote": true}
+{"timestamp": "2026-05-21T06:46:00.713424+00:00", "pack": "PACK_LEGACY", "status": "ready_for_review", "evidence_dir": "Deleted 238 files, 5.8MB backup. 0 references. Import chain: PASS", "worker_vote": true}
+{"timestamp": "2026-05-21T06:46:00.794364+00:00", "pack": "PACK_8", "status": "ready_for_review", "evidence_dir": "Production verification: Ollama \u2705, Embeddings \u2705, Kuzu \u2705, SkillRegistry \u2705, Import \u2705, Spec 179/10 \u2705", "worker_vote": true}
+{"timestamp": "2026-05-21T06:50:40.276599+00:00", "pack": "PACK_9", "status": "ready_for_review", "evidence_dir": ".aiwg/agent_mesh/debate/evidence/PACK_9", "worker_vote": true}
+{"timestamp": "2026-05-21T06:50:48.555698+00:00", "type": "new_proposal", "pack": "PACK_TEST_RECOVER", "name": "Script recovery test", "rationale": "Verify swarm_propose.py works after stash recovery", "priority": "low", "proposed_by": "worker"}
+{"timestamp": "2026-05-21T06:51:08.559275+00:00", "pack": "PACK_LEGACY", "status": "ready_for_review", "evidence_dir": "evidence/PACK_LEGACY", "worker_vote": true}
+{"timestamp": "2026-05-21T06:51:08.619156+00:00", "pack": "PACK_8", "status": "ready_for_review", "evidence_dir": "evidence/PACK_8", "worker_vote": true}
+{"timestamp": "2026-05-21T06:51:08.680568+00:00", "pack": "INMEDIATO", "status": "ready_for_review", "evidence_dir": "evidence/INMEDIATO", "worker_vote": true}

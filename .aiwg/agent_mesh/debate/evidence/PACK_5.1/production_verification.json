@@ -1,0 +1,15 @@
+{
+  "verified": {
+    "ollama_runtime": false,
+    "embedding_providers": true,
+    "model_executor": false,
+    "tool_selector": true,
+    "skill_registry": true,
+    "context_nutrition": true
+  },
+  "critical_failures": [
+    "ollama_runtime",
+    "model_executor"
+  ],
+  "timestamp": 1779341269.6870487
+}

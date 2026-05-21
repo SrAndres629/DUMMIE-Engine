@@ -1,0 +1,15 @@
+{
+  "pack": "INMEDIATO",
+  "name": "Branch cleanup + merge to main",
+  "rationale": "22 branches totales, 5 locales mergeados a main, 4 remote orphans. Hacer git branch -d de mergeados, confirmar fast-forward merge, limpiar.",
+  "priority": "high",
+  "proposed_by": "supervisor",
+  "proposed_at": "2026-05-21T06:30:57.053106+00:00",
+  "votes": {
+    "worker": true,
+    "reviewer": null,
+    "supervisor": null
+  },
+  "status": "pending_votes",
+  "updated_at": "2026-05-21T06:42:46.297058+00:00"
+}

@@ -1,0 +1,34 @@
+# PACK_5.1 — 27 módulos flat_brain sin spec
+# Cada uno tiene 0 imports en producción.
+# Verificar antes de eliminar: grep -r "from layers.l2_brain.flat_brain.<name>" layers/ --include="*.py"
+
+ast_indexer
+auto_evolution
+branch_memory
+causal_replay
+entity_voice
+entropy_governor
+evolution_feedback_loop
+expansion_policy
+file_dossier_generator
+folder_dossier_generator
+formal_bridge
+freshness_ledger
+golden_path
+graph_sync_ledger
+lifecycle_integration_mapper
+metagateway_benchmark
+patch_transaction
+patch_transaction_manager
+prompt_preprocessor
+restart_integration_gate
+sdd_governance
+sovereign_runtime_readiness
+stale_memory_detector
+tool_opportunity_detector
+total_project_truth_scan
+witness
+workbench_vault_runtime
+
+# Nota: algunos de estos existen SOLO en flat_brain/ (no hay copia canónica).
+# prompt_preprocessor.py también existe en src/brain/application/ — NO tocar esa copia.
