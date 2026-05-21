@@ -153,7 +153,14 @@ This documents the history of closed development packs.
 
 ---
 
-## 20. INMEDIATO: Branch cleanup + merge
+## 21. PACK_3.2: CODE Embedding Provider
+* **Status**: `COMPLETED`
+* **Commit**: `pending`
+* **Metrics After**: FastEmbedCodeProvider uses shared model cache with TEXT_FAST (zero additional memory). CODE vectors stored under `CODE_LOCAL_768` space, isolated from `TEXT_FAST_BGE_SMALL_384`. ASTBlastRadiusIndexer generates CODE embeddings for parsed symbols.
+* **Tests**: 6 new tests PASS. Embedding mesh: 11/11 PASS. Import chain: PASS.
+* **Lessons**: Same model, separate vector space achieves semantic isolation without extra compute. Module-level `_MODEL_CACHE` prevents double model loading.
+
+## 22. INMEDIATO: Branch cleanup + merge
 * **Status**: `COMPLETED`
 * **Commit**: `fe91a2f`
 * **Metrics After**: Fast-forward merge to main, 6 stale branches removed, backup branches preserved.

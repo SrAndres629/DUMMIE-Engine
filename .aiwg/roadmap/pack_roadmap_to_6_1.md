@@ -41,8 +41,9 @@ This ledger documents the state of all execution packs.
 * **Commit**: `0c41fd25d6e38a244e716f653c8733d2fec1a657`
 
 ### 10. CODE Embedding Provider (PACK_3.2)
-* **Status**: `READY`
-* **Next Active Pack**: Target for next execution.
+* **Status**: `COMPLETED`
+* **Commit**: `pending`
+* **Metrics**: FastEmbedCodeProvider with shared model cache, CODE_LOCAL_768 vector space, AST symbol embedding.
 
 ### 11. flat_brain Orphan Elimination (PACK_5.1)
 * **Status**: `COMPLETED`

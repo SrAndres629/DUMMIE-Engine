@@ -4,6 +4,7 @@ import logging
 from .contracts import EmbeddingCapability
 from .providers import (
     DeterministicFallbackProvider,
+    FastEmbedCodeProvider,
     FastEmbedTextProvider,
     IEmbeddingProvider,
     LegacyEmbeddingProviderAdapter,
@@ -25,18 +26,17 @@ class EmbeddingRegistry:
         self._initialize_providers()
 
     def _initialize_providers(self):
-        self._providers[EmbeddingCapability.FALLBACK] = DeterministicFallbackProvider(dimensions=384)
+        self._providers[EmbeddingCapability.FALLBACK] = DeterministicFallbackProvider(
+            dimensions=384
+        )
 
         # Placeholder capabilities use deterministic fallback with honest degraded status.
-        self._providers[EmbeddingCapability.TEXT_FIDELITY] = PlaceholderCapabilityProvider(
-            capability=EmbeddingCapability.TEXT_FIDELITY,
-            dimensions=384,
-            model_tag="placeholder-bge-m3",
-        )
-        self._providers[EmbeddingCapability.CODE] = PlaceholderCapabilityProvider(
-            capability=EmbeddingCapability.CODE,
-            dimensions=384,
-            model_tag="placeholder-code-embedding",
+        self._providers[EmbeddingCapability.TEXT_FIDELITY] = (
+            PlaceholderCapabilityProvider(
+                capability=EmbeddingCapability.TEXT_FIDELITY,
+                dimensions=384,
+                model_tag="placeholder-bge-m3",
+            )
         )
         self._providers[EmbeddingCapability.MULTIMODAL] = PlaceholderCapabilityProvider(
             capability=EmbeddingCapability.MULTIMODAL,
@@ -50,16 +50,30 @@ class EmbeddingRegistry:
         )
 
         # Prefer compatibility adapter first. If it fails at runtime it degrades deterministically.
-        self._providers[EmbeddingCapability.TEXT_FAST] = LegacyEmbeddingProviderAdapter()
+        self._providers[EmbeddingCapability.TEXT_FAST] = (
+            LegacyEmbeddingProviderAdapter()
+        )
 
         # Optionally prefer native fastembed wrapper if library is available.
         try:
             import fastembed  # noqa: F401
 
             self._providers[EmbeddingCapability.TEXT_FAST] = FastEmbedTextProvider()
-            logger.info("EmbeddingRegistry: TEXT_FAST uses FastEmbedTextProvider.")
+            self._providers[EmbeddingCapability.CODE] = FastEmbedCodeProvider()
+            logger.info(
+                "EmbeddingRegistry: TEXT_FAST + CODE using FastEmbed (shared model cache)."
+            )
         except Exception:
-            logger.info("EmbeddingRegistry: fastembed unavailable, TEXT_FAST uses legacy adapter/fallback.")
+            self._providers[EmbeddingCapability.CODE] = PlaceholderCapabilityProvider(
+                capability=EmbeddingCapability.CODE,
+                dimensions=384,
+                model_tag="placeholder-code-embedding",
+            )
+            logger.info(
+                "EmbeddingRegistry: fastembed unavailable, CODE uses placeholder fallback."
+            )
 
     def get_provider(self, capability: EmbeddingCapability) -> IEmbeddingProvider:
-        return self._providers.get(capability, self._providers[EmbeddingCapability.FALLBACK])
+        return self._providers.get(
+            capability, self._providers[EmbeddingCapability.FALLBACK]
+        )

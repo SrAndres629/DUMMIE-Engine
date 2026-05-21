@@ -6,13 +6,14 @@ from .contracts import (
     EmbeddingRequest,
     EmbeddingResponse,
     RerankRequest,
-    RerankResponse
+    RerankResponse,
 )
 from .registry import EmbeddingRegistry
 from .router import EmbeddingRouter
 from .providers import (
     IEmbeddingProvider,
     DeterministicFallbackProvider,
+    FastEmbedCodeProvider,
     FastEmbedTextProvider,
     LegacyEmbeddingProviderAdapter,
     PlaceholderCapabilityProvider,
@@ -33,10 +34,11 @@ __all__ = [
     "EmbeddingRouter",
     "IEmbeddingProvider",
     "DeterministicFallbackProvider",
+    "FastEmbedCodeProvider",
     "FastEmbedTextProvider",
     "LegacyEmbeddingProviderAdapter",
     "PlaceholderCapabilityProvider",
     "HybridReranker",
     "RepoIndexer",
-    "HardeningMatrix"
+    "HardeningMatrix",
 ]
