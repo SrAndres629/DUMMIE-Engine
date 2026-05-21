@@ -82,7 +82,7 @@ def build_registry(repo_root: Path) -> dict[str, Any]:
     entries: list[dict[str, Any]] = []
     errors: list[str] = []
 
-    for spec_path in sorted(specs_dir.glob("*.md")):
+    for spec_path in sorted(specs_dir.rglob("*.md")):
         text = spec_path.read_text(encoding="utf-8")
         try:
             meta, body = _parse_frontmatter(text, spec_path)
@@ -136,14 +136,20 @@ def write_outputs(repo_root: Path, payload: dict[str, Any]) -> tuple[Path, Path]
     report_path.parent.mkdir(parents=True, exist_ok=True)
 
     registry_path.write_text(yaml.safe_dump(payload, sort_keys=False), encoding="utf-8")
-    report_path.write_text(json.dumps(payload, indent=2, ensure_ascii=True) + "\n", encoding="utf-8")
+    report_path.write_text(
+        json.dumps(payload, indent=2, ensure_ascii=True) + "\n", encoding="utf-8"
+    )
     return registry_path, report_path
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(description="Sync canonical spec binding registry.")
+    parser = argparse.ArgumentParser(
+        description="Sync canonical spec binding registry."
+    )
     parser.add_argument("--root", default=".", help="Repository root path.")
-    parser.add_argument("--strict", action="store_true", help="Fail if any binding errors are found.")
+    parser.add_argument(
+        "--strict", action="store_true", help="Fail if any binding errors are found."
+    )
     args = parser.parse_args(argv)
 
     root = Path(args.root).resolve()
@@ -152,7 +158,9 @@ def main(argv: list[str] | None = None) -> int:
 
     print(f"spec_registry_path={registry_path}")
     print(f"spec_registry_report={report_path}")
-    print(f"spec_count={payload.get('spec_count', 0)} error_count={payload.get('error_count', 0)}")
+    print(
+        f"spec_count={payload.get('spec_count', 0)} error_count={payload.get('error_count', 0)}"
+    )
 
     if args.strict and payload.get("error_count", 0) > 0:
         return 2
