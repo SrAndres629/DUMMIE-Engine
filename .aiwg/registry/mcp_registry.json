@@ -465,6 +465,90 @@
       "kind": "spec",
       "status": "active",
       "spec": 170
+    },
+    {
+      "path": "layers/l1_nervous/models/model_registry.py",
+      "kind": "model_registry",
+      "status": "active",
+      "spec": 171
+    },
+    {
+      "path": "layers/l1_nervous/models/model_lifecycle.py",
+      "kind": "model_lifecycle",
+      "status": "active",
+      "spec": 171
+    },
+    {
+      "path": "layers/l1_nervous/models/resource_monitor.py",
+      "kind": "resource_monitor",
+      "status": "active",
+      "spec": 171
+    },
+    {
+      "path": "layers/l1_nervous/models/session_context.py",
+      "kind": "session_context",
+      "status": "active",
+      "spec": 171
+    },
+    {
+      "path": "layers/l1_nervous/models/adapters/base.py",
+      "kind": "base_model_adapter",
+      "status": "active",
+      "spec": 171
+    },
+    {
+      "path": "layers/l1_nervous/models/adapters/ollama_adapter.py",
+      "kind": "ollama_adapter",
+      "status": "active",
+      "spec": 171
+    },
+    {
+      "path": "layers/l1_nervous/models/adapters/fastembed_adapter.py",
+      "kind": "fastembed_adapter",
+      "status": "active",
+      "spec": 171
+    },
+    {
+      "path": "layers/l1_nervous/models/adapters/cross_encoder_adapter.py",
+      "kind": "cross_encoder_adapter",
+      "status": "active",
+      "spec": 171
+    },
+    {
+      "path": "layers/l1_nervous/routing/pipeline.py",
+      "kind": "routing_pipeline",
+      "status": "active",
+      "spec": 171
+    },
+    {
+      "path": "layers/l1_nervous/routing/strategies/exact_match.py",
+      "kind": "routing_strategy",
+      "status": "active",
+      "spec": 171
+    },
+    {
+      "path": "layers/l1_nervous/routing/strategies/embedding_match.py",
+      "kind": "routing_strategy",
+      "status": "active",
+      "spec": 171
+    },
+    {
+      "path": "layers/l1_nervous/routing/strategies/cross_encoder_rerank.py",
+      "kind": "routing_strategy",
+      "status": "active",
+      "spec": 171
+    },
+    {
+      "path": "layers/l1_nervous/routing/strategies/llm_reasoning.py",
+      "kind": "routing_strategy",
+      "status": "active",
+      "spec": 171
+    },
+    {
+      "path": "doc/specs/2026-05-22-model-adapters-patterns-design.md",
+      "kind": "spec",
+      "status": "active",
+      "spec": 171
     }
   ],
   "summary": {
@@ -489,7 +573,7 @@
       "Log files (mcp.log, mcp_server.log) at root \u2014 should be gitignored and directed to .aiwg/logs/"
     ]
   },
-  "version": "1.3.0",
+  "version": "1.4.0",
   "generated_at": "2026-05-22T00:00:00Z",
-  "total_items": 51
+  "total_items": 65
 }
