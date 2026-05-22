@@ -2,6 +2,10 @@
 
 # Logs & Temporales
 *.log
+# Secrets locales
+.env
+# Modelos descargados
+models/
 *.old
 tmp/
 # Memoria local dinámica AIWG
@@ -84,3 +88,5 @@ scratch/venv/
 *.dylib
 .gemini.bak/
 .antigravitycli/
+__pycache__/
+*.pyc
