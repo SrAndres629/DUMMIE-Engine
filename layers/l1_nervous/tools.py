@@ -347,9 +347,56 @@ def register_tools(mcp: FastMCP, get_orchestrator, get_proxy, root_dir: str):
 
         router = MetaRouter()
         if query:
-            result = router.route(query)
+            result = await router.route(query)
             return json.dumps(result, indent=2, ensure_ascii=False)
         caps = router.list_all_capabilities()
         return json.dumps(caps, indent=2, ensure_ascii=False)
+
+    @mcp.tool()
+    async def metagateway_cot_reason(query: str) -> str:
+        """
+        Chain of Thought reasoning con 6D context enrichment.
+        Procesa una query con todas las estrategias (exact, embedding, cross-encoder, CoT, LLM)
+        y devuelve el razonamiento paso a paso, gateway destino, confianza y latencia.
+        """
+        from routing import RoutingPipeline
+        from routing.strategies.exact_match import ExactMatchStrategy
+        from routing.strategies.embedding_match import EmbeddingMatchStrategy
+        from routing.strategies.cross_encoder_rerank import CrossEncoderRerankStrategy
+        from routing.strategies.cot_reasoning import CoTReasoningStrategy
+        from routing.strategies.llm_reasoning import LLMReasoningStrategy
+        from models.model_registry import ModelRegistry
+
+        import time
+        registry = ModelRegistry()
+        pipeline = RoutingPipeline([
+            ExactMatchStrategy(),
+            EmbeddingMatchStrategy(registry=registry),
+            CrossEncoderRerankStrategy(registry=registry),
+            CoTReasoningStrategy(registry=registry),
+            LLMReasoningStrategy(registry=registry),
+        ], threshold=0.5)
+
+        t0 = time.time()
+        result = await pipeline.route(query)
+        elapsed_ms = round((time.time() - t0) * 1000, 1)
+
+        output = {
+            "query": query,
+            "match": result.match,
+            "gateway": result.gateway,
+            "domain": result.domain,
+            "action": result.action,
+            "confidence": round(result.confidence, 4),
+            "strategy": result.strategy,
+            "latency_ms": elapsed_ms,
+        }
+        if hasattr(result, 'reasoning') and result.reasoning:
+            output["reasoning"] = result.reasoning
+        if hasattr(result, 'needs_clarification') and result.needs_clarification:
+            output["needs_clarification"] = True
+            output["clarifying_question"] = getattr(result, 'clarifying_question', "")
+
+        return json.dumps(output, indent=2, ensure_ascii=False)
 
     logger.debug("Registro de Meta-Gateway (5 Herramientas Universales) completado.")
