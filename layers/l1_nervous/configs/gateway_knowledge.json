@@ -1,0 +1,15 @@
+{
+  "gateway_name": "knowledge",
+  "port": 8084,
+  "capability_class": "structured_knowledge",
+  "mcp_servers": {
+    "sqlite": {
+      "command": "uvx",
+      "args": ["mcp-server-sqlite", "--db-path", "${DUMMIE_AIWG}/memory/dummie_sqlite.db"]
+    },
+    "sequentialthinking": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"]
+    }
+  }
+}

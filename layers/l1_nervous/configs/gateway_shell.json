@@ -1,0 +1,19 @@
+{
+  "gateway_name": "shell",
+  "port": 8085,
+  "capability_class": "shell_automation",
+  "mcp_servers": {
+    "shell": {
+      "command": "npx",
+      "args": ["-y", "mcp-shell"]
+    },
+    "mcp-bash": {
+      "command": "uvx",
+      "args": ["--from", "git+https://github.com/patrickomatik/mcp-bash.git", "mcp-bash"]
+    },
+    "browser-use": {
+      "command": "uvx",
+      "args": ["--from", "browser-use[cli]", "browser-use", "--mcp"]
+    }
+  }
+}

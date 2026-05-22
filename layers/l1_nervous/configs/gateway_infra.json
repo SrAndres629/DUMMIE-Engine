@@ -1,0 +1,16 @@
+{
+  "gateway_name": "infra",
+  "port": 8083,
+  "capability_class": "infrastructure",
+  "mcp_servers": {
+    "docker": {
+      "command": "docker-mcp",
+      "args": []
+    },
+    "vercel": {
+      "command": "node",
+      "args": ["${BIBLIOTECA_MCP}/Vercel/dist/index.js"],
+      "env": {"VERCEL_TOKEN": "${VERCEL_TOKEN}"}
+    }
+  }
+}
