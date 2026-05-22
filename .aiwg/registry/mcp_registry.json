@@ -549,6 +549,12 @@
       "kind": "spec",
       "status": "active",
       "spec": 171
+    },
+    {
+      "path": "layers/l1_nervous/routing/strategies/cot_reasoning.py",
+      "kind": "routing_strategy_cot",
+      "status": "active",
+      "spec": 171
     }
   ],
   "summary": {
@@ -573,7 +579,7 @@
       "Log files (mcp.log, mcp_server.log) at root \u2014 should be gitignored and directed to .aiwg/logs/"
     ]
   },
-  "version": "1.4.0",
+  "version": "1.5.0",
   "generated_at": "2026-05-22T00:00:00Z",
-  "total_items": 65
+  "total_items": 66
 }
