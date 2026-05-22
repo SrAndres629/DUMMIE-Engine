@@ -1,0 +1,54 @@
+{
+  "version": "1.0.0",
+  "gateways": {
+    "media": {
+      "port": 8081,
+      "domains": ["media_generation", "image", "video", "audio"],
+      "servers": {
+        "muapi": {
+          "tools": ["generate_image", "generate_video", "generate_audio", "upload_file", "list_models"]
+        },
+        "mcp-comfyui": {
+          "tools": ["inspect_capabilities", "generate_image_from_intent", "get_execution_history", "get_optimizations"]
+        },
+        "cloudflare": {
+          "tools": ["run_ai_model"]
+        }
+      }
+    },
+    "code": {
+      "port": 8082,
+      "domains": ["vcs", "workspace", "code"],
+      "servers": {
+        "github": {"tools": ["*"]},
+        "git": {"tools": ["*"]},
+        "filesystem": {"tools": ["*"]}
+      }
+    },
+    "infra": {
+      "port": 8083,
+      "domains": ["infrastructure", "deployment", "cloud"],
+      "servers": {
+        "docker": {"tools": ["manage_containers", "manage_images", "manage_infrastructure", "audit_system", "execute_operations"]},
+        "vercel": {"tools": ["vercel_omni_manager"]}
+      }
+    },
+    "knowledge": {
+      "port": 8084,
+      "domains": ["knowledge", "memory", "reasoning"],
+      "servers": {
+        "sqlite": {"tools": ["*"]},
+        "sequentialthinking": {"tools": ["*"]}
+      }
+    },
+    "shell": {
+      "port": 8085,
+      "domains": ["shell", "automation", "browser"],
+      "servers": {
+        "shell": {"tools": ["*"]},
+        "mcp-bash": {"tools": ["*"]},
+        "browser-use": {"tools": ["*"]}
+      }
+    }
+  }
+}
