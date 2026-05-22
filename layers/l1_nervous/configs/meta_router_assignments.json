@@ -18,7 +18,7 @@
     },
     "code": {
       "port": 8082,
-      "domains": ["vcs", "workspace", "code"],
+      "domains": ["vcs", "workspace_io", "code"],
       "servers": {
         "github": {"tools": ["*"]},
         "git": {"tools": ["*"]},

@@ -1,9 +1,9 @@
 {
   "_meta": {
     "registry_type": "mcp",
-    "version": "1.1.0",
-    "generated_at": "2026-05-21T00:00:00Z",
-    "generated_by": "opencode_production_hardening",
+    "version": "1.8.2",
+    "generated_at": "2026-05-22T00:00:00Z",
+    "generated_by": "update_registry.py",
     "purpose": "Canonical map of all MCP-related files: servers, proxies, drivers, tool skills, configs, specs, and quarantine. No files were moved or deleted.",
     "schema_version": "1.0.0"
   },
@@ -305,7 +305,7 @@
       "canonical_target": "layers/l1_nervous/capability_index.py",
       "owner_layer": "l1_nervous",
       "risk": "medium",
-      "reason": "CapabilityIndex: canonical inventory of all MCP tools and skills. NO embeddings \u2014 matching ontologico exacto. Skills indexadas pero NO cargadas hasta invocacion (lazy loading via gateway).",
+      "reason": "CapabilityIndex: canonical inventory of all MCP tools and skills. NO embeddings — matching ontologico exacto. Skills indexadas pero NO cargadas hasta invocacion (lazy loading via gateway).",
       "recommended_action": "keep"
     },
     {
@@ -555,31 +555,834 @@
       "kind": "routing_strategy_cot",
       "status": "active",
       "spec": 171
+    },
+    {
+      "path": "layers/l1_nervous/tools.py",
+      "kind": "mcp_tool_registration",
+      "status": "active",
+      "owner_layer": "l1_nervous",
+      "risk": "high",
+      "reason": "Master tool registration (276 lines). Registers 8 tool domains + 3 Meta-Gateway tools. Central dispatch.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "layers/l1_nervous/mcp_registry.py",
+      "kind": "mcp_registry_runtime",
+      "status": "active",
+      "owner_layer": "l1_nervous",
+      "risk": "medium",
+      "reason": "Runtime MCP registry for dynamic capability discovery.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "layers/l1_nervous/resources.py",
+      "kind": "mcp_resource_manager",
+      "status": "active",
+      "owner_layer": "l1_nervous",
+      "risk": "low",
+      "reason": "System resources abstraction for MCP resource management.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "layers/l1_nervous/utils.py",
+      "kind": "mcp_utility",
+      "status": "active",
+      "owner_layer": "l1_nervous",
+      "risk": "low",
+      "reason": "Shared utilities across l1_nervous MCP layer.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "layers/l1_nervous/tools_impl/__init__.py",
+      "kind": "mcp_tool_impl_pkg",
+      "status": "active",
+      "owner_layer": "l1_nervous",
+      "risk": "low",
+      "reason": "Package init for tools_impl directory.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "layers/l1_nervous/tools_impl/core.py",
+      "kind": "mcp_tool_impl",
+      "status": "active",
+      "owner_layer": "l1_nervous",
+      "risk": "medium",
+      "reason": "Core tool implementations (ping, config, health).",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "layers/l1_nervous/tools_impl/gateway.py",
+      "kind": "mcp_tool_impl",
+      "status": "active",
+      "owner_layer": "l1_nervous",
+      "risk": "high",
+      "reason": "Gateway tool implementations — dummie_discover, dummie_execute, dummie_analyze.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "layers/l1_nervous/tools_impl/knowledge.py",
+      "kind": "mcp_tool_impl",
+      "status": "active",
+      "owner_layer": "l1_nervous",
+      "risk": "medium",
+      "reason": "Knowledge tool implementations (memory, graph, vault queries).",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "layers/l1_nervous/tools_impl/local_reasoning.py",
+      "kind": "mcp_tool_impl",
+      "status": "active",
+      "owner_layer": "l1_nervous",
+      "risk": "medium",
+      "reason": "Local reasoning tool implementations (LLM bridge, chain-of-thought).",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "layers/l1_nervous/tools_impl/metacognition.py",
+      "kind": "mcp_tool_impl",
+      "status": "active",
+      "owner_layer": "l1_nervous",
+      "risk": "medium",
+      "reason": "Metacognitive tool implementations (self-evaluation, reflection).",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "layers/l1_nervous/tools_impl/nervous.py",
+      "kind": "mcp_tool_impl",
+      "status": "active",
+      "owner_layer": "l1_nervous",
+      "risk": "medium",
+      "reason": "Nervous system tool implementations (memory IPC, state).",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "layers/l1_nervous/tools_impl/patch_transactions.py",
+      "kind": "mcp_tool_impl",
+      "status": "active",
+      "owner_layer": "l1_nervous",
+      "risk": "medium",
+      "reason": "Patch transaction tool implementations for atomic code changes.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "layers/l1_nervous/tools_impl/sdd.py",
+      "kind": "mcp_tool_impl",
+      "status": "active",
+      "owner_layer": "l1_nervous",
+      "risk": "medium",
+      "reason": "SDD (Sovereign Design Document) tool implementations.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "layers/l1_nervous/tools_impl/swarm.py",
+      "kind": "mcp_tool_impl",
+      "status": "active",
+      "owner_layer": "l1_nervous",
+      "risk": "medium",
+      "reason": "Swarm tool implementations (multi-agent coordination).",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "layers/l1_nervous/context/__init__.py",
+      "kind": "context_engine_pkg",
+      "status": "active",
+      "owner_layer": "l1_nervous",
+      "risk": "low",
+      "reason": "Package init for 6D Context Engine.",
+      "recommended_action": "keep",
+      "spec": 170
+    },
+    {
+      "path": "layers/l1_nervous/context/context_engine.py",
+      "kind": "context_engine",
+      "status": "active",
+      "owner_layer": "l1_nervous",
+      "risk": "medium",
+      "reason": "ContextEngine: orchestrates 6 dimensions into ContextProfile for enriched routing.",
+      "recommended_action": "keep",
+      "spec": 170
+    },
+    {
+      "path": "layers/l1_nervous/context/cot_enricher.py",
+      "kind": "context_cot",
+      "status": "active",
+      "owner_layer": "l1_nervous",
+      "risk": "low",
+      "reason": "CoTEnricher: generates chain-of-thought prompts with 6D context injection.",
+      "recommended_action": "keep",
+      "spec": 170
+    },
+    {
+      "path": "layers/l1_nervous/context/obsidian_bridge.py",
+      "kind": "context_obsidian",
+      "status": "active",
+      "owner_layer": "l1_nervous",
+      "risk": "low",
+      "reason": "ObsidianBridge: searches Obsidian vault for episodic context.",
+      "recommended_action": "keep",
+      "spec": 170
+    },
+    {
+      "path": "layers/l1_nervous/context/socratic_bridge.py",
+      "kind": "context_socratic",
+      "status": "active",
+      "owner_layer": "l1_nervous",
+      "risk": "low",
+      "reason": "SocraticBridge: generates clarifying questions for ambiguous queries.",
+      "recommended_action": "keep",
+      "spec": 170
+    },
+    {
+      "path": "layers/l1_nervous/context/dimensions/__init__.py",
+      "kind": "context_dimension_pkg",
+      "status": "active",
+      "owner_layer": "l1_nervous",
+      "risk": "low",
+      "reason": "Package init for 6D context dimension modules.",
+      "recommended_action": "keep",
+      "spec": 170
+    },
+    {
+      "path": "layers/l1_nervous/context/dimensions/temporal.py",
+      "kind": "context_dimension",
+      "status": "active",
+      "owner_layer": "l1_nervous",
+      "risk": "low",
+      "reason": "Temporal dimension: timestamp, session, recency analysis.",
+      "recommended_action": "keep",
+      "spec": 170
+    },
+    {
+      "path": "layers/l1_nervous/context/dimensions/spatial.py",
+      "kind": "context_dimension",
+      "status": "active",
+      "owner_layer": "l1_nervous",
+      "risk": "low",
+      "reason": "Spatial dimension: workspace path, project, filesystem location.",
+      "recommended_action": "keep",
+      "spec": 170
+    },
+    {
+      "path": "layers/l1_nervous/context/dimensions/semantic.py",
+      "kind": "context_dimension",
+      "status": "active",
+      "owner_layer": "l1_nervous",
+      "risk": "low",
+      "reason": "Semantic dimension: embedding-based query similarity.",
+      "recommended_action": "keep",
+      "spec": 170
+    },
+    {
+      "path": "layers/l1_nervous/context/dimensions/relational.py",
+      "kind": "context_dimension",
+      "status": "active",
+      "owner_layer": "l1_nervous",
+      "risk": "low",
+      "reason": "Relational dimension: ontology classes (DEBT, MEMORY, SAFETY, etc.).",
+      "recommended_action": "keep",
+      "spec": 170
+    },
+    {
+      "path": "layers/l1_nervous/context/dimensions/episodic.py",
+      "kind": "context_dimension",
+      "status": "active",
+      "owner_layer": "l1_nervous",
+      "risk": "low",
+      "reason": "Episodic dimension: recent decisions from router log + memory.",
+      "recommended_action": "keep",
+      "spec": 170
+    },
+    {
+      "path": "layers/l1_nervous/context/dimensions/instrumental.py",
+      "kind": "context_dimension",
+      "status": "active",
+      "owner_layer": "l1_nervous",
+      "risk": "low",
+      "reason": "Instrumental dimension: available MCPs per sub-gateway.",
+      "recommended_action": "keep",
+      "spec": 170
+    },
+    {
+      "path": "layers/l1_nervous/configs/gateway_media.json",
+      "kind": "ssot_gateway_config",
+      "status": "active",
+      "owner_layer": "l1_nervous",
+      "risk": "medium",
+      "reason": "Media sub-gateway SSOT config. Port 8081. muapi, mcp-comfyui servers.",
+      "recommended_action": "keep",
+      "spec": 170
+    },
+    {
+      "path": "layers/l1_nervous/configs/gateway_code.json",
+      "kind": "ssot_gateway_config",
+      "status": "active",
+      "owner_layer": "l1_nervous",
+      "risk": "medium",
+      "reason": "Code sub-gateway SSOT config. Port 8082. github, git, filesystem servers.",
+      "recommended_action": "keep",
+      "spec": 170
+    },
+    {
+      "path": "layers/l1_nervous/configs/gateway_infra.json",
+      "kind": "ssot_gateway_config",
+      "status": "active",
+      "owner_layer": "l1_nervous",
+      "risk": "medium",
+      "reason": "Infrastructure sub-gateway SSOT config. Port 8083. docker, cloudflare servers.",
+      "recommended_action": "keep",
+      "spec": 170
+    },
+    {
+      "path": "layers/l1_nervous/configs/gateway_knowledge.json",
+      "kind": "ssot_gateway_config",
+      "status": "active",
+      "owner_layer": "l1_nervous",
+      "risk": "medium",
+      "reason": "Knowledge sub-gateway SSOT config. Port 8084. sqlite, sequentialthinking servers.",
+      "recommended_action": "keep",
+      "spec": 170
+    },
+    {
+      "path": "layers/l1_nervous/configs/gateway_shell.json",
+      "kind": "ssot_gateway_config",
+      "status": "active",
+      "owner_layer": "l1_nervous",
+      "risk": "medium",
+      "reason": "Shell sub-gateway SSOT config. Port 8085. shell, mcp-bash, browser-use servers.",
+      "recommended_action": "keep",
+      "spec": 170
+    },
+    {
+      "path": "layers/l1_nervous/embeddings/__init__.py",
+      "kind": "embedding_pkg",
+      "status": "active",
+      "owner_layer": "l1_nervous",
+      "risk": "low",
+      "reason": "Package init for embeddings module.",
+      "recommended_action": "keep",
+      "spec": 170
+    },
+    {
+      "path": "layers/l1_nervous/gateway/__init__.py",
+      "kind": "gateway_pkg",
+      "status": "active",
+      "owner_layer": "l1_nervous",
+      "risk": "low",
+      "reason": "Package init for gateway module.",
+      "recommended_action": "keep",
+      "spec": 170
+    },
+    {
+      "path": "layers/l1_nervous/models/__init__.py",
+      "kind": "model_pkg",
+      "status": "active",
+      "owner_layer": "l1_nervous",
+      "risk": "low",
+      "reason": "Package init for models module.",
+      "recommended_action": "keep",
+      "spec": 171
+    },
+    {
+      "path": "layers/l1_nervous/models/adapters/__init__.py",
+      "kind": "adapter_pkg",
+      "status": "active",
+      "owner_layer": "l1_nervous",
+      "risk": "low",
+      "reason": "Package init for model adapters module.",
+      "recommended_action": "keep",
+      "spec": 171
+    },
+    {
+      "path": "layers/l1_nervous/routing/__init__.py",
+      "kind": "routing_pkg",
+      "status": "active",
+      "owner_layer": "l1_nervous",
+      "risk": "low",
+      "reason": "Package init for routing pipeline module.",
+      "recommended_action": "keep",
+      "spec": 171
+    },
+    {
+      "path": "scripts/optimize_memory.sh",
+      "kind": "memory_optimization_script",
+      "status": "active",
+      "owner_layer": "scripts",
+      "risk": "low",
+      "reason": "Memory optimization: zram zstd, swap hierarchy (zram prio 100 > swapfile 1), CUDA unified memory.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "scripts/verify_metagateway.py",
+      "kind": "verification_script",
+      "status": "active",
+      "owner_layer": "scripts",
+      "risk": "low",
+      "reason": "MetaGateway verification: 12 routing tests (exact match + embedding fallback).",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "scripts/verify_pipeline.py",
+      "kind": "verification_script",
+      "status": "active",
+      "owner_layer": "scripts",
+      "risk": "low",
+      "reason": "Routing pipeline verification: 5 strategies + Gemma 3 local LLM.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "scripts/bootstrap.sh",
+      "kind": "bootstrap_script",
+      "status": "active",
+      "owner_layer": "scripts",
+      "risk": "low",
+      "reason": "System bootstrap: installs deps, initializes Kuzu DB, configures permissions.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "scripts/dummie_orchestrator.py",
+      "kind": "orchestrator",
+      "status": "active",
+      "owner_layer": "scripts",
+      "risk": "high",
+      "reason": "Production orchestrator: manages MCP gateway lifecycle, daemon process.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "scripts/dummie-engine.service",
+      "kind": "systemd_service",
+      "status": "active",
+      "owner_layer": "scripts",
+      "risk": "medium",
+      "reason": "Systemd service unit for DUMMIE Engine daemonization.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "layers/l2_brain/mcp_server.py",
+      "kind": "mcp_server_l2",
+      "status": "active",
+      "owner_layer": "l2_brain",
+      "risk": "high",
+      "reason": "L2 Brain MCP server: serves dummie-brain tools with Kuzu DB, semantic memory, ontology.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "layers/l2_brain/metagateway_adapter.py",
+      "kind": "metagateway_adapter",
+      "status": "active",
+      "owner_layer": "l2_brain",
+      "risk": "medium",
+      "reason": "Adapts MetaGateway routing decisions for L2 brain consumption.",
+      "recommended_action": "keep",
+      "spec": 170
+    },
+    {
+      "path": "layers/l2_brain/metagateway_policy.py",
+      "kind": "metagateway_policy",
+      "status": "active",
+      "owner_layer": "l2_brain",
+      "risk": "medium",
+      "reason": "Routing policies: local-first, cloud-first, cost-aware delegation rules.",
+      "recommended_action": "keep",
+      "spec": 170
+    },
+    {
+      "path": "layers/l2_brain/metagateway_runtime_meter.py",
+      "kind": "metagateway_meter",
+      "status": "active",
+      "owner_layer": "l2_brain",
+      "risk": "low",
+      "reason": "Runtime metering: latency, cost, success rate per gateway route.",
+      "recommended_action": "keep",
+      "spec": 170
+    },
+    {
+      "path": "layers/l2_brain/semantic_ontology_mapper.py",
+      "kind": "semantic_ontology_mapper",
+      "status": "active",
+      "owner_layer": "l2_brain",
+      "risk": "medium",
+      "reason": "Intent-to-ontology mapper: maps user intent to DEBT/MEMORY/SAFETY ontology classes.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "layers/l5_muscle/__init__.py",
+      "kind": "muscle_pkg",
+      "status": "active",
+      "owner_layer": "l5_muscle",
+      "risk": "low",
+      "reason": "Package init for L5 muscle layer.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "layers/l5_muscle/compactor.py",
+      "kind": "muscle_compactor",
+      "status": "active",
+      "owner_layer": "l5_muscle",
+      "risk": "low",
+      "reason": "Context compaction for efficient muscle execution.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "layers/l5_muscle/manager.py",
+      "kind": "muscle_manager",
+      "status": "active",
+      "owner_layer": "l5_muscle",
+      "risk": "low",
+      "reason": "Muscle layer lifecycle manager: process pool, resource limits.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "layers/l5_muscle/workstation_operator.py",
+      "kind": "muscle_operator",
+      "status": "active",
+      "owner_layer": "l5_muscle",
+      "risk": "low",
+      "reason": "Workstation operator: safely executes commands in trusted workstation mode.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "layers/l1_nervous/routing/delegation.py",
+      "kind": "delegation_engine",
+      "status": "active",
+      "owner_layer": "l1_nervous",
+      "risk": "medium",
+      "reason": "DelegationEngine: local vs cloud routing con Strategy pattern. Evalua VRAM, tipo de servidor, y preferencia de ejecucion.",
+      "recommended_action": "keep",
+      "spec": 170
+    },
+    {
+      "path": "scripts/start_metagateway.sh",
+      "kind": "gateway_launcher",
+      "status": "active",
+      "owner_layer": "scripts",
+      "risk": "medium",
+      "reason": "MetaGateway launcher: starts 5 sub-gateways (media:8081, code:8082, infra:8083, knowledge:8084, shell:8085) with readiness verification.",
+      "recommended_action": "keep",
+      "spec": 170
+    },
+    {
+      "path": "layers/l1_nervous/dummie_sdk/config.py",
+      "kind": "sdk_config",
+      "status": "active",
+      "owner_layer": "l1_nervous",
+      "risk": "medium",
+      "reason": "SDKConfig SSOT: load_config() from configs/models_config.json. Singleton get_config().",
+      "recommended_action": "keep",
+      "spec": 170
+    },
+    {
+      "path": "layers/l1_nervous/dummie_sdk/models/__init__.py",
+      "kind": "sdk_models_pkg",
+      "status": "active",
+      "owner_layer": "l1_nervous",
+      "risk": "medium",
+      "reason": "DUMMIE Engine SDK canonical library.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "layers/l1_nervous/dummie_sdk/models/model_registry.py",
+      "kind": "sdk_model_registry",
+      "status": "active",
+      "owner_layer": "l1_nervous",
+      "risk": "medium",
+      "reason": "Config-driven ModelRegistry con importlib adapter resolution.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "layers/l1_nervous/dummie_sdk/models/model_lifecycle.py",
+      "kind": "sdk_model_lifecycle",
+      "status": "active",
+      "owner_layer": "l1_nervous",
+      "risk": "medium",
+      "reason": "TTL unload, priority queue, VRAM-aware loading.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "layers/l1_nervous/dummie_sdk/models/resource_monitor.py",
+      "kind": "sdk_resource_monitor",
+      "status": "active",
+      "owner_layer": "l1_nervous",
+      "risk": "medium",
+      "reason": "nvidia-smi VRAM + zram monitoring, ModelBudget.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "layers/l1_nervous/dummie_sdk/models/adapters/__init__.py",
+      "kind": "sdk_adapters_pkg",
+      "status": "active",
+      "owner_layer": "l1_nervous",
+      "risk": "medium",
+      "reason": "DUMMIE Engine SDK canonical library.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "layers/l1_nervous/dummie_sdk/models/adapters/base.py",
+      "kind": "sdk_adapter_base",
+      "status": "active",
+      "owner_layer": "l1_nervous",
+      "risk": "medium",
+      "reason": "BaseModelAdapter abstracto + ModelType + OntologyClass enums.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "layers/l1_nervous/dummie_sdk/models/adapters/ollama_adapter.py",
+      "kind": "sdk_ollama_adapter",
+      "status": "active",
+      "owner_layer": "l1_nervous",
+      "risk": "medium",
+      "reason": "OllamaAsyncClient, generate_json, check_health.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "layers/l1_nervous/dummie_sdk/models/adapters/fastembed_adapter.py",
+      "kind": "sdk_fastembed_adapter",
+      "status": "active",
+      "owner_layer": "l1_nervous",
+      "risk": "medium",
+      "reason": "TextEmbedding singleton, dims from config.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "layers/l1_nervous/dummie_sdk/models/adapters/cross_encoder_adapter.py",
+      "kind": "sdk_cross_encoder",
+      "status": "active",
+      "owner_layer": "l1_nervous",
+      "risk": "medium",
+      "reason": "CrossEncoder rerank, SentenceTransformer.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "layers/l1_nervous/dummie_sdk/routing/__init__.py",
+      "kind": "sdk_routing_pkg",
+      "status": "active",
+      "owner_layer": "l1_nervous",
+      "risk": "medium",
+      "reason": "DUMMIE Engine SDK canonical library.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "layers/l1_nervous/dummie_sdk/routing/types.py",
+      "kind": "sdk_routing_types",
+      "status": "active",
+      "owner_layer": "l1_nervous",
+      "risk": "medium",
+      "reason": "RoutingResult, RoutingStrategy protocol, DelegationRequest.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "layers/l1_nervous/dummie_sdk/routing/pipeline.py",
+      "kind": "sdk_routing_pipeline",
+      "status": "active",
+      "owner_layer": "l1_nervous",
+      "risk": "medium",
+      "reason": "Chain of Responsibility con threshold 0.5 y fallback.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "layers/l1_nervous/dummie_sdk/routing/delegation.py",
+      "kind": "sdk_delegation",
+      "status": "active",
+      "owner_layer": "l1_nervous",
+      "risk": "medium",
+      "reason": "DelegationEngine: local/cloud/hybrid con VRAM-aware strategy.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "layers/l1_nervous/dummie_sdk/routing/strategies/__init__.py",
+      "kind": "sdk_strategies_pkg",
+      "status": "active",
+      "owner_layer": "l1_nervous",
+      "risk": "medium",
+      "reason": "DUMMIE Engine SDK canonical library.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "layers/l1_nervous/dummie_sdk/routing/strategies/base.py",
+      "kind": "sdk_strategy_base",
+      "status": "active",
+      "owner_layer": "l1_nervous",
+      "risk": "medium",
+      "reason": "_ensure_loaded() compartido — elimina 4x duplicacion.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "layers/l1_nervous/dummie_sdk/routing/strategies/exact_match.py",
+      "kind": "sdk_strategy_exact",
+      "status": "active",
+      "owner_layer": "l1_nervous",
+      "risk": "medium",
+      "reason": "11 regex patterns, conf=1.0.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "layers/l1_nervous/dummie_sdk/routing/strategies/embedding_match.py",
+      "kind": "sdk_strategy_embedding",
+      "status": "active",
+      "owner_layer": "l1_nervous",
+      "risk": "medium",
+      "reason": "fastembed similarity >0.35.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "layers/l1_nervous/dummie_sdk/routing/strategies/cross_encoder_rerank.py",
+      "kind": "sdk_strategy_rerank",
+      "status": "active",
+      "owner_layer": "l1_nervous",
+      "risk": "medium",
+      "reason": "Rerank top-3 candidates.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "layers/l1_nervous/dummie_sdk/routing/strategies/cot_reasoning.py",
+      "kind": "sdk_strategy_cot",
+      "status": "active",
+      "owner_layer": "l1_nervous",
+      "risk": "medium",
+      "reason": "Chain of Thought paso a paso.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "layers/l1_nervous/dummie_sdk/routing/strategies/llm_reasoning.py",
+      "kind": "sdk_strategy_llm",
+      "status": "active",
+      "owner_layer": "l1_nervous",
+      "risk": "medium",
+      "reason": "Gemma 4 JSON routing.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "layers/l1_nervous/dummie_sdk/validation/__init__.py",
+      "kind": "sdk_validation_pkg",
+      "status": "active",
+      "owner_layer": "l1_nervous",
+      "risk": "medium",
+      "reason": "DUMMIE Engine SDK canonical library.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "layers/l1_nervous/dummie_sdk/validation/guardian.py",
+      "kind": "sdk_guardian",
+      "status": "active",
+      "owner_layer": "l1_nervous",
+      "risk": "medium",
+      "reason": "ArchitectureGuardian: 7 reglas, scan 3 dirs, enforce().",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "layers/l1_nervous/dummie_sdk/validation/rules.py",
+      "kind": "sdk_rules",
+      "status": "active",
+      "owner_layer": "l1_nervous",
+      "risk": "medium",
+      "reason": "7 Rule dataclasses (hardcoded-models, legacy-imports, etc).",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "layers/l1_nervous/dummie_sdk/hooks/pre_commit.py",
+      "kind": "sdk_hook_precommit",
+      "status": "active",
+      "owner_layer": "l1_nervous",
+      "risk": "medium",
+      "reason": "Git pre-commit hook: runs Guardian on staged files.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "layers/l1_nervous/dummie_sdk/hooks/install.py",
+      "kind": "sdk_hook_installer",
+      "status": "active",
+      "owner_layer": "l1_nervous",
+      "risk": "medium",
+      "reason": "Install/uninstall hooks into .git/hooks/.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "layers/l1_nervous/dummie_sdk/daemon/guardian_daemon.py",
+      "kind": "sdk_daemon_guardian",
+      "status": "active",
+      "owner_layer": "l1_nervous",
+      "risk": "medium",
+      "reason": "Background guardian daemon: 300s interval, violations.jsonl.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "layers/l1_nervous/configs/models_config.json",
+      "kind": "ssot_models_config",
+      "status": "active",
+      "owner_layer": "l1_nervous",
+      "risk": "medium",
+      "reason": "SSOT config: gemma4:2b, bge-small-en-v1.5, cross-encoder. Adapter map por provider.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "scripts/systemd/dummie-memory.service",
+      "kind": "systemd_service",
+      "status": "active",
+      "owner_layer": "scripts",
+      "risk": "medium",
+      "reason": "Systemd service for Kuzu/Arrow Flight memory daemon. Type=simple, ExecStart=bin/memory_server.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "scripts/systemd/dummie-engine.service",
+      "kind": "systemd_service",
+      "status": "active",
+      "owner_layer": "scripts",
+      "risk": "medium",
+      "reason": "Systemd service for MetaGateway: 5 sub-gateways (media:8081..shell:8085) + router + delegation. Type=oneshot.",
+      "recommended_action": "keep",
+      "spec": 170
+    },
+    {
+      "path": "scripts/systemd/dummie-guardian.service",
+      "kind": "systemd_service",
+      "status": "active",
+      "owner_layer": "scripts",
+      "risk": "low",
+      "reason": "Systemd service for Architecture Guardian daemon. ExecStart=uv run python -m dummie_sdk.daemon.guardian_daemon.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "scripts/install_services.sh",
+      "kind": "install_script",
+      "status": "active",
+      "owner_layer": "scripts",
+      "risk": "medium",
+      "reason": "Service installer: copies 3 systemd units to /etc/systemd/system/, enables, starts in dependency order (memory→engine→guardian).",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "configs/models_config.json",
+      "kind": "ssot_model_config",
+      "status": "active",
+      "owner_layer": "l1_nervous",
+      "risk": "high",
+      "reason": "SSOT model config: gemma4:e2b (default LLM), BAAI/bge-small-en-v1.5 (embedding), cross-encoder/ms-marco-MiniLM-L-2-v2 (reranker). Adapter map for dynamic import via importlib.",
+      "recommended_action": "keep"
     }
   ],
   "summary": {
-    "total_items": 38,
+    "total_items": 152,
     "status_counts": {
+      "active": 114,
       "canonical": 33,
+      "deprecated": 1,
       "duplicate": 1,
       "generated": 1,
-      "runtime_local": 2,
-      "deprecated": 1
+      "runtime_local": 2
     },
     "architecture_notes": [
-      "MCP server lives in L1 (mcp_server.py). This is architecturally correct \u2014 L1 is the nervous system gateway.",
+      "MCP server lives in L1 (mcp_server.py). This is architecturally correct — L1 is the nervous system gateway.",
       "MCP proxy/gateway (mcp_proxy.py at 17.4KB) is the most complex MCP component. Risk of becoming a God Object.",
       "MCP driver in L5 (mcp_driver.py at 2KB) is appropriately thin. Good separation.",
       "Go MCP client in L1 (mcp_client.go) enables polyglot tool invocation. Used by L0 overseer pipeline.",
-      "Quarantine directory exists but automated quarantine pipeline (static audit \u2192 sandbox \u2192 approval) is NOT implemented yet."
+      "Quarantine directory exists but automated quarantine pipeline (static audit → sandbox → approval) is NOT implemented yet."
     ],
     "critical_issues": [
-      "No automated static audit pipeline for incoming MCP tools",
       "dummie_gateway_config.json at root should be in .aiwg/config/ or .agents/config/",
-      "Log files (mcp.log, mcp_server.log) at root \u2014 should be gitignored and directed to .aiwg/logs/"
+      "Log files (mcp.log, mcp_server.log) should be gitignored and directed to .aiwg/logs/"
     ]
   },
-  "version": "1.5.0",
+  "version": "1.8.0",
   "generated_at": "2026-05-22T00:00:00Z",
-  "total_items": 66
+  "total_items": 152
 }

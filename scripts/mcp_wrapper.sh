@@ -31,5 +31,11 @@ else
     echo "[$(date)] Skipping npx cache cleanup. Set DUMMIE_MCP_CLEAR_NPX_CACHE=1 to enable." >> "$LOG_FILE"
 fi
 
+# Navegar al root de DUMMIE para que paths relativos funcionen
+cd "$DUMMIE_ROOT_DIR" || {
+    echo "[$(date)] CRITICAL: DUMMIE_ROOT_DIR='$DUMMIE_ROOT_DIR' no existe" >> "$LOG_FILE"
+    exit 1
+}
+
 # Ejecutar con los argumentos corregidos
 exec "${NEW_ARGS[@]}" 2>> "$LOG_FILE"

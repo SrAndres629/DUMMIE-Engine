@@ -1,18 +1,31 @@
 import json, re, asyncio
 from pathlib import Path
+from typing import Optional
 from embeddings import EmbeddingRouter
+from routing.delegation import DelegationEngine, DelegationRequest
 
 CONFIG_PATH = Path(__file__).parent / "configs" / "meta_router_assignments.json"
 
 
 class MetaRouter:
-    def __init__(self, use_pipeline: bool = False):
+    def __init__(
+        self,
+        use_pipeline: bool = False,
+        delegation_engine: Optional[DelegationEngine] = None,
+    ):
         with open(CONFIG_PATH) as f:
             self.assignments = json.load(f)
         self.embedding_router = EmbeddingRouter()
         self._use_pipeline = use_pipeline
         self._pipeline = None
+        self._delegation = delegation_engine or DelegationEngine()
         self._build_index()
+
+    def _build_index(self):
+        self._domain_to_gateway = {}
+        for gw_name, gw_cfg in self.assignments["gateways"].items():
+            for domain in gw_cfg["domains"]:
+                self._domain_to_gateway[domain] = gw_name
 
     async def _get_pipeline(self):
         if self._pipeline is None:
@@ -38,6 +51,21 @@ class MetaRouter:
         return self._pipeline
 
     async def route(self, query: str) -> dict:
+        route = await self._resolve_route(query)
+        if not route.get("match"):
+            return route
+
+        delegation_req = DelegationRequest.from_route(route)
+        delegation = await self._delegation.decide(delegation_req)
+        route["delegation"] = {
+            "location": delegation.location.value,
+            "server": delegation.server,
+            "reason": delegation.reason,
+            "confidence": delegation.confidence,
+        }
+        return route
+
+    async def _resolve_route(self, query: str) -> dict:
         if self._use_pipeline:
             pipeline = await self._get_pipeline()
             result = await pipeline.route(query)

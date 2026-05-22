@@ -1,0 +1,29 @@
+[Unit]
+Description=DUMMIE Sovereign Memory Daemon — Kuzu/Arrow Flight IPC
+Documentation=https://dummie.ai
+After=network.target
+
+[Service]
+Type=simple
+Environment=DUMMIE_ROOT=/media/datasets/DUMMIE Engine
+Environment=DUMMIE_AIWG_DIR=/media/datasets/DUMMIE Engine/.aiwg
+Environment=DUMMIE_KUZU_DB_PATH=/media/datasets/DUMMIE Engine/.aiwg/memory/loci.db
+Environment=MEMORY_SOCKET_PATH=/media/datasets/DUMMIE Engine/.aiwg/sockets/flight.sock
+WorkingDirectory=/media/datasets/DUMMIE Engine
+
+ExecStartPre=/bin/bash -c 'mkdir -p /media/datasets/DUMMIE Engine/.aiwg/memory /media/datasets/DUMMIE Engine/.aiwg/sockets'
+ExecStartPre=/bin/bash -c 'rm -f /media/datasets/DUMMIE Engine/.aiwg/memory/loci.db/*.lock'
+ExecStart=/media/datasets/DUMMIE Engine/bin/memory_server
+
+Restart=on-failure
+RestartSec=5
+
+KillSignal=SIGTERM
+TimeoutStopSec=15
+SendSIGKILL=yes
+
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=default.target

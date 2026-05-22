@@ -1,0 +1,20 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ToolSelectionEvent",
+  "type": "object",
+  "required": [
+    "timestamp",
+    "query",
+    "selected_tool",
+    "relevance_score",
+    "latency_ms"
+  ],
+  "properties": {
+    "timestamp": { "type": "string", "format": "date-time" },
+    "query": { "type": "string" },
+    "selected_tool": { "type": "string" },
+    "relevance_score": { "type": "number" },
+    "latency_ms": { "type": "number" },
+    "metadata": { "type": "object" }
+  }
+}

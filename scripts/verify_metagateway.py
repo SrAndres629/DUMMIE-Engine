@@ -7,12 +7,12 @@ sys.path.insert(0, "layers/l1_nervous")
 from meta_router import MetaRouter
 
 
-def verify():
+async def verify():
     router = MetaRouter()
     results = {"pass": 0, "fail": 0, "tests": []}
 
-    def test(name, query, expected_gateway, expected_match=True):
-        r = router.route(query)
+    async def test(name, query, expected_gateway, expected_match=True):
+        r = await router.route(query)
         ok = r.get("match") == expected_match and r.get("gateway") == expected_gateway
         results["tests"].append(
             {
@@ -34,28 +34,28 @@ def verify():
             results["fail"] += 1
 
     # Media gateway
-    test("Media - image", "generar imagen", "media")
-    test("Media - video", "crear video promocional", "media")
-    test("Media - audio", "generar musica", "media")
+    await test("Media - image", "generar imagen", "media")
+    await test("Media - video", "crear video promocional", "media")
+    await test("Media - audio", "generar musica", "media")
 
     # Code gateway
-    test("Code - git", "git status", "code")
-    test("Code - filesystem", "leer archivo", "code")
+    await test("Code - git", "git status", "code")
+    await test("Code - filesystem", "leer archivo", "code")
 
     # Infra gateway
-    test("Infra - docker", "docker ps", "infra")
-    test("Infra - vercel", "deploy to vercel", "infra")
+    await test("Infra - docker", "docker ps", "infra")
+    await test("Infra - vercel", "deploy to vercel", "infra")
 
     # Knowledge gateway
-    test("Knowledge - sql", "consulta sql", "knowledge")
-    test("Knowledge - reasoning", "razonar sobre esto", "knowledge")
+    await test("Knowledge - sql", "consulta sql", "knowledge")
+    await test("Knowledge - reasoning", "razonar sobre esto", "knowledge")
 
     # Shell gateway
-    test("Shell - command", "ejecutar comando shell", "shell")
-    test("Shell - browser", "navegar a youtube", "shell")
+    await test("Shell - command", "ejecutar comando shell", "shell")
+    await test("Shell - browser", "navegar a youtube", "shell")
 
     # No match
-    test("No match", "cual es el clima", None, False)
+    await test("No match", "cual es el clima", None, False)
 
     # Capabilities listing
     print("\n--- Capabilities ---")
@@ -86,6 +86,7 @@ async def verify_pipeline():
     from routing.strategies.embedding_match import EmbeddingMatchStrategy
     from routing.strategies.cross_encoder_rerank import CrossEncoderRerankStrategy
     from routing.strategies.llm_reasoning import LLMReasoningStrategy
+    from routing.strategies.cot_reasoning import CoTReasoningStrategy
     from models.model_registry import ModelRegistry
     import time
 
@@ -95,6 +96,7 @@ async def verify_pipeline():
             ExactMatchStrategy(),
             EmbeddingMatchStrategy(registry=registry),
             CrossEncoderRerankStrategy(registry=registry),
+            CoTReasoningStrategy(registry=registry),
             LLMReasoningStrategy(registry=registry),
         ],
         threshold=0.5,
@@ -124,8 +126,8 @@ async def verify_pipeline():
 
 
 if __name__ == "__main__":
-    r = verify()
     import asyncio
 
+    r = asyncio.run(verify())
     pipe_ok = asyncio.run(verify_pipeline())
     sys.exit(0 if r["fail"] == 0 and pipe_ok else 1)

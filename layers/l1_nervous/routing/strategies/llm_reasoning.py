@@ -1,4 +1,4 @@
-from .pipeline import RoutingResult, RoutingStrategy
+from routing.pipeline import RoutingResult, RoutingStrategy
 
 LLM_ROUTER_SYSTEM = """Eres un router semántico. Dada una consulta del usuario, devuelve JSON:
 {

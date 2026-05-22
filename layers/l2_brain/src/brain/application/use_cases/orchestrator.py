@@ -29,6 +29,8 @@ class CognitiveOrchestrator(IBrainOrchestrator):
         skill_repo: ISkillRepositoryPort,
         embedding_port: Optional["IEmbeddingPort"] = None,
         registry: Optional[CapabilityRegistry] = None,
+        supervisor: Optional[Any] = None,
+        sync_guard: Optional[Any] = None,
         mode: str = "GREENFIELD"
     ):
         self.shield = shield_port
@@ -38,6 +40,8 @@ class CognitiveOrchestrator(IBrainOrchestrator):
         self.skill_repo = skill_repo
         self.embedding_port = embedding_port
         self.registry = registry or CapabilityRegistry()
+        self.supervisor = supervisor
+        self.sync_guard = sync_guard
         self.router = ModelRouterV2(self.registry)
         self.mode = mode
         # Recuperar el tick máximo del Event Store (Spec 02 - Causal Ordering)

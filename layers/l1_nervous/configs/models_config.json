@@ -1,0 +1,71 @@
+{
+  "version": "1.0.0",
+  "defaults": {
+    "llm": "gemma4:e2b",
+    "embedding": "BAAI/bge-small-en-v1.5",
+    "reranker": "cross-encoder/ms-marco-MiniLM-L-2-v2"
+  },
+  "providers": {
+    "ollama": {
+      "host": "http://localhost:11434",
+      "models": {
+        "gemma4:e2b": {
+          "type": "llm",
+          "provider": "ollama",
+          "context_length": 8192,
+          "priority": "HIGH"
+        },
+        "gemma4:e4b": {
+          "type": "llm",
+          "provider": "ollama",
+          "context_length": 16384,
+          "priority": "MEDIUM"
+        },
+        "gemma3:1b": {
+          "type": "llm",
+          "provider": "ollama",
+          "context_length": 8192,
+          "priority": "LOW"
+        }
+      }
+    },
+    "fastembed": {
+      "models": {
+        "BAAI/bge-small-en-v1.5": {
+          "type": "embedding",
+          "provider": "fastembed",
+          "dimensions": 384,
+          "priority": "HIGH"
+        },
+        "BAAI/bge-base-en-v1.5": {
+          "type": "embedding",
+          "provider": "fastembed",
+          "dimensions": 768,
+          "priority": "LOW"
+        }
+      }
+    },
+    "sentence_transformers": {
+      "models": {
+        "cross-encoder/ms-marco-MiniLM-L-2-v2": {
+          "type": "reranker",
+          "provider": "sentence_transformers",
+          "priority": "MEDIUM"
+        }
+      }
+    }
+  },
+  "adapter_map": {
+    "ollama": "dummie_sdk.models.adapters.ollama_adapter.OllamaAdapter",
+    "fastembed": "dummie_sdk.models.adapters.fastembed_adapter.FastEmbedAdapter",
+    "sentence_transformers": "dummie_sdk.models.adapters.cross_encoder_adapter.CrossEncoderAdapter"
+  },
+  "lifecycle": {
+    "ttl_seconds": {
+      "llm": 300,
+      "embedding": 600,
+      "reranker": 600
+    },
+    "vram_threshold_mb": 2048
+  }
+}

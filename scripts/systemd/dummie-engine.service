@@ -1,0 +1,27 @@
+[Unit]
+Description=DUMMIE MetaGateway — 5 sub-gateways + router + delegation
+Documentation=https://dummie.ai
+After=network.target dummie-memory.service
+Wants=dummie-memory.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+Environment=DUMMIE_ROOT=/media/datasets/DUMMIE Engine
+Environment=DUMMIE_AIWG_DIR=/media/datasets/DUMMIE Engine/.aiwg
+Environment=PYTHONUNBUFFERED=1
+WorkingDirectory=/media/datasets/DUMMIE Engine/layers/l1_nervous
+
+ExecStart=/media/datasets/DUMMIE Engine/scripts/start_metagateway.sh
+ExecStop=/bin/bash -c 'pkill -f "gateway/(media|code|infra|knowledge|shell)_gateway.py" 2>/dev/null; rm -f /media/datasets/DUMMIE Engine/.aiwg/runtime/gateways/*'
+
+Restart=on-failure
+RestartSec=10
+
+KillMode=process
+KillSignal=SIGTERM
+TimeoutStopSec=30
+SendSIGKILL=yes
+
+[Install]
+WantedBy=default.target

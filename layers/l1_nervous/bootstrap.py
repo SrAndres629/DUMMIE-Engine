@@ -13,9 +13,6 @@ from layers.l2_brain.models import (
     IntentType as ContextIntent,
 )
 from layers.l2_brain.models import AgentIntent, IntentType as FabricationIntent
-from layers.l2_brain.src.brain.application.use_cases.orchestrator import (
-    CognitiveOrchestrator,
-)
 from layers.l2_brain.adapters import (
     KuzuRepository,
     DecisionLedgerAdapter,
@@ -23,26 +20,36 @@ from layers.l2_brain.adapters import (
     NativeShieldAdapter,
     KuzuSkillRepository,
 )
+from layers.l2_brain.src.brain.application.use_cases.orchestrator import (
+    CognitiveOrchestrator,
+)
 
 logger = logging.getLogger("dummie-mcp.infra")
 
 
+from layers.l2_brain.infrastructure.supervisor import ProcessSupervisor
+
+import kuzu
+
+
+# ...
 def bootstrap_orchestrator(kuzu_db_path: str, aiwg_dir: str):
+    # Step 1: Open kuzu.Database once, handle lock/read_only
     db = None
     read_only = False
-
-    # [TABULA RASA v2] Inicialización NATIVA directa (Wave 1 Fix)
-    # Ignoramos el ArrowMemoryBridge y usamos Kuzu directamente.
-    # El KuzuRepository ahora tiene safe_init_or_recover() para lidiar con locks
     try:
-        logger.debug(f"Inicializando 4D-TES (Kuzu) en modo nativo en {kuzu_db_path}")
-        event_store = KuzuRepository(db_path=kuzu_db_path)
-        db = event_store.db
-    except Exception as e:
-        logger.error(f"Fallo crítico al inicializar 4D-TES en modo nativo: {e}")
-        event_store = KuzuRepository()  # Modo stub
+        db = kuzu.Database(kuzu_db_path)
+    except RuntimeError as e:
+        if "Could not set lock on file" in str(e):
+            db = kuzu.Database(kuzu_db_path, read_only=True)
+            read_only = True
+        else:
+            raise
+
+    # Step 2: Create all adapters sharing the same `db` object
+    event_store = KuzuRepository(db_path=kuzu_db_path, db=db)
+    if read_only:
         event_store.read_only = True
-        read_only = True
 
     ledger_audit = DecisionLedgerAdapter(
         ledger_path=os.path.join(aiwg_dir, "ledger/sovereign_resolutions.jsonl"),
@@ -50,14 +57,16 @@ def bootstrap_orchestrator(kuzu_db_path: str, aiwg_dir: str):
         ambiguities_path=os.path.join(aiwg_dir, "memory/ambiguities.jsonl"),
         ontological_map_path=os.path.join(aiwg_dir, "ontological_map.json"),
     )
+
     session_ledger = SessionLedgerAdapter(
         ledger_path=os.path.join(aiwg_dir, "memory/ego_state.jsonl")
     )
-    shield = NativeShieldAdapter()
 
-    # Compartir el objeto 'db' para evitar bloqueos por doble apertura
-    skill_repo = KuzuSkillRepository(db=db)
-    if read_only or db is None:
+    shield = NativeShieldAdapter()
+    supervisor = ProcessSupervisor()
+
+    skill_repo = KuzuSkillRepository(db_path=kuzu_db_path, db=db)
+    if read_only:
         skill_repo.read_only = True
 
     return CognitiveOrchestrator(
@@ -66,6 +75,7 @@ def bootstrap_orchestrator(kuzu_db_path: str, aiwg_dir: str):
         ledger_audit=ledger_audit,
         session_ledger=session_ledger,
         skill_repo=skill_repo,
+        supervisor=supervisor,
     )
 
 

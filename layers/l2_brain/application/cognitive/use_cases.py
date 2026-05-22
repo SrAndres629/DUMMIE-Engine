@@ -33,8 +33,23 @@ class ContextOptimizer:
 
 
 class SemanticCapabilityRouter:
-    def __init__(self, discovery_port):
+    def __init__(self, discovery_port, event_bus=None):
         self.discovery_port = discovery_port
+        self.event_bus = event_bus
 
-    def get_relevant_tools(self, objective: str) -> list:
-        return self.discovery_port.discover(objective)
+    async def get_relevant_tools(self, objective: str) -> list:
+        import time
+        start = time.perf_counter()
+        
+        tools = self.discovery_port.discover(objective)
+        
+        if self.event_bus:
+            # Emitir métricas de ruteo
+            await self.event_bus.publish("ToolSelection", {
+                "query": objective,
+                "selected_tool": tools[0]["id"] if tools else "none",
+                "relevance_score": tools[0].get("score", 0.0) if tools else 0.0,
+                "latency_ms": (time.perf_counter() - start) * 1000,
+                "timestamp": time.time()
+            })
+        return tools

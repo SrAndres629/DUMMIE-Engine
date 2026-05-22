@@ -1,99 +1,86 @@
-# Spec Reference: 15_mcp_sidecar_isolation
 import asyncio
 import json
 import logging
 import os
-import time
-from typing import Any, Dict, Optional, List
-from pathlib import Path
+import re
+import shutil
+from typing import Any, Dict, Optional
 
 logger = logging.getLogger("mcp-transport")
+
+_BINARY_CACHE = {}
+
+
+def _expand_env(s: str) -> str:
+    """Expands $VAR and ${VAR} env vars (Python expandvars only handles $VAR)."""
+
+    def _replacer(m):
+        var = m.group(1) or m.group(2)
+        return os.environ.get(var, m.group(0))
+
+    return re.sub(r"\$\{(\w+)\}|\$(\w+)", _replacer, s)
+
+
+def _resolve_binary(cmd: str) -> str:
+    if cmd not in _BINARY_CACHE:
+        resolved = shutil.which(cmd)
+        _BINARY_CACHE[cmd] = resolved
+    return _BINARY_CACHE[cmd]
 
 
 class MCPTransport:
     """
-    [L1_NERVOUS] Maneja la comunicación física JSON-RPC sobre Stdio con Sandboxing.
+    [L1_NERVOUS] Transport: Gestión atómica mediante colas y TaskGroups.
+    Soporta múltiples sub-servidores concurrentes con colas independientes.
     """
+
+    def __init__(self):
+        self._queues: Dict[str, asyncio.Queue] = {}
+        self._reader_tasks: Dict[str, asyncio.Task] = {}
 
     async def spawn_process(
         self, server_name: str, config: Dict[str, Any]
     ) -> asyncio.subprocess.Process:
-        cmd = config["command"]
-        args = config.get("args", [])
+        cmd = _expand_env(config["command"])
+        args = [
+            _expand_env(a) if isinstance(a, str) else a for a in config.get("args", [])
+        ]
 
-        # Expand env vars in args
-        final_args = []
-        for arg in args:
-            if isinstance(arg, str):
-                final_args.append(os.path.expandvars(arg))
-            else:
-                final_args.append(arg)
+        resolved = _resolve_binary(cmd)
+        if not resolved:
+            raise FileNotFoundError(
+                f"Binario no encontrado para server '{server_name}': '{cmd}' no está en PATH. "
+                f"Instálalo con: npx -y {cmd} (si es un paquete npm) "
+                f"o asegúrate de que esté disponible en el sistema."
+            )
 
-        env = os.environ.copy()
-        if "env" in config:
-            for k, v in config["env"].items():
-                if isinstance(v, str):
-                    env[k] = os.path.expandvars(v)
-                else:
-                    env[k] = str(v)
-
-        # Sovereign Sandbox Logic (Simplified for modular use)
-        sandbox_mode = os.environ.get("DUMMIE_SANDBOX_MODE", "OFF").upper()
-
-        final_cmd = cmd
-
-        if sandbox_mode == "ON":
-            root_dir = os.environ.get("DUMMIE_ROOT", os.getcwd())
-            bwrap_args = [
-                "bwrap",
-                "--unshare-all",
-                "--share-net",
-                "--loopback",
-                "--dev",
-                "/dev",
-                "--proc",
-                "/proc",
-                "--tmpfs",
-                "/tmp",
-                "--ro-bind",
-                "/usr",
-                "/usr",
-                "--ro-bind",
-                "/lib",
-                "/lib",
-                "--ro-bind",
-                "/lib64",
-                "/lib64",
-                "--ro-bind",
-                "/bin",
-                "/bin",
-                "--ro-bind",
-                "/sbin",
-                "/sbin",
-                "--ro-bind",
-                "/etc/resolv.conf",
-                "/etc/resolv.conf",
-                "--bind",
-                root_dir,
-                root_dir,
-                "--bind",
-                os.path.expanduser("~"),
-                os.path.expanduser("~"),
-                "--",
-                cmd,
-            ]
-            final_cmd = "bwrap"
-            final_args = bwrap_args[1:] + final_args
-
-        logger.debug(f"Spawning MCP Process: {server_name}")
-        return await asyncio.create_subprocess_exec(
-            final_cmd,
-            *final_args,
+        proc = await asyncio.create_subprocess_exec(
+            resolved,
+            *args,
             stdin=asyncio.subprocess.PIPE,
             stdout=asyncio.subprocess.PIPE,
             stderr=asyncio.subprocess.PIPE,
-            env=env,
+            env=os.environ.copy(),
         )
+
+        self._queues[server_name] = asyncio.Queue()
+        self._reader_tasks[server_name] = asyncio.create_task(
+            self._reader_worker(server_name, proc.stdout)
+        )
+        return proc
+
+    async def _reader_worker(self, server_name: str, stream: asyncio.StreamReader):
+        try:
+            queue = self._queues.get(server_name)
+            while not stream.at_eof():
+                line = await stream.readline()
+                if line and queue:
+                    await queue.put(line)
+        except Exception as e:
+            logger.debug(f"Reader worker '{server_name}' stopped: {e}")
+
+    def _get_queue(self, server_name: str) -> asyncio.Queue:
+        return self._queues.setdefault(server_name, asyncio.Queue())
 
     async def send_request(
         self,
@@ -101,6 +88,7 @@ class MCPTransport:
         method: str,
         params: Dict[str, Any],
         request_id: Optional[str] = None,
+        server_name: Optional[str] = None,
     ) -> Dict[str, Any]:
         payload = {
             "jsonrpc": "2.0",
@@ -110,7 +98,7 @@ class MCPTransport:
         }
         process.stdin.write((json.dumps(payload) + "\n").encode())
         await process.stdin.drain()
-        return await self.read_response(process)
+        return await self.read_response(process, server_name=server_name)
 
     async def send_notification(
         self, process: asyncio.subprocess.Process, method: str, params: Dict[str, Any]
@@ -120,32 +108,47 @@ class MCPTransport:
         await process.stdin.drain()
 
     async def read_response(
-        self, process: asyncio.subprocess.Process
+        self, process: asyncio.subprocess.Process, server_name: Optional[str] = None
     ) -> Dict[str, Any]:
-        line = await process.stdout.readline()
-        if not line:
-            raise RuntimeError("Server closed connection.")
-
+        queue = self._get_queue(server_name or "_default")
+        line = await queue.get()
         line_str = line.decode().strip()
-        if line_str.startswith("Content-Length:"):
-            length = int(line_str.split(":")[1].strip())
-            await process.stdout.readline()
-            body = await process.stdout.readexactly(length)
-            return json.loads(body.decode())
-
-        if line_str.startswith("{"):
-            return json.loads(line_str)
-
-        # Skip logs and find JSON
         while not (line_str.startswith("{") or line_str.startswith("Content-Length:")):
-            line = await process.stdout.readline()
-            if not line:
-                raise RuntimeError("Connection lost during log skip.")
+            line = await queue.get()
             line_str = line.decode().strip()
-
         if line_str.startswith("Content-Length:"):
             length = int(line_str.split(":")[1].strip())
-            await process.stdout.readline()
-            body = await process.stdout.readexactly(length)
+            await queue.get()
+            body = await queue.get()
             return json.loads(body.decode())
         return json.loads(line_str)
+
+    async def close_connection(
+        self, process: asyncio.subprocess.Process, server_name: Optional[str] = None
+    ):
+        """Cierre estructurado: Cancela reader -> Cierra stdin -> Termina proceso."""
+        sn = server_name or "_default"
+        task = self._reader_tasks.get(sn)
+        if task:
+            task.cancel()
+            try:
+                await task
+            except asyncio.CancelledError:
+                pass
+            self._reader_tasks.pop(sn, None)
+        self._queues.pop(sn, None)
+
+        if process.stdin:
+            try:
+                process.stdin.close()
+                await process.stdin.wait_closed()
+            except:
+                pass
+
+        if process.returncode is None:
+            process.terminate()
+            try:
+                await asyncio.wait_for(process.wait(), timeout=3.0)
+            except:
+                process.kill()
+                await process.wait()

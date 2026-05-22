@@ -8,10 +8,25 @@ from typing import Any
 class SelfWorktreeToolService:
     def __init__(self, root_dir: str | Path):
         self.root_dir = Path(root_dir).resolve()
-        try:
-            from layers.l2_brain.self_worktree_orchestrator import SelfWorktreeOrchestrator
-        except ImportError:
-            from self_worktree_orchestrator import SelfWorktreeOrchestrator
+        for _mod in [
+            "layers.l2_brain.flat_brain.self_worktree_orchestrator",
+            "layers.l2_brain.cognition.self_worktree_orchestrator",
+            "layers.l2_brain.self_worktree_orchestrator",
+            "self_worktree_orchestrator",
+        ]:
+            try:
+                __import__(_mod, fromlist=["SelfWorktreeOrchestrator"])
+                SelfWorktreeOrchestrator = getattr(
+                    __import__(_mod, fromlist=["SelfWorktreeOrchestrator"]),
+                    "SelfWorktreeOrchestrator",
+                )
+                break
+            except ImportError:
+                continue
+        else:
+            raise ImportError(
+                "No self_worktree_orchestrator module found in any known path"
+            )
 
         self.orchestrator = SelfWorktreeOrchestrator(self.root_dir)
 
@@ -30,7 +45,9 @@ class SelfWorktreeToolService:
         goal: str,
         candidate_paths: list[str] | None = None,
     ) -> dict[str, Any]:
-        plan = self.orchestrator.plan_safe_patch(session_id, goal, candidate_paths or [])
+        plan = self.orchestrator.plan_safe_patch(
+            session_id, goal, candidate_paths or []
+        )
         next_loop = self.orchestrator.propose_next_loop(session_id)
         return {"plan": plan, "next_loop": next_loop}
 
@@ -41,7 +58,9 @@ def register_self_worktree_tools(mcp, root_dir: str):
     @mcp.tool()
     async def dummie_self_session_start(session_id: str, prompt: str = "") -> str:
         """Start a plan-only self-evolution session. Does not apply patches."""
-        return json.dumps(await service.start(session_id, prompt), indent=2, sort_keys=True)
+        return json.dumps(
+            await service.start(session_id, prompt), indent=2, sort_keys=True
+        )
 
     @mcp.tool()
     async def dummie_self_session_status(session_id: str) -> str:

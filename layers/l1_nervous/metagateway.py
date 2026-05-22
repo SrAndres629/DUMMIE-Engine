@@ -7,7 +7,7 @@ class MetaGateway:
         self.router = MetaRouter()
 
     async def route_request(self, query: str):
-        route = self.router.route(query)
+        route = await self.router.route(query)
         if not route["match"]:
             return {
                 "error": True,
@@ -15,7 +15,7 @@ class MetaGateway:
                 "confidence": route.get("confidence", 0.0),
                 "domain": route.get("domain"),
             }
-        return {
+        result = {
             "gateway": route["gateway"],
             "port": route["port"],
             "servers": route["servers"],
@@ -24,18 +24,28 @@ class MetaGateway:
             "confidence": route["confidence"],
             "query": query,
         }
+        if "delegation" in route:
+            result["delegation"] = route["delegation"]
+        return result
 
     async def call_tool(self, query: str, tool: str, arguments: dict = None):
         import httpx
 
-        route = self.router.route(query)
+        route = await self.router.route(query)
         if not route["match"]:
             raise ValueError(f"No gateway found for: {query}")
+        delegation = route.get("delegation", {})
+        target_server = delegation.get("server", route["servers"][0])
+        target_location = delegation.get("location", "local")
+        if target_location == "cloud":
+            raise NotImplementedError(
+                f"Cloud execution not yet implemented for '{target_server}' via MetaGateway"
+            )
         async with httpx.AsyncClient() as client:
             resp = await client.post(
                 f"http://localhost:{route['port']}/call",
                 json={
-                    "server": route["servers"][0],
+                    "server": target_server,
                     "tool": tool,
                     "arguments": arguments or {},
                 },

@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-05-21T21:00:24.397658+00:00",
-  "version": "6c289ff",
+  "timestamp": "2026-05-22T05:00:04.159010+00:00",
+  "version": "27081cc",
   "branch": "main",
   "bootstrap": {
     "exists": false
@@ -11,8 +11,8 @@
   "tests_trend": "stable",
   "failed_tests": [],
   "git": {
-    "modified_count": 258,
-    "sha": "6c289ff",
+    "modified_count": 44,
+    "sha": "27081cc",
     "branch": "main"
   },
   "redirector": {
@@ -26,8 +26,8 @@
   "processes": {
     "dummied_running": false,
     "nats_running": false,
-    "ollama_running": false,
+    "ollama_running": true,
     "daemon_running": false
   },
-  "previous_health": "2026-05-21T08:00:04.956006+00:00"
+  "previous_health": "2026-05-22T04:00:04.038763+00:00"
 }

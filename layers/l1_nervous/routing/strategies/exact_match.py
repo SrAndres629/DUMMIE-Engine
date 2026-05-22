@@ -1,5 +1,5 @@
 import re
-from .pipeline import RoutingResult, RoutingStrategy
+from routing.pipeline import RoutingResult, RoutingStrategy
 
 DOMAIN_MAP = {
     "imagen|image|generar.*imagen|generar.*foto|generar.*img|dibujar|ilustraci": ("media_generation", "image", "media"),

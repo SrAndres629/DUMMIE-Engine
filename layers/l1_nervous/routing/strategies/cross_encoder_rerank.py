@@ -1,4 +1,4 @@
-from .pipeline import RoutingResult, RoutingStrategy
+from routing.pipeline import RoutingResult, RoutingStrategy
 
 class CrossEncoderRerankStrategy:
     name = "cross_encoder_rerank"

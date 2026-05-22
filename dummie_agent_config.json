@@ -4,12 +4,12 @@
       "command": "/usr/local/bin/dummie-mcp",
       "args": [],
       "env": {
-        "DUMMIE_ROOT_DIR": "/home/jorand/Escritorio/DUMMIE Engine",
-        "DUMMIE_AIWG_DIR": "/home/jorand/Escritorio/DUMMIE Engine/.aiwg",
-        "DUMMIE_KUZU_DB_PATH": "/home/jorand/Escritorio/DUMMIE Engine/.aiwg/memory/loci.db",
-        "MEMORY_SOCKET_PATH": "/home/jorand/Escritorio/DUMMIE Engine/.aiwg/sockets/flight.sock",
-        "PYTHONPATH": "/home/jorand/Escritorio/DUMMIE Engine/layers/l2_brain:/home/jorand/Escritorio/DUMMIE Engine/layers/l1_nervous:/home/jorand/Escritorio/DUMMIE Engine/layers/l3_shield",
-        "DUMMIE_MCP_CONFIG_PATH": "/home/jorand/Escritorio/DUMMIE Engine/dummie_gateway_config.json"
+        "DUMMIE_ROOT_DIR": "/media/datasets/DUMMIE Engine",
+        "DUMMIE_AIWG_DIR": "/media/datasets/DUMMIE Engine/.aiwg",
+        "DUMMIE_KUZU_DB_PATH": "/media/datasets/DUMMIE Engine/.aiwg/memory/loci.db",
+        "MEMORY_SOCKET_PATH": "/media/datasets/DUMMIE Engine/.aiwg/sockets/flight.sock",
+        "PYTHONPATH": "/media/datasets/DUMMIE Engine/layers/l2_brain:/media/datasets/DUMMIE Engine/layers/l1_nervous:/media/datasets/DUMMIE Engine/layers/l3_shield",
+        "DUMMIE_MCP_CONFIG_PATH": "/media/datasets/DUMMIE Engine/dummie_gateway_config.json"
       }
     }
   }

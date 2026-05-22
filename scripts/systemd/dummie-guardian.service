@@ -1,0 +1,26 @@
+[Unit]
+Description=DUMMIE Architecture Guardian — validation polling daemon
+Documentation=https://dummie.ai
+After=dummie-engine.service
+Wants=dummie-engine.service
+
+[Service]
+Type=simple
+Environment=DUMMIE_ROOT=/media/datasets/DUMMIE Engine
+Environment=PYTHONUNBUFFERED=1
+WorkingDirectory=/media/datasets/DUMMIE Engine/layers/l1_nervous
+
+ExecStart=uv run python -m dummie_sdk.daemon.guardian_daemon
+
+Restart=on-failure
+RestartSec=10
+
+KillSignal=SIGTERM
+TimeoutStopSec=15
+SendSIGKILL=yes
+
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=default.target

@@ -629,10 +629,14 @@ entries:
   - doc/specs/L1_Nervous/15_mcp_sidecar_isolation.feature
   - doc/specs/L1_Nervous/15_mcp_sidecar_isolation.rules.json
   - layers/l1_nervous/__init__.py
+  - layers/l1_nervous/mcp_transport.py
+  - layers/l1_nervous/bootstrap.py
   - doc/CORE_SPEC.md
   - doc/PHYSICAL_MAP.md
   runtime_files:
   - layers/l1_nervous/__init__.py
+  - layers/l1_nervous/mcp_transport.py
+  - layers/l1_nervous/bootstrap.py
   test_files: []
   docs_files:
   - doc/CORE_SPEC.md
@@ -655,10 +659,23 @@ entries:
   - doc/specs/L1_Nervous/16_mcp_dynamic_gateway.feature
   - doc/specs/L1_Nervous/16_mcp_dynamic_gateway.rules.json
   - layers/l1_nervous/__init__.py
+  - layers/l1_nervous/mcp_transport.py
+  - layers/l1_nervous/mcp_proxy.py
+  - layers/l1_nervous/bootstrap.py
+  - layers/l1_nervous/tools_impl/self_worktree.py
+  - dummie_gateway_config.json
+  - scripts/muapi_stdio_proxy.py
   - doc/CORE_SPEC.md
   - doc/PHYSICAL_MAP.md
   runtime_files:
   - layers/l1_nervous/__init__.py
+  - layers/l1_nervous/mcp_transport.py
+  - layers/l1_nervous/mcp_proxy.py
+  - layers/l1_nervous/bootstrap.py
+  - layers/l1_nervous/tools_impl/self_worktree.py
+  script_files:
+  - scripts/muapi_stdio_proxy.py
+  - dummie_gateway_config.json
   test_files: []
   docs_files:
   - doc/CORE_SPEC.md
