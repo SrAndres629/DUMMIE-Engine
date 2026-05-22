@@ -1,4 +1,4 @@
-import json, re
+import json, re, asyncio
 from pathlib import Path
 from embeddings import EmbeddingRouter
 
@@ -6,19 +6,63 @@ CONFIG_PATH = Path(__file__).parent / "configs" / "meta_router_assignments.json"
 
 
 class MetaRouter:
-    def __init__(self):
+    def __init__(self, use_pipeline: bool = False):
         with open(CONFIG_PATH) as f:
             self.assignments = json.load(f)
         self.embedding_router = EmbeddingRouter()
+        self._use_pipeline = use_pipeline
+        self._pipeline = None
         self._build_index()
 
-    def _build_index(self):
-        self._domain_to_gateway = {}
-        for gw_name, gw_cfg in self.assignments["gateways"].items():
-            for domain in gw_cfg["domains"]:
-                self._domain_to_gateway[domain] = gw_name
+    async def _get_pipeline(self):
+        if self._pipeline is None:
+            from routing import RoutingPipeline
+            from routing.strategies.exact_match import ExactMatchStrategy
+            from routing.strategies.embedding_match import EmbeddingMatchStrategy
+            from routing.strategies.cross_encoder_rerank import (
+                CrossEncoderRerankStrategy,
+            )
+            from routing.strategies.llm_reasoning import LLMReasoningStrategy
+            from models.model_registry import ModelRegistry
 
-    def route(self, query: str) -> dict:
+            registry = ModelRegistry()
+            self._pipeline = RoutingPipeline(
+                [
+                    ExactMatchStrategy(),
+                    EmbeddingMatchStrategy(registry=registry),
+                    CrossEncoderRerankStrategy(registry=registry),
+                    LLMReasoningStrategy(registry=registry),
+                ],
+                threshold=0.5,
+            )
+        return self._pipeline
+
+    async def route(self, query: str) -> dict:
+        if self._use_pipeline:
+            pipeline = await self._get_pipeline()
+            result = await pipeline.route(query)
+            if result.match:
+                gw_name = result.gateway
+                gw_cfg = self.assignments["gateways"].get(gw_name)
+                if gw_cfg:
+                    return {
+                        "match": True,
+                        "domain": result.domain,
+                        "action": result.action,
+                        "gateway": gw_name,
+                        "port": gw_cfg["port"],
+                        "confidence": result.confidence,
+                        "strategy": result.strategy,
+                        "latency_ms": result.latency_ms,
+                        "servers": list(gw_cfg["servers"].keys()),
+                    }
+            return {
+                "match": False,
+                "domain": None,
+                "confidence": result.confidence,
+                "message": "Could not determine domain from query",
+            }
+
         query_lower = query.lower().strip()
         domain, action = self._parse_intent(query_lower)
         if domain:

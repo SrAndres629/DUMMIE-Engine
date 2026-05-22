@@ -78,6 +78,54 @@ def verify():
     return results
 
 
+async def verify_pipeline():
+    """Test RoutingPipeline (exact + embedding + cross-encoder + LLM)."""
+    sys.path.insert(0, "layers/l1_nervous")
+    from routing import RoutingPipeline
+    from routing.strategies.exact_match import ExactMatchStrategy
+    from routing.strategies.embedding_match import EmbeddingMatchStrategy
+    from routing.strategies.cross_encoder_rerank import CrossEncoderRerankStrategy
+    from routing.strategies.llm_reasoning import LLMReasoningStrategy
+    from models.model_registry import ModelRegistry
+    import time
+
+    registry = ModelRegistry()
+    pipeline = RoutingPipeline(
+        [
+            ExactMatchStrategy(),
+            EmbeddingMatchStrategy(registry=registry),
+            CrossEncoderRerankStrategy(registry=registry),
+            LLMReasoningStrategy(registry=registry),
+        ],
+        threshold=0.5,
+    )
+
+    tests = [
+        ("generar imagen", "media", True),
+        ("git status", "code", True),
+        ("docker ps", "infra", True),
+        ("cual es el clima", None, False),
+    ]
+    passes = 0
+    print("\n--- Pipeline Tests ---")
+    for query, expected_gw, expected_match in tests:
+        t0 = time.time()
+        result = await pipeline.route(query)
+        elapsed = (time.time() - t0) * 1000
+        ok = result.match == expected_match and result.gateway == expected_gw
+        s = "✅" if ok else "❌"
+        print(
+            f"{s} {query}: gw={result.gateway} conf={result.confidence:.3f} strategy={result.strategy} ({elapsed:.0f}ms)"
+        )
+        if ok:
+            passes += 1
+    print(f"Pipeline: {passes}/{len(tests)} pass")
+    return passes == len(tests)
+
+
 if __name__ == "__main__":
     r = verify()
-    sys.exit(0 if r["fail"] == 0 else 1)
+    import asyncio
+
+    pipe_ok = asyncio.run(verify_pipeline())
+    sys.exit(0 if r["fail"] == 0 and pipe_ok else 1)
