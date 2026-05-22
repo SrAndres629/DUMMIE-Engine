@@ -1,9 +1,9 @@
 {
   "_meta": {
     "registry_type": "mcp",
-    "version": "1.0.0",
-    "generated_at": "2026-05-09T03:27:00Z",
-    "generated_by": "antigravity_audit",
+    "version": "1.1.0",
+    "generated_at": "2026-05-21T00:00:00Z",
+    "generated_by": "opencode_production_hardening",
     "purpose": "Canonical map of all MCP-related files: servers, proxies, drivers, tool skills, configs, specs, and quarantine. No files were moved or deleted.",
     "schema_version": "1.0.0"
   },
@@ -115,7 +115,7 @@
       "canonical_target": "dummie_gateway_config.json",
       "owner_layer": "root",
       "risk": "medium",
-      "reason": "Gateway configuration (5.7KB). Defines remote MCP server connections. Should eventually move to .aiwg/config/.",
+      "reason": "Gateway configuration. Defines 13 remote MCP server connections across 6 profiles: core (github, shell, filesystem, git, muapi), auxiliary (sequentialthinking, mcp-bash, browser-use), knowledge (sqlite), media_generation (mcp-comfyui), cloud (cloudflare, vercel), infrastructure (docker). Should eventually move to .aiwg/config/.",
       "recommended_action": "alias"
     },
     {
@@ -189,6 +189,86 @@
       "recommended_action": "keep"
     },
     {
+      "path": "scripts/muapi_stdio_proxy.py",
+      "kind": "mcp_proxy",
+      "status": "canonical",
+      "canonical_target": "scripts/muapi_stdio_proxy.py",
+      "owner_layer": "scripts",
+      "risk": "medium",
+      "reason": "Stdio-to-HTTP proxy for muapi-mcp-server at https://api.muapi.ai/mcp. Allows dummie-brain gateway to connect to muapi as a remote sub-server.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "layers/l1_nervous/mcp_transport.py",
+      "kind": "mcp_transport",
+      "status": "canonical",
+      "canonical_target": "layers/l1_nervous/mcp_transport.py",
+      "owner_layer": "l1_nervous",
+      "risk": "high",
+      "reason": "MCP transport layer with sub-server lifecycle. Fixed: per-server queues to prevent cross-talk, custom ${VAR} env expansion for non-shell command execution.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "layers/l1_nervous/tools_impl/self_worktree.py",
+      "kind": "mcp_tool_impl",
+      "status": "canonical",
+      "canonical_target": "layers/l1_nervous/tools_impl/self_worktree.py",
+      "owner_layer": "l1_nervous",
+      "risk": "medium",
+      "reason": "Self-worktree tool implementation. Fixed: multi-path import fallback for self_worktree_orchestrator across layer boundaries.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "layers/l1_nervous/bootstrap.py",
+      "kind": "mcp_bootstrap",
+      "status": "canonical",
+      "canonical_target": "layers/l1_nervous/bootstrap.py",
+      "owner_layer": "l1_nervous",
+      "risk": "high",
+      "reason": "Bootstrap orchestrator for L1 nervous system. Fixed: undefined vars (db, event_store, ledger_audit, session_ledger), added Kuzu DB init with read_only fallback on lock.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "/home/jorand/Escritorio/Biblioteca MCP/Mcp_Comfyui/build/index.js",
+      "kind": "mcp_server_external",
+      "status": "canonical",
+      "canonical_target": "/home/jorand/Escritorio/Biblioteca MCP/Mcp_Comfyui/",
+      "owner_layer": "external",
+      "risk": "medium",
+      "reason": "ComfyUI MCP server for local AI image generation via stable diffusion. Registered as mcp-comfyui in gateway. Requires ComfyUI running at localhost:8188.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "/home/jorand/Escritorio/Biblioteca MCP/cloudflare/dist/index.js",
+      "kind": "mcp_server_external",
+      "status": "canonical",
+      "canonical_target": "/home/jorand/Escritorio/Biblioteca MCP/cloudflare/",
+      "owner_layer": "external",
+      "risk": "medium",
+      "reason": "Cloudflare MCP server for Workers AI, R2 storage, KV, D1, DNS, CDN. Registered as cloudflare in gateway.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "/home/jorand/Escritorio/Biblioteca MCP/Vercel/my-vercel-mcp/dist/index.js",
+      "kind": "mcp_server_external",
+      "status": "canonical",
+      "canonical_target": "/home/jorand/Escritorio/Biblioteca MCP/Vercel/my-vercel-mcp/",
+      "owner_layer": "external",
+      "risk": "medium",
+      "reason": "Vercel MCP server for deployments, env vars, domains, edge config. Registered as vercel in gateway.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "docker-mcp",
+      "kind": "mcp_server_external",
+      "status": "canonical",
+      "canonical_target": "/home/jorand/Escritorio/Biblioteca MCP/docker/",
+      "owner_layer": "external",
+      "risk": "medium",
+      "reason": "Docker MCP server for container/image/volume/network management and system audit. Registered as docker in gateway. Installed via pip from Biblioteca MCP/docker/.",
+      "recommended_action": "keep"
+    },
+    {
       "path": "mcp.log",
       "kind": "log_file",
       "status": "runtime_local",
@@ -217,28 +297,199 @@
       "risk": "low",
       "reason": "Scratch test file at root (1.3KB). Historical artifact.",
       "recommended_action": "delete_later"
+    },
+    {
+      "path": "layers/l1_nervous/capability_index.py",
+      "kind": "mcp_tool_impl",
+      "status": "canonical",
+      "canonical_target": "layers/l1_nervous/capability_index.py",
+      "owner_layer": "l1_nervous",
+      "risk": "medium",
+      "reason": "CapabilityIndex: canonical inventory of all MCP tools and skills. NO embeddings \u2014 matching ontologico exacto. Skills indexadas pero NO cargadas hasta invocacion (lazy loading via gateway).",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "layers/l1_nervous/intelligent_intent_router.py",
+      "kind": "mcp_tool_impl",
+      "status": "canonical",
+      "canonical_target": "layers/l1_nervous/intelligent_intent_router.py",
+      "owner_layer": "l1_nervous",
+      "risk": "medium",
+      "reason": "IntentRouter + IntentClassifier: clasifica intencion del modelo (dominio+accion), busca match exacto en capability_index, reporta 'herramienta necesaria no encontrada' si no hay match, sugiere busquedas de investigacion.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "scripts/superpowers_mcp_proxy.py",
+      "kind": "mcp_proxy",
+      "status": "canonical",
+      "canonical_target": "scripts/superpowers_mcp_proxy.py",
+      "owner_layer": "scripts",
+      "risk": "low",
+      "reason": "Superpowers MCP stdio proxy. Envuelve 14 skills de desarrollo (brainstorming, TDD, planning, etc.) como herramientas MCP. Skills cargadas lazy solo cuando se invocan.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "layers/l1_nervous/local_llm_bridge.py",
+      "kind": "mcp_tool_impl",
+      "status": "canonical",
+      "canonical_target": "layers/l1_nervous/local_llm_bridge.py",
+      "owner_layer": "l1_nervous",
+      "risk": "medium",
+      "reason": "LocalLLMBridge: conexion a Gemma 3 1B via ollama. Razonamiento de herramientas con LLM local.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "layers/l1_nervous/context_enricher.py",
+      "kind": "mcp_tool_impl",
+      "status": "canonical",
+      "canonical_target": "layers/l1_nervous/context_enricher.py",
+      "owner_layer": "l1_nervous",
+      "risk": "low",
+      "reason": "ContextEnricher: recolecta sesion, memoria, MCPS activos para contexto del LLM.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "layers/l1_nervous/metacognitive_reasoner.py",
+      "kind": "mcp_tool_impl",
+      "status": "canonical",
+      "canonical_target": "layers/l1_nervous/metacognitive_reasoner.py",
+      "owner_layer": "l1_nervous",
+      "risk": "medium",
+      "reason": "MetacognitiveReasoner: orquesta classifier -> LLM -> research -> planner. Genera preguntas metacognitivas.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "layers/l1_nervous/smart_research_engine.py",
+      "kind": "mcp_tool_impl",
+      "status": "canonical",
+      "canonical_target": "layers/l1_nervous/smart_research_engine.py",
+      "owner_layer": "l1_nervous",
+      "risk": "low",
+      "reason": "SmartResearchEngine: GitHub search con topic:mcp-server, stars:>50. Cachea resultados.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "layers/l1_nervous/integration_planner.py",
+      "kind": "mcp_tool_impl",
+      "status": "canonical",
+      "canonical_target": "layers/l1_nervous/integration_planner.py",
+      "owner_layer": "l1_nervous",
+      "risk": "low",
+      "reason": "IntegrationPlanner: plan canonico de integracion para repos GitHub descubiertos.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "layers/l1_nervous/intelligence_evaluator.py",
+      "kind": "mcp_tool_impl",
+      "status": "canonical",
+      "canonical_target": "layers/l1_nervous/intelligence_evaluator.py",
+      "owner_layer": "l1_nervous",
+      "risk": "low",
+      "reason": "IntelligenceEvaluator: log JSON de decisiones del router en router_decisions.jsonl.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "layers/l1_nervous/metagateway.py",
+      "kind": "meta_gateway",
+      "status": "active",
+      "spec": 170
+    },
+    {
+      "path": "layers/l1_nervous/meta_router.py",
+      "kind": "meta_router",
+      "status": "active",
+      "spec": 170
+    },
+    {
+      "path": "layers/l1_nervous/gateway/base_gateway.py",
+      "kind": "base_gateway",
+      "status": "active",
+      "spec": 170
+    },
+    {
+      "path": "layers/l1_nervous/gateway/media_gateway.py",
+      "kind": "sub_gateway",
+      "status": "active",
+      "spec": 170
+    },
+    {
+      "path": "layers/l1_nervous/gateway/code_gateway.py",
+      "kind": "sub_gateway",
+      "status": "active",
+      "spec": 170
+    },
+    {
+      "path": "layers/l1_nervous/gateway/infra_gateway.py",
+      "kind": "sub_gateway",
+      "status": "active",
+      "spec": 170
+    },
+    {
+      "path": "layers/l1_nervous/gateway/knowledge_gateway.py",
+      "kind": "sub_gateway",
+      "status": "active",
+      "spec": 170
+    },
+    {
+      "path": "layers/l1_nervous/gateway/shell_gateway.py",
+      "kind": "sub_gateway",
+      "status": "active",
+      "spec": 170
+    },
+    {
+      "path": "layers/l1_nervous/configs/meta_router_assignments.json",
+      "kind": "ssot_routing",
+      "status": "active",
+      "spec": 170
+    },
+    {
+      "path": "layers/l1_nervous/embeddings/embedding_service.py",
+      "kind": "embedding_service",
+      "status": "active",
+      "spec": 170
+    },
+    {
+      "path": "layers/l1_nervous/embeddings/embedding_router.py",
+      "kind": "embedding_router",
+      "status": "active",
+      "spec": 170
+    },
+    {
+      "path": "layers/l1_nervous/embeddings/embedding_cache.py",
+      "kind": "embedding_cache",
+      "status": "active",
+      "spec": 170
+    },
+    {
+      "path": "doc/specs/2026-05-22-metagateway-segmentado-design.md",
+      "kind": "spec",
+      "status": "active",
+      "spec": 170
     }
   ],
   "summary": {
-    "total_items": 21,
+    "total_items": 38,
     "status_counts": {
-      "canonical": 14,
+      "canonical": 33,
       "duplicate": 1,
       "generated": 1,
       "runtime_local": 2,
       "deprecated": 1
     },
     "architecture_notes": [
-      "MCP server lives in L1 (mcp_server.py). This is architecturally correct — L1 is the nervous system gateway.",
+      "MCP server lives in L1 (mcp_server.py). This is architecturally correct \u2014 L1 is the nervous system gateway.",
       "MCP proxy/gateway (mcp_proxy.py at 17.4KB) is the most complex MCP component. Risk of becoming a God Object.",
       "MCP driver in L5 (mcp_driver.py at 2KB) is appropriately thin. Good separation.",
       "Go MCP client in L1 (mcp_client.go) enables polyglot tool invocation. Used by L0 overseer pipeline.",
-      "Quarantine directory exists but automated quarantine pipeline (static audit → sandbox → approval) is NOT implemented yet."
+      "Quarantine directory exists but automated quarantine pipeline (static audit \u2192 sandbox \u2192 approval) is NOT implemented yet."
     ],
     "critical_issues": [
       "No automated static audit pipeline for incoming MCP tools",
       "dummie_gateway_config.json at root should be in .aiwg/config/ or .agents/config/",
-      "Log files (mcp.log, mcp_server.log) at root — should be gitignored and directed to .aiwg/logs/"
+      "Log files (mcp.log, mcp_server.log) at root \u2014 should be gitignored and directed to .aiwg/logs/"
     ]
-  }
+  },
+  "version": "1.3.0",
+  "generated_at": "2026-05-22T00:00:00Z",
+  "total_items": 51
 }
