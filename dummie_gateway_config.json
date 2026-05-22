@@ -1,77 +1,29 @@
 {
   "mcpServers": {
-    "sequentialthinking": {
-      "command": "npx",
+    "metagateway": {
+      "command": "uv",
       "args": [
-        "-y",
-        "@modelcontextprotocol/server-sequential-thinking"
+        "run",
+        "python",
+        "-B",
+        "${DUMMIE_ROOT}/layers/l1_nervous/metagateway.py"
+      ],
+      "disabled": false,
+      "profile": "core",
+      "capability_class": "metagateway",
+      "rationale": "MetaGateway proxy: punto de entrada unico que enruta queries a 5 sub-gateways especializados (media, code, infra, knowledge, shell) usando exact match + embeddings. Fail isolation entre dominios."
+    },
+    "superpowers": {
+      "command": "uv",
+      "args": [
+        "run",
+        "python",
+        "${DUMMIE_ROOT}/scripts/superpowers_mcp_proxy.py"
       ],
       "disabled": false,
       "profile": "auxiliary",
-      "capability_class": "reasoning_support",
-      "rationale": "Auxiliary planning surface. Not required for core engine reasoning."
-    },
-    "github": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-github"
-      ],
-      "env": {
-        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_PERSONAL_ACCESS_TOKEN}"
-      },
-      "disabled": false,
-      "profile": "core",
-      "capability_class": "vcs",
-      "rationale": "Controlled repository state access with policy-based write protection."
-    },
-    "shell": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "mcp-shell"
-      ],
-      "disabled": false,
-      "profile": "core",
-      "capability_class": "shell_execution",
-      "rationale": "Secure, allowlisted shell executor via npx. Replaces problematic mcp-bash."
-    },
-    "sqlite": {
-      "command": "uvx",
-      "args": [
-        "mcp-server-sqlite",
-        "--db-path",
-        "${DUMMIE_AIWG}/memory/dummie_sqlite.db"
-      ],
-      "disabled": false,
-      "profile": "knowledge",
-      "capability_class": "structured_local_store",
-      "rationale": "Ephemeral store subordinated to 4D-TES. Policy-enforced schema."
-    },
-    "filesystem": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-filesystem",
-        "${DUMMIE_ROOT}",
-        "/tmp"
-      ],
-      "disabled": false,
-      "profile": "core",
-      "capability_class": "workspace_io",
-      "rationale": "Standard filesystem MCP with root constraints."
-    },
-    "git": {
-      "command": "uvx",
-      "args": [
-        "mcp-server-git",
-        "--repository",
-        "${DUMMIE_ROOT}"
-      ],
-      "disabled": false,
-      "profile": "core",
-      "capability_class": "vcs",
-      "rationale": "Canonical git repository state tools."
+      "capability_class": "development_workflow",
+      "rationale": "Superpowers development workflow system: 14 skills (brainstorming, TDD, planning, code review, etc.) wrapped as MCP tools. Lazy-loaded, invoked only when needed via gateway."
     }
   }
 }
