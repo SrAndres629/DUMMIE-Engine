@@ -4,6 +4,7 @@ import os
 import sys
 import json
 import importlib
+from importlib import metadata
 from pathlib import Path
 from typing import Dict, Any, List
 
@@ -54,11 +55,12 @@ def run_runtime_dependency_audit(aiwg_root: str = ".") -> Dict[str, Any]:
     for name in monitored:
         # Special handling: pyyaml is imported as 'yaml'
         import_name = name
+        dist_name = "PyYAML" if name == "yaml" else name
         try:
-            mod = importlib.import_module(import_name)
-            ver = getattr(mod, "__version__", None)
-            if ver is None:
-                # Try sub-modules or other fields
+            importlib.import_module(import_name)
+            try:
+                ver = metadata.version(dist_name)
+            except metadata.PackageNotFoundError:
                 ver = "installed"
             dependencies.append({"name": name, "status": "READY", "version": str(ver)})
         except ImportError:
