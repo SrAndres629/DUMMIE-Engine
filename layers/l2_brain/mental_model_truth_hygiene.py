@@ -143,6 +143,7 @@ def run_mental_model_truth_hygiene(aiwg_root: Path = Path(".aiwg")) -> Dict[str,
     models_root.mkdir(parents=True, exist_ok=True)
 
     kuzu_degraded = _is_kuzu_degraded(aiwg_root)
+    confidence_threshold = 0.7
 
     # Load all models --------------------------------------------------
     models: List[Dict[str, Any]] = []
@@ -178,6 +179,7 @@ def run_mental_model_truth_hygiene(aiwg_root: Path = Path(".aiwg")) -> Dict[str,
         mid = m.get("model_id", "unknown")
         intent = m.get("intent", "")
         qs = m.get("quality_score", -1)
+        confidence = float(m.get("confidence", 0.0) or 0.0)
         rels = m.get("relations", [])
         asms = m.get("assumptions", [])
         decs = m.get("decisions", [])
@@ -216,6 +218,20 @@ def run_mental_model_truth_hygiene(aiwg_root: Path = Path(".aiwg")) -> Dict[str,
             )
             if status == "valid":
                 status = "stale"
+
+        # 2b. Low confidence model
+        if confidence < confidence_threshold:
+            finding_list.append(
+                MentalModelHygieneFinding(
+                    mid,
+                    "low_confidence_model",
+                    f"confidence={confidence:.3f} below threshold {confidence_threshold}",
+                    "WARN",
+                    "needs_review",
+                )
+            )
+            if status == "valid":
+                status = "needs_review"
 
         # 3. Empty relations for complex intent
         if is_complex and not rels:

@@ -11,6 +11,7 @@ Never executes mutations autonomously.
 import json
 import uuid
 import sys
+import time
 from dataclasses import dataclass, field, asdict
 from datetime import datetime, timezone
 from pathlib import Path
@@ -102,6 +103,14 @@ def _is_kuzu_degraded(aiwg_root: Path) -> bool:
     return True  # conservative default
 
 
+def _append_heartbeat_memory_node(
+    hb_id: str, mode: str, result: Dict[str, Any]
+) -> Dict[str, Any]:
+    from heartbeat.heartbeat_memory_writer import append_heartbeat_node_safe
+
+    return append_heartbeat_node_safe(hb_id=hb_id, mode=mode, result=result)
+
+
 # ---------------------------------------------------------------------------
 # Core heartbeat
 # ---------------------------------------------------------------------------
@@ -120,17 +129,31 @@ def run_heartbeat(
     hb_id = f"hb-{uuid.uuid4().hex[:8]}"
     warnings: List[str] = []
     evidence: List[str] = []
+    cycle_start = time.perf_counter()
+    phase_timings_ms: Dict[str, int] = {}
+    from heartbeat.heartbeat_budget import HeartbeatBudget
+
+    budget = HeartbeatBudget(max_ms=4000, max_io_ops=300)
 
     # ---- STEP 0: WHOLE-BODY OPERATIONAL VERIFICATION AUDITS ----
+    t0 = time.perf_counter()
     try:
-        from dependency_reproducibility_verifier import (
+        from governance.dependency_reproducibility_verifier import (
             run_dependency_reproducibility_verification,
         )
-        from kuzu_graph_readback_verifier import run_kuzu_graph_readback_verification
-        from embedding_activation_verifier import run_embedding_activation_verification
-        from capability_promotion_governor import run_capability_promotion_governor
-        from full_body_operational_auditor import run_full_body_operational_audit
-        from whole_body_repair_queue import run_whole_body_repair_queue
+        from memory.kuzu_graph_readback_verifier import (
+            run_kuzu_graph_readback_verification,
+        )
+        from embedding_mesh.embedding_activation_verifier import (
+            run_embedding_activation_verification,
+        )
+        from governance.capability_promotion_governor import (
+            run_capability_promotion_governor,
+        )
+        from governance.full_body_operational_auditor import (
+            run_full_body_operational_audit,
+        )
+        from governance.whole_body_repair_queue import run_whole_body_repair_queue
 
         run_dependency_reproducibility_verification()
         run_kuzu_graph_readback_verification()
@@ -138,6 +161,14 @@ def run_heartbeat(
         run_capability_promotion_governor()
         run_full_body_operational_audit()
         run_whole_body_repair_queue()
+
+        from governance.whole_body_scanner import WholeBodyScanner
+        from governance.whole_body_scan_calibrator import WholeBodyScanCalibrator
+
+        scanner = WholeBodyScanner()
+        scanner.run_scan()
+        calibrator = WholeBodyScanCalibrator()
+        calibrator.run_calibration()
 
         evidence.extend(
             [
@@ -147,12 +178,16 @@ def run_heartbeat(
                 ".aiwg/reports/capability_promotion_governor_latest.json",
                 ".aiwg/reports/full_body_operational_audit_latest.json",
                 ".aiwg/reports/whole_body_repair_queue_latest.json",
+                ".aiwg/reports/whole_body_scan_latest.json",
+                ".aiwg/reports/whole_body_scan_calibration_latest.json",
             ]
         )
     except Exception as e:
         warnings.append(f"whole_body_verification_audits_failed: {e}")
+    phase_timings_ms["whole_body_verification"] = int((time.perf_counter() - t0) * 1000)
 
     # ---- STEP 1: OBSERVE ----
+    t1 = time.perf_counter()
     canonical = [
         "self_improvement_action_queue.json",
         "mental_model_truth_hygiene_latest.json",
@@ -236,6 +271,7 @@ def run_heartbeat(
 
     if missing:
         warnings.append(f"Missing canonical inputs: {', '.join(missing)}")
+    phase_timings_ms["observe"] = int((time.perf_counter() - t1) * 1000)
 
     # ---- STEP 1.1: COGNITIVE CIRCULATION ORCHESTRATION ----
     circulation_summary = {}
@@ -346,23 +382,34 @@ def run_heartbeat(
         warnings.append(f"memory_spine_degraded: {e}")
 
     # ---- STEP 6: MENTAL MODEL LOOP (includes dialectic, quality gate) ----
-    try:
-        from metacognitive_loop_runtime import run_metacognitive_loop
-
-        loop = run_metacognitive_loop(
-            "heartbeat: what is the current system state and next safe action?",
-            aiwg_root=aiwg_root,
-        )
-        mental_model = loop.get("mental_model_id", "")
-        dialectic = loop.get("dialectical_review", {})
-        quality_gate = loop.get("quality_gate", {})
-        evidence.append(".aiwg/reports/metacognitive_loop_latest.json")
-    except Exception as e:
+    if kuzu_degraded:
         loop = {}
         mental_model = ""
         dialectic = _load(reports / "dialectical_review_latest.json")
         quality_gate = _load(reports / "metacognitive_quality_gate_latest.json")
-        warnings.append(f"metacognitive_loop_degraded: {e}")
+        runtime_closure_plan["degraded_mode"] = True
+        skipped = runtime_closure_plan.get("skipped_phases", [])
+        runtime_closure_plan["skipped_phases"] = list(
+            set(skipped + ["metacognitive_loop"])
+        )
+    else:
+        try:
+            from metacognitive_loop_runtime import run_metacognitive_loop
+
+            loop = run_metacognitive_loop(
+                "heartbeat: what is the current system state and next safe action?",
+                aiwg_root=aiwg_root,
+            )
+            mental_model = loop.get("mental_model_id", "")
+            dialectic = loop.get("dialectical_review", {})
+            quality_gate = loop.get("quality_gate", {})
+            evidence.append(".aiwg/reports/metacognitive_loop_latest.json")
+        except Exception as e:
+            loop = {}
+            mental_model = ""
+            dialectic = _load(reports / "dialectical_review_latest.json")
+            quality_gate = _load(reports / "metacognitive_quality_gate_latest.json")
+            warnings.append(f"metacognitive_loop_degraded: {e}")
 
     # ---- STEP 7: SELF-IMPROVEMENT QUEUE ----
     si_queue = _load(reports / "self_improvement_action_queue.json")
@@ -491,6 +538,28 @@ def run_heartbeat(
     )
 
     result = outcome.to_dict()
+    write_status = _append_heartbeat_memory_node(hb_id=hb_id, mode=mode, result=result)
+    result["kuzu_memory_node_written"] = bool(write_status.get("success", False))
+    result["kuzu_memory_node_status"] = write_status
+    budget.consume_ms(int((time.perf_counter() - cycle_start) * 1000))
+    result["budget_status"] = budget.decision()
+    result["phase_timings_ms"] = phase_timings_ms
+    result["skipped_non_critical"] = runtime_closure_plan.get("skipped_phases", [])
+
+    try:
+        from heartbeat.heartbeat_perf_report import write_heartbeat_perf_report
+
+        result["heartbeat_perf"] = write_heartbeat_perf_report(
+            aiwg_root=aiwg_root,
+            heartbeat_id=hb_id,
+            mode=mode,
+            cycle_ms=budget.elapsed_ms,
+            phase_ms=phase_timings_ms,
+            skipped_phases=result["skipped_non_critical"],
+            budget_decision=result["budget_status"],
+        )
+    except Exception as e:
+        warnings.append(f"heartbeat_perf_report_failed: {e}")
 
     # ---- WRITE OUTPUTS ----
     (reports / "heartbeat_latest.json").write_text(

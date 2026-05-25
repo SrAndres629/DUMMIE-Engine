@@ -70,6 +70,7 @@ class PromptFrameBuilder:
         self,
         mission_id: str,
         phase_id: str,
+        session_role: str | None = None,
         budget_limit: int = 4096,
         write_output: bool = True,
     ) -> PromptFrame:
@@ -77,6 +78,7 @@ class PromptFrameBuilder:
         quant_result = quant_runtime.build_context_for_phase(
             mission_id=mission_id,
             phase=phase_id,
+            session_role=session_role,
             budget_limit=budget_limit,
             write_outputs=write_output,
         )

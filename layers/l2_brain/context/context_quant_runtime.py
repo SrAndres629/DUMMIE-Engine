@@ -8,7 +8,13 @@ from pathlib import Path
 from typing import Any
 
 from layers.l2_brain.context_budget_manager import ContextBudgetManager
-from layers.l2_brain.context_package import ContextItem, ContextPackage, ContextPackageBuilder, ContextReceipt
+from layers.l2_brain.context_package import (
+    ContextItem,
+    ContextPackage,
+    ContextPackageBuilder,
+    ContextReceipt,
+)
+from layers.l2_brain.context.context_role_filter import filter_context_items_by_role
 from layers.l2_brain.context_value_scorer import ContextValueScorer
 from layers.l2_brain.stale_memory_detector import detect_stale_memory
 
@@ -33,9 +39,13 @@ class ContextQuantResult:
         return asdict(self)
 
 
-
 def _utc_now() -> str:
-    return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+    return (
+        datetime.now(timezone.utc)
+        .replace(microsecond=0)
+        .isoformat()
+        .replace("+00:00", "Z")
+    )
 
 
 class ContextQuantRuntime:
@@ -50,6 +60,7 @@ class ContextQuantRuntime:
         self,
         mission_id: str,
         phase: str,
+        session_role: str | None = None,
         budget_limit: int | None = None,
         model_tier: str = "local_fast",
         write_outputs: bool = True,
@@ -61,19 +72,31 @@ class ContextQuantRuntime:
             write_outputs=write_outputs,
         )
 
-        stale_report = detect_stale_memory(aiwg_root=self.aiwg_root, write_report=write_outputs)
+        stale_report = detect_stale_memory(
+            aiwg_root=self.aiwg_root, write_report=write_outputs
+        )
 
         budget = self.budget_manager.allocate_budget(model_tier)
-        limit = int(budget_limit if budget_limit is not None else budget.get("total_budget", 4096))
+        limit = int(
+            budget_limit
+            if budget_limit is not None
+            else budget.get("total_budget", 4096)
+        )
 
-        scores = self.scorer.rank_context_items(package.items, phase=phase)
+        role_items = filter_context_items_by_role(
+            package.items, session_role=session_role
+        )
+
+        scores = self.scorer.rank_context_items(role_items, phase=phase)
         score_map = {score.ref: score for score in scores}
 
-        required_items = [item for item in package.items if item.required]
-        optional_items = [item for item in package.items if not item.required]
+        required_items = [item for item in role_items if item.required]
+        optional_items = [item for item in role_items if not item.required]
         optional_items.sort(
             key=lambda it: (
-                score_map.get(it.ref).value_per_token if score_map.get(it.ref) else -999.0,
+                score_map.get(it.ref).value_per_token
+                if score_map.get(it.ref)
+                else -999.0,
                 score_map.get(it.ref).value_score if score_map.get(it.ref) else -999.0,
             ),
             reverse=True,
