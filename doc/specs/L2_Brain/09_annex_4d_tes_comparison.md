@@ -6,6 +6,14 @@ layer: L2
 last_verified_on: '2026-04-24'
 version: 1.0.0
 namespace: dummie.engine.l2
+claims:
+- id: 09_annex_4d_tes_comparison-file-valid
+  description: Spec file '09_annex_4d_tes_comparison.md' exists, parses valid YAML
+    frontmatter, and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/specs/L2_Brain/09_annex_4d_tes_comparison.md').read().split('---')[1]);
+    assert d, 'empty frontmatter'"
+  severity: critical
 ---
 # Anexo: Autopsia Arquitectónica y Comparativa (4D-TES)
 

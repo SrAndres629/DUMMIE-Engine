@@ -1,11 +1,18 @@
 ---
-spec_id: "189_capability_promotion_governor"
-title: "Capability Promotion Governor"
-status: "DEPRECATED"
-layer: "L2"
-last_verified_on: "2026-05-16"
+spec_id: 189_capability_promotion_governor
+title: Capability Promotion Governor
+status: DEPRECATED
+layer: L2
+last_verified_on: '2026-05-16'
+claims:
+- id: 189_capability_promotion_governor-file-valid
+  description: Spec file '189_capability_promotion_governor.md' exists, parses valid
+    YAML frontmatter, and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/specs/189_capability_promotion_governor.md').read().split('---')[1]);
+    assert d, 'empty frontmatter'"
+  severity: critical
 ---
-
 ## Purpose
 Enforce rigorous, evidence-backed gates for promoting any DUMMIE capability state. Prevent false `READY` claims unless the capability has passed physical verification, integration paths, and tests.
 

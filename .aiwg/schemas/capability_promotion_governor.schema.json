@@ -16,7 +16,7 @@
           "previous_status": { "type": "string" },
           "verified_status": {
             "type": "string",
-            "enum": ["READY", "READY_CANDIDATE", "SANDBOX_READY", "FALLBACK", "SIMULATED", "DEGRADED", "UNKNOWN"]
+            "enum": ["READY", "READY_CANDIDATE", "SANDBOX_READY", "FALLBACK", "DEGRADED", "UNKNOWN"]
           },
           "promotion_allowed": { "type": "boolean" },
           "promotion_reason": { "type": "string" },

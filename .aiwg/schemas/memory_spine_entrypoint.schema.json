@@ -10,7 +10,7 @@
     "memory_refs": { "type": "array", "items": { "type": "object" } },
     "learning_episode_refs": { "type": "array", "items": { "type": "string" } },
     "vault_refs": { "type": "array", "items": { "type": "string" } },
-    "graph_status": { "type": "string", "enum": ["READY", "DEGRADED", "SIMULATED", "UNKNOWN"] },
+    "graph_status": { "type": "string", "enum": ["READY", "DEGRADED", "REPAIRING", "UNKNOWN"] },
     "used_before_chat_response": { "type": "boolean" },
     "warnings": { "type": "array", "items": { "type": "string" } },
     "evidence_refs": { "type": "array", "items": { "type": "string" } },

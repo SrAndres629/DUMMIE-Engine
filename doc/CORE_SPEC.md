@@ -1,3 +1,39 @@
+---
+status: ACTIVE
+layer: meta
+domain:
+- core-spec
+- index
+- ssot
+dependencies:
+- specs/201_canonical_spec_binding_registry.md
+- specs/202_runtime_lifecycle_chat_contract.md
+- specs/L0_Overseer/00_topology_tracker.md
+- specs/L0_Overseer/11_monorepo_structure.md
+- specs/L0_Overseer/26_langgraph_quantum_swarm.md
+- specs/L0_Overseer/28_shadow_worktrees.md
+- specs/L0_Overseer/29_skill_ingestion_engine.md
+- specs/L0_Overseer/43_documentation_and_artifact_standards.md
+- specs/L0_Overseer/50_daemon_telemetry_contracts.md
+- specs/L0_Overseer/51_model_contracts_alignment.md
+- specs/L1_Nervous/10_protobuf_contracts.md
+- specs/L1_Nervous/15_mcp_sidecar_isolation.md
+- specs/L1_Nervous/16_mcp_dynamic_gateway.md
+- specs/L1_Nervous/23_atomic_modular_nodes.md
+- specs/L1_Nervous/41_layer_handshake_protocol.md
+- specs/L1_Nervous/44_local_reasoning_gateway.md
+- specs/L1_Nervous/49_typed_sdk_generation.md
+- specs/L2_Brain/12_6d_context_model.md
+- specs/L2_Brain/21_software_fabrication_engine.md
+- specs/L2_Brain/27_floating_session_state.md
+- specs/L2_Brain/40_token_optimization_protocol.md
+- specs/L2_Brain/41_wordline_sovereignty.md
+- specs/L2_Brain/42_metacognitive_identity.md
+- specs/L2_Brain/81_phase_ledger.md
+- specs/L2_Brain/82_long_running_mission_runtime.md
+- specs/L3_Shield/22_sdd_executable_contracts.md
+---
+
 # CORE_SPEC
 
 ## Propósito

@@ -1,11 +1,18 @@
 ---
-spec_id: "192_embedding_mesh_foundation"
-title: "EmbeddingMesh Foundation and Repo Self-Knowledge"
-status: "ACTIVE"
-layer: "L2"
-last_verified_on: "2026-05-20"
+spec_id: 192_embedding_mesh_foundation
+title: EmbeddingMesh Foundation and Repo Self-Knowledge
+status: ACTIVE
+layer: L2
+last_verified_on: '2026-05-20'
+claims:
+- id: 192_embedding_mesh_foundation-file-valid
+  description: Spec file '192_embedding_mesh_foundation.md' exists, parses valid YAML
+    frontmatter, and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/specs/192_embedding_mesh_foundation.md').read().split('---')[1]); assert
+    d, 'empty frontmatter'"
+  severity: critical
 ---
-
 # Specification 192 — EmbeddingMesh Foundation & Repo Self-Knowledge
 
 ## Purpose

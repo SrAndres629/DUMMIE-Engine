@@ -1,14 +1,25 @@
 ---
-spec_id: "DE-V2-[ADR-011](0011-l2-infrastructure-bridge.md)"
-title: "Bootstrap de Memoria vía L2-Python Bridge"
-status: "ACTIVE"
-version: "1.1.0"
-layer: "L0"
-namespace: "io.dummie.v2.adr"
-authority: "ARCHITECT"
-tags: ["architectural_decision", "bootstrap", "kuzudb", "l2_brain"]
+spec_id: DE-V2-[ADR-011](0011-l2-infrastructure-bridge.md)
+title: Bootstrap de Memoria vía L2-Python Bridge
+status: ACTIVE
+version: 1.1.0
+layer: L0
+namespace: io.dummie.v2.adr
+authority: ARCHITECT
+tags:
+- architectural_decision
+- bootstrap
+- kuzudb
+- l2_brain
+claims:
+- id: 0011-l2-infrastructure-bridge-file-valid
+  description: Spec file '0011-l2-infrastructure-bridge.md' exists, parses valid YAML
+    frontmatter, and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/01_architecture/adr/0011-l2-infrastructure-bridge.md').read().split('---')[1]);
+    assert d, 'empty frontmatter'"
+  severity: critical
 ---
-
 # [ADR-011](0011-l2-infrastructure-bridge.md): Bootstrap de Memoria vía L2-Python Bridge
 
 ## Abstract

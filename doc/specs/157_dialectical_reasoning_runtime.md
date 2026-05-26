@@ -1,15 +1,22 @@
 ---
-spec_id: "157_dialectical_reasoning_runtime"
-title: "157 Dialectical Reasoning Runtime"
-status: "ACTIVE"
-canonicality: "canonical"
-artifact_type: "spec"
-plan: "DUMMIE PLAN V1"
-layer: "l2_brain"
-created_by: "operationalization_pack_5"
-last_verified_on: "2026-05-16"
+spec_id: 157_dialectical_reasoning_runtime
+title: 157 Dialectical Reasoning Runtime
+status: ACTIVE
+canonicality: canonical
+artifact_type: spec
+plan: DUMMIE PLAN V1
+layer: l2_brain
+created_by: operationalization_pack_5
+last_verified_on: '2026-05-16'
+claims:
+- id: 157_dialectical_reasoning_runtime-file-valid
+  description: Spec file '157_dialectical_reasoning_runtime.md' exists, parses valid
+    YAML frontmatter, and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/specs/157_dialectical_reasoning_runtime.md').read().split('---')[1]);
+    assert d, 'empty frontmatter'"
+  severity: critical
 ---
-
 # Spec 157: Dialectical Reasoning Runtime
 
 ## Purpose

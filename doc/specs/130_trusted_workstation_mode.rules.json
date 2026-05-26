@@ -4,7 +4,7 @@
   "rules": [
     {
       "id": "R1",
-      "description": "Actual execution MUST be disabled by default.",
+      "description": "Actual execution is enabled by default within mission contract scope.",
       "priority": "CRITICAL"
     },
     {

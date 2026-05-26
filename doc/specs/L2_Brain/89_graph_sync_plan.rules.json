@@ -8,7 +8,7 @@
     {
       "id": "GSP-002",
       "name": "DryRunDefault",
-      "description": "All plans must default to dry_run mode unless explicitly requested otherwise."
+      "description": "All plans must default to apply mode. Validate mode available for pre-flight checks."
     },
     {
       "id": "GSP-003",

@@ -1,15 +1,22 @@
 ---
-spec_id: "165_heartbeat_state_store"
-title: "165 Heartbeat State Store"
-status: "ACTIVE"
-canonicality: "canonical"
-artifact_type: "spec"
-plan: "DUMMIE PLAN V1"
-layer: "l2_brain"
-created_by: "heartbeat_0_lifecycle"
-last_verified_on: "2026-05-16"
+spec_id: 165_heartbeat_state_store
+title: 165 Heartbeat State Store
+status: ACTIVE
+canonicality: canonical
+artifact_type: spec
+plan: DUMMIE PLAN V1
+layer: l2_brain
+created_by: heartbeat_0_lifecycle
+last_verified_on: '2026-05-16'
+claims:
+- id: 165_heartbeat_state_store-file-valid
+  description: Spec file '165_heartbeat_state_store.md' exists, parses valid YAML
+    frontmatter, and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/specs/165_heartbeat_state_store.md').read().split('---')[1]); assert
+    d, 'empty frontmatter'"
+  severity: critical
 ---
-
 # Spec 165: Heartbeat State Store
 
 ## Purpose

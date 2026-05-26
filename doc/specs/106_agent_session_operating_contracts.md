@@ -1,11 +1,19 @@
 ---
-spec_id: "DE-V2-L2-106"
-title: "Agent Session Operating Contracts"
-status: "ACTIVE"
-layer: "L2"
-last_verified_on: "2026-05-16"
-version: "1.0.0"
-namespace: "dummie.engine.plan_v1"
+spec_id: DE-V2-L2-106
+title: Agent Session Operating Contracts
+status: ACTIVE
+layer: L2
+last_verified_on: '2026-05-16'
+version: 1.0.0
+namespace: dummie.engine.plan_v1
+claims:
+- id: 106_agent_session_operating_contracts-file-valid
+  description: Spec file '106_agent_session_operating_contracts.md' exists, parses
+    valid YAML frontmatter, and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/specs/106_agent_session_operating_contracts.md').read().split('---')[1]);
+    assert d, 'empty frontmatter'"
+  severity: critical
 ---
 # Spec 106 - Agent Session Operating Contracts
 

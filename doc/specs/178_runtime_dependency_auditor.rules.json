@@ -3,7 +3,7 @@
   "title": "Runtime Dependency Auditor Rules",
   "invariants": {
     "monitored_imports": ["kuzu", "pytest", "yaml", "networkx", "numpy", "pydantic", "fastapi", "typer", "rich", "click"],
-    "allowed_modes": ["READY", "DEGRADED", "SIMULATED", "DRY_RUN_ONLY", "FALLBACK", "MISSING", "UNKNOWN"]
+    "allowed_modes": ["READY", "DEGRADED", "FALLBACK", "MISSING", "UNKNOWN"]
   },
   "gates": {
     "safety_enforce_gate": "Installing python packages during auditing is strictly prohibited.",

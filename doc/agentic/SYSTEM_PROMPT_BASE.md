@@ -1,3 +1,8 @@
+---
+status: ACTIVE
+layer: agentic
+domain: [system-prompt, base, template]
+---
 # SYSTEM_PROMPT_BASE
 
 ## Role

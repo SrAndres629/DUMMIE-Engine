@@ -1,0 +1,115 @@
+{
+  "document": "DUMMIE Engine Strategic Objectives",
+  "registered_at": "2026-05-25T00:00:00Z",
+  "authority": "HUMAN (Jorge) + OVERSEER (Heartbeat)",
+  "phase": "production",
+  "objectives": {
+    "short_term": [
+      {
+        "id": "ST-01",
+        "goal": "Canonizacion total de specs, schemas, codigo y .aiwg",
+        "reason": "50+ archivos todavia en lenguaje read-only/bootstrap. DUMMIE Engine ya esta en fase produccion.",
+        "success": "0 archivos con lenguaje SIMULATED/DRY_RUN_ONLY/read-only en specs activas",
+        "deadline": "esta sesion",
+        "status": "in_progress"
+      },
+      {
+        "id": "ST-02",
+        "goal": "Reparar 4D-TES: KuzuDB escribiendo datos reales de produccion",
+        "reason": "La base de datos tiene 1 solo nodo (verificacion sintetica). 0 nodos reales, 0 edges CAUSAL_LINK.",
+        "success": "N > 10 nodos MemoryNode4D reales con CAUSAL_LINK edges verificados",
+        "deadline": "esta sesion"
+      },
+      {
+        "id": "ST-03",
+        "goal": "Activar daemon Arrow IPC bridge (o eliminar y usar Kuzu directo)",
+        "reason": "El bridge tiene codigo completo pero no hay proceso escuchando. CompressiveMemory no puede persistir.",
+        "success": "CompressiveMemory → Kuzu persiste exitosamente al menos 1 nodo real",
+        "deadline": "esta sesion"
+      }
+    ],
+    "medium_term": [
+      {
+        "id": "MT-01",
+        "goal": "Sesiones por rol con KVCache persistente (plan/build/review/overseer)",
+        "reason": "Cada agente mantiene su propia sesion, contexto y KVCache. Economiza tokens. Elimina sesgos.",
+        "success": "4 sesiones de agente activas, cada una reutiliza su KVCache via SessionStore.find_or_create_session()",
+        "deadline": "2-3 sesiones"
+      },
+      {
+        "id": "MT-02",
+        "goal": "Chat grupal en 1 ventana CLI: @planner, @builder, @reviewer, @overseer visibles",
+        "reason": "Vision de Jorge: un solo chat donde multiples agentes del SO interactuan coherentemente",
+        "success": "GroupChatCoordinator rutea mensajes a sesiones de agentes, compila respuestas unificadas visibles en CLI",
+        "deadline": "2-3 sesiones"
+      },
+      {
+        "id": "MT-03",
+        "goal": "Semantic cache real (Tier 1 exact + Tier 2 vector cosine + Tier 3 Kuzu persistente)",
+        "reason": "El cache actual es SHA256 exact-match. La spec pide busqueda semantica real con embeddings.",
+        "success": "Cache hit ratio > 15% en queries similares (no identicas)",
+        "deadline": "1-2 sesiones"
+      },
+      {
+        "id": "MT-04",
+        "goal": "Heartbeat autonomo como director de orquesta: planifica, investiga, delega sin Jorge",
+        "reason": "Jorge delega la conduccion al heartbeat. Debe funcionar incluso cuando el no esta presente.",
+        "success": "Heartbeat ejecuta ciclo completo observe→dispatch→audit→merge sin intervencion humana. Coherencia > 60%",
+        "deadline": "3-5 sesiones"
+      },
+      {
+        "id": "MT-05",
+        "goal": "Migrar flat_brain/ → canonical organs. Eliminar codigo duplicado.",
+        "reason": "3 copias de SessionStore, 3 de KuzuRepository, 2 de heartbeat. FlatBrainRedirector es un parche.",
+        "success": "0 imports desde flat_brain/. Todos los paths usan layers/l2_brain/<organ>/",
+        "deadline": "2-3 sesiones"
+      }
+    ],
+    "long_term": [
+      {
+        "id": "LT-01",
+        "goal": "eBPF kernel observation (Rust + aya): IO latency, syscall bottleneck, anomaly detection",
+        "reason": "DUMMIE Engine como SO agentico real necesita observabilidad a nivel kernel",
+        "success": "eBPF probe activo reportando metricas a L2 Brain via PyO3 + ring buffer",
+        "deadline": "6-8 semanas"
+      },
+      {
+        "id": "LT-02",
+        "goal": "FUSE filesystem para .aiwg (Rust + fuser): exponer estado cognitivo como VFS",
+        "reason": ".aiwg debe ser accesible como filesystem estandar para cualquier aplicacion Linux",
+        "success": "mount -t fuse .aiwg-cognitive → /mnt/dummie/cognitive/ funcional",
+        "deadline": "4-6 semanas"
+      },
+      {
+        "id": "LT-03",
+        "goal": "SCX layered scheduling: L0-L6 cognitive layers con prioridades de CPU via sched_ext",
+        "reason": "Optimizacion a nivel kernel para SO agentico. Cada capa cognitiva tiene su propio slice de CPU.",
+        "success": "scx_layered activo con 6 layers configuradas y metricas PSI estables",
+        "deadline": "4-8 semanas"
+      },
+      {
+        "id": "LT-04",
+        "goal": "Capsule mount system: .aiwg como capsula cognitiva portatil (.aiwg → tar → transportar → montar)",
+        "reason": "Especificacion canonica del formato .aiwg como capsula de conocimiento portatil",
+        "success": "capsule_mount.sh funcional. Export/import de .aiwg entre sistemas verificado.",
+        "deadline": "2-3 semanas"
+      },
+      {
+        "id": "LT-05",
+        "goal": "Multi-model orchestration: router + load balancer + circuit breaker con modelos locales",
+        "reason": "6 modelos locales disponibles. Necesitan orquestacion inteligente segun complejidad de tarea.",
+        "success": "ModelRouter clasifica correctamente. Fallback cascada funcional. Token budget < 500k/dia cumplido.",
+        "deadline": "3-5 semanas"
+      }
+    ]
+  },
+  "principles": [
+    "TODO usa .aiwg como unica fuente de verdad canonica",
+    "TODO es rastreable via evolution.jsonl + heartbeat_ledger.jsonl",
+    "NUNCA simulado, degradado, dry-run como estado permanente",
+    "SIEMPRE lectura + escritura + administracion en produccion",
+    "KERNEL-NATIVE: cgroups v2, tmpfs, systemd, eBPF, FUSE, SCX",
+    "TOKEN BUDGET: 500k/dia cloud max. Modelos locales para todo lo posible.",
+    "JORGE ES EL DIRECTOR: el heartbeat ejecuta su vision. DUMMIE es mentor, no esclavo."
+  ]
+}

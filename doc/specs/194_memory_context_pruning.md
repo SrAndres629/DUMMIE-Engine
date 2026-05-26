@@ -1,12 +1,19 @@
 ---
-spec_id: "194_memory_context_pruning"
-title: "Memory Context Pruning with RIR Scoring + Token Budget"
-status: "ACTIVE"
-layer: "L2"
-last_verified_on: "2026-05-21"
-version: "1.0.0"
+spec_id: 194_memory_context_pruning
+title: Memory Context Pruning with RIR Scoring + Token Budget
+status: ACTIVE
+layer: L2
+last_verified_on: '2026-05-21'
+version: 1.0.0
+claims:
+- id: 194_memory_context_pruning-file-valid
+  description: Spec file '194_memory_context_pruning.md' exists, parses valid YAML
+    frontmatter, and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/specs/194_memory_context_pruning.md').read().split('---')[1]); assert
+    d, 'empty frontmatter'"
+  severity: critical
 ---
-
 # Spec 194: Memory Context Pruning
 
 ## Purpose

@@ -1,15 +1,22 @@
 ---
-spec_id: "128_debate_review_runtime"
-title: "128 Debate Review Runtime"
-status: "ACTIVE"
-canonicality: "canonical"
-artifact_type: "spec"
-plan: "DUMMIE PLAN V1"
-layer: "l2_brain"
-created_by: "operationalization_pack_1"
-last_verified_on: "2026-05-16"
+spec_id: 128_debate_review_runtime
+title: 128 Debate Review Runtime
+status: ACTIVE
+canonicality: canonical
+artifact_type: spec
+plan: DUMMIE PLAN V1
+layer: l2_brain
+created_by: operationalization_pack_1
+last_verified_on: '2026-05-16'
+claims:
+- id: 128_debate_review_runtime-file-valid
+  description: Spec file '128_debate_review_runtime.md' exists, parses valid YAML
+    frontmatter, and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/specs/128_debate_review_runtime.md').read().split('---')[1]); assert
+    d, 'empty frontmatter'"
+  severity: critical
 ---
-
 # Spec 128: Debate & Adversarial Review Runtime
 
 ## Purpose

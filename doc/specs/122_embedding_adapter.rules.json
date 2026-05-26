@@ -19,7 +19,7 @@
     },
     {
       "id": "R4",
-      "description": "Provider adapters must be disabled unless explicitly configured.",
+      "description": "Provider adapters are enabled by default. Override via explicit configuration only.",
       "priority": "HIGH"
     }
   ]

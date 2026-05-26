@@ -1,3 +1,8 @@
+---
+status: ACTIVE
+layer: agentic
+domain: [scope, guard, protocol, safety]
+---
 # SCOPE_GUARD_PROTOCOL
 
 ## Purpose

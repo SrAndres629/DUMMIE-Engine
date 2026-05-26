@@ -5,4 +5,4 @@ Feature: Graph Synchronization Planning
     Then the plan contains deterministic nodes for each ref
     And Performance Metric: latency < 100ms
     And the plan identifies relationships (edges) between them
-    And the plan defaults to dry_run mode
+    And the plan defaults to apply mode

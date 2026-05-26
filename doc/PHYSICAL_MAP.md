@@ -1,3 +1,8 @@
+---
+status: ACTIVE
+layer: meta
+domain: [physical-map, layer-map, architecture]
+---
 # PHYSICAL_MAP
 
 ## Propósito
@@ -15,11 +20,14 @@ Mapa de verdad física del sistema para evitar deriva entre diseño teórico y e
 ### L1 (`layers/l1_nervous`)
 - **Data Plane (Memory Plane)**: Servidor Arrow Flight tipado (`cmd/memory/main.go`).
 - **Nervous Infrastructure**: Gateway MCP FastMCP (`mcp_server.py`) con bootstrap estricto.
-- **Skill Ingestion Pipeline**: Contratos Protobuf (`proto/skill.proto`) e integración de herramientas (`tools.py`).
+- **SMART MetaGateway (canonical)**: Dispatcher central con cache semántico 2-capas (`semantic_cache.py`), router con modelo pequeño (`smart_router.py`), disclosure progresivo de tools en 3 tiers (`context_budget_tools.py`), ejecución DAG de skills (`skill_executor.py`), entry point canónico `dummie_process`. Ver `doc/architecture/SMART_METAGATEWAY_ARCHITECTURE.md`.
+- **Skill Ingestion Pipeline**: Contratos Protobuf (`proto/skill.proto`) e integración de herramientas (`tools.py`). Skills incorporados: TDD, code_review, systematic_debugging, explore_codebase.
 - **Typed SDK**: Generador dinámico (`sdk_generator.py`) y clientes generados (`generated/`).
 - **Zero-Copy IPC**: Bridge tipado en `memory_ipc.py` con excepciones estructuradas.
 - **Atomicidad**: `utils.py` con `AtomicLedgerWriter` (flock).
 - **Local Reasoning Gateway**: Tools MCP en modo sombra para recall, rerank, context shaping y feedback medible.
+- **Pruebas**: `tests/test_smart_components.py` (38 tests). `tests/bench_metagateway.py` (benchmark suite).
+- **Sub-gateways HTTP (legacy)**: `gateway/*.py` en puertos 8081-8085 — deprecados, servicios systemd enmascarados. Reemplazados por MCPProxyManager STDIO directo.
 
 ### L2 (`layers/l2_brain`)
 - Dominio/orquestación en estructura plana (`models.py`, `orchestrator.py`, `daemon.py`).

@@ -15,6 +15,6 @@
     "timeout_ms": 3000
   },
   "gates": {
-    "no_destruct_commands_gate": "Only read-only safe version queries are allowed to run."
+    "no_destruct_commands_gate": "Version queries are allowed. Write operations require contract scope."
   }
 }

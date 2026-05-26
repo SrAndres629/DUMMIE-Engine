@@ -1,11 +1,18 @@
 ---
-spec_id: "171_shadow_runtime_classifier"
-title: "Shadow Runtime Classifier"
-status: "DEPRECATED"
-layer: "L2"
-last_verified_on: "2026-05-17"
+spec_id: 171_shadow_runtime_classifier
+title: Shadow Runtime Classifier
+status: DEPRECATED
+layer: L2
+last_verified_on: '2026-05-17'
+claims:
+- id: 171_shadow_runtime_classifier-file-valid
+  description: Spec file '171_shadow_runtime_classifier.md' exists, parses valid YAML
+    frontmatter, and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/specs/171_shadow_runtime_classifier.md').read().split('---')[1]); assert
+    d, 'empty frontmatter'"
+  severity: critical
 ---
-
 ## Purpose
 This specification establishes the non-destructive auditor of shadow modules (HEARTBEAT-1.1). It classifies modules identified as unwired/unmapped into logical operational roles (e.g., CLI entrypoint, dynamic import candidate, script support, test utility) to clarify their status without deleting or moving them.
 

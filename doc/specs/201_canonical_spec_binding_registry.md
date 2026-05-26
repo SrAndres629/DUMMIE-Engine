@@ -1,11 +1,20 @@
 ---
-spec_id: "DE-V2-L2-201"
-title: "Canonical Spec Binding Registry"
-status: "ACTIVE"
-layer: "L2"
-last_verified_on: "2026-05-19"
+spec_id: DE-V2-L2-201
+title: Canonical Spec Binding Registry
+status: ACTIVE
+layer: L2
+last_verified_on: '2026-05-19'
+dependencies:
+- specs/108_truth_hierarchy_canonicality_policy.md
+claims:
+- id: 201_canonical_spec_binding_registry-file-valid
+  description: Spec file '201_canonical_spec_binding_registry.md' exists, parses valid
+    YAML frontmatter, and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/specs/201_canonical_spec_binding_registry.md').read().split('---')[1]);
+    assert d, 'empty frontmatter'"
+  severity: critical
 ---
-
 ## Purpose
 Define one canonical registry that binds every spec to its physical implementation artifacts, tests, scripts, and operational data paths.
 

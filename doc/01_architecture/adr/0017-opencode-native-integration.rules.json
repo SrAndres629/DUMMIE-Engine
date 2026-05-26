@@ -1,0 +1,49 @@
+{
+  "spec_id": "DE-ADR-0017",
+  "title": "OpenCode Native Integration",
+  "version": "1.0.0",
+  "rules": [
+    {
+      "id": "R1",
+      "description": "opencode.jsonc MUST be generated from DUMMIE SSOT, never hand-edited for DUMMIE config",
+      "severity": "ERROR",
+      "enforcement": "Guardian rule: detect opencode.jsonc in repo root and verify it matches generated output",
+      "pattern": "opencode\\.jsonc"
+    },
+    {
+      "id": "R2",
+      "description": "Plugin MUST route through MetaGateway, never bypass it",
+      "severity": "ERROR",
+      "enforcement": "All chat.params hooks must call metagateway_discover or metagateway_cot_reason",
+      "pattern": "dummie_execute_capability\\(.*metagateway"
+    },
+    {
+      "id": "R3",
+      "description": "SDD guardrails MUST be checked before any remote tool execution",
+      "severity": "ERROR",
+      "enforcement": "tool.execute.before hook must call sdd_remote_guard check",
+      "pattern": "sdd_remote_guard"
+    },
+    {
+      "id": "R4",
+      "description": "Qwen3-Embedding MUST be the default routing embedding model",
+      "severity": "WARNING",
+      "enforcement": "models_config.json must have qwen3-embedding as default embedding model",
+      "pattern": "qwen3-embedding"
+    },
+    {
+      "id": "R5",
+      "description": "dummie-opencode.service MUST exist and be after dummie-engine.service",
+      "severity": "ERROR",
+      "enforcement": "scripts/systemd/ must contain dummie-opencode.service with After=dummie-engine.service",
+      "pattern": "dummie-opencode\\.service"
+    },
+    {
+      "id": "R6",
+      "description": "Plugin MUST NOT hardcode model strings; MUST use SDK config",
+      "severity": "ERROR",
+      "enforcement": "Guardian hardcoded-models rule must pass for plugin directory",
+      "pattern": "gemma3:1b|BAAI/bge-small"
+    }
+  ]
+}

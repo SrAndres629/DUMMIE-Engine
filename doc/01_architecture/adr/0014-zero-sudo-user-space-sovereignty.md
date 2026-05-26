@@ -1,17 +1,28 @@
 ---
-spec_id: "DE-V2-[ADR-0014](0014-zero-sudo-user-space-sovereignty.md)"
-title: "Soberanía de Usuario y Ejecución Zero-Sudo"
-status: "PROPOSED"
-version: "1.0.0"
-layer: "L0"
-namespace: "io.dummie.v2.adr"
-authority: "ARCHITECT"
+spec_id: DE-V2-[ADR-0014](0014-zero-sudo-user-space-sovereignty.md)
+title: Soberanía de Usuario y Ejecución Zero-Sudo
+status: PROPOSED
+version: 1.0.0
+layer: L0
+namespace: io.dummie.v2.adr
+authority: ARCHITECT
 dependencies:
-  - id: "DE-V2-[ADR-0006](0006-sovereign-hybrid-documentation-protocol.md)"
-    relationship: "REINFORCES"
-tags: ["architectural_decision", "security", "permissions", "user_space"]
+- id: DE-V2-[ADR-0006](0006-sovereign-hybrid-documentation-protocol.md)
+  relationship: REINFORCES
+tags:
+- architectural_decision
+- security
+- permissions
+- user_space
+claims:
+- id: 0014-zero-sudo-user-space-sovereignty-file-valid
+  description: Spec file '0014-zero-sudo-user-space-sovereignty.md' exists, parses
+    valid YAML frontmatter, and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/01_architecture/adr/0014-zero-sudo-user-space-sovereignty.md').read().split('---')[1]);
+    assert d, 'empty frontmatter'"
+  severity: critical
 ---
-
 # [ADR-0014](0014-zero-sudo-user-space-sovereignty.md): Soberanía de Usuario y Ejecución Zero-Sudo
 
 ## Abstract

@@ -1,0 +1,25 @@
+{
+  "spec_id": "210_tmpfs_aiwg_ephemeral",
+  "rules": [
+    {
+      "id": "TAE-001",
+      "description": "tmpfs mounts must be created as ExecStartPre, before the main process starts"
+    },
+    {
+      "id": "TAE-002",
+      "description": "tmpfs mounts must be cleaned up in ExecStopPost to avoid stale mounts"
+    },
+    {
+      "id": "TAE-003",
+      "description": "Only runtime, reports, and sockets go to tmpfs — never identity, memory, heartbeat"
+    },
+    {
+      "id": "TAE-004",
+      "description": "Mount sizes: runtime=256M, reports=512M, sockets=64M"
+    },
+    {
+      "id": "TAE-005",
+      "description": "Permissions must be 0755, owned by root"
+    }
+  ]
+}

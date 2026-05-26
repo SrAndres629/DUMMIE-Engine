@@ -4,7 +4,7 @@
   "rules": [
     {
       "id": "R1",
-      "description": "Swarm is advisory-only and cannot mutate workspace directly.",
+      "description": "Swarm is executive and can mutate .aiwg/ and worktree paths within contract scope.",
       "priority": "CRITICAL"
     },
     {

@@ -1,12 +1,19 @@
 ---
-spec_id: "193_local_embedding_resource_policy"
-title: "Local Embedding Resource Policy"
-status: "ACTIVE"
-layer: "L2"
-last_verified_on: "2026-05-20"
-version: "1.0.0"
+spec_id: 193_local_embedding_resource_policy
+title: Local Embedding Resource Policy
+status: ACTIVE
+layer: L2
+last_verified_on: '2026-05-20'
+version: 1.0.0
+claims:
+- id: 193_local_embedding_resource_policy-file-valid
+  description: Spec file '193_local_embedding_resource_policy.md' exists, parses valid
+    YAML frontmatter, and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/specs/193_local_embedding_resource_policy.md').read().split('---')[1]);
+    assert d, 'empty frontmatter'"
+  severity: critical
 ---
-
 # Spec 193: Local Embedding Resource Policy
 
 ## Purpose

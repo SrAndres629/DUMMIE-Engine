@@ -1,11 +1,18 @@
 ---
-spec_id: "172_six_dimensional_context_runtime"
-title: "Six-Dimensional Context Runtime"
-status: "DEPRECATED"
-layer: "L2"
-last_verified_on: "2026-05-16"
+spec_id: 172_six_dimensional_context_runtime
+title: Six-Dimensional Context Runtime
+status: DEPRECATED
+layer: L2
+last_verified_on: '2026-05-16'
+claims:
+- id: 172_six_dimensional_context_runtime-file-valid
+  description: Spec file '172_six_dimensional_context_runtime.md' exists, parses valid
+    YAML frontmatter, and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/specs/172_six_dimensional_context_runtime.md').read().split('---')[1]);
+    assert d, 'empty frontmatter'"
+  severity: critical
 ---
-
 ## Purpose
 This spec establishes the six-dimensional context axis runtime (HEARTBEAT-2) to translate raw scan matrices and reports into a curated, high-value, multidimensional context packet.
 

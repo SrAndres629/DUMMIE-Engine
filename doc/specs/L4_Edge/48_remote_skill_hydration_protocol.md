@@ -11,10 +11,19 @@ dependencies:
   relationship: INSTALLS_CONTRACT
 - id: DE-V2-L3-04
   relationship: AUDITED_BY
+- specs/L4_Edge/18_loci_ontology_mapping.md
 tags:
 - edge_layer
 - skill_hydration
 - remote_fetching
+claims:
+- id: 48_remote_skill_hydration_protocol-file-valid
+  description: Spec file '48_remote_skill_hydration_protocol.md' exists, parses valid
+    YAML frontmatter, and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/specs/L4_Edge/48_remote_skill_hydration_protocol.md').read().split('---')[1]);
+    assert d, 'empty frontmatter'"
+  severity: critical
 ---
 # 48. Protocolo de Hidratación Remota de Habilidades (Agentic Skill Fetcher)
 

@@ -1,12 +1,19 @@
 ---
-spec_id: "195_performance_optimization"
-title: "Performance Optimization - Memory, Process Consolidation, Aggressive Pruning"
-status: "ACTIVE"
-layer: "L2"
-last_verified_on: "2026-05-21"
-version: "1.0.0"
+spec_id: 195_performance_optimization
+title: Performance Optimization - Memory, Process Consolidation, Aggressive Pruning
+status: ACTIVE
+layer: L2
+last_verified_on: '2026-05-21'
+version: 1.0.0
+claims:
+- id: 195_performance_optimization-file-valid
+  description: Spec file '195_performance_optimization.md' exists, parses valid YAML
+    frontmatter, and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/specs/195_performance_optimization.md').read().split('---')[1]); assert
+    d, 'empty frontmatter'"
+  severity: critical
 ---
-
 # Spec 195: Performance Optimization
 
 ## Purpose

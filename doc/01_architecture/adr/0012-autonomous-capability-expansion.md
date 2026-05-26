@@ -1,13 +1,25 @@
 ---
-spec_id: "DE-V2-L0-ADR-0012"
-title: "Expansión Autónoma de Capacidades (MCP y Skills)"
-status: "ACCEPTED"
-version: "1.0.0"
-layer: "L0"
-namespace: "io.dummie.v2.adr"
-authority: "ARCHITECT"
+spec_id: DE-V2-L0-ADR-0012
+title: Expansión Autónoma de Capacidades (MCP y Skills)
+status: ACCEPTED
+version: 1.0.0
+layer: L0
+namespace: io.dummie.v2.adr
+authority: ARCHITECT
+claims:
+- id: 0012-autonomous-capability-expansion-file-valid
+  description: Spec file '0012-autonomous-capability-expansion.md' exists, parses
+    valid YAML frontmatter, and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/01_architecture/adr/0012-autonomous-capability-expansion.md').read().split('
+merged_from:
+- adr/ADR-001-SDK-Architecture.md
+updated: '2026-05-26'
 ---
-
+')[1]);
+    assert d, 'empty frontmatter'"
+  severity: critical
+---
 # ADR-0012: Expansión Autónoma de Capacidades (MCP y Skills)
 
 ## Contexto y Problema

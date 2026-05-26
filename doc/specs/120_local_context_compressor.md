@@ -1,11 +1,19 @@
 ---
-spec_id: "DE-V2-L2-120"
-title: "LocalContextCompressor"
-status: "ACTIVE"
-layer: "L2"
-last_verified_on: "2026-05-16"
-version: "1.0.0"
-namespace: "dummie.engine.plan_v1"
+spec_id: DE-V2-L2-120
+title: LocalContextCompressor
+status: ACTIVE
+layer: L2
+last_verified_on: '2026-05-16'
+version: 1.0.0
+namespace: dummie.engine.plan_v1
+claims:
+- id: 120_local_context_compressor-file-valid
+  description: Spec file '120_local_context_compressor.md' exists, parses valid YAML
+    frontmatter, and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/specs/120_local_context_compressor.md').read().split('---')[1]); assert
+    d, 'empty frontmatter'"
+  severity: critical
 ---
 # Spec 120 - LocalContextCompressor
 

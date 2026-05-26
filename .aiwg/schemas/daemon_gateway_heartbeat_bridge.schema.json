@@ -12,7 +12,7 @@
         "dispatch_id": { "type": "string" },
         "selected_action": { "type": "object" },
         "target": { "type": "string", "enum": ["local", "daemon_invocation", "gateway", "antigravity", "codex", "gemini", "human_review"] },
-        "mode": { "type": "string", "enum": ["observe_only", "advisory", "repair_planning", "patch_proposal"] },
+        "mode": { "type": "string", "enum": ["observe_only", "advisory", "repair_planning", "patch_proposal", "execute", "autonomous"] },
         "context_packet_ref": { "type": "string" },
         "memory_refs": {
           "type": "array",

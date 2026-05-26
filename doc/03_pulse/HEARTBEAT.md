@@ -1,9 +1,12 @@
 ---
-spec_id: "DE-V2-PULSE-HB"
-title: "Operational Heartbeat"
-status: "DRAFT"
-layer: "L0"
-last_verified_on: "2026-04-24"
+spec_id: DE-V2-PULSE-HB
+title: Operational Heartbeat
+status: DRAFT
+layer: L0
+last_verified_on: '2026-04-24'
+dependencies:
+- specs/L1_Nervous/44_pervasive_channel_adapters.md
+- specs/L4_Edge/18_loci_ontology_mapping.md
 ---
 
 # Operational Heartbeat

@@ -1,3 +1,8 @@
+---
+status: ACTIVE
+layer: agentic
+domain: [validation, evidence, quality]
+---
 # VALIDATION_EVIDENCE
 
 ## Purpose

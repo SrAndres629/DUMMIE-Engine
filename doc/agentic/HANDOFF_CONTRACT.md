@@ -1,3 +1,8 @@
+---
+status: ACTIVE
+layer: agentic
+domain: [handoff, contract, protocol]
+---
 # HANDOFF_CONTRACT
 
 ## Purpose

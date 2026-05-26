@@ -1,7 +1,7 @@
 {
   "_meta": {
     "registry_type": "mcp",
-    "version": "1.8.2",
+    "version": "1.9.0",
     "generated_at": "2026-05-22T00:00:00Z",
     "generated_by": "update_registry.py",
     "purpose": "Canonical map of all MCP-related files: servers, proxies, drivers, tool skills, configs, specs, and quarantine. No files were moved or deleted.",
@@ -115,7 +115,7 @@
       "canonical_target": "dummie_gateway_config.json",
       "owner_layer": "root",
       "risk": "medium",
-      "reason": "Gateway configuration. Defines 13 remote MCP server connections across 6 profiles: core (github, shell, filesystem, git, muapi), auxiliary (sequentialthinking, mcp-bash, browser-use), knowledge (sqlite), media_generation (mcp-comfyui), cloud (cloudflare, vercel), infrastructure (docker). Should eventually move to .aiwg/config/.",
+      "reason": "Gateway configuration. Defines 13 remote MCP server connections across 6 profiles: core (github, shell, filesystem, git), auxiliary (sequentialthinking, mcp-bash, browser-use), knowledge (sqlite), media_generation (mcp-comfyui), cloud (cloudflare, vercel), infrastructure (docker). Should eventually move to .aiwg/config/.",
       "recommended_action": "alias"
     },
     {
@@ -141,21 +141,21 @@
     {
       "path": "doc/specs/15_mcp_sidecar_isolation.md",
       "kind": "mcp_spec",
-      "status": "canonical",
+      "status": "planned",
       "canonical_target": "doc/specs/15_mcp_sidecar_isolation.md",
       "owner_layer": "doc",
       "risk": "low",
-      "reason": "Spec for MCP sidecar isolation with matching .feature and .rules.json.",
+      "reason": "Spec file never authored. Status changed from canonical to planned.",
       "recommended_action": "keep"
     },
     {
       "path": "doc/specs/16_mcp_dynamic_gateway.md",
       "kind": "mcp_spec",
-      "status": "canonical",
+      "status": "planned",
       "canonical_target": "doc/specs/16_mcp_dynamic_gateway.md",
       "owner_layer": "doc",
       "risk": "low",
-      "reason": "Spec for MCP dynamic gateway with matching .feature and .rules.json.",
+      "reason": "Spec file never authored. Status changed from canonical to planned.",
       "recommended_action": "keep"
     },
     {
@@ -186,16 +186,6 @@
       "owner_layer": "l1_nervous",
       "risk": "low",
       "reason": "Purity test for MCP server.",
-      "recommended_action": "keep"
-    },
-    {
-      "path": "scripts/muapi_stdio_proxy.py",
-      "kind": "mcp_proxy",
-      "status": "canonical",
-      "canonical_target": "scripts/muapi_stdio_proxy.py",
-      "owner_layer": "scripts",
-      "risk": "medium",
-      "reason": "Stdio-to-HTTP proxy for muapi-mcp-server at https://api.muapi.ai/mcp. Allows dummie-brain gateway to connect to muapi as a remote sub-server.",
       "recommended_action": "keep"
     },
     {
@@ -259,7 +249,7 @@
       "recommended_action": "keep"
     },
     {
-      "path": "docker-mcp",
+      "path": "/home/jorand/Escritorio/Biblioteca MCP/docker/",
       "kind": "mcp_server_external",
       "status": "canonical",
       "canonical_target": "/home/jorand/Escritorio/Biblioteca MCP/docker/",
@@ -305,7 +295,7 @@
       "canonical_target": "layers/l1_nervous/capability_index.py",
       "owner_layer": "l1_nervous",
       "risk": "medium",
-      "reason": "CapabilityIndex: canonical inventory of all MCP tools and skills. NO embeddings — matching ontologico exacto. Skills indexadas pero NO cargadas hasta invocacion (lazy loading via gateway).",
+      "reason": "CapabilityIndex: canonical inventory of all MCP tools and skills. NO embeddings \u2014 matching ontologico exacto. Skills indexadas pero NO cargadas hasta invocacion (lazy loading via gateway).",
       "recommended_action": "keep"
     },
     {
@@ -616,7 +606,7 @@
       "status": "active",
       "owner_layer": "l1_nervous",
       "risk": "high",
-      "reason": "Gateway tool implementations — dummie_discover, dummie_execute, dummie_analyze.",
+      "reason": "Gateway tool implementations \u2014 dummie_discover, dummie_execute, dummie_analyze.",
       "recommended_action": "keep"
     },
     {
@@ -808,7 +798,7 @@
       "status": "active",
       "owner_layer": "l1_nervous",
       "risk": "medium",
-      "reason": "Media sub-gateway SSOT config. Port 8081. muapi, mcp-comfyui servers.",
+      "reason": "Media sub-gateway SSOT config. Port 8081. mcp-comfyui servers.",
       "recommended_action": "keep",
       "spec": 170
     },
@@ -945,15 +935,6 @@
       "owner_layer": "scripts",
       "risk": "high",
       "reason": "Production orchestrator: manages MCP gateway lifecycle, daemon process.",
-      "recommended_action": "keep"
-    },
-    {
-      "path": "scripts/dummie-engine.service",
-      "kind": "systemd_service",
-      "status": "active",
-      "owner_layer": "scripts",
-      "risk": "medium",
-      "reason": "Systemd service unit for DUMMIE Engine daemonization.",
       "recommended_action": "keep"
     },
     {
@@ -1202,7 +1183,7 @@
       "status": "active",
       "owner_layer": "l1_nervous",
       "risk": "medium",
-      "reason": "_ensure_loaded() compartido — elimina 4x duplicacion.",
+      "reason": "_ensure_loaded() compartido \u2014 elimina 4x duplicacion.",
       "recommended_action": "keep"
     },
     {
@@ -1347,42 +1328,142 @@
       "status": "active",
       "owner_layer": "scripts",
       "risk": "medium",
-      "reason": "Service installer: copies 3 systemd units to /etc/systemd/system/, enables, starts in dependency order (memory→engine→guardian).",
+      "reason": "Service installer: copies 3 systemd units to /etc/systemd/system/, enables, starts in dependency order (memory\u2192engine\u2192guardian).",
       "recommended_action": "keep"
     },
     {
-      "path": "configs/models_config.json",
+      "path": "layers/l1_nervous/configs/models_config.json",
       "kind": "ssot_model_config",
       "status": "active",
       "owner_layer": "l1_nervous",
       "risk": "high",
-      "reason": "SSOT model config: gemma4:e2b (default LLM), BAAI/bge-small-en-v1.5 (embedding), cross-encoder/ms-marco-MiniLM-L-2-v2 (reranker). Adapter map for dynamic import via importlib.",
+      "reason": "SSOT model config: gemma4:e2b (default LLM), qwen3-embedding (default embedding), cross-encoder/ms-marco-MiniLM-L-2-v2 (reranker). Adapter map for dynamic import via importlib.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "doc/adr/ADR-004-Opencode-Native-Integration.md",
+      "kind": "adr",
+      "status": "canonical",
+      "owner_layer": "l0",
+      "risk": "medium",
+      "reason": "ADR-004: DUMMIE como kernel cognitivo, opencode como shell. Define relacion SSOT, plugin hooks, multi-sesion.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "doc/01_architecture/adr/0017-opencode-native-integration.md",
+      "kind": "adr",
+      "status": "canonical",
+      "owner_layer": "l0",
+      "risk": "medium",
+      "reason": "ADR-0017 (full format): OpenCode Native Integration. Incluye abstract, contexto, decision, consecuencias, y MSA siblings.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "doc/01_architecture/adr/0017-opencode-native-integration.feature",
+      "kind": "adr_feature",
+      "status": "canonical",
+      "owner_layer": "l0",
+      "risk": "medium",
+      "reason": "Feature file para ADR-0017: 5 scenarios (config generation, MetaGateway routing, SDD guardrails, multi-session, Qwen3-Embedding).",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "doc/01_architecture/adr/0017-opencode-native-integration.rules.json",
+      "kind": "adr_rules",
+      "status": "canonical",
+      "owner_layer": "l0",
+      "risk": "medium",
+      "reason": "Machine rules para ADR-0017: 6 reglas (SSOT generation, MetaGateway routing, SDD, Qwen3 default, systemd, no hardcoded models).",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "doc/specs/207_opencode_native_integration.md",
+      "kind": "mcp_spec",
+      "status": "active",
+      "owner_layer": "l1",
+      "risk": "medium",
+      "reason": "Spec 172: diseno completo de integracion opencode-native. Arquitectura, SSOT chain, components, routing pipeline, multi-session, verification.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "scripts/generate_opencode_config.py",
+      "kind": "mcp_script",
+      "status": "active",
+      "owner_layer": "l1",
+      "risk": "medium",
+      "reason": "Generador de opencode.jsonc desde SSOTs DUMMIE. Lee models_config.json, dummie_gateway_config.json, meta_router_assignments.json.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "scripts/systemd/dummie-opencode.service",
+      "kind": "systemd_service",
+      "status": "active",
+      "owner_layer": "l1",
+      "risk": "medium",
+      "reason": "Systemd service para opencode con plugin DUMMIE nativo. After dummie-engine.service. ExecStartPre: generate_opencode_config.py.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "layers/l1_nervous/plugins/opencode-dummie/package.json",
+      "kind": "plugin_pkg",
+      "status": "active",
+      "owner_layer": "l1",
+      "risk": "medium",
+      "reason": "Plugin package.json: @opencode-ai/plugin v1.15.5, TypeScript.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "layers/l1_nervous/plugins/opencode-dummie/tsconfig.json",
+      "kind": "plugin_config",
+      "status": "active",
+      "owner_layer": "l1",
+      "risk": "low",
+      "reason": "TypeScript config para el plugin: ES2022, ESNext modules, strict mode.",
+      "recommended_action": "keep"
+    },
+    {
+      "path": "layers/l1_nervous/plugins/opencode-dummie/src/index.ts",
+      "kind": "plugin_source",
+      "status": "active",
+      "owner_layer": "l1",
+      "risk": "medium",
+      "reason": "Plugin source: 3 custom tools (dummie_discover, dummie_route, dummie_swarm), 5 hooks (chat.message, shell.env, system.transform, tool.execute.before, session.compacting).",
+      "recommended_action": "keep"
+    },
+    {
+      "path": ".agents/skills/opencode-integration/SKILL.md",
+      "kind": "mcp_skill_definition",
+      "status": "active",
+      "owner_layer": "l1",
+      "risk": "low",
+      "reason": "Agent skill para opencode + DUMMIE integration: SSOT chain, plugin hooks, custom tools, models, services, common tasks.",
       "recommended_action": "keep"
     }
   ],
   "summary": {
-    "total_items": 152,
+    "total_items": 163,
     "status_counts": {
-      "active": 114,
-      "canonical": 33,
-      "deprecated": 1,
-      "duplicate": 1,
+      "canonical": 31,
       "generated": 1,
-      "runtime_local": 2
+      "duplicate": 1,
+      "planned": 2,
+      "runtime_local": 2,
+      "deprecated": 1,
+      "active": 125
     },
     "architecture_notes": [
-      "MCP server lives in L1 (mcp_server.py). This is architecturally correct — L1 is the nervous system gateway.",
+      "MCP server lives in L1 (mcp_server.py). This is architecturally correct \u2014 L1 is the nervous system gateway.",
       "MCP proxy/gateway (mcp_proxy.py at 17.4KB) is the most complex MCP component. Risk of becoming a God Object.",
       "MCP driver in L5 (mcp_driver.py at 2KB) is appropriately thin. Good separation.",
       "Go MCP client in L1 (mcp_client.go) enables polyglot tool invocation. Used by L0 overseer pipeline.",
-      "Quarantine directory exists but automated quarantine pipeline (static audit → sandbox → approval) is NOT implemented yet."
+      "Quarantine directory exists but automated quarantine pipeline (static audit \u2192 sandbox \u2192 approval) is NOT implemented yet."
     ],
     "critical_issues": [
       "dummie_gateway_config.json at root should be in .aiwg/config/ or .agents/config/",
       "Log files (mcp.log, mcp_server.log) should be gitignored and directed to .aiwg/logs/"
     ]
   },
-  "version": "1.8.0",
+  "version": "1.9.0",
   "generated_at": "2026-05-22T00:00:00Z",
-  "total_items": 152
+  "total_items": 163
 }

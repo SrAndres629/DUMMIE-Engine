@@ -6,6 +6,14 @@ layer: L0
 last_verified_on: '2026-04-24'
 version: 1.0.0
 namespace: dummie.engine.l0
+claims:
+- id: 08_devex_and_deployment_strategy-file-valid
+  description: Spec file '08_devex_and_deployment_strategy.md' exists, parses valid
+    YAML frontmatter, and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/specs/L0_Overseer/08_devex_and_deployment_strategy.md').read().split('---')[1]);
+    assert d, 'empty frontmatter'"
+  severity: critical
 ---
 # DevEx y Estrategia de Despliegue Hermético
 

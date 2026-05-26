@@ -1,3 +1,8 @@
+---
+status: ACTIVE
+layer: governance
+domain: [principles, engineering, evolvability]
+---
 # Engineering Principles: Evolvability & Structural Integrity
 
 Este documento establece los principios técnicos mandatorios para cualquier intervención en el DUMMIE Engine. El objetivo es garantizar que el sistema sea evolutivo, mantenible y resistente a regresiones.

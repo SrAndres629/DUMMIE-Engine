@@ -1,11 +1,18 @@
 ---
-spec_id: "206_canonical_mcp_launcher_contract"
-title: "Canonical MCP Launcher Contract"
-status: "ACTIVE"
-layer: "L1"
-last_verified_on: "2026-05-21"
+spec_id: 206_canonical_mcp_launcher_contract
+title: Canonical MCP Launcher Contract
+status: ACTIVE
+layer: L1
+last_verified_on: '2026-05-21'
+claims:
+- id: 206_canonical_mcp_launcher_contract-file-valid
+  description: Spec file '206_canonical_mcp_launcher_contract.md' exists, parses valid
+    YAML frontmatter, and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/specs/206_canonical_mcp_launcher_contract.md').read().split('---')[1]);
+    assert d, 'empty frontmatter'"
+  severity: critical
 ---
-
 # Spec 206: Canonical MCP Launcher Contract
 
 ## Purpose

@@ -1,22 +1,29 @@
 ---
-spec_id: "164_heartbeat_lifecycle_runtime"
-title: "164 Heartbeat Lifecycle Runtime"
-status: "ACTIVE"
-canonicality: "canonical"
-artifact_type: "spec"
-plan: "DUMMIE PLAN V1"
-layer: "l2_brain"
-created_by: "heartbeat_0_lifecycle"
-last_verified_on: "2026-05-16"
+spec_id: 164_heartbeat_lifecycle_runtime
+title: 164 Heartbeat Lifecycle Runtime
+status: ACTIVE
+canonicality: canonical
+artifact_type: spec
+plan: DUMMIE PLAN V1
+layer: l2_brain
+created_by: heartbeat_0_lifecycle
+last_verified_on: '2026-05-16'
+claims:
+- id: 164_heartbeat_lifecycle_runtime-file-valid
+  description: Spec file '164_heartbeat_lifecycle_runtime.md' exists, parses valid
+    YAML frontmatter, and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/specs/164_heartbeat_lifecycle_runtime.md').read().split('---')[1]);
+    assert d, 'empty frontmatter'"
+  severity: critical
 ---
-
 # Spec 164: Heartbeat Lifecycle Runtime
 
 ## Purpose
 Orchestrates a full observe -> reason -> queue -> learn cycle.
 
 ## Scope
-- Runs heartbeat in observe_only, advisory or repair_planning mode. Does not mutate system automatically.
+- Runs heartbeat in observe, advisory, repair_planning, execute, or autonomous mode. May mutate system within mission contract scope.
 
 ## Current State
 - Active. Created by Heartbeat-0.

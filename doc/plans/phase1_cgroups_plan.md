@@ -1,3 +1,8 @@
+---
+status: ACTIVE
+layer: l0
+domain: [cgroups, systemd, slicing, resource]
+---
 # Phase 1: Cgroups & OS Slicing (Agentic Slice Integration)
 
 ## Objetivo

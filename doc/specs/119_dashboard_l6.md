@@ -1,11 +1,19 @@
 ---
-spec_id: "DE-V2-L2-119"
-title: "Dashboard L6"
-status: "ACTIVE"
-layer: "L6"
-last_verified_on: "2026-05-16"
-version: "1.0.0"
-namespace: "dummie.engine.plan_v1"
+spec_id: DE-V2-L2-119
+title: Dashboard L6
+status: ACTIVE
+layer: L6
+last_verified_on: '2026-05-16'
+version: 1.0.0
+namespace: dummie.engine.plan_v1
+claims:
+- id: 119_dashboard_l6-file-valid
+  description: Spec file '119_dashboard_l6.md' exists, parses valid YAML frontmatter,
+    and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/specs/119_dashboard_l6.md').read().split('---')[1]); assert d, 'empty
+    frontmatter'"
+  severity: critical
 ---
 # Spec 119 - Dashboard L6
 

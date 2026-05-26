@@ -1,5 +1,355 @@
-...............................                                          [100%]
-31 passed, 713 deselected in 0.66s
-.......                                                                  [100%]
-7 passed in 0.43s
-[2026-05-22T05:00:04] 2/0 tests ✅ | trend: stable | branch: main | bootstrap: False
+
+==================================== ERRORS ====================================
+________________ ERROR collecting tests/test_auto_evolution.py _________________
+ImportError while importing test module '/media/datasets/DUMMIE Engine/layers/l2_brain/tests/test_auto_evolution.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/home/jorand/.local/share/uv/python/cpython-3.14.3-linux-x86_64-gnu/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+layers/l2_brain/tests/test_auto_evolution.py:7: in <module>
+    from orchestrator import CognitiveOrchestrator
+E   ImportError: cannot import name 'CognitiveOrchestrator' from 'orchestrator' (/media/datasets/DUMMIE Engine/orchestrator/__init__.py)
+_____________ ERROR collecting tests/test_business_orchestrator.py _____________
+ImportError while importing test module '/media/datasets/DUMMIE Engine/layers/l2_brain/tests/test_business_orchestrator.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/home/jorand/.local/share/uv/python/cpython-3.14.3-linux-x86_64-gnu/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+layers/l2_brain/tests/test_business_orchestrator.py:1: in <module>
+    from business_orchestrator import BusinessSolutionOrchestrator
+E   ModuleNotFoundError: No module named 'business_orchestrator'
+_________ ERROR collecting tests/test_causal_replay_runtime_guards.py __________
+ImportError while importing test module '/media/datasets/DUMMIE Engine/layers/l2_brain/tests/test_causal_replay_runtime_guards.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/home/jorand/.local/share/uv/python/cpython-3.14.3-linux-x86_64-gnu/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+layers/l2_brain/tests/test_causal_replay_runtime_guards.py:8: in <module>
+    from causal_replay import CausalEvent, replay_until
+E   ModuleNotFoundError: No module named 'causal_replay'
+________________ ERROR collecting tests/test_cognitive_hooks.py ________________
+ImportError while importing test module '/media/datasets/DUMMIE Engine/layers/l2_brain/tests/test_cognitive_hooks.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/home/jorand/.local/share/uv/python/cpython-3.14.3-linux-x86_64-gnu/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+layers/l2_brain/tests/test_cognitive_hooks.py:7: in <module>
+    from cognitive_hooks import (  # noqa: E402
+E   ModuleNotFoundError: No module named 'cognitive_hooks'
+______________ ERROR collecting tests/test_cognitive_loop_e2e.py _______________
+ImportError while importing test module '/media/datasets/DUMMIE Engine/layers/l2_brain/tests/test_cognitive_loop_e2e.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/home/jorand/.local/share/uv/python/cpython-3.14.3-linux-x86_64-gnu/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+layers/l2_brain/tests/test_cognitive_loop_e2e.py:13: in <module>
+    from prompt_to_mission import PromptToMissionCompiler
+E   ModuleNotFoundError: No module named 'prompt_to_mission'
+___________________ ERROR collecting tests/test_consensus.py ___________________
+ImportError while importing test module '/media/datasets/DUMMIE Engine/layers/l2_brain/tests/test_consensus.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/home/jorand/.local/share/uv/python/cpython-3.14.3-linux-x86_64-gnu/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+layers/l2_brain/tests/test_consensus.py:8: in <module>
+    from consensus import build_consensus_decision
+E   ModuleNotFoundError: No module named 'consensus'
+___________ ERROR collecting tests/test_context_coverage_auditor.py ____________
+ImportError while importing test module '/media/datasets/DUMMIE Engine/layers/l2_brain/tests/test_context_coverage_auditor.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/home/jorand/.local/share/uv/python/cpython-3.14.3-linux-x86_64-gnu/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+layers/l2_brain/tests/test_context_coverage_auditor.py:7: in <module>
+    from context_coverage_auditor import ContextCoverageAuditor
+E   ModuleNotFoundError: No module named 'context_coverage_auditor'
+_______________ ERROR collecting tests/test_entropy_governor.py ________________
+ImportError while importing test module '/media/datasets/DUMMIE Engine/layers/l2_brain/tests/test_entropy_governor.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/home/jorand/.local/share/uv/python/cpython-3.14.3-linux-x86_64-gnu/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+layers/l2_brain/tests/test_entropy_governor.py:8: in <module>
+    from entropy_governor import classify_memory_temperature
+E   ModuleNotFoundError: No module named 'entropy_governor'
+____________ ERROR collecting tests/test_evolution_delta_applier.py ____________
+ImportError while importing test module '/media/datasets/DUMMIE Engine/layers/l2_brain/tests/test_evolution_delta_applier.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/home/jorand/.local/share/uv/python/cpython-3.14.3-linux-x86_64-gnu/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+layers/l2_brain/tests/test_evolution_delta_applier.py:4: in <module>
+    from evolution_delta_applier import apply_evolution_delta
+E   ModuleNotFoundError: No module named 'evolution_delta_applier'
+_____________ ERROR collecting tests/test_imports_compatibility.py _____________
+ImportError while importing test module '/media/datasets/DUMMIE Engine/layers/l2_brain/tests/test_imports_compatibility.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/home/jorand/.local/share/uv/python/cpython-3.14.3-linux-x86_64-gnu/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+layers/l2_brain/tests/test_imports_compatibility.py:5: in <module>
+    import layers.l2_brain.flat_brain.models as flat_models
+E   ModuleNotFoundError: No module named 'layers.l2_brain.flat_brain'
+________________ ERROR collecting tests/test_knowledge_ports.py ________________
+ImportError while importing test module '/media/datasets/DUMMIE Engine/layers/l2_brain/tests/test_knowledge_ports.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/home/jorand/.local/share/uv/python/cpython-3.14.3-linux-x86_64-gnu/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+layers/l2_brain/tests/test_knowledge_ports.py:8: in <module>
+    from knowledge_ports import KnowledgeProvider, WisdomPublisher, EntropyGovernor, RehydrationProvider
+E   ModuleNotFoundError: No module named 'knowledge_ports'
+______________ ERROR collecting tests/test_memory_spine_bridge.py ______________
+ImportError while importing test module '/media/datasets/DUMMIE Engine/layers/l2_brain/tests/test_memory_spine_bridge.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/home/jorand/.local/share/uv/python/cpython-3.14.3-linux-x86_64-gnu/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+layers/l2_brain/tests/test_memory_spine_bridge.py:7: in <module>
+    from memory_spine_bridge import MemorySpineBridge
+E   ModuleNotFoundError: No module named 'memory_spine_bridge'
+__ ERROR collecting tests/test_metacognitive_self_improvement_integration.py ___
+ImportError while importing test module '/media/datasets/DUMMIE Engine/layers/l2_brain/tests/test_metacognitive_self_improvement_integration.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/home/jorand/.local/share/uv/python/cpython-3.14.3-linux-x86_64-gnu/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+layers/l2_brain/tests/test_metacognitive_self_improvement_integration.py:5: in <module>
+    from evolution_delta_applier import apply_evolution_delta
+E   ModuleNotFoundError: No module named 'evolution_delta_applier'
+_________________ ERROR collecting tests/test_model_router.py __________________
+ImportError while importing test module '/media/datasets/DUMMIE Engine/layers/l2_brain/tests/test_model_router.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/home/jorand/.local/share/uv/python/cpython-3.14.3-linux-x86_64-gnu/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+layers/l2_brain/tests/test_model_router.py:19: in <module>
+    from prompt_preprocessor import (
+E   ModuleNotFoundError: No module named 'prompt_preprocessor'
+_________ ERROR collecting tests/test_orchestrator_bridge_contract.py __________
+ImportError while importing test module '/media/datasets/DUMMIE Engine/layers/l2_brain/tests/test_orchestrator_bridge_contract.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/home/jorand/.local/share/uv/python/cpython-3.14.3-linux-x86_64-gnu/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+layers/l2_brain/tests/test_orchestrator_bridge_contract.py:10: in <module>
+    from orchestrator import CognitiveOrchestrator
+E   ImportError: cannot import name 'CognitiveOrchestrator' from 'orchestrator' (/media/datasets/DUMMIE Engine/orchestrator/__init__.py)
+____________ ERROR collecting tests/test_pattern_to_mission_loop.py ____________
+ImportError while importing test module '/media/datasets/DUMMIE Engine/layers/l2_brain/tests/test_pattern_to_mission_loop.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/home/jorand/.local/share/uv/python/cpython-3.14.3-linux-x86_64-gnu/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+layers/l2_brain/tests/test_pattern_to_mission_loop.py:11: in <module>
+    from prompt_to_mission import PromptToMissionCompiler
+E   ModuleNotFoundError: No module named 'prompt_to_mission'
+_______ ERROR collecting tests/test_pattern_to_patch_transaction_e2e.py ________
+ImportError while importing test module '/media/datasets/DUMMIE Engine/layers/l2_brain/tests/test_pattern_to_patch_transaction_e2e.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/home/jorand/.local/share/uv/python/cpython-3.14.3-linux-x86_64-gnu/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+layers/l2_brain/tests/test_pattern_to_patch_transaction_e2e.py:3: in <module>
+    from prompt_to_mission import PromptToMissionCompiler
+E   ModuleNotFoundError: No module named 'prompt_to_mission'
+___________________ ERROR collecting tests/test_preflight.py ___________________
+ImportError while importing test module '/media/datasets/DUMMIE Engine/layers/l2_brain/tests/test_preflight.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/home/jorand/.local/share/uv/python/cpython-3.14.3-linux-x86_64-gnu/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+layers/l2_brain/tests/test_preflight.py:8: in <module>
+    from preflight import build_intent_draft
+E   ModuleNotFoundError: No module named 'preflight'
+_______________ ERROR collecting tests/test_prompt_to_mission.py _______________
+ImportError while importing test module '/media/datasets/DUMMIE Engine/layers/l2_brain/tests/test_prompt_to_mission.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/home/jorand/.local/share/uv/python/cpython-3.14.3-linux-x86_64-gnu/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+layers/l2_brain/tests/test_prompt_to_mission.py:3: in <module>
+    from prompt_to_mission import PromptToMissionCompiler
+E   ModuleNotFoundError: No module named 'prompt_to_mission'
+__________________ ERROR collecting tests/test_rehydration.py __________________
+ImportError while importing test module '/media/datasets/DUMMIE Engine/layers/l2_brain/tests/test_rehydration.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/home/jorand/.local/share/uv/python/cpython-3.14.3-linux-x86_64-gnu/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+layers/l2_brain/tests/test_rehydration.py:8: in <module>
+    from rehydration import dry_run_rehydration
+E   ModuleNotFoundError: No module named 'rehydration'
+___________ ERROR collecting tests/test_sdd_advanced_capabilities.py ___________
+ImportError while importing test module '/media/datasets/DUMMIE Engine/layers/l2_brain/tests/test_sdd_advanced_capabilities.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/home/jorand/.local/share/uv/python/cpython-3.14.3-linux-x86_64-gnu/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+layers/l2_brain/tests/test_sdd_advanced_capabilities.py:10: in <module>
+    from golden_path import generate_golden_path
+E   ModuleNotFoundError: No module named 'golden_path'
+________________ ERROR collecting tests/test_sdd_governance.py _________________
+ImportError while importing test module '/media/datasets/DUMMIE Engine/layers/l2_brain/tests/test_sdd_governance.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/home/jorand/.local/share/uv/python/cpython-3.14.3-linux-x86_64-gnu/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+layers/l2_brain/tests/test_sdd_governance.py:8: in <module>
+    from sdd_governance import (
+E   ModuleNotFoundError: No module named 'sdd_governance'
+_____________ ERROR collecting tests/test_self_healing_planner.py ______________
+ImportError while importing test module '/media/datasets/DUMMIE Engine/layers/l2_brain/tests/test_self_healing_planner.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/home/jorand/.local/share/uv/python/cpython-3.14.3-linux-x86_64-gnu/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+layers/l2_brain/tests/test_self_healing_planner.py:2: in <module>
+    from self_healing_planner import SelfHealingPlanner
+E   ModuleNotFoundError: No module named 'self_healing_planner'
+___________ ERROR collecting tests/test_self_improvement_runtime.py ____________
+ImportError while importing test module '/media/datasets/DUMMIE Engine/layers/l2_brain/tests/test_self_improvement_runtime.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/home/jorand/.local/share/uv/python/cpython-3.14.3-linux-x86_64-gnu/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+layers/l2_brain/tests/test_self_improvement_runtime.py:4: in <module>
+    from self_improvement_runtime import run_self_improvement_cycle
+E   ModuleNotFoundError: No module named 'self_improvement_runtime'
+_______________ ERROR collecting tests/test_self_optimization.py _______________
+ImportError while importing test module '/media/datasets/DUMMIE Engine/layers/l2_brain/tests/test_self_optimization.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/home/jorand/.local/share/uv/python/cpython-3.14.3-linux-x86_64-gnu/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+layers/l2_brain/tests/test_self_optimization.py:18: in <module>
+    from self_optimization import (
+E   ModuleNotFoundError: No module named 'self_optimization'
+__________ ERROR collecting tests/test_self_worktree_orchestrator.py ___________
+ImportError while importing test module '/media/datasets/DUMMIE Engine/layers/l2_brain/tests/test_self_worktree_orchestrator.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/home/jorand/.local/share/uv/python/cpython-3.14.3-linux-x86_64-gnu/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+layers/l2_brain/tests/test_self_worktree_orchestrator.py:3: in <module>
+    from self_worktree_orchestrator import SelfWorktreeOrchestrator
+E   ModuleNotFoundError: No module named 'self_worktree_orchestrator'
+___________ ERROR collecting tests/test_shadow_runtime_classifier.py ___________
+ImportError while importing test module '/media/datasets/DUMMIE Engine/layers/l2_brain/tests/test_shadow_runtime_classifier.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/home/jorand/.local/share/uv/python/cpython-3.14.3-linux-x86_64-gnu/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+layers/l2_brain/tests/test_shadow_runtime_classifier.py:5: in <module>
+    from shadow_runtime_classifier import run_shadow_runtime_classifier
+E   ModuleNotFoundError: No module named 'shadow_runtime_classifier'
+__________ ERROR collecting tests/test_whole_body_scan_calibrator.py ___________
+ImportError while importing test module '/media/datasets/DUMMIE Engine/layers/l2_brain/tests/test_whole_body_scan_calibrator.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/home/jorand/.local/share/uv/python/cpython-3.14.3-linux-x86_64-gnu/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+layers/l2_brain/tests/test_whole_body_scan_calibrator.py:6: in <module>
+    from whole_body_scan_calibrator import run_whole_body_scan_calibration
+E   ModuleNotFoundError: No module named 'whole_body_scan_calibrator'
+______________ ERROR collecting tests/test_whole_body_scanner.py _______________
+ImportError while importing test module '/media/datasets/DUMMIE Engine/layers/l2_brain/tests/test_whole_body_scanner.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/home/jorand/.local/share/uv/python/cpython-3.14.3-linux-x86_64-gnu/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+layers/l2_brain/tests/test_whole_body_scanner.py:5: in <module>
+    from whole_body_scanner import WholeBodyScanner
+E   ModuleNotFoundError: No module named 'whole_body_scanner'
+_____________ ERROR collecting tests/test_wiring_matrix_builder.py _____________
+ImportError while importing test module '/media/datasets/DUMMIE Engine/layers/l2_brain/tests/test_wiring_matrix_builder.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/home/jorand/.local/share/uv/python/cpython-3.14.3-linux-x86_64-gnu/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+layers/l2_brain/tests/test_wiring_matrix_builder.py:5: in <module>
+    from wiring_matrix_builder import run_wiring_matrix_builder
+E   ModuleNotFoundError: No module named 'wiring_matrix_builder'
+=========================== short test summary info ============================
+ERROR layers/l2_brain/tests/test_auto_evolution.py
+ERROR layers/l2_brain/tests/test_business_orchestrator.py
+ERROR layers/l2_brain/tests/test_causal_replay_runtime_guards.py
+ERROR layers/l2_brain/tests/test_cognitive_hooks.py
+ERROR layers/l2_brain/tests/test_cognitive_loop_e2e.py
+ERROR layers/l2_brain/tests/test_consensus.py
+ERROR layers/l2_brain/tests/test_context_coverage_auditor.py
+ERROR layers/l2_brain/tests/test_entropy_governor.py
+ERROR layers/l2_brain/tests/test_evolution_delta_applier.py
+ERROR layers/l2_brain/tests/test_imports_compatibility.py
+ERROR layers/l2_brain/tests/test_knowledge_ports.py
+ERROR layers/l2_brain/tests/test_memory_spine_bridge.py
+ERROR layers/l2_brain/tests/test_metacognitive_self_improvement_integration.py
+ERROR layers/l2_brain/tests/test_model_router.py
+ERROR layers/l2_brain/tests/test_orchestrator_bridge_contract.py
+ERROR layers/l2_brain/tests/test_pattern_to_mission_loop.py
+ERROR layers/l2_brain/tests/test_pattern_to_patch_transaction_e2e.py
+ERROR layers/l2_brain/tests/test_preflight.py
+ERROR layers/l2_brain/tests/test_prompt_to_mission.py
+ERROR layers/l2_brain/tests/test_rehydration.py
+ERROR layers/l2_brain/tests/test_sdd_advanced_capabilities.py
+ERROR layers/l2_brain/tests/test_sdd_governance.py
+ERROR layers/l2_brain/tests/test_self_healing_planner.py
+ERROR layers/l2_brain/tests/test_self_improvement_runtime.py
+ERROR layers/l2_brain/tests/test_self_optimization.py
+ERROR layers/l2_brain/tests/test_self_worktree_orchestrator.py
+ERROR layers/l2_brain/tests/test_shadow_runtime_classifier.py
+ERROR layers/l2_brain/tests/test_whole_body_scan_calibrator.py
+ERROR layers/l2_brain/tests/test_whole_body_scanner.py
+ERROR layers/l2_brain/tests/test_wiring_matrix_builder.py
+!!!!!!!!!!!!!!!!!!! Interrupted: 30 errors during collection !!!!!!!!!!!!!!!!!!!
+598 deselected, 30 errors in 1.42s
+
+==================================== ERRORS ====================================
+_____________ ERROR collecting tests/test_imports_compatibility.py _____________
+ImportError while importing test module '/media/datasets/DUMMIE Engine/layers/l2_brain/tests/test_imports_compatibility.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/home/jorand/.local/share/uv/python/cpython-3.14.3-linux-x86_64-gnu/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+layers/l2_brain/tests/test_imports_compatibility.py:5: in <module>
+    import layers.l2_brain.flat_brain.models as flat_models
+E   ModuleNotFoundError: No module named 'layers.l2_brain.flat_brain'
+=========================== short test summary info ============================
+ERROR layers/l2_brain/tests/test_imports_compatibility.py
+!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+1 error in 0.15s
+[2026-05-26T09:00:04] 0/0 tests ⚠ (2 failed) | trend: initial | branch: main | bootstrap: False
+  Failed tests:
+    ❌ daemon
+    ❌ core

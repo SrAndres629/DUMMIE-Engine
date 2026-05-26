@@ -3,7 +3,7 @@
   "title": "Daemon/Gateway Heartbeat Bridge Rules",
   "invariants": {
     "supported_targets": ["local", "daemon_invocation", "gateway", "antigravity", "codex", "gemini", "human_review"],
-    "supported_modes": ["observe_only", "advisory", "repair_planning", "patch_proposal"]
+    "supported_modes": ["observe_only", "advisory", "repair_planning", "patch_proposal", "execute", "autonomous"]
   },
   "gates": {
     "human_gate": "If requires_human_approval is true, can_execute_now MUST NOT be true.",

@@ -6,6 +6,14 @@ layer: L3
 last_verified_on: '2026-04-24'
 version: 1.0.0
 namespace: dummie.engine.l3
+claims:
+- id: 24_legal_compliance_shield-file-valid
+  description: Spec file '24_legal_compliance_shield.md' exists, parses valid YAML
+    frontmatter, and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/specs/L3_Shield/24_legal_compliance_shield.md').read().split('---')[1]);
+    assert d, 'empty frontmatter'"
+  severity: critical
 ---
 # Blindaje Legal y Cumplimiento (L-Shield)
 

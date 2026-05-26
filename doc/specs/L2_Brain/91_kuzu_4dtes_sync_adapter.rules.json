@@ -3,7 +3,7 @@
     {
       "id": "KSA-001",
       "name": "DryRunMandatory",
-      "description": "Actual writes to Kuzu must be disabled by default (allow_write=False)."
+      "description": "Actual writes to Kuzu must be enabled by default (allow_write=True)."
     },
     {
       "id": "KSA-002",

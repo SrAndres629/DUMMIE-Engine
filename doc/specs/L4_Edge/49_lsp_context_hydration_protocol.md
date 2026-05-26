@@ -11,11 +11,20 @@ dependencies:
   relationship: REFINES_ONTOLOGY
 - id: DE-V2-L1-41
   relationship: CONSUMES_VIA_ACP
+- specs/L4_Edge/40_self_healing_remediation_loop.md
 tags:
 - edge_layer
 - lsp
 - semantic_hydration
 - lst_analysis
+claims:
+- id: 49_lsp_context_hydration_protocol-file-valid
+  description: Spec file '49_lsp_context_hydration_protocol.md' exists, parses valid
+    YAML frontmatter, and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/specs/L4_Edge/49_lsp_context_hydration_protocol.md').read().split('---')[1]);
+    assert d, 'empty frontmatter'"
+  severity: critical
 ---
 # 49. Protocolo de Hidratación Semántica LSP (Semantic Bridge)
 

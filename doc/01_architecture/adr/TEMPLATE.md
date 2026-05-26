@@ -1,13 +1,20 @@
 ---
-spec_id: "DE-V2-L0-ADR-XXX"
-title: "[Título Breve e Imperativo]"
-status: "PROPOSED"
-version: "1.0.0"
-layer: "L0"
-namespace: "io.dummie.v2.adr"
-authority: "ARCHITECT"
+spec_id: DE-V2-L0-ADR-XXX
+title: '[Título Breve e Imperativo]'
+status: PROPOSED
+version: 1.0.0
+layer: L0
+namespace: io.dummie.v2.adr
+authority: ARCHITECT
+claims:
+- id: TEMPLATE-file-valid
+  description: Spec file 'TEMPLATE.md' exists, parses valid YAML frontmatter, and
+    is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/01_architecture/adr/TEMPLATE.md').read().split('---')[1]); assert d,
+    'empty frontmatter'"
+  severity: critical
 ---
-
 # ADR-XXXX: [Título Breve e Imperativo]
 
 ## Contexto y Problema

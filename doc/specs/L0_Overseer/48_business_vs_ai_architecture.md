@@ -6,6 +6,16 @@ layer: L0
 last_verified_on: '2026-04-28'
 version: 1.0.0
 namespace: dummie.engine.l0
+dependencies:
+- adr/001_architectural_bifurcation.md
+claims:
+- id: 48_business_vs_ai_architecture-file-valid
+  description: Spec file '48_business_vs_ai_architecture.md' exists, parses valid
+    YAML frontmatter, and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/specs/L0_Overseer/48_business_vs_ai_architecture.md').read().split('---')[1]);
+    assert d, 'empty frontmatter'"
+  severity: critical
 ---
 # Bifurcación de Arquitectura: Negocio vs IA
 

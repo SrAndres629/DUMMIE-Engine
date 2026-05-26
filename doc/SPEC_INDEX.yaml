@@ -1,0 +1,2723 @@
+version: 2.0.0
+specs:
+  001_architectural_bifurcation:
+    id: 001_architectural_bifurcation
+    title: 001_architectural_bifurcation
+    status: PROPOSED
+    file: .deprecated/001_architectural_bifurcation.md
+    layer: adr
+    domain:
+    - bifurcation
+    - design-policy
+    claims: 0
+    deps: []
+    superseded_by: ''
+  ADR-001-SDK-Architecture:
+    id: ADR-001-SDK-Architecture
+    title: ADR-001-SDK-Architecture
+    status: APPROVED
+    file: .deprecated/ADR-001-SDK-Architecture.md
+    layer: adr
+    domain:
+    - sdk
+    - python
+    claims: 0
+    deps: []
+    superseded_by: ''
+  ADR-002-Transport-Protocol:
+    id: ADR-002-Transport-Protocol
+    title: ADR-002-Transport-Protocol
+    status: APPROVED
+    file: .deprecated/ADR-002-Transport-Protocol.md
+    layer: adr
+    domain:
+    - transport
+    - grpc
+    - arrow-flight
+    claims: 0
+    deps: []
+    superseded_by: ''
+  ADR-003-Session-State:
+    id: ADR-003-Session-State
+    title: ADR-003-Session-State
+    status: APPROVED
+    file: .deprecated/ADR-003-Session-State.md
+    layer: adr
+    domain:
+    - session
+    - state
+    - 4dtes
+    claims: 0
+    deps: []
+    superseded_by: ''
+  ADR-004-Opencode-Native-Integration:
+    id: ADR-004-Opencode-Native-Integration
+    title: ADR-004-Opencode-Native-Integration
+    status: APPROVED
+    file: .deprecated/ADR-004-Opencode-Native-Integration.md
+    layer: adr
+    domain:
+    - opencode
+    - integration
+    - native
+    claims: 0
+    deps: []
+    superseded_by: ''
+  COGNITIVE_PROTOCOL:
+    id: COGNITIVE_PROTOCOL
+    title: Protocolo de Ingesta y Cristalización Cognitiva
+    status: ACTIVE
+    file: 00_foundation/COGNITIVE_PROTOCOL.md
+    layer: L0
+    domain: []
+    claims: 1
+    deps:
+    - specs/L0_Overseer/49_sovereign_cognitive_closure_protocol.md
+    superseded_by: ''
+  vision_manifesto:
+    id: vision_manifesto
+    title: 'MANIFIESTO DE VISIÓN: Ingeniería de Sistemas Soberana'
+    status: ACTIVE
+    file: 00_foundation/vision_manifesto.md
+    layer: L0
+    domain: []
+    claims: 1
+    deps:
+    - id: DE-V2-L0-00
+      relationship: DEFINES
+    - specs/L0_Overseer/03_polyglot_architecture.md
+    - specs/L1_Nervous/10_protobuf_contracts.md
+    - specs/L1_Nervous/23_atomic_modular_nodes.md
+    - specs/L2_Brain/02_memory_engine_4d_tes.md
+    superseded_by: ''
+  0001-polyglot-architecture:
+    id: 0001-polyglot-architecture
+    title: Arquitectura Políglota de 7 Capas
+    status: ACTIVE
+    file: 01_architecture/adr/0001-polyglot-architecture.md
+    layer: L0
+    domain: []
+    claims: 1
+    deps:
+    - id: DE-V2-L0-03
+      relationship: DEFINES
+    - specs/L0_Overseer/08_devex_and_deployment_strategy.md
+    superseded_by: ''
+  0002-ambiguity-resolutions:
+    id: 0002-ambiguity-resolutions
+    title: Resolución de Ambigüedades y Gobernanza
+    status: ACTIVE
+    file: 01_architecture/adr/0002-ambiguity-resolutions.md
+    layer: L0
+    domain: []
+    claims: 1
+    deps:
+    - id: DE-V2-L0-14
+      relationship: IMPLEMENTS
+    - id: DE-V2-[ADR-005](0005-cognitive-fabrication-protocols.md)
+      relationship: REQUIRES
+    superseded_by: ''
+  0003-agentic-communication-fabrication:
+    id: 0003-agentic-communication-fabrication
+    title: Comunicación Agéntica y Fabricación (SFE)
+    status: ACTIVE
+    file: 01_architecture/adr/0003-agentic-communication-fabrication.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps:
+    - id: DE-V2-L2-21
+      relationship: DEFINES
+    - specs/L1_Nervous/10_protobuf_contracts.md
+    - specs/L3_Shield/22_sdd_executable_contracts.md
+    superseded_by: ''
+  0004-project-personality:
+    id: 0004-project-personality
+    title: Identidad Cognitiva y Personalidad de Proyecto
+    status: ACTIVE
+    file: 01_architecture/adr/0004-project-personality.md
+    layer: L0
+    domain: []
+    claims: 1
+    deps:
+    - id: DE-V2-L2-02
+      relationship: EXTENDS
+    - id: DE-V2-L4-18
+      relationship: USES
+    superseded_by: ''
+  0005-cognitive-fabrication-protocols:
+    id: 0005-cognitive-fabrication-protocols
+    title: Estándares de Fabricación Cognitiva y Protocolos de Interacción
+    status: ACTIVE
+    file: 01_architecture/adr/0005-cognitive-fabrication-protocols.md
+    layer: L0
+    domain: []
+    claims: 1
+    deps:
+    - id: DE-V2-[ADR-002](0002-ambiguity-resolutions.md)
+      relationship: EXTENDS
+    - id: DE-V2-[ADR-003](0003-agentic-communication-fabrication.md)
+      relationship: REINFORCES
+    superseded_by: ''
+  0006-sovereign-hybrid-documentation-protocol:
+    id: 0006-sovereign-hybrid-documentation-protocol
+    title: Protocolo de Ejecución Híbrida Soberana y Documentación en Tiempo Real
+    status: ACTIVE
+    file: 01_architecture/adr/0006-sovereign-hybrid-documentation-protocol.md
+    layer: L0
+    domain: []
+    claims: 1
+    deps:
+    - id: DE-V2-[ADR-005](0005-cognitive-fabrication-protocols.md)
+      relationship: EXTENDS
+    - id: DE-V2-L0-08
+      relationship: IMPLEMENTS
+    superseded_by: ''
+  0007-modular-spec-sibling-files:
+    id: 0007-modular-spec-sibling-files
+    title: Arquitectura de Especificaciones Modulares (MSA) y Archivos Hermanos
+    status: ACTIVE
+    file: 01_architecture/adr/0007-modular-spec-sibling-files.md
+    layer: L0
+    domain: []
+    claims: 1
+    deps:
+    - id: DE-V2-L3-22
+      relationship: IMPLEMENTS
+    - id: DE-V2-[ADR-006](0006-sovereign-hybrid-documentation-protocol.md)
+      relationship: EXTENDS
+    superseded_by: ''
+  0008-hierarchical-domain-specific-documentation:
+    id: 0008-hierarchical-domain-specific-documentation
+    title: Documentación Modular Jerárquica y Bounded Contexts
+    status: ACTIVE
+    file: 01_architecture/adr/0008-hierarchical-domain-specific-documentation.md
+    layer: L0
+    domain: []
+    claims: 1
+    deps:
+    - id: DE-V2-[ADR-007](0007-modular-spec-sibling-files.md)
+      relationship: EXTENDS
+    superseded_by: ''
+  0009-l2-brain-bounded-contexts:
+    id: 0009-l2-brain-bounded-contexts
+    title: Agrupación de Micro-Dominios L2 en Bounded Contexts
+    status: ACTIVE
+    file: 01_architecture/adr/0009-l2-brain-bounded-contexts.md
+    layer: L0
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  0010-hybrid-diagram-strategy:
+    id: 0010-hybrid-diagram-strategy
+    title: Estrategia Híbrida de Mantenimiento Espacial (Diagramación)
+    status: ACTIVE
+    file: 01_architecture/adr/0010-hybrid-diagram-strategy.md
+    layer: L0
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  0011-l2-infrastructure-bridge:
+    id: 0011-l2-infrastructure-bridge
+    title: Bootstrap de Memoria vía L2-Python Bridge
+    status: ACTIVE
+    file: 01_architecture/adr/0011-l2-infrastructure-bridge.md
+    layer: L0
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  0012-autonomous-capability-expansion:
+    id: 0012-autonomous-capability-expansion
+    title: Expansión Autónoma de Capacidades (MCP y Skills)
+    status: ACCEPTED
+    file: 01_architecture/adr/0012-autonomous-capability-expansion.md
+    layer: L0
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  0013-standardized-mcp-connectivity:
+    id: 0013-standardized-mcp-connectivity
+    title: Interoperabilidad Universal de Agentes vía MCP (Estrategia USB-C)
+    status: ACCEPTED
+    file: 01_architecture/adr/0013-standardized-mcp-connectivity.md
+    layer: L0
+    domain: []
+    claims: 1
+    deps:
+    - id: DE-V2-[ADR-005](0005-cognitive-fabrication-protocols.md)
+      relationship: EXTENDS
+    - id: DE-V2-L1-15
+      relationship: REINFORCES
+    superseded_by: ''
+  0014-zero-sudo-user-space-sovereignty:
+    id: 0014-zero-sudo-user-space-sovereignty
+    title: Soberanía de Usuario y Ejecución Zero-Sudo
+    status: PROPOSED
+    file: 01_architecture/adr/0014-zero-sudo-user-space-sovereignty.md
+    layer: L0
+    domain: []
+    claims: 1
+    deps:
+    - id: DE-V2-[ADR-0006](0006-sovereign-hybrid-documentation-protocol.md)
+      relationship: REINFORCES
+    superseded_by: ''
+  0015-sovereign-agent-empowerment:
+    id: 0015-sovereign-agent-empowerment
+    title: Soberanía Total y Empoderamiento del Agente
+    status: ACCEPTED
+    file: 01_architecture/adr/0015-sovereign-agent-empowerment.md
+    layer: L0
+    domain: []
+    claims: 1
+    deps:
+    - id: DE-V2-[ADR-0014](0014-zero-sudo-user-space-sovereignty.md)
+      relationship: SUPERSEDES
+    superseded_by: ''
+  0016-industrial-gear-integration:
+    id: 0016-industrial-gear-integration
+    title: Industrial Gear Integration (Modular Software Fabrication)
+    status: PROPOSED
+    file: 01_architecture/adr/0016-industrial-gear-integration.md
+    layer: L0
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  0017-opencode-native-integration:
+    id: 0017-opencode-native-integration
+    title: OpenCode Native Integration (Cognitive Kernel + Shell Interface)
+    status: ACCEPTED
+    file: 01_architecture/adr/0017-opencode-native-integration.md
+    layer: L0
+    domain: []
+    claims: 1
+    deps:
+    - id: DE-ADR-0013
+      relationship: EXTENDS
+    - id: DE-ADR-0015
+      relationship: REINFORCES
+    - id: DE-ADR-0016
+      relationship: COMPLEMENTS
+    superseded_by: ''
+  TEMPLATE:
+    id: TEMPLATE
+    title: '[Título Breve e Imperativo]'
+    status: PROPOSED
+    file: 01_architecture/adr/TEMPLATE.md
+    layer: L0
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  c4_model_graphs:
+    id: c4_model_graphs
+    title: System Design Blueprint (Modelos C4)
+    status: ACTIVE
+    file: 01_architecture/diagrams/c4_model_graphs.md
+    layer: L0
+    domain: []
+    claims: 0
+    deps:
+    - id: DE-V2-[ADR-001](../adr/0001-polyglot-architecture.md)
+      relationship: REPRESENTS
+    superseded_by: ''
+  PHYSICAL_MAP:
+    id: PHYSICAL_MAP
+    title: PHYSICAL_MAP
+    status: ACTIVE
+    file: PHYSICAL_MAP.md
+    layer: meta
+    domain:
+    - physical-map
+    - layer-map
+    - architecture
+    claims: 0
+    deps: []
+    superseded_by: ''
+  headers:
+    id: headers
+    title: Project Headers Index
+    status: ACTIVE
+    file: 02_atlas/headers.md
+    layer: L0
+    domain: []
+    claims: 0
+    deps:
+    - specs/L0_Overseer/00_topology_tracker.md
+    - specs/L0_Overseer/03_polyglot_architecture.md
+    - specs/L0_Overseer/05_orchestration_stack_and_glue.md
+    - specs/L0_Overseer/06_migration_and_implementation_strategy.md
+    - specs/L0_Overseer/07_unknown_unknowns_resolutions.md
+    - specs/L0_Overseer/08_devex_and_deployment_strategy.md
+    - specs/L0_Overseer/11_monorepo_structure.md
+    - specs/L0_Overseer/14_value_engineering_and_governance.md
+    - specs/L0_Overseer/33_persistent_personality_mood.md
+    - specs/L0_Overseer/43_documentation_and_artifact_standards.md
+    - specs/L0_Overseer/48_architectural_integrity_and_knowledge_crystallization.md
+    - specs/L0_Overseer/49_sovereign_cognitive_closure_protocol.md
+    - specs/L1_Nervous/10_protobuf_contracts.md
+    - specs/L1_Nervous/15_mcp_sidecar_isolation.md
+    - specs/L1_Nervous/23_atomic_modular_nodes.md
+    - specs/L2_Brain/02_memory_engine_4d_tes.md
+    - specs/L2_Brain/09_annex_4d_tes_comparison.md
+    - specs/L2_Brain/12_6d_context_model.md
+    - specs/L2_Brain/21_software_fabrication_engine.md
+    - specs/L2_Brain/27_kaizen_loop_refinement.md
+    - specs/L2_Brain/28_skill_standard_yaml.md
+    - specs/L2_Brain/29_design_station_workflow.md
+    - specs/L2_Brain/31_impact_analytics_blast_radius.md
+    - specs/L2_Brain/34_decision_ledger_auditor.md
+    - specs/L2_Brain/36_cognitive_memory_session_ledger.md
+    - specs/L2_Brain/37_a2a_discovery_protocol.md
+    - specs/L2_Brain/38_procedural_memory_crystallization.md
+    - specs/L2_Brain/39_semantic_consistency_agent.md
+    - specs/L3_Shield/04_anti_ignorance_shields.md
+    - specs/L3_Shield/22_sdd_executable_contracts.md
+    - specs/L3_Shield/24_legal_compliance_shield.md
+    - specs/L4_Edge/18_loci_ontology_mapping.md
+    - specs/L4_Edge/25_blueprint_registry.md
+    - specs/L4_Edge/40_self_healing_remediation_loop.md
+    - specs/L5_Muscle/16_hardware_ipc_stability.md
+    - specs/L5_Muscle/20_simd_muscle_processing.md
+    - specs/L5_Muscle/32_multiverse_compression_necro_learning.md
+    - specs/L5_Muscle/35_necro_learning_pipeline.md
+    - specs/L6_Skin/13_observability_opentelemetry.md
+    - specs/L6_Skin/17_optical_nerve_telemetry.md
+    - specs/L6_Skin/26_command_canvas_gui.md
+    - specs/L6_Skin/30_visualizer_microservice.md
+    superseded_by: ''
+  HEARTBEAT:
+    id: HEARTBEAT
+    title: Operational Heartbeat
+    status: DRAFT
+    file: 03_pulse/HEARTBEAT.md
+    layer: L0
+    domain: []
+    claims: 0
+    deps:
+    - specs/L1_Nervous/44_pervasive_channel_adapters.md
+    - specs/L4_Edge/18_loci_ontology_mapping.md
+    superseded_by: ''
+  inventory_v1:
+    id: inventory_v1
+    title: Inventario de Entidades Heredadas (V1)
+    status: ACTIVE
+    file: 05_archive/inventory_v1.md
+    layer: L0
+    domain: []
+    claims: 0
+    deps:
+    - id: DE-V2-L0-06
+      relationship: INFORMS
+    - specs/L0_Overseer/03_polyglot_architecture.md
+    - specs/L0_Overseer/05_orchestration_stack_and_glue.md
+    - specs/L0_Overseer/14_value_engineering_and_governance.md
+    - specs/L1_Nervous/10_protobuf_contracts.md
+    - specs/L1_Nervous/15_mcp_sidecar_isolation.md
+    - specs/L3_Shield/04_anti_ignorance_shields.md
+    - specs/L4_Edge/18_loci_ontology_mapping.md
+    superseded_by: ''
+  ATLAS:
+    id: ATLAS
+    title: 'DUMMIE Engine: Sovereign Documentation Atlas (HSD)'
+    status: ACTIVE
+    file: ATLAS.md
+    layer: L0
+    domain: []
+    claims: 0
+    deps: []
+    superseded_by: ''
+  CHANGELOG_SMART_OPTIMIZATION:
+    id: CHANGELOG_SMART_OPTIMIZATION
+    title: CHANGELOG_SMART_OPTIMIZATION
+    status: ACTIVE
+    file: CHANGELOG_SMART_OPTIMIZATION.md
+    layer: l0
+    domain:
+    - changelog
+    - optimization
+    - grub
+    - sysctl
+    claims: 0
+    deps:
+    - specs/216_benchmark_suite.md
+    - specs/228_collaborative_gateway.md
+    superseded_by: ''
+  CORE_SPEC:
+    id: CORE_SPEC
+    title: CORE_SPEC
+    status: ACTIVE
+    file: CORE_SPEC.md
+    layer: meta
+    domain:
+    - core-spec
+    - index
+    - ssot
+    claims: 0
+    deps:
+    - specs/201_canonical_spec_binding_registry.md
+    - specs/202_runtime_lifecycle_chat_contract.md
+    - specs/L0_Overseer/00_topology_tracker.md
+    - specs/L0_Overseer/11_monorepo_structure.md
+    - specs/L0_Overseer/26_langgraph_quantum_swarm.md
+    - specs/L0_Overseer/28_shadow_worktrees.md
+    - specs/L0_Overseer/29_skill_ingestion_engine.md
+    - specs/L0_Overseer/43_documentation_and_artifact_standards.md
+    - specs/L0_Overseer/50_daemon_telemetry_contracts.md
+    - specs/L0_Overseer/51_model_contracts_alignment.md
+    - specs/L1_Nervous/10_protobuf_contracts.md
+    - specs/L1_Nervous/15_mcp_sidecar_isolation.md
+    - specs/L1_Nervous/16_mcp_dynamic_gateway.md
+    - specs/L1_Nervous/23_atomic_modular_nodes.md
+    - specs/L1_Nervous/41_layer_handshake_protocol.md
+    - specs/L1_Nervous/44_local_reasoning_gateway.md
+    - specs/L1_Nervous/49_typed_sdk_generation.md
+    - specs/L2_Brain/12_6d_context_model.md
+    - specs/L2_Brain/21_software_fabrication_engine.md
+    - specs/L2_Brain/27_floating_session_state.md
+    - specs/L2_Brain/40_token_optimization_protocol.md
+    - specs/L2_Brain/41_wordline_sovereignty.md
+    - specs/L2_Brain/42_metacognitive_identity.md
+    - specs/L2_Brain/81_phase_ledger.md
+    - specs/L2_Brain/82_long_running_mission_runtime.md
+    - specs/L3_Shield/22_sdd_executable_contracts.md
+    superseded_by: ''
+  ENGINEERING_PRINCIPLES:
+    id: ENGINEERING_PRINCIPLES
+    title: ENGINEERING_PRINCIPLES
+    status: ACTIVE
+    file: ENGINEERING_PRINCIPLES.md
+    layer: governance
+    domain:
+    - principles
+    - engineering
+    - evolvability
+    claims: 0
+    deps: []
+    superseded_by: ''
+  AGENT_RELIABILITY_LEDGER:
+    id: AGENT_RELIABILITY_LEDGER
+    title: AGENT_RELIABILITY_LEDGER
+    status: ACTIVE
+    file: agentic/AGENT_RELIABILITY_LEDGER.md
+    layer: agentic
+    domain:
+    - reliability
+    - ledger
+    - quality
+    claims: 0
+    deps: []
+    superseded_by: ''
+  AGENT_TASK_CONTRACT:
+    id: AGENT_TASK_CONTRACT
+    title: AGENT_TASK_CONTRACT
+    status: ACTIVE
+    file: agentic/AGENT_TASK_CONTRACT.md
+    layer: agentic
+    domain:
+    - contract
+    - task
+    - protocol
+    claims: 0
+    deps: []
+    superseded_by: ''
+  EXECUTION_PROTOCOL:
+    id: EXECUTION_PROTOCOL
+    title: EXECUTION_PROTOCOL
+    status: ACTIVE
+    file: agentic/EXECUTION_PROTOCOL.md
+    layer: agentic
+    domain:
+    - execution
+    - protocol
+    claims: 0
+    deps: []
+    superseded_by: ''
+  HANDOFF_CONTRACT:
+    id: HANDOFF_CONTRACT
+    title: HANDOFF_CONTRACT
+    status: ACTIVE
+    file: agentic/HANDOFF_CONTRACT.md
+    layer: agentic
+    domain:
+    - handoff
+    - contract
+    - protocol
+    claims: 0
+    deps: []
+    superseded_by: ''
+  SCOPE_GUARD_PROTOCOL:
+    id: SCOPE_GUARD_PROTOCOL
+    title: SCOPE_GUARD_PROTOCOL
+    status: ACTIVE
+    file: agentic/SCOPE_GUARD_PROTOCOL.md
+    layer: agentic
+    domain:
+    - scope
+    - guard
+    - protocol
+    - safety
+    claims: 0
+    deps: []
+    superseded_by: ''
+  SWARM_WORKFLOW:
+    id: SWARM_WORKFLOW
+    title: SWARM_WORKFLOW
+    status: ACTIVE
+    file: agentic/SWARM_WORKFLOW.md
+    layer: agentic
+    domain:
+    - swarm
+    - workflow
+    - orchestration
+    claims: 0
+    deps: []
+    superseded_by: ''
+  SYSTEM_PROMPT_BASE:
+    id: SYSTEM_PROMPT_BASE
+    title: SYSTEM_PROMPT_BASE
+    status: ACTIVE
+    file: agentic/SYSTEM_PROMPT_BASE.md
+    layer: agentic
+    domain:
+    - system-prompt
+    - base
+    - template
+    claims: 0
+    deps: []
+    superseded_by: ''
+  VALIDATION_EVIDENCE:
+    id: VALIDATION_EVIDENCE
+    title: VALIDATION_EVIDENCE
+    status: ACTIVE
+    file: agentic/VALIDATION_EVIDENCE.md
+    layer: agentic
+    domain:
+    - validation
+    - evidence
+    - quality
+    claims: 0
+    deps: []
+    superseded_by: ''
+  SMART_METAGATEWAY_ARCHITECTURE:
+    id: SMART_METAGATEWAY_ARCHITECTURE
+    title: SMART_METAGATEWAY_ARCHITECTURE
+    status: APPROVED
+    file: architecture/SMART_METAGATEWAY_ARCHITECTURE.md
+    layer: l1
+    domain:
+    - metagateway
+    - canonical
+    - routing
+    - smart
+    claims: 1
+    deps: []
+    superseded_by: ''
+  COGNITIVE_PERSISTENCE:
+    id: COGNITIVE_PERSISTENCE
+    title: COGNITIVE_PERSISTENCE
+    status: ACTIVE
+    file: manifesto/COGNITIVE_PERSISTENCE.md
+    layer: manifesto
+    domain:
+    - cognitive-persistence
+    - swarm
+    - vision
+    claims: 1
+    deps: []
+    superseded_by: ''
+  MASTER_OPTIMIZATION_PLAN:
+    id: MASTER_OPTIMIZATION_PLAN
+    title: MASTER_OPTIMIZATION_PLAN
+    status: ACTIVE
+    file: plans/MASTER_OPTIMIZATION_PLAN.md
+    layer: l0
+    domain:
+    - optimization
+    - performance
+    - cgroups
+    - zram
+    claims: 0
+    deps:
+    - specs/216_benchmark_suite.md
+    - specs/217_connect_smart_to_handlers.md
+    - specs/219_skill_dag_execution.md
+    superseded_by: ''
+  phase1_cgroups_plan:
+    id: phase1_cgroups_plan
+    title: phase1_cgroups_plan
+    status: ACTIVE
+    file: plans/phase1_cgroups_plan.md
+    layer: l0
+    domain:
+    - cgroups
+    - systemd
+    - slicing
+    - resource
+    claims: 0
+    deps: []
+    superseded_by: ''
+  phase2_zram_plan:
+    id: phase2_zram_plan
+    title: phase2_zram_plan
+    status: ACTIVE
+    file: plans/phase2_zram_plan.md
+    layer: l0
+    domain:
+    - zram
+    - swap
+    - memory
+    - governance
+    claims: 0
+    deps: []
+    superseded_by: ''
+  phase3_governor_plan:
+    id: phase3_governor_plan
+    title: phase3_governor_plan
+    status: ACTIVE
+    file: plans/phase3_governor_plan.md
+    layer: l2
+    domain:
+    - resource
+    - cgroups
+    - concurrency
+    - telemetry
+    claims: 0
+    deps: []
+    superseded_by: ''
+  100_l0_l2_cognitive_bridge:
+    id: 100_l0_l2_cognitive_bridge
+    title: L0-L2 Cognitive Bridge via MCP STDIO
+    status: ACTIVE
+    file: specs/100_l0_l2_cognitive_bridge.md
+    layer: CROSS
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  104_plan_v1_cognitive_evolution_operating_layer:
+    id: 104_plan_v1_cognitive_evolution_operating_layer
+    title: Plan V1 Cognitive Evolution Operating Layer
+    status: ACTIVE
+    file: specs/104_plan_v1_cognitive_evolution_operating_layer.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  105_mental_model_abstraction_layer:
+    id: 105_mental_model_abstraction_layer
+    title: Mental Model Abstraction Layer
+    status: ACTIVE
+    file: specs/105_mental_model_abstraction_layer.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  106_agent_session_operating_contracts:
+    id: 106_agent_session_operating_contracts
+    title: Agent Session Operating Contracts
+    status: ACTIVE
+    file: specs/106_agent_session_operating_contracts.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  107_cognitive_artifact_protocol:
+    id: 107_cognitive_artifact_protocol
+    title: Cognitive Artifact Protocol
+    status: ACTIVE
+    file: specs/107_cognitive_artifact_protocol.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  108_truth_hierarchy_canonicality_policy:
+    id: 108_truth_hierarchy_canonicality_policy
+    title: Truth Hierarchy & Canonicality Policy
+    status: ACTIVE
+    file: specs/108_truth_hierarchy_canonicality_policy.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  109_polyglot_architecture_registry:
+    id: 109_polyglot_architecture_registry
+    title: PolyglotArchitectureRegistry
+    status: ACTIVE
+    file: specs/109_polyglot_architecture_registry.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  110_project_world_model:
+    id: 110_project_world_model
+    title: ProjectWorldModel
+    status: ACTIVE
+    file: specs/110_project_world_model.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  111_spec_coverage_gate:
+    id: 111_spec_coverage_gate
+    title: SpecCoverageGate
+    status: ACTIVE
+    file: specs/111_spec_coverage_gate.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  112_folder_notes_noteplans:
+    id: 112_folder_notes_noteplans
+    title: FolderNotes + NotePlans
+    status: ACTIVE
+    file: specs/112_folder_notes_noteplans.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  113_prompt_frame_builder:
+    id: 113_prompt_frame_builder
+    title: PromptFrameBuilder
+    status: DEPRECATED
+    file: specs/113_prompt_frame_builder.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  114_prompt_cache_ledger:
+    id: 114_prompt_cache_ledger
+    title: PromptCacheLedger
+    status: DEPRECATED
+    file: specs/114_prompt_cache_ledger.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  115_restart_context_efficiency_gate:
+    id: 115_restart_context_efficiency_gate
+    title: RestartIntegrationGate + ContextEfficiencyBenchmark
+    status: DEPRECATED
+    file: specs/115_restart_context_efficiency_gate.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  116_evolution_flywheel_runtime:
+    id: 116_evolution_flywheel_runtime
+    title: EvolutionFlywheelRuntime
+    status: DEPRECATED
+    file: specs/116_evolution_flywheel_runtime.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  117_cli_control_plane:
+    id: 117_cli_control_plane
+    title: CLI Control Plane
+    status: DEPRECATED
+    file: specs/117_cli_control_plane.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  118_tui_process_monitor:
+    id: 118_tui_process_monitor
+    title: TUI Process Monitor
+    status: DEPRECATED
+    file: specs/118_tui_process_monitor.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  119_dashboard_l6:
+    id: 119_dashboard_l6
+    title: Dashboard L6
+    status: ACTIVE
+    file: specs/119_dashboard_l6.md
+    layer: L6
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  120_local_context_compressor:
+    id: 120_local_context_compressor
+    title: LocalContextCompressor
+    status: ACTIVE
+    file: specs/120_local_context_compressor.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  121_state_coherence_guard:
+    id: 121_state_coherence_guard
+    title: 121 State Coherence Guard
+    status: ACTIVE
+    file: specs/121_state_coherence_guard.md
+    layer: l2_brain
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  122_embedding_adapter:
+    id: 122_embedding_adapter
+    title: 122 Embedding Adapter
+    status: ACTIVE
+    file: specs/122_embedding_adapter.md
+    layer: l2_brain
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  123_repo_probe_runner:
+    id: 123_repo_probe_runner
+    title: 123 Repo Probe Runner
+    status: ACTIVE
+    file: specs/123_repo_probe_runner.md
+    layer: l2_brain
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  124_sdd_tdd_mission_planner:
+    id: 124_sdd_tdd_mission_planner
+    title: 124 Sdd Tdd Mission Planner
+    status: ACTIVE
+    file: specs/124_sdd_tdd_mission_planner.md
+    layer: l2_brain
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  125_mission_orchestrator_dag:
+    id: 125_mission_orchestrator_dag
+    title: 125 Mission Orchestrator Dag
+    status: ACTIVE
+    file: specs/125_mission_orchestrator_dag.md
+    layer: l2_brain
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  126_mission_coherence_guard:
+    id: 126_mission_coherence_guard
+    title: 126 Mission Coherence Guard
+    status: ACTIVE
+    file: specs/126_mission_coherence_guard.md
+    layer: l2_brain
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  127_strategic_partner_swarm:
+    id: 127_strategic_partner_swarm
+    title: 127 Strategic Partner Swarm
+    status: ACTIVE
+    file: specs/127_strategic_partner_swarm.md
+    layer: l2_brain
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  128_debate_review_runtime:
+    id: 128_debate_review_runtime
+    title: 128 Debate Review Runtime
+    status: ACTIVE
+    file: specs/128_debate_review_runtime.md
+    layer: l2_brain
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  129_mission_autonomy_contract:
+    id: 129_mission_autonomy_contract
+    title: 129 Mission Autonomy Contract
+    status: ACTIVE
+    file: specs/129_mission_autonomy_contract.md
+    layer: l2_brain
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  130_trusted_workstation_mode:
+    id: 130_trusted_workstation_mode
+    title: 130 Trusted Workstation Mode
+    status: DEPRECATED
+    file: specs/130_trusted_workstation_mode.md
+    layer: l2_brain
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  131_chaos_regression_testing:
+    id: 131_chaos_regression_testing
+    title: 131 Chaos Regression Testing
+    status: ACTIVE
+    file: specs/131_chaos_regression_testing.md
+    layer: l2_brain
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  132_autonomous_strategic_partner_runtime:
+    id: 132_autonomous_strategic_partner_runtime
+    title: 132 Autonomous Strategic Partner Runtime
+    status: ACTIVE
+    file: specs/132_autonomous_strategic_partner_runtime.md
+    layer: l2_brain
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  133_repo_intelligence_runtime:
+    id: 133_repo_intelligence_runtime
+    title: 133 Repo Intelligence Runtime
+    status: ACTIVE
+    file: specs/133_repo_intelligence_runtime.md
+    layer: l2_brain
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  134_folder_file_dossiers:
+    id: 134_folder_file_dossiers
+    title: 134 Folder File Dossiers
+    status: ACTIVE
+    file: specs/134_folder_file_dossiers.md
+    layer: l2_brain
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  135_technical_debt_intelligence:
+    id: 135_technical_debt_intelligence
+    title: 135 Technical Debt Intelligence
+    status: ACTIVE
+    file: specs/135_technical_debt_intelligence.md
+    layer: l2_brain
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  136_plan_v1_completion_review:
+    id: 136_plan_v1_completion_review
+    title: 136 Plan V1 Completion Review
+    status: ACTIVE
+    file: specs/136_plan_v1_completion_review.md
+    layer: l2_brain
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  137_context_enforcement_gate:
+    id: 137_context_enforcement_gate
+    title: 137 Context Enforcement Gate
+    status: ACTIVE
+    file: specs/137_context_enforcement_gate.md
+    layer: l2_brain
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  138_repo_intelligence_query:
+    id: 138_repo_intelligence_query
+    title: 138 Repo Intelligence Query
+    status: ACTIVE
+    file: specs/138_repo_intelligence_query.md
+    layer: l2_brain
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  139_dummie_chat_cli:
+    id: 139_dummie_chat_cli
+    title: 139 Dummie Chat Cli
+    status: ACTIVE
+    file: specs/139_dummie_chat_cli.md
+    layer: l2_brain
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  140_operationalization_review:
+    id: 140_operationalization_review
+    title: 140 Operationalization Review
+    status: ACTIVE
+    file: specs/140_operationalization_review.md
+    layer: l2_brain
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  147_memory_spine_entrypoint:
+    id: 147_memory_spine_entrypoint
+    title: 147 Memory Spine Entrypoint
+    status: ACTIVE
+    file: specs/147_memory_spine_entrypoint.md
+    layer: l2_brain
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  148_token_economy_benchmark:
+    id: 148_token_economy_benchmark
+    title: 148 Token Economy Benchmark
+    status: DEPRECATED
+    file: specs/148_token_economy_benchmark.md
+    layer: l2_brain
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  149_entrypoint_enforcement_auditor:
+    id: 149_entrypoint_enforcement_auditor
+    title: 149 Entrypoint Enforcement Auditor
+    status: ACTIVE
+    file: specs/149_entrypoint_enforcement_auditor.md
+    layer: l2_brain
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  150_mental_model_runtime:
+    id: 150_mental_model_runtime
+    title: 150 Mental Model Runtime
+    status: DEPRECATED
+    file: specs/150_mental_model_runtime.md
+    layer: l2_brain
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  151_semantic_ontology_mapper:
+    id: 151_semantic_ontology_mapper
+    title: 151 Semantic Ontology Mapper
+    status: ACTIVE
+    file: specs/151_semantic_ontology_mapper.md
+    layer: l2_brain
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  152_cognitive_frame_builder:
+    id: 152_cognitive_frame_builder
+    title: 152 Cognitive Frame Builder
+    status: ACTIVE
+    file: specs/152_cognitive_frame_builder.md
+    layer: l2_brain
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  153_metacognitive_loop_runtime:
+    id: 153_metacognitive_loop_runtime
+    title: 153 Metacognitive Loop Runtime
+    status: ACTIVE
+    file: specs/153_metacognitive_loop_runtime.md
+    layer: l2_brain
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  154_mental_model_store:
+    id: 154_mental_model_store
+    title: 154 Mental Model Store
+    status: DEPRECATED
+    file: specs/154_mental_model_store.md
+    layer: l2_brain
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  155_metacognitive_quality_gate:
+    id: 155_metacognitive_quality_gate
+    title: 155 Metacognitive Quality Gate
+    status: ACTIVE
+    file: specs/155_metacognitive_quality_gate.md
+    layer: l2_brain
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  156_epistemic_state_runtime:
+    id: 156_epistemic_state_runtime
+    title: 156 Epistemic State Runtime
+    status: ACTIVE
+    file: specs/156_epistemic_state_runtime.md
+    layer: l2_brain
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  157_dialectical_reasoning_runtime:
+    id: 157_dialectical_reasoning_runtime
+    title: 157 Dialectical Reasoning Runtime
+    status: ACTIVE
+    file: specs/157_dialectical_reasoning_runtime.md
+    layer: l2_brain
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  158_philosophical_ontology_runtime:
+    id: 158_philosophical_ontology_runtime
+    title: 158 Philosophical Ontology Runtime
+    status: DEPRECATED
+    file: specs/158_philosophical_ontology_runtime.md
+    layer: l2_brain
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  159_cognitive_bias_detector:
+    id: 159_cognitive_bias_detector
+    title: 159 Cognitive Bias Detector
+    status: ACTIVE
+    file: specs/159_cognitive_bias_detector.md
+    layer: l2_brain
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  160_metacognitive_evolution_flywheel:
+    id: 160_metacognitive_evolution_flywheel
+    title: 160 Metacognitive Evolution Flywheel
+    status: ACTIVE
+    file: specs/160_metacognitive_evolution_flywheel.md
+    layer: l2_brain
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  161_mental_model_truth_hygiene:
+    id: 161_mental_model_truth_hygiene
+    title: 161 Mental Model Truth Hygiene
+    status: DEPRECATED
+    file: specs/161_mental_model_truth_hygiene.md
+    layer: l2_brain
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  162_evolution_delta_applier:
+    id: 162_evolution_delta_applier
+    title: 162 Evolution Delta Applier
+    status: DEPRECATED
+    file: specs/162_evolution_delta_applier.md
+    layer: l2_brain
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  163_self_improvement_runtime:
+    id: 163_self_improvement_runtime
+    title: 163 Self Improvement Runtime
+    status: ACTIVE
+    file: specs/163_self_improvement_runtime.md
+    layer: l2_brain
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  164_heartbeat_lifecycle_runtime:
+    id: 164_heartbeat_lifecycle_runtime
+    title: 164 Heartbeat Lifecycle Runtime
+    status: ACTIVE
+    file: specs/164_heartbeat_lifecycle_runtime.md
+    layer: l2_brain
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  165_heartbeat_state_store:
+    id: 165_heartbeat_state_store
+    title: 165 Heartbeat State Store
+    status: ACTIVE
+    file: specs/165_heartbeat_state_store.md
+    layer: l2_brain
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  166_heartbeat_decision_policy:
+    id: 166_heartbeat_decision_policy
+    title: 166 Heartbeat Decision Policy
+    status: ACTIVE
+    file: specs/166_heartbeat_decision_policy.md
+    layer: l2_brain
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  167_heartbeat_scheduler:
+    id: 167_heartbeat_scheduler
+    title: 167 Heartbeat Scheduler
+    status: ACTIVE
+    file: specs/167_heartbeat_scheduler.md
+    layer: l2_brain
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  168_whole_body_scanner:
+    id: 168_whole_body_scanner
+    title: Whole-Body Scan, Wiring Matrix, and Shadow Detector Runtime
+    status: ACTIVE
+    file: specs/168_whole_body_scanner.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  169_whole_body_scan_calibrator:
+    id: 169_whole_body_scan_calibrator
+    title: Whole-Body Scan Calibrator
+    status: ACTIVE
+    file: specs/169_whole_body_scan_calibrator.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  170_wiring_matrix_builder:
+    id: 170_wiring_matrix_builder
+    title: Wiring Matrix Builder
+    status: DEPRECATED
+    file: specs/170_wiring_matrix_builder.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  171_shadow_runtime_classifier:
+    id: 171_shadow_runtime_classifier
+    title: Shadow Runtime Classifier
+    status: DEPRECATED
+    file: specs/171_shadow_runtime_classifier.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  172_six_dimensional_context_runtime:
+    id: 172_six_dimensional_context_runtime
+    title: Six-Dimensional Context Runtime
+    status: DEPRECATED
+    file: specs/172_six_dimensional_context_runtime.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  173_context_packet_optimizer:
+    id: 173_context_packet_optimizer
+    title: Context Packet Optimizer
+    status: ACTIVE
+    file: specs/173_context_packet_optimizer.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  174_embedding_memory_router:
+    id: 174_embedding_memory_router
+    title: Embedding Memory Router
+    status: ACTIVE
+    file: specs/174_embedding_memory_router.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps:
+    - specs/192_embedding_mesh_foundation.md
+    - specs/L2_Brain/90_vault_embedding_index.md
+    superseded_by: ''
+  175_4dtes_persistence_preflight:
+    id: 175_4dtes_persistence_preflight
+    title: 4D-TES Persistence Preflight
+    status: ACTIVE
+    file: specs/175_4dtes_persistence_preflight.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  176_daemon_gateway_heartbeat_bridge:
+    id: 176_daemon_gateway_heartbeat_bridge
+    title: Daemon/Gateway Heartbeat Bridge
+    status: ACTIVE
+    file: specs/176_daemon_gateway_heartbeat_bridge.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  177_polyglot_probe_orchestrator:
+    id: 177_polyglot_probe_orchestrator
+    title: Polyglot Probe Orchestrator
+    status: ACTIVE
+    file: specs/177_polyglot_probe_orchestrator.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  178_runtime_dependency_auditor:
+    id: 178_runtime_dependency_auditor
+    title: Runtime Dependency Auditor
+    status: DEPRECATED
+    file: specs/178_runtime_dependency_auditor.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  180_environment_toolchain_probe:
+    id: 180_environment_toolchain_probe
+    title: Environment Toolchain Probe
+    status: DEPRECATED
+    file: specs/180_environment_toolchain_probe.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  181_runtime_closure_planner:
+    id: 181_runtime_closure_planner
+    title: Runtime Closure Planner
+    status: DEPRECATED
+    file: specs/181_runtime_closure_planner.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  186_dependency_reproducibility_verifier:
+    id: 186_dependency_reproducibility_verifier
+    title: Dependency Reproducibility Verifier
+    status: DEPRECATED
+    file: specs/186_dependency_reproducibility_verifier.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  187_kuzu_graph_readback_verifier:
+    id: 187_kuzu_graph_readback_verifier
+    title: Kuzu Graph Readback Verifier
+    status: ACTIVE
+    file: specs/187_kuzu_graph_readback_verifier.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  188_embedding_activation_verifier:
+    id: 188_embedding_activation_verifier
+    title: Embedding Activation Verifier
+    status: ACTIVE
+    file: specs/188_embedding_activation_verifier.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  189_capability_promotion_governor:
+    id: 189_capability_promotion_governor
+    title: Capability Promotion Governor
+    status: DEPRECATED
+    file: specs/189_capability_promotion_governor.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  190_full_body_operational_auditor:
+    id: 190_full_body_operational_auditor
+    title: Full Body Operational Auditor
+    status: ACTIVE
+    file: specs/190_full_body_operational_auditor.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  191_whole_body_repair_queue:
+    id: 191_whole_body_repair_queue
+    title: Whole Body Repair Queue
+    status: ACTIVE
+    file: specs/191_whole_body_repair_queue.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  192_embedding_mesh_foundation:
+    id: 192_embedding_mesh_foundation
+    title: EmbeddingMesh Foundation and Repo Self-Knowledge
+    status: ACTIVE
+    file: specs/192_embedding_mesh_foundation.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  193_local_embedding_resource_policy:
+    id: 193_local_embedding_resource_policy
+    title: Local Embedding Resource Policy
+    status: ACTIVE
+    file: specs/193_local_embedding_resource_policy.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  194_memory_context_pruning:
+    id: 194_memory_context_pruning
+    title: Memory Context Pruning with RIR Scoring + Token Budget
+    status: ACTIVE
+    file: specs/194_memory_context_pruning.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  195_performance_optimization:
+    id: 195_performance_optimization
+    title: Performance Optimization - Memory, Process Consolidation, Aggressive Pruning
+    status: ACTIVE
+    file: specs/195_performance_optimization.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  200_model_capability_and_routing:
+    id: 200_model_capability_and_routing
+    title: Model Capability and Routing Engine
+    status: ACTIVE
+    file: specs/200_model_capability_and_routing.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  201_canonical_spec_binding_registry:
+    id: 201_canonical_spec_binding_registry
+    title: Canonical Spec Binding Registry
+    status: ACTIVE
+    file: specs/201_canonical_spec_binding_registry.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps:
+    - specs/108_truth_hierarchy_canonicality_policy.md
+    superseded_by: ''
+  202_runtime_lifecycle_chat_contract:
+    id: 202_runtime_lifecycle_chat_contract
+    title: Runtime Lifecycle Chat Contract
+    status: ACTIVE
+    file: specs/202_runtime_lifecycle_chat_contract.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps:
+    - specs/200_model_capability_and_routing.md
+    superseded_by: ''
+  203_agent_mesh_runtime:
+    id: 203_agent_mesh_runtime
+    title: Agent Mesh Runtime
+    status: ACTIVE
+    file: specs/203_agent_mesh_runtime.md
+    layer: dummie
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  206_canonical_mcp_launcher_contract:
+    id: 206_canonical_mcp_launcher_contract
+    title: Canonical MCP Launcher Contract
+    status: ACTIVE
+    file: specs/206_canonical_mcp_launcher_contract.md
+    layer: L1
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  207_opencode_native_integration:
+    id: 207_opencode_native_integration
+    title: OpenCode Native Integration
+    status: ACTIVE
+    file: specs/207_opencode_native_integration.md
+    layer: L1
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  208_fluid_data_architecture:
+    id: 208_fluid_data_architecture
+    title: Fluid Data Architecture — Dummie Engine Pipeline Optimization
+    status: ACTIVE
+    file: specs/208_fluid_data_architecture.md
+    layer: cross-layer
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  209_ollama_gpu_acceleration:
+    id: 209_ollama_gpu_acceleration
+    title: Ollama GPU Acceleration
+    status: ACTIVE
+    file: specs/209_ollama_gpu_acceleration.md
+    layer: L1
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  210_tmpfs_aiwg_ephemeral:
+    id: 210_tmpfs_aiwg_ephemeral
+    title: tmpfs for .aiwg Ephemeral Data
+    status: ACTIVE
+    file: specs/210_tmpfs_aiwg_ephemeral.md
+    layer: L1
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  211_gpu_embedding_acceleration:
+    id: 211_gpu_embedding_acceleration
+    title: GPU-Accelerated Embedding Service
+    status: ACTIVE
+    file: specs/211_gpu_embedding_acceleration.md
+    layer: L1
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  212_shared_memory_gateway_ipc:
+    id: 212_shared_memory_gateway_ipc
+    title: Shared Memory Gateway IPC
+    status: ACTIVE
+    file: specs/212_shared_memory_gateway_ipc.md
+    layer: L1
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  213_scx_layered_scheduling:
+    id: 213_scx_layered_scheduling
+    title: sched_ext Layered Scheduler for Agentic OS
+    status: ACTIVE
+    file: specs/213_scx_layered_scheduling.md
+    layer: OS
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  215_smart_metagateway_hardening:
+    id: 215_smart_metagateway_hardening
+    title: 215_smart_metagateway_hardening
+    status: SUPERSEDED
+    file: specs/215_smart_metagateway_hardening.md
+    layer: unknown
+    domain: []
+    claims: 2
+    deps: []
+    superseded_by: doc/architecture/SMART_METAGATEWAY_ARCHITECTURE.md
+  216_benchmark_suite:
+    id: 216_benchmark_suite
+    title: 216_benchmark_suite
+    status: Approved
+    file: specs/216_benchmark_suite.md
+    layer: unknown
+    domain: []
+    claims: 2
+    deps: []
+    superseded_by: ''
+  217_connect_smart_to_handlers:
+    id: 217_connect_smart_to_handlers
+    title: 217_connect_smart_to_handlers
+    status: SUPERSEDED
+    file: specs/217_connect_smart_to_handlers.md
+    layer: unknown
+    domain: []
+    claims: 2
+    deps: []
+    superseded_by: doc/architecture/SMART_METAGATEWAY_ARCHITECTURE.md
+  218_dummie_process_canonical_entry:
+    id: 218_dummie_process_canonical_entry
+    title: 218_dummie_process_canonical_entry
+    status: SUPERSEDED
+    file: specs/218_dummie_process_canonical_entry.md
+    layer: unknown
+    domain: []
+    claims: 2
+    deps: []
+    superseded_by: doc/architecture/SMART_METAGATEWAY_ARCHITECTURE.md
+  219_skill_dag_execution:
+    id: 219_skill_dag_execution
+    title: 219_skill_dag_execution
+    status: SUPERSEDED
+    file: specs/219_skill_dag_execution.md
+    layer: unknown
+    domain: []
+    claims: 2
+    deps: []
+    superseded_by: doc/architecture/SMART_METAGATEWAY_ARCHITECTURE.md
+  220_daemon_prewarming_subgateway_sunset:
+    id: 220_daemon_prewarming_subgateway_sunset
+    title: 220_daemon_prewarming_subgateway_sunset
+    status: Approved
+    file: specs/220_daemon_prewarming_subgateway_sunset.md
+    layer: unknown
+    domain: []
+    claims: 2
+    deps: []
+    superseded_by: ''
+  222_fix_compaction_boot:
+    id: 222_fix_compaction_boot
+    title: 222_fix_compaction_boot
+    status: Approved
+    file: specs/222_fix_compaction_boot.md
+    layer: unknown
+    domain: []
+    claims: 2
+    deps: []
+    superseded_by: ''
+  223_canonical_tools_collapse:
+    id: 223_canonical_tools_collapse
+    title: 223_canonical_tools_collapse
+    status: SUPERSEDED
+    file: specs/223_canonical_tools_collapse.md
+    layer: unknown
+    domain: []
+    claims: 2
+    deps: []
+    superseded_by: doc/architecture/SMART_METAGATEWAY_ARCHITECTURE.md
+  224_skill_catalog:
+    id: 224_skill_catalog
+    title: 224_skill_catalog
+    status: SUPERSEDED
+    file: specs/224_skill_catalog.md
+    layer: unknown
+    domain: []
+    claims: 2
+    deps: []
+    superseded_by: doc/architecture/SMART_METAGATEWAY_ARCHITECTURE.md
+  225_parallel_dispatch:
+    id: 225_parallel_dispatch
+    title: 225_parallel_dispatch
+    status: SUPERSEDED
+    file: specs/225_parallel_dispatch.md
+    layer: unknown
+    domain: []
+    claims: 2
+    deps: []
+    superseded_by: doc/architecture/SMART_METAGATEWAY_ARCHITECTURE.md
+  225_parallel_subagent_dispatch:
+    id: 225_parallel_subagent_dispatch
+    title: 225_parallel_subagent_dispatch
+    status: SUPERSEDED
+    file: specs/225_parallel_subagent_dispatch.md
+    layer: unknown
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: doc/architecture/SMART_METAGATEWAY_ARCHITECTURE.md
+  226_gateway_result_compression:
+    id: 226_gateway_result_compression
+    title: 226_gateway_result_compression
+    status: SUPERSEDED
+    file: specs/226_gateway_result_compression.md
+    layer: unknown
+    domain: []
+    claims: 2
+    deps: []
+    superseded_by: doc/architecture/SMART_METAGATEWAY_ARCHITECTURE.md
+  227_cache_correction:
+    id: 227_cache_correction
+    title: 227_cache_correction
+    status: SUPERSEDED
+    file: specs/227_cache_correction.md
+    layer: unknown
+    domain: []
+    claims: 2
+    deps: []
+    superseded_by: doc/architecture/SMART_METAGATEWAY_ARCHITECTURE.md
+  228_collaborative_gateway:
+    id: 228_collaborative_gateway
+    title: 228_collaborative_gateway
+    status: SUPERSEDED
+    file: specs/228_collaborative_gateway.md
+    layer: unknown
+    domain: []
+    claims: 2
+    deps: []
+    superseded_by: doc/architecture/SMART_METAGATEWAY_ARCHITECTURE.md
+  230_verifiable_spec_contracts:
+    id: 230_verifiable_spec_contracts
+    title: 230_verifiable_spec_contracts
+    status: Draft
+    file: specs/230_verifiable_spec_contracts.md
+    layer: unknown
+    domain: []
+    claims: 0
+    deps: []
+    superseded_by: ''
+  00_topology_tracker:
+    id: 00_topology_tracker
+    title: Rastreador de Topología y Soberanía
+    status: ACTIVE
+    file: specs/L0_Overseer/00_topology_tracker.md
+    layer: L0
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  03_polyglot_architecture:
+    id: 03_polyglot_architecture
+    title: Arquitectura Políglota de 7 Capas
+    status: DRAFT
+    file: specs/L0_Overseer/03_polyglot_architecture.md
+    layer: L0
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  05_orchestration_stack_and_glue:
+    id: 05_orchestration_stack_and_glue
+    title: Stack de Orquestación y Arbitraje
+    status: DRAFT
+    file: specs/L0_Overseer/05_orchestration_stack_and_glue.md
+    layer: L0
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  06_migration_and_implementation_strategy:
+    id: 06_migration_and_implementation_strategy
+    title: Estrategia de Migración y Construcción (Greenfield)
+    status: DRAFT
+    file: specs/L0_Overseer/06_migration_and_implementation_strategy.md
+    layer: L0
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  07_unknown_unknowns_resolutions:
+    id: 07_unknown_unknowns_resolutions
+    title: Resoluciones de Unknown Unknowns
+    status: DRAFT
+    file: specs/L0_Overseer/07_unknown_unknowns_resolutions.md
+    layer: L0
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  08_devex_and_deployment_strategy:
+    id: 08_devex_and_deployment_strategy
+    title: DevEx y Estrategia de Despliegue Hermético
+    status: DRAFT
+    file: specs/L0_Overseer/08_devex_and_deployment_strategy.md
+    layer: L0
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  11_monorepo_structure:
+    id: 11_monorepo_structure
+    title: Estructura de Monorepo Soberano
+    status: ACTIVE
+    file: specs/L0_Overseer/11_monorepo_structure.md
+    layer: L0
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  14_value_engineering_and_governance:
+    id: 14_value_engineering_and_governance
+    title: Ingeniería de Valor y Gobernanza Económica
+    status: DRAFT
+    file: specs/L0_Overseer/14_value_engineering_and_governance.md
+    layer: L0
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  26_langgraph_quantum_swarm:
+    id: 26_langgraph_quantum_swarm
+    title: Orquestador de Enjambre Cuántico (Go StateGraph)
+    status: ACTIVE
+    file: specs/L0_Overseer/26_langgraph_quantum_swarm.md
+    layer: L0
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  28_shadow_worktrees:
+    id: 28_shadow_worktrees
+    title: Shadow Worktrees
+    status: PROPOSED
+    file: specs/L0_Overseer/28_shadow_worktrees.md
+    layer: L0
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  29_skill_ingestion_engine:
+    id: 29_skill_ingestion_engine
+    title: Skill Ingestion Engine
+    status: ACTIVE
+    file: specs/L0_Overseer/29_skill_ingestion_engine.md
+    layer: L0
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  33_persistent_personality_mood:
+    id: 33_persistent_personality_mood
+    title: Perfil de Personalidad y Mood Estratégico
+    status: DRAFT
+    file: specs/L0_Overseer/33_persistent_personality_mood.md
+    layer: L0
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  42_proactive_heartbeat_protocol:
+    id: 42_proactive_heartbeat_protocol
+    title: Protocolo de Heartbeat Proactivo (The Pulse)
+    status: DRAFT
+    file: specs/L0_Overseer/42_proactive_heartbeat_protocol.md
+    layer: L0
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  43_documentation_and_artifact_standards:
+    id: 43_documentation_and_artifact_standards
+    title: Documentation and Artifact Standards
+    status: ACTIVE
+    file: specs/L0_Overseer/43_documentation_and_artifact_standards.md
+    layer: L0
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  46_lane_queue_transaction_protocol:
+    id: 46_lane_queue_transaction_protocol
+    title: Protocolo de Transacción en Lane Queue (Orchestration Integrity)
+    status: ACTIVE
+    file: specs/L0_Overseer/46_lane_queue_transaction_protocol.md
+    layer: L0
+    domain: []
+    claims: 1
+    deps:
+    - id: DE-V2-L0-05
+      relationship: REFINES
+    - id: DE-V2-L1-41
+      relationship: USES_WIRE
+    superseded_by: ''
+  46_sovereign_daemon_dummied:
+    id: 46_sovereign_daemon_dummied
+    title: Demonio Soberano (dummied)
+    status: PROPOSED
+    file: specs/L0_Overseer/46_sovereign_daemon_dummied.md
+    layer: L0
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  47_path_normalization:
+    id: 47_path_normalization
+    title: Path Normalization & Industrial Environment
+    status: ACTIVE
+    file: specs/L0_Overseer/47_path_normalization.md
+    layer: L0
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  48_architectural_integrity_and_knowledge_crystallization:
+    id: 48_architectural_integrity_and_knowledge_crystallization
+    title: Protocolo de Cristalización de Integridad Arquitectónica (ACIP)
+    status: ACTIVE
+    file: specs/L0_Overseer/48_architectural_integrity_and_knowledge_crystallization.md
+    layer: L0
+    domain: []
+    claims: 1
+    deps:
+    - id: DE-V2-L0-06
+      relationship: REFINES
+    superseded_by: ''
+  48_business_vs_ai_architecture:
+    id: 48_business_vs_ai_architecture
+    title: 'Bifurcación de Arquitectura: Negocio vs IA'
+    status: ACTIVE
+    file: specs/L0_Overseer/48_business_vs_ai_architecture.md
+    layer: L0
+    domain: []
+    claims: 1
+    deps:
+    - adr/001_architectural_bifurcation.md
+    superseded_by: ''
+  49_sovereign_cognitive_closure_protocol:
+    id: 49_sovereign_cognitive_closure_protocol
+    title: Protocolo de Cierre Cognitivo Soberano (SCCP)
+    status: ACTIVE
+    file: specs/L0_Overseer/49_sovereign_cognitive_closure_protocol.md
+    layer: L0
+    domain: []
+    claims: 1
+    deps:
+    - id: DE-V2-L0-48
+      relationship: REFINES
+    superseded_by: ''
+  50_daemon_telemetry_contracts:
+    id: 50_daemon_telemetry_contracts
+    title: Daemon Telemetry & Outcome Contracts
+    status: ACTIVE
+    file: specs/L0_Overseer/50_daemon_telemetry_contracts.md
+    layer: L0
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  51_model_contracts_alignment:
+    id: 51_model_contracts_alignment
+    title: Model Contracts Alignment
+    status: ACTIVE
+    file: specs/L0_Overseer/51_model_contracts_alignment.md
+    layer: L0
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  10_protobuf_contracts:
+    id: 10_protobuf_contracts
+    title: Contratos Protobuf (Ley de Schema-First)
+    status: ACTIVE
+    file: specs/L1_Nervous/10_protobuf_contracts.md
+    layer: L1
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  11_arrow_data_plane:
+    id: 11_arrow_data_plane
+    title: Protocolo de Plano de Datos (Apache Arrow Zero-Copy)
+    status: DRAFT
+    file: specs/L1_Nervous/11_arrow_data_plane.md
+    layer: L1
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  15_mcp_sidecar_isolation:
+    id: 15_mcp_sidecar_isolation
+    title: Aislamiento de I/O y Adaptador MCP (Modelo FEI)
+    status: ACTIVE
+    file: specs/L1_Nervous/15_mcp_sidecar_isolation.md
+    layer: L1
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  16_mcp_dynamic_gateway:
+    id: 16_mcp_dynamic_gateway
+    title: MCP Dynamic Gateway
+    status: ACTIVE
+    file: specs/L1_Nervous/16_mcp_dynamic_gateway.md
+    layer: L1
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  23_atomic_modular_nodes:
+    id: 23_atomic_modular_nodes
+    title: Nodos Atómicos y Modularidad Plug & Play
+    status: ACTIVE
+    file: specs/L1_Nervous/23_atomic_modular_nodes.md
+    layer: L1
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  30_floating_sessions:
+    id: 30_floating_sessions
+    title: Floating Sessions Protocol
+    status: DRAFT
+    file: specs/L1_Nervous/30_floating_sessions.md
+    layer: L1
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  41_layer_handshake_protocol:
+    id: 41_layer_handshake_protocol
+    title: Protocolo de Handshake y Mensajería (The Wire)
+    status: ACTIVE
+    file: specs/L1_Nervous/41_layer_handshake_protocol.md
+    layer: L1
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  44_local_reasoning_gateway:
+    id: 44_local_reasoning_gateway
+    title: Local Reasoning Gateway
+    status: DRAFT
+    file: specs/L1_Nervous/44_local_reasoning_gateway.md
+    layer: L1
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  44_pervasive_channel_adapters:
+    id: 44_pervasive_channel_adapters
+    title: Adaptadores de Canal Pervasivos (The Pervasive Gateway)
+    status: DRAFT
+    file: specs/L1_Nervous/44_pervasive_channel_adapters.md
+    layer: L1
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  49_typed_sdk_generation:
+    id: 49_typed_sdk_generation
+    title: Typed SDK Generation
+    status: ACTIVE
+    file: specs/L1_Nervous/49_typed_sdk_generation.md
+    layer: L1
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  dummie_brain_v1.spec:
+    id: dummie_brain_v1.spec
+    title: DUMMIE Brain MCP Specification v1.0
+    status: DRAFT
+    file: specs/L1_Nervous/dummie_brain_v1.spec.md
+    layer: L1
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  02_memory_engine_4d_tes:
+    id: 02_memory_engine_4d_tes
+    title: Motor de Memoria Inmutable (4D-TES)
+    status: ACTIVE
+    file: specs/L2_Brain/02_memory_engine_4d_tes.md
+    layer: L2
+    domain: []
+    claims: 2
+    deps: []
+    superseded_by: ''
+  09_annex_4d_tes_comparison:
+    id: 09_annex_4d_tes_comparison
+    title: 'Anexo: Autopsia Arquitectónica y Comparativa (4D-TES)'
+    status: DRAFT
+    file: specs/L2_Brain/09_annex_4d_tes_comparison.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  12_6d_context_model:
+    id: 12_6d_context_model
+    title: Modelo Formal de Memoria 6D-Context
+    status: ACTIVE
+    file: specs/L2_Brain/12_6d_context_model.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  205_context_nutrition_engine:
+    id: 205_context_nutrition_engine
+    title: Context Nutrition Engine (CNE)
+    status: ACTIVE
+    file: specs/L2_Brain/205_context_nutrition_engine.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  21_software_fabrication_engine:
+    id: 21_software_fabrication_engine
+    title: Software Fabrication Engine (SFE)
+    status: ACTIVE
+    file: specs/L2_Brain/21_software_fabrication_engine.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  27_floating_session_state:
+    id: 27_floating_session_state
+    title: Floating Session State
+    status: PROPOSED
+    file: specs/L2_Brain/27_floating_session_state.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  27_kaizen_loop_refinement:
+    id: 27_kaizen_loop_refinement
+    title: Bucle Kaizen (Mejora Continua)
+    status: DRAFT
+    file: specs/L2_Brain/27_kaizen_loop_refinement.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  28_skill_standard_yaml:
+    id: 28_skill_standard_yaml
+    title: Estándar de Habilidades Agénticas (YAML)
+    status: DRAFT
+    file: specs/L2_Brain/28_skill_standard_yaml.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  29_design_station_workflow:
+    id: 29_design_station_workflow
+    title: Arquitectura de la Estación de Diseño (Workflow)
+    status: DRAFT
+    file: specs/L2_Brain/29_design_station_workflow.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  31_impact_analytics_blast_radius:
+    id: 31_impact_analytics_blast_radius
+    title: Análisis de Impacto y Radio de Explosión
+    status: DRAFT
+    file: specs/L2_Brain/31_impact_analytics_blast_radius.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  34_decision_ledger_auditor:
+    id: 34_decision_ledger_auditor
+    title: Ledger de Decisiones e Interfaz de Alerta
+    status: DRAFT
+    file: specs/L2_Brain/34_decision_ledger_auditor.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  36_cognitive_memory_session_ledger:
+    id: 36_cognitive_memory_session_ledger
+    title: Memoria Cognitiva y Ledger de Sesión
+    status: DRAFT
+    file: specs/L2_Brain/36_cognitive_memory_session_ledger.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  37_a2a_discovery_protocol:
+    id: 37_a2a_discovery_protocol
+    title: Protocolo de Descubrimiento Agent-to-Agent (A2A)
+    status: DRAFT
+    file: specs/L2_Brain/37_a2a_discovery_protocol.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  38_procedural_memory_crystallization:
+    id: 38_procedural_memory_crystallization
+    title: Cristalización de Memoria Procedimental (Kaizen Loop)
+    status: DRAFT
+    file: specs/L2_Brain/38_procedural_memory_crystallization.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  39_semantic_consistency_agent:
+    id: 39_semantic_consistency_agent
+    title: Agente de Consistencia Semántica (Orchestration Synchronizer)
+    status: DRAFT
+    file: specs/L2_Brain/39_semantic_consistency_agent.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  40_metacognitive_audit_loop:
+    id: 40_metacognitive_audit_loop
+    title: Metacognitive Audit Loop (Observador del Observador)
+    status: DRAFT
+    file: specs/L2_Brain/40_metacognitive_audit_loop.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  40_token_optimization_protocol:
+    id: 40_token_optimization_protocol
+    title: Token Optimization Protocol
+    status: DRAFT
+    file: specs/L2_Brain/40_token_optimization_protocol.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  41_semantic_fabric_indexer:
+    id: 41_semantic_fabric_indexer
+    title: Semantic Fabric Indexer
+    status: DRAFT
+    file: specs/L2_Brain/41_semantic_fabric_indexer.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  41_wordline_sovereignty:
+    id: 41_wordline_sovereignty
+    title: Wordline and Context Sovereignty
+    status: PROPOSED
+    file: specs/L2_Brain/41_wordline_sovereignty.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  42_metacognitive_identity:
+    id: 42_metacognitive_identity
+    title: Metacognitive Identity
+    status: PROPOSED
+    file: specs/L2_Brain/42_metacognitive_identity.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  42_ontological_certainty_map:
+    id: 42_ontological_certainty_map
+    title: Ontological Certainty Map
+    status: DRAFT
+    file: specs/L2_Brain/42_ontological_certainty_map.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  71_metagateway_sensor_first_policy:
+    id: 71_metagateway_sensor_first_policy
+    title: Meta-Gateway Sensor-First Policy
+    status: ACTIVE
+    file: specs/L2_Brain/71_metagateway_sensor_first_policy.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  73_dummie_cognitive_body_architecture:
+    id: 73_dummie_cognitive_body_architecture
+    title: DUMMIE Cognitive Body Architecture
+    status: ACTIVE
+    file: specs/L2_Brain/73_dummie_cognitive_body_architecture.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  74_runtime_token_economy:
+    id: 74_runtime_token_economy
+    title: Runtime Token Economy
+    status: ACTIVE
+    file: specs/L2_Brain/74_runtime_token_economy.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  75_mission_workbench:
+    id: 75_mission_workbench
+    title: Mission Workbench
+    status: ACTIVE
+    file: specs/L2_Brain/75_mission_workbench.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  76_knowledge_vault:
+    id: 76_knowledge_vault
+    title: Knowledge Vault
+    status: ACTIVE
+    file: specs/L2_Brain/76_knowledge_vault.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  81_phase_ledger:
+    id: 81_phase_ledger
+    title: Phase Ledger
+    status: ACTIVE
+    file: specs/L2_Brain/81_phase_ledger.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  82_long_running_mission_runtime:
+    id: 82_long_running_mission_runtime
+    title: Long-Running Mission Runtime
+    status: ACTIVE
+    file: specs/L2_Brain/82_long_running_mission_runtime.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  83_token_cost_ledger:
+    id: 83_token_cost_ledger
+    title: Token Cost Ledger
+    status: DRAFT
+    file: specs/L2_Brain/83_token_cost_ledger.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  84_context_budget_manager:
+    id: 84_context_budget_manager
+    title: Context Budget Manager
+    status: DRAFT
+    file: specs/L2_Brain/84_context_budget_manager.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  85_mission_workbench:
+    id: 85_mission_workbench
+    title: Mission Workbench
+    status: SUPERSEDED
+    file: specs/L2_Brain/85_mission_workbench.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: 'DE-V2-L2-75 (Spec 75: Mission Workbench)'
+  86_knowledge_vault:
+    id: 86_knowledge_vault
+    title: Knowledge Vault
+    status: SUPERSEDED
+    file: specs/L2_Brain/86_knowledge_vault.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: 'DE-V2-L2-76 (Spec 76: Knowledge Vault)'
+  88_learning_episode_memory_integration:
+    id: 88_learning_episode_memory_integration
+    title: Learning Episode Memory Integration
+    status: DRAFT
+    file: specs/L2_Brain/88_learning_episode_memory_integration.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  89_graph_sync_plan:
+    id: 89_graph_sync_plan
+    title: Graph Synchronization Planning
+    status: DRAFT
+    file: specs/L2_Brain/89_graph_sync_plan.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  90_vault_embedding_index:
+    id: 90_vault_embedding_index
+    title: Vault Embedding Index
+    status: ACTIVE
+    file: specs/L2_Brain/90_vault_embedding_index.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  91_kuzu_4dtes_sync_adapter:
+    id: 91_kuzu_4dtes_sync_adapter
+    title: Kuzu Graph Sync Adapter
+    status: DRAFT
+    file: specs/L2_Brain/91_kuzu_4dtes_sync_adapter.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  92_socraticode_gateway_adapter:
+    id: 92_socraticode_gateway_adapter
+    title: Socraticode Gateway Adapter
+    status: DRAFT
+    file: specs/L2_Brain/92_socraticode_gateway_adapter.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  93_semantic_retrieval_runtime:
+    id: 93_semantic_retrieval_runtime
+    title: Semantic Retrieval Runtime
+    status: DRAFT
+    file: specs/L2_Brain/93_semantic_retrieval_runtime.md
+    layer: L2
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  04_anti_ignorance_shields:
+    id: 04_anti_ignorance_shields
+    title: Escudos Anti-Ignorancia (Active Shields)
+    status: DRAFT
+    file: specs/L3_Shield/04_anti_ignorance_shields.md
+    layer: L3
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  22_sdd_executable_contracts:
+    id: 22_sdd_executable_contracts
+    title: Contratos Ejecutables de Gobernanza (SDD)
+    status: ACTIVE
+    file: specs/L3_Shield/22_sdd_executable_contracts.md
+    layer: L3
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  24_legal_compliance_shield:
+    id: 24_legal_compliance_shield
+    title: Blindaje Legal y Cumplimiento (L-Shield)
+    status: DRAFT
+    file: specs/L3_Shield/24_legal_compliance_shield.md
+    layer: L3
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  45_secure_node_pairing_protocol:
+    id: 45_secure_node_pairing_protocol
+    title: Protocolo de Emparejamiento Seguro (Sovereign Node Pairing)
+    status: DRAFT
+    file: specs/L3_Shield/45_secure_node_pairing_protocol.md
+    layer: L3
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  47_sovereign_secret_injection_protocol:
+    id: 47_sovereign_secret_injection_protocol
+    title: Protocolo de Inyección de Secretos Soberano (Vault Shield)
+    status: ACTIVE
+    file: specs/L3_Shield/47_sovereign_secret_injection_protocol.md
+    layer: L3
+    domain: []
+    claims: 1
+    deps:
+    - id: DE-V2-L3-04
+      relationship: GOVERNS
+    - id: DE-V2-L1-44
+      relationship: HYDRATES_VIA
+    superseded_by: ''
+  18_loci_ontology_mapping:
+    id: 18_loci_ontology_mapping
+    title: Palacio de Loci y RBAC Topográfico
+    status: ACTIVE
+    file: specs/L4_Edge/18_loci_ontology_mapping.md
+    layer: L4
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  25_blueprint_registry:
+    id: 25_blueprint_registry
+    title: Registro de Blueprints Industriales
+    status: DRAFT
+    file: specs/L4_Edge/25_blueprint_registry.md
+    layer: L4
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  40_self_healing_remediation_loop:
+    id: 40_self_healing_remediation_loop
+    title: Bucle de Autosanación e Infraestructura Agéntica
+    status: DRAFT
+    file: specs/L4_Edge/40_self_healing_remediation_loop.md
+    layer: L4
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  48_remote_skill_hydration_protocol:
+    id: 48_remote_skill_hydration_protocol
+    title: Protocolo de Hidratación Remota de Habilidades (Agentic Skill Fetcher)
+    status: ACTIVE
+    file: specs/L4_Edge/48_remote_skill_hydration_protocol.md
+    layer: L4
+    domain: []
+    claims: 1
+    deps:
+    - id: DE-V2-L2-28
+      relationship: INSTALLS_CONTRACT
+    - id: DE-V2-L3-04
+      relationship: AUDITED_BY
+    - specs/L4_Edge/18_loci_ontology_mapping.md
+    superseded_by: ''
+  49_lsp_context_hydration_protocol:
+    id: 49_lsp_context_hydration_protocol
+    title: Protocolo de Hidratación Semántica LSP (Semantic Bridge)
+    status: ACTIVE
+    file: specs/L4_Edge/49_lsp_context_hydration_protocol.md
+    layer: L4
+    domain: []
+    claims: 1
+    deps:
+    - id: DE-V2-L4-18
+      relationship: REFINES_ONTOLOGY
+    - id: DE-V2-L1-41
+      relationship: CONSUMES_VIA_ACP
+    - specs/L4_Edge/40_self_healing_remediation_loop.md
+    superseded_by: ''
+  01_environment_and_hardware:
+    id: 01_environment_and_hardware
+    title: Entorno Físico y Restricciones del Metal
+    status: DRAFT
+    file: specs/L5_Muscle/01_environment_and_hardware.md
+    layer: L5
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  16_hardware_ipc_stability:
+    id: 16_hardware_ipc_stability
+    title: Estabilidad Física y Sincronización IPC
+    status: DRAFT
+    file: specs/L5_Muscle/16_hardware_ipc_stability.md
+    layer: L5
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  20_simd_muscle_processing:
+    id: 20_simd_muscle_processing
+    title: Computo Paralelo y Procesamiento SIMD
+    status: DRAFT
+    file: specs/L5_Muscle/20_simd_muscle_processing.md
+    layer: L5
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  32_multiverse_compression_necro_learning:
+    id: 32_multiverse_compression_necro_learning
+    title: Motor de Ultra-Compresión del Multiverso
+    status: DRAFT
+    file: specs/L5_Muscle/32_multiverse_compression_necro_learning.md
+    layer: L5
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  35_necro_learning_pipeline:
+    id: 35_necro_learning_pipeline
+    title: Pipeline de Necro-Learning
+    status: DRAFT
+    file: specs/L5_Muscle/35_necro_learning_pipeline.md
+    layer: L5
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  50_surgical_patch_protocol:
+    id: 50_surgical_patch_protocol
+    title: Protocolo de Parche Quirúrgico (Surgical Patching)
+    status: ACTIVE
+    file: specs/L5_Muscle/50_surgical_patch_protocol.md
+    layer: L5
+    domain: []
+    claims: 1
+    deps:
+    - id: DE-V2-L5-16
+      relationship: REFINES_IO
+    - id: DE-V2-L3-04
+      relationship: AUDITED_BY
+    - specs/L4_Edge/49_lsp_context_hydration_protocol.md
+    superseded_by: ''
+  13_observability_opentelemetry:
+    id: 13_observability_opentelemetry
+    title: Observabilidad Sistémica (OpenTelemetry)
+    status: DRAFT
+    file: specs/L6_Skin/13_observability_opentelemetry.md
+    layer: L6
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  17_optical_nerve_telemetry:
+    id: 17_optical_nerve_telemetry
+    title: Nervio Óptico (Visualización 4D)
+    status: DRAFT
+    file: specs/L6_Skin/17_optical_nerve_telemetry.md
+    layer: L6
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  26_command_canvas_gui:
+    id: 26_command_canvas_gui
+    title: Interfaz Command Canvas (GUI)
+    status: DRAFT
+    file: specs/L6_Skin/26_command_canvas_gui.md
+    layer: L6
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''
+  30_visualizer_microservice:
+    id: 30_visualizer_microservice
+    title: Visualizador Topológico 4D (Microservicio)
+    status: DRAFT
+    file: specs/L6_Skin/30_visualizer_microservice.md
+    layer: L6
+    domain: []
+    claims: 1
+    deps: []
+    superseded_by: ''

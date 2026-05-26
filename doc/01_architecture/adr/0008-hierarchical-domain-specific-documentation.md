@@ -1,17 +1,27 @@
 ---
-spec_id: "DE-V2-[ADR-008](0008-hierarchical-domain-specific-documentation.md)"
-title: "Documentación Modular Jerárquica y Bounded Contexts"
-status: "ACTIVE"
-version: "1.1.0"
-layer: "L0"
-namespace: "io.dummie.v2.adr"
-authority: "ARCHITECT"
+spec_id: DE-V2-[ADR-008](0008-hierarchical-domain-specific-documentation.md)
+title: Documentación Modular Jerárquica y Bounded Contexts
+status: ACTIVE
+version: 1.1.0
+layer: L0
+namespace: io.dummie.v2.adr
+authority: ARCHITECT
 dependencies:
-  - id: "DE-V2-[ADR-007](0007-modular-spec-sibling-files.md)"
-    relationship: "EXTENDS"
-tags: ["architectural_decision", "documentation_hierarchy", "domain_driven_design"]
+- id: DE-V2-[ADR-007](0007-modular-spec-sibling-files.md)
+  relationship: EXTENDS
+tags:
+- architectural_decision
+- documentation_hierarchy
+- domain_driven_design
+claims:
+- id: 0008-hierarchical-domain-specific-documentation-file-valid
+  description: Spec file '0008-hierarchical-domain-specific-documentation.md' exists,
+    parses valid YAML frontmatter, and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/01_architecture/adr/0008-hierarchical-domain-specific-documentation.md').read().split('---')[1]);
+    assert d, 'empty frontmatter'"
+  severity: critical
 ---
-
 # [ADR-008](0008-hierarchical-domain-specific-documentation.md): Estructura Jerárquica de Especificaciones
 
 ## Abstract

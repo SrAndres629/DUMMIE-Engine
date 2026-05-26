@@ -1,11 +1,18 @@
 ---
-spec_id: "180_environment_toolchain_probe"
-title: "Environment Toolchain Probe"
-status: "DEPRECATED"
-layer: "L2"
-last_verified_on: "2026-05-16"
+spec_id: 180_environment_toolchain_probe
+title: Environment Toolchain Probe
+status: DEPRECATED
+layer: L2
+last_verified_on: '2026-05-16'
+claims:
+- id: 180_environment_toolchain_probe-file-valid
+  description: Spec file '180_environment_toolchain_probe.md' exists, parses valid
+    YAML frontmatter, and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/specs/180_environment_toolchain_probe.md').read().split('---')[1]);
+    assert d, 'empty frontmatter'"
+  severity: critical
 ---
-
 ## Purpose
 This spec establishes the environment toolchain probe (HEARTBEAT-2.1) to audit the host políglota compilers, interpreters, and package managers safely via command version queries.
 

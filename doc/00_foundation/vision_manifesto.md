@@ -1,17 +1,31 @@
 ---
-spec_id: "DE-V2-L0-VISION"
-title: "MANIFIESTO DE VISIÓN: Ingeniería de Sistemas Soberana"
-status: "ACTIVE"
-version: "2.2.0"
-layer: "L0"
-namespace: "io.dummie.v2.vision"
-authority: "SYSTEM"
+spec_id: DE-V2-L0-VISION
+title: 'MANIFIESTO DE VISIÓN: Ingeniería de Sistemas Soberana'
+status: ACTIVE
+version: 2.2.0
+layer: L0
+namespace: io.dummie.v2.vision
+authority: SYSTEM
 dependencies:
-  - id: "DE-V2-L0-00"
-    relationship: "DEFINES"
-tags: ["governance", "vision_manifesto", "industrial_sdd"]
+- id: DE-V2-L0-00
+  relationship: DEFINES
+- specs/L0_Overseer/03_polyglot_architecture.md
+- specs/L1_Nervous/10_protobuf_contracts.md
+- specs/L1_Nervous/23_atomic_modular_nodes.md
+- specs/L2_Brain/02_memory_engine_4d_tes.md
+tags:
+- governance
+- vision_manifesto
+- industrial_sdd
+claims:
+- id: vision_manifesto-file-valid
+  description: Spec file 'vision_manifesto.md' exists, parses valid YAML frontmatter,
+    and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/00_foundation/vision_manifesto.md').read().split('---')[1]); assert
+    d, 'empty frontmatter'"
+  severity: critical
 ---
-
 # MANIFIESTO DE VISIÓN: Ingeniería de Sistemas Soberana
 
 ## Abstract

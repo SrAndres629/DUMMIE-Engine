@@ -1,17 +1,28 @@
 ---
-spec_id: "DE-V2-[ADR-001](0001-polyglot-architecture.md)"
-title: "Arquitectura Políglota de 7 Capas"
-status: "ACTIVE"
-version: "2.1.0"
-layer: "L0"
-namespace: "io.dummie.v2.adr"
-authority: "ARCHITECT"
+spec_id: DE-V2-[ADR-001](0001-polyglot-architecture.md)
+title: Arquitectura Políglota de 7 Capas
+status: ACTIVE
+version: 2.1.0
+layer: L0
+namespace: io.dummie.v2.adr
+authority: ARCHITECT
 dependencies:
-  - id: "DE-V2-L0-03"
-    relationship: "DEFINES"
-tags: ["architectural_decision", "polyglot_architecture", "industrial_sdd"]
+- id: DE-V2-L0-03
+  relationship: DEFINES
+- specs/L0_Overseer/08_devex_and_deployment_strategy.md
+tags:
+- architectural_decision
+- polyglot_architecture
+- industrial_sdd
+claims:
+- id: 0001-polyglot-architecture-file-valid
+  description: Spec file '0001-polyglot-architecture.md' exists, parses valid YAML
+    frontmatter, and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/01_architecture/adr/0001-polyglot-architecture.md').read().split('---')[1]);
+    assert d, 'empty frontmatter'"
+  severity: critical
 ---
-
 # [ADR-001](0001-polyglot-architecture.md): Arquitectura Políglota de 7 Capas
 
 ## Abstract

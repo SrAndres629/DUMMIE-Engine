@@ -1,19 +1,26 @@
 ---
-spec_id: "127_strategic_partner_swarm"
-title: "127 Strategic Partner Swarm"
-status: "ACTIVE"
-canonicality: "canonical"
-artifact_type: "spec"
-plan: "DUMMIE PLAN V1"
-layer: "l2_brain"
-created_by: "operationalization_pack_1"
-last_verified_on: "2026-05-16"
+spec_id: 127_strategic_partner_swarm
+title: 127 Strategic Partner Swarm
+status: ACTIVE
+canonicality: canonical
+artifact_type: spec
+plan: DUMMIE PLAN V1
+layer: l2_brain
+created_by: operationalization_pack_1
+last_verified_on: '2026-05-16'
+claims:
+- id: 127_strategic_partner_swarm-file-valid
+  description: Spec file '127_strategic_partner_swarm.md' exists, parses valid YAML
+    frontmatter, and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/specs/127_strategic_partner_swarm.md').read().split('---')[1]); assert
+    d, 'empty frontmatter'"
+  severity: critical
 ---
-
 # Spec 127: Strategic Partner Swarm
 
 ## Purpose
-Provide a bounded, advisory-only reasoning layer where multiple specialized roles can review mission plans, repository evidence, and coherence results to produce high-confidence recommendations.
+Provide a bounded, executive reasoning layer with contract-scoped mutation capability where multiple specialized roles can review mission plans, repository evidence, and coherence results to produce high-confidence recommendations.
 
 ## Scope
 - Role definition: planner, critic, validator, mentor, risk_officer, execution_advisor.

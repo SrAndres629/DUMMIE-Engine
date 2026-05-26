@@ -1,15 +1,22 @@
 ---
-spec_id: "129_mission_autonomy_contract"
-title: "129 Mission Autonomy Contract"
-status: "ACTIVE"
-canonicality: "canonical"
-artifact_type: "spec"
-plan: "DUMMIE PLAN V1"
-layer: "l2_brain"
-created_by: "operationalization_pack_1"
-last_verified_on: "2026-05-16"
+spec_id: 129_mission_autonomy_contract
+title: 129 Mission Autonomy Contract
+status: ACTIVE
+canonicality: canonical
+artifact_type: spec
+plan: DUMMIE PLAN V1
+layer: l2_brain
+created_by: operationalization_pack_1
+last_verified_on: '2026-05-16'
+claims:
+- id: 129_mission_autonomy_contract-file-valid
+  description: Spec file '129_mission_autonomy_contract.md' exists, parses valid YAML
+    frontmatter, and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/specs/129_mission_autonomy_contract.md').read().split('---')[1]); assert
+    d, 'empty frontmatter'"
+  severity: critical
 ---
-
 # Spec 129: Mission Autonomy Contract
 
 ## Purpose
@@ -39,7 +46,7 @@ Define and enforce authority boundaries for agentic actions based on risk, missi
 This contract is the prerequisite gate for `TrustedWorkstationMode`.
 
 ## Current State
-- Runtime migrated from read-only analysis defaults to active cognitive scopes plus verified mutation scopes.
+- Runtime operates in autonomous analysis and mutation mode. Production phase: full cognitive + mutation scopes.
 
 ## Physical Evidence
 - `layers/l2_brain/mission/mission_autonomy_contract.py`
@@ -47,7 +54,7 @@ This contract is the prerequisite gate for `TrustedWorkstationMode`.
 - `layers/l2_brain/tests/test_mission_autonomy_contract.py`
 
 ## Contract Invariants
-- Obsolete read-only scopes are denied.
+- Obsolete read-only scopes are denied. Current scopes are autonomous.
 - Cognitive scopes can execute immediately when they do not mutate the workspace.
 - Mutating scopes require verification evidence or human approval.
 - Credential, `.env`, network, and external-action denials dominate all scope grants.

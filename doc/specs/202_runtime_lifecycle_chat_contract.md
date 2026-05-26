@@ -1,11 +1,20 @@
 ---
-spec_id: "DE-V2-L2-202"
-title: "Runtime Lifecycle Chat Contract"
-status: "ACTIVE"
-layer: "L2"
-last_verified_on: "2026-05-19"
+spec_id: DE-V2-L2-202
+title: Runtime Lifecycle Chat Contract
+status: ACTIVE
+layer: L2
+last_verified_on: '2026-05-19'
+dependencies:
+- specs/200_model_capability_and_routing.md
+claims:
+- id: 202_runtime_lifecycle_chat_contract-file-valid
+  description: Spec file '202_runtime_lifecycle_chat_contract.md' exists, parses valid
+    YAML frontmatter, and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/specs/202_runtime_lifecycle_chat_contract.md').read().split('---')[1]);
+    assert d, 'empty frontmatter'"
+  severity: critical
 ---
-
 ## Purpose
 Define the canonical contract for `dummie chat` as a runtime/lifecycle orchestration flow instead of a direct single-model chat.
 

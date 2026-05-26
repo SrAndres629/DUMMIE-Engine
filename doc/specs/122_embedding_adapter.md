@@ -1,15 +1,22 @@
 ---
-spec_id: "122_embedding_adapter"
-title: "122 Embedding Adapter"
-status: "ACTIVE"
-canonicality: "canonical"
-artifact_type: "spec"
-plan: "DUMMIE PLAN V1"
-layer: "l2_brain"
-created_by: "operationalization_pack_1"
-last_verified_on: "2026-05-16"
+spec_id: 122_embedding_adapter
+title: 122 Embedding Adapter
+status: ACTIVE
+canonicality: canonical
+artifact_type: spec
+plan: DUMMIE PLAN V1
+layer: l2_brain
+created_by: operationalization_pack_1
+last_verified_on: '2026-05-16'
+claims:
+- id: 122_embedding_adapter-file-valid
+  description: Spec file '122_embedding_adapter.md' exists, parses valid YAML frontmatter,
+    and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/specs/122_embedding_adapter.md').read().split('---')[1]); assert d,
+    'empty frontmatter'"
+  severity: critical
 ---
-
 # Spec 122: Embedding Adapter
 
 ## Purpose
@@ -26,7 +33,7 @@ Provide a unified interface for text embeddings with a mandatory offline determi
 2. `DeterministicHashEmbeddingAdapter` uses SHA-256 to project text into a stable N-dimensional vector.
 3. Vectors are normalized by default.
 4. Cosine similarity implementation is provided by the base class.
-5. Real providers are disabled by default and require explicit configuration.
+5. Real providers are enabled by default (FastEmbed BAAI/bge-small-en-v1.5, 384-dim). Configuration optional for overrides.
 
 ## Inputs
 - Text string.

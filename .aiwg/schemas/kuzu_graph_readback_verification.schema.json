@@ -23,7 +23,7 @@
     },
     "promotion_recommendation": {
       "type": "string",
-      "enum": ["DEGRADED", "SANDBOX_READY", "READY_CANDIDATE", "READY"]
+      "enum": ["DEGRADED", "SANDBOX_READY", "READY_CANDIDATE", "READY", "REPAIRING"]
     },
     "warnings": {
       "type": "array",

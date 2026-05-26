@@ -5,7 +5,7 @@
   "required": ["sync_id", "mode", "source_refs", "nodes", "edges", "created_at"],
   "properties": {
     "sync_id": { "type": "string" },
-    "mode": { "type": "string", "enum": ["dry_run", "apply"] },
+    "mode": { "type": "string", "enum": ["apply", "validate"] },
     "source_refs": { "type": "array", "items": { "type": "string" } },
     "nodes": {
       "type": "array",

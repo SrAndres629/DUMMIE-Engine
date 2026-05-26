@@ -1,19 +1,35 @@
 ---
-spec_id: "DE-V2-[ADR-0013](0013-standardized-mcp-connectivity.md)"
-title: "Interoperabilidad Universal de Agentes vía MCP (Estrategia USB-C)"
-status: "ACCEPTED"
-version: "1.0.0"
-layer: "L0"
-namespace: "io.dummie.v2.adr"
-authority: "ARCHITECT"
+spec_id: DE-V2-[ADR-0013](0013-standardized-mcp-connectivity.md)
+title: Interoperabilidad Universal de Agentes vía MCP (Estrategia USB-C)
+status: ACCEPTED
+version: 1.0.0
+layer: L0
+namespace: io.dummie.v2.adr
+authority: ARCHITECT
 dependencies:
-  - id: "DE-V2-[ADR-005](0005-cognitive-fabrication-protocols.md)"
-    relationship: "EXTENDS"
-  - id: "DE-V2-L1-15"
-    relationship: "REINFORCES"
-tags: ["architectural_decision", "mcp", "interoperability", "industrial_sdd"]
+- id: DE-V2-[ADR-005](0005-cognitive-fabrication-protocols.md)
+  relationship: EXTENDS
+- id: DE-V2-L1-15
+  relationship: REINFORCES
+tags:
+- architectural_decision
+- mcp
+- interoperability
+- industrial_sdd
+claims:
+- id: 0013-standardized-mcp-connectivity-file-valid
+  description: Spec file '0013-standardized-mcp-connectivity.md' exists, parses valid
+    YAML frontmatter, and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/01_architecture/adr/0013-standardized-mcp-connectivity.md').read().split('
+merged_from:
+- adr/ADR-002-Transport-Protocol.md
+updated: '2026-05-26'
 ---
-
+')[1]);
+    assert d, 'empty frontmatter'"
+  severity: critical
+---
 # [ADR-0013](0013-standardized-mcp-connectivity.md): Interoperabilidad Universal de Agentes vía MCP
 
 ## Abstract

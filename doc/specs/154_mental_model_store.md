@@ -1,15 +1,22 @@
 ---
-spec_id: "154_mental_model_store"
-title: "154 Mental Model Store"
-status: "DEPRECATED"
-canonicality: "canonical"
-artifact_type: "spec"
-plan: "DUMMIE PLAN V1"
-layer: "l2_brain"
-created_by: "operationalization_pack_5"
-last_verified_on: "2026-05-16"
+spec_id: 154_mental_model_store
+title: 154 Mental Model Store
+status: DEPRECATED
+canonicality: canonical
+artifact_type: spec
+plan: DUMMIE PLAN V1
+layer: l2_brain
+created_by: operationalization_pack_5
+last_verified_on: '2026-05-16'
+claims:
+- id: 154_mental_model_store-file-valid
+  description: Spec file '154_mental_model_store.md' exists, parses valid YAML frontmatter,
+    and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/specs/154_mental_model_store.md').read().split('---')[1]); assert d,
+    'empty frontmatter'"
+  severity: critical
 ---
-
 # Spec 154: Mental Model Store
 
 ## Purpose

@@ -1,17 +1,29 @@
 ---
-spec_id: "DE-V2-[ADR-003](0003-agentic-communication-fabrication.md)"
-title: "Comunicación Agéntica y Fabricación (SFE)"
-status: "ACTIVE"
-version: "2.1.0"
-layer: "L2"
-namespace: "io.dummie.v2.adr"
-authority: "ARCHITECT"
+spec_id: DE-V2-[ADR-003](0003-agentic-communication-fabrication.md)
+title: Comunicación Agéntica y Fabricación (SFE)
+status: ACTIVE
+version: 2.1.0
+layer: L2
+namespace: io.dummie.v2.adr
+authority: ARCHITECT
 dependencies:
-  - id: "DE-V2-L2-21"
-    relationship: "DEFINES"
-tags: ["architectural_decision", "agentic_communication", "software_fabrication"]
+- id: DE-V2-L2-21
+  relationship: DEFINES
+- specs/L1_Nervous/10_protobuf_contracts.md
+- specs/L3_Shield/22_sdd_executable_contracts.md
+tags:
+- architectural_decision
+- agentic_communication
+- software_fabrication
+claims:
+- id: 0003-agentic-communication-fabrication-file-valid
+  description: Spec file '0003-agentic-communication-fabrication.md' exists, parses
+    valid YAML frontmatter, and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/01_architecture/adr/0003-agentic-communication-fabrication.md').read().split('---')[1]);
+    assert d, 'empty frontmatter'"
+  severity: critical
 ---
-
 # [ADR-003](0003-agentic-communication-fabrication.md): Comunicación Agéntica y Fabricación (SFE)
 
 ## Abstract

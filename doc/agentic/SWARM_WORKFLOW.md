@@ -1,3 +1,8 @@
+---
+status: ACTIVE
+layer: agentic
+domain: [swarm, workflow, orchestration]
+---
 # SWARM_WORKFLOW
 
 ## Goal

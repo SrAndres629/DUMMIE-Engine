@@ -1,0 +1,25 @@
+{
+  "spec_id": "208_fluid_data_architecture",
+  "rules": [
+    {
+      "id": "FDA-001",
+      "description": "All optimizations must be independently testable and revertible"
+    },
+    {
+      "id": "FDA-002",
+      "description": "GPU must be primary compute target when available"
+    },
+    {
+      "id": "FDA-003",
+      "description": "Ephemeral I/O must never touch persistent storage (NTFS)"
+    },
+    {
+      "id": "FDA-004",
+      "description": "Specs 209-213 must be registered in .aiwg/index/spec_graph.json"
+    },
+    {
+      "id": "FDA-005",
+      "description": "Changes to source files must reference the spec in their module docstring"
+    }
+  ]
+}

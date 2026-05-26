@@ -1,7 +1,9 @@
+Status: OBSOLETE (2026-05-25). Replaced by capability_registry + heartbeat_autonomous.
+
 ---
 spec_id: "146_readiness_score_calibrator"
 title: "146 Readiness Score Calibrator"
-status: "DEPRECATED"
+status: "OBSOLETE"
 canonicality: "canonical"
 artifact_type: "spec"
 plan: "DUMMIE PLAN V1"

@@ -6,6 +6,14 @@ layer: L0
 last_verified_on: '2026-04-24'
 version: 1.0.0
 namespace: dummie.engine.l0
+claims:
+- id: 11_monorepo_structure-file-valid
+  description: Spec file '11_monorepo_structure.md' exists, parses valid YAML frontmatter,
+    and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/specs/L0_Overseer/11_monorepo_structure.md').read().split('---')[1]);
+    assert d, 'empty frontmatter'"
+  severity: critical
 ---
 # Estructura de Monorepo Soberano
 

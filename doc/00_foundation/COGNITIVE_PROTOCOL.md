@@ -1,13 +1,21 @@
 ---
-spec_id: "DE-V2-L0-PROTOCOL"
-title: "Protocolo de Ingesta y Cristalización Cognitiva"
-status: "ACTIVE"
-version: "1.2.0"
-layer: "L0"
-namespace: "io.dummie.v2.foundation"
-authority: "ARCHITECT"
-tags: ["foundation", "cognitive_protocol", "memory_management"]
+spec_id: DE-V2-L0-PROTOCOL
+title: Protocolo de Ingesta y Cristalización Cognitiva
+status: ACTIVE
+version: 1.2.0
+layer: L0
+claims:
+- id: memory_dir_exists
+  description: .aiwg/memory/ directory exists for decision/lesson/ambiguity storage
+  verify_cmd: test -d .aiwg/memory/ && echo OK
+integrity:
+  last_verified: null
+  claims_passing: 0
+  claims_total: 1
+dependencies:
+- specs/L0_Overseer/49_sovereign_cognitive_closure_protocol.md
 ---
+
 
 # Protocolo de Ingesta y Cristalización Cognitiva
 

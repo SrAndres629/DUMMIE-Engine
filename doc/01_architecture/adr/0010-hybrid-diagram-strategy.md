@@ -1,14 +1,24 @@
 ---
-spec_id: "DE-V2-[ADR-010](0010-hybrid-diagram-strategy.md)"
-title: "Estrategia Híbrida de Mantenimiento Espacial (Diagramación)"
-status: "ACTIVE"
-version: "1.1.0"
-layer: "L0"
-namespace: "io.dummie.v2.adr"
-authority: "ARCHITECT"
-tags: ["architectural_decision", "diagramming", "spatial_maintenance"]
+spec_id: DE-V2-[ADR-010](0010-hybrid-diagram-strategy.md)
+title: Estrategia Híbrida de Mantenimiento Espacial (Diagramación)
+status: ACTIVE
+version: 1.1.0
+layer: L0
+namespace: io.dummie.v2.adr
+authority: ARCHITECT
+tags:
+- architectural_decision
+- diagramming
+- spatial_maintenance
+claims:
+- id: 0010-hybrid-diagram-strategy-file-valid
+  description: Spec file '0010-hybrid-diagram-strategy.md' exists, parses valid YAML
+    frontmatter, and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/01_architecture/adr/0010-hybrid-diagram-strategy.md').read().split('---')[1]);
+    assert d, 'empty frontmatter'"
+  severity: critical
 ---
-
 # [ADR-010](0010-hybrid-diagram-strategy.md): Estrategia Híbrida de Mantenimiento Espacial (Diagramación)
 
 ## Abstract

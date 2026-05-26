@@ -1,15 +1,22 @@
 ---
-spec_id: "149_entrypoint_enforcement_auditor"
-title: "149 Entrypoint Enforcement Auditor"
-status: "ACTIVE"
-canonicality: "canonical"
-artifact_type: "spec"
-plan: "DUMMIE PLAN V1"
-layer: "l2_brain"
-created_by: "operationalization_pack_3"
-last_verified_on: "2026-05-16"
+spec_id: 149_entrypoint_enforcement_auditor
+title: 149 Entrypoint Enforcement Auditor
+status: ACTIVE
+canonicality: canonical
+artifact_type: spec
+plan: DUMMIE PLAN V1
+layer: l2_brain
+created_by: operationalization_pack_3
+last_verified_on: '2026-05-16'
+claims:
+- id: 149_entrypoint_enforcement_auditor-file-valid
+  description: Spec file '149_entrypoint_enforcement_auditor.md' exists, parses valid
+    YAML frontmatter, and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/specs/149_entrypoint_enforcement_auditor.md').read().split('---')[1]);
+    assert d, 'empty frontmatter'"
+  severity: critical
 ---
-
 # Spec 149: Entrypoint Enforcement Auditor
 
 ## Purpose

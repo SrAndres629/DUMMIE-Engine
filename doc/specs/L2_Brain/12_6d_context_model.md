@@ -6,6 +6,17 @@ layer: L2
 last_verified_on: '2026-04-26'
 version: 1.0.0
 namespace: dummie.engine.l2
+depends_on: ["DE-V2-L2-02"]
+
+claims:
+  - id: "six_d_model_exists"
+    description: "SixDimensionalContext class is importable from models.py"
+    verify_cmd: "uv run python -c 'from layers.l2_brain.context.models import SixDimensionalContext; print(\"OK\")'"
+
+integrity:
+  last_verified: null
+  claims_passing: 0
+  claims_total: 1
 ---
 # Modelo Formal de Memoria 6D-Context
 

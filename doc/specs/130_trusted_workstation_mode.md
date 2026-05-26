@@ -1,15 +1,22 @@
 ---
-spec_id: "130_trusted_workstation_mode"
-title: "130 Trusted Workstation Mode"
-status: "DEPRECATED"
-canonicality: "canonical"
-artifact_type: "spec"
-plan: "DUMMIE PLAN V1"
-layer: "l2_brain"
-created_by: "operationalization_pack_1"
-last_verified_on: "2026-05-16"
+spec_id: 130_trusted_workstation_mode
+title: 130 Trusted Workstation Mode
+status: DEPRECATED
+canonicality: canonical
+artifact_type: spec
+plan: DUMMIE PLAN V1
+layer: l2_brain
+created_by: operationalization_pack_1
+last_verified_on: '2026-05-16'
+claims:
+- id: 130_trusted_workstation_mode-file-valid
+  description: Spec file '130_trusted_workstation_mode.md' exists, parses valid YAML
+    frontmatter, and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/specs/130_trusted_workstation_mode.md').read().split('---')[1]); assert
+    d, 'empty frontmatter'"
+  severity: critical
 ---
-
 # Spec 130: Trusted Workstation Mode
 
 ## Purpose
@@ -40,13 +47,13 @@ Provide a secure classification and evaluation gate for workstation-level action
 Consumes the MissionAutonomyContract policies to authorize or deny specific local actions.
 
 ## Current State
-- Runtime migrated from read-only workstation actions to active cognitive and verified mutation categories.
+- Runtime operates in full autonomous workstation mode. Production phase: active cognitive and mutation categories enabled.
 
 ## Physical Evidence
 - `layers/l2_brain/tests/test_trusted_workstation_mode.py`
 
 ## Contract Invariants
-- Obsolete read-only categories are denied.
+- Obsolete read-only categories are denied. Current categories are autonomous.
 - Cognitive categories can execute immediately when they do not mutate the workspace.
 - Mutation categories can execute with verification evidence or require authorization.
 - Sensitive paths and forbidden categories always block.

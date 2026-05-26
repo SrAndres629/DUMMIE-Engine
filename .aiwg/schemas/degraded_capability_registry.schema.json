@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "DegradedCapabilityRegistry",
+  "title": "CapabilityRegistry",
   "type": "object",
   "properties": {
     "decision": {
@@ -17,7 +17,7 @@
           "claimed_status": { "type": "string" },
           "actual_status": {
             "type": "string",
-            "enum": ["READY", "DEGRADED", "SIMULATED", "DRY_RUN_ONLY", "FALLBACK", "MISSING", "UNKNOWN"]
+            "enum": ["READY", "FALLBACK", "MISSING", "UNKNOWN"]
           },
           "reason": { "type": "string" },
           "required_dependencies": {

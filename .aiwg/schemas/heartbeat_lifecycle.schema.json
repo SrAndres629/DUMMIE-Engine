@@ -21,7 +21,9 @@
         "advisory",
         "repair_planning",
         "patch_proposal",
-        "authorized_execution"
+        "authorized_execution",
+        "execute",
+        "autonomous"
       ]
     },
     "decision": {

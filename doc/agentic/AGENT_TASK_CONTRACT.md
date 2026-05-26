@@ -1,3 +1,8 @@
+---
+status: ACTIVE
+layer: agentic
+domain: [contract, task, protocol]
+---
 # AGENT_TASK_CONTRACT
 
 ## Purpose

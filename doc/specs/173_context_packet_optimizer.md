@@ -1,11 +1,18 @@
 ---
-spec_id: "173_context_packet_optimizer"
-title: "Context Packet Optimizer"
-status: "ACTIVE"
-layer: "L2"
-last_verified_on: "2026-05-16"
+spec_id: 173_context_packet_optimizer
+title: Context Packet Optimizer
+status: ACTIVE
+layer: L2
+last_verified_on: '2026-05-16'
+claims:
+- id: 173_context_packet_optimizer-file-valid
+  description: Spec file '173_context_packet_optimizer.md' exists, parses valid YAML
+    frontmatter, and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/specs/173_context_packet_optimizer.md').read().split('---')[1]); assert
+    d, 'empty frontmatter'"
+  severity: critical
 ---
-
 ## Purpose
 This spec establishes the context packet optimizer (HEARTBEAT-2) to analyze different strategies for context packing and select the most token-efficient approach that preserves active evidence.
 

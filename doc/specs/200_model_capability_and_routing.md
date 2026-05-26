@@ -1,11 +1,18 @@
 ---
-spec_id: "DE-V2-L2-200"
-title: "Model Capability and Routing Engine"
-status: "ACTIVE"
-layer: "L2"
-last_verified_on: "2026-05-24"
+spec_id: DE-V2-L2-200
+title: Model Capability and Routing Engine
+status: ACTIVE
+layer: L2
+last_verified_on: '2026-05-24'
+claims:
+- id: 200_model_capability_and_routing-file-valid
+  description: Spec file '200_model_capability_and_routing.md' exists, parses valid
+    YAML frontmatter, and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/specs/200_model_capability_and_routing.md').read().split('---')[1]);
+    assert d, 'empty frontmatter'"
+  severity: critical
 ---
-
 ## Purpose
 To provide a canonical registry of AI model capabilities and a deterministic routing logic to select the most appropriate model based on task intent, cost, and latency.
 

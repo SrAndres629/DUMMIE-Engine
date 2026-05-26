@@ -1,13 +1,58 @@
 ---
-spec_id: "DE-V2-INDEX-00"
-title: "Project Headers Index"
-status: "ACTIVE"
-version: "2.2.0"
-layer: "L0"
-namespace: "io.dummie.v2.index"
-authority: "LIBRARIAN"
-dependencies: []
-tags: ["index", "metadata", "industrial_sdd"]
+spec_id: DE-V2-INDEX-00
+title: Project Headers Index
+status: ACTIVE
+version: 2.2.0
+layer: L0
+namespace: io.dummie.v2.index
+authority: LIBRARIAN
+dependencies:
+- specs/L0_Overseer/00_topology_tracker.md
+- specs/L0_Overseer/03_polyglot_architecture.md
+- specs/L0_Overseer/05_orchestration_stack_and_glue.md
+- specs/L0_Overseer/06_migration_and_implementation_strategy.md
+- specs/L0_Overseer/07_unknown_unknowns_resolutions.md
+- specs/L0_Overseer/08_devex_and_deployment_strategy.md
+- specs/L0_Overseer/11_monorepo_structure.md
+- specs/L0_Overseer/14_value_engineering_and_governance.md
+- specs/L0_Overseer/33_persistent_personality_mood.md
+- specs/L0_Overseer/43_documentation_and_artifact_standards.md
+- specs/L0_Overseer/48_architectural_integrity_and_knowledge_crystallization.md
+- specs/L0_Overseer/49_sovereign_cognitive_closure_protocol.md
+- specs/L1_Nervous/10_protobuf_contracts.md
+- specs/L1_Nervous/15_mcp_sidecar_isolation.md
+- specs/L1_Nervous/23_atomic_modular_nodes.md
+- specs/L2_Brain/02_memory_engine_4d_tes.md
+- specs/L2_Brain/09_annex_4d_tes_comparison.md
+- specs/L2_Brain/12_6d_context_model.md
+- specs/L2_Brain/21_software_fabrication_engine.md
+- specs/L2_Brain/27_kaizen_loop_refinement.md
+- specs/L2_Brain/28_skill_standard_yaml.md
+- specs/L2_Brain/29_design_station_workflow.md
+- specs/L2_Brain/31_impact_analytics_blast_radius.md
+- specs/L2_Brain/34_decision_ledger_auditor.md
+- specs/L2_Brain/36_cognitive_memory_session_ledger.md
+- specs/L2_Brain/37_a2a_discovery_protocol.md
+- specs/L2_Brain/38_procedural_memory_crystallization.md
+- specs/L2_Brain/39_semantic_consistency_agent.md
+- specs/L3_Shield/04_anti_ignorance_shields.md
+- specs/L3_Shield/22_sdd_executable_contracts.md
+- specs/L3_Shield/24_legal_compliance_shield.md
+- specs/L4_Edge/18_loci_ontology_mapping.md
+- specs/L4_Edge/25_blueprint_registry.md
+- specs/L4_Edge/40_self_healing_remediation_loop.md
+- specs/L5_Muscle/16_hardware_ipc_stability.md
+- specs/L5_Muscle/20_simd_muscle_processing.md
+- specs/L5_Muscle/32_multiverse_compression_necro_learning.md
+- specs/L5_Muscle/35_necro_learning_pipeline.md
+- specs/L6_Skin/13_observability_opentelemetry.md
+- specs/L6_Skin/17_optical_nerve_telemetry.md
+- specs/L6_Skin/26_command_canvas_gui.md
+- specs/L6_Skin/30_visualizer_microservice.md
+tags:
+- index
+- metadata
+- industrial_sdd
 ---
 
 # Project Headers Index

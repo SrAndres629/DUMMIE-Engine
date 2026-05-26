@@ -6,6 +6,14 @@ layer: L1
 last_verified_on: '2026-04-24'
 version: 1.0.0
 namespace: dummie.engine.l1
+claims:
+- id: 11_arrow_data_plane-file-valid
+  description: Spec file '11_arrow_data_plane.md' exists, parses valid YAML frontmatter,
+    and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/specs/L1_Nervous/11_arrow_data_plane.md').read().split('---')[1]);
+    assert d, 'empty frontmatter'"
+  severity: critical
 ---
 # Protocolo de Plano de Datos (Apache Arrow Zero-Copy)
 

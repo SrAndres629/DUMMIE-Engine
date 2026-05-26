@@ -6,6 +6,14 @@ layer: L1
 last_verified_on: '2026-04-24'
 version: 1.0.0
 namespace: dummie.engine.l1
+claims:
+- id: 44_pervasive_channel_adapters-file-valid
+  description: Spec file '44_pervasive_channel_adapters.md' exists, parses valid YAML
+    frontmatter, and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/specs/L1_Nervous/44_pervasive_channel_adapters.md').read().split('---')[1]);
+    assert d, 'empty frontmatter'"
+  severity: critical
 ---
 # Adaptadores de Canal Pervasivos (The Pervasive Gateway)
 

@@ -1,3 +1,8 @@
+---
+status: ACTIVE
+layer: l2
+domain: [resource, cgroups, concurrency, telemetry]
+---
 # Phase 3: The Autonomous Resource Governor (L2 Python Layer)
 
 ## Objetivo

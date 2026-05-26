@@ -1,19 +1,29 @@
 ---
-spec_id: "DE-V2-[ADR-005](0005-cognitive-fabrication-protocols.md)"
-title: "Estándares de Fabricación Cognitiva y Protocolos de Interacción"
-status: "ACTIVE"
-version: "1.0.0"
-layer: "L0"
-namespace: "io.dummie.v2.adr"
-authority: "ARCHITECT"
+spec_id: DE-V2-[ADR-005](0005-cognitive-fabrication-protocols.md)
+title: Estándares de Fabricación Cognitiva y Protocolos de Interacción
+status: ACTIVE
+version: 1.0.0
+layer: L0
+namespace: io.dummie.v2.adr
+authority: ARCHITECT
 dependencies:
-  - id: "DE-V2-[ADR-002](0002-ambiguity-resolutions.md)"
-    relationship: "EXTENDS"
-  - id: "DE-V2-[ADR-003](0003-agentic-communication-fabrication.md)"
-    relationship: "REINFORCES"
-tags: ["architectural_decision", "cognitive_standards", "industrial_sdd"]
+- id: DE-V2-[ADR-002](0002-ambiguity-resolutions.md)
+  relationship: EXTENDS
+- id: DE-V2-[ADR-003](0003-agentic-communication-fabrication.md)
+  relationship: REINFORCES
+tags:
+- architectural_decision
+- cognitive_standards
+- industrial_sdd
+claims:
+- id: 0005-cognitive-fabrication-protocols-file-valid
+  description: Spec file '0005-cognitive-fabrication-protocols.md' exists, parses
+    valid YAML frontmatter, and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/01_architecture/adr/0005-cognitive-fabrication-protocols.md').read().split('---')[1]);
+    assert d, 'empty frontmatter'"
+  severity: critical
 ---
-
 # [ADR-005](0005-cognitive-fabrication-protocols.md): Estándares de Fabricación Cognitiva
 
 ## Abstract

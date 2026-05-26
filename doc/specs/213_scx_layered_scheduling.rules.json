@@ -1,0 +1,25 @@
+{
+  "spec_id": "213_scx_layered_scheduling",
+  "rules": [
+    {
+      "id": "SLS-001",
+      "description": "scx_layered must be loadable without kernel recompilation (available binary or PPA)"
+    },
+    {
+      "id": "SLS-002",
+      "description": "CFS fallback must work transparently if sched_ext fails"
+    },
+    {
+      "id": "SLS-003",
+      "description": "Layer mapping: L0=REALTIME, L1=LATENCY_SENSITIVE, L2=THROUGHPUT, L3-L6=DEFAULT"
+    },
+    {
+      "id": "SLS-004",
+      "description": "scx daemon must consume <1% CPU when idle"
+    },
+    {
+      "id": "SLS-005",
+      "description": "All layer cgroup paths must be under agentic-workload.slice"
+    }
+  ]
+}

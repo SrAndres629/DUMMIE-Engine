@@ -16,6 +16,14 @@ tags:
 - security
 - secret_management
 - blind_injection
+claims:
+- id: 47_sovereign_secret_injection_protocol-file-valid
+  description: Spec file '47_sovereign_secret_injection_protocol.md' exists, parses
+    valid YAML frontmatter, and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/specs/L3_Shield/47_sovereign_secret_injection_protocol.md').read().split('---')[1]);
+    assert d, 'empty frontmatter'"
+  severity: critical
 ---
 # 47. Protocolo de Inyección de Secretos Soberano (Vault Shield)
 

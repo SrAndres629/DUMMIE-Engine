@@ -11,11 +11,20 @@ dependencies:
   relationship: REFINES_IO
 - id: DE-V2-L3-04
   relationship: AUDITED_BY
+- specs/L4_Edge/49_lsp_context_hydration_protocol.md
 tags:
 - muscle_layer
 - patching
 - atomic_diff
 - integrity_check
+claims:
+- id: 50_surgical_patch_protocol-file-valid
+  description: Spec file '50_surgical_patch_protocol.md' exists, parses valid YAML
+    frontmatter, and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/specs/L5_Muscle/50_surgical_patch_protocol.md').read().split('---')[1]);
+    assert d, 'empty frontmatter'"
+  severity: critical
 ---
 # 50. Protocolo de Parche Quirúrgico (Surgical Patching)
 

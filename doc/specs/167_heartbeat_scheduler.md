@@ -1,22 +1,29 @@
 ---
-spec_id: "167_heartbeat_scheduler"
-title: "167 Heartbeat Scheduler"
-status: "ACTIVE"
-canonicality: "canonical"
-artifact_type: "spec"
-plan: "DUMMIE PLAN V1"
-layer: "l2_brain"
-created_by: "heartbeat_0_lifecycle"
-last_verified_on: "2026-05-16"
+spec_id: 167_heartbeat_scheduler
+title: 167 Heartbeat Scheduler
+status: ACTIVE
+canonicality: canonical
+artifact_type: spec
+plan: DUMMIE PLAN V1
+layer: l2_brain
+created_by: heartbeat_0_lifecycle
+last_verified_on: '2026-05-16'
+claims:
+- id: 167_heartbeat_scheduler-file-valid
+  description: Spec file '167_heartbeat_scheduler.md' exists, parses valid YAML frontmatter,
+    and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/specs/167_heartbeat_scheduler.md').read().split('---')[1]); assert
+    d, 'empty frontmatter'"
+  severity: critical
 ---
-
 # Spec 167: Heartbeat Scheduler
 
 ## Purpose
 Orchestrates manual scheduler execution without background processes or timers.
 
 ## Scope
-- Provides once, dry-run, and seed commands for manual operators.
+- Provides once, apply, validate, and seed commands for manual operators.
 
 ## Current State
 - Active. Created by Heartbeat-0.
@@ -27,7 +34,7 @@ Orchestrates manual scheduler execution without background processes or timers.
 
 ## Contract Invariants
 - no background running timers or loops
-- dry-run does not write to main ledger or mutate session learning episodes
+- validate mode inspects without writing to main ledger. apply mode writes and mutates normally.
 - provides JSON outputs serializable for CLI use
 
 ## Verification

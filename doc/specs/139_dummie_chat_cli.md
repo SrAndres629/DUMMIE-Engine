@@ -1,15 +1,22 @@
 ---
-spec_id: "139_dummie_chat_cli"
-title: "139 Dummie Chat Cli"
-status: "ACTIVE"
-canonicality: "canonical"
-artifact_type: "spec"
-plan: "DUMMIE PLAN V1"
-layer: "l2_brain"
-created_by: "operationalization_pack_1"
-last_verified_on: "2026-05-16"
+spec_id: 139_dummie_chat_cli
+title: 139 Dummie Chat Cli
+status: ACTIVE
+canonicality: canonical
+artifact_type: spec
+plan: DUMMIE PLAN V1
+layer: l2_brain
+created_by: operationalization_pack_1
+last_verified_on: '2026-05-16'
+claims:
+- id: 139_dummie_chat_cli-file-valid
+  description: Spec file '139_dummie_chat_cli.md' exists, parses valid YAML frontmatter,
+    and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/specs/139_dummie_chat_cli.md').read().split('---')[1]); assert d, 'empty
+    frontmatter'"
+  severity: critical
 ---
-
 # Spec 139: DUMMIE Chat CLI
 
 ## Purpose

@@ -1,19 +1,29 @@
 ---
-spec_id: "DE-V2-[ADR-002](0002-ambiguity-resolutions.md)"
-title: "Resolución de Ambigüedades y Gobernanza"
-status: "ACTIVE"
-version: "2.1.0"
-layer: "L0"
-namespace: "io.dummie.v2.adr"
-authority: "ARCHITECT"
+spec_id: DE-V2-[ADR-002](0002-ambiguity-resolutions.md)
+title: Resolución de Ambigüedades y Gobernanza
+status: ACTIVE
+version: 2.1.0
+layer: L0
+namespace: io.dummie.v2.adr
+authority: ARCHITECT
 dependencies:
-  - id: "DE-V2-L0-14"
-    relationship: "IMPLEMENTS"
-  - id: "DE-V2-[ADR-005](0005-cognitive-fabrication-protocols.md)"
-    relationship: "REQUIRES"
-tags: ["architectural_decision", "ambiguity_resolution", "industrial_sdd"]
+- id: DE-V2-L0-14
+  relationship: IMPLEMENTS
+- id: DE-V2-[ADR-005](0005-cognitive-fabrication-protocols.md)
+  relationship: REQUIRES
+tags:
+- architectural_decision
+- ambiguity_resolution
+- industrial_sdd
+claims:
+- id: 0002-ambiguity-resolutions-file-valid
+  description: Spec file '0002-ambiguity-resolutions.md' exists, parses valid YAML
+    frontmatter, and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/01_architecture/adr/0002-ambiguity-resolutions.md').read().split('---')[1]);
+    assert d, 'empty frontmatter'"
+  severity: critical
 ---
-
 # [ADR-002](0002-ambiguity-resolutions.md): Resolución de Ambigüedades y Gobernanza
 
 ## Abstract

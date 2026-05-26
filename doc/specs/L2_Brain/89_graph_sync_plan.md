@@ -7,6 +7,14 @@ last_verified_on: '2025-05-15'
 priority: MANDATORY
 version: 1.0.0
 namespace: dummie.engine.l2
+claims:
+- id: 89_graph_sync_plan-file-valid
+  description: Spec file '89_graph_sync_plan.md' exists, parses valid YAML frontmatter,
+    and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/specs/L2_Brain/89_graph_sync_plan.md').read().split('---')[1]); assert
+    d, 'empty frontmatter'"
+  severity: critical
 ---
 # Graph Synchronization Planning
 

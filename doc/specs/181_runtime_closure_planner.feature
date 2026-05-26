@@ -1,6 +1,6 @@
 Feature: Runtime Closure Planner
   As a Metacognitive Configuration Architect,
-  I want to translate degraded capabilities into actionable closure plans,
+  I want to translate capability states into actionable closure plans,
   So that operators have safe, step-by-step commands to repair physical dependencies.
 
   Scenario: Plan generation for degraded capabilities

@@ -7,6 +7,14 @@ last_verified_on: '2026-05-20'
 priority: MANDATORY
 version: 2.0.0
 namespace: dummie.engine.l2
+claims:
+- id: 90_vault_embedding_index-file-valid
+  description: Spec file '90_vault_embedding_index.md' exists, parses valid YAML frontmatter,
+    and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/specs/L2_Brain/90_vault_embedding_index.md').read().split('---')[1]);
+    assert d, 'empty frontmatter'"
+  severity: critical
 ---
 # Vault Embedding Index
 

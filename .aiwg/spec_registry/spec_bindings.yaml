@@ -664,7 +664,6 @@ entries:
   - layers/l1_nervous/bootstrap.py
   - layers/l1_nervous/tools_impl/self_worktree.py
   - dummie_gateway_config.json
-  - scripts/muapi_stdio_proxy.py
   - doc/CORE_SPEC.md
   - doc/PHYSICAL_MAP.md
   runtime_files:
@@ -674,7 +673,6 @@ entries:
   - layers/l1_nervous/bootstrap.py
   - layers/l1_nervous/tools_impl/self_worktree.py
   script_files:
-  - scripts/muapi_stdio_proxy.py
   - dummie_gateway_config.json
   test_files: []
   docs_files:

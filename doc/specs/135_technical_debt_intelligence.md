@@ -1,15 +1,22 @@
 ---
-spec_id: "135_technical_debt_intelligence"
-title: "135 Technical Debt Intelligence"
-status: "ACTIVE"
-canonicality: "canonical"
-artifact_type: "spec"
-plan: "DUMMIE PLAN V1"
-layer: "l2_brain"
-created_by: "operationalization_pack_1"
-last_verified_on: "2026-05-16"
+spec_id: 135_technical_debt_intelligence
+title: 135 Technical Debt Intelligence
+status: ACTIVE
+canonicality: canonical
+artifact_type: spec
+plan: DUMMIE PLAN V1
+layer: l2_brain
+created_by: operationalization_pack_1
+last_verified_on: '2026-05-16'
+claims:
+- id: 135_technical_debt_intelligence-file-valid
+  description: Spec file '135_technical_debt_intelligence.md' exists, parses valid
+    YAML frontmatter, and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/specs/135_technical_debt_intelligence.md').read().split('---')[1]);
+    assert d, 'empty frontmatter'"
+  severity: critical
 ---
-
 # Spec 135: Technical Debt Intelligence
 
 ## Purpose

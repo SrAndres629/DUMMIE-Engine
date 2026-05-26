@@ -6,6 +6,14 @@ layer: L4
 last_verified_on: '2026-04-24'
 version: 1.0.0
 namespace: dummie.engine.l4
+claims:
+- id: 25_blueprint_registry-file-valid
+  description: Spec file '25_blueprint_registry.md' exists, parses valid YAML frontmatter,
+    and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/specs/L4_Edge/25_blueprint_registry.md').read().split('---')[1]); assert
+    d, 'empty frontmatter'"
+  severity: critical
 ---
 # Registro de Blueprints Industriales
 

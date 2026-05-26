@@ -1,11 +1,18 @@
 ---
-spec_id: "188_embedding_activation_verifier"
-title: "Embedding Activation Verifier"
-status: "ACTIVE"
-layer: "L2"
-last_verified_on: "2026-05-16"
+spec_id: 188_embedding_activation_verifier
+title: Embedding Activation Verifier
+status: ACTIVE
+layer: L2
+last_verified_on: '2026-05-16'
+claims:
+- id: 188_embedding_activation_verifier-file-valid
+  description: Spec file '188_embedding_activation_verifier.md' exists, parses valid
+    YAML frontmatter, and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/specs/188_embedding_activation_verifier.md').read().split('---')[1]);
+    assert d, 'empty frontmatter'"
+  severity: critical
 ---
-
 ## Purpose
 Verify that semantic vector embedding models are safely and locally available inside DUMMIE Engine without triggering automatic external network requests or internet-facing API queries.
 

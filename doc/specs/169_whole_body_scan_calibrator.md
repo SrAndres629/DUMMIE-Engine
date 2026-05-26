@@ -1,11 +1,18 @@
 ---
-spec_id: "169_whole_body_scan_calibrator"
-title: "Whole-Body Scan Calibrator"
-status: "ACTIVE"
-layer: "L2"
-last_verified_on: "2026-05-17"
+spec_id: 169_whole_body_scan_calibrator
+title: Whole-Body Scan Calibrator
+status: ACTIVE
+layer: L2
+last_verified_on: '2026-05-17'
+claims:
+- id: 169_whole_body_scan_calibrator-file-valid
+  description: Spec file '169_whole_body_scan_calibrator.md' exists, parses valid
+    YAML frontmatter, and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/specs/169_whole_body_scan_calibrator.md').read().split('---')[1]);
+    assert d, 'empty frontmatter'"
+  severity: critical
 ---
-
 ## Purpose
 This specification establishes the structural validation, timing audit, and reproducibility verification (HEARTBEAT-1.1) of the whole-body repository scanner. It ensures that scan metrics are accurate, stable, schema-compliant, and that the Pytest suite counts are fully reconciled.
 

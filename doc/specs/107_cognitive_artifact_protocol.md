@@ -1,11 +1,19 @@
 ---
-spec_id: "DE-V2-L2-107"
-title: "Cognitive Artifact Protocol"
-status: "ACTIVE"
-layer: "L2"
-last_verified_on: "2026-05-16"
-version: "1.0.0"
-namespace: "dummie.engine.plan_v1"
+spec_id: DE-V2-L2-107
+title: Cognitive Artifact Protocol
+status: ACTIVE
+layer: L2
+last_verified_on: '2026-05-16'
+version: 1.0.0
+namespace: dummie.engine.plan_v1
+claims:
+- id: 107_cognitive_artifact_protocol-file-valid
+  description: Spec file '107_cognitive_artifact_protocol.md' exists, parses valid
+    YAML frontmatter, and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/specs/107_cognitive_artifact_protocol.md').read().split('---')[1]);
+    assert d, 'empty frontmatter'"
+  severity: critical
 ---
 # Spec 107 - Cognitive Artifact Protocol
 

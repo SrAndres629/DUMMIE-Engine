@@ -1,15 +1,25 @@
 ---
-spec_id: "DE-V2-INDEX-01"
-title: "Inventario de Entidades Heredadas (V1)"
-status: "ACTIVE"
-version: "2.2.0"
-layer: "L0"
-namespace: "io.dummie.v2.index"
-authority: "LIBRARIAN"
+spec_id: DE-V2-INDEX-01
+title: Inventario de Entidades Heredadas (V1)
+status: ACTIVE
+version: 2.2.0
+layer: L0
+namespace: io.dummie.v2.index
+authority: LIBRARIAN
 dependencies:
-  - id: "DE-V2-L0-06"
-    relationship: "INFORMS"
-tags: ["inventory", "legacy_migration", "industrial_sdd"]
+- id: DE-V2-L0-06
+  relationship: INFORMS
+- specs/L0_Overseer/03_polyglot_architecture.md
+- specs/L0_Overseer/05_orchestration_stack_and_glue.md
+- specs/L0_Overseer/14_value_engineering_and_governance.md
+- specs/L1_Nervous/10_protobuf_contracts.md
+- specs/L1_Nervous/15_mcp_sidecar_isolation.md
+- specs/L3_Shield/04_anti_ignorance_shields.md
+- specs/L4_Edge/18_loci_ontology_mapping.md
+tags:
+- inventory
+- legacy_migration
+- industrial_sdd
 ---
 
 # Inventario de Entidades Heredadas (V1)

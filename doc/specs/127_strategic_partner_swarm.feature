@@ -1,6 +1,6 @@
 Feature: Strategic Partner Swarm
   As a Cognitive Architect
-  I want a multi-role advisory layer
+  I want a multi-role executive layer
   So that mission decisions are reviewed from multiple specialized perspectives.
 
   Scenario: Swarm review of a coherent mission

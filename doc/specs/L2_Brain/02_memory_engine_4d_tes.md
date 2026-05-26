@@ -6,6 +6,21 @@ layer: L2
 last_verified_on: '2026-04-28'
 version: 1.0.0
 namespace: dummie.engine.l2
+depends_on: ["DE-V2-L2-12"]
+
+claims:
+  - id: "immutability"
+    description: "MemoryNode4D.causal_hash is computed once and never modified"
+    verify_cmd: "uv run python -c 'from layers.l1_nervous.memory_ipc import ArrowMemoryBridge; print(\"OK\")'"
+
+  - id: "ipc_connectivity"
+    description: "Arrow Flight bridge can connect to memory plane via Unix socket"
+    verify_cmd: "uv run python -c 'import pyarrow.flight; print(\"OK\")'"
+
+integrity:
+  last_verified: null
+  claims_passing: 0
+  claims_total: 2
 ---
 # Motor de Memoria Inmutable (4D-TES)
 

@@ -7,6 +7,14 @@ governance: persistence
 last_verified_on: '2026-05-11'
 version: 1.0.0
 namespace: dummie.engine.l2_brain
+claims:
+- id: 75_mission_workbench-file-valid
+  description: Spec file '75_mission_workbench.md' exists, parses valid YAML frontmatter,
+    and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/specs/L2_Brain/75_mission_workbench.md').read().split('---')[1]); assert
+    d, 'empty frontmatter'"
+  severity: critical
 ---
 # SPEC-75: Mission Workbench
 

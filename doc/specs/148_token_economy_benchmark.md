@@ -1,15 +1,22 @@
 ---
-spec_id: "148_token_economy_benchmark"
-title: "148 Token Economy Benchmark"
-status: "DEPRECATED"
-canonicality: "canonical"
-artifact_type: "spec"
-plan: "DUMMIE PLAN V1"
-layer: "l2_brain"
-created_by: "operationalization_pack_3"
-last_verified_on: "2026-05-16"
+spec_id: 148_token_economy_benchmark
+title: 148 Token Economy Benchmark
+status: DEPRECATED
+canonicality: canonical
+artifact_type: spec
+plan: DUMMIE PLAN V1
+layer: l2_brain
+created_by: operationalization_pack_3
+last_verified_on: '2026-05-16'
+claims:
+- id: 148_token_economy_benchmark-file-valid
+  description: Spec file '148_token_economy_benchmark.md' exists, parses valid YAML
+    frontmatter, and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/specs/148_token_economy_benchmark.md').read().split('---')[1]); assert
+    d, 'empty frontmatter'"
+  severity: critical
 ---
-
 # Spec 148: Token Economy Benchmark
 
 ## Purpose

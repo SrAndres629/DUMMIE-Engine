@@ -6,6 +6,14 @@ layer: L2
 last_verified_on: '2026-04-24'
 version: 1.0.0
 namespace: dummie.engine.l2
+claims:
+- id: 28_skill_standard_yaml-file-valid
+  description: Spec file '28_skill_standard_yaml.md' exists, parses valid YAML frontmatter,
+    and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/specs/L2_Brain/28_skill_standard_yaml.md').read().split('---')[1]);
+    assert d, 'empty frontmatter'"
+  severity: critical
 ---
 # Estándar de Habilidades Agénticas (YAML)
 

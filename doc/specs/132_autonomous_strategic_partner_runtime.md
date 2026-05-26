@@ -1,15 +1,22 @@
 ---
-spec_id: "132_autonomous_strategic_partner_runtime"
-title: "132 Autonomous Strategic Partner Runtime"
-status: "ACTIVE"
-canonicality: "canonical"
-artifact_type: "spec"
-plan: "DUMMIE PLAN V1"
-layer: "l2_brain"
-created_by: "operationalization_pack_1"
-last_verified_on: "2026-05-16"
+spec_id: 132_autonomous_strategic_partner_runtime
+title: 132 Autonomous Strategic Partner Runtime
+status: ACTIVE
+canonicality: canonical
+artifact_type: spec
+plan: DUMMIE PLAN V1
+layer: l2_brain
+created_by: operationalization_pack_1
+last_verified_on: '2026-05-16'
+claims:
+- id: 132_autonomous_strategic_partner_runtime-file-valid
+  description: Spec file '132_autonomous_strategic_partner_runtime.md' exists, parses
+    valid YAML frontmatter, and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/specs/132_autonomous_strategic_partner_runtime.md').read().split('---')[1]);
+    assert d, 'empty frontmatter'"
+  severity: critical
 ---
-
 # Spec 132: Autonomous Strategic Partner Runtime
 
 ## Purpose

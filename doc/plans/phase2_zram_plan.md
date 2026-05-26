@@ -1,3 +1,8 @@
+---
+status: ACTIVE
+layer: l0
+domain: [zram, swap, memory, governance]
+---
 # Phase 2: Kernel Memory Governance (ZRAM & Swap)
 
 ## Objetivo

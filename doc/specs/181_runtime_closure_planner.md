@@ -1,16 +1,23 @@
 ---
-spec_id: "181_runtime_closure_planner"
-title: "Runtime Closure Planner"
-status: "DEPRECATED"
-layer: "L2"
-last_verified_on: "2026-05-16"
+spec_id: 181_runtime_closure_planner
+title: Runtime Closure Planner
+status: DEPRECATED
+layer: L2
+last_verified_on: '2026-05-16'
+claims:
+- id: 181_runtime_closure_planner-file-valid
+  description: Spec file '181_runtime_closure_planner.md' exists, parses valid YAML
+    frontmatter, and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/specs/181_runtime_closure_planner.md').read().split('---')[1]); assert
+    d, 'empty frontmatter'"
+  severity: critical
 ---
-
 ## Purpose
-This spec establishes the runtime closure planner (HEARTBEAT-2.1) to translate degraded capabilities into sequential, human-executable closure recipes and dependency resolution paths.
+This spec establishes the runtime closure planner (HEARTBEAT-2.1) to translate capability states into sequential, human-executable closure recipes and dependency resolution paths.
 
 ## Current State
-Under implementation. Will process degraded capability registry reports and output validated closure plans conforming to `runtime_closure_plan.schema.json`.
+Under implementation. Will process capability registry reports and output validated closure plans conforming to `runtime_closure_plan.schema.json`.
 
 ## Physical Evidence
 - Test suite: `layers/l2_brain/tests/test_runtime_closure_planner.py`

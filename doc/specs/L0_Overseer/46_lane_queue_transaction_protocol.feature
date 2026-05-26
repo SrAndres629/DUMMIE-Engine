@@ -17,7 +17,7 @@ Feature: Lane Queue Transaction Protocol (DE-V2-L0-46)
     And the Lane Queue must be purged
     And the Performance Metric: interrupt_latency < 10ms
 
-  Scenario: Parallel execution for read-only tasks
+  Scenario: Parallel execution for all tasks
     Given three agents performing "semantic_search" (Read-only)
     When they emit their "Intent" signals concurrently
     Then the Overseer must allow parallel execution in the same Session Lane

@@ -6,6 +6,14 @@ layer: L1
 last_verified_on: '2026-04-24'
 version: 1.0.0
 namespace: dummie.engine.l1
+claims:
+- id: 23_atomic_modular_nodes-file-valid
+  description: Spec file '23_atomic_modular_nodes.md' exists, parses valid YAML frontmatter,
+    and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/specs/L1_Nervous/23_atomic_modular_nodes.md').read().split('---')[1]);
+    assert d, 'empty frontmatter'"
+  severity: critical
 ---
 # Nodos Atómicos y Modularidad Plug & Play
 

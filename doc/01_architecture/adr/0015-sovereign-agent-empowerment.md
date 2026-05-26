@@ -1,17 +1,28 @@
 ---
-spec_id: "DE-V2-[ADR-0015](0015-sovereign-agent-empowerment.md)"
-title: "Soberanía Total y Empoderamiento del Agente"
-status: "ACCEPTED"
-version: "1.0.0"
-layer: "L0"
-namespace: "io.dummie.v2.adr"
-authority: "HUMAN_ORACLE"
+spec_id: DE-V2-[ADR-0015](0015-sovereign-agent-empowerment.md)
+title: Soberanía Total y Empoderamiento del Agente
+status: ACCEPTED
+version: 1.0.0
+layer: L0
+namespace: io.dummie.v2.adr
+authority: HUMAN_ORACLE
 dependencies:
-  - id: "DE-V2-[ADR-0014](0014-zero-sudo-user-space-sovereignty.md)"
-    relationship: "SUPERSEDES"
-tags: ["architectural_decision", "sovereignty", "permissions", "empowerment"]
+- id: DE-V2-[ADR-0014](0014-zero-sudo-user-space-sovereignty.md)
+  relationship: SUPERSEDES
+tags:
+- architectural_decision
+- sovereignty
+- permissions
+- empowerment
+claims:
+- id: 0015-sovereign-agent-empowerment-file-valid
+  description: Spec file '0015-sovereign-agent-empowerment.md' exists, parses valid
+    YAML frontmatter, and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/01_architecture/adr/0015-sovereign-agent-empowerment.md').read().split('---')[1]);
+    assert d, 'empty frontmatter'"
+  severity: critical
 ---
-
 # [ADR-0015](0015-sovereign-agent-empowerment.md): Soberanía Total y Empoderamiento del Agente
 
 ## Abstract

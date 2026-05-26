@@ -1,0 +1,25 @@
+{
+  "spec_id": "209_ollama_gpu_acceleration",
+  "rules": [
+    {
+      "id": "OG-001",
+      "description": "ollama.service must be enabled and start after network.target nvidia-persistenced.service"
+    },
+    {
+      "id": "OG-002",
+      "description": "GPU must be visible and used: nvidia-smi must show ollama processes"
+    },
+    {
+      "id": "OG-003",
+      "description": "VRAM limit: ollama must not exceed 5GB of the 6GB VRAM pool"
+    },
+    {
+      "id": "OG-004",
+      "description": "CPU fallback is acceptable only when GPU is absent"
+    },
+    {
+      "id": "OG-005",
+      "description": "All models referenced in models_config.json must be pre-pulled on service start"
+    }
+  ]
+}

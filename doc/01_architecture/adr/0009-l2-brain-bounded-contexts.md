@@ -1,14 +1,24 @@
 ---
-spec_id: "DE-V2-[ADR-009](0009-l2-brain-bounded-contexts.md)"
-title: "Agrupación de Micro-Dominios L2 en Bounded Contexts"
-status: "ACTIVE"
-version: "1.1.0"
-layer: "L0"
-namespace: "io.dummie.v2.adr"
-authority: "ARCHITECT"
-tags: ["architectural_decision", "bounded_contexts", "l2_brain"]
+spec_id: DE-V2-[ADR-009](0009-l2-brain-bounded-contexts.md)
+title: Agrupación de Micro-Dominios L2 en Bounded Contexts
+status: ACTIVE
+version: 1.1.0
+layer: L0
+namespace: io.dummie.v2.adr
+authority: ARCHITECT
+tags:
+- architectural_decision
+- bounded_contexts
+- l2_brain
+claims:
+- id: 0009-l2-brain-bounded-contexts-file-valid
+  description: Spec file '0009-l2-brain-bounded-contexts.md' exists, parses valid
+    YAML frontmatter, and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/01_architecture/adr/0009-l2-brain-bounded-contexts.md').read().split('---')[1]);
+    assert d, 'empty frontmatter'"
+  severity: critical
 ---
-
 # [ADR-009](0009-l2-brain-bounded-contexts.md): Agrupación de Micro-Dominios L2 en Bounded Contexts
 
 ## Abstract

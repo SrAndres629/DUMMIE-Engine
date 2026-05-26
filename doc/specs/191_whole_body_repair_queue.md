@@ -1,11 +1,18 @@
 ---
-spec_id: "191_whole_body_repair_queue"
-title: "Whole Body Repair Queue"
-status: "ACTIVE"
-layer: "L2"
-last_verified_on: "2026-05-16"
+spec_id: 191_whole_body_repair_queue
+title: Whole Body Repair Queue
+status: ACTIVE
+layer: L2
+last_verified_on: '2026-05-16'
+claims:
+- id: 191_whole_body_repair_queue-file-valid
+  description: Spec file '191_whole_body_repair_queue.md' exists, parses valid YAML
+    frontmatter, and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/specs/191_whole_body_repair_queue.md').read().split('---')[1]); assert
+    d, 'empty frontmatter'"
+  severity: critical
 ---
-
 ## Purpose
 Convert full-body audits and capability promotion reports into a prioritized, evidence-backed queue of actionable repairs, ensuring safety and truth gates are addressed before scaling autonomy.
 

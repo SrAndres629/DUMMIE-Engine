@@ -1,19 +1,29 @@
 ---
-spec_id: "DE-V2-[ADR-006](0006-sovereign-hybrid-documentation-protocol.md)"
-title: "Protocolo de Ejecución Híbrida Soberana y Documentación en Tiempo Real"
-status: "ACTIVE"
-version: "1.0.0"
-layer: "L0"
-namespace: "io.dummie.v2.adr"
-authority: "ARCHITECT"
+spec_id: DE-V2-[ADR-006](0006-sovereign-hybrid-documentation-protocol.md)
+title: Protocolo de Ejecución Híbrida Soberana y Documentación en Tiempo Real
+status: ACTIVE
+version: 1.0.0
+layer: L0
+namespace: io.dummie.v2.adr
+authority: ARCHITECT
 dependencies:
-  - id: "DE-V2-[ADR-005](0005-cognitive-fabrication-protocols.md)"
-    relationship: "EXTENDS"
-  - id: "DE-V2-L0-08"
-    relationship: "IMPLEMENTS"
-tags: ["architectural_decision", "hybrid_execution", "documentation_integrity"]
+- id: DE-V2-[ADR-005](0005-cognitive-fabrication-protocols.md)
+  relationship: EXTENDS
+- id: DE-V2-L0-08
+  relationship: IMPLEMENTS
+tags:
+- architectural_decision
+- hybrid_execution
+- documentation_integrity
+claims:
+- id: 0006-sovereign-hybrid-documentation-protocol-file-valid
+  description: Spec file '0006-sovereign-hybrid-documentation-protocol.md' exists,
+    parses valid YAML frontmatter, and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/01_architecture/adr/0006-sovereign-hybrid-documentation-protocol.md').read().split('---')[1]);
+    assert d, 'empty frontmatter'"
+  severity: critical
 ---
-
 # [ADR-006](0006-sovereign-hybrid-documentation-protocol.md): Ejecución Híbrida y Verdad Física
 
 ## Abstract

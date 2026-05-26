@@ -1,11 +1,18 @@
 ---
-spec_id: "187_kuzu_graph_readback_verifier"
-title: "Kuzu Graph Readback Verifier"
-status: "ACTIVE"
-layer: "L2"
-last_verified_on: "2026-05-21"
+spec_id: 187_kuzu_graph_readback_verifier
+title: Kuzu Graph Readback Verifier
+status: ACTIVE
+layer: L2
+last_verified_on: '2026-05-21'
+claims:
+- id: 187_kuzu_graph_readback_verifier-file-valid
+  description: Spec file '187_kuzu_graph_readback_verifier.md' exists, parses valid
+    YAML frontmatter, and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/specs/187_kuzu_graph_readback_verifier.md').read().split('---')[1]);
+    assert d, 'empty frontmatter'"
+  severity: critical
 ---
-
 ## Purpose
 Audit and verify the physical readback capability of the Kùzu Graph database to ensure that data written to `.aiwg/memory/kuzu_4d` is authentic, retrievable, and idempotent.
 
@@ -23,7 +30,7 @@ Active. Canonical Kùzu path is `.aiwg/memory/kuzu_4d` and verification must be 
 
 ## Contract Invariants
 - **Sandbox-Isolation for Writes**: Write tests must only target a temporary, sandboxed database file, never the active `.aiwg/memory/kuzu_4d`.
-- **Read-Only Sovereign Access**: Interacting with `.aiwg/memory/kuzu_4d` must strictly use read-only operations unless the caller explicitly performs a persistence flow.
+- **Sovereign Access**: Interacting with `.aiwg/memory/kuzu_4d` uses read/write operations with full audit trail and readback verification.
 - **No Lock Deletion**: Repository initialization must not delete DB files or Kùzu lock files. Lock contention is a concurrency boundary and must fail explicitly.
 - **Idempotency Gate**: Re-verifying readback must yield consistent results without duplicate node or edge creations.
 

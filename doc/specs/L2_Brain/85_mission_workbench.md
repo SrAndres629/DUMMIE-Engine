@@ -1,12 +1,21 @@
 ---
 spec_id: DE-PHASE7-MWB-85
 title: Mission Workbench
-status: DRAFT
+status: SUPERSEDED
 layer: L2
 last_verified_on: '2025-05-15'
 priority: MANDATORY
 version: 1.0.0
 namespace: dummie.engine.l2
+claims:
+- id: 85_mission_workbench-file-valid
+  description: Spec file '85_mission_workbench.md' exists, parses valid YAML frontmatter,
+    and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/specs/L2_Brain/85_mission_workbench.md').read().split('---')[1]); assert
+    d, 'empty frontmatter'"
+  severity: critical
+superseded_by: 'DE-V2-L2-75 (Spec 75: Mission Workbench)'
 ---
 # Mission Workbench
 

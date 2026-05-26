@@ -1,15 +1,22 @@
 ---
-spec_id: "147_memory_spine_entrypoint"
-title: "147 Memory Spine Entrypoint"
-status: "ACTIVE"
-canonicality: "canonical"
-artifact_type: "spec"
-plan: "DUMMIE PLAN V1"
-layer: "l2_brain"
-created_by: "operationalization_pack_3"
-last_verified_on: "2026-05-16"
+spec_id: 147_memory_spine_entrypoint
+title: 147 Memory Spine Entrypoint
+status: ACTIVE
+canonicality: canonical
+artifact_type: spec
+plan: DUMMIE PLAN V1
+layer: l2_brain
+created_by: operationalization_pack_3
+last_verified_on: '2026-05-16'
+claims:
+- id: 147_memory_spine_entrypoint-file-valid
+  description: Spec file '147_memory_spine_entrypoint.md' exists, parses valid YAML
+    frontmatter, and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/specs/147_memory_spine_entrypoint.md').read().split('---')[1]); assert
+    d, 'empty frontmatter'"
+  severity: critical
 ---
-
 # Spec 147: Memory Spine Entrypoint
 
 ## Purpose

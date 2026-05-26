@@ -1,19 +1,29 @@
 ---
-spec_id: "DE-V2-[ADR-007](0007-modular-spec-sibling-files.md)"
-title: "Arquitectura de Especificaciones Modulares (MSA) y Archivos Hermanos"
-status: "ACTIVE"
-version: "1.0.0"
-layer: "L0"
-namespace: "io.dummie.v2.adr"
-authority: "ARCHITECT"
+spec_id: DE-V2-[ADR-007](0007-modular-spec-sibling-files.md)
+title: Arquitectura de Especificaciones Modulares (MSA) y Archivos Hermanos
+status: ACTIVE
+version: 1.0.0
+layer: L0
+namespace: io.dummie.v2.adr
+authority: ARCHITECT
 dependencies:
-  - id: "DE-V2-L3-22"
-    relationship: "IMPLEMENTS"
-  - id: "DE-V2-[ADR-006](0006-sovereign-hybrid-documentation-protocol.md)"
-    relationship: "EXTENDS"
-tags: ["architectural_decision", "modular_specs", "bdd_automation"]
+- id: DE-V2-L3-22
+  relationship: IMPLEMENTS
+- id: DE-V2-[ADR-006](0006-sovereign-hybrid-documentation-protocol.md)
+  relationship: EXTENDS
+tags:
+- architectural_decision
+- modular_specs
+- bdd_automation
+claims:
+- id: 0007-modular-spec-sibling-files-file-valid
+  description: Spec file '0007-modular-spec-sibling-files.md' exists, parses valid
+    YAML frontmatter, and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/01_architecture/adr/0007-modular-spec-sibling-files.md').read().split('---')[1]);
+    assert d, 'empty frontmatter'"
+  severity: critical
 ---
-
 # [ADR-007](0007-modular-spec-sibling-files.md): Modular Spec Assembly (MSA)
 
 ## Abstract

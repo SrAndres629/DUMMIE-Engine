@@ -1,15 +1,22 @@
 ---
-spec_id: "162_evolution_delta_applier"
-title: "162 Evolution Delta Applier"
-status: "DEPRECATED"
-canonicality: "canonical"
-artifact_type: "spec"
-plan: "DUMMIE PLAN V1"
-layer: "l2_brain"
-created_by: "operationalization_pack_5_2_2"
-last_verified_on: "2026-05-16"
+spec_id: 162_evolution_delta_applier
+title: 162 Evolution Delta Applier
+status: DEPRECATED
+canonicality: canonical
+artifact_type: spec
+plan: DUMMIE PLAN V1
+layer: l2_brain
+created_by: operationalization_pack_5_2_2
+last_verified_on: '2026-05-16'
+claims:
+- id: 162_evolution_delta_applier-file-valid
+  description: Spec file '162_evolution_delta_applier.md' exists, parses valid YAML
+    frontmatter, and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/specs/162_evolution_delta_applier.md').read().split('---')[1]); assert
+    d, 'empty frontmatter'"
+  severity: critical
 ---
-
 # Spec 162: Evolution Delta Applier
 
 ## Purpose

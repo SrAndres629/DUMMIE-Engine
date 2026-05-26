@@ -1,0 +1,10 @@
+{
+  "task_id": "hb-fallback-20260525113639",
+  "branch": "worktree/hb-fallback-20260525113639",
+  "worktree_path": "/media/datasets/DUMMIE Engine/worktrees/hb-fallback-20260525113639",
+  "description": "Action: Generate Action Queue\nPriority: medium\nComplexity: COMPLEX\nScope: This is a COMPLEX change. ",
+  "status": "created",
+  "created_at": "2026-05-25T11:36:41.750263",
+  "audit_passed": null,
+  "merged_at": null
+}

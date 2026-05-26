@@ -1,0 +1,21 @@
+{
+  "spec_id": "212_shared_memory_gateway_ipc",
+  "rules": [
+    {
+      "id": "SMG-001",
+      "description": "HTTP remains the default path; memfd is an opt-in optimization for large payloads"
+    },
+    {
+      "id": "SMG-002",
+      "description": "Payload size threshold for memfd: 64KB"
+    },
+    {
+      "id": "SMG-003",
+      "description": "Memfd must be sealed (F_SEAL_SHRINK | F_SEAL_SEAL) after payload is written"
+    },
+    {
+      "id": "SMG-004",
+      "description": "Receiver must read the payload exactly once and close the fd"
+    }
+  ]
+}

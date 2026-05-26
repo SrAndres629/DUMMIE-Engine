@@ -1,11 +1,18 @@
 ---
-spec_id: "190_full_body_operational_auditor"
-title: "Full Body Operational Auditor"
-status: "ACTIVE"
-layer: "L2"
-last_verified_on: "2026-05-16"
+spec_id: 190_full_body_operational_auditor
+title: Full Body Operational Auditor
+status: ACTIVE
+layer: L2
+last_verified_on: '2026-05-16'
+claims:
+- id: 190_full_body_operational_auditor-file-valid
+  description: Spec file '190_full_body_operational_auditor.md' exists, parses valid
+    YAML frontmatter, and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/specs/190_full_body_operational_auditor.md').read().split('---')[1]);
+    assert d, 'empty frontmatter'"
+  severity: critical
 ---
-
 ## Purpose
 Map and audit the physical existence, connection, and readiness score of every DUMMIE Engine "organ" into a unified operational dashboard to evaluate structural cohesion.
 

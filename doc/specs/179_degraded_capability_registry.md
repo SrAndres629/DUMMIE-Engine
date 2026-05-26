@@ -1,13 +1,15 @@
+Status: SUPERSEDED (2026-05-25). Renamed to capability_registry. 'Degraded' concept retired — production phase.
+
 ---
 spec_id: "179_degraded_capability_registry"
-title: "Degraded Capability Registry"
-status: "DEPRECATED"
+title: "Capability Registry"
+status: "SUPERSEDED"
 layer: "L2"
 last_verified_on: "2026-05-16"
 ---
 
 ## Purpose
-This spec establishes the degraded capability registry (HEARTBEAT-2.1) to serve as the unified source of truth for the actual runtime status of DUMMIE's primary engines.
+This spec establishes the capability registry (HEARTBEAT-2.1) to serve as the unified source of truth for the actual runtime status of DUMMIE's primary engines.
 
 ## Current State
 Under implementation. Will ingest dependency, preflight, and calibration reports, mapping capabilities conforming to `degraded_capability_registry.schema.json`.

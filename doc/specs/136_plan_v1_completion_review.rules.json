@@ -9,7 +9,7 @@
     },
     {
       "id": "R2",
-      "description": "Must clearly separate physical execution from dry-run/simulation.",
+      "description": "Must clearly separate physical execution from planning/validation.",
       "priority": "HIGH"
     }
   ]

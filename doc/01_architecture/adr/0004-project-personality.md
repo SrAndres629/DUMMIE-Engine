@@ -1,19 +1,29 @@
 ---
-spec_id: "DE-V2-[ADR-004](0004-project-personality.md)"
-title: "Identidad Cognitiva y Personalidad de Proyecto"
-status: "ACTIVE"
-version: "1.0.0"
-layer: "L0"
-namespace: "io.dummie.v2.adr"
-authority: "ARCHITECT"
+spec_id: DE-V2-[ADR-004](0004-project-personality.md)
+title: Identidad Cognitiva y Personalidad de Proyecto
+status: ACTIVE
+version: 1.0.0
+layer: L0
+namespace: io.dummie.v2.adr
+authority: ARCHITECT
 dependencies:
-  - id: "DE-V2-L2-02"
-    relationship: "EXTENDS"
-  - id: "DE-V2-L4-18"
-    relationship: "USES"
-tags: ["architectural_decision", "cognitive_identity", "industrial_sdd"]
+- id: DE-V2-L2-02
+  relationship: EXTENDS
+- id: DE-V2-L4-18
+  relationship: USES
+tags:
+- architectural_decision
+- cognitive_identity
+- industrial_sdd
+claims:
+- id: 0004-project-personality-file-valid
+  description: Spec file '0004-project-personality.md' exists, parses valid YAML frontmatter,
+    and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/01_architecture/adr/0004-project-personality.md').read().split('---')[1]);
+    assert d, 'empty frontmatter'"
+  severity: critical
 ---
-
 # [ADR-004](0004-project-personality.md): Identidad Cognitiva y Personalidad de Proyecto
 
 ## Abstract

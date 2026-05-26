@@ -1,12 +1,22 @@
 ---
-spec_id: "174_embedding_memory_router"
-title: "Embedding Memory Router"
-status: "ACTIVE"
-layer: "L2"
-last_verified_on: "2026-05-20"
-version: "2.0.0"
+spec_id: 174_embedding_memory_router
+title: Embedding Memory Router
+status: ACTIVE
+layer: L2
+last_verified_on: '2026-05-20'
+version: 2.0.0
+dependencies:
+- specs/192_embedding_mesh_foundation.md
+- specs/L2_Brain/90_vault_embedding_index.md
+claims:
+- id: 174_embedding_memory_router-file-valid
+  description: Spec file '174_embedding_memory_router.md' exists, parses valid YAML
+    frontmatter, and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/specs/174_embedding_memory_router.md').read().split('---')[1]); assert
+    d, 'empty frontmatter'"
+  severity: critical
 ---
-
 ## Purpose
 This spec establishes the embedding memory router (HEARTBEAT-2) to safely index high-value context items and provide a local search/retrieval mechanism using REAL embeddings via EmbeddingRouter.
 

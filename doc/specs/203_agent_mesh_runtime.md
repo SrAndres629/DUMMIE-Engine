@@ -1,14 +1,21 @@
 ---
-spec_id: "203_agent_mesh_runtime"
-title: "Agent Mesh Runtime"
-status: "ACTIVE"
-canonicality: "canonical"
-artifact_type: "spec"
-layer: "dummie"
-created_by: "codex_agent_mesh_runtime"
-last_verified_on: "2026-05-20"
+spec_id: 203_agent_mesh_runtime
+title: Agent Mesh Runtime
+status: ACTIVE
+canonicality: canonical
+artifact_type: spec
+layer: dummie
+created_by: codex_agent_mesh_runtime
+last_verified_on: '2026-05-20'
+claims:
+- id: 203_agent_mesh_runtime-file-valid
+  description: Spec file '203_agent_mesh_runtime.md' exists, parses valid YAML frontmatter,
+    and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/specs/203_agent_mesh_runtime.md').read().split('---')[1]); assert d,
+    'empty frontmatter'"
+  severity: critical
 ---
-
 # Spec 203: Agent Mesh Runtime
 
 ## Purpose

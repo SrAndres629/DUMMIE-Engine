@@ -1,3 +1,8 @@
+---
+status: ACTIVE
+layer: agentic
+domain: [execution, protocol]
+---
 # EXECUTION_PROTOCOL
 
 ## Purpose

@@ -1,11 +1,18 @@
 ---
-spec_id: "178_runtime_dependency_auditor"
-title: "Runtime Dependency Auditor"
-status: "DEPRECATED"
-layer: "L2"
-last_verified_on: "2026-05-16"
+spec_id: 178_runtime_dependency_auditor
+title: Runtime Dependency Auditor
+status: DEPRECATED
+layer: L2
+last_verified_on: '2026-05-16'
+claims:
+- id: 178_runtime_dependency_auditor-file-valid
+  description: Spec file '178_runtime_dependency_auditor.md' exists, parses valid
+    YAML frontmatter, and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/specs/178_runtime_dependency_auditor.md').read().split('---')[1]);
+    assert d, 'empty frontmatter'"
+  severity: critical
 ---
-
 ## Purpose
 This spec establishes the runtime dependency auditor (HEARTBEAT-2.1) to diagnose the physical presence of python packages, configuration boundaries, and capabilities, distinguishing between real, simulated, fallback, and dry-run modes.
 

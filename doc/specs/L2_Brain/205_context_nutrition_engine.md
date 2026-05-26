@@ -1,12 +1,19 @@
 ---
-spec_id: "205_context_nutrition_engine"
-title: "Context Nutrition Engine (CNE)"
-status: "ACTIVE"
-layer: "L2"
-last_verified_on: "2026-05-20"
-version: "1.1.0"
+spec_id: 205_context_nutrition_engine
+title: Context Nutrition Engine (CNE)
+status: ACTIVE
+layer: L2
+last_verified_on: '2026-05-20'
+version: 1.1.0
+claims:
+- id: 205_context_nutrition_engine-file-valid
+  description: Spec file '205_context_nutrition_engine.md' exists, parses valid YAML
+    frontmatter, and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/specs/L2_Brain/205_context_nutrition_engine.md').read().split('---')[1]);
+    assert d, 'empty frontmatter'"
+  severity: critical
 ---
-
 ## Purpose
 The Context Nutrition Engine (CNE) transforms raw user prompts into evidence-grounded context packets. It reduces hallucinations, exposes semantic gaps, preserves 4D-TES causal evidence, and keeps prompt context under a token budget.
 

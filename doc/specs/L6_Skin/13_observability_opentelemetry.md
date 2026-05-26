@@ -6,6 +6,14 @@ layer: L6
 last_verified_on: '2026-04-24'
 version: 1.0.0
 namespace: dummie.engine.l6
+claims:
+- id: 13_observability_opentelemetry-file-valid
+  description: Spec file '13_observability_opentelemetry.md' exists, parses valid
+    YAML frontmatter, and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/specs/L6_Skin/13_observability_opentelemetry.md').read().split('---')[1]);
+    assert d, 'empty frontmatter'"
+  severity: critical
 ---
 # Observabilidad Sistémica (OpenTelemetry)
 

@@ -1,0 +1,21 @@
+{
+  "spec_id": "211_gpu_embedding_acceleration",
+  "rules": [
+    {
+      "id": "GEA-001",
+      "description": "EmbeddingService must detect CUDA availability at init time"
+    },
+    {
+      "id": "GEA-002",
+      "description": "GPU fallback to CPU must be silent with a debug log, never an exception"
+    },
+    {
+      "id": "GEA-003",
+      "description": "Output dimensions must remain 384 (bge-small-en-v1.5 invariant)"
+    },
+    {
+      "id": "GEA-004",
+      "description": "GPU memory used for embeddings must not exceed 1GB VRAM"
+    }
+  ]
+}

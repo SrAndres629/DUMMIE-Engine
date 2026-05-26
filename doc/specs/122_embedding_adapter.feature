@@ -14,7 +14,7 @@ Feature: Embedding Adapter
     When I calculate their similarity
     Then the result should be 1.0.
 
-  Scenario: Provider disabled by default
+  Scenario: Provider enabled by default
     Given I request a "provider" embedding without configuration
     When the adapter runs
     Then the status should be "PROVIDER_DISABLED".

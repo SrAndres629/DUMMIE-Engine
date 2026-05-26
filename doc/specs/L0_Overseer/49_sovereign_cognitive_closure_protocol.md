@@ -13,6 +13,14 @@ tags:
 - cognitive_core
 - knowledge_crystallization
 - session_governance
+claims:
+- id: 49_sovereign_cognitive_closure_protocol-file-valid
+  description: Spec file '49_sovereign_cognitive_closure_protocol.md' exists, parses
+    valid YAML frontmatter, and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/specs/L0_Overseer/49_sovereign_cognitive_closure_protocol.md').read().split('---')[1]);
+    assert d, 'empty frontmatter'"
+  severity: critical
 ---
 # 49. Protocolo de Cierre Cognitivo Soberano (SCCP)
 

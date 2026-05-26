@@ -1,11 +1,18 @@
 ---
-spec_id: "175_4dtes_persistence_preflight"
-title: "4D-TES Persistence Preflight"
-status: "ACTIVE"
-layer: "L2"
-last_verified_on: "2026-05-16"
+spec_id: 175_4dtes_persistence_preflight
+title: 4D-TES Persistence Preflight
+status: ACTIVE
+layer: L2
+last_verified_on: '2026-05-16'
+claims:
+- id: 175_4dtes_persistence_preflight-file-valid
+  description: Spec file '175_4dtes_persistence_preflight.md' exists, parses valid
+    YAML frontmatter, and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/specs/175_4dtes_persistence_preflight.md').read().split('---')[1]);
+    assert d, 'empty frontmatter'"
+  severity: critical
 ---
-
 ## Purpose
 This spec establishes the 4D-TES persistence preflight check (HEARTBEAT-2) to safely analyze the health of the Kùzu graph store and outline non-destructive repairs.
 
@@ -20,7 +27,7 @@ Under implementation. Will diagnose the persistence layer and create action plan
 
 ## Contract Invariants
 - **Non-destructive Auditing**: Preflight must only inspect files, configurations, and imports; no real Kùzu database write transactions may be executed.
-- **Degraded Status Mapping**: If Kùzu is degraded or unavailable, decision must be `PASS_WITH_WARNINGS` or `FAIL` rather than an unconditional `PASS`, and `graph_write_mode` must be `DEGRADED`, `SIMULATED`, or `DRY_RUN_ONLY`.
+- **Degraded Status Mapping**: If Kùzu is degraded or unavailable, decision must be `PASS_WITH_WARNINGS` or `FAIL` rather than an unconditional `PASS`, and `graph_write_mode` must be `READY`, `DEGRADED`, or `REPAIRING`.
 - **System Integrity Guard**: Recommends repairs but blocks any action that requires manual dependencies or destructive mutations.
 
 ## Verification

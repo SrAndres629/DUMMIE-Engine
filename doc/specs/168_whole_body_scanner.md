@@ -1,11 +1,18 @@
 ---
-spec_id: "168_whole_body_scanner"
-title: "Whole-Body Scan, Wiring Matrix, and Shadow Detector Runtime"
-status: "ACTIVE"
-layer: "L2"
-last_verified_on: "2026-05-16"
+spec_id: 168_whole_body_scanner
+title: Whole-Body Scan, Wiring Matrix, and Shadow Detector Runtime
+status: ACTIVE
+layer: L2
+last_verified_on: '2026-05-16'
+claims:
+- id: 168_whole_body_scanner-file-valid
+  description: Spec file '168_whole_body_scanner.md' exists, parses valid YAML frontmatter,
+    and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/specs/168_whole_body_scanner.md').read().split('---')[1]); assert d,
+    'empty frontmatter'"
+  severity: critical
 ---
-
 ## Purpose
 This spec establishes the whole-body scan, wiring matrix mapping, and shadow runtime detection capability (HEARTBEAT-1) to scan the workspace and identify disconnected, stale, or orphaned assets.
 

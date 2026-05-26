@@ -1,14 +1,24 @@
 ---
-spec_id: "DE-ADR-0016"
-title: "Industrial Gear Integration (Modular Software Fabrication)"
-status: "PROPOSED"
-version: "1.0.0"
-layer: "L0"
-namespace: "io.dummie.v2.adr"
-authority: "ARCHITECT"
-tags: ["adr", "industrial_gears", "modular_architecture"]
+spec_id: DE-ADR-0016
+title: Industrial Gear Integration (Modular Software Fabrication)
+status: PROPOSED
+version: 1.0.0
+layer: L0
+namespace: io.dummie.v2.adr
+authority: ARCHITECT
+tags:
+- adr
+- industrial_gears
+- modular_architecture
+claims:
+- id: 0016-industrial-gear-integration-file-valid
+  description: Spec file '0016-industrial-gear-integration.md' exists, parses valid
+    YAML frontmatter, and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/01_architecture/adr/0016-industrial-gear-integration.md').read().split('---')[1]);
+    assert d, 'empty frontmatter'"
+  severity: critical
 ---
-
 # ADR-0016: Industrial Gear Integration (Modular Software Fabrication)
 
 ## Status

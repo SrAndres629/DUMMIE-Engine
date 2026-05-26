@@ -7,8 +7,15 @@ last_verified_on: '2026-05-20'
 priority: MANDATORY
 version: 1.0.0
 namespace: dummie.engine.cross
+claims:
+- id: 100_l0_l2_cognitive_bridge-file-valid
+  description: Spec file '100_l0_l2_cognitive_bridge.md' exists, parses valid YAML
+    frontmatter, and is not empty.
+  verify_cmd: python3 -c "import yaml; d=yaml.safe_load(open('/media/datasets/DUMMIE
+    Engine/doc/specs/100_l0_l2_cognitive_bridge.md').read().split('---')[1]); assert
+    d, 'empty frontmatter'"
+  severity: critical
 ---
-
 # L0(Go) → L2(Python) Cognitive Bridge
 
 ## Purpose

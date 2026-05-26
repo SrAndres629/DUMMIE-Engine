@@ -1,3 +1,8 @@
+---
+status: ACTIVE
+layer: agentic
+domain: [reliability, ledger, quality]
+---
 # AGENT_RELIABILITY_LEDGER
 
 ## Purpose
