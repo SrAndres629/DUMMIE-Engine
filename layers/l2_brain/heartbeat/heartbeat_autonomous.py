@@ -31,7 +31,7 @@ from heartbeat_lifecycle_runtime import run_heartbeat
 from heartbeat_orchestrator import HeartbeatOrchestrator
 from heartbeat_signal import generate_signal, update_heartbeat_md, load_latest_heartbeat
 from group_chat_coordinator import GroupChatCoordinator
-from heartbeat.heartbeat_event_gate import should_run_heartbeat
+from heartbeat_event_gate import should_run_heartbeat
 
 _PATH = Path("/opt/dummie-engine")
 AIWG_ROOT = _PATH / ".aiwg"

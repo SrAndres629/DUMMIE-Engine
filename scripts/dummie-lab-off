@@ -1,0 +1,143 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# dummie-lab-off — Stop all DUMMIE Engine services in reverse dependency order.
+# Auto-discovers services via dummie-lab-discover. Never hardcodes service names.
+# Always stops ollama as well. Cleans up orphaned processes and sockets.
+
+DISCOVER_BIN="/usr/local/bin/dummie-lab-discover"
+
+if ! command -v "$DISCOVER_BIN" &>/dev/null; then
+    echo "ERROR: dummie-lab-discover not found at $DISCOVER_BIN" >&2
+    exit 1
+fi
+
+echo "=== [LAB-OFF] Stopping DUMMIE Engine services ==="
+echo
+
+# 1. Discover services and get stop order
+DISCOVERY=$("$DISCOVER_BIN")
+STOP_ORDER=$(echo "$DISCOVERY" | python3 -c "import sys,json; [print(s) for s in json.load(sys.stdin)['stop_order']]")
+
+# 2. Stop user-level services first (reverse order)
+echo "  [user] Stopping user-level services:"
+USER_SERVICES=$(echo "$DISCOVERY" | python3 -c "
+import sys, json
+data = json.load(sys.stdin)
+for s in reversed(data['start_order']):
+    for svc in data['services']:
+        if svc['name'] == s and svc['level'] == 'user':
+            print(s)
+            break
+" 2>/dev/null || true)
+
+STOPPED=0
+if [ -n "$USER_SERVICES" ]; then
+    while IFS= read -r svc; do
+        if systemctl --user is-active --quiet "$svc.service" 2>/dev/null; then
+            systemctl --user stop "$svc.service" 2>/dev/null && printf "    %-35s stopped\n" "$svc" || printf "    %-35s FAILED\n" "$svc"
+            STOPPED=$((STOPPED + 1))
+        else
+            printf "    %-35s not running\n" "$svc"
+        fi
+    done <<< "$USER_SERVICES"
+else
+    echo "    (no user-level services running)"
+fi
+echo
+
+# 3. Stop system-level services in reverse order
+echo "  [system] Stopping system-level services:"
+while IFS= read -r svc; do
+    SVC_LEVEL=$(echo "$DISCOVERY" | python3 -c "
+import sys, json
+data = json.load(sys.stdin)
+for s in data['services']:
+    if s['name'] == '$svc':
+        print(s['level'])
+        break
+" 2>/dev/null || echo "system")
+
+    if [ "$SVC_LEVEL" = "user" ]; then
+        continue
+    fi
+
+    if sudo systemctl is-active --quiet "$svc.service" 2>/dev/null; then
+        sudo systemctl stop "$svc.service" 2>/dev/null && printf "    %-35s stopped\n" "$svc" || printf "    %-35s FAILED\n" "$svc"
+        STOPPED=$((STOPPED + 1))
+    else
+        printf "    %-35s not running\n" "$svc"
+    fi
+done <<< "$STOP_ORDER"
+echo
+
+# 4. Stop ollama (always)
+echo "  [substrate] Stopping ollama..."
+if sudo systemctl is-active --quiet ollama 2>/dev/null; then
+    sudo systemctl stop ollama 2>/dev/null && echo "         ollama stopped" || echo "         [WARN] ollama stop failed"
+    STOPPED=$((STOPPED + 1))
+else
+    echo "         ollama not running"
+fi
+echo
+
+# 5. Clean up orphaned processes
+echo "  [cleanup] Killing orphaned DUMMIE processes..."
+ORPHAN_PATTERNS=(
+    "l0_overseer/supervisor.py"
+    "l1_nervous/mcp_server.py"
+    "bin/l1_sidecar"
+    "bin/dummied"
+    "bin/memory_plane"
+    "bin/monitor"
+    "heartbeat_autonomous.py"
+    "run_pulse.py"
+)
+
+ORPHANS_KILLED=0
+for pattern in "${ORPHAN_PATTERNS[@]}"; do
+    PIDS=$(pgrep -f "$pattern" 2>/dev/null || true)
+    if [ -n "$PIDS" ]; then
+        echo "$PIDS" | while read -r pid; do
+            kill "$pid" 2>/dev/null && echo "    killed PID $pid ($pattern)" || true
+            ORPHANS_KILLED=$((ORPHANS_KILLED + 1))
+        done
+    fi
+done
+sleep 1
+
+# SIGKILL any stragglers
+for pattern in "${ORPHAN_PATTERNS[@]}"; do
+    PIDS=$(pgrep -f "$pattern" 2>/dev/null || true)
+    if [ -n "$PIDS" ]; then
+        echo "$PIDS" | while read -r pid; do
+            kill -9 "$pid" 2>/dev/null && echo "    SIGKILL PID $pid ($pattern)" || true
+        done
+    fi
+done
+echo
+
+# 6. Clean up sockets
+echo "  [cleanup] Cleaning stale sockets..."
+SOCKET_DIRS=(
+    "/opt/dummie-engine/.aiwg/sockets"
+    "$HOME/Escritorio/DUMMIE Engine/.aiwg/sockets"
+    "$HOME/Escritorio/DUMMIE Engine/.aiwg/reports"
+)
+
+for dir in "${SOCKET_DIRS[@]}"; do
+    if [ -d "$dir" ]; then
+        find "$dir" -name "*.sock" -delete 2>/dev/null || true
+        find "$dir" -name "*.lock" -delete 2>/dev/null || true
+    fi
+done
+echo "    sockets cleaned"
+echo
+
+# 7. Summary
+echo "=== Summary ==="
+echo "  Services stopped:     $STOPPED"
+echo "  Orphan processes:     cleaned"
+echo "  Sockets:              cleaned"
+echo
+echo "DUMMIE lab is OFFLINE."

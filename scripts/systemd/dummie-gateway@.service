@@ -1,0 +1,37 @@
+[Unit]
+Description=DUMMIE %i Gateway — MCP sub-gateway
+Documentation=https://dummie.ai
+After=network.target dummie-memory.service dummie-engine.service
+Requires=dummie-engine.service dummie-memory.service
+PartOf=dummie-engine.service
+
+[Service]
+Type=simple
+Environment=DUMMIE_ROOT=/opt/dummie-engine
+Environment=DUMMIE_AIWG_DIR=/opt/dummie-engine/.aiwg
+Environment=PYTHONPATH=layers/l1_nervous
+Environment=PYTHONUNBUFFERED=1
+Environment=PATH=/home/jorand/.local/bin:/usr/local/bin:/usr/bin:/bin
+Environment="BIBLIOTECA_MCP=/home/jorand/Escritorio/Biblioteca MCP"
+WorkingDirectory=/opt/dummie-engine
+User=jorand
+Slice=agentic-workload.slice
+MemoryMax=2G
+MemorySwapMax=1G
+TasksMax=128
+
+ExecStart=/home/jorand/.local/bin/uv run python -m gateway.%i_gateway
+
+SuccessExitStatus=SIGTERM
+Restart=on-failure
+RestartSec=5
+
+KillSignal=SIGTERM
+TimeoutStopSec=30
+SendSIGKILL=yes
+
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=default.target

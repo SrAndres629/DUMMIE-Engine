@@ -1,0 +1,28 @@
+[Unit]
+Description=DUMMIE Autonomous Heartbeat — Observe → Dispatch → Audit → Signal
+After=dummie-memory.service dummie-engine.service
+Wants=dummie-memory.service dummie-engine.service
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/dummie-engine
+ExecStart=/home/jorand/.local/bin/uv run python layers/l2_brain/heartbeat/heartbeat_autonomous.py forever
+ExecStop=/bin/kill -TERM $MAINPID
+Restart=on-failure
+RestartSec=15
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=dummie-heartbeat
+Environment=PATH=/home/jorand/.local/bin:/usr/local/bin:/usr/bin:/bin
+Environment=PYTHONPATH=/opt/dummie-engine/layers/l2_brain/heartbeat
+
+Slice=agentic.slice
+CPUWeight=30
+MemoryMax=512M
+TasksMax=32
+
+SuccessExitStatus=143
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,130 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# dummie-lab-on — Start all DUMMIE Engine services in dependency order.
+# Auto-discovers services via dummie-lab-discover. Never hardcodes service names.
+# Masked services are reported but never touched.
+
+DISCOVER_BIN="/usr/local/bin/dummie-lab-discover"
+
+if ! command -v "$DISCOVER_BIN" &>/dev/null; then
+    echo "ERROR: dummie-lab-discover not found at $DISCOVER_BIN" >&2
+    exit 1
+fi
+
+echo "=== [LAB-ON] Starting DUMMIE Engine services ==="
+echo
+
+# 1. Discover services and get start order
+DISCOVERY=$("$DISCOVER_BIN")
+START_ORDER=$(echo "$DISCOVERY" | python3 -c "import sys,json; [print(s) for s in json.load(sys.stdin)['start_order']]")
+MASKED=$(echo "$DISCOVERY" | python3 -c "import sys,json; [print(s) for s in json.load(sys.stdin)['groups']['masked']]" 2>/dev/null || true)
+ISSUES=$(echo "$DISCOVERY" | python3 -c "import sys,json; [print(i) for i in json.load(sys.stdin)['issues']]" 2>/dev/null || true)
+TOTAL=$(echo "$DISCOVERY" | python3 -c "import sys,json; print(json.load(sys.stdin)['summary']['total'])")
+USABLE=$(echo "$DISCOVERY" | python3 -c "import sys,json; print(json.load(sys.stdin)['summary']['usable'])")
+
+# 2. Report masked services (never touch them)
+if [ -n "$MASKED" ]; then
+    echo "  [WARN] Masked services (will not be started):"
+    while IFS= read -r svc; do
+        printf "         %-35s masked\n" "$svc"
+    done <<< "$MASKED"
+    echo
+fi
+
+# 3. Report issues
+if [ -n "$ISSUES" ]; then
+    echo "  [INFO] Detected issues:"
+    while IFS= read -r issue; do
+        echo "         $issue"
+    done <<< "$ISSUES"
+    echo
+fi
+
+# 4. Start substrate (ollama)
+echo "  [substrate] Starting ollama..."
+if sudo systemctl is-active --quiet ollama 2>/dev/null; then
+    echo "         ollama already running"
+else
+    sudo systemctl start ollama 2>/dev/null && echo "         ollama started" || echo "         [WARN] ollama failed to start"
+    sleep 2
+fi
+echo
+
+# 5. Start system-level services in order
+echo "  [system] Starting system-level services:"
+STARTED=0
+FAILED=0
+while IFS= read -r svc; do
+    # Determine if this is a user-level service
+    SVC_LEVEL=$(echo "$DISCOVERY" | python3 -c "
+import sys, json
+data = json.load(sys.stdin)
+for s in data['services']:
+    if s['name'] == '$svc':
+        print(s['level'])
+        break
+" 2>/dev/null || echo "system")
+
+    if [ "$SVC_LEVEL" = "user" ]; then
+        # Skip user-level services here, they're handled separately
+        continue
+    fi
+
+    if sudo systemctl is-active --quiet "$svc.service" 2>/dev/null; then
+        printf "    %-35s already active\n" "$svc"
+    else
+        if sudo systemctl start "$svc.service" 2>/dev/null; then
+            printf "    %-35s started\n" "$svc"
+            STARTED=$((STARTED + 1))
+        else
+            printf "    %-35s FAILED\n" "$svc"
+            FAILED=$((FAILED + 1))
+        fi
+    fi
+done <<< "$START_ORDER"
+echo
+
+# 6. Start user-level services
+echo "  [user] Starting user-level services:"
+USER_SERVICES=$(echo "$DISCOVERY" | python3 -c "
+import sys, json
+data = json.load(sys.stdin)
+for s in data['start_order']:
+    for svc in data['services']:
+        if svc['name'] == s and svc['level'] == 'user':
+            print(s)
+            break
+" 2>/dev/null || true)
+
+if [ -n "$USER_SERVICES" ]; then
+    while IFS= read -r svc; do
+        if systemctl --user is-active --quiet "$svc.service" 2>/dev/null; then
+            printf "    %-35s already active\n" "$svc"
+        else
+            if systemctl --user start "$svc.service" 2>/dev/null; then
+                printf "    %-35s started\n" "$svc"
+                STARTED=$((STARTED + 1))
+            else
+                printf "    %-35s FAILED\n" "$svc"
+                FAILED=$((FAILED + 1))
+            fi
+        fi
+    done <<< "$USER_SERVICES"
+else
+    echo "    (no user-level services to start)"
+fi
+echo
+
+# 7. Summary
+ACTIVE_NOW=$(echo "$DISCOVERY" | python3 -c "import sys,json; print(len(json.load(sys.stdin)['groups']['active']))")
+echo "=== Summary ==="
+echo "  Total services discovered: $TOTAL"
+echo "  Usable (non-masked):       $USABLE"
+echo "  Started this session:      $STARTED"
+echo "  Failed:                    $FAILED"
+echo "  Already active:            $ACTIVE_NOW"
+echo "  Masked (skipped):          $(echo "$MASKED" | grep -c . 2>/dev/null || echo 0)"
+echo
+echo "DUMMIE lab is ONLINE."
+echo "Use: dummie-lab-status to verify"

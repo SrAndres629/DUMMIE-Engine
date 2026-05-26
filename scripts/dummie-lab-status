@@ -1,0 +1,107 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# dummie-lab-status — Comprehensive status of all DUMMIE Engine services.
+# Auto-discovers services via dummie-lab-discover. Never hardcodes service names.
+
+DISCOVER_BIN="/usr/local/bin/dummie-lab-discover"
+
+if ! command -v "$DISCOVER_BIN" &>/dev/null; then
+    echo "ERROR: dummie-lab-discover not found at $DISCOVER_BIN" >&2
+    exit 1
+fi
+
+echo "=== DUMMIE Engine Status ==="
+echo
+
+# 1. Discover services
+DISCOVERY=$("$DISCOVER_BIN")
+TOTAL=$(echo "$DISCOVERY" | python3 -c "import sys,json; print(json.load(sys.stdin)['summary']['total'])")
+ACTIVE=$(echo "$DISCOVERY" | python3 -c "import sys,json; print(json.load(sys.stdin)['summary']['active'])")
+FAILED=$(echo "$DISCOVERY" | python3 -c "import sys,json; print(json.load(sys.stdin)['summary']['failed'])")
+MASKED=$(echo "$DISCOVERY" | python3 -c "import sys,json; print(json.load(sys.stdin)['summary']['masked'])")
+
+echo "  Services: $TOTAL total | $ACTIVE active | $FAILED failed | $MASKED masked"
+echo
+
+# 2. Service status table
+echo "-- DUMMIE Services --"
+printf "  %-30s %-10s %-10s %-10s %s\n" "SERVICE" "ACTIVE" "ENABLED" "LEVEL" "TYPE"
+printf "  %-30s %-10s %-10s %-10s %s\n" "-------" "------" "-------" "-----" "----"
+
+echo "$DISCOVERY" | python3 -c "
+import sys, json
+data = json.load(sys.stdin)
+for svc in sorted(data['services'], key=lambda s: (s['level'], s['name'])):
+    name = svc['name']
+    level = svc['level']
+    state = svc.get('state', 'unknown')
+    svc_type = svc.get('type', '?')
+
+    # Get active status
+    active = 'unknown'
+    enabled = 'unknown'
+    if state == 'masked':
+        active = 'masked'
+        enabled = 'masked'
+    else:
+        active = svc.get('active_status', 'unknown')
+
+    print(f'  {name:<30} {active:<10} {state:<10} {level:<10} {svc_type}')
+" 2>/dev/null || echo "  (error parsing discovery data)"
+echo
+
+# 3. Issues
+ISSUES=$(echo "$DISCOVERY" | python3 -c "import sys,json; [print(i) for i in json.load(sys.stdin)['issues']]" 2>/dev/null || true)
+if [ -n "$ISSUES" ]; then
+    echo "-- Issues --"
+    while IFS= read -r issue; do
+        echo "  [!] $issue"
+    done <<< "$ISSUES"
+    echo
+fi
+
+# 4. Substrate services
+echo "-- Substrate Services --"
+for unit in ollama nvidia-persistenced nvidia-powerd asusd supergfxd zram-config; do
+    state="$(systemctl is-active "$unit" 2>/dev/null || true)"
+    printf "  %-28s %s\n" "$unit:" "${state:-not-found}"
+done
+echo
+
+# 5. Running DUMMIE processes
+echo "-- DUMMIE Processes --"
+ps -eo pid,ppid,stat,etime,rss,cmd 2>/dev/null | awk '
+    /supervisor\.py|dummied|l1_sidecar|memory_server|mcp_server\.py|heartbeat_autonomous|run_pulse\.py|ollama/ && !/awk/ && !/grep/ {
+        printf "  %7s %7s %4s %10s %8.1f MiB  %s\n", $1,$2,$3,$4,$5/1024,substr($0,index($0,$6))
+    }
+' || echo "  (none found)"
+echo
+
+# 6. Listening ports
+echo "-- Listening Ports --"
+if command -v ss >/dev/null 2>&1; then
+    ss -tulpn 2>/dev/null | grep -E "ollama|11434|8765|18789" || echo "  (no DUMMIE ports listening)"
+else
+    echo "  ss not found"
+fi
+echo
+
+# 7. Memory
+echo "-- Memory --"
+free -h | awk 'NR<=2 {print "  " $0}'
+echo
+
+# 8. GPU
+echo "-- GPU --"
+if command -v nvidia-smi >/dev/null 2>&1; then
+    nvidia-smi --query-gpu=name,pstate,memory.used,memory.total,utilization.gpu,power.draw --format=csv,noheader,nounits 2>/dev/null | while IFS= read -r line; do
+        echo "  $line"
+    done || echo "  (nvidia-smi error)"
+    echo
+    nvidia-smi --query-compute-apps=pid,process_name,used_memory --format=csv,noheader,nounits 2>/dev/null | while IFS= read -r line; do
+        echo "  $line"
+    done || true
+else
+    echo "  nvidia-smi not found"
+fi

@@ -1,0 +1,345 @@
+#!/usr/bin/env python3
+"""dummie-lab-discover — Auto-discovers all DUMMIE Engine systemd services.
+
+Scans both system-level (/etc/systemd/system/) and user-level
+(~/.config/systemd/user/) for dummie-* services, resolves their
+dependency graph, computes topological start/stop order, and
+classifies each service by state.
+
+Output: JSON to stdout.
+
+Usage:
+    dummie-lab-discover              # Full discovery JSON
+    dummie-lab-discover --start      # Services in start order only
+    dummie-lab-discover --stop       # Services in stop order only
+    dummie-lab-discover --summary    # Human-readable summary
+"""
+
+import json
+import os
+import subprocess
+import sys
+from collections import defaultdict, deque
+from pathlib import Path
+
+
+def systemctl(*args, user=False):
+    """Run a systemctl command and return stdout."""
+    cmd = ["systemctl"]
+    if user:
+        cmd.insert(1, "--user")
+    cmd.extend(args)
+    try:
+        result = subprocess.run(
+            cmd, capture_output=True, text=True, timeout=10
+        )
+        return result.stdout.strip(), result.returncode
+    except (subprocess.TimeoutExpired, FileNotFoundError):
+        return "", 1
+
+
+def discover_services():
+    """Find all dummie-* service unit files in system and user level."""
+    services = []
+
+    # System-level: scan /etc/systemd/system/ for dummie-*.service
+    system_dir = Path("/etc/systemd/system")
+    if system_dir.exists():
+        for f in sorted(system_dir.glob("dummie-*.service")):
+            name = f.name
+            # Skip template files (@.service without instance)
+            if name.endswith("@.service"):
+                continue
+            # Skip masked (symlinks to /dev/null)
+            if f.is_symlink() and str(f.resolve()) == "/dev/null":
+                services.append({
+                    "name": name.replace(".service", ""),
+                    "level": "system",
+                    "state": "masked",
+                    "unit_file": str(f),
+                })
+            else:
+                services.append({
+                    "name": name.replace(".service", ""),
+                    "level": "system",
+                    "state": "unknown",
+                    "unit_file": str(f),
+                })
+
+    # User-level: scan ~/.config/systemd/user/ for dummie-*.service
+    user_dir = Path.home() / ".config" / "systemd" / "user"
+    if user_dir.exists():
+        for f in sorted(user_dir.glob("dummie-*.service")):
+            name = f.name
+            if name.endswith("@.service"):
+                continue
+            if f.is_symlink() and str(f.resolve()) == "/dev/null":
+                services.append({
+                    "name": name.replace(".service", ""),
+                    "level": "user",
+                    "state": "masked",
+                    "unit_file": str(f),
+                })
+            else:
+                services.append({
+                    "name": name.replace(".service", ""),
+                    "level": "user",
+                    "state": "unknown",
+                    "unit_file": str(f),
+                })
+
+    return services
+
+
+def get_service_properties(svc_name, level):
+    """Query systemd for a service's dependency properties."""
+    user = level == "user"
+    props = {}
+    for prop in ["After", "Requires", "Wants", "PartOf", "BindsTo", "Type"]:
+        out, rc = systemctl("show", "-p", prop, f"{svc_name}.service", user=user)
+        if rc == 0 and out:
+            # Format is "PropertyName=value"
+            if "=" in out:
+                value = out.split("=", 1)[1]
+                props[prop] = value
+    return props
+
+
+def get_service_status(svc_name, level):
+    """Get the runtime status of a service."""
+    user = level == "user"
+    status = {}
+
+    # is-active
+    out, rc = systemctl("is-active", f"{svc_name}.service", user=user)
+    status["active"] = out if rc == 0 else "inactive"
+
+    # is-enabled
+    out, rc = systemctl("is-enabled", f"{svc_name}.service", user=user)
+    status["enabled"] = out if rc == 0 else "disabled"
+
+    # is-failed
+    out, rc = systemctl("is-failed", f"{svc_name}.service", user=user)
+    status["failed"] = rc == 0
+
+    return status
+
+
+def topological_sort(services, deps_map):
+    """Kahn's algorithm for topological sort.
+
+    Returns ordered list of service names where dependencies come first.
+    """
+    # Build adjacency list and in-degree count
+    in_degree = defaultdict(int)
+    graph = defaultdict(list)
+    all_nodes = set()
+
+    for svc in services:
+        name = svc["name"]
+        all_nodes.add(name)
+        if name not in in_degree:
+            in_degree[name] = 0
+
+        # Dependencies: this service should start AFTER these
+        for dep in deps_map.get(name, []):
+            dep_name = dep.replace(".service", "")
+            if dep_name in all_nodes or dep_name.startswith("dummie-"):
+                graph[dep_name].append(name)
+                in_degree[name] += 1
+
+    # Kahn's algorithm
+    queue = deque()
+    for node in all_nodes:
+        if in_degree[node] == 0:
+            queue.append(node)
+
+    result = []
+    while queue:
+        # Sort the queue for deterministic output
+        queue = deque(sorted(queue))
+        node = queue.popleft()
+        result.append(node)
+
+        for neighbor in sorted(graph.get(node, [])):
+            in_degree[neighbor] -= 1
+            if in_degree[neighbor] == 0:
+                queue.append(neighbor)
+
+    # If not all nodes are in result, there's a cycle
+    # Add remaining nodes anyway (they'll fail at runtime)
+    for node in sorted(all_nodes - set(result)):
+        result.append(node)
+
+    return result
+
+
+def resolve_dependencies(services):
+    """Build dependency map for all non-masked services."""
+    deps_map = {}
+
+    for svc in services:
+        if svc["state"] == "masked":
+            continue
+
+        props = get_service_properties(svc["name"], svc["level"])
+        status = get_service_status(svc["name"], svc["level"])
+
+        # Update state from systemd
+        if status["failed"]:
+            svc["state"] = "failed"
+        elif status["active"] == "active":
+            svc["state"] = "active"
+        elif status["enabled"] in ("enabled", "static", "generated"):
+            svc["state"] = "enabled"
+        elif status["enabled"] == "disabled":
+            svc["state"] = "disabled"
+        else:
+            svc["state"] = status.get("enabled", "unknown")
+
+        svc["type"] = props.get("Type", "unknown")
+        svc["active_status"] = status["active"]
+
+        # Collect dependencies (After, Requires, PartOf, BindsTo)
+        all_deps = set()
+        for prop in ["After", "Requires", "PartOf", "BindsTo"]:
+            if prop in props:
+                for dep in props[prop].split():
+                    if dep.startswith("dummie-"):
+                        all_deps.add(dep)
+
+        deps_map[svc["name"]] = sorted(all_deps)
+
+    return deps_map
+
+
+def classify_services(services):
+    """Classify services into meaningful groups."""
+    groups = {
+        "system": [],
+        "user": [],
+        "masked": [],
+        "failed": [],
+        "active": [],
+    }
+
+    for svc in services:
+        if svc["state"] == "masked":
+            groups["masked"].append(svc["name"])
+        elif svc["state"] == "failed":
+            groups["failed"].append(svc["name"])
+        elif svc["active_status"] == "active":
+            groups["active"].append(svc["name"])
+
+        if svc["level"] == "system":
+            groups["system"].append(svc["name"])
+        elif svc["level"] == "user":
+            groups["user"].append(svc["name"])
+
+    return groups
+
+
+def detect_issues(services):
+    """Detect common issues that should be reported."""
+    issues = []
+
+    for svc in services:
+        if svc["state"] == "masked":
+            issues.append(f"MASKED: {svc['name']} (cannot be started)")
+        if svc["state"] == "failed":
+            issues.append(f"FAILED: {svc['name']} (check journalctl -u {svc['name']})")
+
+    # Check for heartbeat crash loop
+    for svc in services:
+        if svc["name"] == "dummie-heartbeat" and svc["state"] != "masked":
+            out, _ = systemctl("show", "-p", "NRestarts", f"{svc['name']}.service")
+            if "=" in out:
+                restarts = int(out.split("=")[1])
+                if restarts > 100:
+                    issues.append(
+                        f"CRASH LOOP: dummie-heartbeat has restarted {restarts} times"
+                    )
+
+    return issues
+
+
+def main():
+    mode = "json"
+    if "--start" in sys.argv:
+        mode = "start"
+    elif "--stop" in sys.argv:
+        mode = "stop"
+    elif "--summary" in sys.argv:
+        mode = "summary"
+
+    # Discover services
+    services = discover_services()
+
+    if not services:
+        print("No dummie-* services found.", file=sys.stderr)
+        sys.exit(1)
+
+    # Resolve dependencies for non-masked services
+    deps_map = resolve_dependencies(services)
+
+    # Compute topological order
+    non_masked = [s for s in services if s["state"] != "masked"]
+    start_order = topological_sort(non_masked, deps_map)
+    stop_order = list(reversed(start_order))
+
+    # Classify
+    groups = classify_services(services)
+
+    # Detect issues
+    issues = detect_issues(services)
+
+    # Build output
+    result = {
+        "services": services,
+        "start_order": start_order,
+        "stop_order": stop_order,
+        "groups": groups,
+        "issues": issues,
+        "summary": {
+            "total": len(services),
+            "system": len(groups["system"]),
+            "user": len(groups["user"]),
+            "masked": len(groups["masked"]),
+            "failed": len(groups["failed"]),
+            "active": len(groups["active"]),
+            "usable": len(non_masked),
+        },
+    }
+
+    if mode == "json":
+        print(json.dumps(result, indent=2))
+    elif mode == "start":
+        for svc in start_order:
+            print(svc)
+    elif mode == "stop":
+        for svc in stop_order:
+            print(svc)
+    elif mode == "summary":
+        print(f"DUMMIE Engine Services ({result['summary']['total']} total)")
+        print(f"  System-level: {result['summary']['system']}")
+        print(f"  User-level:   {result['summary']['user']}")
+        print(f"  Active:       {result['summary']['active']}")
+        print(f"  Failed:       {result['summary']['failed']}")
+        print(f"  Masked:       {result['summary']['masked']}")
+        print()
+        if issues:
+            print("Issues:")
+            for issue in issues:
+                print(f"  - {issue}")
+            print()
+        print("Start order:")
+        for i, svc in enumerate(start_order, 1):
+            print(f"  {i}. {svc}")
+        print()
+        print("Stop order:")
+        for i, svc in enumerate(stop_order, 1):
+            print(f"  {i}. {svc}")
+
+
+if __name__ == "__main__":
+    main()

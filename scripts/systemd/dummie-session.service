@@ -1,26 +1,21 @@
 [Unit]
-Description=DUMMIE Architecture Guardian — validation polling daemon
-After=dummie-engine.service
-Wants=dummie-engine.service
+Description=DUMMIE Session Daemon — opencode lifecycle + model watch + heartbeat
+After=network.target dummie-engine.service dummie-opencode.service
+Wants=dummie-engine.service dummie-opencode.service
 
 [Service]
 Type=simple
 User=jorand
 WorkingDirectory=/opt/dummie-engine
-ExecStart=/home/jorand/.local/bin/uv run python -m dummie_sdk.daemon.guardian_daemon
+ExecStart=/home/jorand/.local/bin/uv run python -m dummie_sdk.daemon.session_daemon
 ExecStop=/bin/kill -TERM $MAINPID
-Restart=on-failure
+Restart=always
 RestartSec=30
 StandardOutput=journal
 StandardError=journal
-SyslogIdentifier=dummie-guardian
+SyslogIdentifier=dummie-session
 Environment=PATH=/home/jorand/.local/bin:/usr/local/bin:/usr/bin:/bin
 Environment=DUMMIE_ROOT=/opt/dummie-engine
-
-Slice=agentic.slice
-CPUWeight=20
-MemoryMax=256M
-TasksMax=16
 
 SuccessExitStatus=143
 

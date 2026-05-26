@@ -1,0 +1,26 @@
+[Unit]
+Description=DUMMIE Pulse Engine — Autonomous Cognitive Animation
+After=network-online.target
+Wants=network-online.target
+PartOf=dummie-engine.service
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/dummie-engine
+ExecStart=/home/jorand/.local/bin/uv run python /opt/dummie-engine/pulse/run_pulse.py start
+ExecStop=/bin/kill -TERM $MAINPID
+Restart=on-failure
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=dummie-pulse
+Environment=PATH=/home/jorand/.local/bin:/usr/local/bin:/usr/bin:/bin
+
+Slice=agentic.slice
+CPUWeight=50
+MemoryMax=1G
+TasksMax=64
+
+[Install]
+WantedBy=multi-user.target

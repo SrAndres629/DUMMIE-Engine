@@ -1,0 +1,16 @@
+[Unit]
+Description=DUMMIE Cognitive Capsule Mount — tmpfs + disk hybrid
+Documentation=https://dummie.ai
+After=dummie-engine.service
+Requires=dummie-engine.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/opt/dummie-engine/scripts/capsule_mount.sh
+ExecStop=/opt/dummie-engine/scripts/capsule_unmount.sh
+User=root
+Group=root
+
+[Install]
+WantedBy=dummie-engine.service
