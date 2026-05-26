@@ -91,9 +91,9 @@ class KuzuGraphSyncAdapter:
             import re
 
             try:
-                from layers.l2_brain.models import MemoryNode4D, IntentType
+                from layers.l2_brain.l2_memory_models import MemoryNode4D, IntentType
             except ImportError:
-                from models import MemoryNode4D, IntentType
+                from layers.l2_brain.l2_memory_models import MemoryNode4D, IntentType
 
             nodes_written = 0
             id_to_hash = {}

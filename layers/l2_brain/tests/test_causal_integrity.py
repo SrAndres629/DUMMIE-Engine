@@ -1,11 +1,11 @@
 import pytest
 try:
-    from layers.l2_brain.models import MemoryNode4D, AuthorityLevel, IntentType
+    from layers.l2_brain.l2_memory_models import MemoryNode4D, AuthorityLevel, IntentType
 except ImportError:
     import sys
     import os
     sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-    from models import MemoryNode4D, AuthorityLevel, IntentType
+    from layers.l2_brain.l2_memory_models import MemoryNode4D, AuthorityLevel, IntentType
 
 def test_causal_hash_sensitivity():
     """Verifica que el hash cambie si cambia cualquier dimensión del contexto o el payload."""
@@ -57,7 +57,7 @@ def test_causal_hash_no_truncation():
 def test_tamper_detection(tmp_path):
     """Verifica que si un nodo es alterado en la DB, get_by_hash levante ValueError."""
     from layers.l2_brain.adapters import KuzuRepository
-    from layers.l2_brain.models import MemoryNode4D, AuthorityLevel, IntentType
+    from layers.l2_brain.l2_memory_models import MemoryNode4D, AuthorityLevel, IntentType
     
     db_file = str(tmp_path / "test_db")
     repo = KuzuRepository(db_path=db_file)

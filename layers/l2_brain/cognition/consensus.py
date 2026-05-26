@@ -1,4 +1,4 @@
-from models import ConsensusDecision
+from layers.l2_brain.l2_memory_models import ConsensusDecision
 
 
 def build_consensus_decision(

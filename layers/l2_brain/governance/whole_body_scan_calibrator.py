@@ -6,14 +6,17 @@ Validates execution timing, schema conformance, metrics consistency, and reconci
 """
 
 import json
+import os
 from datetime import datetime, timezone
 import uuid
 from pathlib import Path
 from typing import Any, Dict, List
 
+DUMMIE_ROOT = Path(os.environ.get("DUMMIE_ROOT", "/opt/dummie-engine"))
+
 
 class WholeBodyScanCalibrator:
-    def __init__(self, root: Path = Path("/home/jorand/Escritorio/DUMMIE Engine")):
+    def __init__(self, root: Path = DUMMIE_ROOT):
         self.root = root.resolve()
         self.aiwg = self.root / ".aiwg"
         self.reports_dir = self.aiwg / "reports"
@@ -22,12 +25,12 @@ class WholeBodyScanCalibrator:
     def run_calibration(self) -> Dict[str, Any]:
         timestamp = datetime.now(timezone.utc).isoformat()
         calibration_id = f"cal-{uuid.uuid4().hex[:8]}"
-        
+
         scan_latest_path = self.reports_dir / "whole_body_scan_latest.json"
-        
+
         warnings: List[str] = []
         errors: List[str] = []
-        
+
         if not scan_latest_path.exists():
             return {
                 "calibration_id": calibration_id,
@@ -38,22 +41,22 @@ class WholeBodyScanCalibrator:
                     "shadow_modules": 0,
                     "orphaned_tests": 0,
                     "stale_reports": 0,
-                    "unvalidated_specs": 0
+                    "unvalidated_specs": 0,
                 },
                 "reproducibility": {
                     "runtime_seconds": 0.0,
                     "reproducibility_hash": "none",
-                    "freshness_timestamp": timestamp
+                    "freshness_timestamp": timestamp,
                 },
                 "test_reconciliation": {
                     "suite_total_tests": 0,
                     "reconciled": False,
-                    "explanation": "No scanner report found."
+                    "explanation": "No scanner report found.",
                 },
                 "warnings": ["Scanner report does not exist."],
-                "evidence_refs": []
+                "evidence_refs": [],
             }
-            
+
         try:
             scan_data = json.loads(scan_latest_path.read_text(encoding="utf-8"))
         except Exception as e:
@@ -66,24 +69,35 @@ class WholeBodyScanCalibrator:
                     "shadow_modules": 0,
                     "orphaned_tests": 0,
                     "stale_reports": 0,
-                    "unvalidated_specs": 0
+                    "unvalidated_specs": 0,
                 },
                 "reproducibility": {
                     "runtime_seconds": 0.0,
                     "reproducibility_hash": "none",
-                    "freshness_timestamp": timestamp
+                    "freshness_timestamp": timestamp,
                 },
                 "test_reconciliation": {
                     "suite_total_tests": 0,
                     "reconciled": False,
-                    "explanation": f"Failed to parse scanner JSON: {e}"
+                    "explanation": f"Failed to parse scanner JSON: {e}",
                 },
                 "warnings": [f"Invalid JSON format: {e}"],
-                "evidence_refs": [str(scan_latest_path)]
+                "evidence_refs": [str(scan_latest_path)],
             }
 
         # 1. Verify schema keys
-        required_keys = ["timestamp", "overall_coherence_score", "profiling_profile", "report_version", "freshness_timestamp", "runtime_seconds", "reproducibility_hash", "metrics", "findings", "matrix"]
+        required_keys = [
+            "timestamp",
+            "overall_coherence_score",
+            "profiling_profile",
+            "report_version",
+            "freshness_timestamp",
+            "runtime_seconds",
+            "reproducibility_hash",
+            "metrics",
+            "findings",
+            "matrix",
+        ]
         for key in required_keys:
             if key not in scan_data:
                 errors.append(f"Missing required key in scan report: {key}")
@@ -92,9 +106,11 @@ class WholeBodyScanCalibrator:
         runtime_sec = scan_data.get("runtime_seconds", 0.0)
         reprod_hash = scan_data.get("reproducibility_hash", "")
         fresh_ts = scan_data.get("freshness_timestamp", "")
-        
+
         if runtime_sec > 8.0:
-            warnings.append(f"Scanner runtime is high: {runtime_sec}s (threshold: 8.0s)")
+            warnings.append(
+                f"Scanner runtime is high: {runtime_sec}s (threshold: 8.0s)"
+            )
 
         # 3. Scan Metrics extraction
         metrics = scan_data.get("metrics", {})
@@ -110,7 +126,7 @@ class WholeBodyScanCalibrator:
             "shadow_modules": shadow_cnt,
             "orphaned_tests": orphan_tests_cnt,
             "stale_reports": stale_reports_cnt,
-            "unvalidated_specs": unvalidated_specs_cnt
+            "unvalidated_specs": unvalidated_specs_cnt,
         }
 
         # 4. Test reconciliation
@@ -123,13 +139,19 @@ class WholeBodyScanCalibrator:
         test_reconciliation = {
             "suite_total_tests": 46,
             "reconciled": True,
-            "explanation": explanation
+            "explanation": explanation,
         }
 
         decision = "PASS"
         if errors:
             decision = "FAIL"
-        elif warnings or shadow_cnt > 0 or orphan_tests_cnt > 0 or stale_reports_cnt > 0 or unvalidated_specs_cnt > 0:
+        elif (
+            warnings
+            or shadow_cnt > 0
+            or orphan_tests_cnt > 0
+            or stale_reports_cnt > 0
+            or unvalidated_specs_cnt > 0
+        ):
             decision = "PASS_WITH_WARNINGS"
 
         result = {
@@ -140,11 +162,11 @@ class WholeBodyScanCalibrator:
             "reproducibility": {
                 "runtime_seconds": runtime_sec,
                 "reproducibility_hash": reprod_hash,
-                "freshness_timestamp": fresh_ts
+                "freshness_timestamp": fresh_ts,
             },
             "test_reconciliation": test_reconciliation,
             "warnings": warnings + errors,
-            "evidence_refs": [".aiwg/reports/whole_body_scan_latest.json"]
+            "evidence_refs": [".aiwg/reports/whole_body_scan_latest.json"],
         }
 
         # Write output JSON
@@ -163,7 +185,7 @@ class WholeBodyScanCalibrator:
         md.append(f"**Calibration ID:** `{result['calibration_id']}`")
         md.append(f"**Timestamp:** {result['timestamp']}\n")
         md.append(f"## Calibration Decision: **{result['decision']}**\n")
-        
+
         md.append("### Scanner Timings and Reproducibility")
         rep = result["reproducibility"]
         md.append(f"- **Runtime Seconds:** `{rep['runtime_seconds']}s`")
@@ -173,7 +195,9 @@ class WholeBodyScanCalibrator:
         md.append("### Test Reconciliation Matrix")
         rec = result["test_reconciliation"]
         md.append(f"- **Suite Total Tests:** `{rec['suite_total_tests']}`")
-        md.append(f"- **Reconciled Status:** `{'RECONCILED' if rec['reconciled'] else 'UNRECONCILED'}`")
+        md.append(
+            f"- **Reconciled Status:** `{'RECONCILED' if rec['reconciled'] else 'UNRECONCILED'}`"
+        )
         md.append(f"- **Explanation:** {rec['explanation']}\n")
 
         md.append("### Validated Scan Metrics")
@@ -191,7 +215,9 @@ class WholeBodyScanCalibrator:
         else:
             md.append("- *No warnings detected.*")
 
-        (self.reports_dir / "whole_body_scan_calibration_latest.md").write_text("\n".join(md), encoding="utf-8")
+        (self.reports_dir / "whole_body_scan_calibration_latest.md").write_text(
+            "\n".join(md), encoding="utf-8"
+        )
 
 
 def run_whole_body_scan_calibration(aiwg_root: Path = None) -> Dict[str, Any]:

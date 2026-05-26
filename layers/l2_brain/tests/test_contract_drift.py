@@ -1,12 +1,12 @@
 import re
 import os
 try:
-    from layers.l2_brain.models import AuthorityLevel, IntentType
+    from layers.l2_brain.l2_memory_models import AuthorityLevel, IntentType
 except ImportError:
     import sys
     import os
     sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-    from models import AuthorityLevel, IntentType
+    from layers.l2_brain.l2_memory_models import AuthorityLevel, IntentType
 
 def test_authority_level_protobuf_drift():
     """Verifica que AuthorityLevel en Python coincida con core.proto."""

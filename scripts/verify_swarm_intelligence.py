@@ -11,7 +11,7 @@ sys.path.append(os.path.abspath("layers/l3_shield"))
 
 from bootstrap import bootstrap_orchestrator
 from daemon import GatewayRequest
-from models import MemoryNode4D
+from layers.l2_brain.l2_memory_models import MemoryNode4D
 from model_router import ModelTier
 
 async def verify():

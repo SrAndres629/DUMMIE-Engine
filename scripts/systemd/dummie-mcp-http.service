@@ -1,0 +1,24 @@
+[Unit]
+Description=DUMMIE MCP HTTP Gateway
+After=network-online.target dummie-engine.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/dummie-engine
+Environment=DUMMIE_ROOT=/opt/dummie-engine
+Environment=DUMMIE_ROOT_DIR=/opt/dummie-engine
+Environment=DUMMIE_AIWG_DIR=/opt/dummie-engine/.aiwg
+Environment=DUMMIE_KUZU_DB_PATH=/opt/dummie-engine/.aiwg/memory/loci.db
+Environment=DUMMIE_MCP_CONFIG_PATH=/opt/dummie-engine/dummie_gateway_config.json
+Environment=DUMMIE_N8N_ENV_FILE=/home/jorand/Escritorio/n8n/.env
+Environment=DUMMIE_MCP_TRANSPORT=streamable-http
+Environment=DUMMIE_MCP_HOST=0.0.0.0
+Environment=DUMMIE_MCP_PORT=8765
+Environment=DUMMIE_MCP_HTTP_PATH=/mcp
+ExecStart=/opt/dummie-engine/scripts/run_dummie_mcp_http_gateway.sh
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

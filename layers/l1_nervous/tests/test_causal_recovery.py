@@ -9,7 +9,7 @@ sys.path.insert(0, os.path.join(ROOT_DIR, "layers", "l2_brain"))
 sys.path.insert(0, os.path.join(ROOT_DIR, "layers", "l1_nervous"))
 
 from adapters import KuzuRepository
-from models import AuthorityLevel, IntentType, MemoryNode4D
+from layers.l2_brain.l2_memory_models import AuthorityLevel, IntentType, MemoryNode4D
 
 @pytest.fixture
 def temp_kuzu(tmp_path):

@@ -1,0 +1,7 @@
+[Unit]
+Description=Agentic Workload Slice - Maximum throughput, memory bounded
+Before=slices.target
+
+[Slice]
+MemoryMax=12G
+TasksMax=2048

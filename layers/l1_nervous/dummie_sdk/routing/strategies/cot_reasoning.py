@@ -11,7 +11,7 @@ COT_PROMPT = """You are a routing agent. Think step by step:
 4. How confident are you? (0.0-1.0)
 
 Available gateway servers:
-- media: muapi (image/video/audio generation), mcp-comfyui (local image gen), cloudflare (AI inference)
+- media: mcp-comfyui (local image gen), cloudflare (AI inference)
 - code: github (version control), git (git operations), filesystem (file read/write)
 - infra: docker (containers), vercel (deployments)
 - knowledge: sqlite (database), sequentialthinking (reasoning)

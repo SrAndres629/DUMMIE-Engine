@@ -1,14 +1,16 @@
 import os
 import json
 from typing import List
-from brain.domain.memory.ports import ISessionLedgerPort
-from brain.domain.memory.models import EgoState
+from layers.l2_brain.domain.memory.ports import ISessionLedgerPort
+from layers.l2_brain.domain.memory.models import EgoState
+
 
 class SessionLedgerAdapter(ISessionLedgerPort):
     """
     Adaptador para el Ledger de Sesión (Spec 36).
     Persiste el 'Stream of Consciousness' en formato JSONL.
     """
+
     def __init__(self, ledger_path: str = ".aiwg/memory/session_ledger.jsonl"):
         self.ledger_path = ledger_path
         ledger_dir = os.path.dirname(self.ledger_path)
@@ -21,14 +23,14 @@ class SessionLedgerAdapter(ISessionLedgerPort):
             with open(self.ledger_path, "a", encoding="utf-8") as f:
                 f.write(state.model_dump_json() + "\n")
         except Exception as e:
-            pass # print(f"[SessionLedgerAdapter] Error al escribir ego state: {e}")
+            pass  # print(f"[SessionLedgerAdapter] Error al escribir ego state: {e}")
 
     def get_session_history(self, session_id: str) -> List[EgoState]:
         """Escanea el ledger para recuperar pensamientos de una sesión específica."""
         history = []
         if not os.path.exists(self.ledger_path):
             return []
-            
+
         try:
             with open(self.ledger_path, "r", encoding="utf-8") as f:
                 for line in f:
@@ -39,5 +41,5 @@ class SessionLedgerAdapter(ISessionLedgerPort):
                     history.append(EgoState(**data))
             return history
         except Exception as e:
-            pass # print(f"[SessionLedgerAdapter] Error al leer historial: {e}")
+            pass  # print(f"[SessionLedgerAdapter] Error al leer historial: {e}")
             return []

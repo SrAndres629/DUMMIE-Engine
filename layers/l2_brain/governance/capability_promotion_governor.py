@@ -28,9 +28,9 @@ def _run_test_probe(name: str, command: list[str], cwd: Path | None = None) -> b
 
 
 def run_capability_promotion_governor() -> dict:
-    # __file__ is layers/l2_brain/flat_brain/capability_promotion_governor.py
+    # __file__ is layers/l2_brain/canonical/capability_promotion_governor.py
     this_file = Path(__file__).resolve()
-    repo_root = this_file.parents[3]  # 0:flat_brain, 1:l2_brain, 2:layers, 3:root
+    repo_root = this_file.parents[3]  # 0:canonical, 1:l2_brain, 2:layers, 3:root
 
     aiwg_root = repo_root / ".aiwg"
     reports_dir = aiwg_root / "reports"

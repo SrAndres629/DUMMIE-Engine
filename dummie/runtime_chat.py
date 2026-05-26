@@ -13,19 +13,27 @@ from dummie.providers import DummieProviderRegistry
 from dummie.strategic_partner import DummieStrategicPartner
 
 try:
-    from layers.l2_brain.model_router import ModelRouter, ModelTier, build_model_registry
+    from layers.l2_brain.model_router import (
+        ModelRouter,
+        ModelTier,
+        build_model_registry,
+    )
 except ModuleNotFoundError:
-    from layers.l2_brain.flat_brain.model_router import ModelRouter, ModelTier, build_model_registry
+    from layers.l2_brain.model_mesh.model_router import (
+        ModelRouter,
+        ModelTier,
+        build_model_registry,
+    )
 
 try:
     from layers.l2_brain.prompt_preprocessor import PromptPreprocessor
 except ModuleNotFoundError:
-    from layers.l2_brain.flat_brain.prompt_preprocessor import PromptPreprocessor
+    from layers.l2_brain.application.prompt_preprocessor import PromptPreprocessor
 
 try:
     from layers.l2_brain.token_cost_ledger import TokenCostLedger
 except ModuleNotFoundError:
-    from layers.l2_brain.flat_brain.token_cost_ledger import TokenCostLedger
+    from layers.l2_brain.model_mesh.token_cost_ledger import TokenCostLedger
 
 
 DEFAULT_RUNTIME_CHAT_REGISTRY: dict[str, Any] = {
@@ -82,7 +90,9 @@ class DummieRuntimeChat:
         self.partner = partner or DummieStrategicPartner()
         self.registry_path = self.aiwg_root / "runtime" / "runtime_chat_registry.yaml"
 
-    def run(self, prompt: str, low_cost: bool = False, session_id: str = "CURRENT") -> RuntimeChatResult:
+    def run(
+        self, prompt: str, low_cost: bool = False, session_id: str = "CURRENT"
+    ) -> RuntimeChatResult:
         registry = self._load_registry()
         preprocessing = registry.get("preprocessing", {})
         routing_cfg = registry.get("routing", {})
@@ -110,7 +120,9 @@ class DummieRuntimeChat:
             model_id=decision.model_id,
             tier=decision.tier.value,
             providers_status=providers_status,
-            provider_priority=provider_priority if isinstance(provider_priority, list) else [],
+            provider_priority=provider_priority
+            if isinstance(provider_priority, list)
+            else [],
         )
 
         payload = {
@@ -176,8 +188,12 @@ class DummieRuntimeChat:
         return RuntimeChatResult(
             decision="PASS",
             goal_type=goal_type,
-            strategic_questions=lifecycle_questions if isinstance(lifecycle_questions, list) else [],
-            tool_opportunities=lifecycle_tools if isinstance(lifecycle_tools, list) else [],
+            strategic_questions=lifecycle_questions
+            if isinstance(lifecycle_questions, list)
+            else [],
+            tool_opportunities=lifecycle_tools
+            if isinstance(lifecycle_tools, list)
+            else [],
             roadmap=lifecycle_roadmap if isinstance(lifecycle_roadmap, list) else [],
             preprocessing_provider=pre.provider,
             routing_tier=decision.tier.value,
@@ -199,7 +215,9 @@ class DummieRuntimeChat:
             return dict(DEFAULT_RUNTIME_CHAT_REGISTRY)
 
         try:
-            loaded = yaml.safe_load(self.registry_path.read_text(encoding="utf-8")) or {}
+            loaded = (
+                yaml.safe_load(self.registry_path.read_text(encoding="utf-8")) or {}
+            )
         except Exception:
             return dict(DEFAULT_RUNTIME_CHAT_REGISTRY)
         if not isinstance(loaded, dict):

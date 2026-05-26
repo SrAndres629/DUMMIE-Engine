@@ -15,7 +15,7 @@ from layers.l2_brain.daemon_outcome import (
 )
 from layers.l2_brain.infrastructure.event_bus import AsyncEventBus
 from layers.l2_brain.infrastructure.gateway_contract import SagaTransaction
-from layers.l2_brain.models import AuthorityLevel, IntentType
+from layers.l2_brain.l2_memory_models import AuthorityLevel, IntentType
 
 
 def test_daemon_outcome_serializes_required_contract_fields():

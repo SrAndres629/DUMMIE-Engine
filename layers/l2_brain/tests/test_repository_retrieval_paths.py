@@ -11,7 +11,7 @@ pytestmark = pytest.mark.skipif(not HAS_KUZU, reason="kuzu not available")
 
 
 from layers.l2_brain.adapters import KuzuRepository
-from layers.l2_brain.models import MemoryNode4D
+from layers.l2_brain.l2_memory_models import MemoryNode4D
 
 
 def _persist(repo: KuzuRepository, node: MemoryNode4D) -> None:

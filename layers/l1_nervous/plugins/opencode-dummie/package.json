@@ -1,0 +1,30 @@
+{
+  "name": "opencode-dummie",
+  "version": "1.0.0",
+  "description": "DUMMIE Engine native plugin for OpenCode — cognitive kernel integration with MetaGateway routing, Qwen3-Embedding, and multi-session swarm coordination",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch"
+  },
+  "keywords": [
+    "opencode",
+    "dummie",
+    "mcp",
+    "ai",
+    "plugin"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@opencode-ai/plugin": "^1.15.5",
+    "@opencode-ai/sdk": "^1.15.5"
+  },
+  "devDependencies": {
+    "@types/node": "^25.9.1",
+    "typescript": "^5.7.0"
+  }
+}

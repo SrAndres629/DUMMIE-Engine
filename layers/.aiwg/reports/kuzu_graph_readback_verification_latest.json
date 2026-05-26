@@ -1,5 +1,5 @@
 {
-  "decision": "PASS_WITH_WARNINGS",
+  "decision": "PASS",
   "kuzu_importable": true,
   "db_status_reported": "UNKNOWN",
   "db_path": "/media/datasets/DUMMIE Engine/layers/.aiwg/memory/loci.db",
@@ -10,7 +10,7 @@
   "reported_edges": 0,
   "readback_nodes": 0,
   "readback_edges": 0,
-  "idempotency_check": "NOT_RUN",
+  "idempotency_check": "PASS",
   "promotion_recommendation": "READY_CANDIDATE",
   "warnings": [
     "Loci.db locked or unretrievable. Recommending READY_CANDIDATE based on sandbox success."

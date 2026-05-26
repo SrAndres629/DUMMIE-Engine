@@ -299,7 +299,7 @@ class LocalReasoningToolService:
             from layers.l2_brain.embedding_provider import EmbeddingProvider
         except ImportError:
             try:
-                from embedding_provider import EmbeddingProvider
+                from layers.l2_brain.model_mesh.embedding_provider import EmbeddingProvider
             except ImportError:
                 return lexical
         try:

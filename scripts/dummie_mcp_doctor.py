@@ -16,7 +16,7 @@ from pathlib import Path
 from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
-PYTHON = ROOT / "layers" / "l2_brain" / ".venv" / "bin" / "python"
+PYTHON = ROOT / ".venv" / "bin" / "python3"
 SERVER = ROOT / "layers" / "l1_nervous" / "mcp_server.py"
 GATEWAY_CONFIG = ROOT / "dummie_gateway_config.json"
 CANONICAL_DB = ROOT / ".aiwg" / "memory" / "loci.db"
@@ -205,26 +205,42 @@ def check_system_resources() -> dict[str, Any]:
         resources["ok"] = False
         print(f"resource_scan=FAIL code={code}")
         return resources
-    
+
     lines = stdout.splitlines()
     if len(lines) >= 2:
         parts = lines[1].split()
         if len(parts) >= 6:
-            resources["ram"] = {"total": int(parts[1]), "used": int(parts[2]), "free": int(parts[3])}
+            resources["ram"] = {
+                "total": int(parts[1]),
+                "used": int(parts[2]),
+                "free": int(parts[3]),
+            }
             usage = (resources["ram"]["used"] / resources["ram"]["total"]) * 100
-            print(f"resource_ram=OK total={parts[1]}MB used={parts[2]}MB usage={usage:.1f}%")
+            print(
+                f"resource_ram=OK total={parts[1]}MB used={parts[2]}MB usage={usage:.1f}%"
+            )
             if usage > 90:
                 print("resource_ram=WARNING pressure detected")
-    
+
     if len(lines) >= 3:
         parts = lines[2].split()
         if len(parts) >= 3:
-            resources["swap"] = {"total": int(parts[1]), "used": int(parts[2]), "free": int(parts[3])}
-            usage = (resources["swap"]["used"] / resources["swap"]["total"]) * 100 if int(parts[1]) > 0 else 0
-            print(f"resource_swap=OK total={parts[1]}MB used={parts[2]}MB usage={usage:.1f}%")
+            resources["swap"] = {
+                "total": int(parts[1]),
+                "used": int(parts[2]),
+                "free": int(parts[3]),
+            }
+            usage = (
+                (resources["swap"]["used"] / resources["swap"]["total"]) * 100
+                if int(parts[1]) > 0
+                else 0
+            )
+            print(
+                f"resource_swap=OK total={parts[1]}MB used={parts[2]}MB usage={usage:.1f}%"
+            )
             if usage > 50:
                 print("resource_swap=WARNING high zram/swap usage")
-    
+
     return resources
 
 
@@ -249,7 +265,7 @@ async def main() -> int:
 
     results = {}
     ok = True
-    
+
     if not PYTHON.exists():
         print(f"python=FAIL missing={PYTHON}")
         ok = False
@@ -260,10 +276,10 @@ async def main() -> int:
     results["system_resources"] = check_system_resources()
     if ok and not args.skip_codex:
         ok = check_codex_config() and ok
-    
+
     results["gateway_config_ok"] = audit_gateway_config()
     ok = results["gateway_config_ok"] and ok
-    
+
     # Capture process info for repair
     code, stdout, stderr = run_command(["ps", "-eo", "pid,ppid,stat,comm,args"])
     relevant = []
@@ -276,10 +292,12 @@ async def main() -> int:
                     relevant.append(line.strip())
             if "kuzu_data" in line:
                 legacy.append(line.strip())
-    
+
     results["processes"] = {"relevant": relevant, "legacy": legacy}
-    print(f"process_scan={'OK' if not legacy else 'FAIL'} relevant={len(relevant)} legacy_kuzu_data={len(legacy)}")
-    
+    print(
+        f"process_scan={'OK' if not legacy else 'FAIL'} relevant={len(relevant)} legacy_kuzu_data={len(legacy)}"
+    )
+
     results["runtime_sockets_ok"] = inspect_runtime_sockets()
     ok = results["runtime_sockets_ok"] and ok
 
@@ -293,7 +311,7 @@ async def main() -> int:
         ok = False
 
     if args.json:
-        # Clear stdout of previous prints if we want pure JSON? 
+        # Clear stdout of previous prints if we want pure JSON?
         # Actually, let's just print the JSON at the end.
         print("--- JSON START ---")
         print(json.dumps({"ok": ok, "results": results}, indent=2))

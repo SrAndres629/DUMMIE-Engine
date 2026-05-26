@@ -49,6 +49,7 @@ from layers.l1_nervous.bootstrap import bootstrap_orchestrator, setup_shutdown_h
 from layers.l1_nervous.tools import register_tools
 from layers.l1_nervous.resources import register_resources
 from layers.l1_nervous.mcp_proxy import MCPProxyManager
+from layers.l1_nervous.mcp_server_runtime import load_runtime_config, run_gateway
 
 # Configuración (Resto)
 AIWG_DIR = os.environ.get(
@@ -79,7 +80,15 @@ logging.basicConfig(level=logging.WARNING, stream=sys.stderr, force=True)
 logger = logging.getLogger("dummie-mcp.main")
 logger.setLevel(logging.WARNING)
 
-mcp = FastMCP("DUMMIE-Brain-Gateway")
+RUNTIME_CONFIG = load_runtime_config()
+
+mcp = FastMCP(
+    "DUMMIE-Brain-Gateway",
+    host=RUNTIME_CONFIG.host,
+    port=RUNTIME_CONFIG.port,
+    mount_path=RUNTIME_CONFIG.mount_path,
+    streamable_http_path=RUNTIME_CONFIG.streamable_http_path,
+)
 
 # Watchdog: archivo de readiness para orquestadores externos
 _READINESS_FILE = os.path.join(AIWG_DIR, "state", "mcp_gateway.ready")
@@ -169,7 +178,7 @@ if __name__ == "__main__":
     _write_readiness("ready")
 
     try:
-        mcp.run(transport="stdio")
+        run_gateway(mcp, RUNTIME_CONFIG)
     except KeyboardInterrupt:
         logger.info("Gateway detenido por señal de interrupción")
         _write_readiness("degraded")

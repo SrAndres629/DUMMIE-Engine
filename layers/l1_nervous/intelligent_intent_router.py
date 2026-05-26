@@ -128,6 +128,28 @@ INTENT_PATTERNS = {
         "verify": ["verify", "check", "valid", "verificar"],
         "debug": ["debug", "fix", "repair", "arreglar"],
     },
+    "automation": {
+        "workflow": [
+            "n8n",
+            "workflow",
+            "workflows",
+            "webhook",
+            "webhooks",
+            "automation",
+            "automatiza",
+            "automatizar",
+            "orchestrat",
+        ],
+        "manage": [
+            "execute",
+            "ejecutar",
+            "deploy",
+            "activar",
+            "desactivar",
+            "credential",
+            "credentials",
+        ],
+    },
     "workspace": {
         "read": ["read", "leer", "open", "abrir"],
         "write": ["write", "escribir", "creat"],
@@ -162,6 +184,10 @@ DOMAIN_ALIASES = {
     r"\bdeploy\b": "infrastructure",
     r"\bdesplegar\b": "deploy",
     r"\bdocker\b": "infrastructure",
+    r"\bn8n\b": "automation",
+    r"\bworkflow\b": "automation",
+    r"\bwebhook\b": "automation",
+    r"\bautomatiz": "automation",
     r"\bswarm\b": "communication",
     r"\bbrainstorm\b": "planning",
     r"\bskill\b": "development",
@@ -193,6 +219,17 @@ class Resolution:
 
 
 class IntentClassifier:
+    def _best_action_for_domain(self, domain: str, normalized: str) -> str:
+        actions = INTENT_PATTERNS.get(domain, {})
+        best_action = ""
+        best_score = 0
+        for action, keywords in actions.items():
+            score = sum(1 for kw in keywords if kw in normalized)
+            if score > best_score:
+                best_action = action
+                best_score = score
+        return best_action
+
     def classify(self, query: str) -> Intent:
         raw = query.strip()
         if not raw:
@@ -237,6 +274,7 @@ class IntentClassifier:
             "memory": 6,
             "code": 5,
             "infrastructure": 4,
+            "automation": 4,
             "data": 3,
             "planning": 2,
             "development": 2,
@@ -255,21 +293,26 @@ class IntentClassifier:
 
         if best_score > 0 and best_domain:
             norm_tokens = normalized.split()
+
+            # Bonus unico: el dominio ganador aparece como token en el texto
+            if best_domain in norm_tokens:
+                best_score += 2
+
             for other_domain, other_actions in INTENT_PATTERNS.items():
                 if other_domain == best_domain:
                     continue
                 other_score = sum(
                     1 for kw in sum(other_actions.values(), []) if kw in normalized
                 )
-                domain_tokens = [t for t in norm_tokens if t in INTENT_PATTERNS]
                 if other_domain in norm_tokens:
                     other_score += 2
-                if best_domain in norm_tokens:
-                    best_score += 2
                 if other_score > best_score + 0.5:
                     best_domain = other_domain
-                    best_action = ""
+                    best_action = self._best_action_for_domain(other_domain, normalized)
                     best_score = other_score
+
+        if best_domain and not best_action:
+            best_action = self._best_action_for_domain(best_domain, normalized)
 
         intent = Intent(
             raw=raw,

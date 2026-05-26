@@ -1,0 +1,11 @@
+[Unit]
+Description=DUMMIE Models Pull Timer — periodic Ollama model download check
+Documentation=https://dummie.ai
+
+[Timer]
+OnBootSec=2min
+OnUnitActiveSec=5min
+Persistent=true
+
+[Install]
+WantedBy=timers.target

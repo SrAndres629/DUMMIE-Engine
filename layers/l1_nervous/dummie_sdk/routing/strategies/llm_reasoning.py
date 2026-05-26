@@ -5,7 +5,7 @@ from dummie_sdk.routing.strategies.base import BaseRoutingStrategy
 
 GATEWAYS_INFO = """
 GATEWAYS:
-- media (port 8081): muapi, mcp-comfyui, cloudflare
+- media (port 8081): mcp-comfyui, cloudflare
 - code (port 8082): github, git, filesystem
 - infra (port 8083): docker, vercel
 - knowledge (port 8084): sqlite, sequentialthinking

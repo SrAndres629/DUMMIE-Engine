@@ -10,7 +10,7 @@ sys.path.insert(0, os.path.abspath("layers/l2_brain"))
 sys.path.insert(0, os.path.abspath("layers/l1_nervous"))
 from bootstrap import bootstrap_orchestrator
 from application.use_cases import BrainToolUseCases
-from models import SixDimensionalContext, AuthorityLevel, IntentType
+from layers.l2_brain.l2_memory_models import SixDimensionalContext, AuthorityLevel, IntentType
 
 db_path = os.path.abspath(".aiwg/memory/loci.db")
 aiwg_dir = os.path.abspath(".aiwg")

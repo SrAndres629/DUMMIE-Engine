@@ -1,4 +1,5 @@
 import json
+import os
 import time
 import logging
 from typing import Optional, Dict, Any
@@ -6,8 +7,15 @@ from dataclasses import dataclass, field
 
 logger = logging.getLogger("dummie-mcp.llm-bridge")
 
-OLLAMA_MODEL = "gemma3:1b"
-OLLAMA_HOST = "http://localhost:11434"
+try:
+    from dummie_sdk.config import get_config
+
+    _cfg = get_config()
+    OLLAMA_MODEL = _cfg.default_model("llm") or "gemma4:e2b"
+except Exception:
+    OLLAMA_MODEL = "gemma4:e2b"
+
+OLLAMA_HOST = os.environ.get("OLLAMA_HOST", "http://localhost:11434")
 LLM_TIMEOUT = 30
 
 LLM_REASONING_SYSTEM_PROMPT = """Eres un arquitecto de sistemas evaluando qué herramienta MCP o skill es la mejor para una tarea. Tu trabajo es analizar el contexto y la consulta, y determinar si existe una herramienta adecuada.
@@ -49,7 +57,7 @@ class LocalLLMBridge:
             try:
                 import ollama
 
-                self._llm = ollama
+                self._client = ollama.Client(host=OLLAMA_HOST, timeout=LLM_TIMEOUT)
                 logger.info("LocalLLMBridge: ollama disponible (%s)", OLLAMA_MODEL)
             except ImportError:
                 logger.warning("LocalLLMBridge: ollama Python SDK no instalado")
@@ -65,10 +73,15 @@ class LocalLLMBridge:
             with urllib.request.urlopen(req, timeout=2) as resp:
                 data = json.loads(resp.read())
                 models = data.get("models", [])
-                if not models:
-                    logger.warning("ollama OK pero sin modelos instalados")
+                available = [m.get("name", "") for m in models]
+                if OLLAMA_MODEL not in available:
+                    logger.warning(
+                        "ollama OK pero '%s' no instalado. Disponibles: %s",
+                        OLLAMA_MODEL,
+                        available,
+                    )
                     return False
-                logger.info("ollama OK: %d modelos disponibles", len(models))
+                logger.info("ollama OK: %s disponible", OLLAMA_MODEL)
                 return True
         except Exception as e:
             logger.debug("ollama no disponible: %s", e)
@@ -82,7 +95,7 @@ class LocalLLMBridge:
         skills_summary: str = "",
     ) -> LLMDecision:
         start = time.time()
-        if not self._available or not self._llm:
+        if not self._available or not self._client:
             return LLMDecision(
                 llm_available=False,
                 latency_ms=(time.time() - start) * 1000,
@@ -92,7 +105,7 @@ class LocalLLMBridge:
         prompt = self._build_prompt(query, context, tools_summary, skills_summary)
 
         try:
-            resp = self._llm.chat(
+            resp = self._client.chat(
                 model=OLLAMA_MODEL,
                 messages=[
                     {

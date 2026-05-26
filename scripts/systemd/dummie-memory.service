@@ -5,15 +5,19 @@ After=network.target
 
 [Service]
 Type=simple
-Environment=DUMMIE_ROOT=/media/datasets/DUMMIE Engine
-Environment=DUMMIE_AIWG_DIR=/media/datasets/DUMMIE Engine/.aiwg
-Environment=DUMMIE_KUZU_DB_PATH=/media/datasets/DUMMIE Engine/.aiwg/memory/loci.db
-Environment=MEMORY_SOCKET_PATH=/media/datasets/DUMMIE Engine/.aiwg/sockets/flight.sock
-WorkingDirectory=/media/datasets/DUMMIE Engine
+User=jorand
+Environment=DUMMIE_ROOT=/opt/dummie-engine
+User=jorand
+Environment=DUMMIE_AIWG_DIR=/opt/dummie-engine/.aiwg
+User=jorand
+Environment=DUMMIE_KUZU_DB_PATH=/opt/dummie-engine/.aiwg/memory/loci.db
+User=jorand
+Environment=MEMORY_SOCKET_PATH=/opt/dummie-engine/.aiwg/sockets/flight.sock
+WorkingDirectory=/opt/dummie-engine
 
-ExecStartPre=/bin/bash -c 'mkdir -p /media/datasets/DUMMIE Engine/.aiwg/memory /media/datasets/DUMMIE Engine/.aiwg/sockets'
-ExecStartPre=/bin/bash -c 'rm -f /media/datasets/DUMMIE Engine/.aiwg/memory/loci.db/*.lock'
-ExecStart=/media/datasets/DUMMIE Engine/bin/memory_server
+ExecStartPre=/bin/bash -c "mkdir -p '/opt/dummie-engine/.aiwg/memory' '/opt/dummie-engine/.aiwg/sockets'"
+ExecStartPre=/bin/bash -c "rm -f '/opt/dummie-engine/.aiwg/memory/loci.db'/*.lock"
+ExecStart=/opt/dummie-engine/layers/l1_nervous/bin/memory_server
 
 Restart=on-failure
 RestartSec=5

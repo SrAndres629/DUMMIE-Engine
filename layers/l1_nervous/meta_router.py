@@ -1,8 +1,7 @@
 import json, re, asyncio
 from pathlib import Path
 from typing import Optional
-from embeddings import EmbeddingRouter
-from routing.delegation import DelegationEngine, DelegationRequest
+from dummie_sdk.routing.delegation import DelegationEngine, DelegationRequest
 
 CONFIG_PATH = Path(__file__).parent / "configs" / "meta_router_assignments.json"
 
@@ -15,7 +14,6 @@ class MetaRouter:
     ):
         with open(CONFIG_PATH) as f:
             self.assignments = json.load(f)
-        self.embedding_router = EmbeddingRouter()
         self._use_pipeline = use_pipeline
         self._pipeline = None
         self._delegation = delegation_engine or DelegationEngine()
@@ -29,14 +27,16 @@ class MetaRouter:
 
     async def _get_pipeline(self):
         if self._pipeline is None:
-            from routing import RoutingPipeline
-            from routing.strategies.exact_match import ExactMatchStrategy
-            from routing.strategies.embedding_match import EmbeddingMatchStrategy
-            from routing.strategies.cross_encoder_rerank import (
+            from dummie_sdk.routing.pipeline import RoutingPipeline
+            from dummie_sdk.routing.strategies.exact_match import ExactMatchStrategy
+            from dummie_sdk.routing.strategies.embedding_match import (
+                EmbeddingMatchStrategy,
+            )
+            from dummie_sdk.routing.strategies.cross_encoder_rerank import (
                 CrossEncoderRerankStrategy,
             )
-            from routing.strategies.llm_reasoning import LLMReasoningStrategy
-            from models.model_registry import ModelRegistry
+            from dummie_sdk.routing.strategies.llm_reasoning import LLMReasoningStrategy
+            from dummie_sdk.models.model_registry import ModelRegistry
 
             registry = ModelRegistry()
             self._pipeline = RoutingPipeline(
@@ -96,9 +96,14 @@ class MetaRouter:
         if domain:
             confidence = 1.0
         else:
-            best = self.embedding_router.best_domain(query)
-            domain = best[0] if best else None
-            confidence = best[1] if best else 0.0
+            from dummie_sdk.routing.strategies.embedding_match import (
+                EmbeddingMatchStrategy,
+            )
+
+            strat = EmbeddingMatchStrategy()
+            result = await strat.execute(query)
+            domain = result.domain if result.match else None
+            confidence = result.confidence if result.match else 0.0
 
         if not domain:
             return {

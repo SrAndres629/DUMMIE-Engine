@@ -1,6 +1,6 @@
 from dataclasses import dataclass, field
 
-from models import RehydrationManifest, SourceArtifact
+from layers.l2_brain.l2_memory_models import RehydrationManifest, SourceArtifact
 
 
 @dataclass

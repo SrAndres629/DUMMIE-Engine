@@ -10,6 +10,7 @@ herramientas MCP estándar.
 
 Transporte: stdio (compatible con Antigravity, DUMMIE Engine, Claude, etc.)
 """
+
 import os
 import sys
 import json
@@ -26,17 +27,20 @@ from mcp.server.fastmcp import FastMCP
 # ============================================================================
 PROJECT_ROOT = os.environ.get(
     "DUMMIE_PROJECT_ROOT",
-    os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))))
+    os.path.dirname(
+        os.path.dirname(
+            os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+        )
+    ),
 )
 
 DB_PATH = os.environ.get(
-    "DUMMIE_MEMORY_DB_PATH",
-    os.path.join(PROJECT_ROOT, ".aiwg", "memory", "loci.db")
+    "DUMMIE_MEMORY_DB_PATH", os.path.join(PROJECT_ROOT, ".aiwg", "memory", "loci.db")
 )
 
 LEDGER_PATH = os.environ.get(
     "DUMMIE_LEDGER_PATH",
-    os.path.join(PROJECT_ROOT, ".aiwg", "memory", "decisions.jsonl")
+    os.path.join(PROJECT_ROOT, ".aiwg", "memory", "decisions.jsonl"),
 )
 
 # Ensure PYTHONPATH includes src
@@ -50,7 +54,7 @@ if src_path not in sys.path:
 logging.basicConfig(
     level=logging.INFO,
     format="[%(asctime)s] [%(name)s] %(levelname)s: %(message)s",
-    stream=sys.stderr  # MCP uses stdout for protocol; logs go to stderr
+    stream=sys.stderr,  # MCP uses stdout for protocol; logs go to stderr
 )
 logger = logging.getLogger("dummie.mcp.memory")
 
@@ -68,6 +72,7 @@ def _get_kuzu_repo():
     global _kuzu_repo
     if _kuzu_repo is None:
         from brain.infrastructure.adapters.kuzu_repository import KuzuRepository
+
         logger.info(f"Initializing KuzuRepository at: {DB_PATH}")
         _kuzu_repo = KuzuRepository(db_path=DB_PATH)
     return _kuzu_repo
@@ -78,6 +83,7 @@ def _get_skill_repo():
     global _skill_repo
     if _skill_repo is None:
         from brain.infrastructure.adapters.kuzu_repository import KuzuSkillRepository
+
         _skill_repo = KuzuSkillRepository(_get_kuzu_repo())
     return _skill_repo
 
@@ -87,6 +93,7 @@ def _get_ledger_adapter():
     global _ledger_adapter
     if _ledger_adapter is None:
         from brain.infrastructure.adapters.ledger_adapter import DecisionLedgerAdapter
+
         logger.info(f"Initializing DecisionLedgerAdapter at: {LEDGER_PATH}")
         _ledger_adapter = DecisionLedgerAdapter(ledger_path=LEDGER_PATH)
     return _ledger_adapter
@@ -98,11 +105,12 @@ def _get_orchestrator():
     if _orchestrator is None:
         from brain.infrastructure.adapters.shield_adapter import NativeShieldAdapter
         from brain.application.use_cases.orchestrator import CognitiveOrchestrator
+
         _orchestrator = CognitiveOrchestrator(
             shield_port=NativeShieldAdapter(),
             event_store=_get_kuzu_repo(),
             ledger_audit=_get_ledger_adapter(),
-            skill_repo=_get_skill_repo()
+            skill_repo=_get_skill_repo(),
         )
     return _orchestrator
 
@@ -149,8 +157,12 @@ def memory_append(
         intent: Intent type: OBSERVATION, MUTATION, RESOLUTION, CRYSTALLIZATION
         authority: Authority level: AGENT, ENGINEER, ARCHITECT, OVERSEER, HUMAN
     """
-    from brain.domain.context.models import SixDimensionalContext, AuthorityLevel, IntentType
-    from brain.domain.memory.models import MemoryNode4DTES
+    from brain.domain.context.models import (
+        SixDimensionalContext,
+        AuthorityLevel,
+        IntentType,
+    )
+    from layers.l2_brain.domain.memory.models import MemoryNode4DTES
 
     repo = _get_kuzu_repo()
 
@@ -191,18 +203,24 @@ def memory_append(
     # Persist
     result = repo.append(node)
     if not result:
-        return json.dumps({"error": "Failed to persist node to KuzuDB", "success": False})
+        return json.dumps(
+            {"error": "Failed to persist node to KuzuDB", "success": False}
+        )
 
-    logger.info(f"Node appended: {node.causal_hash[:16]}... (tick={current_tick}, parent={last_hash[:16]}...)")
+    logger.info(
+        f"Node appended: {node.causal_hash[:16]}... (tick={current_tick}, parent={last_hash[:16]}...)"
+    )
 
-    return json.dumps({
-        "success": True,
-        "causal_hash": node.causal_hash,
-        "parent_hash": last_hash,
-        "lamport_t": current_tick,
-        "locus_x": locus_x,
-        "intent": intent,
-    })
+    return json.dumps(
+        {
+            "success": True,
+            "causal_hash": node.causal_hash,
+            "parent_hash": last_hash,
+            "lamport_t": current_tick,
+            "locus_x": locus_x,
+            "intent": intent,
+        }
+    )
 
 
 # ============================================================================
@@ -224,21 +242,27 @@ def memory_get_node(causal_hash: str) -> str:
 
     payload_str = node.payload.decode("utf-8", errors="replace")
 
-    return json.dumps({
-        "found": True,
-        "causal_hash": node.causal_hash,
-        "parent_hash": node.parent_hash,
-        "payload": payload_str,
-        "payload_hash": node.payload_hash,
-        "context": {
-            "locus_x": node.context.locus_x,
-            "locus_y": node.context.locus_y,
-            "locus_z": node.context.locus_z,
-            "lamport_t": node.context.lamport_t,
-            "authority_a": node.context.authority_a.value if hasattr(node.context.authority_a, 'value') else str(node.context.authority_a),
-            "intent_i": node.context.intent_i.value if hasattr(node.context.intent_i, 'value') else str(node.context.intent_i),
-        },
-    })
+    return json.dumps(
+        {
+            "found": True,
+            "causal_hash": node.causal_hash,
+            "parent_hash": node.parent_hash,
+            "payload": payload_str,
+            "payload_hash": node.payload_hash,
+            "context": {
+                "locus_x": node.context.locus_x,
+                "locus_y": node.context.locus_y,
+                "locus_z": node.context.locus_z,
+                "lamport_t": node.context.lamport_t,
+                "authority_a": node.context.authority_a.value
+                if hasattr(node.context.authority_a, "value")
+                else str(node.context.authority_a),
+                "intent_i": node.context.intent_i.value
+                if hasattr(node.context.intent_i, "value")
+                else str(node.context.intent_i),
+            },
+        }
+    )
 
 
 # ============================================================================
@@ -265,13 +289,17 @@ def memory_get_chain(leaf_hash: str, depth: int = 30) -> str:
 
     nodes = []
     for node in chain:
-        nodes.append({
-            "causal_hash": node.causal_hash,
-            "parent_hash": node.parent_hash,
-            "lamport_t": node.context.lamport_t,
-            "locus_x": node.context.locus_x,
-            "intent": node.context.intent_i.value if hasattr(node.context.intent_i, 'value') else str(node.context.intent_i),
-        })
+        nodes.append(
+            {
+                "causal_hash": node.causal_hash,
+                "parent_hash": node.parent_hash,
+                "lamport_t": node.context.lamport_t,
+                "locus_x": node.context.locus_x,
+                "intent": node.context.intent_i.value
+                if hasattr(node.context.intent_i, "value")
+                else str(node.context.intent_i),
+            }
+        )
 
     return json.dumps({"chain_length": len(nodes), "nodes": nodes})
 
@@ -351,15 +379,17 @@ def memory_search(
         nodes = []
         while result.has_next():
             row = result.get_next()
-            nodes.append({
-                "causal_hash": row[0],
-                "parent_hash": row[1],
-                "locus_x": row[2],
-                "locus_y": row[3],
-                "locus_z": row[4],
-                "lamport_t": row[5],
-                "intent": row[6],
-            })
+            nodes.append(
+                {
+                    "causal_hash": row[0],
+                    "parent_hash": row[1],
+                    "locus_x": row[2],
+                    "locus_y": row[3],
+                    "locus_z": row[4],
+                    "lamport_t": row[5],
+                    "intent": row[6],
+                }
+            )
         return json.dumps({"count": len(nodes), "nodes": nodes})
     except Exception as e:
         return json.dumps({"error": str(e), "count": 0, "nodes": []})
@@ -392,7 +422,11 @@ def ledger_record(
         target_causal_hash: The 4D-TES node this decision relates to.
         witness_hash: Cryptographic signature from the auditor.
     """
-    from brain.domain.context.models import SixDimensionalContext, AuthorityLevel, IntentType
+    from brain.domain.context.models import (
+        SixDimensionalContext,
+        AuthorityLevel,
+        IntentType,
+    )
     from brain.domain.governance.models import DecisionRecord
 
     ledger = _get_ledger_adapter()
@@ -417,11 +451,13 @@ def ledger_record(
 
     success = ledger.record_decision(record)
 
-    return json.dumps({
-        "success": bool(success),
-        "decision_id": decision_id,
-        "rationale": rationale,
-    })
+    return json.dumps(
+        {
+            "success": bool(success),
+            "decision_id": decision_id,
+            "rationale": rationale,
+        }
+    )
 
 
 # ============================================================================
@@ -442,13 +478,15 @@ def ledger_get_certainty(locus_x: str) -> str:
     ledger = _get_ledger_adapter()
     certainty = ledger.get_certainty_for_locus(locus_x)
 
-    return json.dumps({
-        "locus_x": locus_x,
-        "certainty_score": certainty.certainty_score,
-        "tests_passing": certainty.tests_passing,
-        "unverified_mutations": certainty.unverified_mutations,
-        "is_terra_incognita": certainty.is_terra_incognita,
-    })
+    return json.dumps(
+        {
+            "locus_x": locus_x,
+            "certainty_score": certainty.certainty_score,
+            "tests_passing": certainty.tests_passing,
+            "unverified_mutations": certainty.unverified_mutations,
+            "is_terra_incognita": certainty.is_terra_incognita,
+        }
+    )
 
 
 # ============================================================================
@@ -472,7 +510,7 @@ def skill_save(
         yaml_payload: The YAML content of the skill specification.
         source_causal_hashes: JSON array of causal hashes from the 4D-TES nodes that originated this skill.
     """
-    from brain.domain.memory.models import CrystallizedSkill
+    from layers.l2_brain.domain.memory.models import CrystallizedSkill
 
     skill_repo = _get_skill_repo()
 
@@ -494,12 +532,14 @@ def skill_save(
 
     skill_repo.save_skill(skill)
 
-    return json.dumps({
-        "success": True,
-        "skill_id": skill_id,
-        "skill_hash": skill_hash,
-        "provenance_count": len(hashes),
-    })
+    return json.dumps(
+        {
+            "success": True,
+            "skill_id": skill_id,
+            "skill_hash": skill_hash,
+            "provenance_count": len(hashes),
+        }
+    )
 
 
 # ============================================================================
@@ -520,13 +560,15 @@ def skill_get(skill_id: str) -> str:
     if not skill:
         return json.dumps({"found": False, "skill_id": skill_id})
 
-    return json.dumps({
-        "found": True,
-        "skill_id": skill.skill_id,
-        "yaml_payload": skill.yaml_payload,
-        "skill_hash": skill.skill_hash,
-        "source_causal_hashes": skill.source_causal_hashes,
-    })
+    return json.dumps(
+        {
+            "found": True,
+            "skill_id": skill.skill_id,
+            "yaml_payload": skill.yaml_payload,
+            "skill_hash": skill.skill_hash,
+            "source_causal_hashes": skill.source_causal_hashes,
+        }
+    )
 
 
 # ============================================================================
@@ -592,7 +634,9 @@ def brain_status() -> str:
             head_info = {
                 "lamport_t": node.context.lamport_t,
                 "locus_x": node.context.locus_x,
-                "intent": node.context.intent_i.value if hasattr(node.context.intent_i, 'value') else str(node.context.intent_i),
+                "intent": node.context.intent_i.value
+                if hasattr(node.context.intent_i, "value")
+                else str(node.context.intent_i),
             }
 
     # Ledger stats
@@ -606,25 +650,31 @@ def brain_status() -> str:
         except Exception:
             pass
 
-    return json.dumps({
-        "engine": "DUMMIE Engine L2 Brain - 4D-TES Memory",
-        "version": "2.2.0",
-        "db_path": DB_PATH,
-        "ledger_path": LEDGER_PATH,
-        "head_hash": head,
-        "is_genesis": head == "GENESIS",
-        "head_info": head_info,
-        "total_nodes": node_count,
-        "total_skills": skill_count,
-        "ledger_entries": ledger_entries,
-        "timestamp": datetime.now(timezone.utc).isoformat(),
-    })
+    return json.dumps(
+        {
+            "engine": "DUMMIE Engine L2 Brain - 4D-TES Memory",
+            "version": "2.2.0",
+            "db_path": DB_PATH,
+            "ledger_path": LEDGER_PATH,
+            "head_hash": head,
+            "is_genesis": head == "GENESIS",
+            "head_info": head_info,
+            "total_nodes": node_count,
+            "total_skills": skill_count,
+            "ledger_entries": ledger_entries,
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+        }
+    )
 
 
 # ============================================================================
 # RESOURCE: memory://status
 # ============================================================================
-@mcp.resource("memory://status", name="Memory Engine Status", description="Current state of the 4D-TES memory engine")
+@mcp.resource(
+    "memory://status",
+    name="Memory Engine Status",
+    description="Current state of the 4D-TES memory engine",
+)
 def resource_status() -> str:
     return brain_status()
 

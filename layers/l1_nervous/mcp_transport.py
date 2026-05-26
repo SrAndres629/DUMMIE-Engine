@@ -45,6 +45,13 @@ class MCPTransport:
         args = [
             _expand_env(a) if isinstance(a, str) else a for a in config.get("args", [])
         ]
+        env = os.environ.copy()
+        env.update(
+            {
+                key: _expand_env(value) if isinstance(value, str) else value
+                for key, value in config.get("env", {}).items()
+            }
+        )
 
         resolved = _resolve_binary(cmd)
         if not resolved:
@@ -60,7 +67,7 @@ class MCPTransport:
             stdin=asyncio.subprocess.PIPE,
             stdout=asyncio.subprocess.PIPE,
             stderr=asyncio.subprocess.PIPE,
-            env=os.environ.copy(),
+            env=env,
         )
 
         self._queues[server_name] = asyncio.Queue()

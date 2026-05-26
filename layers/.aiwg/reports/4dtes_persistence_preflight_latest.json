@@ -1,0 +1,14 @@
+{
+  "decision": "PASS",
+  "kuzu_importable": true,
+  "db_path_detected": ".aiwg/memory/loci.db",
+  "graph_write_mode": "READY_CANDIDATE",
+  "memory_spine_status": "ready_persisted",
+  "safe_to_attempt_repair": false,
+  "repair_plan": [],
+  "blocked_actions": [],
+  "warnings": [],
+  "evidence_refs": [
+    ".aiwg/reports/kuzu_graph_readback_verification_latest.json"
+  ]
+}

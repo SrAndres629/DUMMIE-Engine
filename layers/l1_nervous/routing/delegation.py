@@ -7,7 +7,7 @@ import logging
 logger = logging.getLogger("dummie-mcp.routing.delegation")
 
 EXECUTION_LOCATIONS = ["local", "cloud", "hybrid"]
-CLOUD_ONLY_SERVERS = {"muapi", "vercel", "cloudflare"}
+CLOUD_ONLY_SERVERS = {"vercel", "cloudflare"}
 LOCAL_ONLY_SERVERS = {
     "mcp-comfyui",
     "docker",

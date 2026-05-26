@@ -9,9 +9,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-PREFERRED_PYTHON = ROOT / ".venv" / "bin" / "python"
-if not PREFERRED_PYTHON.exists():
-    PREFERRED_PYTHON = ROOT / "layers" / "l2_brain" / ".venv" / "bin" / "python"
+PREFERRED_PYTHON = ROOT / ".venv" / "bin" / "python3"
 if (
     sys.prefix == sys.base_prefix
     and PREFERRED_PYTHON.exists()
@@ -20,7 +18,9 @@ if (
 ):
     env = os.environ.copy()
     env["DUMMIE_TRUTH_NO_REEXEC"] = "1"
-    os.execve(str(PREFERRED_PYTHON), [str(PREFERRED_PYTHON), __file__, *sys.argv[1:]], env)
+    os.execve(
+        str(PREFERRED_PYTHON), [str(PREFERRED_PYTHON), __file__, *sys.argv[1:]], env
+    )
 
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
@@ -47,9 +47,17 @@ def format_text(report) -> str:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Report DUMMIE Engine operational truth.")
-    parser.add_argument("--json", action="store_true", help="Print machine-readable JSON.")
-    parser.add_argument("--include-slow", action="store_true", help="Run slower probes such as model discovery and Kuzu open.")
+    parser = argparse.ArgumentParser(
+        description="Report DUMMIE Engine operational truth."
+    )
+    parser.add_argument(
+        "--json", action="store_true", help="Print machine-readable JSON."
+    )
+    parser.add_argument(
+        "--include-slow",
+        action="store_true",
+        help="Run slower probes such as model discovery and Kuzu open.",
+    )
     args = parser.parse_args()
 
     report = collect_truth(str(ROOT), include_slow=args.include_slow)

@@ -4,6 +4,7 @@ from enum import Enum
 from typing import Dict, Any, List, Optional
 from layers.l2_brain.domain.authority import AuthorityLevel
 
+
 class IntentType(str, Enum):
     UNSPECIFIED = "INTENT_UNSPECIFIED"
     OBSERVATION = "OBSERVATION"
@@ -21,12 +22,14 @@ class MemoryTemperature(Enum):
     RESERVED = "RESERVED"
     QUARANTINED = "QUARANTINED"
 
+
 @dataclass
 class SixDimensionalContext:
     """
     [L2_BRAIN] Modelo de Contexto 6D (Sovereign).
     Define la posición y autoridad de una intención en el espacio cognitivo.
     """
+
     locus_x: str = "sw.strategy.discovery"
     locus_y: str = "L1_TRANSPORT"
     locus_z: str = "L2_BRAIN"
@@ -50,12 +53,14 @@ class SixDimensionalContext:
         """Legacy alias for intent."""
         return self.intent_i
 
+
 @dataclass
 class AgentIntent:
     """
     [L2_BRAIN] Intención Agéntica Soberana.
     Representa una unidad de voluntad del sistema.
     """
+
     goal: str
     agent_id: str = ""
     authority_a: AuthorityLevel = AuthorityLevel.AGENT
@@ -79,6 +84,7 @@ class AgentIntent:
 import hashlib
 import json
 
+
 class MemoryNode4D(BaseModel):
     causal_hash: str
     parent_hashes: List[str] = Field(default_factory=lambda: ["GENESIS"])
@@ -95,6 +101,7 @@ class MemoryNode4D(BaseModel):
     @property
     def context(self):
         """Propiedad de compatibilidad legacy."""
+
         class _LegacyContext:
             def __init__(self, node):
                 self.lamport_t = node.lamport_t
@@ -103,6 +110,7 @@ class MemoryNode4D(BaseModel):
                 self.locus_z = node.locus_z
                 self.authority_a = node.authority_a
                 self.intent_i = node.intent_i
+
         return _LegacyContext(self)
 
     @property
@@ -134,7 +142,7 @@ class MemoryNode4D(BaseModel):
     def schema_creation_queries() -> List[str]:
         return [
             MemoryNode4D.schema_creation_query(),
-            "CREATE REL TABLE CAUSAL_LINK(FROM MemoryNode4D TO MemoryNode4D)"
+            "CREATE REL TABLE CAUSAL_LINK(FROM MemoryNode4D TO MemoryNode4D)",
         ]
 
     @classmethod
@@ -148,7 +156,7 @@ class MemoryNode4D(BaseModel):
         authority_a: Any = None,
         intent_i: Any = None,
         payload: str = "",
-        **kwargs
+        **kwargs,
     ) -> "MemoryNode4D":
         if parent_hashes is None:
             p_hash = kwargs.get("parent_hash")
@@ -158,10 +166,14 @@ class MemoryNode4D(BaseModel):
                 parent_hashes = ["GENESIS"]
 
         import hashlib
+
         payload_hash = f"sha256:{hashlib.sha256(payload.encode('utf-8')).hexdigest()}"
 
         from enum import Enum
-        auth_val = authority_a.value if isinstance(authority_a, Enum) else str(authority_a)
+
+        auth_val = (
+            authority_a.value if isinstance(authority_a, Enum) else str(authority_a)
+        )
         intent_val = intent_i.value if isinstance(intent_i, Enum) else str(intent_i)
 
         causal_hash = compute_causal_hash(
@@ -172,14 +184,14 @@ class MemoryNode4D(BaseModel):
             locus_z=locus_z,
             lamport_t=lamport_t,
             authority_a=auth_val,
-            intent_i=intent_val
+            intent_i=intent_val,
         )
 
         try:
             from layers.l2_brain.model_mesh.embedding_provider import EmbeddingProvider
         except ImportError:
-            from layers.l2_brain.model_mesh.embedding_provider import EmbeddingProvider
-        
+            from layers.l2_brain.embedding_provider import EmbeddingProvider
+
         embedding_vec = EmbeddingProvider.generate_vector(payload)
 
         return cls(
@@ -193,7 +205,7 @@ class MemoryNode4D(BaseModel):
             intent_i=intent_val,
             payload=payload,
             payload_hash=payload_hash,
-            embedding=embedding_vec
+            embedding=embedding_vec,
         )
 
     def to_cypher(self) -> str:
@@ -201,10 +213,14 @@ class MemoryNode4D(BaseModel):
         [LEGACY BRIDGE] Serializa el nodo de memoria a Cypher delegando en cypher_codec.
         """
         try:
-            from layers.l2_brain.infrastructure.cypher_codec import node_to_create_cypher
+            from layers.l2_brain.infrastructure.cypher_codec import (
+                node_to_create_cypher,
+            )
         except ImportError:
-            from layers.l2_brain.infrastructure.cypher_codec import node_to_create_cypher
-            
+            from layers.l2_brain.infrastructure.cypher_codec import (
+                node_to_create_cypher,
+            )
+
         return node_to_create_cypher(self)
 
     @classmethod
@@ -232,6 +248,7 @@ class MemoryNode4D(BaseModel):
         )
         return node.causal_hash, node.to_cypher()
 
+
 def compute_causal_hash(
     parent_hashes: List[str],
     payload_hash: str,
@@ -247,10 +264,10 @@ def compute_causal_hash(
     """
     import json
     import hashlib
-    
+
     # Ordenar hashes para determinismo
     sorted_parents = sorted(parent_hashes) if parent_hashes else ["GENESIS"]
-    
+
     node_material = {
         "parent_hashes": sorted_parents,
         "payload_hash": str(payload_hash),
@@ -270,6 +287,7 @@ def compute_causal_hash(
     )
     return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
 
+
 class CausalIntegrityVerifier:
     @staticmethod
     def verify_node(node: Any) -> bool:
@@ -277,13 +295,25 @@ class CausalIntegrityVerifier:
         Verifica tanto el payload_hash como el causal_hash para evitar falsificaciones parciales.
         """
         import hashlib
+
         try:
             from enum import Enum
-            auth_val = node.authority_a.value if isinstance(node.authority_a, Enum) else str(node.authority_a)
-            intent_val = node.intent_i.value if isinstance(node.intent_i, Enum) else str(node.intent_i)
-            
+
+            auth_val = (
+                node.authority_a.value
+                if isinstance(node.authority_a, Enum)
+                else str(node.authority_a)
+            )
+            intent_val = (
+                node.intent_i.value
+                if isinstance(node.intent_i, Enum)
+                else str(node.intent_i)
+            )
+
             # 1. Verificar integridad del payload
-            expected_payload_hash = f"sha256:{hashlib.sha256(node.payload.encode('utf-8')).hexdigest()}"
+            expected_payload_hash = (
+                f"sha256:{hashlib.sha256(node.payload.encode('utf-8')).hexdigest()}"
+            )
             if expected_payload_hash != node.payload_hash:
                 return False
 
@@ -296,11 +326,12 @@ class CausalIntegrityVerifier:
                 locus_z=node.locus_z,
                 lamport_t=node.lamport_t,
                 authority_a=auth_val,
-                intent_i=intent_val
+                intent_i=intent_val,
             )
             return recomputed == node.causal_hash
         except Exception:
             return False
+
 
 @dataclass
 class SourceArtifact:

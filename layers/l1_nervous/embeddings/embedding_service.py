@@ -1,3 +1,5 @@
+"""Embedding service with GPU acceleration (spec 211)."""
+
 import numpy as np
 
 
@@ -5,13 +7,35 @@ class EmbeddingService:
     def __init__(self, model_name: str = "BAAI/bge-small-en-v1.5"):
         self.model_name = model_name
         self._model = None
+        self._device = self._detect_device()
+
+    @staticmethod
+    def _detect_device() -> str:
+        import os
+
+        if os.environ.get("CUDA_VISIBLE_DEVICES") is not None:
+            return "cuda"
+        try:
+            import torch
+
+            if torch.cuda.is_available():
+                return "cuda"
+        except ImportError:
+            pass
+        return "cpu"
 
     @property
     def model(self):
         if self._model is None:
             from fastembed import TextEmbedding
 
-            self._model = TextEmbedding(model_name=self.model_name)
+            providers = None
+            if self._device == "cuda":
+                providers = ["CUDAExecutionProvider"]
+            self._model = TextEmbedding(
+                model_name=self.model_name,
+                providers=providers,
+            )
         return self._model
 
     def embed(self, texts: list[str]) -> list[np.ndarray]:

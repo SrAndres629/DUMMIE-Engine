@@ -3,11 +3,6 @@
   "port": 8081,
   "capability_class": "media_generation",
   "mcp_servers": {
-    "muapi": {
-      "command": "python3",
-      "args": ["${DUMMIE_ROOT}/scripts/muapi_stdio_proxy.py"],
-      "env": {"MUAPI_KEY": "${MUAPI_KEY}"}
-    },
     "mcp-comfyui": {
       "command": "node",
       "args": ["${BIBLIOTECA_MCP}/Mcp_Comfyui/build/index.js"]

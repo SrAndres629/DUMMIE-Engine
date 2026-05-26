@@ -5,7 +5,7 @@ import time
 try:
     from layers.l2_brain.adapters import KuzuRepository
     from layers.l1_nervous.compressive_memory import CompressiveMemory
-    from layers.l2_brain.models import MemoryNode4D, AuthorityLevel, IntentType
+    from layers.l2_brain.l2_memory_models import MemoryNode4D, AuthorityLevel, IntentType
 except ImportError:
     import sys
     import os
@@ -15,7 +15,7 @@ except ImportError:
     sys.path.insert(0, os.path.join(root, "l1_nervous"))
     from adapters import KuzuRepository
     from compressive_memory import CompressiveMemory
-    from models import MemoryNode4D, AuthorityLevel, IntentType
+    from layers.l2_brain.l2_memory_models import MemoryNode4D, AuthorityLevel, IntentType
 
 class MockBridge:
     def __init__(self, conn):

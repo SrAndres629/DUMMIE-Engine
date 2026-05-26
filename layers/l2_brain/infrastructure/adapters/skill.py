@@ -1,7 +1,7 @@
 import kuzu
 from typing import Optional
-from brain.domain.memory.models import CrystallizedSkill
-from brain.domain.memory.ports import ISkillRepositoryPort
+from layers.l2_brain.domain.memory.models import CrystallizedSkill
+from layers.l2_brain.domain.memory.ports import ISkillRepositoryPort
 
 
 class KuzuSkillRepository(ISkillRepositoryPort):

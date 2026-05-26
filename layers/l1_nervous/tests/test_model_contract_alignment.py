@@ -3,7 +3,7 @@ from enum import Enum
 from pathlib import Path
 
 from layers.l1_nervous.domain import models as l1_models
-from layers.l2_brain import models as l2_models
+from layers.l2_brain import l2_memory_models as l2_models
 
 
 def _wire_dict(value):

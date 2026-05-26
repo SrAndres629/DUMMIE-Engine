@@ -24,6 +24,39 @@
       "profile": "auxiliary",
       "capability_class": "development_workflow",
       "rationale": "Superpowers development workflow system: 14 skills (brainstorming, TDD, planning, code review, etc.) wrapped as MCP tools. Lazy-loaded, invoked only when needed via gateway."
+    },
+    "n8n_native": {
+      "command": "uv",
+      "args": [
+        "run",
+        "python",
+        "-B",
+        "${DUMMIE_ROOT}/layers/l1_nervous/mcp_bridges/n8n_native_bridge.py"
+      ],
+      "env": {
+        "N8N_MCP_URL": "${N8N_API_URL}/mcp-server/http",
+        "N8N_MCP_TOKEN": "${N8N_MCP_TOKEN}"
+      },
+      "disabled": false,
+      "profile": "automation",
+      "capability_class": "workflow_automation",
+      "rationale": "n8n native MCP server (built-in) via HTTP→stdio bridge. 27 tools: workflow CRUD, node discovery, Data Tables, testing, validation, SDK reference, projects, folders, credentials, executions. Runs inside n8n container — zero extra disk or process overhead."
+    },
+    "n8n_lint": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@automatelab/n8n-mcp"
+      ],
+      "env": {
+        "N8N_API_URL": "${N8N_API_URL}",
+        "N8N_API_KEY": "${N8N_API_KEY}",
+        "N8N_MCP_READ_ONLY": "1"
+      },
+      "disabled": false,
+      "profile": "automation",
+      "capability_class": "workflow_automation",
+      "rationale": "Focused n8n debugging and first-run-correctness MCP for workflow generation (NL→JSON), linting (20+ rules), semantic diffs, execution diagnosis (explain, replay, timeline), and node scaffolding. ~167KB, read-only mode enabled."
     }
   }
 }

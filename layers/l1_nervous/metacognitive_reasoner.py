@@ -1,3 +1,4 @@
+import asyncio
 import json
 import time
 import logging
@@ -66,7 +67,7 @@ class MetacognitiveReasoner:
         self._evaluator = IntelligenceEvaluator()
         self._router_cache: Optional[IntentRouter] = None
 
-    def analyze(
+    async def analyze(
         self,
         query: str,
         index: CapabilityIndex,
@@ -97,12 +98,22 @@ class MetacognitiveReasoner:
         tools_summary = self._summarize_tools(index)
         skills_summary = self._summarize_skills(index)
 
-        llm_decision = self._llm.reason(
-            query=query,
-            context=ctx.to_dict(),
-            tools_summary=tools_summary,
-            skills_summary=skills_summary,
-        )
+        try:
+            llm_decision = await asyncio.wait_for(
+                asyncio.to_thread(
+                    self._llm.reason,
+                    query,
+                    ctx.to_dict(),
+                    tools_summary,
+                    skills_summary,
+                ),
+                timeout=30,
+            )
+        except asyncio.TimeoutError:
+            llm_decision = LLMDecision(
+                llm_available=False,
+                reasoning="LLM timeout: modelo no respondio en 30s",
+            )
         result.llm_decision = llm_decision
 
         if llm_decision.suggested_tool and llm_decision.confidence >= 0.6:
@@ -147,6 +158,15 @@ class MetacognitiveReasoner:
             result.stage = "needs_more_context"
 
             self._evaluator.log_decision(result.to_dict())
+            result.latency_ms = (time.time() - start) * 1000
+            return result
+
+        # Si LLM no disponible, no tiene sentido continuar a research
+        if not llm_decision.llm_available:
+            result.message = (
+                "LLM no disponible. No se puede continuar la investigacion."
+            )
+            result.stage = "llm_unavailable"
             result.latency_ms = (time.time() - start) * 1000
             return result
 

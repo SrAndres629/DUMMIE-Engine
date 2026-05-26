@@ -1,0 +1,24 @@
+[Unit]
+Description=OpenCode with DUMMIE Engine Native Plugin
+Documentation=https://opencode.ai
+After=dummie-engine.service dummie-memory.service
+Requires=dummie-engine.service
+PartOf=dummie-engine.service
+
+[Service]
+Type=simple
+User=jorand
+Environment=DUMMIE_ROOT=/opt/dummie-engine
+Environment=DUMMIE_AIWG_DIR=/opt/dummie-engine/.aiwg
+Environment=DUMMIE_MCP_CONFIG_PATH=/opt/dummie-engine/dummie_gateway_config.json
+Environment=DUMMIE_DEFAULT_LLM=gemma4:e2b
+Environment=DUMMIE_DEFAULT_EMBEDDING=qwen3-embedding
+Environment=OPENCODE_PLUGIN_DIR=/opt/dummie-engine/layers/l1_nervous/plugins/opencode-dummie
+WorkingDirectory=/opt/dummie-engine
+ExecStartPre=/opt/dummie-engine/scripts/generate_opencode_config.py
+ExecStart=/home/jorand/.local/bin/opencode serve --port 18789 --hostname 127.0.0.1
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target

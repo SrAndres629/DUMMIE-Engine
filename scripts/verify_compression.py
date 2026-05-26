@@ -66,7 +66,7 @@ def test_infini_attention(allow_offline: bool = False):
     if not allow_offline:
         # Asegurar esquema (Self-healing)
         try:
-            from layers.l2_brain.models import MemoryNode4D
+            from layers.l2_brain.l2_memory_models import MemoryNode4D
             bridge.ipc.execute(MemoryNode4D.schema_creation_query())
         except Exception:
             pass # Ya existe o error manejado por la persistencia posterior

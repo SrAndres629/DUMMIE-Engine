@@ -7,13 +7,14 @@ Wants=dummie-memory.service
 [Service]
 Type=oneshot
 RemainAfterExit=yes
-Environment=DUMMIE_ROOT=/media/datasets/DUMMIE Engine
-Environment=DUMMIE_AIWG_DIR=/media/datasets/DUMMIE Engine/.aiwg
+Environment=DUMMIE_ROOT=/opt/dummie-engine
+Environment=DUMMIE_AIWG_DIR=/opt/dummie-engine/.aiwg
 Environment=PYTHONUNBUFFERED=1
-WorkingDirectory=/media/datasets/DUMMIE Engine/layers/l1_nervous
+Environment=PATH=/home/jorand/.local/bin:/usr/local/bin:/usr/bin:/bin
+WorkingDirectory=/opt/dummie-engine/layers/l1_nervous
 
-ExecStart=/media/datasets/DUMMIE Engine/scripts/start_metagateway.sh
-ExecStop=/bin/bash -c 'pkill -f "gateway/(media|code|infra|knowledge|shell)_gateway.py" 2>/dev/null; rm -f /media/datasets/DUMMIE Engine/.aiwg/runtime/gateways/*'
+ExecStart=/bin/bash "/opt/dummie-engine/scripts/start_metagateway.sh"
+ExecStop=/bin/bash -c "pkill -f 'gateway/(media|code|infra|knowledge|shell)_gateway.py' 2>/dev/null; rm -f '/opt/dummie-engine/.aiwg/runtime/gateways'/*"
 
 Restart=on-failure
 RestartSec=10

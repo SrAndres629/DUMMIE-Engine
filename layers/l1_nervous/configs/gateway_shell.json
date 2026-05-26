@@ -8,8 +8,8 @@
       "args": ["-y", "mcp-shell"]
     },
     "mcp-bash": {
-      "command": "uvx",
-      "args": ["--from", "git+https://github.com/patrickomatik/mcp-bash.git", "mcp-bash"]
+      "command": "mcp-bash-server",
+      "args": []
     },
     "browser-use": {
       "command": "uvx",

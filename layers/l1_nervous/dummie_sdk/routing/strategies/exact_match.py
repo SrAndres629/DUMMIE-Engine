@@ -40,6 +40,11 @@ class ExactMatchStrategy(BaseRoutingStrategy):
             "knowledge",
             "query",
         ),
+        (
+            r"n8n|workflow|workflows|webhook|webhooks|automatiza|automatizar|automation",
+            "automation",
+            "workflow",
+        ),
         (r"shell|terminal|comando|command|ejecutar|run|bash|zsh", "shell", "shell"),
         (
             r"navegador|browser|web|pagina|test.*web|chrome|firefox|navegar",

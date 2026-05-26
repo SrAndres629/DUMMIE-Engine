@@ -1,66 +1,34 @@
 #!/bin/bash
-set -e
+# === CANONICAL ARCHITECTURE v2 ===
+# Gateways are now managed by systemd (dummie-gateway@.service template).
+# This script is a HEALTH CHECK tool, NOT a process launcher.
+# Use: systemctl start dummie-engine  (orchestrator starts all 5 gateways)
+# Use: systemctl status dummie-gateway@media  (per-gateway status)
+set -euo pipefail
 
-ROOT="${DUMMIE_ROOT:-/media/datasets/DUMMIE Engine}"
-L1="$ROOT/layers/l1_nervous"
+ROOT="${DUMMIE_ROOT:-/opt/dummie-engine}"
 RUNTIME="$ROOT/.aiwg/runtime/gateways"
-BIN="${L1}/dummie_nervous"
 
-mkdir -p "$RUNTIME"
+GATEWAYS=(media code infra knowledge shell)
+HEALTHY=0
 
-echo "=== MetaGateway Launcher ==="
+echo "=== MetaGateway Health Check ==="
 echo "Root: $ROOT"
-
-# Kill existing sub-gateways
-echo "[*] Purging existing sub-gateway processes..."
-pkill -f "gateway/(media|code|infra|knowledge|shell)_gateway.py" 2>/dev/null || true
-sleep 1
-
-# Clean up old readiness files
-rm -f "$RUNTIME"/*.ready "$RUNTIME"/*.pid
-
-# Start each sub-gateway in background
-declare -A GATEWAYS=(
-    ["media"]=8081
-    ["code"]=8082
-    ["infra"]=8083
-    ["knowledge"]=8084
-    ["shell"]=8085
-)
-
-FAILED=0
-for name in "${!GATEWAYS[@]}"; do
-    port="${GATEWAYS[$name]}"
-    echo "[*] Starting ${name} gateway on port ${port}..."
-    cd "$L1"
-    uv run python "gateway/${name}_gateway.py" &
-    PID=$!
-    echo $PID > "$RUNTIME/${name}.pid"
-    echo "[+] ${name} gateway PID: $PID"
-done
-
-# Verify readiness
 echo ""
-echo "[*] Verifying sub-gateway readiness..."
-for i in $(seq 1 10); do
-    READY_COUNT=0
-    for name in "${!GATEWAYS[@]}"; do
-        if [ -f "$RUNTIME/${name}.ready" ]; then
-            ((READY_COUNT++))
-        fi
-    done
-    if [ "$READY_COUNT" -eq "${#GATEWAYS[@]}" ]; then
-        echo "[✓] All ${#GATEWAYS[@]} sub-gateways ready"
-        exit 0
+
+for name in "${GATEWAYS[@]}"; do
+    SVC="dummie-gateway@${name}.service"
+    ACTIVE=$(systemctl is-active "$SVC" 2>/dev/null || echo "unknown")
+    READY=$(cat "$RUNTIME/${name}.ready" 2>/dev/null || echo "not-ready")
+
+    if [ "$ACTIVE" = "active" ] && [ "$READY" = "ready" ]; then
+        echo "[✓] $name: systemd=$ACTIVE ready=$READY"
+        ((HEALTHY++))
+    else
+        echo "[✗] $name: systemd=$ACTIVE ready=$READY"
     fi
-    sleep 1
 done
 
-echo "[✗] Not all sub-gateways ready after 10s"
-for name in "${!GATEWAYS[@]}"; do
-    if [ ! -f "$RUNTIME/${name}.ready" ]; then
-        echo "  - ${name} NOT ready"
-        ((FAILED++))
-    fi
-done
-exit $FAILED
+echo ""
+echo "=== ${HEALTHY}/${#GATEWAYS[@]} gateways healthy ==="
+[ "$HEALTHY" -eq "${#GATEWAYS[@]}" ] && exit 0 || exit 1

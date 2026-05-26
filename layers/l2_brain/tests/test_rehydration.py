@@ -6,7 +6,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from rehydration import dry_run_rehydration
-from models import RehydrationManifest, SourceArtifact
+from layers.l2_brain.l2_memory_models import RehydrationManifest, SourceArtifact
 
 
 def test_rehydration_dry_run_extracts_candidates_without_mutation():

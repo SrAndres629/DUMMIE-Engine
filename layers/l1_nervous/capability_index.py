@@ -237,6 +237,14 @@ class CapabilityIndex:
             "policy",
             "rule",
         ]
+        automation_kw = [
+            "n8n",
+            "workflow",
+            "webhook",
+            "automation",
+            "automate",
+            "orchestrat",
+        ]
 
         mappings = [
             ("media_generation", media_kw),
@@ -247,6 +255,7 @@ class CapabilityIndex:
             ("infrastructure", infra_kw),
             ("communication", comm_kw),
             ("governance", governance_kw),
+            ("workflow_automation", automation_kw),
         ]
 
         for cat, kws in mappings:
@@ -283,6 +292,14 @@ class CapabilityIndex:
             categories.add("reasoning")
         if "development" in text or "superpower" in text:
             categories.add("development_workflow")
+        if (
+            "n8n" in text
+            or "workflow" in text
+            or "webhook" in text
+            or "automation" in text
+            or capability_class == "workflow_automation"
+        ):
+            categories.add("workflow_automation")
         if server_name in ("git", "github") or capability_class == "vcs":
             categories.add("vcs")
 
@@ -315,6 +332,13 @@ class CapabilityIndex:
                 categories.add("data_access")
             if "cloud" in text or "deploy" in text or "dns" in text:
                 categories.add("infrastructure")
+            if (
+                "n8n" in text
+                or "workflow" in text
+                or "webhook" in text
+                or "automation" in text
+            ):
+                categories.add("workflow_automation")
 
             entry = {
                 "id": f"{server_name}.{name}",

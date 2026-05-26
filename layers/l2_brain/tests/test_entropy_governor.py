@@ -6,7 +6,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from entropy_governor import classify_memory_temperature
-from models import MemoryTemperatureSignal, MemoryTemperature
+from layers.l2_brain.l2_memory_models import MemoryTemperatureSignal, MemoryTemperature
 
 
 def test_manual_pin_promotes_memory_to_hot():

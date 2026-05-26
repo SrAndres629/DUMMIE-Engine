@@ -1,6 +1,6 @@
 import pytest
 import hashlib
-from layers.l2_brain.models import MemoryNode4D
+from layers.l2_brain.l2_memory_models import MemoryNode4D
 
 def test_from_intent_context_is_callable():
     node = MemoryNode4D.from_intent_context(

@@ -2,7 +2,7 @@ import asyncio, sys
 from pathlib import Path
 from .base_gateway import BaseGateway
 
-CONFIG = Path(__file__).parents[2] / "configs" / "gateway_media.json"
+CONFIG = Path(__file__).parents[1] / "configs" / "gateway_media.json"
 
 
 class MediaGateway(BaseGateway):

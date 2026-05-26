@@ -7,12 +7,12 @@ import signal
 from pathlib import Path
 
 # [TABULA RASA v2] Redirección Nerviosa a L2
-from layers.l2_brain.models import (
+from layers.l2_brain.l2_memory_models import (
     SixDimensionalContext,
     AuthorityLevel,
     IntentType as ContextIntent,
 )
-from layers.l2_brain.models import AgentIntent, IntentType as FabricationIntent
+from layers.l2_brain.l2_memory_models import AgentIntent, IntentType as FabricationIntent
 from layers.l2_brain.adapters import (
     KuzuRepository,
     DecisionLedgerAdapter,

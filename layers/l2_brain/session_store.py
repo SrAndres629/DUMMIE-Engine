@@ -2,16 +2,26 @@ import datetime
 import json
 import re
 import os
+import shutil
 import tempfile
 import uuid
 from contextlib import contextmanager
+from enum import Enum
 from pathlib import Path
 from typing import Any
 
 try:
     import fcntl
-except ImportError:  # Windows fallback
+except ImportError:
     fcntl = None
+
+
+class SessionRole(str, Enum):
+    PLAN = "plan"
+    BUILD = "build"
+    REVIEW = "review"
+    GENERAL = "general"
+    OVERSEER = "overseer"
 
 
 @contextmanager
@@ -45,6 +55,7 @@ def atomic_write_text(path: Path, content: str) -> None:
         if os.path.exists(tmp_name):
             os.unlink(tmp_name)
 
+
 class SessionStore:
     SESSION_ID_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_.-]{0,127}$")
 
@@ -53,12 +64,13 @@ class SessionStore:
         self.base_dir = self.root_dir / ".aiwg" / "sessions"
         self.base_dir.mkdir(parents=True, exist_ok=True)
 
-    def create_session(self, session_id: str, metadata: dict[str, Any] | None = None) -> dict[str, Any]:
+    def create_session(
+        self, session_id: str, metadata: dict[str, Any] | None = None
+    ) -> dict[str, Any]:
         session_path = self._session_path(session_id)
         session_path.mkdir(parents=True, exist_ok=True)
         (session_path / "artifacts").mkdir(exist_ok=True)
         (session_path / "events.jsonl").touch(exist_ok=True)
-
 
         now = self._now()
         state = {
@@ -85,7 +97,9 @@ class SessionStore:
         events = self._read_events(session_path)
 
         artifacts_path = session_path / "artifacts"
-        artifacts = sorted(path.name for path in artifacts_path.iterdir() if path.is_file())
+        artifacts = sorted(
+            path.name for path in artifacts_path.iterdir() if path.is_file()
+        )
         return {
             "session_id": session_id,
             "path": str(session_path),
@@ -94,7 +108,9 @@ class SessionStore:
             "artifacts": artifacts,
         }
 
-    def save_state(self, session_id: str, state_update: dict[str, Any]) -> dict[str, Any]:
+    def save_state(
+        self, session_id: str, state_update: dict[str, Any]
+    ) -> dict[str, Any]:
         session_path = self._session_path(session_id)
         if not session_path.exists():
             raise FileNotFoundError(f"Session not found: {session_id}")
@@ -150,7 +166,9 @@ class SessionStore:
 
         return event
 
-    def append_learning_episode(self, session_id: str, episode_data: dict[str, Any]) -> str:
+    def append_learning_episode(
+        self, session_id: str, episode_data: dict[str, Any]
+    ) -> str:
         """
         Appends a LearningEpisode to learning_episodes.jsonl with locking and idempotency.
         """
@@ -160,34 +178,39 @@ class SessionStore:
 
         episode_id = episode_data.get("episode_id")
         if not episode_id:
-             episode_id = f"ep-{uuid.uuid4().hex[:8]}"
-             episode_data["episode_id"] = episode_id
+            episode_id = f"ep-{uuid.uuid4().hex[:8]}"
+            episode_data["episode_id"] = episode_id
 
         # Security: already handled by LearningEpisode class but reinforced here
         content = json.dumps(episode_data, sort_keys=True)
-        if "chain-of-thought" in content.lower() or "private reasoning" in content.lower():
-             raise ValueError("private reasoning artifacts are not accepted in SessionStore artifacts")
+        if (
+            "chain-of-thought" in content.lower()
+            or "private reasoning" in content.lower()
+        ):
+            raise ValueError(
+                "private reasoning artifacts are not accepted in SessionStore artifacts"
+            )
 
         episodes_path = session_path / "learning_episodes.jsonl"
         lock_path = session_path / ".episodes.lock"
-        
-        with file_lock(lock_path):
-             # Idempotency check
-             if episodes_path.exists():
-                 with episodes_path.open("r", encoding="utf-8") as h:
-                     for line in h:
-                         if line.strip():
-                             existing = json.loads(line)
-                             if existing.get("episode_id") == episode_id:
-                                 return str(episodes_path.relative_to(self.root_dir))
 
-             with episodes_path.open("a", encoding="utf-8") as handle:
-                 handle.write(content + "\n")
-                 handle.flush()
-                 try:
-                     os.fsync(handle.fileno())
-                 except OSError:
-                     pass
+        with file_lock(lock_path):
+            # Idempotency check
+            if episodes_path.exists():
+                with episodes_path.open("r", encoding="utf-8") as h:
+                    for line in h:
+                        if line.strip():
+                            existing = json.loads(line)
+                            if existing.get("episode_id") == episode_id:
+                                return str(episodes_path.relative_to(self.root_dir))
+
+            with episodes_path.open("a", encoding="utf-8") as handle:
+                handle.write(content + "\n")
+                handle.flush()
+                try:
+                    os.fsync(handle.fileno())
+                except OSError:
+                    pass
 
         # Also append to event log for causal trace
         self.append_event(
@@ -198,11 +221,11 @@ class SessionStore:
                 "episode_id": episode_id,
                 "mission_id": episode_data.get("mission_id"),
                 "outcome": episode_data.get("outcome"),
-                "cas": episode_data.get("capability_amplification_score", 0.0)
+                "cas": episode_data.get("capability_amplification_score", 0.0),
             },
-            evidence_refs=[str(episodes_path.relative_to(self.root_dir))]
+            evidence_refs=[str(episodes_path.relative_to(self.root_dir))],
         )
-        
+
         return str(episodes_path.relative_to(self.root_dir))
 
     def iter_learning_episodes(self, session_id: str = ""):
@@ -222,7 +245,6 @@ class SessionStore:
         if episodes:
             return episodes[-1]
         return None
-
 
     def iter_events(self, session_id: str):
         session_path = self._session_path(session_id)
@@ -254,11 +276,23 @@ class SessionStore:
         loaded = self.load_session(session_id)
         events = loaded["events"]
         retained = events[-keep_last:] if keep_last > 0 else []
-        lines = [f"- t{event['lamport_t']} {event['event_type']}: {event['summary']}" for event in retained]
+        lines = [
+            f"- t{event['lamport_t']} {event['event_type']}: {event['summary']}"
+            for event in retained
+        ]
         summary = "\n".join(lines)
-        self.save_artifact(session_id, "compact.md", f"# Session Compact\n\n{summary}\n")
-        self.save_state(session_id, {"compacted_at": self._now(), "compacted_event_count": len(events)})
-        return {"session_id": session_id, "summary": summary, "retained_events": retained}
+        self.save_artifact(
+            session_id, "compact.md", f"# Session Compact\n\n{summary}\n"
+        )
+        self.save_state(
+            session_id,
+            {"compacted_at": self._now(), "compacted_event_count": len(events)},
+        )
+        return {
+            "session_id": session_id,
+            "summary": summary,
+            "retained_events": retained,
+        }
 
     def list_sessions(self) -> list[dict[str, Any]]:
         sessions = []
@@ -266,6 +300,62 @@ class SessionStore:
             if path.is_dir() and (path / "state.json").exists():
                 sessions.append(self._read_json(path / "state.json"))
         return sessions
+
+    def find_or_create_session(
+        self,
+        role: SessionRole = SessionRole.GENERAL,
+        context_id: str = "",
+    ) -> dict[str, Any]:
+        sessions = self.list_sessions()
+        for s in sessions:
+            if s.get("status") == "active" and s.get("role") == role.value:
+                if not context_id or s.get("context_id") == context_id:
+                    return self.load_session(s["session_id"])
+
+        session_id = f"{role.value}-{uuid.uuid4().hex[:8]}"
+        metadata = {
+            "role": role.value,
+            "context_id": context_id,
+            "session_type": role.value,
+        }
+        return self.create_session(session_id, metadata)
+
+    def close_session(self, session_id: str) -> dict[str, Any]:
+        self.compact_session(session_id)
+        return self.save_state(
+            session_id,
+            {"status": "completed", "closed_at": self._now()},
+        )
+
+    def archive_session(self, session_id: str, archive_dir: str = "") -> str:
+        session_path = self._session_path(session_id)
+        if not session_path.exists():
+            raise FileNotFoundError(f"Session not found: {session_id}")
+        if not archive_dir:
+            archive_dir = str(self.base_dir / ".archive")
+
+        archive_path = Path(archive_dir)
+        archive_path.mkdir(parents=True, exist_ok=True)
+
+        dest = archive_path / session_id
+        if dest.exists():
+            shutil.rmtree(str(dest))
+        shutil.move(str(session_path), str(dest))
+
+        return str(dest)
+
+    def list_sessions_by_role(self, role: SessionRole) -> list[dict[str, Any]]:
+        sessions = self.list_sessions()
+        return [s for s in sessions if s.get("role") == role.value]
+
+    def list_active_sessions(self) -> list[dict[str, Any]]:
+        sessions = self.list_sessions()
+        return [s for s in sessions if s.get("status") == "active"]
+
+    def set_session_contract(
+        self, session_id: str, contract: dict[str, Any]
+    ) -> dict[str, Any]:
+        return self.save_state(session_id, {"contract": contract})
 
     def _session_path(self, session_id: str) -> Path:
         self._validate_session_id(session_id)
@@ -285,7 +375,9 @@ class SessionStore:
         return path
 
     def _validate_session_id(self, session_id: str) -> None:
-        if not isinstance(session_id, str) or not self.SESSION_ID_RE.fullmatch(session_id):
+        if not isinstance(session_id, str) or not self.SESSION_ID_RE.fullmatch(
+            session_id
+        ):
             raise ValueError(f"Unsafe session_id: {session_id}")
         if session_id in {".", "..", ".git"}:
             raise ValueError(f"Unsafe session_id: {session_id}")

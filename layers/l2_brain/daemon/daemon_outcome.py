@@ -4,7 +4,7 @@ import json
 from dataclasses import asdict, dataclass, field
 from typing import Any
 
-from layers.l2_brain.models import AuthorityLevel, IntentType
+from layers.l2_brain.l2_memory_models import AuthorityLevel, IntentType
 
 
 OUTCOME_STATUSES = {"SUCCESS", "PARTIAL", "FAILED", "BLOCKED", "DEGRADED"}

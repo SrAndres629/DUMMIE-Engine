@@ -1,0 +1,32 @@
+{
+  "timestamp": "2026-05-26T09:45:34.846125+00:00",
+  "overall_coherence_score": 0.0,
+  "profiling_profile": "active_workspace_scan",
+  "report_version": "1.1",
+  "freshness_timestamp": "2026-05-26T09:45:34.846132+00:00",
+  "runtime_seconds": 0.0012,
+  "reproducibility_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "evidence_refs": [
+    ".aiwg/reports/whole_body_scan_latest.json"
+  ],
+  "metrics": {
+    "total_python_files": 0,
+    "total_spec_files": 0,
+    "total_schema_files": 0,
+    "total_report_files": 16,
+    "shadow_modules_count": 0,
+    "orphaned_tests_count": 0,
+    "stale_reports_count": 2,
+    "unvalidated_specs_count": 0
+  },
+  "findings": {
+    "shadow_modules": [],
+    "orphaned_tests": [],
+    "stale_reports": [
+      ".aiwg/reports/capability_promotion_governor_latest.json",
+      ".aiwg/reports/capability_promotion_governor_latest.md"
+    ],
+    "unvalidated_specs": []
+  },
+  "matrix": {}
+}

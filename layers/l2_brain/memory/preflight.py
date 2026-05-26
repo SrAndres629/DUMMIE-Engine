@@ -1,4 +1,4 @@
-from models import IntentDraft
+from layers.l2_brain.l2_memory_models import IntentDraft
 
 
 def build_intent_draft(

@@ -41,6 +41,34 @@ class MCPProxyManager:
         ] = {}  # próxima ventana permitida (time.time)
         self._max_retries = 5
         self._backoff_base = 4.0  # segundos, se duplica cada intento (más agresivo)
+        self._prewarmed = False
+
+        self._start_prewarming()
+
+    def _start_prewarming(self):
+        hot = os.environ.get("DUMMIE_PREWARM", "")
+        if not hot:
+            return
+        servers = [s.strip() for s in hot.split(",") if s.strip()]
+        if not servers:
+            return
+        try:
+            loop = asyncio.get_running_loop()
+            loop.create_task(self._prewarm(servers))
+        except RuntimeError:
+            pass
+
+    async def _prewarm(self, servers: list[str]):
+        if self._prewarmed:
+            return
+        self._prewarmed = True
+        for name in servers:
+            if name in self.registry.servers:
+                try:
+                    await self._ensure_ready(name)
+                    logger.info("pre-warmed: %s", name)
+                except Exception as e:
+                    logger.warning("pre-warm failed for %s: %s", name, e)
 
     async def get_tools_for_server(self, server_name: str) -> List[Dict[str, Any]]:
         if server_name not in self.locks:

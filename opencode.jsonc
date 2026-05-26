@@ -1,0 +1,241 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "model": "opencode/deepseek-v4-flash-free",
+  "small_model": "opencode/deepseek-v4-flash-free",
+  "mcp": {
+    "metagateway": {
+      "type": "local",
+      "command": [
+        "uv",
+        "run",
+        "python",
+        "-B",
+        "${DUMMIE_ROOT}/layers/l1_nervous/metagateway.py"
+      ],
+      "environment": {},
+      "enabled": true,
+      "timeout": 120000
+    },
+    "superpowers": {
+      "type": "local",
+      "command": [
+        "uv",
+        "run",
+        "python",
+        "${DUMMIE_ROOT}/scripts/superpowers_mcp_proxy.py"
+      ],
+      "environment": {},
+      "enabled": true,
+      "timeout": 120000
+    },
+    "n8n": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "n8n-mcp"
+      ],
+      "environment": {
+        "MCP_MODE": "stdio",
+        "LOG_LEVEL": "error",
+        "DISABLE_CONSOLE_OUTPUT": "true",
+        "N8N_API_URL": "${N8N_API_URL}",
+        "N8N_API_KEY": "${N8N_API_KEY}",
+        "WEBHOOK_SECURITY_MODE": "moderate"
+      },
+      "enabled": true,
+      "timeout": 120000
+    },
+    "n8n_api": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "@nextoolsolutions/mcp-n8n"
+      ],
+      "environment": {
+        "N8N_BASE_URL": "${N8N_BASE_URL}",
+        "N8N_API_KEY": "${N8N_API_KEY}"
+      },
+      "enabled": true,
+      "timeout": 120000
+    },
+    "n8n_lint": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "@automatelab/n8n-mcp"
+      ],
+      "environment": {
+        "N8N_API_URL": "${N8N_API_URL}",
+        "N8N_API_KEY": "${N8N_API_KEY}",
+        "N8N_MCP_READ_ONLY": "1"
+      },
+      "enabled": true,
+      "timeout": 120000
+    },
+    "dummie-brain": {
+      "type": "local",
+      "command": [
+        "/bin/bash",
+        "/opt/dummie-engine/scripts/mcp_wrapper.sh",
+        "uv",
+        "run",
+        "python",
+        "-B",
+        "layers/l1_nervous/mcp_server.py"
+      ],
+      "environment": {
+        "DUMMIE_ROOT": "/opt/dummie-engine",
+        "DUMMIE_ROOT_DIR": "/opt/dummie-engine",
+        "DUMMIE_AIWG_DIR": "/opt/dummie-engine/.aiwg",
+        "DUMMIE_KUZU_DB_PATH": "/opt/dummie-engine/.aiwg/memory/loci.db",
+        "DUMMIE_MCP_CONFIG_PATH": "/opt/dummie-engine/dummie_gateway_config.json"
+      },
+      "enabled": true,
+      "timeout": 120000
+    }
+  },
+  "plugin": [
+    [
+      "/opt/dummie-engine/layers/l1_nervous/plugins/opencode-dummie",
+      {
+        "dummie_root": "/opt/dummie-engine",
+        "default_llm": "gemma4:e2b",
+        "default_embedding": "granite-embedding:30m",
+        "meta_gateway_pipeline": true,
+        "sdd_guardrails": true,
+        "swarm_coordination": true
+      }
+    ]
+  ],
+  "permission": "allow",
+  "compaction": {
+    "auto": true,
+    "tail_turns": 15
+  },
+  "dummie_meta_router": {
+    "version": "1.0.0",
+    "gateways": {
+      "media": {
+        "port": 8081,
+        "domains": [
+          "media_generation",
+          "image",
+          "video",
+          "audio"
+        ],
+        "servers": {
+          "mcp-comfyui": {
+            "tools": [
+              "inspect_capabilities",
+              "generate_image_from_intent",
+              "get_execution_history",
+              "get_optimizations"
+            ]
+          },
+          "cloudflare": {
+            "tools": [
+              "run_ai_model"
+            ]
+          }
+        }
+      },
+      "code": {
+        "port": 8082,
+        "domains": [
+          "vcs",
+          "workspace_io",
+          "code"
+        ],
+        "servers": {
+          "github": {
+            "tools": [
+              "*"
+            ]
+          },
+          "git": {
+            "tools": [
+              "*"
+            ]
+          },
+          "filesystem": {
+            "tools": [
+              "*"
+            ]
+          }
+        }
+      },
+      "infra": {
+        "port": 8083,
+        "domains": [
+          "infrastructure",
+          "deployment",
+          "cloud"
+        ],
+        "servers": {
+          "docker": {
+            "tools": [
+              "manage_containers",
+              "manage_images",
+              "manage_infrastructure",
+              "audit_system",
+              "execute_operations"
+            ]
+          },
+          "vercel": {
+            "tools": [
+              "vercel_omni_manager"
+            ]
+          }
+        }
+      },
+      "knowledge": {
+        "port": 8084,
+        "domains": [
+          "knowledge",
+          "memory",
+          "reasoning"
+        ],
+        "servers": {
+          "sqlite": {
+            "tools": [
+              "*"
+            ]
+          },
+          "sequentialthinking": {
+            "tools": [
+              "*"
+            ]
+          }
+        }
+      },
+      "shell": {
+        "port": 8085,
+        "domains": [
+          "shell",
+          "automation",
+          "browser"
+        ],
+        "servers": {
+          "shell": {
+            "tools": [
+              "*"
+            ]
+          },
+          "mcp-bash": {
+            "tools": [
+              "*"
+            ]
+          },
+          "browser-use": {
+            "tools": [
+              "*"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

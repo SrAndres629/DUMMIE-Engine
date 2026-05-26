@@ -5,9 +5,6 @@
       "port": 8081,
       "domains": ["media_generation", "image", "video", "audio"],
       "servers": {
-        "muapi": {
-          "tools": ["generate_image", "generate_video", "generate_audio", "upload_file", "list_models"]
-        },
         "mcp-comfyui": {
           "tools": ["inspect_capabilities", "generate_image_from_intent", "get_execution_history", "get_optimizations"]
         },

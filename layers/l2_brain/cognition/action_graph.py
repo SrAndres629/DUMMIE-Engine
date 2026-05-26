@@ -25,7 +25,7 @@ class ActionGraph:
         self.kuzu_repo = kuzu_repo
 
     async def record_action(self, node: ActionNode):
-        from models import MemoryNode4D
+        from layers.l2_brain.l2_memory_models import MemoryNode4D
         node.timestamp = datetime.now().isoformat()
         logger.info(f"ActionGraph: Recording {node.action_type} by {node.model_id} on {node.target}")
         

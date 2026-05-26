@@ -88,9 +88,9 @@ class CompressiveMemory:
             
             import time
             try:
-                from models import MemoryNode4D
+                from layers.l2_brain.l2_memory_models import MemoryNode4D
             except ImportError:
-                from layers.l2_brain.models import MemoryNode4D
+                from layers.l2_brain.l2_memory_models import MemoryNode4D
             
             # [HARDENING] Saneamiento de Cadena Causal
             # No usamos strings arbitrarios como 'COMPRESSED_CONTEXT'.

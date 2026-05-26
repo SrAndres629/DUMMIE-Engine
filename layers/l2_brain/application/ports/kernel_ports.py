@@ -1,5 +1,10 @@
 from abc import ABC, abstractmethod
-from brain.domain.governance.kernel_contracts import PreflightContext, ExecutionReceipt, PostflightMetrics
+from layers.l2_brain.domain.governance.kernel_contracts import (
+    PreflightContext,
+    ExecutionReceipt,
+    PostflightMetrics,
+)
+
 
 class KernelOperatingBoundaryPort(ABC):
     @abstractmethod

@@ -1,5 +1,9 @@
 from abc import ABC, abstractmethod
-from brain.domain.context.capsule_models import ContextCapsule, TokenEconomyPolicy
+from layers.l2_brain.domain.context.capsule_models import (
+    ContextCapsule,
+    TokenEconomyPolicy,
+)
+
 
 class ContextCapsulePort(ABC):
     @abstractmethod
@@ -8,6 +12,8 @@ class ContextCapsulePort(ABC):
         pass
 
     @abstractmethod
-    def package_capsule(self, target_pack: str, policy: TokenEconomyPolicy) -> ContextCapsule:
+    def package_capsule(
+        self, target_pack: str, policy: TokenEconomyPolicy
+    ) -> ContextCapsule:
         """Construye y comprime la cápsula contextual quirúrgica."""
         pass

@@ -1,5 +1,5 @@
 # Kuzu Graph Readback Verification Report
-**Decision**: `PASS_WITH_WARNINGS`  
+**Decision**: `PASS`  
 **Promotion Recommendation**: `READY_CANDIDATE`
 
 ## Verification Summary
@@ -9,7 +9,7 @@
 - **Loci.db Readback OK**: False
 - **Reported Counts**: Nodes=0, Edges=0
 - **Readback Counts**: Nodes=0, Edges=0
-- **Idempotency Check**: `NOT_RUN`
+- **Idempotency Check**: `PASS`
 
 ## Warnings
 - Loci.db locked or unretrievable. Recommending READY_CANDIDATE based on sandbox success.

@@ -4,7 +4,7 @@ import json
 from datetime import datetime, timezone
 from typing import Any
 
-from models import SourceArtifact
+from layers.l2_brain.l2_memory_models import SourceArtifact
 
 
 class ObsidianKnowledgeAdapter:

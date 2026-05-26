@@ -1,21 +1,20 @@
 # Full Body Operational Audit Report
 **Decision**: `PASS_WITH_WARNINGS`  
-**Body Score**: `77.0%`  
+**Body Score**: `82.0%`  
 **Next Recommended Repair**: `repair_kuzu_persistence`
 
 ## Organ Taxonomy Summary
-- **Ready Organs**: ['brain', 'nervous_system', 'mouth', 'immune_system', 'skin']
-- **Degraded Organs**: ['eyes', 'memory']
+- **Ready Organs**: ['eyes', 'brain', 'nervous_system', 'mouth', 'immune_system', 'skin']
+- **Degraded Organs**: ['memory']
 - **Fallback Organs**: ['metabolism', 'hands', 'polyglot_body']
 - **Unwired Organs**: ['hands']
 - **Shadow Organs**: []
 
 ## Top Body Gaps Identified
-- Whole-Body Scanner not fully active or scan reports missing.
 - Memory spine or embeddings are degraded or fallback.
 - Metabolism uses static token cost estimation instead of dynamic metrics.
 - Hands (Gateway live dispatch) runs in dry-run/manual-only mode.
 - Polyglot Body runs in Python-only fallback. Compile/test lifecycles are unwired.
 
 ## Warnings
-- System body is not fully complete (Body Score: 77.0% < 90%).
+- System body is not fully complete (Body Score: 82.0% < 90%).

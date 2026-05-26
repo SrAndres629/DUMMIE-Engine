@@ -9,7 +9,7 @@
     },
     "vercel": {
       "command": "node",
-      "args": ["${BIBLIOTECA_MCP}/Vercel/dist/index.js"],
+      "args": ["${BIBLIOTECA_MCP}/Vercel/my-vercel-mcp/dist/index.js"],
       "env": {"VERCEL_TOKEN": "${VERCEL_TOKEN}"}
     }
   }

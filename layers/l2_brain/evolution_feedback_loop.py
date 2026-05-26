@@ -64,7 +64,7 @@ class EvolutionFeedbackLoop:
         Guarda un patrón de éxito en el 4D-TES como un "Golden Path".
         """
         try:
-            from layers.l2_brain.models import MemoryNode4D
+            from layers.l2_brain.l2_memory_models import MemoryNode4D
 
             # Crear un nodo de memoria que represente esta estrategia exitosa
             node = MemoryNode4D.from_intent_context(

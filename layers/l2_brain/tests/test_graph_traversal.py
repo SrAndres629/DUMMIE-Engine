@@ -1,6 +1,6 @@
 import pytest
 from layers.l2_brain.adapters import KuzuRepository
-from layers.l2_brain.models import MemoryNode4D, AuthorityLevel, IntentType
+from layers.l2_brain.l2_memory_models import MemoryNode4D, AuthorityLevel, IntentType
 
 try:
     import kuzu

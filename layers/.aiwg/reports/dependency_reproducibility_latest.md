@@ -7,7 +7,7 @@
 - **Declared Dependencies**: []
 - **Undeclared Installed**: ['kuzu', 'networkx', 'fastapi', 'sentence_transformers', 'torch']
 - **Missing Declared**: []
-- **Heavy Dependencies (>10MB)**: ['kuzu (20.5 MB)', 'networkx (11.2 MB)', 'torch (1098.7 MB)']
+- **Heavy Dependencies (>10MB)**: ['kuzu (20.5 MB)', 'networkx (10.8 MB)', 'torch (1100.3 MB)']
 
 ## Warnings
 - pyproject.toml not found

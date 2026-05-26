@@ -10,27 +10,33 @@ import uuid
 
 # Re-use domain classes where possible
 try:
-    from brain.domain.governance.kernel_contracts import PreflightContext, ExecutionReceipt, PostflightMetrics
+    from layers.l2_brain.domain.governance.kernel_contracts import (
+        PreflightContext,
+        ExecutionReceipt,
+        PostflightMetrics,
+    )
     from brain.application.use_cases.guarded_execution import GuardedExecutionUseCase
 except ImportError:
     pass
 
 from .context_capsule_engine import ContextCapsuleEngine
 
+
 class AIWGKernel:
     """
     AIWG Native Operating Kernel.
     Acts as the main reflex and spine for agentic execution.
     """
+
     def __init__(self, workspace_root: Path):
         self.workspace_root = workspace_root
         self.aiwg_dir = self.workspace_root / ".aiwg"
         self.reports_dir = self.aiwg_dir / "reports"
         self.memory_dir = self.aiwg_dir / "memory"
-        
+
         self.reports_dir.mkdir(parents=True, exist_ok=True)
         self.memory_dir.mkdir(parents=True, exist_ok=True)
-        
+
         self.capsule_engine = ContextCapsuleEngine(self.workspace_root)
 
     def aiwg_preflight(self) -> Dict[str, Any]:
@@ -38,10 +44,16 @@ class AIWGKernel:
         Executes preflight checks before any agent entrypoint runs.
         """
         print("[AIWG KERNEL] Running preflight...")
-        
+
         # Determine HEAD commit
         try:
-            head_commit = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=self.workspace_root).decode().strip()
+            head_commit = (
+                subprocess.check_output(
+                    ["git", "rev-parse", "HEAD"], cwd=self.workspace_root
+                )
+                .decode()
+                .strip()
+            )
         except Exception:
             head_commit = "UNKNOWN"
 
@@ -55,21 +67,21 @@ class AIWGKernel:
                     current_pack = pack_data.get("pack_id", "NONE")
             except json.JSONDecodeError:
                 pass
-                
+
         is_frozen = current_pack == "NONE"
-        
+
         preflight_state = {
             "timestamp": datetime.now(timezone.utc).isoformat(),
             "head_commit": head_commit,
             "current_pack": current_pack,
             "is_frozen": is_frozen,
-            "status": "PASS"
+            "status": "PASS",
         }
-        
+
         report_path = self.reports_dir / "aiwg_preflight_latest.json"
         with open(report_path, "w") as f:
             json.dump(preflight_state, f, indent=2)
-            
+
         return preflight_state
 
     def aiwg_context_loader(self, request_payload: Dict[str, Any]) -> Dict[str, Any]:
@@ -79,10 +91,12 @@ class AIWGKernel:
         print("[AIWG KERNEL] Loading context...")
         return {
             "workspace_root": str(self.workspace_root),
-            "loaded_files": request_payload.get("target_files", [])
+            "loaded_files": request_payload.get("target_files", []),
         }
 
-    def aiwg_context_capsule_builder(self, context_data: Dict[str, Any]) -> Dict[str, Any]:
+    def aiwg_context_capsule_builder(
+        self, context_data: Dict[str, Any]
+    ) -> Dict[str, Any]:
         """
         Builds a surgical context capsule based on the loader and constraints.
         """
@@ -90,7 +104,9 @@ class AIWGKernel:
         file_paths = context_data.get("loaded_files", [])
         return self.capsule_engine.compile_capsule(file_paths)
 
-    def aiwg_token_budgeter(self, capsule: Dict[str, Any], token_limit: int = 4000) -> bool:
+    def aiwg_token_budgeter(
+        self, capsule: Dict[str, Any], token_limit: int = 4000
+    ) -> bool:
         """
         Validates that the built capsule does not exceed the token budget.
         """
@@ -110,14 +126,16 @@ class AIWGKernel:
         cmd_base = command.split(" ")[0]
         if cmd_base in read_only_tools:
             return True
-            
+
         # If mutating, check if preflight allows it
         preflight_path = self.reports_dir / "aiwg_preflight_latest.json"
         if preflight_path.exists():
             with open(preflight_path, "r") as f:
                 pf = json.load(f)
                 if pf.get("is_frozen", True):
-                    print("[AIWG KERNEL] REJECTED: System is frozen. No mutations allowed.")
+                    print(
+                        "[AIWG KERNEL] REJECTED: System is frozen. No mutations allowed."
+                    )
                     return False
         return True
 
@@ -132,13 +150,13 @@ class AIWGKernel:
             "command": command,
             "exit_code": exit_code,
             "duration_seconds": duration,
-            "timestamp": datetime.now(timezone.utc).isoformat()
+            "timestamp": datetime.now(timezone.utc).isoformat(),
         }
-        
+
         receipt_path = self.reports_dir / f"receipt_{receipt_id}.json"
         with open(receipt_path, "w") as f:
             json.dump(receipt, f, indent=2)
-            
+
         return receipt_id
 
     def aiwg_postflight(self, receipt_id: str) -> Dict[str, Any]:
@@ -149,7 +167,7 @@ class AIWGKernel:
         return {
             "receipt_id": receipt_id,
             "status": "PASS",
-            "timestamp": datetime.now(timezone.utc).isoformat()
+            "timestamp": datetime.now(timezone.utc).isoformat(),
         }
 
     def agent_entrypoint_guard(self, payload: Dict[str, Any], execute_fn: Any) -> Any:
@@ -160,13 +178,13 @@ class AIWGKernel:
         pf = self.aiwg_preflight()
         if pf.get("status") != "PASS":
             raise RuntimeError("Preflight failed.")
-            
+
         context = self.aiwg_context_loader(payload)
         capsule = self.aiwg_context_capsule_builder(context)
-        
+
         if not self.aiwg_token_budgeter(capsule):
             raise RuntimeError("Token budget exceeded.")
-            
+
         # Execute the function
         start_time = time.time()
         exit_code = 0
@@ -177,7 +195,9 @@ class AIWGKernel:
             raise e
         finally:
             duration = time.time() - start_time
-            receipt_id = self.aiwg_receipt_writer("agent_execution", exit_code, duration)
+            receipt_id = self.aiwg_receipt_writer(
+                "agent_execution", exit_code, duration
+            )
             self.aiwg_postflight(receipt_id)
-            
+
         return result

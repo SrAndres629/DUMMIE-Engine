@@ -1,6 +1,6 @@
 {
   "decision": "PASS_WITH_WARNINGS",
-  "body_score": 77.0,
+  "body_score": 82.0,
   "organs": [
     "eyes",
     "brain",
@@ -14,6 +14,7 @@
     "polyglot_body"
   ],
   "ready_organs": [
+    "eyes",
     "brain",
     "nervous_system",
     "mouth",
@@ -21,7 +22,6 @@
     "skin"
   ],
   "degraded_organs": [
-    "eyes",
     "memory"
   ],
   "fallback_organs": [
@@ -34,7 +34,6 @@
     "hands"
   ],
   "top_body_gaps": [
-    "Whole-Body Scanner not fully active or scan reports missing.",
     "Memory spine or embeddings are degraded or fallback.",
     "Metabolism uses static token cost estimation instead of dynamic metrics.",
     "Hands (Gateway live dispatch) runs in dry-run/manual-only mode.",
@@ -42,7 +41,7 @@
   ],
   "next_repair_recommendation": "repair_kuzu_persistence",
   "warnings": [
-    "System body is not fully complete (Body Score: 77.0% < 90%)."
+    "System body is not fully complete (Body Score: 82.0% < 90%)."
   ],
   "evidence_refs": [
     ".aiwg/reports/capability_promotion_governor_latest.json",

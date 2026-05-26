@@ -7,6 +7,7 @@ SERVICES=(
     "dummie-memory.service"
     "dummie-engine.service"
     "dummie-guardian.service"
+    "dummie-opencode.service"
 )
 
 echo "=== DUMMIE Engine — Systemd Service Installer ==="
@@ -70,6 +71,9 @@ echo "  - dummie-engine.service started"
 
 systemctl start dummie-guardian.service
 echo "  - dummie-guardian.service started"
+
+systemctl start dummie-opencode.service
+echo "  - dummie-opencode.service started"
 
 # Verify all services
 echo ""

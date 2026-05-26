@@ -238,7 +238,7 @@ NEW_ITEMS = [
         kind="ssot_gateway_config",
         owner_layer="l1_nervous",
         risk="medium",
-        reason="Media sub-gateway SSOT config. Port 8081. muapi, mcp-comfyui servers.",
+        reason="Media sub-gateway SSOT config. Port 8081. mcp-comfyui servers.",
         spec=170,
     ),
     RegistryItem(

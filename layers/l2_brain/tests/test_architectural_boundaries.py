@@ -80,7 +80,7 @@ async def test_fallback_unsafe_auditor_message():
 
 def test_agent_intent_rationale_is_goal_alias():
     """AgentIntent.rationale should return goal."""
-    from models import AgentIntent
+    from layers.l2_brain.l2_memory_models import AgentIntent
     intent = AgentIntent(goal="test goal value")
     assert intent.rationale == "test goal value"
     assert intent.rationale == intent.goal
@@ -88,7 +88,7 @@ def test_agent_intent_rationale_is_goal_alias():
 
 def test_agent_intent_default_authority():
     """AgentIntent should default to AGENT authority."""
-    from models import AgentIntent, AuthorityLevel
+    from layers.l2_brain.l2_memory_models import AgentIntent, AuthorityLevel
     intent = AgentIntent(goal="test")
     assert intent.authority_a == AuthorityLevel.AGENT
 
@@ -97,7 +97,7 @@ def test_agent_intent_default_authority():
 
 def test_six_dimensional_context_canonical_fields():
     """SixDimensionalContext must have exactly the 6 canonical dimensions + metadata."""
-    from models import SixDimensionalContext
+    from layers.l2_brain.l2_memory_models import SixDimensionalContext
     ctx = SixDimensionalContext()
     # Verify all 6 dimensions exist
     assert hasattr(ctx, "locus_x")
@@ -111,7 +111,7 @@ def test_six_dimensional_context_canonical_fields():
 
 def test_six_dimensional_context_defaults():
     """SixDimensionalContext defaults should be set."""
-    from models import SixDimensionalContext, AuthorityLevel, IntentType
+    from layers.l2_brain.l2_memory_models import SixDimensionalContext, AuthorityLevel, IntentType
     ctx = SixDimensionalContext()
     assert ctx.lamport_t == 0.0
     assert ctx.authority_a == AuthorityLevel.AGENT

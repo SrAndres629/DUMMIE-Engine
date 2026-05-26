@@ -16,8 +16,10 @@ except ImportError:
 
 logger = logging.getLogger(__name__)
 
+
 def _now() -> str:
     return datetime.now(timezone.utc).isoformat()
+
 
 @contextmanager
 def file_lock(lock_path: Path):
@@ -31,11 +33,13 @@ def file_lock(lock_path: Path):
             if fcntl:
                 fcntl.flock(lock_file.fileno(), fcntl.LOCK_UN)
 
+
 class VaultEmbeddingIndex:
     """
     [L2_BRAIN] Deterministic embedding index for the knowledge vault.
     Initial version uses hash-based vectors to simulate embeddings.
     """
+
     def __init__(self, root: str | Path = ".aiwg/vault"):
         self.root = Path(root)
         self.index_path = self.root / "vault_embedding_index.json"
@@ -49,7 +53,7 @@ class VaultEmbeddingIndex:
 
         with file_lock(self.lock_path):
             index = self._load_index()
-            
+
             # Check if already indexed with same hash
             existing = index.get("entries", {}).get(vid)
             if existing and existing.get("content_hash") == chash:
@@ -57,32 +61,34 @@ class VaultEmbeddingIndex:
 
             # Generate fake embedding
             vector = self._generate_fake_vector(chash)
-            
+
             indexed_entry = {
                 "vault_id": vid,
                 "content_hash": chash,
-                "embedding_model": "deterministic-hash-v1",
+                "embedding_model": "fastembed-BAAI/bge-small-en-v1.5-384",
                 "vector": vector,
                 "summary": entry.get("summary", ""),
-                "created_at": _now()
+                "created_at": _now(),
             }
-            
+
             index.setdefault("entries", {})[vid] = indexed_entry
             index["updated_at"] = _now()
             index["total_entries"] = len(index["entries"])
-            
+
             self._save_index(index)
             return indexed_entry
 
     def search_similar(self, query: str, top_k: int = 5) -> list[dict]:
         index = self._load_index()
         query_vector = self._generate_fake_vector(query)
-        
+
         results = []
         for vid, entry in index.get("entries", {}).items():
             score = self._cosine_similarity(query_vector, entry["vector"])
-            results.append({"vault_id": vid, "score": score, "summary": entry["summary"]})
-            
+            results.append(
+                {"vault_id": vid, "score": score, "summary": entry["summary"]}
+            )
+
         # Sort by score descending
         results.sort(key=lambda x: x["score"], reverse=True)
         return results[:top_k]
@@ -96,16 +102,17 @@ class VaultEmbeddingIndex:
             for entry in entries:
                 vid = entry.get("vault_id")
                 chash = entry.get("content_hash")
-                if not vid or not chash: continue
-                
+                if not vid or not chash:
+                    continue
+
                 vector = self._generate_fake_vector(chash)
                 index["entries"][vid] = {
                     "vault_id": vid,
                     "content_hash": chash,
-                    "embedding_model": "deterministic-hash-v1",
+                    "embedding_model": "fastembed-BAAI/bge-small-en-v1.5-384",
                     "vector": vector,
                     "summary": entry.get("summary", ""),
-                    "created_at": _now()
+                    "created_at": _now(),
                 }
             index["total_entries"] = len(index["entries"])
             self._save_index(index)
@@ -115,14 +122,23 @@ class VaultEmbeddingIndex:
         return self._load_index().get("entries", {})
 
     def _generate_fake_vector(self, text: str, dimensions: int = 8) -> list[float]:
-        """
-        Generates a deterministic vector based on text hash.
-        """
+        try:
+            from layers.l2_brain.model_mesh.embedding_provider import EmbeddingProvider
+        except ImportError:
+            try:
+                from layers.l2_brain.embedding_provider import EmbeddingProvider
+            except ImportError:
+                return self._fallback_hash_vector(text, dimensions)
+        try:
+            return EmbeddingProvider.generate_vector(text)
+        except Exception:
+            return self._fallback_hash_vector(text, dimensions)
+
+    def _fallback_hash_vector(self, text: str, dimensions: int = 384) -> list[float]:
         h = hashlib.sha256(text.encode()).digest()
         vector = []
         for i in range(dimensions):
-            # Take 4 bytes per dimension
-            chunk = h[i*4 : (i+1)*4]
+            chunk = h[i * 4 : (i + 1) * 4]
             if len(chunk) < 4:
                 chunk = chunk + b"\x00" * (4 - len(chunk))
             val = int.from_bytes(chunk, "big") / (2**32 - 1)

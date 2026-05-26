@@ -9,7 +9,7 @@ class SelfWorktreeToolService:
     def __init__(self, root_dir: str | Path):
         self.root_dir = Path(root_dir).resolve()
         for _mod in [
-            "layers.l2_brain.flat_brain.self_worktree_orchestrator",
+            "layers.l2_brain.cognition.self_worktree_orchestrator",
             "layers.l2_brain.cognition.self_worktree_orchestrator",
             "layers.l2_brain.self_worktree_orchestrator",
             "self_worktree_orchestrator",
